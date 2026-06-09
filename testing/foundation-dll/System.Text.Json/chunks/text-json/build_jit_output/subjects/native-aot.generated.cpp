@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -19181,22 +19183,22 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
     auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
     // Register managed_array (variable-size: header + contiguous element data).
     registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-        static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-        static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+        static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
     registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
     registry.Register(8665936019526958123ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c), nullptr, 0);
@@ -19678,2564 +19680,1832 @@ CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_IO_Stream__Null =
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_JsonDocument__System_Void_JsonDocument_JsonDocument_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual<JsonDocument>:System.Void(JsonDocument,JsonDocument,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_JsonElement__System_Void_JsonElement_JsonElement_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual<JsonElement>:System.Void(JsonElement,JsonElement,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Text_Json_Nodes_JsonNode__System_Void_System_Text_Json_Nodes_JsonNode_System_Text_Json_Nodes_JsonNode_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual<System.Text.Json.Nodes.JsonNode>:System.Void(System.Text.Json.Nodes.JsonNode,System.Text.Json.Nodes.JsonNode,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Byte___System_Byte___System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte[],System.Byte[],System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_JsonException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<JsonException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentNullException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_InvalidOperationException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.InvalidOperationException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NotSupportedException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NotSupportedException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonDocumentTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass10_0____ref_6_2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass10_0::__ref_6_2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass12_0____ref_8_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass12_0::__ref_8_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass13_0____ref_8_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass13_0::__ref_8_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass15_0____ref_10_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass15_0::__ref_10_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass16_0____ref_10_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass16_0::__ref_10_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass18_0____ref_12_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass18_0::__ref_12_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass19_0____ref_12_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass19_0::__ref_12_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass21_0____ref_14_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass21_0::__ref_14_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass22_0____ref_14_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass22_0::__ref_14_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass24_0____ref_16_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass24_0::__ref_16_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass25_0____ref_16_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass25_0::__ref_16_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass27_0____ref_18_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass27_0::__ref_18_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass28_0____ref_18_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass28_0::__ref_18_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass30_0____ref_20_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass30_0::__ref_20_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass31_0____ref_20_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass31_0::__ref_20_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass33_0____ref_22_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass33_0::__ref_22_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass34_0____ref_22_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass34_0::__ref_22_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass36_0____ref_24_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass36_0::__ref_24_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass37_0____ref_24_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass37_0::__ref_24_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass39_0____ref_26_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass39_0::__ref_26_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass40_0____ref_26_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass40_0::__ref_26_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass42_0____ref_28_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass42_0::__ref_28_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass43_0____ref_28_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass43_0::__ref_28_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass45_0____ref_30_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass45_0::__ref_30_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass47_0____ref_32_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass47_0::__ref_32_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass49_0____ref_34_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass49_0::__ref_34_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass4_0____ref_3_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass4_0::__ref_3_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass5_0____ref_3_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass5_0::__ref_3_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass8_0____ref_6_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass8_0::__ref_6_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c__DisplayClass9_0____ref_6_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c__DisplayClass9_0::__ref_6_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__51_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__53_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__55_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonElementTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonElementTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonEncodedTextTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonEncodedTextTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonEncodedTextTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonEncodedTextTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonEncodedTextTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonEncodedTextTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonNamingPolicyTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonNamingPolicyTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonNamingPolicyTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonNamingPolicyTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonNamingPolicyTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonNamingPolicyTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonPropertyTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonPropertyTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonPropertyTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonPropertyTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonPropertyTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonPropertyTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonPropertyTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonPropertyTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerOptionsTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerOptionsTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerOptionsTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerOptionsTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerOptionsTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerOptionsTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerOptionsTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerOptionsTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerOptionsTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerOptionsTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__104_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__104_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__105_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__105_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__106_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__106_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__107_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__107_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__108_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__108_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__109_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__109_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__110_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__110_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__111_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__111_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__112_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__112_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__113_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__113_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__114_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__114_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__115_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__115_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__116_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__116_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__117_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__117_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__118_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__118_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__119_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__119_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__47_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__49_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__51_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__53_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__55_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__57_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__57_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__59_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__59_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__61_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__63_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__65_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__65_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__67_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__67_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__69_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__69_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__74_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__75_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__75_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__76_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__77_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__77_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__78_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__79_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__79_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__82_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__82_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__83_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__83_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__86_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__86_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__87_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__87_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__88_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__88_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__89_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__89_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__90_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__90_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__91_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__91_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__92_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__92_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__93_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__93_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__94_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__94_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__95_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__95_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__96_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__96_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__97_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__97_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__98_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__98_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__99_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__99_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_JsonSerializerTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass25_0____ref_22_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass25_0::__ref_22_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass26_0____ref_22_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass26_0::__ref_22_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass27_0____ref_22_2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass27_0::__ref_22_2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass28_0____ref_23_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass28_0::__ref_23_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass29_0____ref_23_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass29_0::__ref_23_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass30_0____ref_24_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass30_0::__ref_24_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass31_0____ref_24_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass31_0::__ref_24_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass32_0____ref_25_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass32_0::__ref_25_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass33_0____ref_25_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass33_0::__ref_25_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass34_0____ref_26_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass34_0::__ref_26_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass35_0____ref_26_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass35_0::__ref_26_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass36_0____ref_27_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass36_0::__ref_27_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass37_0____ref_27_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass37_0::__ref_27_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass38_0____ref_28_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass38_0::__ref_28_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass39_0____ref_28_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass39_0::__ref_28_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass40_0____ref_29_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass40_0::__ref_29_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass41_0____ref_29_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass41_0::__ref_29_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass42_0____ref_30_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass42_0::__ref_30_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass43_0____ref_30_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass43_0::__ref_30_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass44_0____ref_31_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass44_0::__ref_31_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass45_0____ref_31_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass45_0::__ref_31_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass46_0____ref_32_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass46_0::__ref_32_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass47_0____ref_32_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass47_0::__ref_32_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass48_0____ref_33_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass48_0::__ref_33_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass49_0____ref_33_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass49_0::__ref_33_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass50_0____ref_34_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass50_0::__ref_34_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass51_0____ref_35_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass51_0::__ref_35_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c__DisplayClass52_0____ref_36_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c__DisplayClass52_0::__ref_36_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonReaderTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonReaderTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__100_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__100_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__101_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__101_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__102_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__102_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__103_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__103_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__104_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__104_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__105_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__105_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__106_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__106_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__107_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__107_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__108_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__108_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__109_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__109_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__110_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__110_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__47_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__49_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__51_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__53_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__55_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__57_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__57_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__59_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__59_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__61_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__63_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__65_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__65_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__67_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__67_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__69_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__69_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__70_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__70_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__71_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__71_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__72_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__73_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__73_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__74_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__75_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__75_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__76_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__77_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__77_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__78_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__79_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__79_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__80_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__80_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__81_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__81_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__82_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__82_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__83_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__83_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__84_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__84_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__85_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__85_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__86_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__86_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__87_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__87_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__88_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__88_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__89_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__89_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__90_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__90_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__91_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__91_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__92_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__92_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__93_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__93_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__94_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__94_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__95_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__95_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__96_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__96_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__97_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__97_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__98_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__98_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__99_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__99_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_Utf8JsonWriterTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Text_Json.System_Text_Json_Utf8JsonWriterTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_NullStream___ctor() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("NullStream::.ctor");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Memory_System_Buffers_ArrayBufferWriter_System_Byte____ctor_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Memory/System.Buffers.ArrayBufferWriter<System.Byte>::.ctor:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Memory_System_Buffers_ReadOnlySequence_System_Byte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Memory/System.Buffers.ReadOnlySequence<System.Byte>");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Byte() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Byte");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_DateTime() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.DateTime");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_DateTimeOffset() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.DateTimeOffset");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Decimal() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Decimal");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Decimal__Zero() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Decimal::Zero");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Guid() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Guid");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Null() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::Null");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -22245,583 +21515,417 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.ReadOnlyMemory<System.Byte>");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_ReadOnlyMemory_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.ReadOnlyMemory<System.Char>");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_JsonDocument___GetResult_JsonDocument__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<JsonDocument>::GetResult:JsonDocument()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>::GetResult:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Object___GetResult_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Object>::GetResult:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_CancellationToken() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.CancellationToken");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_JsonDocument___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_JsonDocument___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<JsonDocument>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<JsonDocument>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Object___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Object>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Object>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocumentOptions() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocumentOptions");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocument__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocument::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocument__ParseAsync_System_Threading_Tasks_Task_JsonDocument__System_IO_Stream_JsonDocumentOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocument::ParseAsync:System.Threading.Tasks.Task<JsonDocument>(System.IO.Stream,JsonDocumentOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocument__Parse_JsonDocument_System_Buffers_ReadOnlySequence_System_Byte__JsonDocumentOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocument::Parse:JsonDocument(System.Buffers.ReadOnlySequence<System.Byte>,JsonDocumentOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocument__Parse_JsonDocument_System_IO_Stream_JsonDocumentOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocument::Parse:JsonDocument(System.IO.Stream,JsonDocumentOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocument__Parse_JsonDocument_System_ReadOnlyMemory_System_Byte__JsonDocumentOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocument::Parse:JsonDocument(System.ReadOnlyMemory<System.Byte>,JsonDocumentOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocument__Parse_JsonDocument_System_ReadOnlyMemory_System_Char__JsonDocumentOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocument::Parse:JsonDocument(System.ReadOnlyMemory<System.Char>,JsonDocumentOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocument__Parse_JsonDocument_System_String_JsonDocumentOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocument::Parse:JsonDocument(System.String,JsonDocumentOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonDocument__WriteTo_System_Void_Utf8JsonWriter_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonDocument::WriteTo:System.Void(Utf8JsonWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__Clone_JsonElement__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::Clone:JsonElement()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__DeepEquals_System_Boolean_JsonElement_JsonElement_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::DeepEquals:System.Boolean(JsonElement,JsonElement)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetArrayLength_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetArrayLength:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetBoolean_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetBoolean:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetByte_System_Byte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetByte:System.Byte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetBytesFromBase64_System_Byte____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetBytesFromBase64:System.Byte[]()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetDateTimeOffset_System_DateTimeOffset__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetDateTimeOffset:System.DateTimeOffset()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetDateTime_System_DateTime__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetDateTime:System.DateTime()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetDecimal_System_Decimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetDecimal:System.Decimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetDouble_System_Double__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetDouble:System.Double()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetGuid_System_Guid__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetGuid:System.Guid()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetInt16_System_Int16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetInt16:System.Int16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetInt32_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetInt32:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetInt64_System_Int64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetInt64:System.Int64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetPropertyCount_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetPropertyCount:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetProperty_JsonElement_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetProperty:JsonElement(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetRawText_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetRawText:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetSByte_System_SByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetSByte:System.SByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetSingle_System_Single__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetSingle:System.Single()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetString_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetString:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetUInt16_System_UInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetUInt16:System.UInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetUInt32_System_UInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetUInt32:System.UInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__GetUInt64_System_UInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::GetUInt64:System.UInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetByte_System_Boolean_System_Byte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetByte:System.Boolean(System.Byte&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetBytesFromBase64_System_Boolean_System_Byte____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetBytesFromBase64:System.Boolean(System.Byte[]&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetDateTimeOffset_System_Boolean_System_DateTimeOffset__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetDateTime_System_Boolean_System_DateTime__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetDateTime:System.Boolean(System.DateTime&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetDecimal_System_Boolean_System_Decimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetDecimal:System.Boolean(System.Decimal&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetDouble_System_Boolean_System_Double__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetDouble:System.Boolean(System.Double&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetGuid_System_Boolean_System_Guid__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetGuid:System.Boolean(System.Guid&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetInt16_System_Boolean_System_Int16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetInt16:System.Boolean(System.Int16&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetInt32_System_Boolean_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetInt32:System.Boolean(System.Int32&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetInt64_System_Boolean_System_Int64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetInt64:System.Boolean(System.Int64&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetProperty_System_Boolean_System_String_JsonElement__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetProperty:System.Boolean(System.String,JsonElement&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetSByte_System_Boolean_System_SByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetSByte:System.Boolean(System.SByte&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetSingle_System_Boolean_System_Single__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetSingle:System.Boolean(System.Single&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetUInt16_System_Boolean_System_UInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetUInt16:System.Boolean(System.UInt16&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetUInt32_System_Boolean_System_UInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetUInt32:System.Boolean(System.UInt32&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__TryGetUInt64_System_Boolean_System_UInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::TryGetUInt64:System.Boolean(System.UInt64&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__ValueEquals_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::ValueEquals:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonElement__WriteTo_System_Void_Utf8JsonWriter_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonElement::WriteTo:System.Void(Utf8JsonWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonEncodedText() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonEncodedText");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonEncodedText__Encode_JsonEncodedText_System_String_JavaScriptEncoder_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonEncodedText::Encode:JsonEncodedText(System.String,JavaScriptEncoder)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonNamingPolicy__ConvertName_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonProperty() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonProperty");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonProperty__NameEquals_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonProperty::NameEquals:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonProperty__WriteTo_System_Void_Utf8JsonWriter_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonProperty::WriteTo:System.Void(Utf8JsonWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializerOptions__GetConverter_System_Text_Json_Serialization_JsonConverter_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializerOptions__MakeReadOnly_System_Void_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializerOptions::MakeReadOnly:System.Void(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializerOptions__MakeReadOnly_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializerOptions::MakeReadOnly:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsyncEnumerable_System_Int32__System_Collections_Generic_IAsyncEnumerable_System_Int32__System_IO_Stream_JsonSerializerOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,JsonSerializerOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsyncEnumerable_System_Int32__System_Collections_Generic_IAsyncEnumerable_System_Int32__System_IO_Stream_System_Boolean_JsonSerializerOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Boolean,JsonSerializerOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsyncEnumerable_System_Int32__System_Collections_Generic_IAsyncEnumerable_System_Int32__System_IO_Stream_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__System_Boolean_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Boolean,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsyncEnumerable_System_Int32__System_Collections_Generic_IAsyncEnumerable_System_Int32__System_IO_Stream_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::DeserializeAsyncEnumerable<System.Int32>:System.Collections.Generic.IAsyncEnumerable<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsync_System_Int32__System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_JsonSerializerOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::DeserializeAsync<System.Int32>:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,JsonSerializerOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsync_System_Int32__System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::DeserializeAsync<System.Int32>:System.Threading.Tasks.ValueTask<System.Int32>(System.IO.Stream,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsync_System_Threading_Tasks_ValueTask_System_Object__System_IO_Stream_System_Type_JsonSerializerOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsync_System_Threading_Tasks_ValueTask_System_Object__System_IO_Stream_System_Type_System_Text_Json_Serialization_JsonSerializerContext_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::DeserializeAsync:System.Threading.Tasks.ValueTask<System.Object>(System.IO.Stream,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_JsonDocument__JsonDocument_System_String_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize<JsonDocument>:JsonDocument(System.String,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_JsonElement__JsonElement_System_String_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize<JsonElement>:JsonElement(System.String,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonDocument_JsonSerializerOptions_(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
@@ -22876,240 +21980,172 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Dese
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_JsonDocument_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonDocument,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_JsonDocument_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonDocument,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_JsonElement_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonElement,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_JsonElement_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(JsonElement,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_IO_Stream_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_IO_Stream_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(System.IO.Stream,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_String_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(System.String,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_String_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(System.String,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_Text_Json_Nodes_JsonNode_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(System.Text.Json.Nodes.JsonNode,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_Text_Json_Nodes_JsonNode_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Deserialize:System.Object(System.Text.Json.Nodes.JsonNode,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Int32__System_Threading_Tasks_Task_PipeWriter_System_Int32_JsonSerializerOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(PipeWriter,System.Int32,JsonSerializerOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Int32__System_Threading_Tasks_Task_PipeWriter_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(PipeWriter,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Int32__System_Threading_Tasks_Task_System_IO_Stream_System_Int32_JsonSerializerOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,JsonSerializerOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Int32__System_Threading_Tasks_Task_System_IO_Stream_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeAsync<System.Int32>:System.Threading.Tasks.Task(System.IO.Stream,System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Threading_Tasks_Task_PipeWriter_System_Object_System_Type_JsonSerializerOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(PipeWriter,System.Object,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Threading_Tasks_Task_PipeWriter_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(PipeWriter,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Threading_Tasks_Task_System_IO_Stream_System_Object_System_Type_JsonSerializerOptions_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Object,System.Type,JsonSerializerOptions,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Threading_Tasks_Task_System_IO_Stream_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToDocument_JsonDocument_System_Object_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToDocument:JsonDocument(System.Object,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToDocument_JsonDocument_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToDocument:JsonDocument(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToDocument_System_Int32__JsonDocument_System_Int32_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToDocument<System.Int32>:JsonDocument(System.Int32,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToDocument_System_Int32__JsonDocument_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToDocument<System.Int32>:JsonDocument(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToElement_JsonElement_System_Object_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToElement:JsonElement(System.Object,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToElement_JsonElement_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToElement:JsonElement(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToElement_System_Int32__JsonElement_System_Int32_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToElement<System.Int32>:JsonElement(System.Int32,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToElement_System_Int32__JsonElement_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToElement<System.Int32>:JsonElement(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToNode_System_Int32__System_Text_Json_Nodes_JsonNode_System_Int32_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToNode<System.Int32>:System.Text.Json.Nodes.JsonNode(System.Int32,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToNode_System_Int32__System_Text_Json_Nodes_JsonNode_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToNode<System.Int32>:System.Text.Json.Nodes.JsonNode(System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToNode_System_Text_Json_Nodes_JsonNode_System_Object_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Object,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToNode_System_Text_Json_Nodes_JsonNode_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToNode:System.Text.Json.Nodes.JsonNode(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToUtf8Bytes_System_Byte___System_Object_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Object,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToUtf8Bytes_System_Byte___System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToUtf8Bytes:System.Byte[](System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToUtf8Bytes_System_Int32__System_Byte___System_Int32_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToUtf8Bytes<System.Int32>:System.Byte[](System.Int32,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToUtf8Bytes_System_Int32__System_Byte___System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::SerializeToUtf8Bytes<System.Int32>:System.Byte[](System.Int32,System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Int32>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Int32__System_String_System_Int32_JsonSerializerOptions_(CHAOS_IL2CPP_INTPTR chaos_arg_0) noexcept
@@ -23144,744 +22180,532 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Seri
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_String_System_Object_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Serialize:System.String(System.Object,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_String_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Serialize:System.String(System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Void_System_IO_Stream_System_Object_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Void_System_IO_Stream_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Void_Utf8JsonWriter_System_Object_System_Type_JsonSerializerOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Serialize:System.Void(Utf8JsonWriter,System.Object,System.Type,JsonSerializerOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Void_Utf8JsonWriter_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/JsonSerializer::Serialize:System.Void(Utf8JsonWriter,System.Object,System.Type,System.Text.Json.Serialization.JsonSerializerContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_System_Text_Json_Nodes_JsonNode__op_Implicit_System_Text_Json_Nodes_JsonNode_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetBoolean_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetBoolean:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetByte_System_Byte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetByte:System.Byte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetBytesFromBase64_System_Byte____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetBytesFromBase64:System.Byte[]()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetComment_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetComment:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetDateTimeOffset_System_DateTimeOffset__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetDateTimeOffset:System.DateTimeOffset()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetDateTime_System_DateTime__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetDateTime:System.DateTime()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetDecimal_System_Decimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetDecimal:System.Decimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetDouble_System_Double__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetDouble:System.Double()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetGuid_System_Guid__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetGuid:System.Guid()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetInt16_System_Int16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetInt16:System.Int16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetInt32_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetInt32:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetInt64_System_Int64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetInt64:System.Int64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetSByte_System_SByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetSByte:System.SByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetSingle_System_Single__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetSingle:System.Single()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetString_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetString:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetUInt16_System_UInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetUInt16:System.UInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetUInt32_System_UInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetUInt32:System.UInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__GetUInt64_System_UInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::GetUInt64:System.UInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__Read_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::Read:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__Skip_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::Skip:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetByte_System_Boolean_System_Byte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetByte:System.Boolean(System.Byte&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetBytesFromBase64_System_Boolean_System_Byte____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte[]&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetDateTimeOffset_System_Boolean_System_DateTimeOffset__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetDateTime_System_Boolean_System_DateTime__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetDateTime:System.Boolean(System.DateTime&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetDecimal_System_Boolean_System_Decimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetDecimal:System.Boolean(System.Decimal&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetDouble_System_Boolean_System_Double__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetDouble:System.Boolean(System.Double&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetGuid_System_Boolean_System_Guid__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetGuid:System.Boolean(System.Guid&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetInt16_System_Boolean_System_Int16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetInt16:System.Boolean(System.Int16&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetInt32_System_Boolean_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetInt32:System.Boolean(System.Int32&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetInt64_System_Boolean_System_Int64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetInt64:System.Boolean(System.Int64&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetSByte_System_Boolean_System_SByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetSByte:System.Boolean(System.SByte&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetSingle_System_Boolean_System_Single__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetSingle:System.Boolean(System.Single&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetUInt16_System_Boolean_System_UInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetUInt16:System.Boolean(System.UInt16&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetUInt32_System_Boolean_System_UInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetUInt32:System.Boolean(System.UInt32&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TryGetUInt64_System_Boolean_System_UInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TryGetUInt64:System.Boolean(System.UInt64&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__TrySkip_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::TrySkip:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonReader__ValueTextEquals_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonReader::ValueTextEquals:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__Flush_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::Flush:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__Reset_System_Void_System_Buffers_IBufferWriter_System_Byte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter<System.Byte>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__Reset_System_Void_System_IO_Stream_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::Reset:System.Void(System.IO.Stream)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteBooleanValue_System_Void_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteBooleanValue:System.Void(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteBoolean_System_Void_JsonEncodedText_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteBoolean:System.Void(JsonEncodedText,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteBoolean_System_Void_System_String_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteBoolean:System.Void(System.String,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteCommentValue_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteCommentValue:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteEndArray_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteEndArray:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteEndObject_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteEndObject:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNullValue_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNullValue:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNull_System_Void_JsonEncodedText_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNull:System.Void(JsonEncodedText)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNull_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNull:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumberValue_System_Void_System_Decimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Decimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumberValue_System_Void_System_Double_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Double)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumberValue_System_Void_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumberValue_System_Void_System_Int64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumberValue_System_Void_System_Single_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.Single)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumberValue_System_Void_System_UInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumberValue_System_Void_System_UInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_JsonEncodedText_System_Decimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Decimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_JsonEncodedText_System_Double_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Double)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_JsonEncodedText_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_JsonEncodedText_System_Int64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_JsonEncodedText_System_Single_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.Single)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_JsonEncodedText_System_UInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.UInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_JsonEncodedText_System_UInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(JsonEncodedText,System.UInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_System_String_System_Decimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Decimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_System_String_System_Double_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Double)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_System_String_System_Int64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_System_String_System_Single_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Single)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_System_String_System_UInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteNumber_System_Void_System_String_System_UInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WritePropertyName_System_Void_JsonEncodedText_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WritePropertyName:System.Void(JsonEncodedText)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WritePropertyName_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WritePropertyName:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteRawValue_System_Void_System_Buffers_ReadOnlySequence_System_Byte__System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence<System.Byte>,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteRawValue_System_Void_System_String_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteRawValue:System.Void(System.String,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStartArray_System_Void_JsonEncodedText_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void(JsonEncodedText)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStartArray_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStartArray_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStartArray:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStartObject_System_Void_JsonEncodedText_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void(JsonEncodedText)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStartObject_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStartObject_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStartObject:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStringValue_System_Void_JsonEncodedText_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(JsonEncodedText)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStringValue_System_Void_System_DateTimeOffset_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.DateTimeOffset)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStringValue_System_Void_System_DateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.DateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStringValue_System_Void_System_Guid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.Guid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteStringValue_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteStringValue:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_JsonEncodedText_JsonEncodedText_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,JsonEncodedText)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_JsonEncodedText_System_DateTimeOffset_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.DateTimeOffset)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_JsonEncodedText_System_DateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.DateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_JsonEncodedText_System_Guid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.Guid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_JsonEncodedText_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(JsonEncodedText,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_System_String_JsonEncodedText_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,JsonEncodedText)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_System_String_System_DateTimeOffset_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTimeOffset)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_System_String_System_DateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_System_String_System_Guid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.Guid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Text_Json_Utf8JsonWriter__WriteString_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Text.Json/Utf8JsonWriter::WriteString:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_ONCE_FLAG chaos_type_init_once_System_Private_CoreLib_System_IO_Stream;
@@ -23912,7 +22736,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -29251,7 +28075,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[605] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[605] = {
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9__0_0),
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonDocumentTests___c____9),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_),
@@ -29412,8 +28236,8 @@ extern "C" void* kChaosExternalRuntimeFnTable[605] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializerOptions__GetConverter_System_Text_Json_Serialization_JsonConverter_System_Type_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializerOptions__MakeReadOnly_System_Void__),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializerOptions__MakeReadOnly_System_Void_System_Boolean_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Int32__System_Void_System_IO_Stream_System_Int32_JsonSerializerOptions_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Int32__System_String_System_Int32_JsonSerializerOptions_),
+    nullptr,
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Int32__System_Threading_Tasks_Task_System_IO_Stream_System_Int32_JsonSerializerOptions_System_Threading_CancellationToken_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToDocument_System_Int32__JsonDocument_System_Int32_JsonSerializerOptions_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeToElement_System_Int32__JsonElement_System_Int32_JsonSerializerOptions_),
@@ -29528,25 +28352,25 @@ extern "C" void* kChaosExternalRuntimeFnTable[605] = {
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__75_0),
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__76_0),
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json_JsonSerializerTests___c____9__77_0),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonDocument_JsonSerializerOptions_),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_JsonDocument_System_Type_JsonSerializerOptions_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_Text_Json_Nodes_JsonNode_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_Text_Json_Nodes_JsonNode_System_Type_System_Text_Json_Serialization_JsonSerializerContext_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonDocument_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_IO_Stream_JsonSerializerOptions_),
+    nullptr,
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_IO_Stream_System_Type_JsonSerializerOptions_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_IO_Stream_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_JsonDocument_System_Type_System_Text_Json_Serialization_JsonSerializerContext_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_IO_Stream_System_Type_System_Text_Json_Serialization_JsonSerializerContext_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_String_JsonSerializerOptions_),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_String_System_Type_JsonSerializerOptions_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_String_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_String_System_Type_System_Text_Json_Serialization_JsonSerializerContext_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonElement_JsonSerializerOptions_),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_JsonElement_System_Type_JsonSerializerOptions_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_JsonElement_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_JsonElement_System_Type_System_Text_Json_Serialization_JsonSerializerContext_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Int32__System_Int32_System_Text_Json_Nodes_JsonNode_JsonSerializerOptions_),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Deserialize_System_Object_System_Text_Json_Nodes_JsonNode_System_Type_JsonSerializerOptions_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsync_System_Int32__System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_JsonSerializerOptions_System_Threading_CancellationToken_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___),
@@ -29561,14 +28385,14 @@ extern "C" void* kChaosExternalRuntimeFnTable[605] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsyncEnumerable_System_Int32__System_Collections_Generic_IAsyncEnumerable_System_Int32__System_IO_Stream_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__System_Threading_CancellationToken_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__DeserializeAsyncEnumerable_System_Int32__System_Collections_Generic_IAsyncEnumerable_System_Int32__System_IO_Stream_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__System_Boolean_System_Threading_CancellationToken_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Void_System_IO_Stream_System_Object_System_Type_JsonSerializerOptions_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Int32__System_Void_System_IO_Stream_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Void_System_IO_Stream_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_String_System_Object_System_Type_JsonSerializerOptions_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Int32__System_String_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_String_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Int32__System_Void_Utf8JsonWriter_System_Int32_JsonSerializerOptions_),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Void_Utf8JsonWriter_System_Object_System_Type_JsonSerializerOptions_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Int32__System_Void_Utf8JsonWriter_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__Serialize_System_Void_Utf8JsonWriter_System_Object_System_Type_System_Text_Json_Serialization_JsonSerializerContext_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Threading_Tasks_Task_System_IO_Stream_System_Object_System_Type_JsonSerializerOptions_System_Threading_CancellationToken_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Text_Json_JsonSerializer__SerializeAsync_System_Int32__System_Threading_Tasks_Task_System_IO_Stream_System_Int32_System_Text_Json_Serialization_Metadata_JsonTypeInfo_System_Int32__System_Threading_CancellationToken_),
@@ -29859,6 +28683,47 @@ extern "C" void* kChaosExternalRuntimeFnTable[605] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 605;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+    const char* subject_id;
+    const uint8_t* il_data;
+    int32_t il_size;
+    void* patch_method;
+    const char* json_data;
+};
+extern "C" int32_t kChaosExternalRuntimeIlCount;
+static const uint8_t s_il_0[] = {
+    0x2A, 
+};
+static const uint8_t s_il_238[] = {
+    0x02, 0x73, 0xDE, 0x65, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_239[] = {
+    0x02, 0x7B, 0x94, 0x14, 0x00, 0x04, 0x16, 0x28, 0xE3, 0x65, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_265[] = {
+    0x02, 0x12, 0x00, 0xFE, 0x15, 0x4D, 0x00, 0x00, 0x1B, 0x06, 0x28, 0xB0, 0x07, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_541[] = {
+    0x02, 0x73, 0x35, 0x66, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_542[] = {
+    0x02, 0x7C, 0xAA, 0x14, 0x00, 0x04, 0x28, 0xD6, 0x3E, 0x00, 0x06, 0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+    { "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()", s_il_238, sizeof(s_il_238), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()", s_il_239, sizeof(s_il_239), nullptr, nullptr },
+    { "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Int32)", s_il_265, sizeof(s_il_265), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()", s_il_541, sizeof(s_il_541), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()", s_il_542, sizeof(s_il_542), nullptr, nullptr },
+    { nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -47585,6 +46450,10 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Text_Json_System_Text_Json
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
 		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
@@ -49175,7 +48044,7 @@ extern "C" const JitEntry kChaosJitEntries[783] =
     { kJitJson_782, 2814u, 0x000004AFu, 0u }
 };
 
-extern "C" const uint32_t kChaosJitEntryCount = 783u;
+extern "C" const CHAOS_IL2CPP_UINT32 kChaosJitEntryCount = 783u;
 
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 extern "C" void ChaosJitRegisterAll() {

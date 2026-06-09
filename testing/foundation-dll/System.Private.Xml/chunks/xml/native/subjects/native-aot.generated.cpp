@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -22578,22 +22580,22 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
     auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
     // Register managed_array (variable-size: header + contiguous element data).
     registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-        static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-        static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+        static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
     registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
     registry.Register(17890845224900496377ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c), nullptr, 0);
@@ -23749,14541 +23751,5222 @@ CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_IO_TextWriter__Nu
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__IsNotNull_System_Void_System_Object_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentNullException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_FormatException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.FormatException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Xml_XmlException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Add_0_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Add_0_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Add_1_System_Char_int_int_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Add_1_System_Char_int_int_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Add_1_System_Char_int_int_2_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Add_1_System_Char_int_int_3_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Add_1_System_Char_int_int_4_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Get_2_string_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Get_2_string_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Get_3_System_Char_int_int_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Get_3_System_Char_int_int_1_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Get_3_System_Char_int_int_2_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Get_3_System_Char_int_int_3_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___Get_3_System_Char_int_int_4_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.Xml.XmlException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___Append_2_XmlAttribute_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___InsertAfter_4_XmlAttribute_XmlAttribute_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___InsertBefore_3_XmlAttribute_XmlAttribute_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___Prepend_1_XmlAttribute_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___RemoveAll_7__7_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___RemoveAt_6_int_0_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___RemoveAt_6_int_1_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___Remove_5_XmlAttribute_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___SetNamedItem_0_XmlNode_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_NameTableTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeCollectionTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___AppendChild_6_XmlNode_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___InsertAfter_2_XmlNode_XmlNode_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___InsertBefore_1_XmlNode_XmlNode_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___PrependChild_5_XmlNode_0_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___RemoveChild_4_XmlNode_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___ReplaceChild_3_XmlNode_XmlNode_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___WriteContentTo_8_XmlWriter_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___WriteTo_7_XmlWriter_0_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeCollectionTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlAttributeTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlAttributeTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCDataSectionTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCDataSectionTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCDataSectionTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCDataSectionTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCDataSectionTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___AppendData_1_string_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___AppendData_1_string_1_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___DeleteData_3_int_int_0_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___DeleteData_3_int_int_1_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___DeleteData_3_int_int_2_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___InsertData_2_int_string_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___InsertData_2_int_string_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___InsertData_2_int_string_2_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___ReplaceData_4_int_int_string_0_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___ReplaceData_4_int_int_string_1_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___ReplaceData_4_int_int_string_2_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___ReplaceData_4_int_int_string_3_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___Substring_0_int_int_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___Substring_0_int_int_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___Substring_0_int_int_2_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCDataSectionTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCharacterDataTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCharacterDataTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCommentTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCommentTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCommentTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCommentTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlCommentTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToBoolean_17_string_0_b__61_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToBoolean_17_string_1_b__62_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToByte_24_string_0_b__75_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToByte_24_string_1_b__76_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToChar_18_string_0_b__63_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToChar_18_string_1_b__64_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_35_string_0_b__100_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_35_string_1_b__101_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_36_string_string_0_b__102_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_36_string_string_1_b__103_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_36_string_string_2_b__104_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_37_string_System_String_0_b__105_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_37_string_System_String_1_b__106_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_37_string_System_String_2_b__107_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTimeOffset_37_string_System_String_3_b__108_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_31_string_0_b__89_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_31_string_1_b__90_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_32_string_string_0_b__91_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_32_string_string_1_b__92_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_32_string_string_2_b__93_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_33_string_System_String_0_b__94_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_33_string_System_String_1_b__95_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_33_string_System_String_2_b__96_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_33_string_System_String_3_b__97_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_34_string_XmlDateTimeSerializationMode_0_b__98_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDateTime_34_string_XmlDateTimeSerializationMode_1_b__99_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDecimal_19_string_0_b__65_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDecimal_19_string_1_b__66_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDouble_29_string_0_b__85_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToDouble_29_string_1_b__86_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToGuid_38_string_0_b__109_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToGuid_38_string_1_b__110_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToInt16_21_string_0_b__69_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToInt16_21_string_1_b__70_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToInt32_22_string_0_b__71_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToInt32_22_string_1_b__72_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToInt64_23_string_0_b__73_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToInt64_23_string_1_b__74_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToSByte_20_string_0_b__67_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToSByte_20_string_1_b__68_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToSingle_28_string_0_b__83_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToSingle_28_string_1_b__84_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToTimeSpan_30_string_0_b__87_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToTimeSpan_30_string_1_b__88_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToUInt16_25_string_0_b__77_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToUInt16_25_string_1_b__78_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToUInt32_26_string_0_b__79_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToUInt32_26_string_1_b__80_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToUInt64_27_string_0_b__81_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ToUInt64_27_string_1_b__82_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyNCName_5_string_0_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyNCName_5_string_1_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyNMTOKEN_7_string_0_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyNMTOKEN_7_string_1_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyName_4_string_0_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyName_4_string_1_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyPublicId_9_string_0_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyWhitespace_10_string_0_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___VerifyXmlChars_8_string_0_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlCommentTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__100_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__100_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__101_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__101_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__102_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__102_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__103_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__103_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__104_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__104_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__105_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__105_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__106_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__106_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__107_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__107_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__108_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__108_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__109_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__109_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__110_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__110_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__61_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__63_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__65_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__65_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__67_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__67_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__69_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__69_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__70_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__70_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__71_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__71_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__72_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__73_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__73_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__74_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__75_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__75_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__76_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__77_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__77_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__78_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__79_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__79_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__80_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__80_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__81_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__81_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__82_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__82_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__83_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__83_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__84_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__84_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__85_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__85_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__86_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__86_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__87_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__87_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__88_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__88_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__89_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__89_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__90_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__90_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__91_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__91_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__92_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__92_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__93_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__93_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__94_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__94_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__95_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__95_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__96_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__96_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__97_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__97_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__98_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__98_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c____9__99_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlConvertTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlConvertTests+<>c::<>9__99_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDeclarationTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDeclarationTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDeclarationTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDeclarationTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDeclarationTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDeclarationTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentFragmentTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentFragmentTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentFragmentTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentFragmentTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentFragmentTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_15_string_string_0_b__33_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_15_string_string_1_b__34_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_15_string_string_2_b__35_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_1_string_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_1_string_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_20_string_string_string_0_b__46_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_20_string_string_string_1_b__47_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_20_string_string_string_2_b__48_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateAttribute_20_string_string_string_3_b__49_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateCDataSection_2_string_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateCDataSection_2_string_1_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateComment_3_string_0_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateComment_3_string_1_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateDocumentFragment_5__5_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateDocumentType_4_string_string_string_string_0_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateDocumentType_4_string_string_string_string_1_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateDocumentType_4_string_string_string_string_2_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateDocumentType_4_string_string_string_string_3_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_16_string_string_0_b__36_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_16_string_string_1_b__37_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_16_string_string_2_b__38_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_21_string_string_string_0_b__50_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_21_string_string_string_1_b__51_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_21_string_string_string_2_b__52_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_21_string_string_string_3_b__53_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_6_string_0_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateElement_6_string_1_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateEntityReference_7_string_0_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateEntityReference_7_string_1_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNavigator_12__12_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_22_XmlNodeType_string_string_string_0_b__54_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_22_XmlNodeType_string_string_string_1_b__55_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_22_XmlNodeType_string_string_string_2_b__56_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_23_string_string_string_0_b__57_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_23_string_string_string_1_b__58_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_23_string_string_string_2_b__59_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_23_string_string_string_3_b__60_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_24_XmlNodeType_string_string_0_b__61_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_24_XmlNodeType_string_string_1_b__62_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateNode_24_XmlNodeType_string_string_2_b__63_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateProcessingInstruction_8_string_string_0_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateProcessingInstruction_8_string_string_1_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateProcessingInstruction_8_string_string_2_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateSignificantWhitespace_11_string_0_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateSignificantWhitespace_11_string_1_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateTextNode_10_string_0_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateTextNode_10_string_1_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateWhitespace_13_string_0_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateWhitespace_13_string_1_b__30_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateXmlDeclaration_9_string_string_string_0_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateXmlDeclaration_9_string_string_string_1_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateXmlDeclaration_9_string_string_string_2_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___CreateXmlDeclaration_9_string_string_string_3_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___GetElementById_18_string_0_b__42_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___GetElementById_18_string_1_b__43_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___GetElementsByTagName_14_string_0_b__31_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___GetElementsByTagName_14_string_1_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___GetElementsByTagName_17_string_string_0_b__39_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___GetElementsByTagName_17_string_string_1_b__40_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___GetElementsByTagName_17_string_string_2_b__41_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___ImportNode_19_XmlNode_bool_0_b__44_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___ImportNode_19_XmlNode_bool_1_b__45_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___LoadXml_30_string_0_b__72_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___LoadXml_30_string_1_b__73_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Load_26_string_0_b__65_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Load_26_string_1_b__66_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Load_27_Stream_0_b__67_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Load_27_Stream_1_b__68_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Load_28_TextReader_0_b__69_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Load_28_TextReader_1_b__70_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Load_29_XmlReader_0_b__71_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___ReadNode_25_XmlReader_0_b__64_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Save_31_string_0_b__74_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Save_31_string_1_b__75_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Save_32_Stream_0_b__76_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Save_32_Stream_1_b__77_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Save_33_TextWriter_0_b__78_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Save_33_TextWriter_1_b__79_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Save_34_XmlWriter_0_b__80_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Validate_37_ValidationEventHandler_0_b__83_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___Validate_38_ValidationEventHandler_XmlNode_0_b__84_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___WriteContentTo_36_XmlWriter_0_b__82_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___WriteTo_35_XmlWriter_0_b__81_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentFragmentTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__47_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__49_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__51_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__53_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__55_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__57_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__57_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__59_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__59_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__61_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__63_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__65_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__65_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__67_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__67_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__69_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__69_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__70_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__70_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__71_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__71_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__72_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__73_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__73_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__74_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__75_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__75_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__76_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__77_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__77_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__78_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__79_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__79_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__80_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__80_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__81_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__81_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__82_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__82_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__83_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__83_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__84_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__84_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTypeTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTypeTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTypeTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTypeTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlDocumentTypeTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttributeNode_11_string_string_0_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttributeNode_11_string_string_1_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttributeNode_11_string_string_2_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttributeNode_4_string_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttributeNode_4_string_1_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttribute_1_string_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttribute_1_string_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttribute_8_string_string_0_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttribute_8_string_string_1_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetAttribute_8_string_string_2_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetElementsByTagName_14_string_string_0_b__34_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetElementsByTagName_14_string_string_1_b__35_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetElementsByTagName_14_string_string_2_b__36_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetElementsByTagName_7_string_0_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___GetElementsByTagName_7_string_1_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___HasAttribute_15_string_0_b__37_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___HasAttribute_15_string_1_b__38_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___HasAttribute_16_string_string_0_b__39_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___HasAttribute_16_string_string_1_b__40_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___HasAttribute_16_string_string_2_b__41_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAllAttributes_20__20_b__46_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAll_21__21_b__47_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttributeAt_19_int_0_b__44_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttributeAt_19_int_1_b__45_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttributeNode_13_string_string_0_b__31_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttributeNode_13_string_string_1_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttributeNode_13_string_string_2_b__33_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttributeNode_6_XmlAttribute_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttribute_10_string_string_0_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttribute_10_string_string_1_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttribute_10_string_string_2_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttribute_3_string_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___RemoveAttribute_3_string_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttributeNode_12_string_string_0_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttributeNode_12_string_string_1_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttributeNode_12_string_string_2_b__30_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttributeNode_5_XmlAttribute_0_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttribute_2_string_string_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttribute_2_string_string_1_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttribute_2_string_string_2_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttribute_9_string_string_string_0_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttribute_9_string_string_string_1_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttribute_9_string_string_string_2_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___SetAttribute_9_string_string_string_3_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___WriteContentTo_18_XmlWriter_0_b__43_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___WriteTo_17_XmlWriter_0_b__42_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlDocumentTypeTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__47_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlElementTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlElementTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityReferenceTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityReferenceTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityReferenceTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityReferenceTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityReferenceTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityReferenceTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlEntityTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c___CreateDocument_1__1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c___HasFeature_0_string_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c___HasFeature_0_string_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c___HasFeature_0_string_string_2_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlEntityTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlImplementationTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlImplementationTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlImplementationTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlImplementationTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlImplementationTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Add_2_System_Char_int_int_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Add_2_System_Char_int_int_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Add_2_System_Char_int_int_2_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Add_2_System_Char_int_int_3_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Add_2_System_Char_int_int_4_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Add_3_string_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Add_3_string_1_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Get_0_System_Char_int_int_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Get_0_System_Char_int_int_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Get_0_System_Char_int_int_2_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Get_0_System_Char_int_int_3_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Get_0_System_Char_int_int_4_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Get_1_string_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___Get_1_string_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlImplementationTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNameTableTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___GetEnumerator_6__6_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___GetNamedItem_0_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___GetNamedItem_0_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___GetNamedItem_4_string_string_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___GetNamedItem_4_string_string_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___GetNamedItem_4_string_string_2_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___Item_3_int_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___Item_3_int_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___RemoveNamedItem_2_string_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___RemoveNamedItem_2_string_1_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___RemoveNamedItem_5_string_string_0_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___RemoveNamedItem_5_string_string_1_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___RemoveNamedItem_5_string_string_2_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___SetNamedItem_1_XmlNode_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNameTableTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamedNodeMapTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___AddNamespace_2_string_string_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___AddNamespace_2_string_string_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___AddNamespace_2_string_string_2_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___GetEnumerator_4__4_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___GetNamespacesInScope_5_XmlNamespaceScope_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___HasNamespace_8_string_0_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___HasNamespace_8_string_1_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___LookupNamespace_6_string_0_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___LookupNamespace_6_string_1_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___LookupPrefix_7_string_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___LookupPrefix_7_string_1_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___PopScope_1__1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___PushScope_0__0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___RemoveNamespace_3_string_string_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___RemoveNamespace_3_string_string_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___RemoveNamespace_3_string_string_2_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamedNodeMapTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNamespaceManagerTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeListTests___c___GetEnumerator_1__1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeListTests___c___Item_0_int_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeListTests___c___Item_0_int_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNamespaceManagerTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeListTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeListTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeListTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeListTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeListTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeListTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeListTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeListTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___Close_10__10_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___GetAttribute_0_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___GetAttribute_0_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___GetAttribute_1_string_string_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___GetAttribute_1_string_string_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___GetAttribute_1_string_string_2_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___GetAttribute_2_int_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___GetAttribute_2_int_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___LookupNamespace_13_string_0_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___LookupNamespace_13_string_1_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToAttribute_3_string_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToAttribute_3_string_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToAttribute_4_string_string_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToAttribute_4_string_string_1_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToAttribute_4_string_string_2_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToAttribute_5_int_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToAttribute_5_int_1_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToElement_8__8_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToFirstAttribute_6__6_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___MoveToNextAttribute_7__7_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadAttributeValue_15__15_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBase64_16_System_Byte_int_int_0_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBase64_16_System_Byte_int_int_1_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBase64_16_System_Byte_int_int_2_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBase64_16_System_Byte_int_int_3_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBase64_16_System_Byte_int_int_4_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_0_b__30_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_1_b__31_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_2_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_3_b__33_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_4_b__34_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBase64_18_System_Byte_int_int_0_b__35_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBase64_18_System_Byte_int_int_1_b__36_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBase64_18_System_Byte_int_int_2_b__37_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBase64_18_System_Byte_int_int_3_b__38_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBase64_18_System_Byte_int_int_4_b__39_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBinHex_19_System_Byte_int_int_0_b__40_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBinHex_19_System_Byte_int_int_1_b__41_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBinHex_19_System_Byte_int_int_2_b__42_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBinHex_19_System_Byte_int_int_3_b__43_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadElementContentAsBinHex_19_System_Byte_int_int_4_b__44_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ReadString_12__12_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___Read_9__9_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ResolveEntity_14__14_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___Skip_11__11_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeListTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeReaderTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___AppendChild_10_XmlNode_0_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___CloneNode_11_bool_0_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___CloneNode_11_bool_1_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___Clone_13__13_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___CreateNavigator_0__0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___GetEnumerator_14__14_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___GetNamespaceOfPrefix_18_string_0_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___GetNamespaceOfPrefix_18_string_1_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___GetPrefixOfNamespace_19_string_0_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___GetPrefixOfNamespace_19_string_1_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___InsertAfter_6_XmlNode_XmlNode_0_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___InsertBefore_5_XmlNode_XmlNode_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___PrependChild_9_XmlNode_0_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___RemoveAll_17__17_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___RemoveChild_8_XmlNode_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___ReplaceChild_7_XmlNode_XmlNode_0_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___SelectNodes_3_string_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___SelectNodes_3_string_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___SelectNodes_4_string_XmlNamespaceManager_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___SelectNodes_4_string_XmlNamespaceManager_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___SelectSingleNode_1_string_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___SelectSingleNode_1_string_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___SelectSingleNode_2_string_XmlNamespaceManager_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___SelectSingleNode_2_string_XmlNamespaceManager_1_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___Supports_12_string_string_0_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___Supports_12_string_string_1_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___Supports_12_string_string_2_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___WriteContentTo_16_XmlWriter_0_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___WriteTo_15_XmlWriter_0_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeReaderTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNodeTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNodeTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNotationTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNotationTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNotationTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNotationTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlNotationTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlNotationTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlProcessingInstructionTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlProcessingInstructionTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlProcessingInstructionTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlProcessingInstructionTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlProcessingInstructionTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderSettingsTests___c___Clone_0__0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlProcessingInstructionTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderSettingsTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderSettingsTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderSettingsTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderSettingsTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___Close_42__42_b__69_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___Dispose_74__74_b__144_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___GetAttribute_31_string_0_b__50_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___GetAttribute_31_string_1_b__51_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___GetAttribute_32_string_string_0_b__52_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___GetAttribute_32_string_string_1_b__53_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___GetAttribute_32_string_string_2_b__54_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___GetAttribute_33_int_0_b__55_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___GetAttribute_33_int_1_b__56_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___GetValueAsync_75__75_b__145_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___IsNameToken_70_string_0_b__138_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___IsName_69_string_0_b__135_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___IsStartElement_60__60_b__114_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___IsStartElement_61_string_0_b__115_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___IsStartElement_61_string_1_b__116_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___IsStartElement_62_string_string_0_b__117_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___IsStartElement_62_string_string_1_b__118_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___IsStartElement_62_string_string_2_b__119_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___LookupNamespace_44_string_0_b__71_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___LookupNamespace_44_string_1_b__72_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToAttribute_34_string_0_b__57_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToAttribute_34_string_1_b__58_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToAttribute_35_string_string_0_b__59_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToAttribute_35_string_string_1_b__60_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToAttribute_35_string_string_2_b__61_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToAttribute_36_int_0_b__62_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToAttribute_36_int_1_b__63_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToContentAsync_89__89_b__179_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToContent_52__52_b__100_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToElement_39__39_b__66_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToFirstAttribute_37__37_b__64_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___MoveToNextAttribute_38__38_b__65_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadAsync_82__82_b__152_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadAttributeValue_40__40_b__67_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsAsync_78_System_Type_IXmlNamespaceResolver_0_b__148_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64Async_84_System_Byte_int_int_0_b__154_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64Async_84_System_Byte_int_int_1_b__155_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64Async_84_System_Byte_int_int_2_b__156_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64Async_84_System_Byte_int_int_3_b__157_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64Async_84_System_Byte_int_int_4_b__158_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64_46_System_Byte_int_int_0_b__74_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64_46_System_Byte_int_int_1_b__75_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64_46_System_Byte_int_int_2_b__76_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64_46_System_Byte_int_int_3_b__77_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBase64_46_System_Byte_int_int_4_b__78_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHexAsync_86_System_Byte_int_int_0_b__164_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHexAsync_86_System_Byte_int_int_1_b__165_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHexAsync_86_System_Byte_int_int_2_b__166_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHexAsync_86_System_Byte_int_int_3_b__167_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHexAsync_86_System_Byte_int_int_4_b__168_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHex_48_System_Byte_int_int_0_b__84_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHex_48_System_Byte_int_int_1_b__85_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHex_48_System_Byte_int_int_2_b__86_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHex_48_System_Byte_int_int_3_b__87_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBinHex_48_System_Byte_int_int_4_b__88_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsBoolean_1__1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsDateTimeOffset_3__3_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsDateTime_2__2_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsDecimal_6__6_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsDouble_4__4_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsFloat_5__5_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsInt_7__7_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsLong_8__8_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsObjectAsync_76__76_b__146_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsObject_0__0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsStringAsync_77__77_b__147_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAsString_9__9_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadContentAs_10_System_Type_IXmlNamespaceResolver_0_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsAsync_81_System_Type_IXmlNamespaceResolver_0_b__151_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64Async_85_System_Byte_int_int_0_b__159_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64Async_85_System_Byte_int_int_1_b__160_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64Async_85_System_Byte_int_int_2_b__161_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64Async_85_System_Byte_int_int_3_b__162_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64Async_85_System_Byte_int_int_4_b__163_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64_47_System_Byte_int_int_0_b__79_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64_47_System_Byte_int_int_1_b__80_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64_47_System_Byte_int_int_2_b__81_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64_47_System_Byte_int_int_3_b__82_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBase64_47_System_Byte_int_int_4_b__83_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHexAsync_87_System_Byte_int_int_0_b__169_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHexAsync_87_System_Byte_int_int_1_b__170_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHexAsync_87_System_Byte_int_int_2_b__171_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHexAsync_87_System_Byte_int_int_3_b__172_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHexAsync_87_System_Byte_int_int_4_b__173_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHex_49_System_Byte_int_int_0_b__89_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHex_49_System_Byte_int_int_1_b__90_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHex_49_System_Byte_int_int_2_b__91_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHex_49_System_Byte_int_int_3_b__92_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBinHex_49_System_Byte_int_int_4_b__93_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBoolean_13__13_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBoolean_14_string_string_0_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBoolean_14_string_string_1_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsBoolean_14_string_string_2_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDateTime_15__15_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDateTime_16_string_string_0_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDateTime_16_string_string_1_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDateTime_16_string_string_2_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDecimal_21__21_b__31_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDecimal_22_string_string_0_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDecimal_22_string_string_1_b__33_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDecimal_22_string_string_2_b__34_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDouble_17__17_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDouble_18_string_string_0_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDouble_18_string_string_1_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsDouble_18_string_string_2_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsFloat_19__19_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsFloat_20_string_string_0_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsFloat_20_string_string_1_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsFloat_20_string_string_2_b__30_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsInt_23__23_b__35_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsInt_24_string_string_0_b__36_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsInt_24_string_string_1_b__37_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsInt_24_string_string_2_b__38_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsLong_25__25_b__39_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsLong_26_string_string_0_b__40_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsLong_26_string_string_1_b__41_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsLong_26_string_string_2_b__42_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsObjectAsync_79__79_b__149_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsObject_11__11_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsObject_12_string_string_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsObject_12_string_string_1_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsObject_12_string_string_2_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsStringAsync_80__80_b__150_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsString_27__27_b__43_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsString_28_string_string_0_b__44_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsString_28_string_string_1_b__45_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAsString_28_string_string_2_b__46_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAs_29_System_Type_IXmlNamespaceResolver_0_b__47_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAs_30_System_Type_IXmlNamespaceResolver_string_string_0_b__48_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementContentAs_30_System_Type_IXmlNamespaceResolver_string_string_1_b__49_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementString_56__56_b__107_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementString_57_string_0_b__108_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementString_57_string_1_b__109_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementString_58_string_string_0_b__110_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementString_58_string_string_1_b__111_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadElementString_58_string_string_2_b__112_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadEndElement_59__59_b__113_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadInnerXmlAsync_90__90_b__180_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadInnerXml_71__71_b__141_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadOuterXmlAsync_91__91_b__181_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadOuterXml_72__72_b__142_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadStartElement_53__53_b__101_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadStartElement_54_string_0_b__102_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadStartElement_54_string_1_b__103_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadStartElement_55_string_string_0_b__104_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadStartElement_55_string_string_1_b__105_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadStartElement_55_string_string_2_b__106_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadString_51__51_b__99_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadSubtree_73__73_b__143_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToDescendant_65_string_0_b__125_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToDescendant_65_string_1_b__126_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToDescendant_66_string_string_0_b__127_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToDescendant_66_string_string_1_b__128_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToDescendant_66_string_string_2_b__129_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToFollowing_63_string_0_b__120_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToFollowing_63_string_1_b__121_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToFollowing_64_string_string_0_b__122_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToFollowing_64_string_string_1_b__123_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToFollowing_64_string_string_2_b__124_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToNextSibling_67_string_0_b__130_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToNextSibling_67_string_1_b__131_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToNextSibling_68_string_string_0_b__132_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToNextSibling_68_string_string_1_b__133_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadToNextSibling_68_string_string_2_b__134_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunkAsync_88_System_Char_int_int_0_b__174_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunkAsync_88_System_Char_int_int_1_b__175_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunkAsync_88_System_Char_int_int_2_b__176_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunkAsync_88_System_Char_int_int_3_b__177_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunkAsync_88_System_Char_int_int_4_b__178_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunk_50_System_Char_int_int_0_b__94_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunk_50_System_Char_int_int_1_b__95_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunk_50_System_Char_int_int_2_b__96_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunk_50_System_Char_int_int_3_b__97_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ReadValueChunk_50_System_Char_int_int_4_b__98_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___Read_41__41_b__68_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ResolveEntity_45__45_b__73_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___SkipAsync_83__83_b__153_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___Skip_43__43_b__70_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderSettingsTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__100_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__100_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__101_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__101_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__102_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__102_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__103_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__103_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__104_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__104_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__105_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__105_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__106_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__106_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__107_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__107_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__108_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__108_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__109_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__109_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__110_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__110_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__111_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__111_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__112_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__112_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__113_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__113_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__114_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__114_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__115_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__115_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__116_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__116_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__117_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__117_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__118_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__118_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__119_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__119_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__120_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__120_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__121_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__121_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__122_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__122_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__123_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__123_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__124_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__124_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__125_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__125_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__126_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__126_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__127_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__127_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__128_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__128_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__129_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__129_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__130_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__130_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__131_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__131_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__132_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__132_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__133_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__133_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__134_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__134_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__135_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__135_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__138_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__138_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__141_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__141_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__142_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__142_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__143_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__143_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__144_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__144_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__145_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__145_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__146_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__146_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__147_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__147_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__148_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__148_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__149_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__149_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__150_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__150_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__151_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__151_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__152_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__152_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__153_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__153_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__154_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__154_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__155_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__155_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__156_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__156_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__157_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__157_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__158_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__158_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__159_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__159_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__160_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__160_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__161_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__161_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__162_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__162_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__163_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__163_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__164_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__164_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__165_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__165_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__166_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__166_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__167_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__167_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__168_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__168_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__169_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__169_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__170_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__170_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__171_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__171_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__172_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__172_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__173_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__173_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__174_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__174_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__175_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__175_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__176_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__176_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__177_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__177_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__178_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__178_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__179_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__179_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__180_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__180_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__181_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__181_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__47_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__49_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__51_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__53_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__55_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__57_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__57_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__59_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__59_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__61_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__63_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__65_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__65_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__67_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__67_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__69_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__69_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__70_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__70_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__71_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__71_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__72_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__73_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__73_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__74_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__75_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__75_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__76_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__77_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__77_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__78_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__79_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__79_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__80_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__80_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__81_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__81_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__82_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__82_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__83_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__83_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__84_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__84_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__85_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__85_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__86_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__86_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__87_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__87_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__88_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__88_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__89_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__89_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__90_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__90_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__91_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__91_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__92_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__92_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__93_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__93_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__94_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__94_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__95_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__95_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__96_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__96_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__97_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__97_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__98_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__98_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__99_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__99_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlReaderTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c___GetEntityAsync_1_System_Uri_string_System_Type_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c___GetEntityAsync_1_System_Uri_string_System_Type_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c___GetEntity_0_System_Uri_string_System_Type_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c___GetEntity_0_System_Uri_string_System_Type_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c___ResolveUri_2_System_Uri_string_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c___ResolveUri_2_System_Uri_string_1_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c___SupportsType_3_System_Uri_System_Type_0_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlReaderTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlResolverTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlResolverTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlResolverTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlResolverTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlResolverTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlResolverTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlResolverTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlResolverTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c___GetEntityAsync_1_System_Uri_string_System_Type_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c___GetEntityAsync_1_System_Uri_string_System_Type_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c___GetEntity_0_System_Uri_string_System_Type_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c___GetEntity_0_System_Uri_string_System_Type_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c___ResolveUri_2_System_Uri_string_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c___ResolveUri_2_System_Uri_string_1_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlResolverTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSecureResolverTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSecureResolverTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSecureResolverTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSecureResolverTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSecureResolverTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSecureResolverTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSecureResolverTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSecureResolverTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSignificantWhitespaceTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSignificantWhitespaceTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSignificantWhitespaceTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSignificantWhitespaceTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlSignificantWhitespaceTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___Close_11__11_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetAttribute_0_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetAttribute_0_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetAttribute_1_string_string_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetAttribute_1_string_string_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetAttribute_1_string_string_2_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetAttribute_2_int_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetAttribute_2_int_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetNamespacesInScope_21_XmlNamespaceScope_0_b__46_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___GetRemainder_23__23_b__48_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___HasLineInfo_20__20_b__45_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___LookupNamespace_13_string_0_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___LookupNamespace_13_string_1_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToAttribute_3_string_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToAttribute_3_string_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToAttribute_4_string_string_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToAttribute_4_string_string_1_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToAttribute_4_string_string_2_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToAttribute_5_int_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToAttribute_5_int_1_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToElement_8__8_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToFirstAttribute_6__6_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___MoveToNextAttribute_7__7_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadAttributeValue_9__9_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBase64_25_System_Byte_int_int_0_b__54_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBase64_25_System_Byte_int_int_1_b__55_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBase64_25_System_Byte_int_int_2_b__56_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBase64_25_System_Byte_int_int_3_b__57_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBase64_25_System_Byte_int_int_4_b__58_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBinHex_26_System_Byte_int_int_0_b__59_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBinHex_26_System_Byte_int_int_1_b__60_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBinHex_26_System_Byte_int_int_2_b__61_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBinHex_26_System_Byte_int_int_3_b__62_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadBinHex_26_System_Byte_int_int_4_b__63_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadChars_24_System_Char_int_int_0_b__49_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadChars_24_System_Char_int_int_1_b__50_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadChars_24_System_Char_int_int_2_b__51_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadChars_24_System_Char_int_int_3_b__52_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadChars_24_System_Char_int_int_4_b__53_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBase64_15_System_Byte_int_int_0_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBase64_15_System_Byte_int_int_1_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBase64_15_System_Byte_int_int_2_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBase64_15_System_Byte_int_int_3_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBase64_15_System_Byte_int_int_4_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_0_b__34_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_1_b__35_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_2_b__36_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_3_b__37_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadContentAsBinHex_17_System_Byte_int_int_4_b__38_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBase64_16_System_Byte_int_int_0_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBase64_16_System_Byte_int_int_1_b__30_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBase64_16_System_Byte_int_int_2_b__31_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBase64_16_System_Byte_int_int_3_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBase64_16_System_Byte_int_int_4_b__33_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBinHex_18_System_Byte_int_int_0_b__39_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBinHex_18_System_Byte_int_int_1_b__40_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBinHex_18_System_Byte_int_int_2_b__41_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBinHex_18_System_Byte_int_int_3_b__42_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadElementContentAsBinHex_18_System_Byte_int_int_4_b__43_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ReadString_19__19_b__44_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___Read_10__10_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ResetState_22__22_b__47_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ResolveEntity_14__14_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___Skip_12__12_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlSignificantWhitespaceTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__47_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__49_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__51_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__53_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__55_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__57_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__57_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__59_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__59_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__61_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__63_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextReaderTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c___SplitText_1_int_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c___SplitText_1_int_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c___WriteContentTo_3_XmlWriter_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c___WriteTo_2_XmlWriter_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextReaderTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___Close_22__22_b__59_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___Flush_23__23_b__60_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___LookupPrefix_26_string_0_b__66_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___LookupPrefix_26_string_1_b__67_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBase64_20_System_Byte_int_int_0_b__49_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBase64_20_System_Byte_int_int_1_b__50_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBase64_20_System_Byte_int_int_2_b__51_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBase64_20_System_Byte_int_int_3_b__52_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBase64_20_System_Byte_int_int_4_b__53_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBinHex_21_System_Byte_int_int_0_b__54_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBinHex_21_System_Byte_int_int_1_b__55_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBinHex_21_System_Byte_int_int_2_b__56_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBinHex_21_System_Byte_int_int_3_b__57_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteBinHex_21_System_Byte_int_int_4_b__58_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteCData_9_string_0_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteCData_9_string_1_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteCharEntity_13_char_0_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteCharEntity_13_char_1_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteChars_17_System_Char_int_int_0_b__37_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteChars_17_System_Char_int_int_1_b__38_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteChars_17_System_Char_int_int_2_b__39_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteChars_17_System_Char_int_int_3_b__40_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteChars_17_System_Char_int_int_4_b__41_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteComment_10_string_0_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteComment_10_string_1_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteDocType_3_string_string_string_string_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteDocType_3_string_string_string_string_1_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteDocType_3_string_string_string_string_2_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteDocType_3_string_string_string_string_3_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteEndAttribute_8__8_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteEndDocument_2__2_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteEndElement_5__5_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteEntityRef_12_string_0_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteEntityRef_12_string_1_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteFullEndElement_6__6_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteName_24_string_0_b__61_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteName_24_string_1_b__62_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteNmToken_27_string_0_b__68_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteNmToken_27_string_1_b__69_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteProcessingInstruction_11_string_string_0_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteProcessingInstruction_11_string_string_1_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteProcessingInstruction_11_string_string_2_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteQualifiedName_25_string_string_0_b__63_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteQualifiedName_25_string_string_1_b__64_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteQualifiedName_25_string_string_2_b__65_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteRaw_18_System_Char_int_int_0_b__42_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteRaw_18_System_Char_int_int_1_b__43_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteRaw_18_System_Char_int_int_2_b__44_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteRaw_18_System_Char_int_int_3_b__45_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteRaw_18_System_Char_int_int_4_b__46_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteRaw_19_string_0_b__47_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteRaw_19_string_1_b__48_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartAttribute_7_string_string_string_0_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartAttribute_7_string_string_string_1_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartAttribute_7_string_string_string_2_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartAttribute_7_string_string_string_3_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartDocument_0__0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartDocument_1_bool_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartDocument_1_bool_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartElement_4_string_string_string_0_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartElement_4_string_string_string_1_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartElement_4_string_string_string_2_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteStartElement_4_string_string_string_3_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteString_15_string_0_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteString_15_string_1_b__33_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteSurrogateCharEntity_16_char_char_0_b__34_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteSurrogateCharEntity_16_char_char_1_b__35_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteSurrogateCharEntity_16_char_char_2_b__36_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteWhitespace_14_string_0_b__30_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___WriteWhitespace_14_string_1_b__31_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__47_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__49_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__51_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__53_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__55_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__57_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__57_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__59_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__59_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__61_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__63_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__65_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__65_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__67_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__67_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__69_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__69_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlTextWriterTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c___GetEntityAsync_1_System_Uri_string_System_Type_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c___GetEntityAsync_1_System_Uri_string_System_Type_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c___GetEntity_0_System_Uri_string_System_Type_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c___GetEntity_0_System_Uri_string_System_Type_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c___ResolveUri_2_System_Uri_string_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c___ResolveUri_2_System_Uri_string_1_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlTextWriterTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlUrlResolverTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlUrlResolverTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlUrlResolverTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlUrlResolverTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlUrlResolverTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlUrlResolverTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlUrlResolverTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___Close_11__11_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___GetAttribute_0_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___GetAttribute_0_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___GetAttribute_1_string_string_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___GetAttribute_1_string_string_1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___GetAttribute_1_string_string_2_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___GetAttribute_2_int_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___GetAttribute_2_int_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___HasLineInfo_19__19_b__44_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___LookupNamespace_12_string_0_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___LookupNamespace_12_string_1_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToAttribute_3_string_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToAttribute_3_string_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToAttribute_4_string_string_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToAttribute_4_string_string_1_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToAttribute_4_string_string_2_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToAttribute_5_int_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToAttribute_5_int_1_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToElement_8__8_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToFirstAttribute_6__6_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___MoveToNextAttribute_7__7_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadAttributeValue_9__9_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBase64_14_System_Byte_int_int_0_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBase64_14_System_Byte_int_int_1_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBase64_14_System_Byte_int_int_2_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBase64_14_System_Byte_int_int_3_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBase64_14_System_Byte_int_int_4_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBinHex_16_System_Byte_int_int_0_b__33_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBinHex_16_System_Byte_int_int_1_b__34_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBinHex_16_System_Byte_int_int_2_b__35_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBinHex_16_System_Byte_int_int_3_b__36_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadContentAsBinHex_16_System_Byte_int_int_4_b__37_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBase64_15_System_Byte_int_int_0_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBase64_15_System_Byte_int_int_1_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBase64_15_System_Byte_int_int_2_b__30_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBase64_15_System_Byte_int_int_3_b__31_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBase64_15_System_Byte_int_int_4_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBinHex_17_System_Byte_int_int_0_b__38_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBinHex_17_System_Byte_int_int_1_b__39_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBinHex_17_System_Byte_int_int_2_b__40_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBinHex_17_System_Byte_int_int_3_b__41_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadElementContentAsBinHex_17_System_Byte_int_int_4_b__42_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadString_18__18_b__43_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ReadTypedValue_20__20_b__45_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___Read_10__10_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ResolveEntity_13__13_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlUrlResolverTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlValidatingReaderTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c___CloneNode_0_bool_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c___CloneNode_0_bool_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c___WriteContentTo_2_XmlWriter_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c___WriteTo_1_XmlWriter_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlValidatingReaderTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWhitespaceTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWhitespaceTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWhitespaceTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWhitespaceTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWhitespaceTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterSettingsTests___c___Clone_0__0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWhitespaceTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterSettingsTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterSettingsTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterSettingsTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterSettingsTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___Close_29__29_b__80_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___DisposeAsync_81__81_b__202_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___Dispose_51__51_b__125_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___FlushAsync_73__73_b__184_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___Flush_30__30_b__81_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___LookupPrefix_31_string_0_b__82_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___LookupPrefix_31_string_1_b__83_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeStringAsync_59_string_string_string_string_0_b__140_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeStringAsync_59_string_string_string_string_1_b__141_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeStringAsync_59_string_string_string_string_2_b__142_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeStringAsync_59_string_string_string_string_3_b__143_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_10_string_string_0_b__23_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_10_string_string_1_b__24_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_10_string_string_2_b__25_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_11_string_string_string_string_0_b__26_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_11_string_string_string_string_1_b__27_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_11_string_string_string_string_2_b__28_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_11_string_string_string_string_3_b__29_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_9_string_string_string_0_b__19_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_9_string_string_string_1_b__20_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_9_string_string_string_2_b__21_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributeString_9_string_string_string_3_b__22_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributesAsync_77_XmlReader_bool_0_b__192_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributesAsync_77_XmlReader_bool_1_b__193_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributes_45_XmlReader_bool_0_b__108_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteAttributes_45_XmlReader_bool_1_b__109_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64Async_71_System_Byte_int_int_0_b__174_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64Async_71_System_Byte_int_int_1_b__175_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64Async_71_System_Byte_int_int_2_b__176_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64Async_71_System_Byte_int_int_3_b__177_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64Async_71_System_Byte_int_int_4_b__178_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64_27_System_Byte_int_int_0_b__70_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64_27_System_Byte_int_int_1_b__71_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64_27_System_Byte_int_int_2_b__72_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64_27_System_Byte_int_int_3_b__73_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBase64_27_System_Byte_int_int_4_b__74_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHexAsync_72_System_Byte_int_int_0_b__179_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHexAsync_72_System_Byte_int_int_1_b__180_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHexAsync_72_System_Byte_int_int_2_b__181_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHexAsync_72_System_Byte_int_int_3_b__182_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHexAsync_72_System_Byte_int_int_4_b__183_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHex_28_System_Byte_int_int_0_b__75_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHex_28_System_Byte_int_int_1_b__76_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHex_28_System_Byte_int_int_2_b__77_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHex_28_System_Byte_int_int_3_b__78_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteBinHex_28_System_Byte_int_int_4_b__79_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCDataAsync_60_string_0_b__144_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCDataAsync_60_string_1_b__145_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCData_16_string_0_b__40_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCData_16_string_1_b__41_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharEntityAsync_64_char_0_b__153_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharEntityAsync_64_char_1_b__154_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharEntity_20_char_0_b__49_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharEntity_20_char_1_b__50_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharsAsync_68_System_Char_int_int_0_b__162_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharsAsync_68_System_Char_int_int_1_b__163_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharsAsync_68_System_Char_int_int_2_b__164_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharsAsync_68_System_Char_int_int_3_b__165_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCharsAsync_68_System_Char_int_int_4_b__166_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteChars_24_System_Char_int_int_0_b__58_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteChars_24_System_Char_int_int_1_b__59_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteChars_24_System_Char_int_int_2_b__60_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteChars_24_System_Char_int_int_3_b__61_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteChars_24_System_Char_int_int_4_b__62_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCommentAsync_61_string_0_b__146_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteCommentAsync_61_string_1_b__147_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteComment_17_string_0_b__42_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteComment_17_string_1_b__43_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteDocTypeAsync_55_string_string_string_string_0_b__130_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteDocTypeAsync_55_string_string_string_string_1_b__131_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteDocTypeAsync_55_string_string_string_string_2_b__132_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteDocTypeAsync_55_string_string_string_string_3_b__133_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteDocType_3_string_string_string_string_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteDocType_3_string_string_string_string_1_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteDocType_3_string_string_string_string_2_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteDocType_3_string_string_string_string_3_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementStringAsync_80_string_string_string_string_0_b__198_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementStringAsync_80_string_string_string_string_1_b__199_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementStringAsync_80_string_string_string_string_2_b__200_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementStringAsync_80_string_string_string_string_3_b__201_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_48_string_string_0_b__114_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_48_string_string_1_b__115_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_48_string_string_2_b__116_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_49_string_string_string_0_b__117_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_49_string_string_string_1_b__118_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_49_string_string_string_2_b__119_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_49_string_string_string_3_b__120_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_50_string_string_string_string_0_b__121_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_50_string_string_string_string_1_b__122_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_50_string_string_string_string_2_b__123_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteElementString_50_string_string_string_string_3_b__124_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEndAttribute_15__15_b__39_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEndDocumentAsync_54__54_b__129_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEndDocument_2__2_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEndElementAsync_57__57_b__138_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEndElement_7__7_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEntityRefAsync_63_string_0_b__151_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEntityRefAsync_63_string_1_b__152_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEntityRef_19_string_0_b__47_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteEntityRef_19_string_1_b__48_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteFullEndElementAsync_58__58_b__139_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteFullEndElement_8__8_b__18_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNameAsync_75_string_0_b__187_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNameAsync_75_string_1_b__188_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteName_33_string_0_b__86_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteName_33_string_1_b__87_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNmTokenAsync_74_string_0_b__185_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNmTokenAsync_74_string_1_b__186_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNmToken_32_string_0_b__84_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNmToken_32_string_1_b__85_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNodeAsync_78_XmlReader_bool_0_b__194_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNodeAsync_78_XmlReader_bool_1_b__195_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNodeAsync_79_XPathNavigator_bool_0_b__196_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNodeAsync_79_XPathNavigator_bool_1_b__197_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNode_46_XmlReader_bool_0_b__110_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNode_46_XmlReader_bool_1_b__111_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNode_47_XPathNavigator_bool_0_b__112_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteNode_47_XPathNavigator_bool_1_b__113_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteProcessingInstructionAsync_62_string_string_0_b__148_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteProcessingInstructionAsync_62_string_string_1_b__149_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteProcessingInstructionAsync_62_string_string_2_b__150_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteProcessingInstruction_18_string_string_0_b__44_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteProcessingInstruction_18_string_string_1_b__45_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteProcessingInstruction_18_string_string_2_b__46_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteQualifiedNameAsync_76_string_string_0_b__189_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteQualifiedNameAsync_76_string_string_1_b__190_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteQualifiedNameAsync_76_string_string_2_b__191_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteQualifiedName_34_string_string_0_b__88_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteQualifiedName_34_string_string_1_b__89_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteQualifiedName_34_string_string_2_b__90_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRawAsync_69_System_Char_int_int_0_b__167_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRawAsync_69_System_Char_int_int_1_b__168_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRawAsync_69_System_Char_int_int_2_b__169_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRawAsync_69_System_Char_int_int_3_b__170_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRawAsync_69_System_Char_int_int_4_b__171_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRawAsync_70_string_0_b__172_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRawAsync_70_string_1_b__173_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRaw_25_System_Char_int_int_0_b__63_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRaw_25_System_Char_int_int_1_b__64_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRaw_25_System_Char_int_int_2_b__65_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRaw_25_System_Char_int_int_3_b__66_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRaw_25_System_Char_int_int_4_b__67_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRaw_26_string_0_b__68_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteRaw_26_string_1_b__69_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_12_string_string_0_b__30_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_12_string_string_1_b__31_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_12_string_string_2_b__32_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_13_string_string_string_0_b__33_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_13_string_string_string_1_b__34_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_13_string_string_string_2_b__35_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_13_string_string_string_3_b__36_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_14_string_0_b__37_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartAttribute_14_string_1_b__38_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartDocumentAsync_52__52_b__126_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartDocumentAsync_53_bool_0_b__127_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartDocumentAsync_53_bool_1_b__128_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartDocument_0__0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartDocument_1_bool_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartDocument_1_bool_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElementAsync_56_string_string_string_0_b__134_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElementAsync_56_string_string_string_1_b__135_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElementAsync_56_string_string_string_2_b__136_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElementAsync_56_string_string_string_3_b__137_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_4_string_string_0_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_4_string_string_1_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_4_string_string_2_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_5_string_string_string_0_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_5_string_string_string_1_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_5_string_string_string_2_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_5_string_string_string_3_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_6_string_0_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStartElement_6_string_1_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStringAsync_66_string_0_b__157_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteStringAsync_66_string_1_b__158_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteString_22_string_0_b__53_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteString_22_string_1_b__54_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteSurrogateCharEntityAsync_67_char_char_0_b__159_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteSurrogateCharEntityAsync_67_char_char_1_b__160_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteSurrogateCharEntityAsync_67_char_char_2_b__161_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteSurrogateCharEntity_23_char_char_0_b__55_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteSurrogateCharEntity_23_char_char_1_b__56_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteSurrogateCharEntity_23_char_char_2_b__57_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_35_object_0_b__91_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_36_string_0_b__92_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_36_string_1_b__93_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_37_bool_0_b__94_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_37_bool_1_b__95_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_38_System_DateTime_0_b__96_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_39_System_DateTimeOffset_0_b__97_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_40_double_0_b__98_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_40_double_1_b__99_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_41_float_0_b__100_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_41_float_1_b__101_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_42_decimal_0_b__102_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_42_decimal_1_b__103_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_43_int_0_b__104_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_43_int_1_b__105_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_44_long_0_b__106_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteValue_44_long_1_b__107_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteWhitespaceAsync_65_string_0_b__155_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteWhitespaceAsync_65_string_1_b__156_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteWhitespace_21_string_0_b__51_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___WriteWhitespace_21_string_1_b__52_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterSettingsTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__100_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__100_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__101_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__101_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__102_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__102_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__103_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__103_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__104_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__104_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__105_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__105_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__106_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__106_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__107_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__107_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__108_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__108_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__109_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__109_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__110_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__110_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__111_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__111_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__112_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__112_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__113_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__113_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__114_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__114_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__115_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__115_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__116_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__116_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__117_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__117_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__118_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__118_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__119_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__119_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__120_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__120_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__121_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__121_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__122_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__122_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__123_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__123_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__124_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__124_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__125_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__125_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__126_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__126_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__127_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__127_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__128_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__128_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__129_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__129_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__130_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__130_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__131_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__131_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__132_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__132_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__133_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__133_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__134_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__134_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__135_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__135_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__136_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__136_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__137_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__137_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__138_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__138_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__139_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__139_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__140_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__140_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__141_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__141_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__142_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__142_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__143_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__143_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__144_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__144_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__145_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__145_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__146_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__146_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__147_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__147_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__148_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__148_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__149_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__149_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__150_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__150_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__151_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__151_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__152_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__152_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__153_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__153_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__154_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__154_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__155_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__155_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__156_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__156_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__157_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__157_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__158_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__158_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__159_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__159_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__160_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__160_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__161_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__161_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__162_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__162_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__163_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__163_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__164_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__164_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__165_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__165_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__166_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__166_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__167_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__167_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__168_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__168_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__169_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__169_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__170_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__170_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__171_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__171_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__172_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__172_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__173_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__173_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__174_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__174_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__175_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__175_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__176_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__176_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__177_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__177_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__178_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__178_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__179_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__179_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__180_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__180_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__181_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__181_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__182_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__182_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__183_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__183_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__184_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__184_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__185_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__185_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__186_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__186_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__187_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__187_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__188_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__188_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__189_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__189_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__190_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__190_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__191_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__191_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__192_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__192_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__193_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__193_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__194_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__194_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__195_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__195_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__196_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__196_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__197_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__197_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__198_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__198_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__199_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__199_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__19_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__200_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__200_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__201_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__201_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__202_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__202_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__21_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__23_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__25_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__27_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__29_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__31_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__33_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__35_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__37_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__39_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__41_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__43_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__45_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__47_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__49_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__51_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__53_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__55_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__57_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__57_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__59_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__59_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__61_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__63_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__65_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__65_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__67_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__67_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__69_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__69_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__70_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__70_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__71_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__71_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__72_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__73_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__73_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__74_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__75_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__75_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__76_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__77_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__77_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__78_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__79_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__79_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__80_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__80_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__81_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__81_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__82_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__82_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__83_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__83_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__84_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__84_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__85_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__85_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__86_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__86_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__87_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__87_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__88_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__88_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__89_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__89_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__90_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__90_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__91_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__91_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__92_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__92_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__93_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__93_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__94_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__94_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__95_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__95_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__96_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__96_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__97_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__97_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__98_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__98_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__99_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__99_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_XmlWriterTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_XmlWriterTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_NullStreamReader___ctor() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("NullStreamReader::.ctor");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_NullStream___ctor() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("NullStream::.ctor");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____() noexcept
@@ -38303,58 +28986,42 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Byte() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Byte");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Char() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Char");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_DateTime() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.DateTime");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_DateTimeOffset() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.DateTimeOffset");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Decimal__Zero() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Decimal::Zero");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Null() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::Null");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_TextReader__Null() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.TextReader::Null");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__Null() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.TextWriter::Null");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -38364,2473 +29031,1767 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Boolean___GetResult_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>::GetResult:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Int32>::GetResult:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Object___GetResult_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Object>::GetResult:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_String___GetResult_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.String>::GetResult:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Xml_XmlNodeType___GetResult_System_Xml_XmlNodeType__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Xml.XmlNodeType>::GetResult:System.Xml.XmlNodeType()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_String() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.String");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Boolean___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Boolean___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Boolean>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Int32>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Object___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Object>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Object>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_String___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.String>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.String>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Xml_XmlNodeType___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Xml_XmlNodeType___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Xml.XmlNodeType>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Xml.XmlNodeType>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlAttributeCollection__Append_System_Xml_XmlAttribute_System_Xml_XmlAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlAttributeCollection::Append:System.Xml.XmlAttribute(System.Xml.XmlAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlAttributeCollection__InsertAfter_System_Xml_XmlAttribute_System_Xml_XmlAttribute_System_Xml_XmlAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlAttributeCollection::InsertAfter:System.Xml.XmlAttribute(System.Xml.XmlAttribute,System.Xml.XmlAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlAttributeCollection__InsertBefore_System_Xml_XmlAttribute_System_Xml_XmlAttribute_System_Xml_XmlAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlAttributeCollection::InsertBefore:System.Xml.XmlAttribute(System.Xml.XmlAttribute,System.Xml.XmlAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlAttributeCollection__Prepend_System_Xml_XmlAttribute_System_Xml_XmlAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlAttributeCollection::Prepend:System.Xml.XmlAttribute(System.Xml.XmlAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlAttributeCollection__RemoveAll_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlAttributeCollection::RemoveAll:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlAttributeCollection__RemoveAt_System_Xml_XmlAttribute_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlAttributeCollection::RemoveAt:System.Xml.XmlAttribute(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlAttributeCollection__Remove_System_Xml_XmlAttribute_System_Xml_XmlAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlAttributeCollection::Remove:System.Xml.XmlAttribute(System.Xml.XmlAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlCharacterData__AppendData_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlCharacterData::AppendData:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlCharacterData__DeleteData_System_Void_System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlCharacterData::DeleteData:System.Void(System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlCharacterData__InsertData_System_Void_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlCharacterData::InsertData:System.Void(System.Int32,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlCharacterData__ReplaceData_System_Void_System_Int32_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlCharacterData::ReplaceData:System.Void(System.Int32,System.Int32,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlCharacterData__Substring_System_String_System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlCharacterData::Substring:System.String(System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__DecodeName_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::DecodeName:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__EncodeLocalName_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::EncodeLocalName:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__EncodeName_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::EncodeName:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__EncodeNmToken_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::EncodeNmToken:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__IsNCNameChar_System_Boolean_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::IsNCNameChar:System.Boolean(System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__IsPublicIdChar_System_Boolean_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::IsPublicIdChar:System.Boolean(System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__IsStartNCNameChar_System_Boolean_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::IsStartNCNameChar:System.Boolean(System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__IsWhitespaceChar_System_Boolean_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::IsWhitespaceChar:System.Boolean(System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__IsXmlChar_System_Boolean_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::IsXmlChar:System.Boolean(System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__IsXmlSurrogatePair_System_Boolean_System_Char_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::IsXmlSurrogatePair:System.Boolean(System.Char,System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToBoolean_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToBoolean:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToByte_System_Byte_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToByte:System.Byte(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToChar_System_Char_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToChar:System.Char(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTimeOffset_System_DateTimeOffset_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDateTimeOffset:System.DateTimeOffset(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTimeOffset_System_DateTimeOffset_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDateTimeOffset:System.DateTimeOffset(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTimeOffset_System_DateTimeOffset_System_String_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDateTimeOffset:System.DateTimeOffset(System.String,System.String[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTime_System_DateTime_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDateTime:System.DateTime(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTime_System_DateTime_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDateTime:System.DateTime(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTime_System_DateTime_System_String_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDateTime:System.DateTime(System.String,System.String[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTime_System_DateTime_System_String_System_Xml_XmlDateTimeSerializationMode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDateTime:System.DateTime(System.String,System.Xml.XmlDateTimeSerializationMode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDecimal_System_Decimal_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDecimal:System.Decimal(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDouble_System_Double_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToDouble:System.Double(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToGuid_System_Guid_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToGuid:System.Guid(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToInt16_System_Int16_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToInt16:System.Int16(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToInt32_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToInt32:System.Int32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToInt64_System_Int64_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToInt64:System.Int64(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToSByte_System_SByte_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToSByte:System.SByte(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToSingle_System_Single_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToSingle:System.Single(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToTimeSpan_System_TimeSpan_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToTimeSpan:System.TimeSpan(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToUInt16_System_UInt16_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToUInt16:System.UInt16(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToUInt32_System_UInt32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToUInt32:System.UInt32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToUInt64_System_UInt64_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::ToUInt64:System.UInt64(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__VerifyNCName_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::VerifyNCName:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__VerifyNMTOKEN_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::VerifyNMTOKEN:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__VerifyName_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::VerifyName:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__VerifyPublicId_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::VerifyPublicId:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__VerifyTOKEN_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::VerifyTOKEN:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__VerifyWhitespace_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::VerifyWhitespace:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__VerifyXmlChars_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlConvert::VerifyXmlChars:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateAttribute_System_Xml_XmlAttribute_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateAttribute:System.Xml.XmlAttribute(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateAttribute_System_Xml_XmlAttribute_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateAttribute:System.Xml.XmlAttribute(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateAttribute_System_Xml_XmlAttribute_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateAttribute:System.Xml.XmlAttribute(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateCDataSection_System_Xml_XmlCDataSection_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateCDataSection:System.Xml.XmlCDataSection(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateComment_System_Xml_XmlComment_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateComment:System.Xml.XmlComment(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateDocumentFragment_System_Xml_XmlDocumentFragment__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateDocumentFragment:System.Xml.XmlDocumentFragment()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateDocumentType_System_Xml_XmlDocumentType_System_String_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateDocumentType:System.Xml.XmlDocumentType(System.String,System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateElement_System_Xml_XmlElement_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateElement:System.Xml.XmlElement(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateElement_System_Xml_XmlElement_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateElement:System.Xml.XmlElement(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateElement_System_Xml_XmlElement_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateEntityReference_System_Xml_XmlEntityReference_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateEntityReference:System.Xml.XmlEntityReference(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateNode_System_Xml_XmlNode_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateNode:System.Xml.XmlNode(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateNode_System_Xml_XmlNode_System_Xml_XmlNodeType_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateNode:System.Xml.XmlNode(System.Xml.XmlNodeType,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateNode_System_Xml_XmlNode_System_Xml_XmlNodeType_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateNode:System.Xml.XmlNode(System.Xml.XmlNodeType,System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateProcessingInstruction_System_Xml_XmlProcessingInstruction_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateProcessingInstruction:System.Xml.XmlProcessingInstruction(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateSignificantWhitespace_System_Xml_XmlSignificantWhitespace_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateSignificantWhitespace:System.Xml.XmlSignificantWhitespace(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateTextNode_System_Xml_XmlText_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateTextNode:System.Xml.XmlText(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateWhitespace_System_Xml_XmlWhitespace_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateWhitespace:System.Xml.XmlWhitespace(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__CreateXmlDeclaration_System_Xml_XmlDeclaration_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::CreateXmlDeclaration:System.Xml.XmlDeclaration(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__GetElementById_System_Xml_XmlElement_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::GetElementById:System.Xml.XmlElement(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__GetElementsByTagName_System_Xml_XmlNodeList_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::GetElementsByTagName:System.Xml.XmlNodeList(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__GetElementsByTagName_System_Xml_XmlNodeList_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::GetElementsByTagName:System.Xml.XmlNodeList(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__ImportNode_System_Xml_XmlNode_System_Xml_XmlNode_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::ImportNode:System.Xml.XmlNode(System.Xml.XmlNode,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__LoadXml_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::LoadXml:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Load_System_Void_System_IO_Stream_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Load:System.Void(System.IO.Stream)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Load_System_Void_System_IO_TextReader_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Load:System.Void(System.IO.TextReader)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Load_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Load:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Load_System_Void_System_Xml_XmlReader_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Load:System.Void(System.Xml.XmlReader)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__ReadNode_System_Xml_XmlNode_System_Xml_XmlReader_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::ReadNode:System.Xml.XmlNode(System.Xml.XmlReader)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Save_System_Void_System_IO_Stream_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Save:System.Void(System.IO.Stream)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Save_System_Void_System_IO_TextWriter_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Save:System.Void(System.IO.TextWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Save_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Save:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Save_System_Void_System_Xml_XmlWriter_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Save:System.Void(System.Xml.XmlWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Validate_System_Void_System_Xml_Schema_ValidationEventHandler_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Validate:System.Void(System.Xml.Schema.ValidationEventHandler)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlDocument__Validate_System_Void_System_Xml_Schema_ValidationEventHandler_System_Xml_XmlNode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlDocument::Validate:System.Void(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__GetAttributeNode_System_Xml_XmlAttribute_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::GetAttributeNode:System.Xml.XmlAttribute(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__GetAttributeNode_System_Xml_XmlAttribute_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::GetAttributeNode:System.Xml.XmlAttribute(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__GetAttribute_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::GetAttribute:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__GetAttribute_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::GetAttribute:System.String(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__GetElementsByTagName_System_Xml_XmlNodeList_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::GetElementsByTagName:System.Xml.XmlNodeList(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__GetElementsByTagName_System_Xml_XmlNodeList_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::GetElementsByTagName:System.Xml.XmlNodeList(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__HasAttribute_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::HasAttribute:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__HasAttribute_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::HasAttribute:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__RemoveAllAttributes_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::RemoveAllAttributes:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__RemoveAttributeAt_System_Xml_XmlNode_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::RemoveAttributeAt:System.Xml.XmlNode(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__RemoveAttributeNode_System_Xml_XmlAttribute_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::RemoveAttributeNode:System.Xml.XmlAttribute(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__RemoveAttributeNode_System_Xml_XmlAttribute_System_Xml_XmlAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::RemoveAttributeNode:System.Xml.XmlAttribute(System.Xml.XmlAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__RemoveAttribute_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::RemoveAttribute:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__RemoveAttribute_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::RemoveAttribute:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__SetAttributeNode_System_Xml_XmlAttribute_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::SetAttributeNode:System.Xml.XmlAttribute(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__SetAttributeNode_System_Xml_XmlAttribute_System_Xml_XmlAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::SetAttributeNode:System.Xml.XmlAttribute(System.Xml.XmlAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__SetAttribute_System_String_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::SetAttribute:System.String(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlElement__SetAttribute_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlElement::SetAttribute:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlImplementation__CreateDocument_System_Xml_XmlDocument__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlImplementation::CreateDocument:System.Xml.XmlDocument()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlImplementation__HasFeature_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlImplementation::HasFeature:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNameTable__Add_System_String_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNameTable::Add:System.String(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNameTable__Add_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNameTable::Add:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNameTable__Get_System_String_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNameTable::Get:System.String(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNameTable__Get_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNameTable::Get:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamedNodeMap__GetEnumerator_System_Collections_IEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamedNodeMap::GetEnumerator:System.Collections.IEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamedNodeMap__GetNamedItem_System_Xml_XmlNode_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamedNodeMap::GetNamedItem:System.Xml.XmlNode(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamedNodeMap__GetNamedItem_System_Xml_XmlNode_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamedNodeMap::GetNamedItem:System.Xml.XmlNode(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamedNodeMap__Item_System_Xml_XmlNode_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamedNodeMap::Item:System.Xml.XmlNode(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamedNodeMap__RemoveNamedItem_System_Xml_XmlNode_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamedNodeMap::RemoveNamedItem:System.Xml.XmlNode(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamedNodeMap__RemoveNamedItem_System_Xml_XmlNode_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamedNodeMap::RemoveNamedItem:System.Xml.XmlNode(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamedNodeMap__SetNamedItem_System_Xml_XmlNode_System_Xml_XmlNode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamedNodeMap::SetNamedItem:System.Xml.XmlNode(System.Xml.XmlNode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__AddNamespace_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::AddNamespace:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__GetEnumerator_System_Collections_IEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::GetEnumerator:System.Collections.IEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__GetNamespacesInScope_System_Collections_Generic_IDictionary_System_String_System_String__System_Xml_XmlNamespaceScope_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::GetNamespacesInScope:System.Collections.Generic.IDictionary<System.String,System.String>(System.Xml.XmlNamespaceScope)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__HasNamespace_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::HasNamespace:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__LookupNamespace_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::LookupNamespace:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__LookupPrefix_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::LookupPrefix:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__PopScope_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::PopScope:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__PushScope_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::PushScope:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNamespaceManager__RemoveNamespace_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNamespaceManager::RemoveNamespace:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNodeList__GetEnumerator_System_Collections_IEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNodeList::GetEnumerator:System.Collections.IEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNodeList__Item_System_Xml_XmlNode_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNodeList::Item:System.Xml.XmlNode(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__AppendChild_System_Xml_XmlNode_System_Xml_XmlNode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::AppendChild:System.Xml.XmlNode(System.Xml.XmlNode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__CloneNode_System_Xml_XmlNode_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::CloneNode:System.Xml.XmlNode(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__Clone_System_Xml_XmlNode__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::Clone:System.Xml.XmlNode()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__CreateNavigator_System_Xml_XPath_XPathNavigator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::CreateNavigator:System.Xml.XPath.XPathNavigator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__GetEnumerator_System_Collections_IEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::GetEnumerator:System.Collections.IEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__GetNamespaceOfPrefix_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::GetNamespaceOfPrefix:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__GetPrefixOfNamespace_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::GetPrefixOfNamespace:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__InsertAfter_System_Xml_XmlNode_System_Xml_XmlNode_System_Xml_XmlNode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::InsertAfter:System.Xml.XmlNode(System.Xml.XmlNode,System.Xml.XmlNode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__InsertBefore_System_Xml_XmlNode_System_Xml_XmlNode_System_Xml_XmlNode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::InsertBefore:System.Xml.XmlNode(System.Xml.XmlNode,System.Xml.XmlNode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__PrependChild_System_Xml_XmlNode_System_Xml_XmlNode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::PrependChild:System.Xml.XmlNode(System.Xml.XmlNode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__RemoveAll_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::RemoveAll:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__RemoveChild_System_Xml_XmlNode_System_Xml_XmlNode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::RemoveChild:System.Xml.XmlNode(System.Xml.XmlNode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__ReplaceChild_System_Xml_XmlNode_System_Xml_XmlNode_System_Xml_XmlNode_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::ReplaceChild:System.Xml.XmlNode(System.Xml.XmlNode,System.Xml.XmlNode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__SelectNodes_System_Xml_XmlNodeList_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::SelectNodes:System.Xml.XmlNodeList(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__SelectNodes_System_Xml_XmlNodeList_System_String_System_Xml_XmlNamespaceManager_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::SelectNodes:System.Xml.XmlNodeList(System.String,System.Xml.XmlNamespaceManager)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__SelectSingleNode_System_Xml_XmlNode_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::SelectSingleNode:System.Xml.XmlNode(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__SelectSingleNode_System_Xml_XmlNode_System_String_System_Xml_XmlNamespaceManager_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::SelectSingleNode:System.Xml.XmlNode(System.String,System.Xml.XmlNamespaceManager)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__Supports_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::Supports:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__WriteContentTo_System_Void_System_Xml_XmlWriter_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::WriteContentTo:System.Void(System.Xml.XmlWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNode__WriteTo_System_Void_System_Xml_XmlWriter_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlNode::WriteTo:System.Void(System.Xml.XmlWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReaderSettings__Clone_System_Xml_XmlReaderSettings__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReaderSettings::Clone:System.Xml.XmlReaderSettings()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__Close_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::Close:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__GetAttribute_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::GetAttribute:System.String(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__GetAttribute_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::GetAttribute:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__GetAttribute_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::GetAttribute:System.String(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__GetValueAsync_System_Threading_Tasks_Task_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::GetValueAsync:System.Threading.Tasks.Task<System.String>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__IsNameToken_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::IsNameToken:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__IsName_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::IsName:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__IsStartElement_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::IsStartElement:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__IsStartElement_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::IsStartElement:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__IsStartElement_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::IsStartElement:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__LookupNamespace_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::LookupNamespace:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__MoveToAttribute_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::MoveToAttribute:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__MoveToAttribute_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::MoveToAttribute:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__MoveToAttribute_System_Void_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::MoveToAttribute:System.Void(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__MoveToContentAsync_System_Threading_Tasks_Task_System_Xml_XmlNodeType___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::MoveToContentAsync:System.Threading.Tasks.Task<System.Xml.XmlNodeType>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__MoveToContent_System_Xml_XmlNodeType__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::MoveToContent:System.Xml.XmlNodeType()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__MoveToElement_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::MoveToElement:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__MoveToFirstAttribute_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::MoveToFirstAttribute:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__MoveToNextAttribute_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::MoveToNextAttribute:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadAsync_System_Threading_Tasks_Task_System_Boolean___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadAsync:System.Threading.Tasks.Task<System.Boolean>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadAttributeValue_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadAttributeValue:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsAsync_System_Threading_Tasks_Task_System_Object__System_Type_System_Xml_IXmlNamespaceResolver_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsAsync:System.Threading.Tasks.Task<System.Object>(System.Type,System.Xml.IXmlNamespaceResolver)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsBase64Async_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsBase64_System_Int32_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsBase64:System.Int32(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsBinHexAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsBinHex_System_Int32_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsBinHex:System.Int32(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsBoolean_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsBoolean:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsDateTimeOffset_System_DateTimeOffset__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsDateTimeOffset:System.DateTimeOffset()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsDateTime_System_DateTime__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsDateTime:System.DateTime()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsDecimal_System_Decimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsDecimal:System.Decimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsDouble_System_Double__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsDouble:System.Double()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsFloat_System_Single__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsFloat:System.Single()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsInt_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsInt:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsLong_System_Int64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsLong:System.Int64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsObjectAsync_System_Threading_Tasks_Task_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsObjectAsync:System.Threading.Tasks.Task<System.Object>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsObject_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsObject:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsStringAsync_System_Threading_Tasks_Task_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsStringAsync:System.Threading.Tasks.Task<System.String>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsString_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAsString:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAs_System_Object_System_Type_System_Xml_IXmlNamespaceResolver_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadContentAs:System.Object(System.Type,System.Xml.IXmlNamespaceResolver)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsAsync_System_Threading_Tasks_Task_System_Object__System_Type_System_Xml_IXmlNamespaceResolver_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsAsync:System.Threading.Tasks.Task<System.Object>(System.Type,System.Xml.IXmlNamespaceResolver)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsBase64Async_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsBase64Async:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsBase64_System_Int32_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsBase64:System.Int32(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsBinHexAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsBinHexAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsBinHex_System_Int32_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsBinHex:System.Int32(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsBoolean_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsBoolean:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsBoolean_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsBoolean:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsDateTime_System_DateTime_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsDateTime:System.DateTime(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsDateTime_System_DateTime__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsDateTime:System.DateTime()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsDecimal_System_Decimal_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsDecimal:System.Decimal(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsDecimal_System_Decimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsDecimal:System.Decimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsDouble_System_Double_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsDouble:System.Double(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsDouble_System_Double__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsDouble:System.Double()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsFloat_System_Single_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsFloat:System.Single(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsFloat_System_Single__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsFloat:System.Single()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsInt_System_Int32_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsInt:System.Int32(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsInt_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsInt:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsLong_System_Int64_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsLong:System.Int64(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsLong_System_Int64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsLong:System.Int64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsObjectAsync_System_Threading_Tasks_Task_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsObjectAsync:System.Threading.Tasks.Task<System.Object>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsObject_System_Object_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsObject:System.Object(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsObject_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsObject:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsStringAsync_System_Threading_Tasks_Task_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsStringAsync:System.Threading.Tasks.Task<System.String>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsString_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsString:System.String(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsString_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAsString:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAs_System_Object_System_Type_System_Xml_IXmlNamespaceResolver_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAs:System.Object(System.Type,System.Xml.IXmlNamespaceResolver)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAs_System_Object_System_Type_System_Xml_IXmlNamespaceResolver_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementContentAs:System.Object(System.Type,System.Xml.IXmlNamespaceResolver,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementString_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementString:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementString_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementString:System.String(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementString_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadElementString:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadEndElement_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadEndElement:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadInnerXmlAsync_System_Threading_Tasks_Task_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadInnerXmlAsync:System.Threading.Tasks.Task<System.String>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadInnerXml_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadInnerXml:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadOuterXmlAsync_System_Threading_Tasks_Task_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadOuterXmlAsync:System.Threading.Tasks.Task<System.String>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadOuterXml_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadOuterXml:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadStartElement_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadStartElement:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadStartElement_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadStartElement:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadStartElement_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadStartElement:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadString_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadString:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadSubtree_System_Xml_XmlReader__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadSubtree:System.Xml.XmlReader()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadToDescendant_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadToDescendant:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadToDescendant_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadToDescendant:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadToFollowing_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadToFollowing:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadToFollowing_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadToFollowing:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadToNextSibling_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadToNextSibling:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadToNextSibling_System_Boolean_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadToNextSibling:System.Boolean(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadValueChunkAsync_System_Threading_Tasks_Task_System_Int32__System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadValueChunkAsync:System.Threading.Tasks.Task<System.Int32>(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadValueChunk_System_Int32_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ReadValueChunk:System.Int32(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__Read_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::Read:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ResolveEntity_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::ResolveEntity:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__SkipAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::SkipAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__Skip_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlReader::Skip:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlResolver__GetEntityAsync_System_Threading_Tasks_Task_System_Object__System_Uri_System_String_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlResolver::GetEntityAsync:System.Threading.Tasks.Task<System.Object>(System.Uri,System.String,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlResolver__GetEntity_System_Object_System_Uri_System_String_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlResolver::GetEntity:System.Object(System.Uri,System.String,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlResolver__ResolveUri_System_Uri_System_Uri_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlResolver::ResolveUri:System.Uri(System.Uri,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlResolver__SupportsType_System_Boolean_System_Uri_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlResolver::SupportsType:System.Boolean(System.Uri,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlTextReader__GetNamespacesInScope_System_Collections_Generic_IDictionary_System_String_System_String__System_Xml_XmlNamespaceScope_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlTextReader::GetNamespacesInScope:System.Collections.Generic.IDictionary<System.String,System.String>(System.Xml.XmlNamespaceScope)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlTextReader__GetRemainder_System_IO_TextReader__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlTextReader::GetRemainder:System.IO.TextReader()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlTextReader__HasLineInfo_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlTextReader::HasLineInfo:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlTextReader__ReadBase64_System_Int32_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlTextReader::ReadBase64:System.Int32(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlTextReader__ReadBinHex_System_Int32_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlTextReader::ReadBinHex:System.Int32(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlTextReader__ReadChars_System_Int32_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlTextReader::ReadChars:System.Int32(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlTextReader__ResetState_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlTextReader::ResetState:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlText__SplitText_System_Xml_XmlText_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlText::SplitText:System.Xml.XmlText(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlValidatingReader__HasLineInfo_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlValidatingReader::HasLineInfo:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlValidatingReader__ReadTypedValue_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlValidatingReader::ReadTypedValue:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriterSettings__Clone_System_Xml_XmlWriterSettings__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriterSettings::Clone:System.Xml.XmlWriterSettings()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__Close_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::Close:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__FlushAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::FlushAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__Flush_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::Flush:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__LookupPrefix_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::LookupPrefix:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteAttributeStringAsync_System_Threading_Tasks_Task_System_String_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteAttributeStringAsync:System.Threading.Tasks.Task(System.String,System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteAttributeString_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteAttributeString:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteAttributeString_System_Void_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteAttributeString:System.Void(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteAttributeString_System_Void_System_String_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteAttributeString:System.Void(System.String,System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteAttributesAsync_System_Threading_Tasks_Task_System_Xml_XmlReader_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteAttributesAsync:System.Threading.Tasks.Task(System.Xml.XmlReader,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteAttributes_System_Void_System_Xml_XmlReader_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteAttributes:System.Void(System.Xml.XmlReader,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteBase64Async_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteBase64Async:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteBase64_System_Void_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteBase64:System.Void(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteBinHexAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteBinHexAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteBinHex_System_Void_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteBinHex:System.Void(System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteCDataAsync_System_Threading_Tasks_Task_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteCDataAsync:System.Threading.Tasks.Task(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteCData_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteCData:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteCharEntityAsync_System_Threading_Tasks_Task_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteCharEntityAsync:System.Threading.Tasks.Task(System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteCharEntity_System_Void_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteCharEntity:System.Void(System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteCharsAsync_System_Threading_Tasks_Task_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteCharsAsync:System.Threading.Tasks.Task(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteChars_System_Void_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteChars:System.Void(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteCommentAsync_System_Threading_Tasks_Task_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteCommentAsync:System.Threading.Tasks.Task(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteComment_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteComment:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteDocTypeAsync_System_Threading_Tasks_Task_System_String_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteDocTypeAsync:System.Threading.Tasks.Task(System.String,System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteDocType_System_Void_System_String_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteDocType:System.Void(System.String,System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteElementStringAsync_System_Threading_Tasks_Task_System_String_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteElementStringAsync:System.Threading.Tasks.Task(System.String,System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteElementString_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteElementString:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteElementString_System_Void_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteElementString:System.Void(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteElementString_System_Void_System_String_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteElementString:System.Void(System.String,System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteEndAttribute_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteEndAttribute:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteEndDocumentAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteEndDocumentAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteEndDocument_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteEndDocument:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteEndElementAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteEndElementAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteEndElement_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteEndElement:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteEntityRefAsync_System_Threading_Tasks_Task_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteEntityRefAsync:System.Threading.Tasks.Task(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteEntityRef_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteEntityRef:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteFullEndElementAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteFullEndElementAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteFullEndElement_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteFullEndElement:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteNameAsync_System_Threading_Tasks_Task_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteNameAsync:System.Threading.Tasks.Task(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteName_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteName:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteNmTokenAsync_System_Threading_Tasks_Task_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteNmTokenAsync:System.Threading.Tasks.Task(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteNmToken_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteNmToken:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteNodeAsync_System_Threading_Tasks_Task_System_Xml_XPath_XPathNavigator_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteNodeAsync:System.Threading.Tasks.Task(System.Xml.XPath.XPathNavigator,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteNodeAsync_System_Threading_Tasks_Task_System_Xml_XmlReader_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteNodeAsync:System.Threading.Tasks.Task(System.Xml.XmlReader,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteNode_System_Void_System_Xml_XPath_XPathNavigator_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteNode:System.Void(System.Xml.XPath.XPathNavigator,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteNode_System_Void_System_Xml_XmlReader_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteNode:System.Void(System.Xml.XmlReader,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteProcessingInstructionAsync_System_Threading_Tasks_Task_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteProcessingInstructionAsync:System.Threading.Tasks.Task(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteProcessingInstruction_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteProcessingInstruction:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteQualifiedNameAsync_System_Threading_Tasks_Task_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteQualifiedNameAsync:System.Threading.Tasks.Task(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteQualifiedName_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteQualifiedName:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteRawAsync_System_Threading_Tasks_Task_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteRawAsync:System.Threading.Tasks.Task(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteRawAsync_System_Threading_Tasks_Task_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteRawAsync:System.Threading.Tasks.Task(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteRaw_System_Void_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteRaw:System.Void(System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteRaw_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteRaw:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartAttribute_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartAttribute:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartAttribute_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartAttribute:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartAttribute_System_Void_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartAttribute:System.Void(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartDocumentAsync_System_Threading_Tasks_Task_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartDocumentAsync:System.Threading.Tasks.Task(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartDocumentAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartDocumentAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartDocument_System_Void_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartDocument:System.Void(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartDocument_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartDocument:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartElementAsync_System_Threading_Tasks_Task_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartElementAsync:System.Threading.Tasks.Task(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartElement_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartElement:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartElement_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartElement:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStartElement_System_Void_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStartElement:System.Void(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteStringAsync_System_Threading_Tasks_Task_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteStringAsync:System.Threading.Tasks.Task(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteString_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteString:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteSurrogateCharEntityAsync_System_Threading_Tasks_Task_System_Char_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteSurrogateCharEntityAsync:System.Threading.Tasks.Task(System.Char,System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteSurrogateCharEntity_System_Void_System_Char_System_Char_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteSurrogateCharEntity:System.Void(System.Char,System.Char)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_DateTimeOffset_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.DateTimeOffset)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_DateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.DateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_Decimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.Decimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_Double_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.Double)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_Int64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_Single_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.Single)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteValue_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteValue:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteWhitespaceAsync_System_Threading_Tasks_Task_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteWhitespaceAsync:System.Threading.Tasks.Task(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlWriter__WriteWhitespace_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlWriter::WriteWhitespace:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_ONCE_FLAG chaos_type_init_once_System_Private_CoreLib_System_IO_Stream;
@@ -40870,7 +30831,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -53823,7 +43784,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[1407] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[1407] = {
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__0_0),
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_),
@@ -53843,7 +43804,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[1407] = {
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_NameTableTests___c____9__13_0),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNameTable__Add_System_String_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNameTable__Add_System_String_System_Char___System_Int32_System_Int32_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Char__System_Char____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Char),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNameTable__Get_System_String_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlNameTable__Get_System_String_System_Char___System_Int32_System_Int32_),
@@ -54003,7 +43964,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[1407] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTime_System_DateTime_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTime_System_DateTime_System_String_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTime_System_DateTime_System_String_System_String___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_String__System_String____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTime_System_DateTime_System_String_System_Xml_XmlDateTimeSerializationMode_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlConvert__ToDateTimeOffset_System_DateTimeOffset_System_String_),
@@ -54377,7 +44338,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[1407] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__Read_System_Boolean__),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadAttributeValue_System_Boolean__),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsBase64_System_Int32_System_Byte___System_Int32_System_Int32_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Byte),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadContentAsBinHex_System_Int32_System_Byte___System_Int32_System_Int32_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlReader__ReadElementContentAsBase64_System_Int32_System_Byte___System_Int32_System_Int32_),
@@ -55233,6 +45194,43 @@ extern "C" void* kChaosExternalRuntimeFnTable[1407] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 1407;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+    const char* subject_id;
+    const uint8_t* il_data;
+    int32_t il_size;
+    void* patch_method;
+    const char* json_data;
+};
+
+static const uint8_t s_il_0[] = {
+    0x2A, 
+};
+static const uint8_t s_il_875[] = {
+    0x02, 0x73, 0xDE, 0x65, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_876[] = {
+    0x02, 0x7B, 0x94, 0x14, 0x00, 0x04, 0x16, 0x28, 0xE3, 0x65, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_1350[] = {
+    0x02, 0x73, 0x35, 0x66, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_1351[] = {
+    0x02, 0x7C, 0xAA, 0x14, 0x00, 0x04, 0x28, 0xD6, 0x3E, 0x00, 0x06, 0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+    { "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()", s_il_875, sizeof(s_il_875), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()", s_il_876, sizeof(s_il_876), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()", s_il_1350, sizeof(s_il_1350), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()", s_il_1351, sizeof(s_il_1351), nullptr, nullptr },
+    { nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -101308,6 +91306,10 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Nam
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
 		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;

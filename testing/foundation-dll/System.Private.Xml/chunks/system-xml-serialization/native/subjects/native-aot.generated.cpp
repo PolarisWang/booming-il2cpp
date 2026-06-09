@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -2136,22 +2138,22 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
     auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
     // Register managed_array (variable-size: header + contiguous element data).
     registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-        static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-        static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+        static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
     registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
     registry.Register(2537297389617321037ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c), nullptr, 0);
@@ -2355,1528 +2357,562 @@ CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_IO_TextWriter__Nu
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentNullException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c___MakeCamel_1_string_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c___MakePascal_0_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c___MakeValid_2_string_0_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifierTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifierTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifierTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifierTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___AddReserved_3_string_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___AddReserved_3_string_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___AddUnique_5_string_object_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___AddUnique_5_string_object_1_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___Add_7_string_object_0_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___Add_7_string_object_1_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___Clear_0__0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___IsInUse_6_string_0_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___IsInUse_6_string_1_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___MakeRightCase_1_string_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___MakeRightCase_1_string_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___MakeUnique_2_string_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___MakeUnique_2_string_1_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___RemoveReserved_4_string_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___RemoveReserved_4_string_1_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___Remove_8_string_0_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___Remove_8_string_1_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___ToArray_9_System_Type_0_b__17_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifierTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__17_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_SoapAttributeOverridesTests___c___Add_0_System_Type_SoapAttributes_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_SoapAttributeOverridesTests___c___Add_1_System_Type_string_SoapAttributes_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_SoapAttributeOverridesTests___c___Add_1_System_Type_string_SoapAttributes_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_CodeIdentifiersTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_SoapAttributeOverridesTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_SoapAttributeOverridesTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_SoapAttributeOverridesTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_SoapAttributeOverridesTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_SoapAttributeOverridesTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_SoapAttributeOverridesTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_SoapAttributeOverridesTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_SoapAttributeOverridesTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c___Add_0_XmlAnyElementAttribute_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c___Contains_3_XmlAnyElementAttribute_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c___IndexOf_2_XmlAnyElementAttribute_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c___Insert_1_int_XmlAnyElementAttribute_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c___Insert_1_int_XmlAnyElementAttribute_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c___Remove_4_XmlAnyElementAttribute_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_SoapAttributeOverridesTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAnyElementAttributesTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAnyElementAttributesTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAnyElementAttributesTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAnyElementAttributesTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAnyElementAttributesTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAnyElementAttributesTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAnyElementAttributesTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c___Add_0_XmlArrayItemAttribute_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c___Contains_3_XmlArrayItemAttribute_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c___IndexOf_2_XmlArrayItemAttribute_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c___Insert_1_int_XmlArrayItemAttribute_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c___Insert_1_int_XmlArrayItemAttribute_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c___Remove_4_XmlArrayItemAttribute_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAnyElementAttributesTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlArrayItemAttributesTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlArrayItemAttributesTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlArrayItemAttributesTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlArrayItemAttributesTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlArrayItemAttributesTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlArrayItemAttributesTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlArrayItemAttributesTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAttributeOverridesTests___c___Add_0_System_Type_XmlAttributes_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAttributeOverridesTests___c___Add_1_System_Type_string_XmlAttributes_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAttributeOverridesTests___c___Add_1_System_Type_string_XmlAttributes_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlArrayItemAttributesTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAttributeOverridesTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAttributeOverridesTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAttributeOverridesTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAttributeOverridesTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAttributeOverridesTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAttributeOverridesTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAttributeOverridesTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlAttributeOverridesTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c___Add_0_XmlElementAttribute_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c___Contains_3_XmlElementAttribute_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c___IndexOf_2_XmlElementAttribute_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c___Insert_1_int_XmlElementAttribute_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c___Insert_1_int_XmlElementAttribute_1_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c___Remove_4_XmlElementAttribute_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlAttributeOverridesTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlElementAttributesTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlElementAttributesTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlElementAttributesTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlElementAttributesTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlElementAttributesTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlElementAttributesTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlElementAttributesTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlMappingTests___c___SetKey_0_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlMappingTests___c___SetKey_0_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlElementAttributesTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlMappingTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlMappingTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlMappingTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlMappingTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlMappingTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlMappingTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ExportAnyType_4_string_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ExportAnyType_4_string_1_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ExportAnyType_5_XmlMembersMapping_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ExportMembersMapping_2_XmlMembersMapping_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ExportMembersMapping_3_XmlMembersMapping_bool_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ExportMembersMapping_3_XmlMembersMapping_bool_1_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ExportTypeMapping_0_XmlTypeMapping_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ExportTypeMapping_1_XmlMembersMapping_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlMappingTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemaExporterTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___AddReference_4_XmlSchema_0_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Add_1_XmlSchema_0_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Add_2_XmlSchema_System_Uri_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Add_3_XmlSchemas_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Compile_12_ValidationEventHandler_bool_0_b__15_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Compile_12_ValidationEventHandler_bool_1_b__16_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Contains_7_XmlSchema_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Contains_8_string_0_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Contains_8_string_1_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Find_10_XmlQualifiedName_System_Type_0_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___GetSchemas_0_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___GetSchemas_0_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___IndexOf_6_XmlSchema_0_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Insert_5_int_XmlSchema_0_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Insert_5_int_XmlSchema_1_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___IsDataSet_11_XmlSchema_0_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___Remove_9_XmlSchema_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemaExporterTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSchemasTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_0_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_0_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_0_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_2_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_1_System_Type_XmlRootAttribute_0_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_2_System_Type_System_Type_0_b__4_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_2_System_Type_System_Type_1_b__5_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_2_System_Type_System_Type_2_b__6_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_3_System_Type_XmlAttributeOverrides_0_b__7_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_4_XmlTypeMapping_0_b__8_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_5_System_Type_0_b__9_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_6_System_Type_string_0_b__10_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_6_System_Type_string_1_b__11_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_7_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_string_0_b__12_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_7_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_string_1_b__13_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___CreateSerializer_7_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_string_2_b__14_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSchemasTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__13_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__5_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__9_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerImplementationTests___c___CanSerialize_0_System_Type_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerImplementationTests___c___GetSerializer_1_System_Type_0_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerFactoryTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerImplementationTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerImplementationTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerImplementationTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerImplementationTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerImplementationTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerImplementationTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c___Add_0_string_string_0_b__0_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c___Add_0_string_string_1_b__1_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c___Add_0_string_string_2_b__2_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c___ToArray_1__1_b__3_0_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerImplementationTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerNamespacesTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerNamespacesTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c____9__1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerNamespacesTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerNamespacesTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c____9__3_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerNamespacesTests___c___ctor_System_Void__() noexcept
-{
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Private_Xml.System_Xml_Serialization_XmlSerializerNamespacesTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_NullStreamReader___ctor() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("NullStreamReader::.ctor");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_NullStream___ctor() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("NullStream::.ctor");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Type__System_Type____() noexcept
@@ -3906,23 +2942,17 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Null() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::Null");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_TextReader__Null() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.TextReader::Null");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__Null() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.TextWriter::Null");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -3932,835 +2962,597 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Type");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_Serialization_XmlSerializerNamespaces__Add_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_Serialization_XmlSerializerNamespaces__ToArray_System_Xml_XmlQualifiedName____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.Serialization.XmlSerializerNamespaces::ToArray:System.Xml.XmlQualifiedName[]()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlQualifiedName() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.ReaderWriter/System.Xml.XmlQualifiedName");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifier__MakeCamel_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifier::MakeCamel:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifier__MakePascal_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifier::MakePascal:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifier__MakeValid_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifier::MakeValid:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__AddReserved_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::AddReserved:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__AddUnique_System_String_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::AddUnique:System.String(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__Add_System_Void_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::Add:System.Void(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__Clear_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::Clear:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__IsInUse_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::IsInUse:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__MakeRightCase_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::MakeRightCase:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__MakeUnique_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::MakeUnique:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__RemoveReserved_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::RemoveReserved:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__Remove_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::Remove:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_CodeIdentifiers__ToArray_System_Object_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.CodeIdentifiers::ToArray:System.Object(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapAttributeOverrides__Add_System_Void_System_Type_System_String_System_Xml_Serialization_SoapAttributes_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.SoapAttributes)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapAttributeOverrides__Add_System_Void_System_Type_System_Xml_Serialization_SoapAttributes_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapAttributeOverrides::Add:System.Void(System.Type,System.Xml.Serialization.SoapAttributes)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_System_Boolean_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_System_Boolean_System_Boolean_System_Xml_Serialization_XmlMappingAccess_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Type_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__IncludeType_System_Void_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapReflectionImporter::IncludeType:System.Void(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__IncludeTypes_System_Void_System_Reflection_ICustomAttributeProvider_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapReflectionImporter::IncludeTypes:System.Void(System.Reflection.ICustomAttributeProvider)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapSchemaMember() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.SoapSchemaMember");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlAnyElementAttributes__Add_System_Int32_System_Xml_Serialization_XmlAnyElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlAnyElementAttributes::Add:System.Int32(System.Xml.Serialization.XmlAnyElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlAnyElementAttributes__Contains_System_Boolean_System_Xml_Serialization_XmlAnyElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlAnyElementAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlAnyElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlAnyElementAttributes__IndexOf_System_Int32_System_Xml_Serialization_XmlAnyElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlAnyElementAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlAnyElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlAnyElementAttributes__Insert_System_Void_System_Int32_System_Xml_Serialization_XmlAnyElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlAnyElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlAnyElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlAnyElementAttributes__Remove_System_Void_System_Xml_Serialization_XmlAnyElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlAnyElementAttributes::Remove:System.Void(System.Xml.Serialization.XmlAnyElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlArrayItemAttributes__Add_System_Int32_System_Xml_Serialization_XmlArrayItemAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlArrayItemAttributes::Add:System.Int32(System.Xml.Serialization.XmlArrayItemAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlArrayItemAttributes__Contains_System_Boolean_System_Xml_Serialization_XmlArrayItemAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlArrayItemAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlArrayItemAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlArrayItemAttributes__IndexOf_System_Int32_System_Xml_Serialization_XmlArrayItemAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlArrayItemAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlArrayItemAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlArrayItemAttributes__Insert_System_Void_System_Int32_System_Xml_Serialization_XmlArrayItemAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlArrayItemAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlArrayItemAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlArrayItemAttributes__Remove_System_Void_System_Xml_Serialization_XmlArrayItemAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlArrayItemAttributes::Remove:System.Void(System.Xml.Serialization.XmlArrayItemAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlAttributeOverrides__Add_System_Void_System_Type_System_String_System_Xml_Serialization_XmlAttributes_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.XmlAttributes)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlAttributeOverrides__Add_System_Void_System_Type_System_Xml_Serialization_XmlAttributes_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlAttributeOverrides::Add:System.Void(System.Type,System.Xml.Serialization.XmlAttributes)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlDeserializationEvents() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlDeserializationEvents");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlElementAttributes__Add_System_Int32_System_Xml_Serialization_XmlElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlElementAttributes::Add:System.Int32(System.Xml.Serialization.XmlElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlElementAttributes__Contains_System_Boolean_System_Xml_Serialization_XmlElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlElementAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlElementAttributes__IndexOf_System_Int32_System_Xml_Serialization_XmlElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlElementAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlElementAttributes__Insert_System_Void_System_Int32_System_Xml_Serialization_XmlElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlElementAttributes__Remove_System_Void_System_Xml_Serialization_XmlElementAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlElementAttributes::Remove:System.Void(System.Xml.Serialization.XmlElementAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlMapping() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlMapping");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlMapping__SetKey_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlMapping::SetKey:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_System_Boolean_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_System_Boolean_System_Boolean_System_Xml_Serialization_XmlMappingAccess_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__ImportTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__ImportTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Type_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__ImportTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Type_System_Xml_Serialization_XmlRootAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__ImportTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Type_System_Xml_Serialization_XmlRootAttribute_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__IncludeType_System_Void_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::IncludeType:System.Void(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionImporter__IncludeTypes_System_Void_System_Reflection_ICustomAttributeProvider_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionImporter::IncludeTypes:System.Void(System.Reflection.ICustomAttributeProvider)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionMember() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlReflectionMember");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaExporter__ExportAnyType_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaExporter__ExportAnyType_System_String_System_Xml_Serialization_XmlMembersMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.Xml.Serialization.XmlMembersMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaExporter__ExportMembersMapping_System_Void_System_Xml_Serialization_XmlMembersMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaExporter__ExportMembersMapping_System_Void_System_Xml_Serialization_XmlMembersMapping_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaExporter__ExportTypeMapping_System_Void_System_Xml_Serialization_XmlTypeMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaExporter::ExportTypeMapping:System.Void(System.Xml.Serialization.XmlTypeMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaExporter__ExportTypeMapping_System_Xml_XmlQualifiedName_System_Xml_Serialization_XmlMembersMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaExporter::ExportTypeMapping:System.Xml.XmlQualifiedName(System.Xml.Serialization.XmlMembersMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportAnyType_System_Xml_Serialization_XmlMembersMapping_System_Xml_XmlQualifiedName_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportAnyType:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportDerivedTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportDerivedTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportDerivedTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_System_Type_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportDerivedTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_SoapSchemaMember___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_Xml_XmlQualifiedName_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_Xml_XmlQualifiedName___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_Xml_XmlQualifiedName___System_Type_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportSchemaType_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportSchemaType_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportSchemaType_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_System_Type_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemaImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__AddReference_System_Void_System_Xml_Schema_XmlSchema_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::AddReference:System.Void(System.Xml.Schema.XmlSchema)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Add_System_Int32_System_Xml_Schema_XmlSchema_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Add:System.Int32(System.Xml.Schema.XmlSchema)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Add_System_Int32_System_Xml_Schema_XmlSchema_System_Uri_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Add:System.Int32(System.Xml.Schema.XmlSchema,System.Uri)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Add_System_Void_System_Xml_Serialization_XmlSchemas_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Add:System.Void(System.Xml.Serialization.XmlSchemas)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Compile_System_Void_System_Xml_Schema_ValidationEventHandler_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Compile:System.Void(System.Xml.Schema.ValidationEventHandler,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Contains_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Contains:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Contains_System_Boolean_System_Xml_Schema_XmlSchema_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Contains:System.Boolean(System.Xml.Schema.XmlSchema)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Find_System_Object_System_Xml_XmlQualifiedName_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Find:System.Object(System.Xml.XmlQualifiedName,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__GetSchemas_System_Collections_IList_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::GetSchemas:System.Collections.IList(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__IndexOf_System_Int32_System_Xml_Schema_XmlSchema_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::IndexOf:System.Int32(System.Xml.Schema.XmlSchema)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Insert_System_Void_System_Int32_System_Xml_Schema_XmlSchema_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Insert:System.Void(System.Int32,System.Xml.Schema.XmlSchema)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__IsDataSet_System_Boolean_System_Xml_Schema_XmlSchema_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::IsDataSet:System.Boolean(System.Xml.Schema.XmlSchema)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemas__Remove_System_Void_System_Xml_Schema_XmlSchema_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSchemas::Remove:System.Void(System.Xml.Schema.XmlSchema)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_Type___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Type[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_Xml_Serialization_XmlAttributeOverrides_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_Xml_Serialization_XmlAttributeOverrides_System_Type___System_Xml_Serialization_XmlRootAttribute_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_Xml_Serialization_XmlAttributeOverrides_System_Type___System_Xml_Serialization_XmlRootAttribute_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_Xml_Serialization_XmlRootAttribute_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlRootAttribute)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Xml_Serialization_XmlTypeMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Xml.Serialization.XmlTypeMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerImplementation__CanSerialize_System_Boolean_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerImplementation::CanSerialize:System.Boolean(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerImplementation__GetSerializer_System_Xml_Serialization_XmlSerializer_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializerImplementation::GetSerializer:System.Xml.Serialization.XmlSerializer(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__CanDeserialize_System_Boolean_System_Xml_XmlReader_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::CanDeserialize:System.Boolean(System.Xml.XmlReader)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Deserialize_System_Object_System_IO_Stream_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.Stream)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Deserialize_System_Object_System_IO_TextReader_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.TextReader)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Deserialize_System_Object_System_Xml_XmlReader_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Deserialize_System_Object_System_Xml_XmlReader_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Deserialize_System_Object_System_Xml_XmlReader_System_String_System_Xml_Serialization_XmlDeserializationEvents_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String,System.Xml.Serialization.XmlDeserializationEvents)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Deserialize_System_Object_System_Xml_XmlReader_System_Xml_Serialization_XmlDeserializationEvents_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.Xml.Serialization.XmlDeserializationEvents)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__FromMappings_System_Xml_Serialization_XmlSerializer___System_Xml_Serialization_XmlMapping___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__FromMappings_System_Xml_Serialization_XmlSerializer___System_Xml_Serialization_XmlMapping___System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[],System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__FromTypes_System_Xml_Serialization_XmlSerializer___System_Type___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::FromTypes:System.Xml.Serialization.XmlSerializer[](System.Type[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__GetXmlSerializerAssemblyName_System_String_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::GetXmlSerializerAssemblyName:System.String(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__GetXmlSerializerAssemblyName_System_String_System_Type_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::GetXmlSerializerAssemblyName:System.String(System.Type,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Serialize_System_Void_System_IO_Stream_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Serialize_System_Void_System_IO_Stream_System_Object_System_Xml_Serialization_XmlSerializerNamespaces_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Serialize_System_Void_System_IO_TextWriter_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Serialize_System_Void_System_IO_TextWriter_System_Object_System_Xml_Serialization_XmlSerializerNamespaces_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Serialize_System_Void_System_Xml_XmlWriter_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Serialize_System_Void_System_Xml_XmlWriter_System_Object_System_Xml_Serialization_XmlSerializerNamespaces_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Serialize_System_Void_System_Xml_XmlWriter_System_Object_System_Xml_Serialization_XmlSerializerNamespaces_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Serialize_System_Void_System_Xml_XmlWriter_System_Object_System_Xml_Serialization_XmlSerializerNamespaces_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Xml.XmlSerializer/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_ONCE_FLAG chaos_type_init_once_System_Private_CoreLib_System_IO_Stream;
@@ -4800,7 +3592,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -7640,7 +6432,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[238] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[238] = {
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9__13_0),
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_CodeIdentifiersTests___c____9),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_),
@@ -7688,7 +6480,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[238] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapAttributeOverrides__Add_System_Void_System_Type_System_Xml_Serialization_SoapAttributes_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapAttributeOverrides__Add_System_Void_System_Type_System_String_System_Xml_Serialization_SoapAttributes_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Xml_Serialization_XmlReflectionMember__System_Xml_Serialization_XmlReflectionMember____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlReflectionMember),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_System_Boolean_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapReflectionImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_XmlReflectionMember___System_Boolean_System_Boolean_System_Boolean_),
@@ -7772,11 +6564,11 @@ extern "C" void* kChaosExternalRuntimeFnTable[238] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportDerivedTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_System_Type_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportDerivedTypeMapping_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_System_Type_System_Boolean_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_String_System_String_System_Xml_Serialization_SoapSchemaMember___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Xml_Serialization_SoapSchemaMember__System_Xml_Serialization_SoapSchemaMember____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_SoapSchemaMember),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_Xml_XmlQualifiedName_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_Xml_XmlQualifiedName___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Xml_XmlQualifiedName__System_Xml_XmlQualifiedName____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_ReaderWriter_System_Xml_XmlQualifiedName),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportMembersMapping_System_Xml_Serialization_XmlMembersMapping_System_Xml_XmlQualifiedName___System_Type_System_Boolean_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSchemaImporter__ImportSchemaType_System_Xml_Serialization_XmlTypeMapping_System_Xml_XmlQualifiedName_),
@@ -7831,7 +6623,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[238] = {
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__13_0),
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Serialization_XmlSerializerFactoryTests___c____9__14_0),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_Xml_Serialization_XmlAttributeOverrides_System_Type___System_Xml_Serialization_XmlRootAttribute_System_String_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Type__System_Type____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_Xml_Serialization_XmlRootAttribute_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializerFactory__CreateSerializer_System_Xml_Serialization_XmlSerializer_System_Type_System_Type___),
@@ -7863,7 +6655,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[238] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__Deserialize_System_Object_System_IO_TextReader_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_TextReader__Null),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__FromMappings_System_Xml_Serialization_XmlSerializer___System_Xml_Serialization_XmlMapping___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Xml_Serialization_XmlMapping__System_Xml_Serialization_XmlMapping____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlMapping),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__FromMappings_System_Xml_Serialization_XmlSerializer___System_Xml_Serialization_XmlMapping___System_Type_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Xml_XmlSerializer_System_Xml_Serialization_XmlSerializer__FromTypes_System_Xml_Serialization_XmlSerializer___System_Type___),
@@ -7881,6 +6673,27 @@ extern "C" void* kChaosExternalRuntimeFnTable[238] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 238;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+    const char* subject_id;
+    const uint8_t* il_data;
+    int32_t il_size;
+    void* patch_method;
+    const char* json_data;
+};
+
+static const uint8_t s_il_0[] = {
+    0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+    { "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+    { nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -17613,6 +16426,10 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Private_Xml_System_Xml_Ser
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
 		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;

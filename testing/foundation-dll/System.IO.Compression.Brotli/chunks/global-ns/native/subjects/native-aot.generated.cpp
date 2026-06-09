@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -341,22 +343,22 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
 	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
 	// Register managed_array (variable-size: header + contiguous element data).
 	registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-		static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-		static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+		static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+		static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 	registry.Register(692616651328340837ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c), nullptr, 0);
@@ -428,303 +430,217 @@ CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_IO_Compre
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__11_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__13_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__15_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__18_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__20_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__22_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__24_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__26_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__28_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__31_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__33_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__33_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__35_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__35_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__37_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__37_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__39_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__39_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__41_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__41_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__43_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__43_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__45_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__45_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__47_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__47_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__49_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__51_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__53_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__55_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__55_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__57_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__57_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__59_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__59_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__61_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__61_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__63_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__63_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__65_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__65_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__67_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__67_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__69_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__69_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__71_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__71_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__73_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__73_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__75_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__75_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__7_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__9_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_IO_Compression_Brotli.System_IO_Compression_BrotliStreamTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoder() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoder__Dispose_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__Dispose_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder__GetMaxCompressedLength_System_Int32_System_Int32_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____() noexcept
@@ -734,51 +650,37 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Byte() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Byte");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::EndRead:System.Int32(System.IAsyncResult)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::EndWrite:System.Void(System.IAsyncResult)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -788,23 +690,17 @@ void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_Syste
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::ReadAsync:System.Threading.Tasks.Task<System.Int32>(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::ReadAsync:System.Threading.Tasks.ValueTask<System.Int32>(System.Memory<System.Byte>,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::ReadByte:System.Int32()");
 }
 
 CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3) noexcept
@@ -814,9 +710,7 @@ CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_IO_Strea
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1) noexcept
@@ -826,23 +720,17 @@ void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__SetLength_S
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory<System.Byte>,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::WriteByte:System.Void(System.Byte)");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3) noexcept
@@ -852,9 +740,7 @@ void chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Write_Syste
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Memory_System_Byte_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Memory<System.Byte>");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -864,72 +750,52 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.ReadOnlyMemory<System.Byte>");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Int32>::GetResult:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>::GetResult:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_CancellationToken() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.CancellationToken");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Int32>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<System.Int32>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()");
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -950,7 +816,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -1821,7 +1687,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[74] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[74] = {
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoder),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoder__Dispose_System_Void__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder),
@@ -1842,23 +1708,23 @@ extern "C" void* kChaosExternalRuntimeFnTable[74] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__13_0),
 	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c____9__15_0),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Byte),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Threading_CancellationToken),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Memory_System_Byte_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_),
+	nullptr,
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_),
@@ -1899,7 +1765,16 @@ extern "C" void* kChaosExternalRuntimeFnTable[74] = {
 
 extern "C" int32_t kChaosExternalRuntimeCount = 74;
 // ── Embedded IL Data for Interpreter Fallback ────────────────
-extern "C" int32_t kChaosExternalRuntimeIlCount;;
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+	const char* subject_id;
+	const uint8_t* il_data;
+	int32_t il_size;
+	void* patch_method;
+	const char* json_data;
+};
+extern "C" int32_t kChaosExternalRuntimeIlCount;
 static const uint8_t s_il_0[] = {
 	0x2A, 
 };
@@ -5037,7 +4912,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5101,7 +4976,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5165,7 +5040,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5229,7 +5104,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5293,7 +5168,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5357,7 +5232,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5421,7 +5296,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5485,7 +5360,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5549,7 +5424,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5613,7 +5488,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7161,7 +7036,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7225,7 +7100,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7289,7 +7164,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7353,7 +7228,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7417,7 +7292,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7481,7 +7356,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7545,7 +7420,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7609,7 +7484,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7673,7 +7548,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7737,7 +7612,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7801,7 +7676,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7865,7 +7740,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7929,7 +7804,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -7993,7 +7868,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8057,7 +7932,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8121,7 +7996,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8185,7 +8060,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8249,7 +8124,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8313,7 +8188,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8377,7 +8252,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8441,7 +8316,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8505,7 +8380,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8569,7 +8444,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -8633,7 +8508,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(

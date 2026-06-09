@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -9258,22 +9260,22 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
     auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
     // Register managed_array (variable-size: header + contiguous element data).
     registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-        static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-        static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+        static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
     registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
     registry.Register(6538174920033039349ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c), nullptr, 0);
@@ -9730,4496 +9732,3212 @@ CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Data_Comm
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentNullException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataAdapterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataAdapterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataAdapterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataAdapterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataAdapterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataAdapterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataAdapterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataAdapterTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataAdapterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataColumnMappingTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataColumnMappingTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataColumnMappingTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataColumnMappingTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataColumnMappingTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataColumnMappingTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataColumnMappingTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataColumnMappingTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataColumnMappingTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataColumnMappingTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataTableMappingTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataTableMappingTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataTableMappingTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataTableMappingTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataTableMappingTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataTableMappingTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataTableMappingTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataTableMappingTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataTableMappingTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataTableMappingTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DataTableMappingTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DataTableMappingTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandCollectionTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandCollectionTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchCommandTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchCommandTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbBatchTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbBatchTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandBuilderTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandBuilderTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbCommandTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbCommandTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c__DisplayClass32_0____ref_8_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c__DisplayClass32_0::__ref_8_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c__DisplayClass34_0____ref_8_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c__DisplayClass34_0::__ref_8_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionStringBuilderTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionStringBuilderTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbConnectionTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbConnectionTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataAdapterTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataAdapterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderExtensionsTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderExtensionsTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderExtensionsTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderExtensionsTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__100_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__100_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__102_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__102_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__104_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__104_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__106_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__106_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__108_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__108_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__110_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__110_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__112_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__112_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__114_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__114_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__116_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__116_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__118_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__118_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__120_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__120_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__122_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__122_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__124_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__124_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__126_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__126_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__128_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__128_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__130_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__130_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__132_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__132_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__134_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__134_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__136_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__136_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__138_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__138_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__140_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__140_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__142_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__142_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__144_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__144_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__146_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__146_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__148_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__148_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__150_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__150_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__152_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__152_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__154_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__154_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__156_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__156_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__158_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__158_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__160_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__160_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__162_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__162_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__164_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__164_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__166_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__166_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__168_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__168_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__170_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__170_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__70_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__70_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__72_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__74_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__76_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__78_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__80_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__80_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__82_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__82_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__84_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__84_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__86_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__86_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__88_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__88_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__90_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__90_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__92_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__92_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__94_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__94_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__96_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__96_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataReaderTests___c____9__98_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataReaderTests+<>c::<>9__98_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__100_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__100_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__70_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__70_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__72_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__74_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__76_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__78_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__80_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__80_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__82_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__82_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__84_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__84_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__86_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__86_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__88_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__88_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__90_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__90_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__92_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__92_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__94_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__94_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__96_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__96_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataRecordTests___c____9__98_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataRecordTests+<>c::<>9__98_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceEnumeratorTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceEnumeratorTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceEnumeratorTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceEnumeratorTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbDataSourceTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbDataSourceTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterCollectionTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterCollectionTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbParameterTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbParameterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbProviderFactoryTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbProviderFactoryTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_DbTransactionTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_DbTransactionTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_RowUpdatedEventArgsTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_RowUpdatedEventArgsTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_RowUpdatedEventArgsTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_RowUpdatedEventArgsTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_RowUpdatedEventArgsTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_RowUpdatedEventArgsTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_RowUpdatedEventArgsTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_RowUpdatedEventArgsTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_RowUpdatedEventArgsTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_RowUpdatedEventArgsTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_RowUpdatedEventArgsTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_RowUpdatedEventArgsTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_RowUpdatedEventArgsTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_RowUpdatedEventArgsTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_Common_RowUpdatedEventArgsTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_Common_RowUpdatedEventArgsTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataAdapter__FillSchema_System_Data_DataTable___System_Data_DataSet_System_Data_SchemaType_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataAdapter::FillSchema:System.Data.DataTable[](System.Data.DataSet,System.Data.SchemaType)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataAdapter__Fill_System_Int32_System_Data_DataSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataAdapter::Fill:System.Int32(System.Data.DataSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataAdapter__GetFillParameters_System_Data_IDataParameter____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataAdapter::GetFillParameters:System.Data.IDataParameter[]()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataAdapter__ResetFillLoadOption_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataAdapter::ResetFillLoadOption:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataAdapter__ShouldSerializeAcceptChangesDuringFill_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataAdapter::ShouldSerializeAcceptChangesDuringFill:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataAdapter__ShouldSerializeFillLoadOption_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataAdapter::ShouldSerializeFillLoadOption:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataAdapter__Update_System_Int32_System_Data_DataSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataAdapter::Update:System.Int32(System.Data.DataSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMapping() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMapping");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__AddRange_System_Void_DataColumnMapping___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::AddRange:System.Void(DataColumnMapping[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__AddRange_System_Void_System_Array_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::AddRange:System.Void(System.Array)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Add_DataColumnMapping_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Add:DataColumnMapping(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Add_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Add:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Clear_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Clear:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Contains_System_Boolean_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Contains:System.Boolean(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Contains_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Contains:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__CopyTo_System_Void_System_Array_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::CopyTo:System.Void(System.Array,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__GetByDataSetColumn_DataColumnMapping_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::GetByDataSetColumn:DataColumnMapping(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__GetColumnMappingBySchemaAction_DataColumnMapping_DataColumnMappingCollection_System_String_System_Data_MissingMappingAction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::GetColumnMappingBySchemaAction:DataColumnMapping(DataColumnMappingCollection,System.String,System.Data.MissingMappingAction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__GetDataColumn_System_Data_DataColumn_DataColumnMappingCollection_System_String_System_Type_System_Data_DataTable_System_Data_MissingMappingAction_System_Data_MissingSchemaAction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::GetDataColumn:System.Data.DataColumn(DataColumnMappingCollection,System.String,System.Type,System.Data.DataTable,System.Data.MissingMappingAction,System.Data.MissingSchemaAction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__GetEnumerator_System_Collections_IEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::GetEnumerator:System.Collections.IEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__IndexOfDataSetColumn_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::IndexOfDataSetColumn:System.Int32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__IndexOf_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::IndexOf:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__IndexOf_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::IndexOf:System.Int32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Insert_System_Void_System_Int32_DataColumnMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Insert:System.Void(System.Int32,DataColumnMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Insert_System_Void_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Insert:System.Void(System.Int32,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__RemoveAt_System_Void_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::RemoveAt:System.Void(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__RemoveAt_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::RemoveAt:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Remove_System_Void_DataColumnMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Remove:System.Void(DataColumnMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Remove_System_Void_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMappingCollection::Remove:System.Void(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMapping__GetDataColumnBySchemaAction_System_Data_DataColumn_System_Data_DataTable_System_Type_System_Data_MissingSchemaAction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMapping::GetDataColumnBySchemaAction:System.Data.DataColumn(System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataColumnMapping__GetDataColumnBySchemaAction_System_Data_DataColumn_System_String_System_String_System_Data_DataTable_System_Type_System_Data_MissingSchemaAction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataColumnMapping::GetDataColumnBySchemaAction:System.Data.DataColumn(System.String,System.String,System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMapping() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMapping");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__AddRange_System_Void_DataTableMapping___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::AddRange:System.Void(DataTableMapping[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__AddRange_System_Void_System_Array_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::AddRange:System.Void(System.Array)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Add_DataTableMapping_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Add:DataTableMapping(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Add_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Add:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Clear_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Clear:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Contains_System_Boolean_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Contains:System.Boolean(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Contains_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Contains:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__CopyTo_System_Void_System_Array_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::CopyTo:System.Void(System.Array,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__GetByDataSetTable_DataTableMapping_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::GetByDataSetTable:DataTableMapping(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__GetEnumerator_System_Collections_IEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::GetEnumerator:System.Collections.IEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__GetTableMappingBySchemaAction_DataTableMapping_DataTableMappingCollection_System_String_System_String_System_Data_MissingMappingAction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::GetTableMappingBySchemaAction:DataTableMapping(DataTableMappingCollection,System.String,System.String,System.Data.MissingMappingAction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__IndexOfDataSetTable_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::IndexOfDataSetTable:System.Int32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__IndexOf_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::IndexOf:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__IndexOf_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::IndexOf:System.Int32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Insert_System_Void_System_Int32_DataTableMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Insert:System.Void(System.Int32,DataTableMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Insert_System_Void_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Insert:System.Void(System.Int32,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__RemoveAt_System_Void_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::RemoveAt:System.Void(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__RemoveAt_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::RemoveAt:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Remove_System_Void_DataTableMapping_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Remove:System.Void(DataTableMapping)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Remove_System_Void_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMappingCollection::Remove:System.Void(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMapping__GetColumnMappingBySchemaAction_DataColumnMapping_System_String_System_Data_MissingMappingAction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMapping::GetColumnMappingBySchemaAction:DataColumnMapping(System.String,System.Data.MissingMappingAction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMapping__GetDataColumn_System_Data_DataColumn_System_String_System_Type_System_Data_DataTable_System_Data_MissingMappingAction_System_Data_MissingSchemaAction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMapping::GetDataColumn:System.Data.DataColumn(System.String,System.Type,System.Data.DataTable,System.Data.MissingMappingAction,System.Data.MissingSchemaAction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DataTableMapping__GetDataTableBySchemaAction_System_Data_DataTable_System_Data_DataSet_System_Data_MissingSchemaAction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DataTableMapping::GetDataTableBySchemaAction:System.Data.DataTable(System.Data.DataSet,System.Data.MissingSchemaAction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommandCollection__Add_System_Void_DbBatchCommand_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommandCollection::Add:System.Void(DbBatchCommand)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommandCollection__Clear_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommandCollection::Clear:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommandCollection__Contains_System_Boolean_DbBatchCommand_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommandCollection::Contains:System.Boolean(DbBatchCommand)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommandCollection__GetEnumerator_System_Collections_Generic_IEnumerator_DbBatchCommand___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommandCollection::GetEnumerator:System.Collections.Generic.IEnumerator<DbBatchCommand>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommandCollection__IndexOf_System_Int32_DbBatchCommand_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommandCollection::IndexOf:System.Int32(DbBatchCommand)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommandCollection__Insert_System_Void_System_Int32_DbBatchCommand_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommandCollection::Insert:System.Void(System.Int32,DbBatchCommand)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommandCollection__RemoveAt_System_Void_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommandCollection::RemoveAt:System.Void(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommandCollection__Remove_System_Boolean_DbBatchCommand_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommandCollection::Remove:System.Boolean(DbBatchCommand)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatchCommand__CreateParameter_DbParameter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatchCommand::CreateParameter:DbParameter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__Cancel_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::Cancel:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__CreateBatchCommand_DbBatchCommand__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::CreateBatchCommand:DbBatchCommand()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__ExecuteNonQueryAsync_System_Threading_Tasks_Task_System_Int32__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::ExecuteNonQueryAsync:System.Threading.Tasks.Task<System.Int32>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__ExecuteNonQuery_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::ExecuteNonQuery:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__ExecuteReaderAsync_System_Threading_Tasks_Task_DbDataReader__System_Data_CommandBehavior_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::ExecuteReaderAsync:System.Threading.Tasks.Task<DbDataReader>(System.Data.CommandBehavior,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__ExecuteReaderAsync_System_Threading_Tasks_Task_DbDataReader__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::ExecuteReaderAsync:System.Threading.Tasks.Task<DbDataReader>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__ExecuteReader_DbDataReader_System_Data_CommandBehavior_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::ExecuteReader:DbDataReader(System.Data.CommandBehavior)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__ExecuteScalarAsync_System_Threading_Tasks_Task_System_Object__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::ExecuteScalarAsync:System.Threading.Tasks.Task<System.Object>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__ExecuteScalar_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::ExecuteScalar:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__PrepareAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::PrepareAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbBatch__Prepare_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbBatch::Prepare:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__GetDeleteCommand_DbCommand_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::GetDeleteCommand:DbCommand(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__GetDeleteCommand_DbCommand__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::GetDeleteCommand:DbCommand()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__GetInsertCommand_DbCommand_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::GetInsertCommand:DbCommand(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__GetInsertCommand_DbCommand__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::GetInsertCommand:DbCommand()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__GetUpdateCommand_DbCommand_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::GetUpdateCommand:DbCommand(System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__GetUpdateCommand_DbCommand__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::GetUpdateCommand:DbCommand()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__QuoteIdentifier_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::QuoteIdentifier:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__RefreshSchema_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::RefreshSchema:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommandBuilder__UnquoteIdentifier_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommandBuilder::UnquoteIdentifier:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__Cancel_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::Cancel:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__CreateParameter_DbParameter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::CreateParameter:DbParameter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteNonQueryAsync_System_Threading_Tasks_Task_System_Int32__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteNonQueryAsync:System.Threading.Tasks.Task<System.Int32>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteNonQueryAsync_System_Threading_Tasks_Task_System_Int32___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteNonQueryAsync:System.Threading.Tasks.Task<System.Int32>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteNonQuery_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteNonQuery:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteReaderAsync_System_Threading_Tasks_Task_DbDataReader__System_Data_CommandBehavior_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteReaderAsync:System.Threading.Tasks.Task<DbDataReader>(System.Data.CommandBehavior)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteReaderAsync_System_Threading_Tasks_Task_DbDataReader__System_Data_CommandBehavior_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteReaderAsync:System.Threading.Tasks.Task<DbDataReader>(System.Data.CommandBehavior,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteReaderAsync_System_Threading_Tasks_Task_DbDataReader__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteReaderAsync:System.Threading.Tasks.Task<DbDataReader>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteReaderAsync_System_Threading_Tasks_Task_DbDataReader___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteReaderAsync:System.Threading.Tasks.Task<DbDataReader>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteReader_DbDataReader_System_Data_CommandBehavior_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteReader:DbDataReader(System.Data.CommandBehavior)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteReader_DbDataReader__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteReader:DbDataReader()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteScalarAsync_System_Threading_Tasks_Task_System_Object__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteScalarAsync:System.Threading.Tasks.Task<System.Object>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteScalarAsync_System_Threading_Tasks_Task_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteScalarAsync:System.Threading.Tasks.Task<System.Object>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__ExecuteScalar_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::ExecuteScalar:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__PrepareAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::PrepareAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbCommand__Prepare_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbCommand::Prepare:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__Add_System_Void_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::Add:System.Void(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__AppendKeyValuePair_System_Void_System_Text_StringBuilder_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__AppendKeyValuePair_System_Void_System_Text_StringBuilder_System_String_System_String_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::AppendKeyValuePair:System.Void(System.Text.StringBuilder,System.String,System.String,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__Clear_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::Clear:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__ContainsKey_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::ContainsKey:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__EquivalentTo_System_Boolean_DbConnectionStringBuilder_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::EquivalentTo:System.Boolean(DbConnectionStringBuilder)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__Remove_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::Remove:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__ShouldSerialize_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::ShouldSerialize:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnectionStringBuilder__TryGetValue_System_Boolean_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnectionStringBuilder::TryGetValue:System.Boolean(System.String,System.Object&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__BeginTransactionAsync_System_Threading_Tasks_ValueTask_DbTransaction__System_Data_IsolationLevel_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::BeginTransactionAsync:System.Threading.Tasks.ValueTask<DbTransaction>(System.Data.IsolationLevel,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__BeginTransactionAsync_System_Threading_Tasks_ValueTask_DbTransaction__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::BeginTransactionAsync:System.Threading.Tasks.ValueTask<DbTransaction>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__BeginTransaction_DbTransaction_System_Data_IsolationLevel_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::BeginTransaction:DbTransaction(System.Data.IsolationLevel)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__BeginTransaction_DbTransaction__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::BeginTransaction:DbTransaction()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__ChangeDatabaseAsync_System_Threading_Tasks_Task_System_String_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::ChangeDatabaseAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__ChangeDatabase_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::ChangeDatabase:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__CloseAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::CloseAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__Close_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::Close:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__CreateBatch_DbBatch__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::CreateBatch:DbBatch()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__CreateCommand_DbCommand__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::CreateCommand:DbCommand()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__EnlistTransaction_System_Void_System_Transactions_Transaction_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::EnlistTransaction:System.Void(System.Transactions.Transaction)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__GetSchemaAsync_System_Threading_Tasks_Task_System_Data_DataTable__System_String_System_String___System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::GetSchemaAsync:System.Threading.Tasks.Task<System.Data.DataTable>(System.String,System.String[],System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__GetSchemaAsync_System_Threading_Tasks_Task_System_Data_DataTable__System_String_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::GetSchemaAsync:System.Threading.Tasks.Task<System.Data.DataTable>(System.String,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__GetSchemaAsync_System_Threading_Tasks_Task_System_Data_DataTable__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::GetSchemaAsync:System.Threading.Tasks.Task<System.Data.DataTable>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__GetSchema_System_Data_DataTable_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::GetSchema:System.Data.DataTable(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__GetSchema_System_Data_DataTable_System_String_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::GetSchema:System.Data.DataTable(System.String,System.String[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__GetSchema_System_Data_DataTable__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::GetSchema:System.Data.DataTable()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__OpenAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::OpenAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__OpenAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::OpenAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbConnection__Open_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbConnection::Open:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__FillSchema_System_Data_DataTable_System_Data_DataTable_System_Data_SchemaType_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::FillSchema:System.Data.DataTable(System.Data.DataTable,System.Data.SchemaType)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__FillSchema_System_Data_DataTable___System_Data_DataSet_System_Data_SchemaType_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::FillSchema:System.Data.DataTable[](System.Data.DataSet,System.Data.SchemaType,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__Fill_System_Int32_System_Data_DataSet_System_Int32_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::Fill:System.Int32(System.Data.DataSet,System.Int32,System.Int32,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__Fill_System_Int32_System_Data_DataSet_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::Fill:System.Int32(System.Data.DataSet,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__Fill_System_Int32_System_Data_DataTable_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::Fill:System.Int32(System.Data.DataTable)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__Fill_System_Int32_System_Int32_System_Int32_System_Data_DataTable___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::Fill:System.Int32(System.Int32,System.Int32,System.Data.DataTable[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__Update_System_Int32_System_Data_DataRow___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::Update:System.Int32(System.Data.DataRow[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__Update_System_Int32_System_Data_DataSet_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::Update:System.Int32(System.Data.DataSet,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataAdapter__Update_System_Int32_System_Data_DataTable_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataAdapter::Update:System.Int32(System.Data.DataTable)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReaderExtensions__CanGetColumnSchema_System_Boolean_DbDataReader_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReaderExtensions::CanGetColumnSchema:System.Boolean(DbDataReader)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReaderExtensions__GetColumnSchema_System_Collections_ObjectModel_ReadOnlyCollection_DbColumn__DbDataReader_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReaderExtensions::GetColumnSchema:System.Collections.ObjectModel.ReadOnlyCollection<DbColumn>(DbDataReader)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__CloseAsync_System_Threading_Tasks_Task__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::CloseAsync:System.Threading.Tasks.Task()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__Close_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::Close:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetBoolean_System_Boolean_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetBoolean:System.Boolean(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetByte_System_Byte_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetByte:System.Byte(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetBytes_System_Int64_System_Int32_System_Int64_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetChar_System_Char_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetChar:System.Char(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetChars_System_Int64_System_Int32_System_Int64_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetColumnSchemaAsync_System_Threading_Tasks_Task_System_Collections_ObjectModel_ReadOnlyCollection_DbColumn___System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetColumnSchemaAsync:System.Threading.Tasks.Task<System.Collections.ObjectModel.ReadOnlyCollection<DbColumn>>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetDataTypeName_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetDataTypeName:System.String(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetData_DbDataReader_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetData:DbDataReader(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetDateTime_System_DateTime_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetDateTime:System.DateTime(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetDecimal_System_Decimal_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetDecimal:System.Decimal(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetDouble_System_Double_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetDouble:System.Double(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetEnumerator_System_Collections_IEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetEnumerator:System.Collections.IEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetFieldType_System_Type_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetFieldType:System.Type(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetFieldValueAsync_System_Int32__System_Threading_Tasks_Task_System_Int32__System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetFieldValueAsync<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetFieldValueAsync_System_Int32__System_Threading_Tasks_Task_System_Int32__System_Int32_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetFieldValueAsync<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Int32,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetFieldValue_System_Int32__System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetFieldValue<System.Int32>:System.Int32(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetFloat_System_Single_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetFloat:System.Single(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetGuid_System_Guid_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetGuid:System.Guid(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetInt16_System_Int16_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetInt16:System.Int16(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetInt32_System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetInt32:System.Int32(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetInt64_System_Int64_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetInt64:System.Int64(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetName_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetName:System.String(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetOrdinal_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetOrdinal:System.Int32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetProviderSpecificFieldType_System_Type_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetProviderSpecificFieldType:System.Type(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetProviderSpecificValue_System_Object_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetProviderSpecificValue:System.Object(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetProviderSpecificValues_System_Int32_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetProviderSpecificValues:System.Int32(System.Object[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetSchemaTableAsync_System_Threading_Tasks_Task_System_Data_DataTable__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetSchemaTableAsync:System.Threading.Tasks.Task<System.Data.DataTable>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetSchemaTable_System_Data_DataTable__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetSchemaTable:System.Data.DataTable()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetStream_System_IO_Stream_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetStream:System.IO.Stream(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetString_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetString:System.String(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetTextReader_System_IO_TextReader_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetTextReader:System.IO.TextReader(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetValue_System_Object_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetValue:System.Object(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__GetValues_System_Int32_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::GetValues:System.Int32(System.Object[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__IsDBNullAsync_System_Threading_Tasks_Task_System_Boolean__System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::IsDBNullAsync:System.Threading.Tasks.Task<System.Boolean>(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__IsDBNullAsync_System_Threading_Tasks_Task_System_Boolean__System_Int32_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::IsDBNullAsync:System.Threading.Tasks.Task<System.Boolean>(System.Int32,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__IsDBNull_System_Boolean_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::IsDBNull:System.Boolean(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__NextResultAsync_System_Threading_Tasks_Task_System_Boolean__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::NextResultAsync:System.Threading.Tasks.Task<System.Boolean>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__NextResultAsync_System_Threading_Tasks_Task_System_Boolean___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::NextResultAsync:System.Threading.Tasks.Task<System.Boolean>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__NextResult_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::NextResult:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__ReadAsync_System_Threading_Tasks_Task_System_Boolean__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::ReadAsync:System.Threading.Tasks.Task<System.Boolean>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__ReadAsync_System_Threading_Tasks_Task_System_Boolean___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::ReadAsync:System.Threading.Tasks.Task<System.Boolean>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataReader__Read_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataReader::Read:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetBoolean_System_Boolean_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetBoolean:System.Boolean(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetByte_System_Byte_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetByte:System.Byte(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetBytes_System_Int64_System_Int32_System_Int64_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetBytes:System.Int64(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetChar_System_Char_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetChar:System.Char(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetChars_System_Int64_System_Int32_System_Int64_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetChars:System.Int64(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetDataTypeName_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetDataTypeName:System.String(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetData_System_Data_IDataReader_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetData:System.Data.IDataReader(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetDateTime_System_DateTime_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetDateTime:System.DateTime(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetDecimal_System_Decimal_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetDecimal:System.Decimal(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetDouble_System_Double_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetDouble:System.Double(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetFieldType_System_Type_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetFieldType:System.Type(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetFloat_System_Single_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetFloat:System.Single(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetGuid_System_Guid_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetGuid:System.Guid(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetInt16_System_Int16_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetInt16:System.Int16(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetInt32_System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetInt32:System.Int32(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetInt64_System_Int64_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetInt64:System.Int64(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetName_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetName:System.String(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetOrdinal_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetOrdinal:System.Int32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetString_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetString:System.String(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetValue_System_Object_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetValue:System.Object(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__GetValues_System_Int32_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::GetValues:System.Int32(System.Object[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataRecord__IsDBNull_System_Boolean_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataRecord::IsDBNull:System.Boolean(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataSourceEnumerator__GetDataSources_System_Data_DataTable__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataSourceEnumerator::GetDataSources:System.Data.DataTable()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataSource__CreateBatch_DbBatch__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataSource::CreateBatch:DbBatch()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataSource__CreateCommand_DbCommand_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataSource::CreateCommand:DbCommand(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataSource__CreateConnection_DbConnection__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataSource::CreateConnection:DbConnection()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataSource__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataSource::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataSource__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataSource::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataSource__OpenConnectionAsync_System_Threading_Tasks_ValueTask_DbConnection__System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataSource::OpenConnectionAsync:System.Threading.Tasks.ValueTask<DbConnection>(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbDataSource__OpenConnection_DbConnection__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbDataSource::OpenConnection:DbConnection()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__AddRange_System_Void_System_Array_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::AddRange:System.Void(System.Array)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__Add_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::Add:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__Clear_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::Clear:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__Contains_System_Boolean_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::Contains:System.Boolean(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__Contains_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::Contains:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__CopyTo_System_Void_System_Array_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::CopyTo:System.Void(System.Array,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__GetEnumerator_System_Collections_IEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::GetEnumerator:System.Collections.IEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__IndexOf_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::IndexOf:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__IndexOf_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::IndexOf:System.Int32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__Insert_System_Void_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::Insert:System.Void(System.Int32,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__RemoveAt_System_Void_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::RemoveAt:System.Void(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__RemoveAt_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::RemoveAt:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameterCollection__Remove_System_Void_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameterCollection::Remove:System.Void(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbParameter__ResetDbType_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbParameter::ResetDbType:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__GetFactoryClasses_System_Data_DataTable__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::GetFactoryClasses:System.Data.DataTable()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__GetFactory_DbProviderFactory_DbConnection_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::GetFactory:DbProviderFactory(DbConnection)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__GetFactory_DbProviderFactory_System_Data_DataRow_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::GetFactory:DbProviderFactory(System.Data.DataRow)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__GetFactory_DbProviderFactory_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::GetFactory:DbProviderFactory(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__GetProviderInvariantNames_System_Collections_Generic_IEnumerable_System_String___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::GetProviderInvariantNames:System.Collections.Generic.IEnumerable<System.String>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__RegisterFactory_System_Void_System_String_DbProviderFactory_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::RegisterFactory:System.Void(System.String,DbProviderFactory)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__RegisterFactory_System_Void_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::RegisterFactory:System.Void(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__RegisterFactory_System_Void_System_String_System_Type_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::RegisterFactory:System.Void(System.String,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__TryGetFactory_System_Boolean_System_String_DbProviderFactory__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::TryGetFactory:System.Boolean(System.String,DbProviderFactory&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactories__UnregisterFactory_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactories::UnregisterFactory:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateBatchCommand_DbBatchCommand__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateBatchCommand:DbBatchCommand()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateBatch_DbBatch__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateBatch:DbBatch()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateCommandBuilder_DbCommandBuilder__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateCommandBuilder:DbCommandBuilder()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateCommand_DbCommand__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateCommand:DbCommand()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateConnectionStringBuilder_DbConnectionStringBuilder__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateConnectionStringBuilder:DbConnectionStringBuilder()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateConnection_DbConnection__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateConnection:DbConnection()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateDataAdapter_DbDataAdapter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateDataAdapter:DbDataAdapter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateDataSourceEnumerator_DbDataSourceEnumerator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateDataSourceEnumerator:DbDataSourceEnumerator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateDataSource_DbDataSource_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateDataSource:DbDataSource(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbProviderFactory__CreateParameter_DbParameter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbProviderFactory::CreateParameter:DbParameter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__CommitAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::CommitAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__Commit_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::Commit:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__DisposeAsync_System_Threading_Tasks_ValueTask__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::DisposeAsync:System.Threading.Tasks.ValueTask()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__ReleaseAsync_System_Threading_Tasks_Task_System_String_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::ReleaseAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__Release_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::Release:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__RollbackAsync_System_Threading_Tasks_Task_System_String_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::RollbackAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__RollbackAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::RollbackAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__Rollback_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::Rollback:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__Rollback_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::Rollback:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__SaveAsync_System_Threading_Tasks_Task_System_String_System_Threading_CancellationToken_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::SaveAsync:System.Threading.Tasks.Task(System.String,System.Threading.CancellationToken)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_DbTransaction__Save_System_Void_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/DbTransaction::Save:System.Void(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_RowUpdatedEventArgs__CopyToRows_System_Void_System_Data_DataRow___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_RowUpdatedEventArgs__CopyToRows_System_Void_System_Data_DataRow___System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/RowUpdatedEventArgs::CopyToRows:System.Void(System.Data.DataRow[],System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_DataRow() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.DataRow");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_DataTable() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.DataTable");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_DataColumnMapping__DataColumnMapping____() noexcept
@@ -14264,23 +12982,17 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Byte() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Byte");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Char() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Char");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Object");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -14290,156 +13002,112 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_DbDataReader___GetResult_DbDataReader__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<DbDataReader>::GetResult:DbDataReader()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Boolean___GetResult_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>::GetResult:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Collections_ObjectModel_ReadOnlyCollection_DbColumn____GetResult_System_Collections_ObjectModel_ReadOnlyCollection_DbColumn___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Collections.ObjectModel.ReadOnlyCollection<DbColumn>>::GetResult:System.Collections.ObjectModel.ReadOnlyCollection<DbColumn>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Data_DataTable___GetResult_System_Data_DataTable__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Data.DataTable>::GetResult:System.Data.DataTable()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Int32>::GetResult:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Object___GetResult_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Object>::GetResult:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_DbConnection___GetResult_DbConnection__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<DbConnection>::GetResult:DbConnection()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_DbTransaction___GetResult_DbTransaction__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<DbTransaction>::GetResult:DbTransaction()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_String() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.String");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_CancellationToken() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.CancellationToken");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_DbDataReader___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_DbDataReader___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<DbDataReader>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<DbDataReader>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Boolean___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Boolean___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Boolean>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Boolean>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Collections_ObjectModel_ReadOnlyCollection_DbColumn____GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Collections_ObjectModel_ReadOnlyCollection_DbColumn____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Collections.ObjectModel.ReadOnlyCollection<DbColumn>>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Collections.ObjectModel.ReadOnlyCollection<DbColumn>>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Data_DataTable___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Data_DataTable___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Data.DataTable>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Data.DataTable>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Int32>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Object___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task<System.Object>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Object>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask_DbConnection___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_DbConnection___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask<DbConnection>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<DbConnection>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask_DbTransaction___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_DbTransaction___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask<DbTransaction>::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter<DbTransaction>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()");
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -14461,7 +13129,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -21910,7 +20578,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[676] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[676] = {
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataAdapter__Fill_System_Int32_System_Data_DataSet_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataAdapter__FillSchema_System_Data_DataTable___System_Data_DataSet_System_Data_SchemaType_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataAdapter__GetFillParameters_System_Data_IDataParameter____),
@@ -21931,7 +20599,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[676] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Add_System_Int32_System_Object_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Add_DataColumnMapping_System_String_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__AddRange_System_Void_DataColumnMapping___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_DataColumnMapping__DataColumnMapping____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataColumnMapping),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__AddRange_System_Void_System_Array_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataColumnMappingCollection__Clear_System_Void__),
@@ -21962,7 +20630,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[676] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Add_System_Int32_System_Object_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Add_DataTableMapping_System_String_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataTableMappingCollection__AddRange_System_Void_DataTableMapping___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_DataTableMapping__DataTableMapping____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataTableMapping),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataTableMappingCollection__AddRange_System_Void_System_Array_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DataTableMappingCollection__Clear_System_Void__),
@@ -22157,7 +20825,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[676] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbConnection__GetSchema_System_Data_DataTable__),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbConnection__GetSchema_System_Data_DataTable_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbConnection__GetSchema_System_Data_DataTable_System_String_System_String___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_String__System_String____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbConnection__GetSchemaAsync_System_Threading_Tasks_Task_System_Data_DataTable__System_Threading_CancellationToken_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbConnection__GetSchemaAsync_System_Threading_Tasks_Task_System_Data_DataTable__System_String_System_Threading_CancellationToken_),
@@ -22200,12 +20868,12 @@ extern "C" void* kChaosExternalRuntimeFnTable[676] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataAdapter__Fill_System_Int32_System_Data_DataSet_System_Int32_System_Int32_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataAdapter__Fill_System_Int32_System_Data_DataTable_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataAdapter__Fill_System_Int32_System_Int32_System_Int32_System_Data_DataTable___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Data_DataTable__System_Data_DataTable____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_DataTable),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataAdapter__FillSchema_System_Data_DataTable_System_Data_DataTable_System_Data_SchemaType_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataAdapter__FillSchema_System_Data_DataTable___System_Data_DataSet_System_Data_SchemaType_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataAdapter__Update_System_Int32_System_Data_DataRow___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Data_DataRow__System_Data_DataRow____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_DataRow),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataAdapter__Update_System_Int32_System_Data_DataTable_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataAdapter__Update_System_Int32_System_Data_DataSet_System_String_),
@@ -22246,11 +20914,11 @@ extern "C" void* kChaosExternalRuntimeFnTable[676] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetBoolean_System_Boolean_System_Int32_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetByte_System_Byte_System_Int32_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetBytes_System_Int64_System_Int32_System_Int64_System_Byte___System_Int32_System_Int32_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Byte),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetChar_System_Char_System_Int32_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetChars_System_Int64_System_Int32_System_Int64_System_Char___System_Int32_System_Int32_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Char__System_Char____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Char),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetColumnSchemaAsync_System_Threading_Tasks_Task_System_Collections_ObjectModel_ReadOnlyCollection_DbColumn___System_Threading_CancellationToken_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetData_DbDataReader_System_Int32_),
@@ -22273,7 +20941,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[676] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetProviderSpecificFieldType_System_Type_System_Int32_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetProviderSpecificValue_System_Object_System_Int32_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetProviderSpecificValues_System_Int32_System_Object___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Object__System_Object____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetSchemaTable_System_Data_DataTable__),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_DbDataReader__GetSchemaTableAsync_System_Threading_Tasks_Task_System_Data_DataTable__System_Threading_CancellationToken_),
@@ -22589,6 +21257,43 @@ extern "C" void* kChaosExternalRuntimeFnTable[676] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 676;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+    const char* subject_id;
+    const uint8_t* il_data;
+    int32_t il_size;
+    void* patch_method;
+    const char* json_data;
+};
+
+static const uint8_t s_il_0[] = {
+    0x2A, 
+};
+static const uint8_t s_il_130[] = {
+    0x02, 0x73, 0x35, 0x66, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_131[] = {
+    0x02, 0x7C, 0xAA, 0x14, 0x00, 0x04, 0x28, 0xD6, 0x3E, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_138[] = {
+    0x02, 0x73, 0xDE, 0x65, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_139[] = {
+    0x02, 0x7B, 0x94, 0x14, 0x00, 0x04, 0x16, 0x28, 0xE3, 0x65, 0x00, 0x06, 0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+    { "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Threading.Tasks.ValueTask::GetAwaiter:System.Runtime.CompilerServices.ValueTaskAwaiter()", s_il_130, sizeof(s_il_130), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter::GetResult:System.Void()", s_il_131, sizeof(s_il_131), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Threading.Tasks.Task::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter()", s_il_138, sizeof(s_il_138), nullptr, nullptr },
+    { "System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter::GetResult:System.Void()", s_il_139, sizeof(s_il_139), nullptr, nullptr },
+    { nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.

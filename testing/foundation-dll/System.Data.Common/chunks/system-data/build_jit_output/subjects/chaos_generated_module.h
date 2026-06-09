@@ -30,9 +30,6 @@
 // Forward declaration of ChaosRuntimeHost (defined in chaos_runtime_host.h).
 class ChaosRuntimeHost;
 
-// chaos_valuetype_* typedefs (opaque 32-bit managed value types)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
-
 
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -43,162 +40,6 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_t {
-        void (*AreEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_1)(
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_3)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_4)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_5)(
-                    double, 
-                    double, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_6)(
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_7)(
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_8)(
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_9)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_10)(
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_11)(
-                    float, 
-                    float, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_12)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_13)(
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_14)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_15)(
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_16)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreNotEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*Complete)(
-                void
-        );
-        void (*Fail)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsFalse)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNotNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsTrue)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*RecordFailure)(
-                void
-        );
-        void (*Reset)(
-                void
-        );
-        void (*Throws)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_ArgumentNullException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_InvalidOperationException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_NullReferenceException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*get_ExitCode)(
-                void
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute;
     struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_ConstraintCollectionTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -6497,7 +6338,7 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableBaseSystem_Data_DataRowTests___c;
-    int32_t method_count;
+    CHAOS_IL2CPP_INT32 method_count;
 };
 
 extern const Functions kFunctions;
@@ -6514,350 +6355,6 @@ extern "C" void* kFunctionsFlat[];
 // These provide type-safe invocation without exposing the raw function table.
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
-    static inline void AreEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_1(
-                CHAOS_IL2CPP_UINT8 arg_0, 
-                CHAOS_IL2CPP_UINT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_1(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_3(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_3(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_4(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_4(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_5(
-                double arg_0, 
-                double arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_5(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_6(
-                CHAOS_IL2CPP_INT16 arg_0, 
-                CHAOS_IL2CPP_INT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_6(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_7(
-                CHAOS_IL2CPP_INT32 arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_7(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_8(
-                CHAOS_IL2CPP_INT64 arg_0, 
-                CHAOS_IL2CPP_INT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_8(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_9(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_9(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_10(
-                CHAOS_IL2CPP_INT8 arg_0, 
-                CHAOS_IL2CPP_INT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_10(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_11(
-                float arg_0, 
-                float arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_11(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_12(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_12(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_13(
-                CHAOS_IL2CPP_UINT16 arg_0, 
-                CHAOS_IL2CPP_UINT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_13(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_14(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_14(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_15(
-                CHAOS_IL2CPP_UINT64 arg_0, 
-                CHAOS_IL2CPP_UINT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_15(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_16(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_16(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreNotEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreNotEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 Complete(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Complete(
-        );
-    }
-    static inline void Fail(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Fail(
-                    arg_0
-        );
-    }
-    static inline void IsFalse(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsFalse(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNotNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNotNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsTrue(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsTrue(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void RecordFailure(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.RecordFailure(
-        );
-    }
-    static inline void Reset(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Reset(
-        );
-    }
-    static inline void Throws(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_ArgumentNullException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentNullException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_InvalidOperationException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_InvalidOperationException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_NullReferenceException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_NullReferenceException_(
-                    arg_0
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 get_ExitCode(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.get_ExitCode(
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 31;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException.ctor(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_ConstraintCollectionTests {
     static inline void ctor(
@@ -7228,7 +6725,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_ConstraintC
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 61;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 61;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_ConstraintCollectionTests___c {
@@ -7455,7 +6952,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_ConstraintC
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 32;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 32;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DBConcurrencyExceptionTests {
@@ -7551,7 +7048,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DBConcurren
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DBConcurrencyExceptionTests___c {
@@ -7617,7 +7114,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DBConcurren
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataColumnCollectionTests {
@@ -7917,7 +7414,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataColumnC
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 49;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 49;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataColumnCollectionTests___c {
@@ -8102,7 +7599,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataColumnC
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 26;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 26;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataColumnTests {
@@ -8138,7 +7635,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataColumnT
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataColumnTests___c {
@@ -8169,7 +7666,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataColumnT
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 4;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 4;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataReaderExtensionsTests {
@@ -8877,7 +8374,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataReaderE
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 117;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 117;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataReaderExtensionsTests___c {
@@ -9300,7 +8797,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataReaderE
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 60;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 60;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRelationCollectionTests {
@@ -9696,7 +9193,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRelatio
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 65;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 65;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRelationCollectionTests___c {
@@ -9937,7 +9434,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRelatio
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 34;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 34;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowCollectionTests {
@@ -10213,7 +9710,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowColl
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 45;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 45;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowCollectionTests___c {
@@ -10384,7 +9881,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowColl
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 24;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 24;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowExtensionsTests {
@@ -10612,7 +10109,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowExte
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 37;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 37;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowExtensionsTests___c {
@@ -10755,7 +10252,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowExte
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 20;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 20;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowTests {
@@ -11367,7 +10864,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowTest
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 101;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 101;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowTests___c {
@@ -11734,7 +11231,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowTest
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 52;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 52;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowViewTests {
@@ -11890,7 +11387,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowView
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 25;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 25;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowViewTests___c {
@@ -11991,7 +11488,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataRowView
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 14;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 14;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataSetTests {
@@ -13275,7 +12772,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataSetTest
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 213;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 213;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataSetTests___c {
@@ -14099,7 +13596,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataSetTest
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 115;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 115;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableCollectionTests {
@@ -14483,7 +13980,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableCo
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 63;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 63;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableCollectionTests___c {
@@ -14717,7 +14214,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableCo
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 33;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 33;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableExtensionsTests {
@@ -14837,7 +14334,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableEx
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableExtensionsTests___c {
@@ -14917,7 +14414,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableEx
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 11;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 11;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableReaderTests {
@@ -15661,7 +15158,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableRe
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 123;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 123;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableReaderTests___c {
@@ -16105,7 +15602,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableRe
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 63;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 63;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableTests {
@@ -17449,7 +16946,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableTe
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 223;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 223;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableTests___c {
@@ -18236,7 +17733,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataTableTe
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 112;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 112;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewManagerTests {
@@ -18260,7 +17757,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewMan
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewManagerTests___c {
@@ -18284,7 +17781,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewMan
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewSettingCollectionTests {
@@ -18332,7 +17829,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewSet
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewSettingCollectionTests___c {
@@ -18370,7 +17867,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewSet
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewTests {
@@ -18718,7 +18215,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewTes
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 57;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 57;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewTests___c {
@@ -18931,7 +18428,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_DataViewTes
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 30;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 30;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_EnumerableRowCollectionExtensionsTests {
@@ -19195,7 +18692,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_EnumerableR
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 43;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 43;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_EnumerableRowCollectionExtensionsTests___c {
@@ -19539,7 +19036,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_EnumerableR
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 43;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 43;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_EnumerableRowCollectionSystem_Int32Tests {
@@ -19563,7 +19060,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_EnumerableR
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_EnumerableRowCollectionSystem_Int32Tests___c {
@@ -19587,7 +19084,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_EnumerableR
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_InternalDataCollectionBaseTests {
@@ -19635,7 +19132,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_InternalDat
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_InternalDataCollectionBaseTests___c {
@@ -19673,7 +19170,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_InternalDat
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_PropertyCollectionTests {
@@ -19697,7 +19194,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_PropertyCol
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_PropertyCollectionTests___c {
@@ -19721,7 +19218,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_PropertyCol
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableBaseExtensionsTests {
@@ -19913,7 +19410,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableB
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 31;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 31;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableBaseExtensionsTests___c {
@@ -20143,7 +19640,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableB
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableBaseSystem_Data_DataRowTests {
@@ -20179,7 +19676,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableB
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableBaseSystem_Data_DataRowTests___c {
@@ -20210,7 +19707,7 @@ struct CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_TypedTableB
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 4;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 4;
 };
 
 

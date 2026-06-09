@@ -14,18 +14,37 @@ if(MSVC)
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter)
   set(CHAOS_EHA_FLAG -fexceptions)
-  set(CHAOS_FORCE_MULTIPLE "")
+  # eager_compile.cpp is compiled locally AND present in prebuilt
+  # libchaos_interpreter.a — both define EagerCompilePatchMethods.
+  set(CHAOS_FORCE_MULTIPLE "-Wl,--allow-multiple-definition")
 endif()
 
 # ── Config tier ──
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
   set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
+
+# ── Hephaestus Lib: pre-compiled framework cache ──
+# When CHAOS_HEPHAESTUS_DIR is set, link against pre-compiled static libraries
+# from previously-cached builds.  This avoids recompiling the IL2CPP codegen
+# output for core assemblies (System.Private.CoreLib, System.Runtime, etc.)
+# across chunks.
+# The cache is managed by the HephaestusCache in the Python verification pipeline.
+# If the variable is not set, the build proceeds as normal.
+if(DEFINED CHAOS_HEPHAESTUS_DIR AND EXISTS "${CHAOS_HEPHAESTUS_DIR}")
+  message(STATUS "Hephaestus Lib: ${CHAOS_HEPHAESTUS_DIR}")
+  file(GLOB CHAOS_HEPHAESTUS_LIBS "${CHAOS_HEPHAESTUS_DIR}/*.lib" "${CHAOS_HEPHAESTUS_DIR}/*.a")
+  if(CHAOS_HEPHAESTUS_LIBS)
+    list(APPEND CHAOS_ENTRY_SOURCES ${CHAOS_HEPHAESTUS_LIBS})
+    message(STATUS "Hephaestus Lib: ${CHAOS_HEPHAESTUS_LIBS}")
+  endif()
+endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
-  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/mobile-release.h")
+  add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
+  add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
@@ -51,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Private.Xml/chunks/system-xml-xsl/native/codegen")
-set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Private.Xml/chunks/system-xml-xsl/native/codegen")
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.Xml/chunks/system-xml-xsl/native/codegen")
+set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.Xml/chunks/system-xml-xsl/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -64,10 +83,12 @@ find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 file(GLOB CHAOS_CODEGEN_FLAT_CPP "${CMAKE_CURRENT_SOURCE_DIR}/subjects/*.cpp")
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.page*.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.page-*.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/chaos_generated_module.cpp"
     # Flat layout fallback: codegen writes directly to codegen/generated/
     "${CHAOS_CODEGEN_DIR}/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/native-aot.generated.page*.cpp"
     "${CHAOS_CODEGEN_DIR}/generated/native-aot.page-*.cpp"
     "${CHAOS_CODEGEN_DIR}/generated/chaos_generated_module.cpp"
 )
@@ -86,6 +107,9 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/dispatch.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
@@ -109,6 +133,12 @@ set(CHAOS_MATH_STUBS
 set(CHAOS_SIMD_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/simd_stubs.cpp"
 )
+set(CHAOS_CHAR_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/char_stubs.cpp"
+)
+set(CHAOS_VECTOR_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/vector_stubs.cpp"
+)
 set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
@@ -118,6 +148,9 @@ set(CHAOS_INTEROP_STUBS
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
 )
+set(CHAOS_CRYPTO_STUBS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
+)
 # hotpatch_table.cpp — compiled locally so the entry has the latest
 # SetPatchedBySlot (the prebuilt chaos_runtime_core.lib may be stale).
 set(CHAOS_HOTPATCH_TABLE
@@ -126,8 +159,22 @@ set(CHAOS_HOTPATCH_TABLE
 # eager_compile.cpp — required by patch_loader.obj in chaos_runtime_core.lib
 # but defined in the interpreter project.  Compile locally since the prebuilt
 # chaos_interpreter.lib may be stale (EagerCompilePatchMethods).
-set(CHAOS_EAGER_COMPILE
-    "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
+# Skipped in profile build (JIT header dependency chain).
+if(NOT CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
+  set(CHAOS_EAGER_COMPILE
+      "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
+  )
+endif()
+# method_replacement.cpp — the prebuilt chaos_hot_update.lib may be stale
+# (SetPatchedBySlot signature changed — domain_id parameter added).
+set(CHAOS_METHOD_REPLACEMENT
+    "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
+)
+# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
+# symbols added after the SDK was last rebuilt.  Compile locally.
+set(CHAOS_PROFILE_STATS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
 )
 
 set(CHAOS_ENTRY_SOURCES
@@ -139,11 +186,16 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_ARRAY_STUBS}
     ${CHAOS_MATH_STUBS}
     ${CHAOS_SIMD_STUBS}
+    ${CHAOS_CHAR_STUBS}
+    ${CHAOS_VECTOR_STUBS}
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
+    ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
+    ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -161,7 +213,8 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
-    "${CHAOS_CODEGEN_DIR}/generated/generated"
+    "${CHAOS_PROJECT_ROOT}/cmake"
+    "${CHAOS_CODEGEN_DIR}/codegen/generated"
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
     # JIT headers needed by eager_compile.cpp (compiled for all builds
@@ -190,5 +243,11 @@ if(MSVC)
   target_link_libraries(chaos_entry PRIVATE bcrypt)
   target_link_options(chaos_entry PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
 
+endif()
+# OpenSSL: needed by crypto_stubs.cpp on Linux (SHA/HMAC via libcrypto).
+if(NOT MSVC)
+  find_package(OpenSSL REQUIRED)
+  target_include_directories(chaos_entry PRIVATE ${OPENSSL_INCLUDE_DIR})
+  target_link_libraries(chaos_entry PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})

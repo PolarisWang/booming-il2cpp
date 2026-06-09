@@ -1,2 +1,0 @@
-// entry.h — Auto-generated
-#pragma once

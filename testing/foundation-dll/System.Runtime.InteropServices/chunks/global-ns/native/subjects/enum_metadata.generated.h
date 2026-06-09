@@ -73,37 +73,6 @@ static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOB
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Globalization+TimeZoneDisplayNameType ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_TIMEZONEDISPLAYNAMETYPE[] = {
-    { "Generic", 0 },
-    { "Standard", 1 },
-    { "DaylightSavings", 2 },
-    { "GenericLocation", 3 },
-    { "ExemplarCity", 4 },
-};
-
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_TIMEZONEDISPLAYNAMETYPE = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_TIMEZONEDISPLAYNAMETYPE, 5
-};
-
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_TIMEZONEDISPLAYNAMETYPE = {
-    0u,
-    0u,
-    "System.Private.CoreLib/Interop+Globalization+TimeZoneDisplayNameType"
-};
-
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Globalization+TimeZoneDisplayNameType (5 fields).
-/// Returns compile-time string constant on match, 0 for unrecognized values
-/// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_TIMEZONEDISPLAYNAMETYPE(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("Generic");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("Standard");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("DaylightSavings");
-    if (value == 3) return CHAOS_IL2CPP_STRING_ID("GenericLocation");
-    if (value == 4) return CHAOS_IL2CPP_STRING_ID("ExemplarCity");
-    return 0;  // unrecognized value → caller falls through to decimal
-}
-
 // ── Enum: System.Private.CoreLib/Interop+BOOL ──────────────────────────────
 static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL[] = {
     { "FALSE", 0 },
@@ -126,6 +95,87 @@ static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP
 static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL(CHAOS_IL2CPP_INT64 value) noexcept {
     if (value == 0) return CHAOS_IL2CPP_STRING_ID("FALSE");
     if (value == 1) return CHAOS_IL2CPP_STRING_ID("TRUE");
+    return 0;  // unrecognized value → caller falls through to decimal
+}
+
+// ── Enum: System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS[] = {
+    { "FindExInfoStandard", 0 },
+    { "FindExInfoBasic", 1 },
+    { "FindExInfoMaxInfoLevel", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS = {
+    0u,
+    0u,
+    "System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS"
+};
+
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS (3 fields).
+/// Returns compile-time string constant on match, 0 for unrecognized values
+/// (caller falls through to decimal formatting).
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("FindExInfoStandard");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("FindExInfoBasic");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("FindExInfoMaxInfoLevel");
+    return 0;  // unrecognized value → caller falls through to decimal
+}
+
+// ── Enum: System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS[] = {
+    { "FindExSearchNameMatch", 0 },
+    { "FindExSearchLimitToDirectories", 1 },
+    { "FindExSearchLimitToDevices", 2 },
+    { "FindExSearchMaxSearchOp", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS = {
+    0u,
+    0u,
+    "System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS"
+};
+
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS (4 fields).
+/// Returns compile-time string constant on match, 0 for unrecognized values
+/// (caller falls through to decimal formatting).
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("FindExSearchNameMatch");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("FindExSearchLimitToDirectories");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("FindExSearchLimitToDevices");
+    if (value == 3) return CHAOS_IL2CPP_STRING_ID("FindExSearchMaxSearchOp");
+    return 0;  // unrecognized value → caller falls through to decimal
+}
+
+// ── Enum: System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS[] = {
+    { "GetFileExInfoStandard", 0 },
+    { "GetFileExMaxInfoLevel", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS = {
+    0u,
+    0u,
+    "System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS"
+};
+
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS (2 fields).
+/// Returns compile-time string constant on match, 0 for unrecognized values
+/// (caller falls through to decimal formatting).
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("GetFileExInfoStandard");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("GetFileExMaxInfoLevel");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
@@ -160,833 +210,637 @@ static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVA
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Error ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_ERROR[] = {
-    { "SUCCESS", 0 },
-    { "E2BIG", 65537 },
-    { "EACCES", 65538 },
-    { "EADDRINUSE", 65539 },
-    { "EADDRNOTAVAIL", 65540 },
-    { "EAFNOSUPPORT", 65541 },
-    { "EAGAIN", 65542 },
-    { "EWOULDBLOCK", 65542 },
-    { "EALREADY", 65543 },
-    { "EBADF", 65544 },
-    { "EBADMSG", 65545 },
-    { "EBUSY", 65546 },
-    { "ECANCELED", 65547 },
-    { "ECHILD", 65548 },
-    { "ECONNABORTED", 65549 },
-    { "ECONNREFUSED", 65550 },
-    { "ECONNRESET", 65551 },
-    { "EDEADLK", 65552 },
-    { "EDESTADDRREQ", 65553 },
-    { "EDOM", 65554 },
-    { "EDQUOT", 65555 },
-    { "EEXIST", 65556 },
-    { "EFAULT", 65557 },
-    { "EFBIG", 65558 },
-    { "EHOSTUNREACH", 65559 },
-    { "EIDRM", 65560 },
-    { "EILSEQ", 65561 },
-    { "EINPROGRESS", 65562 },
-    { "EINTR", 65563 },
-    { "EINVAL", 65564 },
-    { "EIO", 65565 },
-    { "EISCONN", 65566 },
-    { "EISDIR", 65567 },
-    { "ELOOP", 65568 },
-    { "EMFILE", 65569 },
-    { "EMLINK", 65570 },
-    { "EMSGSIZE", 65571 },
-    { "EMULTIHOP", 65572 },
-    { "ENAMETOOLONG", 65573 },
-    { "ENETDOWN", 65574 },
-    { "ENETRESET", 65575 },
-    { "ENETUNREACH", 65576 },
-    { "ENFILE", 65577 },
-    { "ENOBUFS", 65578 },
-    { "ENODEV", 65580 },
-    { "ENOENT", 65581 },
-    { "ENOEXEC", 65582 },
-    { "ENOLCK", 65583 },
-    { "ENOLINK", 65584 },
-    { "ENOMEM", 65585 },
-    { "ENOMSG", 65586 },
-    { "ENOPROTOOPT", 65587 },
-    { "ENOSPC", 65588 },
-    { "ENOSYS", 65591 },
-    { "ENOTCONN", 65592 },
-    { "ENOTDIR", 65593 },
-    { "ENOTEMPTY", 65594 },
-    { "ENOTRECOVERABLE", 65595 },
-    { "ENOTSOCK", 65596 },
-    { "ENOTSUP", 65597 },
-    { "EOPNOTSUPP", 65597 },
-    { "ENOTTY", 65598 },
-    { "ENXIO", 65599 },
-    { "EOVERFLOW", 65600 },
-    { "EOWNERDEAD", 65601 },
-    { "EPERM", 65602 },
-    { "EPIPE", 65603 },
-    { "EPROTO", 65604 },
-    { "EPROTONOSUPPORT", 65605 },
-    { "EPROTOTYPE", 65606 },
-    { "ERANGE", 65607 },
-    { "EROFS", 65608 },
-    { "ESPIPE", 65609 },
-    { "ESRCH", 65610 },
-    { "ESTALE", 65611 },
-    { "ETIMEDOUT", 65613 },
-    { "ETXTBSY", 65614 },
-    { "EXDEV", 65615 },
-    { "ESOCKTNOSUPPORT", 65630 },
-    { "EPFNOSUPPORT", 65632 },
-    { "ESHUTDOWN", 65644 },
-    { "EHOSTDOWN", 65648 },
-    { "ENODATA", 65649 },
-    { "EHOSTNOTFOUND", 131073 },
-    { "ESOCKETERROR", 131074 },
+// ── Enum: System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS[] = {
+    { "BinaryTrackInfo", 0 },
+    { "SetEnableAllKeywords", 1 },
+    { "SetTraits", 2 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ERROR = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_ERROR, 85
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS, 3
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ERROR = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Error"
+    "System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Error (85 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS (3 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ERROR(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("SUCCESS");
-    if (value == 65537) return CHAOS_IL2CPP_STRING_ID("E2BIG");
-    if (value == 65538) return CHAOS_IL2CPP_STRING_ID("EACCES");
-    if (value == 65539) return CHAOS_IL2CPP_STRING_ID("EADDRINUSE");
-    if (value == 65540) return CHAOS_IL2CPP_STRING_ID("EADDRNOTAVAIL");
-    if (value == 65541) return CHAOS_IL2CPP_STRING_ID("EAFNOSUPPORT");
-    if (value == 65542) return CHAOS_IL2CPP_STRING_ID("EAGAIN");
-    if (value == 65542) return CHAOS_IL2CPP_STRING_ID("EWOULDBLOCK");
-    if (value == 65543) return CHAOS_IL2CPP_STRING_ID("EALREADY");
-    if (value == 65544) return CHAOS_IL2CPP_STRING_ID("EBADF");
-    if (value == 65545) return CHAOS_IL2CPP_STRING_ID("EBADMSG");
-    if (value == 65546) return CHAOS_IL2CPP_STRING_ID("EBUSY");
-    if (value == 65547) return CHAOS_IL2CPP_STRING_ID("ECANCELED");
-    if (value == 65548) return CHAOS_IL2CPP_STRING_ID("ECHILD");
-    if (value == 65549) return CHAOS_IL2CPP_STRING_ID("ECONNABORTED");
-    if (value == 65550) return CHAOS_IL2CPP_STRING_ID("ECONNREFUSED");
-    if (value == 65551) return CHAOS_IL2CPP_STRING_ID("ECONNRESET");
-    if (value == 65552) return CHAOS_IL2CPP_STRING_ID("EDEADLK");
-    if (value == 65553) return CHAOS_IL2CPP_STRING_ID("EDESTADDRREQ");
-    if (value == 65554) return CHAOS_IL2CPP_STRING_ID("EDOM");
-    if (value == 65555) return CHAOS_IL2CPP_STRING_ID("EDQUOT");
-    if (value == 65556) return CHAOS_IL2CPP_STRING_ID("EEXIST");
-    if (value == 65557) return CHAOS_IL2CPP_STRING_ID("EFAULT");
-    if (value == 65558) return CHAOS_IL2CPP_STRING_ID("EFBIG");
-    if (value == 65559) return CHAOS_IL2CPP_STRING_ID("EHOSTUNREACH");
-    if (value == 65560) return CHAOS_IL2CPP_STRING_ID("EIDRM");
-    if (value == 65561) return CHAOS_IL2CPP_STRING_ID("EILSEQ");
-    if (value == 65562) return CHAOS_IL2CPP_STRING_ID("EINPROGRESS");
-    if (value == 65563) return CHAOS_IL2CPP_STRING_ID("EINTR");
-    if (value == 65564) return CHAOS_IL2CPP_STRING_ID("EINVAL");
-    if (value == 65565) return CHAOS_IL2CPP_STRING_ID("EIO");
-    if (value == 65566) return CHAOS_IL2CPP_STRING_ID("EISCONN");
-    if (value == 65567) return CHAOS_IL2CPP_STRING_ID("EISDIR");
-    if (value == 65568) return CHAOS_IL2CPP_STRING_ID("ELOOP");
-    if (value == 65569) return CHAOS_IL2CPP_STRING_ID("EMFILE");
-    if (value == 65570) return CHAOS_IL2CPP_STRING_ID("EMLINK");
-    if (value == 65571) return CHAOS_IL2CPP_STRING_ID("EMSGSIZE");
-    if (value == 65572) return CHAOS_IL2CPP_STRING_ID("EMULTIHOP");
-    if (value == 65573) return CHAOS_IL2CPP_STRING_ID("ENAMETOOLONG");
-    if (value == 65574) return CHAOS_IL2CPP_STRING_ID("ENETDOWN");
-    if (value == 65575) return CHAOS_IL2CPP_STRING_ID("ENETRESET");
-    if (value == 65576) return CHAOS_IL2CPP_STRING_ID("ENETUNREACH");
-    if (value == 65577) return CHAOS_IL2CPP_STRING_ID("ENFILE");
-    if (value == 65578) return CHAOS_IL2CPP_STRING_ID("ENOBUFS");
-    if (value == 65580) return CHAOS_IL2CPP_STRING_ID("ENODEV");
-    if (value == 65581) return CHAOS_IL2CPP_STRING_ID("ENOENT");
-    if (value == 65582) return CHAOS_IL2CPP_STRING_ID("ENOEXEC");
-    if (value == 65583) return CHAOS_IL2CPP_STRING_ID("ENOLCK");
-    if (value == 65584) return CHAOS_IL2CPP_STRING_ID("ENOLINK");
-    if (value == 65585) return CHAOS_IL2CPP_STRING_ID("ENOMEM");
-    if (value == 65586) return CHAOS_IL2CPP_STRING_ID("ENOMSG");
-    if (value == 65587) return CHAOS_IL2CPP_STRING_ID("ENOPROTOOPT");
-    if (value == 65588) return CHAOS_IL2CPP_STRING_ID("ENOSPC");
-    if (value == 65591) return CHAOS_IL2CPP_STRING_ID("ENOSYS");
-    if (value == 65592) return CHAOS_IL2CPP_STRING_ID("ENOTCONN");
-    if (value == 65593) return CHAOS_IL2CPP_STRING_ID("ENOTDIR");
-    if (value == 65594) return CHAOS_IL2CPP_STRING_ID("ENOTEMPTY");
-    if (value == 65595) return CHAOS_IL2CPP_STRING_ID("ENOTRECOVERABLE");
-    if (value == 65596) return CHAOS_IL2CPP_STRING_ID("ENOTSOCK");
-    if (value == 65597) return CHAOS_IL2CPP_STRING_ID("ENOTSUP");
-    if (value == 65597) return CHAOS_IL2CPP_STRING_ID("EOPNOTSUPP");
-    if (value == 65598) return CHAOS_IL2CPP_STRING_ID("ENOTTY");
-    if (value == 65599) return CHAOS_IL2CPP_STRING_ID("ENXIO");
-    if (value == 65600) return CHAOS_IL2CPP_STRING_ID("EOVERFLOW");
-    if (value == 65601) return CHAOS_IL2CPP_STRING_ID("EOWNERDEAD");
-    if (value == 65602) return CHAOS_IL2CPP_STRING_ID("EPERM");
-    if (value == 65603) return CHAOS_IL2CPP_STRING_ID("EPIPE");
-    if (value == 65604) return CHAOS_IL2CPP_STRING_ID("EPROTO");
-    if (value == 65605) return CHAOS_IL2CPP_STRING_ID("EPROTONOSUPPORT");
-    if (value == 65606) return CHAOS_IL2CPP_STRING_ID("EPROTOTYPE");
-    if (value == 65607) return CHAOS_IL2CPP_STRING_ID("ERANGE");
-    if (value == 65608) return CHAOS_IL2CPP_STRING_ID("EROFS");
-    if (value == 65609) return CHAOS_IL2CPP_STRING_ID("ESPIPE");
-    if (value == 65610) return CHAOS_IL2CPP_STRING_ID("ESRCH");
-    if (value == 65611) return CHAOS_IL2CPP_STRING_ID("ESTALE");
-    if (value == 65613) return CHAOS_IL2CPP_STRING_ID("ETIMEDOUT");
-    if (value == 65614) return CHAOS_IL2CPP_STRING_ID("ETXTBSY");
-    if (value == 65615) return CHAOS_IL2CPP_STRING_ID("EXDEV");
-    if (value == 65630) return CHAOS_IL2CPP_STRING_ID("ESOCKTNOSUPPORT");
-    if (value == 65632) return CHAOS_IL2CPP_STRING_ID("EPFNOSUPPORT");
-    if (value == 65644) return CHAOS_IL2CPP_STRING_ID("ESHUTDOWN");
-    if (value == 65648) return CHAOS_IL2CPP_STRING_ID("EHOSTDOWN");
-    if (value == 65649) return CHAOS_IL2CPP_STRING_ID("ENODATA");
-    if (value == 131073) return CHAOS_IL2CPP_STRING_ID("EHOSTNOTFOUND");
-    if (value == 131074) return CHAOS_IL2CPP_STRING_ID("ESOCKETERROR");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("BinaryTrackInfo");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("SetEnableAllKeywords");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("SetTraits");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+AccessMode ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_ACCESSMODE[] = {
-    { "F_OK", 0 },
-    { "X_OK", 1 },
-    { "W_OK", 2 },
-    { "R_OK", 4 },
+// ── Enum: System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS[] = {
+    { "TraceGuidQueryList", 0 },
+    { "TraceGuidQueryInfo", 1 },
+    { "TraceGuidQueryProcess", 2 },
+    { "TraceStackTracingInfo", 3 },
+    { "MaxTraceSetInfoClass", 4 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_ACCESSMODE = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_ACCESSMODE, 4
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS, 5
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_ACCESSMODE = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+AccessMode"
+    "System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+AccessMode (4 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS (5 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_ACCESSMODE(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("F_OK");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("X_OK");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("W_OK");
-    if (value == 4) return CHAOS_IL2CPP_STRING_ID("R_OK");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("TraceGuidQueryList");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("TraceGuidQueryInfo");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("TraceGuidQueryProcess");
+    if (value == 3) return CHAOS_IL2CPP_STRING_ID("TraceStackTracingInfo");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("MaxTraceSetInfoClass");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+UnixFileSystemTypes ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_UNIXFILESYSTEMTYPES[] = {
-    { "apfs", 26 },
-    { "qnx4", 47 },
-    { "autofs", 391 },
-    { "jffs", 1984 },
-    { "dev", 4979 },
-    { "devfs", 4979 },
-    { "ext", 4989 },
-    { "minix_old", 4991 },
-    { "minix", 5007 },
-    { "devpts", 7377 },
-    { "minix2", 9320 },
-    { "minix2v2", 9336 },
-    { "nilfs", 13364 },
-    { "fat", 16390 },
-    { "hfs", 16964 },
-    { "hfsplus", 18475 },
-    { "msdos", 19780 },
-    { "minix3", 19802 },
-    { "samba", 20859 },
-    { "smb", 20859 },
-    { "novell", 22092 },
-    { "exofs", 24053 },
-    { "nfs", 26985 },
-    { "romfs", 29301 },
-    { "jffs2", 29366 },
-    { "isofs", 38496 },
-    { "proc", 40864 },
-    { "openprom", 40865 },
-    { "usbdevice", 40866 },
-    { "adfs", 44533 },
-    { "affs", 44543 },
-    { "ext2_old", 61265 },
-    { "ext2", 61267 },
-    { "ext3", 61267 },
-    { "ext4", 61267 },
-    { "lofs", 61267 },
-    { "ecryptfs", 61791 },
-    { "ufs", 72020 },
-    { "cgroupfs", 2613483 },
-    { "efs", 4278867 },
-    { "ceph", 12805120 },
-    { "fd", 15731998 },
-    { "cpuset", 16914836 },
-    { "ctfs", 16914836 },
-    { "mntfs", 16914836 },
-    { "objfs", 16914836 },
-    { "sharefs", 16914836 },
-    { "tmpfs", 16914836 },
-    { "udev", 16914836 },
-    { "v9fs", 16914839 },
-    { "gfsgfs2", 18225520 },
-    { "gfs2", 18225520 },
-    { "xia", 19911021 },
-    { "xenix", 19920820 },
-    { "sysv4", 19920821 },
-    { "sysv2", 19920822 },
-    { "coherent", 19920823 },
-    { "anoninode", 151263540 },
-    { "futexfs", 195894762 },
-    { "lustre", 198183888 },
-    { "inodefs", 288389204 },
-    { "udf", 352400198 },
-    { "ufs2", 424935705 },
-    { "mqueue", 427819522 },
-    { "fhgfs", 428016422 },
-    { "bfs", 464386766 },
-    { "ubifs", 604313861 },
-    { "cramfs", 684539205 },
-    { "inotifyfs", 732765674 },
-    { "zfs", 801189825 },
-    { "jfs", 827541066 },
-    { "befs", 1111905073 },
-    { "binfmt_misc", 1112100429 },
-    { "gpfs", 1196443219 },
-    { "pipefs", 1346981957 },
-    { "reiserfs", 1382369651 },
-    { "afs", 1397113167 },
-    { "rootfs", 1397114950 },
-    { "ntfs", 1397118030 },
-    { "sockfs", 1397703499 },
-    { "ufscigam", 1410924800 },
-    { "vzfs", 1448756819 },
-    { "xfs", 1481003842 },
-    { "sdcardfs", 1573531125 },
-    { "pstorefs", 1634035564 },
-    { "aufs", 1635083891 },
-    { "bdevfs", 1650746742 },
-    { "configfs", 1650812272 },
-    { "sysfs", 1650812274 },
-    { "cgroup2fs", 1667723888 },
-    { "debugfs", 1684170528 },
-    { "fusectl", 1702057283 },
-    { "fuse", 1702057286 },
-    { "fuseblk", 1702057286 },
-    { "rpc_pipefs", 1733912937 },
-    { "qnx6", 1746473250 },
-    { "kafs", 1799439955 },
-    { "autofs4", 1833588077 },
-    { "nfsd", 1852207972 },
-    { "securityfs", 1935894131 },
-    { "squashfs", 1936814952 },
-    { "coda", 1937076805 },
-    { "ocfs2", 1952539503 },
-    { "tracefs", 1953653091 },
-    { "sffs", 2020557398 },
-    { "vagrant", 2020557398 },
-    { "vboxfs", 2020557398 },
-    { "overlay", 2035054128 },
-    { "overlayfs", 2035054159 },
-    { "ramfs", 2240043254 },
-    { "btrfs", 2435016766 },
-    { "hugetlbfs", 2508478710 },
-    { "vxfs", 2768370933 },
-    { "bootfs", 2775400441 },
-    { "panfs", 2866260714 },
-    { "xenfs", 2881100148 },
-    { "vmhgfs", 3133910204 },
-    { "omfs", 3264822663 },
-    { "logfs", 3380511080 },
-    { "bpf_fs", 3405662737 },
-    { "f2fs", 4076150800 },
-    { "selinux", 4185718668 },
-    { "hpfs", 4187351113 },
-    { "smb2", 4266872130 },
-    { "cifs", 4283649346 },
+// ── Enum: System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS[] = {
+    { "TokenUser", 1 },
+    { "TokenGroups", 2 },
+    { "TokenPrivileges", 3 },
+    { "TokenOwner", 4 },
+    { "TokenPrimaryGroup", 5 },
+    { "TokenDefaultDacl", 6 },
+    { "TokenSource", 7 },
+    { "TokenType", 8 },
+    { "TokenImpersonationLevel", 9 },
+    { "TokenStatistics", 10 },
+    { "TokenRestrictedSids", 11 },
+    { "TokenSessionId", 12 },
+    { "TokenGroupsAndPrivileges", 13 },
+    { "TokenSessionReference", 14 },
+    { "TokenSandBoxInert", 15 },
+    { "TokenAuditPolicy", 16 },
+    { "TokenOrigin", 17 },
+    { "TokenElevationType", 18 },
+    { "TokenLinkedToken", 19 },
+    { "TokenElevation", 20 },
+    { "TokenHasRestrictions", 21 },
+    { "TokenAccessInformation", 22 },
+    { "TokenVirtualizationAllowed", 23 },
+    { "TokenVirtualizationEnabled", 24 },
+    { "TokenIntegrityLevel", 25 },
+    { "TokenUIAccess", 26 },
+    { "TokenMandatoryPolicy", 27 },
+    { "TokenLogonSid", 28 },
+    { "TokenIsAppContainer", 29 },
+    { "TokenCapabilities", 30 },
+    { "TokenAppContainerSid", 31 },
+    { "TokenAppContainerNumber", 32 },
+    { "TokenUserClaimAttributes", 33 },
+    { "TokenDeviceClaimAttributes", 34 },
+    { "TokenRestrictedUserClaimAttributes", 35 },
+    { "TokenRestrictedDeviceClaimAttributes", 36 },
+    { "TokenDeviceGroups", 37 },
+    { "TokenRestrictedDeviceGroups", 38 },
+    { "TokenSecurityAttributes", 39 },
+    { "TokenIsRestricted", 40 },
+    { "MaxTokenInfoClass", 41 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_UNIXFILESYSTEMTYPES = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_UNIXFILESYSTEMTYPES, 125
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS, 41
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_UNIXFILESYSTEMTYPES = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+UnixFileSystemTypes"
+    "System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+UnixFileSystemTypes (125 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS (41 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_UNIXFILESYSTEMTYPES(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 26) return CHAOS_IL2CPP_STRING_ID("apfs");
-    if (value == 47) return CHAOS_IL2CPP_STRING_ID("qnx4");
-    if (value == 391) return CHAOS_IL2CPP_STRING_ID("autofs");
-    if (value == 1984) return CHAOS_IL2CPP_STRING_ID("jffs");
-    if (value == 4979) return CHAOS_IL2CPP_STRING_ID("dev");
-    if (value == 4979) return CHAOS_IL2CPP_STRING_ID("devfs");
-    if (value == 4989) return CHAOS_IL2CPP_STRING_ID("ext");
-    if (value == 4991) return CHAOS_IL2CPP_STRING_ID("minix_old");
-    if (value == 5007) return CHAOS_IL2CPP_STRING_ID("minix");
-    if (value == 7377) return CHAOS_IL2CPP_STRING_ID("devpts");
-    if (value == 9320) return CHAOS_IL2CPP_STRING_ID("minix2");
-    if (value == 9336) return CHAOS_IL2CPP_STRING_ID("minix2v2");
-    if (value == 13364) return CHAOS_IL2CPP_STRING_ID("nilfs");
-    if (value == 16390) return CHAOS_IL2CPP_STRING_ID("fat");
-    if (value == 16964) return CHAOS_IL2CPP_STRING_ID("hfs");
-    if (value == 18475) return CHAOS_IL2CPP_STRING_ID("hfsplus");
-    if (value == 19780) return CHAOS_IL2CPP_STRING_ID("msdos");
-    if (value == 19802) return CHAOS_IL2CPP_STRING_ID("minix3");
-    if (value == 20859) return CHAOS_IL2CPP_STRING_ID("samba");
-    if (value == 20859) return CHAOS_IL2CPP_STRING_ID("smb");
-    if (value == 22092) return CHAOS_IL2CPP_STRING_ID("novell");
-    if (value == 24053) return CHAOS_IL2CPP_STRING_ID("exofs");
-    if (value == 26985) return CHAOS_IL2CPP_STRING_ID("nfs");
-    if (value == 29301) return CHAOS_IL2CPP_STRING_ID("romfs");
-    if (value == 29366) return CHAOS_IL2CPP_STRING_ID("jffs2");
-    if (value == 38496) return CHAOS_IL2CPP_STRING_ID("isofs");
-    if (value == 40864) return CHAOS_IL2CPP_STRING_ID("proc");
-    if (value == 40865) return CHAOS_IL2CPP_STRING_ID("openprom");
-    if (value == 40866) return CHAOS_IL2CPP_STRING_ID("usbdevice");
-    if (value == 44533) return CHAOS_IL2CPP_STRING_ID("adfs");
-    if (value == 44543) return CHAOS_IL2CPP_STRING_ID("affs");
-    if (value == 61265) return CHAOS_IL2CPP_STRING_ID("ext2_old");
-    if (value == 61267) return CHAOS_IL2CPP_STRING_ID("ext2");
-    if (value == 61267) return CHAOS_IL2CPP_STRING_ID("ext3");
-    if (value == 61267) return CHAOS_IL2CPP_STRING_ID("ext4");
-    if (value == 61267) return CHAOS_IL2CPP_STRING_ID("lofs");
-    if (value == 61791) return CHAOS_IL2CPP_STRING_ID("ecryptfs");
-    if (value == 72020) return CHAOS_IL2CPP_STRING_ID("ufs");
-    if (value == 2613483) return CHAOS_IL2CPP_STRING_ID("cgroupfs");
-    if (value == 4278867) return CHAOS_IL2CPP_STRING_ID("efs");
-    if (value == 12805120) return CHAOS_IL2CPP_STRING_ID("ceph");
-    if (value == 15731998) return CHAOS_IL2CPP_STRING_ID("fd");
-    if (value == 16914836) return CHAOS_IL2CPP_STRING_ID("cpuset");
-    if (value == 16914836) return CHAOS_IL2CPP_STRING_ID("ctfs");
-    if (value == 16914836) return CHAOS_IL2CPP_STRING_ID("mntfs");
-    if (value == 16914836) return CHAOS_IL2CPP_STRING_ID("objfs");
-    if (value == 16914836) return CHAOS_IL2CPP_STRING_ID("sharefs");
-    if (value == 16914836) return CHAOS_IL2CPP_STRING_ID("tmpfs");
-    if (value == 16914836) return CHAOS_IL2CPP_STRING_ID("udev");
-    if (value == 16914839) return CHAOS_IL2CPP_STRING_ID("v9fs");
-    if (value == 18225520) return CHAOS_IL2CPP_STRING_ID("gfsgfs2");
-    if (value == 18225520) return CHAOS_IL2CPP_STRING_ID("gfs2");
-    if (value == 19911021) return CHAOS_IL2CPP_STRING_ID("xia");
-    if (value == 19920820) return CHAOS_IL2CPP_STRING_ID("xenix");
-    if (value == 19920821) return CHAOS_IL2CPP_STRING_ID("sysv4");
-    if (value == 19920822) return CHAOS_IL2CPP_STRING_ID("sysv2");
-    if (value == 19920823) return CHAOS_IL2CPP_STRING_ID("coherent");
-    if (value == 151263540) return CHAOS_IL2CPP_STRING_ID("anoninode");
-    if (value == 195894762) return CHAOS_IL2CPP_STRING_ID("futexfs");
-    if (value == 198183888) return CHAOS_IL2CPP_STRING_ID("lustre");
-    if (value == 288389204) return CHAOS_IL2CPP_STRING_ID("inodefs");
-    if (value == 352400198) return CHAOS_IL2CPP_STRING_ID("udf");
-    if (value == 424935705) return CHAOS_IL2CPP_STRING_ID("ufs2");
-    if (value == 427819522) return CHAOS_IL2CPP_STRING_ID("mqueue");
-    if (value == 428016422) return CHAOS_IL2CPP_STRING_ID("fhgfs");
-    if (value == 464386766) return CHAOS_IL2CPP_STRING_ID("bfs");
-    if (value == 604313861) return CHAOS_IL2CPP_STRING_ID("ubifs");
-    if (value == 684539205) return CHAOS_IL2CPP_STRING_ID("cramfs");
-    if (value == 732765674) return CHAOS_IL2CPP_STRING_ID("inotifyfs");
-    if (value == 801189825) return CHAOS_IL2CPP_STRING_ID("zfs");
-    if (value == 827541066) return CHAOS_IL2CPP_STRING_ID("jfs");
-    if (value == 1111905073) return CHAOS_IL2CPP_STRING_ID("befs");
-    if (value == 1112100429) return CHAOS_IL2CPP_STRING_ID("binfmt_misc");
-    if (value == 1196443219) return CHAOS_IL2CPP_STRING_ID("gpfs");
-    if (value == 1346981957) return CHAOS_IL2CPP_STRING_ID("pipefs");
-    if (value == 1382369651) return CHAOS_IL2CPP_STRING_ID("reiserfs");
-    if (value == 1397113167) return CHAOS_IL2CPP_STRING_ID("afs");
-    if (value == 1397114950) return CHAOS_IL2CPP_STRING_ID("rootfs");
-    if (value == 1397118030) return CHAOS_IL2CPP_STRING_ID("ntfs");
-    if (value == 1397703499) return CHAOS_IL2CPP_STRING_ID("sockfs");
-    if (value == 1410924800) return CHAOS_IL2CPP_STRING_ID("ufscigam");
-    if (value == 1448756819) return CHAOS_IL2CPP_STRING_ID("vzfs");
-    if (value == 1481003842) return CHAOS_IL2CPP_STRING_ID("xfs");
-    if (value == 1573531125) return CHAOS_IL2CPP_STRING_ID("sdcardfs");
-    if (value == 1634035564) return CHAOS_IL2CPP_STRING_ID("pstorefs");
-    if (value == 1635083891) return CHAOS_IL2CPP_STRING_ID("aufs");
-    if (value == 1650746742) return CHAOS_IL2CPP_STRING_ID("bdevfs");
-    if (value == 1650812272) return CHAOS_IL2CPP_STRING_ID("configfs");
-    if (value == 1650812274) return CHAOS_IL2CPP_STRING_ID("sysfs");
-    if (value == 1667723888) return CHAOS_IL2CPP_STRING_ID("cgroup2fs");
-    if (value == 1684170528) return CHAOS_IL2CPP_STRING_ID("debugfs");
-    if (value == 1702057283) return CHAOS_IL2CPP_STRING_ID("fusectl");
-    if (value == 1702057286) return CHAOS_IL2CPP_STRING_ID("fuse");
-    if (value == 1702057286) return CHAOS_IL2CPP_STRING_ID("fuseblk");
-    if (value == 1733912937) return CHAOS_IL2CPP_STRING_ID("rpc_pipefs");
-    if (value == 1746473250) return CHAOS_IL2CPP_STRING_ID("qnx6");
-    if (value == 1799439955) return CHAOS_IL2CPP_STRING_ID("kafs");
-    if (value == 1833588077) return CHAOS_IL2CPP_STRING_ID("autofs4");
-    if (value == 1852207972) return CHAOS_IL2CPP_STRING_ID("nfsd");
-    if (value == 1935894131) return CHAOS_IL2CPP_STRING_ID("securityfs");
-    if (value == 1936814952) return CHAOS_IL2CPP_STRING_ID("squashfs");
-    if (value == 1937076805) return CHAOS_IL2CPP_STRING_ID("coda");
-    if (value == 1952539503) return CHAOS_IL2CPP_STRING_ID("ocfs2");
-    if (value == 1953653091) return CHAOS_IL2CPP_STRING_ID("tracefs");
-    if (value == 2020557398) return CHAOS_IL2CPP_STRING_ID("sffs");
-    if (value == 2020557398) return CHAOS_IL2CPP_STRING_ID("vagrant");
-    if (value == 2020557398) return CHAOS_IL2CPP_STRING_ID("vboxfs");
-    if (value == 2035054128) return CHAOS_IL2CPP_STRING_ID("overlay");
-    if (value == 2035054159) return CHAOS_IL2CPP_STRING_ID("overlayfs");
-    if (value == 2240043254) return CHAOS_IL2CPP_STRING_ID("ramfs");
-    if (value == 2435016766) return CHAOS_IL2CPP_STRING_ID("btrfs");
-    if (value == 2508478710) return CHAOS_IL2CPP_STRING_ID("hugetlbfs");
-    if (value == 2768370933) return CHAOS_IL2CPP_STRING_ID("vxfs");
-    if (value == 2775400441) return CHAOS_IL2CPP_STRING_ID("bootfs");
-    if (value == 2866260714) return CHAOS_IL2CPP_STRING_ID("panfs");
-    if (value == 2881100148) return CHAOS_IL2CPP_STRING_ID("xenfs");
-    if (value == 3133910204) return CHAOS_IL2CPP_STRING_ID("vmhgfs");
-    if (value == 3264822663) return CHAOS_IL2CPP_STRING_ID("omfs");
-    if (value == 3380511080) return CHAOS_IL2CPP_STRING_ID("logfs");
-    if (value == 3405662737) return CHAOS_IL2CPP_STRING_ID("bpf_fs");
-    if (value == 4076150800) return CHAOS_IL2CPP_STRING_ID("f2fs");
-    if (value == 4185718668) return CHAOS_IL2CPP_STRING_ID("selinux");
-    if (value == 4187351113) return CHAOS_IL2CPP_STRING_ID("hpfs");
-    if (value == 4266872130) return CHAOS_IL2CPP_STRING_ID("smb2");
-    if (value == 4283649346) return CHAOS_IL2CPP_STRING_ID("cifs");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("TokenUser");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("TokenGroups");
+    if (value == 3) return CHAOS_IL2CPP_STRING_ID("TokenPrivileges");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("TokenOwner");
+    if (value == 5) return CHAOS_IL2CPP_STRING_ID("TokenPrimaryGroup");
+    if (value == 6) return CHAOS_IL2CPP_STRING_ID("TokenDefaultDacl");
+    if (value == 7) return CHAOS_IL2CPP_STRING_ID("TokenSource");
+    if (value == 8) return CHAOS_IL2CPP_STRING_ID("TokenType");
+    if (value == 9) return CHAOS_IL2CPP_STRING_ID("TokenImpersonationLevel");
+    if (value == 10) return CHAOS_IL2CPP_STRING_ID("TokenStatistics");
+    if (value == 11) return CHAOS_IL2CPP_STRING_ID("TokenRestrictedSids");
+    if (value == 12) return CHAOS_IL2CPP_STRING_ID("TokenSessionId");
+    if (value == 13) return CHAOS_IL2CPP_STRING_ID("TokenGroupsAndPrivileges");
+    if (value == 14) return CHAOS_IL2CPP_STRING_ID("TokenSessionReference");
+    if (value == 15) return CHAOS_IL2CPP_STRING_ID("TokenSandBoxInert");
+    if (value == 16) return CHAOS_IL2CPP_STRING_ID("TokenAuditPolicy");
+    if (value == 17) return CHAOS_IL2CPP_STRING_ID("TokenOrigin");
+    if (value == 18) return CHAOS_IL2CPP_STRING_ID("TokenElevationType");
+    if (value == 19) return CHAOS_IL2CPP_STRING_ID("TokenLinkedToken");
+    if (value == 20) return CHAOS_IL2CPP_STRING_ID("TokenElevation");
+    if (value == 21) return CHAOS_IL2CPP_STRING_ID("TokenHasRestrictions");
+    if (value == 22) return CHAOS_IL2CPP_STRING_ID("TokenAccessInformation");
+    if (value == 23) return CHAOS_IL2CPP_STRING_ID("TokenVirtualizationAllowed");
+    if (value == 24) return CHAOS_IL2CPP_STRING_ID("TokenVirtualizationEnabled");
+    if (value == 25) return CHAOS_IL2CPP_STRING_ID("TokenIntegrityLevel");
+    if (value == 26) return CHAOS_IL2CPP_STRING_ID("TokenUIAccess");
+    if (value == 27) return CHAOS_IL2CPP_STRING_ID("TokenMandatoryPolicy");
+    if (value == 28) return CHAOS_IL2CPP_STRING_ID("TokenLogonSid");
+    if (value == 29) return CHAOS_IL2CPP_STRING_ID("TokenIsAppContainer");
+    if (value == 30) return CHAOS_IL2CPP_STRING_ID("TokenCapabilities");
+    if (value == 31) return CHAOS_IL2CPP_STRING_ID("TokenAppContainerSid");
+    if (value == 32) return CHAOS_IL2CPP_STRING_ID("TokenAppContainerNumber");
+    if (value == 33) return CHAOS_IL2CPP_STRING_ID("TokenUserClaimAttributes");
+    if (value == 34) return CHAOS_IL2CPP_STRING_ID("TokenDeviceClaimAttributes");
+    if (value == 35) return CHAOS_IL2CPP_STRING_ID("TokenRestrictedUserClaimAttributes");
+    if (value == 36) return CHAOS_IL2CPP_STRING_ID("TokenRestrictedDeviceClaimAttributes");
+    if (value == 37) return CHAOS_IL2CPP_STRING_ID("TokenDeviceGroups");
+    if (value == 38) return CHAOS_IL2CPP_STRING_ID("TokenRestrictedDeviceGroups");
+    if (value == 39) return CHAOS_IL2CPP_STRING_ID("TokenSecurityAttributes");
+    if (value == 40) return CHAOS_IL2CPP_STRING_ID("TokenIsRestricted");
+    if (value == 41) return CHAOS_IL2CPP_STRING_ID("MaxTokenInfoClass");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+LockOperations ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKOPERATIONS[] = {
-    { "LOCK_SH", 1 },
-    { "LOCK_EX", 2 },
-    { "LOCK_NB", 4 },
-    { "LOCK_UN", 8 },
+// ── Enum: System.Private.CoreLib/Interop+BCrypt+NTSTATUS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS[] = {
+    { "STATUS_SUCCESS", 0 },
+    { "STATUS_UNSUCCESSFUL", 3221225473 },
+    { "STATUS_INVALID_PARAMETER", 3221225485 },
+    { "STATUS_NO_MEMORY", 3221225495 },
+    { "STATUS_BUFFER_TOO_SMALL", 3221225507 },
+    { "STATUS_NOT_FOUND", 3221226021 },
+    { "STATUS_AUTH_TAG_MISMATCH", 3221266434 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKOPERATIONS = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKOPERATIONS, 4
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS, 7
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKOPERATIONS = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+LockOperations"
+    "System.Private.CoreLib/Interop+BCrypt+NTSTATUS"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+LockOperations (4 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+BCrypt+NTSTATUS (7 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKOPERATIONS(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("LOCK_SH");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("LOCK_EX");
-    if (value == 4) return CHAOS_IL2CPP_STRING_ID("LOCK_NB");
-    if (value == 8) return CHAOS_IL2CPP_STRING_ID("LOCK_UN");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("STATUS_SUCCESS");
+    if (value == 3221225473) return CHAOS_IL2CPP_STRING_ID("STATUS_UNSUCCESSFUL");
+    if (value == 3221225485) return CHAOS_IL2CPP_STRING_ID("STATUS_INVALID_PARAMETER");
+    if (value == 3221225495) return CHAOS_IL2CPP_STRING_ID("STATUS_NO_MEMORY");
+    if (value == 3221225507) return CHAOS_IL2CPP_STRING_ID("STATUS_BUFFER_TOO_SMALL");
+    if (value == 3221226021) return CHAOS_IL2CPP_STRING_ID("STATUS_NOT_FOUND");
+    if (value == 3221266434) return CHAOS_IL2CPP_STRING_ID("STATUS_AUTH_TAG_MISMATCH");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+LockType ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKTYPE[] = {
-    { "F_RDLCK", 0 },
-    { "F_WRLCK", 1 },
-    { "F_UNLCK", 2 },
+// ── Enum: System.Private.CoreLib/Interop+BOOLEAN ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN[] = {
+    { "FALSE", 0 },
+    { "TRUE", 1 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKTYPE = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKTYPE, 3
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN, 2
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKTYPE = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+LockType"
+    "System.Private.CoreLib/Interop+BOOLEAN"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+LockType (3 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+BOOLEAN (2 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKTYPE(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("F_RDLCK");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("F_WRLCK");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("F_UNLCK");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("FALSE");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("TRUE");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+SeekWhence ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SEEKWHENCE[] = {
-    { "SEEK_SET", 0 },
-    { "SEEK_CUR", 1 },
-    { "SEEK_END", 2 },
+// ── Enum: System.Private.CoreLib/Interop+NtDll+CreateDisposition ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION[] = {
+    { "FILE_SUPERSEDE", 0 },
+    { "FILE_OPEN", 1 },
+    { "FILE_CREATE", 2 },
+    { "FILE_OPEN_IF", 3 },
+    { "FILE_OVERWRITE", 4 },
+    { "FILE_OVERWRITE_IF", 5 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SEEKWHENCE = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SEEKWHENCE, 3
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION, 6
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SEEKWHENCE = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+SeekWhence"
+    "System.Private.CoreLib/Interop+NtDll+CreateDisposition"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+SeekWhence (3 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+NtDll+CreateDisposition (6 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SEEKWHENCE(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("SEEK_SET");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("SEEK_CUR");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("SEEK_END");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("FILE_SUPERSEDE");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("FILE_OPEN");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("FILE_CREATE");
+    if (value == 3) return CHAOS_IL2CPP_STRING_ID("FILE_OPEN_IF");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("FILE_OVERWRITE");
+    if (value == 5) return CHAOS_IL2CPP_STRING_ID("FILE_OVERWRITE_IF");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+OpenFlags ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_OPENFLAGS[] = {
-    { "O_RDONLY", 0 },
-    { "O_WRONLY", 1 },
-    { "O_RDWR", 2 },
-    { "O_CLOEXEC", 16 },
-    { "O_CREAT", 32 },
-    { "O_EXCL", 64 },
-    { "O_TRUNC", 128 },
-    { "O_SYNC", 256 },
-    { "O_NOFOLLOW", 512 },
+// ── Enum: System.Private.CoreLib/Interop+NtDll+CreateOptions ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS[] = {
+    { "FILE_DIRECTORY_FILE", 1 },
+    { "FILE_WRITE_THROUGH", 2 },
+    { "FILE_SEQUENTIAL_ONLY", 4 },
+    { "FILE_NO_INTERMEDIATE_BUFFERING", 8 },
+    { "FILE_SYNCHRONOUS_IO_ALERT", 16 },
+    { "FILE_SYNCHRONOUS_IO_NONALERT", 32 },
+    { "FILE_NON_DIRECTORY_FILE", 64 },
+    { "FILE_CREATE_TREE_CONNECTION", 128 },
+    { "FILE_COMPLETE_IF_OPLOCKED", 256 },
+    { "FILE_NO_EA_KNOWLEDGE", 512 },
+    { "FILE_RANDOM_ACCESS", 2048 },
+    { "FILE_DELETE_ON_CLOSE", 4096 },
+    { "FILE_OPEN_BY_FILE_ID", 8192 },
+    { "FILE_OPEN_FOR_BACKUP_INTENT", 16384 },
+    { "FILE_NO_COMPRESSION", 32768 },
+    { "FILE_OPEN_REQUIRING_OPLOCK", 65536 },
+    { "FILE_DISALLOW_EXCLUSIVE", 131072 },
+    { "FILE_SESSION_AWARE", 262144 },
+    { "FILE_RESERVE_OPFILTER", 1048576 },
+    { "FILE_OPEN_REPARSE_POINT", 2097152 },
+    { "FILE_OPEN_NO_RECALL", 4194304 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_OPENFLAGS = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_OPENFLAGS, 9
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS, 21
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_OPENFLAGS = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+OpenFlags"
+    "System.Private.CoreLib/Interop+NtDll+CreateOptions"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+OpenFlags (9 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+NtDll+CreateOptions (21 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_OPENFLAGS(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("O_RDONLY");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("O_WRONLY");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("O_RDWR");
-    if (value == 16) return CHAOS_IL2CPP_STRING_ID("O_CLOEXEC");
-    if (value == 32) return CHAOS_IL2CPP_STRING_ID("O_CREAT");
-    if (value == 64) return CHAOS_IL2CPP_STRING_ID("O_EXCL");
-    if (value == 128) return CHAOS_IL2CPP_STRING_ID("O_TRUNC");
-    if (value == 256) return CHAOS_IL2CPP_STRING_ID("O_SYNC");
-    if (value == 512) return CHAOS_IL2CPP_STRING_ID("O_NOFOLLOW");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("FILE_DIRECTORY_FILE");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("FILE_WRITE_THROUGH");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("FILE_SEQUENTIAL_ONLY");
+    if (value == 8) return CHAOS_IL2CPP_STRING_ID("FILE_NO_INTERMEDIATE_BUFFERING");
+    if (value == 16) return CHAOS_IL2CPP_STRING_ID("FILE_SYNCHRONOUS_IO_ALERT");
+    if (value == 32) return CHAOS_IL2CPP_STRING_ID("FILE_SYNCHRONOUS_IO_NONALERT");
+    if (value == 64) return CHAOS_IL2CPP_STRING_ID("FILE_NON_DIRECTORY_FILE");
+    if (value == 128) return CHAOS_IL2CPP_STRING_ID("FILE_CREATE_TREE_CONNECTION");
+    if (value == 256) return CHAOS_IL2CPP_STRING_ID("FILE_COMPLETE_IF_OPLOCKED");
+    if (value == 512) return CHAOS_IL2CPP_STRING_ID("FILE_NO_EA_KNOWLEDGE");
+    if (value == 2048) return CHAOS_IL2CPP_STRING_ID("FILE_RANDOM_ACCESS");
+    if (value == 4096) return CHAOS_IL2CPP_STRING_ID("FILE_DELETE_ON_CLOSE");
+    if (value == 8192) return CHAOS_IL2CPP_STRING_ID("FILE_OPEN_BY_FILE_ID");
+    if (value == 16384) return CHAOS_IL2CPP_STRING_ID("FILE_OPEN_FOR_BACKUP_INTENT");
+    if (value == 32768) return CHAOS_IL2CPP_STRING_ID("FILE_NO_COMPRESSION");
+    if (value == 65536) return CHAOS_IL2CPP_STRING_ID("FILE_OPEN_REQUIRING_OPLOCK");
+    if (value == 131072) return CHAOS_IL2CPP_STRING_ID("FILE_DISALLOW_EXCLUSIVE");
+    if (value == 262144) return CHAOS_IL2CPP_STRING_ID("FILE_SESSION_AWARE");
+    if (value == 1048576) return CHAOS_IL2CPP_STRING_ID("FILE_RESERVE_OPFILTER");
+    if (value == 2097152) return CHAOS_IL2CPP_STRING_ID("FILE_OPEN_REPARSE_POINT");
+    if (value == 4194304) return CHAOS_IL2CPP_STRING_ID("FILE_OPEN_NO_RECALL");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+FileAdvice ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILEADVICE[] = {
-    { "POSIX_FADV_NORMAL", 0 },
-    { "POSIX_FADV_RANDOM", 1 },
-    { "POSIX_FADV_SEQUENTIAL", 2 },
-    { "POSIX_FADV_WILLNEED", 3 },
-    { "POSIX_FADV_DONTNEED", 4 },
-    { "POSIX_FADV_NOREUSE", 5 },
+// ── Enum: System.Private.CoreLib/Interop+NtDll+DesiredAccess ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS[] = {
+    { "FILE_READ_DATA", 1 },
+    { "FILE_LIST_DIRECTORY", 1 },
+    { "FILE_WRITE_DATA", 2 },
+    { "FILE_ADD_FILE", 2 },
+    { "FILE_APPEND_DATA", 4 },
+    { "FILE_ADD_SUBDIRECTORY", 4 },
+    { "FILE_CREATE_PIPE_INSTANCE", 4 },
+    { "FILE_READ_EA", 8 },
+    { "FILE_WRITE_EA", 16 },
+    { "FILE_EXECUTE", 32 },
+    { "FILE_TRAVERSE", 32 },
+    { "FILE_DELETE_CHILD", 64 },
+    { "FILE_READ_ATTRIBUTES", 128 },
+    { "FILE_WRITE_ATTRIBUTES", 256 },
+    { "DELETE", 65536 },
+    { "READ_CONTROL", 131072 },
+    { "STANDARD_RIGHTS_READ", 131072 },
+    { "STANDARD_RIGHTS_WRITE", 131072 },
+    { "STANDARD_RIGHTS_EXECUTE", 131072 },
+    { "WRITE_DAC", 262144 },
+    { "WRITE_OWNER", 524288 },
+    { "FILE_ALL_ACCESS", 983551 },
+    { "SYNCHRONIZE", 1048576 },
+    { "FILE_GENERIC_EXECUTE", 536870912 },
+    { "FILE_GENERIC_WRITE", 1073741824 },
+    { "FILE_GENERIC_READ", 2147483648 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILEADVICE = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILEADVICE, 6
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS, 26
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILEADVICE = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+FileAdvice"
+    "System.Private.CoreLib/Interop+NtDll+DesiredAccess"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+FileAdvice (6 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+NtDll+DesiredAccess (26 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILEADVICE(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("POSIX_FADV_NORMAL");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("POSIX_FADV_RANDOM");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("POSIX_FADV_SEQUENTIAL");
-    if (value == 3) return CHAOS_IL2CPP_STRING_ID("POSIX_FADV_WILLNEED");
-    if (value == 4) return CHAOS_IL2CPP_STRING_ID("POSIX_FADV_DONTNEED");
-    if (value == 5) return CHAOS_IL2CPP_STRING_ID("POSIX_FADV_NOREUSE");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("FILE_READ_DATA");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("FILE_LIST_DIRECTORY");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("FILE_WRITE_DATA");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("FILE_ADD_FILE");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("FILE_APPEND_DATA");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("FILE_ADD_SUBDIRECTORY");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("FILE_CREATE_PIPE_INSTANCE");
+    if (value == 8) return CHAOS_IL2CPP_STRING_ID("FILE_READ_EA");
+    if (value == 16) return CHAOS_IL2CPP_STRING_ID("FILE_WRITE_EA");
+    if (value == 32) return CHAOS_IL2CPP_STRING_ID("FILE_EXECUTE");
+    if (value == 32) return CHAOS_IL2CPP_STRING_ID("FILE_TRAVERSE");
+    if (value == 64) return CHAOS_IL2CPP_STRING_ID("FILE_DELETE_CHILD");
+    if (value == 128) return CHAOS_IL2CPP_STRING_ID("FILE_READ_ATTRIBUTES");
+    if (value == 256) return CHAOS_IL2CPP_STRING_ID("FILE_WRITE_ATTRIBUTES");
+    if (value == 65536) return CHAOS_IL2CPP_STRING_ID("DELETE");
+    if (value == 131072) return CHAOS_IL2CPP_STRING_ID("READ_CONTROL");
+    if (value == 131072) return CHAOS_IL2CPP_STRING_ID("STANDARD_RIGHTS_READ");
+    if (value == 131072) return CHAOS_IL2CPP_STRING_ID("STANDARD_RIGHTS_WRITE");
+    if (value == 131072) return CHAOS_IL2CPP_STRING_ID("STANDARD_RIGHTS_EXECUTE");
+    if (value == 262144) return CHAOS_IL2CPP_STRING_ID("WRITE_DAC");
+    if (value == 524288) return CHAOS_IL2CPP_STRING_ID("WRITE_OWNER");
+    if (value == 983551) return CHAOS_IL2CPP_STRING_ID("FILE_ALL_ACCESS");
+    if (value == 1048576) return CHAOS_IL2CPP_STRING_ID("SYNCHRONIZE");
+    if (value == 536870912) return CHAOS_IL2CPP_STRING_ID("FILE_GENERIC_EXECUTE");
+    if (value == 1073741824) return CHAOS_IL2CPP_STRING_ID("FILE_GENERIC_WRITE");
+    if (value == 2147483648) return CHAOS_IL2CPP_STRING_ID("FILE_GENERIC_READ");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+NodeType ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_NODETYPE[] = {
-    { "DT_UNKNOWN", 0 },
-    { "DT_FIFO", 1 },
-    { "DT_CHR", 2 },
-    { "DT_DIR", 4 },
-    { "DT_BLK", 6 },
-    { "DT_REG", 8 },
-    { "DT_LNK", 10 },
-    { "DT_SOCK", 12 },
-    { "DT_WHT", 14 },
+// ── Enum: System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS[] = {
+    { "FileDirectoryInformation", 1 },
+    { "FileFullDirectoryInformation", 2 },
+    { "FileBothDirectoryInformation", 3 },
+    { "FileBasicInformation", 4 },
+    { "FileStandardInformation", 5 },
+    { "FileInternalInformation", 6 },
+    { "FileEaInformation", 7 },
+    { "FileAccessInformation", 8 },
+    { "FileNameInformation", 9 },
+    { "FileRenameInformation", 10 },
+    { "FileLinkInformation", 11 },
+    { "FileNamesInformation", 12 },
+    { "FileDispositionInformation", 13 },
+    { "FilePositionInformation", 14 },
+    { "FileFullEaInformation", 15 },
+    { "FileModeInformation", 16 },
+    { "FileAlignmentInformation", 17 },
+    { "FileAllInformation", 18 },
+    { "FileAllocationInformation", 19 },
+    { "FileEndOfFileInformation", 20 },
+    { "FileAlternateNameInformation", 21 },
+    { "FileStreamInformation", 22 },
+    { "FilePipeInformation", 23 },
+    { "FilePipeLocalInformation", 24 },
+    { "FilePipeRemoteInformation", 25 },
+    { "FileMailslotQueryInformation", 26 },
+    { "FileMailslotSetInformation", 27 },
+    { "FileCompressionInformation", 28 },
+    { "FileObjectIdInformation", 29 },
+    { "FileCompletionInformation", 30 },
+    { "FileMoveClusterInformation", 31 },
+    { "FileQuotaInformation", 32 },
+    { "FileReparsePointInformation", 33 },
+    { "FileNetworkOpenInformation", 34 },
+    { "FileAttributeTagInformation", 35 },
+    { "FileTrackingInformation", 36 },
+    { "FileIdBothDirectoryInformation", 37 },
+    { "FileIdFullDirectoryInformation", 38 },
+    { "FileValidDataLengthInformation", 39 },
+    { "FileShortNameInformation", 40 },
+    { "FileIoCompletionNotificationInformation", 41 },
+    { "FileIoStatusBlockRangeInformation", 42 },
+    { "FileIoPriorityHintInformation", 43 },
+    { "FileSfioReserveInformation", 44 },
+    { "FileSfioVolumeInformation", 45 },
+    { "FileHardLinkInformation", 46 },
+    { "FileProcessIdsUsingFileInformation", 47 },
+    { "FileNormalizedNameInformation", 48 },
+    { "FileNetworkPhysicalNameInformation", 49 },
+    { "FileIdGlobalTxDirectoryInformation", 50 },
+    { "FileIsRemoteDeviceInformation", 51 },
+    { "FileUnusedInformation", 52 },
+    { "FileNumaNodeInformation", 53 },
+    { "FileStandardLinkInformation", 54 },
+    { "FileRemoteProtocolInformation", 55 },
+    { "FileRenameInformationBypassAccessCheck", 56 },
+    { "FileLinkInformationBypassAccessCheck", 57 },
+    { "FileVolumeNameInformation", 58 },
+    { "FileIdInformation", 59 },
+    { "FileIdExtdDirectoryInformation", 60 },
+    { "FileReplaceCompletionInformation", 61 },
+    { "FileHardLinkFullIdInformation", 62 },
+    { "FileIdExtdBothDirectoryInformation", 63 },
+    { "FileDispositionInformationEx", 64 },
+    { "FileRenameInformationEx", 65 },
+    { "FileRenameInformationExBypassAccessCheck", 66 },
+    { "FileDesiredStorageClassInformation", 67 },
+    { "FileStatInformation", 68 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_NODETYPE = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_NODETYPE, 9
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS, 68
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_NODETYPE = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+NodeType"
+    "System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+NodeType (9 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS (68 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_NODETYPE(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("DT_UNKNOWN");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("DT_FIFO");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("DT_CHR");
-    if (value == 4) return CHAOS_IL2CPP_STRING_ID("DT_DIR");
-    if (value == 6) return CHAOS_IL2CPP_STRING_ID("DT_BLK");
-    if (value == 8) return CHAOS_IL2CPP_STRING_ID("DT_REG");
-    if (value == 10) return CHAOS_IL2CPP_STRING_ID("DT_LNK");
-    if (value == 12) return CHAOS_IL2CPP_STRING_ID("DT_SOCK");
-    if (value == 14) return CHAOS_IL2CPP_STRING_ID("DT_WHT");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("FileDirectoryInformation");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("FileFullDirectoryInformation");
+    if (value == 3) return CHAOS_IL2CPP_STRING_ID("FileBothDirectoryInformation");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("FileBasicInformation");
+    if (value == 5) return CHAOS_IL2CPP_STRING_ID("FileStandardInformation");
+    if (value == 6) return CHAOS_IL2CPP_STRING_ID("FileInternalInformation");
+    if (value == 7) return CHAOS_IL2CPP_STRING_ID("FileEaInformation");
+    if (value == 8) return CHAOS_IL2CPP_STRING_ID("FileAccessInformation");
+    if (value == 9) return CHAOS_IL2CPP_STRING_ID("FileNameInformation");
+    if (value == 10) return CHAOS_IL2CPP_STRING_ID("FileRenameInformation");
+    if (value == 11) return CHAOS_IL2CPP_STRING_ID("FileLinkInformation");
+    if (value == 12) return CHAOS_IL2CPP_STRING_ID("FileNamesInformation");
+    if (value == 13) return CHAOS_IL2CPP_STRING_ID("FileDispositionInformation");
+    if (value == 14) return CHAOS_IL2CPP_STRING_ID("FilePositionInformation");
+    if (value == 15) return CHAOS_IL2CPP_STRING_ID("FileFullEaInformation");
+    if (value == 16) return CHAOS_IL2CPP_STRING_ID("FileModeInformation");
+    if (value == 17) return CHAOS_IL2CPP_STRING_ID("FileAlignmentInformation");
+    if (value == 18) return CHAOS_IL2CPP_STRING_ID("FileAllInformation");
+    if (value == 19) return CHAOS_IL2CPP_STRING_ID("FileAllocationInformation");
+    if (value == 20) return CHAOS_IL2CPP_STRING_ID("FileEndOfFileInformation");
+    if (value == 21) return CHAOS_IL2CPP_STRING_ID("FileAlternateNameInformation");
+    if (value == 22) return CHAOS_IL2CPP_STRING_ID("FileStreamInformation");
+    if (value == 23) return CHAOS_IL2CPP_STRING_ID("FilePipeInformation");
+    if (value == 24) return CHAOS_IL2CPP_STRING_ID("FilePipeLocalInformation");
+    if (value == 25) return CHAOS_IL2CPP_STRING_ID("FilePipeRemoteInformation");
+    if (value == 26) return CHAOS_IL2CPP_STRING_ID("FileMailslotQueryInformation");
+    if (value == 27) return CHAOS_IL2CPP_STRING_ID("FileMailslotSetInformation");
+    if (value == 28) return CHAOS_IL2CPP_STRING_ID("FileCompressionInformation");
+    if (value == 29) return CHAOS_IL2CPP_STRING_ID("FileObjectIdInformation");
+    if (value == 30) return CHAOS_IL2CPP_STRING_ID("FileCompletionInformation");
+    if (value == 31) return CHAOS_IL2CPP_STRING_ID("FileMoveClusterInformation");
+    if (value == 32) return CHAOS_IL2CPP_STRING_ID("FileQuotaInformation");
+    if (value == 33) return CHAOS_IL2CPP_STRING_ID("FileReparsePointInformation");
+    if (value == 34) return CHAOS_IL2CPP_STRING_ID("FileNetworkOpenInformation");
+    if (value == 35) return CHAOS_IL2CPP_STRING_ID("FileAttributeTagInformation");
+    if (value == 36) return CHAOS_IL2CPP_STRING_ID("FileTrackingInformation");
+    if (value == 37) return CHAOS_IL2CPP_STRING_ID("FileIdBothDirectoryInformation");
+    if (value == 38) return CHAOS_IL2CPP_STRING_ID("FileIdFullDirectoryInformation");
+    if (value == 39) return CHAOS_IL2CPP_STRING_ID("FileValidDataLengthInformation");
+    if (value == 40) return CHAOS_IL2CPP_STRING_ID("FileShortNameInformation");
+    if (value == 41) return CHAOS_IL2CPP_STRING_ID("FileIoCompletionNotificationInformation");
+    if (value == 42) return CHAOS_IL2CPP_STRING_ID("FileIoStatusBlockRangeInformation");
+    if (value == 43) return CHAOS_IL2CPP_STRING_ID("FileIoPriorityHintInformation");
+    if (value == 44) return CHAOS_IL2CPP_STRING_ID("FileSfioReserveInformation");
+    if (value == 45) return CHAOS_IL2CPP_STRING_ID("FileSfioVolumeInformation");
+    if (value == 46) return CHAOS_IL2CPP_STRING_ID("FileHardLinkInformation");
+    if (value == 47) return CHAOS_IL2CPP_STRING_ID("FileProcessIdsUsingFileInformation");
+    if (value == 48) return CHAOS_IL2CPP_STRING_ID("FileNormalizedNameInformation");
+    if (value == 49) return CHAOS_IL2CPP_STRING_ID("FileNetworkPhysicalNameInformation");
+    if (value == 50) return CHAOS_IL2CPP_STRING_ID("FileIdGlobalTxDirectoryInformation");
+    if (value == 51) return CHAOS_IL2CPP_STRING_ID("FileIsRemoteDeviceInformation");
+    if (value == 52) return CHAOS_IL2CPP_STRING_ID("FileUnusedInformation");
+    if (value == 53) return CHAOS_IL2CPP_STRING_ID("FileNumaNodeInformation");
+    if (value == 54) return CHAOS_IL2CPP_STRING_ID("FileStandardLinkInformation");
+    if (value == 55) return CHAOS_IL2CPP_STRING_ID("FileRemoteProtocolInformation");
+    if (value == 56) return CHAOS_IL2CPP_STRING_ID("FileRenameInformationBypassAccessCheck");
+    if (value == 57) return CHAOS_IL2CPP_STRING_ID("FileLinkInformationBypassAccessCheck");
+    if (value == 58) return CHAOS_IL2CPP_STRING_ID("FileVolumeNameInformation");
+    if (value == 59) return CHAOS_IL2CPP_STRING_ID("FileIdInformation");
+    if (value == 60) return CHAOS_IL2CPP_STRING_ID("FileIdExtdDirectoryInformation");
+    if (value == 61) return CHAOS_IL2CPP_STRING_ID("FileReplaceCompletionInformation");
+    if (value == 62) return CHAOS_IL2CPP_STRING_ID("FileHardLinkFullIdInformation");
+    if (value == 63) return CHAOS_IL2CPP_STRING_ID("FileIdExtdBothDirectoryInformation");
+    if (value == 64) return CHAOS_IL2CPP_STRING_ID("FileDispositionInformationEx");
+    if (value == 65) return CHAOS_IL2CPP_STRING_ID("FileRenameInformationEx");
+    if (value == 66) return CHAOS_IL2CPP_STRING_ID("FileRenameInformationExBypassAccessCheck");
+    if (value == 67) return CHAOS_IL2CPP_STRING_ID("FileDesiredStorageClassInformation");
+    if (value == 68) return CHAOS_IL2CPP_STRING_ID("FileStatInformation");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+FileStatusFlags ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILESTATUSFLAGS[] = {
-    { "None", 0 },
-    { "HasBirthTime", 1 },
+// ── Enum: System.Private.CoreLib/Interop+ImpersonationLevel ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL[] = {
+    { "Anonymous", 0 },
+    { "Identification", 1 },
+    { "Impersonation", 2 },
+    { "Delegation", 3 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILESTATUSFLAGS = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILESTATUSFLAGS, 2
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL, 4
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILESTATUSFLAGS = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+FileStatusFlags"
+    "System.Private.CoreLib/Interop+ImpersonationLevel"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+FileStatusFlags (2 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+ImpersonationLevel (4 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILESTATUSFLAGS(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("None");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("HasBirthTime");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("Anonymous");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("Identification");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("Impersonation");
+    if (value == 3) return CHAOS_IL2CPP_STRING_ID("Delegation");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+SysConfName ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSCONFNAME[] = {
-    { "_SC_CLK_TCK", 1 },
-    { "_SC_PAGESIZE", 2 },
+// ── Enum: System.Private.CoreLib/Interop+ContextTrackingMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE[] = {
+    { "Static", 0 },
+    { "Dynamic", 1 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSCONFNAME = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSCONFNAME, 2
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE, 2
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSCONFNAME = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+SysConfName"
+    "System.Private.CoreLib/Interop+ContextTrackingMode"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+SysConfName (2 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+ContextTrackingMode (2 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSCONFNAME(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("_SC_CLK_TCK");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("_SC_PAGESIZE");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 0) return CHAOS_IL2CPP_STRING_ID("Static");
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("Dynamic");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
-// ── Enum: System.Private.CoreLib/Interop+Sys+SysLogPriority ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSLOGPRIORITY[] = {
-    { "LOG_EMERG", 0 },
-    { "LOG_ALERT", 1 },
-    { "LOG_CRIT", 2 },
-    { "LOG_ERR", 3 },
-    { "LOG_WARNING", 4 },
-    { "LOG_NOTICE", 5 },
-    { "LOG_INFO", 6 },
-    { "LOG_DEBUG", 7 },
+// ── Enum: System.Private.CoreLib/Interop+ObjectAttributes ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES[] = {
+    { "OBJ_INHERIT", 2 },
+    { "OBJ_PERMANENT", 16 },
+    { "OBJ_EXCLUSIVE", 32 },
+    { "OBJ_CASE_INSENSITIVE", 64 },
+    { "OBJ_OPENIF", 128 },
+    { "OBJ_OPENLINK", 256 },
 };
 
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSLOGPRIORITY = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSLOGPRIORITY, 8
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES, 6
 };
 
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSLOGPRIORITY = {
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES = {
     0u,
     0u,
-    "System.Private.CoreLib/Interop+Sys+SysLogPriority"
+    "System.Private.CoreLib/Interop+ObjectAttributes"
 };
 
-/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+Sys+SysLogPriority (8 fields).
+/// Per-enum ToString dispatch for System.Private.CoreLib/Interop+ObjectAttributes (6 fields).
 /// Returns compile-time string constant on match, 0 for unrecognized values
 /// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSLOGPRIORITY(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("LOG_EMERG");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("LOG_ALERT");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("LOG_CRIT");
-    if (value == 3) return CHAOS_IL2CPP_STRING_ID("LOG_ERR");
-    if (value == 4) return CHAOS_IL2CPP_STRING_ID("LOG_WARNING");
-    if (value == 5) return CHAOS_IL2CPP_STRING_ID("LOG_NOTICE");
-    if (value == 6) return CHAOS_IL2CPP_STRING_ID("LOG_INFO");
-    if (value == 7) return CHAOS_IL2CPP_STRING_ID("LOG_DEBUG");
-    return 0;  // unrecognized value → caller falls through to decimal
-}
-
-// ── Enum: System.Private.CoreLib/Microsoft.Win32.SafeHandles.SafeFileHandle+ThreadPoolValueTaskSource+Operation ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_THREADPOOLVALUETASKSOURCE_OPERATION[] = {
-    { "None", 0 },
-    { "Read", 1 },
-    { "Write", 2 },
-    { "ReadScatter", 3 },
-    { "WriteGather", 4 },
-};
-
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_THREADPOOLVALUETASKSOURCE_OPERATION = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_THREADPOOLVALUETASKSOURCE_OPERATION, 5
-};
-
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_THREADPOOLVALUETASKSOURCE_OPERATION = {
-    0u,
-    0u,
-    "System.Private.CoreLib/Microsoft.Win32.SafeHandles.SafeFileHandle+ThreadPoolValueTaskSource+Operation"
-};
-
-/// Per-enum ToString dispatch for System.Private.CoreLib/Microsoft.Win32.SafeHandles.SafeFileHandle+ThreadPoolValueTaskSource+Operation (5 fields).
-/// Returns compile-time string constant on match, 0 for unrecognized values
-/// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_THREADPOOLVALUETASKSOURCE_OPERATION(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("None");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("Read");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("Write");
-    if (value == 3) return CHAOS_IL2CPP_STRING_ID("ReadScatter");
-    if (value == 4) return CHAOS_IL2CPP_STRING_ID("WriteGather");
-    return 0;  // unrecognized value → caller falls through to decimal
-}
-
-// ── Enum: System.Private.CoreLib/Microsoft.Win32.SafeHandles.SafeFileHandle+NullableBool ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_NULLABLEBOOL[] = {
-    { "False", -1 },
-    { "Undefined", 0 },
-    { "True", 1 },
-};
-
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_NULLABLEBOOL = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_NULLABLEBOOL, 3
-};
-
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_NULLABLEBOOL = {
-    0u,
-    0u,
-    "System.Private.CoreLib/Microsoft.Win32.SafeHandles.SafeFileHandle+NullableBool"
-};
-
-/// Per-enum ToString dispatch for System.Private.CoreLib/Microsoft.Win32.SafeHandles.SafeFileHandle+NullableBool (3 fields).
-/// Returns compile-time string constant on match, 0 for unrecognized values
-/// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_NULLABLEBOOL(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == -1) return CHAOS_IL2CPP_STRING_ID("False");
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("Undefined");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("True");
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("OBJ_INHERIT");
+    if (value == 16) return CHAOS_IL2CPP_STRING_ID("OBJ_PERMANENT");
+    if (value == 32) return CHAOS_IL2CPP_STRING_ID("OBJ_EXCLUSIVE");
+    if (value == 64) return CHAOS_IL2CPP_STRING_ID("OBJ_CASE_INSENSITIVE");
+    if (value == 128) return CHAOS_IL2CPP_STRING_ID("OBJ_OPENIF");
+    if (value == 256) return CHAOS_IL2CPP_STRING_ID("OBJ_OPENLINK");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
@@ -1483,6 +1337,39 @@ static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTI
     if (value == 4) return CHAOS_IL2CPP_STRING_ID("Event");
     if (value == 5) return CHAOS_IL2CPP_STRING_ID("Interface");
     if (value == 6) return CHAOS_IL2CPP_STRING_ID("NestedType");
+    return 0;  // unrecognized value → caller falls through to decimal
+}
+
+// ── Enum: System.Private.CoreLib/System.RuntimeType+DispatchWrapperType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE[] = {
+    { "Unknown", 1 },
+    { "Dispatch", 2 },
+    { "Error", 8 },
+    { "Currency", 16 },
+    { "BStr", 32 },
+    { "SafeArray", 65536 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE = {
+    0u,
+    0u,
+    "System.Private.CoreLib/System.RuntimeType+DispatchWrapperType"
+};
+
+/// Per-enum ToString dispatch for System.Private.CoreLib/System.RuntimeType+DispatchWrapperType (6 fields).
+/// Returns compile-time string constant on match, 0 for unrecognized values
+/// (caller falls through to decimal formatting).
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("Unknown");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("Dispatch");
+    if (value == 8) return CHAOS_IL2CPP_STRING_ID("Error");
+    if (value == 16) return CHAOS_IL2CPP_STRING_ID("Currency");
+    if (value == 32) return CHAOS_IL2CPP_STRING_ID("BStr");
+    if (value == 65536) return CHAOS_IL2CPP_STRING_ID("SafeArray");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
@@ -3024,33 +2911,6 @@ static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZ
     if (value == 1) return CHAOS_IL2CPP_STRING_ID("NotEscaped");
     if (value == 2) return CHAOS_IL2CPP_STRING_ID("StartOfToken");
     if (value == 3) return CHAOS_IL2CPP_STRING_ID("EndOfLine");
-    return 0;  // unrecognized value → caller falls through to decimal
-}
-
-// ── Enum: System.Private.CoreLib/System.TimeZoneInfo+TZVersion ──────────────────────────────
-static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TZVERSION[] = {
-    { "V1", 0 },
-    { "V2", 1 },
-    { "V3", 2 },
-};
-
-static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TZVERSION = {
-    kEnumFields_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TZVERSION, 3
-};
-
-static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TZVERSION = {
-    0u,
-    0u,
-    "System.Private.CoreLib/System.TimeZoneInfo+TZVersion"
-};
-
-/// Per-enum ToString dispatch for System.Private.CoreLib/System.TimeZoneInfo+TZVersion (3 fields).
-/// Returns compile-time string constant on match, 0 for unrecognized values
-/// (caller falls through to decimal formatting).
-static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TZVERSION(CHAOS_IL2CPP_INT64 value) noexcept {
-    if (value == 0) return CHAOS_IL2CPP_STRING_ID("V1");
-    if (value == 1) return CHAOS_IL2CPP_STRING_ID("V2");
-    if (value == 2) return CHAOS_IL2CPP_STRING_ID("V3");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
@@ -6214,6 +6074,35 @@ static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTI
     if (value == 0) return CHAOS_IL2CPP_STRING_ID("Instance");
     if (value == 1) return CHAOS_IL2CPP_STRING_ID("TrackerSupportGlobalInstance");
     if (value == 2) return CHAOS_IL2CPP_STRING_ID("MarshallingGlobalInstance");
+    return 0;  // unrecognized value → caller falls through to decimal
+}
+
+// ── Enum: System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS[] = {
+    { "DISPATCH_METHOD", 1 },
+    { "DISPATCH_PROPERTYGET", 2 },
+    { "DISPATCH_PROPERTYPUT", 4 },
+    { "DISPATCH_PROPERTYPUTREF", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS = {
+    kEnumFields_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS = {
+    0u,
+    0u,
+    "System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags"
+};
+
+/// Per-enum ToString dispatch for System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags (4 fields).
+/// Returns compile-time string constant on match, 0 for unrecognized values
+/// (caller falls through to decimal formatting).
+static CHAOS_IL2CPP_INTPTR ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS(CHAOS_IL2CPP_INT64 value) noexcept {
+    if (value == 1) return CHAOS_IL2CPP_STRING_ID("DISPATCH_METHOD");
+    if (value == 2) return CHAOS_IL2CPP_STRING_ID("DISPATCH_PROPERTYGET");
+    if (value == 4) return CHAOS_IL2CPP_STRING_ID("DISPATCH_PROPERTYPUT");
+    if (value == 8) return CHAOS_IL2CPP_STRING_ID("DISPATCH_PROPERTYPUTREF");
     return 0;  // unrecognized value → caller falls through to decimal
 }
 
@@ -11857,7 +11746,6 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x197A07u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS },
     { 0x1A7F8Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE },
     { 0x1BBDB1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY },
-    { 0x1BCC44u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_NULLABLEBOOL },
     { 0x1D8B23u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION },
     { 0x1D97C2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH },
     { 0x1E1A98u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES },
@@ -11876,7 +11764,6 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x26A8B1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS },
     { 0x26C185u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES },
     { 0x2972CDu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY },
-    { 0x2A9C65u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_OPENFLAGS },
     { 0x2BE7A9u, &kEnumTable_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_ADVF },
     { 0x2C6B47u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT },
     { 0x2C73B5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING },
@@ -11903,6 +11790,7 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x3ECD44u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS },
     { 0x3F2B49u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES },
     { 0x3FD939u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION },
+    { 0x401F33u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE },
     { 0x41F77Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS },
     { 0x42696Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM },
     { 0x4311A8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY },
@@ -11918,31 +11806,29 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x4EE7B9u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS },
     { 0x4F8D65u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG },
     { 0x50534Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES },
-    { 0x50C6B0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILEADVICE },
     { 0x512204u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION },
     { 0x517214u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT },
-    { 0x5301B7u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKOPERATIONS },
     { 0x538B85u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS },
     { 0x53E981u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS },
-    { 0x54F26Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_THREADPOOLVALUETASKSOURCE_OPERATION },
     { 0x552C72u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND },
-    { 0x5753AEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_TIMEZONEDISPLAYNAMETYPE },
     { 0x57DFB0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENDNOGCREGIONSTATUS },
     { 0x58486Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_STACKCRAWLMARK },
     { 0x5A7820u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HS },
     { 0x5AB28Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA },
     { 0x5C362Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS },
+    { 0x5DB2F6u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS },
+    { 0x5E7F97u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS },
     { 0x5F14D7u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND },
     { 0x60E12Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV },
     { 0x611107u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES },
     { 0x611655u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID },
     { 0x617111u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS },
+    { 0x61A896u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL },
     { 0x64927Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE },
     { 0x6570FFu, &kEnumTable_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_TYPELIBVARFLAGS },
     { 0x66AFD2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE },
     { 0x67C078u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER },
     { 0x68A964u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS },
-    { 0x68BBC2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SEEKWHENCE },
     { 0x695F22u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT },
     { 0x699697u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES },
     { 0x69D93Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STUBHELPERS_ASANYMARSHALER_BACKPROPACTION },
@@ -11972,6 +11858,8 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x7F5639u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEEKORIGIN },
     { 0x7FF573u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP },
     { 0x80A94Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES },
+    { 0x80B7BEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS },
+    { 0x822A59u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE },
     { 0x827356u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE },
     { 0x82C1B5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES },
     { 0x832793u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE },
@@ -11981,8 +11869,8 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x85E5D7u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_ACTIVITYCONTROL },
     { 0x861922u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_CONTROLLERCOMMAND },
     { 0x86DF1Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION },
+    { 0x86F999u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS },
     { 0x87E290u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND },
-    { 0x880187u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_ACCESSMODE },
     { 0x8817F8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING },
     { 0x88EA4Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN },
     { 0x88F92Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON },
@@ -12001,7 +11889,6 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x93BC81u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TIMESPANSTANDARDSTYLES },
     { 0x956273u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE },
     { 0x96825Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE },
-    { 0x97111Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_NODETYPE },
     { 0x977136u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE },
     { 0x98B412u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS },
     { 0x98EEDAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE },
@@ -12011,11 +11898,10 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x9EE02Au, &kEnumTable_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DVASPECT },
     { 0x9F0B27u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS },
     { 0x9F82E6u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE },
-    { 0xA03105u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKTYPE },
     { 0xA0F7ADu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID },
     { 0xA10731u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION },
     { 0xA247D5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE },
-    { 0xA4632Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSLOGPRIORITY },
+    { 0xA50EA1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS },
     { 0xA7057Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS },
     { 0xA7B368u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES },
     { 0xA9EB01u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT },
@@ -12028,10 +11914,10 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xB0D003u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS },
     { 0xB43E05u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES },
     { 0xB6DC0Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS },
-    { 0xB7D7D5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TZVERSION },
     { 0xB9E5EEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS },
     { 0xBB0FE9u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES },
     { 0xBC0F28u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY },
+    { 0xBDCA52u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS },
     { 0xBDEC8Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS },
     { 0xBE5D30u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT },
     { 0xBE97D4u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS },
@@ -12051,11 +11937,10 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xC671CCu, &kEnumTable_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_TYPELIBFUNCFLAGS },
     { 0xC71C51u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND },
     { 0xC78E6Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA },
+    { 0xC85E16u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION },
     { 0xC96144u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE },
-    { 0xCA49E9u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILESTATUSFLAGS },
     { 0xCC1B24u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM },
     { 0xCC828Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL },
-    { 0xCD6C42u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSCONFNAME },
     { 0xCD94D5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND },
     { 0xCDED50u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL },
     { 0xCE6651u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE },
@@ -12069,12 +11954,14 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xD0D2D8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE },
     { 0xD1C617u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE },
     { 0xD5A67Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS },
+    { 0xD6D3CFu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS },
     { 0xD6DCDCu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE },
+    { 0xD8BD93u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS },
     { 0xD8BE39u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION },
     { 0xD8C295u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES },
     { 0xD9A6FEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID },
     { 0xDA7B73u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY },
-    { 0xDAC69Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ERROR },
+    { 0xDCC476u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES },
     { 0xDD5C31u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE },
     { 0xDD8D75u, &kEnumTable_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_REGISTRATIONCONNECTIONTYPE },
     { 0xDEB1A3u, &kEnumTable_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYMED },
@@ -12084,6 +11971,7 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xE0C990u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS },
     { 0xE0CA54u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND },
     { 0xE2236Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR },
+    { 0xE27BB8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN },
     { 0xE2C6CFu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS },
     { 0xE37DA4u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS },
     { 0xE3F3CEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE },
@@ -12092,13 +11980,14 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xE716D2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE },
     { 0xE75260u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE },
     { 0xE7A5CDu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES },
-    { 0xE9C594u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_UNIXFILESYSTEMTYPES },
     { 0xEA5932u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE },
     { 0xEAE405u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES },
     { 0xEC9415u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM },
     { 0xEDDA05u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE },
+    { 0xEE04BBu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS },
     { 0xEE0BCFu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY },
     { 0xEE334Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT },
+    { 0xEE8B97u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS },
     { 0xEF7DC8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND },
     { 0xF09D9Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS },
     { 0xF09E30u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS },
@@ -12115,12 +12004,13 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xFC53C6u, &kEnumTable_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_TYPELIBTYPEFLAGS },
     { 0xFD14EBu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER },
     { 0xFDE806u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES },
+    { 0xFE353Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS },
     { 0xFECC6Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS },
     { 0xFF0696u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE },
     { 0xFF31C4u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE },
     { 0xFFBFF1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT },
 };
-static constexpr CHAOS_IL2CPP_UINT32 kEnumDispatchCount = 295u;
+static constexpr CHAOS_IL2CPP_UINT32 kEnumDispatchCount = 296u;
 
 // ── ToString dispatch table: sorted by FNV-24 for binary search ──
 #ifndef CHAOS_IL2CPP_ENUM_TOSTRING_DISPATCH_ENTRY_DEFINED
@@ -12164,7 +12054,6 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0x197A07u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS },
     { 0x1A7F8Au, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE },
     { 0x1BBDB1u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY },
-    { 0x1BCC44u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_NULLABLEBOOL },
     { 0x1D8B23u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION },
     { 0x1D97C2u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH },
     { 0x1E1A98u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES },
@@ -12183,7 +12072,6 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0x26A8B1u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS },
     { 0x26C185u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES },
     { 0x2972CDu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY },
-    { 0x2A9C65u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_OPENFLAGS },
     { 0x2BE7A9u, &ChaosEnumToString_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_ADVF },
     { 0x2C6B47u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT },
     { 0x2C73B5u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING },
@@ -12210,6 +12098,7 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0x3ECD44u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS },
     { 0x3F2B49u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES },
     { 0x3FD939u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION },
+    { 0x401F33u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE },
     { 0x41F77Cu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS },
     { 0x42696Du, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM },
     { 0x4311A8u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY },
@@ -12225,31 +12114,29 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0x4EE7B9u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS },
     { 0x4F8D65u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG },
     { 0x50534Cu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES },
-    { 0x50C6B0u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILEADVICE },
     { 0x512204u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION },
     { 0x517214u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT },
-    { 0x5301B7u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKOPERATIONS },
     { 0x538B85u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS },
     { 0x53E981u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS },
-    { 0x54F26Eu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_THREADPOOLVALUETASKSOURCE_OPERATION },
     { 0x552C72u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND },
-    { 0x5753AEu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_TIMEZONEDISPLAYNAMETYPE },
     { 0x57DFB0u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENDNOGCREGIONSTATUS },
     { 0x58486Bu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_STACKCRAWLMARK },
     { 0x5A7820u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HS },
     { 0x5AB28Eu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA },
     { 0x5C362Du, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS },
+    { 0x5DB2F6u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS },
+    { 0x5E7F97u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS },
     { 0x5F14D7u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND },
     { 0x60E12Eu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV },
     { 0x611107u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES },
     { 0x611655u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID },
     { 0x617111u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS },
+    { 0x61A896u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL },
     { 0x64927Au, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE },
     { 0x6570FFu, &ChaosEnumToString_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_TYPELIBVARFLAGS },
     { 0x66AFD2u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE },
     { 0x67C078u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER },
     { 0x68A964u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS },
-    { 0x68BBC2u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SEEKWHENCE },
     { 0x695F22u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT },
     { 0x699697u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES },
     { 0x69D93Au, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_STUBHELPERS_ASANYMARSHALER_BACKPROPACTION },
@@ -12279,6 +12166,8 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0x7F5639u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEEKORIGIN },
     { 0x7FF573u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP },
     { 0x80A94Du, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES },
+    { 0x80B7BEu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS },
+    { 0x822A59u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE },
     { 0x827356u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE },
     { 0x82C1B5u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES },
     { 0x832793u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE },
@@ -12288,8 +12177,8 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0x85E5D7u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_ACTIVITYCONTROL },
     { 0x861922u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_CONTROLLERCOMMAND },
     { 0x86DF1Du, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION },
+    { 0x86F999u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS },
     { 0x87E290u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND },
-    { 0x880187u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_ACCESSMODE },
     { 0x8817F8u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING },
     { 0x88EA4Au, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN },
     { 0x88F92Fu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON },
@@ -12308,7 +12197,6 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0x93BC81u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TIMESPANSTANDARDSTYLES },
     { 0x956273u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE },
     { 0x96825Cu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE },
-    { 0x97111Eu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_NODETYPE },
     { 0x977136u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE },
     { 0x98B412u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS },
     { 0x98EEDAu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE },
@@ -12318,11 +12206,10 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0x9EE02Au, &ChaosEnumToString_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DVASPECT },
     { 0x9F0B27u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS },
     { 0x9F82E6u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE },
-    { 0xA03105u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKTYPE },
     { 0xA0F7ADu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID },
     { 0xA10731u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION },
     { 0xA247D5u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE },
-    { 0xA4632Fu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSLOGPRIORITY },
+    { 0xA50EA1u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS },
     { 0xA7057Cu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS },
     { 0xA7B368u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES },
     { 0xA9EB01u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT },
@@ -12335,10 +12222,10 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0xB0D003u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS },
     { 0xB43E05u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES },
     { 0xB6DC0Bu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS },
-    { 0xB7D7D5u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TZVERSION },
     { 0xB9E5EEu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS },
     { 0xBB0FE9u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES },
     { 0xBC0F28u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY },
+    { 0xBDCA52u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS },
     { 0xBDEC8Fu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS },
     { 0xBE5D30u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT },
     { 0xBE97D4u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS },
@@ -12358,11 +12245,10 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0xC671CCu, &ChaosEnumToString_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_TYPELIBFUNCFLAGS },
     { 0xC71C51u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND },
     { 0xC78E6Au, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA },
+    { 0xC85E16u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION },
     { 0xC96144u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE },
-    { 0xCA49E9u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILESTATUSFLAGS },
     { 0xCC1B24u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM },
     { 0xCC828Bu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL },
-    { 0xCD6C42u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSCONFNAME },
     { 0xCD94D5u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND },
     { 0xCDED50u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL },
     { 0xCE6651u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE },
@@ -12376,12 +12262,14 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0xD0D2D8u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE },
     { 0xD1C617u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE },
     { 0xD5A67Eu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS },
+    { 0xD6D3CFu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS },
     { 0xD6DCDCu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE },
+    { 0xD8BD93u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS },
     { 0xD8BE39u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION },
     { 0xD8C295u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES },
     { 0xD9A6FEu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID },
     { 0xDA7B73u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY },
-    { 0xDAC69Au, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_ERROR },
+    { 0xDCC476u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES },
     { 0xDD5C31u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE },
     { 0xDD8D75u, &ChaosEnumToString_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_REGISTRATIONCONNECTIONTYPE },
     { 0xDEB1A3u, &ChaosEnumToString_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYMED },
@@ -12391,6 +12279,7 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0xE0C990u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS },
     { 0xE0CA54u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND },
     { 0xE2236Eu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR },
+    { 0xE27BB8u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN },
     { 0xE2C6CFu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS },
     { 0xE37DA4u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS },
     { 0xE3F3CEu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE },
@@ -12399,13 +12288,14 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0xE716D2u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE },
     { 0xE75260u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE },
     { 0xE7A5CDu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES },
-    { 0xE9C594u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_UNIXFILESYSTEMTYPES },
     { 0xEA5932u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE },
     { 0xEAE405u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES },
     { 0xEC9415u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM },
     { 0xEDDA05u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE },
+    { 0xEE04BBu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS },
     { 0xEE0BCFu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY },
     { 0xEE334Bu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT },
+    { 0xEE8B97u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS },
     { 0xEF7DC8u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND },
     { 0xF09D9Eu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS },
     { 0xF09E30u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS },
@@ -12422,12 +12312,13 @@ static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {
     { 0xFC53C6u, &ChaosEnumToString_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_TYPELIBTYPEFLAGS },
     { 0xFD14EBu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER },
     { 0xFDE806u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES },
+    { 0xFE353Bu, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS },
     { 0xFECC6Du, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS },
     { 0xFF0696u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE },
     { 0xFF31C4u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE },
     { 0xFFBFF1u, &ChaosEnumToString_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT },
 };
-static constexpr CHAOS_IL2CPP_UINT32 kEnumToStringDispatchCount = 295u;
+static constexpr CHAOS_IL2CPP_UINT32 kEnumToStringDispatchCount = 296u;
 
 /// Binary search lookup on the sorted dispatch table.
 /// Returns nullptr if fnv24 not found (fallback to resolve_type_arg +
@@ -12487,10 +12378,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONRESOURCE));
     ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+SysLogPriority"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSLOGPRIORITY));
-    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferAllocatedReason"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERALLOCATEDREASON));
@@ -12503,10 +12390,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS));
     ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+LockOperations"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKOPERATIONS));
-    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.CALLCONV"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV));
@@ -12514,10 +12397,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND));
-    ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Microsoft.Win32.SafeHandles.SafeFileHandle+ThreadPoolValueTaskSource+Operation"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_THREADPOOLVALUETASKSOURCE_OPERATION));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Resources.ResourceTypeCode"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -12623,6 +12502,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS));
     ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+CreateOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS));
+    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES));
@@ -12634,6 +12517,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.StringSplitOptions"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -12679,9 +12566,21 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_STRONGBIDICATEGORY));
     ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS));
+    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+MemberListType"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_MEMBERLISTTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+BOOLEAN"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -12823,6 +12722,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE));
     ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+DesiredAccess"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS));
+    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL));
@@ -12887,6 +12790,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS));
     ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+CreateDisposition"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION));
+    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND));
@@ -12926,6 +12833,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+DispatchWrapperType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.LoaderOptimization"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13003,10 +12914,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE));
     ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+NodeType"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_NODETYPE));
-    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.GC+EnableNoGCRegionCallbackStatus"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS));
@@ -13022,6 +12929,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYPERMISSIONFLAG));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13123,6 +13034,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES));
     ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS));
+    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.ConstrainedExecution.Consistency"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY));
@@ -13138,6 +13053,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.IO.SearchOption"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHOPTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+ObjectAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.CastResult"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13171,10 +13090,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS));
     ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+AccessMode"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_ACCESSMODE));
-    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARKIND"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARKIND));
@@ -13182,10 +13097,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarWeekRule"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE));
-    ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+FileStatusFlags"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILESTATUSFLAGS));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13199,6 +13110,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_RUNTIME_INTEROPSERVICES_SYSTEM_RUNTIME_INTEROPSERVICES_TYPELIBVARFLAGS));
     ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS));
+    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodBase+InvokerStrategy"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY));
@@ -13206,14 +13121,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarId"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID));
-    ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+SeekWhence"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SEEKWHENCE));
-    ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Error"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ERROR));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13227,13 +13134,13 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS));
     ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Microsoft.Win32.SafeHandles.SafeFileHandle+NullableBool"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_MICROSOFT_WIN32_SAFEHANDLES_SAFEFILEHANDLE_NULLABLEBOOL));
-    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.Versioning.ResourceScope"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_RESOURCESCOPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Runtime.InteropServices/System.Runtime.InteropServices.RegistrationClassContext"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13270,10 +13177,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventSourceSettings"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTSOURCESETTINGS));
-    ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+LockType"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_LOCKTYPE));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+TM"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13351,10 +13254,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS));
     ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+OpenFlags"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_OPENFLAGS));
-    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.IO.FileAccess"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS));
@@ -13362,10 +13261,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.PEFileKinds"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PEFILEKINDS));
-    ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+FileAdvice"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_FILEADVICE));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+ActivityControl"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13394,6 +13289,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.PackingSize"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PACKINGSIZE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+BCrypt+NTSTATUS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.GCKind"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13431,6 +13330,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT));
     ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+ImpersonationLevel"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL));
+    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.IO.SearchTarget"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET));
@@ -13446,10 +13349,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Reflection.TypeAttributes"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES));
-    ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfo+TZVersion"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TZVERSION));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13494,6 +13393,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.ConstrainedExecution.Cer"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+ContextTrackingMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Runtime.InteropServices/System.Runtime.InteropServices.TypeLibTypeFlags"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13559,10 +13462,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DELEGATEBINDINGFLAGS));
     ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+UnixFileSystemTypes"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_UNIXFILESYSTEMTYPES));
-    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.StringComparison"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON));
@@ -13583,10 +13482,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY));
     ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Globalization+TimeZoneDisplayNameType"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_TIMEZONEDISPLAYNAMETYPE));
-    ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.TypeNameFormatFlags"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS));
@@ -13594,6 +13489,10 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureData+LocaleStringData"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALESTRINGDATA));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS));
     ChaosRegisterExternalType(
         compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanParse+TTT"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -13650,10 +13549,6 @@ static void ChaosRegisterEnumGeneratedMetadata() noexcept {
         compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ClassInterfaceType"),
         reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
             &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CLASSINTERFACETYPE));
-    ChaosRegisterExternalType(
-        compute_enum_hash24("System.Private.CoreLib/Interop+Sys+SysConfName"),
-        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_SYS_SYSCONFNAME));
 
     if (g_chaos_resolve_enum_metadata == nullptr) {
         g_chaos_resolve_enum_metadata =

@@ -31,7 +31,6 @@
 class ChaosRuntimeHost;
 
 // chaos_valuetype_* typedefs (opaque 32-bit managed value types)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___0CFBF01C84FAB4E5344ABB5D837C123C4EE573A987BF536E197188590338F8D4;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___1C343036D67A5B9B5F1DEADD8B023B4B783FC92B8FCC92517ACE15C566720521;
@@ -67,174 +66,6 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementati
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_t {
-        void (*AreEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_1)(
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_3)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_4)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_5)(
-                    double, 
-                    double, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_6)(
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_7)(
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_8)(
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_9)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_10)(
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_11)(
-                    float, 
-                    float, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_12)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_13)(
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_14)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_15)(
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_16)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreNotEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*Complete)(
-                void
-        );
-        void (*Fail)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsFalse)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNotNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsTrue)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*RecordFailure)(
-                void
-        );
-        void (*Reset)(
-                void
-        );
-        void (*Throws)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_ArgumentException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_ArgumentNullException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_ArgumentOutOfRangeException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_FormatException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_NullReferenceException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_PlatformNotSupportedException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_Security_Cryptography_CryptographicException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*get_ExitCode)(
-                void
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute;
     struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -12917,7 +12748,7 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c;
-    int32_t method_count;
+    CHAOS_IL2CPP_INT32 method_count;
 };
 
 extern const Functions kFunctions;
@@ -12934,378 +12765,6 @@ extern "C" void* kFunctionsFlat[];
 // These provide type-safe invocation without exposing the raw function table.
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
-    static inline void AreEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_1(
-                CHAOS_IL2CPP_UINT8 arg_0, 
-                CHAOS_IL2CPP_UINT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_1(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_3(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_3(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_4(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_4(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_5(
-                double arg_0, 
-                double arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_5(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_6(
-                CHAOS_IL2CPP_INT16 arg_0, 
-                CHAOS_IL2CPP_INT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_6(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_7(
-                CHAOS_IL2CPP_INT32 arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_7(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_8(
-                CHAOS_IL2CPP_INT64 arg_0, 
-                CHAOS_IL2CPP_INT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_8(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_9(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_9(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_10(
-                CHAOS_IL2CPP_INT8 arg_0, 
-                CHAOS_IL2CPP_INT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_10(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_11(
-                float arg_0, 
-                float arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_11(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_12(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_12(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_13(
-                CHAOS_IL2CPP_UINT16 arg_0, 
-                CHAOS_IL2CPP_UINT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_13(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_14(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_14(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_15(
-                CHAOS_IL2CPP_UINT64 arg_0, 
-                CHAOS_IL2CPP_UINT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_15(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_16(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_16(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreNotEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreNotEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 Complete(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Complete(
-        );
-    }
-    static inline void Fail(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Fail(
-                    arg_0
-        );
-    }
-    static inline void IsFalse(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsFalse(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNotNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNotNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsTrue(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsTrue(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void RecordFailure(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.RecordFailure(
-        );
-    }
-    static inline void Reset(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Reset(
-        );
-    }
-    static inline void Throws(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_ArgumentException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_ArgumentNullException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentNullException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_ArgumentOutOfRangeException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_ArgumentOutOfRangeException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_FormatException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_FormatException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_NullReferenceException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_NullReferenceException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_PlatformNotSupportedException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_PlatformNotSupportedException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_Security_Cryptography_CryptographicException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_Security_Cryptography_CryptographicException_(
-                    arg_0
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 get_ExitCode(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.get_ExitCode(
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 35;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException.ctor(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests {
     static inline void ctor(
@@ -13400,7 +12859,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c {
@@ -13466,7 +12925,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests {
@@ -13598,7 +13057,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c {
@@ -13685,7 +13144,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests {
@@ -13817,7 +13276,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c {
@@ -13904,7 +13363,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests {
@@ -14000,7 +13459,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c {
@@ -14066,7 +13525,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests {
@@ -14198,7 +13657,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c {
@@ -14285,7 +13744,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests {
@@ -14333,7 +13792,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c {
@@ -14371,7 +13830,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests {
@@ -14419,7 +13878,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c {
@@ -14457,7 +13916,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests {
@@ -14589,7 +14048,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c {
@@ -14676,7 +14135,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests {
@@ -14736,7 +14195,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c {
@@ -14781,7 +14240,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests {
@@ -14877,7 +14336,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c {
@@ -14943,7 +14402,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests {
@@ -15063,7 +14522,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c {
@@ -15143,7 +14602,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 11;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 11;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests {
@@ -15239,7 +14698,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c {
@@ -15305,7 +14764,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests {
@@ -15401,7 +14860,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c {
@@ -15467,7 +14926,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests {
@@ -15803,7 +15262,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 55;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 55;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c {
@@ -16002,7 +15461,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 28;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 28;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngPropertyTests {
@@ -16026,7 +15485,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests {
@@ -16242,7 +15701,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 35;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 35;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c {
@@ -16357,7 +15816,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 16;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 16;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests {
@@ -17017,7 +16476,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 109;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 109;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c {
@@ -17412,7 +16871,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 56;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 56;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests {
@@ -17688,7 +17147,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 45;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 45;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c {
@@ -17859,7 +17318,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 24;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 24;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests {
@@ -17991,7 +17450,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c {
@@ -18078,7 +17537,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests {
@@ -18162,7 +17621,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 13;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c {
@@ -18221,7 +17680,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 8;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 8;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests {
@@ -18341,7 +17800,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c {
@@ -18421,7 +17880,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 11;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 11;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests {
@@ -18853,7 +18312,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 71;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 71;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c {
@@ -19115,7 +18574,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 37;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 37;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests {
@@ -19247,7 +18706,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c {
@@ -19334,7 +18793,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests {
@@ -19418,7 +18877,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 13;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c {
@@ -19477,7 +18936,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 8;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 8;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests {
@@ -19561,7 +19020,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 13;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c {
@@ -19620,7 +19079,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 8;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 8;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests {
@@ -20376,7 +19835,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 125;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 125;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c {
@@ -20827,7 +20286,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 64;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 64;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests {
@@ -20875,7 +20334,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c {
@@ -20913,7 +20372,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests {
@@ -21021,7 +20480,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 17;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 17;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c {
@@ -21094,7 +20553,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 10;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 10;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests {
@@ -21178,7 +20637,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 13;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c {
@@ -21230,7 +20689,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests {
@@ -21350,7 +20809,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c {
@@ -21430,7 +20889,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 11;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 11;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests {
@@ -21718,7 +21177,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 47;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 47;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c {
@@ -21896,7 +21355,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 25;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 25;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests {
@@ -21956,7 +21415,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c {
@@ -22001,7 +21460,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests {
@@ -22073,7 +21532,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 11;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 11;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c {
@@ -22125,7 +21584,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests {
@@ -22365,7 +21824,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 39;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 39;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c {
@@ -22515,7 +21974,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests {
@@ -22959,7 +22418,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 73;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 73;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c {
@@ -23228,7 +22687,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 38;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 38;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests {
@@ -23324,7 +22783,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c {
@@ -23390,7 +22849,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests {
@@ -24110,7 +23569,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 119;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 119;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c {
@@ -24540,7 +23999,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 61;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 61;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests {
@@ -24564,7 +24023,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c {
@@ -24588,7 +24047,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests {
@@ -24744,7 +24203,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 25;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 25;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c {
@@ -24845,7 +24304,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 14;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 14;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests {
@@ -24989,7 +24448,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 23;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 23;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c {
@@ -25083,7 +24542,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 13;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests {
@@ -25263,7 +24722,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c {
@@ -25329,7 +24788,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests {
@@ -25509,7 +24968,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c {
@@ -25575,7 +25034,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests {
@@ -25755,7 +25214,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c {
@@ -25821,7 +25280,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests {
@@ -26001,7 +25460,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c {
@@ -26067,7 +25526,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests {
@@ -26247,7 +25706,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c {
@@ -26313,7 +25772,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests {
@@ -26493,7 +25952,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c {
@@ -26559,7 +26018,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests {
@@ -26739,7 +26198,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c {
@@ -26805,7 +26264,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests {
@@ -26985,7 +26444,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c {
@@ -27051,7 +26510,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests {
@@ -27075,7 +26534,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c {
@@ -27099,7 +26558,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests {
@@ -27159,7 +26618,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c {
@@ -27190,7 +26649,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 4;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 4;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0 {
@@ -27209,7 +26668,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 2;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests {
@@ -27521,7 +26980,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 51;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 51;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c {
@@ -27713,7 +27172,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 27;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 27;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests {
@@ -27917,7 +27376,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 33;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 33;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c {
@@ -28046,7 +27505,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 18;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 18;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests {
@@ -28370,7 +27829,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 53;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 53;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c {
@@ -28513,7 +27972,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 20;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 20;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests {
@@ -28837,7 +28296,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 53;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 53;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c {
@@ -28980,7 +28439,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 20;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 20;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests {
@@ -29304,7 +28763,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 53;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 53;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c {
@@ -29447,7 +28906,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 20;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 20;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests {
@@ -29771,7 +29230,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 53;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 53;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c {
@@ -29914,7 +29373,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 20;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 20;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests {
@@ -29938,7 +29397,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c {
@@ -29962,7 +29421,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests {
@@ -30082,7 +29541,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c {
@@ -30134,7 +29593,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests {
@@ -30194,7 +29653,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c {
@@ -30239,7 +29698,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests {
@@ -30275,7 +29734,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c {
@@ -30306,7 +29765,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 4;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 4;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests {
@@ -30366,7 +29825,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c {
@@ -30411,7 +29870,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests {
@@ -30471,7 +29930,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c {
@@ -30516,7 +29975,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests {
@@ -30624,7 +30083,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 17;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 17;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c {
@@ -30697,7 +30156,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 10;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 10;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PemEncodingTests {
@@ -30745,7 +30204,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests {
@@ -30853,7 +30312,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 17;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 17;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c {
@@ -30926,7 +30385,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 10;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 10;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests {
@@ -31070,7 +30529,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 23;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 23;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c {
@@ -31164,7 +30623,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 13;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests {
@@ -31356,7 +30815,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 31;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 31;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c {
@@ -31478,7 +30937,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 17;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 17;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests {
@@ -32150,7 +31609,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 111;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 111;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c {
@@ -32552,7 +32011,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 57;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 57;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests {
@@ -32576,7 +32035,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c {
@@ -32600,7 +32059,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests {
@@ -32660,7 +32119,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c {
@@ -32705,7 +32164,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests {
@@ -32801,7 +32260,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c {
@@ -32867,7 +32326,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests {
@@ -32927,7 +32386,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c {
@@ -32972,7 +32431,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests {
@@ -33032,7 +32491,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c {
@@ -33077,7 +32536,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests {
@@ -33173,7 +32632,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c {
@@ -33239,7 +32698,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests {
@@ -33323,7 +32782,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 13;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c {
@@ -33382,7 +32841,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 8;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 8;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests {
@@ -33466,7 +32925,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 13;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 13;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c {
@@ -33525,7 +32984,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 8;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 8;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests {
@@ -34149,7 +33608,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 103;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 103;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c {
@@ -34523,7 +33982,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 53;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 53;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests {
@@ -34799,7 +34258,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 45;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 45;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c {
@@ -34935,7 +34394,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests {
@@ -35151,7 +34610,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 35;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 35;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c {
@@ -35287,7 +34746,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests {
@@ -35419,7 +34878,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c {
@@ -35506,7 +34965,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests {
@@ -35530,7 +34989,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c {
@@ -35554,7 +35013,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests {
@@ -35578,7 +35037,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c {
@@ -35602,7 +35061,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests {
@@ -35722,7 +35181,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c {
@@ -35774,7 +35233,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests {
@@ -35798,7 +35257,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c {
@@ -35822,7 +35281,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests {
@@ -35846,7 +35305,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c {
@@ -35870,7 +35329,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests {
@@ -35990,7 +35449,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c {
@@ -36042,7 +35501,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests {
@@ -36066,7 +35525,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c {
@@ -36090,7 +35549,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests {
@@ -36114,7 +35573,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c {
@@ -36138,7 +35597,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests {
@@ -36258,7 +35717,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c {
@@ -36310,7 +35769,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests {
@@ -36430,7 +35889,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c {
@@ -36482,7 +35941,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests {
@@ -36602,7 +36061,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c {
@@ -36654,7 +36113,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests {
@@ -36774,7 +36233,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c {
@@ -36826,7 +36285,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests {
@@ -36850,7 +36309,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c {
@@ -36874,7 +36333,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests {
@@ -36898,7 +36357,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c {
@@ -36922,7 +36381,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests {
@@ -37042,7 +36501,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 19;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 19;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c {
@@ -37094,7 +36553,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests {
@@ -37298,7 +36757,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 33;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 33;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c {
@@ -37427,7 +36886,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 18;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 18;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests {
@@ -37559,7 +37018,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c {
@@ -37646,7 +37105,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests {
@@ -37934,7 +37393,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 47;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 47;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c {
@@ -38077,7 +37536,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 20;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 20;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests {
@@ -38365,7 +37824,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 47;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 47;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c {
@@ -38508,7 +37967,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 20;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 20;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests {
@@ -38556,7 +38015,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c {
@@ -38594,7 +38053,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests {
@@ -39074,7 +38533,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 79;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 79;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c {
@@ -39364,7 +38823,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 41;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 41;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests {
@@ -39520,7 +38979,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 25;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 25;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c {
@@ -39621,7 +39080,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 14;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 14;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests {
@@ -39753,7 +39212,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c {
@@ -39840,7 +39299,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests {
@@ -39972,7 +39431,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 21;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 21;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c {
@@ -40059,7 +39518,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 12;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 12;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests {
@@ -40107,7 +39566,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c {
@@ -40145,7 +39604,7 @@ struct CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Securi
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 

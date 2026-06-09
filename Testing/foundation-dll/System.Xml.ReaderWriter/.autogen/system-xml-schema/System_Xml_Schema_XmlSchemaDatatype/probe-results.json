@@ -1,0 +1,54 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::ParseValue:System.Object(System.String,System.Xml.XmlNameTable,System.Xml.IXmlNamespaceResolver)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Object",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::ChangeType:System.Object(System.Object,System.Type)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Object",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::ChangeType:System.Object(System.Object,System.Type,System.Xml.IXmlNamespaceResolver)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Object",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaDatatype::IsDerivedFrom:System.Boolean(System.Xml.Schema.XmlSchemaDatatype)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

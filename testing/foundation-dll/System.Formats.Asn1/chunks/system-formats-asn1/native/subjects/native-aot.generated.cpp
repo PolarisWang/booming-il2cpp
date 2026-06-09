@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -1564,22 +1566,22 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
 	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
 	// Register managed_array (variable-size: header + contiguous element data).
 	registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-		static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-		static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+		static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+		static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 	registry.Register(10874374776005268531ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c), nullptr, 0);
@@ -1675,1185 +1677,562 @@ CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Formats_A
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0___TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0____ref_6_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass11_0::__ref_6_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0____ref_6_0_1() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0___TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass11_0::__ref_6_0_1");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0____ref_6_1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass13_0::__ref_6_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0____ref_6_1_1() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass15_0___ReadBitString_7_int_System_NullableAsn1Tag_0_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass13_0::__ref_6_1_1");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass15_0____ref_7_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass15_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass17_0___ReadBitString_7_int_System_NullableAsn1Tag_1_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass15_0::__ref_7_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass17_0____ref_7_1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass17_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass33_0___TryReadInt32_15_int_System_NullableAsn1Tag_0_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass17_0::__ref_7_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass33_0____ref_15_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass33_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass35_0___TryReadInt32_15_int_System_NullableAsn1Tag_1_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass33_0::__ref_15_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass35_0____ref_15_1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass35_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass37_0___TryReadUInt32_16_uint_System_NullableAsn1Tag_0_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass35_0::__ref_15_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass37_0____ref_16_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass37_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass39_0___TryReadUInt32_16_uint_System_NullableAsn1Tag_1_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass37_0::__ref_16_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass39_0____ref_16_1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass39_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass41_0___TryReadInt64_17_long_System_NullableAsn1Tag_0_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass39_0::__ref_16_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass41_0____ref_17_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass41_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass43_0___TryReadInt64_17_long_System_NullableAsn1Tag_1_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass41_0::__ref_17_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass43_0____ref_17_1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass43_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass45_0___TryReadUInt64_18_ulong_System_NullableAsn1Tag_0_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass43_0::__ref_17_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass45_0____ref_18_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass45_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass47_0___TryReadUInt64_18_ulong_System_NullableAsn1Tag_1_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass45_0::__ref_18_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass47_0____ref_18_1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass47_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass58_0___TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass47_0::__ref_18_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass58_0____ref_24_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass58_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass70_0___TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0_b__0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass58_0::__ref_24_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass70_0____ref_29_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass70_0___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___Clone_5__5_b__9_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___PeekContentBytes_3__3_b__5_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___PeekEncodedValue_2__2_b__3_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___PeekTag_1__1_b__1_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadBoolean_8_System_NullableAsn1Tag_0_b__19_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0_b__72_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadEncodedValue_4__4_b__7_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadEnumeratedBytes_9_System_NullableAsn1Tag_0_b__21_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadEnumeratedValue_10_System_NullableAsn1Tag_0_b__23_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0_b__25_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadGeneralizedTime_12_System_NullableAsn1Tag_0_b__27_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadIntegerBytes_13_System_NullableAsn1Tag_0_b__29_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadInteger_14_System_NullableAsn1Tag_0_b__31_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadNamedBitListValue_19_System_NullableAsn1Tag_0_b__49_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0_b__51_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadNamedBitList_21_System_NullableAsn1Tag_0_b__53_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadObjectIdentifier_25_System_NullableAsn1Tag_0_b__60_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadOctetString_23_System_NullableAsn1Tag_0_b__56_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadSequence_26_System_NullableAsn1Tag_0_b__62_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadSetOf_27_System_NullableAsn1Tag_0_b__64_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadSetOf_28_bool_System_NullableAsn1Tag_0_b__66_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadSetOf_28_bool_System_NullableAsn1Tag_1_b__68_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadUtcTime_31_System_NullableAsn1Tag_0_b__74_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadUtcTime_32_int_System_NullableAsn1Tag_0_b__76_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ReadUtcTime_32_int_System_NullableAsn1Tag_1_b__78_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass70_0::__ref_29_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__19_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__21_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__21_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__23_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__23_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__25_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__25_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__27_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__27_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__29_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__29_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__31_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__31_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__3_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__49_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__49_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__51_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__51_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__53_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__53_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__56_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__5_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__60_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__62_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__64_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__66_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__68_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__72_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__74_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__74_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__76_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__76_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__78_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__78_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__7_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__9_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c___EncodedValueEquals_1_AsnWriter_0_b__2_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c___GetEncodedLength_0__0_b__0_0_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c___ctor_System_Void__() noexcept
-{
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_Asn1Tag() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/Asn1Tag");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_Asn1Tag__AsConstructed_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/Asn1Tag::AsConstructed:Asn1Tag()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_Asn1Tag__AsPrimitive_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/Asn1Tag::AsPrimitive:Asn1Tag()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_Asn1Tag__CalculateEncodedSize_System_Int32__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/Asn1Tag::CalculateEncodedSize:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_Asn1Tag__HasSameClassAndValue_System_Boolean_Asn1Tag_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/Asn1Tag::HasSameClassAndValue:System.Boolean(Asn1Tag)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__Clone_AsnReader__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::Clone:AsnReader()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__PeekContentBytes_System_ReadOnlyMemory_System_Byte___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::PeekContentBytes:System.ReadOnlyMemory<System.Byte>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__PeekEncodedValue_System_ReadOnlyMemory_System_Byte___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::PeekEncodedValue:System.ReadOnlyMemory<System.Byte>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__PeekTag_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::PeekTag:Asn1Tag()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadBitString_System_Byte___System_Int32__System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadBitString:System.Byte[](System.Int32&,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadBoolean_System_Boolean_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadBoolean:System.Boolean(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadCharacterString_System_String_UniversalTagNumber_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadCharacterString:System.String(UniversalTagNumber,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadEncodedValue_System_ReadOnlyMemory_System_Byte___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadEncodedValue:System.ReadOnlyMemory<System.Byte>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadEnumeratedBytes_System_ReadOnlyMemory_System_Byte__System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory<System.Byte>(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadEnumeratedValue_System_DayOfWeek__System_DayOfWeek_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadEnumeratedValue<System.DayOfWeek>:System.DayOfWeek(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadEnumeratedValue_System_Enum_System_Type_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadGeneralizedTime_System_DateTimeOffset_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadIntegerBytes_System_ReadOnlyMemory_System_Byte__System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadIntegerBytes:System.ReadOnlyMemory<System.Byte>(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadInteger_System_Numerics_BigInteger_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadNamedBitListValue_System_DayOfWeek__System_DayOfWeek_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadNamedBitListValue<System.DayOfWeek>:System.DayOfWeek(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadNamedBitListValue_System_Enum_System_Type_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadNamedBitList_BitArray_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadNamedBitList:BitArray(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadNull_System_Void_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadNull:System.Void(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadObjectIdentifier_System_String_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadObjectIdentifier:System.String(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadOctetString_System_Byte___System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadOctetString:System.Byte[](System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadSequence_AsnReader_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadSequence:AsnReader(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadSetOf_AsnReader_System_Boolean_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadSetOf:AsnReader(System.Boolean,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadSetOf_AsnReader_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadSetOf:AsnReader(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadUtcTime_System_DateTimeOffset_System_Int32_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadUtcTime_System_DateTimeOffset_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__ThrowIfNotEmpty_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::ThrowIfNotEmpty:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadInt32_System_Boolean_System_Int32__System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::TryReadInt32:System.Boolean(System.Int32&,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadInt64_System_Boolean_System_Int64__System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::TryReadInt64:System.Boolean(System.Int64&,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadPrimitiveBitString_System_Boolean_System_Int32__System_ReadOnlyMemory_System_Byte___System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32&,System.ReadOnlyMemory<System.Byte>&,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadPrimitiveCharacterStringBytes_System_Boolean_Asn1Tag_System_ReadOnlyMemory_System_Byte___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(Asn1Tag,System.ReadOnlyMemory<System.Byte>&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadPrimitiveOctetString_System_Boolean_System_ReadOnlyMemory_System_Byte___System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory<System.Byte>&,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadUInt32_System_Boolean_System_UInt32__System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::TryReadUInt32:System.Boolean(System.UInt32&,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadUInt64_System_Boolean_System_UInt64__System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnReader::TryReadUInt64:System.Boolean(System.UInt64&,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter_Scope() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter+Scope");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter_Scope__Dispose_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter+Scope::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__CopyTo_System_Void_AsnWriter_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::CopyTo:System.Void(AsnWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__EncodedValueEquals_System_Boolean_AsnWriter_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::EncodedValueEquals:System.Boolean(AsnWriter)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__GetEncodedLength_System_Int32__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::GetEncodedLength:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__PopOctetString_System_Void_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::PopOctetString:System.Void(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__PopSequence_System_Void_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::PopSequence:System.Void(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__PopSetOf_System_Void_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::PopSetOf:System.Void(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteBoolean_System_Void_System_Boolean_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteCharacterString_System_Void_UniversalTagNumber_System_String_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteCharacterString:System.Void(UniversalTagNumber,System.String,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteEnumeratedValue_System_DayOfWeek__System_Void_System_DayOfWeek_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteEnumeratedValue<System.DayOfWeek>:System.Void(System.DayOfWeek,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteEnumeratedValue_System_Void_System_Enum_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteGeneralizedTime_System_Void_System_DateTimeOffset_System_Boolean_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteInteger_System_Void_System_Int64_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteInteger_System_Void_System_Numerics_BigInteger_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteInteger_System_Void_System_UInt64_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteNamedBitList_System_DayOfWeek__System_Void_System_DayOfWeek_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteNamedBitList<System.DayOfWeek>:System.Void(System.DayOfWeek,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteNamedBitList_System_Void_BitArray_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteNamedBitList:System.Void(BitArray,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteNamedBitList_System_Void_System_Enum_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteNull_System_Void_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteNull:System.Void(System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteObjectIdentifier_System_Void_System_String_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteUtcTime_System_Void_System_DateTimeOffset_System_Int32_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteUtcTime_System_Void_System_DateTimeOffset_System_Nullable_Asn1Tag__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Formats.Asn1/AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable<Asn1Tag>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_DateTimeOffset() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.DateTimeOffset");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Nullable_Asn1Tag_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Nullable<Asn1Tag>");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -2863,16 +2242,12 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.ReadOnlyMemory<System.Byte>");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Numerics_System_Numerics_BigInteger() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Numerics/System.Numerics.BigInteger");
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -2893,6 +2268,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -3923,191 +3299,191 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[185] = {
 // GetHotpatchEntries(). Without external linkage, the linker cannot resolve
 // the symbol across translation units.
 extern "C" HotpatchEntryV0 s_hotpatch_entries[185] = {
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_AsConstructed_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::AsConstructed_0__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_AsPrimitive_1__1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::AsPrimitive_1__1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_Benchmark_AsConstructed_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::Benchmark_AsConstructed_0__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_Benchmark_AsPrimitive_1__1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::Benchmark_AsPrimitive_1__1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_Benchmark_CalculateEncodedSize_2__2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::Benchmark_CalculateEncodedSize_2__2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_Benchmark_HasSameClassAndValue_3_Asn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::Benchmark_HasSameClassAndValue_3_Asn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_CalculateEncodedSize_2__2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::CalculateEncodedSize_2__2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_HasSameClassAndValue_3_Asn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::HasSameClassAndValue_3_Asn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_Clone_5__5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_Clone_5__5
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_PeekContentBytes_3__3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_PeekContentBytes_3__3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_PeekEncodedValue_2__2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_PeekEncodedValue_2__2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_PeekTag_1__1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_PeekTag_1__1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadBitString_7_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadBitString_7_int_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadBitString_7_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadBitString_7_int_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadBoolean_8_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadBoolean_8_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadEncodedValue_4__4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadEncodedValue_4__4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadEnumeratedBytes_9_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadEnumeratedBytes_9_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadEnumeratedValue_10_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadEnumeratedValue_10_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadGeneralizedTime_12_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadGeneralizedTime_12_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadInteger_14_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadInteger_14_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadIntegerBytes_13_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadIntegerBytes_13_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadNamedBitList_21_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadNamedBitList_21_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadNamedBitListValue_19_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadNamedBitListValue_19_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadNull_22_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadNull_22_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadObjectIdentifier_25_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadObjectIdentifier_25_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadOctetString_23_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadOctetString_23_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadSequence_26_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadSequence_26_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadSetOf_27_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadSetOf_27_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadSetOf_28_bool_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadSetOf_28_bool_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadSetOf_28_bool_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadSetOf_28_bool_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadUtcTime_31_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadUtcTime_31_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadUtcTime_32_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadUtcTime_32_int_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadUtcTime_32_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadUtcTime_32_int_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ThrowIfNotEmpty_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ThrowIfNotEmpty_0__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadInt32_15_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadInt32_15_int_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadInt32_15_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadInt32_15_int_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadInt64_17_long_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadInt64_17_long_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadInt64_17_long_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadInt64_17_long_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadUInt32_16_uint_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadUInt32_16_uint_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadUInt32_16_uint_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadUInt32_16_uint_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadUInt64_18_ulong_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadUInt64_18_ulong_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadUInt64_18_ulong_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadUInt64_18_ulong_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Clone_5__5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Clone_5__5
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_PeekContentBytes_3__3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::PeekContentBytes_3__3
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_PeekEncodedValue_2__2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::PeekEncodedValue_2__2
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_PeekTag_1__1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::PeekTag_1__1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadBitString_7_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadBitString_7_int_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadBitString_7_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadBitString_7_int_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadBoolean_8_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadBoolean_8_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadEncodedValue_4__4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadEncodedValue_4__4
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadEnumeratedBytes_9_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadEnumeratedBytes_9_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadEnumeratedValue_10_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadEnumeratedValue_10_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadGeneralizedTime_12_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadGeneralizedTime_12_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadInteger_14_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadInteger_14_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadIntegerBytes_13_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadIntegerBytes_13_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadNamedBitList_21_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadNamedBitList_21_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadNamedBitListValue_19_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadNamedBitListValue_19_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadObjectIdentifier_25_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadObjectIdentifier_25_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadOctetString_23_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadOctetString_23_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadSequence_26_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadSequence_26_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadSetOf_27_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadSetOf_27_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadSetOf_28_bool_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadSetOf_28_bool_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadSetOf_28_bool_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadSetOf_28_bool_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadUtcTime_31_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadUtcTime_31_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadUtcTime_32_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadUtcTime_32_int_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadUtcTime_32_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadUtcTime_32_int_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadInt32_15_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadInt32_15_int_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadInt32_15_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadInt32_15_int_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadInt64_17_long_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadInt64_17_long_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadInt64_17_long_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadInt64_17_long_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadUInt32_16_uint_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadUInt32_16_uint_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadUInt32_16_uint_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadUInt32_16_uint_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadUInt64_18_ulong_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadUInt64_18_ulong_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadUInt64_18_ulong_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadUInt64_18_ulong_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass11_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass11_0::<TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass13_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass13_0::<TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass15_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass15_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass15_0_ReadBitString_7_int_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass15_0::<ReadBitString_7_int_System_NullableAsn1Tag_0>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass17_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass17_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass17_0_ReadBitString_7_int_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass17_0::<ReadBitString_7_int_System_NullableAsn1Tag_1>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass33_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass33_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass33_0_TryReadInt32_15_int_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass33_0::<TryReadInt32_15_int_System_NullableAsn1Tag_0>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass35_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass35_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass35_0_TryReadInt32_15_int_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass35_0::<TryReadInt32_15_int_System_NullableAsn1Tag_1>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass37_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass37_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass37_0_TryReadUInt32_16_uint_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass37_0::<TryReadUInt32_16_uint_System_NullableAsn1Tag_0>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass39_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass39_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass39_0_TryReadUInt32_16_uint_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass39_0::<TryReadUInt32_16_uint_System_NullableAsn1Tag_1>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass41_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass41_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass41_0_TryReadInt64_17_long_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass41_0::<TryReadInt64_17_long_System_NullableAsn1Tag_0>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass43_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass43_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass43_0_TryReadInt64_17_long_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass43_0::<TryReadInt64_17_long_System_NullableAsn1Tag_1>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass45_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass45_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass45_0_TryReadUInt64_18_ulong_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass45_0::<TryReadUInt64_18_ulong_System_NullableAsn1Tag_0>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass47_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass47_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass47_0_TryReadUInt64_18_ulong_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass47_0::<TryReadUInt64_18_ulong_System_NullableAsn1Tag_1>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass58_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass58_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass58_0_TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass58_0::<TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0>b__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass70_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass70_0::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass70_0_TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass70_0::<TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_AsConstructed_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::AsConstructed_0__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_AsPrimitive_1__1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::AsPrimitive_1__1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_Benchmark_AsConstructed_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::Benchmark_AsConstructed_0__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_Benchmark_AsPrimitive_1__1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::Benchmark_AsPrimitive_1__1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_Benchmark_CalculateEncodedSize_2__2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::Benchmark_CalculateEncodedSize_2__2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_Benchmark_HasSameClassAndValue_3_Asn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::Benchmark_HasSameClassAndValue_3_Asn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_CalculateEncodedSize_2__2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::CalculateEncodedSize_2__2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_Asn1TagTests_HasSameClassAndValue_3_Asn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_Asn1TagTests::HasSameClassAndValue_3_Asn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_Clone_5__5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_Clone_5__5
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_PeekContentBytes_3__3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_PeekContentBytes_3__3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_PeekEncodedValue_2__2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_PeekEncodedValue_2__2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_PeekTag_1__1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_PeekTag_1__1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadBitString_7_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadBitString_7_int_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadBitString_7_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadBitString_7_int_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadBoolean_8_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadBoolean_8_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadEncodedValue_4__4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadEncodedValue_4__4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadEnumeratedBytes_9_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadEnumeratedBytes_9_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadEnumeratedValue_10_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadEnumeratedValue_10_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadGeneralizedTime_12_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadGeneralizedTime_12_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadInteger_14_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadInteger_14_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadIntegerBytes_13_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadIntegerBytes_13_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadNamedBitList_21_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadNamedBitList_21_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadNamedBitListValue_19_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadNamedBitListValue_19_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadNull_22_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadNull_22_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadObjectIdentifier_25_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadObjectIdentifier_25_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadOctetString_23_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadOctetString_23_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadSequence_26_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadSequence_26_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadSetOf_27_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadSetOf_27_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadSetOf_28_bool_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadSetOf_28_bool_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadSetOf_28_bool_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadSetOf_28_bool_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadUtcTime_31_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadUtcTime_31_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadUtcTime_32_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadUtcTime_32_int_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ReadUtcTime_32_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ReadUtcTime_32_int_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_ThrowIfNotEmpty_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_ThrowIfNotEmpty_0__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadInt32_15_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadInt32_15_int_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadInt32_15_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadInt32_15_int_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadInt64_17_long_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadInt64_17_long_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadInt64_17_long_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadInt64_17_long_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadUInt32_16_uint_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadUInt32_16_uint_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadUInt32_16_uint_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadUInt32_16_uint_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadUInt64_18_ulong_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadUInt64_18_ulong_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Benchmark_TryReadUInt64_18_ulong_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Benchmark_TryReadUInt64_18_ulong_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_Clone_5__5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::Clone_5__5
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_PeekContentBytes_3__3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::PeekContentBytes_3__3
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_PeekEncodedValue_2__2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::PeekEncodedValue_2__2
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_PeekTag_1__1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::PeekTag_1__1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadBitString_7_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadBitString_7_int_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadBitString_7_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadBitString_7_int_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadBoolean_8_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadBoolean_8_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadEncodedValue_4__4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadEncodedValue_4__4
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadEnumeratedBytes_9_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadEnumeratedBytes_9_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadEnumeratedValue_10_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadEnumeratedValue_10_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadGeneralizedTime_12_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadGeneralizedTime_12_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadInteger_14_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadInteger_14_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadIntegerBytes_13_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadIntegerBytes_13_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadNamedBitList_21_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadNamedBitList_21_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadNamedBitListValue_19_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadNamedBitListValue_19_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadObjectIdentifier_25_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadObjectIdentifier_25_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadOctetString_23_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadOctetString_23_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadSequence_26_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadSequence_26_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadSetOf_27_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadSetOf_27_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadSetOf_28_bool_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadSetOf_28_bool_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadSetOf_28_bool_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadSetOf_28_bool_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadUtcTime_31_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadUtcTime_31_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadUtcTime_32_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadUtcTime_32_int_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_ReadUtcTime_32_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::ReadUtcTime_32_int_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadInt32_15_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadInt32_15_int_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadInt32_15_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadInt32_15_int_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadInt64_17_long_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadInt64_17_long_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadInt64_17_long_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadInt64_17_long_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadUInt32_16_uint_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadUInt32_16_uint_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadUInt32_16_uint_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadUInt32_16_uint_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadUInt64_18_ulong_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadUInt64_18_ulong_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests_TryReadUInt64_18_ulong_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests::TryReadUInt64_18_ulong_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass11_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass11_0::<TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass13_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0_TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass13_0::<TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass15_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass15_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass15_0_ReadBitString_7_int_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass15_0::<ReadBitString_7_int_System_NullableAsn1Tag_0>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass17_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass17_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass17_0_ReadBitString_7_int_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass17_0::<ReadBitString_7_int_System_NullableAsn1Tag_1>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass33_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass33_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass33_0_TryReadInt32_15_int_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass33_0::<TryReadInt32_15_int_System_NullableAsn1Tag_0>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass35_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass35_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass35_0_TryReadInt32_15_int_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass35_0::<TryReadInt32_15_int_System_NullableAsn1Tag_1>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass37_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass37_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass37_0_TryReadUInt32_16_uint_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass37_0::<TryReadUInt32_16_uint_System_NullableAsn1Tag_0>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass39_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass39_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass39_0_TryReadUInt32_16_uint_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass39_0::<TryReadUInt32_16_uint_System_NullableAsn1Tag_1>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass41_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass41_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass41_0_TryReadInt64_17_long_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass41_0::<TryReadInt64_17_long_System_NullableAsn1Tag_0>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass43_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass43_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass43_0_TryReadInt64_17_long_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass43_0::<TryReadInt64_17_long_System_NullableAsn1Tag_1>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass45_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass45_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass45_0_TryReadUInt64_18_ulong_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass45_0::<TryReadUInt64_18_ulong_System_NullableAsn1Tag_0>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass47_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass47_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass47_0_TryReadUInt64_18_ulong_System_NullableAsn1Tag_1_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass47_0::<TryReadUInt64_18_ulong_System_NullableAsn1Tag_1>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass58_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass58_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass58_0_TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass58_0::<TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0>b__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass70_0__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass70_0::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass70_0_TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0_b__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass70_0::<TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0>b__0
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_cctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::.cctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_Clone_5__5_b__9_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<Clone_5__5>b__9_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_PeekContentBytes_3__3_b__5_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<PeekContentBytes_3__3>b__5_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_PeekEncodedValue_2__2_b__3_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<PeekEncodedValue_2__2>b__3_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_PeekTag_1__1_b__1_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<PeekTag_1__1>b__1_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadBoolean_8_System_NullableAsn1Tag_0_b__19_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadBoolean_8_System_NullableAsn1Tag_0>b__19_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0_b__72_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0>b__72_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadEncodedValue_4__4_b__7_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadEncodedValue_4__4>b__7_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadEnumeratedBytes_9_System_NullableAsn1Tag_0_b__21_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadEnumeratedBytes_9_System_NullableAsn1Tag_0>b__21_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadEnumeratedValue_10_System_NullableAsn1Tag_0_b__23_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadEnumeratedValue_10_System_NullableAsn1Tag_0>b__23_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0_b__25_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0>b__25_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadGeneralizedTime_12_System_NullableAsn1Tag_0_b__27_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadGeneralizedTime_12_System_NullableAsn1Tag_0>b__27_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadInteger_14_System_NullableAsn1Tag_0_b__31_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadInteger_14_System_NullableAsn1Tag_0>b__31_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadIntegerBytes_13_System_NullableAsn1Tag_0_b__29_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadIntegerBytes_13_System_NullableAsn1Tag_0>b__29_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadNamedBitList_21_System_NullableAsn1Tag_0_b__53_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadNamedBitList_21_System_NullableAsn1Tag_0>b__53_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadNamedBitListValue_19_System_NullableAsn1Tag_0_b__49_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadNamedBitListValue_19_System_NullableAsn1Tag_0>b__49_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0_b__51_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0>b__51_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadObjectIdentifier_25_System_NullableAsn1Tag_0_b__60_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadObjectIdentifier_25_System_NullableAsn1Tag_0>b__60_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadOctetString_23_System_NullableAsn1Tag_0_b__56_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadOctetString_23_System_NullableAsn1Tag_0>b__56_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadSequence_26_System_NullableAsn1Tag_0_b__62_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadSequence_26_System_NullableAsn1Tag_0>b__62_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadSetOf_27_System_NullableAsn1Tag_0_b__64_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadSetOf_27_System_NullableAsn1Tag_0>b__64_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadSetOf_28_bool_System_NullableAsn1Tag_0_b__66_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadSetOf_28_bool_System_NullableAsn1Tag_0>b__66_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadSetOf_28_bool_System_NullableAsn1Tag_1_b__68_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadSetOf_28_bool_System_NullableAsn1Tag_1>b__68_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadUtcTime_31_System_NullableAsn1Tag_0_b__74_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadUtcTime_31_System_NullableAsn1Tag_0>b__74_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadUtcTime_32_int_System_NullableAsn1Tag_0_b__76_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadUtcTime_32_int_System_NullableAsn1Tag_0>b__76_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadUtcTime_32_int_System_NullableAsn1Tag_1_b__78_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadUtcTime_32_int_System_NullableAsn1Tag_1>b__78_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriter_ScopeTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriter_ScopeTests::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriter_ScopeTests_Benchmark_Dispose_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriter_ScopeTests::Benchmark_Dispose_0__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_CopyTo_2_AsnWriter_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_CopyTo_2_AsnWriter_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_EncodedValueEquals_1_AsnWriter_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_EncodedValueEquals_1_AsnWriter_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_GetEncodedLength_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_GetEncodedLength_0__0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_PopOctetString_14_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_PopOctetString_14_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_PopSequence_16_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_PopSequence_16_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_PopSetOf_17_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_PopSetOf_17_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteBoolean_3_bool_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteBoolean_3_bool_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteBoolean_3_bool_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteBoolean_3_bool_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteEnumeratedValue_4_System_Enum_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteEnumeratedValue_4_System_Enum_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_7_long_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_7_long_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_7_long_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_7_long_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_8_ulong_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_8_ulong_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_8_ulong_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_8_ulong_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_9_BigInteger_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_9_BigInteger_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_9_BigInteger_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_9_BigInteger_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNamedBitList_10_System_Enum_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNamedBitList_10_System_Enum_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNamedBitList_12_BitArray_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNamedBitList_12_BitArray_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNull_13_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNull_13_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteObjectIdentifier_15_string_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteObjectIdentifier_15_string_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteObjectIdentifier_15_string_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteObjectIdentifier_15_string_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteUtcTime_19_System_DateTimeOffset_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteUtcTime_19_System_DateTimeOffset_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_1
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_EncodedValueEquals_1_AsnWriter_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::EncodedValueEquals_1_AsnWriter_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_GetEncodedLength_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::GetEncodedLength_0__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_Clone_5__5_b__9_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<Clone_5__5>b__9_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_PeekContentBytes_3__3_b__5_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<PeekContentBytes_3__3>b__5_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_PeekEncodedValue_2__2_b__3_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<PeekEncodedValue_2__2>b__3_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_PeekTag_1__1_b__1_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<PeekTag_1__1>b__1_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadBoolean_8_System_NullableAsn1Tag_0_b__19_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadBoolean_8_System_NullableAsn1Tag_0>b__19_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0_b__72_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0>b__72_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadEncodedValue_4__4_b__7_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadEncodedValue_4__4>b__7_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadEnumeratedBytes_9_System_NullableAsn1Tag_0_b__21_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadEnumeratedBytes_9_System_NullableAsn1Tag_0>b__21_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadEnumeratedValue_10_System_NullableAsn1Tag_0_b__23_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadEnumeratedValue_10_System_NullableAsn1Tag_0>b__23_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0_b__25_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0>b__25_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadGeneralizedTime_12_System_NullableAsn1Tag_0_b__27_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadGeneralizedTime_12_System_NullableAsn1Tag_0>b__27_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadInteger_14_System_NullableAsn1Tag_0_b__31_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadInteger_14_System_NullableAsn1Tag_0>b__31_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadIntegerBytes_13_System_NullableAsn1Tag_0_b__29_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadIntegerBytes_13_System_NullableAsn1Tag_0>b__29_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadNamedBitList_21_System_NullableAsn1Tag_0_b__53_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadNamedBitList_21_System_NullableAsn1Tag_0>b__53_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadNamedBitListValue_19_System_NullableAsn1Tag_0_b__49_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadNamedBitListValue_19_System_NullableAsn1Tag_0>b__49_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0_b__51_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0>b__51_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadObjectIdentifier_25_System_NullableAsn1Tag_0_b__60_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadObjectIdentifier_25_System_NullableAsn1Tag_0>b__60_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadOctetString_23_System_NullableAsn1Tag_0_b__56_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadOctetString_23_System_NullableAsn1Tag_0>b__56_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadSequence_26_System_NullableAsn1Tag_0_b__62_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadSequence_26_System_NullableAsn1Tag_0>b__62_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadSetOf_27_System_NullableAsn1Tag_0_b__64_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadSetOf_27_System_NullableAsn1Tag_0>b__64_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadSetOf_28_bool_System_NullableAsn1Tag_0_b__66_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadSetOf_28_bool_System_NullableAsn1Tag_0>b__66_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadSetOf_28_bool_System_NullableAsn1Tag_1_b__68_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadSetOf_28_bool_System_NullableAsn1Tag_1>b__68_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadUtcTime_31_System_NullableAsn1Tag_0_b__74_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadUtcTime_31_System_NullableAsn1Tag_0>b__74_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadUtcTime_32_int_System_NullableAsn1Tag_0_b__76_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadUtcTime_32_int_System_NullableAsn1Tag_0>b__76_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c_ReadUtcTime_32_int_System_NullableAsn1Tag_1_b__78_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<ReadUtcTime_32_int_System_NullableAsn1Tag_1>b__78_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriter_ScopeTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriter_ScopeTests::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriter_ScopeTests_Benchmark_Dispose_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriter_ScopeTests::Benchmark_Dispose_0__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_CopyTo_2_AsnWriter_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_CopyTo_2_AsnWriter_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_EncodedValueEquals_1_AsnWriter_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_EncodedValueEquals_1_AsnWriter_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_GetEncodedLength_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_GetEncodedLength_0__0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_PopOctetString_14_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_PopOctetString_14_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_PopSequence_16_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_PopSequence_16_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_PopSetOf_17_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_PopSetOf_17_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteBoolean_3_bool_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteBoolean_3_bool_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteBoolean_3_bool_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteBoolean_3_bool_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteEnumeratedValue_4_System_Enum_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteEnumeratedValue_4_System_Enum_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_7_long_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_7_long_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_7_long_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_7_long_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_8_ulong_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_8_ulong_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_8_ulong_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_8_ulong_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_9_BigInteger_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_9_BigInteger_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteInteger_9_BigInteger_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteInteger_9_BigInteger_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNamedBitList_10_System_Enum_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNamedBitList_10_System_Enum_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNamedBitList_12_BitArray_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNamedBitList_12_BitArray_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteNull_13_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteNull_13_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteObjectIdentifier_15_string_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteObjectIdentifier_15_string_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteObjectIdentifier_15_string_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteObjectIdentifier_15_string_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteUtcTime_19_System_DateTimeOffset_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteUtcTime_19_System_DateTimeOffset_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_Benchmark_WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::Benchmark_WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_1
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_EncodedValueEquals_1_AsnWriter_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::EncodedValueEquals_1_AsnWriter_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests_GetEncodedLength_0__0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests::GetEncodedLength_0__0
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c_cctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::.cctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::.ctor
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c_EncodedValueEquals_1_AsnWriter_0_b__2_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<EncodedValueEquals_1_AsnWriter_0>b__2_0
-	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c_GetEncodedLength_0__0_b__0_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<GetEncodedLength_0__0>b__0_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::.ctor
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c_EncodedValueEquals_1_AsnWriter_0_b__2_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<EncodedValueEquals_1_AsnWriter_0>b__2_0
+	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c_GetEncodedLength_0__0_b__0_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<GetEncodedLength_0__0>b__0_0
 };
 
 // Accessor functions for verification_dispatch.generated.cpp
@@ -4130,10 +3506,266 @@ extern constexpr HotpatchModuleV0 s_hotpatch_module = {
 // Expose hotpatch module to BootstrapRuntime
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 	= &s_hotpatch_module;
-// --- External Runtime Dispatch Table (empty) ---
-extern "C" const char* kChaosExternalRuntimeSubjects[1] = { nullptr };
-extern "C" void* kChaosExternalRuntimeFnTable[1] = { nullptr };
-extern "C" int32_t kChaosExternalRuntimeCount = 0;
+// ── External Runtime Dispatch Table ──────────────────────────
+// Startup-time-resolved function pointers for cross-assembly calls.
+
+extern "C" const char* kChaosExternalRuntimeSubjects[115] = {
+	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
+	"System.Formats.Asn1/Asn1Tag",
+	"System.Formats.Asn1/Asn1Tag::AsConstructed:Asn1Tag()",
+	"System.Formats.Asn1/Asn1Tag::AsPrimitive:Asn1Tag()",
+	"System.Formats.Asn1/Asn1Tag::CalculateEncodedSize:System.Int32()",
+	"System.Formats.Asn1/Asn1Tag::HasSameClassAndValue:System.Boolean(Asn1Tag)",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)",
+	"System.Formats.Asn1/AsnReader::Clone:AsnReader()",
+	"System.Formats.Asn1/AsnReader::PeekContentBytes:System.ReadOnlyMemory<System.Byte>()",
+	"System.Formats.Asn1/AsnReader::PeekEncodedValue:System.ReadOnlyMemory<System.Byte>()",
+	"System.Formats.Asn1/AsnReader::PeekTag:Asn1Tag()",
+	"System.Private.CoreLib/System.Nullable<Asn1Tag>",
+	"System.Formats.Asn1/AsnReader::ReadBitString:System.Byte[](System.Int32&,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadBoolean:System.Boolean(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadCharacterString:System.String(UniversalTagNumber,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadEncodedValue:System.ReadOnlyMemory<System.Byte>()",
+	"System.Formats.Asn1/AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory<System.Byte>(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadEnumeratedValue<System.DayOfWeek>:System.DayOfWeek(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadIntegerBytes:System.ReadOnlyMemory<System.Byte>(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadNamedBitList:BitArray(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadNamedBitListValue<System.DayOfWeek>:System.DayOfWeek(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadNull:System.Void(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadObjectIdentifier:System.String(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadOctetString:System.Byte[](System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadSequence:AsnReader(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadSetOf:AsnReader(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadSetOf:AsnReader(System.Boolean,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::ThrowIfNotEmpty:System.Void()",
+	"System.Formats.Asn1/AsnReader::TryReadInt32:System.Boolean(System.Int32&,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::TryReadInt64:System.Boolean(System.Int64&,System.Nullable<Asn1Tag>)",
+	"System.Private.CoreLib/System.ReadOnlyMemory<System.Byte>",
+	"System.Formats.Asn1/AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32&,System.ReadOnlyMemory<System.Byte>&,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(Asn1Tag,System.ReadOnlyMemory<System.Byte>&)",
+	"System.Formats.Asn1/AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory<System.Byte>&,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::TryReadUInt32:System.Boolean(System.UInt32&,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnReader::TryReadUInt64:System.Boolean(System.UInt64&,System.Nullable<Asn1Tag>)",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__9_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9",
+	"System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__5_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__3_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__1_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass15_0::__ref_7_0_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass17_0::__ref_7_1_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__19_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__72_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__7_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__21_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__23_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__25_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__27_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__31_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__29_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__53_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__49_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__51_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__60_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__56_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__62_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__64_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__66_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__68_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__74_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__76_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c::<>9__78_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass33_0::__ref_15_0_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass35_0::__ref_15_1_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass41_0::__ref_17_0_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass43_0::__ref_17_1_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass11_0::__ref_6_0_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass11_0::__ref_6_0_1",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass13_0::__ref_6_1_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass13_0::__ref_6_1_1",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass70_0::__ref_29_0_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass58_0::__ref_24_0_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass37_0::__ref_16_0_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass39_0::__ref_16_1_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass45_0::__ref_18_0_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnReaderTests+<>c__DisplayClass47_0::__ref_18_1_0",
+	"System.Formats.Asn1/AsnWriter+Scope",
+	"System.Formats.Asn1/AsnWriter+Scope::Dispose:System.Void()",
+	"System.Formats.Asn1/AsnWriter::CopyTo:System.Void(AsnWriter)",
+	"System.Formats.Asn1/AsnWriter::EncodedValueEquals:System.Boolean(AsnWriter)",
+	"System.Formats.Asn1/AsnWriter::GetEncodedLength:System.Int32()",
+	"System.Formats.Asn1/AsnWriter::PopOctetString:System.Void(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::PopSequence:System.Void(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::PopSetOf:System.Void(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteCharacterString:System.Void(UniversalTagNumber,System.String,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteEnumeratedValue<System.DayOfWeek>:System.Void(System.DayOfWeek,System.Nullable<Asn1Tag>)",
+	"System.Private.CoreLib/System.DateTimeOffset",
+	"System.Formats.Asn1/AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable<Asn1Tag>)",
+	"System.Runtime.Numerics/System.Numerics.BigInteger",
+	"System.Formats.Asn1/AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteNamedBitList<System.DayOfWeek>:System.Void(System.DayOfWeek,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteNamedBitList:System.Void(BitArray,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteNull:System.Void(System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable<Asn1Tag>)",
+	"System.Formats.Asn1/AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable<Asn1Tag>)",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<>9__2_0",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<>9",
+	"CombinedSubjects/AutoGenerated.System_Formats_Asn1.System_Formats_Asn1_AsnWriterTests+<>c::<>9__0_0",
+};
+
+extern "C" void* kChaosExternalRuntimeFnTable[115] = {
+	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_Asn1Tag),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_Asn1Tag__AsConstructed_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_Asn1Tag__AsPrimitive_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_Asn1Tag__CalculateEncodedSize_System_Int32__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_Asn1Tag__HasSameClassAndValue_System_Boolean_Asn1Tag_),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__Clone_AsnReader__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__PeekContentBytes_System_ReadOnlyMemory_System_Byte___),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__PeekEncodedValue_System_ReadOnlyMemory_System_Byte___),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__PeekTag_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Nullable_Asn1Tag_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadBitString_System_Byte___System_Int32__System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadBoolean_System_Boolean_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadCharacterString_System_String_UniversalTagNumber_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadEncodedValue_System_ReadOnlyMemory_System_Byte___),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadEnumeratedBytes_System_ReadOnlyMemory_System_Byte__System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadEnumeratedValue_System_DayOfWeek__System_DayOfWeek_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadEnumeratedValue_System_Enum_System_Type_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadGeneralizedTime_System_DateTimeOffset_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadInteger_System_Numerics_BigInteger_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadIntegerBytes_System_ReadOnlyMemory_System_Byte__System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadNamedBitList_BitArray_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadNamedBitListValue_System_DayOfWeek__System_DayOfWeek_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadNamedBitListValue_System_Enum_System_Type_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadNull_System_Void_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadObjectIdentifier_System_String_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadOctetString_System_Byte___System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadSequence_AsnReader_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadSetOf_AsnReader_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadSetOf_AsnReader_System_Boolean_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadUtcTime_System_DateTimeOffset_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ReadUtcTime_System_DateTimeOffset_System_Int32_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__ThrowIfNotEmpty_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadInt32_System_Boolean_System_Int32__System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadInt64_System_Boolean_System_Int64__System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadPrimitiveBitString_System_Boolean_System_Int32__System_ReadOnlyMemory_System_Byte___System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadPrimitiveCharacterStringBytes_System_Boolean_Asn1Tag_System_ReadOnlyMemory_System_Byte___),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadPrimitiveOctetString_System_Boolean_System_ReadOnlyMemory_System_Byte___System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadUInt32_System_Boolean_System_UInt32__System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnReader__TryReadUInt64_System_Boolean_System_UInt64__System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__9_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_),
+	reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__5_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__3_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__1_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass15_0____ref_7_0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass17_0____ref_7_1_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__19_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__72_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__7_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__21_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__23_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__25_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__27_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__31_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__29_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__53_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__49_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__51_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__60_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__56_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__62_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__64_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__66_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__68_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__74_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__76_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c____9__78_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass33_0____ref_15_0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass35_0____ref_15_1_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass41_0____ref_17_0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass43_0____ref_17_1_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0____ref_6_0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass11_0____ref_6_0_1),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0____ref_6_1_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass13_0____ref_6_1_1),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass70_0____ref_29_0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass58_0____ref_24_0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass37_0____ref_16_0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass39_0____ref_16_1_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass45_0____ref_18_0_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnReaderTests___c__DisplayClass47_0____ref_18_1_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter_Scope),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter_Scope__Dispose_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__CopyTo_System_Void_AsnWriter_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__EncodedValueEquals_System_Boolean_AsnWriter_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__GetEncodedLength_System_Int32__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__PopOctetString_System_Void_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__PopSequence_System_Void_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__PopSetOf_System_Void_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteBoolean_System_Void_System_Boolean_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteCharacterString_System_Void_UniversalTagNumber_System_String_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteEnumeratedValue_System_Void_System_Enum_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteEnumeratedValue_System_DayOfWeek__System_Void_System_DayOfWeek_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_DateTimeOffset),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteGeneralizedTime_System_Void_System_DateTimeOffset_System_Boolean_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteInteger_System_Void_System_Int64_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteInteger_System_Void_System_UInt64_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Numerics_System_Numerics_BigInteger),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteInteger_System_Void_System_Numerics_BigInteger_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteNamedBitList_System_Void_System_Enum_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteNamedBitList_System_DayOfWeek__System_Void_System_DayOfWeek_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteNamedBitList_System_Void_BitArray_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteNull_System_Void_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteObjectIdentifier_System_Void_System_String_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteUtcTime_System_Void_System_DateTimeOffset_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Formats_Asn1_AsnWriter__WriteUtcTime_System_Void_System_DateTimeOffset_System_Int32_System_Nullable_Asn1Tag__),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c____9__2_0),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c____9),
+	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Formats_Asn1_AsnWriterTests___c____9__0_0),
+};
+
+extern "C" int32_t kChaosExternalRuntimeCount = 115;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+	const char* subject_id;
+	const uint8_t* il_data;
+	int32_t il_size;
+	void* patch_method;
+	const char* json_data;
+};
+
+static const uint8_t s_il_0[] = {
+	0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+	{ "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+	{ nullptr, nullptr, 0, nullptr, nullptr }
+};
+
 
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
@@ -8422,6 +8054,10 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Formats_Asn1_System_Format
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
 		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;

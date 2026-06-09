@@ -1,0 +1,15 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.XmlReaderSettings::Clone:System.Xml.XmlReaderSettings()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Xml.XmlReaderSettings",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

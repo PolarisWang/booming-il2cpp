@@ -1,4 +1,4 @@
-// AUTO-GENERATED from RuntimeHelperShapeRegistry -- DO NOT EDIT
+﻿// AUTO-GENERATED from RuntimeHelperShapeRegistry -- DO NOT EDIT
 // This file is the single source of truth for runtime helper dispatch.
 // All changes must originate in RuntimeHelperShapeRegistry.BuildDefault().
 

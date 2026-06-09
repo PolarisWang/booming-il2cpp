@@ -89,7 +89,10 @@ public sealed class TestEmitter
         sb.AppendLine("using System.Threading.Channels;");
         sb.AppendLine("using System.Threading.Tasks;");
         sb.AppendLine("using System.Xml;");
+        sb.AppendLine("using System.Xml.Linq;");
         sb.AppendLine("using System.Xml.Schema;");
+        sb.AppendLine("using System.Xml.XPath;");
+        sb.AppendLine("using System.Xml.Xsl;");
         sb.AppendLine("using Microsoft.Win32.SafeHandles;");
         sb.AppendLine("using Chaos.TestFramework;");
 

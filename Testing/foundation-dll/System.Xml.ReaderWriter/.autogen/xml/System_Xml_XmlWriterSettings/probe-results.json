@@ -1,0 +1,15 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.XmlWriterSettings::Clone:System.Xml.XmlWriterSettings()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Xml.XmlWriterSettings",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

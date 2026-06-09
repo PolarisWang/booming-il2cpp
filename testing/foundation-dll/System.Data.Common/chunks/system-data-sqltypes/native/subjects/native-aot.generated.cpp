@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -6239,22 +6241,22 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
     auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
     // Register managed_array (variable-size: header + contiguous element data).
     registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-        static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-        static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+        static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
     registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
     registry.Register(10840107372015832795ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c), nullptr, 0);
@@ -6662,4678 +6664,3342 @@ CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_TimeSpan__Zero = 
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Globalization_CompareOptions__System_Void_System_Globalization_CompareOptions_System_Globalization_CompareOptions_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual<System.Globalization.CompareOptions>:System.Void(System.Globalization.CompareOptions,System.Globalization.CompareOptions,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Byte___System_Byte___System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte[],System.Byte[],System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__IsNotNull_System_Void_System_Object_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentNullException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Data_SqlTypes_SqlNullValueException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.Data.SqlTypes.SqlNullValueException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Data_SqlTypes_SqlTypeException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.Data.SqlTypes.SqlTypeException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_FormatException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.FormatException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_IndexOutOfRangeException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.IndexOutOfRangeException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBinaryTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBooleanTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBooleanTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlByteTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBytesTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlBytesTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlCharsTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlCharsTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDateTimeTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDateTimeTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__66_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__66_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__68_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__68_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__70_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__70_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__72_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__72_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDecimalTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDecimalTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlDoubleTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlDoubleTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlGuidTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlGuidTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt16Tests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt16Tests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt32Tests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt32Tests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlInt64Tests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlInt64Tests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlMoneyTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlMoneyTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlSingleTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlSingleTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlStringTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlStringTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlXmlTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlXmlTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlXmlTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Data_Common.System_Data_SqlTypes_SqlXmlTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__Add_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::Add:System.Data.SqlTypes.SqlBinary(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__CompareTo_System_Int32_System_Data_SqlTypes_SqlBinary_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::CompareTo:System.Int32(System.Data.SqlTypes.SqlBinary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__Concat_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::Concat:System.Data.SqlTypes.SqlBinary(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__ToSqlGuid_System_Data_SqlTypes_SqlGuid__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::ToSqlGuid:System.Data.SqlTypes.SqlGuid()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__WrapBytes_System_Data_SqlTypes_SqlBinary_System_Byte___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBinary::WrapBytes:System.Data.SqlTypes.SqlBinary(System.Byte[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__And_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::And:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__CompareTo_System_Int32_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::CompareTo:System.Int32(System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__GreaterThanOrEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::GreaterThanOrEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__LessThanOrEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::LessThanOrEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__OnesComplement_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::OnesComplement:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__Or_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::Or:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__Parse_System_Data_SqlTypes_SqlBoolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::Parse:System.Data.SqlTypes.SqlBoolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBoolean__Xor_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBoolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBoolean::Xor:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__Add_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::Add:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__BitwiseAnd_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::BitwiseAnd:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__BitwiseOr_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::BitwiseOr:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__CompareTo_System_Int32_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::CompareTo:System.Int32(System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__Divide_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::Divide:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__Mod_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::Mod:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__Modulus_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::Modulus:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__Multiply_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::Multiply:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__OnesComplement_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::OnesComplement:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__Parse_System_Data_SqlTypes_SqlByte_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::Parse:System.Data.SqlTypes.SqlByte(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__Subtract_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::Subtract:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlByte__Xor_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_System_Data_SqlTypes_SqlByte_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlByte::Xor:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBytes__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBytes::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBytes__Read_System_Int64_System_Int64_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBytes::Read:System.Int64(System.Int64,System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBytes__SetLength_System_Void_System_Int64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBytes::SetLength:System.Void(System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBytes__SetNull_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBytes::SetNull:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBytes__ToSqlBinary_System_Data_SqlTypes_SqlBinary__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBytes::ToSqlBinary:System.Data.SqlTypes.SqlBinary()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBytes__Write_System_Void_System_Int64_System_Byte___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlBytes::Write:System.Void(System.Int64,System.Byte[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlChars::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__Read_System_Int64_System_Int64_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlChars::Read:System.Int64(System.Int64,System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__SetLength_System_Void_System_Int64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlChars::SetLength:System.Void(System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__SetNull_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlChars::SetNull:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlChars::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__Write_System_Void_System_Int64_System_Char___System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlChars::Write:System.Void(System.Int64,System.Char[],System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__Add_System_Data_SqlTypes_SqlDateTime_System_Data_SqlTypes_SqlDateTime_System_TimeSpan_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::Add:System.Data.SqlTypes.SqlDateTime(System.Data.SqlTypes.SqlDateTime,System.TimeSpan)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__CompareTo_System_Int32_System_Data_SqlTypes_SqlDateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::CompareTo:System.Int32(System.Data.SqlTypes.SqlDateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDateTime_System_Data_SqlTypes_SqlDateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDateTime_System_Data_SqlTypes_SqlDateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDateTime_System_Data_SqlTypes_SqlDateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDateTime_System_Data_SqlTypes_SqlDateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDateTime_System_Data_SqlTypes_SqlDateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__Parse_System_Data_SqlTypes_SqlDateTime_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::Parse:System.Data.SqlTypes.SqlDateTime(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__Subtract_System_Data_SqlTypes_SqlDateTime_System_Data_SqlTypes_SqlDateTime_System_TimeSpan_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::Subtract:System.Data.SqlTypes.SqlDateTime(System.Data.SqlTypes.SqlDateTime,System.TimeSpan)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDateTime__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDateTime::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Add_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Add:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__AdjustScale_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Int32_System_Boolean_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::AdjustScale:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Ceiling_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Ceiling:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__CompareTo_System_Int32_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::CompareTo:System.Int32(System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ConvertToPrecScale_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Int32_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ConvertToPrecScale:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Divide_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Divide:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Floor_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Floor:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Multiply_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Multiply:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Parse_System_Data_SqlTypes_SqlDecimal_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Parse:System.Data.SqlTypes.SqlDecimal(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Power_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Double_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Power:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Double)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Round_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Round:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Sign_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Sign:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Subtract_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Subtract:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToDouble_System_Double__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToDouble:System.Double()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDecimal__Truncate_System_Data_SqlTypes_SqlDecimal_System_Data_SqlTypes_SqlDecimal_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDecimal::Truncate:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__Add_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::Add:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__CompareTo_System_Int32_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::CompareTo:System.Int32(System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__Divide_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::Divide:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__Multiply_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::Multiply:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__Parse_System_Data_SqlTypes_SqlDouble_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::Parse:System.Data.SqlTypes.SqlDouble(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__Subtract_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_System_Data_SqlTypes_SqlDouble_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::Subtract:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlDouble__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__CompareTo_System_Int32_System_Data_SqlTypes_SqlGuid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::CompareTo:System.Int32(System.Data.SqlTypes.SqlGuid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlGuid_System_Data_SqlTypes_SqlGuid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlGuid_System_Data_SqlTypes_SqlGuid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlGuid_System_Data_SqlTypes_SqlGuid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlGuid_System_Data_SqlTypes_SqlGuid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlGuid_System_Data_SqlTypes_SqlGuid_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__Parse_System_Data_SqlTypes_SqlGuid_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::Parse:System.Data.SqlTypes.SqlGuid(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__ToByteArray_System_Byte____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::ToByteArray:System.Byte[]()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__ToSqlBinary_System_Data_SqlTypes_SqlBinary__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::ToSqlBinary:System.Data.SqlTypes.SqlBinary()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlGuid__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlGuid::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__Add_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::Add:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__BitwiseAnd_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::BitwiseAnd:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__BitwiseOr_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::BitwiseOr:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__CompareTo_System_Int32_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__Divide_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::Divide:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__Mod_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::Mod:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__Modulus_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::Modulus:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__Multiply_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::Multiply:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__OnesComplement_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::OnesComplement:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__Parse_System_Data_SqlTypes_SqlInt16_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::Parse:System.Data.SqlTypes.SqlInt16(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__Subtract_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::Subtract:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt16__Xor_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_System_Data_SqlTypes_SqlInt16_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt16::Xor:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__Add_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::Add:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__BitwiseAnd_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::BitwiseAnd:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__BitwiseOr_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::BitwiseOr:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__CompareTo_System_Int32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__Divide_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::Divide:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__Mod_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::Mod:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__Modulus_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::Modulus:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__Multiply_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::Multiply:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__OnesComplement_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::OnesComplement:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__Parse_System_Data_SqlTypes_SqlInt32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::Parse:System.Data.SqlTypes.SqlInt32(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__Subtract_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::Subtract:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt32__Xor_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_System_Data_SqlTypes_SqlInt32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt32::Xor:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__Add_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::Add:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__BitwiseAnd_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::BitwiseAnd:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__BitwiseOr_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::BitwiseOr:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__CompareTo_System_Int32_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__Divide_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::Divide:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__Mod_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::Mod:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__Modulus_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::Modulus:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__Multiply_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::Multiply:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__OnesComplement_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::OnesComplement:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__Parse_System_Data_SqlTypes_SqlInt64_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::Parse:System.Data.SqlTypes.SqlInt64(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__Subtract_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::Subtract:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlInt64__Xor_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_System_Data_SqlTypes_SqlInt64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlInt64::Xor:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__Add_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::Add:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__CompareTo_System_Int32_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::CompareTo:System.Int32(System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__Divide_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::Divide:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__FromTdsValue_System_Data_SqlTypes_SqlMoney_System_Int64_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::FromTdsValue:System.Data.SqlTypes.SqlMoney(System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__GetTdsValue_System_Int64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::GetTdsValue:System.Int64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__Multiply_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::Multiply:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__Parse_System_Data_SqlTypes_SqlMoney_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::Parse:System.Data.SqlTypes.SqlMoney(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__Subtract_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_System_Data_SqlTypes_SqlMoney_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::Subtract:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToDecimal_System_Decimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToDecimal:System.Decimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToDouble_System_Double__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToDouble:System.Double()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToInt32_System_Int32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToInt32:System.Int32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToInt64_System_Int64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToInt64:System.Int64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlMoney__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__Add_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::Add:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__CompareTo_System_Int32_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::CompareTo:System.Int32(System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__Divide_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::Divide:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__Multiply_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::Multiply:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__Parse_System_Data_SqlTypes_SqlSingle_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::Parse:System.Data.SqlTypes.SqlSingle(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__Subtract_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_System_Data_SqlTypes_SqlSingle_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::Subtract:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlSingle__ToSqlString_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlString:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__Add_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::Add:System.Data.SqlTypes.SqlString(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__Clone_System_Data_SqlTypes_SqlString__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::Clone:System.Data.SqlTypes.SqlString()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__CompareOptionsFromSqlCompareOptions_System_Globalization_CompareOptions_System_Data_SqlTypes_SqlCompareOptions_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::CompareOptionsFromSqlCompareOptions:System.Globalization.CompareOptions(System.Data.SqlTypes.SqlCompareOptions)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__CompareTo_System_Int32_System_Data_SqlTypes_SqlString_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::CompareTo:System.Int32(System.Data.SqlTypes.SqlString)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__CompareTo_System_Int32_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::CompareTo:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__Concat_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::Concat:System.Data.SqlTypes.SqlString(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__GetNonUnicodeBytes_System_Byte____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::GetNonUnicodeBytes:System.Byte[]()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__GetUnicodeBytes_System_Byte____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::GetUnicodeBytes:System.Byte[]()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__GreaterThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__GreaterThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__LessThanOrEqual_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__LessThan_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlString_System_Data_SqlTypes_SqlString_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlBoolean_System_Data_SqlTypes_SqlBoolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlByte_System_Data_SqlTypes_SqlByte__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlByte:System.Data.SqlTypes.SqlByte()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlDateTime_System_Data_SqlTypes_SqlDateTime__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDateTime:System.Data.SqlTypes.SqlDateTime()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlDecimal_System_Data_SqlTypes_SqlDecimal__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlDouble_System_Data_SqlTypes_SqlDouble__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDouble:System.Data.SqlTypes.SqlDouble()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlGuid_System_Data_SqlTypes_SqlGuid__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlGuid:System.Data.SqlTypes.SqlGuid()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlInt16_System_Data_SqlTypes_SqlInt16__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt16:System.Data.SqlTypes.SqlInt16()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlInt32_System_Data_SqlTypes_SqlInt32__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt32:System.Data.SqlTypes.SqlInt32()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlInt64_System_Data_SqlTypes_SqlInt64__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt64:System.Data.SqlTypes.SqlInt64()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlMoney_System_Data_SqlTypes_SqlMoney__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlMoney:System.Data.SqlTypes.SqlMoney()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlString__ToSqlSingle_System_Data_SqlTypes_SqlSingle__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlSingle:System.Data.SqlTypes.SqlSingle()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlXml__CreateReader_System_Xml_XmlReader__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlXml::CreateReader:System.Xml.XmlReader()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlXml__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Data.Common/System.Data.SqlTypes.SqlXml::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____() noexcept
@@ -11348,16 +10014,12 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Byte() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Byte");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Char() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Char");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -11367,16 +10029,12 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_TimeSpan() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.TimeSpan");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_TimeSpan__Zero() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.TimeSpan::Zero");
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -11398,7 +10056,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -17839,7 +16497,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[675] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[675] = {
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__0_0),
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_),
@@ -17857,7 +16515,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[675] = {
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__NotEquals_System_Data_SqlTypes_SqlBoolean_System_Data_SqlTypes_SqlBinary_System_Data_SqlTypes_SqlBinary_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__ToSqlGuid_System_Data_SqlTypes_SqlGuid__),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlBinary__WrapBytes_System_Data_SqlTypes_SqlBinary_System_Byte___),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Byte),
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlBinaryTests___c____9__16_0),
     reinterpret_cast<void*>(&chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_),
@@ -17998,7 +16656,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[675] = {
     reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Data_Common_System_Data_SqlTypes_SqlByteTests___c____9__22_0),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__GetXsdType_System_Xml_XmlQualifiedName_System_Xml_Schema_XmlSchemaSet_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__Read_System_Int64_System_Int64_System_Char___System_Int32_System_Int32_),
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Char__System_Char____),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Char),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__SetLength_System_Void_System_Int64_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Data_Common_System_Data_SqlTypes_SqlChars__SetNull_System_Void__),
@@ -18517,6 +17175,1444 @@ extern "C" void* kChaosExternalRuntimeFnTable[675] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 675;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+    const char* subject_id;
+    const uint8_t* il_data;
+    int32_t il_size;
+    void* patch_method;
+    const char* json_data;
+};
+extern "C" int32_t kChaosExternalRuntimeIlCount;
+static const uint8_t s_il_0[] = {
+    0x2A, 
+};
+static const uint8_t s_il_6[] = {
+    0x02, 0x03, 0x28, 0xAF, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_7[] = {
+    0x03, 0x75, 0x14, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x14, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xC2, 0x12, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x14, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_8[] = {
+    0x03, 0x75, 0x14, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x14, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xC2, 0x12, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x14, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_9[] = {
+    0x02, 0x03, 0x28, 0xAF, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_10[] = {
+    0x72, 0xF8, 0x73, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_11[] = {
+    0x02, 0x03, 0x28, 0xB5, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_12[] = {
+    0x02, 0x03, 0x28, 0xB7, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_13[] = {
+    0x02, 0x03, 0x28, 0xB4, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_14[] = {
+    0x02, 0x03, 0x28, 0xB6, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_15[] = {
+    0x02, 0x03, 0x28, 0xB3, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_16[] = {
+    0x02, 0x71, 0x14, 0x01, 0x00, 0x02, 0x28, 0xA2, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_17[] = {
+    0x02, 0x16, 0x73, 0xA7, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_34[] = {
+    0x02, 0x03, 0x28, 0xD9, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_35[] = {
+    0x03, 0x75, 0x15, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x15, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x03, 0x13, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x15, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_36[] = {
+    0x03, 0x75, 0x15, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x15, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x03, 0x13, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x15, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_37[] = {
+    0x72, 0x7A, 0x6F, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_38[] = {
+    0x02, 0x03, 0x28, 0xEC, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_39[] = {
+    0x02, 0x03, 0x28, 0xEE, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_40[] = {
+    0x02, 0x03, 0x28, 0xEB, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_41[] = {
+    0x02, 0x03, 0x28, 0xED, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_42[] = {
+    0x02, 0x03, 0x28, 0xEA, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_43[] = {
+    0x02, 0x28, 0xDE, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_44[] = {
+    0x02, 0x03, 0x28, 0xDA, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_45[] = {
+    0x02, 0x2D, 0x0C, 0x02, 0x28, 0xD9, 0x04, 0x00, 0x0A, 0x73, 0xCD, 0x12, 0x00, 0x06, 0x2A, 0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 
+    0x00, 0x0A, 0x2C, 0x06, 0x7E, 0xCC, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x6F, 0xA0, 0x05, 0x00, 0x0A, 0x10, 0x00, 0x02, 0x16, 0x6F, 0x2A, 0x00, 0x00, 
+    0x0A, 0x0A, 0x06, 0x28, 0xA1, 0x05, 0x00, 0x0A, 0x2D, 0x0A, 0x1F, 0x2D, 0x06, 0x2E, 0x05, 0x1F, 0x2B, 0x06, 0x33, 0x0D, 0x02, 0x14, 0x28, 0xCA, 
+    0x02, 0x00, 0x0A, 0x73, 0xCE, 0x12, 0x00, 0x06, 0x2A, 0x02, 0x28, 0xD9, 0x04, 0x00, 0x0A, 0x73, 0xCD, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_46[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0x1D, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_47[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0x07, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_48[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0x67, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_49[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0xCC, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_50[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0x10, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_51[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0x55, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_52[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0xA1, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_53[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0xEF, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_54[] = {
+    0x02, 0x71, 0x15, 0x01, 0x00, 0x02, 0x28, 0x33, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_55[] = {
+    0x02, 0x03, 0x28, 0xDF, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_78[] = {
+    0x72, 0xF8, 0x73, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_79[] = {
+    0x02, 0x28, 0x53, 0x13, 0x00, 0x06, 0x2C, 0x06, 0x73, 0x6C, 0x12, 0x00, 0x06, 0x7A, 0x04, 0x72, 0xD6, 0xDE, 0x00, 0x70, 0x28, 0xDB, 0x00, 0x00, 
+    0x0A, 0x03, 0x02, 0x28, 0x55, 0x13, 0x00, 0x06, 0x72, 0xC8, 0xDE, 0x00, 0x70, 0x28, 0x7E, 0x00, 0x00, 0x2B, 0x03, 0x72, 0xC8, 0xDE, 0x00, 0x70, 
+    0x28, 0x7C, 0x00, 0x00, 0x2B, 0x05, 0x6A, 0x02, 0x28, 0x55, 0x13, 0x00, 0x06, 0x72, 0xE4, 0xDE, 0x00, 0x70, 0x28, 0x7E, 0x00, 0x00, 0x2B, 0x05, 
+    0x72, 0xE4, 0xDE, 0x00, 0x70, 0x28, 0x80, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x72, 0x02, 0xDF, 0x00, 0x70, 0x28, 0x80, 0x00, 0x00, 0x2B, 0x0E, 0x04, 
+    0x04, 0x8E, 0x69, 0x05, 0x59, 0x72, 0x02, 0xDF, 0x00, 0x70, 0x28, 0x7F, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x6A, 0x02, 0x28, 0x55, 0x13, 0x00, 0x06, 
+    0x03, 0x59, 0x31, 0x0B, 0x02, 0x28, 0x55, 0x13, 0x00, 0x06, 0x03, 0x59, 0x69, 0x10, 0x04, 0x0E, 0x04, 0x2C, 0x4C, 0x02, 0x7B, 0xDC, 0x04, 0x00, 
+    0x04, 0x0A, 0x06, 0x19, 0x33, 0x2F, 0x02, 0x7B, 0xDB, 0x04, 0x00, 0x04, 0x6F, 0x7D, 0x05, 0x00, 0x0A, 0x03, 0x2E, 0x0E, 0x02, 0x7B, 0xDB, 0x04, 
+    0x00, 0x04, 0x03, 0x16, 0x6F, 0x7E, 0x05, 0x00, 0x0A, 0x26, 0x02, 0x7B, 0xDB, 0x04, 0x00, 0x04, 0x04, 0x05, 0x0E, 0x04, 0x6F, 0x95, 0x05, 0x00, 
+    0x0A, 0x10, 0x04, 0x2B, 0x12, 0x02, 0x7B, 0xD9, 0x04, 0x00, 0x04, 0x03, 0x04, 0x05, 0x6A, 0x0E, 0x04, 0x6A, 0x28, 0x37, 0x03, 0x00, 0x0A, 0x0E, 
+    0x04, 0x6A, 0x2A, 
+};
+static const uint8_t s_il_80[] = {
+    0x03, 0x72, 0xBA, 0xDA, 0x00, 0x70, 0x28, 0x7C, 0x00, 0x00, 0x2B, 0x02, 0x28, 0x65, 0x13, 0x00, 0x06, 0x2C, 0x0D, 0x02, 0x7B, 0xDB, 0x04, 0x00, 
+    0x04, 0x03, 0x6F, 0x9A, 0x05, 0x00, 0x0A, 0x2A, 0x02, 0x7B, 0xD9, 0x04, 0x00, 0x04, 0x2D, 0x0B, 0x28, 0xC5, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 
+    0x00, 0x06, 0x7A, 0x03, 0x02, 0x7B, 0xD9, 0x04, 0x00, 0x04, 0x8E, 0x69, 0x6A, 0x72, 0xBA, 0xDA, 0x00, 0x70, 0x28, 0x7E, 0x00, 0x00, 0x2B, 0x02, 
+    0x28, 0x53, 0x13, 0x00, 0x06, 0x2C, 0x07, 0x02, 0x17, 0x7D, 0xDC, 0x04, 0x00, 0x04, 0x02, 0x03, 0x7D, 0xDA, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_81[] = {
+    0x02, 0x15, 0x6A, 0x7D, 0xDA, 0x04, 0x00, 0x04, 0x02, 0x14, 0x7D, 0xDB, 0x04, 0x00, 0x04, 0x02, 0x16, 0x7D, 0xDC, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_82[] = {
+    0x02, 0x28, 0x53, 0x13, 0x00, 0x06, 0x2D, 0x0C, 0x02, 0x28, 0x57, 0x13, 0x00, 0x06, 0x73, 0xA6, 0x12, 0x00, 0x06, 0x2A, 0x7E, 0xC8, 0x04, 0x00, 
+    0x04, 0x2A, 
+};
+static const uint8_t s_il_83[] = {
+    0x02, 0x28, 0x65, 0x13, 0x00, 0x06, 0x2C, 0x2C, 0x02, 0x7B, 0xDB, 0x04, 0x00, 0x04, 0x6F, 0x7D, 0x05, 0x00, 0x0A, 0x03, 0x2E, 0x0E, 0x02, 0x7B, 
+    0xDB, 0x04, 0x00, 0x04, 0x03, 0x16, 0x6F, 0x7E, 0x05, 0x00, 0x0A, 0x26, 0x02, 0x7B, 0xDB, 0x04, 0x00, 0x04, 0x04, 0x05, 0x0E, 0x04, 0x6F, 0x97, 
+    0x05, 0x00, 0x0A, 0x2A, 0x04, 0x72, 0xD6, 0xDE, 0x00, 0x70, 0x28, 0xDB, 0x00, 0x00, 0x0A, 0x02, 0x7B, 0xD9, 0x04, 0x00, 0x04, 0x2D, 0x0B, 0x28, 
+    0xC5, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 0x00, 0x06, 0x7A, 0x03, 0x72, 0xC8, 0xDE, 0x00, 0x70, 0x28, 0x7C, 0x00, 0x00, 0x2B, 0x03, 0x02, 0x7B, 
+    0xD9, 0x04, 0x00, 0x04, 0x8E, 0x69, 0x6A, 0x31, 0x0B, 0x28, 0xC6, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 0x00, 0x06, 0x7A, 0x05, 0x72, 0xE4, 0xDE, 
+    0x00, 0x70, 0x28, 0x80, 0x00, 0x00, 0x2B, 0x05, 0x04, 0x8E, 0x69, 0x72, 0xE4, 0xDE, 0x00, 0x70, 0x28, 0x7F, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x72, 
+    0x02, 0xDF, 0x00, 0x70, 0x28, 0x80, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x04, 0x8E, 0x69, 0x05, 0x59, 0x72, 0x02, 0xDF, 0x00, 0x70, 0x28, 0x7F, 0x00, 
+    0x00, 0x2B, 0x0E, 0x04, 0x6A, 0x02, 0x7B, 0xD9, 0x04, 0x00, 0x04, 0x8E, 0x69, 0x6A, 0x03, 0x59, 0x31, 0x0B, 0x28, 0xC6, 0x01, 0x00, 0x06, 0x73, 
+    0x68, 0x12, 0x00, 0x06, 0x7A, 0x02, 0x28, 0x53, 0x13, 0x00, 0x06, 0x2C, 0x1F, 0x03, 0x2C, 0x0B, 0x28, 0xC7, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 
+    0x00, 0x06, 0x7A, 0x02, 0x16, 0x6A, 0x7D, 0xDA, 0x04, 0x00, 0x04, 0x02, 0x17, 0x7D, 0xDC, 0x04, 0x00, 0x04, 0x2B, 0x14, 0x03, 0x02, 0x7B, 0xDA, 
+    0x04, 0x00, 0x04, 0x31, 0x0B, 0x28, 0xC8, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 0x00, 0x06, 0x7A, 0x0E, 0x04, 0x2C, 0x2A, 0x04, 0x05, 0x6A, 0x02, 
+    0x7B, 0xD9, 0x04, 0x00, 0x04, 0x03, 0x0E, 0x04, 0x6A, 0x28, 0x37, 0x03, 0x00, 0x0A, 0x02, 0x7B, 0xDA, 0x04, 0x00, 0x04, 0x03, 0x0E, 0x04, 0x6A, 
+    0x58, 0x2F, 0x0B, 0x02, 0x03, 0x0E, 0x04, 0x6A, 0x58, 0x7D, 0xDA, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_102[] = {
+    0x02, 0x03, 0x28, 0x15, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_103[] = {
+    0x02, 0x03, 0x28, 0x1A, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_104[] = {
+    0x02, 0x03, 0x28, 0x1B, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_105[] = {
+    0x03, 0x75, 0x16, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x16, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x46, 0x13, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x16, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_106[] = {
+    0x03, 0x75, 0x16, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x16, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x46, 0x13, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x16, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_107[] = {
+    0x02, 0x03, 0x28, 0x18, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_108[] = {
+    0x72, 0x42, 0x74, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_109[] = {
+    0x02, 0x03, 0x28, 0x29, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_110[] = {
+    0x02, 0x03, 0x28, 0x2B, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_111[] = {
+    0x02, 0x03, 0x28, 0x28, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_112[] = {
+    0x02, 0x03, 0x28, 0x2A, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_113[] = {
+    0x02, 0x03, 0x28, 0x19, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_114[] = {
+    0x02, 0x03, 0x28, 0x19, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_115[] = {
+    0x02, 0x03, 0x28, 0x17, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_116[] = {
+    0x02, 0x03, 0x28, 0x27, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_117[] = {
+    0x02, 0x28, 0x14, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_118[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 0x7E, 0xD1, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x14, 0x28, 0xA2, 0x05, 
+    0x00, 0x0A, 0x73, 0x0D, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_119[] = {
+    0x02, 0x03, 0x28, 0x16, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_120[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0xE0, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_121[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0x08, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_122[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0x68, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_123[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0xCD, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_124[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0x11, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_125[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0x56, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_126[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0xA2, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_127[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0xF0, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_128[] = {
+    0x02, 0x71, 0x16, 0x01, 0x00, 0x02, 0x28, 0x34, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_129[] = {
+    0x02, 0x03, 0x28, 0x1C, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_157[] = {
+    0x72, 0x8C, 0x70, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_158[] = {
+    0x02, 0x28, 0x8F, 0x0F, 0x00, 0x06, 0x2C, 0x06, 0x73, 0x6C, 0x12, 0x00, 0x06, 0x7A, 0x04, 0x72, 0xD6, 0xDE, 0x00, 0x70, 0x28, 0xDB, 0x00, 0x00, 
+    0x0A, 0x03, 0x02, 0x28, 0x91, 0x0F, 0x00, 0x06, 0x72, 0xC8, 0xDE, 0x00, 0x70, 0x28, 0x7E, 0x00, 0x00, 0x2B, 0x03, 0x72, 0xC8, 0xDE, 0x00, 0x70, 
+    0x28, 0x7C, 0x00, 0x00, 0x2B, 0x05, 0x04, 0x8E, 0x69, 0x72, 0xE4, 0xDE, 0x00, 0x70, 0x28, 0x7F, 0x00, 0x00, 0x2B, 0x05, 0x72, 0xE4, 0xDE, 0x00, 
+    0x70, 0x28, 0x80, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x72, 0x02, 0xDF, 0x00, 0x70, 0x28, 0x80, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x04, 0x8E, 0x69, 0x05, 
+    0x59, 0x72, 0x02, 0xDF, 0x00, 0x70, 0x28, 0x7F, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x6A, 0x02, 0x28, 0x91, 0x0F, 0x00, 0x06, 0x03, 0x59, 0x31, 0x0B, 
+    0x02, 0x28, 0x91, 0x0F, 0x00, 0x06, 0x03, 0x59, 0x69, 0x10, 0x04, 0x0E, 0x04, 0x2C, 0x4B, 0x02, 0x7B, 0x55, 0x04, 0x00, 0x04, 0x0A, 0x06, 0x19, 
+    0x33, 0x2E, 0x02, 0x7B, 0x54, 0x04, 0x00, 0x04, 0x6F, 0xA8, 0x0F, 0x00, 0x06, 0x03, 0x2E, 0x0E, 0x02, 0x7B, 0x54, 0x04, 0x00, 0x04, 0x03, 0x16, 
+    0x6F, 0xA9, 0x0F, 0x00, 0x06, 0x26, 0x02, 0x7B, 0x54, 0x04, 0x00, 0x04, 0x04, 0x05, 0x0E, 0x04, 0x6F, 0xAA, 0x0F, 0x00, 0x06, 0x26, 0x2B, 0x12, 
+    0x02, 0x7B, 0x52, 0x04, 0x00, 0x04, 0x03, 0x04, 0x05, 0x6A, 0x0E, 0x04, 0x6A, 0x28, 0x37, 0x03, 0x00, 0x0A, 0x0E, 0x04, 0x6A, 0x2A, 
+};
+static const uint8_t s_il_161[] = {
+    0x03, 0x72, 0xBA, 0xDA, 0x00, 0x70, 0x28, 0x7C, 0x00, 0x00, 0x2B, 0x02, 0x28, 0x9E, 0x0F, 0x00, 0x06, 0x2C, 0x0D, 0x02, 0x7B, 0x54, 0x04, 0x00, 
+    0x04, 0x03, 0x6F, 0xAC, 0x0F, 0x00, 0x06, 0x2A, 0x02, 0x7B, 0x52, 0x04, 0x00, 0x04, 0x2D, 0x0B, 0x28, 0xC5, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 
+    0x00, 0x06, 0x7A, 0x03, 0x02, 0x7B, 0x52, 0x04, 0x00, 0x04, 0x8E, 0x69, 0x6A, 0x72, 0xBA, 0xDA, 0x00, 0x70, 0x28, 0x7E, 0x00, 0x00, 0x2B, 0x02, 
+    0x28, 0x8F, 0x0F, 0x00, 0x06, 0x2C, 0x07, 0x02, 0x17, 0x7D, 0x55, 0x04, 0x00, 0x04, 0x02, 0x03, 0x7D, 0x53, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_162[] = {
+    0x02, 0x15, 0x6A, 0x7D, 0x53, 0x04, 0x00, 0x04, 0x02, 0x14, 0x7D, 0x54, 0x04, 0x00, 0x04, 0x02, 0x16, 0x7D, 0x55, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_163[] = {
+    0x02, 0x28, 0x8F, 0x0F, 0x00, 0x06, 0x2D, 0x11, 0x02, 0x28, 0x93, 0x0F, 0x00, 0x06, 0x73, 0x16, 0x05, 0x00, 0x0A, 0x28, 0x2B, 0x12, 0x00, 0x06, 
+    0x2A, 0x7E, 0xA9, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_164[] = {
+    0x02, 0x28, 0x9E, 0x0F, 0x00, 0x06, 0x2C, 0x2C, 0x02, 0x7B, 0x54, 0x04, 0x00, 0x04, 0x6F, 0xA8, 0x0F, 0x00, 0x06, 0x03, 0x2E, 0x0E, 0x02, 0x7B, 
+    0x54, 0x04, 0x00, 0x04, 0x03, 0x16, 0x6F, 0xA9, 0x0F, 0x00, 0x06, 0x26, 0x02, 0x7B, 0x54, 0x04, 0x00, 0x04, 0x04, 0x05, 0x0E, 0x04, 0x6F, 0xAB, 
+    0x0F, 0x00, 0x06, 0x2A, 0x04, 0x72, 0xD6, 0xDE, 0x00, 0x70, 0x28, 0xDB, 0x00, 0x00, 0x0A, 0x02, 0x7B, 0x52, 0x04, 0x00, 0x04, 0x2D, 0x0B, 0x28, 
+    0xC5, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 0x00, 0x06, 0x7A, 0x03, 0x72, 0xC8, 0xDE, 0x00, 0x70, 0x28, 0x7C, 0x00, 0x00, 0x2B, 0x03, 0x02, 0x7B, 
+    0x52, 0x04, 0x00, 0x04, 0x8E, 0x69, 0x6A, 0x31, 0x0B, 0x28, 0xC6, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 0x00, 0x06, 0x7A, 0x05, 0x72, 0xE4, 0xDE, 
+    0x00, 0x70, 0x28, 0x80, 0x00, 0x00, 0x2B, 0x05, 0x04, 0x8E, 0x69, 0x72, 0xE4, 0xDE, 0x00, 0x70, 0x28, 0x7F, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x72, 
+    0x02, 0xDF, 0x00, 0x70, 0x28, 0x80, 0x00, 0x00, 0x2B, 0x0E, 0x04, 0x04, 0x8E, 0x69, 0x05, 0x59, 0x72, 0x02, 0xDF, 0x00, 0x70, 0x28, 0x7F, 0x00, 
+    0x00, 0x2B, 0x0E, 0x04, 0x6A, 0x02, 0x7B, 0x52, 0x04, 0x00, 0x04, 0x8E, 0x69, 0x6A, 0x03, 0x59, 0x31, 0x0B, 0x28, 0xC6, 0x01, 0x00, 0x06, 0x73, 
+    0x68, 0x12, 0x00, 0x06, 0x7A, 0x02, 0x28, 0x8F, 0x0F, 0x00, 0x06, 0x2C, 0x1F, 0x03, 0x2C, 0x0B, 0x28, 0xC7, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 
+    0x00, 0x06, 0x7A, 0x02, 0x16, 0x6A, 0x7D, 0x53, 0x04, 0x00, 0x04, 0x02, 0x17, 0x7D, 0x55, 0x04, 0x00, 0x04, 0x2B, 0x14, 0x03, 0x02, 0x7B, 0x53, 
+    0x04, 0x00, 0x04, 0x31, 0x0B, 0x28, 0xC8, 0x01, 0x00, 0x06, 0x73, 0x68, 0x12, 0x00, 0x06, 0x7A, 0x0E, 0x04, 0x2C, 0x2A, 0x04, 0x05, 0x6A, 0x02, 
+    0x7B, 0x52, 0x04, 0x00, 0x04, 0x03, 0x0E, 0x04, 0x6A, 0x28, 0x37, 0x03, 0x00, 0x0A, 0x02, 0x7B, 0x53, 0x04, 0x00, 0x04, 0x03, 0x0E, 0x04, 0x6A, 
+    0x58, 0x2F, 0x0B, 0x02, 0x03, 0x0E, 0x04, 0x6A, 0x58, 0x7D, 0x53, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_185[] = {
+    0x02, 0x03, 0x28, 0xC4, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_187[] = {
+    0x03, 0x75, 0xFE, 0x00, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0xFE, 0x00, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xD8, 0x0F, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0xFE, 0x00, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_188[] = {
+    0x03, 0x75, 0xFE, 0x00, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0xFE, 0x00, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xD8, 0x0F, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0xFE, 0x00, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_189[] = {
+    0x72, 0x9E, 0x6F, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_190[] = {
+    0x02, 0x03, 0x28, 0xCD, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_191[] = {
+    0x02, 0x03, 0x28, 0xCF, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_192[] = {
+    0x02, 0x03, 0x28, 0xCC, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_193[] = {
+    0x02, 0x03, 0x28, 0xCE, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_194[] = {
+    0x02, 0x03, 0x28, 0xCB, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_195[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 0x7E, 0x68, 0x04, 0x00, 0x04, 0x2A, 0x00, 0x02, 0x28, 0x08, 0x00, 
+    0x00, 0x0A, 0x28, 0x09, 0x05, 0x00, 0x0A, 0x0A, 0xDE, 0x2B, 0x26, 0x28, 0x33, 0x01, 0x00, 0x0A, 0xD0, 0x71, 0x01, 0x00, 0x01, 0x28, 0x0A, 0x00, 
+    0x00, 0x0A, 0x6F, 0x23, 0x05, 0x00, 0x0A, 0x74, 0x71, 0x01, 0x00, 0x01, 0x0B, 0x02, 0x7E, 0x65, 0x04, 0x00, 0x04, 0x07, 0x1D, 0x28, 0x24, 0x05, 
+    0x00, 0x0A, 0x0A, 0xDE, 0x00, 0x06, 0x73, 0xB2, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_196[] = {
+    0x02, 0x03, 0x28, 0xC5, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_197[] = {
+    0x02, 0x71, 0xFE, 0x00, 0x00, 0x02, 0x28, 0x3C, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_215[] = {
+    0x02, 0x03, 0x28, 0x03, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_216[] = {
+    0x16, 0x0C, 0x03, 0x13, 0x05, 0x11, 0x05, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x58, 0x16, 0x2F, 0x06, 0x73, 0x71, 0x12, 0x00, 0x06, 0x7A, 0x11, 
+    0x05, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x58, 0x1F, 0x26, 0x31, 0x0B, 0x28, 0xCE, 0x11, 0x00, 0x06, 0x73, 0xDC, 0x04, 0x00, 0x0A, 0x7A, 0x11, 
+    0x05, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x58, 0xD2, 0x0D, 0x1F, 0x26, 0x17, 0x11, 0x05, 0x02, 0x7B, 0x6B, 0x04, 0x00, 0x04, 0x58, 0x28, 0x13, 
+    0x02, 0x00, 0x0A, 0x28, 0x4A, 0x02, 0x00, 0x0A, 0xD2, 0x13, 0x04, 0x11, 0x05, 0x16, 0x31, 0x56, 0x02, 0x09, 0x7D, 0x6C, 0x04, 0x00, 0x04, 0x02, 
+    0x11, 0x04, 0x7D, 0x6B, 0x04, 0x00, 0x04, 0x2B, 0x3E, 0x11, 0x05, 0x1F, 0x09, 0x32, 0x1A, 0x28, 0xE1, 0x0F, 0x00, 0x06, 0x13, 0x06, 0x12, 0x06, 
+    0x1E, 0x28, 0x2A, 0x05, 0x00, 0x0A, 0x4B, 0x0B, 0x11, 0x05, 0x1F, 0x09, 0x59, 0x13, 0x05, 0x2B, 0x17, 0x28, 0xE1, 0x0F, 0x00, 0x06, 0x13, 0x06, 
+    0x12, 0x06, 0x11, 0x05, 0x17, 0x59, 0x28, 0x2A, 0x05, 0x00, 0x0A, 0x4B, 0x0B, 0x16, 0x13, 0x05, 0x02, 0x07, 0x28, 0x19, 0x10, 0x00, 0x06, 0x11, 
+    0x05, 0x16, 0x30, 0xBD, 0x2B, 0x63, 0x11, 0x05, 0x16, 0x2F, 0x5E, 0x11, 0x05, 0x1F, 0xF7, 0x30, 0x1A, 0x28, 0xE1, 0x0F, 0x00, 0x06, 0x13, 0x06, 
+    0x12, 0x06, 0x1E, 0x28, 0x2A, 0x05, 0x00, 0x0A, 0x4B, 0x0B, 0x11, 0x05, 0x1F, 0x09, 0x58, 0x13, 0x05, 0x2B, 0x18, 0x28, 0xE1, 0x0F, 0x00, 0x06, 
+    0x13, 0x06, 0x12, 0x06, 0x11, 0x05, 0x65, 0x17, 0x59, 0x28, 0x2A, 0x05, 0x00, 0x0A, 0x4B, 0x0B, 0x16, 0x13, 0x05, 0x02, 0x07, 0x28, 0x1A, 0x10, 
+    0x00, 0x06, 0x0A, 0x11, 0x05, 0x16, 0x32, 0xBB, 0x06, 0x07, 0x18, 0x5C, 0xFE, 0x05, 0x16, 0xFE, 0x01, 0x0C, 0x02, 0x09, 0x7D, 0x6C, 0x04, 0x00, 
+    0x04, 0x02, 0x11, 0x04, 0x7D, 0x6B, 0x04, 0x00, 0x04, 0x08, 0x04, 0x5F, 0x2C, 0x08, 0x02, 0x17, 0x28, 0x18, 0x10, 0x00, 0x06, 0x2A, 0x02, 0x28, 
+    0x13, 0x10, 0x00, 0x06, 0x2C, 0x06, 0x02, 0x28, 0xF3, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_217[] = {
+    0x0F, 0x00, 0x28, 0xF0, 0x0F, 0x00, 0x06, 0x2C, 0x06, 0x7E, 0x73, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x2D, 0x02, 0x02, 
+    0x2A, 0x0F, 0x00, 0x12, 0x00, 0x28, 0x47, 0x10, 0x00, 0x06, 0x06, 0x2C, 0x11, 0x0F, 0x00, 0x28, 0xF2, 0x0F, 0x00, 0x06, 0x2C, 0x08, 0x0F, 0x00, 
+    0x17, 0x28, 0x18, 0x10, 0x00, 0x06, 0x0F, 0x00, 0x28, 0x13, 0x10, 0x00, 0x06, 0x2C, 0x07, 0x0F, 0x00, 0x28, 0xF3, 0x0F, 0x00, 0x06, 0x02, 0x2A, 
+
+};
+static const uint8_t s_il_218[] = {
+    0x03, 0x75, 0xFF, 0x00, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0xFF, 0x00, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x51, 0x10, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0xFF, 0x00, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_219[] = {
+    0x03, 0x75, 0xFF, 0x00, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0xFF, 0x00, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x51, 0x10, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0xFF, 0x00, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_220[] = {
+    0x03, 0x04, 0x28, 0x2A, 0x10, 0x00, 0x06, 0x0F, 0x00, 0x28, 0xF0, 0x0F, 0x00, 0x06, 0x2C, 0x06, 0x7E, 0x73, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x0A, 
+    0x04, 0x06, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x59, 0x0B, 0x12, 0x00, 0x07, 0x17, 0x28, 0x1B, 0x10, 0x00, 0x06, 0x03, 0xD2, 0x28, 0x12, 0x10, 0x00, 
+    0x06, 0x0C, 0x08, 0x06, 0x7B, 0x6A, 0x04, 0x00, 0x04, 0x2F, 0x06, 0x73, 0x71, 0x12, 0x00, 0x06, 0x7A, 0x08, 0x06, 0x7B, 0x6A, 0x04, 0x00, 0x04, 
+    0x33, 0x10, 0x03, 0x12, 0x00, 0x28, 0xE6, 0x0F, 0x00, 0x06, 0x2F, 0x06, 0x73, 0x71, 0x12, 0x00, 0x06, 0x7A, 0x12, 0x00, 0x03, 0xD2, 0x7D, 0x6B, 
+    0x04, 0x00, 0x04, 0x06, 0x2A, 
+};
+static const uint8_t s_il_221[] = {
+    0x02, 0x03, 0x28, 0x06, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_222[] = {
+    0x0F, 0x00, 0x28, 0xF0, 0x0F, 0x00, 0x06, 0x2C, 0x06, 0x7E, 0x73, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x2D, 0x02, 0x02, 
+    0x2A, 0x0F, 0x00, 0x12, 0x00, 0x28, 0x47, 0x10, 0x00, 0x06, 0x06, 0x2C, 0x11, 0x0F, 0x00, 0x28, 0xF2, 0x0F, 0x00, 0x06, 0x2D, 0x08, 0x0F, 0x00, 
+    0x17, 0x28, 0x18, 0x10, 0x00, 0x06, 0x0F, 0x00, 0x28, 0x13, 0x10, 0x00, 0x06, 0x2C, 0x07, 0x0F, 0x00, 0x28, 0xF3, 0x0F, 0x00, 0x06, 0x02, 0x2A, 
+
+};
+static const uint8_t s_il_223[] = {
+    0x72, 0x24, 0x74, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_224[] = {
+    0x02, 0x03, 0x28, 0x2E, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_225[] = {
+    0x02, 0x03, 0x28, 0x30, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_226[] = {
+    0x02, 0x03, 0x28, 0x2D, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_227[] = {
+    0x02, 0x03, 0x28, 0x2F, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_228[] = {
+    0x02, 0x03, 0x28, 0x05, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_229[] = {
+    0x02, 0x03, 0x28, 0x2C, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_230[] = {
+    0x02, 0x72, 0xC2, 0xE0, 0x00, 0x70, 0x28, 0xDB, 0x00, 0x00, 0x0A, 0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 
+    0x7E, 0x73, 0x04, 0x00, 0x04, 0x2A, 0x7E, 0x73, 0x04, 0x00, 0x04, 0x0A, 0x02, 0x6F, 0x12, 0x05, 0x00, 0x0A, 0x0B, 0x07, 0x8E, 0x69, 0x0C, 0x15, 
+    0x13, 0x05, 0x16, 0x13, 0x06, 0x12, 0x00, 0x17, 0x7D, 0x6B, 0x04, 0x00, 0x04, 0x12, 0x00, 0x16, 0x7D, 0x6C, 0x04, 0x00, 0x04, 0x12, 0x00, 0x28, 
+    0x46, 0x10, 0x00, 0x06, 0x2B, 0x04, 0x08, 0x17, 0x59, 0x0C, 0x08, 0x2C, 0x09, 0x07, 0x08, 0x17, 0x59, 0x93, 0x1F, 0x20, 0x2E, 0xF0, 0x08, 0x2D, 
+    0x15, 0x28, 0xDA, 0x11, 0x00, 0x06, 0x73, 0x35, 0x05, 0x00, 0x0A, 0x7A, 0x11, 0x06, 0x17, 0x58, 0x13, 0x06, 0x08, 0x17, 0x59, 0x0C, 0x07, 0x11, 
+    0x06, 0x93, 0x1F, 0x20, 0x2E, 0xEE, 0x07, 0x11, 0x06, 0x93, 0x1F, 0x2D, 0x33, 0x14, 0x12, 0x00, 0x16, 0x28, 0xF4, 0x0F, 0x00, 0x06, 0x11, 0x06, 
+    0x17, 0x58, 0x13, 0x06, 0x08, 0x17, 0x59, 0x0C, 0x2B, 0x26, 0x12, 0x00, 0x17, 0x28, 0xF4, 0x0F, 0x00, 0x06, 0x07, 0x11, 0x06, 0x93, 0x1F, 0x2B, 
+    0x33, 0x16, 0x11, 0x06, 0x17, 0x58, 0x13, 0x06, 0x08, 0x17, 0x59, 0x0C, 0x2B, 0x0A, 0x11, 0x06, 0x17, 0x58, 0x13, 0x06, 0x08, 0x17, 0x59, 0x0C, 
+    0x08, 0x18, 0x31, 0x08, 0x07, 0x11, 0x06, 0x93, 0x1F, 0x30, 0x2E, 0xEA, 0x18, 0x08, 0x33, 0x20, 0x1F, 0x30, 0x07, 0x11, 0x06, 0x93, 0x33, 0x18, 
+    0x1F, 0x2E, 0x07, 0x11, 0x06, 0x17, 0x58, 0x93, 0x33, 0x0E, 0x07, 0x11, 0x06, 0x1F, 0x2E, 0x9D, 0x07, 0x11, 0x06, 0x17, 0x58, 0x1F, 0x30, 0x9D, 
+    0x08, 0x2C, 0x05, 0x08, 0x1F, 0x27, 0x31, 0x15, 0x28, 0xDA, 0x11, 0x00, 0x06, 0x73, 0x35, 0x05, 0x00, 0x0A, 0x7A, 0x11, 0x06, 0x17, 0x58, 0x13, 
+    0x06, 0x08, 0x17, 0x59, 0x0C, 0x08, 0x17, 0x31, 0x08, 0x07, 0x11, 0x06, 0x93, 0x1F, 0x30, 0x2E, 0xEA, 0x16, 0x0D, 0x2B, 0x50, 0x07, 0x11, 0x06, 
+    0x93, 0x13, 0x04, 0x11, 0x06, 0x17, 0x58, 0x13, 0x06, 0x11, 0x04, 0x28, 0x36, 0x05, 0x00, 0x0A, 0x2C, 0x0A, 0x11, 0x04, 0x1F, 0x30, 0x59, 0xD1, 
+    0x13, 0x04, 0x2B, 0x1B, 0x11, 0x04, 0x1F, 0x2E, 0x33, 0x0A, 0x11, 0x05, 0x16, 0x2F, 0x05, 0x09, 0x13, 0x05, 0x2B, 0x1D, 0x28, 0xDA, 0x11, 0x00, 
+    0x06, 0x73, 0x35, 0x05, 0x00, 0x0A, 0x7A, 0x12, 0x00, 0x1F, 0x0A, 0x28, 0x19, 0x10, 0x00, 0x06, 0x12, 0x00, 0x11, 0x04, 0x28, 0x18, 0x10, 0x00, 
+    0x06, 0x09, 0x17, 0x58, 0x0D, 0x09, 0x08, 0x32, 0xAC, 0x11, 0x05, 0x16, 0x2F, 0x13, 0x12, 0x00, 0x09, 0xD2, 0x7D, 0x6B, 0x04, 0x00, 0x04, 0x12, 
+    0x00, 0x16, 0x7D, 0x6C, 0x04, 0x00, 0x04, 0x2B, 0x1C, 0x12, 0x00, 0x09, 0x17, 0x59, 0xD2, 0x7D, 0x6B, 0x04, 0x00, 0x04, 0x12, 0x00, 0x06, 0x7B, 
+    0x6B, 0x04, 0x00, 0x04, 0x11, 0x05, 0x59, 0xD2, 0x7D, 0x6C, 0x04, 0x00, 0x04, 0x06, 0x7B, 0x6B, 0x04, 0x00, 0x04, 0x1F, 0x26, 0x31, 0x0B, 0x28, 
+    0xDA, 0x11, 0x00, 0x06, 0x73, 0x35, 0x05, 0x00, 0x0A, 0x7A, 0x06, 0x7B, 0x6B, 0x04, 0x00, 0x04, 0x2D, 0x0B, 0x28, 0xDA, 0x11, 0x00, 0x06, 0x73, 
+    0x35, 0x05, 0x00, 0x0A, 0x7A, 0x12, 0x00, 0x28, 0x13, 0x10, 0x00, 0x06, 0x2C, 0x07, 0x12, 0x00, 0x28, 0xF3, 0x0F, 0x00, 0x06, 0x06, 0x2A, 
+};
+static const uint8_t s_il_231[] = {
+    0x0F, 0x00, 0x28, 0xF0, 0x0F, 0x00, 0x06, 0x2C, 0x06, 0x7E, 0x73, 0x04, 0x00, 0x04, 0x2A, 0x0F, 0x00, 0x28, 0xF6, 0x0F, 0x00, 0x06, 0x0A, 0x0F, 
+    0x00, 0x28, 0xFB, 0x0F, 0x00, 0x06, 0x0B, 0x0F, 0x00, 0x07, 0x03, 0x28, 0x37, 0x05, 0x00, 0x0A, 0x28, 0xEE, 0x0F, 0x00, 0x06, 0x0F, 0x00, 0x06, 
+    0x0F, 0x00, 0x28, 0xF6, 0x0F, 0x00, 0x06, 0x59, 0x17, 0x28, 0x1B, 0x10, 0x00, 0x06, 0x0F, 0x00, 0x7E, 0x71, 0x04, 0x00, 0x04, 0x7D, 0x6B, 0x04, 
+    0x00, 0x04, 0x02, 0x2A, 
+};
+static const uint8_t s_il_232[] = {
+    0x0F, 0x00, 0x28, 0xF0, 0x0F, 0x00, 0x06, 0x2C, 0x06, 0x7E, 0x73, 0x04, 0x00, 0x04, 0x2A, 0x03, 0x16, 0x32, 0x15, 0x1F, 0x26, 0x03, 0x28, 0x4A, 
+    0x02, 0x00, 0x0A, 0x10, 0x01, 0x03, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x32, 0x25, 0x02, 0x2A, 0x1F, 0xDA, 0x03, 0x28, 0x13, 0x02, 0x00, 0x0A, 
+    0x10, 0x01, 0x03, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x02, 0x7B, 0x6B, 0x04, 0x00, 0x04, 0x59, 0x2F, 0x09, 0x0F, 0x00, 0x28, 0x46, 0x10, 0x00, 
+    0x06, 0x02, 0x2A, 0x16, 0x0A, 0x03, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x59, 0x28, 0x3F, 0x05, 0x00, 0x0A, 0x0B, 0x17, 0x0C, 0x2B, 0x60, 0x07, 
+    0x1F, 0x09, 0x32, 0x2E, 0x0F, 0x00, 0x28, 0xE1, 0x0F, 0x00, 0x06, 0x0D, 0x12, 0x03, 0x1E, 0x28, 0x2A, 0x05, 0x00, 0x0A, 0x4B, 0x28, 0x1A, 0x10, 
+    0x00, 0x06, 0x0A, 0x28, 0xE1, 0x0F, 0x00, 0x06, 0x0D, 0x12, 0x03, 0x1E, 0x28, 0x2A, 0x05, 0x00, 0x0A, 0x4B, 0x0C, 0x07, 0x1F, 0x09, 0x59, 0x0B, 
+    0x2B, 0x2D, 0x0F, 0x00, 0x28, 0xE1, 0x0F, 0x00, 0x06, 0x0D, 0x12, 0x03, 0x07, 0x17, 0x59, 0x28, 0x2A, 0x05, 0x00, 0x0A, 0x4B, 0x28, 0x1A, 0x10, 
+    0x00, 0x06, 0x0A, 0x28, 0xE1, 0x0F, 0x00, 0x06, 0x0D, 0x12, 0x03, 0x07, 0x17, 0x59, 0x28, 0x2A, 0x05, 0x00, 0x0A, 0x4B, 0x0C, 0x16, 0x0B, 0x07, 
+    0x16, 0x30, 0x9C, 0x08, 0x17, 0x36, 0x07, 0x06, 0x08, 0x1F, 0x0A, 0x5C, 0x5C, 0x0A, 0x0F, 0x00, 0x28, 0x13, 0x10, 0x00, 0x06, 0x2C, 0x10, 0x04, 
+    0x2D, 0x04, 0x06, 0x1B, 0x34, 0x09, 0x0F, 0x00, 0x28, 0xF3, 0x0F, 0x00, 0x06, 0x02, 0x2A, 0x06, 0x1B, 0x37, 0x0B, 0x04, 0x2D, 0x08, 0x0F, 0x00, 
+    0x17, 0x28, 0x18, 0x10, 0x00, 0x06, 0x03, 0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x59, 0x28, 0x3F, 0x05, 0x00, 0x0A, 0x0B, 0x2B, 0x09, 0x0F, 0x00, 
+    0x1F, 0x0A, 0x28, 0x19, 0x10, 0x00, 0x06, 0x07, 0x25, 0x17, 0x59, 0x0B, 0x16, 0x30, 0xEF, 0x02, 0x2A, 
+};
+static const uint8_t s_il_233[] = {
+    0x0F, 0x00, 0x28, 0xF0, 0x0F, 0x00, 0x06, 0x2C, 0x06, 0x7E, 0x86, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x16, 0x73, 0xEA, 0x0F, 0x00, 0x06, 0x28, 0x2B, 
+    0x10, 0x00, 0x06, 0x28, 0xD7, 0x12, 0x00, 0x06, 0x2C, 0x06, 0x7E, 0x87, 0x04, 0x00, 0x04, 0x2A, 0x0F, 0x00, 0x28, 0xF0, 0x0F, 0x00, 0x06, 0x2D, 
+    0x17, 0x0F, 0x00, 0x28, 0xF2, 0x0F, 0x00, 0x06, 0x2D, 0x07, 0x15, 0x73, 0xFF, 0x10, 0x00, 0x06, 0x2A, 0x17, 0x73, 0xFF, 0x10, 0x00, 0x06, 0x2A, 
+    0x7E, 0x86, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_234[] = {
+    0x02, 0x03, 0x28, 0x04, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_235[] = {
+    0x02, 0x28, 0xF0, 0x0F, 0x00, 0x06, 0x2C, 0x06, 0x73, 0x6C, 0x12, 0x00, 0x06, 0x7A, 0x02, 0x7B, 0x70, 0x04, 0x00, 0x04, 0x76, 0x6C, 0x0A, 0x06, 
+    0x23, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x41, 0x5A, 0x02, 0x7B, 0x6F, 0x04, 0x00, 0x04, 0x76, 0x6C, 0x58, 0x0A, 0x06, 0x23, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0xF0, 0x41, 0x5A, 0x02, 0x7B, 0x6E, 0x04, 0x00, 0x04, 0x76, 0x6C, 0x58, 0x0A, 0x06, 0x23, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0xF0, 0x41, 0x5A, 0x02, 0x7B, 0x6D, 0x04, 0x00, 0x04, 0x76, 0x6C, 0x58, 0x0A, 0x06, 0x23, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x24, 0x40, 
+    0x02, 0x7B, 0x6C, 0x04, 0x00, 0x04, 0x6C, 0x28, 0x37, 0x05, 0x00, 0x0A, 0x5B, 0x0A, 0x02, 0x28, 0xF2, 0x0F, 0x00, 0x06, 0x2D, 0x03, 0x06, 0x65, 
+    0x2A, 0x06, 0x2A, 
+};
+static const uint8_t s_il_236[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0xE7, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_237[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0x24, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_238[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0x6E, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_239[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0xD3, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_240[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0x17, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_241[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0x5C, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_242[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0xA8, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_243[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0xF5, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_244[] = {
+    0x02, 0x71, 0xFF, 0x00, 0x00, 0x02, 0x28, 0x3A, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_245[] = {
+    0x02, 0x03, 0x17, 0x28, 0x4C, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_283[] = {
+    0x02, 0x03, 0x28, 0x63, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_284[] = {
+    0x03, 0x75, 0x00, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x00, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x8A, 0x10, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x00, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_285[] = {
+    0x03, 0x75, 0x00, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x00, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x8A, 0x10, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x00, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_286[] = {
+    0x02, 0x03, 0x28, 0x66, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_287[] = {
+    0x72, 0x34, 0x74, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_288[] = {
+    0x02, 0x03, 0x28, 0x73, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_289[] = {
+    0x02, 0x03, 0x28, 0x75, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_290[] = {
+    0x02, 0x03, 0x28, 0x72, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_291[] = {
+    0x02, 0x03, 0x28, 0x74, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_292[] = {
+    0x02, 0x03, 0x28, 0x65, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_293[] = {
+    0x02, 0x03, 0x28, 0x71, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_294[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 0x7E, 0x78, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x28, 0x08, 0x00, 0x00, 
+    0x0A, 0x28, 0x42, 0x05, 0x00, 0x0A, 0x73, 0x5B, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_295[] = {
+    0x02, 0x03, 0x28, 0x64, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_296[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0xE4, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_297[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0x23, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_298[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0x0E, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_299[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0xD1, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_300[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0x15, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_301[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0x5A, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_302[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0xA7, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_303[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0xF6, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_304[] = {
+    0x02, 0x71, 0x00, 0x01, 0x00, 0x02, 0x28, 0x39, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_326[] = {
+    0x03, 0x75, 0x01, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x01, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xB2, 0x10, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x01, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_327[] = {
+    0x03, 0x75, 0x01, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x01, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xB2, 0x10, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x01, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_328[] = {
+    0x72, 0x8C, 0x70, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_329[] = {
+    0x02, 0x03, 0x28, 0xA6, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_330[] = {
+    0x02, 0x03, 0x28, 0xA8, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_331[] = {
+    0x02, 0x03, 0x28, 0xA5, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_332[] = {
+    0x02, 0x03, 0x28, 0xA7, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_333[] = {
+    0x02, 0x03, 0x28, 0xA4, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_334[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 0x7E, 0x7D, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x73, 0x94, 0x10, 0x00, 
+    0x06, 0x2A, 
+};
+static const uint8_t s_il_335[] = {
+    0x02, 0x7B, 0x7C, 0x04, 0x00, 0x04, 0x0A, 0x12, 0x00, 0x28, 0x4B, 0x05, 0x00, 0x0A, 0x2D, 0x02, 0x14, 0x2A, 0x02, 0x7C, 0x7C, 0x04, 0x00, 0x04, 
+    0x28, 0x4C, 0x05, 0x00, 0x0A, 0x0B, 0x12, 0x01, 0x28, 0x4D, 0x05, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_336[] = {
+    0x02, 0x71, 0x01, 0x01, 0x00, 0x02, 0x28, 0xB1, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_337[] = {
+    0x02, 0x71, 0x01, 0x01, 0x00, 0x02, 0x28, 0x3D, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_354[] = {
+    0x02, 0x03, 0x28, 0xC4, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_355[] = {
+    0x02, 0x03, 0x28, 0xC9, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_356[] = {
+    0x02, 0x03, 0x28, 0xCA, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_357[] = {
+    0x03, 0x75, 0x02, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x02, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xF5, 0x10, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x02, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_358[] = {
+    0x03, 0x75, 0x02, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x02, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xF5, 0x10, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x02, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_359[] = {
+    0x02, 0x03, 0x28, 0xC7, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_360[] = {
+    0x72, 0x5C, 0x74, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_361[] = {
+    0x02, 0x03, 0x28, 0xD8, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_362[] = {
+    0x02, 0x03, 0x28, 0xDA, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_363[] = {
+    0x02, 0x03, 0x28, 0xD7, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_364[] = {
+    0x02, 0x03, 0x28, 0xD9, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_365[] = {
+    0x02, 0x03, 0x28, 0xC8, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_366[] = {
+    0x02, 0x03, 0x28, 0xC8, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_367[] = {
+    0x02, 0x03, 0x28, 0xC6, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_368[] = {
+    0x02, 0x03, 0x28, 0xD6, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_369[] = {
+    0x02, 0x28, 0xC3, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_370[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 0x7E, 0x80, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x14, 0x28, 0x54, 0x05, 
+    0x00, 0x0A, 0x73, 0xBB, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_371[] = {
+    0x02, 0x03, 0x28, 0xC5, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_372[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0xE1, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_373[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0x1F, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_374[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0x09, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_375[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0x69, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_376[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0x12, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_377[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0x57, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_378[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0xA3, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_379[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0xF1, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_380[] = {
+    0x02, 0x71, 0x02, 0x01, 0x00, 0x02, 0x28, 0x35, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_381[] = {
+    0x02, 0x03, 0x28, 0xCB, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_411[] = {
+    0x02, 0x03, 0x28, 0x08, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_412[] = {
+    0x02, 0x03, 0x28, 0x0D, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_413[] = {
+    0x02, 0x03, 0x28, 0x0E, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_414[] = {
+    0x03, 0x75, 0x03, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x03, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x3A, 0x11, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x03, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_415[] = {
+    0x03, 0x75, 0x03, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x03, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x3A, 0x11, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x03, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_416[] = {
+    0x02, 0x03, 0x28, 0x0B, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_417[] = {
+    0x72, 0x36, 0x70, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_418[] = {
+    0x02, 0x03, 0x28, 0x1D, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_419[] = {
+    0x02, 0x03, 0x28, 0x1F, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_420[] = {
+    0x02, 0x03, 0x28, 0x1C, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_421[] = {
+    0x02, 0x03, 0x28, 0x1E, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_422[] = {
+    0x02, 0x03, 0x28, 0x0C, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_423[] = {
+    0x02, 0x03, 0x28, 0x0C, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_424[] = {
+    0x02, 0x03, 0x28, 0x0A, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_425[] = {
+    0x02, 0x03, 0x28, 0x1B, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_426[] = {
+    0x02, 0x28, 0x07, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_427[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 0x7E, 0x86, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x14, 0x28, 0xCA, 0x02, 
+    0x00, 0x0A, 0x73, 0xFF, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_428[] = {
+    0x02, 0x03, 0x28, 0x09, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_429[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0xE2, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_430[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0x20, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_431[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_432[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0x6A, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_433[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0xCE, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_434[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0x58, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_435[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0xA4, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_436[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0xF2, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_437[] = {
+    0x02, 0x71, 0x03, 0x01, 0x00, 0x02, 0x28, 0x36, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_438[] = {
+    0x02, 0x03, 0x28, 0x0F, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_468[] = {
+    0x02, 0x03, 0x28, 0x4D, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_469[] = {
+    0x02, 0x03, 0x28, 0x52, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_470[] = {
+    0x02, 0x03, 0x28, 0x53, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_471[] = {
+    0x03, 0x75, 0x04, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x04, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x7F, 0x11, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x04, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_472[] = {
+    0x03, 0x75, 0x04, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x04, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x7F, 0x11, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x04, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_473[] = {
+    0x02, 0x03, 0x28, 0x50, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_474[] = {
+    0x72, 0x68, 0x74, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_475[] = {
+    0x02, 0x03, 0x28, 0x62, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_476[] = {
+    0x02, 0x03, 0x28, 0x64, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_477[] = {
+    0x02, 0x03, 0x28, 0x61, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_478[] = {
+    0x02, 0x03, 0x28, 0x63, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_479[] = {
+    0x02, 0x03, 0x28, 0x51, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_480[] = {
+    0x02, 0x03, 0x28, 0x51, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_481[] = {
+    0x02, 0x03, 0x28, 0x4F, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_482[] = {
+    0x02, 0x03, 0x28, 0x60, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_483[] = {
+    0x02, 0x28, 0x4C, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_484[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 0x7E, 0x8C, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x14, 0x28, 0x5B, 0x05, 
+    0x00, 0x0A, 0x73, 0x44, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_485[] = {
+    0x02, 0x03, 0x28, 0x4E, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_486[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0xE3, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_487[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0x21, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_488[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0x0B, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_489[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0x6B, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_490[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0xCF, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_491[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0x13, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_492[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0xA5, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_493[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0xF3, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_494[] = {
+    0x02, 0x71, 0x04, 0x01, 0x00, 0x02, 0x28, 0x37, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_495[] = {
+    0x02, 0x03, 0x28, 0x54, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_525[] = {
+    0x02, 0x03, 0x28, 0x9D, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_526[] = {
+    0x03, 0x75, 0x05, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x05, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xC4, 0x11, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x05, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_527[] = {
+    0x03, 0x75, 0x05, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x05, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0xC4, 0x11, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x05, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_528[] = {
+    0x02, 0x03, 0x28, 0xA0, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_529[] = {
+    0x02, 0x16, 0x73, 0x89, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_530[] = {
+    0x02, 0x28, 0x8E, 0x11, 0x00, 0x06, 0x2C, 0x06, 0x73, 0x6C, 0x12, 0x00, 0x06, 0x7A, 0x02, 0x7B, 0x91, 0x04, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_531[] = {
+    0x72, 0x24, 0x74, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_532[] = {
+    0x02, 0x03, 0x28, 0xAD, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_533[] = {
+    0x02, 0x03, 0x28, 0xAF, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_534[] = {
+    0x02, 0x03, 0x28, 0xAC, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_535[] = {
+    0x02, 0x03, 0x28, 0xAE, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_536[] = {
+    0x02, 0x03, 0x28, 0x9F, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_537[] = {
+    0x02, 0x03, 0x28, 0xAB, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_538[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x08, 0x7E, 0x92, 0x04, 0x00, 0x04, 0x0B, 0x2B, 0x35, 0x02, 0x20, 0x3F, 
+    0x01, 0x00, 0x00, 0x28, 0x07, 0x05, 0x00, 0x0A, 0x12, 0x00, 0x28, 0x0A, 0x05, 0x00, 0x0A, 0x2C, 0x0A, 0x12, 0x01, 0x06, 0x28, 0x8C, 0x11, 0x00, 
+    0x06, 0x2B, 0x17, 0x12, 0x01, 0x02, 0x20, 0x7F, 0x01, 0x00, 0x00, 0x28, 0x62, 0x05, 0x00, 0x0A, 0x28, 0x63, 0x05, 0x00, 0x0A, 0x28, 0x8C, 0x11, 
+    0x00, 0x06, 0x07, 0x2A, 
+};
+static const uint8_t s_il_539[] = {
+    0x02, 0x03, 0x28, 0x9E, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_540[] = {
+    0x02, 0x28, 0x8E, 0x11, 0x00, 0x06, 0x2C, 0x06, 0x73, 0x6C, 0x12, 0x00, 0x06, 0x7A, 0x16, 0x0A, 0x02, 0x7B, 0x91, 0x04, 0x00, 0x04, 0x0B, 0x02, 
+    0x7B, 0x91, 0x04, 0x00, 0x04, 0x16, 0x6A, 0x2F, 0x0A, 0x17, 0x0A, 0x02, 0x7B, 0x91, 0x04, 0x00, 0x04, 0x65, 0x0B, 0x07, 0x69, 0x07, 0x1F, 0x20, 
+    0x63, 0x69, 0x16, 0x06, 0x1A, 0x73, 0xE3, 0x02, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_541[] = {
+    0x02, 0x28, 0x90, 0x11, 0x00, 0x06, 0x28, 0x60, 0x05, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_542[] = {
+    0x02, 0x28, 0x91, 0x11, 0x00, 0x06, 0xB7, 0x2A, 
+};
+static const uint8_t s_il_543[] = {
+    0x02, 0x28, 0x8E, 0x11, 0x00, 0x06, 0x2C, 0x06, 0x73, 0x6C, 0x12, 0x00, 0x06, 0x7A, 0x02, 0x7B, 0x91, 0x04, 0x00, 0x04, 0x20, 0xE8, 0x03, 0x00, 
+    0x00, 0x6A, 0x5B, 0x0A, 0x06, 0x16, 0x6A, 0xFE, 0x04, 0x16, 0xFE, 0x01, 0x0B, 0x06, 0x1F, 0x0A, 0x6A, 0x5D, 0x0C, 0x06, 0x1F, 0x0A, 0x6A, 0x5B, 
+    0x0A, 0x08, 0x1B, 0x6A, 0x32, 0x0F, 0x07, 0x2C, 0x07, 0x06, 0x17, 0x6A, 0x58, 0x0A, 0x2B, 0x05, 0x06, 0x17, 0x6A, 0x59, 0x0A, 0x06, 0x2A, 
+};
+static const uint8_t s_il_544[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0xE6, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_545[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0x1E, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_546[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0x0C, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_547[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0x6D, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_548[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0xD2, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_549[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0x16, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_550[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0x5B, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_551[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0xF4, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_552[] = {
+    0x02, 0x71, 0x05, 0x01, 0x00, 0x02, 0x28, 0x3B, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_581[] = {
+    0x02, 0x03, 0x28, 0xEB, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_582[] = {
+    0x03, 0x75, 0x07, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x07, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x12, 0x12, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x07, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_583[] = {
+    0x03, 0x75, 0x07, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x07, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x12, 0x12, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x07, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_584[] = {
+    0x02, 0x03, 0x28, 0xEE, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_585[] = {
+    0x72, 0x7A, 0x6E, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_586[] = {
+    0x02, 0x03, 0x28, 0xFB, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_587[] = {
+    0x02, 0x03, 0x28, 0xFD, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_588[] = {
+    0x02, 0x03, 0x28, 0xFA, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_589[] = {
+    0x02, 0x03, 0x28, 0xFC, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_590[] = {
+    0x02, 0x03, 0x28, 0xED, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_591[] = {
+    0x02, 0x03, 0x28, 0xF9, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_592[] = {
+    0x02, 0x28, 0xCD, 0x11, 0x00, 0x06, 0x28, 0x0F, 0x00, 0x00, 0x0A, 0x2C, 0x06, 0x7E, 0x98, 0x04, 0x00, 0x04, 0x2A, 0x02, 0x28, 0x08, 0x00, 0x00, 
+    0x0A, 0x28, 0x6A, 0x05, 0x00, 0x0A, 0x73, 0xE2, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_593[] = {
+    0x02, 0x03, 0x28, 0xEC, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_594[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0xE5, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_595[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0x22, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_596[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0x0D, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_597[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0x6C, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_598[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0xD0, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_599[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0x14, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_600[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0x59, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_601[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0xA6, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_602[] = {
+    0x02, 0x71, 0x07, 0x01, 0x00, 0x02, 0x28, 0x38, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_626[] = {
+    0x02, 0x03, 0x28, 0x30, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_627[] = {
+    0x02, 0x28, 0x24, 0x12, 0x00, 0x06, 0x2C, 0x07, 0x17, 0x73, 0x1B, 0x12, 0x00, 0x06, 0x2A, 0x12, 0x00, 0x02, 0x7B, 0xA4, 0x04, 0x00, 0x04, 0x02, 
+    0x7B, 0xA6, 0x04, 0x00, 0x04, 0x02, 0x7B, 0xA7, 0x04, 0x00, 0x04, 0x28, 0x20, 0x12, 0x00, 0x06, 0x06, 0x2A, 
+};
+static const uint8_t s_il_628[] = {
+    0x16, 0x0A, 0x02, 0x28, 0x58, 0x12, 0x00, 0x06, 0x02, 0x20, 0x00, 0xC0, 0x00, 0x00, 0x5F, 0x2C, 0x0B, 0x72, 0x9C, 0xE1, 0x00, 0x70, 0x28, 0x1C, 
+    0x14, 0x00, 0x06, 0x7A, 0x02, 0x17, 0x5F, 0x2C, 0x04, 0x06, 0x17, 0x60, 0x0A, 0x02, 0x18, 0x5F, 0x2C, 0x04, 0x06, 0x18, 0x60, 0x0A, 0x02, 0x1E, 
+    0x5F, 0x2C, 0x04, 0x06, 0x1E, 0x60, 0x0A, 0x02, 0x1F, 0x10, 0x5F, 0x2C, 0x05, 0x06, 0x1F, 0x10, 0x60, 0x0A, 0x06, 0x2A, 
+};
+static const uint8_t s_il_629[] = {
+    0x03, 0x75, 0x09, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x09, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x5E, 0x12, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x09, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_630[] = {
+    0x03, 0x75, 0x09, 0x01, 0x00, 0x02, 0x2C, 0x0F, 0x03, 0xA5, 0x09, 0x01, 0x00, 0x02, 0x0A, 0x02, 0x06, 0x28, 0x5E, 0x12, 0x00, 0x06, 0x2A, 0x03, 
+    0x6F, 0x3F, 0x01, 0x00, 0x0A, 0xD0, 0x09, 0x01, 0x00, 0x02, 0x28, 0x0A, 0x00, 0x00, 0x0A, 0x28, 0xD1, 0x13, 0x00, 0x06, 0x7A, 
+};
+static const uint8_t s_il_631[] = {
+    0x02, 0x03, 0x28, 0x30, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_632[] = {
+    0x02, 0x28, 0x24, 0x12, 0x00, 0x06, 0x2C, 0x02, 0x14, 0x2A, 0x02, 0x7B, 0xA6, 0x04, 0x00, 0x04, 0x73, 0xD7, 0x01, 0x00, 0x0A, 0x0A, 0x06, 0x6F, 
+    0x70, 0x05, 0x00, 0x0A, 0x6F, 0x71, 0x05, 0x00, 0x0A, 0x28, 0x72, 0x05, 0x00, 0x0A, 0x0B, 0x07, 0x02, 0x7B, 0xA4, 0x04, 0x00, 0x04, 0x6F, 0x74, 
+    0x05, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_633[] = {
+    0x02, 0x28, 0x24, 0x12, 0x00, 0x06, 0x2C, 0x02, 0x14, 0x2A, 0x7E, 0xAA, 0x04, 0x00, 0x04, 0x02, 0x7B, 0xA4, 0x04, 0x00, 0x04, 0x6F, 0x74, 0x05, 
+    0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_634[] = {
+    0x72, 0x8C, 0x70, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_635[] = {
+    0x02, 0x03, 0x28, 0x42, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_636[] = {
+    0x02, 0x03, 0x28, 0x44, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_637[] = {
+    0x02, 0x03, 0x28, 0x41, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_638[] = {
+    0x02, 0x03, 0x28, 0x43, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_639[] = {
+    0x02, 0x03, 0x28, 0x40, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_640[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0xE8, 0x12, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_641[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0x25, 0x13, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_642[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0xC8, 0x0F, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_643[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0x0F, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_644[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0x6F, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_645[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0xA1, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_646[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0xD4, 0x10, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_647[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0x18, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_648[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0x5D, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_649[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0xA9, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_650[] = {
+    0x02, 0x71, 0x09, 0x01, 0x00, 0x02, 0x28, 0xF7, 0x11, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_671[] = {
+    0x02, 0x28, 0x86, 0x12, 0x00, 0x06, 0x2C, 0x06, 0x73, 0x6C, 0x12, 0x00, 0x06, 0x7A, 0x02, 0x7B, 0xC2, 0x04, 0x00, 0x04, 0x73, 0x90, 0x12, 0x00, 
+    0x06, 0x0A, 0x02, 0x7B, 0xC3, 0x04, 0x00, 0x04, 0x2C, 0x08, 0x06, 0x6F, 0x7C, 0x05, 0x00, 0x0A, 0x2C, 0x12, 0x06, 0x6F, 0x7D, 0x05, 0x00, 0x0A, 
+    0x2C, 0x0A, 0x06, 0x16, 0x6A, 0x16, 0x6F, 0x7E, 0x05, 0x00, 0x0A, 0x26, 0x02, 0x7B, 0xC0, 0x04, 0x00, 0x04, 0x2D, 0x0B, 0x02, 0x28, 0x85, 0x12, 
+    0x00, 0x06, 0x7D, 0xC0, 0x04, 0x00, 0x04, 0x06, 0x16, 0x16, 0x28, 0x83, 0x12, 0x00, 0x06, 0x0B, 0x02, 0x16, 0x7D, 0xC3, 0x04, 0x00, 0x04, 0x07, 
+    0x2A, 
+};
+static const uint8_t s_il_672[] = {
+    0x72, 0xD4, 0x73, 0x00, 0x70, 0x72, 0x0A, 0x71, 0x00, 0x70, 0x73, 0xB1, 0x01, 0x00, 0x0A, 0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+    { "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::Add:System.Data.SqlTypes.SqlBinary(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)", s_il_6, sizeof(s_il_6), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::CompareTo:System.Int32(System.Object)", s_il_7, sizeof(s_il_7), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::CompareTo:System.Int32(System.Data.SqlTypes.SqlBinary)", s_il_8, sizeof(s_il_8), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::Concat:System.Data.SqlTypes.SqlBinary(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)", s_il_9, sizeof(s_il_9), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_10, sizeof(s_il_10), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)", s_il_11, sizeof(s_il_11), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)", s_il_12, sizeof(s_il_12), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)", s_il_13, sizeof(s_il_13), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)", s_il_14, sizeof(s_il_14), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBinary,System.Data.SqlTypes.SqlBinary)", s_il_15, sizeof(s_il_15), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::ToSqlGuid:System.Data.SqlTypes.SqlGuid()", s_il_16, sizeof(s_il_16), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBinary::WrapBytes:System.Data.SqlTypes.SqlBinary(System.Byte[])", s_il_17, sizeof(s_il_17), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::And:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)", s_il_34, sizeof(s_il_34), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::CompareTo:System.Int32(System.Object)", s_il_35, sizeof(s_il_35), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::CompareTo:System.Int32(System.Data.SqlTypes.SqlBoolean)", s_il_36, sizeof(s_il_36), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_37, sizeof(s_il_37), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)", s_il_38, sizeof(s_il_38), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::GreaterThanOrEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)", s_il_39, sizeof(s_il_39), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)", s_il_40, sizeof(s_il_40), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::LessThanOrEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)", s_il_41, sizeof(s_il_41), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)", s_il_42, sizeof(s_il_42), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::OnesComplement:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean)", s_il_43, sizeof(s_il_43), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::Or:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)", s_il_44, sizeof(s_il_44), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::Parse:System.Data.SqlTypes.SqlBoolean(System.String)", s_il_45, sizeof(s_il_45), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_46, sizeof(s_il_46), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_47, sizeof(s_il_47), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_48, sizeof(s_il_48), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_49, sizeof(s_il_49), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_50, sizeof(s_il_50), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_51, sizeof(s_il_51), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_52, sizeof(s_il_52), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_53, sizeof(s_il_53), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_54, sizeof(s_il_54), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBoolean::Xor:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlBoolean,System.Data.SqlTypes.SqlBoolean)", s_il_55, sizeof(s_il_55), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBytes::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_78, sizeof(s_il_78), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBytes::Read:System.Int64(System.Int64,System.Byte[],System.Int32,System.Int32)", s_il_79, sizeof(s_il_79), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBytes::SetLength:System.Void(System.Int64)", s_il_80, sizeof(s_il_80), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBytes::SetNull:System.Void()", s_il_81, sizeof(s_il_81), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBytes::ToSqlBinary:System.Data.SqlTypes.SqlBinary()", s_il_82, sizeof(s_il_82), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlBytes::Write:System.Void(System.Int64,System.Byte[],System.Int32,System.Int32)", s_il_83, sizeof(s_il_83), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::Add:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_102, sizeof(s_il_102), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::BitwiseAnd:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_103, sizeof(s_il_103), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::BitwiseOr:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_104, sizeof(s_il_104), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::CompareTo:System.Int32(System.Object)", s_il_105, sizeof(s_il_105), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::CompareTo:System.Int32(System.Data.SqlTypes.SqlByte)", s_il_106, sizeof(s_il_106), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::Divide:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_107, sizeof(s_il_107), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_108, sizeof(s_il_108), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_109, sizeof(s_il_109), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_110, sizeof(s_il_110), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_111, sizeof(s_il_111), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_112, sizeof(s_il_112), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::Mod:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_113, sizeof(s_il_113), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::Modulus:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_114, sizeof(s_il_114), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::Multiply:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_115, sizeof(s_il_115), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_116, sizeof(s_il_116), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::OnesComplement:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte)", s_il_117, sizeof(s_il_117), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::Parse:System.Data.SqlTypes.SqlByte(System.String)", s_il_118, sizeof(s_il_118), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::Subtract:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_119, sizeof(s_il_119), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_120, sizeof(s_il_120), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_121, sizeof(s_il_121), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_122, sizeof(s_il_122), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_123, sizeof(s_il_123), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_124, sizeof(s_il_124), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_125, sizeof(s_il_125), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_126, sizeof(s_il_126), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_127, sizeof(s_il_127), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_128, sizeof(s_il_128), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlByte::Xor:System.Data.SqlTypes.SqlByte(System.Data.SqlTypes.SqlByte,System.Data.SqlTypes.SqlByte)", s_il_129, sizeof(s_il_129), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlChars::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_157, sizeof(s_il_157), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlChars::Read:System.Int64(System.Int64,System.Char[],System.Int32,System.Int32)", s_il_158, sizeof(s_il_158), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlChars::SetLength:System.Void(System.Int64)", s_il_161, sizeof(s_il_161), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlChars::SetNull:System.Void()", s_il_162, sizeof(s_il_162), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlChars::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_163, sizeof(s_il_163), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlChars::Write:System.Void(System.Int64,System.Char[],System.Int32,System.Int32)", s_il_164, sizeof(s_il_164), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::Add:System.Data.SqlTypes.SqlDateTime(System.Data.SqlTypes.SqlDateTime,System.TimeSpan)", s_il_185, sizeof(s_il_185), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::CompareTo:System.Int32(System.Data.SqlTypes.SqlDateTime)", s_il_187, sizeof(s_il_187), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::CompareTo:System.Int32(System.Object)", s_il_188, sizeof(s_il_188), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_189, sizeof(s_il_189), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)", s_il_190, sizeof(s_il_190), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)", s_il_191, sizeof(s_il_191), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)", s_il_192, sizeof(s_il_192), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)", s_il_193, sizeof(s_il_193), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDateTime,System.Data.SqlTypes.SqlDateTime)", s_il_194, sizeof(s_il_194), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::Parse:System.Data.SqlTypes.SqlDateTime(System.String)", s_il_195, sizeof(s_il_195), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::Subtract:System.Data.SqlTypes.SqlDateTime(System.Data.SqlTypes.SqlDateTime,System.TimeSpan)", s_il_196, sizeof(s_il_196), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDateTime::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_197, sizeof(s_il_197), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Add:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_215, sizeof(s_il_215), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::AdjustScale:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32,System.Boolean)", s_il_216, sizeof(s_il_216), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Ceiling:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)", s_il_217, sizeof(s_il_217), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::CompareTo:System.Int32(System.Object)", s_il_218, sizeof(s_il_218), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::CompareTo:System.Int32(System.Data.SqlTypes.SqlDecimal)", s_il_219, sizeof(s_il_219), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ConvertToPrecScale:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32,System.Int32)", s_il_220, sizeof(s_il_220), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Divide:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_221, sizeof(s_il_221), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Floor:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal)", s_il_222, sizeof(s_il_222), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_223, sizeof(s_il_223), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_224, sizeof(s_il_224), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_225, sizeof(s_il_225), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_226, sizeof(s_il_226), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_227, sizeof(s_il_227), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Multiply:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_228, sizeof(s_il_228), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_229, sizeof(s_il_229), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Parse:System.Data.SqlTypes.SqlDecimal(System.String)", s_il_230, sizeof(s_il_230), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Power:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Double)", s_il_231, sizeof(s_il_231), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Round:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32)", s_il_232, sizeof(s_il_232), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Sign:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlDecimal)", s_il_233, sizeof(s_il_233), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Subtract:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Data.SqlTypes.SqlDecimal)", s_il_234, sizeof(s_il_234), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToDouble:System.Double()", s_il_235, sizeof(s_il_235), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_236, sizeof(s_il_236), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_237, sizeof(s_il_237), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_238, sizeof(s_il_238), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_239, sizeof(s_il_239), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_240, sizeof(s_il_240), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_241, sizeof(s_il_241), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_242, sizeof(s_il_242), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_243, sizeof(s_il_243), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_244, sizeof(s_il_244), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDecimal::Truncate:System.Data.SqlTypes.SqlDecimal(System.Data.SqlTypes.SqlDecimal,System.Int32)", s_il_245, sizeof(s_il_245), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::Add:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_283, sizeof(s_il_283), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::CompareTo:System.Int32(System.Object)", s_il_284, sizeof(s_il_284), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::CompareTo:System.Int32(System.Data.SqlTypes.SqlDouble)", s_il_285, sizeof(s_il_285), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::Divide:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_286, sizeof(s_il_286), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_287, sizeof(s_il_287), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_288, sizeof(s_il_288), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_289, sizeof(s_il_289), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_290, sizeof(s_il_290), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_291, sizeof(s_il_291), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::Multiply:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_292, sizeof(s_il_292), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_293, sizeof(s_il_293), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::Parse:System.Data.SqlTypes.SqlDouble(System.String)", s_il_294, sizeof(s_il_294), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::Subtract:System.Data.SqlTypes.SqlDouble(System.Data.SqlTypes.SqlDouble,System.Data.SqlTypes.SqlDouble)", s_il_295, sizeof(s_il_295), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_296, sizeof(s_il_296), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_297, sizeof(s_il_297), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_298, sizeof(s_il_298), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_299, sizeof(s_il_299), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_300, sizeof(s_il_300), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_301, sizeof(s_il_301), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_302, sizeof(s_il_302), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_303, sizeof(s_il_303), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlDouble::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_304, sizeof(s_il_304), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::CompareTo:System.Int32(System.Data.SqlTypes.SqlGuid)", s_il_326, sizeof(s_il_326), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::CompareTo:System.Int32(System.Object)", s_il_327, sizeof(s_il_327), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_328, sizeof(s_il_328), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)", s_il_329, sizeof(s_il_329), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)", s_il_330, sizeof(s_il_330), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)", s_il_331, sizeof(s_il_331), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)", s_il_332, sizeof(s_il_332), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlGuid,System.Data.SqlTypes.SqlGuid)", s_il_333, sizeof(s_il_333), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::Parse:System.Data.SqlTypes.SqlGuid(System.String)", s_il_334, sizeof(s_il_334), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::ToByteArray:System.Byte[]()", s_il_335, sizeof(s_il_335), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::ToSqlBinary:System.Data.SqlTypes.SqlBinary()", s_il_336, sizeof(s_il_336), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlGuid::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_337, sizeof(s_il_337), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::Add:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_354, sizeof(s_il_354), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::BitwiseAnd:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_355, sizeof(s_il_355), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::BitwiseOr:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_356, sizeof(s_il_356), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::CompareTo:System.Int32(System.Object)", s_il_357, sizeof(s_il_357), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt16)", s_il_358, sizeof(s_il_358), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::Divide:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_359, sizeof(s_il_359), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_360, sizeof(s_il_360), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_361, sizeof(s_il_361), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_362, sizeof(s_il_362), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_363, sizeof(s_il_363), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_364, sizeof(s_il_364), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::Mod:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_365, sizeof(s_il_365), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::Modulus:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_366, sizeof(s_il_366), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::Multiply:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_367, sizeof(s_il_367), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_368, sizeof(s_il_368), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::OnesComplement:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16)", s_il_369, sizeof(s_il_369), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::Parse:System.Data.SqlTypes.SqlInt16(System.String)", s_il_370, sizeof(s_il_370), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::Subtract:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_371, sizeof(s_il_371), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_372, sizeof(s_il_372), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_373, sizeof(s_il_373), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_374, sizeof(s_il_374), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_375, sizeof(s_il_375), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_376, sizeof(s_il_376), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_377, sizeof(s_il_377), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_378, sizeof(s_il_378), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_379, sizeof(s_il_379), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_380, sizeof(s_il_380), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt16::Xor:System.Data.SqlTypes.SqlInt16(System.Data.SqlTypes.SqlInt16,System.Data.SqlTypes.SqlInt16)", s_il_381, sizeof(s_il_381), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::Add:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_411, sizeof(s_il_411), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::BitwiseAnd:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_412, sizeof(s_il_412), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::BitwiseOr:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_413, sizeof(s_il_413), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::CompareTo:System.Int32(System.Object)", s_il_414, sizeof(s_il_414), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt32)", s_il_415, sizeof(s_il_415), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::Divide:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_416, sizeof(s_il_416), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_417, sizeof(s_il_417), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_418, sizeof(s_il_418), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_419, sizeof(s_il_419), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_420, sizeof(s_il_420), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_421, sizeof(s_il_421), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::Mod:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_422, sizeof(s_il_422), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::Modulus:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_423, sizeof(s_il_423), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::Multiply:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_424, sizeof(s_il_424), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_425, sizeof(s_il_425), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::OnesComplement:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32)", s_il_426, sizeof(s_il_426), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::Parse:System.Data.SqlTypes.SqlInt32(System.String)", s_il_427, sizeof(s_il_427), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::Subtract:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_428, sizeof(s_il_428), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_429, sizeof(s_il_429), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_430, sizeof(s_il_430), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_431, sizeof(s_il_431), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_432, sizeof(s_il_432), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_433, sizeof(s_il_433), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_434, sizeof(s_il_434), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_435, sizeof(s_il_435), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_436, sizeof(s_il_436), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_437, sizeof(s_il_437), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt32::Xor:System.Data.SqlTypes.SqlInt32(System.Data.SqlTypes.SqlInt32,System.Data.SqlTypes.SqlInt32)", s_il_438, sizeof(s_il_438), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::Add:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_468, sizeof(s_il_468), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::BitwiseAnd:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_469, sizeof(s_il_469), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::BitwiseOr:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_470, sizeof(s_il_470), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::CompareTo:System.Int32(System.Object)", s_il_471, sizeof(s_il_471), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::CompareTo:System.Int32(System.Data.SqlTypes.SqlInt64)", s_il_472, sizeof(s_il_472), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::Divide:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_473, sizeof(s_il_473), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_474, sizeof(s_il_474), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_475, sizeof(s_il_475), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_476, sizeof(s_il_476), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_477, sizeof(s_il_477), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_478, sizeof(s_il_478), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::Mod:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_479, sizeof(s_il_479), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::Modulus:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_480, sizeof(s_il_480), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::Multiply:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_481, sizeof(s_il_481), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_482, sizeof(s_il_482), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::OnesComplement:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64)", s_il_483, sizeof(s_il_483), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::Parse:System.Data.SqlTypes.SqlInt64(System.String)", s_il_484, sizeof(s_il_484), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::Subtract:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_485, sizeof(s_il_485), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_486, sizeof(s_il_486), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_487, sizeof(s_il_487), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_488, sizeof(s_il_488), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_489, sizeof(s_il_489), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_490, sizeof(s_il_490), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_491, sizeof(s_il_491), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_492, sizeof(s_il_492), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_493, sizeof(s_il_493), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_494, sizeof(s_il_494), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlInt64::Xor:System.Data.SqlTypes.SqlInt64(System.Data.SqlTypes.SqlInt64,System.Data.SqlTypes.SqlInt64)", s_il_495, sizeof(s_il_495), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::Add:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_525, sizeof(s_il_525), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::CompareTo:System.Int32(System.Object)", s_il_526, sizeof(s_il_526), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::CompareTo:System.Int32(System.Data.SqlTypes.SqlMoney)", s_il_527, sizeof(s_il_527), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::Divide:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_528, sizeof(s_il_528), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::FromTdsValue:System.Data.SqlTypes.SqlMoney(System.Int64)", s_il_529, sizeof(s_il_529), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::GetTdsValue:System.Int64()", s_il_530, sizeof(s_il_530), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_531, sizeof(s_il_531), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_532, sizeof(s_il_532), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_533, sizeof(s_il_533), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_534, sizeof(s_il_534), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_535, sizeof(s_il_535), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::Multiply:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_536, sizeof(s_il_536), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_537, sizeof(s_il_537), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::Parse:System.Data.SqlTypes.SqlMoney(System.String)", s_il_538, sizeof(s_il_538), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::Subtract:System.Data.SqlTypes.SqlMoney(System.Data.SqlTypes.SqlMoney,System.Data.SqlTypes.SqlMoney)", s_il_539, sizeof(s_il_539), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToDecimal:System.Decimal()", s_il_540, sizeof(s_il_540), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToDouble:System.Double()", s_il_541, sizeof(s_il_541), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToInt32:System.Int32()", s_il_542, sizeof(s_il_542), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToInt64:System.Int64()", s_il_543, sizeof(s_il_543), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_544, sizeof(s_il_544), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_545, sizeof(s_il_545), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_546, sizeof(s_il_546), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_547, sizeof(s_il_547), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_548, sizeof(s_il_548), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_549, sizeof(s_il_549), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_550, sizeof(s_il_550), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_551, sizeof(s_il_551), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlMoney::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_552, sizeof(s_il_552), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::Add:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_581, sizeof(s_il_581), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::CompareTo:System.Int32(System.Object)", s_il_582, sizeof(s_il_582), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::CompareTo:System.Int32(System.Data.SqlTypes.SqlSingle)", s_il_583, sizeof(s_il_583), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::Divide:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_584, sizeof(s_il_584), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_585, sizeof(s_il_585), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_586, sizeof(s_il_586), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_587, sizeof(s_il_587), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_588, sizeof(s_il_588), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_589, sizeof(s_il_589), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::Multiply:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_590, sizeof(s_il_590), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_591, sizeof(s_il_591), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::Parse:System.Data.SqlTypes.SqlSingle(System.String)", s_il_592, sizeof(s_il_592), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::Subtract:System.Data.SqlTypes.SqlSingle(System.Data.SqlTypes.SqlSingle,System.Data.SqlTypes.SqlSingle)", s_il_593, sizeof(s_il_593), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_594, sizeof(s_il_594), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_595, sizeof(s_il_595), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_596, sizeof(s_il_596), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_597, sizeof(s_il_597), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_598, sizeof(s_il_598), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_599, sizeof(s_il_599), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_600, sizeof(s_il_600), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_601, sizeof(s_il_601), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlSingle::ToSqlString:System.Data.SqlTypes.SqlString()", s_il_602, sizeof(s_il_602), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::Add:System.Data.SqlTypes.SqlString(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)", s_il_626, sizeof(s_il_626), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::Clone:System.Data.SqlTypes.SqlString()", s_il_627, sizeof(s_il_627), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::CompareOptionsFromSqlCompareOptions:System.Globalization.CompareOptions(System.Data.SqlTypes.SqlCompareOptions)", s_il_628, sizeof(s_il_628), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::CompareTo:System.Int32(System.Object)", s_il_629, sizeof(s_il_629), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::CompareTo:System.Int32(System.Data.SqlTypes.SqlString)", s_il_630, sizeof(s_il_630), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::Concat:System.Data.SqlTypes.SqlString(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)", s_il_631, sizeof(s_il_631), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::GetNonUnicodeBytes:System.Byte[]()", s_il_632, sizeof(s_il_632), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::GetUnicodeBytes:System.Byte[]()", s_il_633, sizeof(s_il_633), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_634, sizeof(s_il_634), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::GreaterThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)", s_il_635, sizeof(s_il_635), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::GreaterThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)", s_il_636, sizeof(s_il_636), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::LessThan:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)", s_il_637, sizeof(s_il_637), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::LessThanOrEqual:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)", s_il_638, sizeof(s_il_638), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::NotEquals:System.Data.SqlTypes.SqlBoolean(System.Data.SqlTypes.SqlString,System.Data.SqlTypes.SqlString)", s_il_639, sizeof(s_il_639), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlBoolean:System.Data.SqlTypes.SqlBoolean()", s_il_640, sizeof(s_il_640), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlByte:System.Data.SqlTypes.SqlByte()", s_il_641, sizeof(s_il_641), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDateTime:System.Data.SqlTypes.SqlDateTime()", s_il_642, sizeof(s_il_642), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDecimal:System.Data.SqlTypes.SqlDecimal()", s_il_643, sizeof(s_il_643), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlDouble:System.Data.SqlTypes.SqlDouble()", s_il_644, sizeof(s_il_644), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlGuid:System.Data.SqlTypes.SqlGuid()", s_il_645, sizeof(s_il_645), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt16:System.Data.SqlTypes.SqlInt16()", s_il_646, sizeof(s_il_646), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt32:System.Data.SqlTypes.SqlInt32()", s_il_647, sizeof(s_il_647), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlInt64:System.Data.SqlTypes.SqlInt64()", s_il_648, sizeof(s_il_648), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlMoney:System.Data.SqlTypes.SqlMoney()", s_il_649, sizeof(s_il_649), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlString::ToSqlSingle:System.Data.SqlTypes.SqlSingle()", s_il_650, sizeof(s_il_650), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlXml::CreateReader:System.Xml.XmlReader()", s_il_671, sizeof(s_il_671), nullptr, nullptr },
+    { "System.Data.Common/System.Data.SqlTypes.SqlXml::GetXsdType:System.Xml.XmlQualifiedName(System.Xml.Schema.XmlSchemaSet)", s_il_672, sizeof(s_il_672), nullptr, nullptr },
+    { nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.

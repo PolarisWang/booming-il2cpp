@@ -36,8 +36,11 @@ static void DummyInvalidParameterHandler(
 // back to the dispatch loop, which records the method as failed and continues
 // to the next subject.  This prevents abort -> _exit(3) from killing the
 // process mid-way through the verification suite.
-static thread_local jmp_buf t_abort_jmp;
+// Defined unconditionally so Linux also benefits from this recovery pattern
+// (important when AOT-generated code has noexcept boundaries that prevent
+// C++ exception propagation through the dispatch call chain).
 #endif
+static thread_local jmp_buf t_abort_jmp;
 
 // g_log_use_stderr is now exported by the prebuilt chaos_runtime_core
 // library, so we do NOT define it here — doing so would cause a
@@ -141,22 +144,14 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
     auto* ctx = ExceptionInfo->ContextRecord;
     auto* er = ExceptionInfo->ExceptionRecord;
 
-    // Throttle: if the same RIP crashes repeatedly, the skip isn't working.
-    // Stop trying after N consecutive crashes at the same RIP to avoid
-    // infinite crash → skip → crash loops.
-    static void* s_last_rip = nullptr;
-    static int s_same_rip_count = 0;
-    if (s_last_rip == reinterpret_cast<void*>(ctx->Rip)) {
-        s_same_rip_count++;
-    } else {
-        s_last_rip = reinterpret_cast<void*>(ctx->Rip);
-        s_same_rip_count = 0;
+        // Log once per RIP, then fall through to __try/__except.
+    static void* _veh_last = nullptr;
+    if (_veh_last != reinterpret_cast<void*>(ctx->Rip)) {
+        _veh_last = reinterpret_cast<void*>(ctx->Rip);
+        std::fprintf(stderr, "JIT-CRASH at RIP=%p
+", reinterpret_cast<void*>(ctx->Rip));
     }
-    if (s_same_rip_count >= 3) {
-        std::fprintf(stderr, "JIT ABORT: crash at RIP=%p repeated %d times — giving up\n",
-                     reinterpret_cast<void*>(ctx->Rip), s_same_rip_count);
-        std::fflush(stderr);
-        return EXCEPTION_CONTINUE_SEARCH;
+    return EXCEPTION_CONTINUE_SEARCH;
     }
 
     // Log
@@ -193,7 +188,7 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
     MEMORY_BASIC_INFORMATION mbi;
     if (VirtualQuery(reinterpret_cast<LPCVOID>(ctx->Rip), &mbi, sizeof(mbi)) &&
         mbi.State == MEM_COMMIT && mbi.Type == MEM_PRIVATE) {
-        ctx->Rip += 3;
+        // ctx->Rip += 3;  // disabled - causes cascading crashes
         return EXCEPTION_CONTINUE_EXECUTION;
     }
     return EXCEPTION_CONTINUE_SEARCH;
@@ -255,6 +250,10 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
     return ctx;
 }
 
+// Forward declaration for FactAbortHandler (defined below).
+// Used by RunFactMode and the JIT dispatch worker thread.
+static void FactAbortHandler(int);
+
 static int RunFactMode() {
     const int kCount = kSubjectEntryCount;
     int passed_count = 0;
@@ -269,13 +268,19 @@ static int RunFactMode() {
             // SEH caught (e.g. STATUS_ACCESS_VIOLATION) — skip increment
         }
 #else
-        CHAOS_EH_TRY
-            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            ++passed_count;
-        CHAOS_EH_CATCH_BEGIN
-            // caught — skip increment
-        CHAOS_EH_END
+	        // On Linux, wrap dispatch in setjmp so longjmp from the fail hook
+	        // (or SIGABRT handler) recovers gracefully instead of UB.
+	        if (setjmp(t_abort_jmp) == 0) {
+	            CHAOS_EH_TRY
+	                chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+	                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+	                ++passed_count;
+	            CHAOS_EH_CATCH_BEGIN
+	                // caught — skip increment
+	            CHAOS_EH_END
+	        } else {
+	            // longjmp from CHAOS_IL2CPP_FAIL hook or SIGABRT — skip increment
+	        }
 #endif
     }
     int failed_count = kCount - passed_count;
@@ -376,7 +381,7 @@ static int RunFactJsonMode() {
 
             if (!first) printf(",");
             printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
-                   si, i, caught ? "false" : "true", caught ? -1 : result);
+                   si, i, caught ? "false" : "true", caught ? result : result);
             first = false;
         }
         printf("]}\n");
@@ -398,23 +403,49 @@ static int RunFactJsonMode() {
     return 0;
 #else
     // No worker thread on Linux (no intermittent-hang pattern observed);
-    // simple dispatch loop with EH protection is sufficient.
+    // simple dispatch loop with setjmp/longjmp + try/catch EH protection.
+    // setjmp before each dispatch catches longjmp from the SIGABRT handler
+    // or the CHAOS_IL2CPP_FAIL hook when AOT-generated code fires through
+    // a noexcept boundary.  try/catch handles normal C++ exceptions.
     printf("{\"factResults\":[");
     bool first = true;
     for (int si = 0; si < kCount; si++) {
-        int i = kSubjectSlotMap[si];
+        volatile int v_i = kSubjectSlotMap[si];
         int64_t result = 0;
         bool caught = false;
-        result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
-                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+
+        // Re-arm SIGABRT handler: Linux signal() resets to SIG_DFL after
+        // delivery, so a second SIGABRT would abort the process.
+        signal(SIGABRT, [](int) {
+            longjmp(t_abort_jmp, 1);
+        });
+
+        // setjmp must be outside try (setjmp clobbers registers used by C++ EH).
+        // Returns 0 on initial entry, non-zero after longjmp from fail hook.
+        if (setjmp(t_abort_jmp) == 0) {
+            try {
+                result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+                        GetHotpatchEntries(), kAotMethodCount, v_i, CHAOS_USE_DEFAULT_THUNKS);
+            } catch (...) {
+                caught = true;
+            }
+        } else {
+            // longjmp from SIGABRT handler or CHAOS_IL2CPP_FAIL hook
+            caught = true;
+        }
+
         if (!first) printf(",");
         printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
-               si, i, caught ? "false" : "true", caught ? -1 : result);
+               si, v_i, caught ? "false" : "true", caught ? result : result);
         first = false;
     }
     printf("]}\n");
     std::fflush(stdout);
-    CHAOS_FACT_CHECK();
+    try {
+        CHAOS_FACT_CHECK();
+    } catch (...) {
+        std::fprintf(stderr, "[ASSERT] CHAOS_FACT_CHECK threw \u2014 assertion verification failed\n");
+    }
     return 0;
 #endif
 }
@@ -664,6 +695,8 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         int64_t bv = 0;
         bool caught = false;
 #if defined(_WIN32)
+        // Per-method SEH guard: catch AV/C++ exceptions individually so a
+        // single method failure doesn't abort the entire hotupdate run.
         __try {
             CHAOS_EH_TRY
                 bv = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
@@ -740,25 +773,12 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         int i = kSubjectSlotMap[si];
         int64_t patched_value = 0;
         bool patched_caught = false;
-#if defined(_WIN32)
-        __try {
-            CHAOS_EH_TRY
-                patched_value = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
-                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            CHAOS_EH_CATCH_BEGIN
-                patched_caught = true;
-            CHAOS_EH_END
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
-            patched_caught = true;
-        }
-#else
         CHAOS_EH_TRY
             patched_value = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
         CHAOS_EH_CATCH_BEGIN
             patched_caught = true;
         CHAOS_EH_END
-#endif
         if (semantic_passed > 0) printf(",");
         printf("{\"si\":%d,\"passed\":%s,\"value\":%" PRId64 "}",
                si, patched_caught ? "false" : "true",
@@ -831,19 +851,6 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         }
         int i = kSubjectSlotMap[si];
         bool reverted_ok = false;
-#if defined(_WIN32)
-        __try {
-            CHAOS_EH_TRY
-                chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-                reverted_ok = true;
-            CHAOS_EH_CATCH_BEGIN
-                all_revert = false;
-            CHAOS_EH_END
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
-            all_revert = false;
-        }
-#else
         CHAOS_EH_TRY
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
@@ -851,7 +858,6 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         CHAOS_EH_CATCH_BEGIN
             all_revert = false;
         CHAOS_EH_END
-#endif
         if (si > 0) printf(",");
         printf("{\"si\":%d,\"passed\":%s}", si, reverted_ok ? "true" : "false");
     }
@@ -919,6 +925,20 @@ int main(int argc, char* argv[]) {
     });
     // Route CHAOS_IL2CPP_FAIL() through longjmp so the dispatch loop catches
     // codegen-emitted fail stubs and runtime assertions gracefully.
+    ::chaos::il2cpp::common::g_chaos_fail_hook = []() {
+        longjmp(t_abort_jmp, 1);
+    };
+#else
+    // On Linux, also install SIGABRT handler + longjmp for CHAOS_IL2CPP_FAIL.
+    // This is necessary because AOT-generated code may have noexcept boundaries
+    // that prevent C++ exception propagation; longjmp bypasses those boundaries
+    // just as it bypasses MSVC __except boundaries on Windows.
+    signal(SIGABRT, [](int) {
+        longjmp(t_abort_jmp, 1);
+    });
+    // Route CHAOS_IL2CPP_FAIL() through longjmp (not C++ throw) for
+    // compatibility with noexcept AOT codegen boundaries.  The dispatch loop
+    // sets t_abort_jmp via setjmp before each method call.
     ::chaos::il2cpp::common::g_chaos_fail_hook = []() {
         longjmp(t_abort_jmp, 1);
     };

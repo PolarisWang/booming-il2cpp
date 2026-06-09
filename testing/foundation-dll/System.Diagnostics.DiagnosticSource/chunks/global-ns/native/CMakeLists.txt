@@ -14,7 +14,9 @@ if(MSVC)
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter)
   set(CHAOS_EHA_FLAG -fexceptions)
-  set(CHAOS_FORCE_MULTIPLE "")
+  # eager_compile.cpp is compiled locally AND present in prebuilt
+  # libchaos_interpreter.a — both define EagerCompilePatchMethods.
+  set(CHAOS_FORCE_MULTIPLE "-Wl,--allow-multiple-definition")
 endif()
 
 # ── Config tier ──
@@ -42,6 +44,7 @@ if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
+  add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
@@ -67,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Diagnostics.DiagnosticSource/chunks/global-ns/native/codegen")
-set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Diagnostics.DiagnosticSource/chunks/global-ns/native/codegen")
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Diagnostics.DiagnosticSource/chunks/global-ns/native/codegen")
+set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Diagnostics.DiagnosticSource/chunks/global-ns/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -104,6 +107,9 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/dispatch.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
@@ -130,17 +136,20 @@ set(CHAOS_SIMD_STUBS
 set(CHAOS_CHAR_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/char_stubs.cpp"
 )
+set(CHAOS_VECTOR_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/vector_stubs.cpp"
+)
 set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
 set(CHAOS_INTEROP_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/interop_stubs.cpp"
 )
-set(CHAOS_VECTOR_STUBS
-    "${CHAOS_SDK_DIR}/runtime_stubs/vector_stubs.cpp"
-)
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
+)
+set(CHAOS_CRYPTO_STUBS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
 # hotpatch_table.cpp — compiled locally so the entry has the latest
 # SetPatchedBySlot (the prebuilt chaos_runtime_core.lib may be stale).
@@ -161,6 +170,12 @@ endif()
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
 )
+# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
+# symbols added after the SDK was last rebuilt.  Compile locally.
+set(CHAOS_PROFILE_STATS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
+)
 
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -172,13 +187,15 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MATH_STUBS}
     ${CHAOS_SIMD_STUBS}
     ${CHAOS_CHAR_STUBS}
+    ${CHAOS_VECTOR_STUBS}
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
-    ${CHAOS_VECTOR_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
+    ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -196,13 +213,13 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
+    "${CHAOS_PROJECT_ROOT}/cmake"
     "${CHAOS_CODEGEN_DIR}/codegen/generated"
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
     # JIT headers needed by eager_compile.cpp (compiled for all builds
     # since the prebuilt chaos_interpreter.lib may be stale).
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
-    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"
@@ -226,5 +243,11 @@ if(MSVC)
   target_link_libraries(chaos_entry PRIVATE bcrypt)
   target_link_options(chaos_entry PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
 
+endif()
+# OpenSSL: needed by crypto_stubs.cpp on Linux (SHA/HMAC via libcrypto).
+if(NOT MSVC)
+  find_package(OpenSSL REQUIRED)
+  target_include_directories(chaos_entry PRIVATE ${OPENSSL_INCLUDE_DIR})
+  target_link_libraries(chaos_entry PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})

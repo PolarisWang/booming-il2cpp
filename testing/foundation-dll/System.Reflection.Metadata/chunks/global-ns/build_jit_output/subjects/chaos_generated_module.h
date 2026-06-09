@@ -31,7 +31,6 @@
 class ChaosRuntimeHost;
 
 // chaos_valuetype_* typedefs (opaque 32-bit managed value types)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Collections_Immutable_ImmutableArray_System_Byte_;
 
 
@@ -44,159 +43,6 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Collections_Immutable_Immutabl
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_t {
-        void (*AreEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_1)(
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_3)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_4)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_5)(
-                    double, 
-                    double, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_6)(
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_7)(
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_8)(
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_9)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_10)(
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_11)(
-                    float, 
-                    float, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_12)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_13)(
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_14)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_15)(
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_16)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreNotEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*Complete)(
-                void
-        );
-        void (*Fail)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsFalse)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNotNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsTrue)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*RecordFailure)(
-                void
-        );
-        void (*Reset)(
-                void
-        );
-        void (*Throws)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_InvalidOperationException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_NullReferenceException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*get_ExitCode)(
-                void
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute;
     struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_DebugDirectoryBuilderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
@@ -754,7 +600,7 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEReaderTests___c__DisplayClass24_0;
-    int32_t method_count;
+    CHAOS_IL2CPP_INT32 method_count;
 };
 
 extern const Functions kFunctions;
@@ -771,343 +617,6 @@ extern "C" void* kFunctionsFlat[];
 // These provide type-safe invocation without exposing the raw function table.
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
-    static inline void AreEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_1(
-                CHAOS_IL2CPP_UINT8 arg_0, 
-                CHAOS_IL2CPP_UINT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_1(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_3(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_3(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_4(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_4(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_5(
-                double arg_0, 
-                double arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_5(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_6(
-                CHAOS_IL2CPP_INT16 arg_0, 
-                CHAOS_IL2CPP_INT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_6(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_7(
-                CHAOS_IL2CPP_INT32 arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_7(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_8(
-                CHAOS_IL2CPP_INT64 arg_0, 
-                CHAOS_IL2CPP_INT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_8(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_9(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_9(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_10(
-                CHAOS_IL2CPP_INT8 arg_0, 
-                CHAOS_IL2CPP_INT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_10(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_11(
-                float arg_0, 
-                float arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_11(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_12(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_12(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_13(
-                CHAOS_IL2CPP_UINT16 arg_0, 
-                CHAOS_IL2CPP_UINT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_13(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_14(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_14(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_15(
-                CHAOS_IL2CPP_UINT64 arg_0, 
-                CHAOS_IL2CPP_UINT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_15(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_16(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_16(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreNotEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreNotEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 Complete(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Complete(
-        );
-    }
-    static inline void Fail(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Fail(
-                    arg_0
-        );
-    }
-    static inline void IsFalse(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsFalse(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNotNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNotNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsTrue(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsTrue(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void RecordFailure(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.RecordFailure(
-        );
-    }
-    static inline void Reset(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Reset(
-        );
-    }
-    static inline void Throws(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_InvalidOperationException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_InvalidOperationException_(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_NullReferenceException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_NullReferenceException_(
-                    arg_0
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 get_ExitCode(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.get_ExitCode(
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 30;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException.ctor(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_DebugDirectoryBuilderTests {
     static inline void ctor(
@@ -1334,7 +843,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 37;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 37;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_DebugDirectoryBuilderTests___c {
@@ -1499,7 +1008,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 22;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 22;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_ManagedPEBuilderTests {
@@ -1535,7 +1044,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_ManagedPEBuilderTests___c {
@@ -1584,7 +1093,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEBuilderTests {
@@ -1608,7 +1117,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEBuilderTests___c {
@@ -1632,7 +1141,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 3;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEHeaderBuilderTests {
@@ -1668,7 +1177,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 5;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 5;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEHeadersTests {
@@ -1728,7 +1237,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 9;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEHeadersTests___c {
@@ -1759,7 +1268,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 4;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 4;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEHeadersTests___c__DisplayClass0_0 {
@@ -1778,7 +1287,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 2;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEHeadersTests___c__DisplayClass2_0 {
@@ -1797,7 +1306,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 2;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEMemoryBlockTests {
@@ -1905,7 +1414,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 17;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 17;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEMemoryBlockTests___c {
@@ -1950,7 +1459,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 6;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEReaderTests {
@@ -2130,7 +1639,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 29;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEReaderTests___c {
@@ -2242,7 +1751,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 15;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 15;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEReaderTests___c__DisplayClass20_0 {
@@ -2261,7 +1770,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 2;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEReaderTests___c__DisplayClass22_0 {
@@ -2280,7 +1789,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 2;
 };
 
 struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_PortableExecutable_PEReaderTests___c__DisplayClass24_0 {
@@ -2299,7 +1808,7 @@ struct CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflecti
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 2;
 };
 
 

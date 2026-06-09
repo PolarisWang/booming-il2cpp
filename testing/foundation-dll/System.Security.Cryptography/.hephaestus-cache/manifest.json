@@ -3,27 +3,15 @@
   "max_entries": 50,
   "entries": [
     {
-      "cache_key": "System.Security.Cryptography/security-cryptography/dc2d057f7cad601e",
+      "cache_key": "System.Security.Cryptography/system-security-cryptography-x509certificates/1865d11293931e0d",
       "assembly": "System.Security.Cryptography",
-      "chunk_slug": "security-cryptography",
-      "input_hash": "dc2d057f7cad601ef3f59824363aaabe03da207e65cfc64695d923532461cc63",
-      "cached_at": "2026-06-09T16:01:36Z",
-      "duration_ms": 128705,
-      "commit_hash": "1643d3faf",
-      "entry_exe_size": 27743744,
-      "entry_count": 418,
-      "status": "valid"
-    },
-    {
-      "cache_key": "System.Security.Cryptography/security-cryptography/15a7a5ec0bac659a",
-      "assembly": "System.Security.Cryptography",
-      "chunk_slug": "security-cryptography",
-      "input_hash": "15a7a5ec0bac659a9a7d42979e6aa2a9ed1d17011fb152f0ada574df88253b3b",
-      "cached_at": "2026-06-08T06:22:22Z",
-      "duration_ms": 173169,
-      "commit_hash": "d148b8dac",
-      "entry_exe_size": 31076864,
-      "entry_count": 427,
+      "chunk_slug": "system-security-cryptography-x509certificates",
+      "input_hash": "1865d11293931e0d5266f1e7f1ea76b4713e6fe3bb48cc00d9fd7680115ab07b",
+      "cached_at": "2026-06-09T21:31:47Z",
+      "duration_ms": 53741,
+      "commit_hash": "761dc6d2a",
+      "entry_exe_size": 9816576,
+      "entry_count": 368,
       "status": "valid"
     }
   ]

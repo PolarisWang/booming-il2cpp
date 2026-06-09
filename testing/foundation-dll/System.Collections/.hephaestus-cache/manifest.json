@@ -3,39 +3,15 @@
   "max_entries": 50,
   "entries": [
     {
-      "cache_key": "System.Collections/global-ns/c7f366a70865e9d0",
+      "cache_key": "System.Collections/global-ns/101527708ddfacf1",
       "assembly": "System.Collections",
       "chunk_slug": "global-ns",
-      "input_hash": "c7f366a70865e9d01a43c779cbd845b6c2e420a72c314188a55c28ae053f29cb",
-      "cached_at": "2026-06-09T08:32:32Z",
-      "duration_ms": 68250,
-      "commit_hash": "afac28d63",
-      "entry_exe_size": 7054192,
-      "entry_count": 541,
-      "status": "valid"
-    },
-    {
-      "cache_key": "System.Collections/global-ns/815b4d746ca33ac5",
-      "assembly": "System.Collections",
-      "chunk_slug": "global-ns",
-      "input_hash": "815b4d746ca33ac588208f342802e101c02dd1bf5cd186d637a0c3bfbd9c66c3",
-      "cached_at": "2026-06-08T08:59:45Z",
-      "duration_ms": 44160,
-      "commit_hash": "0560b1f8f",
-      "entry_exe_size": 3417088,
-      "entry_count": 346,
-      "status": "valid"
-    },
-    {
-      "cache_key": "System.Collections/global-ns/9116126b50684e95",
-      "assembly": "System.Collections",
-      "chunk_slug": "global-ns",
-      "input_hash": "9116126b50684e95e909bdbff4ca132f82f62115823fd871211346f974b351e3",
-      "cached_at": "2026-06-07T13:40:42Z",
-      "duration_ms": 13454,
-      "commit_hash": "1964a52a2",
-      "entry_exe_size": 3435520,
-      "entry_count": 528,
+      "input_hash": "101527708ddfacf12557522114da05310b7eca42c739685ef925773b799f566f",
+      "cached_at": "2026-06-09T19:56:58Z",
+      "duration_ms": 18909,
+      "commit_hash": "20f9980dc",
+      "entry_exe_size": 3517952,
+      "entry_count": 350,
       "status": "valid"
     }
   ]

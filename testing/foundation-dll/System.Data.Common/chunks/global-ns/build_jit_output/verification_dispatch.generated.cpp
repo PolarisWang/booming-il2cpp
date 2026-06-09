@@ -33,7 +33,7 @@ extern "C" void (*kDefaultArgThunks[])() noexcept;
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
     chaos_gc_enter_no_gc_region();
 
-    // JIT mode: use subject-slot iteration to skip intrinsic stubs
+    // JIT mode (or Linux AOT): use try/catch for POSIX EH compatibility
     auto* entries = GetHotpatchEntries();
     CHAOS_IL2CPP_INT32 failures = 0;
     for (int32_t si = 0; si < kSubjectEntryCount; si++) {
@@ -60,12 +60,18 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     if (entry_index < 0 || entry_index >= kAotMethodCount)
         return {-1.0, 0, false};
     auto* entries = GetHotpatchEntries();
-    // Warmup: at least 100 calls to prime caches / tier promotion
+    // Warmup: at least 100 calls to prime caches / tier promotion.
+    // Use __try/__except for AOT mode (interpreter dispatch may raise SEH);
+    // try/catch does not catch access violations on Windows.
+
     try {
+
         for (int w = 0; w < 100; w++) {
             ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
         }
+
     } catch(...) {
+
         return {-1.0, 0, true};
     }
 
@@ -73,11 +79,15 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     chaos_gc_enter_no_gc_region();
     auto alloc_before = chaos_gc_get_allocated_bytes_for_current_thread();
     auto start = std::chrono::steady_clock::now();
+
     try {
+
         for (int i = 0; i < iterations; i++) {
             ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
         }
+
     } catch(...) {
+
         auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
         chaos_gc_leave_no_gc_region();
         return {-1.0, alloc_after - alloc_before, true};
@@ -117,23 +127,32 @@ extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations)
     if (entry_index < 0 || entry_index >= kAotMethodCount)
         return {-1.0, 0, false};
     auto* entries = GetHotpatchEntries();
-    // Warmup: at least 100 calls to prime caches / tier promotion
+    // Warmup: at least 100 calls to prime caches / tier promotion.
+    // Use __try/__except for AOT mode — see RunBenchmark for rationale.
+
     try {
+
         for (int w = 0; w < 100; w++) {
             ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
         }
+
     } catch(...) {
+
         return {-1.0, 0, true};
     }
     CHAOS_IL2CPP_PROFILE_RESET();
     chaos_gc_enter_no_gc_region();
     auto alloc_before = chaos_gc_get_allocated_bytes_for_current_thread();
     auto start = std::chrono::steady_clock::now();
+
     try {
+
         for (int i = 0; i < iterations; i++) {
             ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
         }
+
     } catch(...) {
+
         auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
         chaos_gc_leave_no_gc_region();
         return {-1.0, alloc_after - alloc_before, true};

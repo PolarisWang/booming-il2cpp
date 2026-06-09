@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -1321,22 +1323,22 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
 	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
 	// Register managed_array (variable-size: header + contiguous element data).
 	registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-		static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-		static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+		static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+		static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 	registry.Register(17926809518465428827ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c), nullptr, 0);
@@ -1494,912 +1496,652 @@ CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_IO_Stream__Null =
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__10_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__12_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__14_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__16_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__18_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__20_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__22_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__24_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__26_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__6_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests___c____9__8_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ComponentSerializationServiceTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ContextStackTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ContextStackTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ContextStackTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ContextStackTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ContextStackTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ContextStackTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ContextStackTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_ContextStackTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_DesignerLoaderTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_DesignerLoaderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_DesignerLoaderTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_DesignerLoaderTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_DesignerLoaderTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_DesignerLoaderTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_DesignerLoaderTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_DesignerLoaderTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_MemberRelationshipServiceTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_MemberRelationshipServiceTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_MemberRelationshipServiceTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_MemberRelationshipServiceTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_SerializationStoreTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_SerializationStoreTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_SerializationStoreTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_SerializationStoreTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_SerializationStoreTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_SerializationStoreTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_SerializationStoreTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_ComponentModel_Design_Serialization_SerializationStoreTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_ColorConverterTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_ColorConverterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_ColorConverterTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_ColorConverterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_ColorConverterTests___c____9__10_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_ColorConverterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_ColorConverterTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_ColorConverterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_ColorConverterTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_ColorConverterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_ColorConverterTests___c____9__6_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_ColorConverterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_ColorConverterTests___c____9__8_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_ColorConverterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__10_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__12_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__14_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__16_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__18_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__20_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__6_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__8_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_PointConverterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__10_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__12_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__14_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__16_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__18_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__20_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__6_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_RectangleConverterTests___c____9__8_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_RectangleConverterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__10_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__12_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__14_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__16_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__18_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__20_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__6_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeConverterTests___c____9__8_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeConverterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__10_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__12_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__14_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__16_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__18_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__20_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__6_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_SizeFConverterTests___c____9__8_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Drawing_SizeFConverterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Security_Authentication_ExtendedProtection_ExtendedProtectionPolicyTypeConverterTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Security_Authentication_ExtendedProtection_ExtendedProtectionPolicyTypeConverterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Security_Authentication_ExtendedProtection_ExtendedProtectionPolicyTypeConverterTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Security_Authentication_ExtendedProtection_ExtendedProtectionPolicyTypeConverterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Security_Authentication_ExtendedProtection_ExtendedProtectionPolicyTypeConverterTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Security_Authentication_ExtendedProtection_ExtendedProtectionPolicyTypeConverterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Timers_TimerTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Timers_TimerTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Timers_TimerTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Timers_TimerTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Timers_TimerTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Timers_TimerTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Timers_TimerTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Timers_TimerTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Timers_TimerTests___c____9__6_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_ComponentModel_TypeConverter.System_Timers_TimerTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_NullStream___ctor() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("NullStream::.ctor");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__CreateStore_System_ComponentModel_Design_Serialization_SerializationStore__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::CreateStore:System.ComponentModel.Design.Serialization.SerializationStore()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__DeserializeTo_System_Void_System_ComponentModel_Design_Serialization_SerializationStore_System_ComponentModel_IContainer_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::DeserializeTo:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__DeserializeTo_System_Void_System_ComponentModel_Design_Serialization_SerializationStore_System_ComponentModel_IContainer_System_Boolean_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::DeserializeTo:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__DeserializeTo_System_Void_System_ComponentModel_Design_Serialization_SerializationStore_System_ComponentModel_IContainer_System_Boolean_System_Boolean_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::DeserializeTo:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer,System.Boolean,System.Boolean)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__Deserialize_System_Collections_ICollection_System_ComponentModel_Design_Serialization_SerializationStore_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::Deserialize:System.Collections.ICollection(System.ComponentModel.Design.Serialization.SerializationStore)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__Deserialize_System_Collections_ICollection_System_ComponentModel_Design_Serialization_SerializationStore_System_ComponentModel_IContainer_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::Deserialize:System.Collections.ICollection(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__LoadStore_System_ComponentModel_Design_Serialization_SerializationStore_System_IO_Stream_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::LoadStore:System.ComponentModel.Design.Serialization.SerializationStore(System.IO.Stream)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__SerializeAbsolute_System_Void_System_ComponentModel_Design_Serialization_SerializationStore_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::SerializeAbsolute:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__SerializeMemberAbsolute_System_Void_System_ComponentModel_Design_Serialization_SerializationStore_System_Object_System_ComponentModel_MemberDescriptor_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::SerializeMemberAbsolute:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.Object,System.ComponentModel.MemberDescriptor)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__SerializeMember_System_Void_System_ComponentModel_Design_Serialization_SerializationStore_System_Object_System_ComponentModel_MemberDescriptor_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::SerializeMember:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.Object,System.ComponentModel.MemberDescriptor)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__Serialize_System_Void_System_ComponentModel_Design_Serialization_SerializationStore_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::Serialize:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ContextStack__Append_System_Void_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Append:System.Void(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ContextStack__Pop_System_Object__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Pop:System.Object()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ContextStack__Push_System_Void_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Push:System.Void(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_DesignerLoader__BeginLoad_System_Void_System_ComponentModel_Design_Serialization_IDesignerLoaderHost_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.DesignerLoader::BeginLoad:System.Void(System.ComponentModel.Design.Serialization.IDesignerLoaderHost)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_DesignerLoader__Dispose_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.DesignerLoader::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_DesignerLoader__Flush_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.DesignerLoader::Flush:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_MemberRelationship() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.MemberRelationship");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_MemberRelationshipService__SupportsRelationship_System_Boolean_System_ComponentModel_Design_Serialization_MemberRelationship_System_ComponentModel_Design_Serialization_MemberRelationship_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.MemberRelationshipService::SupportsRelationship:System.Boolean(System.ComponentModel.Design.Serialization.MemberRelationship,System.ComponentModel.Design.Serialization.MemberRelationship)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_SerializationStore__Close_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.SerializationStore::Close:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_SerializationStore__Save_System_Void_System_IO_Stream_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.SerializationStore::Save:System.Void(System.IO.Stream)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__CanConvertFrom_System_Boolean_System_ComponentModel_ITypeDescriptorContext_System_Type_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__CanConvertTo_System_Boolean_System_ComponentModel_ITypeDescriptorContext_System_Type_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__ConvertFrom_System_Object_System_ComponentModel_ITypeDescriptorContext_System_Globalization_CultureInfo_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__ConvertTo_System_Object_System_ComponentModel_ITypeDescriptorContext_System_Globalization_CultureInfo_System_Object_System_Type_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__CreateInstance_System_Object_System_ComponentModel_ITypeDescriptorContext_System_Collections_IDictionary_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CreateInstance:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__GetCreateInstanceSupported_System_Boolean_System_ComponentModel_ITypeDescriptorContext_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetCreateInstanceSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__GetPropertiesSupported_System_Boolean_System_ComponentModel_ITypeDescriptorContext_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__GetProperties_System_ComponentModel_PropertyDescriptorCollection_System_ComponentModel_ITypeDescriptorContext_System_Object_System_Attribute___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__GetStandardValuesSupported_System_Boolean_System_ComponentModel_ITypeDescriptorContext_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__GetStandardValues_System_ComponentModel_TypeConverter_StandardValuesCollection_System_ComponentModel_ITypeDescriptorContext_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_Timers_Timer__BeginInit_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.Timers.Timer::BeginInit:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_Timers_Timer__Close_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.Timers.Timer::Close:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_Timers_Timer__EndInit_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.Timers.Timer::EndInit:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_ComponentModel_TypeConverter_System_Timers_Timer__Stop_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.ComponentModel.TypeConverter/System.Timers.Timer::Stop:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Attribute__System_Attribute____() noexcept
@@ -2409,23 +2151,17 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Attribute() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Attribute");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Collections_Hashtable___ctor_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Collections.Hashtable::.ctor:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Null() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::Null");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -2460,7 +2196,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -4322,7 +4058,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[134] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[134] = {
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__CreateStore_System_ComponentModel_Design_Serialization_SerializationStore__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__Deserialize_System_Collections_ICollection_System_ComponentModel_Design_Serialization_SerializationStore_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_Design_Serialization_ComponentSerializationService__Deserialize_System_Collections_ICollection_System_ComponentModel_Design_Serialization_SerializationStore_System_ComponentModel_IContainer_),
@@ -4393,7 +4129,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[134] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Collections_Hashtable___ctor_System_Void__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__GetCreateInstanceSupported_System_Boolean_System_ComponentModel_ITypeDescriptorContext_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__GetProperties_System_ComponentModel_PropertyDescriptorCollection_System_ComponentModel_ITypeDescriptorContext_System_Object_System_Attribute___),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Attribute__System_Attribute____),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Attribute),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_ComponentModel_TypeConverter_System_ComponentModel_TypeConverter__GetPropertiesSupported_System_Boolean_System_ComponentModel_ITypeDescriptorContext_),
 	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_ComponentModel_TypeConverter_System_Drawing_PointConverterTests___c____9__0_0),
@@ -4459,6 +4195,121 @@ extern "C" void* kChaosExternalRuntimeFnTable[134] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 134;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+	const char* subject_id;
+	const uint8_t* il_data;
+	int32_t il_size;
+	void* patch_method;
+	const char* json_data;
+};
+
+static const uint8_t s_il_0[] = {
+	0x2A, 
+};
+static const uint8_t s_il_4[] = {
+	0x02, 0x03, 0x04, 0x17, 0x17, 0x6F, 0x3F, 0x08, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_5[] = {
+	0x02, 0x03, 0x04, 0x17, 0x17, 0x6F, 0x3F, 0x08, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_6[] = {
+	0x02, 0x03, 0x04, 0x17, 0x17, 0x6F, 0x3F, 0x08, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_32[] = {
+	0x03, 0x72, 0xEC, 0x4E, 0x00, 0x70, 0x28, 0x09, 0x00, 0x00, 0x0A, 0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x2D, 0x0B, 0x02, 0x73, 0x5F, 0x02, 0x00, 
+	0x0A, 0x7D, 0x75, 0x02, 0x00, 0x04, 0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x16, 0x03, 0x6F, 0x76, 0x03, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_33[] = {
+	0x14, 0x0A, 0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x2C, 0x35, 0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x6F, 0x73, 0x03, 0x00, 0x0A, 0x16, 0x31, 0x27, 
+	0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x6F, 0x73, 0x03, 0x00, 0x0A, 0x17, 0x59, 0x0B, 0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x07, 0x6F, 0x74, 0x03, 
+	0x00, 0x0A, 0x0A, 0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x07, 0x6F, 0x77, 0x03, 0x00, 0x0A, 0x06, 0x2A, 
+};
+static const uint8_t s_il_34[] = {
+	0x03, 0x72, 0xEC, 0x4E, 0x00, 0x70, 0x28, 0x09, 0x00, 0x00, 0x0A, 0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x2D, 0x0B, 0x02, 0x73, 0x5F, 0x02, 0x00, 
+	0x0A, 0x7D, 0x75, 0x02, 0x00, 0x04, 0x02, 0x7B, 0x75, 0x02, 0x00, 0x04, 0x03, 0x6F, 0x60, 0x02, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_41[] = {
+	0x2A, 
+};
+static const uint8_t s_il_54[] = {
+	0x02, 0x14, 0x03, 0x6F, 0x80, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_55[] = {
+	0x02, 0x14, 0x03, 0x6F, 0x82, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_56[] = {
+	0x02, 0x14, 0x28, 0x68, 0x00, 0x00, 0x0A, 0x03, 0x6F, 0x84, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_57[] = {
+	0x02, 0x14, 0x14, 0x03, 0x04, 0x6F, 0x8B, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_58[] = {
+	0x02, 0x14, 0x6F, 0x9D, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_59[] = {
+	0x02, 0x14, 0x6F, 0xA1, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_67[] = {
+	0x02, 0x14, 0x03, 0x6F, 0x92, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_68[] = {
+	0x02, 0x28, 0x4A, 0x06, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_69[] = {
+	0x02, 0x14, 0x6F, 0x96, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_70[] = {
+	0x02, 0x14, 0x03, 0x28, 0x98, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_73[] = {
+	0x02, 0x14, 0x6F, 0x9B, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_127[] = {
+	0x02, 0x28, 0xB5, 0x00, 0x00, 0x06, 0x02, 0x17, 0x7D, 0x13, 0x00, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_128[] = {
+	0x02, 0x16, 0x7D, 0x13, 0x00, 0x00, 0x04, 0x02, 0x16, 0x7D, 0x14, 0x00, 0x00, 0x04, 0x02, 0x16, 0x7D, 0x12, 0x00, 0x00, 0x04, 0x02, 0x7B, 0x19, 
+	0x00, 0x00, 0x04, 0x2C, 0x12, 0x02, 0x7B, 0x19, 0x00, 0x00, 0x04, 0x6F, 0x9A, 0x00, 0x00, 0x0A, 0x02, 0x14, 0x7D, 0x19, 0x00, 0x00, 0x04, 0x2A, 
+
+};
+static const uint8_t s_il_129[] = {
+	0x02, 0x16, 0x7D, 0x13, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0x14, 0x00, 0x00, 0x04, 0x28, 0xAA, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_130[] = {
+	0x02, 0x16, 0x28, 0xAA, 0x00, 0x00, 0x06, 0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+	{ "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::DeserializeTo:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer,System.Boolean)", s_il_4, sizeof(s_il_4), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::DeserializeTo:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer,System.Boolean,System.Boolean)", s_il_5, sizeof(s_il_5), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ComponentSerializationService::DeserializeTo:System.Void(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer)", s_il_6, sizeof(s_il_6), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Append:System.Void(System.Object)", s_il_32, sizeof(s_il_32), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Pop:System.Object()", s_il_33, sizeof(s_il_33), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.ContextStack::Push:System.Void(System.Object)", s_il_34, sizeof(s_il_34), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.Design.Serialization.DesignerLoader::Flush:System.Void()", s_il_41, sizeof(s_il_41), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CanConvertFrom:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)", s_il_54, sizeof(s_il_54), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CanConvertTo:System.Boolean(System.ComponentModel.ITypeDescriptorContext,System.Type)", s_il_55, sizeof(s_il_55), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertFrom:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)", s_il_56, sizeof(s_il_56), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::ConvertTo:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)", s_il_57, sizeof(s_il_57), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValues:System.ComponentModel.TypeConverter+StandardValuesCollection(System.ComponentModel.ITypeDescriptorContext)", s_il_58, sizeof(s_il_58), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetStandardValuesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)", s_il_59, sizeof(s_il_59), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::CreateInstance:System.Object(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)", s_il_67, sizeof(s_il_67), nullptr, nullptr },
+	{ "System.Private.CoreLib/System.Collections.Hashtable::.ctor:System.Void()", s_il_68, sizeof(s_il_68), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetCreateInstanceSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)", s_il_69, sizeof(s_il_69), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetProperties:System.ComponentModel.PropertyDescriptorCollection(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])", s_il_70, sizeof(s_il_70), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.ComponentModel.TypeConverter::GetPropertiesSupported:System.Boolean(System.ComponentModel.ITypeDescriptorContext)", s_il_73, sizeof(s_il_73), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.Timers.Timer::BeginInit:System.Void()", s_il_127, sizeof(s_il_127), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.Timers.Timer::Close:System.Void()", s_il_128, sizeof(s_il_128), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.Timers.Timer::EndInit:System.Void()", s_il_129, sizeof(s_il_129), nullptr, nullptr },
+	{ "System.ComponentModel.TypeConverter/System.Timers.Timer::Stop:System.Void()", s_il_130, sizeof(s_il_130), nullptr, nullptr },
+	{ nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.

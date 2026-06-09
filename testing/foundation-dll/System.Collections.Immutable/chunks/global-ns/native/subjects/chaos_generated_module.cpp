@@ -16,162 +16,46 @@ extern "C" CHAOS_IL2CPP_INT32 kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(
-            CHAOS_IL2CPP_UINT8, 
-            CHAOS_IL2CPP_UINT8, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(
-            double, 
-            double, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(
-            CHAOS_IL2CPP_INT16, 
-            CHAOS_IL2CPP_INT16, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(
-            CHAOS_IL2CPP_INT64, 
-            CHAOS_IL2CPP_INT64, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(
-            CHAOS_IL2CPP_INT8, 
-            CHAOS_IL2CPP_INT8, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(
-            float, 
-            float, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(
-            CHAOS_IL2CPP_UINT16, 
-            CHAOS_IL2CPP_UINT16, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(
-            CHAOS_IL2CPP_UINT64, 
-            CHAOS_IL2CPP_UINT64, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests__ctor(
             CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_ContainsKey_2_int_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_ContainsKey_2_int_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_2(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_3(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_GetValueRefOrNullRef_1_int_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_GetValueRefOrNullRef_1_int_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_2(
+        void
 );
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_ContainsKey_2_int_0(
             CHAOS_IL2CPP_INTPTR
 );
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_ContainsKey_2_int_1(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_1(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_2(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_3(
             CHAOS_IL2CPP_INTPTR
 );
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_GetValueRefOrNullRef_1_int_0(
@@ -189,13 +73,58 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_TryGetValue_3_int_int_2(
             CHAOS_IL2CPP_INTPTR
 );
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_cctor(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_ContainsKey_2_int_0_b__8_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_ContainsKey_2_int_1_b__10_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_GetValueRefOrNullRef_1_int_0_b__4_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_GetValueRefOrNullRef_1_int_1_b__6_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass12_0__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass12_0_TryGetValue_3_int_int_0_b__0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass14_0__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass14_0_TryGetValue_3_int_int_1_b__0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass16_0__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass16_0_TryGetValue_3_int_int_2_b__0(
+            CHAOS_IL2CPP_INTPTR
+);
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests__ctor(
             CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0(
+        void
 );
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_1(
         void
 );
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_0(
+        void
+);
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0(
         void
 );
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1(
@@ -225,32 +154,92 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_Syst
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c__ctor(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__5_0_System_Int32(
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__7_0_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
-extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__8_0_System_Int32(
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__11_0_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
-extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__8_1_System_Int32(
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__11_1_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
-extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__4_0_System_Int32(
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0_b__0_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__4_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__6_0_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
-extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__7_0_System_Int32(
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__8_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__10_0_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
-extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__7_1_System_Int32(
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__10_1_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests__ctor(
             CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Contains_0_int_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Contains_0_int_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSubsetOf_2_IEnumerableint_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSubsetOf_2_IEnumerableint_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSupersetOf_3_IEnumerableint_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSupersetOf_3_IEnumerableint_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSubsetOf_4_IEnumerableint_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSubsetOf_4_IEnumerableint_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSupersetOf_5_IEnumerableint_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSupersetOf_5_IEnumerableint_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Overlaps_6_IEnumerableint_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Overlaps_6_IEnumerableint_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_SetEquals_7_IEnumerableint_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_SetEquals_7_IEnumerableint_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_0(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_1(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_2(
+        void
 );
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Contains_0_int_0(
             CHAOS_IL2CPP_INTPTR
@@ -303,8 +292,77 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_TryGetValue_1_int_int_2(
             CHAOS_IL2CPP_INTPTR
 );
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_cctor(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Contains_0_int_0_b__0_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Contains_0_int_1_b__2_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSubsetOf_2_IEnumerableint_0_b__10_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSubsetOf_2_IEnumerableint_1_b__12_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSupersetOf_3_IEnumerableint_0_b__14_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSupersetOf_3_IEnumerableint_1_b__16_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSubsetOf_4_IEnumerableint_0_b__18_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSubsetOf_4_IEnumerableint_1_b__20_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSupersetOf_5_IEnumerableint_0_b__22_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSupersetOf_5_IEnumerableint_1_b__24_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Overlaps_6_IEnumerableint_0_b__26_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Overlaps_6_IEnumerableint_1_b__28_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_SetEquals_7_IEnumerableint_0_b__30_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_SetEquals_7_IEnumerableint_1_b__32_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass4_0__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass4_0_TryGetValue_1_int_int_0_b__0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass6_0__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass6_0_TryGetValue_1_int_int_1_b__0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass8_0__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass8_0_TryGetValue_1_int_int_2_b__0(
+            CHAOS_IL2CPP_INTPTR
+);
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests__ctor(
             CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_Benchmark_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0(
+        void
 );
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_Benchmark_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_1(
         void
@@ -315,6 +373,15 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_1(
             CHAOS_IL2CPP_INTPTR
 );
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c_cctor(
+        void
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c__ctor(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" void CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0_b__0_0(
+            CHAOS_IL2CPP_INTPTR
+);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
@@ -322,55 +389,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 
 static const Functions s_functions = {
     {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor,
-    },
-    {
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_ContainsKey_2_int_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_ContainsKey_2_int_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_2,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_3,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_GetValueRefOrNullRef_1_int_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_GetValueRefOrNullRef_1_int_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_2,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_ContainsKey_2_int_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_ContainsKey_2_int_1,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_0,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_1,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_2,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_3,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_GetValueRefOrNullRef_1_int_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_GetValueRefOrNullRef_1_int_1,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_TryGetValue_3_int_int_0,
@@ -378,9 +410,32 @@ static const Functions s_functions = {
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_TryGetValue_3_int_int_2,
     },
     {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_cctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_ContainsKey_2_int_0_b__8_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_ContainsKey_2_int_1_b__10_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_GetValueRefOrNullRef_1_int_0_b__4_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_GetValueRefOrNullRef_1_int_1_b__6_0,
+    },
+    {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass12_0__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass12_0_TryGetValue_3_int_int_0_b__0,
+    },
+    {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass14_0__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass14_0_TryGetValue_3_int_int_1_b__0,
+    },
+    {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass16_0__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass16_0_TryGetValue_3_int_int_2_b__0,
+    },
+    {
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_1,
@@ -392,15 +447,35 @@ static const Functions s_functions = {
     {
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_cctor,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c__ctor,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__5_0_System_Int32,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__8_0_System_Int32,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__8_1_System_Int32,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__4_0_System_Int32,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__7_0_System_Int32,
-        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__7_1_System_Int32,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__7_0_System_Int32,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__11_0_System_Int32,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__11_1_System_Int32,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0_b__0_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__4_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__6_0_System_Int32,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__8_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__10_0_System_Int32,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__10_1_System_Int32,
     },
     {
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Contains_0_int_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Contains_0_int_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSubsetOf_2_IEnumerableint_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSubsetOf_2_IEnumerableint_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSupersetOf_3_IEnumerableint_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSupersetOf_3_IEnumerableint_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSubsetOf_4_IEnumerableint_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSubsetOf_4_IEnumerableint_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSupersetOf_5_IEnumerableint_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSupersetOf_5_IEnumerableint_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Overlaps_6_IEnumerableint_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Overlaps_6_IEnumerableint_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_SetEquals_7_IEnumerableint_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_SetEquals_7_IEnumerableint_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_1,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_2,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Contains_0_int_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Contains_0_int_1,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_IsProperSubsetOf_2_IEnumerableint_0,
@@ -420,12 +495,48 @@ static const Functions s_functions = {
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_TryGetValue_1_int_int_2,
     },
     {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_cctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Contains_0_int_0_b__0_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Contains_0_int_1_b__2_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSubsetOf_2_IEnumerableint_0_b__10_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSubsetOf_2_IEnumerableint_1_b__12_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSupersetOf_3_IEnumerableint_0_b__14_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSupersetOf_3_IEnumerableint_1_b__16_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSubsetOf_4_IEnumerableint_0_b__18_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSubsetOf_4_IEnumerableint_1_b__20_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSupersetOf_5_IEnumerableint_0_b__22_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSupersetOf_5_IEnumerableint_1_b__24_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Overlaps_6_IEnumerableint_0_b__26_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Overlaps_6_IEnumerableint_1_b__28_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_SetEquals_7_IEnumerableint_0_b__30_0,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_SetEquals_7_IEnumerableint_1_b__32_0,
+    },
+    {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass4_0__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass4_0_TryGetValue_1_int_int_0_b__0,
+    },
+    {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass6_0__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass6_0_TryGetValue_1_int_int_1_b__0,
+    },
+    {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass8_0__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass8_0_TryGetValue_1_int_int_2_b__0,
+    },
+    {
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_Benchmark_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_Benchmark_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_1,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0,
         &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_1,
     },
-    84,
+    {
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c_cctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c__ctor,
+        &CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0_b__0_0,
+    },
+    120,
 };
 
 const Functions kFunctions = s_functions;
@@ -433,55 +544,45 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[84];
-void* kFunctionsFlat[84] = {
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+extern "C" void* kFunctionsFlat[120];
+void* kFunctionsFlat[120] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_ContainsKey_2_int_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_ContainsKey_2_int_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_2),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_CopyTo_0_KeyValuePairintint_int_3),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_GetValueRefOrNullRef_1_int_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_GetValueRefOrNullRef_1_int_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_Benchmark_TryGetValue_3_int_int_2),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_ContainsKey_2_int_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_ContainsKey_2_int_1),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_1),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_2),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_CopyTo_0_KeyValuePairintint_int_3),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_GetValueRefOrNullRef_1_int_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_GetValueRefOrNullRef_1_int_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_TryGetValue_3_int_int_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_TryGetValue_3_int_int_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests_TryGetValue_3_int_int_2),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_cctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_ContainsKey_2_int_0_b__8_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_ContainsKey_2_int_1_b__10_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_GetValueRefOrNullRef_1_int_0_b__4_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c_GetValueRefOrNullRef_1_int_1_b__6_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass12_0__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass12_0_TryGetValue_3_int_int_0_b__0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass14_0__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass14_0_TryGetValue_3_int_int_1_b__0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass16_0__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionarySystem_Int32System_Int32Tests___c__DisplayClass16_0_TryGetValue_3_int_int_2_b__0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_1),
@@ -491,13 +592,33 @@ void* kFunctionsFlat[84] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_cctor),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c__ctor),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__5_0_System_Int32),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__8_0_System_Int32),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__8_1_System_Int32),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__4_0_System_Int32),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__7_0_System_Int32),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__7_1_System_Int32),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__7_0_System_Int32),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__11_0_System_Int32),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_Benchmark_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__11_1_System_Int32),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_0_IEnumerableKeyValuePairintint_IEqualityComparerint_0_b__0_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_0_b__4_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_1_IEnumerableint_System_Funcintint_IEqualityComparerint_1_b__6_0_System_Int32),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_0_b__8_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__10_0_System_Int32),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenDictionaryTests___c_ToFrozenDictionary_2_IEnumerableint_System_Funcintint_System_Funcintint_IEqualityComparerint_1_b__10_1_System_Int32),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Contains_0_int_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Contains_0_int_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSubsetOf_2_IEnumerableint_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSubsetOf_2_IEnumerableint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSupersetOf_3_IEnumerableint_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsProperSupersetOf_3_IEnumerableint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSubsetOf_4_IEnumerableint_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSubsetOf_4_IEnumerableint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSupersetOf_5_IEnumerableint_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_IsSupersetOf_5_IEnumerableint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Overlaps_6_IEnumerableint_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_Overlaps_6_IEnumerableint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_SetEquals_7_IEnumerableint_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_SetEquals_7_IEnumerableint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Benchmark_TryGetValue_1_int_int_2),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Contains_0_int_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_Contains_0_int_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_IsProperSubsetOf_2_IEnumerableint_0),
@@ -515,10 +636,36 @@ void* kFunctionsFlat[84] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_TryGetValue_1_int_int_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_TryGetValue_1_int_int_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests_TryGetValue_1_int_int_2),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_cctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Contains_0_int_0_b__0_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Contains_0_int_1_b__2_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSubsetOf_2_IEnumerableint_0_b__10_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSubsetOf_2_IEnumerableint_1_b__12_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSupersetOf_3_IEnumerableint_0_b__14_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsProperSupersetOf_3_IEnumerableint_1_b__16_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSubsetOf_4_IEnumerableint_0_b__18_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSubsetOf_4_IEnumerableint_1_b__20_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSupersetOf_5_IEnumerableint_0_b__22_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_IsSupersetOf_5_IEnumerableint_1_b__24_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Overlaps_6_IEnumerableint_0_b__26_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_Overlaps_6_IEnumerableint_1_b__28_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_SetEquals_7_IEnumerableint_0_b__30_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c_SetEquals_7_IEnumerableint_1_b__32_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass4_0__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass4_0_TryGetValue_1_int_int_0_b__0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass6_0__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass6_0_TryGetValue_1_int_int_1_b__0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass8_0__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetSystem_Int32Tests___c__DisplayClass8_0_TryGetValue_1_int_int_2_b__0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_Benchmark_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_Benchmark_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c_cctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c__ctor),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_Immutable_System_Collections_Frozen_FrozenSetTests___c_ToFrozenSet_0_IEnumerableint_IEqualityComparerint_0_b__0_0),
 };
 
 

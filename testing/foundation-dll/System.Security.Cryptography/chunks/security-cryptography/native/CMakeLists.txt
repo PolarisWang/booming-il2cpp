@@ -14,7 +14,9 @@ if(MSVC)
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter)
   set(CHAOS_EHA_FLAG -fexceptions)
-  set(CHAOS_FORCE_MULTIPLE -Wl,--allow-multiple-definition)
+  # eager_compile.cpp is compiled locally AND present in prebuilt
+  # libchaos_interpreter.a — both define EagerCompilePatchMethods.
+  set(CHAOS_FORCE_MULTIPLE "-Wl,--allow-multiple-definition")
 endif()
 
 # ── Config tier ──
@@ -68,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Security.Cryptography/chunks/security-cryptography/native/codegen")
-set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Security.Cryptography/chunks/security-cryptography/native/codegen")
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Security.Cryptography/chunks/security-cryptography/native/codegen")
+set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Security.Cryptography/chunks/security-cryptography/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -134,6 +136,9 @@ set(CHAOS_SIMD_STUBS
 set(CHAOS_CHAR_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/char_stubs.cpp"
 )
+set(CHAOS_VECTOR_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/vector_stubs.cpp"
+)
 set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
@@ -182,6 +187,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MATH_STUBS}
     ${CHAOS_SIMD_STUBS}
     ${CHAOS_CHAR_STUBS}
+    ${CHAOS_VECTOR_STUBS}
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}

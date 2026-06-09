@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -2793,22 +2795,22 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
     auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
     // Register managed_array (variable-size: header + contiguous element data).
     registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-        static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-        static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+        static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
     registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
     registry.Register(3452740720088861223ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContextTests___c), nullptr, 0);
@@ -3030,1668 +3032,1192 @@ CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Diagnosti
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentNullException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentOutOfRangeException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentOutOfRangeException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContextTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityContextTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContextTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityContextTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContextTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityContextTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContextTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityContextTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityListenerTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityListenerTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityListenerTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityListenerTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySourceTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivitySourceTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c__DisplayClass28_0____ref_8_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c__DisplayClass28_0::__ref_8_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c__DisplayClass30_0____ref_8_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c__DisplayClass30_0::__ref_8_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollectionTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTagsCollectionTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__34_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__34_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__36_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__36_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__38_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__38_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__40_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__40_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__42_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__42_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__44_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__44_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__46_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__46_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__48_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__48_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__50_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__50_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__52_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__52_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__54_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__54_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__56_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__56_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__58_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__58_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__60_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__60_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__62_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__62_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__64_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__64_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_ActivityTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__10_1() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__10_1");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__11_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__14_1() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__14_1");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__15_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__6_1() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__6_1");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__6_2() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__6_2");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__6_3() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__6_3");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__7_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__7_1() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__7_1");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__7_2() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__7_2");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListenerTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticListenerTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__10_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__12_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__14_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__16_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__22_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__24_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__26_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__2_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__30_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__32_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__4_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSourceTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DiagnosticSourceTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagatorTests___c__DisplayClass2_0____ref_1_0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DistributedContextPropagatorTests+<>c__DisplayClass2_0::__ref_1_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagatorTests___c__DisplayClass2_0____ref_1_0_1() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DistributedContextPropagatorTests+<>c__DisplayClass2_0::__ref_1_0_1");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagatorTests___c__DisplayClass4_0____ref_1_1_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DistributedContextPropagatorTests+<>c__DisplayClass4_0::__ref_1_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagatorTests___c__DisplayClass4_0____ref_1_1_1() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DistributedContextPropagatorTests+<>c__DisplayClass4_0::__ref_1_1_1");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagatorTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DistributedContextPropagatorTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagatorTests___c____9__0_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DistributedContextPropagatorTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagatorTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_DistributedContextPropagatorTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagListTests___c____9() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_TagListTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagListTests___c____9__18_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_TagListTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagListTests___c____9__20_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_TagListTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagListTests___c____9__28_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_TagListTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagListTests___c____9__6_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_TagListTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagListTests___c____9__8_0() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Diagnostics_DiagnosticSource.System_Diagnostics_TagListTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContext() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContext__Parse_System_Diagnostics_ActivityContext_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContext__TryParse_System_Boolean_System_String_System_String_System_Boolean_System_Diagnostics_ActivityContext__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContext__TryParse_System_Boolean_System_String_System_String_System_Diagnostics_ActivityContext__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityEvent() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityEvent");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityLink() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityLink");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityListener__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityListener::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__AddActivityListener_System_Void_System_Diagnostics_ActivityListener_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::AddActivityListener:System.Void(System.Diagnostics.ActivityListener)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__CreateActivity_System_Diagnostics_Activity_System_String_System_Diagnostics_ActivityKind_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__CreateActivity_System_Diagnostics_Activity_System_String_System_Diagnostics_ActivityKind_System_Diagnostics_ActivityContext_System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Collections_Generic_IEnumerable_System_Diagnostics_ActivityLink__System_Diagnostics_ActivityIdFormat_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__CreateActivity_System_Diagnostics_Activity_System_String_System_Diagnostics_ActivityKind_System_String_System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Collections_Generic_IEnumerable_System_Diagnostics_ActivityLink__System_Diagnostics_ActivityIdFormat_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__HasListeners_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::HasListeners:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__StartActivity_System_Diagnostics_Activity_System_Diagnostics_ActivityKind_System_Diagnostics_ActivityContext_System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Collections_Generic_IEnumerable_System_Diagnostics_ActivityLink__System_DateTimeOffset_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__StartActivity_System_Diagnostics_Activity_System_String_System_Diagnostics_ActivityKind_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__StartActivity_System_Diagnostics_Activity_System_String_System_Diagnostics_ActivityKind_System_Diagnostics_ActivityContext_System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Collections_Generic_IEnumerable_System_Diagnostics_ActivityLink__System_DateTimeOffset_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySource__StartActivity_System_Diagnostics_Activity_System_String_System_Diagnostics_ActivityKind_System_String_System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Collections_Generic_IEnumerable_System_Diagnostics_ActivityLink__System_DateTimeOffset_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySpanId() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySpanId__CreateRandom_System_Diagnostics_ActivitySpanId__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateRandom:System.Diagnostics.ActivitySpanId()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivitySpanId__ToHexString_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::ToHexString:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__Add_System_Void_System_Collections_Generic_KeyValuePair_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__Add_System_Void_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__Clear_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Clear:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__ContainsKey_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::ContainsKey:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__Contains_System_Boolean_System_Collections_Generic_KeyValuePair_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Contains:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__CopyTo_System_Void_System_Collections_Generic_KeyValuePair_System_String_System_Object____System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__Remove_System_Boolean_System_Collections_Generic_KeyValuePair_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__Remove_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTagsCollection__TryGetValue_System_Boolean_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::TryGetValue:System.Boolean(System.String,System.Object&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTraceId() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTraceId__CreateRandom_System_Diagnostics_ActivityTraceId__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateRandom:System.Diagnostics.ActivityTraceId()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityTraceId__ToHexString_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::ToHexString:System.String()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__AddBaggage_System_Diagnostics_Activity_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__AddEvent_System_Diagnostics_Activity_System_Diagnostics_ActivityEvent_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddEvent:System.Diagnostics.Activity(System.Diagnostics.ActivityEvent)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__AddException_System_Diagnostics_Activity_System_Exception_System_Diagnostics_TagList__System_DateTimeOffset_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddException:System.Diagnostics.Activity(System.Exception,System.Diagnostics.TagList&,System.DateTimeOffset)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__AddLink_System_Diagnostics_Activity_System_Diagnostics_ActivityLink_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddLink:System.Diagnostics.Activity(System.Diagnostics.ActivityLink)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__AddTag_System_Diagnostics_Activity_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__AddTag_System_Diagnostics_Activity_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__GetBaggageItem_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetBaggageItem:System.String(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__GetCustomProperty_System_Object_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetCustomProperty:System.Object(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__GetTagItem_System_Object_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetTagItem:System.Object(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetBaggage_System_Diagnostics_Activity_System_String_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetCustomProperty_System_Void_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetCustomProperty:System.Void(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetEndTime_System_Diagnostics_Activity_System_DateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetEndTime:System.Diagnostics.Activity(System.DateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetIdFormat_System_Diagnostics_Activity_System_Diagnostics_ActivityIdFormat_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetIdFormat:System.Diagnostics.Activity(System.Diagnostics.ActivityIdFormat)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetParentId_System_Diagnostics_Activity_System_Diagnostics_ActivityTraceId_System_Diagnostics_ActivitySpanId_System_Diagnostics_ActivityTraceFlags_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.Diagnostics.ActivityTraceId,System.Diagnostics.ActivitySpanId,System.Diagnostics.ActivityTraceFlags)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetParentId_System_Diagnostics_Activity_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetStartTime_System_Diagnostics_Activity_System_DateTime_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStartTime:System.Diagnostics.Activity(System.DateTime)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetStatus_System_Diagnostics_Activity_System_Diagnostics_ActivityStatusCode_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStatus:System.Diagnostics.Activity(System.Diagnostics.ActivityStatusCode,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__SetTag_System_Diagnostics_Activity_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetTag:System.Diagnostics.Activity(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_Activity__Stop_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Stop:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListener__Dispose_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Dispose:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListener__IsEnabled_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListener__Subscribe_System_IDisposable_System_IObserver_System_Collections_Generic_KeyValuePair_System_String_System_Object___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListener__Subscribe_System_IDisposable_System_IObserver_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Func_System_String_System_Object_System_Object_System_Boolean__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListener__Subscribe_System_IDisposable_System_IObserver_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Func_System_String_System_Object_System_Object_System_Boolean__System_Action_System_Diagnostics_Activity_System_Object__System_Action_System_Diagnostics_Activity_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>,System.Action<System.Diagnostics.Activity,System.Object>,System.Action<System.Diagnostics.Activity,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticListener__Subscribe_System_IDisposable_System_IObserver_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Predicate_System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Predicate<System.String>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__IsEnabled_System_Boolean_System_String_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__IsEnabled_System_Boolean_System_String_System_Object_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String,System.Object,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__OnActivityExport_System_Void_System_Diagnostics_Activity_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::OnActivityExport:System.Void(System.Diagnostics.Activity,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__OnActivityImport_System_Void_System_Diagnostics_Activity_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::OnActivityImport:System.Void(System.Diagnostics.Activity,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__StartActivity_System_Diagnostics_Activity_System_Diagnostics_Activity_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__StartActivity_System_Int32__System_Diagnostics_Activity_System_Diagnostics_Activity_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity<System.Int32>:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__StopActivity_System_Int32__System_Void_System_Diagnostics_Activity_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity<System.Int32>:System.Void(System.Diagnostics.Activity,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__StopActivity_System_Void_System_Diagnostics_Activity_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity:System.Void(System.Diagnostics.Activity,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__Write_System_Int32__System_Void_System_String_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write<System.Int32>:System.Void(System.String,System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DiagnosticSource__Write_System_Void_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagator__CreateDefaultPropagator_System_Diagnostics_DistributedContextPropagator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateDefaultPropagator:System.Diagnostics.DistributedContextPropagator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagator__CreateNoOutputPropagator_System_Diagnostics_DistributedContextPropagator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateNoOutputPropagator:System.Diagnostics.DistributedContextPropagator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagator__CreatePassThroughPropagator_System_Diagnostics_DistributedContextPropagator__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreatePassThroughPropagator:System.Diagnostics.DistributedContextPropagator()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagator__ExtractBaggage_System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_String_System_String___System_Object_System_Diagnostics_DistributedContextPropagator_PropagatorGetterCallback_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractBaggage:System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.String>>(System.Object,System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagator__ExtractTraceIdAndState_System_Void_System_Object_System_Diagnostics_DistributedContextPropagator_PropagatorGetterCallback_System_String__System_String__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::ExtractTraceIdAndState:System.Void(System.Object,System.Diagnostics.DistributedContextPropagator+PropagatorGetterCallback,System.String&,System.String&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_DistributedContextPropagator__Inject_System_Void_System_Diagnostics_Activity_System_Object_System_Diagnostics_DistributedContextPropagator_PropagatorSetterCallback_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::Inject:System.Void(System.Diagnostics.Activity,System.Object,System.Diagnostics.DistributedContextPropagator+PropagatorSetterCallback)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__Add_System_Void_System_Collections_Generic_KeyValuePair_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__Add_System_Void_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__Clear_System_Void__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Clear:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__Contains_System_Boolean_System_Collections_Generic_KeyValuePair_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Contains:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__CopyTo_System_Void_System_Collections_Generic_KeyValuePair_System_String_System_Object____System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__GetEnumerator_System_Collections_Generic_IEnumerator_System_Collections_Generic_KeyValuePair_System_String_System_Object____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::GetEnumerator:System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__IndexOf_System_Int32_System_Collections_Generic_KeyValuePair_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::IndexOf:System.Int32(System.Collections.Generic.KeyValuePair<System.String,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__Insert_System_Void_System_Int32_System_Collections_Generic_KeyValuePair_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__RemoveAt_System_Void_System_Int32_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList__Remove_System_Boolean_System_Collections_Generic_KeyValuePair_System_String_System_Object__() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Remove:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Linq_Enumerable__Empty_System_Collections_Generic_KeyValuePair_System_String_System_Object___System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_System_String_System_Object____() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Linq/Enumerable::Empty<System.Collections.Generic.KeyValuePair<System.String,System.Object>>:System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Linq_Enumerable__Empty_System_Diagnostics_ActivityLink__System_Collections_Generic_IEnumerable_System_Diagnostics_ActivityLink___() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Linq/Enumerable::Empty<System.Diagnostics.ActivityLink>:System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action_System_Diagnostics_Activity_System_Object____ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action<System.Diagnostics.Activity,System.Object>::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_KeyValuePair_System_String_System_Object_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Collections.Generic.KeyValuePair<System.String,System.Object>");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_DateTime() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.DateTime");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_DateTimeOffset() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.DateTimeOffset");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Func_System_String_System_Object_System_Object_System_Boolean____ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Func<System.String,System.Object,System.Object,System.Boolean>::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -4701,9 +4227,7 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Predicate_System_String____ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-    CHAOS_IL2CPP_FAIL();
-    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+    return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Predicate<System.String>::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -4725,7 +4249,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -7581,7 +7105,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[240] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[240] = {
-    reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+    nullptr,
     reinterpret_cast<void*>(&chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContext__Parse_System_Diagnostics_ActivityContext_System_String_System_String_),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContext),
     reinterpret_cast<void*>(&chaos_external_runtime_System_Diagnostics_DiagnosticSource_System_Diagnostics_ActivityContext__TryParse_System_Boolean_System_String_System_String_System_Boolean_System_Diagnostics_ActivityContext__),
@@ -7824,6 +7348,448 @@ extern "C" void* kChaosExternalRuntimeFnTable[240] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 240;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+    const char* subject_id;
+    const uint8_t* il_data;
+    int32_t il_size;
+    void* patch_method;
+    const char* json_data;
+};
+extern "C" int32_t kChaosExternalRuntimeIlCount;
+static const uint8_t s_il_0[] = {
+    0x2A, 
+};
+static const uint8_t s_il_1[] = {
+    0x02, 0x2D, 0x0B, 0x72, 0xB1, 0x04, 0x00, 0x70, 0x73, 0x2D, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x03, 0x16, 0x12, 0x00, 0x28, 0x6E, 0x00, 0x00, 0x06, 
+    0x2D, 0x0B, 0x28, 0x1E, 0x00, 0x00, 0x06, 0x73, 0x43, 0x00, 0x00, 0x0A, 0x7A, 0x06, 0x2A, 
+};
+static const uint8_t s_il_3[] = {
+    0x02, 0x2D, 0x09, 0x05, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x16, 0x2A, 0x02, 0x03, 0x04, 0x05, 0x28, 0x6E, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_4[] = {
+    0x02, 0x2D, 0x09, 0x05, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x16, 0x2A, 0x02, 0x03, 0x04, 0x05, 0x28, 0x6E, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_13[] = {
+    0x02, 0x28, 0x3B, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_19[] = {
+    0x02, 0x2D, 0x0B, 0x72, 0xD3, 0x04, 0x00, 0x70, 0x73, 0x2D, 0x00, 0x00, 0x0A, 0x7A, 0x7E, 0x84, 0x00, 0x00, 0x04, 0x02, 0x6F, 0xE1, 0x00, 0x00, 
+    0x0A, 0x2C, 0x2A, 0x7E, 0x83, 0x00, 0x00, 0x04, 0x7E, 0x8C, 0x00, 0x00, 0x04, 0x25, 0x2D, 0x17, 0x26, 0x7E, 0x88, 0x00, 0x00, 0x04, 0xFE, 0x06, 
+    0x46, 0x01, 0x00, 0x06, 0x73, 0xE2, 0x00, 0x00, 0x0A, 0x25, 0x80, 0x8C, 0x00, 0x00, 0x04, 0x02, 0x6F, 0xE3, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_20[] = {
+    0x02, 0x03, 0x04, 0x12, 0x00, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x06, 0x14, 0x14, 0x14, 0x12, 0x01, 0xFE, 0x15, 0x33, 0x00, 0x00, 0x01, 0x07, 
+    0x16, 0x16, 0x28, 0x37, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_21[] = {
+    0x02, 0x03, 0x04, 0x12, 0x00, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x06, 0x14, 0x14, 0x14, 0x12, 0x01, 0xFE, 0x15, 0x33, 0x00, 0x00, 0x01, 0x07, 
+    0x16, 0x16, 0x28, 0x37, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_24[] = {
+    0x02, 0x03, 0x04, 0x12, 0x00, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x06, 0x14, 0x14, 0x14, 0x12, 0x01, 0xFE, 0x15, 0x33, 0x00, 0x00, 0x01, 0x07, 
+    0x16, 0x16, 0x28, 0x37, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_25[] = {
+    0x02, 0x14, 0x7D, 0x85, 0x00, 0x00, 0x04, 0x7E, 0x83, 0x00, 0x00, 0x04, 0x02, 0x6F, 0xE0, 0x00, 0x00, 0x0A, 0x26, 0x2A, 
+};
+static const uint8_t s_il_26[] = {
+    0x02, 0x7B, 0x85, 0x00, 0x00, 0x04, 0x0A, 0x06, 0x2C, 0x0A, 0x06, 0x6F, 0xCE, 0x00, 0x00, 0x0A, 0x16, 0xFE, 0x02, 0x2A, 0x16, 0x2A, 
+};
+static const uint8_t s_il_27[] = {
+    0x02, 0x03, 0x04, 0x12, 0x00, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x06, 0x14, 0x14, 0x14, 0x12, 0x01, 0xFE, 0x15, 0x33, 0x00, 0x00, 0x01, 0x07, 
+    0x17, 0x16, 0x28, 0x37, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_29[] = {
+    0x02, 0x03, 0x04, 0x12, 0x00, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x06, 0x14, 0x14, 0x14, 0x12, 0x01, 0xFE, 0x15, 0x33, 0x00, 0x00, 0x01, 0x07, 
+    0x17, 0x16, 0x28, 0x37, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_30[] = {
+    0x02, 0x03, 0x04, 0x12, 0x00, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x06, 0x14, 0x14, 0x14, 0x12, 0x01, 0xFE, 0x15, 0x33, 0x00, 0x00, 0x01, 0x07, 
+    0x17, 0x16, 0x28, 0x37, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_31[] = {
+    0x02, 0x03, 0x04, 0x12, 0x00, 0xFE, 0x15, 0x18, 0x00, 0x00, 0x02, 0x06, 0x14, 0x14, 0x14, 0x12, 0x01, 0xFE, 0x15, 0x33, 0x00, 0x00, 0x01, 0x07, 
+    0x17, 0x16, 0x28, 0x37, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_54[] = {
+    0x12, 0x00, 0xE0, 0x1E, 0x73, 0x96, 0x00, 0x00, 0x0A, 0x28, 0xC2, 0x00, 0x00, 0x06, 0x12, 0x00, 0xE0, 0x1E, 0x73, 0xA8, 0x00, 0x00, 0x0A, 0x20, 
+    0x20, 0x20, 0x00, 0x00, 0x28, 0x03, 0x00, 0x00, 0x06, 0x73, 0xC6, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_56[] = {
+    0x02, 0x7B, 0x57, 0x00, 0x00, 0x04, 0x25, 0x2D, 0x06, 0x26, 0x72, 0x73, 0x04, 0x00, 0x70, 0x2A, 
+};
+static const uint8_t s_il_62[] = {
+    0x03, 0x2D, 0x0B, 0x72, 0x9F, 0x04, 0x00, 0x70, 0x73, 0x2D, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x03, 0x28, 0xE8, 0x00, 0x00, 0x06, 0x0A, 0x06, 0x16, 
+    0x32, 0x11, 0x28, 0x1D, 0x00, 0x00, 0x06, 0x03, 0x28, 0x0F, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x7B, 0x5C, 0x00, 0x00, 
+    0x04, 0x03, 0x04, 0x73, 0x45, 0x00, 0x00, 0x0A, 0x6F, 0xAD, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_64[] = {
+    0x03, 0x2D, 0x0B, 0x72, 0x9F, 0x04, 0x00, 0x70, 0x73, 0x2D, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x03, 0x28, 0xE8, 0x00, 0x00, 0x06, 0x0A, 0x06, 0x16, 
+    0x32, 0x11, 0x28, 0x1D, 0x00, 0x00, 0x06, 0x03, 0x28, 0x0F, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x7B, 0x5C, 0x00, 0x00, 
+    0x04, 0x03, 0x04, 0x73, 0x45, 0x00, 0x00, 0x0A, 0x6F, 0xAD, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_65[] = {
+    0x02, 0x7B, 0x5C, 0x00, 0x00, 0x04, 0x6F, 0xB6, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_66[] = {
+    0x02, 0x7B, 0x5C, 0x00, 0x00, 0x04, 0x03, 0x6F, 0xB7, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_67[] = {
+    0x02, 0x03, 0x28, 0xE8, 0x00, 0x00, 0x06, 0x16, 0xFE, 0x04, 0x16, 0xFE, 0x01, 0x2A, 
+};
+static const uint8_t s_il_68[] = {
+    0x02, 0x7B, 0x5C, 0x00, 0x00, 0x04, 0x03, 0x04, 0x6F, 0xB8, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_69[] = {
+    0x03, 0x2D, 0x0B, 0x72, 0x9F, 0x04, 0x00, 0x70, 0x73, 0x2D, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x03, 0x28, 0xE8, 0x00, 0x00, 0x06, 0x0A, 0x06, 0x16, 
+    0x32, 0x0E, 0x02, 0x7B, 0x5C, 0x00, 0x00, 0x04, 0x06, 0x6F, 0xAB, 0x00, 0x00, 0x0A, 0x17, 0x2A, 0x16, 0x2A, 
+};
+static const uint8_t s_il_70[] = {
+    0x03, 0x2D, 0x0B, 0x72, 0x9F, 0x04, 0x00, 0x70, 0x73, 0x2D, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x03, 0x28, 0xE8, 0x00, 0x00, 0x06, 0x0A, 0x06, 0x16, 
+    0x32, 0x0E, 0x02, 0x7B, 0x5C, 0x00, 0x00, 0x04, 0x06, 0x6F, 0xAB, 0x00, 0x00, 0x0A, 0x17, 0x2A, 0x16, 0x2A, 
+};
+static const uint8_t s_il_71[] = {
+    0x02, 0x03, 0x28, 0xE8, 0x00, 0x00, 0x06, 0x0A, 0x06, 0x16, 0x32, 0x18, 0x04, 0x02, 0x7B, 0x5C, 0x00, 0x00, 0x04, 0x06, 0x6F, 0xAA, 0x00, 0x00, 
+    0x0A, 0x0B, 0x12, 0x01, 0x28, 0x84, 0x00, 0x00, 0x0A, 0x51, 0x17, 0x2A, 0x04, 0x14, 0x51, 0x16, 0x2A, 
+};
+static const uint8_t s_il_97[] = {
+    0x12, 0x00, 0x03, 0x04, 0x28, 0x48, 0x00, 0x00, 0x0A, 0x02, 0x7B, 0x24, 0x00, 0x00, 0x04, 0x2D, 0x15, 0x02, 0x7C, 0x24, 0x00, 0x00, 0x04, 0x06, 
+    0x16, 0x73, 0x8E, 0x00, 0x00, 0x06, 0x14, 0x28, 0x06, 0x00, 0x00, 0x2B, 0x2C, 0x0C, 0x02, 0x7B, 0x24, 0x00, 0x00, 0x04, 0x06, 0x6F, 0x90, 0x00, 
+    0x00, 0x06, 0x02, 0x2A, 
+};
+static const uint8_t s_il_99[] = {
+    0x02, 0x7B, 0x26, 0x00, 0x00, 0x04, 0x2D, 0x14, 0x02, 0x7C, 0x26, 0x00, 0x00, 0x04, 0x03, 0x73, 0x46, 0x00, 0x00, 0x0A, 0x14, 0x28, 0x05, 0x00, 
+    0x00, 0x2B, 0x2C, 0x0C, 0x02, 0x7B, 0x26, 0x00, 0x00, 0x04, 0x03, 0x6F, 0x47, 0x00, 0x00, 0x0A, 0x02, 0x2A, 
+};
+static const uint8_t s_il_103[] = {
+    0x02, 0x03, 0x04, 0x28, 0x52, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_104[] = {
+    0x02, 0x03, 0x04, 0x28, 0x52, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_105[] = {
+    0x02, 0x28, 0x4A, 0x00, 0x00, 0x06, 0x6F, 0x3B, 0x00, 0x00, 0x0A, 0x0A, 0x2B, 0x20, 0x06, 0x6F, 0x3C, 0x00, 0x00, 0x0A, 0x0B, 0x03, 0x12, 0x01, 
+    0x28, 0x3D, 0x00, 0x00, 0x0A, 0x28, 0x3E, 0x00, 0x00, 0x0A, 0x2C, 0x0A, 0x12, 0x01, 0x28, 0x3F, 0x00, 0x00, 0x0A, 0x0C, 0xDE, 0x16, 0x06, 0x6F, 
+    0x40, 0x00, 0x00, 0x0A, 0x2D, 0xD8, 0xDE, 0x0A, 0x06, 0x2C, 0x06, 0x06, 0x6F, 0x41, 0x00, 0x00, 0x0A, 0xDC, 0x14, 0x2A, 0x08, 0x2A, 
+};
+static const uint8_t s_il_106[] = {
+    0x02, 0x7B, 0x27, 0x00, 0x00, 0x04, 0x2D, 0x02, 0x14, 0x2A, 0x02, 0x7B, 0x27, 0x00, 0x00, 0x04, 0x0B, 0x16, 0x0C, 0x07, 0x12, 0x02, 0x28, 0x54, 
+    0x00, 0x00, 0x0A, 0x02, 0x7B, 0x27, 0x00, 0x00, 0x04, 0x03, 0x12, 0x03, 0x6F, 0x58, 0x00, 0x00, 0x0A, 0x2D, 0x03, 0x14, 0x2B, 0x01, 0x09, 0x0A, 
+    0xDE, 0x0A, 0x08, 0x2C, 0x06, 0x07, 0x28, 0x57, 0x00, 0x00, 0x0A, 0xDC, 0x06, 0x2A, 
+};
+static const uint8_t s_il_107[] = {
+    0x02, 0x7B, 0x23, 0x00, 0x00, 0x04, 0x25, 0x2D, 0x04, 0x26, 0x14, 0x2B, 0x06, 0x03, 0x28, 0x9C, 0x00, 0x00, 0x06, 0x25, 0x2D, 0x02, 0x26, 0x14, 
+    0x2A, 
+};
+static const uint8_t s_il_108[] = {
+    0x12, 0x00, 0x03, 0x04, 0x28, 0x48, 0x00, 0x00, 0x0A, 0x02, 0x7B, 0x24, 0x00, 0x00, 0x04, 0x2D, 0x15, 0x02, 0x7C, 0x24, 0x00, 0x00, 0x04, 0x06, 
+    0x17, 0x73, 0x8E, 0x00, 0x00, 0x06, 0x14, 0x28, 0x06, 0x00, 0x00, 0x2B, 0x2C, 0x0C, 0x02, 0x7B, 0x24, 0x00, 0x00, 0x04, 0x06, 0x6F, 0x91, 0x00, 
+    0x00, 0x06, 0x02, 0x2A, 
+};
+static const uint8_t s_il_109[] = {
+    0x02, 0x7B, 0x27, 0x00, 0x00, 0x04, 0x2D, 0x12, 0x02, 0x7C, 0x27, 0x00, 0x00, 0x04, 0x73, 0x53, 0x00, 0x00, 0x0A, 0x14, 0x28, 0x07, 0x00, 0x00, 
+    0x2B, 0x26, 0x02, 0x7B, 0x27, 0x00, 0x00, 0x04, 0x0A, 0x16, 0x0B, 0x06, 0x12, 0x01, 0x28, 0x54, 0x00, 0x00, 0x0A, 0x04, 0x2D, 0x0F, 0x02, 0x7B, 
+    0x27, 0x00, 0x00, 0x04, 0x03, 0x6F, 0x55, 0x00, 0x00, 0x0A, 0x26, 0xDE, 0x19, 0x02, 0x7B, 0x27, 0x00, 0x00, 0x04, 0x03, 0x04, 0x6F, 0x56, 0x00, 
+    0x00, 0x0A, 0xDE, 0x0A, 0x07, 0x2C, 0x06, 0x06, 0x28, 0x57, 0x00, 0x00, 0x0A, 0xDC, 0x2A, 
+};
+static const uint8_t s_il_111[] = {
+    0x0F, 0x01, 0x28, 0x4A, 0x00, 0x00, 0x0A, 0x17, 0x2E, 0x11, 0x28, 0x16, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 
+    0x06, 0x2B, 0x31, 0x02, 0x03, 0x02, 0x28, 0x41, 0x00, 0x00, 0x06, 0x28, 0x4B, 0x00, 0x00, 0x0A, 0x28, 0x40, 0x00, 0x00, 0x06, 0x02, 0x28, 0x3F, 
+    0x00, 0x00, 0x06, 0x0A, 0x12, 0x00, 0x28, 0x4C, 0x00, 0x00, 0x0A, 0x16, 0x6A, 0x30, 0x0D, 0x02, 0x17, 0x6A, 0x73, 0x4D, 0x00, 0x00, 0x0A, 0x28, 
+    0x40, 0x00, 0x00, 0x06, 0x02, 0x2A, 
+};
+static const uint8_t s_il_112[] = {
+    0x02, 0x7B, 0x1B, 0x00, 0x00, 0x04, 0x2D, 0x08, 0x02, 0x7B, 0x20, 0x00, 0x00, 0x04, 0x2C, 0x11, 0x28, 0x1A, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 
+    0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x07, 0x02, 0x03, 0x28, 0x81, 0x00, 0x00, 0x06, 0x02, 0x2A, 
+};
+static const uint8_t s_il_113[] = {
+    0x02, 0x7B, 0x1B, 0x00, 0x00, 0x04, 0x2D, 0x08, 0x02, 0x7B, 0x20, 0x00, 0x00, 0x04, 0x2C, 0x11, 0x28, 0x15, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 
+    0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x5A, 0x02, 0x28, 0x3D, 0x00, 0x00, 0x06, 0x2C, 0x11, 0x28, 0x1B, 0x00, 0x00, 0x06, 0x73, 0x49, 
+    0x00, 0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x41, 0x02, 0x28, 0x44, 0x00, 0x00, 0x06, 0x2D, 0x08, 0x02, 0x7B, 0x1E, 0x00, 0x00, 0x04, 
+    0x2C, 0x11, 0x28, 0x18, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x20, 0x03, 0x28, 0x42, 0x00, 0x00, 
+    0x0A, 0x2C, 0x11, 0x28, 0x19, 0x00, 0x00, 0x06, 0x73, 0x43, 0x00, 0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x07, 0x02, 0x03, 0x7D, 0x1D, 
+    0x00, 0x00, 0x04, 0x02, 0x2A, 
+};
+static const uint8_t s_il_115[] = {
+    0x02, 0x7B, 0x1B, 0x00, 0x00, 0x04, 0x2D, 0x08, 0x02, 0x7B, 0x20, 0x00, 0x00, 0x04, 0x2C, 0x11, 0x28, 0x15, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 
+    0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x5A, 0x02, 0x28, 0x3D, 0x00, 0x00, 0x06, 0x2C, 0x11, 0x28, 0x1B, 0x00, 0x00, 0x06, 0x73, 0x49, 
+    0x00, 0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x41, 0x02, 0x28, 0x44, 0x00, 0x00, 0x06, 0x2D, 0x08, 0x02, 0x7B, 0x1E, 0x00, 0x00, 0x04, 
+    0x2C, 0x11, 0x28, 0x18, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x20, 0x03, 0x28, 0x42, 0x00, 0x00, 
+    0x0A, 0x2C, 0x11, 0x28, 0x19, 0x00, 0x00, 0x06, 0x73, 0x43, 0x00, 0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2B, 0x07, 0x02, 0x03, 0x7D, 0x1D, 
+    0x00, 0x00, 0x04, 0x02, 0x2A, 
+};
+static const uint8_t s_il_116[] = {
+    0x0F, 0x01, 0x28, 0x4A, 0x00, 0x00, 0x0A, 0x17, 0x2E, 0x11, 0x28, 0x1C, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 
+    0x06, 0x2B, 0x07, 0x02, 0x03, 0x28, 0x42, 0x00, 0x00, 0x06, 0x02, 0x2A, 
+};
+static const uint8_t s_il_117[] = {
+    0x02, 0x03, 0x7D, 0x29, 0x00, 0x00, 0x04, 0x02, 0x03, 0x18, 0x2E, 0x03, 0x14, 0x2B, 0x01, 0x04, 0x7D, 0x2A, 0x00, 0x00, 0x04, 0x02, 0x2A, 
+};
+static const uint8_t s_il_118[] = {
+    0x12, 0x00, 0x03, 0x04, 0x28, 0x45, 0x00, 0x00, 0x0A, 0x02, 0x7B, 0x23, 0x00, 0x00, 0x04, 0x2D, 0x15, 0x02, 0x7C, 0x23, 0x00, 0x00, 0x04, 0x06, 
+    0x17, 0x73, 0x96, 0x00, 0x00, 0x06, 0x14, 0x28, 0x04, 0x00, 0x00, 0x2B, 0x2C, 0x0C, 0x02, 0x7B, 0x23, 0x00, 0x00, 0x04, 0x06, 0x6F, 0x9E, 0x00, 
+    0x00, 0x06, 0x02, 0x2A, 
+};
+static const uint8_t s_il_119[] = {
+    0x02, 0x7B, 0x1B, 0x00, 0x00, 0x04, 0x2D, 0x18, 0x02, 0x7B, 0x20, 0x00, 0x00, 0x04, 0x2D, 0x10, 0x28, 0x13, 0x00, 0x00, 0x06, 0x73, 0x49, 0x00, 
+    0x00, 0x0A, 0x28, 0x75, 0x00, 0x00, 0x06, 0x2A, 0x02, 0x28, 0x7E, 0x00, 0x00, 0x06, 0x2D, 0x3C, 0x02, 0x17, 0x28, 0x7F, 0x00, 0x00, 0x06, 0x02, 
+    0x28, 0x3F, 0x00, 0x00, 0x06, 0x7E, 0x4F, 0x00, 0x00, 0x0A, 0x28, 0x50, 0x00, 0x00, 0x0A, 0x2C, 0x0C, 0x02, 0x28, 0x86, 0x00, 0x00, 0x06, 0x28, 
+    0x5A, 0x00, 0x00, 0x06, 0x26, 0x02, 0x28, 0x3B, 0x00, 0x00, 0x06, 0x02, 0x6F, 0x3D, 0x01, 0x00, 0x06, 0x02, 0x7B, 0x2B, 0x00, 0x00, 0x04, 0x28, 
+    0x84, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_142[] = {
+    0x1F, 0x10, 0xE0, 0xFE, 0x0F, 0x1F, 0x10, 0x73, 0x96, 0x00, 0x00, 0x0A, 0x0B, 0x07, 0x0A, 0x06, 0x28, 0xC2, 0x00, 0x00, 0x06, 0x06, 0x28, 0x97, 
+    0x00, 0x00, 0x0A, 0x28, 0xB6, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_143[] = {
+    0x02, 0x7B, 0x56, 0x00, 0x00, 0x04, 0x25, 0x2D, 0x06, 0x26, 0x72, 0x31, 0x04, 0x00, 0x70, 0x2A, 
+};
+static const uint8_t s_il_144[] = {
+    0x7E, 0x98, 0x00, 0x00, 0x04, 0x0B, 0x16, 0x0C, 0x07, 0x12, 0x02, 0x28, 0x54, 0x00, 0x00, 0x0A, 0x02, 0x7B, 0x95, 0x00, 0x00, 0x04, 0x2C, 0x05, 
+    0xDD, 0x85, 0x00, 0x00, 0x00, 0x02, 0x17, 0x7D, 0x95, 0x00, 0x00, 0x04, 0x7E, 0x96, 0x00, 0x00, 0x04, 0x02, 0x33, 0x11, 0x7E, 0x96, 0x00, 0x00, 
+    0x04, 0x7B, 0x94, 0x00, 0x00, 0x04, 0x80, 0x96, 0x00, 0x00, 0x04, 0x2B, 0x29, 0x7E, 0x96, 0x00, 0x00, 0x04, 0x0D, 0x2B, 0x1E, 0x09, 0x7B, 0x94, 
+    0x00, 0x00, 0x04, 0x02, 0x33, 0x0E, 0x09, 0x02, 0x7B, 0x94, 0x00, 0x00, 0x04, 0x7D, 0x94, 0x00, 0x00, 0x04, 0x2B, 0x0A, 0x09, 0x7B, 0x94, 0x00, 
+    0x00, 0x04, 0x0D, 0x09, 0x2D, 0xDF, 0x02, 0x14, 0x7D, 0x94, 0x00, 0x00, 0x04, 0xDE, 0x0A, 0x08, 0x2C, 0x06, 0x07, 0x28, 0x57, 0x00, 0x00, 0x0A, 
+    0xDC, 0x14, 0x0A, 0x12, 0x00, 0x02, 0xFE, 0x13, 0x7B, 0x93, 0x00, 0x00, 0x04, 0x28, 0x17, 0x00, 0x00, 0x2B, 0x26, 0x2B, 0x12, 0x06, 0x7B, 0x99, 
+    0x00, 0x00, 0x04, 0x6F, 0xFC, 0x00, 0x00, 0x0A, 0x06, 0x7B, 0x9F, 0x00, 0x00, 0x04, 0x0A, 0x06, 0x2D, 0xEB, 0x2A, 
+};
+static const uint8_t s_il_145[] = {
+    0x02, 0xFE, 0x13, 0x7B, 0x93, 0x00, 0x00, 0x04, 0x14, 0xFE, 0x03, 0x2A, 
+};
+static const uint8_t s_il_146[] = {
+    0x02, 0x03, 0x6F, 0x53, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_147[] = {
+    0x02, 0x03, 0x6F, 0x53, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_148[] = {
+    0x2A, 
+};
+static const uint8_t s_il_149[] = {
+    0x2A, 
+};
+static const uint8_t s_il_150[] = {
+    0x04, 0x2C, 0x18, 0x02, 0x03, 0x02, 0xFE, 0x06, 0x6E, 0x01, 0x00, 0x06, 0x73, 0xF9, 0x00, 0x00, 0x0A, 0x04, 0x05, 0x0E, 0x04, 0x28, 0x6C, 0x01, 
+    0x00, 0x06, 0x2A, 0x02, 0x03, 0x14, 0x14, 0x05, 0x0E, 0x04, 0x28, 0x6C, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_157[] = {
+    0x04, 0x2C, 0x18, 0x02, 0x03, 0x02, 0xFE, 0x06, 0x6E, 0x01, 0x00, 0x06, 0x73, 0xF9, 0x00, 0x00, 0x0A, 0x04, 0x05, 0x0E, 0x04, 0x28, 0x6C, 0x01, 
+    0x00, 0x06, 0x2A, 0x02, 0x03, 0x14, 0x14, 0x05, 0x0E, 0x04, 0x28, 0x6C, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_160[] = {
+    0x04, 0x2C, 0x18, 0x02, 0x03, 0x02, 0xFE, 0x06, 0x6E, 0x01, 0x00, 0x06, 0x73, 0xF9, 0x00, 0x00, 0x0A, 0x04, 0x05, 0x0E, 0x04, 0x28, 0x6C, 0x01, 
+    0x00, 0x06, 0x2A, 0x02, 0x03, 0x14, 0x14, 0x05, 0x0E, 0x04, 0x28, 0x6C, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_162[] = {
+    0x04, 0x2C, 0x18, 0x02, 0x03, 0x02, 0xFE, 0x06, 0x6E, 0x01, 0x00, 0x06, 0x73, 0xF9, 0x00, 0x00, 0x0A, 0x04, 0x05, 0x0E, 0x04, 0x28, 0x6C, 0x01, 
+    0x00, 0x06, 0x2A, 0x02, 0x03, 0x14, 0x14, 0x05, 0x0E, 0x04, 0x28, 0x6C, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_163[] = {
+    0x02, 0x03, 0x04, 0x8C, 0x3B, 0x00, 0x00, 0x1B, 0x6F, 0x51, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_186[] = {
+    0x03, 0x6F, 0x5C, 0x00, 0x00, 0x06, 0x26, 0x02, 0x03, 0x6F, 0x38, 0x00, 0x00, 0x06, 0x72, 0xE5, 0x04, 0x00, 0x70, 0x28, 0x61, 0x00, 0x00, 0x0A, 
+    0x04, 0x6F, 0x51, 0x01, 0x00, 0x06, 0x03, 0x2A, 
+};
+static const uint8_t s_il_188[] = {
+    0x03, 0x6F, 0x3F, 0x00, 0x00, 0x06, 0x7E, 0x4F, 0x00, 0x00, 0x0A, 0x28, 0x50, 0x00, 0x00, 0x0A, 0x2C, 0x0C, 0x03, 0x28, 0x86, 0x00, 0x00, 0x06, 
+    0x6F, 0x5A, 0x00, 0x00, 0x06, 0x26, 0x02, 0x03, 0x6F, 0x38, 0x00, 0x00, 0x06, 0x72, 0xF3, 0x04, 0x00, 0x70, 0x28, 0x61, 0x00, 0x00, 0x0A, 0x04, 
+    0x6F, 0x51, 0x01, 0x00, 0x06, 0x03, 0x6F, 0x5D, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_209[] = {
+    0x28, 0xF5, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_210[] = {
+    0x28, 0xFD, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_211[] = {
+    0x28, 0x04, 0x02, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_222[] = {
+    0x02, 0x03, 0x04, 0x73, 0x45, 0x00, 0x00, 0x0A, 0x28, 0x16, 0x02, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_223[] = {
+    0x02, 0x03, 0x04, 0x73, 0x45, 0x00, 0x00, 0x0A, 0x28, 0x16, 0x02, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_224[] = {
+    0x02, 0x16, 0x7D, 0xF6, 0x00, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_225[] = {
+    0x02, 0x03, 0x28, 0x20, 0x02, 0x00, 0x06, 0x16, 0xFE, 0x04, 0x16, 0xFE, 0x01, 0x2A, 
+};
+static const uint8_t s_il_226[] = {
+    0x0F, 0x01, 0x28, 0x69, 0x01, 0x00, 0x0A, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x2F, 0x0B, 0x28, 0x20, 0x00, 0x00, 0x06, 0x73, 0x43, 0x00, 0x00, 
+    0x0A, 0x7A, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x2C, 0x1C, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x16, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x28, 
+    0x20, 0x00, 0x00, 0x2B, 0x0A, 0x12, 0x00, 0x03, 0x28, 0x6B, 0x01, 0x00, 0x0A, 0x2A, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x0B, 0x07, 0x45, 0x09, 
+    0x00, 0x00, 0x00, 0x99, 0x00, 0x00, 0x00, 0x86, 0x00, 0x00, 0x00, 0x73, 0x00, 0x00, 0x00, 0x60, 0x00, 0x00, 0x00, 0x4D, 0x00, 0x00, 0x00, 0x3A, 
+    0x00, 0x00, 0x00, 0x27, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x2A, 0x0F, 0x01, 0x1D, 0x28, 0x6C, 0x01, 0x00, 0x0A, 
+    0x02, 0x7B, 0xF5, 0x00, 0x00, 0x04, 0x81, 0x0F, 0x00, 0x00, 0x1B, 0x0F, 0x01, 0x1C, 0x28, 0x6C, 0x01, 0x00, 0x0A, 0x02, 0x7B, 0xF4, 0x00, 0x00, 
+    0x04, 0x81, 0x0F, 0x00, 0x00, 0x1B, 0x0F, 0x01, 0x1B, 0x28, 0x6C, 0x01, 0x00, 0x0A, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x81, 0x0F, 0x00, 0x00, 
+    0x1B, 0x0F, 0x01, 0x1A, 0x28, 0x6C, 0x01, 0x00, 0x0A, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 0x81, 0x0F, 0x00, 0x00, 0x1B, 0x0F, 0x01, 0x19, 0x28, 
+    0x6C, 0x01, 0x00, 0x0A, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 0x81, 0x0F, 0x00, 0x00, 0x1B, 0x0F, 0x01, 0x18, 0x28, 0x6C, 0x01, 0x00, 0x0A, 0x02, 
+    0x7B, 0xF0, 0x00, 0x00, 0x04, 0x81, 0x0F, 0x00, 0x00, 0x1B, 0x0F, 0x01, 0x17, 0x28, 0x6C, 0x01, 0x00, 0x0A, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 
+    0x81, 0x0F, 0x00, 0x00, 0x1B, 0x0F, 0x01, 0x16, 0x28, 0x6C, 0x01, 0x00, 0x0A, 0x02, 0x7B, 0xEE, 0x00, 0x00, 0x04, 0x81, 0x0F, 0x00, 0x00, 0x1B, 
+    0x2A, 
+};
+static const uint8_t s_il_227[] = {
+    0x02, 0x73, 0x24, 0x02, 0x00, 0x06, 0x8C, 0x4A, 0x00, 0x00, 0x02, 0x2A, 
+};
+static const uint8_t s_il_228[] = {
+    0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x2C, 0x29, 0x16, 0x0A, 0x2B, 0x1A, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x06, 0xA3, 0x0F, 0x00, 0x00, 0x1B, 
+    0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x06, 0x2A, 0x06, 0x17, 0x58, 0x0A, 0x06, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x32, 0xDD, 0x15, 
+    0x2A, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x0B, 0x07, 0x17, 0x59, 0x45, 0x08, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 
+    0x3B, 0x00, 0x00, 0x00, 0x6E, 0x00, 0x00, 0x00, 0xB1, 0x00, 0x00, 0x00, 0x04, 0x01, 0x00, 0x00, 0x67, 0x01, 0x00, 0x00, 0xDA, 0x01, 0x00, 0x00, 
+    0x38, 0x55, 0x02, 0x00, 0x00, 0x02, 0x7B, 0xEE, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x39, 0x44, 0x02, 0x00, 0x00, 0x16, 0x2A, 
+    0x02, 0x7B, 0xEE, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x16, 0x2A, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x03, 0x28, 
+    0x22, 0x02, 0x00, 0x06, 0x39, 0x21, 0x02, 0x00, 0x00, 0x17, 0x2A, 0x02, 0x7B, 0xEE, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 
+    0x02, 0x16, 0x2A, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x17, 0x2A, 0x02, 0x7B, 0xF0, 0x00, 0x00, 
+    0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x39, 0xEE, 0x01, 0x00, 0x00, 0x18, 0x2A, 0x02, 0x7B, 0xEE, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 
+    0x00, 0x06, 0x2C, 0x02, 0x16, 0x2A, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x17, 0x2A, 0x02, 0x7B, 
+    0xF0, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x18, 0x2A, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 
+    0x00, 0x06, 0x39, 0xAB, 0x01, 0x00, 0x00, 0x19, 0x2A, 0x02, 0x7B, 0xEE, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x16, 
+    0x2A, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x17, 0x2A, 0x02, 0x7B, 0xF0, 0x00, 0x00, 0x04, 0x03, 
+    0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x18, 0x2A, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x19, 
+    0x2A, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x39, 0x58, 0x01, 0x00, 0x00, 0x1A, 0x2A, 0x02, 0x7B, 0xEE, 0x00, 
+    0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x16, 0x2A, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 
+    0x2C, 0x02, 0x17, 0x2A, 0x02, 0x7B, 0xF0, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x18, 0x2A, 0x02, 0x7B, 0xF1, 0x00, 
+    0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x19, 0x2A, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 
+    0x2C, 0x02, 0x1A, 0x2A, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x39, 0xF5, 0x00, 0x00, 0x00, 0x1B, 0x2A, 0x02, 
+    0x7B, 0xEE, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x16, 0x2A, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 
+    0x02, 0x00, 0x06, 0x2C, 0x02, 0x17, 0x2A, 0x02, 0x7B, 0xF0, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x18, 0x2A, 0x02, 
+    0x7B, 0xF1, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x19, 0x2A, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 
+    0x02, 0x00, 0x06, 0x2C, 0x02, 0x1A, 0x2A, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x1B, 0x2A, 0x02, 
+    0x7B, 0xF4, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x39, 0x82, 0x00, 0x00, 0x00, 0x1C, 0x2A, 0x02, 0x7B, 0xEE, 0x00, 0x00, 0x04, 
+    0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x16, 0x2A, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 
+    0x17, 0x2A, 0x02, 0x7B, 0xF0, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x18, 0x2A, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 
+    0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x19, 0x2A, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 
+    0x1A, 0x2A, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x1B, 0x2A, 0x02, 0x7B, 0xF4, 0x00, 0x00, 0x04, 
+    0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 0x1C, 0x2A, 0x02, 0x7B, 0xF5, 0x00, 0x00, 0x04, 0x03, 0x28, 0x22, 0x02, 0x00, 0x06, 0x2C, 0x02, 
+    0x1D, 0x2A, 0x15, 0x2A, 
+};
+static const uint8_t s_il_229[] = {
+    0x03, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x36, 0x0B, 0x72, 0x08, 0x0F, 0x00, 0x70, 0x73, 0x98, 0x00, 0x00, 0x0A, 0x7A, 0x03, 0x02, 0x7B, 0xF6, 
+    0x00, 0x00, 0x04, 0x33, 0x08, 0x02, 0x04, 0x28, 0x16, 0x02, 0x00, 0x06, 0x2A, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x1E, 0x33, 0x0E, 0x02, 0x7B, 
+    0xF7, 0x00, 0x00, 0x04, 0x2D, 0x06, 0x02, 0x28, 0x23, 0x02, 0x00, 0x06, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x2C, 0x6A, 0x02, 0x7B, 0xF6, 0x00, 
+    0x00, 0x04, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x8E, 0x69, 0x33, 0x13, 0x02, 0x7C, 0xF7, 0x00, 0x00, 0x04, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 
+    0x1E, 0x58, 0x28, 0x1F, 0x00, 0x00, 0x2B, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x0A, 0x2B, 0x1E, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x06, 0x02, 
+    0x7B, 0xF7, 0x00, 0x00, 0x04, 0x06, 0x17, 0x59, 0xA3, 0x0F, 0x00, 0x00, 0x1B, 0xA4, 0x0F, 0x00, 0x00, 0x1B, 0x06, 0x17, 0x59, 0x0A, 0x06, 0x03, 
+    0x30, 0xDE, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x03, 0x04, 0xA4, 0x0F, 0x00, 0x00, 0x1B, 0x02, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x17, 0x58, 
+    0x7D, 0xF6, 0x00, 0x00, 0x04, 0x2A, 0x03, 0x45, 0x07, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x61, 0x00, 0x00, 0x00, 0xB5, 0x00, 0x00, 0x00, 
+    0xFD, 0x00, 0x00, 0x00, 0x36, 0x01, 0x00, 0x00, 0x63, 0x01, 0x00, 0x00, 0x84, 0x01, 0x00, 0x00, 0x2A, 0x02, 0x02, 0x7B, 0xF4, 0x00, 0x00, 0x04, 
+    0x7D, 0xF5, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x7D, 0xF4, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 
+    0x7D, 0xF3, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 0x7D, 0xF2, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF0, 0x00, 0x00, 0x04, 
+    0x7D, 0xF1, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x7D, 0xF0, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xEE, 0x00, 0x00, 0x04, 
+    0x7D, 0xEF, 0x00, 0x00, 0x04, 0x02, 0x04, 0x7D, 0xEE, 0x00, 0x00, 0x04, 0x38, 0x36, 0x01, 0x00, 0x00, 0x02, 0x02, 0x7B, 0xF4, 0x00, 0x00, 0x04, 
+    0x7D, 0xF5, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x7D, 0xF4, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 
+    0x7D, 0xF3, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 0x7D, 0xF2, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF0, 0x00, 0x00, 0x04, 
+    0x7D, 0xF1, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x7D, 0xF0, 0x00, 0x00, 0x04, 0x02, 0x04, 0x7D, 0xEF, 0x00, 0x00, 0x04, 
+    0x38, 0xE2, 0x00, 0x00, 0x00, 0x02, 0x02, 0x7B, 0xF4, 0x00, 0x00, 0x04, 0x7D, 0xF5, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 
+    0x7D, 0xF4, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 0x7D, 0xF3, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 
+    0x7D, 0xF2, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF0, 0x00, 0x00, 0x04, 0x7D, 0xF1, 0x00, 0x00, 0x04, 0x02, 0x04, 0x7D, 0xF0, 0x00, 0x00, 0x04, 
+    0x38, 0x9A, 0x00, 0x00, 0x00, 0x02, 0x02, 0x7B, 0xF4, 0x00, 0x00, 0x04, 0x7D, 0xF5, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 
+    0x7D, 0xF4, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 0x7D, 0xF3, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 
+    0x7D, 0xF2, 0x00, 0x00, 0x04, 0x02, 0x04, 0x7D, 0xF1, 0x00, 0x00, 0x04, 0x2B, 0x61, 0x02, 0x02, 0x7B, 0xF4, 0x00, 0x00, 0x04, 0x7D, 0xF5, 0x00, 
+    0x00, 0x04, 0x02, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x7D, 0xF4, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF2, 0x00, 0x00, 0x04, 0x7D, 0xF3, 0x00, 
+    0x00, 0x04, 0x02, 0x04, 0x7D, 0xF2, 0x00, 0x00, 0x04, 0x2B, 0x34, 0x02, 0x02, 0x7B, 0xF4, 0x00, 0x00, 0x04, 0x7D, 0xF5, 0x00, 0x00, 0x04, 0x02, 
+    0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x7D, 0xF4, 0x00, 0x00, 0x04, 0x02, 0x04, 0x7D, 0xF3, 0x00, 0x00, 0x04, 0x2B, 0x13, 0x02, 0x02, 0x7B, 0xF4, 
+    0x00, 0x00, 0x04, 0x7D, 0xF5, 0x00, 0x00, 0x04, 0x02, 0x04, 0x7D, 0xF4, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x17, 0x58, 
+    0x7D, 0xF6, 0x00, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_230[] = {
+    0x02, 0x03, 0x28, 0x20, 0x02, 0x00, 0x06, 0x0A, 0x06, 0x16, 0x32, 0x09, 0x02, 0x06, 0x28, 0x1A, 0x02, 0x00, 0x06, 0x17, 0x2A, 0x16, 0x2A, 
+};
+static const uint8_t s_il_231[] = {
+    0x03, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x37, 0x0B, 0x72, 0x08, 0x0F, 0x00, 0x70, 0x73, 0x98, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x7B, 0xF7, 0x00, 
+    0x00, 0x04, 0x2C, 0x3C, 0x03, 0x0A, 0x2B, 0x1E, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x06, 0x02, 0x7B, 0xF7, 0x00, 0x00, 0x04, 0x06, 0x17, 0x58, 
+    0xA3, 0x0F, 0x00, 0x00, 0x1B, 0xA4, 0x0F, 0x00, 0x00, 0x1B, 0x06, 0x17, 0x58, 0x0A, 0x06, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x17, 0x59, 0x32, 
+    0xD7, 0x02, 0x02, 0x7B, 0xF6, 0x00, 0x00, 0x04, 0x17, 0x59, 0x7D, 0xF6, 0x00, 0x00, 0x04, 0x2A, 0x03, 0x45, 0x08, 0x00, 0x00, 0x00, 0x02, 0x00, 
+    0x00, 0x00, 0x0E, 0x00, 0x00, 0x00, 0x1A, 0x00, 0x00, 0x00, 0x26, 0x00, 0x00, 0x00, 0x32, 0x00, 0x00, 0x00, 0x3E, 0x00, 0x00, 0x00, 0x4A, 0x00, 
+    0x00, 0x00, 0x56, 0x00, 0x00, 0x00, 0x2B, 0x54, 0x02, 0x02, 0x7B, 0xEF, 0x00, 0x00, 0x04, 0x7D, 0xEE, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF0, 
+    0x00, 0x00, 0x04, 0x7D, 0xEF, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF1, 0x00, 0x00, 0x04, 0x7D, 0xF0, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF2, 
+    0x00, 0x00, 0x04, 0x7D, 0xF1, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF3, 0x00, 0x00, 0x04, 0x7D, 0xF2, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF4, 
+    0x00, 0x00, 0x04, 0x7D, 0xF3, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF5, 0x00, 0x00, 0x04, 0x7D, 0xF4, 0x00, 0x00, 0x04, 0x02, 0x02, 0x7B, 0xF6, 
+    0x00, 0x00, 0x04, 0x17, 0x59, 0x7D, 0xF6, 0x00, 0x00, 0x04, 0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+    { "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::Parse:System.Diagnostics.ActivityContext(System.String,System.String)", s_il_1, sizeof(s_il_1), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Boolean,System.Diagnostics.ActivityContext&)", s_il_3, sizeof(s_il_3), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityContext::TryParse:System.Boolean(System.String,System.String,System.Diagnostics.ActivityContext&)", s_il_4, sizeof(s_il_4), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityListener::Dispose:System.Void()", s_il_13, sizeof(s_il_13), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::AddActivityListener:System.Void(System.Diagnostics.ActivityListener)", s_il_19, sizeof(s_il_19), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)", s_il_20, sizeof(s_il_20), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)", s_il_21, sizeof(s_il_21), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::CreateActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.Diagnostics.ActivityIdFormat)", s_il_24, sizeof(s_il_24), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::Dispose:System.Void()", s_il_25, sizeof(s_il_25), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::HasListeners:System.Boolean()", s_il_26, sizeof(s_il_26), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind)", s_il_27, sizeof(s_il_27), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)", s_il_29, sizeof(s_il_29), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.String,System.Diagnostics.ActivityKind,System.String,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset)", s_il_30, sizeof(s_il_30), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.ActivityKind,System.Diagnostics.ActivityContext,System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Collections.Generic.IEnumerable<System.Diagnostics.ActivityLink>,System.DateTimeOffset,System.String)", s_il_31, sizeof(s_il_31), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::CreateRandom:System.Diagnostics.ActivitySpanId()", s_il_54, sizeof(s_il_54), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivitySpanId::ToHexString:System.String()", s_il_56, sizeof(s_il_56), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.String,System.Object)", s_il_62, sizeof(s_il_62), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Add:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>)", s_il_64, sizeof(s_il_64), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Clear:System.Void()", s_il_65, sizeof(s_il_65), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Contains:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)", s_il_66, sizeof(s_il_66), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::ContainsKey:System.Boolean(System.String)", s_il_67, sizeof(s_il_67), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)", s_il_68, sizeof(s_il_68), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.String)", s_il_69, sizeof(s_il_69), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::Remove:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)", s_il_70, sizeof(s_il_70), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTagsCollection::TryGetValue:System.Boolean(System.String,System.Object&)", s_il_71, sizeof(s_il_71), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddBaggage:System.Diagnostics.Activity(System.String,System.String)", s_il_97, sizeof(s_il_97), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddEvent:System.Diagnostics.Activity(System.Diagnostics.ActivityEvent)", s_il_99, sizeof(s_il_99), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.String)", s_il_103, sizeof(s_il_103), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::AddTag:System.Diagnostics.Activity(System.String,System.Object)", s_il_104, sizeof(s_il_104), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetBaggageItem:System.String(System.String)", s_il_105, sizeof(s_il_105), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetCustomProperty:System.Object(System.String)", s_il_106, sizeof(s_il_106), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::GetTagItem:System.Object(System.String)", s_il_107, sizeof(s_il_107), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetBaggage:System.Diagnostics.Activity(System.String,System.String)", s_il_108, sizeof(s_il_108), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetCustomProperty:System.Void(System.String,System.Object)", s_il_109, sizeof(s_il_109), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetEndTime:System.Diagnostics.Activity(System.DateTime)", s_il_111, sizeof(s_il_111), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetIdFormat:System.Diagnostics.Activity(System.Diagnostics.ActivityIdFormat)", s_il_112, sizeof(s_il_112), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.String)", s_il_113, sizeof(s_il_113), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetParentId:System.Diagnostics.Activity(System.Diagnostics.ActivityTraceId,System.Diagnostics.ActivitySpanId,System.Diagnostics.ActivityTraceFlags)", s_il_115, sizeof(s_il_115), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStartTime:System.Diagnostics.Activity(System.DateTime)", s_il_116, sizeof(s_il_116), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetStatus:System.Diagnostics.Activity(System.Diagnostics.ActivityStatusCode,System.String)", s_il_117, sizeof(s_il_117), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::SetTag:System.Diagnostics.Activity(System.String,System.Object)", s_il_118, sizeof(s_il_118), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.Activity::Stop:System.Void()", s_il_119, sizeof(s_il_119), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::CreateRandom:System.Diagnostics.ActivityTraceId()", s_il_142, sizeof(s_il_142), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.ActivityTraceId::ToHexString:System.String()", s_il_143, sizeof(s_il_143), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Dispose:System.Void()", s_il_144, sizeof(s_il_144), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::IsEnabled:System.Boolean()", s_il_145, sizeof(s_il_145), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String)", s_il_146, sizeof(s_il_146), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::IsEnabled:System.Boolean(System.String,System.Object,System.Object)", s_il_147, sizeof(s_il_147), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::OnActivityExport:System.Void(System.Diagnostics.Activity,System.Object)", s_il_148, sizeof(s_il_148), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::OnActivityImport:System.Void(System.Diagnostics.Activity,System.Object)", s_il_149, sizeof(s_il_149), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>,System.Action<System.Diagnostics.Activity,System.Object>,System.Action<System.Diagnostics.Activity,System.Object>)", s_il_150, sizeof(s_il_150), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Predicate<System.String>)", s_il_157, sizeof(s_il_157), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>,System.Func<System.String,System.Object,System.Object,System.Boolean>)", s_il_160, sizeof(s_il_160), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticListener::Subscribe:System.IDisposable(System.IObserver<System.Collections.Generic.KeyValuePair<System.String,System.Object>>)", s_il_162, sizeof(s_il_162), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::Write:System.Void(System.String,System.Object)", s_il_163, sizeof(s_il_163), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StartActivity:System.Diagnostics.Activity(System.Diagnostics.Activity,System.Object)", s_il_186, sizeof(s_il_186), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DiagnosticSource::StopActivity:System.Void(System.Diagnostics.Activity,System.Object)", s_il_188, sizeof(s_il_188), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateDefaultPropagator:System.Diagnostics.DistributedContextPropagator()", s_il_209, sizeof(s_il_209), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateNoOutputPropagator:System.Diagnostics.DistributedContextPropagator()", s_il_210, sizeof(s_il_210), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreatePassThroughPropagator:System.Diagnostics.DistributedContextPropagator()", s_il_211, sizeof(s_il_211), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)", s_il_222, sizeof(s_il_222), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>)", s_il_223, sizeof(s_il_223), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Clear:System.Void()", s_il_224, sizeof(s_il_224), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Contains:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)", s_il_225, sizeof(s_il_225), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair<System.String,System.Object>[],System.Int32)", s_il_226, sizeof(s_il_226), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::GetEnumerator:System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.Object>>()", s_il_227, sizeof(s_il_227), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::IndexOf:System.Int32(System.Collections.Generic.KeyValuePair<System.String,System.Object>)", s_il_228, sizeof(s_il_228), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair<System.String,System.Object>)", s_il_229, sizeof(s_il_229), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Remove:System.Boolean(System.Collections.Generic.KeyValuePair<System.String,System.Object>)", s_il_230, sizeof(s_il_230), nullptr, nullptr },
+    { "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)", s_il_231, sizeof(s_il_231), nullptr, nullptr },
+    { nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -18496,7 +18462,7 @@ extern "C" const JitEntry kChaosJitEntries[449] =
     { kJitJson_448, 3663u, 0x00000263u, 0u }
 };
 
-extern "C" const uint32_t kChaosJitEntryCount = 449u;
+extern "C" const CHAOS_IL2CPP_UINT32 kChaosJitEntryCount = 449u;
 
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 extern "C" void ChaosJitRegisterAll() {

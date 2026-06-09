@@ -3,15 +3,15 @@
   "max_entries": 50,
   "entries": [
     {
-      "cache_key": "System.Net.ServerSentEvents/global-ns/00bc65fa5437dce6",
+      "cache_key": "System.Net.ServerSentEvents/global-ns/a676d3aa4a7e7b81",
       "assembly": "System.Net.ServerSentEvents",
       "chunk_slug": "global-ns",
-      "input_hash": "00bc65fa5437dce62c285f39cfbfa157d1a4c753e613fbdc2bc44a935d8b0ce4",
-      "cached_at": "2026-06-07T15:53:09Z",
-      "duration_ms": 34766,
-      "commit_hash": "49e15e221",
-      "entry_exe_size": 3428864,
-      "entry_count": 346,
+      "input_hash": "a676d3aa4a7e7b8170da2e670e056afaa5ab28125a4de5eb240a35b458629e85",
+      "cached_at": "2026-06-09T20:28:21Z",
+      "duration_ms": 33982,
+      "commit_hash": "20f9980dc",
+      "entry_exe_size": 3529728,
+      "entry_count": 350,
       "status": "valid"
     }
   ]

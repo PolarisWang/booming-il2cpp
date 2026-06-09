@@ -353,6 +353,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     TYPE_FORWARDER_DLL_MAP: dict[str, str] = {
         "System.Runtime.Intrinsics": "System.Private.CoreLib",
         "System.Numerics.Vectors":   "System.Private.CoreLib",
+        "System.Xml.ReaderWriter":   "System.Private.Xml",
     }
     original_assembly = ctx.assembly
     if ctx.assembly in TYPE_FORWARDER_DLL_MAP:

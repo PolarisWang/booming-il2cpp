@@ -14,6 +14,9 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,40 +38,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentNullException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopStateTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopStateTests_Benchmark_Break_1__1(void);
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopStateTests_Benchmark_Stop_0__0(void);
@@ -531,6 +500,43 @@ extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_T
 
 
 
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::Benchmark_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_Benchmark_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = 0;
+	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s1;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
+	_s1 = chaos_locals[0];
+	_s2 = 0;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEachAsync_System_Int32__System_Threading_Tasks_Task_System_Collections_Generic_IAsyncEnumerable_System_Int32__System_Threading_CancellationToken_System_Func_System_Int32_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
 // Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::Benchmark_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_Benchmark_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1(void)
 {
@@ -541,6 +547,10 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_S
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 	{
@@ -563,13 +573,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_S
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 326)
+				// Hotpatch-aware ldftn wrapper (slot 293)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[326];
+					auto& _d_entry = s_hotpatch_entries[293];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[20];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[20];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -599,17 +609,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_S
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (142 < 0 || 142 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 142 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[142] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 142 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[142])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEachAsync_System_Int32__System_Threading_Tasks_Task_System_Collections_Generic_IAsyncEnumerable_System_Int32__System_Threading_CancellationToken_System_Func_System_Int32_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -624,21 +625,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_S
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = 0;
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (144 < 0 || 144 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 144 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[144] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 144 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[144])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEachAsync_System_Int32__System_Threading_Tasks_Task_System_Collections_Generic_IAsyncEnumerable_System_Int32__System_Threading_Tasks_ParallelOptions_System_Func_System_Int32_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask__();
+		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return;
 }
@@ -653,6 +650,10 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_S
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = 0;
 	_s1 = 0;
 	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__223_0;
@@ -662,13 +663,13 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_S
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 327)
+				// Hotpatch-aware ldftn wrapper (slot 294)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[327];
+					auto& _d_entry = s_hotpatch_entries[294];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[20];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[20];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -698,17 +699,8 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_S
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (144 < 0 || 144 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 144 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[144] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 144 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[144])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEachAsync_System_Int32__System_Threading_Tasks_Task_System_Collections_Generic_IAsyncEnumerable_System_Int32__System_Threading_Tasks_ParallelOptions_System_Func_System_Int32_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
 	}
@@ -722,7 +714,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__0_0;
 	_s1 = _s0;
 	{
@@ -730,13 +726,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 328)
+				// Hotpatch-aware ldftn wrapper (slot 295)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[328];
+					auto& _d_entry = s_hotpatch_entries[295];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -782,7 +778,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__2_0;
 	_s1 = _s0;
 	{
@@ -790,13 +790,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 329)
+				// Hotpatch-aware ldftn wrapper (slot 296)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[329];
+					auto& _d_entry = s_hotpatch_entries[296];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -842,7 +842,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__4_0;
 	_s1 = _s0;
 	{
@@ -850,13 +854,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 330)
+				// Hotpatch-aware ldftn wrapper (slot 297)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[330];
+					auto& _d_entry = s_hotpatch_entries[297];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -904,7 +908,14 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	CHAOS_IL2CPP_INT64 _i5;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__6_0;
@@ -914,13 +925,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 331)
+				// Hotpatch-aware ldftn wrapper (slot 298)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> void {
-					auto& _d_entry = s_hotpatch_entries[331];
+					auto& _d_entry = s_hotpatch_entries[298];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[12];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[12];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -948,39 +959,30 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (26 < 0 || 26 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 26 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[26] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 26 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__For_System_Threading_Tasks_ParallelLoopResult_System_Int32_System_Int32_System_Action_System_Int32__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_value = _s0;
+			const auto chaos_value = _s3;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
 			chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
 			chaos_boxed->value = chaos_value;
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
 		{
-			if (_s0 != 0)
+			if (_s3 != 0)
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				_i3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			}
 			else
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s0)));
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+				_i3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s3)));
 			}
-			chaos_locals[1] = ChaosStoreInt64(_i0);
-			_i0 = ChaosLoadInt64(chaos_locals[1]);
-			return _i0;
+			chaos_locals[1] = ChaosStoreInt64(_s2);
+			_i2 = ChaosLoadInt64(chaos_locals[1]);
+			return _i2;
 		}
 	}
 }
@@ -993,7 +995,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__8_0;
 	_s1 = _s0;
 	{
@@ -1001,13 +1007,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 332)
+				// Hotpatch-aware ldftn wrapper (slot 299)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[332];
+					auto& _d_entry = s_hotpatch_entries[299];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1053,7 +1059,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__10_0;
 	_s1 = _s0;
 	{
@@ -1061,13 +1071,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 333)
+				// Hotpatch-aware ldftn wrapper (slot 300)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[333];
+					auto& _d_entry = s_hotpatch_entries[300];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1113,7 +1123,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__12_0;
 	_s1 = _s0;
 	{
@@ -1121,13 +1135,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 334)
+				// Hotpatch-aware ldftn wrapper (slot 301)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[334];
+					auto& _d_entry = s_hotpatch_entries[301];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1176,9 +1190,17 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
 	CHAOS_IL2CPP_INT64 _i0;
 	CHAOS_IL2CPP_INT64 _i1;
 	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	CHAOS_IL2CPP_INT64 _i5;
+	CHAOS_IL2CPP_INT64 _i6;
+	CHAOS_IL2CPP_INT64 _i7;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1190,13 +1212,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 335)
+				// Hotpatch-aware ldftn wrapper (slot 302)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1) -> void {
-					auto& _d_entry = s_hotpatch_entries[335];
+					auto& _d_entry = s_hotpatch_entries[302];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[16];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[16];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_1));
@@ -1224,39 +1246,30 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s4;
-			const auto chaos_arg_1 = _s3;
-			const auto chaos_arg_0 = _s2;
-			if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[30])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__For_System_Threading_Tasks_ParallelLoopResult_System_Int64_System_Int64_System_Action_System_Int64__();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_value = _s2;
+			const auto chaos_value = _s5;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
 			chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
 			chaos_boxed->value = chaos_value;
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
 		{
-			if (_s2 != 0)
+			if (_s5 != 0)
 			{
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				_i5 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s5));
 			}
 			else
 			{
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+				_i5 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s5)));
 			}
-			chaos_locals[1] = ChaosStoreInt64(_i1);
-			_i1 = ChaosLoadInt64(chaos_locals[1]);
-			return _i1;
+			chaos_locals[1] = ChaosStoreInt64(_s4);
+			_i4 = ChaosLoadInt64(chaos_locals[1]);
+			return _i4;
 		}
 	}
 }
@@ -1269,7 +1282,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__80_0;
 	_s1 = _s0;
 	{
@@ -1277,13 +1294,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 336)
+				// Hotpatch-aware ldftn wrapper (slot 303)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[336];
+					auto& _d_entry = s_hotpatch_entries[303];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1329,7 +1346,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__82_0;
 	_s1 = _s0;
 	{
@@ -1337,13 +1358,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 337)
+				// Hotpatch-aware ldftn wrapper (slot 304)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[337];
+					auto& _d_entry = s_hotpatch_entries[304];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1389,7 +1410,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__84_0;
 	_s1 = _s0;
 	{
@@ -1397,13 +1422,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 338)
+				// Hotpatch-aware ldftn wrapper (slot 305)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[338];
+					auto& _d_entry = s_hotpatch_entries[305];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1449,7 +1474,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__86_0;
 	_s1 = _s0;
 	{
@@ -1457,13 +1486,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 339)
+				// Hotpatch-aware ldftn wrapper (slot 306)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[339];
+					auto& _d_entry = s_hotpatch_entries[306];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1509,7 +1538,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__88_0;
 	_s1 = _s0;
 	{
@@ -1517,13 +1550,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 343)
+				// Hotpatch-aware ldftn wrapper (slot 310)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[343];
+					auto& _d_entry = s_hotpatch_entries[310];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1569,7 +1602,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__90_0;
 	_s1 = _s0;
 	{
@@ -1577,13 +1614,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 344)
+				// Hotpatch-aware ldftn wrapper (slot 311)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[344];
+					auto& _d_entry = s_hotpatch_entries[311];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1629,7 +1666,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__92_0;
 	_s1 = _s0;
 	{
@@ -1637,13 +1678,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 345)
+				// Hotpatch-aware ldftn wrapper (slot 312)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[345];
+					auto& _d_entry = s_hotpatch_entries[312];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1689,7 +1730,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__94_0;
 	_s1 = _s0;
 	{
@@ -1697,13 +1742,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 346)
+				// Hotpatch-aware ldftn wrapper (slot 313)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[346];
+					auto& _d_entry = s_hotpatch_entries[313];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1749,7 +1794,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__16_0;
 	_s1 = _s0;
 	{
@@ -1757,13 +1806,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 350)
+				// Hotpatch-aware ldftn wrapper (slot 317)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[350];
+					auto& _d_entry = s_hotpatch_entries[317];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1809,7 +1858,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__18_0;
 	_s1 = _s0;
 	{
@@ -1817,13 +1870,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 351)
+				// Hotpatch-aware ldftn wrapper (slot 318)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[351];
+					auto& _d_entry = s_hotpatch_entries[318];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1869,7 +1922,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__20_0;
 	_s1 = _s0;
 	{
@@ -1877,13 +1934,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 352)
+				// Hotpatch-aware ldftn wrapper (slot 319)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[352];
+					auto& _d_entry = s_hotpatch_entries[319];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1929,7 +1986,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__22_0;
 	_s1 = _s0;
 	{
@@ -1937,13 +1998,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 353)
+				// Hotpatch-aware ldftn wrapper (slot 320)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[353];
+					auto& _d_entry = s_hotpatch_entries[320];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1989,7 +2050,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__24_0;
 	_s1 = _s0;
 	{
@@ -1997,13 +2062,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 355)
+				// Hotpatch-aware ldftn wrapper (slot 322)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[355];
+					auto& _d_entry = s_hotpatch_entries[322];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2049,7 +2114,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__26_0;
 	_s1 = _s0;
 	{
@@ -2057,13 +2126,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 356)
+				// Hotpatch-aware ldftn wrapper (slot 323)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[356];
+					auto& _d_entry = s_hotpatch_entries[323];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2109,7 +2178,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__28_0;
 	_s1 = _s0;
 	{
@@ -2117,13 +2190,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 357)
+				// Hotpatch-aware ldftn wrapper (slot 324)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[357];
+					auto& _d_entry = s_hotpatch_entries[324];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2169,7 +2242,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__30_0;
 	_s1 = _s0;
 	{
@@ -2177,13 +2254,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 358)
+				// Hotpatch-aware ldftn wrapper (slot 325)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[358];
+					auto& _d_entry = s_hotpatch_entries[325];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2229,7 +2306,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__32_0;
 	_s1 = _s0;
 	{
@@ -2237,13 +2318,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 360)
+				// Hotpatch-aware ldftn wrapper (slot 327)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[360];
+					auto& _d_entry = s_hotpatch_entries[327];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2289,7 +2370,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__34_0;
 	_s1 = _s0;
 	{
@@ -2297,13 +2382,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 361)
+				// Hotpatch-aware ldftn wrapper (slot 328)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[361];
+					auto& _d_entry = s_hotpatch_entries[328];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2349,7 +2434,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__36_0;
 	_s1 = _s0;
 	{
@@ -2357,13 +2446,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 362)
+				// Hotpatch-aware ldftn wrapper (slot 329)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[362];
+					auto& _d_entry = s_hotpatch_entries[329];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2411,7 +2500,14 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	CHAOS_IL2CPP_INT64 _i5;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__38_0;
@@ -2421,13 +2517,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 363)
+				// Hotpatch-aware ldftn wrapper (slot 330)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> void {
-					auto& _d_entry = s_hotpatch_entries[363];
+					auto& _d_entry = s_hotpatch_entries[330];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[20];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[20];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -2456,39 +2552,30 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (48 < 0 || 48 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 48 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[48] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 48 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__For_System_Threading_Tasks_ParallelLoopResult_System_Int32_System_Int32_System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_value = _s0;
+			const auto chaos_value = _s3;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
 			chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
 			chaos_boxed->value = chaos_value;
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
 		{
-			if (_s0 != 0)
+			if (_s3 != 0)
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				_i3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			}
 			else
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s0)));
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+				_i3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s3)));
 			}
-			chaos_locals[1] = ChaosStoreInt64(_i0);
-			_i0 = ChaosLoadInt64(chaos_locals[1]);
-			return _i0;
+			chaos_locals[1] = ChaosStoreInt64(_s2);
+			_i2 = ChaosLoadInt64(chaos_locals[1]);
+			return _i2;
 		}
 	}
 }
@@ -2501,7 +2588,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__40_0;
 	_s1 = _s0;
 	{
@@ -2509,13 +2600,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 364)
+				// Hotpatch-aware ldftn wrapper (slot 331)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[364];
+					auto& _d_entry = s_hotpatch_entries[331];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2561,7 +2652,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__42_0;
 	_s1 = _s0;
 	{
@@ -2569,13 +2664,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 365)
+				// Hotpatch-aware ldftn wrapper (slot 332)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[365];
+					auto& _d_entry = s_hotpatch_entries[332];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2621,7 +2716,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__44_0;
 	_s1 = _s0;
 	{
@@ -2629,13 +2728,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 366)
+				// Hotpatch-aware ldftn wrapper (slot 333)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[366];
+					auto& _d_entry = s_hotpatch_entries[333];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2684,9 +2783,17 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
 	CHAOS_IL2CPP_INT64 _i0;
 	CHAOS_IL2CPP_INT64 _i1;
 	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	CHAOS_IL2CPP_INT64 _i5;
+	CHAOS_IL2CPP_INT64 _i6;
+	CHAOS_IL2CPP_INT64 _i7;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -2698,13 +2805,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 367)
+				// Hotpatch-aware ldftn wrapper (slot 334)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> void {
-					auto& _d_entry = s_hotpatch_entries[367];
+					auto& _d_entry = s_hotpatch_entries[334];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[24];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[24];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_1));
@@ -2733,39 +2840,30 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s4;
-			const auto chaos_arg_1 = _s3;
-			const auto chaos_arg_0 = _s2;
-			if (51 < 0 || 51 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 51 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[51] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 51 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__For_System_Threading_Tasks_ParallelLoopResult_System_Int64_System_Int64_System_Action_System_Int64_System_Threading_Tasks_ParallelLoopState__();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_value = _s2;
+			const auto chaos_value = _s5;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
 			chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
 			chaos_boxed->value = chaos_value;
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
 		{
-			if (_s2 != 0)
+			if (_s5 != 0)
 			{
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				_i5 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s5));
 			}
 			else
 			{
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+				_i5 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s5)));
 			}
-			chaos_locals[1] = ChaosStoreInt64(_i1);
-			_i1 = ChaosLoadInt64(chaos_locals[1]);
-			return _i1;
+			chaos_locals[1] = ChaosStoreInt64(_s4);
+			_i4 = ChaosLoadInt64(chaos_locals[1]);
+			return _i4;
 		}
 	}
 }
@@ -2778,7 +2876,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__48_0;
 	_s1 = _s0;
 	{
@@ -2786,13 +2888,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 368)
+				// Hotpatch-aware ldftn wrapper (slot 335)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[368];
+					auto& _d_entry = s_hotpatch_entries[335];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2838,7 +2940,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__50_0;
 	_s1 = _s0;
 	{
@@ -2846,13 +2952,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 369)
+				// Hotpatch-aware ldftn wrapper (slot 336)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[369];
+					auto& _d_entry = s_hotpatch_entries[336];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2898,7 +3004,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__52_0;
 	_s1 = _s0;
 	{
@@ -2906,13 +3016,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 370)
+				// Hotpatch-aware ldftn wrapper (slot 337)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[370];
+					auto& _d_entry = s_hotpatch_entries[337];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -2958,7 +3068,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__54_0;
 	_s1 = _s0;
 	{
@@ -2966,13 +3080,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 371)
+				// Hotpatch-aware ldftn wrapper (slot 338)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[371];
+					auto& _d_entry = s_hotpatch_entries[338];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3018,7 +3132,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__56_0;
 	_s1 = _s0;
 	{
@@ -3026,13 +3144,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 373)
+				// Hotpatch-aware ldftn wrapper (slot 340)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[373];
+					auto& _d_entry = s_hotpatch_entries[340];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3078,7 +3196,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__58_0;
 	_s1 = _s0;
 	{
@@ -3086,13 +3208,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 374)
+				// Hotpatch-aware ldftn wrapper (slot 341)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[374];
+					auto& _d_entry = s_hotpatch_entries[341];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3138,7 +3260,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__60_0;
 	_s1 = _s0;
 	{
@@ -3146,13 +3272,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 375)
+				// Hotpatch-aware ldftn wrapper (slot 342)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[375];
+					auto& _d_entry = s_hotpatch_entries[342];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3198,7 +3324,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__62_0;
 	_s1 = _s0;
 	{
@@ -3206,13 +3336,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 376)
+				// Hotpatch-aware ldftn wrapper (slot 343)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[376];
+					auto& _d_entry = s_hotpatch_entries[343];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3258,7 +3388,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__64_0;
 	_s1 = _s0;
 	{
@@ -3266,13 +3400,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 378)
+				// Hotpatch-aware ldftn wrapper (slot 345)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[378];
+					auto& _d_entry = s_hotpatch_entries[345];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3318,7 +3452,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__66_0;
 	_s1 = _s0;
 	{
@@ -3326,13 +3464,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 379)
+				// Hotpatch-aware ldftn wrapper (slot 346)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[379];
+					auto& _d_entry = s_hotpatch_entries[346];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3378,7 +3516,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__68_0;
 	_s1 = _s0;
 	{
@@ -3386,13 +3528,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 380)
+				// Hotpatch-aware ldftn wrapper (slot 347)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[380];
+					auto& _d_entry = s_hotpatch_entries[347];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3430,10 +3572,168 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	}
 }
 
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3:System.Int64()
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3()
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__70_0;
+	_s3 = _s2;
+	{
+		if (_s3 == 0)
+		{
+			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 348)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[348];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s3;
+				const auto chaos_target = _s2;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s3 = _s2;
+			{
+				auto chaos_value = _s3;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__70_0 = chaos_value;
+			}
+		}
+		_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__70_1;
+		_s4 = _s3;
+		{
+			if (_s4 == 0)
+			{
+				_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 349)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[349];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[24];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_3));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+					};
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s4;
+					const auto chaos_target = _s3;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s4 = _s3;
+				{
+					auto chaos_value = _s4;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__70_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__70_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 350)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> void {
+							auto& _d_entry = s_hotpatch_entries[350];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[12];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, nullptr);
+								return;
+							}
+							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__70_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__For_System_Int32__System_Threading_Tasks_ParallelLoopResult_System_Int32_System_Int32_System_Func_System_Int32__System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32__System_Action_System_Int32__();
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				{
+					const auto chaos_value = _s1;
+					auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
+					chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
+					chaos_boxed->value = chaos_value;
+					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+				}
+				{
+					if (_s1 != 0)
+					{
+					}
+					else
+					{
+					}
+				}
+			}
+		}
+	}
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0()
@@ -3444,7 +3744,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__72_0;
 	_s1 = _s0;
 	{
@@ -3452,13 +3756,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 384)
+				// Hotpatch-aware ldftn wrapper (slot 351)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[384];
+					auto& _d_entry = s_hotpatch_entries[351];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3504,7 +3808,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__74_0;
 	_s1 = _s0;
 	{
@@ -3512,13 +3820,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 385)
+				// Hotpatch-aware ldftn wrapper (slot 352)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[385];
+					auto& _d_entry = s_hotpatch_entries[352];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3564,7 +3872,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__76_0;
 	_s1 = _s0;
 	{
@@ -3572,13 +3884,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 386)
+				// Hotpatch-aware ldftn wrapper (slot 353)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[386];
+					auto& _d_entry = s_hotpatch_entries[353];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3616,10 +3928,174 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	}
 }
 
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3:System.Int64()
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3()
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
+	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__78_0;
+	_s3 = _s2;
+	{
+		if (_s3 == 0)
+		{
+			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 354)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[354];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s3;
+				const auto chaos_target = _s2;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s3 = _s2;
+			{
+				auto chaos_value = _s3;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__78_0 = chaos_value;
+			}
+		}
+		_s5 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__78_1;
+		_s6 = _s5;
+		{
+			if (_s6 == 0)
+			{
+				_s5 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 355)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[355];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[28];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_1));
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_3));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT64, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+					};
+				_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s6;
+					const auto chaos_target = _s5;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int64_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int64_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s6 = _s5;
+				{
+					auto chaos_value = _s6;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__78_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__78_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 356)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> void {
+							auto& _d_entry = s_hotpatch_entries[356];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[12];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, nullptr);
+								return;
+							}
+							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__78_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__For_System_Int32__System_Threading_Tasks_ParallelLoopResult_System_Int64_System_Int64_System_Func_System_Int32__System_Func_System_Int64_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32__System_Action_System_Int32__();
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				{
+					const auto chaos_value = _s1;
+					auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
+					chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
+					chaos_boxed->value = chaos_value;
+					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+				}
+				{
+					if (_s1 != 0)
+					{
+					}
+					else
+					{
+					}
+				}
+			}
+		}
+	}
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_0()
@@ -3630,7 +4106,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__176_0;
 	_s1 = _s0;
 	{
@@ -3638,13 +4118,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 390)
+				// Hotpatch-aware ldftn wrapper (slot 357)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[390];
+					auto& _d_entry = s_hotpatch_entries[357];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3690,7 +4170,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__178_0;
 	_s1 = _s0;
 	{
@@ -3698,13 +4182,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 391)
+				// Hotpatch-aware ldftn wrapper (slot 358)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[391];
+					auto& _d_entry = s_hotpatch_entries[358];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3750,7 +4234,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__180_0;
 	_s1 = _s0;
 	{
@@ -3758,13 +4246,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 392)
+				// Hotpatch-aware ldftn wrapper (slot 359)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[392];
+					auto& _d_entry = s_hotpatch_entries[359];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3812,9 +4300,20 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
 	CHAOS_IL2CPP_INT64 _i0;
 	CHAOS_IL2CPP_INT64 _i1;
 	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	CHAOS_IL2CPP_INT64 _i5;
+	CHAOS_IL2CPP_INT64 _i6;
+	CHAOS_IL2CPP_INT64 _i7;
+	CHAOS_IL2CPP_INT64 _i8;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -3826,13 +4325,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 393)
+				// Hotpatch-aware ldftn wrapper (slot 360)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[393];
+					auto& _d_entry = s_hotpatch_entries[360];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[24];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[24];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_1));
@@ -3862,44 +4361,24 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _i1;
-			const auto chaos_arg_0 = _i0;
-			if (66 < 0 || 66 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 66 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[66] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 66 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForAsync_System_Int64__System_Threading_Tasks_Task_System_Int64_System_Int64_System_Func_System_Int64_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__();
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		chaos_locals[0] = _s1;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+		chaos_locals[0] = _s4;
+		_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 		{
-			if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-			}
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
-		chaos_locals[1] = ChaosStoreInt64(_i2);
-		_i2 = ChaosLoadInt64(chaos_locals[1]);
-		return _i2;
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i6 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s6));
+		chaos_locals[1] = ChaosStoreInt64(_i6);
+		_i6 = ChaosLoadInt64(chaos_locals[1]);
+		return _i6;
 	}
 }
 
@@ -3911,7 +4390,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__184_0;
 	_s1 = _s0;
 	{
@@ -3919,13 +4402,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 394)
+				// Hotpatch-aware ldftn wrapper (slot 361)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[394];
+					auto& _d_entry = s_hotpatch_entries[361];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -3971,7 +4454,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__186_0;
 	_s1 = _s0;
 	{
@@ -3979,13 +4466,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 395)
+				// Hotpatch-aware ldftn wrapper (slot 362)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[395];
+					auto& _d_entry = s_hotpatch_entries[362];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4031,7 +4518,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__188_0;
 	_s1 = _s0;
 	{
@@ -4039,13 +4530,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 396)
+				// Hotpatch-aware ldftn wrapper (slot 363)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[396];
+					auto& _d_entry = s_hotpatch_entries[363];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4094,9 +4585,21 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
 	CHAOS_IL2CPP_INT64 _i0;
 	CHAOS_IL2CPP_INT64 _i1;
 	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	CHAOS_IL2CPP_INT64 _i5;
+	CHAOS_IL2CPP_INT64 _i6;
+	CHAOS_IL2CPP_INT64 _i7;
+	CHAOS_IL2CPP_INT64 _i8;
+	CHAOS_IL2CPP_INT64 _i9;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -4122,13 +4625,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 397)
+				// Hotpatch-aware ldftn wrapper (slot 364)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[397];
+					auto& _d_entry = s_hotpatch_entries[364];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[24];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[24];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_1));
@@ -4158,45 +4661,24 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_3 = _s3;
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _i1;
-			const auto chaos_arg_0 = _i0;
-			if (70 < 0 || 70 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 70 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[70] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 70 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForAsync_System_Int64__System_Threading_Tasks_Task_System_Int64_System_Int64_System_Threading_CancellationToken_System_Func_System_Int64_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask__();
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		chaos_locals[1] = ChaosStoreInt64(_s1);
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+		chaos_locals[1] = ChaosStoreInt64(_s5);
+		_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 		{
-			if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-			}
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__();
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
-		chaos_locals[2] = ChaosStoreInt64(_i2);
-		_i2 = ChaosLoadInt64(chaos_locals[2]);
-		return _i2;
+		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i7 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s7));
+		chaos_locals[2] = ChaosStoreInt64(_i7);
+		_i7 = ChaosLoadInt64(chaos_locals[2]);
+		return _i7;
 	}
 }
 
@@ -4208,7 +4690,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__192_0;
 	_s1 = _s0;
 	{
@@ -4216,13 +4702,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 398)
+				// Hotpatch-aware ldftn wrapper (slot 365)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[398];
+					auto& _d_entry = s_hotpatch_entries[365];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4268,7 +4754,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__194_0;
 	_s1 = _s0;
 	{
@@ -4276,13 +4766,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 399)
+				// Hotpatch-aware ldftn wrapper (slot 366)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[399];
+					auto& _d_entry = s_hotpatch_entries[366];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4328,7 +4818,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__196_0;
 	_s1 = _s0;
 	{
@@ -4336,13 +4830,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 400)
+				// Hotpatch-aware ldftn wrapper (slot 367)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[400];
+					auto& _d_entry = s_hotpatch_entries[367];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4388,7 +4882,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__198_0;
 	_s1 = _s0;
 	{
@@ -4396,13 +4894,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 401)
+				// Hotpatch-aware ldftn wrapper (slot 368)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[401];
+					auto& _d_entry = s_hotpatch_entries[368];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4448,7 +4946,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__96_0;
 	_s1 = _s0;
 	{
@@ -4456,13 +4958,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 403)
+				// Hotpatch-aware ldftn wrapper (slot 370)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[403];
+					auto& _d_entry = s_hotpatch_entries[370];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4509,15 +5011,15 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
 	{
-		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[75])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__98_0;
@@ -4527,13 +5029,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 404)
+				// Hotpatch-aware ldftn wrapper (slot 371)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> void {
-					auto& _d_entry = s_hotpatch_entries[404];
+					auto& _d_entry = s_hotpatch_entries[371];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[12];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[12];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -4561,38 +5063,30 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (74 < 0 || 74 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 74 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[74] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 74 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEach_System_Int32__System_Threading_Tasks_ParallelLoopResult_System_Collections_Generic_IEnumerable_System_Int32__System_Action_System_Int32__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_value = _s0;
+			const auto chaos_value = _s2;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
 			chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
 			chaos_boxed->value = chaos_value;
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
 		{
-			if (_s0 != 0)
+			if (_s2 != 0)
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
 			}
 			else
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s0)));
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
 			}
-			chaos_locals[1] = ChaosStoreInt64(_i0);
-			_i0 = ChaosLoadInt64(chaos_locals[1]);
-			return _i0;
+			chaos_locals[1] = ChaosStoreInt64(_s1);
+			_i1 = ChaosLoadInt64(chaos_locals[1]);
+			return _i1;
 		}
 	}
 }
@@ -4605,7 +5099,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__100_0;
 	_s1 = _s0;
 	{
@@ -4613,13 +5111,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 405)
+				// Hotpatch-aware ldftn wrapper (slot 372)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[405];
+					auto& _d_entry = s_hotpatch_entries[372];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4665,7 +5163,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__102_0;
 	_s1 = _s0;
 	{
@@ -4673,13 +5175,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 406)
+				// Hotpatch-aware ldftn wrapper (slot 373)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[406];
+					auto& _d_entry = s_hotpatch_entries[373];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4725,7 +5227,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__104_0;
 	_s1 = _s0;
 	{
@@ -4733,13 +5239,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 408)
+				// Hotpatch-aware ldftn wrapper (slot 375)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[408];
+					auto& _d_entry = s_hotpatch_entries[375];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4786,15 +5292,15 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
 	{
-		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[75])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__106_0;
@@ -4804,13 +5310,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 409)
+				// Hotpatch-aware ldftn wrapper (slot 376)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> void {
-					auto& _d_entry = s_hotpatch_entries[409];
+					auto& _d_entry = s_hotpatch_entries[376];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[20];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[20];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -4839,38 +5345,30 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (79 < 0 || 79 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 79 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[79] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 79 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEach_System_Int32__System_Threading_Tasks_ParallelLoopResult_System_Collections_Generic_IEnumerable_System_Int32__System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_value = _s0;
+			const auto chaos_value = _s2;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
 			chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
 			chaos_boxed->value = chaos_value;
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
 		{
-			if (_s0 != 0)
+			if (_s2 != 0)
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
 			}
 			else
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s0)));
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
 			}
-			chaos_locals[1] = ChaosStoreInt64(_i0);
-			_i0 = ChaosLoadInt64(chaos_locals[1]);
-			return _i0;
+			chaos_locals[1] = ChaosStoreInt64(_s1);
+			_i1 = ChaosLoadInt64(chaos_locals[1]);
+			return _i1;
 		}
 	}
 }
@@ -4883,7 +5381,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__108_0;
 	_s1 = _s0;
 	{
@@ -4891,13 +5393,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 410)
+				// Hotpatch-aware ldftn wrapper (slot 377)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[410];
+					auto& _d_entry = s_hotpatch_entries[377];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -4943,7 +5445,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__110_0;
 	_s1 = _s0;
 	{
@@ -4951,13 +5457,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 411)
+				// Hotpatch-aware ldftn wrapper (slot 378)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[411];
+					auto& _d_entry = s_hotpatch_entries[378];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5003,7 +5509,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__112_0;
 	_s1 = _s0;
 	{
@@ -5011,13 +5521,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 413)
+				// Hotpatch-aware ldftn wrapper (slot 380)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[413];
+					auto& _d_entry = s_hotpatch_entries[380];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5064,15 +5574,15 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
 	{
-		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[75])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__114_0;
@@ -5082,13 +5592,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 414)
+				// Hotpatch-aware ldftn wrapper (slot 381)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3) -> void {
-					auto& _d_entry = s_hotpatch_entries[414];
+					auto& _d_entry = s_hotpatch_entries[381];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[28];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[28];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -5118,38 +5628,30 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (83 < 0 || 83 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 83 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[83] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 83 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[83])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEach_System_Int32__System_Threading_Tasks_ParallelLoopResult_System_Collections_Generic_IEnumerable_System_Int32__System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_value = _s0;
+			const auto chaos_value = _s2;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
 			chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
 			chaos_boxed->value = chaos_value;
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
 		{
-			if (_s0 != 0)
+			if (_s2 != 0)
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
 			}
 			else
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-				_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s0)));
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+				_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s2)));
 			}
-			chaos_locals[1] = ChaosStoreInt64(_i0);
-			_i0 = ChaosLoadInt64(chaos_locals[1]);
-			return _i0;
+			chaos_locals[1] = ChaosStoreInt64(_s1);
+			_i1 = ChaosLoadInt64(chaos_locals[1]);
+			return _i1;
 		}
 	}
 }
@@ -5162,7 +5664,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__116_0;
 	_s1 = _s0;
 	{
@@ -5170,13 +5676,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 415)
+				// Hotpatch-aware ldftn wrapper (slot 382)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[415];
+					auto& _d_entry = s_hotpatch_entries[382];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5222,7 +5728,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__118_0;
 	_s1 = _s0;
 	{
@@ -5230,13 +5740,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 416)
+				// Hotpatch-aware ldftn wrapper (slot 383)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[416];
+					auto& _d_entry = s_hotpatch_entries[383];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5282,7 +5792,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__120_0;
 	_s1 = _s0;
 	{
@@ -5290,13 +5804,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 418)
+				// Hotpatch-aware ldftn wrapper (slot 385)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[418];
+					auto& _d_entry = s_hotpatch_entries[385];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5334,10 +5848,169 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	}
 }
 
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1:System.Int64()
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1()
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__122_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 386)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[386];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__122_0 = chaos_value;
+			}
+		}
+		_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__122_1;
+		_s3 = _s2;
+		{
+			if (_s3 == 0)
+			{
+				_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 387)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[387];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[24];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_3));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+					};
+				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s3;
+					const auto chaos_target = _s2;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s3 = _s2;
+				{
+					auto chaos_value = _s3;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__122_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__122_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 388)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> void {
+							auto& _d_entry = s_hotpatch_entries[388];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[12];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, nullptr);
+								return;
+							}
+							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__122_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEach_System_Int32_System_Int32__System_Threading_Tasks_ParallelLoopResult_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32__System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32_System_Int32__System_Action_System_Int32__();
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				{
+					const auto chaos_value = _s1;
+					auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
+					chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
+					chaos_boxed->value = chaos_value;
+					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+				}
+				{
+					if (_s1 != 0)
+					{
+					}
+					else
+					{
+					}
+				}
+			}
+		}
+	}
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0()
@@ -5348,7 +6021,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__124_0;
 	_s1 = _s0;
 	{
@@ -5356,13 +6033,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 422)
+				// Hotpatch-aware ldftn wrapper (slot 389)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[422];
+					auto& _d_entry = s_hotpatch_entries[389];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5408,7 +6085,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__126_0;
 	_s1 = _s0;
 	{
@@ -5416,13 +6097,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 423)
+				// Hotpatch-aware ldftn wrapper (slot 390)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[423];
+					auto& _d_entry = s_hotpatch_entries[390];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5468,7 +6149,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__128_0;
 	_s1 = _s0;
 	{
@@ -5476,13 +6161,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 427)
+				// Hotpatch-aware ldftn wrapper (slot 394)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[427];
+					auto& _d_entry = s_hotpatch_entries[394];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5520,10 +6205,170 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	}
 }
 
-// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1:System.Int64()
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1()
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	return {};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	{
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__130_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 395)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[395];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__130_0 = chaos_value;
+			}
+		}
+		_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__130_1;
+		_s3 = _s2;
+		{
+			if (_s3 == 0)
+			{
+				_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+				{
+					// Hotpatch-aware ldftn wrapper (slot 396)
+					static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4) -> CHAOS_IL2CPP_INT32 {
+						auto& _d_entry = s_hotpatch_entries[396];
+						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+						{
+							alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[32];
+							ArgBuffer _d_bw(_d_ab);
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+							_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
+							_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_3));
+							_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_4));
+							CHAOS_IL2CPP_INT32 _d_ret{};
+							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+								_d_entry.method_key, _d_ab, &_d_ret);
+							return _d_ret;
+						}
+						return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT64, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+					};
+				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+				}
+				{
+					const auto chaos_method_ptr = _s3;
+					const auto chaos_target = _s2;
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32_System_Int32_, {});
+					chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32_System_Int32_.AsTypeInfoHot();
+					chaos_object->chaos_delegate_target = chaos_target;
+					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+				}
+				_s3 = _s2;
+				{
+					auto chaos_value = _s3;
+					chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__130_1 = chaos_value;
+				}
+			}
+			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__130_2;
+			_s2 = _s1;
+			{
+				if (_s2 == 0)
+				{
+					_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+					{
+						// Hotpatch-aware ldftn wrapper (slot 397)
+						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> void {
+							auto& _d_entry = s_hotpatch_entries[397];
+							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+							{
+								alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[12];
+								ArgBuffer _d_bw(_d_ab);
+								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+								_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+									_d_entry.method_key, _d_ab, nullptr);
+								return;
+							}
+							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+						};
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+					}
+					{
+						const auto chaos_method_ptr = _s2;
+						const auto chaos_target = _s1;
+						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_, {});
+						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_.AsTypeInfoHot();
+						chaos_object->chaos_delegate_target = chaos_target;
+						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+						_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					}
+					_s2 = _s1;
+					{
+						auto chaos_value = _s2;
+						chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__130_2 = chaos_value;
+					}
+				}
+				{
+					const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEach_System_Int32_System_Int32__System_Threading_Tasks_ParallelLoopResult_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32__System_Func_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32_System_Int32__System_Action_System_Int32__();
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				}
+				{
+					const auto chaos_value = _s1;
+					auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult, {});
+					chaos_boxed->header.type_info = chaos_mt_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopResult.AsTypeInfoHot();
+					chaos_boxed->value = chaos_value;
+					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+				}
+				{
+					if (_s1 != 0)
+					{
+					}
+					else
+					{
+					}
+				}
+			}
+		}
+	}
 }
 
 // Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0()
@@ -5534,7 +6379,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__132_0;
 	_s1 = _s0;
 	{
@@ -5542,13 +6391,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 431)
+				// Hotpatch-aware ldftn wrapper (slot 398)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[431];
+					auto& _d_entry = s_hotpatch_entries[398];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -5586,794 +6435,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__134_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 432)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[432];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__134_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_22_Partitionerint_System_Actionint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_22_Partitionerint_System_Actionint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__136_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 436)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[436];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__136_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_22_Partitionerint_System_Actionint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_22_Partitionerint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__138_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 437)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[437];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__138_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_23_Partitionerint_System_ActionintParallelLoopState_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_23_Partitionerint_System_ActionintParallelLoopState_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__140_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 439)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[439];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__140_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_23_Partitionerint_System_ActionintParallelLoopState_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__142_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 440)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[440];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__142_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__144_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 442)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[442];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__144_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__146_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 443)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[443];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__146_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__148_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 445)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[445];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__148_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__150_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 446)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[446];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__150_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__152_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 450)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[450];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__152_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__154_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 451)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[451];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__154_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__156_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 455)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[455];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__156_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1()
-extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INT64 _i0;
-	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__158_0;
-	_s1 = _s0;
-	{
-		if (_s1 == 0)
-		{
-			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 456)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[456];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[8];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
-				};
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s1;
-				const auto chaos_target = _s0;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s1 = _s0;
-			{
-				auto chaos_value = _s1;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__158_0 = chaos_value;
-			}
-		}
-		{
-			// Assert.Throws: target method not found via IL lookahead
-			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-		chaos_locals[0] = ChaosStoreInt64(_i0);
-		_i0 = ChaosLoadInt64(chaos_locals[0]);
-		return _i0;
-	}
-}
-
 
 
 }  // namespace chaos::il2cpp::codegen::CombinedSubjects
 #pragma warning(pop)
-
-// extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 491;
-// Codegen stub count — pipeline checks this
-extern "C" const int kCodegenFailureCount = 24;
-
-extern "C" void ChaosJitRegisterAll() {}

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DefineConstants>VERIFY</DefineConstants>
@@ -11,6 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CombinedSubjects.cs" />
-    <ProjectReference Include="/home/debian/agent/booming-il2cpp/src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
 </Project>

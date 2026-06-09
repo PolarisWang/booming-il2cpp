@@ -1,4 +1,4 @@
-// Auto-generated type declarations (TU paging)
+﻿// Auto-generated type declarations (TU paging)
 #pragma once
 
 #include <chaos/native_types.h>
@@ -2876,7 +2876,7 @@ extern void chaos_initialize_array_from_field_data_int32(CHAOS_IL2CPP_INTPTR cha
 extern CHAOS_IL2CPP_INTPTR chaos_create_field_data_span_int32(CHAOS_IL2CPP_INTPTR chaos_field_handle);
 
 CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept { return chaos_value; }
+inline CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept { return chaos_value; }
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
 

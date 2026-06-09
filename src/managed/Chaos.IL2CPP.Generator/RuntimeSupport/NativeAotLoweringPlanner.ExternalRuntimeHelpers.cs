@@ -61,8 +61,11 @@ public sealed partial class NativeAotLoweringPlanner
 		// Canonicalize assembly prefix so matching is assembly-agnostic
 		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
-		// If method compiled in AOT IR, use its real ParameterAbis, not catch-all stub
-		if (_methodsBySubjectId.ContainsKey(callee))
+		// If method compiled in AOT IR (has IL body instructions), use its real ParameterAbis.
+		// Methods in _methodsBySubjectId with 0 instructions are BCL/import methods that
+		// don't have compiled bodies -- they should fall through to external runtime stubs.
+		if (_methodsBySubjectId.TryGetValue(callee, out var existingMethod) &&
+			existingMethod is { Instructions.Count: > 0 })
 		{
 			helperDefinition = null;
 			_externalRuntimeHelperCache[callee] = null;

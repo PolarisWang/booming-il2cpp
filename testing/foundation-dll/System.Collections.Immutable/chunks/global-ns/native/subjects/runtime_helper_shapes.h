@@ -13,6 +13,14 @@ namespace chaos { namespace il2cpp { namespace shape_dispatch {
 
 // ---- Shape ID enum (FNV-1a hashes of canonical shape keys) ----
 enum ShapeId : CHAOS_IL2CPP_UINT32 {
+    SHAPE_HMACMD5_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x0A53FB71u,
+    SHAPE_HMACSHA1_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x02E793DEu,
+    SHAPE_HMACSHA256_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x75866860u,
+    SHAPE_HMACSHA384_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x17AFF048u,
+    SHAPE_HMACSHA3_256_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x8F74D156u,
+    SHAPE_HMACSHA3_384_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x52D912AAu,
+    SHAPE_HMACSHA3_512_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x946AD5F1u,
+    SHAPE_HMACSHA512_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__ = 0x007F3F2Fu,
     SHAPE_INTERLOCKED_COMPAREEXCHANGE_SYSTEM_INT32__SYSTEM_INT32_SYSTEM_INT32 = 0x4B7E9FFDu,
     SHAPE_INTERLOCKED_COMPAREEXCHANGE_SYSTEM_INT64__SYSTEM_INT64_SYSTEM_INT64 = 0xBDF04DE4u,
     SHAPE_INTERLOCKED_DECREMENT_SYSTEM_INT64_ = 0xE04035C1u,
@@ -26,9 +34,19 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_MARSHAL_GETEXCEPTIONPOINTERS = 0xADE49E01u,
     SHAPE_MARSHAL_GETLASTPINVOKEERROR = 0x5C500D76u,
     SHAPE_MARSHAL_SETLASTPINVOKEERROR_SYSTEM_INT32 = 0x2B0950FFu,
+    SHAPE_MD5_HASHDATA_SYSTEM_BYTE__ = 0x68BF3BEFu,
     SHAPE_MONITOR_ENTER_SYSTEM_OBJECT_SYSTEM_BOOLEAN_ = 0xEB2C9BA3u,
     SHAPE_MONITOR_EXIT_SYSTEM_OBJECT = 0x04764296u,
     SHAPE_MONITOR_TRYENTER_SYSTEM_OBJECT_SYSTEM_INT32 = 0x5149D70Cu,
+    SHAPE_RANDOMNUMBERGENERATOR_FILL_SYSTEM_BYTE__ = 0xB3F4C475u,
+    SHAPE_RANDOMNUMBERGENERATOR_GETBYTES_SYSTEM_INT32 = 0x34FA6871u,
+    SHAPE_SHA1_HASHDATA_SYSTEM_BYTE__ = 0xBFCDBB46u,
+    SHAPE_SHA256_HASHDATA_SYSTEM_BYTE__ = 0x6A52C980u,
+    SHAPE_SHA384_HASHDATA_SYSTEM_BYTE__ = 0xBF8294CCu,
+    SHAPE_SHA3_256_HASHDATA_SYSTEM_BYTE__ = 0xFC312E92u,
+    SHAPE_SHA3_384_HASHDATA_SYSTEM_BYTE__ = 0xC2444C62u,
+    SHAPE_SHA3_512_HASHDATA_SYSTEM_BYTE__ = 0x4F808675u,
+    SHAPE_SHA512_HASHDATA_SYSTEM_BYTE__ = 0x7DF46DD7u,
     SHAPE_SYSTEM_ACTIVATOR_CREATEINSTANCE_SYSTEM_TYPE = 0x59AC309Eu,
     SHAPE_SYSTEM_ARGUMENTEXCEPTION_GET_PARAMNAME = 0x24D05674u,
     SHAPE_SYSTEM_ARGUMENTOUTOFRANGEEXCEPTION__CTOR_SYSTEM_STRING_SYSTEM_STRING = 0x74FA35FBu,
@@ -110,7 +128,9 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_GC_WAITFORPENDINGFINALIZERS = 0x7E101281u,
     SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETDECIMALDIGITVALUE_SYSTEM_CHAR = 0x959E3451u,
     SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETDIGITVALUE_SYSTEM_CHAR = 0x1021226Cu,
+    SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETDIGITVALUE_SYSTEM_STRING_SYSTEM_INT32 = 0xAB910A8Eu,
     SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETNUMERICVALUE_SYSTEM_CHAR = 0xE39A8412u,
+    SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETNUMERICVALUE_SYSTEM_STRING_SYSTEM_INT32 = 0xC8349540u,
     SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETUNICODECATEGORY_SYSTEM_CHAR = 0xE894E43Fu,
     SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETUNICODECATEGORY_SYSTEM_INT32 = 0x2FA7653Fu,
     SHAPE_SYSTEM_GLOBALIZATION_COMPAREINFO_COMPARE_SYSTEM_STRING_SYSTEM_STRING = 0x3F9983A0u,
@@ -294,6 +314,9 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_YIELDAWAITABLE_GETAWAITER = 0xC76A5DEEu,
     SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_YIELDAWAITABLE_YIELDAWAITER_GETRESULT = 0x03229253u,
     SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_YIELDAWAITABLE_YIELDAWAITER_GET_ISCOMPLETED = 0x4F469568u,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_ANSISTRINGMARSHALLER_CONVERTTOMANAGED_SYSTEM_BYTE_ = 0xDCBC0D03u,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_ANSISTRINGMARSHALLER_CONVERTTOUNMANAGED_SYSTEM_STRING = 0x2836D3AFu,
+    SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_ANSISTRINGMARSHALLER_FREE_SYSTEM_BYTE_ = 0x31ECB64Eu,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CALLCOMMETHOD_SYSTEM_INTPTR_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32 = 0xB30D568Bu,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CALLDIRECTCOMMETHOD_SYSTEM_INTPTR_SYSTEM_INT32_SYSTEM_INT32_SYSTEM_INT32 = 0xDE30F8FCu,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CREATERCW_SYSTEM_INTPTR = 0x8A241412u,
@@ -391,12 +414,44 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 377u,
+    SHAPE_COUNT = 400u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
 template <ShapeId S, typename... Args>
 CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
+    if constexpr (S == SHAPE_HMACMD5_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosHmacMd5(args...));
+    }
+    else if constexpr (S == SHAPE_HMACSHA1_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosHmacSha1(args...));
+    }
+    else if constexpr (S == SHAPE_HMACSHA256_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosHmacSha256(args...));
+    }
+    else if constexpr (S == SHAPE_HMACSHA384_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosHmacSha384(args...));
+    }
+    else if constexpr (S == SHAPE_HMACSHA3_256_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosHmacSha3_256(args...));
+    }
+    else if constexpr (S == SHAPE_HMACSHA3_384_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosHmacSha3_384(args...));
+    }
+    else if constexpr (S == SHAPE_HMACSHA3_512_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosHmacSha3_512(args...));
+    }
+    else if constexpr (S == SHAPE_HMACSHA512_HASHDATA_SYSTEM_BYTE___SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosHmacSha512(args...));
+    }
     else if constexpr (S == SHAPE_INTERLOCKED_COMPAREEXCHANGE_SYSTEM_INT64__SYSTEM_INT64_SYSTEM_INT64) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosInterlockedCompareExchangeInt64(args...));
@@ -424,6 +479,42 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_MARSHAL_GETEXCEPTIONPOINTERS) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosMarshalGetExceptionPointers(args...));
+    }
+    else if constexpr (S == SHAPE_MD5_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosMd5Hash(args...));
+    }
+    else if constexpr (S == SHAPE_RANDOMNUMBERGENERATOR_GETBYTES_SYSTEM_INT32) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosCngGetBytes(args...));
+    }
+    else if constexpr (S == SHAPE_SHA1_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosSha1Hash(args...));
+    }
+    else if constexpr (S == SHAPE_SHA256_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosSha256Hash(args...));
+    }
+    else if constexpr (S == SHAPE_SHA384_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosSha384Hash(args...));
+    }
+    else if constexpr (S == SHAPE_SHA3_256_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosSha3_256Hash(args...));
+    }
+    else if constexpr (S == SHAPE_SHA3_384_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosSha3_384Hash(args...));
+    }
+    else if constexpr (S == SHAPE_SHA3_512_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosSha3_512Hash(args...));
+    }
+    else if constexpr (S == SHAPE_SHA512_HASHDATA_SYSTEM_BYTE__) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosSha512Hash(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_ACTIVATOR_CREATEINSTANCE_SYSTEM_TYPE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -584,6 +675,10 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETNUMERICVALUE_SYSTEM_CHAR) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosCharUnicodeInfoGetNumericValue(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETNUMERICVALUE_SYSTEM_STRING_SYSTEM_INT32) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosCharUnicodeInfoGetNumericValueString(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_COMPAREINFO_GETCOMPAREINFO_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1021,6 +1116,14 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             chaos_async_yield_get_is_completed(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_ANSISTRINGMARSHALLER_CONVERTTOMANAGED_SYSTEM_BYTE_) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosAnsiStringMarshallerConvertToManaged(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_ANSISTRINGMARSHALLER_CONVERTTOUNMANAGED_SYSTEM_STRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosAnsiStringMarshallerConvertToUnmanaged(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_CREATERCW_SYSTEM_INTPTR) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             MarshalCreateRcw(args...));
@@ -1306,6 +1409,9 @@ void DispatchVoid(Args... args) {
     else if constexpr (S == SHAPE_MONITOR_EXIT_SYSTEM_OBJECT) {
         chaos_monitor_exit(args...);
     }
+    else if constexpr (S == SHAPE_RANDOMNUMBERGENERATOR_FILL_SYSTEM_BYTE__) {
+        ChaosCngFill(args...);
+    }
     else if constexpr (S == SHAPE_SYSTEM_ARGUMENTOUTOFRANGEEXCEPTION__CTOR_SYSTEM_STRING_SYSTEM_STRING) {
         ChaosReflectionSetExceptionMetadata_2params(args...);
     }
@@ -1435,6 +1541,9 @@ void DispatchVoid(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_RUNTIME_COMPILERSERVICES_YIELDAWAITABLE_YIELDAWAITER_GETRESULT) {
         chaos_async_yield_get_result(args...);
     }
+    else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_ANSISTRINGMARSHALLER_FREE_SYSTEM_BYTE_) {
+        ChaosAnsiStringMarshallerFree(args...);
+    }
     else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RELEASERCW_SYSTEM_INTPTR) {
         MarshalReleaseRcw(args...);
     }
@@ -1476,7 +1585,7 @@ void DispatchVoid(Args... args) {
 // ---- Compile-time dispatch: Int32-returning shapes ----
 template <ShapeId S, typename... Args>
 CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
-    if constexpr (S == SHAPE_INTERLOCKED_COMPAREEXCHANGE_SYSTEM_INT32__SYSTEM_INT32_SYSTEM_INT32) {
+    else if constexpr (S == SHAPE_INTERLOCKED_COMPAREEXCHANGE_SYSTEM_INT32__SYSTEM_INT32_SYSTEM_INT32) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosInterlockedCompareExchangeInt32(args...));
     }
@@ -1591,6 +1700,10 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETDIGITVALUE_SYSTEM_CHAR) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosCharUnicodeInfoGetDigitValue(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETDIGITVALUE_SYSTEM_STRING_SYSTEM_INT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosCharUnicodeInfoGetDigitValueString(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_GLOBALIZATION_CHARUNICODEINFO_GETUNICODECATEGORY_SYSTEM_CHAR) {
         return static_cast<CHAOS_IL2CPP_INT32>(
@@ -1867,7 +1980,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 377u,
+static_assert(SHAPE_COUNT == 400u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

@@ -14,6 +14,9 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,38 +38,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -94,32 +65,9 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 // Runtime prelude dependencies included at translation unit level
 
 
-MethodTable chaos_mt_Chaos_TestFramework_Sdk___0 = {nullptr, nullptr, 12016523716365422726ULL, 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk___0 = static_cast<CHAOS_IL2CPP_UINT64>(12016523716365422726ULL);
 // ── Virtual method table arrays ──
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-const void* chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[] =
-{
-	reinterpret_cast<void*>(Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-};
-MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert = {nullptr, nullptr, 3469195832277345062ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert = static_cast<CHAOS_IL2CPP_UINT64>(3469195832277345062ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_Exception = {nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_UINT64>(10972282733316558392ULL);
-MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Exception), chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException, 8951892653230046377ULL, 1u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException = static_cast<CHAOS_IL2CPP_UINT64>(8951892653230046377ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_UINT64>(15228727185366376748ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_Delegate = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 7451128447593600616ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_UINT64>(7451128447593600616ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Delegate), nullptr, 6681393039041505440ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_UINT64>(6681393039041505440ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_Action = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 14722794505377461205ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action = static_cast<CHAOS_IL2CPP_UINT64>(14722794505377461205ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable = {nullptr, nullptr, 16749028324345562163ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Collections_IEnumerable = static_cast<CHAOS_IL2CPP_UINT64>(16749028324345562163ULL);
-MethodTable chaos_mt_System_Private_CoreLib_System_IDisposable = {nullptr, nullptr, 13420242832086098868ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IDisposable = static_cast<CHAOS_IL2CPP_UINT64>(13420242832086098868ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_UINT64>(5474029880995115448ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
@@ -136,12 +84,6 @@ MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nullptr, 1
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_UINT64>(1782325859292956794ULL);
 MethodTable chaos_mt_System_Private_CoreLib_System_Type = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_UINT64>(3222174513575444759ULL);
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_boxed_type_id_Chaos_TestFramework_Sdk___0 = static_cast<CHAOS_IL2CPP_UINT64>(12016523716365422726ULL);
-
-static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[] =
-{
-	{ 0x0000000Bu, reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String) },
-};
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -176,125 +118,8 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	return false;
 }
 
-const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept
-{
-	if (chaos_string_value == 0)
-	{
-		return nullptr;
-	}
-
-	if (chaos_is_string_id(chaos_string_value))
-	{
-		const auto chaos_view = chaos::il2cpp::string_table::Resolve(
-			chaos_extract_string_id(chaos_string_value));
-		return chaos_view.utf8_data;
-	}
-
-	auto* chaos_string = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_string_value);
-	return chaos_string->utf8_data;
-}
-
-CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_utf8_copy(const char* chaos_utf8_data, CHAOS_IL2CPP_SIZE chaos_length)
-{
-	if (chaos_utf8_data == nullptr)
-	{
-		return 0;
-	}
-
-	const auto chaos_id = chaos::il2cpp::string_table::Intern(
-		chaos_utf8_data, static_cast<CHAOS_IL2CPP_UINT32>(chaos_length));
-	return chaos_make_string_id_value(chaos_id);
-}
-
-CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR chaos_left_string_value, CHAOS_IL2CPP_INTPTR chaos_right_string_value)
-{
-	const auto chaos_left_length =
-		chaos_left_string_value == 0
-			? static_cast<CHAOS_IL2CPP_SIZE>(0)
-			: chaos_is_string_id(chaos_left_string_value)
-				? static_cast<CHAOS_IL2CPP_SIZE>(chaos::il2cpp::string_table::Resolve(
-					chaos_extract_string_id(chaos_left_string_value)).byte_count)
-				: static_cast<CHAOS_IL2CPP_SIZE>(reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_left_string_value)->length);
-	const auto chaos_right_length =
-		chaos_right_string_value == 0
-			? static_cast<CHAOS_IL2CPP_SIZE>(0)
-			: chaos_is_string_id(chaos_right_string_value)
-				? static_cast<CHAOS_IL2CPP_SIZE>(chaos::il2cpp::string_table::Resolve(
-					chaos_extract_string_id(chaos_right_string_value)).byte_count)
-				: static_cast<CHAOS_IL2CPP_SIZE>(reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_right_string_value)->length);
-	const char* chaos_left_utf8 = chaos_reflection_get_string_utf8(chaos_left_string_value);
-	const char* chaos_right_utf8 = chaos_reflection_get_string_utf8(chaos_right_string_value);
-	if ((chaos_left_string_value != 0 && chaos_left_utf8 == nullptr && chaos_left_length != 0) ||
-		(chaos_right_string_value != 0 && chaos_right_utf8 == nullptr && chaos_right_length != 0))
-	{
-		CHAOS_IL2CPP_FAIL();
-	}
-
-	const auto chaos_combined_length = chaos_left_length + chaos_right_length;
-	auto* chaos_raw = static_cast<char*>(
-		chaos::il2cpp::runtime_core::GcAllocateAtomic(
-			sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_combined_length + 1));
-	auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);
-	chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-	chaos_str->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_combined_length);
-	chaos_str->string_id = 0;
-	chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);
-
-	if (chaos_left_length != 0)
-	{
-		CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data), chaos_left_utf8, chaos_left_length);
-	}
-	if (chaos_right_length != 0)
-	{
-		CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data + chaos_left_length), chaos_right_utf8, chaos_right_length);
-	}
-	const_cast<char*>(chaos_str->utf8_data)[chaos_combined_length] = '\0';
-
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_literal(const char* chaos_utf8_data)
-{
-	if (chaos_utf8_data == nullptr)
-	{
-		return 0;
-	}
-
-	return chaos_reflection_create_string_utf8_copy(chaos_utf8_data, CHAOS_IL2CPP_STRLEN(chaos_utf8_data));
-}
-
-
-CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
-{
-	if (chaos_value == 0)
-	{
-		return 0;
-	}
-
-	if (!chaos_is_string_id(chaos_value))
-	{
-		return chaos_value;
-	}
-
-	const auto chaos_id = chaos_extract_string_id(chaos_value);
-	const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_id);
-
-	auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String, {});
-	chaos_string->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
-	chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);
-	auto* owned_utf8 = static_cast<char*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(chaos_view.byte_count + 1));
-	CHAOS_IL2CPP_MEMCPY(owned_utf8, chaos_view.utf8_data, chaos_view.byte_count);
-	owned_utf8[chaos_view.byte_count] = '\0';
-	chaos_string->utf8_data = owned_utf8;
-	chaos_string->string_id = chaos_id;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
-}
-
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _stackTrace))};
-static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
 static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
 static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
 static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
@@ -310,16 +135,7 @@ extern "C" void ChaosRegisterGcLayouts() {
 		static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
 		static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
-	registry.Register(12016523716365422726ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk___0), nullptr, 0);
-	registry.Register(3469195832277345062ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert), nullptr, 0);
-	registry.Register(10972282733316558392ULL, sizeof(chaos_type_System_Private_CoreLib_System_Exception), kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception, 3);
-	registry.Register(8951892653230046377ULL, sizeof(chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException), nullptr, 0);
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
-	registry.Register(7451128447593600616ULL, sizeof(chaos_type_System_Private_CoreLib_System_Delegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate, 2);
-	registry.Register(6681393039041505440ULL, sizeof(chaos_type_System_Private_CoreLib_System_MulticastDelegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate, 2);
-	registry.Register(14722794505377461205ULL, sizeof(chaos_type_System_Private_CoreLib_System_Action), nullptr, 0);
-	registry.Register(16749028324345562163ULL, sizeof(chaos_type_System_Private_CoreLib_System_Collections_IEnumerable), nullptr, 0);
-	registry.Register(13420242832086098868ULL, sizeof(chaos_type_System_Private_CoreLib_System_IDisposable), nullptr, 0);
 	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
 	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
 	registry.Register(4197398748135124456ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodBase), nullptr, 0);
@@ -330,16 +146,7 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.Register(3222174513575444759ULL, sizeof(chaos_type_System_Private_CoreLib_System_Type), kGcOffsets_chaos_type_System_Private_CoreLib_System_Type, 2);
 
 	// Register MethodTable address ranges for IsValidTypeInfoPointer.
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk___0), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk___0) + sizeof(chaos_mt_Chaos_TestFramework_Sdk___0));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert) + sizeof(chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Exception), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Exception) + sizeof(chaos_mt_System_Private_CoreLib_System_Exception));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException), reinterpret_cast<uintptr_t>(&chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException) + sizeof(chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate) + sizeof(chaos_mt_System_Private_CoreLib_System_Delegate));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate) + sizeof(chaos_mt_System_Private_CoreLib_System_MulticastDelegate));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action) + sizeof(chaos_mt_System_Private_CoreLib_System_Action));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable) + sizeof(chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable));
-	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IDisposable), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IDisposable) + sizeof(chaos_mt_System_Private_CoreLib_System_IDisposable));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase));
@@ -350,59 +157,9 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type) + sizeof(chaos_mt_System_Private_CoreLib_System_Type));
 }
 
-CHAOS_IL2CPP_INT32 chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = 0;
-
-
-	// AOT-baked string table: sorted by StringId for binary search at runtime.
-	constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {
-		{ 1342797903967929121U, "[ASSERT FAIL] ", 14u },
-		{ 6601085983368743141U, "null", 4u },
-	};
-
-	constexpr CHAOS_IL2CPP_UINT32 chaos_aot_string_entry_count = sizeof(chaos_aot_string_entries) / sizeof(chaos_aot_string_entries[0]);
-
-	// Register the AOT-baked string table with the runtime before any code uses it.
-	static const CHAOS_IL2CPP_UINT32 s_aot_string_table_registered = []()
-	{
-		::chaos::il2cpp::string_table::InitializeFromAot(
-			chaos_aot_string_entries,
-			chaos_aot_string_entry_count);
-		return 0u;
-	}();
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__(void) noexcept
-{
-	return ChaosConsoleGetError();
-}
-
-void chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
-{
-	ChaosReflectionSetExceptionMetadata(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-void chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
-{
-	ChaosTextWriterWriteLineStr(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept
-{
-	return ChaosObjectEqualsStatic(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
-{
-	return ChaosObjectToString(chaos_fn_arg_0);
-}
-
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
 {
 	ChaosObjectCtor(chaos_fn_arg_0);
-}
-
-CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1) noexcept
-{
-	return ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -429,112 +186,46 @@ extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[57] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[24] = {
 	0u,
-	3u,
-	6u,
-	9u,
-	12u,
-	15u,
-	18u,
-	21u,
-	24u,
-	27u,
-	30u,
-	33u,
-	36u,
-	39u,
-	42u,
-	45u,
-	48u,
-	51u,
-	54u,
-	54u,
-	55u,
-	55u,
-	57u,
-	59u,
-	61u,
-	63u,
-	63u,
-	63u,
-	64u,
-	65u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
-	66u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[56];
-	CHAOS_IL2CPP_UINT8 params[66];
+	::ChaosAbiMethodEntryV0 entries[23];
+	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		56u,
-		66u,
-		1173518651u,  // FNV-1a over entries+params
+		23u,
+		0u,
+		240135485u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String
-		{ 0u, 3u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String
-		{ 1u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String
-		{ 1u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String
-		{ 0u, 2u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action
-		{ 0u, 1u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor
-		{ 0u, 0u },  // Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor
 		{ 0u, 0u },  // CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor
 		{ 10u, 0u },  // CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0
 		{ 10u, 0u },  // CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12
@@ -560,72 +251,6 @@ static constexpr struct {
 		{ 10u, 0u },  // CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Xor_5_BitArray_0
 	},
 	{
-		2u,
-		2u,
-		2u,
-		5u,
-		5u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		9u,
-		9u,
-		2u,
-		6u,
-		6u,
-		2u,
-		1u,
-		1u,
-		2u,
-		10u,
-		10u,
-		2u,
-		2u,
-		2u,
-		2u,
-		4u,
-		4u,
-		2u,
-		8u,
-		8u,
-		2u,
-		2u,
-		2u,
-		2u,
-		7u,
-		7u,
-		2u,
-		2u,
-		2u,
-		2u,
-		11u,
-		11u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
-		2u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
@@ -702,131 +327,62 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("CombinedSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[55] = {
-	{ ".ctor", 0x00000036u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "And_3_BitArray_0", 0x00000018u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Clone_12__12", 0x00000032u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "CopyTo_9_System_Array_int_0", 0x00000028u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "CopyTo_9_System_Array_int_1", 0x0000002Au, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "CopyTo_9_System_Array_int_2", 0x0000002Cu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Get_0_int_0", 0x0000000Au, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Get_0_int_1", 0x0000000Cu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "GetEnumerator_13__13", 0x00000034u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "HasAllSet_10__10", 0x0000002Eu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "HasAnySet_11__11", 0x00000030u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "LeftShift_8_int_0", 0x00000024u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "LeftShift_8_int_1", 0x00000026u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Not_6__6", 0x0000001Eu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Or_4_BitArray_0", 0x0000001Au, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "RightShift_7_int_0", 0x00000020u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "RightShift_7_int_1", 0x00000022u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Set_1_int_bool_0", 0x0000000Eu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Set_1_int_bool_1", 0x00000010u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Set_1_int_bool_2", 0x00000012u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "SetAll_2_bool_0", 0x00000014u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "SetAll_2_bool_1", 0x00000016u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "Xor_5_BitArray_0", 0x0000001Cu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
-	{ "AreEqual", 0x00000027u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000021u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000003Cu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000025u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000002Du, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000002Bu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000001Du, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000015u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000019u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000031u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000023u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000029u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000002Fu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000001Fu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x00000017u, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual", 0x0000001Bu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreEqual`1", 0x0000003Bu, 3u },  // Chaos.TestFramework.Assert
-	{ "AreNotEqual`1", 0x0000003Du, 3u },  // Chaos.TestFramework.Assert
-	{ "Complete", 0x00000011u, 0u },  // Chaos.TestFramework.Assert
-	{ "Fail", 0x0000003Eu, 1u },  // Chaos.TestFramework.Assert
-	{ "get_ExitCode", 0x00000013u, 0u },  // Chaos.TestFramework.Assert
-	{ "IsFalse", 0x00000038u, 2u },  // Chaos.TestFramework.Assert
-	{ "IsNotNull", 0x00000035u, 2u },  // Chaos.TestFramework.Assert
-	{ "IsNull", 0x00000033u, 2u },  // Chaos.TestFramework.Assert
-	{ "IsTrue", 0x00000037u, 2u },  // Chaos.TestFramework.Assert
-	{ "RecordFailure", 0x0000000Fu, 0u },  // Chaos.TestFramework.Assert
-	{ "Reset", 0x0000000Du, 0u },  // Chaos.TestFramework.Assert
-	{ "Throws", 0x00000039u, 1u },  // Chaos.TestFramework.Assert
-	{ ".ctor", 0x0000000Bu, 1u },  // Chaos.TestFramework.AssertionException
-	{ ".ctor", 0x0000003Fu, 0u },  // Chaos.TestFramework.BenchmarkAttribute
-	{ ".ctor", 0x00000040u, 0u },  // Chaos.TestFramework.FactAttribute
-	{ ".ctor", 0x00000041u, 0u },  // Chaos.TestFramework.HotUpdateAttribute
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[23] = {
+	{ ".ctor", 0x00000018u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "And_3_BitArray_0", 0x00000009u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Clone_12__12", 0x00000016u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "CopyTo_9_System_Array_int_0", 0x00000011u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "CopyTo_9_System_Array_int_1", 0x00000012u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "CopyTo_9_System_Array_int_2", 0x00000013u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Get_0_int_0", 0x00000002u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Get_0_int_1", 0x00000003u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "GetEnumerator_13__13", 0x00000017u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "HasAllSet_10__10", 0x00000014u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "HasAnySet_11__11", 0x00000015u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "LeftShift_8_int_0", 0x0000000Fu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "LeftShift_8_int_1", 0x00000010u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Not_6__6", 0x0000000Cu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Or_4_BitArray_0", 0x0000000Au, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "RightShift_7_int_0", 0x0000000Du, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "RightShift_7_int_1", 0x0000000Eu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Set_1_int_bool_0", 0x00000004u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Set_1_int_bool_1", 0x00000005u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Set_1_int_bool_2", 0x00000006u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "SetAll_2_bool_0", 0x00000007u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "SetAll_2_bool_1", 0x00000008u, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
+	{ "Xor_5_BitArray_0", 0x0000000Bu, 0u },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[6] = {
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
 	{ "AutoGenerated.System_Collections.System_Collections_BitArrayTests", "AutoGenerated.System_Collections", 0u, 23u },
-	{ "Chaos.TestFramework.Assert", "Chaos.TestFramework", 23u, 28u },
-	{ "Chaos.TestFramework.AssertionException", "Chaos.TestFramework", 51u, 1u },
-	{ "Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework", 52u, 1u },
-	{ "Chaos.TestFramework.FactAttribute", "Chaos.TestFramework", 53u, 1u },
-	{ "Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework", 54u, 1u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[55] = {
-	{ 0x0000000Au, 38u },
-	{ 0x0000000Bu, 28u },
-	{ 0x0000000Cu, 39u },
-	{ 0x0000000Du, 26u },
-	{ 0x0000000Eu, 49u },
-	{ 0x0000000Fu, 25u },
-	{ 0x00000010u, 50u },
-	{ 0x00000011u, 18u },
-	{ 0x00000012u, 51u },
-	{ 0x00000013u, 20u },
-	{ 0x00000014u, 52u },
-	{ 0x00000015u, 7u },
-	{ 0x00000016u, 53u },
-	{ 0x00000017u, 14u },
-	{ 0x00000018u, 33u },
-	{ 0x00000019u, 8u },
-	{ 0x0000001Au, 46u },
-	{ 0x0000001Bu, 15u },
-	{ 0x0000001Cu, 54u },
-	{ 0x0000001Du, 6u },
-	{ 0x0000001Eu, 45u },
-	{ 0x0000001Fu, 13u },
-	{ 0x00000020u, 47u },
-	{ 0x00000021u, 1u },
-	{ 0x00000022u, 48u },
-	{ 0x00000023u, 10u },
-	{ 0x00000024u, 43u },
-	{ 0x00000025u, 3u },
-	{ 0x00000026u, 44u },
-	{ 0x00000027u, 0u },
-	{ 0x00000028u, 35u },
-	{ 0x00000029u, 11u },
-	{ 0x0000002Au, 36u },
-	{ 0x0000002Bu, 5u },
-	{ 0x0000002Cu, 37u },
-	{ 0x0000002Du, 4u },
-	{ 0x0000002Eu, 41u },
-	{ 0x0000002Fu, 12u },
-	{ 0x00000030u, 42u },
-	{ 0x00000031u, 9u },
-	{ 0x00000032u, 34u },
-	{ 0x00000033u, 23u },
-	{ 0x00000034u, 40u },
-	{ 0x00000035u, 22u },
-	{ 0x00000036u, 32u },
-	{ 0x00000037u, 24u },
-	{ 0x00000038u, 21u },
-	{ 0x00000039u, 27u },
-	{ 0x0000003Bu, 16u },
-	{ 0x0000003Cu, 2u },
-	{ 0x0000003Du, 17u },
-	{ 0x0000003Eu, 19u },
-	{ 0x0000003Fu, 29u },
-	{ 0x00000040u, 30u },
-	{ 0x00000041u, 31u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[23] = {
+	{ 0x00000002u, 6u },
+	{ 0x00000003u, 7u },
+	{ 0x00000004u, 17u },
+	{ 0x00000005u, 18u },
+	{ 0x00000006u, 19u },
+	{ 0x00000007u, 20u },
+	{ 0x00000008u, 21u },
+	{ 0x00000009u, 1u },
+	{ 0x0000000Au, 14u },
+	{ 0x0000000Bu, 22u },
+	{ 0x0000000Cu, 13u },
+	{ 0x0000000Du, 15u },
+	{ 0x0000000Eu, 16u },
+	{ 0x0000000Fu, 11u },
+	{ 0x00000010u, 12u },
+	{ 0x00000011u, 3u },
+	{ 0x00000012u, 4u },
+	{ 0x00000013u, 5u },
+	{ 0x00000014u, 9u },
+	{ 0x00000015u, 10u },
+	{ 0x00000016u, 2u },
+	{ 0x00000017u, 8u },
+	{ 0x00000018u, 0u },
 };
 
 // Dispatch table (function pointers)
@@ -835,39 +391,7 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[55] = {
 // TU (verification_dispatch.generated.cpp) can access this array via
 // GetHotpatchEntries(). Without external linkage, the linker cannot resolve
 // the symbol across translation units.
-extern "C" HotpatchEntryV0 s_hotpatch_entries[55] = {
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreEqual`1
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::AreNotEqual`1
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::Complete
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::Fail
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::get_ExitCode
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsFalse
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsNotNull
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsNull
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::IsTrue
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::RecordFailure
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::Reset
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.Assert::Throws
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.AssertionException::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.BenchmarkAttribute::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.FactAttribute::.ctor
-	{ reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // Chaos.TestFramework.HotUpdateAttribute::.ctor
+extern "C" HotpatchEntryV0 s_hotpatch_entries[23] = {
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0
 	{ reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12
@@ -895,19 +419,19 @@ extern "C" HotpatchEntryV0 s_hotpatch_entries[55] = {
 
 // Accessor functions for verification_dispatch.generated.cpp
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
-extern "C" int32_t GetHotpatchEntryCount() noexcept { return 55; }
+extern "C" int32_t GetHotpatchEntryCount() noexcept { return 23; }
 
 // Module hotpatch bundle (extern linkage — referenced across page files)
 extern constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"CombinedSubjects",
 	s_hotpatch_types,
-	6u,
+	1u,
 	s_hotpatch_methods,
-	55u,
+	23u,
 	s_hotpatch_slots,
-	55u,
+	23u,
 	s_hotpatch_entries,
-	55u,
+	23u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -916,61 +440,36 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[24] = {
-	"System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)",
-	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
-	"System.Private.CoreLib/System.Object::ToString:System.String()",
-	"System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)",
-	"Chaos.TestFramework.Sdk/!!0",
-	"System.Private.CoreLib/System.String",
-	"System.Private.CoreLib/System.Collections.IEnumerable",
-	"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()",
-	"System.Private.CoreLib/System.IDisposable",
-	"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()",
-	"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)",
-	"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()",
-	"System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)",
-	"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode",
-	"System.Console/System.Console::get_Error:System.IO.TextWriter()",
-	"System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
-	"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
-	"System.Private.CoreLib/System.Action::Invoke:System.Void()",
-	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
-	"System.Private.CoreLib/System.Attribute::.ctor:System.Void()",
+extern "C" const char* kChaosExternalRuntimeSubjects[1] = {
 	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[24] = {
+extern "C" void* kChaosExternalRuntimeFnTable[1] = {
 	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_),
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_),
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 24;
+extern "C" int32_t kChaosExternalRuntimeCount = 1;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+	const char* subject_id;
+	const uint8_t* il_data;
+	int32_t il_size;
+	void* patch_method;
+	const char* json_data;
+};
+extern "C" int32_t kChaosExternalRuntimeIlCount;
+static const uint8_t s_il_0[] = {
+	0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+	{ "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+	{ nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -978,40 +477,7 @@ extern "C" int32_t kChaosExternalRuntimeCount = 24;
 // NOTE: Emitted in ALL modes (AOT + JIT). JIT mode verification dispatch
 // uses kDefaultArgThunks to bypass JIT precode trampoline (verification
 // tests AOT codegen, not JIT compilation).
-static void (*kMethodTable[56])() = {
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-	reinterpret_cast<void(*)()>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+static void (*kMethodTable[23])() = {
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor),
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0),
 	reinterpret_cast<void(*)()>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12),
@@ -1042,63 +508,30 @@ static void (*kMethodTable[56])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_null_instance = 0;
-extern "C" void (*kDefaultArgThunks[56])() = {
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[0])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[1])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[2])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[3])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[4])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[5])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[6])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[7])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[8])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[9])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[10])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[11])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[12])(chaos_make_string_id_value(6601085983368743141ULL),chaos_make_string_id_value(6601085983368743141ULL),chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[13])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[14])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[15])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[16])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[17])(0,0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {kMethodTable[18]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[19])(chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {kMethodTable[20]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[21])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[23])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[24])(0,chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {kMethodTable[25]();},
-	[]() {kMethodTable[26]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[27])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[28])(0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[29])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),chaos_make_string_id_value(6601085983368743141ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[30])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[31])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[32])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[33])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[34])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[35])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[36])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[37])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[38])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[39])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[40])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[41])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[42])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[43])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[44])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[45])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[46])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[48])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[49])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[50])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[51])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[52])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[53])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[54])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[55])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+extern "C" void (*kDefaultArgThunks[23])() = {
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[0])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[1])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[2])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[3])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[4])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[5])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[6])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[7])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[8])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[9])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[10])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[11])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[12])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[13])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[14])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[15])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[16])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[17])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[18])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[19])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[20])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[21])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 };
 
 // ── Subject slot map (kSubjectSlotMap[]) ────────────────────────────
@@ -1106,31 +539,32 @@ extern "C" void (*kDefaultArgThunks[56])() = {
 // External consumers use this to route --benchmark N to the correct
 // AOT method slot, since kMethodTable[] includes lambdas/closures
 // that shift subject methods to non-contiguous indices.
-extern "C" const int kSubjectEntryCount = 16;
-extern "C" const int kSubjectSlotMap[16] = {
-	34,
-	36,
-	37,
-	38,
-	39,
-	40,
-	44,
-	45,
-	47,
-	48,
-	49,
-	50,
-	51,
-	52,
-	53,
-	54,
+extern "C" const int kSubjectEntryCount = 17;
+extern "C" const int kSubjectSlotMap[17] = {
+	1,
+	3,
+	4,
+	5,
+	6,
+	7,
+	11,
+	12,
+	14,
+	15,
+	16,
+	17,
+	18,
+	19,
+	20,
+	21,
+	22,
 };
 
 // ── Subject contract map (kSubjectContractMap[]) ───────────────────────
 // Maps subject slot index (si) to contract index (position in contract list).
 // Used by fact-json output to match native results against golden records
 // without assuming slot layout.
-extern "C" const int kSubjectContractMap[16] = {
+extern "C" const int kSubjectContractMap[17] = {
 	0,
 	1,
 	2,
@@ -1147,6 +581,7 @@ extern "C" const int kSubjectContractMap[16] = {
 	13,
 	14,
 	15,
+	16,
 };
 // ── GC Slot Map Section ───────────────────────────────────────────
 // Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
@@ -1162,151 +597,151 @@ static const struct __attribute__((packed)) {
 static const struct {
 #endif
 
-	/* ── Entry 0: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String ── */
+	/* ── Entry 0: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry0;
-	/* ── Entry 1: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String ── */
+	/* ── Entry 1: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry1;
-	/* ── Entry 2: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String ── */
+	/* ── Entry 2: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[12];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry2;
-	/* ── Entry 3: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String ── */
+	/* ── Entry 3: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry3;
-	/* ── Entry 4: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String ── */
+	/* ── Entry 4: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry4;
-	/* ── Entry 5: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String ── */
+	/* ── Entry 5: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry5;
-	/* ── Entry 6: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String ── */
+	/* ── Entry 6: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry6;
-	/* ── Entry 7: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String ── */
+	/* ── Entry 7: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry7;
-	/* ── Entry 8: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String ── */
+	/* ── Entry 8: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_GetEnumerator_13__13 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry8;
-	/* ── Entry 9: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String ── */
+	/* ── Entry 9: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAllSet_10__10 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry9;
-	/* ── Entry 10: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String ── */
+	/* ── Entry 10: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAnySet_11__11 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry10;
-	/* ── Entry 11: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String ── */
+	/* ── Entry 11: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry11;
-	/* ── Entry 12: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String ── */
+	/* ── Entry 12: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry12;
-	/* ── Entry 13: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String ── */
+	/* ── Entry 13: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Not_6__6 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry13;
-	/* ── Entry 14: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String ── */
+	/* ── Entry 14: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Or_4_BitArray_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry14;
-	/* ── Entry 15: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String ── */
+	/* ── Entry 15: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry15;
-	/* ── Entry 16: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String ── */
+	/* ── Entry 16: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[23];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry16;
-	/* ── Entry 17: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String ── */
+	/* ── Entry 17: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry17;
-	/* ── Entry 18: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete ── */
+	/* ── Entry 18: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -1314,23 +749,23 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry18;
-	/* ── Entry 19: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String ── */
+	/* ── Entry 19: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_2 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry19;
-	/* ── Entry 20: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode ── */
+	/* ── Entry 20: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry20;
-	/* ── Entry 21: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String ── */
+	/* ── Entry 21: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_1 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -1338,721 +773,193 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry21;
-	/* ── Entry 22: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String ── */
+	/* ── Entry 22: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Xor_5_BitArray_0 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry22;
-	/* ── Entry 23: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry23;
-	/* ── Entry 24: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry24;
-	/* ── Entry 25: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry25;
-	/* ── Entry 26: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry26;
-	/* ── Entry 27: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry27;
-	/* ── Entry 28: Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry28;
-	/* ── Entry 29: Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry29;
-	/* ── Entry 30: Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry30;
-	/* ── Entry 31: Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry31;
-	/* ── Entry 32: Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry32;
-	/* ── Entry 33: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry33;
-	/* ── Entry 34: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry34;
-	/* ── Entry 35: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry35;
-	/* ── Entry 36: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry36;
-	/* ── Entry 37: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry37;
-	/* ── Entry 38: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_2 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry38;
-	/* ── Entry 39: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry39;
-	/* ── Entry 40: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry40;
-	/* ── Entry 41: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_GetEnumerator_13__13 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry41;
-	/* ── Entry 42: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAllSet_10__10 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry42;
-	/* ── Entry 43: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAnySet_11__11 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry43;
-	/* ── Entry 44: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry44;
-	/* ── Entry 45: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry45;
-	/* ── Entry 46: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Not_6__6 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry46;
-	/* ── Entry 47: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Or_4_BitArray_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry47;
-	/* ── Entry 48: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry48;
-	/* ── Entry 49: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry49;
-	/* ── Entry 50: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry50;
-	/* ── Entry 51: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry51;
-	/* ── Entry 52: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_2 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry52;
-	/* ── Entry 53: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry53;
-	/* ── Entry 54: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_1 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry54;
-	/* ── Entry 55: CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Xor_5_BitArray_0 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry55;
 } kChaosGcSlotMapsSection = {
-	/* entry0 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String */
+	/* entry0 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor */
 	.entry0 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry1 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String */
-	.entry1 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry2 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String */
-	.entry2 = {
-		/* entry_total_size = 68 */ 68u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-		/* frame_size = 96 */ 96u,
-		/* num_gc_slots = 12 */ 12u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u }
-	},
-	/* entry3 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String */
-	.entry3 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry4 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String */
-	.entry4 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry5 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String */
-	.entry5 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry6 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String */
-	.entry6 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry7 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String */
-	.entry7 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry8 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String */
-	.entry8 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry9 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String */
-	.entry9 = {
-		/* entry_total_size = 52 */ 52u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
-	},
-	/* entry10 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String */
-	.entry10 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry11 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String */
-	.entry11 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry12 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String */
-	.entry12 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry13 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String */
-	.entry13 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry14 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String */
-	.entry14 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry15 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String */
-	.entry15 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 16u, 24u, 32u, 40u }
-	},
-	/* entry16 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String */
-	.entry16 = {
-		/* entry_total_size = 112 */ 112u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-		/* frame_size = 184 */ 184u,
-		/* num_gc_slots = 23 */ 23u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u, 96u, 104u, 112u, 120u, 128u, 136u, 144u, 152u, 160u, 168u, 176u }
-	},
-	/* entry17 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String */
-	.entry17 = {
-		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
-	},
-	/* entry18 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete */
-	.entry18 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry19 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String */
-	.entry19 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry20 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode */
-	.entry20 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry21 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String */
-	.entry21 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 8u, 16u, 24u }
-	},
-	/* entry22 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String */
-	.entry22 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
-	},
-	/* entry23 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String */
-	.entry23 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
-	},
-	/* entry24 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String */
-	.entry24 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 8u, 16u, 24u, 32u }
-	},
-	/* entry25 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure */
-	.entry25 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry26 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset */
-	.entry26 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry27 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action */
-	.entry27 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry28 = Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action */
-	.entry28 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry29 = Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String */
-	.entry29 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry30 = Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor */
-	.entry30 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry31 = Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor */
-	.entry31 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry32 = Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor */
-	.entry32 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry33 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor */
-	.entry33 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry34 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0 */
-	.entry34 = {
+	/* entry1 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0 */
+	.entry1 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry35 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12 */
-	.entry35 = {
+	/* entry2 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12 */
+	.entry2 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry36 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_0 */
-	.entry36 = {
+	/* entry3 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_0 */
+	.entry3 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry37 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_1 */
-	.entry37 = {
+	/* entry4 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_1 */
+	.entry4 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_1),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry38 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_2 */
-	.entry38 = {
+	/* entry5 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_2 */
+	.entry5 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_2),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry39 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_0 */
-	.entry39 = {
+	/* entry6 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_0 */
+	.entry6 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry40 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_1 */
-	.entry40 = {
+	/* entry7 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_1 */
+	.entry7 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_1),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry41 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_GetEnumerator_13__13 */
-	.entry41 = {
+	/* entry8 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_GetEnumerator_13__13 */
+	.entry8 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_GetEnumerator_13__13),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry42 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAllSet_10__10 */
-	.entry42 = {
+	/* entry9 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAllSet_10__10 */
+	.entry9 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAllSet_10__10),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry43 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAnySet_11__11 */
-	.entry43 = {
+	/* entry10 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAnySet_11__11 */
+	.entry10 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAnySet_11__11),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry44 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_0 */
-	.entry44 = {
+	/* entry11 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_0 */
+	.entry11 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry45 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_1 */
-	.entry45 = {
+	/* entry12 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_1 */
+	.entry12 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_1),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry46 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Not_6__6 */
-	.entry46 = {
+	/* entry13 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Not_6__6 */
+	.entry13 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Not_6__6),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry47 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Or_4_BitArray_0 */
-	.entry47 = {
+	/* entry14 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Or_4_BitArray_0 */
+	.entry14 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Or_4_BitArray_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry48 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_0 */
-	.entry48 = {
+	/* entry15 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_0 */
+	.entry15 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry49 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_1 */
-	.entry49 = {
+	/* entry16 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_1 */
+	.entry16 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_1),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry50 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_0 */
-	.entry50 = {
+	/* entry17 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_0 */
+	.entry17 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry51 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_1 */
-	.entry51 = {
+	/* entry18 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_1 */
+	.entry18 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_1),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry52 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_2 */
-	.entry52 = {
+	/* entry19 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_2 */
+	.entry19 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_2),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry53 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_0 */
-	.entry53 = {
+	/* entry20 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_0 */
+	.entry20 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_0),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry54 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_1 */
-	.entry54 = {
+	/* entry21 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_1 */
+	.entry21 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_1),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry55 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Xor_5_BitArray_0 */
-	.entry55 = {
+	/* entry22 = CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Xor_5_BitArray_0 */
+	.entry22 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Xor_5_BitArray_0),
 		/* frame_size = 24 */ 24u,
@@ -2064,158 +971,11 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 2000u;
-
-// ── Bridge/import thunks ──
-extern "C" void* kChaosExternalRuntimeFnTable[];
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::Equals:System.Boolean(System.Object,System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_10(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IDisposable::Dispose:System.Void()
-extern "C" void chaos_bridge_thunk_11(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[13])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::get_Default:System.Collections.Generic.EqualityComparer<!!0>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_12(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[14])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<!!0>::Equals:System.Boolean(!!0,!!0)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_13(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode
-extern "C" void chaos_bridge_thunk_14(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[16])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Action::Invoke:System.Void()
-extern "C" void chaos_bridge_thunk_15(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[20])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Attribute::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_16(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[22])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/!!0
-extern "C" void chaos_bridge_thunk_2(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String
-extern "C" void chaos_bridge_thunk_3(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerable
-extern "C" void chaos_bridge_thunk_4(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[6])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_5(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[7])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IDisposable
-extern "C" void chaos_bridge_thunk_6(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[8])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_7(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[9])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.EqualityComparer<System.Object>::get_Default:System.Collections.Generic.EqualityComparer<System.Object>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_8(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[10])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_9(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[11])();
-	return result;
-}
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 732u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[56] = {
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-	reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+static void* const kMethodPointers[23] = {
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor),
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0),
 	reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12),
@@ -2242,27 +1002,11 @@ static void* const kMethodPointers[56] = {
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
-// ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
-static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
-	{
-		CHAOS_IL2CPP_UINT64_C(0x7C3B82F05F34BCA9),
-		0x00000003u,
-		0u,
-		1u,
-		reinterpret_cast<const void*>(kSlots_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException),
-		reinterpret_cast<const void**>(chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException),
-		1u,
-		1,
-		{0, 0, 0},
-		nullptr,
-		0u,
-	},
-};
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 56u,
+	.method_pointer_count      = 23u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -2271,8 +1015,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
-	.vtable_descriptors = kChaosVTableDescriptors,
-	.vtable_descriptor_count = 1u,
+	.vtable_descriptors = nullptr,
+	.vtable_descriptor_count = 0u,
 	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
 	.slot_map_section_end   = reinterpret_cast<const void*>(
 		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
@@ -2311,108 +1055,42 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // Used by ResolveSubjectId to resolve call_target via subjectId
 // matching during IR lowering of patched methods.
 
-static constexpr ReflectionQueryFieldDescriptor kReflFields_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert[1] = {
-	{ 0x04000001u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode", "s_exitCode", "System.Int32", 0LL, 2u },
-};
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert[29] = {
-	{ 0x00000027u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000021u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte,System.Byte,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Cu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte[],System.Byte[],System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000025u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Char,System.Char,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000002Du, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Decimal,System.Decimal,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000002Bu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Double,System.Double,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000001Du, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int16,System.Int16,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000015u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000019u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int64,System.Int64,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000031u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Object,System.Object,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000023u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.SByte,System.SByte,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000029u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Single,System.Single,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000002Fu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000001Fu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt16,System.UInt16,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000017u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt32,System.UInt32,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000001Bu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt64,System.UInt64,System.String)", "AreEqual", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Bu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual`1:System.Void(!!0,!!0,System.String)", "AreEqual`1", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Du, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreNotEqual`1:System.Void(!!0,!!0,System.String)", "AreNotEqual`1", "System.Void", 3, nullptr, 0u, nullptr, 0u },
-	{ 0x00000011u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Complete:System.Int32()", "Complete", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Eu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)", "Fail", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x00000013u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::get_ExitCode:System.Int32()", "get_ExitCode", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000038u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsFalse:System.Void(System.Boolean,System.String)", "IsFalse", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x00000035u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)", "IsNotNull", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x00000033u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNull:System.Void(System.Object,System.String)", "IsNull", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x00000037u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsTrue:System.Void(System.Boolean,System.String)", "IsTrue", "System.Void", 2, nullptr, 0u, nullptr, 0u },
-	{ 0x0000000Fu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::RecordFailure:System.Void()", "RecordFailure", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000000Du, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Reset:System.Void()", "Reset", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000039u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws:System.Void(System.Action)", "Throws", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-	{ 0x0000003Au, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws`1:System.Void(System.Action)", "Throws`1", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[1] = {
-	{ 0x0000000Bu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor:System.Void(System.String)", ".ctor", "System.Void", 1, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute[1] = {
-	{ 0x0000003Fu, "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute[1] = {
-	{ 0x00000040u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute[1] = {
-	{ 0x00000041u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-};
-
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests[23] = {
-	{ 0x00000036u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000018u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0:System.Int64()", "And_3_BitArray_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000032u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12:System.Int64()", "Clone_12__12", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000028u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0:System.Int64()", "CopyTo_9_System_Array_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000002Au, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1:System.Int64()", "CopyTo_9_System_Array_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000002Cu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2:System.Int64()", "CopyTo_9_System_Array_int_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000000Au, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0:System.Int64()", "Get_0_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000000Cu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1:System.Int64()", "Get_0_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000034u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13:System.Int64()", "GetEnumerator_13__13", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000002Eu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10:System.Int64()", "HasAllSet_10__10", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000030u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11:System.Int64()", "HasAnySet_11__11", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000024u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0:System.Int64()", "LeftShift_8_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000026u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1:System.Int64()", "LeftShift_8_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000001Eu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6:System.Int64()", "Not_6__6", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000001Au, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0:System.Int64()", "Or_4_BitArray_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000020u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0:System.Int64()", "RightShift_7_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000022u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1:System.Int64()", "RightShift_7_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000000Eu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0:System.Int64()", "Set_1_int_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000010u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1:System.Int64()", "Set_1_int_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000012u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2:System.Int64()", "Set_1_int_bool_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000014u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0:System.Int64()", "SetAll_2_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x00000016u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1:System.Int64()", "SetAll_2_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
-	{ 0x0000001Cu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0:System.Int64()", "Xor_5_BitArray_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000018u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0:System.Int64()", "And_3_BitArray_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12:System.Int64()", "Clone_12__12", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0:System.Int64()", "CopyTo_9_System_Array_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1:System.Int64()", "CopyTo_9_System_Array_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2:System.Int64()", "CopyTo_9_System_Array_int_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000002u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0:System.Int64()", "Get_0_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000003u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1:System.Int64()", "Get_0_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13:System.Int64()", "GetEnumerator_13__13", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10:System.Int64()", "HasAllSet_10__10", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11:System.Int64()", "HasAnySet_11__11", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0:System.Int64()", "LeftShift_8_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1:System.Int64()", "LeftShift_8_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6:System.Int64()", "Not_6__6", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0:System.Int64()", "Or_4_BitArray_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0:System.Int64()", "RightShift_7_int_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1:System.Int64()", "RightShift_7_int_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0:System.Int64()", "Set_1_int_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1:System.Int64()", "Set_1_int_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2:System.Int64()", "Set_1_int_bool_2", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0:System.Int64()", "SetAll_2_bool_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1:System.Int64()", "SetAll_2_bool_1", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0:System.Int64()", "Xor_5_BitArray_0", "System.Int64", 0, nullptr, 0u, nullptr, 0u },
 };
 
-static const ReflectionQueryTypeDescriptor kReflTypes[6] = {
-	{ 0x00000004u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert", "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert", "Chaos.TestFramework", "Chaos.TestFramework.Assert", "Chaos.TestFramework.Assert", nullptr, kReflFields_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert, 1u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert, 29u, nullptr, 0u, 0u },
-	{ 0x00000003u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException", "Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException", "Chaos.TestFramework", "Chaos.TestFramework.AssertionException", "Chaos.TestFramework.AssertionException", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException, 1u, nullptr, 0u, 0u },
-	{ 0x00000005u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework", "Chaos.TestFramework.BenchmarkAttribute", "Chaos.TestFramework.BenchmarkAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000006u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute", "Chaos.TestFramework", "Chaos.TestFramework.FactAttribute", "Chaos.TestFramework.FactAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000007u, "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework", "Chaos.TestFramework.HotUpdateAttribute", "Chaos.TestFramework.HotUpdateAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-nullptr, 0u,    kReflMethods_Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute, 1u, nullptr, 0u, 0u },
-	{ 0x00000002u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests", "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests", "AutoGenerated.System_Collections", "AutoGenerated.System_Collections.System_Collections_BitArrayTests", "AutoGenerated.System_Collections.System_Collections_BitArrayTests", nullptr, nullptr, 0u, nullptr, 0u,
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
+	{ 0x00000001u, "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests", "CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests", "AutoGenerated.System_Collections", "AutoGenerated.System_Collections.System_Collections_BitArrayTests", "AutoGenerated.System_Collections.System_Collections_BitArrayTests", nullptr, nullptr, 0u, nullptr, 0u,
 nullptr, 0u,    kReflMethods_CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests, 23u, nullptr, 0u, 0u },
 };
 
-static const ReflectionQueryTypeDescriptor* kReflTypePtrs[6] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
-	&kReflTypes[1],
-	&kReflTypes[2],
-	&kReflTypes[3],
-	&kReflTypes[4],
-	&kReflTypes[5],
 };
 
-extern const ReflectionQueryImageDescriptor kReflImage = { "CombinedSubjects", kReflTypePtrs, 6u, 1, 0, 0, 0 };
+extern const ReflectionQueryImageDescriptor kReflImage = { "CombinedSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -2458,1391 +1136,6 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Boolean,System.Boolean,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Byte,System.Byte,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Byte[],System.Byte[],System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 6) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	CHAOS_IL2CPP_INTPTR _s7;
-	CHAOS_IL2CPP_INTPTR _s8;
-	CHAOS_IL2CPP_INTPTR _s9;
-	_s0 = chaos_args[0];
-	_s1 = 0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = chaos_args[1];
-	_s2 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-			_s8 = chaos_args[0];
-			_s9 = 0;
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s8) == static_cast<CHAOS_IL2CPP_INTPTR>(_s9) ? 1 : 0);
-			{
-				if (_s8 == 0)
-				{
-					_s2 = chaos_args[0];
-					_s2 = [&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(_s2); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }();
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s2));
-					_s3 = chaos_args[1];
-					_s3 = [&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(_s3); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }();
-					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s3));
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-					{
-						if (_s2 == 0)
-						{
-							_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-							chaos_locals[3] = _s2;
-							_s4 = chaos_args[0];
-							_s5 = chaos_locals[3];
-							{
-								const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s5);
-								auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s4);
-								if (chaos_array == nullptr)
-								{
-									CHAOS_IL2CPP_FAIL_FAST();
-								}
-								if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
-								{
-									CHAOS_IL2CPP_FAIL_FAST();
-								}
-								const auto chaos_element = *reinterpret_cast<CHAOS_IL2CPP_INT8*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index));
-								_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element);
-							}
-							_s5 = chaos_args[1];
-							_s6 = chaos_locals[3];
-							{
-								const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s6);
-								auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s5);
-								if (chaos_array == nullptr)
-								{
-									CHAOS_IL2CPP_FAIL_FAST();
-								}
-								if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
-								{
-									CHAOS_IL2CPP_FAIL_FAST();
-								}
-								const auto chaos_element = *reinterpret_cast<CHAOS_IL2CPP_INT8*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index));
-								_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element);
-							}
-							_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-							_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-							_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-							{
-								if (_s4 == 0)
-								{
-								}
-							}
-						}
-						else
-						{
-						}
-					}
-				}
-				else
-				{
-				}
-			}
-		}
-		else
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Char,System.Char,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Decimal,System.Decimal,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (0 < 0 || 0 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 0 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[0] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 0 is null");
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Double,System.Double,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = ChaosStoreFloat64(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreFloat64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Int16,System.Int16,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Int32,System.Int32,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Int64,System.Int64,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = ChaosStoreInt64(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Object,System.Object,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectEqualsStatic(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
-			_s0 = chaos_args[0];
-			{
-				if (_s0 != 0)
-				{
-					_s0 = chaos_args[0];
-					{
-						const auto chaos_arg_0 = _s0;
-						const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-						_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-				}
-				else
-				{
-					_s0 = 0;
-				}
-				_s2 = _s1;
-				{
-					if (_s2 == 0)
-					{
-						{
-							_s1 = CHAOS_IL2CPP_STRING_ID("null");
-						}
-					}
-					chaos_locals[1] = _s1;
-					_s1 = chaos_args[1];
-					{
-						if (_s1 != 0)
-						{
-						}
-						else
-						{
-						}
-					}
-				}
-			}
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.SByte,System.SByte,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.Single,System.Single,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = ChaosStoreFloat32(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreFloat32(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.String,System.String,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (3 < 0 || 3 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 3 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[3] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 3 is null");
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.UInt16,System.UInt16,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.UInt32,System.UInt32,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual(System.UInt64,System.UInt64,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = chaos_store_uint64(chaos_fn_arg_0);
-	chaos_args[1] = chaos_store_uint64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual`1(!!0,!!0,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 15) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	CHAOS_IL2CPP_INTPTR _s7;
-	CHAOS_IL2CPP_INTPTR _s8;
-	CHAOS_IL2CPP_INTPTR _s9;
-	CHAOS_IL2CPP_INTPTR _s10;
-	CHAOS_IL2CPP_INTPTR _s11;
-	CHAOS_IL2CPP_INTPTR _s12;
-	CHAOS_IL2CPP_INTPTR _s13;
-	CHAOS_IL2CPP_INTPTR _s14;
-	CHAOS_IL2CPP_INTPTR _s15;
-	CHAOS_IL2CPP_INTPTR _s16;
-	CHAOS_IL2CPP_INTPTR _s17;
-	CHAOS_IL2CPP_INTPTR _s18;
-	CHAOS_IL2CPP_INTPTR _s19;
-	CHAOS_IL2CPP_INTPTR _s20;
-	CHAOS_IL2CPP_INTPTR _s21;
-	CHAOS_IL2CPP_INTPTR _s22;
-	CHAOS_IL2CPP_INTPTR _s23;
-	CHAOS_IL2CPP_INTPTR _s24;
-	CHAOS_IL2CPP_INTPTR _s25;
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_value = _s0;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_Chaos_TestFramework_Sdk___0, {});
-		chaos_boxed->header.type_info = chaos_mt_Chaos_TestFramework_Sdk___0.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	// brtrue (structured EH branch)
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_Chaos_TestFramework_Sdk___0, {});
-		chaos_boxed->header.type_info = chaos_mt_Chaos_TestFramework_Sdk___0.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	_s2 = 0;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
-	// br (handled via structured EH branches)
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[2] = _s2;
-	_s2 = chaos_locals[2];
-	// brfalse (structured EH branch)
-	// br (handled via structured EH branches)
-	_s3 = chaos_args[0];
-	{
-		const auto chaos_value = _s3;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_Chaos_TestFramework_Sdk___0, {});
-		chaos_boxed->header.type_info = chaos_mt_Chaos_TestFramework_Sdk___0.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	// brfalse (structured EH branch)
-	_s4 = chaos_args[1];
-	{
-		const auto chaos_value = _s4;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_Chaos_TestFramework_Sdk___0, {});
-		chaos_boxed->header.type_info = chaos_mt_Chaos_TestFramework_Sdk___0.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	_s5 = 0;
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-	// br (handled via structured EH branches)
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	chaos_locals[3] = _s5;
-	_s5 = chaos_locals[3];
-	// brfalse (structured EH branch)
-	// br (handled via structured EH branches)
-	_s6 = chaos_args[0];
-	{
-		const auto chaos_value = _s6;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_Chaos_TestFramework_Sdk___0, {});
-		chaos_boxed->header.type_info = chaos_mt_Chaos_TestFramework_Sdk___0.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		const auto chaos_value = _s6;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot());
-		}
-		_s6 = chaos_matches ? chaos_value : 0;
-	}
-	// brtrue (structured EH branch)
-	_s7 = chaos_args[1];
-	{
-		const auto chaos_value = _s7;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_Chaos_TestFramework_Sdk___0, {});
-		chaos_boxed->header.type_info = chaos_mt_Chaos_TestFramework_Sdk___0.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s7 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		const auto chaos_value = _s7;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot());
-		}
-		_s7 = chaos_matches ? chaos_value : 0;
-	}
-	// brtrue (structured EH branch)
-	_s8 = chaos_args[0];
-	{
-		const auto chaos_value = _s8;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_Chaos_TestFramework_Sdk___0, {});
-		chaos_boxed->header.type_info = chaos_mt_Chaos_TestFramework_Sdk___0.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s8 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		const auto chaos_value = _s8;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable.AsTypeInfoHot());
-		}
-		_s8 = chaos_matches ? chaos_value : 0;
-	}
-	chaos_locals[0] = _s8;
-	_s8 = chaos_locals[0];
-	// brfalse (structured EH branch)
-	_s9 = chaos_args[1];
-	{
-		const auto chaos_value = _s9;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_Chaos_TestFramework_Sdk___0, {});
-		chaos_boxed->header.type_info = chaos_mt_Chaos_TestFramework_Sdk___0.AsTypeInfoHot();
-		chaos_boxed->value = chaos_value;
-		_s9 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		const auto chaos_value = _s9;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable.AsTypeInfoHot());
-		}
-		_s9 = chaos_matches ? chaos_value : 0;
-	}
-	chaos_locals[1] = _s9;
-	_s9 = chaos_locals[1];
-	_s10 = 0;
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s9) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s10) ? 1 : 0);
-	// br (handled via structured EH branches)
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	chaos_locals[4] = _s10;
-	_s10 = chaos_locals[4];
-	// brfalse (structured EH branch)
-	_s11 = chaos_locals[0];
-	{
-		if (7 < 0 || 7 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 7 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[7] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 7 is null");
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[5] = _s12;
-	_s12 = chaos_locals[1];
-	{
-		if (7 < 0 || 7 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 7 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[7] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 7 is null");
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[6] = _s13;
-	_s13 = chaos_locals[5];
-	{
-		const auto chaos_value = _s13;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_IDisposable.AsTypeInfoHot());
-		}
-		_s13 = chaos_matches ? chaos_value : 0;
-	}
-	chaos_locals[7] = _s13;
-	_s13 = chaos_locals[6];
-	{
-		const auto chaos_value = _s13;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_IDisposable.AsTypeInfoHot());
-		}
-		_s13 = chaos_matches ? chaos_value : 0;
-	}
-	chaos_locals[8] = _s13;
-		auto _chaos_finally = [&]()
-		{
-			_s13 = chaos_locals[8];
-			{
-				if (_s13 != 0)
-				{
-					_s13 = chaos_locals[8];
-					{
-						if (13 < 0 || 13 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 13 out of range");
-						}
-						if (kChaosExternalRuntimeFnTable[13] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 13 is null");
-						}
-						reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[13])();
-					}
-				}
-			}
-		};
-	CHAOS_EH_TRY_FINALLY
-				auto _chaos_finally = [&]()
-				{
-					_s13 = chaos_locals[7];
-					{
-						if (_s13 != 0)
-						{
-							_s13 = chaos_locals[7];
-							{
-								if (13 < 0 || 13 >= kChaosExternalRuntimeCount) {
-									CHAOS_IL2CPP_FAIL("external runtime table index 13 out of range");
-								}
-								if (kChaosExternalRuntimeFnTable[13] == nullptr) {
-									CHAOS_IL2CPP_FAIL("external runtime table entry 13 is null");
-								}
-								reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[13])();
-							}
-						}
-					}
-				};
-			CHAOS_EH_TRY_FINALLY
-					_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-					chaos_locals[9] = _s13;
-					// br (handled via structured EH branches)
-					_s13 = chaos_locals[6];
-					{
-						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
-						}
-						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
-						}
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
-						_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-					_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s14) == static_cast<CHAOS_IL2CPP_INTPTR>(_s15) ? 1 : 0);
-					chaos_locals[10] = _s14;
-					_s14 = chaos_locals[10];
-					// brfalse (structured EH branch)
-					// leave (handled via structured EH branches)
-					{
-						if (10 < 0 || 10 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 10 out of range");
-						}
-						if (kChaosExternalRuntimeFnTable[10] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 10 is null");
-						}
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
-						_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					_s16 = chaos_locals[5];
-					{
-						if (11 < 0 || 11 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 11 out of range");
-						}
-						if (kChaosExternalRuntimeFnTable[11] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 11 is null");
-						}
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
-						_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					_s18 = chaos_locals[6];
-					{
-						if (11 < 0 || 11 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 11 out of range");
-						}
-						if (kChaosExternalRuntimeFnTable[11] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 11 is null");
-						}
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
-						_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					{
-						const auto chaos_arg_1 = _s19;
-						const auto chaos_arg_0 = _s18;
-						if (12 < 0 || 12 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 12 out of range");
-						}
-						if (kChaosExternalRuntimeFnTable[12] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 12 is null");
-						}
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0, chaos_arg_1);
-						_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-					_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s18) == static_cast<CHAOS_IL2CPP_INTPTR>(_s19) ? 1 : 0);
-					chaos_locals[11] = _s18;
-					_s18 = chaos_locals[11];
-					// brfalse (structured EH branch)
-					// leave (handled via structured EH branches)
-					_s19 = chaos_locals[9];
-					_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-					_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(_s19) + static_cast<CHAOS_IL2CPP_UINT32>(_s20)));
-					chaos_locals[9] = _s19;
-					_s19 = chaos_locals[5];
-					{
-						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
-						}
-						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
-						}
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
-						_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					chaos_locals[12] = _s20;
-					_s20 = chaos_locals[12];
-					// brtrue (structured EH branch)
-					_s21 = chaos_locals[6];
-					{
-						if (9 < 0 || 9 >= kChaosExternalRuntimeCount) {
-							CHAOS_IL2CPP_FAIL("external runtime table index 9 out of range");
-						}
-						if (kChaosExternalRuntimeFnTable[9] == nullptr) {
-							CHAOS_IL2CPP_FAIL("external runtime table entry 9 is null");
-						}
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
-						_s22 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					chaos_locals[13] = _s22;
-					_s22 = chaos_locals[13];
-					// brfalse (structured EH branch)
-			CHAOS_EH_FINALLY_END
-	CHAOS_EH_FINALLY_END
-	{
-		if (14 < 0 || 14 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 14 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[14] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 14 is null");
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s24 = chaos_args[0];
-	_s25 = chaos_args[1];
-	{
-		const auto chaos_arg_1 = _s25;
-		const auto chaos_arg_0 = _s24;
-		if (15 < 0 || 15 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 15 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[15] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 15 is null");
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
-		_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s25 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s24) == static_cast<CHAOS_IL2CPP_INTPTR>(_s25) ? 1 : 0);
-	{
-		if (_s24 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreNotEqual`1(!!0,!!0,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	{
-		if (14 < 0 || 14 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 14 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[14] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 14 is null");
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	_s2 = chaos_args[1];
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		if (15 < 0 || 15 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 15 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[15] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 15 is null");
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s1 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Complete()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode;
-	chaos_locals[0] = _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s0;
-		chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = chaos_value;
-	}
-	_s0 = chaos_locals[0];
-	chaos_locals[1] = _s0;
-	_s0 = chaos_locals[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail(System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	{
-		auto chaos_value = _s0;
-		chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = chaos_value;
-	}
-	{
-		const auto chaos_result = ChaosConsoleGetError();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		_s1 = CHAOS_IL2CPP_STRING_ID("[ASSERT FAIL] ");
-	}
-	_s2 = chaos_args[0];
-	{
-		const auto chaos_arg_1 = _s2;
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_(chaos_arg_0, chaos_arg_1);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		ChaosTextWriterWriteLineStr(chaos_arg_0, chaos_arg_1);
-	}
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_1 = _s0;
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException, {});
-		chaos_object->header.type_info = chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException.AsTypeInfoHot();
-		Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	CHAOS_EH_THROW(_s0);
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::get_ExitCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode;
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsFalse(System.Boolean,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_args[0];
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull(System.Object,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = 0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNull(System.Object,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = 0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsTrue(System.Boolean,System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 == 0)
-		{
-		}
-		return;
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::RecordFailure()
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	{
-		auto chaos_value = _s0;
-		chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = chaos_value;
-	}
-	return;
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Reset()
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto chaos_value = _s0;
-		chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode = chaos_value;
-	}
-	return;
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws(System.Action)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_EH_TRY
-			_s0 = chaos_args[0];
-			{
-				const auto chaos_delegate_value = _s0;
-				if (chaos_delegate_value == 0)
-				{
-					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-				}
-				auto* chaos_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(chaos_delegate_value);
-				if (chaos_delegate->chaos_delegate_invocation_count > 0)
-				{
-					const auto* chaos_invocation_list = reinterpret_cast<const CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR)*>(chaos_delegate->chaos_delegate_invocation_list);
-					if (chaos_invocation_list == nullptr ||
-						static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)
-					{
-						CHAOS_IL2CPP_FAIL_FAST();
-					}
-
-					for (CHAOS_IL2CPP_SIZE chaos_delegate_index = 0; chaos_delegate_index < chaos_invocation_list->size(); ++chaos_delegate_index)
-					{
-						const auto chaos_invocation_delegate_value = (*chaos_invocation_list)[chaos_delegate_index];
-						if (chaos_invocation_delegate_value == 0)
-						{
-							CHAOS_IL2CPP_FAIL_FAST();
-						}
-						auto* chaos_invocation_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(chaos_invocation_delegate_value);
-						if (chaos_invocation_delegate->chaos_delegate_method_ptr == 0)
-						{
-							CHAOS_IL2CPP_FAIL_FAST();
-						}
-						if (chaos_invocation_delegate->chaos_delegate_target == 0)
-						{
-							auto chaos_open_function = reinterpret_cast<void(*)()>(chaos_invocation_delegate->chaos_delegate_method_ptr);
-							chaos_open_function();
-						}
-						else
-						{
-							auto chaos_closed_function = reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)>(chaos_invocation_delegate->chaos_delegate_method_ptr);
-							chaos_closed_function(chaos_invocation_delegate->chaos_delegate_target);
-						}
-					}
-				}
-				else
-				{
-					if (chaos_delegate->chaos_delegate_method_ptr == 0)
-					{
-						CHAOS_IL2CPP_FAIL_FAST();
-					}
-					bool __chaos_hotpatch_taken = false;
-					CHAOS_IL2CPP_UINT64 __chaos_args_buf[1] = {0};
-					CHAOS_IL2CPP_UINT64 __chaos_ret_buf[2] = {};
-					if (chaos_delegate->chaos_delegate_method_token != 0)
-					{
-						__chaos_hotpatch_taken = ::chaos::il2cpp::runtime_core::DelegateHotpatchCheckpoint(
-							chaos_delegate->chaos_delegate_method_token,
-							__chaos_args_buf, __chaos_ret_buf, 0);
-					}
-
-					if (__chaos_hotpatch_taken)
-					{
-					}
-					else
-					{
-						if (chaos_delegate->chaos_delegate_target == 0)
-						{
-							auto chaos_open_function = reinterpret_cast<void(*)()>(chaos_delegate->chaos_delegate_method_ptr);
-							chaos_open_function();
-						}
-						else
-						{
-							auto chaos_closed_function = reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)>(chaos_delegate->chaos_delegate_method_ptr);
-							chaos_closed_function(chaos_delegate->chaos_delegate_target);
-						}
-					}
-				}
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException.AsTypeInfoHot()))
-		{ CHAOS_EH_RETHROW; }
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
-			CHAOS_EH_RETHROW;
-	CHAOS_EH_END
-	CHAOS_EH_TRY
-			_s0 = chaos_args[0];
-			{
-				const auto chaos_delegate_value = _s0;
-				if (chaos_delegate_value == 0)
-				{
-					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-				}
-				auto* chaos_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(chaos_delegate_value);
-				if (chaos_delegate->chaos_delegate_invocation_count > 0)
-				{
-					const auto* chaos_invocation_list = reinterpret_cast<const CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR)*>(chaos_delegate->chaos_delegate_invocation_list);
-					if (chaos_invocation_list == nullptr ||
-						static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)
-					{
-						CHAOS_IL2CPP_FAIL_FAST();
-					}
-
-					for (CHAOS_IL2CPP_SIZE chaos_delegate_index = 0; chaos_delegate_index < chaos_invocation_list->size(); ++chaos_delegate_index)
-					{
-						const auto chaos_invocation_delegate_value = (*chaos_invocation_list)[chaos_delegate_index];
-						if (chaos_invocation_delegate_value == 0)
-						{
-							CHAOS_IL2CPP_FAIL_FAST();
-						}
-						auto* chaos_invocation_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(chaos_invocation_delegate_value);
-						if (chaos_invocation_delegate->chaos_delegate_method_ptr == 0)
-						{
-							CHAOS_IL2CPP_FAIL_FAST();
-						}
-						if (chaos_invocation_delegate->chaos_delegate_target == 0)
-						{
-							auto chaos_open_function = reinterpret_cast<void(*)()>(chaos_invocation_delegate->chaos_delegate_method_ptr);
-							chaos_open_function();
-						}
-						else
-						{
-							auto chaos_closed_function = reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)>(chaos_invocation_delegate->chaos_delegate_method_ptr);
-							chaos_closed_function(chaos_invocation_delegate->chaos_delegate_target);
-						}
-					}
-				}
-				else
-				{
-					if (chaos_delegate->chaos_delegate_method_ptr == 0)
-					{
-						CHAOS_IL2CPP_FAIL_FAST();
-					}
-					bool __chaos_hotpatch_taken = false;
-					CHAOS_IL2CPP_UINT64 __chaos_args_buf[1] = {0};
-					CHAOS_IL2CPP_UINT64 __chaos_ret_buf[2] = {};
-					if (chaos_delegate->chaos_delegate_method_token != 0)
-					{
-						__chaos_hotpatch_taken = ::chaos::il2cpp::runtime_core::DelegateHotpatchCheckpoint(
-							chaos_delegate->chaos_delegate_method_token,
-							__chaos_args_buf, __chaos_ret_buf, 0);
-					}
-
-					if (__chaos_hotpatch_taken)
-					{
-					}
-					else
-					{
-						if (chaos_delegate->chaos_delegate_target == 0)
-						{
-							auto chaos_open_function = reinterpret_cast<void(*)()>(chaos_delegate->chaos_delegate_method_ptr);
-							chaos_open_function();
-						}
-						else
-						{
-							auto chaos_closed_function = reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)>(chaos_delegate->chaos_delegate_method_ptr);
-							chaos_closed_function(chaos_delegate->chaos_delegate_target);
-						}
-					}
-				}
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-		{ CHAOS_EH_RETHROW; }
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
-	CHAOS_EH_END
-	return;
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor(System.String)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		ChaosReflectionSetExceptionMetadata(chaos_arg_0, chaos_arg_1);
-	}
-	return;
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor()
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_args[0];
-	{
-		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
-	}
-	return;
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute::.ctor()
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_args[0];
-	{
-		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
-	}
-	return;
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute::.ctor()
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_args[0];
-	{
-		if (22 < 0 || 22 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL("external runtime table index 22 out of range");
-		}
-		if (kChaosExternalRuntimeFnTable[22] == nullptr) {
-			CHAOS_IL2CPP_FAIL("external runtime table entry 22 is null");
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[22])();
-	}
-	return;
-}
-
 // Managed method: CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor()
 extern "C" void CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
@@ -3850,9 +1143,17 @@ extern "C" void CombinedSubjects_AutoGenerated_System_Collections_System_Collect
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
 		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
@@ -3865,7 +1166,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -3880,7 +1185,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -3895,7 +1204,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -3910,7 +1223,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -3925,7 +1242,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -3940,7 +1261,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -3955,7 +1280,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -3970,7 +1299,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -3985,7 +1318,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4000,7 +1337,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4015,7 +1356,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4030,7 +1375,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4045,7 +1394,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4060,7 +1413,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4075,7 +1432,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4090,7 +1451,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4105,7 +1470,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4120,7 +1489,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4135,7 +1508,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4150,7 +1527,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4165,7 +1546,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4180,7 +1565,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	chaos_locals[0] = ChaosStoreInt64(_i0);
@@ -4194,7 +1583,7 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Collections_
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 56;
+extern "C" const int kAotMethodCount = 23;
 
 #ifdef CHAOS_IL2CPP_JIT_MODE
 
@@ -4203,128 +1592,58 @@ extern "C" const int kAotMethodCount = 56;
 #include <cstdint>
 #include "jit_registration.h"
 
-static const char kJitJson_0[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Boolean,System.Boolean,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Boolean,System.Boolean,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":2},{\"carrierKindCode\":2,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Boolean\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Boolean\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_1[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte,System.Byte,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Byte,System.Byte,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte,System.Byte,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte,System.Byte,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Byte,System.Byte,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":5,\"typeShape\":2},{\"carrierKindCode\":5,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Byte\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Byte\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_2[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte[],System.Byte[],System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Byte[],System.Byte[],System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte[],System.Byte[],System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Byte[],System.Byte[],System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Byte[],System.Byte[],System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":6,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Byte[]\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":5,\"resultType\":\"System.Byte[]\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":6,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":11,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":15,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":21,\"ilOffset\":16,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":86,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":21,\"resultType\":\"System.Byte[]\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":31,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":86,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Byte[]\",\"isPreserveSig\":false},{\"op\":\"ldlen\",\"opCode\":46,\"ilOffset\":32,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":34,\"resultType\":\"System.Byte[]\",\"isPreserveSig\":false},{\"op\":\"ldlen\",\"opCode\":46,\"ilOffset\":35,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":36,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":40,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":43,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":49,\"ilOffset\":44,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":86,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":50,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":74,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":53,\"resultType\":\"System.Byte[]\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":54,\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Byte\",\"ilOffset\":55,\"resultType\":\"System.Byte\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":56,\"resultType\":\"System.Byte[]\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":57,\"isPreserveSig\":false},{\"op\":\"ldelem\",\"opCode\":44,\"operand\":\"System.Byte\",\"ilOffset\":58,\"resultType\":\"System.Byte\",\"runtimeServiceKind\":12,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":59,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":61,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":62,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":64,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":66,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":70,\"ilOffset\":68,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":70,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":71,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":72,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":73,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":74,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":75,\"resultType\":\"System.Byte[]\",\"isPreserveSig\":false},{\"op\":\"ldlen\",\"opCode\":46,\"ilOffset\":76,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":77,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"clt\",\"opCode\":32,\"ilOffset\":78,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":5,\"ilOffset\":80,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":82,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":53,\"ilOffset\":84,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":86,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_3[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Char,System.Char,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Char,System.Char,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Char,System.Char,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Char,System.Char,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Char,System.Char,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":2},{\"carrierKindCode\":2,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Char\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Char\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_4[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Decimal,System.Decimal,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Decimal,System.Decimal,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Decimal,System.Decimal,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Decimal,System.Decimal,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Decimal,System.Decimal,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Decimal\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Decimal\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Decimal::op_Inequality:System.Boolean(System.Decimal,System.Decimal)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_5[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Double,System.Double,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Double,System.Double,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Double,System.Double,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Double,System.Double,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Double,System.Double,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":9,\"typeShape\":2},{\"carrierKindCode\":9,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Double\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_6[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int16,System.Int16,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Int16,System.Int16,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int16,System.Int16,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int16,System.Int16,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Int16,System.Int16,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":6,\"typeShape\":2},{\"carrierKindCode\":6,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Int16\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Int16\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_7[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Int32,System.Int32,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int32,System.Int32,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Int32,System.Int32,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":1,\"typeShape\":2},{\"carrierKindCode\":1,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_8[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int64,System.Int64,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Int64,System.Int64,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int64,System.Int64,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Int64,System.Int64,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Int64,System.Int64,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":10,\"typeShape\":2},{\"carrierKindCode\":10,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_9[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Object,System.Object,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Object,System.Object,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Object,System.Object,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Object,System.Object,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Object,System.Object,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":3,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":61,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":22,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":19,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":28,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Object::ToString:System.String()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::ToString:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::ToString:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":31,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"null\",\"ilOffset\":32,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":37,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":38,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":44,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":41,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":50,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":45,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Object::ToString:System.String()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::ToString:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::ToString:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":50,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":59,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":53,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"null\",\"ilOffset\":54,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":59,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":61,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_10[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.SByte,System.SByte,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.SByte,System.SByte,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.SByte,System.SByte,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.SByte,System.SByte,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.SByte,System.SByte,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":4,\"typeShape\":2},{\"carrierKindCode\":4,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.SByte\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.SByte\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_11[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Single,System.Single,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Single,System.Single,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Single,System.Single,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Single,System.Single,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.Single,System.Single,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":8,\"typeShape\":2},{\"carrierKindCode\":8,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Single\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Single\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_12[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.String,System.String,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.String,System.String,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.String,System.String,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_13[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt16,System.UInt16,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.UInt16,System.UInt16,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt16,System.UInt16,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt16,System.UInt16,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.UInt16,System.UInt16,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":7,\"typeShape\":2},{\"carrierKindCode\":7,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.UInt16\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.UInt16\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_14[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt32,System.UInt32,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.UInt32,System.UInt32,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt32,System.UInt32,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt32,System.UInt32,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.UInt32,System.UInt32,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":2},{\"carrierKindCode\":2,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.UInt32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_15[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt64,System.UInt64,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.UInt64,System.UInt64,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt64,System.UInt64,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.UInt64,System.UInt64,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(System.UInt64,System.UInt64,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":11,\"typeShape\":2},{\"carrierKindCode\":11,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.UInt64\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.UInt64\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":6,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":12,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":12,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_16[] = 
-    "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual\\u00601:System.Void(!!0,!!0,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(!!0,!!0,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual\\u00601:System.Void(!!0,!!0,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual\\u00601:System.Void(!!0,!!0,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreEqual(!!0,!!0,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":15,\"exceptionRegionCount\":2,\"exceptionRegions\":[{\"handlingKindCode\":2,\"tryOffset\":164,\"tryLength\":100,\"handlerOffset\":264,\"handlerLength\":13},{\"handlingKindCode\":2,\"tryOffset\":155,\"tryLength\":124,\"handlerOffset\":279,\"handlerLength\":13}],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"Chaos.TestFramework.Sdk/!!0\",\"ilOffset\":2,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"type\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":20,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":9,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"Chaos.TestFramework.Sdk/!!0\",\"ilOffset\":10,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"type\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":15,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":21,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":2,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":22,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":30,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":315,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":30,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"Chaos.TestFramework.Sdk/!!0\",\"ilOffset\":31,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"type\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":49,\"ilOffset\":36,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":38,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"Chaos.TestFramework.Sdk/!!0\",\"ilOffset\":39,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"type\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":44,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":50,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":3,\"ilOffset\":50,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":51,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":60,\"ilOffset\":52,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":315,\"ilOffset\":55,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":60,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"Chaos.TestFramework.Sdk/!!0\",\"ilOffset\":61,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"type\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"isinst\",\"opCode\":38,\"operand\":\"System.Private.CoreLib/System.String\",\"ilOffset\":66,\"resultType\":\"System.Private.CoreLib/System.String\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.String\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":8,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":119,\"ilOffset\":71,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":73,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"Chaos.TestFramework.Sdk/!!0\",\"ilOffset\":74,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"type\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"isinst\",\"opCode\":38,\"operand\":\"System.Private.CoreLib/System.String\",\"ilOffset\":79,\"resultType\":\"System.Private.CoreLib/System.String\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.String\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":8,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":119,\"ilOffset\":84,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":86,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"Chaos.TestFramework.Sdk/!!0\",\"ilOffset\":87,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"type\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"isinst\",\"opCode\":38,\"operand\":\"System.Private.CoreLib/System.Collections.IEnumerable\",\"ilOffset\":92,\"resultType\":\"System.Private.CoreLib/System.Collections.IEnumerable\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerable\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerable\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":8,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":97,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":98,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":119,\"ilOffset\":99,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":101,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"Chaos.TestFramework.Sdk/!!0\",\"ilOffset\":102,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"type\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/!!0\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"isinst\",\"opCode\":38,\"operand\":\"System.Private.CoreLib/System.Collections.IEnumerable\",\"ilOffset\":107,\"resultType\":\"System.Private.CoreLib/System.Collections.IEnumerable\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerable\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerable\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":8,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":112,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":113,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":114,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":115,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":120,\"ilOffset\":117,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":119,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":4,\"ilOffset\":120,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":122,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":294,\"ilOffset\":124,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":130,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":131,\"resultType\":\"System.Collections.IEnumerator\",\"callee\":\"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":5,\"ilOffset\":136,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":138,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":139,\"resultType\":\"System.Collections.IEnumerator\",\"callee\":\"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:System.Collections.IEnumerator()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":6,\"ilOffset\":144,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":146,\"isPreserveSig\":false},{\"op\":\"isinst\",\"opCode\":38,\"operand\":\"System.Private.CoreLib/System.IDisposable\",\"ilOffset\":148,\"resultType\":\"System.Private.CoreLib/System.IDisposable\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.IDisposable\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IDisposable\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":8,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":7,\"ilOffset\":153,\"resultType\":\"System.Void\",\"isPreserveSig"
-    "\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":6,\"ilOffset\":155,\"isPreserveSig\":false},{\"op\":\"isinst\",\"opCode\":38,\"operand\":\"System.Private.CoreLib/System.IDisposable\",\"ilOffset\":157,\"resultType\":\"System.Private.CoreLib/System.IDisposable\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.IDisposable\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IDisposable\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":8,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":8,\"ilOffset\":162,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":165,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":9,\"ilOffset\":166,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":233,\"ilOffset\":168,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":6,\"ilOffset\":171,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":173,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":178,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":179,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":10,\"ilOffset\":181,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":10,\"ilOffset\":183,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":190,\"ilOffset\":185,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":315,\"ilOffset\":188,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":190,\"resultType\":\"System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E\",\"callee\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E()\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[System.Object];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[System.Object];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"System.Object\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[System.Object];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[System.Object];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E()\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::get_Default()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"System.Object\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":195,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":197,\"resultType\":\"System.Object\",\"callee\":\"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":6,\"ilOffset\":202,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":204,\"resultType\":\"System.Object\",\"callee\":\"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::get_Current:System.Object()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":209,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::Equals:System.Boolean(System.Object,System.Object)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::Equals:System.Boolean(System.Object,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::Equals:System.Boolean(System.Object,System.Object)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[System.Object];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[System.Object];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"typeArguments\":[\"System.Object\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[System.Object];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[System.Object];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::Equals:System.Boolean(System.Object,System.Object)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003CSystem.Object\\u003E::Equals(System.Object,System.Object)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"typeArguments\":[\"System.Object\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":214,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":215,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":11,\"ilOffset\":217,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":11,\"ilOffset\":219,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":226,\"ilOffset\":221,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":315,\"ilOffset\":224,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":9,\"ilOffset\":226,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":228,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"add\",\"opCode\":25,\"ilOffset\":229,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":9,\"ilOffset\":230,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":233,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":235,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":12,\"ilOffset\":240,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":12,\"ilOffset\":242,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":170,\"ilOffset\":244,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":6,\"ilOffset\":246,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":248,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":13,\"ilOffset\":253,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":13,\"ilOffset\":255,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":261,\"ilOffset\":257,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":277,\"ilOffset\":262,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":8,\"ilOffset\":264,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":276,\"ilOffset\":266,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":8,\"ilOffset\":268,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":270,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"endfinally\",\"opCode\":51,\"ilOffset\":276,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":292,\"ilOffset\":277,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":7,\"ilOffset\":279,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":291,\"ilOffset\":281,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":7,\"ilOffset\":283,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":285,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"su"
-    "bjectId\":\"System.Private.CoreLib/System.IDisposable::Dispose:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"endfinally\",\"opCode\":51,\"ilOffset\":291,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":315,\"ilOffset\":292,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":294,\"resultType\":\"System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E\",\"callee\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E()\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[!!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[!!0];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"!!0\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[!!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[!!0];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":2,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E()\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"!!0\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":299,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":300,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":301,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals:System.Boolean(!!0,!!0)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals:System.Boolean(!!0,!!0)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals:System.Boolean(!!0,!!0)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[!!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[!!0];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"typeArguments\":[\"!!0\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[!!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[!!0];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":2,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals:System.Boolean(!!0,!!0)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals(!!0,!!0)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"typeArguments\":[\"!!0\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":306,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":307,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":14,\"ilOffset\":309,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":14,\"ilOffset\":311,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":315,\"ilOffset\":313,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":315,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}"
-    ;
-static const char kJitJson_17[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-not-equal\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreNotEqual\\u00601:System.Void(!!0,!!0,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreNotEqual(!!0,!!0,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreNotEqual\\u00601:System.Void(!!0,!!0,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreNotEqual\\u00601:System.Void(!!0,!!0,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.are-not-equal\",\"signature\":\"System.Void Chaos.TestFramework.Assert::AreNotEqual(!!0,!!0,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":3,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E\",\"callee\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E()\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E()\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[!!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[!!0];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"!!0\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[!!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E();type=[!!0];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":2,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default:System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E()\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::get_Default()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::get_Default:System.Collections.Generic.EqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"!!0\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":6,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":7,\"resultType\":\"!!0\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Boolean\",\"callee\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals:System.Boolean(!!0,!!0)\",\"reference\":{\"assemblyName\":\"System.Collections\",\"subjectKind\":\"method\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals:System.Boolean(!!0,!!0)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Collections\",\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals:System.Boolean(!!0,!!0)\",\"openDefinitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[!!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[!!0];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"typeArguments\":[\"!!0\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[!!0];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0);type=[!!0];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":2,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals:System.Boolean(!!0,!!0)\",\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"displaySubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u003C!!0\\u003E::Equals(!!0,!!0)\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.Collections/System.Collections.Generic.EqualityComparer\\u00601::Equals:System.Boolean(!0,!0)\",\"typeArguments\":[\"!!0\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":13,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":17,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":17,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_18[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.complete\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Complete:System.Int32()\",\"signature\":\"System.Int32 Chaos.TestFramework.Assert::Complete()\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Complete:System.Int32()\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Complete:System.Int32()\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.complete\",\"signature\":\"System.Int32 Chaos.TestFramework.Assert::Complete()\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"ilOffset\":1,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"field\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":6,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"ilOffset\":8,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"field\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":17,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":18,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_19[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.fail\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::Fail(System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.fail\",\"signature\":\"System.Void Chaos.TestFramework.Assert::Fail(System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"ilOffset\":2,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"field\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.IO.TextWriter\",\"callee\":\"System.Console/System.Console::get_Error:System.IO.TextWriter()\",\"reference\":{\"assemblyName\":\"System.Console\",\"subjectKind\":\"method\",\"subjectId\":\"System.Console/System.Console::get_Error:System.IO.TextWriter()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Console\",\"subjectId\":\"System.Console/System.Console::get_Error:System.IO.TextWriter()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"[ASSERT FAIL] \",\"ilOffset\":12,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":18,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":30,\"resultType\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException\",\"callee\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"method\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor:System.Void(System.String)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"baseTypeSubjectId\":\"System.Private.CoreLib/System.Exception\",\"implementedInterfaceSubjectIds\":[],\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"throw\",\"opCode\":48,\"ilOffset\":35,\"resultType\":\"System.Void\",\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_20[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.get-exit-code\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::get_ExitCode:System.Int32()\",\"signature\":\"System.Int32 Chaos.TestFramework.Assert::get_ExitCode()\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::get_ExitCode:System.Int32()\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::get_ExitCode:System.Int32()\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.get-exit-code\",\"signature\":\"System.Int32 Chaos.TestFramework.Assert::get_ExitCode()\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode\",\"isStatic\":true,\"returnType\":\"System.Int32\",\"returnAbi\":{\"carrierKindCode\":1,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"ilOffset\":0,\"resultType\":\"System.Int32\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"field\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":5,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_21[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.is-false\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsFalse:System.Void(System.Boolean,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::IsFalse(System.Boolean,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsFalse:System.Void(System.Boolean,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsFalse:System.Void(System.Boolean,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.is-false\",\"signature\":\"System.Void Chaos.TestFramework.Assert::IsFalse(System.Boolean,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":2,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Boolean\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":3,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":6,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_22[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.is-not-null\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::IsNotNull(System.Object,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.is-not-null\",\"signature\":\"System.Void Chaos.TestFramework.Assert::IsNotNull(System.Object,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":2,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":9,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":9,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_23[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.is-null\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNull:System.Void(System.Object,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::IsNull(System.Object,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNull:System.Void(System.Object,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNull:System.Void(System.Object,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.is-null\",\"signature\":\"System.Void Chaos.TestFramework.Assert::IsNull(System.Object,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":2,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"cgt.un\",\"opCode\":33,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":9,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":9,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_24[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.is-true\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsTrue:System.Void(System.Boolean,System.String)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::IsTrue(System.Boolean,System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsTrue:System.Void(System.Boolean,System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsTrue:System.Void(System.Boolean,System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.is-true\",\"signature\":\"System.Void Chaos.TestFramework.Assert::IsTrue(System.Boolean,System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":2,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":2},{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":1,\"resultType\":\"System.Boolean\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":6,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":9,\"ilOffset\":7,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":9,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_25[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.record-failure\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::RecordFailure:System.Void()\",\"signature\":\"System.Void Chaos.TestFramework.Assert::RecordFailure()\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::RecordFailure:System.Void()\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::RecordFailure:System.Void()\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.record-failure\",\"signature\":\"System.Void Chaos.TestFramework.Assert::RecordFailure()\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"ilOffset\":1,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"field\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_26[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.reset\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Reset:System.Void()\",\"signature\":\"System.Void Chaos.TestFramework.Assert::Reset()\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Reset:System.Void()\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Reset:System.Void()\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.reset\",\"signature\":\"System.Void Chaos.TestFramework.Assert::Reset()\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":0,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"ilOffset\":1,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectKind\":\"field\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::s_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":6,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_27[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.throws\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws:System.Void(System.Action)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::Throws(System.Action)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws:System.Void(System.Action)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws:System.Void(System.Action)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.throws\",\"signature\":\"System.Void Chaos.TestFramework.Assert::Throws(System.Action)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1}],\"localCount\":0,\"exceptionRegionCount\":2,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":4,\"catchTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException\"},{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":16,\"handlerLength\":5,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Action\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Action::Invoke:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Action::Invoke:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Action::Invoke:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":21,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"rethrow\",\"opCode\":49,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":21,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":21,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_28[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.throws\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws\\u00601:System.Void(System.Action)\",\"signature\":\"System.Void Chaos.TestFramework.Assert::Throws(System.Action)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws\\u00601:System.Void(System.Action)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws\\u00601:System.Void(System.Action)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assert.throws\",\"signature\":\"System.Void Chaos.TestFramework.Assert::Throws(System.Action)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeShape\":1}],\"localCount\":1,\"exceptionRegionCount\":3,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":4,\"catchTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException\"},{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":16,\"handlerLength\":5,\"catchTypeSubjectId\":\"Chaos.TestFramework.Sdk/!!0\"},{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":21,\"handlerLength\":5,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Exception\"}],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Action\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Action::Invoke:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Action::Invoke:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Action::Invoke:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":26,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"rethrow\",\"opCode\":49,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":26,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":26,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":26,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_29[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assertion-exception.ctor\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor:System.Void(System.String)\",\"signature\":\"System.Void Chaos.TestFramework.AssertionException::.ctor(System.String)\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor:System.Void(System.String)\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException::.ctor:System.Void(System.String)\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-assertion-exception.ctor\",\"signature\":\"System.Void Chaos.TestFramework.AssertionException::.ctor(System.String)\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":1,\"parameterAbis\":[{\"carrierKindCode\":2,\"typeSubjectId\":\"System.Private.CoreLib/System.String\",\"typeShape\":1}],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.AssertionException\",\"isPreserveSig\":false},{\"op\":\"ldarg\",\"opCode\":6,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":9,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_30[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-benchmark-attribute.ctor\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void()\",\"signature\":\"System.Void Chaos.TestFramework.BenchmarkAttribute::.ctor()\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void()\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void()\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-benchmark-attribute.ctor\",\"signature\":\"System.Void Chaos.TestFramework.BenchmarkAttribute::.ctor()\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_31[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-fact-attribute.ctor\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute::.ctor:System.Void()\",\"signature\":\"System.Void Chaos.TestFramework.FactAttribute::.ctor()\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute::.ctor:System.Void()\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute::.ctor:System.Void()\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-fact-attribute.ctor\",\"signature\":\"System.Void Chaos.TestFramework.FactAttribute::.ctor()\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.FactAttribute\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_32[] = "{\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-hot-update-attribute.ctor\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute::.ctor:System.Void()\",\"signature\":\"System.Void Chaos.TestFramework.HotUpdateAttribute::.ctor()\",\"identity\":{\"assemblyName\":\"Chaos.TestFramework.Sdk\",\"declaringTypeSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute\",\"definitionSubjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute::.ctor:System.Void()\",\"subjectId\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute::.ctor:System.Void()\",\"methodId\":\"chaos-test-framework-sdk.chaos-test-framework-hot-update-attribute.ctor\",\"signature\":\"System.Void Chaos.TestFramework.HotUpdateAttribute::.ctor()\"},\"nativeSymbol\":\"Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateAttribute\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Attribute::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"Chaos.TestFramework.Sdk\"}";
-static const char kJitJson_33[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.ctor\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor:System.Void()\",\"signature\":\"System.Void AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor:System.Void()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor:System.Void()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.ctor\",\"signature\":\"System.Void AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_34[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.and-3-bit-array-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.and-3-bit-array-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_35[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.clone-12-12\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.clone-12-12\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_36[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_37[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_38[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-2\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-2\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_2\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_39[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-0-int-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-0-int-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_40[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-0-int-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-0-int-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_41[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-enumerator-13-13\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-enumerator-13-13\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_GetEnumerator_13__13\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_42[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.has-all-set-10-10\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.has-all-set-10-10\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAllSet_10__10\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_43[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.has-any-set-11-11\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.has-any-set-11-11\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAnySet_11__11\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_44[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.left-shift-8-int-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.left-shift-8-int-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_45[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.left-shift-8-int-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.left-shift-8-int-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_46[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.not-6-6\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.not-6-6\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Not_6__6\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_47[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.or-4-bit-array-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.or-4-bit-array-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Or_4_BitArray_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_48[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.right-shift-7-int-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.right-shift-7-int-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_49[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.right-shift-7-int-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.right-shift-7-int-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_50[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_51[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_52[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-2\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-2\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_2\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_53[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-all-2-bool-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-all-2-bool-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_54[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-all-2-bool-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-all-2-bool-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
-static const char kJitJson_55[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.xor-5-bit-array-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.xor-5-bit-array-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Xor_5_BitArray_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_0[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.ctor\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor:System.Void()\",\"signature\":\"System.Void AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor:System.Void()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor:System.Void()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.ctor\",\"signature\":\"System.Void AutoGenerated.System_Collections.System_Collections_BitArrayTests::.ctor()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests__ctor\",\"isStatic\":false,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldarg\",\"opCode\":6,\"operand\":0,\"ilOffset\":0,\"resultType\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":1,\"resultType\":\"System.Void\",\"callee\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::.ctor:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":7,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_1[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.and-3-bit-array-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.and-3-bit-array-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::And_3_BitArray_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_And_3_BitArray_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_2[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.clone-12-12\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.clone-12-12\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Clone_12__12()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Clone_12__12\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_3[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_4[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_5[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-2\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.copy-to-9-system-array-int-2\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::CopyTo_9_System_Array_int_2()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_CopyTo_9_System_Array_int_2\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_6[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-0-int-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-0-int-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_7[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-0-int-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-0-int-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Get_0_int_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Get_0_int_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_8[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-enumerator-13-13\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.get-enumerator-13-13\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::GetEnumerator_13__13()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_GetEnumerator_13__13\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_9[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.has-all-set-10-10\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.has-all-set-10-10\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAllSet_10__10()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAllSet_10__10\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_10[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.has-any-set-11-11\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.has-any-set-11-11\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::HasAnySet_11__11()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_HasAnySet_11__11\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_11[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.left-shift-8-int-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.left-shift-8-int-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_12[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.left-shift-8-int-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.left-shift-8-int-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::LeftShift_8_int_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_LeftShift_8_int_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_13[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.not-6-6\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.not-6-6\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Not_6__6()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Not_6__6\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_14[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.or-4-bit-array-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.or-4-bit-array-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Or_4_BitArray_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Or_4_BitArray_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_15[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.right-shift-7-int-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.right-shift-7-int-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_16[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.right-shift-7-int-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.right-shift-7-int-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::RightShift_7_int_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_RightShift_7_int_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_17[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_18[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_19[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-2\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-1-int-bool-2\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Set_1_int_bool_2()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Set_1_int_bool_2\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_20[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-all-2-bool-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-all-2-bool-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_21[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-all-2-bool-1\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.set-all-2-bool-1\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::SetAll_2_bool_1()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_SetAll_2_bool_1\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
+static const char kJitJson_22[] = "{\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.xor-5-bit-array-0\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0:System.Int64()\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0()\",\"identity\":{\"assemblyName\":\"CombinedSubjects\",\"declaringTypeSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests\",\"definitionSubjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0:System.Int64()\",\"subjectId\":\"CombinedSubjects/AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0:System.Int64()\",\"methodId\":\"combined-subjects.auto-generated-system-collections-system-collections-bit-array-tests.xor-5-bit-array-0\",\"signature\":\"System.Int64 AutoGenerated.System_Collections.System_Collections_BitArrayTests::Xor_5_BitArray_0()\"},\"nativeSymbol\":\"CombinedSubjects_AutoGenerated_System_Collections_System_Collections_BitArrayTests_Xor_5_BitArray_0\",\"isStatic\":false,\"returnType\":\"System.Int64\",\"returnAbi\":{\"carrierKindCode\":10,\"typeShape\":2},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"conv.i8\",\"opCode\":40,\"ilOffset\":3,\"resultType\":\"System.Int64\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":4,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":7,\"ilOffset\":5,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"ret\",\"ilOffset\":8,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CombinedSubjects\"}";
 
-extern "C" const JitEntry kChaosJitEntries[56] =
+extern "C" const JitEntry kChaosJitEntries[23] =
 {
-    { kJitJson_0, 2480u, 0x00000027u, 0u },
-    { kJitJson_1, 2438u, 0x00000021u, 0u },
-    { kJitJson_2, 7431u, 0x0000003Cu, 0u },
-    { kJitJson_3, 2438u, 0x00000025u, 0u },
-    { kJitJson_4, 2921u, 0x0000002Du, 0u },
-    { kJitJson_5, 2466u, 0x0000002Bu, 0u },
-    { kJitJson_6, 2452u, 0x0000001Du, 0u },
-    { kJitJson_7, 2452u, 0x00000015u, 0u },
-    { kJitJson_8, 2454u, 0x00000019u, 0u },
-    { kJitJson_9, 6173u, 0x00000031u, 0u },
-    { kJitJson_10, 2452u, 0x00000023u, 0u },
-    { kJitJson_11, 2466u, 0x00000029u, 0u },
-    { kJitJson_12, 3008u, 0x0000002Fu, 0u },
-    { kJitJson_13, 2466u, 0x0000001Fu, 0u },
-    { kJitJson_14, 2466u, 0x00000017u, 0u },
-    { kJitJson_15, 2468u, 0x0000001Bu, 0u },
-    { kJitJson_16, 35914u, 0x0000003Bu, 0u },
-    { kJitJson_17, 7607u, 0x0000003Du, 0u },
-    { kJitJson_18, 3309u, 0x00000011u, 0u },
-    { kJitJson_19, 5407u, 0x0000003Eu, 0u },
-    { kJitJson_20, 2063u, 0x00000013u, 0u },
-    { kJitJson_21, 1962u, 0x00000038u, 0u },
-    { kJitJson_22, 2152u, 0x00000035u, 0u },
-    { kJitJson_23, 2129u, 0x00000033u, 0u },
-    { kJitJson_24, 2144u, 0x00000037u, 0u },
-    { kJitJson_25, 2166u, 0x0000000Fu, 0u },
-    { kJitJson_26, 2100u, 0x0000000Du, 0u },
-    { kJitJson_27, 2838u, 0x00000039u, 0u },
-    { kJitJson_28, 3206u, 0x0000003Au, 0u },
-    { kJitJson_29, 2442u, 0x0000000Bu, 0u },
-    { kJitJson_30, 2132u, 0x0000003Fu, 0u },
-    { kJitJson_31, 2082u, 0x00000040u, 0u },
-    { kJitJson_32, 2134u, 0x00000041u, 0u },
-    { kJitJson_33, 2325u, 0x00000036u, 0u },
-    { kJitJson_34, 2126u, 0x00000018u, 0u },
-    { kJitJson_35, 2090u, 0x00000032u, 0u },
-    { kJitJson_36, 2214u, 0x00000028u, 0u },
-    { kJitJson_37, 2214u, 0x0000002Au, 0u },
-    { kJitJson_38, 2214u, 0x0000002Cu, 0u },
-    { kJitJson_39, 2084u, 0x0000000Au, 0u },
-    { kJitJson_40, 2084u, 0x0000000Cu, 0u },
-    { kJitJson_41, 2156u, 0x00000034u, 0u },
-    { kJitJson_42, 2126u, 0x0000002Eu, 0u },
-    { kJitJson_43, 2126u, 0x00000030u, 0u },
-    { kJitJson_44, 2134u, 0x00000024u, 0u },
-    { kJitJson_45, 2134u, 0x00000026u, 0u },
-    { kJitJson_46, 2058u, 0x0000001Eu, 0u },
-    { kJitJson_47, 2118u, 0x0000001Au, 0u },
-    { kJitJson_48, 2142u, 0x00000020u, 0u },
-    { kJitJson_49, 2142u, 0x00000022u, 0u },
-    { kJitJson_50, 2124u, 0x0000000Eu, 0u },
-    { kJitJson_51, 2124u, 0x00000010u, 0u },
-    { kJitJson_52, 2124u, 0x00000012u, 0u },
-    { kJitJson_53, 2118u, 0x00000014u, 0u },
-    { kJitJson_54, 2118u, 0x00000016u, 0u },
-    { kJitJson_55, 2126u, 0x0000001Cu, 0u }
+    { kJitJson_0, 2313u, 0x00000018u, 0u },
+    { kJitJson_1, 2114u, 0x00000009u, 0u },
+    { kJitJson_2, 2078u, 0x00000016u, 0u },
+    { kJitJson_3, 2202u, 0x00000011u, 0u },
+    { kJitJson_4, 2202u, 0x00000012u, 0u },
+    { kJitJson_5, 2202u, 0x00000013u, 0u },
+    { kJitJson_6, 2072u, 0x00000002u, 0u },
+    { kJitJson_7, 2072u, 0x00000003u, 0u },
+    { kJitJson_8, 2144u, 0x00000017u, 0u },
+    { kJitJson_9, 2114u, 0x00000014u, 0u },
+    { kJitJson_10, 2114u, 0x00000015u, 0u },
+    { kJitJson_11, 2122u, 0x0000000Fu, 0u },
+    { kJitJson_12, 2122u, 0x00000010u, 0u },
+    { kJitJson_13, 2046u, 0x0000000Cu, 0u },
+    { kJitJson_14, 2106u, 0x0000000Au, 0u },
+    { kJitJson_15, 2130u, 0x0000000Du, 0u },
+    { kJitJson_16, 2130u, 0x0000000Eu, 0u },
+    { kJitJson_17, 2112u, 0x00000004u, 0u },
+    { kJitJson_18, 2112u, 0x00000005u, 0u },
+    { kJitJson_19, 2112u, 0x00000006u, 0u },
+    { kJitJson_20, 2106u, 0x00000007u, 0u },
+    { kJitJson_21, 2106u, 0x00000008u, 0u },
+    { kJitJson_22, 2114u, 0x0000000Bu, 0u }
 };
 
-extern "C" const CHAOS_IL2CPP_UINT32 kChaosJitEntryCount = 56u;
+extern "C" const CHAOS_IL2CPP_UINT32 kChaosJitEntryCount = 23u;
 
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 extern "C" void ChaosJitRegisterAll() {

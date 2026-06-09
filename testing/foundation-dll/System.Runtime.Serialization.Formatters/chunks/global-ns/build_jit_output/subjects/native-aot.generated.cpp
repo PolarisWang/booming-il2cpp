@@ -15,6 +15,8 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -1067,22 +1069,22 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 
 // ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
-static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 extern "C" void ChaosRegisterGcLayouts() {
 	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
 	// Register managed_array (variable-size: header + contiguous element data).
 	registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
-		static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
-		static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
+		static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),
+		static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));
 
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 	registry.Register(8921470828950949066ULL, sizeof(chaos_type_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c), nullptr, 0);
@@ -1182,331 +1184,237 @@ CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_IO_Stream__Null =
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.ArgumentNullException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws<System.NullReferenceException>:System.Void(System.Action)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__10_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__10_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__12_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__12_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__14_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__14_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__16_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__16_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__18_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__18_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__20_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__20_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__22_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__22_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__24_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__24_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__26_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__26_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__28_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__28_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__30_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__30_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__32_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__32_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__4_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__4_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__6_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__6_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverterTests___c____9__8_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterConverterTests+<>c::<>9__8_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__11_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__11_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__13_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__13_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__15_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__15_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__17_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__17_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__19_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__19_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__5_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__7_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__9_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_FormatterServicesTests+<>c::<>9__9_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectIDGeneratorTests___c__DisplayClass0_0____ref_0_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_ObjectIDGeneratorTests+<>c__DisplayClass0_0::__ref_0_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectIDGeneratorTests___c__DisplayClass2_0____ref_0_1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_ObjectIDGeneratorTests+<>c__DisplayClass2_0::__ref_0_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectIDGeneratorTests___c__DisplayClass4_0____ref_1_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_ObjectIDGeneratorTests+<>c__DisplayClass4_0::__ref_1_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectIDGeneratorTests___c__DisplayClass6_0____ref_1_1_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_ObjectIDGeneratorTests+<>c__DisplayClass6_0::__ref_1_1_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManagerTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_ObjectManagerTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManagerTests___c____9__0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_ObjectManagerTests+<>c::<>9__0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManagerTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_ObjectManagerTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SerializationBinderTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_SerializationBinderTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SerializationBinderTests___c____9__3_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_SerializationBinderTests+<>c::<>9__3_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SerializationBinderTests___c____9__5_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_SerializationBinderTests+<>c::<>9__5_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SerializationBinderTests___c____9__7_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_SerializationBinderTests+<>c::<>9__7_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SurrogateSelectorTests___c__DisplayClass4_0____ref_3_0_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_SurrogateSelectorTests+<>c__DisplayClass4_0::__ref_3_0_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SurrogateSelectorTests___c____9() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_SurrogateSelectorTests+<>c::<>9");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SurrogateSelectorTests___c____9__2_0() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("CombinedSubjects/AutoGenerated.System_Runtime_Serialization_Formatters.System_Runtime_Serialization_SurrogateSelectorTests+<>c::<>9__2_0");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_NullStream___ctor() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("NullStream::.ctor");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Action___ctor_System_Void_System_Object_System_IntPtr_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Int32__System_Int32____() noexcept
@@ -1526,16 +1434,12 @@ CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_IO_Stream__Null() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.IO.Stream::Null");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int32() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Int32");
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept
@@ -1545,373 +1449,267 @@ void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_V
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Reflection.MemberInfo");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Runtime_Serialization_StreamingContext() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Private.CoreLib/System.Runtime.Serialization.StreamingContext");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__Convert_System_Object_System_Object_System_TypeCode_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.TypeCode)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__Convert_System_Object_System_Object_System_Type_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToBoolean_System_Boolean_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToBoolean:System.Boolean(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToByte_System_Byte_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToByte:System.Byte(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToChar_System_Char_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToChar:System.Char(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToDateTime_System_DateTime_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDateTime:System.DateTime(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToDecimal_System_Decimal_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDecimal:System.Decimal(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToDouble_System_Double_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDouble:System.Double(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToInt16_System_Int16_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt16:System.Int16(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToInt32_System_Int32_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt32:System.Int32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToInt64_System_Int64_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt64:System.Int64(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToSByte_System_SByte_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSByte:System.SByte(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToSingle_System_Single_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSingle:System.Single(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToUInt16_System_UInt16_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt16:System.UInt16(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToUInt32_System_UInt32_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt32:System.UInt32(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToUInt64_System_UInt64_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt64:System.UInt64(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__CheckTypeSecurity_System_Void_System_Type_TypeFilterLevel_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::CheckTypeSecurity:System.Void(System.Type,TypeFilterLevel)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__GetSafeUninitializedObject_System_Object_System_Type_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSafeUninitializedObject:System.Object(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__GetSerializableMembers_System_Reflection_MemberInfo___System_Type_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__GetSerializableMembers_System_Reflection_MemberInfo___System_Type_System_Runtime_Serialization_StreamingContext_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type,System.Runtime.Serialization.StreamingContext)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__GetSurrogateForCyclicalReference_System_Runtime_Serialization_ISerializationSurrogate_System_Runtime_Serialization_ISerializationSurrogate_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSurrogateForCyclicalReference:System.Runtime.Serialization.ISerializationSurrogate(System.Runtime.Serialization.ISerializationSurrogate)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__GetTypeFromAssembly_System_Type_System_Reflection_Assembly_System_String_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetTypeFromAssembly:System.Type(System.Reflection.Assembly,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__GetUninitializedObject_System_Object_System_Type_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetUninitializedObject:System.Object(System.Type)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__PopulateObjectMembers_System_Object_System_Object_System_Reflection_MemberInfo___System_Object___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_Formatter__Deserialize_System_Object_System_IO_Stream_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Deserialize:System.Object(System.IO.Stream)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_Formatter__Serialize_System_Void_System_IO_Stream_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Serialize:System.Void(System.IO.Stream,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_Formatters_Binary_BinaryFormatter__Deserialize_System_Object_System_IO_Stream_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_Formatters_Binary_BinaryFormatter__Serialize_System_Void_System_IO_Stream_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectIDGenerator__GetId_System_Int64_System_Object_System_Boolean__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectIDGenerator__HasId_System_Int64_System_Object_System_Boolean__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__DoFixups_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::DoFixups:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__GetObject_System_Object_System_Int64_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RaiseDeserializationEvent_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseDeserializationEvent:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RaiseOnDeserializingEvent_System_Void_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseOnDeserializingEvent:System.Void(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RecordArrayElementFixup_System_Void_System_Int64_System_Int32_System_Int64_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RecordArrayElementFixup_System_Void_System_Int64_System_Int32___System_Int64_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RecordDelayedFixup_System_Void_System_Int64_System_String_System_Int64_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RecordFixup_System_Void_System_Int64_System_Reflection_MemberInfo_System_Int64_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RegisterObject_System_Void_System_Object_System_Int64_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RegisterObject_System_Void_System_Object_System_Int64_System_Runtime_Serialization_SerializationInfo_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RegisterObject_System_Void_System_Object_System_Int64_System_Runtime_Serialization_SerializationInfo_System_Int64_System_Reflection_MemberInfo_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RegisterObject_System_Void_System_Object_System_Int64_System_Runtime_Serialization_SerializationInfo_System_Int64_System_Reflection_MemberInfo_System_Int32___() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SerializationBinder__BindToName_System_Void_System_Type_System_String__System_String__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String&,System.String&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SerializationBinder__BindToType_System_Type_System_String_System_String_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SerializationObjectManager__RaiseOnSerializedEvent_System_Void__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RaiseOnSerializedEvent:System.Void()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SerializationObjectManager__RegisterObject_System_Void_System_Object_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RegisterObject:System.Void(System.Object)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SurrogateSelector__AddSurrogate_System_Void_System_Type_System_Runtime_Serialization_StreamingContext_System_Runtime_Serialization_ISerializationSurrogate_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::AddSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISerializationSurrogate)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SurrogateSelector__ChainSelector_System_Void_System_Runtime_Serialization_ISurrogateSelector_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::ChainSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SurrogateSelector__GetNextSelector_System_Runtime_Serialization_ISurrogateSelector__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SurrogateSelector__GetSurrogate_System_Runtime_Serialization_ISerializationSurrogate_System_Type_System_Runtime_Serialization_StreamingContext_System_Runtime_Serialization_ISurrogateSelector__() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector&)");
 }
 
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_SurrogateSelector__RemoveSurrogate_System_Void_System_Type_System_Runtime_Serialization_StreamingContext_() noexcept
 {
-	CHAOS_IL2CPP_FAIL();
-	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
-	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+	return ChaosExternalRuntimeFallback("System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::RemoveSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext)");
 }
 
 CHAOS_IL2CPP_ONCE_FLAG chaos_type_init_once_System_Private_CoreLib_System_IO_Stream;
@@ -1941,7 +1739,7 @@ extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kRefl
 // Namespace-scoped extern declaration for kAotMethodCount.
 // (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)
 extern "C" const int kAotMethodCount;
-extern "C" int32_t kChaosExternalRuntimeCount;
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 // ── ABI manifest ──────────────────────────────────────────────
 // Single contiguous struct: header + entries + params in same object
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
@@ -3292,7 +3090,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[105] = {
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[105] = {
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__Convert_System_Object_System_Object_System_Type_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__Convert_System_Object_System_Object_System_TypeCode_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterConverter__ToBoolean_System_Boolean_System_Object_),
@@ -3341,8 +3139,8 @@ extern "C" void* kChaosExternalRuntimeFnTable[105] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__GetTypeFromAssembly_System_Type_System_Reflection_Assembly_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__GetUninitializedObject_System_Object_System_Type_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServices__PopulateObjectMembers_System_Object_System_Object_System_Reflection_MemberInfo___System_Object___),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Reflection_MemberInfo__System_Reflection_MemberInfo____),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Object__System_Object____),
+	nullptr,
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo),
 	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9__7_0),
 	reinterpret_cast<void*>(&chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_FormatterServicesTests___c____9),
@@ -3370,7 +3168,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[105] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RaiseOnDeserializingEvent_System_Void_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RecordArrayElementFixup_System_Void_System_Int64_System_Int32_System_Int64_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RecordArrayElementFixup_System_Void_System_Int64_System_Int32___System_Int64_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__Empty_System_Int32__System_Int32____),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Int32),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RecordDelayedFixup_System_Void_System_Int64_System_String_System_Int64_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Runtime_Serialization_Formatters_System_Runtime_Serialization_ObjectManager__RecordFixup_System_Void_System_Int64_System_Reflection_MemberInfo_System_Int64_),
@@ -3400,6 +3198,282 @@ extern "C" void* kChaosExternalRuntimeFnTable[105] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 105;
+// ── Embedded IL Data for Interpreter Fallback ────────────────
+// ABI export: extern "C" for C-language linkage from managed/NativeAot code
+// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback
+struct ChaosIlDataEntry {
+	const char* subject_id;
+	const uint8_t* il_data;
+	int32_t il_size;
+	void* patch_method;
+	const char* json_data;
+};
+extern "C" int32_t kChaosExternalRuntimeIlCount;
+static const uint8_t s_il_0[] = {
+	0x2A, 
+};
+static const uint8_t s_il_1[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x04, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x30, 0x00, 0x00, 0x0A, 0x2A, 
+
+};
+static const uint8_t s_il_2[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x04, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x30, 0x00, 0x00, 0x0A, 0x2A, 
+
+};
+static const uint8_t s_il_3[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x1D, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_4[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x20, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_5[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x1E, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_6[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x26, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_7[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x27, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_8[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x25, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_9[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x21, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_10[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x22, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_11[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x23, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_12[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x1F, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_13[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x24, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_14[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x28, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_15[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x29, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_16[] = {
+	0x03, 0x72, 0x38, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x28, 0x1C, 0x00, 0x00, 0x0A, 0x28, 0x2A, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_37[] = {
+	0x28, 0x01, 0x00, 0x00, 0x06, 0x2D, 0x0B, 0x28, 0x4B, 0x00, 0x00, 0x06, 0x73, 0xB2, 0x00, 0x00, 0x0A, 0x7A, 0x03, 0x72, 0xF9, 0x12, 0x00, 0x70, 
+	0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x6F, 0xB3, 0x00, 0x00, 0x0A, 0x2C, 0x13, 0x03, 0x6F, 0xB4, 0x00, 0x00, 0x0A, 0x2D, 0x0B, 0x28, 0x2B, 0x00, 
+	0x00, 0x06, 0x73, 0x17, 0x00, 0x00, 0x0A, 0x7A, 0x73, 0xC1, 0x02, 0x00, 0x06, 0x25, 0x02, 0x7B, 0x43, 0x01, 0x00, 0x04, 0x7D, 0x05, 0x02, 0x00, 
+	0x04, 0x25, 0x18, 0x7D, 0x08, 0x02, 0x00, 0x04, 0x25, 0x02, 0x7B, 0x44, 0x01, 0x00, 0x04, 0x7D, 0x06, 0x02, 0x00, 0x04, 0x25, 0x02, 0x7B, 0x45, 
+	0x01, 0x00, 0x04, 0x7D, 0x07, 0x02, 0x00, 0x04, 0x0A, 0x03, 0x02, 0x7B, 0x40, 0x01, 0x00, 0x04, 0x02, 0x7B, 0x41, 0x01, 0x00, 0x04, 0x06, 0x02, 
+	0x7B, 0x42, 0x01, 0x00, 0x04, 0x73, 0x34, 0x02, 0x00, 0x06, 0x25, 0x02, 0x7B, 0x46, 0x01, 0x00, 0x04, 0x7D, 0x9B, 0x01, 0x00, 0x04, 0x0B, 0x7E, 
+	0x49, 0x01, 0x00, 0x04, 0x6F, 0xD0, 0x01, 0x00, 0x06, 0x03, 0x07, 0x73, 0x74, 0x02, 0x00, 0x06, 0x0C, 0x07, 0x08, 0x6F, 0x35, 0x02, 0x00, 0x06, 
+	0x0D, 0xDE, 0x1D, 0x26, 0xFE, 0x1A, 0x13, 0x04, 0x28, 0x2A, 0x00, 0x00, 0x06, 0x11, 0x04, 0x73, 0x7D, 0x00, 0x00, 0x0A, 0x7A, 0x7E, 0x49, 0x01, 
+	0x00, 0x04, 0x6F, 0xD1, 0x01, 0x00, 0x06, 0xDC, 0x09, 0x2A, 
+};
+static const uint8_t s_il_39[] = {
+	0x28, 0x01, 0x00, 0x00, 0x06, 0x2D, 0x0B, 0x28, 0x4B, 0x00, 0x00, 0x06, 0x73, 0xB2, 0x00, 0x00, 0x0A, 0x7A, 0x03, 0x72, 0xF9, 0x12, 0x00, 0x70, 
+	0x28, 0x2F, 0x00, 0x00, 0x0A, 0x73, 0xC1, 0x02, 0x00, 0x06, 0x25, 0x02, 0x7B, 0x43, 0x01, 0x00, 0x04, 0x7D, 0x05, 0x02, 0x00, 0x04, 0x25, 0x18, 
+	0x7D, 0x08, 0x02, 0x00, 0x04, 0x25, 0x02, 0x7B, 0x44, 0x01, 0x00, 0x04, 0x7D, 0x06, 0x02, 0x00, 0x04, 0x0A, 0x7E, 0x49, 0x01, 0x00, 0x04, 0x6F, 
+	0xCC, 0x01, 0x00, 0x06, 0x02, 0x7B, 0x40, 0x01, 0x00, 0x04, 0x02, 0x7B, 0x41, 0x01, 0x00, 0x04, 0x06, 0x02, 0x7B, 0x42, 0x01, 0x00, 0x04, 0x73, 
+	0x55, 0x02, 0x00, 0x06, 0x0B, 0x03, 0x07, 0x02, 0x7B, 0x43, 0x01, 0x00, 0x04, 0x73, 0xD5, 0x01, 0x00, 0x06, 0x0C, 0x07, 0x04, 0x08, 0x6F, 0x56, 
+	0x02, 0x00, 0x06, 0x02, 0x07, 0x7B, 0xB3, 0x01, 0x00, 0x04, 0x7D, 0x46, 0x01, 0x00, 0x04, 0xDE, 0x0B, 0x7E, 0x49, 0x01, 0x00, 0x04, 0x6F, 0xCD, 
+	0x01, 0x00, 0x06, 0xDC, 0x2A, 
+};
+static const uint8_t s_il_40[] = {
+	0x2A, 
+};
+static const uint8_t s_il_41[] = {
+	0x02, 0x28, 0x4F, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_42[] = {
+	0x02, 0x20, 0xFF, 0x00, 0x00, 0x00, 0x73, 0x4C, 0x00, 0x00, 0x0A, 0x28, 0x8B, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_44[] = {
+	0x02, 0x20, 0xFF, 0x00, 0x00, 0x00, 0x73, 0x4C, 0x00, 0x00, 0x0A, 0x28, 0x8B, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_45[] = {
+	0x02, 0x72, 0x70, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x02, 0x73, 0x9E, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_46[] = {
+	0x02, 0x72, 0x8E, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x02, 0x03, 0x16, 0x16, 0x6F, 0x56, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_47[] = {
+	0x02, 0x28, 0x4F, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_48[] = {
+	0x02, 0x72, 0x4E, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x72, 0x56, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x04, 0x72, 
+	0x66, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x8E, 0x69, 0x04, 0x8E, 0x69, 0x2E, 0x0B, 0x28, 0x0E, 0x00, 0x00, 0x06, 0x73, 0x0D, 
+	0x00, 0x00, 0x0A, 0x7A, 0x16, 0x0A, 0x2B, 0x54, 0x03, 0x06, 0x9A, 0x0B, 0x07, 0x14, 0x28, 0x51, 0x00, 0x00, 0x0A, 0x2C, 0x1B, 0x72, 0x56, 0x10, 
+	0x00, 0x70, 0x28, 0x0F, 0x00, 0x00, 0x06, 0x06, 0x8C, 0x23, 0x00, 0x00, 0x01, 0x28, 0x07, 0x00, 0x00, 0x06, 0x73, 0x52, 0x00, 0x00, 0x0A, 0x7A, 
+	0x04, 0x06, 0x9A, 0x0C, 0x08, 0x2C, 0x21, 0x07, 0x75, 0x32, 0x00, 0x00, 0x01, 0x0D, 0x09, 0x2C, 0x0C, 0x09, 0x02, 0x04, 0x06, 0x9A, 0x6F, 0x50, 
+	0x00, 0x00, 0x0A, 0x2B, 0x0B, 0x28, 0x10, 0x00, 0x00, 0x06, 0x73, 0x17, 0x00, 0x00, 0x0A, 0x7A, 0x06, 0x17, 0x58, 0x0A, 0x06, 0x03, 0x8E, 0x69, 
+	0x32, 0xA6, 0x02, 0x2A, 
+};
+static const uint8_t s_il_66[] = {
+	0x03, 0x72, 0x4E, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x02, 0x03, 0x12, 0x00, 0x28, 0xB2, 0x00, 0x00, 0x06, 0x0B, 0x06, 0x2D, 0x46, 
+	0x02, 0x7B, 0x11, 0x00, 0x00, 0x04, 0x07, 0x03, 0xA2, 0x02, 0x7B, 0x10, 0x00, 0x00, 0x04, 0x07, 0x02, 0x02, 0x7B, 0x0E, 0x00, 0x00, 0x04, 0x0D, 
+	0x09, 0x17, 0x58, 0x7D, 0x0E, 0x00, 0x00, 0x04, 0x09, 0x6A, 0x9F, 0x02, 0x7B, 0x10, 0x00, 0x00, 0x04, 0x07, 0x96, 0x0C, 0x02, 0x7B, 0x0E, 0x00, 
+	0x00, 0x04, 0x02, 0x7B, 0x0F, 0x00, 0x00, 0x04, 0x1A, 0x5A, 0x18, 0x5B, 0x31, 0x11, 0x02, 0x28, 0xB5, 0x00, 0x00, 0x06, 0x2B, 0x09, 0x02, 0x7B, 
+	0x10, 0x00, 0x00, 0x04, 0x07, 0x96, 0x0C, 0x04, 0x06, 0x16, 0xFE, 0x01, 0x52, 0x08, 0x2A, 
+};
+static const uint8_t s_il_67[] = {
+	0x03, 0x72, 0x4E, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x02, 0x03, 0x12, 0x00, 0x28, 0xB2, 0x00, 0x00, 0x06, 0x0B, 0x06, 0x2C, 0x0C, 
+	0x04, 0x16, 0x52, 0x02, 0x7B, 0x10, 0x00, 0x00, 0x04, 0x07, 0x96, 0x2A, 0x04, 0x17, 0x52, 0x16, 0x6A, 0x2A, 
+};
+static const uint8_t s_il_72[] = {
+	0x15, 0x0B, 0x38, 0x84, 0x00, 0x00, 0x00, 0x16, 0x0B, 0x02, 0x28, 0xBA, 0x00, 0x00, 0x06, 0x6F, 0x13, 0x01, 0x00, 0x06, 0x0C, 0x2B, 0x6C, 0x08, 
+	0x6F, 0x19, 0x01, 0x00, 0x06, 0x0A, 0x06, 0x6F, 0xF6, 0x00, 0x00, 0x06, 0x2D, 0x1B, 0x28, 0x16, 0x00, 0x00, 0x06, 0x06, 0x7B, 0x1C, 0x00, 0x00, 
+	0x04, 0x8C, 0x24, 0x00, 0x00, 0x01, 0x28, 0x07, 0x00, 0x00, 0x06, 0x73, 0x17, 0x00, 0x00, 0x0A, 0x7A, 0x06, 0x6F, 0xF0, 0x00, 0x00, 0x06, 0x2D, 
+	0x3A, 0x06, 0x6F, 0xFD, 0x00, 0x00, 0x06, 0x2C, 0x0D, 0x02, 0x06, 0x28, 0xBF, 0x00, 0x00, 0x06, 0x07, 0x17, 0x58, 0x0B, 0x2B, 0x10, 0x06, 0x6F, 
+	0xE5, 0x00, 0x00, 0x06, 0x2D, 0x08, 0x02, 0x06, 0x17, 0x28, 0xC3, 0x00, 0x00, 0x06, 0x06, 0x6F, 0xE5, 0x00, 0x00, 0x06, 0x2C, 0x0D, 0x02, 0x06, 
+	0x28, 0xC0, 0x00, 0x00, 0x06, 0x2C, 0x04, 0x07, 0x17, 0x58, 0x0B, 0x08, 0x6F, 0x18, 0x01, 0x00, 0x06, 0x2D, 0x8C, 0x07, 0x3A, 0x76, 0xFF, 0xFF, 
+	0xFF, 0x02, 0x7B, 0x18, 0x00, 0x00, 0x04, 0x2D, 0x2E, 0x02, 0x28, 0xB8, 0x00, 0x00, 0x06, 0x75, 0x19, 0x00, 0x00, 0x02, 0x2C, 0x20, 0x28, 0x1B, 
+	0x00, 0x00, 0x06, 0x02, 0x28, 0xB8, 0x00, 0x00, 0x06, 0x74, 0x19, 0x00, 0x00, 0x02, 0x6F, 0x1B, 0x01, 0x00, 0x06, 0x28, 0x07, 0x00, 0x00, 0x06, 
+	0x73, 0x17, 0x00, 0x00, 0x0A, 0x7A, 0x2A, 0x16, 0x0D, 0x2B, 0x33, 0x02, 0x7B, 0x15, 0x00, 0x00, 0x04, 0x09, 0x9A, 0x0A, 0x2B, 0x18, 0x06, 0x6F, 
+	0xF0, 0x00, 0x00, 0x06, 0x16, 0x31, 0x08, 0x02, 0x06, 0x17, 0x28, 0xC3, 0x00, 0x00, 0x06, 0x06, 0x7B, 0x23, 0x00, 0x00, 0x04, 0x0A, 0x06, 0x2D, 
+	0xE5, 0x02, 0x7B, 0x18, 0x00, 0x00, 0x04, 0x2D, 0x01, 0x2A, 0x09, 0x17, 0x58, 0x0D, 0x09, 0x02, 0x7B, 0x15, 0x00, 0x00, 0x04, 0x8E, 0x69, 0x32, 
+	0xC2, 0x28, 0x23, 0x00, 0x00, 0x06, 0x73, 0x17, 0x00, 0x00, 0x0A, 0x7A, 
+};
+static const uint8_t s_il_73[] = {
+	0x03, 0x16, 0x6A, 0x30, 0x10, 0x72, 0xAE, 0x10, 0x00, 0x70, 0x28, 0x1F, 0x00, 0x00, 0x06, 0x73, 0x79, 0x00, 0x00, 0x0A, 0x7A, 0x02, 0x03, 0x28, 
+	0xBB, 0x00, 0x00, 0x06, 0x0A, 0x06, 0x2C, 0x08, 0x06, 0x6F, 0xEE, 0x00, 0x00, 0x06, 0x2C, 0x02, 0x14, 0x2A, 0x06, 0x6F, 0xF6, 0x00, 0x00, 0x06, 
+	0x2A, 
+};
+static const uint8_t s_il_74[] = {
+	0x02, 0x7B, 0x14, 0x00, 0x00, 0x04, 0x25, 0x2D, 0x03, 0x26, 0x2B, 0x0B, 0x02, 0x7B, 0x1A, 0x00, 0x00, 0x04, 0x6F, 0x54, 0x00, 0x00, 0x06, 0x02, 
+	0x7B, 0x13, 0x00, 0x00, 0x04, 0x25, 0x2D, 0x02, 0x26, 0x2A, 0x14, 0x6F, 0x52, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_75[] = {
+	0x03, 0x6F, 0x1A, 0x00, 0x00, 0x0A, 0x28, 0x2B, 0x01, 0x00, 0x06, 0x0A, 0x06, 0x03, 0x02, 0x7B, 0x1A, 0x00, 0x00, 0x04, 0x6F, 0x25, 0x01, 0x00, 
+	0x06, 0x2A, 
+};
+static const uint8_t s_il_76[] = {
+	0x17, 0x8D, 0x23, 0x00, 0x00, 0x01, 0x0A, 0x06, 0x16, 0x04, 0x9E, 0x02, 0x03, 0x06, 0x05, 0x6F, 0xD2, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_77[] = {
+	0x17, 0x8D, 0x23, 0x00, 0x00, 0x01, 0x0A, 0x06, 0x16, 0x04, 0x9E, 0x02, 0x03, 0x06, 0x05, 0x6F, 0xD2, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_80[] = {
+	0x03, 0x16, 0x6A, 0x31, 0x05, 0x05, 0x16, 0x6A, 0x30, 0x1C, 0x03, 0x16, 0x6A, 0x31, 0x07, 0x72, 0xC0, 0x10, 0x00, 0x70, 0x2B, 0x05, 0x72, 0xDE, 
+	0x10, 0x00, 0x70, 0x28, 0x25, 0x00, 0x00, 0x06, 0x73, 0x79, 0x00, 0x00, 0x0A, 0x7A, 0x04, 0x72, 0x0C, 0x11, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 
+	0x0A, 0x05, 0x04, 0x1A, 0x73, 0x02, 0x01, 0x00, 0x06, 0x0A, 0x02, 0x06, 0x03, 0x05, 0x28, 0xCE, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_81[] = {
+	0x03, 0x16, 0x6A, 0x31, 0x05, 0x05, 0x16, 0x6A, 0x30, 0x1C, 0x03, 0x16, 0x6A, 0x31, 0x07, 0x72, 0xC0, 0x10, 0x00, 0x70, 0x2B, 0x05, 0x72, 0xDE, 
+	0x10, 0x00, 0x70, 0x28, 0x25, 0x00, 0x00, 0x06, 0x73, 0x79, 0x00, 0x00, 0x0A, 0x7A, 0x04, 0x72, 0xFE, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 
+	0x0A, 0x04, 0x75, 0x32, 0x00, 0x00, 0x01, 0x2D, 0x16, 0x28, 0x27, 0x00, 0x00, 0x06, 0x04, 0x6F, 0x1A, 0x00, 0x00, 0x0A, 0x28, 0x07, 0x00, 0x00, 
+	0x06, 0x73, 0x17, 0x00, 0x00, 0x0A, 0x7A, 0x05, 0x04, 0x18, 0x73, 0x02, 0x01, 0x00, 0x06, 0x0A, 0x02, 0x06, 0x03, 0x05, 0x28, 0xCE, 0x00, 0x00, 
+	0x06, 0x2A, 
+};
+static const uint8_t s_il_82[] = {
+	0x02, 0x03, 0x04, 0x14, 0x16, 0x6A, 0x14, 0x28, 0xC8, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_83[] = {
+	0x02, 0x03, 0x04, 0x14, 0x16, 0x6A, 0x14, 0x28, 0xC8, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_84[] = {
+	0x02, 0x03, 0x04, 0x14, 0x16, 0x6A, 0x14, 0x28, 0xC8, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_85[] = {
+	0x02, 0x03, 0x04, 0x14, 0x16, 0x6A, 0x14, 0x28, 0xC8, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_89[] = {
+	0x04, 0x14, 0x51, 0x05, 0x14, 0x51, 0x2A, 
+};
+static const uint8_t s_il_95[] = {
+	0x02, 0x7B, 0x44, 0x00, 0x00, 0x04, 0x25, 0x2D, 0x02, 0x26, 0x2A, 0x02, 0x7B, 0x43, 0x00, 0x00, 0x04, 0x6F, 0x54, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_96[] = {
+	0x03, 0x6F, 0x1A, 0x00, 0x00, 0x0A, 0x28, 0x2B, 0x01, 0x00, 0x06, 0x0A, 0x06, 0x6F, 0x23, 0x01, 0x00, 0x06, 0x2C, 0x28, 0x02, 0x7B, 0x42, 0x00, 
+	0x00, 0x04, 0x03, 0x17, 0x8C, 0x1C, 0x00, 0x00, 0x01, 0x6F, 0x9F, 0x00, 0x00, 0x0A, 0x2C, 0x14, 0x06, 0x03, 0x02, 0x7B, 0x43, 0x00, 0x00, 0x04, 
+	0x6F, 0x24, 0x01, 0x00, 0x06, 0x02, 0x03, 0x28, 0x40, 0x01, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_97[] = {
+	0x03, 0x72, 0x44, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x05, 0x72, 0x6C, 0x11, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x04, 
+	0x73, 0x48, 0x01, 0x00, 0x06, 0x0A, 0x02, 0x7B, 0x45, 0x00, 0x00, 0x04, 0x06, 0x05, 0x6F, 0xA0, 0x00, 0x00, 0x0A, 0x2A, 
+};
+static const uint8_t s_il_98[] = {
+	0x03, 0x72, 0x80, 0x11, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x02, 0x33, 0x0B, 0x28, 0x49, 0x00, 0x00, 0x06, 0x73, 0x17, 0x00, 0x00, 
+	0x0A, 0x7A, 0x03, 0x28, 0x42, 0x01, 0x00, 0x06, 0x2D, 0x10, 0x28, 0x48, 0x00, 0x00, 0x06, 0x72, 0x80, 0x11, 0x00, 0x70, 0x73, 0xA1, 0x00, 0x00, 
+	0x0A, 0x7A, 0x03, 0x6F, 0xAD, 0x00, 0x00, 0x06, 0x0A, 0x03, 0x0B, 0x2B, 0x09, 0x06, 0x0B, 0x06, 0x6F, 0xAD, 0x00, 0x00, 0x06, 0x0A, 0x06, 0x2C, 
+	0x04, 0x06, 0x02, 0x33, 0xF0, 0x06, 0x02, 0x33, 0x10, 0x28, 0x49, 0x00, 0x00, 0x06, 0x72, 0x80, 0x11, 0x00, 0x70, 0x73, 0xA1, 0x00, 0x00, 0x0A, 
+	0x7A, 0x03, 0x0A, 0x03, 0x0C, 0x2B, 0x67, 0x06, 0x07, 0x33, 0x09, 0x02, 0x6F, 0x44, 0x01, 0x00, 0x06, 0x0A, 0x2B, 0x07, 0x06, 0x6F, 0xAD, 0x00, 
+	0x00, 0x06, 0x0A, 0x06, 0x2C, 0x53, 0x06, 0x08, 0x33, 0x10, 0x28, 0x49, 0x00, 0x00, 0x06, 0x72, 0x80, 0x11, 0x00, 0x70, 0x73, 0xA1, 0x00, 0x00, 
+	0x0A, 0x7A, 0x06, 0x07, 0x33, 0x09, 0x02, 0x6F, 0x44, 0x01, 0x00, 0x06, 0x0A, 0x2B, 0x07, 0x06, 0x6F, 0xAD, 0x00, 0x00, 0x06, 0x0A, 0x08, 0x07, 
+	0x33, 0x09, 0x02, 0x6F, 0x44, 0x01, 0x00, 0x06, 0x0C, 0x2B, 0x07, 0x08, 0x6F, 0xAD, 0x00, 0x00, 0x06, 0x0C, 0x06, 0x08, 0x33, 0x10, 0x28, 0x49, 
+	0x00, 0x00, 0x06, 0x72, 0x80, 0x11, 0x00, 0x70, 0x73, 0xA1, 0x00, 0x00, 0x0A, 0x7A, 0x06, 0x2D, 0x96, 0x02, 0x7B, 0x46, 0x00, 0x00, 0x04, 0x0D, 
+	0x02, 0x03, 0x7D, 0x46, 0x00, 0x00, 0x04, 0x09, 0x2C, 0x07, 0x07, 0x09, 0x6F, 0xAB, 0x00, 0x00, 0x06, 0x2A, 
+};
+static const uint8_t s_il_99[] = {
+	0x02, 0x7B, 0x46, 0x00, 0x00, 0x04, 0x2A, 
+};
+static const uint8_t s_il_100[] = {
+	0x03, 0x72, 0x44, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x05, 0x02, 0x51, 0x03, 0x04, 0x73, 0x48, 0x01, 0x00, 0x06, 0x0A, 0x02, 0x7B, 
+	0x45, 0x00, 0x00, 0x04, 0x06, 0x6F, 0xA2, 0x00, 0x00, 0x0A, 0x74, 0x0E, 0x00, 0x00, 0x02, 0x0B, 0x07, 0x2C, 0x02, 0x07, 0x2A, 0x02, 0x7B, 0x46, 
+	0x00, 0x00, 0x04, 0x2C, 0x0F, 0x02, 0x7B, 0x46, 0x00, 0x00, 0x04, 0x03, 0x04, 0x05, 0x6F, 0xAC, 0x00, 0x00, 0x06, 0x2A, 0x14, 0x2A, 
+};
+static const uint8_t s_il_101[] = {
+	0x03, 0x72, 0x44, 0x10, 0x00, 0x70, 0x28, 0x2F, 0x00, 0x00, 0x0A, 0x03, 0x04, 0x73, 0x48, 0x01, 0x00, 0x06, 0x0A, 0x02, 0x7B, 0x45, 0x00, 0x00, 
+	0x04, 0x06, 0x6F, 0xA3, 0x00, 0x00, 0x0A, 0x2A, 
+};
+
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[] = {
+	{ "System.Private.CoreLib/System.Object::.ctor:System.Void()", s_il_0, sizeof(s_il_0), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.Type)", s_il_1, sizeof(s_il_1), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.TypeCode)", s_il_2, sizeof(s_il_2), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToBoolean:System.Boolean(System.Object)", s_il_3, sizeof(s_il_3), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToByte:System.Byte(System.Object)", s_il_4, sizeof(s_il_4), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToChar:System.Char(System.Object)", s_il_5, sizeof(s_il_5), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDateTime:System.DateTime(System.Object)", s_il_6, sizeof(s_il_6), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDecimal:System.Decimal(System.Object)", s_il_7, sizeof(s_il_7), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDouble:System.Double(System.Object)", s_il_8, sizeof(s_il_8), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt16:System.Int16(System.Object)", s_il_9, sizeof(s_il_9), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt32:System.Int32(System.Object)", s_il_10, sizeof(s_il_10), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt64:System.Int64(System.Object)", s_il_11, sizeof(s_il_11), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSByte:System.SByte(System.Object)", s_il_12, sizeof(s_il_12), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSingle:System.Single(System.Object)", s_il_13, sizeof(s_il_13), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt16:System.UInt16(System.Object)", s_il_14, sizeof(s_il_14), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt32:System.UInt32(System.Object)", s_il_15, sizeof(s_il_15), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt64:System.UInt64(System.Object)", s_il_16, sizeof(s_il_16), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)", s_il_37, sizeof(s_il_37), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)", s_il_39, sizeof(s_il_39), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::CheckTypeSecurity:System.Void(System.Type,TypeFilterLevel)", s_il_40, sizeof(s_il_40), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSafeUninitializedObject:System.Object(System.Type)", s_il_41, sizeof(s_il_41), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type)", s_il_42, sizeof(s_il_42), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type,System.Runtime.Serialization.StreamingContext)", s_il_44, sizeof(s_il_44), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSurrogateForCyclicalReference:System.Runtime.Serialization.ISerializationSurrogate(System.Runtime.Serialization.ISerializationSurrogate)", s_il_45, sizeof(s_il_45), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetTypeFromAssembly:System.Type(System.Reflection.Assembly,System.String)", s_il_46, sizeof(s_il_46), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetUninitializedObject:System.Object(System.Type)", s_il_47, sizeof(s_il_47), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])", s_il_48, sizeof(s_il_48), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean&)", s_il_66, sizeof(s_il_66), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean&)", s_il_67, sizeof(s_il_67), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::DoFixups:System.Void()", s_il_72, sizeof(s_il_72), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)", s_il_73, sizeof(s_il_73), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseDeserializationEvent:System.Void()", s_il_74, sizeof(s_il_74), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseOnDeserializingEvent:System.Void(System.Object)", s_il_75, sizeof(s_il_75), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)", s_il_76, sizeof(s_il_76), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)", s_il_77, sizeof(s_il_77), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)", s_il_80, sizeof(s_il_80), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)", s_il_81, sizeof(s_il_81), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64)", s_il_82, sizeof(s_il_82), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo)", s_il_83, sizeof(s_il_83), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo)", s_il_84, sizeof(s_il_84), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])", s_il_85, sizeof(s_il_85), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String&,System.String&)", s_il_89, sizeof(s_il_89), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RaiseOnSerializedEvent:System.Void()", s_il_95, sizeof(s_il_95), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RegisterObject:System.Void(System.Object)", s_il_96, sizeof(s_il_96), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::AddSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISerializationSurrogate)", s_il_97, sizeof(s_il_97), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::ChainSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)", s_il_98, sizeof(s_il_98), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()", s_il_99, sizeof(s_il_99), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector&)", s_il_100, sizeof(s_il_100), nullptr, nullptr },
+	{ "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::RemoveSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext)", s_il_101, sizeof(s_il_101), nullptr, nullptr },
+	{ nullptr, nullptr, 0, nullptr, nullptr }
+};
+
+
 // (no method AOT entries for this module)
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -8074,7 +8148,7 @@ extern "C" const JitEntry kChaosJitEntries[188] =
     { kJitJson_187, 3329u, 0x000000F8u, 0u }
 };
 
-extern "C" const uint32_t kChaosJitEntryCount = 188u;
+extern "C" const CHAOS_IL2CPP_UINT32 kChaosJitEntryCount = 188u;
 
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 extern "C" void ChaosJitRegisterAll() {

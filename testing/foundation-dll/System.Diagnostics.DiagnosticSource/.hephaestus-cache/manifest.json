@@ -3,27 +3,27 @@
   "max_entries": 50,
   "entries": [
     {
-      "cache_key": "System.Diagnostics.DiagnosticSource/diagnostics/8207f6608d4c4be5",
+      "cache_key": "System.Diagnostics.DiagnosticSource/global-ns/aba0f53b6c5f72d2",
       "assembly": "System.Diagnostics.DiagnosticSource",
-      "chunk_slug": "diagnostics",
-      "input_hash": "8207f6608d4c4be58ab6028842ca987cce6686756b066ccad5a6e6a8b437cb33",
-      "cached_at": "2026-06-08T09:05:16Z",
-      "duration_ms": 61327,
-      "commit_hash": "cc4319ace",
-      "entry_exe_size": 6374400,
-      "entry_count": 359,
+      "chunk_slug": "global-ns",
+      "input_hash": "aba0f53b6c5f72d20b5ef31e40b82ea3bef14ee95b690a2142684605f7b5404b",
+      "cached_at": "2026-06-09T20:12:01Z",
+      "duration_ms": 45678,
+      "commit_hash": "20f9980dc",
+      "entry_exe_size": 6437888,
+      "entry_count": 365,
       "status": "valid"
     },
     {
-      "cache_key": "System.Diagnostics.DiagnosticSource/diagnostics/7eadcc4a971d7341",
+      "cache_key": "System.Diagnostics.DiagnosticSource/diagnostics/dbb4259b39bd484a",
       "assembly": "System.Diagnostics.DiagnosticSource",
       "chunk_slug": "diagnostics",
-      "input_hash": "7eadcc4a971d73413716b2452419e7cd17adecaaedcf7311605de33b8c200cdf",
-      "cached_at": "2026-06-07T14:18:59Z",
-      "duration_ms": 33376,
-      "commit_hash": "668ae88cc",
-      "entry_exe_size": 6518784,
-      "entry_count": 538,
+      "input_hash": "dbb4259b39bd484a83895f3ab9c0d8cc113d93460fe05fcd349840801584ce59",
+      "cached_at": "2026-06-09T20:10:36Z",
+      "duration_ms": 42879,
+      "commit_hash": "20f9980dc",
+      "entry_exe_size": 5827584,
+      "entry_count": 359,
       "status": "valid"
     }
   ]

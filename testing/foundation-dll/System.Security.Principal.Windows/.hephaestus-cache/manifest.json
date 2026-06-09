@@ -3,15 +3,15 @@
   "max_entries": 50,
   "entries": [
     {
-      "cache_key": "System.Security.Principal.Windows/global-ns/a95de2f4bf83cc4d",
+      "cache_key": "System.Security.Principal.Windows/global-ns/87873f725d79725a",
       "assembly": "System.Security.Principal.Windows",
       "chunk_slug": "global-ns",
-      "input_hash": "a95de2f4bf83cc4d96f0b2c99e546148b0b55a53b1cc378c687e02f78bd7a0ca",
-      "cached_at": "2026-06-07T14:24:24Z",
-      "duration_ms": 13410,
-      "commit_hash": "8f001edbc",
-      "entry_exe_size": 5097472,
-      "entry_count": 476,
+      "input_hash": "87873f725d79725a4c77bdb7ac9e571d6d4737afac288c16b3f87cb3ebed6c59",
+      "cached_at": "2026-06-09T21:33:18Z",
+      "duration_ms": 33694,
+      "commit_hash": "761dc6d2a",
+      "entry_exe_size": 3713024,
+      "entry_count": 353,
       "status": "valid"
     }
   ]

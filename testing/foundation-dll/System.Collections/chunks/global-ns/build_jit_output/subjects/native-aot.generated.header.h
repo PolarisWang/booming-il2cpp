@@ -6,56 +6,7 @@
 #include "generated_code_compat.h"  // PureTypeHeader for delegate type definitions
 #include "ChaosGeneratedRuntimePrelude.h"  // chaos_managed_array for array-compat checks
 
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
-
-struct chaos_type_Chaos_TestFramework_Sdk___0
-{
-    ThinLockableHeader header{};
-};
-
-struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert
-{
-    ThinLockableHeader header{};
-};
-
-struct chaos_type_System_Private_CoreLib_System_Exception
-{
-    ThinLockableHeader header{};
-    CHAOS_IL2CPP_INTPTR _message = 0;
-    CHAOS_IL2CPP_INTPTR _innerException = 0;
-    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-    CHAOS_IL2CPP_INT32 _HResult = 0;
-};
-
-struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException : public chaos_type_System_Private_CoreLib_System_Exception
-{
-};
-
 struct chaos_type_System_Private_CoreLib_System_Object
-{
-    ThinLockableHeader header{};
-};
-
-struct chaos_type_System_Private_CoreLib_System_Delegate : public chaos_type_System_Private_CoreLib_System_Object
-{
-    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
-    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
-    CHAOS_IL2CPP_UINT32 _pad = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_MulticastDelegate : public chaos_type_System_Private_CoreLib_System_Delegate
-{
-};
-
-struct chaos_type_System_Private_CoreLib_System_Collections_IEnumerable
-{
-    ThinLockableHeader header{};
-};
-
-struct chaos_type_System_Private_CoreLib_System_IDisposable
 {
     ThinLockableHeader header{};
 };
@@ -119,35 +70,7 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
 };
 
-struct chaos_type_Chaos_TestFramework_Sdk___0;
-struct chaos_boxed_type_Chaos_TestFramework_Sdk___0 {
-    PureTypeHeader header{};
-    chaos_valuetype_Chaos_TestFramework_Sdk___0 value{};
-};
-struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-struct chaos_type_System_Private_CoreLib_System_Action {
-    PureTypeHeader header{};
-    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
-    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
-    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
-    CHAOS_IL2CPP_UINT32 _pad = 0;
-};
-struct chaos_boxed_type_System_Private_CoreLib_System_Action;
-struct chaos_type_System_Private_CoreLib_System_Collections_IEnumerable;
-struct chaos_boxed_type_System_Private_CoreLib_System_Collections_IEnumerable;
-struct chaos_type_System_Private_CoreLib_System_Delegate;
-struct chaos_boxed_type_System_Private_CoreLib_System_Delegate;
-struct chaos_type_System_Private_CoreLib_System_Exception;
-struct chaos_boxed_type_System_Private_CoreLib_System_Exception;
-struct chaos_type_System_Private_CoreLib_System_IDisposable;
-struct chaos_boxed_type_System_Private_CoreLib_System_IDisposable;
-struct chaos_type_System_Private_CoreLib_System_MulticastDelegate;
-struct chaos_boxed_type_System_Private_CoreLib_System_MulticastDelegate;
+
 struct chaos_type_System_Private_CoreLib_System_Object;
 struct chaos_boxed_type_System_Private_CoreLib_System_Object;
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly;
@@ -172,15 +95,6 @@ extern "C" HotpatchEntryV0 s_hotpatch_entries[];
 
 namespace chaos::il2cpp::codegen::CombinedSubjects
 {
-extern MethodTable chaos_mt_Chaos_TestFramework_Sdk___0;
-extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-extern MethodTable chaos_mt_System_Private_CoreLib_System_Action;
-extern MethodTable chaos_mt_System_Private_CoreLib_System_Collections_IEnumerable;
-extern MethodTable chaos_mt_System_Private_CoreLib_System_Delegate;
-extern MethodTable chaos_mt_System_Private_CoreLib_System_Exception;
-extern MethodTable chaos_mt_System_Private_CoreLib_System_IDisposable;
-extern MethodTable chaos_mt_System_Private_CoreLib_System_MulticastDelegate;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Object;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName;
@@ -191,19 +105,7 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_String;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
 
-extern const void* chaos_vtable_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException[];
 
-extern CHAOS_IL2CPP_INT32 chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__s_exitCode;
-
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk___0;
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action;
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Collections_IEnumerable;
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate;
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Exception;
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IDisposable;
-extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_MulticastDelegate;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName;
@@ -214,7 +116,18 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Ref
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type;
 
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_String(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Type(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Object(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_MethodBase(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_MethodInfo(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_ConstructorInfo(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_FieldInfo(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_Assembly(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_AssemblyName(void);
+
 CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
+inline CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept { return chaos_value; }
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
 
@@ -231,13 +144,7 @@ extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 
 namespace chaos::il2cpp::codegen::CombinedSubjects
 {
-extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Console_System_Console__get_Error_System_IO_TextWriter__(void) noexcept;
-extern void chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept;
-extern void chaos_external_runtime_System_Private_CoreLib_System_IO_TextWriter__WriteLine_System_Void_System_String_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept;
-extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) noexcept;
-extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept;
 extern void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) noexcept;
-extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1) noexcept;
 
 } // namespace chaos::il2cpp::codegen::CombinedSubjects
 

@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.XmlNodeList::Item:System.Xml.XmlNode(System.Int32)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Xml.XmlNode",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.XmlNodeList::GetEnumerator:System.Collections.IEnumerator()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Collections.IEnumerator",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

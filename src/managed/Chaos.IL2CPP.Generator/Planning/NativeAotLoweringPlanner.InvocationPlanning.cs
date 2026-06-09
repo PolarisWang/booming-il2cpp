@@ -956,7 +956,7 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
             TryCreateExternalRuntimeHelperDefinition(calleeOrTarget, out var helperDef))
         {
             symbol = helperDef.TargetSymbol;
-            extParamAbis = helperDef.ParameterAbis;
+            extParamAbis = helperDef.ParameterAbis.Count > 0 ? helperDef.ParameterAbis : null;
             extReturnAbi = helperDef.ReturnAbi;
             extRawIndices = helperDef.RawArgumentIndices;
             extDirectNativeSymbol = helperDef.DirectNativeSymbol;

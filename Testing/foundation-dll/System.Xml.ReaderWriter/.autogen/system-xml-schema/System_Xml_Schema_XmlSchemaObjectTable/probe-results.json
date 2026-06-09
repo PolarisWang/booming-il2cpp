@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectTable::Contains:System.Boolean(System.Xml.XmlQualifiedName)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaObjectTable::GetEnumerator:System.Collections.IDictionaryEnumerator()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Collections.IDictionaryEnumerator",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

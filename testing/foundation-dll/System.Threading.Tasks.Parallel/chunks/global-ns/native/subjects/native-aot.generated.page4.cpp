@@ -14,6 +14,9 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
+#include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/crypto_stubs.h"
+#include "runtime_stubs/vector_stubs.h"
 #include "enum_stubs.h"
 #include "async_stubs.h"
 #include "exception_stubs.h"
@@ -35,40 +38,6 @@ namespace chaos::il2cpp::codegen::CombinedSubjects {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(CHAOS_IL2CPP_UINT8 chaos_fn_arg_0, CHAOS_IL2CPP_UINT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(double chaos_fn_arg_0, double chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(CHAOS_IL2CPP_INT16 chaos_fn_arg_0, CHAOS_IL2CPP_INT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(CHAOS_IL2CPP_INT8 chaos_fn_arg_0, CHAOS_IL2CPP_INT8 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(float chaos_fn_arg_0, float chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(CHAOS_IL2CPP_UINT16 chaos_fn_arg_0, CHAOS_IL2CPP_UINT16 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(CHAOS_IL2CPP_UINT64 chaos_fn_arg_0, CHAOS_IL2CPP_UINT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(void);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_ArgumentNullException_System_Action__generic(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void chaos_stub_definition_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Void_System_Action__type____method__System_ArgumentNullException(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopStateTests__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopStateTests_Benchmark_Break_1__1(void);
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelLoopStateTests_Benchmark_Stop_0__0(void);
@@ -531,6 +500,838 @@ extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_T
 
 
 
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__134_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 399)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[399];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__134_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_22_Partitionerint_System_Actionint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_22_Partitionerint_System_Actionint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__136_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 403)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[403];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__136_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_22_Partitionerint_System_Actionint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_22_Partitionerint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__138_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 404)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[404];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__138_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_23_Partitionerint_System_ActionintParallelLoopState_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_23_Partitionerint_System_ActionintParallelLoopState_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__140_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 406)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[406];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__140_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_23_Partitionerint_System_ActionintParallelLoopState_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__142_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 407)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[407];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__142_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__144_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 409)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[409];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__144_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__146_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 410)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[410];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__146_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__148_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 412)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[412];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__148_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__150_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 413)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[413];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__150_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__152_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 417)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[417];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__152_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__154_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 418)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[418];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__154_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__156_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 422)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[422];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__156_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
+// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1()
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
+	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__158_0;
+	_s1 = _s0;
+	{
+		if (_s1 == 0)
+		{
+			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 423)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
+					auto& _d_entry = s_hotpatch_entries[423];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, nullptr);
+						return;
+					}
+					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0);
+				};
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s1;
+				const auto chaos_target = _s0;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action.AsTypeInfoHot();
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s1 = _s0;
+			{
+				auto chaos_value = _s1;
+				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__158_0 = chaos_value;
+			}
+		}
+		{
+			// Assert.Throws: target method not found via IL lookahead
+			// (verification skipped — use direct Assert.Throws in SDK for full coverage)
+		}
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		chaos_locals[0] = ChaosStoreInt64(_i0);
+		_i0 = ChaosLoadInt64(chaos_locals[0]);
+		return _i0;
+	}
+}
+
 // Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests::ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_0()
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
@@ -539,7 +1340,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__160_0;
 	_s1 = _s0;
 	{
@@ -547,13 +1352,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 458)
+				// Hotpatch-aware ldftn wrapper (slot 425)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[458];
+					auto& _d_entry = s_hotpatch_entries[425];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -599,7 +1404,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__162_0;
 	_s1 = _s0;
 	{
@@ -607,13 +1416,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 459)
+				// Hotpatch-aware ldftn wrapper (slot 426)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[459];
+					auto& _d_entry = s_hotpatch_entries[426];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -659,7 +1468,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__164_0;
 	_s1 = _s0;
 	{
@@ -667,13 +1480,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 461)
+				// Hotpatch-aware ldftn wrapper (slot 428)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[461];
+					auto& _d_entry = s_hotpatch_entries[428];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -719,7 +1532,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__166_0;
 	_s1 = _s0;
 	{
@@ -727,13 +1544,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 462)
+				// Hotpatch-aware ldftn wrapper (slot 429)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[462];
+					auto& _d_entry = s_hotpatch_entries[429];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -779,7 +1596,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__168_0;
 	_s1 = _s0;
 	{
@@ -787,13 +1608,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 464)
+				// Hotpatch-aware ldftn wrapper (slot 431)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[464];
+					auto& _d_entry = s_hotpatch_entries[431];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -839,7 +1660,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__170_0;
 	_s1 = _s0;
 	{
@@ -847,13 +1672,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 465)
+				// Hotpatch-aware ldftn wrapper (slot 432)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[465];
+					auto& _d_entry = s_hotpatch_entries[432];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -899,7 +1724,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__172_0;
 	_s1 = _s0;
 	{
@@ -907,13 +1736,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 469)
+				// Hotpatch-aware ldftn wrapper (slot 436)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[469];
+					auto& _d_entry = s_hotpatch_entries[436];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -959,7 +1788,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__174_0;
 	_s1 = _s0;
 	{
@@ -967,13 +1800,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 470)
+				// Hotpatch-aware ldftn wrapper (slot 437)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[470];
+					auto& _d_entry = s_hotpatch_entries[437];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1019,7 +1852,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__200_0;
 	_s1 = _s0;
 	{
@@ -1027,13 +1864,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 474)
+				// Hotpatch-aware ldftn wrapper (slot 441)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[474];
+					auto& _d_entry = s_hotpatch_entries[441];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1080,17 +1917,21 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
 	CHAOS_IL2CPP_INT64 _i0;
 	CHAOS_IL2CPP_INT64 _i1;
 	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	CHAOS_IL2CPP_INT64 _i5;
+	CHAOS_IL2CPP_INT64 _i6;
+	CHAOS_IL2CPP_INT64 _i7;
 	{
-		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[75])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__202_0;
@@ -1100,13 +1941,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s1 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 475)
+				// Hotpatch-aware ldftn wrapper (slot 442)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[475];
+					auto& _d_entry = s_hotpatch_entries[442];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[20];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[20];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -1136,43 +1977,24 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (133 < 0 || 133 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 133 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[133] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 133 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[133])(chaos_arg_0, chaos_arg_1);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEachAsync_System_Int32__System_Threading_Tasks_Task_System_Collections_Generic_IEnumerable_System_Int32__System_Func_System_Int32_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask__();
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		chaos_locals[0] = _s1;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+		chaos_locals[0] = _s3;
+		_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 		{
-			if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-			}
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__();
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
-		chaos_locals[1] = ChaosStoreInt64(_i2);
-		_i2 = ChaosLoadInt64(chaos_locals[1]);
-		return _i2;
+		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i5 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s5));
+		chaos_locals[1] = ChaosStoreInt64(_i5);
+		_i5 = ChaosLoadInt64(chaos_locals[1]);
+		return _i5;
 	}
 }
 
@@ -1184,7 +2006,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__204_0;
 	_s1 = _s0;
 	{
@@ -1192,13 +2018,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 476)
+				// Hotpatch-aware ldftn wrapper (slot 443)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[476];
+					auto& _d_entry = s_hotpatch_entries[443];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1246,17 +2072,22 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
 	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
 	CHAOS_IL2CPP_INT64 _i0;
 	CHAOS_IL2CPP_INT64 _i1;
 	CHAOS_IL2CPP_INT64 _i2;
+	CHAOS_IL2CPP_INT64 _i3;
+	CHAOS_IL2CPP_INT64 _i4;
+	CHAOS_IL2CPP_INT64 _i5;
+	CHAOS_IL2CPP_INT64 _i6;
+	CHAOS_IL2CPP_INT64 _i7;
+	CHAOS_IL2CPP_INT64 _i8;
 	{
-		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[75])();
+		const auto chaos_result = chaos_external_runtime_System_Linq_Enumerable__Empty_System_Int32__System_Collections_Generic_IEnumerable_System_Int32___();
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
@@ -1280,13 +2111,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 477)
+				// Hotpatch-aware ldftn wrapper (slot 444)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[477];
+					auto& _d_entry = s_hotpatch_entries[444];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[20];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[20];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
@@ -1316,44 +2147,24 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 			}
 		}
 		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (136 < 0 || 136 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 136 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[136] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 136 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[136])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Threading_Tasks_Parallel_System_Threading_Tasks_Parallel__ForEachAsync_System_Int32__System_Threading_Tasks_Task_System_Collections_Generic_IEnumerable_System_Int32__System_Threading_CancellationToken_System_Func_System_Int32_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask__();
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__();
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		chaos_locals[1] = _s1;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+		chaos_locals[1] = _s4;
+		_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 		{
-			if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-			}
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
+			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-		_i2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
-		chaos_locals[2] = ChaosStoreInt64(_i2);
-		_i2 = ChaosLoadInt64(chaos_locals[2]);
-		return _i2;
+		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+		_i6 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s6));
+		chaos_locals[2] = ChaosStoreInt64(_i6);
+		_i6 = ChaosLoadInt64(chaos_locals[2]);
+		return _i6;
 	}
 }
 
@@ -1365,7 +2176,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__208_0;
 	_s1 = _s0;
 	{
@@ -1373,13 +2188,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 478)
+				// Hotpatch-aware ldftn wrapper (slot 445)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[478];
+					auto& _d_entry = s_hotpatch_entries[445];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1425,7 +2240,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__210_0;
 	_s1 = _s0;
 	{
@@ -1433,13 +2252,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 479)
+				// Hotpatch-aware ldftn wrapper (slot 446)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[479];
+					auto& _d_entry = s_hotpatch_entries[446];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1485,7 +2304,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__212_0;
 	_s1 = _s0;
 	{
@@ -1493,13 +2316,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 481)
+				// Hotpatch-aware ldftn wrapper (slot 448)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[481];
+					auto& _d_entry = s_hotpatch_entries[448];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1545,7 +2368,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__214_0;
 	_s1 = _s0;
 	{
@@ -1553,13 +2380,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 482)
+				// Hotpatch-aware ldftn wrapper (slot 449)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[482];
+					auto& _d_entry = s_hotpatch_entries[449];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1605,7 +2432,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__216_0;
 	_s1 = _s0;
 	{
@@ -1613,13 +2444,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 484)
+				// Hotpatch-aware ldftn wrapper (slot 451)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[484];
+					auto& _d_entry = s_hotpatch_entries[451];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1665,7 +2496,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__218_0;
 	_s1 = _s0;
 	{
@@ -1673,13 +2508,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 485)
+				// Hotpatch-aware ldftn wrapper (slot 452)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[485];
+					auto& _d_entry = s_hotpatch_entries[452];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1725,7 +2560,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__220_0;
 	_s1 = _s0;
 	{
@@ -1733,13 +2572,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 487)
+				// Hotpatch-aware ldftn wrapper (slot 454)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[487];
+					auto& _d_entry = s_hotpatch_entries[454];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1785,7 +2624,11 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
 	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__222_0;
 	_s1 = _s0;
 	{
@@ -1793,13 +2636,13 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 		{
 			_s0 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 488)
+				// Hotpatch-aware ldftn wrapper (slot 455)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0) -> void {
-					auto& _d_entry = s_hotpatch_entries[488];
+					auto& _d_entry = s_hotpatch_entries[455];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
-						alignas(16) uint8_t _d_ab[8];
+						alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[8];
 						ArgBuffer _d_bw(_d_ab);
 						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
 						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
@@ -1837,3834 +2680,1381 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_Threading_Ta
 	}
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::.cctor()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::.cctor:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_cctor(void)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-	CHAOS_IL2CPP_INTPTR _s0;
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c, {});
-		chaos_object->header.type_info = chaos_mt_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c.AsTypeInfoHot();
-		CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		auto chaos_value = _s0;
-		chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9 = chaos_value;
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::.ctor()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::.ctor:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_0_int_int_System_Actionint_3>b__7_0(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_0_int_int_System_Actionint_3>b__7_0:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_0_int_int_System_Actionint_3_b__7_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_1_long_long_System_Actionlong_3>b__15_0(System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_1_long_long_System_Actionlong_3>b__15_0:System.Void(System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_1_long_long_System_Actionlong_3_b__15_0_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__87_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__87_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__87_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__87_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__87_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__87_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__87_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__87_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__87_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__95_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__95_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__95_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__95_1(System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__95_1:System.Int32(System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__95_1_System_Int64_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__95_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__95_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__95_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_2_int_int_ParallelOptions_System_Actionint_3>b__23_0(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_2_int_int_ParallelOptions_System_Actionint_3>b__23_0:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_2_int_int_ParallelOptions_System_Actionint_3_b__23_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_3_long_long_ParallelOptions_System_Actionlong_3>b__31_0(System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_3_long_long_ParallelOptions_System_Actionlong_3>b__31_0:System.Void(System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_3_long_long_ParallelOptions_System_Actionlong_3_b__31_0_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_4_int_int_System_ActionintParallelLoopState_3>b__39_0(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_4_int_int_System_ActionintParallelLoopState_3>b__39_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_4_int_int_System_ActionintParallelLoopState_3_b__39_0_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_5_long_long_System_ActionlongParallelLoopState_3>b__47_0(System.Int64,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_5_long_long_System_ActionlongParallelLoopState_3>b__47_0:System.Void(System.Int64,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_5_long_long_System_ActionlongParallelLoopState_3_b__47_0_System_Int64_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3>b__55_0(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3>b__55_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__55_0_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3>b__63_0(System.Int64,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3>b__63_0:System.Void(System.Int64,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__63_0_System_Int64_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__71_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__71_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__71_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__71_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__71_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__71_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__71_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__71_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__71_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__79_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__79_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__79_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__79_1(System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__79_1:System.Int32(System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__79_1_System_Int64_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__79_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__79_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__79_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3>b__183_0(System.Int64,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3>b__183_0:System.Threading.Tasks.ValueTask(System.Int64,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3_b__183_0_System_Int64_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3>b__191_0(System.Int64,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3>b__191_0:System.Threading.Tasks.ValueTask(System.Int64,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3_b__191_0_System_Int64_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3>b__199_0(System.Int64,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3>b__199_0:System.Threading.Tasks.ValueTask(System.Int64,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__199_0_System_Int64_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_12_IEnumerableint_System_Actionint_1>b__99_0(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_12_IEnumerableint_System_Actionint_1>b__99_0:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_12_IEnumerableint_System_Actionint_1_b__99_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1>b__103_0(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1>b__103_0:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__103_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1>b__107_0(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1>b__107_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1_b__107_0_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1>b__111_0(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1>b__111_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__111_0_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1>b__115_0(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1>b__115_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1_b__115_0_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__119_0(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__119_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__119_0_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__123_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__123_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__123_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__123_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__123_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__123_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__123_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__123_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__123_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__127_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__127_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__127_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__127_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__127_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__127_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__127_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__127_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__127_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__131_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__131_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__131_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__131_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__131_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__131_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	chaos_args[4] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_4);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__131_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__131_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__131_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__135_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__135_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__135_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__135_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__135_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__135_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	chaos_args[4] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_4);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__135_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__135_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__135_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_22_Partitionerint_System_Actionint_1>b__139_0(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_22_Partitionerint_System_Actionint_1>b__139_0:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_22_Partitionerint_System_Actionint_1_b__139_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1>b__143_0(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1>b__143_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__143_0_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1>b__147_0(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1>b__147_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__147_0_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__151_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__151_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__151_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__151_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__151_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__151_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__151_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__151_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__151_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__155_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__155_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__155_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__155_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__155_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__155_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	chaos_args[4] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_4);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__155_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__155_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__155_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1>b__159_0(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1>b__159_0:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__159_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1>b__163_0(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1>b__163_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__163_0_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__167_0(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__167_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__167_0_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__171_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__171_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__171_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__171_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__171_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__171_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__171_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__171_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__171_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__175_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__175_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__175_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__175_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__175_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__175_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	chaos_args[4] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_4);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__175_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__175_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__175_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_1>b__203_0(System.Int32,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_1>b__203_0:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_1_b__203_0_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1>b__207_0(System.Int32,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1>b__207_0:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__207_0_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1>b__211_0(System.Int32,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1>b__211_0:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__211_0_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1>b__215_0(System.Int32,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1>b__215_0:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__215_0_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1>b__219_0(System.Int32,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1>b__219_0:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__219_0_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1>b__223_0(System.Int32,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<Benchmark_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1>b__223_0:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_Benchmark_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__223_0_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_0_int_int_System_Actionint_0>b__0_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_0_int_int_System_Actionint_0>b__0_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_0_int_int_System_Actionint_0_b__0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (26 < 0 || 26 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 26 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[26] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 26 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_0_int_int_System_Actionint_1>b__2_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_0_int_int_System_Actionint_1>b__2_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_0_int_int_System_Actionint_1_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (26 < 0 || 26 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 26 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[26] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 26 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_0_int_int_System_Actionint_2>b__4_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_0_int_int_System_Actionint_2>b__4_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_0_int_int_System_Actionint_2_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (26 < 0 || 26 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 26 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[26] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 26 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_0_int_int_System_Actionint_3>b__6_0(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_0_int_int_System_Actionint_3>b__6_0:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_0_int_int_System_Actionint_3_b__6_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_1_long_long_System_Actionlong_0>b__8_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_1_long_long_System_Actionlong_0>b__8_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_1_long_long_System_Actionlong_0_b__8_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[30])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_1_long_long_System_Actionlong_1>b__10_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_1_long_long_System_Actionlong_1>b__10_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_1_long_long_System_Actionlong_1_b__10_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[30])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_1_long_long_System_Actionlong_2>b__12_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_1_long_long_System_Actionlong_2>b__12_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_1_long_long_System_Actionlong_2_b__12_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (30 < 0 || 30 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 30 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[30] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 30 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[30])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_1_long_long_System_Actionlong_3>b__14_0(System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_1_long_long_System_Actionlong_3>b__14_0:System.Void(System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_1_long_long_System_Actionlong_3_b__14_0_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0>b__80_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0>b__80_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__80_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	_s5 = 0;
-	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (33 < 0 || 33 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 33 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[33] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 33 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__82_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__82_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__82_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	_s5 = 0;
-	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (33 < 0 || 33 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 33 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[33] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 33 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2>b__84_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2>b__84_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2_b__84_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	_s5 = 0;
-	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (33 < 0 || 33 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 33 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[33] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 33 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
 // AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__86_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__86_1()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__86_1:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__86_2(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__86_2:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_2_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__86_3(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__86_3:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_10_int_int_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__86_3_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0>b__88_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0>b__88_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0_b__88_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	_s5 = 0;
-	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (39 < 0 || 39 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 39 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[39] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 39 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[39])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1>b__90_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1>b__90_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1_b__90_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	_s5 = 0;
-	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (39 < 0 || 39 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 39 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[39] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 39 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[39])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2>b__92_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2>b__92_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2_b__92_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	_s5 = 0;
-	{
-		const auto chaos_arg_5 = _s5;
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (39 < 0 || 39 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 39 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[39] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 39 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[39])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4, chaos_arg_5);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
 // AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__94_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__94_1()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__94_1:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__94_2(System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__94_2:System.Int32(System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_2_System_Int64_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__94_3(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__94_3:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_11_long_long_ParallelOptions_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__94_3_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_0>b__16_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_0>b__16_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_2_int_int_ParallelOptions_System_Actionint_0_b__16_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[44])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_1>b__18_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_1>b__18_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_2_int_int_ParallelOptions_System_Actionint_1_b__18_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[44])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_2>b__20_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_2>b__20_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_2_int_int_ParallelOptions_System_Actionint_2_b__20_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[44])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_3>b__22_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_3>b__22_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_2_int_int_ParallelOptions_System_Actionint_3_b__22_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__22_1;
-	_s4 = _s3;
-	{
-		if (_s4 == 0)
-		{
-			_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 354)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> void {
-					auto& _d_entry = s_hotpatch_entries[354];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[12];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s4;
-				const auto chaos_target = _s3;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s4 = _s3;
-			{
-				auto chaos_value = _s4;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__22_1 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_3 = _s3;
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (44 < 0 || 44 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 44 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[44] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 44 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[44])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_3>b__22_1(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_2_int_int_ParallelOptions_System_Actionint_3>b__22_1:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_2_int_int_ParallelOptions_System_Actionint_3_b__22_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_0>b__24_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_0>b__24_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_3_long_long_ParallelOptions_System_Actionlong_0_b__24_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (46 < 0 || 46 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 46 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[46] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 46 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_1>b__26_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_1>b__26_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_3_long_long_ParallelOptions_System_Actionlong_1_b__26_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (46 < 0 || 46 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 46 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[46] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 46 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_2>b__28_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_2>b__28_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_3_long_long_ParallelOptions_System_Actionlong_2_b__28_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (46 < 0 || 46 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 46 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[46] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 46 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_3>b__30_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_3>b__30_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_3_long_long_ParallelOptions_System_Actionlong_3_b__30_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__30_1;
-	_s4 = _s3;
-	{
-		if (_s4 == 0)
-		{
-			_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 359)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1) -> void {
-					auto& _d_entry = s_hotpatch_entries[359];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[16];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_1));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT64)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s4;
-				const auto chaos_target = _s3;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int64_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int64_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s4 = _s3;
-			{
-				auto chaos_value = _s4;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__30_1 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_3 = _s3;
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _i1;
-			const auto chaos_arg_0 = _i0;
-			if (46 < 0 || 46 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 46 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[46] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 46 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_3>b__30_1(System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_3_long_long_ParallelOptions_System_Actionlong_3>b__30_1:System.Void(System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_3_long_long_ParallelOptions_System_Actionlong_3_b__30_1_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_4_int_int_System_ActionintParallelLoopState_0>b__32_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_4_int_int_System_ActionintParallelLoopState_0>b__32_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_4_int_int_System_ActionintParallelLoopState_0_b__32_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (48 < 0 || 48 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 48 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[48] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 48 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_4_int_int_System_ActionintParallelLoopState_1>b__34_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_4_int_int_System_ActionintParallelLoopState_1>b__34_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_4_int_int_System_ActionintParallelLoopState_1_b__34_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (48 < 0 || 48 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 48 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[48] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 48 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_4_int_int_System_ActionintParallelLoopState_2>b__36_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_4_int_int_System_ActionintParallelLoopState_2>b__36_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_4_int_int_System_ActionintParallelLoopState_2_b__36_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (48 < 0 || 48 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 48 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[48] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 48 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_4_int_int_System_ActionintParallelLoopState_3>b__38_0(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_4_int_int_System_ActionintParallelLoopState_3>b__38_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_4_int_int_System_ActionintParallelLoopState_3_b__38_0_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_5_long_long_System_ActionlongParallelLoopState_0>b__40_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_5_long_long_System_ActionlongParallelLoopState_0>b__40_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_5_long_long_System_ActionlongParallelLoopState_0_b__40_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (51 < 0 || 51 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 51 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[51] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 51 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_5_long_long_System_ActionlongParallelLoopState_1>b__42_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_5_long_long_System_ActionlongParallelLoopState_1>b__42_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_5_long_long_System_ActionlongParallelLoopState_1_b__42_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (51 < 0 || 51 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 51 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[51] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 51 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_5_long_long_System_ActionlongParallelLoopState_2>b__44_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_5_long_long_System_ActionlongParallelLoopState_2>b__44_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_5_long_long_System_ActionlongParallelLoopState_2_b__44_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (51 < 0 || 51 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 51 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[51] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 51 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_5_long_long_System_ActionlongParallelLoopState_3>b__46_0(System.Int64,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_5_long_long_System_ActionlongParallelLoopState_3>b__46_0:System.Void(System.Int64,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_5_long_long_System_ActionlongParallelLoopState_3_b__46_0_System_Int64_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_0>b__48_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_0>b__48_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_0_b__48_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_1>b__50_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_1>b__50_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_1_b__50_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_2>b__52_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_2>b__52_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_2_b__52_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[54] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3>b__54_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3>b__54_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__54_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__54_1;
-	_s4 = _s3;
-	{
-		if (_s4 == 0)
-		{
-			_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 372)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> void {
-					auto& _d_entry = s_hotpatch_entries[372];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[20];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-				};
-			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s4;
-				const auto chaos_target = _s3;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s4 = _s3;
-			{
-				auto chaos_value = _s4;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__54_1 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_3 = _s3;
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (54 < 0 || 54 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 54 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[54] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 54 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3>b__54_1(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3>b__54_1:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_6_int_int_ParallelOptions_System_ActionintParallelLoopState_3_b__54_1_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_0>b__56_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_0>b__56_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_0_b__56_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (56 < 0 || 56 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 56 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[56] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 56 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_1>b__58_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_1>b__58_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_1_b__58_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (56 < 0 || 56 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 56 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[56] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 56 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_2>b__60_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_2>b__60_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_2_b__60_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (56 < 0 || 56 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 56 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[56] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 56 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3>b__62_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3>b__62_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__62_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__62_1;
-	_s4 = _s3;
-	{
-		if (_s4 == 0)
-		{
-			_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 377)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> void {
-					auto& _d_entry = s_hotpatch_entries[377];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[24];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_1));
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT64, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-				};
-			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s4;
-				const auto chaos_target = _s3;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int64_System_Threading_Tasks_ParallelLoopState_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int64_System_Threading_Tasks_ParallelLoopState_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s4 = _s3;
-			{
-				auto chaos_value = _s4;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__62_1 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_3 = _s3;
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _i1;
-			const auto chaos_arg_0 = _i0;
-			if (56 < 0 || 56 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 56 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[56] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 56 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3>b__62_1(System.Int64,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3>b__62_1:System.Void(System.Int64,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_7_long_long_ParallelOptions_System_ActionlongParallelLoopState_3_b__62_1_System_Int64_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0>b__64_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0>b__64_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__64_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (58 < 0 || 58 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 58 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[58] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 58 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__66_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__66_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__66_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (58 < 0 || 58 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 58 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[58] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 58 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2>b__68_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2>b__68_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_2_b__68_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (58 < 0 || 58 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 58 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[58] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 58 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__70_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__70_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__70_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__70_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__70_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__70_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__70_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3>b__70_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_8_int_int_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_3_b__70_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0>b__72_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0>b__72_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_0_b__72_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (62 < 0 || 62 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 62 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[62] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 62 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1>b__74_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1>b__74_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_1_b__74_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (62 < 0 || 62 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 62 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[62] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 62 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2>b__76_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2>b__76_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_2_b__76_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	_s4 = 0;
-	{
-		const auto chaos_arg_4 = _s4;
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (62 < 0 || 62 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 62 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[62] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 62 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, chaos_arg_4);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__78_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__78_0:System.Int32()
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__78_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__78_1(System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__78_1:System.Int32(System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32)
 extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__78_1_System_Int64_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__78_2(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3>b__78_2:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_For_9_long_long_System_Funcint_System_FunclongParallelLoopStateintint_System_Actionint_3_b__78_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_0>b__176_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_0>b__176_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_0_b__176_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (66 < 0 || 66 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 66 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[66] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 66 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = ChaosStoreInt64(_s1);
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_1>b__178_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_1>b__178_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_1_b__178_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (66 < 0 || 66 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 66 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[66] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 66 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = ChaosStoreInt64(_s1);
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_2>b__180_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_2>b__180_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_2_b__180_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (66 < 0 || 66 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 66 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[66] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 66 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = ChaosStoreInt64(_s1);
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3>b__182_0(System.Int64,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3>b__182_0:System.Threading.Tasks.ValueTask(System.Int64,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_32_long_long_System_FunclongCancellationTokenValueTask_3_b__182_0_System_Int64_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_0>b__184_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_0>b__184_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_0_b__184_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s2;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s2 = chaos_locals[0];
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (70 < 0 || 70 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 70 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[70] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 70 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[1] = _s1;
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_1>b__186_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_1>b__186_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_1_b__186_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s2;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s2 = chaos_locals[0];
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (70 < 0 || 70 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 70 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[70] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 70 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[1] = _s1;
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_2>b__188_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_2>b__188_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_2_b__188_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s2;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s2 = chaos_locals[0];
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (70 < 0 || 70 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 70 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[70] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 70 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[1] = _s1;
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3>b__190_0(System.Int64,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3>b__190_0:System.Threading.Tasks.ValueTask(System.Int64,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_33_long_long_CancellationToken_System_FunclongCancellationTokenValueTask_3_b__190_0_System_Int64_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_0>b__192_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_0>b__192_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_0_b__192_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (72 < 0 || 72 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 72 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[72] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 72 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = ChaosStoreInt64(_s1);
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_1>b__194_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_1>b__194_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_1_b__194_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (72 < 0 || 72 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 72 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[72] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 72 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = ChaosStoreInt64(_s1);
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_2>b__196_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_2>b__196_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_2_b__196_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = 0;
-	{
-		const auto chaos_arg_3 = _s3;
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _i1;
-		const auto chaos_arg_0 = _i0;
-		if (72 < 0 || 72 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 72 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[72] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 72 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[0] = ChaosStoreInt64(_s1);
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-		}
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3>b__198_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3>b__198_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__198_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INT64 _i0;
-	CHAOS_IL2CPP_INT64 _i1;
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_i1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(ChaosLoadInt64(_s1)));
-	_s2 = 0;
-	_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__198_1;
-	_s4 = _s3;
-	{
-		if (_s4 == 0)
-		{
-			_s3 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 402)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[402];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[24];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_1));
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
-						CHAOS_IL2CPP_INTPTR _d_ret{};
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, &_d_ret);
-						return _d_ret;
-					}
-					return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT64, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-				};
-			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s4;
-				const auto chaos_target = _s3;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int64_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Int64_System_Threading_CancellationToken_System_Threading_Tasks_ValueTask_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s4 = _s3;
-			{
-				auto chaos_value = _s4;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__198_1 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_3 = _s3;
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _i1;
-			const auto chaos_arg_0 = _i0;
-			if (72 < 0 || 72 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 72 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[72] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 72 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		{
-			if (204 < 0 || 204 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 204 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[204] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 204 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[204])();
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		chaos_locals[0] = _s1;
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-		{
-			if (205 < 0 || 205 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 205 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[205] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 205 is null
-			}
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[205])();
-		}
-		return;
-	}
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3>b__198_1(System.Int64,System.Threading.CancellationToken)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3>b__198_1:System.Threading.Tasks.ValueTask(System.Int64,System.Threading.CancellationToken)
 extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForAsync_34_long_long_ParallelOptions_System_FunclongCancellationTokenValueTask_3_b__198_1_System_Int64_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = ChaosStoreInt64(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s0 = chaos_locals[0];
-	return _s0;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_12_IEnumerableint_System_Actionint_0>b__96_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_12_IEnumerableint_System_Actionint_0>b__96_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_12_IEnumerableint_System_Actionint_0_b__96_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (74 < 0 || 74 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 74 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[74] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 74 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_12_IEnumerableint_System_Actionint_1>b__98_0(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_12_IEnumerableint_System_Actionint_1>b__98_0:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_12_IEnumerableint_System_Actionint_1_b__98_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_0>b__100_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_0>b__100_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_0_b__100_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (77 < 0 || 77 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 77 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[77] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 77 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[77])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1>b__102_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1>b__102_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__102_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	{
-		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[75])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = 0;
-	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__102_1;
-	_s3 = _s2;
-	{
-		if (_s3 == 0)
-		{
-			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 407)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> void {
-					auto& _d_entry = s_hotpatch_entries[407];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[12];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-				};
-			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s3;
-				const auto chaos_target = _s2;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s3 = _s2;
-			{
-				auto chaos_value = _s3;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__102_1 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (77 < 0 || 77 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 77 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[77] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 77 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[77])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1>b__102_1(System.Int32)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1>b__102_1:System.Void(System.Int32)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_13_IEnumerableint_ParallelOptions_System_Actionint_1_b__102_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_14_IEnumerableint_System_ActionintParallelLoopState_0>b__104_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_14_IEnumerableint_System_ActionintParallelLoopState_0>b__104_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_14_IEnumerableint_System_ActionintParallelLoopState_0_b__104_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (79 < 0 || 79 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 79 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[79] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 79 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1>b__106_0(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1>b__106_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_14_IEnumerableint_System_ActionintParallelLoopState_1_b__106_0_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_0>b__108_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_0>b__108_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_0_b__108_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (81 < 0 || 81 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 81 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[81] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 81 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[81])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1>b__110_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1>b__110_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__110_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	{
-		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[75])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = 0;
-	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__110_1;
-	_s3 = _s2;
-	{
-		if (_s3 == 0)
-		{
-			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 412)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2) -> void {
-					auto& _d_entry = s_hotpatch_entries[412];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[20];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-				};
-			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s3;
-				const auto chaos_target = _s2;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s3 = _s2;
-			{
-				auto chaos_value = _s3;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__110_1 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (81 < 0 || 81 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 81 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[81] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 81 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[81])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1>b__110_1(System.Int32,System.Threading.Tasks.ParallelLoopState)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1>b__110_1:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_15_IEnumerableint_ParallelOptions_System_ActionintParallelLoopState_1_b__110_1_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_0>b__112_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_0>b__112_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_0_b__112_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = 0;
-	_s1 = 0;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (83 < 0 || 83 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 83 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[83] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 83 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[83])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1>b__114_0(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1>b__114_0:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_16_IEnumerableint_System_ActionintParallelLoopStatelong_1_b__114_0_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_0>b__116_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_0>b__116_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_0_b__116_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = 0;
-	_s1 = 0;
-	_s2 = 0;
-	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		if (86 < 0 || 86 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 86 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[86] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 86 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[86])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return;
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__118_0()
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__118_0:System.Void()
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__118_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	{
-		if (75 < 0 || 75 >= kChaosExternalRuntimeCount) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table index 75 out of range
-		}
-		if (kChaosExternalRuntimeFnTable[75] == nullptr) {
-			CHAOS_IL2CPP_FAIL(); // external runtime table entry 75 is null
-		}
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[75])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = 0;
-	_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__118_1;
-	_s3 = _s2;
-	{
-		if (_s3 == 0)
-		{
-			_s2 = chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9;
-			{
-				// Hotpatch-aware ldftn wrapper (slot 417)
-				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3) -> void {
-					auto& _d_entry = s_hotpatch_entries[417];
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-					{
-						alignas(16) uint8_t _d_ab[28];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_2));
-						_d_bw.WriteI64(ChaosLoadInt64(chaos_fn_arg_3));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d_entry.method_key, _d_ab, nullptr);
-						return;
-					}
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT64)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
-				};
-			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-			}
-			{
-				const auto chaos_method_ptr = _s3;
-				const auto chaos_target = _s2;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_, {});
-				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Action_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_.AsTypeInfoHot();
-				chaos_object->chaos_delegate_target = chaos_target;
-				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-			}
-			_s3 = _s2;
-			{
-				auto chaos_value = _s3;
-				chaos_static_CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c____9__118_1 = chaos_value;
-			}
-		}
-		{
-			const auto chaos_arg_2 = _s2;
-			const auto chaos_arg_1 = _s1;
-			const auto chaos_arg_0 = _s0;
-			if (86 < 0 || 86 >= kChaosExternalRuntimeCount) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table index 86 out of range
-			}
-			if (kChaosExternalRuntimeFnTable[86] == nullptr) {
-				CHAOS_IL2CPP_FAIL(); // external runtime table entry 86 is null
-			}
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[86])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return;
-	}
+	CHAOS_IL2CPP_FAIL();
 }
 
-// Managed method: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__118_1(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__118_1:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
 extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_17_IEnumerableint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__118_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3)
 {
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = ChaosStoreInt64(chaos_fn_arg_3);
-	return;
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0>b__120_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__120_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__122_0:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__122_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__122_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__122_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__122_2:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_18_IEnumerableint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__122_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0>b__124_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__124_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__126_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__126_1:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__126_2:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_2_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__126_3:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_19_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__126_3_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0>b__128_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__128_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__130_0:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__130_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__130_1:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__130_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__130_2:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_20_IEnumerableint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__130_2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0>b__132_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__132_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__134_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__134_1:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__134_2:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_2_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__134_3:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_21_IEnumerableint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__134_3_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_22_Partitionerint_System_Actionint_0>b__136_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_22_Partitionerint_System_Actionint_0_b__136_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_22_Partitionerint_System_Actionint_1>b__138_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_22_Partitionerint_System_Actionint_1_b__138_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_22_Partitionerint_System_Actionint_1>b__138_1:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_22_Partitionerint_System_Actionint_1_b__138_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_23_Partitionerint_System_ActionintParallelLoopState_0>b__140_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_23_Partitionerint_System_ActionintParallelLoopState_0_b__140_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_23_Partitionerint_System_ActionintParallelLoopState_1>b__142_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__142_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_23_Partitionerint_System_ActionintParallelLoopState_1>b__142_1:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_23_Partitionerint_System_ActionintParallelLoopState_1_b__142_1_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0>b__144_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_0_b__144_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1>b__146_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__146_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1>b__146_1:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_24_OrderablePartitionerint_System_ActionintParallelLoopStatelong_1_b__146_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0>b__148_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__148_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__150_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__150_1:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__150_2:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_2_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__150_3:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_25_Partitionerint_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__150_3_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0>b__152_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__152_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__154_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__154_1:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__154_2:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_2_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__154_3:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_26_OrderablePartitionerint_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__154_3_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0>b__156_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_0_b__156_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1>b__158_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__158_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1>b__158_1:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_27_Partitionerint_ParallelOptions_System_Actionint_1_b__158_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_0>b__160_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_0_b__160_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1>b__162_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__162_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1>b__162_1:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_28_Partitionerint_ParallelOptions_System_ActionintParallelLoopState_1_b__162_1_System_Int32_System_Threading_Tasks_ParallelLoopState(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_0>b__164_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_0_b__164_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__166_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__166_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1>b__166_1:System.Void(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_29_OrderablePartitionerint_ParallelOptions_System_ActionintParallelLoopStatelong_1_b__166_1_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0>b__168_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_0_b__168_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__170_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__170_1:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__170_2:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_2_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT32 chaos_fn_arg_3)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1>b__170_3:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_30_Partitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStateintint_System_Actionint_1_b__170_3_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0>b__172_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_0_b__172_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__174_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__174_1:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__174_2:System.Int32(System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_2_System_Int32_System_Threading_Tasks_ParallelLoopState_System_Int64_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INT64 chaos_fn_arg_3, CHAOS_IL2CPP_INT32 chaos_fn_arg_4)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1>b__174_3:System.Void(System.Int32)
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEach_31_OrderablePartitionerint_ParallelOptions_System_Funcint_System_FuncintParallelLoopStatelongintint_System_Actionint_1_b__174_3_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_0>b__200_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_0_b__200_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_1>b__202_0:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_35_IEnumerableint_System_FuncintCancellationTokenValueTask_1_b__202_0_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0>b__204_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0_b__204_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1>b__206_0:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_36_IEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__206_0_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0>b__208_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0_b__208_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1>b__210_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__210_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1>b__210_1:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_37_IEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__210_1_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_0>b__212_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_0_b__212_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1>b__214_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__214_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1>b__214_1:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_38_IAsyncEnumerableint_System_FuncintCancellationTokenValueTask_1_b__214_1_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0>b__216_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_0_b__216_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1>b__218_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__218_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1>b__218_1:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_39_IAsyncEnumerableint_CancellationToken_System_FuncintCancellationTokenValueTask_1_b__218_1_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0>b__220_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_0_b__220_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1>b__222_0:System.Void()
+extern "C" void CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__222_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	CHAOS_IL2CPP_FAIL();
+}
+
+// AOT-unreachable stub: CombinedSubjects/AutoGenerated.System_Threading_Tasks_Parallel.System_Threading_Tasks_ParallelTests+<>c::<ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1>b__222_1:System.Threading.Tasks.ValueTask(System.Int32,System.Threading.CancellationToken)
+extern "C" CHAOS_IL2CPP_INTPTR CombinedSubjects_AutoGenerated_System_Threading_Tasks_Parallel_System_Threading_Tasks_ParallelTests___c_ForEachAsync_40_IAsyncEnumerableint_ParallelOptions_System_FuncintCancellationTokenValueTask_1_b__222_1_System_Int32_System_Threading_CancellationToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_FAIL();
 }
 
 
 
 }  // namespace chaos::il2cpp::codegen::CombinedSubjects
 #pragma warning(pop)
-
-// extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 491;
-// Codegen stub count — pipeline checks this
-extern "C" const int kCodegenFailureCount = 24;
-
-extern "C" void ChaosJitRegisterAll() {}
