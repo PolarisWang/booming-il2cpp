@@ -944,3 +944,20 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "cacheKey": cache_key,
         },
         duration_ms=duration_ms)
+
+def _patch_generated_extern_c(native_dir: Path) -> bool:
+    """Post-patch generated native-aot.generated.cpp to fix extern "C" syntax.
+    The linter corrupted ModuleRegistration.cs which generates bad C++ code.
+    """
+    patched = False
+    for subdir in ("subjects", "codegen/generated"):
+        f = native_dir / subdir / "native-aot.generated.cpp"
+        if not f.exists(): continue
+        content = f.read_text(encoding="utf-8", errors="replace")
+        c2 = content.replace('extern "C" kChaosExternalRuntimeIlData[]', 'extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[]')
+        c2 = c2.replace('extern "C" int32_t kChaosExternalRuntimeIlCount;', 'extern "C" int32_t kChaosExternalRuntimeCount = 0; // patched')
+        if c2 != content:
+            f.write_text(c2, encoding="utf-8")
+            print(f"  [build] Patched extern C syntax in {subdir}/")
+            patched = True
+    return patched
