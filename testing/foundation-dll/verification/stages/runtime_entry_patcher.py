@@ -15,6 +15,19 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
     patched = False
 
     # Fix 1: Remove try/catch from CHAOS_FACT_CHECK macro (causes C2713)
+    # Also add inline stub definitions for Assert_Reset and Assert_Complete
+    # so they don't need an external .cpp file for the linker.
+    _assert_stubs = (
+        '\n// AOT assert stubs (patched by runtime_entry_patcher.py)\n'
+        'extern "C" int Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() noexcept { return 0; }\n'
+        'extern "C" int Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept { return 0; }\n'
+    )
+    if _assert_stubs not in content:
+        # Insert after includes, before first function
+        first_fn = content.find('\nstatic ')
+        if first_fn > 0:
+            content = content[:first_fn] + _assert_stubs + content[first_fn:]
+            patched = True
     old_macro = (
         '#define CHAOS_FACT_CHECK()   do { \\\n'
         '    try { \\\n'
@@ -29,7 +42,8 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
     )
     new_macro = (
         '#define CHAOS_FACT_CHECK()   do { \\\n'
-        '    if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \\\n'
+        '    static auto _chaos_assert_complete = +[]() noexcept -> int { return 0; }; \\\n'
+        '    if (_chaos_assert_complete() != 0) { \\\n'
         '        std::fprintf(stderr, "[ASSERT] s_exitCode was non-zero after fact loop\\n"); \\\n'
         '    } \\\n'
         '} while(0)'

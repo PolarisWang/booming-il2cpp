@@ -812,11 +812,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # The linter may corrupt 'extern "C"' in generated code (missing types).
     _patch_generated_extern_c(ctx.native_dir)
 
-    # ── Ensure Assert_Reset/Assert_Complete stub definitions exist ──
-    # The CHAOS_FACT_CHECK macro calls these but the managed SDK DLL may not
-    # export them as C-linkage symbols in AOT mode.  Provide stub definitions.
-    _ensure_assert_stubs(ctx.native_dir)
-
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
         # ── Post-generation patch: register interop stubs for unresolvable bridge thunks ──
