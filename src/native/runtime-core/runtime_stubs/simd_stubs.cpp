@@ -62,14 +62,13 @@ V128 ChaosSimd_V128_CmpEq_I32(V128 a, V128 b) noexcept {
     return result;
 }
 
-V128 ChaosSimd_V128_Shl_I32(V128 a, V128 b) noexcept {
+V128 ChaosSimd_V128_Shl_I32(ChaosSimdV128 a, CHAOS_IL2CPP_INT32 b) noexcept {
     __m128i va = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&a));
-    // b is a vector carrier; shift count is in lane 0
-    __m128i vb = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&b));
-    __m128i vr = _mm_sll_epi32(va, vb);
+    __m128i vr = _mm_slli_epi32(va, b);
     V128 result;
     _mm_storeu_si128(reinterpret_cast<__m128i*>(&result), vr);
     return result;
+}
 }
 
 // ════════════════════════════════════════════════════════════
