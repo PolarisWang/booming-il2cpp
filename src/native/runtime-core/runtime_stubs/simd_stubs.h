@@ -55,6 +55,6 @@ ChaosSimdV256 ChaosSimd_V256_CmpEq_I32(ChaosSimdV256 a, ChaosSimdV256 b) noexcep
 ChaosSimdV256 ChaosSimd_V256_CmpEq_F32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
 
 // ── Vector256 shift ──
-V256 ChaosSimd_V256_Shl_I32(V256 a, V256 b) noexcept;
+ChaosSimdV256 ChaosSimd_V256_Shl_I32(ChaosSimdV256 a, CHAOS_IL2CPP_INT32 b) noexcept;
 
 }  // extern "C"
