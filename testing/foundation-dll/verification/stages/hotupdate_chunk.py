@@ -510,8 +510,22 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         print(f"  [hotupdate] Running without --patch-data (no semantic change expected)...")
 
     # When patch data is available, run benchmark before/after for performance comparison
-    # Use 50 iterations — enough for rough perf comparison without making hotupdate stage too slow
-    benchmark_iterations = 50 if patch_data_path else 0
+    # Scale iterations by chunk size: 5 for small (<500), 2 for medium, 0 (disabled) for large
+    method_count = len(hotupdate_indices)
+    if patch_data_path:
+        if method_count > 2000:
+            benchmark_iterations = 0  # skip benchmark for large chunks
+        elif method_count > 500:
+            benchmark_iterations = 2
+        else:
+            benchmark_iterations = 5
+    else:
+        benchmark_iterations = 0  # no patch data, no benchmark needed
+
+    # Scale timeout by chunk size: 3s per method for 3 passes (baseline/patched/revert)
+    hotupdate_timeout = max(120, 60 + method_count * 3)
+    print(f"  [hotupdate] {method_count} subjects, timeout={hotupdate_timeout}s, benchmark_iters={benchmark_iterations}")
+
     if benchmark_iterations > 0:
         hotupdate_args.extend(["--benchmark-iterations", str(benchmark_iterations)])
         print(f"  [hotupdate] With before/after benchmark ({benchmark_iterations} iter)...")
@@ -519,12 +533,12 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     try:
         r = subprocess.run(
             hotupdate_args,
-            capture_output=True, text=True, timeout=120,
+            capture_output=True, text=True, timeout=hotupdate_timeout,
         )
     except subprocess.TimeoutExpired:
         return StageResult(
             stage="hotupdate", status="error",
-            summary="hotupdate timed out after 120s",
+            summary=f"hotupdate timed out after {hotupdate_timeout}s",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
