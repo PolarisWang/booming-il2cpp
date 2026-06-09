@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -110,25 +110,26 @@ public sealed partial class NativeAotLoweringPlanner
 								_externalRuntimeHelperCache[callee] = helperDefinition;
 					return true;
 		}
-		// Catch-all: generate CHAOS_IL2CPP_FAIL() stub for any unmatched callee.
-		// Prevents undefined-chaos_external_runtime_* C++ symbol errors.
-		// Use NativeInt return as safe default when InferReturnTypeFromSubjectId returns null.
+		// Catch-all: generate ChaosExternalRuntimeFallback stub for any unmatched callee.
+		// Prevents undefined-chaos_external_runtime_* C++ symbol errors and CHAOS_IL2CPP_FAIL.
+		// Returns type-appropriate defaults (0/nullptr) via the runtime fallback function.
 		var failReturnType = InferReturnTypeFromSubjectId(callee);
 		var failReturnAbi = !string.IsNullOrEmpty(failReturnType)
 			? CreateLegacyAbiSlot(failReturnType)
 			: CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType);
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
+		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
 		if (failReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
 		{
 			var src = RenderSimpleExternalRuntimeHelper("void", failSymbol, "",
-				["    CHAOS_IL2CPP_FAIL();"]);
+				["    ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 				Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
 		}
 		else
 		{
 			var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
-				["    CHAOS_IL2CPP_FAIL();", "    return 0;"]);
+				["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 				Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
 		}

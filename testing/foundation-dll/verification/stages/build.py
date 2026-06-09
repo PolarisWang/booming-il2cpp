@@ -969,6 +969,7 @@ def _patch_generated_extern_c(native_dir: Path) -> bool:
         f = native_dir / subdir / "native-aot.generated.cpp"
         if not f.exists(): continue
         content = f.read_text(encoding="utf-8", errors="replace")
+        content_before = content
 
         # Fix 1: Add struct ChaosIlDataEntry definition before its first use
         if 'struct ChaosIlDataEntry {' not in content:
@@ -994,11 +995,15 @@ struct ChaosIlDataEntry {
         # Fix 2: Fix missing type name in extern "C" declaration
         content = content.replace('extern "C" kChaosExternalRuntimeIlData[]',
                                   'extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[]')
-        # Fix 3: Fix unused count variable (rename to avoid conflicts)
-        content = content.replace('extern "C" int32_t kChaosExternalRuntimeIlCount;',
-                                  'extern "C" int32_t kChaosExternalRuntimeCount = 0; // patched')
+        # Fix 3: Fix unused count variable and avoid duplicate definition.
+        # The IlCount declaration exists but was corrupted by the linter.
+        # Remove it entirely — kChaosExternalRuntimeCount is already defined
+        # in the generated file with its real value (= 481).
+        if 'extern "C" int32_t kChaosExternalRuntimeIlCount;' in content:
+            # Remove the line entirely to prevent double-definition
+            content = content.replace('extern "C" int32_t kChaosExternalRuntimeIlCount;', '')
 
-        if content != f.read_text(encoding="utf-8", errors="replace"):
+        if content != content_before:
             f.write_text(content, encoding="utf-8")
             print(f"  [build] Patched extern C syntax in {subdir}/")
             patched = True

@@ -91,3 +91,11 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryLoad(CHAOS_IL2CPP_INTPTR nameObj) noexcept
 CHAOS_IL2CPP_INT32 ChaosNativeLibraryFree(CHAOS_IL2CPP_INTPTR handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetExport(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR nameObj) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept;
+
+// ── External runtime fallback stub ──────────────────────────
+// Returns type-appropriate default values (0/nullptr) for
+// unresolved external runtime method calls. Called from generated
+// dispatch code when kChaosExternalRuntimeFnTable[idx] is null.
+// This prevents CHAOS_IL2CPP_FAIL/crash for methods without
+// DirectNativeSymbol stubs or runtime DLL resolution.
+CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept;

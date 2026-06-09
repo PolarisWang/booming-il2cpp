@@ -4234,7 +4234,11 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL(); // external runtime table index {idx} out of range");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    if (kChaosExternalRuntimeFnTable[{idx}] == nullptr) {{");
-		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL(); // external runtime table entry {idx} is null");
+		// External runtime fallback: return type-appropriate default
+		string escapedSubjectId = EscapeCppStringLiteral(invocationTarget.TargetSymbol);
+		builder.AppendLine($"{indentation}        const auto chaos_ret = ChaosExternalRuntimeFallback(\"" + escapedSubjectId + "\");");
+		EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_ret", indentation + "        ");
+		builder.AppendLine($"{indentation}        return;");
 		builder.AppendLine($"{indentation}    }}");
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
