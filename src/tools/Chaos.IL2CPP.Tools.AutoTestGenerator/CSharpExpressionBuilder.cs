@@ -126,6 +126,28 @@ public sealed class CSharpExpressionBuilder
         ["System.Globalization.CultureInfo"] = "System.Globalization.CultureInfo.InvariantCulture",
         ["System.Globalization.EastAsianLunisolarCalendar"] = "new System.Globalization.ChineseLunisolarCalendar()",
         ["System.Globalization.ChineseLunisolarCalendar"] = "new System.Globalization.ChineseLunisolarCalendar()",
+        // Reflection API types — provide valid instances instead of default(T)!
+        // default(FieldInfo)! passes a zero handle to the AOT native stub,
+        // causing NullReferenceException in all test subjects. Using real
+        // metadata instances produces valid handles and meaningful assertions.
+        ["System.Reflection.FieldInfo"] =
+            "typeof(int).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)[0]",
+        ["System.Reflection.PropertyInfo"] =
+            "typeof(string).GetProperty(\"Length\")!",
+        ["System.Reflection.MethodInfo"] =
+            "typeof(string).GetMethod(\"ToString\", System.Type.EmptyTypes)!",
+        ["System.Reflection.ConstructorInfo"] =
+            "typeof(string).GetConstructor(System.Type.EmptyTypes)!",
+        ["System.Reflection.MemberInfo"] =
+            "typeof(object).GetMembers(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)[0]",
+        ["System.Reflection.Module"] =
+            "typeof(int).Module",
+        ["System.Reflection.ParameterInfo"] =
+            "typeof(string).GetMethod(\"IndexOf\", new[] { typeof(char) })!.GetParameters()[0]",
+        ["System.Reflection.EventInfo"] =
+            "typeof(System.ComponentModel.PropertyChangedEventArgs).GetEvents()[0]",
+        ["System.Reflection.Assembly"] =
+            "typeof(int).Assembly",
     };
 
     // Types with a static `Shared` property that returns a valid instance.
