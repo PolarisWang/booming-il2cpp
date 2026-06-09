@@ -193,8 +193,8 @@ CHAOS_IL2CPP_INTPTR ChaosHmacMd5(
 
     auto buf = std::make_unique<UCHAR[]>(hashLen);
     status = BCryptHash(hAlg,
-        const_cast<PUCHAR>(keyData), static_cast<ULONG>(keyArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
-        const_cast<PUCHAR>(dataBuf), static_cast<ULONG>(dataArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
+        (PUCHAR)(keyData), static_cast<ULONG>(keyArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
+        (PUCHAR)(dataBuf), static_cast<ULONG>(dataArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
         buf.get(), hashLen);
 
     BCryptCloseAlgorithmProvider(hAlg, 0);
