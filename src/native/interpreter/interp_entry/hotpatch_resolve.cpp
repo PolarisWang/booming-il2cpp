@@ -72,6 +72,11 @@ static void ParseSubjectIdForHotpatchLookup(
     }
 }
 
+// ── Interop stub declarations (extern "C" must be at namespace scope) ──
+extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;
+extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
+extern "C" const char* const kChaosExternalRuntimeSubjects[];
+
 extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
 {
     if (kChaosExternalRuntimeCount <= 0) return;
@@ -112,9 +117,6 @@ extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
     // leaving their kChaosExternalRuntimeFnTable entry as nullptr.  Calling
     // through a null entry causes AV.  Provide fallback implementations
     // for well-known methods that have native stubs in interop_stubs.cpp.
-    extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;
-    extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
-    extern void* kChaosExternalRuntimeSubjects[];
     for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
         if (kChaosExternalRuntimeFnTable[i] != nullptr)
             continue;

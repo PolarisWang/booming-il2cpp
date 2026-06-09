@@ -922,7 +922,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"{indentation}        {{");
 				if (ftnParams.Count > 0)
 				{
-					builder.AppendLine($"{indentation}            alignas(16) uint8_t _d_ab[{ftnAbSize}];");
+					builder.AppendLine($"{indentation}            alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[{ftnAbSize}];");
 					builder.AppendLine($"{indentation}            ArgBuffer _d_bw(_d_ab);");
 					for (int i = 0; i < ftnParams.Count; i++)
 					{
@@ -3081,7 +3081,14 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						if (ldftnInstr.Callee != null &&
 						    _methodsBySubjectId.TryGetValue(ldftnInstr.Callee, out var targetMethod))
 						{
-							return (TryGetInstantiationStubSymbol(targetMethod) ?? targetMethod.NativeSymbol, targetMethod.IsStatic);
+							return (TryGetInstantiationStubSymbol(targetMethod) ?? targetMethod.NativeSymbol,
+							    // DisplayClass b__0 methods (lambda closures) always take the
+							    // delegate target as their first CHAOS_IL2CPP_INTPTR argument,
+							    // even when C# emits them as static (no-capture lambdas).
+							    // Override IsStatic to false so the caller passes the target.
+							    targetMethod.IsStatic &&
+							    !(targetMethod.SubjectId.Contains("DisplayClass") &&
+							      targetMethod.SubjectId.Contains("_b__")));
 						}
 						if (!string.IsNullOrEmpty(ldftnInstr.TargetSymbol))
 						{
@@ -3715,7 +3722,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}        }}");
 		// Hotpatch checkpoint: check if the delegate target method has been patched.
 		int paramCount = parameterAbis.Count;
-		string argsArray = string.Join(", ", Enumerable.Range(0, paramCount).Select(i => $"(uint64_t)chaos_arg_{i}"));
+		string argsArray = string.Join(", ", Enumerable.Range(0, paramCount).Select(i => $"(CHAOS_IL2CPP_UINT64)chaos_arg_{i}"));
 		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			builder.AppendLine($"{indentation}        {returnType} __chaos_hotpatch_result{{}};");
@@ -3723,13 +3730,13 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}        bool __chaos_hotpatch_taken = false;");
 		if (paramCount > 0)
 		{
-			builder.AppendLine($"{indentation}        uint64_t __chaos_args_buf[{paramCount}] = {{ {argsArray} }};");
+			builder.AppendLine($"{indentation}        CHAOS_IL2CPP_UINT64 __chaos_args_buf[{paramCount}] = {{ {argsArray} }};");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}        uint64_t __chaos_args_buf[1] = {{0}};");
+			builder.AppendLine($"{indentation}        CHAOS_IL2CPP_UINT64 __chaos_args_buf[1] = {{0}};");
 		}
-		builder.AppendLine($"{indentation}        uint64_t __chaos_ret_buf[2] = {{}};");
+		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_UINT64 __chaos_ret_buf[2] = {{}};");
 		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_method_token != 0)");
 		builder.AppendLine($"{indentation}        {{");
 		builder.AppendLine($"{indentation}            __chaos_hotpatch_taken = ::chaos::il2cpp::runtime_core::DelegateHotpatchCheckpoint(");
@@ -4377,7 +4384,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		if (parameterAbis.Count > 0)
 		{
 			int argBufferSize = CalculateArgBufferSize(parameterAbis);
-			builder.AppendLine($"{indentation}        alignas(16) uint8_t _d_ab[{argBufferSize}];");
+			builder.AppendLine($"{indentation}        alignas(16) CHAOS_IL2CPP_UINT8 _d_ab[{argBufferSize}];");
 			builder.AppendLine($"{indentation}        ArgBuffer _d_bw(_d_ab);");
 			for (int i = 0; i < parameterAbis.Count; i++)
 			{

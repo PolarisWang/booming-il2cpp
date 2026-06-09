@@ -1269,7 +1269,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             namespacePreamble.AppendLine("// (Definition at file scope via globalDeclarations for runtime-entry.cpp link-time visibility.)");
             namespacePreamble.AppendLine("extern \"C\" const int kAotMethodCount;");
             if (_externalRuntimeSubjects is { Count: > 0 })
-                namespacePreamble.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount;");
+                namespacePreamble.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;");
         }
         moduleRegistrationCode = namespacePreamble.ToString() + moduleRegSb.ToString();
 
@@ -1783,7 +1783,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             {
                 if (allInterfaceTypeIds.Count > 0 && allInterfaceTypeIds.Contains(typeId))
                     continue; // already declared as inline constexpr above
-                sb.Append("extern const uint64_t ");
+                sb.Append("extern const CHAOS_IL2CPP_UINT64 ");
                 sb.Append(GetNativeTypeIdSymbol(typeId));
                 sb.AppendLine(";");
             }
@@ -1865,7 +1865,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         }
         // Always declare kChaosExternalRuntimeCount for page files that use
         // BS-5 external runtime table bounds checks (defined in main file).
-        sb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount;");
+        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;");
         sb.AppendLine();
 
         // ── Runtime helper function declarations (global scope) ──
@@ -2637,11 +2637,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         builder.AppendLine($"// AOT-unreachable stub: {method.SubjectId}");
         builder.AppendLine($"extern \"C\" {returnType} {symbol}({paramList})");
         builder.AppendLine("{");
-        if (isSubjectMethod)
+        if (!string.IsNullOrEmpty(returnType) && returnType != "void")
         {
-            // Safe default for unreachable subject methods (avoid CHAOS_IL2CPP_FAIL crash)
-            if (!string.IsNullOrEmpty(returnType) && returnType != "void")
-                builder.AppendLine($"    return {{}};");
+            builder.AppendLine($"    return {{}};");
         }
         builder.AppendLine("}");
 
@@ -2656,13 +2654,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             builder.AppendLine($"// AOT-unreachable generic instantiation stub: {method.SubjectId}");
             builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({paramList})");
             builder.AppendLine("{");
-            if (isSubjectMethod)
-            {
-                // Safe default for unreachable subject methods (avoid CHAOS_IL2CPP_FAIL crash)
-                if (!string.IsNullOrEmpty(returnType) && returnType != "void")
-                    builder.AppendLine($"    return {{}};");
-            }
-            else if (!string.IsNullOrEmpty(returnType) && returnType != "void")
+            if (!string.IsNullOrEmpty(returnType) && returnType != "void")
             {
                 builder.AppendLine($"    return {{}};");
             }

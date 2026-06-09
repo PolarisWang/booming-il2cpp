@@ -112,11 +112,11 @@ public sealed partial class NativeAotLoweringPlanner
                 continue;
 
             string offsetsSym = $"kGcOffsets_{SanitizeSubjectId(TypeSymbol)}";
-            builder.Append($"static constexpr uint16_t {offsetsSym}[] = {{");
+            builder.Append($"static constexpr CHAOS_IL2CPP_UINT16 {offsetsSym}[] = {{");
             for (int i = 0; i < GcMemberNames.Count; i++)
             {
                 if (i > 0) builder.Append(", ");
-                builder.Append($"static_cast<uint16_t>(offsetof({TypeSymbol}, {GcMemberNames[i]}))");
+                builder.Append($"static_cast<CHAOS_IL2CPP_UINT16>(offsetof({TypeSymbol}, {GcMemberNames[i]}))");
             }
             builder.AppendLine("};");
         }
@@ -128,8 +128,8 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine();
         builder.AppendLine("    // Register managed_array (variable-size: header + contiguous element data).");
         builder.AppendLine("    registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,");
-        builder.AppendLine("        static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),");
-        builder.AppendLine("        static_cast<uint16_t>(offsetof(chaos_managed_array, length)));");
+        builder.AppendLine("        static_cast<CHAOS_IL2CPP_UINT16>(sizeof(CHAOS_IL2CPP_INTPTR)),");
+        builder.AppendLine("        static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_managed_array, length)));");
         builder.AppendLine();
 
         foreach (var (_, TypeSymbol, StableId, GcMemberNames) in entries)

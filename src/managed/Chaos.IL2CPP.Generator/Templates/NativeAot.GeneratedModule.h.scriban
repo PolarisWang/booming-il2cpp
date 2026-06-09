@@ -56,7 +56,7 @@ struct Functions {
 {{~ end ~}}
     } {{ type_group.safe_name_lower }};
 {{~ end ~}}
-    int32_t method_count;
+    CHAOS_IL2CPP_INT32 method_count;
 };
 
 extern const Functions kFunctions;
@@ -94,7 +94,7 @@ struct {{ type_group.safe_name }} {
     }
 {{~ end ~}}
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = {{ type_group.method_count }};
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = {{ type_group.method_count }};
 };
 
 {{~ end ~}}

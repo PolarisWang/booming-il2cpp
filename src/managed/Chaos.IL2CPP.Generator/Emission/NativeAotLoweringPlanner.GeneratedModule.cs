@@ -38,7 +38,7 @@ public sealed partial class NativeAotLoweringPlanner
             return new ScriptObject
             {
                 ["type_groups"] = System.Array.Empty<ScriptObject>(),
-                ["k_aot_method_count_type"] = "const int",
+                ["k_aot_method_count_type"] = "CHAOS_IL2CPP_INT32",
                 ["k_aot_method_count_value"] = 0,
             };
         }
@@ -218,7 +218,7 @@ public sealed partial class NativeAotLoweringPlanner
         return new ScriptObject
         {
             ["type_groups"] = typeGroupModels,
-            ["k_aot_method_count_type"] = "const int",
+            ["k_aot_method_count_type"] = "CHAOS_IL2CPP_INT32",
             ["k_aot_method_count_value"] = totalDedupedCount,
             ["value_type_typedefs"] = valueTypeTypedefs,
         };

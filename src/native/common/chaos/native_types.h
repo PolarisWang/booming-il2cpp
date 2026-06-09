@@ -92,7 +92,7 @@
 namespace chaos { namespace il2cpp { namespace common {
     extern void (*g_chaos_fail_hook)();
 }}}
-#define CHAOS_IL2CPP_FAIL() \
+#define CHAOS_IL2CPP_FAIL(...) \
     do { \
         if (::chaos::il2cpp::common::g_chaos_fail_hook) \
             ::chaos::il2cpp::common::g_chaos_fail_hook(); \

@@ -25,6 +25,7 @@
 
 #include <cstdint>
 #include <chaos/config.h>
+#include <chaos/native_types.h>
 
 // Must precede <chaos/eh.h> on Windows SEH path (provides CHAOS_SEH_FILTER_ALL)
 #include <exception_jmp.h>

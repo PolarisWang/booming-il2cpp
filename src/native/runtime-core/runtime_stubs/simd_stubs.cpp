@@ -10,6 +10,9 @@
 
 #if defined(__x86_64__) || defined(_M_AMD64)
 #include <immintrin.h>
+// This file uses SSE4.1 (_mm_mullo_epi32) and AVX (_mm256_*) intrinsics.
+// The pragma ensures these compile even when the consumer project lacks -mavx.
+#pragma GCC target("avx2,sse4.2")
 #else
 // Stub: non-x86 platforms compile to scalar fallback (unreachable on current targets)
 #error "SIMD stubs require x86-64 (SSE2+ / AVX2)"

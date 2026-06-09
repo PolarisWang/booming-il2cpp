@@ -208,7 +208,7 @@ CHAOS_IL2CPP_UINT64 ChaosBitOpsRotateRight64(CHAOS_IL2CPP_UINT64 value, CHAOS_IL
 
 CHAOS_IL2CPP_UINT32 ChaosBitOpsCrc32CByte(CHAOS_IL2CPP_UINT32 crc, CHAOS_IL2CPP_UINT8 data) noexcept
 {
-#if defined(__x86_64__) || defined(_M_AMD64)
+#if defined(__x86_64__) && defined(__SSE4_2__) || defined(_M_AMD64)
     return _mm_crc32_u8(crc, data);
 #else
     crc ^= data;
@@ -220,7 +220,7 @@ CHAOS_IL2CPP_UINT32 ChaosBitOpsCrc32CByte(CHAOS_IL2CPP_UINT32 crc, CHAOS_IL2CPP_
 
 CHAOS_IL2CPP_UINT32 ChaosBitOpsCrc32CUInt16(CHAOS_IL2CPP_UINT32 crc, CHAOS_IL2CPP_UINT16 data) noexcept
 {
-#if defined(__x86_64__) || defined(_M_AMD64)
+#if defined(__x86_64__) && defined(__SSE4_2__) || defined(_M_AMD64)
     return _mm_crc32_u16(crc, data);
 #else
     crc = ChaosBitOpsCrc32CByte(crc, static_cast<CHAOS_IL2CPP_UINT8>(data));
@@ -230,7 +230,7 @@ CHAOS_IL2CPP_UINT32 ChaosBitOpsCrc32CUInt16(CHAOS_IL2CPP_UINT32 crc, CHAOS_IL2CP
 
 CHAOS_IL2CPP_UINT32 ChaosBitOpsCrc32CUInt32(CHAOS_IL2CPP_UINT32 crc, CHAOS_IL2CPP_UINT32 data) noexcept
 {
-#if defined(__x86_64__) || defined(_M_AMD64)
+#if defined(__x86_64__) && defined(__SSE4_2__) || defined(_M_AMD64)
     return _mm_crc32_u32(crc, data);
 #else
     crc = ChaosBitOpsCrc32CByte(crc, static_cast<CHAOS_IL2CPP_UINT8>(data));
@@ -242,7 +242,7 @@ CHAOS_IL2CPP_UINT32 ChaosBitOpsCrc32CUInt32(CHAOS_IL2CPP_UINT32 crc, CHAOS_IL2CP
 
 CHAOS_IL2CPP_UINT32 ChaosBitOpsCrc32CUInt64(CHAOS_IL2CPP_UINT32 crc, CHAOS_IL2CPP_UINT64 data) noexcept
 {
-#if defined(__x86_64__) || defined(_M_AMD64)
+#if defined(__x86_64__) && defined(__SSE4_2__) || defined(_M_AMD64)
     return _mm_crc32_u64(crc, data);
 #else
     crc = ChaosBitOpsCrc32CUInt32(crc, static_cast<CHAOS_IL2CPP_UINT32>(data));
@@ -372,5 +372,4 @@ CHAOS_IL2CPP_FLOAT64 ChaosMathTanh(CHAOS_IL2CPP_FLOAT64 x) noexcept
 
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
-
 

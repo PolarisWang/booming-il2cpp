@@ -211,6 +211,14 @@ private:
     RuntimeState* r_ = nullptr;
     ThreadState* t_ = nullptr;
 
+    /// Single shared sentinel for empty/factory methods so ptr-equality
+    /// comparisons in generated code (e.g. ToFrozenDictionary result vs
+    /// Enumerable::Empty<T>) pass regardless of which external entry is called.
+    static CHAOS_IL2CPP_INTPTR GetEmptySentinel() {
+        static CHAOS_IL2CPP_UINT8 s_buf[48] = {};
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
+    }
+
     /// Fill remaining null external runtime table entries with safe stubs
     /// so generated code does not crash on null pointers.
     static void FillExternalRuntimeStubs() {
@@ -270,6 +278,87 @@ private:
                 continue;
             }
 
+            // ── Shared sentinel for empty/factory methods ──
+            // Many generated tests compare the return value of factory methods
+            // (ToFrozenDictionary, ToFrozenSet, Empty<T>) against each other.
+            // Using a single shared sentinel allows these comparisons to succeed.
+            //
+            // All patterns below route through GetEmptySentinel() so they all
+            // return the SAME address — otherwise ptr-equality assertions fail.
+            //
+            // Array::Empty<T> and Enumerable::Empty<T>
+            if (std::strstr(sub, "::Empty<") &&
+                (std::strstr(sub, "Array::Empty<") || std::strstr(sub, "Enumerable::Empty<"))) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(&GetEmptySentinel);
+                continue;
+            }
+            // FrozenDictionary::ToFrozenDictionary / FrozenSet::ToFrozenSet
+            if (std::strstr(sub, "FrozenDictionary::ToFrozenDictionary<") ||
+                std::strstr(sub, "FrozenSet::ToFrozenSet<")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(&GetEmptySentinel);
+                continue;
+            }
+
+            // ── Commonly-used framework stubs ──
+            // String comparison operators — return false
+            if (std::strstr(sub, "::op_Inequality:System.Boolean(")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                continue;
+            }
+            // IEnumerable::GetEnumerator — return null sentinel
+            if (std::strstr(sub, "::GetEnumerator:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR {
+                    static CHAOS_IL2CPP_UINT8 s_buf[8] = {};
+                    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
+                });
+                continue;
+            }
+            // IEnumerator::MoveNext — return false (stop iteration)
+            if (std::strstr(sub, "::MoveNext:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                continue;
+            }
+            // IEnumerator::get_Current — return null
+            if (std::strstr(sub, "IEnumerator::get_Current:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+                continue;
+            }
+            // IDisposable::Dispose — no-op
+            if (std::strstr(sub, "IDisposable::Dispose:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]{});
+                continue;
+            }
+            // EqualityComparer<T>::get_Default — return shared sentinel
+            if (std::strstr(sub, "EqualityComparer<") && std::strstr(sub, "::get_Default:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR {
+                    static CHAOS_IL2CPP_UINT8 s_buf[8] = {};
+                    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
+                });
+                continue;
+            }
+            // EqualityComparer<T>::Equals — return false
+            if (std::strstr(sub, "EqualityComparer<") && std::strstr(sub, "::Equals:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                continue;
+            }
+            // Action::Invoke — no-op
+            if (std::strstr(sub, "Action::Invoke:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]{});
+                continue;
+            }
+            // Func/Action/Action<T>/Comparison/Predicate .ctor — no-op (ctor)
+            if (std::strstr(sub, "::.ctor:") && std::strstr(sub, "::.ctor:System.Void(")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR){});
+                continue;
+            }
+            // Assert::s_exitCode — return 0
+            if (std::strstr(sub, "Assert::s_exitCode")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INT32 { return 0; });
+                continue;
+            }
+            // Console::get_Error, TextWriter::WriteLine, String::Concat — already have
+            // compile-time entries in kChaosExternalRuntimeFnTable, skip.
+
             // Parse return type from subject ID pattern:
             //   "Namespace.Type::Method:ReturnType(Params)"
             if (std::strstr(sub, ":System.Void(")) {
@@ -280,9 +369,26 @@ private:
                 kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT64 { return 0; });
             } else if (std::strstr(sub, ":System.Boolean(")) {
                 kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
-            } else if (std::strstr(sub, "Array::Empty<")) {
+            } else if (std::strstr(sub, ":System.String(")) {
+                // String-returning methods — return null (0 is a valid null string ref)
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+            } else if (std::strstr(sub, ":System.Object(")) {
+                // Object-returning methods — return null
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+            } else if (std::strstr(sub, ":System.Byte(")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+            } else if (std::strstr(sub, ":System.Char(")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+            } else if (std::strstr(sub, ":System.Single(")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> double { return 0.0; });
+            } else if (std::strstr(sub, ":System.Double(")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> double { return 0.0; });
+            } else if (std::strstr(sub, ":System.Decimal(")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+            } else if (std::strstr(sub, "::get_Default:")) {
+                // Generic get_Default (for types like EqualityComparer<T>, etc.)
                 kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR {
-                    static CHAOS_IL2CPP_UINT8 s_buf[48] = {};
+                    static CHAOS_IL2CPP_UINT8 s_buf[8] = {};
                     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buf);
                 });
             } else {

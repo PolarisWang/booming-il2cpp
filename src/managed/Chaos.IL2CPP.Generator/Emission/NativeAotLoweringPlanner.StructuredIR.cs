@@ -2327,7 +2327,7 @@ public sealed partial class NativeAotLoweringPlanner
         Interlocked.Increment(ref s_pcDispatchCount);
 
         builder.AppendLine(indentation + "// pc-dispatch state machine for irreducible CFG");
-        builder.AppendLine(indentation + "int32_t chaos_pc = " + pcDispatch.PcVariableInit.ToString() + ";");
+        builder.AppendLine(indentation + "CHAOS_IL2CPP_INT32 chaos_pc = " + pcDispatch.PcVariableInit.ToString() + ";");
         builder.AppendLine(indentation + "while (chaos_pc >= 0)");
         builder.AppendLine(indentation + "{");
         builder.AppendLine(indentation + "    switch (chaos_pc)");
@@ -2525,49 +2525,49 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 string right = ctx.PeekValue(); ctx.PopValue();
                 string left = ctx.PeekValue(); ctx.PopValue();
-                return "(int32_t)" + left + " < (int32_t)" + right;
+                return "(CHAOS_IL2CPP_INT32)" + left + " < (CHAOS_IL2CPP_INT32)" + right;
             }
             case "blt.un":
             {
                 string right = ctx.PeekValue(); ctx.PopValue();
                 string left = ctx.PeekValue(); ctx.PopValue();
-                return "(uint32_t)" + left + " < (uint32_t)" + right;
+                return "(CHAOS_IL2CPP_UINT32)" + left + " < (CHAOS_IL2CPP_UINT32)" + right;
             }
             case "bgt":
             {
                 string right = ctx.PeekValue(); ctx.PopValue();
                 string left = ctx.PeekValue(); ctx.PopValue();
-                return "(int32_t)" + left + " > (int32_t)" + right;
+                return "(CHAOS_IL2CPP_INT32)" + left + " > (CHAOS_IL2CPP_INT32)" + right;
             }
             case "bgt.un":
             {
                 string right = ctx.PeekValue(); ctx.PopValue();
                 string left = ctx.PeekValue(); ctx.PopValue();
-                return "(uint32_t)" + left + " > (uint32_t)" + right;
+                return "(CHAOS_IL2CPP_UINT32)" + left + " > (CHAOS_IL2CPP_UINT32)" + right;
             }
             case "ble":
             {
                 string right = ctx.PeekValue(); ctx.PopValue();
                 string left = ctx.PeekValue(); ctx.PopValue();
-                return "(int32_t)" + left + " <= (int32_t)" + right;
+                return "(CHAOS_IL2CPP_INT32)" + left + " <= (CHAOS_IL2CPP_INT32)" + right;
             }
             case "ble.un":
             {
                 string right = ctx.PeekValue(); ctx.PopValue();
                 string left = ctx.PeekValue(); ctx.PopValue();
-                return "(uint32_t)" + left + " <= (uint32_t)" + right;
+                return "(CHAOS_IL2CPP_UINT32)" + left + " <= (CHAOS_IL2CPP_UINT32)" + right;
             }
             case "bge":
             {
                 string right = ctx.PeekValue(); ctx.PopValue();
                 string left = ctx.PeekValue(); ctx.PopValue();
-                return "(int32_t)" + left + " >= (int32_t)" + right;
+                return "(CHAOS_IL2CPP_INT32)" + left + " >= (CHAOS_IL2CPP_INT32)" + right;
             }
             case "bge.un":
             {
                 string right = ctx.PeekValue(); ctx.PopValue();
                 string left = ctx.PeekValue(); ctx.PopValue();
-                return "(uint32_t)" + left + " >= (uint32_t)" + right;
+                return "(CHAOS_IL2CPP_UINT32)" + left + " >= (CHAOS_IL2CPP_UINT32)" + right;
             }
             default:
                 // Unknown opcode: fall through to taken target (conservative)

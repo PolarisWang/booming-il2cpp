@@ -7,6 +7,13 @@ public sealed class TestEmitter
     private readonly CSharpSerializer _serializer;
     private readonly CSharpExpressionBuilder _expressionBuilder;
 
+    // Assemblies whose methods dispatch through the external runtime stub table in
+    // AOT mode.  The stubs return default values and never throw, so Assert.Throws<T>
+    // auto-generated tests will always fail at AOT runtime — the stub can't replicate
+    // the exception behavior that the managed probe captured.
+    // Chaos.TestFramework.Sdk is the only assembly compiled into the AOT image.
+    private const string AotInternalAssemblyPrefix = "Chaos.TestFramework.Sdk";
+
     // Types that need explicit casts to disambiguate overloads
     private static readonly HashSet<string> CastNeededTypes = new(StringComparer.Ordinal)
     {
@@ -100,6 +107,13 @@ public sealed class TestEmitter
         sb.AppendLine("{");
         sb.AppendLine($"    public unsafe partial class {className}");
         sb.AppendLine("    {");
+
+        // ── Determine if target assembly is external to AOT ──
+        // Assemblies other than Chaos.TestFramework.Sdk dispatch through
+        // the external runtime stub table in AOT mode.  The stubs return
+        // default values and never throw, making Assert.Throws<T> tests
+        // always fail at AOT runtime.
+        var isExternalAssembly = !assemblyName.StartsWith(AotInternalAssemblyPrefix, StringComparison.Ordinal);
 
         for (int mi = 0; mi < methods.Count; mi++)
         {
@@ -209,7 +223,7 @@ public sealed class TestEmitter
                     sb.AppendLine("        {");
                     if (!string.IsNullOrEmpty(factCallStatement))
                         sb.AppendLine(factCallStatement);
-                    AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam, hasAnyValidSet);
+                    AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam, hasAnyValidSet, isExternalAssembly);
                     // Return long value for hotupdate semantic change detection.
                     // Exception subjects and void methods return sentinel 42L.
                     if (method.IsVoid || isPlainTask || hasException)
@@ -251,12 +265,21 @@ public sealed class TestEmitter
     }
 
     private void AppendAssert(StringBuilder sb, int mi, MethodSignature method, ValueSet set,
-        ProbeResult? result, string callExpr, bool hasRefParam, bool hasAnyValidSet)
+        ProbeResult? result, string callExpr, bool hasRefParam, bool hasAnyValidSet,
+        bool isExternalAssembly)
     {
         if (result is null) return;
 
         if (result.HasException && result.ExceptionType is not null)
         {
+            // Skip Assert.Throws<T> for methods from an external AOT assembly —
+            // the stub can never throw the expected exception.
+            if (isExternalAssembly)
+            {
+                sb.AppendLine($"            // [AOT smoke] {result.ExceptionType} thrown by {callExpr} (external assembly stub — skipping Throws)");
+                return;
+            }
+
             // Ref/out locals can't be captured in a lambda — skip Assert.Throws
             if (!hasRefParam)
             {

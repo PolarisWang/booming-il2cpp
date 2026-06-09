@@ -19,6 +19,7 @@ target_compile_options(chaos::runtime INTERFACE
     "$<$<CXX_COMPILER_ID:MSVC>:/DWIN32 /D_WINDOWS>"
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-finput-charset=utf-8>"
+    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-msse4.2>"
 )
 
 target_compile_features(chaos::runtime INTERFACE

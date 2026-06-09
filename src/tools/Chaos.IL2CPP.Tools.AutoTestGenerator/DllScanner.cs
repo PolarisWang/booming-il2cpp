@@ -727,6 +727,7 @@ public sealed class DllScanner
 
         Console.WriteLine($"  Scanning {types.Count} types...");
         int skipCount = 0;
+        var seenTypes = new HashSet<string>(); // deduplicate: same concrete type from open generic + closed form
         foreach (var (typeName, _) in types)
         {
             if (UnprobableTypeNames.Contains(typeName))
@@ -754,7 +755,24 @@ public sealed class DllScanner
             {
                 var result = ScanInContext(mlc, assembly, assemblyName, typeName);
                 if (result.Methods.Count > 0)
-                    results.Add(result);
+                {
+                    // Deduplicate: MLC may return both an open generic (concretized in
+                    // ScanInContext) and an already-concrete closed form with the same
+                    // TypeFullName.  Normalise by removing all spaces so that subtle
+                    // differences (e.g. "Dictionary<K, V>" vs "Dictionary<K,V>") do not
+                    // defeat the set lookup.  See also: Type.FullName uses a space after
+                    // the comma, but assembly.GetType() resolution may produce one without.
+                    var dedupKey = result.TypeFullName.Replace(" ", "");
+                    if (!seenTypes.Add(dedupKey))
+                    {
+                        Console.WriteLine($"  [SKIP] {typeName}: duplicate (already scanned as {result.TypeFullName})");
+                        skipCount++;
+                    }
+                    else
+                    {
+                        results.Add(result);
+                    }
+                }
                 else
                     skipCount++;
             }

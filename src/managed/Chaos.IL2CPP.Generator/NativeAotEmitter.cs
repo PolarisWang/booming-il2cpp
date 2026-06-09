@@ -278,8 +278,9 @@ public sealed class NativeAotEmitter
                 ? ScribanTemplateRenderer.NormalizeIndentation(templateModel.ModuleRegistrationCode)
                 : "",
             [NativeAotTemplateCatalog.TranslationUnitNamespaceProperty] = templateModel.CodegenNamespace,
-            ["global_declarations"] = templateModel.GlobalDeclarations
-                + (includeRegistration ? templateModel.EntryFunctionCode : ""),
+            ["global_declarations"] = includeRegistration
+                ? templateModel.GlobalDeclarations + templateModel.EntryFunctionCode
+                : "",
             ["workload_abi"] = templateModel.WorkloadAbi,
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
@@ -400,9 +401,10 @@ public sealed class NativeAotEmitter
         sb.Append("#pragma warning(pop)\n\n");
 
         // Global declarations + entry function code (outside namespace)
-        sb.Append(templateModel.GlobalDeclarations);
+        // Emitted only on the first page to avoid multiple-definition linker errors.
         if (includeRegistration)
         {
+            sb.Append(templateModel.GlobalDeclarations);
             sb.Append(templateModel.EntryFunctionCode);
         }
 

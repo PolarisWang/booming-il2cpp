@@ -749,13 +749,13 @@ public sealed partial class NativeAotLoweringPlanner
                 $"{{ bool __v; std::memcpy(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Byte =>
-                $"{{ uint8_t __v; std::memcpy(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_UINT8 __v; std::memcpy(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.SByte =>
-                $"{{ int8_t __v; std::memcpy(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_INT8 __v; std::memcpy(&__v, p, 1); p += 1; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Int16 =>
-                $"{{ int16_t __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
+                $"{{ CHAOS_IL2CPP_INT16 __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.Int32 =>
                 $"{{ CHAOS_IL2CPP_INT32 __v; std::memcpy(&__v, p, 4); p += 4; attr->{fieldName} = __v; }}",
@@ -955,7 +955,7 @@ public sealed partial class NativeAotLoweringPlanner
             emptySb.AppendLine("// --- External Runtime Dispatch Table (empty) ---");
             emptySb.AppendLine("extern \"C\" const char* kChaosExternalRuntimeSubjects[1] = { nullptr };");
             emptySb.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[1] = { nullptr };");
-            emptySb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount = 0;");
+            emptySb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount = 0;");
             return emptySb.ToString();
         }
 
@@ -1289,7 +1289,7 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine();
 
         // Emit count symbol
-        sb.Append("extern \"C\" const uint32_t kChaosJitEntryCount = ")
+        sb.Append("extern \"C\" const CHAOS_IL2CPP_UINT32 kChaosJitEntryCount = ")
             .Append(methodsForLowering.Count)
             .AppendLine("u;");
 

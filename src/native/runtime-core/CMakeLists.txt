@@ -47,6 +47,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/mutex_stubs.cpp
     runtime_stubs/threadpool_events.cpp
     runtime_stubs/convert_stubs.cpp
+    runtime_stubs/interop_stubs.cpp
     runtime_stubs/collection_stubs.cpp
     runtime_stubs/misc_stubs.cpp
     runtime_stubs/interpreter_entry_direct.cpp
