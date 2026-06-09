@@ -220,7 +220,6 @@ V256 ChaosSimd_V256_Shl_I32(ChaosSimdV256 a, CHAOS_IL2CPP_INT32 b) noexcept {
     _mm256_storeu_si256(reinterpret_cast<__m256i*>(&result), vr);
     return result;
 }
-}
 
 // ════════════════════════════════════════════════════════════
 // Vector256 float
