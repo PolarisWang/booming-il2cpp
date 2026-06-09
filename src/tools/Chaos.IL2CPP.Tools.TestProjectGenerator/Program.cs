@@ -284,7 +284,7 @@ public static class Program
             emitter.Emit(
                 outputDir, codegenResult, subjects,
                 isJit: cmd.Jit, configTier: cmd.ConfigTier,
-                isWindows: true, projectRoot: projectRoot,
+                isWindows: OperatingSystem.IsWindows(), projectRoot: projectRoot,
                 codegenDir: codegenBase, sdkDir: sdkDir);
             Console.Error.WriteLine("        Sources written (source-only mode)");
             return new ServerResponse(cmd.Id, "ok");
@@ -293,7 +293,7 @@ public static class Program
         var exePath = emitter.GenerateAndBuild(
             outputDir, codegenResult, subjects,
             isJit: cmd.Jit, configTier: cmd.ConfigTier,
-            isWindows: true, projectRoot: projectRoot,
+            isWindows: OperatingSystem.IsWindows(), projectRoot: projectRoot,
             codegenDir: codegenBase, sdkDir: sdkDir);
 
         if (exePath is null)
@@ -620,7 +620,7 @@ public static class Program
         {
             emitter.Emit(outputDir, codegenResult, subjects,
                 isJit: isJit, configTier: configTier,
-                isWindows: true, projectRoot: projectRoot,
+                isWindows: OperatingSystem.IsWindows(), projectRoot: projectRoot,
                 codegenDir: codegenBase, sdkDir: sdkDir);
             Console.WriteLine("        Sources written (source-only mode)");
             return 0;
@@ -628,7 +628,7 @@ public static class Program
 
         var exePath = emitter.GenerateAndBuild(outputDir, codegenResult, subjects,
             isJit: isJit, configTier: configTier,
-            isWindows: true, projectRoot: projectRoot,
+            isWindows: OperatingSystem.IsWindows(), projectRoot: projectRoot,
             codegenDir: codegenBase, sdkDir: sdkDir);
 
         if (exePath is null)

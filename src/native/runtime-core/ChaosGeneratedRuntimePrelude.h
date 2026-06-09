@@ -30,6 +30,18 @@ namespace chaos::il2cpp::jit {
 constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;
 inline TypeInfoV0 chaos_type_info_managed_array = {{ nullptr, nullptr, 1ULL, 0, 32, 2, 0 }, { nullptr, nullptr, 0, 0, 0, 0 }};
 
+// ── External runtime IL data entry ──────────────────────────────────
+// Used by the codegen to register external runtime IL byte arrays
+// that are referenced by kChaosExternalRuntimeIlData[].
+// Fields: { sid, data, size, reserved1, reserved2 }
+struct ChaosIlDataEntry {
+    const char* sid;
+    const uint8_t* data;
+    size_t size;
+    void* reserved1;
+    void* reserved2;
+};
+
 struct chaos_managed_array
 {
     ThinLockableHeader header{};

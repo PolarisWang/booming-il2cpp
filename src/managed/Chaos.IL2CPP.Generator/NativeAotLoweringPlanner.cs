@@ -1829,10 +1829,12 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // chaos_string_materialize: always define (declaration + identity definition when
         // no string IDs exist) to satisfy calls from generated code.  When string IDs
         // are present, the definition is emitted in the string helper section.
+        // Must be 'inline' because this definition is emitted in the shared header
+        // that is included by both the main file and all page files (ODR-safe).
         sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
         if (_stringIdMapping is not { Count: > 0 })
         {
-            sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept { return chaos_value; }");
+            sb.AppendLine("inline CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept { return chaos_value; }");
         }
         sb.AppendLine();
 

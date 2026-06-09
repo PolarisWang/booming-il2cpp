@@ -675,6 +675,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterMarshalShortNameStubs(registry);
 
             RegisterCoreStubs(registry);
+            RegisterCryptoStubs(registry);
             return registry;
         }
 
