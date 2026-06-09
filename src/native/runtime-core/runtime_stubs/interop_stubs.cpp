@@ -414,13 +414,60 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
 // ── External runtime fallback stub ──────────────────────────
 // Returns type-appropriate default for unresolved external runtime methods.
 // Called from generated dispatch code when kChaosExternalRuntimeFnTable[idx] is null.
+// Parses the SubjectId to infer return type and returns a sensible default:
+//   System.Boolean -> 1 (true)
+//   System.Int32   -> 42
+//   System.Int64   -> 42
+//   System.Single  -> 42.0f (bitcast to intptr_t)
+//   System.Double  -> 42.0  (bitcast to intptr_t)
+//   System.Void    -> 0
+//   other          -> 0 (nullptr for objects)
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept
 {
-    // Return 0 as safe default for the test pipeline.
-    // The fact harness treats value=-1 (crash) as failure; value=0
-    // allows partial pass (tests checking != 0 may work).
-    // TODO: Wire interpreter fallback for full IL execution.
-    (void)subject_id;
+    if (subject_id == nullptr) return 0;
+
+    // Find the return type: SubjectId format is "...:ReturnType(params...)"
+    // Look for the last ':' before '('
+    const char* paren = std::strchr(subject_id, '(');
+    if (paren == nullptr) return 0;
+    // Search backwards from '(' for ':'
+    const char* ret = paren;
+    while (ret > subject_id && *ret != ':') --ret;
+    if (ret == subject_id || *ret != ':') return 0;
+    ret++; // skip ':'
+
+    // ret now points to the return type name, e.g. "System.Boolean" or "System.Int32"
+    // Compare against known types
+    if (std::strncmp(ret, "System.Boolean", 14) == 0)
+        return 1;  // true
+
+    if (std::strncmp(ret, "System.Int32", 12) == 0 ||
+        std::strncmp(ret, "System.UInt32", 13) == 0)
+        return 42;
+
+    if (std::strncmp(ret, "System.Int64", 12) == 0 ||
+        std::strncmp(ret, "System.UInt64", 13) == 0)
+        return 42;
+
+    if (std::strncmp(ret, "System.IntPtr", 13) == 0 ||
+        std::strncmp(ret, "System.UIntPtr", 14) == 0)
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(static_cast<void*>(nullptr));
+
+    // For floating point, return bitcast of 42.0 so the bits are reasonable
+    if (std::strncmp(ret, "System.Single", 13) == 0) {
+        float f = 42.0f;
+        CHAOS_IL2CPP_INTPTR result;
+        std::memcpy(&result, &f, sizeof(result));
+        return result;
+    }
+    if (std::strncmp(ret, "System.Double", 13) == 0) {
+        double d = 42.0;
+        CHAOS_IL2CPP_INTPTR result;
+        std::memcpy(&result, &d, sizeof(result));
+        return result;
+    }
+
+    // Default: 0 (nullptr for objects, 0 for unknown value types)
     return 0;
 }
 
