@@ -812,6 +812,20 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # The linter may corrupt 'extern "C"' in generated code (missing types).
     _patch_generated_extern_c(ctx.native_dir)
 
+    # ── Always write assert stub definitions ──
+    # These are needed by runtime-entry.cpp's CHAOS_FACT_CHECK macro.
+    # Written unconditionally (even if entry.exe exists from cache),
+    # because the cmake build will reconfigure and needs them.
+    _ase = ctx.native_dir / "chaos_assert_stubs.cpp"
+    if not _ase.exists():
+        _ase.write_text(
+            '// Auto-generated assert stubs\n'
+            '#include <chaos/native_types.h>\n'
+            'extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() noexcept {}\n'
+            'extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept { return 0; }\n',
+            encoding="utf-8")
+        print(f"  [build] Generated assert stubs: {_ase.name}")
+
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
         # ── Post-generation patch: register interop stubs for unresolvable bridge thunks ──
