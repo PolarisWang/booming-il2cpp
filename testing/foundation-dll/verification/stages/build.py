@@ -1038,26 +1038,14 @@ def _ensure_assert_stubs(native_dir: Path) -> None:
     The CHAOS_FACT_CHECK macro in runtime-entry.cpp calls these functions via the
     patched template.  In AOT mode, the managed SDK DLL doesn't export C-linkage
     symbols, so the linker fails with LNK2019.  Provide simple stubs.
+    Write to native_dir/ (NOT subjects/), because subjects/ may not exist yet
+    when this is called, and the CMakeLists.txt globs *.cpp from native_dir.
     """
-    subjects_dir = native_dir / "subjects"
-    if not subjects_dir.is_dir():
-        return
-    stub_file = subjects_dir / "chaos_assert_stubs.cpp"
-    if stub_file.exists():
-        # Already present from a previous patch run
-        return
-    stub_code = '''// Auto-generated assert stubs for AOT mode (build.py _ensure_assert_stubs)
-// The managed Chaos.TestFramework.Sdk does not export C-linkage symbols in AOT.
-#include <cstdint>
-
-extern "C" int32_t Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() noexcept {
-    return 0;
-}
-
-extern "C" int32_t Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept {
-    return 0;
-}
-'''
-    # Write to subjects/ (compiled as part of the entry, included by file glob)
+    stub_file = native_dir / "chaos_assert_stubs.cpp"
+    # Always overwrite to ensure the file exists regardless of previous state
+    stub_code = '// Auto-generated assert stubs for AOT mode (build.py)\n'
+    stub_code += '#include <chaos/native_types.h>\n'
+    stub_code += 'extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() noexcept {}\n'
+    stub_code += 'extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept { return 0; }\n'
     stub_file.write_text(stub_code, encoding="utf-8")
     print(f"  [build] Generated assert stubs: {stub_file.name}")
