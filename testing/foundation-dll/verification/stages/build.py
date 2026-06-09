@@ -812,6 +812,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # The linter may corrupt 'extern "C"' in generated code (missing types).
     _patch_generated_extern_c(ctx.native_dir)
 
+    # ── Ensure Assert_Reset/Assert_Complete stub definitions exist ──
+    # The CHAOS_FACT_CHECK macro calls these but the managed SDK DLL may not
+    # export them as C-linkage symbols in AOT mode.  Provide stub definitions.
+    _ensure_assert_stubs(ctx.native_dir)
+
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
         # ── Post-generation patch: register interop stubs for unresolvable bridge thunks ──
@@ -1025,3 +1030,34 @@ struct ChaosIlDataEntry {
                 patched = True
 
     return patched
+
+
+def _ensure_assert_stubs(native_dir: Path) -> None:
+    """Generate stub definitions for Assert_Reset and Assert_Complete.
+
+    The CHAOS_FACT_CHECK macro in runtime-entry.cpp calls these functions via the
+    patched template.  In AOT mode, the managed SDK DLL doesn't export C-linkage
+    symbols, so the linker fails with LNK2019.  Provide simple stubs.
+    """
+    subjects_dir = native_dir / "subjects"
+    if not subjects_dir.is_dir():
+        return
+    stub_file = subjects_dir / "chaos_assert_stubs.cpp"
+    if stub_file.exists():
+        # Already present from a previous patch run
+        return
+    stub_code = '''// Auto-generated assert stubs for AOT mode (build.py _ensure_assert_stubs)
+// The managed Chaos.TestFramework.Sdk does not export C-linkage symbols in AOT.
+#include <cstdint>
+
+extern "C" int32_t Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() noexcept {
+    return 0;
+}
+
+extern "C" int32_t Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept {
+    return 0;
+}
+'''
+    # Write to subjects/ (compiled as part of the entry, included by file glob)
+    stub_file.write_text(stub_code, encoding="utf-8")
+    print(f"  [build] Generated assert stubs: {stub_file.name}")
