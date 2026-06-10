@@ -179,8 +179,10 @@ static CHAOS_IL2CPP_INTPTR ChaosCngHmac(
 
     auto buf = std::make_unique<UCHAR[]>(hashLen);
     status = BCryptHash(hAlg,
-        (PUCHAR)(keyData), static_cast<ULONG>(keyArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
-        (PUCHAR)(dataBuf), static_cast<ULONG>(dataArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<PUCHAR>(const_cast<void*>(static_cast<const void*>(keyData))),
+        static_cast<ULONG>(keyArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
+        static_cast<PUCHAR>(const_cast<void*>(static_cast<const void*>(dataBuf))),
+        static_cast<ULONG>(dataArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
         buf.get(), hashLen);
 
     BCryptCloseAlgorithmProvider(hAlg, 0);
