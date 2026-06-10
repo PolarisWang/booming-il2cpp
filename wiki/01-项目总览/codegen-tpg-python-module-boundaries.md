@@ -4,6 +4,55 @@
 
 ## 四层架构总览
 
+```mermaid
+graph TD
+    subgraph "Layer 4: Python Pipeline"
+        VP[verification/ orchestration] -->|build + test| PE[entry.exe]
+        VP -->|generate| TG[TPG]
+        VP -->|run auto-test| CG[Codegen]
+    end
+
+    subgraph "Layer 3: TPG (C#)"
+        TPG[TestProjectGenerator] -->|templates + emit| ENTRY[runtime-entry.cpp]
+        TPG -->|cmake| CML[CMakeLists.txt]
+        TPG -->|scriban| ENTRY_T[entry.cpp template]
+    end
+
+    subgraph "Layer 2: Codegen (C#)"
+        CG[Chaos.IL2CPP.Generator] -->|IL→C++| NGC[native-aot.generated.cpp]
+        CG -->|AOT IR| AOTIR[aot-core-ir.json]
+        CG -->|code registration| CR[code-registration.json]
+        CG -->|hotpatch table| HT[HotpatchEntryV0[]]
+        CG -->|vtable descriptors| VT[VTableDescriptorV0[]]
+        CG -->|external runtime table| ER[kChaosExternalRuntimeFnTable]
+    end
+
+    subgraph "Layer 1: Native Runtime (C++)"
+        RC[runtime-core] -->|dispatch| HD[ChaosDispatchMethod]
+        RC -->|vtable resolve| VR[ResolveVirtualMethodPointer]
+        RC -->|GC| GCORE[GC subsystem]
+        INT[interpreter] -->|execute| IE[InterpreterEntryDirect]
+        JIT[jit compiler] -->|compile| JT[JIT codegen]
+    end
+
+    subgraph "Build Artifacts"
+        ENTRY -->|link| PE
+        NGC -->|compile| PE
+        PE -->|run| RESULT[Passed: N/M]
+    end
+
+    classDef csharp fill:#e1f5fe,stroke:#0288d1;
+    classDef native fill:#fff3e0,stroke:#e65100;
+    classDef python fill:#e8f5e9,stroke:#2e7d32;
+    classDef artifact fill:#f3e5f5,stroke:#7b1fa2;
+    class CG,TPG csharp;
+    class RC,INT,JIT native;
+    class VP python;
+    class NGC,ENTRY,RESULT,HT,VT,CR,AOTIR artifact;
+```
+
+```
+(legacy text diagram kept for reference — see Mermaid above for interactive version)
 ```
 ┌────────────────────────────────────────────────────────────┐
 │ 1. Codegen (C#) — Chaos.IL2CPP.Generator                   │

@@ -1,7 +1,14 @@
 ---
 name: dev-il2cpp-translation-expert
-description: il2cpp 翻译路径专家 — 处理 IL→C++ 翻译路径选择、Planner/Emission 修改、新增 IL 指令翻译
+description: dev-il2cpp-translation-expert — il2cpp 翻译专家
 ---
+
+> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
+> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+>
+> **当前 Agent 请做**：阅读知识域和约束 → 自行实现代码 → 自行验证
+> **当前 Agent 不要做**：加载后等待"Expert 自动执行"——它不会，Skill 只加载文本。
+>
 
 # dev-il2cpp-translation-expert — il2cpp 翻译专家
 
@@ -14,11 +21,22 @@ description: il2cpp 翻译路径专家 — 处理 IL→C++ 翻译路径选择、
 - 修改 codegen 桥接合约（`codegen_bridge.h`、`runtime_abi.h` 中与翻译相关的部分）
 - 翻译路径一致性验证
 
-### 我不负责的
-- **运行时实现**（修改 interpreter / runtime-core 的执行逻辑）→ 请调用 `dev-il2cpp-runtime-expert`
-- **C# codegen 工具链修改**（T4 模板、NativeAot lowering 管线）→ 暂直接实现
-- **GC/内存分配相关** → 请调用 dev-systematic-debugging 或 GC Expert
-- **测试治理**（subject/manifest/runner）→ 请调用 `dev-project-test-governance`
+### 我不负责的（超出以下范围 → 标记 remaining，回 Dispatcher 重新分发）
+
+- **运行时实现**（修改 interpreter / runtime-core 的执行逻辑）→ 超出范围，标记 remaining，原因：需要运行时域知识
+- **C# codegen 工具链修改**（T4 模板、NativeAot lowering 管线）→ 超出范围，标记 remaining，原因：需要 CodeGen 域知识
+- **GC/内存分配相关** → 超出范围，标记 remaining，原因：需要 GC 域知识
+- **测试治理**（subject/manifest/runner）→ 超出范围，标记 remaining，原因：需要测试治理域知识
+- **编译失败 / codegen stub**（LNK 错误、C++ 编译错、CMake 错误、dotnet build 失败）→ 超出范围，标记 remaining，原因：需要构建修复域知识
+
+## 输出格式（Dispatcher 回读用）
+
+每个 Expert 处理完任务后，必须在当前上下文中输出：
+
+```
+✅ done: [已处理的子任务 ID 列表]
+⏳ remaining: [未处理的子任务 ID 列表 + 原因]
+```
 
 ---
 
@@ -140,6 +158,11 @@ description: il2cpp 翻译路径专家 — 处理 IL→C++ 翻译路径选择、
 2. **如果涉及 codegen 桥接合约变更**，必须通知下游（当前为人工通知，CodeGen Expert 创建后自动路由）
 
 3. **Wiki 一致性**：新路径稳定后，必须触发 `dev-project-wiki-maintenance` 更新 `02-翻译路径参考/` 对应文档
+
+4. **commit message 要求** — 修改完成后必须包含三段式根因：
+   - `root_cause` — 一句话根因
+   - `fix_strategy` — 修复策略
+   - `regression_check` — 验证范围
 
 ---
 

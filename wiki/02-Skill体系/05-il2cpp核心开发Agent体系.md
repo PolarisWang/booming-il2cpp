@@ -41,6 +41,8 @@ dev-il2cpp-core-agent (Master Controller)
 | `dev-il2cpp-gc-expert` | GC | CRAG GC + 分代 + 写屏障 + stress test | pressure-test-management | P2 |
 | `dev-il2cpp-codegen-expert` | CodeGen | 25 Planner 文件 + 40+ Scriban 模板 + 88 snapshot 基线 | test-governance | P2 |
 | `dev-il2cpp-hotupdate-expert` | 热更新 | PatchLoader + .patchdata + InterpreterEntryDirect | runtime-expert, codegen-expert | P2 |
+| `dev-il2cpp-foundation-dll-optimizer` | 优化 | 全平台对比 + 8 种瓶颈分析 + 迭代优化循环 | gc-expert, codegen-expert | P3 |
+| `dev-il2cpp-build-fixer` | 构建 | 四层诊断（ATG/TPG/CodeGen/Python）+ 编译失败修复 | codegen-expert | P3 |
 
 ## 路由矩阵
 
@@ -52,8 +54,10 @@ dev-il2cpp-core-agent (Master Controller)
 | GC、分配、写屏障、stress test | `dev-il2cpp-gc-expert` |
 | C# codegen、T4 模板、snapshot | `dev-il2cpp-codegen-expert` |
 | foundation-dll、subject、测试管线 | `dev-project-test-governance` |
-| 性能优化、profile、benchmark | `dev-optimization-campaign` |
+| 性能优化、profile、benchmark、横向对比 | `dev-il2cpp-foundation-dll-optimizer` |
+| 跨 family 大规模优化战役 | `dev-optimization-campaign` |
 | 热更新、PatchLoader、patchdata | `dev-il2cpp-hotupdate-expert` |
+| **编译失败、链接错误 LNK、codegen stub、dotnet build 失败、CMake 错误** | `dev-il2cpp-build-fixer` |
 | **跨域（2+ 域）** | Controller 串行调度 |
 | **跨域（3+ 域）** | roadmap / Workflow Orchestrator |
 
@@ -63,7 +67,8 @@ dev-il2cpp-core-agent (Master Controller)
 |------|--------|------|
 | Phase 1 | 知识基座 + Controller + 3 Expert（翻译/运行时/调试） | ✅ |
 | Phase 2 | 3 Expert（GC/CodeGen/热更新） | ✅ |
-| Phase 3 | Workflow Orchestrator + 6 冲突检测规则 | ✅ |
+| Phase 3 | foundation-dll 优化 Expert + BuildFixer + Workflow Orchestrator | ✅ |
+| Phase 4 | Hub-and-Spoke 分发循环 + 全部 9 Expert 集成 | ✅ |
 
 ### 未来的可能演化
 

@@ -1,7 +1,14 @@
 ---
 name: dev-il2cpp-codegen-expert
-description: il2cpp CodeGen 专家 — C# codegen 管线、NativeAotLoweringPlanner、T4 模板、Scriban 渲染、snapshot 测试
+description: dev-il2cpp-codegen-expert — il2cpp CodeGen 专家
 ---
+
+> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
+> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+>
+> **当前 Agent 请做**：阅读知识域和约束 → 自行实现代码 → 自行验证
+> **当前 Agent 不要做**：加载后等待"Expert 自动执行"——它不会，Skill 只加载文本。
+>
 
 # dev-il2cpp-codegen-expert — il2cpp CodeGen 专家
 
@@ -16,11 +23,22 @@ description: il2cpp CodeGen 专家 — C# codegen 管线、NativeAotLoweringPlan
 - T4/JIT native code 生成器（`jit_engine.cpp`）
 - PatchDataExtractor / PatchDataDumper（`.patchdata` 构建期生成）
 
-### 我不负责的
-- **运行时实现**（runtime-core/interpreter 的 C++ 代码）→ 请调用 `dev-il2cpp-runtime-expert`
-- **翻译路径设计**（IL 指令→Planner 选择逻辑）→ 请调用 `dev-il2cpp-translation-expert`
-- **测试治理**（subject/manifest/runner）→ 请调用 `dev-project-test-governance`
-- **GC/分配策略** → 请调用 `dev-il2cpp-gc-expert`
+### 我不负责的（超出以下范围 → 标记 remaining，回 Dispatcher 重新分发）
+
+- **运行时实现**（runtime-core/interpreter 的 C++ 代码）→ 超出范围，标记 remaining，原因：需要运行时域知识
+- **翻译路径设计**（IL 指令→Planner 选择逻辑）→ 超出范围，标记 remaining，原因：需要翻译域知识
+- **测试治理**（subject/manifest/runner）→ 超出范围，标记 remaining，原因：需要测试治理域知识
+- **GC/分配策略** → 超出范围，标记 remaining，原因：需要 GC 域知识
+- **编译失败 / codegen stub**（LNK 错误、C++ 编译错）→ 超出范围，标记 remaining，原因：需要构建修复域知识
+
+## 输出格式（Dispatcher 回读用）
+
+每个 Expert 处理完任务后，必须在当前上下文中输出：
+
+```
+✅ done: [已处理的子任务 ID 列表]
+⏳ remaining: [未处理的子任务 ID 列表 + 原因]
+```
 
 ---
 
@@ -113,25 +131,19 @@ description: il2cpp CodeGen 专家 — C# codegen 管线、NativeAotLoweringPlan
 
 ## 执行流程
 
-### Step 1：加载 CodeGen 语境
+### Step 0：架构语境加载（Architecture Pre-check）
 
-1. **确认修改范围**：
-   - 属于 25 个 Planner 文件中的哪个？
-   - 涉及模板修改吗？
-   - 涉及 snapshot 基线变更吗？
+1. **确认修改范围** — 属于 25 个 Planner 文件中的哪个？
+2. **检查架构约束**：
+   - 结构化恢复率必须保持 100%（`flatFallbackCount` MUST be 0）
+   - Symbol 命名规范（`SanitizeSubjectId` + `chaos_*_` prefix）
+   - AOT/JIT 模式约束（`--mode aot|jit`）
+3. **如果涉及 Scriban 模板** — 阅读 `NativeAotTemplateCatalog.cs` 找到对应模板，确认模板变量定义
+4. **如果涉及 AOT/JIT 模式** — 阅读 [`30-模式间切换指南.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/30-模式间切换指南.md)
+5. **如果是新增 IL 指令** — 必须先走 `dev-il2cpp-translation-expert` 完成翻译路径设计
+6. **如果是 PatchData 修改** — 检查 PatchDataExtractor + patch_data.h 格式一致性
 
-2. **如果是新增 IL 指令翻译**：
-   - 建议先走 `dev-il2cpp-translation-expert` 完成翻译路径设计
-   - 再回来修改 CodeGen 输出
-
-3. **如果涉及模板修改**：
-   - 阅读 `NativeAotTemplateCatalog.cs` 找到对应模板
-   - 确认模板变量在 `NativeAotTemplateModel` 中的定义
-
-4. **如果涉及 AOT/JIT 模式**：
-   - 阅读 [`30-模式间切换指南.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/30-模式间切换指南.md)
-
-### Step 2：实现
+### Step 1：实现
 
 1. **Planner 修改**：
    - 在正确的 partial class 文件中修改
@@ -185,6 +197,10 @@ description: il2cpp CodeGen 专家 — C# codegen 管线、NativeAotLoweringPlan
 2. **`CHAOS_IL2CPP_` 宏约束** — 生成代码不得包含裸 `new`/`delete`/`malloc`/`free`
 3. **不生成 CMake 文件** — CMakeLists.txt 由 TPG 通过 Scriban 模板生成
 4. **SDK 输出自包含** — 运行时存根必须从 SDK 的 `runtime_stubs/` 拷贝
+5. **commit message 要求** — 修改完成后必须包含三段式根因：
+   - `root_cause` — 一句话根因
+   - `fix_strategy` — 修复策略
+   - `regression_check` — 验证范围
 
 ## 执行前 Checklist
 

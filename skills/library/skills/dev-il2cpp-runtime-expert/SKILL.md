@@ -1,7 +1,14 @@
 ---
 name: dev-il2cpp-runtime-expert
-description: il2cpp 运行时专家 — runtime-core/interpreter/bootstrap/support 领域的修改与调试
+description: dev-il2cpp-runtime-expert — il2cpp 运行时专家
 ---
+
+> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
+> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+>
+> **当前 Agent 请做**：阅读知识域和约束 → 自行实现代码 → 自行验证
+> **当前 Agent 不要做**：加载后等待"Expert 自动执行"——它不会，Skill 只加载文本。
+>
 
 # dev-il2cpp-runtime-expert — il2cpp 运行时专家
 
@@ -15,12 +22,23 @@ description: il2cpp 运行时专家 — runtime-core/interpreter/bootstrap/suppo
 - **engine-bridge 模块**：引擎绑定、RuntimeAbiV0 实现
 - **运行时合约**：`codegen_bridge.h`、`runtime_abi.h` 中的运行时侧实现
 
-### 我不负责的
-- **翻译路径设计**（Planner / Emission 文件修改）→ 请调用 `dev-il2cpp-translation-expert`
-- **GC 核心算法**（分代策略、写屏障语义）→ 请调用 GC Expert 或 `dev-systematic-debugging`
-- **C# codegen 工具链**（T4 模板、NativeAot lowering）→ 暂直接实现
-- **测试治理**（subject/manifest/runner）→ 请调用 `dev-project-test-governance`
-- **纯性能优化**（profile 驱动的优化）→ 请调用 `dev-optimization-campaign`
+### 我不负责的（超出以下范围 → 标记 remaining，回 Dispatcher 重新分发）
+
+- **翻译路径设计**（Planner / Emission 文件修改）→ 超出范围，标记 remaining，原因：需要翻译域知识
+- **GC 核心算法**（分代策略、写屏障语义）→ 超出范围，标记 remaining，原因：需要 GC 域知识
+- **C# codegen 工具链**（T4 模板、NativeAot lowering）→ 超出范围，标记 remaining，原因：需要 CodeGen 域知识
+- **测试治理**（subject/manifest/runner）→ 超出范围，标记 remaining，原因：需要测试治理域知识
+- **纯性能优化**（profile 驱动的优化）→ 超出范围，标记 remaining，原因：需要优化域知识
+- **编译失败 / codegen stub**（LNK 错误、C++ 编译错、CMake 错误、dotnet build 失败）→ 超出范围，标记 remaining，原因：需要构建修复域知识
+
+## 输出格式（Dispatcher 回读用）
+
+每个 Expert 处理完任务后，必须在当前上下文中输出：
+
+```
+✅ done: [已处理的子任务 ID 列表]
+⏳ remaining: [未处理的子任务 ID 列表 + 原因]
+```
 
 ---
 
@@ -67,6 +85,34 @@ description: il2cpp 运行时专家 — runtime-core/interpreter/bootstrap/suppo
 | [`01-翻译管线/13-MemoryDomain系统.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/13-MemoryDomain系统.md) | MemoryDomain 分配系统 |
 | [`01-翻译管线/17-统一内存分配体系.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/17-统一内存分配体系.md) | A→B→C 三阶段分配策略 |
 | [`01-翻译管线/19-解释器VM架构.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/19-解释器VM架构.md) | Interpreter VM 架构 |
+
+### 运行时故障模式索引
+
+| 故障模式 | 典型症状 | 优先检查 | 已知根因 |
+|---------|---------|---------|---------|
+| Dangling VTable Pointer | RegisterTypeVTable 后 segfault | `[[dangling-vtable-pointer-segfault]]` | 栈局部 VTable 超出作用域 |
+| TLS Guard Overhead | 热点路径性能骤降 | `[[avoid-thread-local-hashmaps-in-hot-stubs]]` | MSVC function-scoped thread_local 加 guard |
+| Tiering Call_Count (memset) | interpreter dispatch 异常 | `[[tiering-call-count-guard]]` | SetupPatchMethod memset 覆盖 call_count |
+| 跨 DLL 类型身份 | TypeInfo 指针等式失败 | `[[module-boundaries]]` | 跨 DLL 必须用 stable_id 比较 |
+| AOT Core IR 数据流 | 方法分派到错误实现 | `[[emit-patch-data-aot-core-ir-blocker]]` | aot-core-ir.json 复用问题 |
+| Interpreter 栈帧溢出 | 深层递归调用崩溃 | interpreter_entry.cpp FramePool depth | FastFrame pool depth 限制 |
+| Hotpatch Dispatch 竞争 | dispatch_entry 中间态 | 检查 memory_order release | flags + method_key 写入顺序 |
+| Shutdown AV | 进程退出时 0xC0000409 | `[[shutdown-av-abort-longjmp-fix]]` | SIGABRT + longjmp recovery |
+| Entry.exe SEH 缺口 | AOT 方法 AV 未捕获 | `[[entry-exe-seh-catch-gap]]` | 必须用 __try/__except |
+
+### 热点路径性能基线
+
+| 函数 | 位置 | 基线性能 | 说明 |
+|------|------|---------|------|
+| SafepointPoll | `thread_state.cpp` | ~0.5ns fast path | 无竞争时的最佳路径 |
+| GcAllocate (bump) | `runtime_core.cpp` | 与 GC bump 缓存一致 | 分配热点入口 |
+| FastExecute main loop | `fast_dispatch.cpp` | ~12ns/op | 指令分派主循环 |
+| Handle_Call | `fast_dispatch.cpp` | ~8ns/op | 直接/虚/接口调用分派 |
+| Handle_Box | `fast_dispatch.cpp` | ~25ns/op | 值类型装箱 |
+| Handle_NewObj | `fast_dispatch.cpp` | ~35ns/op | 对象分配 |
+| InterpreterDispatch | `runtime_instantiation.cpp` | ~15ns/op | 解释器分派入口 |
+| ResolveVirtualMethodPointer | `vtable_registry.cpp` | ~5ns/op | VTable 虚方法解析 |
+| ResolveMethodTable | `method_table.cpp` | ~8ns/op | 方法表查找 |
 | [`01-翻译管线/23-托管线程模型与GC协作.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/23-托管线程模型与GC协作.md) | 线程模型与 GC Safepoint |
 | [`01-翻译管线/28-AssemblyManager与ALC.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/28-AssemblyManager与ALC.md) | Assembly 管理 |
 | [`04-历史决策/15-B2+VTable虚方法分派决策.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/15-B2+VTable虚方法分派决策.md) | VTable 分派架构决策 |
@@ -76,14 +122,16 @@ description: il2cpp 运行时专家 — runtime-core/interpreter/bootstrap/suppo
 
 ## 执行流程
 
-### Step 1：加载运行时语境
+### Step 0：架构语境加载（Architecture Pre-check）
 
-1. 阅读 [`11-CPP运行时模块分层.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/11-CPP运行时模块分层.md) 确认模块 DAG 依赖
-2. 如果涉及跨 DLL 分派，阅读 [16-RuntimeCentricCrossDllDispatch决策.md](../../../wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/16-RuntimeCentricCrossDllDispatch决策.md)
-3. 如果涉及内存分配，阅读 [`17-统一内存分配体系.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/17-统一内存分配体系.md)
-4. 如果涉及合约接口变更，检查 `codegen_bridge.h` 和 `runtime_abi.h`
+1. **加载运行时模块 DAG** — 阅读 [`11-CPP运行时模块分层.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/11-CPP运行时模块分层.md)
+2. **检查运行时故障模式索引**（9 种已知模式）
+3. **如果涉及跨 DLL 分派** — 阅读 [16-RuntimeCentricCrossDllDispatch决策.md](../../../wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/16-RuntimeCentricCrossDllDispatch决策.md)
+4. **如果涉及内存分配** — 阅读 [`17-统一内存分配体系.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/17-统一内存分配体系.md)
+5. **如果涉及合约接口变更** — 检查 `codegen_bridge.h` + `runtime_abi.h`
+6. **确认修改不违反 `03-架构约束/` 中的禁止模式**
 
-### Step 2：实现
+### Step 1：实现
 
 1. **运行时函数修改**：
    - 确认在正确的模块/命名空间中修改
@@ -154,6 +202,10 @@ description: il2cpp 运行时专家 — runtime-core/interpreter/bootstrap/suppo
 3. **禁止全局 operator new/delete 重载** — 使用 `CHAOS_IL2CPP_*` 宏
 4. **热点路径性能** — 修改热点路径后必须确认性能无损
 5. **AOT IR 兼容** — AOT IR 数据流修改必须检查 `.skip-aot-core-ir` 和 reader 逻辑
+6. **commit message 要求** — 修复完成后必须包含三段式根因：
+   - `root_cause` — 一句话根因
+   - `fix_strategy` — 修复策略
+   - `regression_check` — 验证范围
 
 ---
 

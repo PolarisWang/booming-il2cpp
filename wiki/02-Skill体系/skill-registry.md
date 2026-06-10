@@ -30,6 +30,8 @@
 | `dev-il2cpp-gc-expert` | `project` | il2cpp | CRAG GC 架构、分代策略、写屏障专家 | `skills/library/skills/dev-il2cpp-gc-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
 | `dev-il2cpp-codegen-expert` | `project` | il2cpp | C# codegen 管线、Scriban 模板、snapshot 专家 | `skills/library/skills/dev-il2cpp-codegen-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
 | `dev-il2cpp-hotupdate-expert` | `project` | il2cpp | Hotpatch/PatchLoader/.patchdata 热更新专家 | `skills/library/skills/dev-il2cpp-hotupdate-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
+| `dev-il2cpp-foundation-dll-optimizer` | `project` | il2cpp | foundation-dll 深度优化专家（全平台对比、瓶颈分析、迭代优化） | `skills/library/skills/dev-il2cpp-foundation-dll-optimizer/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
+| `dev-il2cpp-build-fixer` | `project` | il2cpp | 编译失败与 codegen stub 修复专家（四层分层诊断） | `skills/library/skills/dev-il2cpp-build-fixer/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
 
 ## 规则
 

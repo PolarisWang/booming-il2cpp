@@ -1,7 +1,14 @@
 ---
 name: dev-il2cpp-hotupdate-expert
-description: il2cpp 热更新专家 — Hotpatch 双层分派、PatchLoader、.patchdata、PatchMetadataCache、Interpreter 解释器路由
+description: dev-il2cpp-hotupdate-expert — il2cpp 热更新专家
 ---
+
+> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
+> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+>
+> **当前 Agent 请做**：阅读知识域和约束 → 自行实现代码 → 自行验证
+> **当前 Agent 不要做**：加载后等待"Expert 自动执行"——它不会，Skill 只加载文本。
+>
 
 # dev-il2cpp-hotupdate-expert — il2cpp 热更新专家
 
@@ -17,11 +24,22 @@ description: il2cpp 热更新专家 — Hotpatch 双层分派、PatchLoader、.p
 - **emit-patch-data CLI** — 完整闭包管线 + patch 提取
 - **Hotpatch 验证** — 7 步验证流程
 
-### 我不负责的
-- **翻译路径设计**（Planner/Emission 的翻译逻辑）→ 请调用 `dev-il2cpp-translation-expert`
-- **运行时核心**（runtime-core 非 hotpatch 部分）→ 请调用 `dev-il2cpp-runtime-expert`
-- **CodeGen / Scriban 模板**（非 hotpatch 部分）→ 请调用 `dev-il2cpp-codegen-expert`
-- **GC / 内存域分配** → 请调用 `dev-il2cpp-gc-expert`
+### 我不负责的（超出以下范围 → 标记 remaining，回 Dispatcher 重新分发）
+
+- **翻译路径设计**（Planner/Emission 的翻译逻辑）→ 超出范围，标记 remaining，原因：需要翻译域知识
+- **运行时核心**（runtime-core 非 hotpatch 部分）→ 超出范围，标记 remaining，原因：需要运行时域知识
+- **CodeGen / Scriban 模板**（非 hotpatch 部分）→ 超出范围，标记 remaining，原因：需要 CodeGen 域知识
+- **GC / 内存域分配** → 超出范围，标记 remaining，原因：需要 GC 域知识
+- **编译失败 / codegen stub**（LNK 错误、C++ 编译错）→ 超出范围，标记 remaining，原因：需要构建修复域知识
+
+## 输出格式（Dispatcher 回读用）
+
+每个 Expert 处理完任务后，必须在当前上下文中输出：
+
+```
+✅ done: [已处理的子任务 ID 列表]
+⏳ remaining: [未处理的子任务 ID 列表 + 原因]
+```
 
 ---
 
@@ -131,6 +149,17 @@ g_token_slot[]: TokenSlotEntry { token, slot }
 
 ## 执行流程
 
+### Step 0：架构语境加载（Architecture Pre-check）
+
+1. **确定子系统** — build-time（C#） / patch load（C++） / dispatch（C++）？
+2. **加载对应架构文档**：
+   - 全貌：[`18-热更新架构.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/18-热更新架构.md)
+   - 决策：[18-HotUpdateDispatchHotpatch-决策.md](../../../wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/18-HotUpdateDispatchHotpatch-决策.md)
+   - 翻译表：[`11-热更新HotpatchDispatch翻译表.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/02-翻译路径参考/11-热更新HotpatchDispatch翻译表.md)
+3. **检查已知故障模式**（4 种已知模式）
+4. **如果涉及 .patchdata 格式** — 检查 v1→v2 兼容性
+5. **如果涉及 InterpreterEntryDirect** — 注意 call_count fetch_add 约束
+
 ### Step 1：加载热更新语境
 
 1. **确定需要修改的子系统**：
@@ -218,6 +247,10 @@ g_token_slot[]: TokenSlotEntry { token, slot }
 1. **`.patchdata` 格式变更必须更新 version + 兼容 header_size check**
 2. **Unpatch 必须在 PatchMethodLowerIR 失败时回滚所有已设置 dispatch_entry**
 3. **InterpreterEntryDirect call_count 必须使用 fetch_add**（不要 memset PatchMethod）
+4. **commit message 要求** — 修改完成后必须包含三段式根因：
+   - `root_cause` — 一句话根因
+   - `fix_strategy` — 修复策略
+   - `regression_check` — 验证范围
 4. **Hotpatch dispatch table 位于 codegen 生成的静态数组中**（不在 runtime 侧动态创建）
 
 ---

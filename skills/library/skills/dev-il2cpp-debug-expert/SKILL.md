@@ -1,7 +1,14 @@
 ---
 name: dev-il2cpp-debug-expert
-description: il2cpp 调试专家 — il2cpp 领域专用的系统性调试，集成 trace 系统和 il2cpp 故障模式索引
+description: dev-il2cpp-debug-expert — il2cpp 调试专家
 ---
+
+> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
+> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+>
+> **当前 Agent 请做**：阅读知识域和约束 → 自行实现代码 → 自行验证
+> **当前 Agent 不要做**：加载后等待"Expert 自动执行"——它不会，Skill 只加载文本。
+>
 
 # dev-il2cpp-debug-expert — il2cpp 调试专家
 
@@ -14,11 +21,28 @@ description: il2cpp 调试专家 — il2cpp 领域专用的系统性调试，集
 - 跨多层管线（Python → C# codegen → C++ 编译 → 运行时）的问题追踪
 - interpreter / runtime-core 中的异常行为
 
-### 我不负责的
-- **翻译路径设计**（翻译问题定位后请转给 `dev-il2cpp-translation-expert`）
-- **纯测试治理问题**（subject/manifest/runner）→ 请调用 `dev-project-test-governance`
-- **性能优化**（profiling 基线分析）→ 请调用 `dev-optimization-campaign`
-- **非技术性问题**（需求不清、设计讨论）→ 请调用 `dev-brainstorm`
+### 我不负责的（超出以下范围 → 标记 remaining，回 Dispatcher 重新分发）
+
+- **翻译路径设计** → 超出范围，标记 remaining，原因：需要翻译域知识
+- **纯测试治理问题**（subject/manifest/runner）→ 超出范围，标记 remaining，原因：需要测试治理域知识
+- **性能优化**（profiling 基线分析）→ 超出范围，标记 remaining，原因：需要优化域知识
+- **非技术性问题**（需求不清、设计讨论）→ 超出范围，标记 remaining，原因：需要 brainstorm 流程
+- **编译失败 / codegen stub**（LNK 错误、C++ 编译错）→ 超出范围，标记 remaining，原因：需要构建修复域知识
+- **GC 修复**（GC crash 定位完成后）→ 标记 remaining，附诊断结果，原因：需要 GC 域知识修复
+- **运行时实现**（定位到 runtime bug 后）→ 标记 remaining，附诊断结果，原因：需要运行时域知识修复
+
+## 输出格式（Dispatcher 回读用）
+
+每个 Expert 处理完任务后，必须在当前上下文中输出：
+
+```
+✅ done: [已处理的子任务 ID 列表]
+⏳ remaining: [未处理的子任务 ID 列表 + 原因]
+```
+
+> **故障模式索引维护规则**：本 Expert 是 il2cpp 故障模式索引的统一维护者。
+> 其他 Expert Agent 发现新故障模式时，应在各自的文档中记录并通知本 Expert 同步更新到故障模式表。
+> 所有故障模式知识以本 Expert 的表为权威源，避免多个 Expert 之间发散。
 
 ---
 
@@ -99,9 +123,16 @@ il2cpp 调试经常涉及 Python → C# codegen → C++ native 三层管线，�
   - LOG_DEBUG 输出是否揭示了异常值？
 ```
 
-### 四阶段流程（继承自 dev-systematic-debugging）
+### Step 0：架构语境加载（Architecture Pre-check）
 
-#### Phase 1：根本原因调查
+> 在进入四阶段调试前，先加载 il2cpp 架构语境，避免在架构误解上调试。
+
+1. **检查已知故障模式**（见增强 1 的 il2cpp 故障模式索引）
+2. **加载相关架构文档**（如 GC crash → 加载 GC 架构文档；interpreter bug → 加载 interpreter VM 文档）
+3. **检查最近变更**：`git diff HEAD~5`、最近提交、配置变更
+4. **确认可重现性**：能否可靠触发？精确步骤？
+
+### Step 1：根本原因调查（Phase 1）
 
 1. **仔细阅读错误信息** — stack trace、行号、文件路径、错误码
 2. **一致地重现** — 能否可靠触发？精确步骤？
@@ -109,20 +140,20 @@ il2cpp 调试经常涉及 Python → C# codegen → C++ native 三层管线，�
 4. **在多组件系统中收集证据** — trace 优先（见增强 2），根据需要加诊断埋点
 5. **追踪数据流** — 坏值从哪里产生？一直追踪到源头
 
-#### Phase 2：模式分析
+#### Step 2：模式分析
 
 1. 对照 **il2cpp 故障模式索引**（见增强 1）匹配已知模式
 2. 找到同一代码库中类似的有效代码
 3. 识别有效和损坏之间的差异
 4. 理解依赖关系和假设
 
-#### Phase 3：假设与测试
+#### Step 3：假设与测试
 
 1. 形成单一假设："我认为 X 是根因，因为 Y"
 2. 最小化测试 — 每次只改变一个变量
 3. 验证后再继续
 
-#### Phase 4：实现
+#### Step 4：实现
 
 1. 创建失败测试用例
 2. 实现单一修复（解决根因而非症状）

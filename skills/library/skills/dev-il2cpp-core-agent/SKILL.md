@@ -1,19 +1,35 @@
 ---
 name: dev-il2cpp-core-agent
-description: il2cpp 核心开发统一入口 — 分类任务并路由到对应的 Expert Agent，完成后自动执行质量门
+description: il2cpp 核心开发 Controller — Hub-and-Spoke 分发循环。派发→Expert 做一部分→收回→再派发，直到全部完成
 ---
 
 # dev-il2cpp-core-agent — il2cpp 核心开发 Controller
 
 ## 概述
 
-本 skill 是 **所有 il2cpp 开发任务的统一入口**。它不直接实现任何代码，而是：
-1. 加载 il2cpp 开发语境（优先级约束 + 架构知识索引）
-2. 将任务分类到对应域（翻译/调试/运行时/GC/CodeGen/测试/复合）
-3. 路由到对应的 **Expert Agent** 执行专业实现
-4. 执行完成后自动注入质量门
+本 skill 是 **所有 il2cpp 开发任务的统一入口**。采用 **Hub-and-Spoke + Loop-back** 分发模式：
 
-核心原则：**专业的事情交给专业的 agent 处理**。
+```
+Dispatcher 接收任务
+  │
+  ├── 拆分子任务清单
+  ├── 循环:
+  │     ├── 选一个 Expert
+  │     ├── Skill("dev-xxx-expert") → 注入知识
+  │     ├── Expert 做自己能做的部分
+  │     ├── Expert 标记:
+  │     │   ✅ done:     [已处理的部分]
+  │     │   ⏳ remaining: [未处理的部分]
+  │     ├── Dispatcher 更新待办清单
+  │     └── 待办为空? → 退出循环; 否则 → 选下一个 Expert
+  │
+  └── ✅ 全部完成 → 质量门
+```
+
+核心原则：
+- **Expert 做 partial**：每个 Expert 只做自己域内的部分，做不完的标记 remaining 回 Dispatcher
+- **Dispatcher 管进度**：维护待办清单，循环分派直到清空
+- **终止守卫**：连续 N 轮无进展 → 报错终止，防止无限循环
 
 ---
 
@@ -21,175 +37,157 @@ description: il2cpp 核心开发统一入口 — 分类任务并路由到对应�
 
 - 用户会话从 `dev-using-booming` 路由到 il2cpp 域（替换模式）
 - 用户直接输入 `/dev-il2cpp-core-agent`
-- 用户输入包含以下关键词：il2cpp、翻译、IL 指令、AOT、codegen、GC、运行时、runtime-core、interpreter、VTable、Emission、Planner、NativeAot、热更新
+- 用户输入包含：il2cpp、翻译、IL 指令、AOT、codegen、GC、运行时、runtime-core、interpreter、VTable、Emission、Planner、NativeAot、热更新
 
 ---
 
-## 三阶段流程
+## 四阶段流程
 
 ### 阶段 1: il2cpp 语境加载（Context Loading）
 
-进入本 skill 后，首先执行语境加载：
-
 ```
-1. 重申全局优先级约束：
+1. 重申全局优先级约束:
    P1（最高）= 性能最优 > P2 = 方案完美性 > P3 = HotUpdate 支持
-   低优先级与高优先级冲突时，低优先级让位于高优先级
 
-2. 加载 00-快速导航.md：
+2. 加载 00-快速导航.md:
    读取 wiki/03-功能模块/06-il2cpp核心架构/00-快速导航.md
-   → 建立完整的架构知识索引
 
-3. 检查工作区状态：
+3. 检查工作区状态:
    - 当前分支和 git 状态
-   - 检查 STATUS.md 是否存在、是否有进行中的任务
-   - 检查 docs/dev/ACTIVE.md 活跃任务清单
+   - STATUS.md / ACTIVE.md
 
-4. 建立会话级"il2cpp 态"：
-   确认当前会话专注于 il2cpp 核心开发，后续所有操作在此语境下展开
+4. 建立会话级"il2cpp 态"
 ```
 
-### 阶段 2: 任务分类与路由（Task Classification & Routing）
+### 阶段 2: 任务分解（Task Decomposition）
 
-根据用户输入的任务描述，按以下分类矩阵匹配：
-
-#### 分类矩阵
-
-| 任务信号 | 域 | 路由目标 | 说明 |
-|----------|-----|---------|------|
-| 新 IL 指令、翻译路径、Emission、Planner、Lowering | **翻译** | `dev-il2cpp-translation-expert` | 含 `dev-architecture-first-development` 三阶段流程 |
-| runtime-core、interpreter、VTable、bootstrap、method_table、线程状态 | **运行时** | `dev-il2cpp-runtime-expert` | runtime-core/interpreter 领域 |
-| crash、segfault、test failure、编译错误、异常行为 | **调试** | `dev-il2cpp-debug-expert` | il2cpp 域定制化 debugging |
-| GC 相关、分配模式、内存回收、写屏障、stress test | **GC** | `dev-il2cpp-gc-expert` | CRAG GC、分代、Page Decommission |
-| C# codegen、T4 模板、NativeAot lowering、snapshot | **CodeGen** | `dev-il2cpp-codegen-expert` | C# codegen 管线、Scriban 模板 |
-| foundation-dll、subject、测试管线、manifest | **测试** | `dev-project-test-governance`（复用现有） | 测试治理是全局职责 |
-| 性能优化、profile 分析、benchmark | **优化** | `dev-optimization-campaign`（复用现有） | 复用现有 skill |
-| 热更新、PatchLoader、patchdata、HotpatchDispatch | **热更新** | `dev-il2cpp-hotupdate-expert` | Hotpatch、PatchMetadataCache、Interpreter 路由 |
-| **跨域**（命中 2+ 个域） | **复合** | Controller 保留 → 自行调度 | 见下方跨域处理 |
-
-#### 单域路由（≥80% 清晰）
-
-直接调用对应的 Expert Agent（通过 Skill 工具），传入原始任务描述作为 args。
+将用户输入的原始任务拆分为 **子任务清单**：
 
 ```
-用户任务 → 分类 → 路由到 Expert Agent → Expert 执行 → 返回结果 → 阶段 3 质量门
+用户: "翻译 newobj + 改 runtime helper + 加 GC 写屏障"
+  → 子任务清单: [
+       {id: T1, desc: "翻译 newobj 指令", domain: "translation", status: pending},
+       {id: T2, desc: "实现 runtime helper", domain: "runtime", status: pending},
+       {id: T3, desc: "添加 GC 写屏障", domain: "gc", status: pending},
+     ]
 ```
 
-#### 跨域任务处理规则
+子任务颗粒度：一个 Expert 一轮能完成的量。太粗→Expert 做不完；太细→循环太多轮。
 
-**2 个域**：Controller 按 `[主域 → 从域]` 串行执行。
-- 示例 "GC crash 发生在 runtime 分配处" → 先调 `dev-il2cpp-debug-expert` 定位 crash 根因 → 再调 GC 处理修复
-- 示例 "翻译新 IL + 改 runtime helper" → 先调 `dev-il2cpp-translation-expert` 完成翻译 → 再调 `dev-il2cpp-runtime-expert` 实现 helper
+### 阶段 3: 分发循环（Dispatch Loop）
 
-**3+ 个域或涉及翻译+运行时+测试**：
-- 默认走 `dev-roadmap` → `dev-writing-plans` → `dev-executing-plans` 生成正式多步计划
-- 或提示用户是否使用 Workflow Orchestrator（当需要并行执行多个 Expert Agent 时）
-- 与用户确认后再执行
-
-**不明确的输入**：
-- 先反问用户澄清："你的意思是做 X（翻译类）还是 Y（调试类）？"
-- 根据用户澄清结果重路由
-
-#### 执行模型决策树
+这是核心循环，反复执行直到待办清单为空。
 
 ```
-用户输入任务描述
-  │
-  ▼
-阶段 1: 加载 il2cpp 语境
-  │
-  ▼
-阶段 2: 分类任务域
-  │
-  ├─ 单域（≥80% 清晰）→ 调用 Expert Agent
-  │                            │
-  │                            └→ 执行完成 → 阶段 3
-  │
-  ├─ 双域 → Controller 串行调度
-  │       └→ 主域 Expert → 从域 Expert → 阶段 3
-  │
-  ├─ 三域+ → 走 roadmap / 或询问用户是否用 Orchestrator
-  │          └→ 逐步执行 → 阶段 3
-  │
-  └─ 不明确的 → 反问澄清 → 重路由
+todo = [子任务清单]       ← 初始 = 阶段 2 的输出
+tried = []              ← 已尝试过的 Expert
+round = 0
+
+while todo 非空:
+  round++
+  if round > MAX_ROUNDS (默认 10):
+    报错: "超过最大轮次，未完成: {todo}" → 终止
+
+  target_expert = 从分类矩阵选最匹配 todo 的 Expert
+  if target_expert in tried:
+    报错: "Expert {target_expert} 已尝试过但仍有剩余，其他 Expert 也无法处理 → 人工介入"
+
+  tried.append(target_expert)
+  输出 classification: "domains=[{todo的域}] mode=knowledge-inject expert={target_expert} round={round}"
+
+  Skill("dev-{target_expert}")  →  加载 Expert 知识到当前上下文
+
+  /* 当前 Agent 利用 Expert 知识处理 todo 中自己能做的部分 */
+  ✅ done:       [已处理的子任务]
+  ⏳ remaining:  [未处理的子任务]
+
+  todo = remaining
+  /* 进入下一轮 while 循环 */
 ```
 
-### 阶段 3: 自动质量门（Post-Execution Quality Gates）
+**终止守卫**：
+```
+MAX_ROUNDS = 10（默认）
+- 超过 10 轮 → 终止，报残留任务
+- 连续 3 轮 todo 无缩减 → 终止，报"无进展"
+- 所有 Expert 已尝试但 todo 仍有残留 → 终止，报"无法处理的子任务"
+```
 
-在 Expert Agent 执行完成后，自动执行以下质量门：
+### 阶段 4: 质量门
+
+全部子任务完成后，执行质量门：
 
 ```
-必做：
-1. dev-trace-enforcement — 检查修改中是否缺少必要的 trace 点
-2. dev-verification-before-completion — 执行验证门检查
-3. 更新 STATUS.md — 必须包含：
-   - 本次修改的内容摘要
-   - 涉及的文件列表
-   - 如果涉及翻译路径变更：## 架构映射 小节（违反 dev-architecture-first-development 要求时需补充）
-   - 验证结果
-
-按需：
-4. 如果涉及翻译路径变更或 wiki 知识变更：
-   → 建议执行 dev-project-wiki-maintenance 更新对应文档
-5. 如果修改了 AOT/IL2CPP 新特性：
-   → 检查是否需要更新 wiki 中的翻译路径参考表
+□ 如果有代码修改 → dev-trace-enforcement
+□ dev-verification-before-completion
+□ 更新 STATUS.md（内容摘要、文件列表、验证结果）
+□ 如果涉及翻译路径变更 → wiki 维护
+□ 如果涉及多域串行修改（≥2 Expert）→ 运行 foundation-dll pipeline 集成验证
 ```
 
 ---
 
-## 与现有体系的集成
+## 分类矩阵（用于阶段 3 选 Expert）
 
-### dev-using-booming 集成
+> ⚠️ **执行顺序约束**：Translation Expert 和 CodeGen Expert 都涉及 Planner/Emission 文件。
+> 当子任务同时包含翻译路径修改和 codegen 修改时，**必须先派发 Translation Expert，再派发 CodeGen Expert**。
+> Translation Expert 完成翻译路径设计后，CodeGen Expert 在此基础上做代码生成修改。
 
-`dev-using-booming` 的路由表中，在 `Default (bounded, single-session, single-goal)` 分支之前已插入规则：
+| 子任务信号 | 目标 Expert |
+|-----------|-----------|
+| 新 IL 指令、翻译路径、Emission、Planner、Lowering | `dev-il2cpp-translation-expert` |
+| runtime-core、interpreter、VTable、bootstrap、method_table、线程状态 | `dev-il2cpp-runtime-expert` |
+| crash、segfault、test failure、异常行为 | `dev-il2cpp-debug-expert` |
+| GC 相关、分配模式、内存回收、写屏障、stress test | `dev-il2cpp-gc-expert` |
+| C# codegen、T4 模板、NativeAot lowering、snapshot | `dev-il2cpp-codegen-expert` |
+| foundation-dll、subject、测试管线、manifest | `dev-project-test-governance` |
+| 性能优化、profile 分析、benchmark | `dev-il2cpp-foundation-dll-optimizer` |
+| 热更新、PatchLoader、patchdata、HotpatchDispatch | `dev-il2cpp-hotupdate-expert` |
+| 编译失败、链接错误、codegen stub、dotnet build 失败、CMake 错误 | `dev-il2cpp-build-fixer` |
+
+---
+
+## 输入/输出规范
+
+### Expert 收到任务时的输出格式
+
+每个 Expert 在处理完自己能做的部分后，必须在当前上下文中输出：
 
 ```
-- IL2CPP/AOT/GC/Runtime/翻译/CodeGen/interpreter/VTable 相关工作
-  → dev-il2cpp-core-agent
+✅ done: [已处理的子任务 ID 列表]
+⏳ remaining: [未处理的子任务 ID 列表 + 原因]
 ```
 
-因此当用户进入 il2cpp 域的任务时，会自动跳转到本 Controller。
+示例：
+```
+✅ done: [T1 — 翻译 newobj 指令已完成]
+⏳ remaining: [T2 — runtime helper 的实现涉及 codegen 模板修改，超出翻译 Expert 范围]
+```
 
-### Expert Agent 目录结构
+### Dispatcher 收到 remaining 后的行为
 
-所有 Expert Agent 位于 `skills/library/skills/dev-il2cpp-*-expert/SKILL.md`，当前已注册：
-
-| Expert Agent | 文件 | 状态 |
-|-------------|------|------|
-| `dev-il2cpp-translation-expert` | 翻译专家 | ✅ Phase 1 |
-| `dev-il2cpp-runtime-expert` | 运行时专家 | ✅ Phase 1 |
-| `dev-il2cpp-debug-expert` | 调试专家 | ✅ Phase 1 |
-| `dev-il2cpp-gc-expert` | GC 专家 | ✅ Phase 2 |
-| `dev-il2cpp-codegen-expert` | CodeGen 专家 | ✅ Phase 2 |
-| `dev-il2cpp-hotupdate-expert` | 热更新专家 | ✅ Phase 2 |
-
-### Workflow Orchestrator
-
-复杂跨域任务（3+ 域）可调用 Workflow Orchestrator：
-- 模板文件: `skills/library/skills/dev-il2cpp-core-agent/orchestrator-template.workflow.md`
-- 触发条件: 涉及 3+ 域 或 10+ 文件 或 ABI 接口变更
-- 流程: 分解 → 并行执行 → 冲突检测 → 集成验证
+```
+1. 把 ✅ done 从 todo 中移除
+2. 把 ⏳ remaining 保留在 todo 中，标记原因为"需要 XX Expert"
+3. 重新进入 while 循环，选下一个 Expert
+4. remaining 的原因帮助 Dispatcher 选更精准的 target_expert
+```
 
 ---
 
 ## 输出约束
 
-1. **Controller 不处理实现** — 本 skill 只做分类和路由，不写任何实现代码
-2. **不做重复路由** — 如果已经处于某个 Expert Agent 内部，不再触发本 Controller
-3. **质量门是强制的** — 阶段 3 不可跳过
-4. **先分类再行动** — 禁止跳过分类直接猜测实现路径
-5. **跨域任务必须与用户确认** — 不要替用户决定是串行还是走 roadmap
-
----
+1. **先分类再行动** — 禁止跳过分类直接实现
+2. **每轮输出 classification 声明** — 格式 `classification: domains=[...] expert=xxx round=N`
+3. **维护待办清单** — 在上下文中显式维护 todo list，每轮同步
+4. **终止守卫不可跳过** — 超过 MAX_ROUNDS 或无进展时必须终止，不能死循环
+5. **Expert 标记 completed/remaining** — 每个 Expert 执行完后必须输出 done/remaining
+6. **质量门不可跳过** — 阶段 4
 
 ## 集成点
 
 | 上游 | 本 skill | 下游 |
 |------|----------|------|
-| `dev-using-booming` → il2cpp 路由 | **dev-il2cpp-core-agent** | `dev-il2cpp-translation-expert` |
-| 用户直接输入 /dev-il2cpp-core-agent | | `dev-il2cpp-runtime-expert` |
-| | | `dev-il2cpp-debug-expert` |
-| | | `dev-project-test-governance`（测试） |
-| | | `dev-optimization-campaign`（优化） |
-| | | `dev-architecture-first-development`（回退） |
-| | | `dev-systematic-debugging`（回退） |
+| `dev-using-booming` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | `Skill("dev-il2cpp-*-expert")` — 知识注入 |
+| 用户直接输入 | | `Skill("dev-project-test-governance")` |
+| | | `Workflow({scriptPath: "orchestrator.workflow.js"})` |

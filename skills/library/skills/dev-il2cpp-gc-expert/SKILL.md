@@ -1,7 +1,14 @@
 ---
 name: dev-il2cpp-gc-expert
-description: il2cpp GC 专家 — CRAG GC 架构、分配策略、分代分析、写屏障、stress test、内存域
+description: dev-il2cpp-gc-expert — il2cpp GC 专家
 ---
+
+> ⚠️ **本文件通过 Skill 工具加载，作用是注入领域知识到当前对话上下文。**
+> 本文件**不是可执行的 agent**。当前 Agent 需阅读下方"执行流程"作为实现参考。
+>
+> **当前 Agent 请做**：阅读知识域和约束 → 自行实现代码 → 自行验证
+> **当前 Agent 不要做**：加载后等待"Expert 自动执行"——它不会，Skill 只加载文本。
+>
 
 # dev-il2cpp-gc-expert — il2cpp GC 专家
 
@@ -17,11 +24,22 @@ description: il2cpp GC 专家 — CRAG GC 架构、分配策略、分代分析�
 - Stress test 回归分析与修复
 - GC Crash 根因定位（分配异常、写屏障损坏、Page 回收）
 
-### 我不负责的
-- **运行时非 GC 分配**（MemoryDomain、Domain 分配）→ 请调用 `dev-il2cpp-runtime-expert`
-- **翻译路径设计**（IL→C++ codegen）→ 请调用 `dev-il2cpp-translation-expert`
-- **纯性能优化**（profile 驱动的优化）→ 请调用 `dev-optimization-campaign`
-- **对象模型/ObjectHeader** → 请调用 `dev-il2cpp-runtime-expert`
+### 我不负责的（超出以下范围 → 标记 remaining，回 Dispatcher 重新分发）
+
+- **运行时非 GC 分配**（MemoryDomain、Domain 分配）→ 超出范围，标记 remaining，原因：需要运行时域知识
+- **翻译路径设计**（IL→C++ codegen）→ 超出范围，标记 remaining，原因：需要翻译域知识
+- **纯性能优化**（profile 驱动的优化）→ 超出范围，标记 remaining，原因：需要优化域知识
+- **对象模型/ObjectHeader** → 超出范围，标记 remaining，原因：需要运行时域知识
+- **编译失败 / codegen stub**（LNK 错误、C++ 编译错）→ 超出范围，标记 remaining，原因：需要构建修复域知识
+
+## 输出格式（Dispatcher 回读用）
+
+每个 Expert 处理完任务后，必须在当前上下文中输出：
+
+```
+✅ done: [已处理的子任务 ID 列表]
+⏳ remaining: [未处理的子任务 ID 列表 + 原因]
+```
 
 ---
 
@@ -77,23 +95,15 @@ description: il2cpp GC 专家 — CRAG GC 架构、分配策略、分代分析�
 
 ## 执行流程
 
-### Step 1：加载 GC 语境
+### Step 0：架构语境加载（Architecture Pre-check）
 
-1. **确认 GC 架构基线**：
-   - 阅读 [`24-CRAG-GC架构参考.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/24-CRAG-GC架构参考.md) 建立架构理解
-   - 阅读 [`17-统一内存分配体系.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/17-统一内存分配体系.md) 理解 A→B→C 三阶段策略
+1. **确认 GC 架构基线** — 阅读 [`24-CRAG-GC架构参考.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/24-CRAG-GC架构参考.md)
+2. **检查已知故障模式**（7 种已知 GC 模式，维护者：dev-il2cpp-debug-expert）
+3. **如果涉及 Phase 3 并发** — 加载 [`08-GC子系统/CRAG-GC-Phase3-并发能力.md`](../../../wiki/03-功能模块/08-GC子系统/CRAG-GC-Phase3-并发能力.md)
+4. **如果涉及 ETW 诊断** — 加载 [`08-GC子系统/CRAG-GC-ETW诊断事件.md`](../../../wiki/03-功能模块/08-GC子系统/CRAG-GC-ETW诊断事件.md)
+5. **确认修改不违反架构约束**（精确扫描、写屏障预算、BGC 事件驱动）
 
-2. **检查已知故障模式**：
-   - 对照"已知故障模式"表匹配当前问题
-   - 如果匹配 → 直接参考已知解决方案
-   - 如果不匹配 → 进入 Step 2
-
-3. **如果涉及 GC 扩展功能**，加载对应文档：
-   - Phase 3 并发 → [`08-GC子系统/CRAG-GC-Phase3-并发能力.md`](../../../wiki/03-功能模块/08-GC子系统/CRAG-GC-Phase3-并发能力.md)
-   - ETW 事件 → [`08-GC子系统/CRAG-GC-ETW诊断事件.md`](../../../wiki/03-功能模块/08-GC子系统/CRAG-GC-ETW诊断事件.md)
-   - stress test → [`04-测试与验证/GC压力测试报告.md`](../../../wiki/03-功能模块/04-测试与验证/GC压力测试报告.md)
-
-### Step 2：定位与实现
+### Step 1：定位与实现
 
 1. **GC crash 定位流程**：
    - 先检查已知故障模式表
@@ -195,6 +205,10 @@ description: il2cpp GC 专家 — CRAG GC 架构、分配策略、分代分析�
 3. **写屏障修改必须保持性能预算** — ~6 native instructions
 4. **分代策略修改必须验证 kPromotionAgeThreshold 影响**
 5. **BGC 状态机修改必须保持事件驱动模型** — 不要加轮询
+6. **commit message 要求** — 修复完成后必须包含三段式根因：
+   - `root_cause` — 一句话根因
+   - `fix_strategy` — 修复策略
+   - `regression_check` — 验证范围
 
 ## 执行前 Checklist
 
