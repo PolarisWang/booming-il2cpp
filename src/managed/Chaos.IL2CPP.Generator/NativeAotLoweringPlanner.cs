@@ -165,6 +165,8 @@ public sealed partial class NativeAotLoweringPlanner
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
     private HashSet<string>? _subjectMethodSubjectIds;
+    private IReadOnlyDictionary<string, ManagedMethodModel>? _allManagedMethods;
+    private readonly List<(string SubjectId, string Json)> _cryptoAotIrEntries = new();
 
     // Verification dispatch manifest (populated by BuildDispatchEntryCode)
     private string? _manifestJson;
@@ -608,6 +610,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         _codegenMode = mode;
         _subjectMethodSubjectIds = subjectMethods;
+        _allManagedMethods = allManagedMethods;
 
         // Skip entry ABI validation for full-closure assembly translation
         if (!closureManifest.FullAssemblyClosure)
@@ -1067,6 +1070,7 @@ public sealed partial class NativeAotLoweringPlanner
             helperSymbolBySubjectId: externalRuntimeHelpers?
                 .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
                 .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
+        var cryptoAotIrCode = BuildCryptoAotIrCode();
         var moduleRegistrationCode = BuildModuleRegistration();
         var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);
         if (!string.IsNullOrEmpty(nameIndexCode))
@@ -1078,6 +1082,11 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(externalRuntimeTableCode);
+        if (!string.IsNullOrEmpty(cryptoAotIrCode))
+        {
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(cryptoAotIrCode);
+        }
         }
         if (!string.IsNullOrEmpty(aotRegistrationCode))
         {
@@ -1892,6 +1901,13 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Always declare kChaosExternalRuntimeCount for page files that use
         // BS-5 external runtime table bounds checks (defined in main file).
         sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;");
+        // ── Crypto AOT IR data for interpreter fallback ──
+        if (_cryptoAotIrEntries.Count > 0)
+        {
+            sb.AppendLine("extern \"C\" const int kCryptoAotIrCount;");
+            sb.AppendLine("extern \"C\" const char* kCryptoAotIrSubjects[];");
+            sb.AppendLine("extern \"C\" const char* kCryptoAotIrJson[];");
+        }
 
         // ── Runtime helper function declarations (global scope) ──
         // These functions are DEFINED in the native runtime library (not inside the
@@ -2100,6 +2116,27 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             }
         }
         return symbols;
+    }
+
+    private string BuildCryptoAotIrCode()
+    {
+        if (_cryptoAotIrEntries.Count == 0) return string.Empty;
+        var sb = new StringBuilder(4096);
+        sb.Append("extern \"C\" const int kCryptoAotIrCount = ");
+        sb.Append(_cryptoAotIrEntries.Count);
+        sb.AppendLine(";");
+        sb.AppendLine("extern \"C\" const char* kCryptoAotIrSubjects[] = {");
+        foreach (var e in _cryptoAotIrEntries)
+            sb.AppendLine("    \"" + e.SubjectId.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\",");
+        sb.AppendLine("};");
+        sb.AppendLine("extern \"C\" const char* kCryptoAotIrJson[] = {");
+        foreach (var e in _cryptoAotIrEntries)
+        {
+            var esc = e.Json.Replace("\\", "\\\\").Replace("\"", "\\\"");
+            sb.AppendLine("    \"" + esc + "\",");
+        }
+        sb.AppendLine("};");
+        return sb.ToString();
     }
 
     private static string BuildEntryBridgeArguments(AotCoreIrMethodArtifact entryMethod)
