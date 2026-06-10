@@ -1,8 +1,0 @@
-CHAOS_IL2CPP_ONCE_FLAG {{ once_flag_symbol }};
-
-void {{ initialization_function_symbol }}()
-{
-    CHAOS_IL2CPP_CALL_ONCE({{ once_flag_symbol }}, []()
-    {
-{{ action_block }}    });
-}

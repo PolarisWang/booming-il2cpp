@@ -1,6 +1,0 @@
-{{ indentation }}if ({{ static_field_symbol }} == 0)
-{{ indentation }}{
-{{ indentation }}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({{ native_type_symbol }});
-{{ indentation }}    chaos_object->header.type_info = {{ native_type_info_symbol }};
-{{ constructor_block }}{{ indentation }}    {{ static_field_symbol }} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-{{ indentation }}}

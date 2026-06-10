@@ -1,7 +1,0 @@
-generic_instantiation_test 1 0.0423077
-aot_core_ir_reader_test 1 0.024525
-assembly_manager_test 1 0.0416548
-convert_parse_test 0 0
-native_static_var_test 1 0.0388845
----
-convert_parse_test
