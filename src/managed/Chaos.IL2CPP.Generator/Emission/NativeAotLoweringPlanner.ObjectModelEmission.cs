@@ -430,8 +430,11 @@ public sealed partial class NativeAotLoweringPlanner
 		// VTableDescriptorV0 entries in the CodeRegistration, but may not
 		// have been captured by instruction scanning (e.g. auto-generated
 		// test types only referenced via typeof()/box in test code).
+		// Skip generic parameter markers (!!0, !0) — they are not concrete types.
 		foreach (string id in hashSet3)
 		{
+			if (id.Contains("!!", StringComparison.Ordinal) || id.Contains("!0", StringComparison.Ordinal))
+				continue;
 			if (!valueTypeSubjectIds.Contains(id) && !referenceTypeSubjectIds.Contains(id))
 			{
 				TrackReferenceType(id, "System.Private.CoreLib/System.Object");
@@ -1316,7 +1319,11 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 					    !tid.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
 					{
 						_allEmittedTypeSubjectIds.Add(tid);
-						if (!referenceTypeSubjectIds.Contains(tid) && !hashSet3.Contains(tid))
+						// Always add to hashSet3 for cross-assembly type references
+						// (generic parameter types like !!0, and types referenced in boxing/
+						// LdObj/StObj instructions need chaos_boxed_type_* declarations and
+						// MethodTable symbols regardless of tracking status).
+						if (!hashSet3.Contains(tid))
 							hashSet3.Add(tid);
 					}
 				}
