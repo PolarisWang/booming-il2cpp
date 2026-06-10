@@ -4,8 +4,7 @@
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>  // MethodTable, TypeInfoV0 (complete type)
 #include "generated_code_compat.h"  // PureTypeHeader for delegate type definitions
-#include "ChaosGeneratedRuntimePrelude.h"
-#include "vector_stubs.h"  // Vector<T> comparison stubs  // chaos_managed_array for array-compat checks
+#include "ChaosGeneratedRuntimePrelude.h"  // chaos_managed_array for array-compat checks
 
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___0CFBF01C84FAB4E5344ABB5D837C123C4EE573A987BF536E197188590338F8D4;
@@ -31,1278 +30,716 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementati
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___F06ED69DF6E1896529126C9DD2F159F0FF1E4468B1BE716B3D7AEE38F8C701DC;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___F54AFD13D27E53DD97A248512A6187637E5499827ED7BC55EF5E6C31195661DF;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_CombinedSubjects__PrivateImplementationDetails___FCF2BF7E8F6FE4D1C7B4755B69955B1AC712D43B86CD17EFB2D92F256DC9FCE3;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Memory_System_Byte_;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Threading_CancellationToken;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Security_Cryptography_CngProperty;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Security_Cryptography_DSAParameters;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Security_Cryptography_ECCurve;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Security_Cryptography_ECParameters;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Security_Cryptography_HashAlgorithmName;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Security_Cryptography_RSAParameters;
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails_
-
 {
-
     ThinLockableHeader header{};
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___0CFBF01C84FAB4E5344ABB5D837C123C4EE573A987BF536E197188590338F8D4 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___1C343036D67A5B9B5F1DEADD8B023B4B783FC92B8FCC92517ACE15C566720521 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___24B9055C69246706F8619F15AAB72925979B771882644E7BBB372EDCD37DE304 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___32D2AE03B8B636B73DE1709B6CF0C3880AE1B548510D4807FC0AD20FA04DB4A4 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___407FEB4A4B8303BAF4F84E29A209E0DCFD62E81F88C8EDB7675C5A95D90E5C90 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___4800FBFC4566EB02D1727A4B1C949CCBC7535C216A0766564C199308631B5DD6 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___488B4329DF99DACE80B4C50E073E6EB39E5198EE93A1F51C62AC3B19356E747C = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___533B8C444F951E83EFF7305E3807B66CE0005DE0A2D0A44873C130895A3BE6AA = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___5BDC74B9D1416F740F6037B2C6C5D4EDF2A346D830527135302252C92107037D = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___5DF6E0E2761359D30A8275058E299FCC0381534545F55CF43E41983F5D4C9456 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___648EB07B73F6EDBA340490178239727562B005589A00F25DFD5B22FE702BF3F0 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___65EDEDEE30ED896528AF7D1CA58311C4B6C73F00F187D14E6074FD8E4CDEA7F4 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___7D43B81AA0A4088B663E41DA4F587E21DA5CB023CD64064EA3711551BD2CAA89 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___91F8EE26CEA10781D036C27E66E95B8722174A9B9C78A7A88B9C5FB9579F1D38 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___A09941949DF508620D027C03AC12A3286382E745B9B17C656A98F7B5FB316918 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___B452C33202206672AFB35352A995095F186C8DC0BDE343EFAB3198D5D9D7FB4A = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___C7C4522A56245022151F347AC8EB8745A0C6A052B5E3DC09A935DBA740A1ECD3 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___E2E17543AE2573B10DC2547315170D6B35BA571445AC0188005E4E314070FBE2 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___ED59E83E776F0CAF91A6CDA28DEEF6E3B82EDD19C37F455C5342566AC97A261D = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___ED6F05B6150596F21C460439B0F74206E4AB3B9D202694888BE5822F7BA345E6 = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___F06ED69DF6E1896529126C9DD2F159F0FF1E4468B1BE716B3D7AEE38F8C701DC = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___F54AFD13D27E53DD97A248512A6187637E5499827ED7BC55EF5E6C31195661DF = 0;
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects__PrivateImplementationDetails___FCF2BF7E8F6FE4D1C7B4755B69955B1AC712D43B86CD17EFB2D92F256DC9FCE3 = 0;
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_Object
-
 {
-
     ThinLockableHeader header{};
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___0CFBF01C84FAB4E5344ABB5D837C123C4EE573A987BF536E197188590338F8D4 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___1C343036D67A5B9B5F1DEADD8B023B4B783FC92B8FCC92517ACE15C566720521 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___24B9055C69246706F8619F15AAB72925979B771882644E7BBB372EDCD37DE304 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___32D2AE03B8B636B73DE1709B6CF0C3880AE1B548510D4807FC0AD20FA04DB4A4 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___407FEB4A4B8303BAF4F84E29A209E0DCFD62E81F88C8EDB7675C5A95D90E5C90 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___4800FBFC4566EB02D1727A4B1C949CCBC7535C216A0766564C199308631B5DD6 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___488B4329DF99DACE80B4C50E073E6EB39E5198EE93A1F51C62AC3B19356E747C : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___533B8C444F951E83EFF7305E3807B66CE0005DE0A2D0A44873C130895A3BE6AA : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___5BDC74B9D1416F740F6037B2C6C5D4EDF2A346D830527135302252C92107037D : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___5DF6E0E2761359D30A8275058E299FCC0381534545F55CF43E41983F5D4C9456 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___648EB07B73F6EDBA340490178239727562B005589A00F25DFD5B22FE702BF3F0 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___65EDEDEE30ED896528AF7D1CA58311C4B6C73F00F187D14E6074FD8E4CDEA7F4 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___7D43B81AA0A4088B663E41DA4F587E21DA5CB023CD64064EA3711551BD2CAA89 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___91F8EE26CEA10781D036C27E66E95B8722174A9B9C78A7A88B9C5FB9579F1D38 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___A09941949DF508620D027C03AC12A3286382E745B9B17C656A98F7B5FB316918 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___B452C33202206672AFB35352A995095F186C8DC0BDE343EFAB3198D5D9D7FB4A : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___C7C4522A56245022151F347AC8EB8745A0C6A052B5E3DC09A935DBA740A1ECD3 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___E2E17543AE2573B10DC2547315170D6B35BA571445AC0188005E4E314070FBE2 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___ED59E83E776F0CAF91A6CDA28DEEF6E3B82EDD19C37F455C5342566AC97A261D : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___ED6F05B6150596F21C460439B0F74206E4AB3B9D202694888BE5822F7BA345E6 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___F06ED69DF6E1896529126C9DD2F159F0FF1E4468B1BE716B3D7AEE38F8C701DC : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___F54AFD13D27E53DD97A248512A6187637E5499827ED7BC55EF5E6C31195661DF : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___FCF2BF7E8F6FE4D1C7B4755B69955B1AC712D43B86CD17EFB2D92F256DC9FCE3 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0 : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
     CHAOS_IL2CPP_INTPTR field_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0____ref_0_0_0 = 0;
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_Delegate : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
     CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
-
     CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
-
     CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
-
     CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
-
     CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
-
     CHAOS_IL2CPP_UINT32 _pad = 0;
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_MulticastDelegate : public chaos_type_System_Private_CoreLib_System_Delegate
-
 {
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_Byte
-
 {
-
     ThinLockableHeader header{};
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_IO_Stream
-
 {
-
     ThinLockableHeader header{};
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_IO_Stream_NullStream
-
 {
-
     ThinLockableHeader header{};
-
 };
 
+struct chaos_type_System_Private_CoreLib_System_Memory_System_Byte_ : public chaos_type_System_Private_CoreLib_System_Object
+{
+};
 
+struct chaos_type_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_ : public chaos_type_System_Private_CoreLib_System_Object
+{
+};
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
-
 {
-
     ThinLockableHeader header{};
-
     CHAOS_IL2CPP_INTPTR runtime_assembly_name_value = 0;
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName
-
 {
-
     ThinLockableHeader header{};
-
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodBase : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo : public chaos_type_System_Private_CoreLib_System_Reflection_MethodBase
-
 {
-
     CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
-
     CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
-
     CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
-
     CHAOS_IL2CPP_INTPTR generic_argument_type_handle = 0;
-
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
-
 {
-
     ThinLockableHeader header{};
-
     CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
-
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo : public chaos_type_System_Private_CoreLib_System_Reflection_MethodBase
-
 {
-
     CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
-
     CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
-
     CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
-
     CHAOS_IL2CPP_INTPTR generic_argument_type_handle = 0;
-
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
-
 };
-
-
 
 struct chaos_type_System_Private_CoreLib_System_String
-
 {
-
     ThinLockableHeader header{};
-
     CHAOS_IL2CPP_INTPTR length = 0;
-
     const char* utf8_data = nullptr;
-
     CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
-
 };
 
-
+struct chaos_type_System_Private_CoreLib_System_Threading_CancellationToken : public chaos_type_System_Private_CoreLib_System_Object
+{
+};
 
 struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_Private_CoreLib_System_Object
-
 {
-
     CHAOS_IL2CPP_INTPTR runtime_type_handle = 0;
-
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
-
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+};
 
+struct chaos_type_System_Security_Cryptography_CngProperty : public chaos_type_System_Private_CoreLib_System_Object
+{
+};
+
+struct chaos_type_System_Security_Cryptography_DSAParameters : public chaos_type_System_Private_CoreLib_System_Object
+{
+};
+
+struct chaos_type_System_Security_Cryptography_ECCurve : public chaos_type_System_Private_CoreLib_System_Object
+{
+};
+
+struct chaos_type_System_Security_Cryptography_ECParameters : public chaos_type_System_Private_CoreLib_System_Object
+{
+};
+
+struct chaos_type_System_Security_Cryptography_HashAlgorithmName : public chaos_type_System_Private_CoreLib_System_Object
+{
+};
+
+struct chaos_type_System_Security_Cryptography_RSAParameters : public chaos_type_System_Private_CoreLib_System_Object
+{
 };
 
 
-
-
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Byte___System_Byte___System_String_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Byte___System_Byte___System_String_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Object_System_Object_System_String_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Object_System_Object_System_String_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__IsNotNull_System_Void_System_Object_System_String_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__IsNotNull_System_Void_System_Object_System_String_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentOutOfRangeException__System_Void_System_Action_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentOutOfRangeException__System_Void_System_Action_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_FormatException__System_Void_System_Action_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_FormatException__System_Void_System_Action_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_PlatformNotSupportedException__System_Void_System_Action_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_PlatformNotSupportedException__System_Void_System_Action_;
+struct chaos_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Security_Cryptography_CryptographicException__System_Void_System_Action_;
+struct chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Security_Cryptography_CryptographicException__System_Void_System_Action_;
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails_;
 struct chaos_boxed_type_CombinedSubjects__PrivateImplementationDetails_;
 struct chaos_type_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2;
@@ -1643,6 +1080,14 @@ struct chaos_type_System_Private_CoreLib_System_Action {
     CHAOS_IL2CPP_UINT32 _pad = 0;
 };
 struct chaos_boxed_type_System_Private_CoreLib_System_Action;
+struct chaos_type_System_Private_CoreLib_System_Array;
+struct chaos_boxed_type_System_Private_CoreLib_System_Array;
+struct chaos_type_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____;
+struct chaos_boxed_type_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____;
+struct chaos_type_System_Private_CoreLib_System_Array__Empty_System_Object__System_Object____;
+struct chaos_boxed_type_System_Private_CoreLib_System_Array__Empty_System_Object__System_Object____;
+struct chaos_type_System_Private_CoreLib_System_Array__Empty_System_String__System_String____;
+struct chaos_boxed_type_System_Private_CoreLib_System_Array__Empty_System_String__System_String____;
 struct chaos_type_System_Private_CoreLib_System_Byte;
 struct chaos_boxed_type_System_Private_CoreLib_System_Byte;
 struct chaos_type_System_Private_CoreLib_System_Delegate;
@@ -1651,10 +1096,62 @@ struct chaos_type_System_Private_CoreLib_System_IO_Stream;
 struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream;
 struct chaos_type_System_Private_CoreLib_System_IO_Stream_NullStream;
 struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream_NullStream;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__CopyTo_System_Void_System_IO_Stream_System_Int32_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__CopyTo_System_Void_System_IO_Stream_System_Int32_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__CopyToAsync_System_Threading_Tasks_Task_System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__CopyToAsync_System_Threading_Tasks_Task_System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__Null;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__Null;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_;
+struct chaos_boxed_type_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_;
+struct chaos_type_System_Private_CoreLib_System_Memory_System_Byte_;
+struct chaos_boxed_type_System_Private_CoreLib_System_Memory_System_Byte_ {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Private_CoreLib_System_Memory_System_Byte_ value{};
+};
 struct chaos_type_System_Private_CoreLib_System_MulticastDelegate;
 struct chaos_boxed_type_System_Private_CoreLib_System_MulticastDelegate;
 struct chaos_type_System_Private_CoreLib_System_Object;
 struct chaos_boxed_type_System_Private_CoreLib_System_Object;
+struct chaos_type_System_Private_CoreLib_System_Object___ctor_System_Void__;
+struct chaos_boxed_type_System_Private_CoreLib_System_Object___ctor_System_Void__;
+struct chaos_type_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_;
+struct chaos_boxed_type_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_ {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_ value{};
+};
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_Assembly;
 struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName;
@@ -1667,16 +1164,1061 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_MethodBase;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_MethodBase;
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_MethodInfo;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte___;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte___;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____GetResult_System_Byte____;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____GetResult_System_Byte____;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32_;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32_;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte___;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte___;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____GetResult_System_Byte____;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____GetResult_System_Byte____;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32_;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32_;
+struct chaos_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult_System_Int32__;
+struct chaos_boxed_type_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult_System_Int32__;
 struct chaos_type_System_Private_CoreLib_System_String;
 struct chaos_boxed_type_System_Private_CoreLib_System_String;
+struct chaos_type_System_Private_CoreLib_System_Threading_CancellationToken;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_CancellationToken {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Private_CoreLib_System_Threading_CancellationToken value{};
+};
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_Task;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_Task;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte___;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte___;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32_;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32_;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte___;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte___;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32_;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32_;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___;
 struct chaos_type_System_Private_CoreLib_System_Type;
 struct chaos_boxed_type_System_Private_CoreLib_System_Type;
+struct chaos_type_System_Security_Cryptography_AesCcm;
+struct chaos_boxed_type_System_Security_Cryptography_AesCcm;
+struct chaos_type_System_Security_Cryptography_AesCcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AesCcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_AesCcm__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_AesCcm__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_AesCcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AesCcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_AesGcm;
+struct chaos_boxed_type_System_Security_Cryptography_AesGcm;
+struct chaos_type_System_Security_Cryptography_AesGcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AesGcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_AesGcm__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_AesGcm__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_AesGcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AesGcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_AsnEncodedData;
+struct chaos_boxed_type_System_Security_Cryptography_AsnEncodedData;
+struct chaos_type_System_Security_Cryptography_AsnEncodedData__CopyFrom_System_Void_AsnEncodedData_;
+struct chaos_boxed_type_System_Security_Cryptography_AsnEncodedData__CopyFrom_System_Void_AsnEncodedData_;
+struct chaos_type_System_Security_Cryptography_AsnEncodedData__Format_System_String_System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_AsnEncodedData__Format_System_String_System_Boolean_;
+struct chaos_type_System_Security_Cryptography_AsnEncodedDataCollection;
+struct chaos_boxed_type_System_Security_Cryptography_AsnEncodedDataCollection;
+struct chaos_type_System_Security_Cryptography_AsnEncodedDataCollection__Add_System_Int32_AsnEncodedData_;
+struct chaos_boxed_type_System_Security_Cryptography_AsnEncodedDataCollection__Add_System_Int32_AsnEncodedData_;
+struct chaos_type_System_Security_Cryptography_AsnEncodedDataCollection__GetEnumerator_AsnEncodedDataEnumerator__;
+struct chaos_boxed_type_System_Security_Cryptography_AsnEncodedDataCollection__GetEnumerator_AsnEncodedDataEnumerator__;
+struct chaos_type_System_Security_Cryptography_AsnEncodedDataCollection__Remove_System_Void_AsnEncodedData_;
+struct chaos_boxed_type_System_Security_Cryptography_AsnEncodedDataCollection__Remove_System_Void_AsnEncodedData_;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm__Clear_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm__Clear_System_Void__;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKey_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKey_System_Byte____;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKeyPem_System_String__;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKeyPem_System_String__;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfo_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfo_System_Byte____;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfoPem_System_String__;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfoPem_System_String__;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm__FromXmlString_System_Void_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm__FromXmlString_System_Void_System_String_;
+struct chaos_type_System_Security_Cryptography_AsymmetricAlgorithm__ToXmlString_System_String_System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricAlgorithm__ToXmlString_System_String_System_Boolean_;
+struct chaos_type_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter;
+struct chaos_type_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__DecryptKeyExchange_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__DecryptKeyExchange_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__SetKey_System_Void_AsymmetricAlgorithm_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__SetKey_System_Void_AsymmetricAlgorithm_;
+struct chaos_type_System_Security_Cryptography_AsymmetricKeyExchangeFormatter;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricKeyExchangeFormatter;
+struct chaos_type_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___System_Type_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___System_Type_;
+struct chaos_type_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__SetKey_System_Void_AsymmetricAlgorithm_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__SetKey_System_Void_AsymmetricAlgorithm_;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureDeformatter;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureDeformatter;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetHashAlgorithm_System_Void_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetHashAlgorithm_System_Void_System_String_;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetKey_System_Void_AsymmetricAlgorithm_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetKey_System_Void_AsymmetricAlgorithm_;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_HashAlgorithm_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_HashAlgorithm_System_Byte___;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureFormatter;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureFormatter;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___HashAlgorithm_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___HashAlgorithm_;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureFormatter__SetHashAlgorithm_System_Void_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureFormatter__SetHashAlgorithm_System_Void_System_String_;
+struct chaos_type_System_Security_Cryptography_AsymmetricSignatureFormatter__SetKey_System_Void_AsymmetricAlgorithm_;
+struct chaos_boxed_type_System_Security_Cryptography_AsymmetricSignatureFormatter__SetKey_System_Void_AsymmetricAlgorithm_;
+struct chaos_type_System_Security_Cryptography_ChaCha20Poly1305;
+struct chaos_boxed_type_System_Security_Cryptography_ChaCha20Poly1305;
+struct chaos_type_System_Security_Cryptography_ChaCha20Poly1305__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ChaCha20Poly1305__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_ChaCha20Poly1305__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_ChaCha20Poly1305__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_ChaCha20Poly1305__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ChaCha20Poly1305__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_CngKey;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey;
+struct chaos_type_System_Security_Cryptography_CngKey__Delete_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Delete_System_Void__;
+struct chaos_type_System_Security_Cryptography_CngKey__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_;
+struct chaos_type_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_;
+struct chaos_type_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_CngKeyOpenOptions_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_CngKeyOpenOptions_;
+struct chaos_type_System_Security_Cryptography_CngKey__Export_System_Byte___CngKeyBlobFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Export_System_Byte___CngKeyBlobFormat_;
+struct chaos_type_System_Security_Cryptography_CngKey__GetProperty_CngProperty_System_String_CngPropertyOptions_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__GetProperty_CngProperty_System_String_CngPropertyOptions_;
+struct chaos_type_System_Security_Cryptography_CngKey__HasProperty_System_Boolean_System_String_CngPropertyOptions_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__HasProperty_System_Boolean_System_String_CngPropertyOptions_;
+struct chaos_type_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_;
+struct chaos_type_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_CngProvider_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_CngProvider_;
+struct chaos_type_System_Security_Cryptography_CngKey__Open_CngKey_Microsoft_Win32_SafeHandles_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Open_CngKey_Microsoft_Win32_SafeHandles_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_;
+struct chaos_type_System_Security_Cryptography_CngKey__Open_CngKey_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Open_CngKey_System_String_;
+struct chaos_type_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_;
+struct chaos_type_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_CngKeyOpenOptions_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_CngKeyOpenOptions_;
+struct chaos_type_System_Security_Cryptography_CngKey__SetProperty_System_Void_CngProperty_;
+struct chaos_boxed_type_System_Security_Cryptography_CngKey__SetProperty_System_Void_CngProperty_;
+struct chaos_type_System_Security_Cryptography_CngProperty;
+struct chaos_boxed_type_System_Security_Cryptography_CngProperty {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Security_Cryptography_CngProperty value{};
+};
+struct chaos_type_System_Security_Cryptography_CngProperty__GetValue_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_CngProperty__GetValue_System_Byte____;
+struct chaos_type_System_Security_Cryptography_CryptoConfig;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoConfig;
+struct chaos_type_System_Security_Cryptography_CryptoConfig__AddAlgorithm_System_Void_System_Type_System_String___;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoConfig__AddAlgorithm_System_Void_System_Type_System_String___;
+struct chaos_type_System_Security_Cryptography_CryptoConfig__AddOID_System_Void_System_String_System_String___;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoConfig__AddOID_System_Void_System_String_System_String___;
+struct chaos_type_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_;
+struct chaos_type_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_System_Object___;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_System_Object___;
+struct chaos_type_System_Security_Cryptography_CryptoConfig__EncodeOID_System_Byte___System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoConfig__EncodeOID_System_Byte___System_String_;
+struct chaos_type_System_Security_Cryptography_CryptoConfig__MapNameToOID_System_String_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoConfig__MapNameToOID_System_String_System_String_;
+struct chaos_type_System_Security_Cryptography_CryptoStream;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoStream;
+struct chaos_type_System_Security_Cryptography_CryptoStream__Clear_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoStream__Clear_System_Void__;
+struct chaos_type_System_Security_Cryptography_CryptoStream__FlushFinalBlock_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoStream__FlushFinalBlock_System_Void__;
+struct chaos_type_System_Security_Cryptography_CryptoStream__FlushFinalBlockAsync_System_Threading_Tasks_ValueTask_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptoStream__FlushFinalBlockAsync_System_Threading_Tasks_ValueTask_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_Byte___;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_DES;
+struct chaos_boxed_type_System_Security_Cryptography_DES;
+struct chaos_type_System_Security_Cryptography_DES__IsSemiWeakKey_System_Boolean_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_DES__IsSemiWeakKey_System_Boolean_System_Byte___;
+struct chaos_type_System_Security_Cryptography_DES__IsWeakKey_System_Boolean_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_DES__IsWeakKey_System_Boolean_System_Byte___;
+struct chaos_type_System_Security_Cryptography_DSA;
+struct chaos_boxed_type_System_Security_Cryptography_DSA;
+struct chaos_type_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSA__ExportParameters_DSAParameters_System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__ExportParameters_DSAParameters_System_Boolean_;
+struct chaos_type_System_Security_Cryptography_DSA__GetMaxSignatureSize_System_Int32_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__GetMaxSignatureSize_System_Int32_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSA__ImportParameters_System_Void_DSAParameters_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__ImportParameters_System_Void_DSAParameters_;
+struct chaos_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_DSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_DSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___;
+struct chaos_type_System_Security_Cryptography_DSAOpenSsl;
+struct chaos_boxed_type_System_Security_Cryptography_DSAOpenSsl;
+struct chaos_type_System_Security_Cryptography_DSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+struct chaos_boxed_type_System_Security_Cryptography_DSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+struct chaos_type_System_Security_Cryptography_DSAParameters;
+struct chaos_boxed_type_System_Security_Cryptography_DSAParameters {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Security_Cryptography_DSAParameters value{};
+};
+struct chaos_type_System_Security_Cryptography_DeriveBytes;
+struct chaos_boxed_type_System_Security_Cryptography_DeriveBytes;
+struct chaos_type_System_Security_Cryptography_DeriveBytes__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_DeriveBytes__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_DeriveBytes__GetBytes_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_DeriveBytes__GetBytes_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_ECAlgorithm;
+struct chaos_boxed_type_System_Security_Cryptography_ECAlgorithm;
+struct chaos_type_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKey_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKey_System_Byte____;
+struct chaos_type_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKeyPem_System_String__;
+struct chaos_boxed_type_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKeyPem_System_String__;
+struct chaos_type_System_Security_Cryptography_ECAlgorithm__ExportExplicitParameters_ECParameters_System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_ECAlgorithm__ExportExplicitParameters_ECParameters_System_Boolean_;
+struct chaos_type_System_Security_Cryptography_ECAlgorithm__ExportParameters_ECParameters_System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_ECAlgorithm__ExportParameters_ECParameters_System_Boolean_;
+struct chaos_type_System_Security_Cryptography_ECAlgorithm__GenerateKey_System_Void_ECCurve_;
+struct chaos_boxed_type_System_Security_Cryptography_ECAlgorithm__GenerateKey_System_Void_ECCurve_;
+struct chaos_type_System_Security_Cryptography_ECAlgorithm__ImportParameters_System_Void_ECParameters_;
+struct chaos_boxed_type_System_Security_Cryptography_ECAlgorithm__ImportParameters_System_Void_ECParameters_;
+struct chaos_type_System_Security_Cryptography_ECCurve;
+struct chaos_boxed_type_System_Security_Cryptography_ECCurve {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Security_Cryptography_ECCurve value{};
+};
+struct chaos_type_System_Security_Cryptography_ECCurve__CreateFromFriendlyName_ECCurve_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_ECCurve__CreateFromFriendlyName_ECCurve_System_String_;
+struct chaos_type_System_Security_Cryptography_ECCurve__CreateFromOid_ECCurve_Oid_;
+struct chaos_boxed_type_System_Security_Cryptography_ECCurve__CreateFromOid_ECCurve_Oid_;
+struct chaos_type_System_Security_Cryptography_ECCurve__CreateFromValue_ECCurve_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_ECCurve__CreateFromValue_ECCurve_System_String_;
+struct chaos_type_System_Security_Cryptography_ECCurve__Validate_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_ECCurve__Validate_System_Void__;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellman;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellman;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyMaterial_System_Byte___ECDiffieHellmanPublicKey_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyMaterial_System_Byte___ECDiffieHellmanPublicKey_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyTls_System_Byte___ECDiffieHellmanPublicKey_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellman__DeriveKeyTls_System_Byte___ECDiffieHellmanPublicKey_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellman__DeriveRawSecretAgreement_System_Byte___ECDiffieHellmanPublicKey_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellman__DeriveRawSecretAgreement_System_Byte___ECDiffieHellmanPublicKey_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCng;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCng;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCng__DeriveKeyMaterial_System_Byte___CngKey_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCng__DeriveKeyMaterial_System_Byte___CngKey_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_CngKey_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_CngKey_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_ECDiffieHellmanPublicKey_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_ECDiffieHellmanPublicKey_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCng__ToXmlString_System_String_ECKeyXmlFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCng__ToXmlString_System_String_ECKeyXmlFormat_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCngPublicKey;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCngPublicKey;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromByteArray_ECDiffieHellmanPublicKey_System_Byte___CngKeyBlobFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromByteArray_ECDiffieHellmanPublicKey_System_Byte___CngKeyBlobFormat_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromXmlString_ECDiffieHellmanCngPublicKey_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromXmlString_ECDiffieHellmanCngPublicKey_System_String_;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__Import_CngKey__;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__Import_CngKey__;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanOpenSsl;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanOpenSsl;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanPublicKey;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanPublicKey;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportExplicitParameters_ECParameters__;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportExplicitParameters_ECParameters__;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportParameters_ECParameters__;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportParameters_ECParameters__;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToByteArray_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToByteArray_System_Byte____;
+struct chaos_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToXmlString_System_String__;
+struct chaos_boxed_type_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToXmlString_System_String__;
+struct chaos_type_System_Security_Cryptography_ECDsa;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa;
+struct chaos_type_System_Security_Cryptography_ECDsa__GetMaxSignatureSize_System_Int32_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__GetMaxSignatureSize_System_Int32_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsaCng;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng;
+struct chaos_type_System_Security_Cryptography_ECDsaCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_ECDsaCng__ToXmlString_System_String_ECKeyXmlFormat_;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng__ToXmlString_System_String_ECKeyXmlFormat_;
+struct chaos_type_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_IO_Stream_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_IO_Stream_System_Byte___;
+struct chaos_type_System_Security_Cryptography_ECDsaOpenSsl;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaOpenSsl;
+struct chaos_type_System_Security_Cryptography_ECDsaOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+struct chaos_boxed_type_System_Security_Cryptography_ECDsaOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+struct chaos_type_System_Security_Cryptography_ECParameters;
+struct chaos_boxed_type_System_Security_Cryptography_ECParameters {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Security_Cryptography_ECParameters value{};
+};
+struct chaos_type_System_Security_Cryptography_ECParameters__Validate_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_ECParameters__Validate_System_Void__;
+struct chaos_type_System_Security_Cryptography_FromBase64Transform;
+struct chaos_boxed_type_System_Security_Cryptography_FromBase64Transform;
+struct chaos_type_System_Security_Cryptography_FromBase64Transform__Clear_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_FromBase64Transform__Clear_System_Void__;
+struct chaos_type_System_Security_Cryptography_FromBase64Transform__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_FromBase64Transform__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_FromBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_FromBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_FromBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_FromBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_HKDF;
+struct chaos_boxed_type_System_Security_Cryptography_HKDF;
+struct chaos_type_System_Security_Cryptography_HKDF__DeriveKey_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HKDF__DeriveKey_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HKDF__Expand_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HKDF__Expand_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_HKDF__Extract_System_Byte___HashAlgorithmName_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HKDF__Extract_System_Byte___HashAlgorithmName_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACMD5;
+struct chaos_boxed_type_System_Security_Cryptography_HMACMD5;
+struct chaos_type_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA1;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA1;
+struct chaos_type_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA256;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA256;
+struct chaos_type_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA384;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA384;
+struct chaos_type_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_256;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_256;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_384;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_384;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_512;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_512;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA512;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA512;
+struct chaos_type_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__Clear_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__Clear_System_Void__;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__ComputeHashAsync_System_Threading_Tasks_Task_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__ComputeHashAsync_System_Threading_Tasks_Task_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__Initialize_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__Initialize_System_Void__;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_HashAlgorithm__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithm__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_HashAlgorithmName;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithmName {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Security_Cryptography_HashAlgorithmName value{};
+};
+struct chaos_type_System_Security_Cryptography_HashAlgorithmName__FromOid_HashAlgorithmName_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithmName__FromOid_HashAlgorithmName_System_String_;
+struct chaos_type_System_Security_Cryptography_HashAlgorithmName__TryFromOid_System_Boolean_System_String_HashAlgorithmName__;
+struct chaos_boxed_type_System_Security_Cryptography_HashAlgorithmName__TryFromOid_System_Boolean_System_String_HashAlgorithmName__;
+struct chaos_type_System_Security_Cryptography_IncrementalHash;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash;
+struct chaos_type_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_IncrementalHash__Clone_IncrementalHash__;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash__Clone_IncrementalHash__;
+struct chaos_type_System_Security_Cryptography_IncrementalHash__CreateHMAC_IncrementalHash_HashAlgorithmName_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash__CreateHMAC_IncrementalHash_HashAlgorithmName_System_Byte___;
+struct chaos_type_System_Security_Cryptography_IncrementalHash__CreateHash_IncrementalHash_HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash__CreateHash_IncrementalHash_HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_IncrementalHash__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_IncrementalHash__GetCurrentHash_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash__GetCurrentHash_System_Byte____;
+struct chaos_type_System_Security_Cryptography_IncrementalHash__GetHashAndReset_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_IncrementalHash__GetHashAndReset_System_Byte____;
+struct chaos_type_System_Security_Cryptography_Kmac128;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128;
+struct chaos_type_System_Security_Cryptography_Kmac128__AppendData_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__AppendData_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Kmac128__Clone_Kmac128__;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__Clone_Kmac128__;
+struct chaos_type_System_Security_Cryptography_Kmac128__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_Kmac128__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Kmac128__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Kmac256;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256;
+struct chaos_type_System_Security_Cryptography_Kmac256__AppendData_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__AppendData_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Kmac256__Clone_Kmac256__;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__Clone_Kmac256__;
+struct chaos_type_System_Security_Cryptography_Kmac256__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_Kmac256__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Kmac256__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_KmacXof128;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128;
+struct chaos_type_System_Security_Cryptography_KmacXof128__AppendData_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__AppendData_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_KmacXof128__Clone_KmacXof128__;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__Clone_KmacXof128__;
+struct chaos_type_System_Security_Cryptography_KmacXof128__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_KmacXof128__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_KmacXof128__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_KmacXof256;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256;
+struct chaos_type_System_Security_Cryptography_KmacXof256__AppendData_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__AppendData_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_KmacXof256__Clone_KmacXof256__;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__Clone_KmacXof256__;
+struct chaos_type_System_Security_Cryptography_KmacXof256__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_KmacXof256__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_KmacXof256__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_MD5;
+struct chaos_boxed_type_System_Security_Cryptography_MD5;
+struct chaos_type_System_Security_Cryptography_MD5__HashData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_MD5__HashData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_MD5__HashData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_MD5__HashData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_MaskGenerationMethod;
+struct chaos_boxed_type_System_Security_Cryptography_MaskGenerationMethod;
+struct chaos_type_System_Security_Cryptography_MaskGenerationMethod__GenerateMask_System_Byte___System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_MaskGenerationMethod__GenerateMask_System_Byte___System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Oid;
+struct chaos_boxed_type_System_Security_Cryptography_Oid;
+struct chaos_type_System_Security_Cryptography_Oid__FromFriendlyName_Oid_System_String_OidGroup_;
+struct chaos_boxed_type_System_Security_Cryptography_Oid__FromFriendlyName_Oid_System_String_OidGroup_;
+struct chaos_type_System_Security_Cryptography_Oid__FromOidValue_Oid_System_String_OidGroup_;
+struct chaos_boxed_type_System_Security_Cryptography_Oid__FromOidValue_Oid_System_String_OidGroup_;
+struct chaos_type_System_Security_Cryptography_OidCollection;
+struct chaos_boxed_type_System_Security_Cryptography_OidCollection;
+struct chaos_type_System_Security_Cryptography_OidCollection__Add_System_Int32_Oid_;
+struct chaos_boxed_type_System_Security_Cryptography_OidCollection__Add_System_Int32_Oid_;
+struct chaos_type_System_Security_Cryptography_OidCollection__GetEnumerator_OidEnumerator__;
+struct chaos_boxed_type_System_Security_Cryptography_OidCollection__GetEnumerator_OidEnumerator__;
+struct chaos_type_System_Security_Cryptography_PasswordDeriveBytes;
+struct chaos_boxed_type_System_Security_Cryptography_PasswordDeriveBytes;
+struct chaos_type_System_Security_Cryptography_PasswordDeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_PasswordDeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_PemEncoding;
+struct chaos_boxed_type_System_Security_Cryptography_PemEncoding;
+struct chaos_type_System_Security_Cryptography_PemEncoding__GetEncodedSize_System_Int32_System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_PemEncoding__GetEncodedSize_System_Int32_System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_RSA;
+struct chaos_boxed_type_System_Security_Cryptography_RSA;
+struct chaos_type_System_Security_Cryptography_RSA__Decrypt_System_Byte___System_Byte___RSAEncryptionPadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__Decrypt_System_Byte___System_Byte___RSAEncryptionPadding_;
+struct chaos_type_System_Security_Cryptography_RSA__DecryptValue_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__DecryptValue_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_RSA__Encrypt_System_Byte___System_Byte___RSAEncryptionPadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__Encrypt_System_Byte___System_Byte___RSAEncryptionPadding_;
+struct chaos_type_System_Security_Cryptography_RSA__EncryptValue_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__EncryptValue_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_RSA__ExportParameters_RSAParameters_System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__ExportParameters_RSAParameters_System_Boolean_;
+struct chaos_type_System_Security_Cryptography_RSA__ExportRSAPrivateKey_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__ExportRSAPrivateKey_System_Byte____;
+struct chaos_type_System_Security_Cryptography_RSA__ExportRSAPrivateKeyPem_System_String__;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__ExportRSAPrivateKeyPem_System_String__;
+struct chaos_type_System_Security_Cryptography_RSA__ExportRSAPublicKey_System_Byte____;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__ExportRSAPublicKey_System_Byte____;
+struct chaos_type_System_Security_Cryptography_RSA__ExportRSAPublicKeyPem_System_String__;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__ExportRSAPublicKeyPem_System_String__;
+struct chaos_type_System_Security_Cryptography_RSA__GetMaxOutputSize_System_Int32__;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__GetMaxOutputSize_System_Int32__;
+struct chaos_type_System_Security_Cryptography_RSA__ImportParameters_System_Void_RSAParameters_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__ImportParameters_System_Void_RSAParameters_;
+struct chaos_type_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_type_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_RSASignaturePadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_RSASignaturePadding_;
+struct chaos_type_System_Security_Cryptography_RSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_RSASignaturePadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_RSASignaturePadding_;
+struct chaos_type_System_Security_Cryptography_RSA__SignHash_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__SignHash_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_type_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_type_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_type_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_type_System_Security_Cryptography_RSA__VerifyHash_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_boxed_type_System_Security_Cryptography_RSA__VerifyHash_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__Decrypt_System_Byte___System_Byte___System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__Decrypt_System_Byte___System_Byte___System_Boolean_;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__Encrypt_System_Byte___System_Byte___System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__Encrypt_System_Byte___System_Byte___System_Boolean_;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_System_Object_;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_System_Object_;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Object_;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Object_;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_System_Object_;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_System_Object_;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Object_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Object_System_Byte___;
+struct chaos_type_System_Security_Cryptography_RSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_RSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___;
+struct chaos_type_System_Security_Cryptography_RSAEncryptionPadding;
+struct chaos_boxed_type_System_Security_Cryptography_RSAEncryptionPadding;
+struct chaos_type_System_Security_Cryptography_RSAEncryptionPadding__CreateOaep_RSAEncryptionPadding_HashAlgorithmName_;
+struct chaos_boxed_type_System_Security_Cryptography_RSAEncryptionPadding__CreateOaep_RSAEncryptionPadding_HashAlgorithmName_;
+struct chaos_type_System_Security_Cryptography_RSAOpenSsl;
+struct chaos_boxed_type_System_Security_Cryptography_RSAOpenSsl;
+struct chaos_type_System_Security_Cryptography_RSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+struct chaos_boxed_type_System_Security_Cryptography_RSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+struct chaos_type_System_Security_Cryptography_RSAParameters;
+struct chaos_boxed_type_System_Security_Cryptography_RSAParameters {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Security_Cryptography_RSAParameters value{};
+};
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator;
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator__GetHexString_System_String_System_Int32_System_Boolean_;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator__GetHexString_System_String_System_Int32_System_Boolean_;
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_RandomNumberGenerator__GetNonZeroBytes_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_RandomNumberGenerator__GetNonZeroBytes_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Rfc2898DeriveBytes;
+struct chaos_boxed_type_System_Security_Cryptography_Rfc2898DeriveBytes;
+struct chaos_type_System_Security_Cryptography_Rfc2898DeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Rfc2898DeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_Byte___System_Byte___System_Int32_HashAlgorithmName_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_Byte___System_Byte___System_Int32_HashAlgorithmName_System_Int32_;
+struct chaos_type_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_String_System_Byte___System_Int32_HashAlgorithmName_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_String_System_Byte___System_Int32_HashAlgorithmName_System_Int32_;
+struct chaos_type_System_Security_Cryptography_SHA1;
+struct chaos_boxed_type_System_Security_Cryptography_SHA1;
+struct chaos_type_System_Security_Cryptography_SHA1__HashData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SHA1__HashData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SHA1__HashData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA1__HashData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA256;
+struct chaos_boxed_type_System_Security_Cryptography_SHA256;
+struct chaos_type_System_Security_Cryptography_SHA256__HashData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SHA256__HashData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SHA256__HashData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA256__HashData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA384;
+struct chaos_boxed_type_System_Security_Cryptography_SHA384;
+struct chaos_type_System_Security_Cryptography_SHA384__HashData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SHA384__HashData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SHA384__HashData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA384__HashData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA3_256;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_256;
+struct chaos_type_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA3_384;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_384;
+struct chaos_type_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA3_512;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_512;
+struct chaos_type_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA512;
+struct chaos_boxed_type_System_Security_Cryptography_SHA512;
+struct chaos_type_System_Security_Cryptography_SHA512__HashData_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SHA512__HashData_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SHA512__HashData_System_Byte___System_IO_Stream_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA512__HashData_System_Byte___System_IO_Stream_;
+struct chaos_type_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_SP800108HmacCounterKdf;
+struct chaos_boxed_type_System_Security_Cryptography_SP800108HmacCounterKdf;
+struct chaos_type_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_Byte___System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_Byte___System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_String_System_String_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_String_System_String_System_Int32_;
+struct chaos_type_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_Byte___System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_Byte___System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_String_System_String_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_String_System_String_System_Int32_;
+struct chaos_type_System_Security_Cryptography_SP800108HmacCounterKdf__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_SP800108HmacCounterKdf__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_SafeEvpPKeyHandle;
+struct chaos_boxed_type_System_Security_Cryptography_SafeEvpPKeyHandle;
+struct chaos_type_System_Security_Cryptography_SafeEvpPKeyHandle__DuplicateHandle_SafeEvpPKeyHandle__;
+struct chaos_boxed_type_System_Security_Cryptography_SafeEvpPKeyHandle__DuplicateHandle_SafeEvpPKeyHandle__;
+struct chaos_type_System_Security_Cryptography_SafeEvpPKeyHandle__OpenKeyFromProvider_SafeEvpPKeyHandle_System_String_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_SafeEvpPKeyHandle__OpenKeyFromProvider_SafeEvpPKeyHandle_System_String_System_String_;
+struct chaos_type_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPrivateKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPrivateKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_;
+struct chaos_type_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPublicKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_;
+struct chaos_boxed_type_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPublicKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_;
+struct chaos_type_System_Security_Cryptography_Shake128;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128;
+struct chaos_type_System_Security_Cryptography_Shake128__AppendData_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__AppendData_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Shake128__Clone_Shake128__;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__Clone_Shake128__;
+struct chaos_type_System_Security_Cryptography_Shake128__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_Shake128__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake128__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake128__HashData_System_Byte___System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__HashData_System_Byte___System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake128__HashData_System_Byte___System_IO_Stream_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__HashData_System_Byte___System_IO_Stream_System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Shake128__Read_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake128__Read_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake256;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256;
+struct chaos_type_System_Security_Cryptography_Shake256__AppendData_System_Void_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__AppendData_System_Void_System_Byte___;
+struct chaos_type_System_Security_Cryptography_Shake256__Clone_Shake256__;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__Clone_Shake256__;
+struct chaos_type_System_Security_Cryptography_Shake256__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_Shake256__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__GetCurrentHash_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake256__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__GetHashAndReset_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake256__HashData_System_Byte___System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__HashData_System_Byte___System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake256__HashData_System_Byte___System_IO_Stream_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__HashData_System_Byte___System_IO_Stream_System_Int32_;
+struct chaos_type_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+struct chaos_type_System_Security_Cryptography_Shake256__Read_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_Shake256__Read_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_SignatureDescription;
+struct chaos_boxed_type_System_Security_Cryptography_SignatureDescription;
+struct chaos_type_System_Security_Cryptography_SignatureDescription__CreateDeformatter_AsymmetricSignatureDeformatter_AsymmetricAlgorithm_;
+struct chaos_boxed_type_System_Security_Cryptography_SignatureDescription__CreateDeformatter_AsymmetricSignatureDeformatter_AsymmetricAlgorithm_;
+struct chaos_type_System_Security_Cryptography_SignatureDescription__CreateDigest_HashAlgorithm__;
+struct chaos_boxed_type_System_Security_Cryptography_SignatureDescription__CreateDigest_HashAlgorithm__;
+struct chaos_type_System_Security_Cryptography_SignatureDescription__CreateFormatter_AsymmetricSignatureFormatter_AsymmetricAlgorithm_;
+struct chaos_boxed_type_System_Security_Cryptography_SignatureDescription__CreateFormatter_AsymmetricSignatureFormatter_AsymmetricAlgorithm_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__Clear_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__Clear_System_Void__;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform__;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform__;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform__;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform__;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform_System_Byte___System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform_System_Byte___System_Byte___;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__DecryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__DecryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__DecryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__DecryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__DecryptEcb_System_Byte___System_Byte___PaddingMode_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__DecryptEcb_System_Byte___System_Byte___PaddingMode_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__EncryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__EncryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__EncryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__EncryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__EncryptEcb_System_Byte___System_Byte___PaddingMode_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__EncryptEcb_System_Byte___System_Byte___PaddingMode_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__GenerateIV_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__GenerateIV_System_Void__;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__GenerateKey_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__GenerateKey_System_Void__;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCbc_System_Int32_System_Int32_PaddingMode_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCbc_System_Int32_System_Int32_PaddingMode_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCfb_System_Int32_System_Int32_PaddingMode_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCfb_System_Int32_System_Int32_PaddingMode_System_Int32_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthEcb_System_Int32_System_Int32_PaddingMode_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthEcb_System_Int32_System_Int32_PaddingMode_;
+struct chaos_type_System_Security_Cryptography_SymmetricAlgorithm__ValidKeySize_System_Boolean_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_SymmetricAlgorithm__ValidKeySize_System_Boolean_System_Int32_;
+struct chaos_type_System_Security_Cryptography_ToBase64Transform;
+struct chaos_boxed_type_System_Security_Cryptography_ToBase64Transform;
+struct chaos_type_System_Security_Cryptography_ToBase64Transform__Clear_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_ToBase64Transform__Clear_System_Void__;
+struct chaos_type_System_Security_Cryptography_ToBase64Transform__Dispose_System_Void__;
+struct chaos_boxed_type_System_Security_Cryptography_ToBase64Transform__Dispose_System_Void__;
+struct chaos_type_System_Security_Cryptography_ToBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_ToBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+struct chaos_type_System_Security_Cryptography_ToBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Security_Cryptography_ToBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+struct chaos_type_System_Security_Cryptography_TripleDES;
+struct chaos_boxed_type_System_Security_Cryptography_TripleDES;
+struct chaos_type_System_Security_Cryptography_TripleDES__IsWeakKey_System_Boolean_System_Byte___;
+struct chaos_boxed_type_System_Security_Cryptography_TripleDES__IsWeakKey_System_Boolean_System_Byte___;
 
 struct HotpatchEntryV0;
 extern "C" HotpatchEntryV0 s_hotpatch_entries[];
 
 namespace chaos::il2cpp::codegen::CombinedSubjects
 {
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Byte___System_Byte___System_String_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Object_System_Object_System_String_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__IsNotNull_System_Void_System_Object_System_String_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentOutOfRangeException__System_Void_System_Action_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_FormatException__System_Void_System_Action_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_PlatformNotSupportedException__System_Void_System_Action_;
+extern MethodTable chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Security_Cryptography_CryptographicException__System_Void_System_Action_;
 extern MethodTable chaos_mt_CombinedSubjects__PrivateImplementationDetails_;
 extern MethodTable chaos_mt_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2;
 extern MethodTable chaos_mt_CombinedSubjects__PrivateImplementationDetails___0CFBF01C84FAB4E5344ABB5D837C123C4EE573A987BF536E197188590338F8D4;
@@ -1807,20 +2349,552 @@ extern MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Security_Crypt
 extern MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c;
 extern MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Action;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Array;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Array__Empty_System_Object__System_Object____;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Array__Empty_System_String__System_String____;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Byte;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Delegate;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream_NullStream;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__CopyTo_System_Void_System_IO_Stream_System_Int32_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__CopyToAsync_System_Threading_Tasks_Task_System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__Null;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Memory_System_Byte_;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_MulticastDelegate;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Object;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Object___ctor_System_Void__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte___;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____GetResult_System_Byte____;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte___;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____GetResult_System_Byte____;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult_System_Int32__;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_String;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_CancellationToken;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_Task;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte___;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_ValueTask;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte___;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32_;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
+extern MethodTable chaos_mt_System_Security_Cryptography_AesCcm;
+extern MethodTable chaos_mt_System_Security_Cryptography_AesCcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AesCcm__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_AesCcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AesGcm;
+extern MethodTable chaos_mt_System_Security_Cryptography_AesGcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AesGcm__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_AesGcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsnEncodedData;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsnEncodedData__CopyFrom_System_Void_AsnEncodedData_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsnEncodedData__Format_System_String_System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsnEncodedDataCollection;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsnEncodedDataCollection__Add_System_Int32_AsnEncodedData_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsnEncodedDataCollection__GetEnumerator_AsnEncodedDataEnumerator__;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsnEncodedDataCollection__Remove_System_Void_AsnEncodedData_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm__Clear_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKey_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKeyPem_System_String__;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfo_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfoPem_System_String__;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm__FromXmlString_System_Void_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricAlgorithm__ToXmlString_System_String_System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__DecryptKeyExchange_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__SetKey_System_Void_AsymmetricAlgorithm_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricKeyExchangeFormatter;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___System_Type_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__SetKey_System_Void_AsymmetricAlgorithm_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureDeformatter;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetHashAlgorithm_System_Void_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetKey_System_Void_AsymmetricAlgorithm_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_HashAlgorithm_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureFormatter;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___HashAlgorithm_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureFormatter__SetHashAlgorithm_System_Void_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_AsymmetricSignatureFormatter__SetKey_System_Void_AsymmetricAlgorithm_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ChaCha20Poly1305;
+extern MethodTable chaos_mt_System_Security_Cryptography_ChaCha20Poly1305__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ChaCha20Poly1305__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ChaCha20Poly1305__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Delete_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_CngKeyOpenOptions_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Export_System_Byte___CngKeyBlobFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__GetProperty_CngProperty_System_String_CngPropertyOptions_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__HasProperty_System_Boolean_System_String_CngPropertyOptions_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_CngProvider_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Open_CngKey_Microsoft_Win32_SafeHandles_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Open_CngKey_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_CngKeyOpenOptions_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngKey__SetProperty_System_Void_CngProperty_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngProperty;
+extern MethodTable chaos_mt_System_Security_Cryptography_CngProperty__GetValue_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoConfig;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoConfig__AddAlgorithm_System_Void_System_Type_System_String___;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoConfig__AddOID_System_Void_System_String_System_String___;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_System_Object___;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoConfig__EncodeOID_System_Byte___System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoConfig__MapNameToOID_System_String_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoStream;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoStream__Clear_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoStream__FlushFinalBlock_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptoStream__FlushFinalBlockAsync_System_Threading_Tasks_ValueTask_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DES;
+extern MethodTable chaos_mt_System_Security_Cryptography_DES__IsSemiWeakKey_System_Boolean_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_DES__IsWeakKey_System_Boolean_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__ExportParameters_DSAParameters_System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__GetMaxSignatureSize_System_Int32_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__ImportParameters_System_Void_DSAParameters_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSAOpenSsl;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+extern MethodTable chaos_mt_System_Security_Cryptography_DSAParameters;
+extern MethodTable chaos_mt_System_Security_Cryptography_DeriveBytes;
+extern MethodTable chaos_mt_System_Security_Cryptography_DeriveBytes__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_DeriveBytes__GetBytes_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECAlgorithm;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKey_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKeyPem_System_String__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECAlgorithm__ExportExplicitParameters_ECParameters_System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECAlgorithm__ExportParameters_ECParameters_System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECAlgorithm__GenerateKey_System_Void_ECCurve_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECAlgorithm__ImportParameters_System_Void_ECParameters_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECCurve;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECCurve__CreateFromFriendlyName_ECCurve_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECCurve__CreateFromOid_ECCurve_Oid_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECCurve__CreateFromValue_ECCurve_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECCurve__Validate_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellman;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellman__DeriveKeyMaterial_System_Byte___ECDiffieHellmanPublicKey_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellman__DeriveKeyTls_System_Byte___ECDiffieHellmanPublicKey_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellman__DeriveRawSecretAgreement_System_Byte___ECDiffieHellmanPublicKey_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCng;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCng__DeriveKeyMaterial_System_Byte___CngKey_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_CngKey_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_ECDiffieHellmanPublicKey_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCng__ToXmlString_System_String_ECKeyXmlFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCngPublicKey;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromByteArray_ECDiffieHellmanPublicKey_System_Byte___CngKeyBlobFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromXmlString_ECDiffieHellmanCngPublicKey_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__Import_CngKey__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanOpenSsl;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanPublicKey;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanPublicKey__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportExplicitParameters_ECParameters__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportParameters_ECParameters__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToByteArray_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToXmlString_System_String__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__GetMaxSignatureSize_System_Int32_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng__ToXmlString_System_String_ECKeyXmlFormat_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_IO_Stream_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaOpenSsl;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECDsaOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECParameters;
+extern MethodTable chaos_mt_System_Security_Cryptography_ECParameters__Validate_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_FromBase64Transform;
+extern MethodTable chaos_mt_System_Security_Cryptography_FromBase64Transform__Clear_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_FromBase64Transform__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_FromBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_FromBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HKDF;
+extern MethodTable chaos_mt_System_Security_Cryptography_HKDF__DeriveKey_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HKDF__Expand_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HKDF__Extract_System_Byte___HashAlgorithmName_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACMD5;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA1;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA256;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA384;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_256;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_384;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_512;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA512;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__Clear_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__ComputeHashAsync_System_Threading_Tasks_Task_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__Initialize_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithm__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithmName;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithmName__FromOid_HashAlgorithmName_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_HashAlgorithmName__TryFromOid_System_Boolean_System_String_HashAlgorithmName__;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash__Clone_IncrementalHash__;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash__CreateHMAC_IncrementalHash_HashAlgorithmName_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash__CreateHash_IncrementalHash_HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash__GetCurrentHash_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_IncrementalHash__GetHashAndReset_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__AppendData_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__Clone_Kmac128__;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__GetCurrentHash_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__GetHashAndReset_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__AppendData_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__Clone_Kmac256__;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__GetCurrentHash_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__GetHashAndReset_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__AppendData_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__Clone_KmacXof128__;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__GetCurrentHash_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__GetHashAndReset_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__AppendData_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__Clone_KmacXof256__;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__GetCurrentHash_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__GetHashAndReset_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_MD5;
+extern MethodTable chaos_mt_System_Security_Cryptography_MD5__HashData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_MD5__HashData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_MaskGenerationMethod;
+extern MethodTable chaos_mt_System_Security_Cryptography_MaskGenerationMethod__GenerateMask_System_Byte___System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Oid;
+extern MethodTable chaos_mt_System_Security_Cryptography_Oid__FromFriendlyName_Oid_System_String_OidGroup_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Oid__FromOidValue_Oid_System_String_OidGroup_;
+extern MethodTable chaos_mt_System_Security_Cryptography_OidCollection;
+extern MethodTable chaos_mt_System_Security_Cryptography_OidCollection__Add_System_Int32_Oid_;
+extern MethodTable chaos_mt_System_Security_Cryptography_OidCollection__GetEnumerator_OidEnumerator__;
+extern MethodTable chaos_mt_System_Security_Cryptography_PasswordDeriveBytes;
+extern MethodTable chaos_mt_System_Security_Cryptography_PasswordDeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_PemEncoding;
+extern MethodTable chaos_mt_System_Security_Cryptography_PemEncoding__GetEncodedSize_System_Int32_System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__Decrypt_System_Byte___System_Byte___RSAEncryptionPadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__DecryptValue_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__Encrypt_System_Byte___System_Byte___RSAEncryptionPadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__EncryptValue_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__ExportParameters_RSAParameters_System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__ExportRSAPrivateKey_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__ExportRSAPrivateKeyPem_System_String__;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__ExportRSAPublicKey_System_Byte____;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__ExportRSAPublicKeyPem_System_String__;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__GetMaxOutputSize_System_Int32__;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__ImportParameters_System_Void_RSAParameters_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_RSASignaturePadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_RSASignaturePadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__SignHash_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSA__VerifyHash_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__Decrypt_System_Byte___System_Byte___System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__Encrypt_System_Byte___System_Byte___System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_System_Object_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Object_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_System_Object_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Object_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSAEncryptionPadding;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSAEncryptionPadding__CreateOaep_RSAEncryptionPadding_HashAlgorithmName_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSAOpenSsl;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+extern MethodTable chaos_mt_System_Security_Cryptography_RSAParameters;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator__GetHexString_System_String_System_Int32_System_Boolean_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_RandomNumberGenerator__GetNonZeroBytes_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Rfc2898DeriveBytes;
+extern MethodTable chaos_mt_System_Security_Cryptography_Rfc2898DeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_Byte___System_Byte___System_Int32_HashAlgorithmName_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_String_System_Byte___System_Int32_HashAlgorithmName_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA1;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA1__HashData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA1__HashData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA256;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA256__HashData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA256__HashData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA384;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA384__HashData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA384__HashData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_256;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_384;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_512;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA512;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA512__HashData_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA512__HashData_System_Byte___System_IO_Stream_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SP800108HmacCounterKdf;
+extern MethodTable chaos_mt_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_Byte___System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_String_System_String_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_Byte___System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_String_System_String_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SP800108HmacCounterKdf__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SafeEvpPKeyHandle;
+extern MethodTable chaos_mt_System_Security_Cryptography_SafeEvpPKeyHandle__DuplicateHandle_SafeEvpPKeyHandle__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SafeEvpPKeyHandle__OpenKeyFromProvider_SafeEvpPKeyHandle_System_String_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPrivateKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPublicKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__AppendData_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__Clone_Shake128__;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__GetCurrentHash_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__GetHashAndReset_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__HashData_System_Byte___System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__HashData_System_Byte___System_IO_Stream_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake128__Read_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__AppendData_System_Void_System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__Clone_Shake256__;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__GetCurrentHash_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__GetHashAndReset_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__HashData_System_Byte___System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__HashData_System_Byte___System_IO_Stream_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+extern MethodTable chaos_mt_System_Security_Cryptography_Shake256__Read_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SignatureDescription;
+extern MethodTable chaos_mt_System_Security_Cryptography_SignatureDescription__CreateDeformatter_AsymmetricSignatureDeformatter_AsymmetricAlgorithm_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SignatureDescription__CreateDigest_HashAlgorithm__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SignatureDescription__CreateFormatter_AsymmetricSignatureFormatter_AsymmetricAlgorithm_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__Clear_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform_System_Byte___System_Byte___;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__DecryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__DecryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__DecryptEcb_System_Byte___System_Byte___PaddingMode_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__EncryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__EncryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__EncryptEcb_System_Byte___System_Byte___PaddingMode_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__GenerateIV_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__GenerateKey_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCbc_System_Int32_System_Int32_PaddingMode_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCfb_System_Int32_System_Int32_PaddingMode_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthEcb_System_Int32_System_Int32_PaddingMode_;
+extern MethodTable chaos_mt_System_Security_Cryptography_SymmetricAlgorithm__ValidKeySize_System_Boolean_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ToBase64Transform;
+extern MethodTable chaos_mt_System_Security_Cryptography_ToBase64Transform__Clear_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ToBase64Transform__Dispose_System_Void__;
+extern MethodTable chaos_mt_System_Security_Cryptography_ToBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_ToBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern MethodTable chaos_mt_System_Security_Cryptography_TripleDES;
+extern MethodTable chaos_mt_System_Security_Cryptography_TripleDES__IsWeakKey_System_Boolean_System_Byte___;
 
 extern const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c[];
 extern const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c[];
@@ -4947,6 +6021,20 @@ extern CHAOS_IL2CPP_INTPTR chaos_static_System_Security_Cryptography_ToBase64Tra
 extern CHAOS_IL2CPP_INTPTR chaos_static_System_Security_Cryptography_ToBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
 extern CHAOS_IL2CPP_INTPTR chaos_static_System_Security_Cryptography_TripleDES__IsWeakKey_System_Boolean_System_Byte___;
 
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Byte___System_Byte___System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Object_System_Object_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__IsNotNull_System_Void_System_Object_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentOutOfRangeException__System_Void_System_Action_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_FormatException__System_Void_System_Action_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_PlatformNotSupportedException__System_Void_System_Action_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Security_Cryptography_CryptographicException__System_Void_System_Action_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects__PrivateImplementationDetails_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects__PrivateImplementationDetails___0CFBF01C84FAB4E5344ABB5D837C123C4EE573A987BF536E197188590338F8D4;
@@ -5077,20 +6165,552 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_Sy
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Array;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Array__Empty_System_Object__System_Object____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Array__Empty_System_String__System_String____;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Byte;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream_NullStream;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__CopyTo_System_Void_System_IO_Stream_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__CopyToAsync_System_Threading_Tasks_Task_System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__Null;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Memory_System_Byte_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_MulticastDelegate;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object___ctor_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodBase;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____GetResult_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____GetResult_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult_System_Int32__;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_CancellationToken;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_Task;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_ValueTask;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AesCcm;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AesCcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AesCcm__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AesCcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AesGcm;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AesGcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AesGcm__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AesGcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsnEncodedData;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsnEncodedData__CopyFrom_System_Void_AsnEncodedData_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsnEncodedData__Format_System_String_System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsnEncodedDataCollection;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsnEncodedDataCollection__Add_System_Int32_AsnEncodedData_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsnEncodedDataCollection__GetEnumerator_AsnEncodedDataEnumerator__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsnEncodedDataCollection__Remove_System_Void_AsnEncodedData_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm__Clear_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKey_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKeyPem_System_String__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfo_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfoPem_System_String__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm__FromXmlString_System_Void_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricAlgorithm__ToXmlString_System_String_System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__DecryptKeyExchange_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__SetKey_System_Void_AsymmetricAlgorithm_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricKeyExchangeFormatter;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___System_Type_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__SetKey_System_Void_AsymmetricAlgorithm_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureDeformatter;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetHashAlgorithm_System_Void_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetKey_System_Void_AsymmetricAlgorithm_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_HashAlgorithm_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureFormatter;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___HashAlgorithm_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureFormatter__SetHashAlgorithm_System_Void_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_AsymmetricSignatureFormatter__SetKey_System_Void_AsymmetricAlgorithm_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ChaCha20Poly1305;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ChaCha20Poly1305__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ChaCha20Poly1305__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ChaCha20Poly1305__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Delete_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_CngKeyOpenOptions_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Export_System_Byte___CngKeyBlobFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__GetProperty_CngProperty_System_String_CngPropertyOptions_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__HasProperty_System_Boolean_System_String_CngPropertyOptions_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_CngProvider_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Open_CngKey_Microsoft_Win32_SafeHandles_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Open_CngKey_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_CngKeyOpenOptions_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngKey__SetProperty_System_Void_CngProperty_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngProperty;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CngProperty__GetValue_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoConfig;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoConfig__AddAlgorithm_System_Void_System_Type_System_String___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoConfig__AddOID_System_Void_System_String_System_String___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_System_Object___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoConfig__EncodeOID_System_Byte___System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoConfig__MapNameToOID_System_String_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoStream;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoStream__Clear_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoStream__FlushFinalBlock_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptoStream__FlushFinalBlockAsync_System_Threading_Tasks_ValueTask_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DES;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DES__IsSemiWeakKey_System_Boolean_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DES__IsWeakKey_System_Boolean_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__ExportParameters_DSAParameters_System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__GetMaxSignatureSize_System_Int32_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__ImportParameters_System_Void_DSAParameters_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSAOpenSsl;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DSAParameters;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DeriveBytes;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DeriveBytes__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_DeriveBytes__GetBytes_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECAlgorithm;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKey_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKeyPem_System_String__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECAlgorithm__ExportExplicitParameters_ECParameters_System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECAlgorithm__ExportParameters_ECParameters_System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECAlgorithm__GenerateKey_System_Void_ECCurve_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECAlgorithm__ImportParameters_System_Void_ECParameters_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECCurve;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECCurve__CreateFromFriendlyName_ECCurve_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECCurve__CreateFromOid_ECCurve_Oid_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECCurve__CreateFromValue_ECCurve_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECCurve__Validate_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellman;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellman__DeriveKeyMaterial_System_Byte___ECDiffieHellmanPublicKey_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellman__DeriveKeyTls_System_Byte___ECDiffieHellmanPublicKey_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellman__DeriveRawSecretAgreement_System_Byte___ECDiffieHellmanPublicKey_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCng;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCng__DeriveKeyMaterial_System_Byte___CngKey_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_CngKey_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_ECDiffieHellmanPublicKey_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCng__ToXmlString_System_String_ECKeyXmlFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCngPublicKey;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromByteArray_ECDiffieHellmanPublicKey_System_Byte___CngKeyBlobFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromXmlString_ECDiffieHellmanCngPublicKey_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__Import_CngKey__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanOpenSsl;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanPublicKey;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanPublicKey__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportExplicitParameters_ECParameters__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportParameters_ECParameters__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToByteArray_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToXmlString_System_String__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__GetMaxSignatureSize_System_Int32_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng__ToXmlString_System_String_ECKeyXmlFormat_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_IO_Stream_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaOpenSsl;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECDsaOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECParameters;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ECParameters__Validate_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_FromBase64Transform;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_FromBase64Transform__Clear_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_FromBase64Transform__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_FromBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_FromBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HKDF;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HKDF__DeriveKey_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HKDF__Expand_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HKDF__Extract_System_Byte___HashAlgorithmName_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACMD5;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA1;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA256;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA384;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_256;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_384;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_512;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA512;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__Clear_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__ComputeHashAsync_System_Threading_Tasks_Task_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__Initialize_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithm__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithmName;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithmName__FromOid_HashAlgorithmName_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_HashAlgorithmName__TryFromOid_System_Boolean_System_String_HashAlgorithmName__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash__Clone_IncrementalHash__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash__CreateHMAC_IncrementalHash_HashAlgorithmName_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash__CreateHash_IncrementalHash_HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash__GetCurrentHash_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_IncrementalHash__GetHashAndReset_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__AppendData_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__Clone_Kmac128__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__GetCurrentHash_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__GetHashAndReset_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__AppendData_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__Clone_Kmac256__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__GetCurrentHash_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__GetHashAndReset_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__AppendData_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__Clone_KmacXof128__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__GetCurrentHash_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__GetHashAndReset_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__AppendData_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__Clone_KmacXof256__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__GetCurrentHash_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__GetHashAndReset_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_MD5;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_MD5__HashData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_MD5__HashData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_MaskGenerationMethod;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_MaskGenerationMethod__GenerateMask_System_Byte___System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Oid;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Oid__FromFriendlyName_Oid_System_String_OidGroup_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Oid__FromOidValue_Oid_System_String_OidGroup_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_OidCollection;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_OidCollection__Add_System_Int32_Oid_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_OidCollection__GetEnumerator_OidEnumerator__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_PasswordDeriveBytes;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_PasswordDeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_PemEncoding;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_PemEncoding__GetEncodedSize_System_Int32_System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__Decrypt_System_Byte___System_Byte___RSAEncryptionPadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__DecryptValue_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__Encrypt_System_Byte___System_Byte___RSAEncryptionPadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__EncryptValue_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__ExportParameters_RSAParameters_System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__ExportRSAPrivateKey_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__ExportRSAPrivateKeyPem_System_String__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__ExportRSAPublicKey_System_Byte____;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__ExportRSAPublicKeyPem_System_String__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__GetMaxOutputSize_System_Int32__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__ImportParameters_System_Void_RSAParameters_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_RSASignaturePadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_RSASignaturePadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__SignHash_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSA__VerifyHash_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__Decrypt_System_Byte___System_Byte___System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__Encrypt_System_Byte___System_Byte___System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_System_Object_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Object_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_System_Object_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Object_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSAEncryptionPadding;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSAEncryptionPadding__CreateOaep_RSAEncryptionPadding_HashAlgorithmName_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSAOpenSsl;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RSAParameters;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator__GetHexString_System_String_System_Int32_System_Boolean_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_RandomNumberGenerator__GetNonZeroBytes_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Rfc2898DeriveBytes;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Rfc2898DeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_Byte___System_Byte___System_Int32_HashAlgorithmName_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_String_System_Byte___System_Int32_HashAlgorithmName_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA1;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA1__HashData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA1__HashData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA256;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA256__HashData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA256__HashData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA384;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA384__HashData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA384__HashData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_256;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_384;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_512;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA512;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA512__HashData_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA512__HashData_System_Byte___System_IO_Stream_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SP800108HmacCounterKdf;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_Byte___System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_String_System_String_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_Byte___System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_String_System_String_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SP800108HmacCounterKdf__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SafeEvpPKeyHandle;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SafeEvpPKeyHandle__DuplicateHandle_SafeEvpPKeyHandle__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SafeEvpPKeyHandle__OpenKeyFromProvider_SafeEvpPKeyHandle_System_String_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPrivateKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPublicKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__AppendData_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__Clone_Shake128__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__GetCurrentHash_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__GetHashAndReset_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__HashData_System_Byte___System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__HashData_System_Byte___System_IO_Stream_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake128__Read_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__AppendData_System_Void_System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__Clone_Shake256__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__GetCurrentHash_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__GetHashAndReset_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__HashData_System_Byte___System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__HashData_System_Byte___System_IO_Stream_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_Shake256__Read_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SignatureDescription;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SignatureDescription__CreateDeformatter_AsymmetricSignatureDeformatter_AsymmetricAlgorithm_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SignatureDescription__CreateDigest_HashAlgorithm__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SignatureDescription__CreateFormatter_AsymmetricSignatureFormatter_AsymmetricAlgorithm_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__Clear_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform_System_Byte___System_Byte___;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__DecryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__DecryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__DecryptEcb_System_Byte___System_Byte___PaddingMode_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__EncryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__EncryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__EncryptEcb_System_Byte___System_Byte___PaddingMode_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__GenerateIV_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__GenerateKey_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCbc_System_Int32_System_Int32_PaddingMode_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCfb_System_Int32_System_Int32_PaddingMode_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthEcb_System_Int32_System_Int32_PaddingMode_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_SymmetricAlgorithm__ValidKeySize_System_Boolean_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ToBase64Transform;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ToBase64Transform__Clear_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ToBase64Transform__Dispose_System_Void__;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ToBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_ToBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_TripleDES;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Security_Cryptography_TripleDES__IsWeakKey_System_Boolean_System_Byte___;
 
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Byte(void);
 extern "C" void chaos_ensure_type_initialized_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c(void);
@@ -5212,6 +6832,15 @@ extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Refl
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_FieldInfo(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_Assembly(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_AssemblyName(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngProperty(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithmName(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Memory_System_Byte_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_CancellationToken(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSAParameters(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECCurve(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECParameters(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSAParameters(void);
 extern "C" void chaos_ensure_type_initialized_CombinedSubjects__PrivateImplementationDetails___E2E17543AE2573B10DC2547315170D6B35BA571445AC0188005E4E314070FBE2(void);
 extern "C" void chaos_ensure_type_initialized_CombinedSubjects__PrivateImplementationDetails___FCF2BF7E8F6FE4D1C7B4755B69955B1AC712D43B86CD17EFB2D92F256DC9FCE3(void);
 extern "C" void chaos_ensure_type_initialized_CombinedSubjects__PrivateImplementationDetails___ED59E83E776F0CAF91A6CDA28DEEF6E3B82EDD19C37F455C5342566AC97A261D(void);
@@ -5236,6 +6865,543 @@ extern "C" void chaos_ensure_type_initialized_CombinedSubjects__PrivateImplement
 extern "C" void chaos_ensure_type_initialized_CombinedSubjects__PrivateImplementationDetails___B452C33202206672AFB35352A995095F186C8DC0BDE343EFAB3198D5D9D7FB4A(void);
 extern "C" void chaos_ensure_type_initialized_CombinedSubjects__PrivateImplementationDetails___001D686DB504E20C792EAA07FE09224A45FF328E24A80072D04D16ABC5C2B5D2(void);
 extern "C" void chaos_ensure_type_initialized_CombinedSubjects__PrivateImplementationDetails___488B4329DF99DACE80B4C50E073E6EB39E5198EE93A1F51C62AC3B19356E747C(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AesCcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AesCcm(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Array(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AesCcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AesCcm__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Object___ctor_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__CreateDecryptor_ICryptoTransform_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__CreateEncryptor_ICryptoTransform_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__GenerateKey_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__GenerateIV_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AesGcm__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AesGcm(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AesGcm__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AesGcm__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsnEncodedData__CopyFrom_System_Void_AsnEncodedData_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsnEncodedData(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsnEncodedData__Format_System_String_System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsnEncodedDataCollection__Add_System_Int32_AsnEncodedData_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsnEncodedDataCollection(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsnEncodedDataCollection__Remove_System_Void_AsnEncodedData_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsnEncodedDataCollection__GetEnumerator_AsnEncodedDataEnumerator__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm__FromXmlString_System_Void_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm__ToXmlString_System_String_System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm__Clear_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKey_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfo_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm__ExportPkcs8PrivateKeyPem_System_String__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricAlgorithm__ExportSubjectPublicKeyInfoPem_System_String__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__SetKey_System_Void_AsymmetricAlgorithm_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricKeyExchangeDeformatter__DecryptKeyExchange_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__SetKey_System_Void_AsymmetricAlgorithm_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricKeyExchangeFormatter(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricKeyExchangeFormatter__CreateKeyExchange_System_Byte___System_Byte___System_Type_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetKey_System_Void_AsymmetricAlgorithm_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureDeformatter(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureDeformatter__SetHashAlgorithm_System_Void_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_HashAlgorithm_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureDeformatter__VerifySignature_System_Boolean_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureFormatter__SetKey_System_Void_AsymmetricAlgorithm_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureFormatter(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureFormatter__SetHashAlgorithm_System_Void_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___HashAlgorithm_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_AsymmetricSignatureFormatter__CreateSignature_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ChaCha20Poly1305__Encrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ChaCha20Poly1305(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ChaCha20Poly1305__Decrypt_System_Void_System_Byte___System_Byte___System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ChaCha20Poly1305__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Delete_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Exists_System_Boolean_System_String_CngProvider_CngKeyOpenOptions_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Export_System_Byte___CngKeyBlobFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Import_CngKey_System_Byte___CngKeyBlobFormat_CngProvider_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Open_CngKey_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_Security_Cryptography_CryptographicException__System_Void_System_Action_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Open_CngKey_System_String_CngProvider_CngKeyOpenOptions_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__Open_CngKey_Microsoft_Win32_SafeHandles_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__GetProperty_CngProperty_System_String_CngPropertyOptions_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__HasProperty_System_Boolean_System_String_CngPropertyOptions_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngKey__SetProperty_System_Void_CngProperty_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CngProperty__GetValue_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__IsNotNull_System_Void_System_Object_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Byte___System_Byte___System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoConfig__AddAlgorithm_System_Void_System_Type_System_String___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoConfig(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Array__Empty_System_String__System_String____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_System_Object___(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Object_System_Object_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Array__Empty_System_Object__System_Object____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoConfig__CreateFromName_System_Object_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoConfig__AddOID_System_Void_System_String_System_String___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoConfig__MapNameToOID_System_String_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_String_System_String_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoConfig__EncodeOID_System_Byte___System_String_(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_FormatException__System_Void_System_Action_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HashData_System_Byte___HashAlgorithmName_System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__Null(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HmacData_System_Byte___HashAlgorithmName_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Int32__HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptographicOperations__HmacDataAsync_System_Threading_Tasks_ValueTask_System_Byte____HashAlgorithmName_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoStream__FlushFinalBlock_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoStream(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoStream__FlushFinalBlockAsync_System_Threading_Tasks_ValueTask_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__Flush_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__FlushAsync_System_Threading_Tasks_Task_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__Seek_System_Int64_System_Int64_System_IO_SeekOrigin_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__SetLength_System_Void_System_Int64_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_Task_System_Int32__System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__ReadAsync_System_Threading_Tasks_ValueTask_System_Int32__System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__BeginRead_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__EndRead_System_Int32_System_IAsyncResult_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__ReadByte_System_Int32__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__WriteByte_System_Void_System_Byte_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__Read_System_Int32_System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_Task_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__WriteAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__BeginWrite_System_IAsyncResult_System_Byte___System_Int32_System_Int32_System_AsyncCallback_System_Object_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__EndWrite_System_Void_System_IAsyncResult_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__Write_System_Void_System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__CopyTo_System_Void_System_IO_Stream_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__CopyToAsync_System_Threading_Tasks_Task_System_IO_Stream_System_Int32_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_CryptoStream__Clear_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_IO_Stream__DisposeAsync_System_Threading_Tasks_ValueTask__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DeriveBytes__GetBytes_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DeriveBytes(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DeriveBytes__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DES__IsWeakKey_System_Boolean_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DES(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DES__IsSemiWeakKey_System_Boolean_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__ExportParameters_DSAParameters_System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__ImportParameters_System_Void_DSAParameters_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__CreateSignature_System_Byte___System_Byte___DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__VerifySignature_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSA__GetMaxSignatureSize_System_Int32_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_DSAOpenSsl(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECAlgorithm__ExportParameters_ECParameters_System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECAlgorithm(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECAlgorithm__ExportExplicitParameters_ECParameters_System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECAlgorithm__ImportParameters_System_Void_ECParameters_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECAlgorithm__GenerateKey_System_Void_ECCurve_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKey_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECAlgorithm__ExportECPrivateKeyPem_System_String__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECCurve__CreateFromOid_ECCurve_Oid_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECCurve__CreateFromFriendlyName_ECCurve_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECCurve__CreateFromValue_ECCurve_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECCurve__Validate_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellman__DeriveKeyMaterial_System_Byte___ECDiffieHellmanPublicKey_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellman(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHash_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellman__DeriveKeyFromHmac_System_Byte___ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellman__DeriveKeyTls_System_Byte___ECDiffieHellmanPublicKey_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellman__DeriveRawSecretAgreement_System_Byte___ECDiffieHellmanPublicKey_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCng__DeriveKeyMaterial_System_Byte___CngKey_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCng(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_ECDiffieHellmanPublicKey_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCng__DeriveSecretAgreementHandle_Microsoft_Win32_SafeHandles_SafeNCryptSecretHandle_CngKey_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCng__ToXmlString_System_String_ECKeyXmlFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToXmlString_System_String__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanPublicKey(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_PlatformNotSupportedException__System_Void_System_Action_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromXmlString_ECDiffieHellmanCngPublicKey_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCngPublicKey(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__FromByteArray_ECDiffieHellmanPublicKey_System_Byte___CngKeyBlobFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanCngPublicKey__Import_CngKey__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportExplicitParameters_ECParameters__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanPublicKey__ExportParameters_ECParameters__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanOpenSsl(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanPublicKey__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDiffieHellmanPublicKey__ToByteArray_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__SignHash_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__VerifyHash_System_Boolean_System_Byte___System_Byte___DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsa__GetMaxSignatureSize_System_Int32_DSASignatureFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng__FromXmlString_System_Void_System_String_ECKeyXmlFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng__SignData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng__ToXmlString_System_String_ECKeyXmlFormat_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaCng__VerifyData_System_Boolean_System_IO_Stream_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECDsaOpenSsl(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ECParameters__Validate_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_FromBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_FromBase64Transform(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_FromBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_FromBase64Transform__Clear_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_FromBase64Transform__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__ComputeHash_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__ComputeHashAsync_System_Threading_Tasks_Task_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__Clear_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithm__Initialize_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithmName__TryFromOid_System_Boolean_System_String_HashAlgorithmName__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HashAlgorithmName__FromOid_HashAlgorithmName_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HKDF__Extract_System_Byte___HashAlgorithmName_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HKDF(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentOutOfRangeException__System_Void_System_Action_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HKDF__Expand_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HKDF__DeriveKey_System_Byte___HashAlgorithmName_System_Byte___System_Int32_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACMD5(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACMD5__HashData_System_Byte___System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte_____GetResult_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACMD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA1(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA1__HashData_System_Byte___System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA256(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA256__HashData_System_Byte___System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA384(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA384__HashData_System_Byte___System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_256(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_256__HashData_System_Byte___System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_384(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_384__HashData_System_Byte___System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_512(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_512__HashData_System_Byte___System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA512(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA512__HashData_System_Byte___System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_HMACSHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash__AppendData_System_Void_System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash__GetHashAndReset_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash__GetCurrentHash_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash__Clone_IncrementalHash__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash__CreateHash_IncrementalHash_HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_IncrementalHash__CreateHMAC_IncrementalHash_HashAlgorithmName_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__AppendData_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__GetHashAndReset_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__GetCurrentHash_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__Clone_Kmac128__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_ValueTask__GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_ValueTask(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__AppendData_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__GetHashAndReset_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__GetCurrentHash_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__Clone_Kmac256__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Kmac256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__AppendData_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__GetHashAndReset_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__GetCurrentHash_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__Clone_KmacXof128__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof128__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__AppendData_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__GetHashAndReset_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__GetCurrentHash_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__Clone_KmacXof256__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_Byte___System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__HashData_System_Byte___System_Byte___System_IO_Stream_System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_Byte___System_IO_Stream_System_Int32_System_Byte___System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Int32_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_KmacXof256__HashDataAsync_System_Threading_Tasks_ValueTask_System_ReadOnlyMemory_System_Byte__System_IO_Stream_System_Memory_System_Byte__System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_MaskGenerationMethod__GenerateMask_System_Byte___System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_MaskGenerationMethod(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_MD5__HashData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_MD5(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_MD5__HashData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_MD5__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Oid__FromFriendlyName_Oid_System_String_OidGroup_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Oid(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Oid__FromOidValue_Oid_System_String_OidGroup_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_OidCollection__Add_System_Int32_Oid_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_OidCollection(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_OidCollection__GetEnumerator_OidEnumerator__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_PasswordDeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_PasswordDeriveBytes(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_PemEncoding__GetEncodedSize_System_Int32_System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_PemEncoding(void);
+extern "C" void chaos_ensure_type_initialized_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Void_System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator__GetNonZeroBytes_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator__GetInt32_System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator__GetBytes_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RandomNumberGenerator__GetHexString_System_String_System_Int32_System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Rfc2898DeriveBytes__CryptDeriveKey_System_Byte___System_String_System_String_System_Int32_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Rfc2898DeriveBytes(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_Byte___System_Byte___System_Int32_HashAlgorithmName_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Rfc2898DeriveBytes__Pbkdf2_System_Byte___System_String_System_Byte___System_Int32_HashAlgorithmName_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__GetMaxOutputSize_System_Int32__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__ExportParameters_RSAParameters_System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__ImportParameters_System_Void_RSAParameters_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__Encrypt_System_Byte___System_Byte___RSAEncryptionPadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__Decrypt_System_Byte___System_Byte___RSAEncryptionPadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__SignHash_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__VerifyHash_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__DecryptValue_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__EncryptValue_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__SignData_System_Byte___System_Byte___System_Int32_System_Int32_HashAlgorithmName_RSASignaturePadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__SignData_System_Byte___System_IO_Stream_HashAlgorithmName_RSASignaturePadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Byte___HashAlgorithmName_RSASignaturePadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_Byte___System_Int32_System_Int32_System_Byte___HashAlgorithmName_RSASignaturePadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__VerifyData_System_Boolean_System_IO_Stream_System_Byte___HashAlgorithmName_RSASignaturePadding_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__ExportRSAPrivateKey_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__ExportRSAPublicKey_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__ExportRSAPrivateKeyPem_System_String__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSA__ExportRSAPublicKeyPem_System_String__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__Decrypt_System_Byte___System_Byte___System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__Encrypt_System_Byte___System_Byte___System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__ExportCspBlob_System_Byte___System_Boolean_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__ImportCspBlob_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Int32_System_Int32_System_Object_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_Byte___System_Object_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__SignData_System_Byte___System_IO_Stream_System_Object_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__SignHash_System_Byte___System_Byte___System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__VerifyData_System_Boolean_System_Byte___System_Object_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSACryptoServiceProvider__VerifyHash_System_Boolean_System_Byte___System_String_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSAEncryptionPadding__CreateOaep_RSAEncryptionPadding_HashAlgorithmName_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSAEncryptionPadding(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSAOpenSsl__DuplicateKeyHandle_SafeEvpPKeyHandle__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_RSAOpenSsl(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPrivateKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SafeEvpPKeyHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SafeEvpPKeyHandle__OpenPublicKeyFromEngine_SafeEvpPKeyHandle_System_String_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SafeEvpPKeyHandle__OpenKeyFromProvider_SafeEvpPKeyHandle_System_String_System_String_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SafeEvpPKeyHandle__DuplicateHandle_SafeEvpPKeyHandle__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA1__HashData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA1(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA1__HashData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA1__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA256__HashData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA256(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA256__HashData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA384__HashData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA384(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA384__HashData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_256(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_256__HashData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_384(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_384__HashData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_384__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_512(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_512__HashData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA3_512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA512__HashData_System_Byte___System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA512(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA512__HashData_System_Byte___System_IO_Stream_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SHA512__HashDataAsync_System_Threading_Tasks_ValueTask_System_Int32__System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__AppendData_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__GetHashAndReset_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__GetCurrentHash_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__Read_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__Clone_Shake128__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__HashData_System_Byte___System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__HashData_System_Byte___System_IO_Stream_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake128__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__AppendData_System_Void_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__GetHashAndReset_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__GetCurrentHash_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__Read_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__Clone_Shake256__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__HashData_System_Byte___System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__HashData_System_Byte___System_IO_Stream_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_IO_Stream_System_Memory_System_Byte__System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_Shake256__HashDataAsync_System_Threading_Tasks_ValueTask_System_Byte____System_IO_Stream_System_Int32_System_Threading_CancellationToken_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SignatureDescription__CreateDeformatter_AsymmetricSignatureDeformatter_AsymmetricAlgorithm_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SignatureDescription(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SignatureDescription__CreateFormatter_AsymmetricSignatureFormatter_AsymmetricAlgorithm_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SignatureDescription__CreateDigest_HashAlgorithm__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_Byte___System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SP800108HmacCounterKdf(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveBytes_System_Byte___System_Byte___HashAlgorithmName_System_String_System_String_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_Byte___System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SP800108HmacCounterKdf__DeriveKey_System_Byte___System_String_System_String_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SP800108HmacCounterKdf__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__Clear_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__ValidKeySize_System_Boolean_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthEcb_System_Int32_System_Int32_PaddingMode_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCbc_System_Int32_System_Int32_PaddingMode_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__GetCiphertextLengthCfb_System_Int32_System_Int32_PaddingMode_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__DecryptEcb_System_Byte___System_Byte___PaddingMode_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__EncryptEcb_System_Byte___System_Byte___PaddingMode_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__DecryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__EncryptCbc_System_Byte___System_Byte___System_Byte___PaddingMode_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__DecryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_SymmetricAlgorithm__EncryptCfb_System_Byte___System_Byte___System_Byte___PaddingMode_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ToBase64Transform__TransformBlock_System_Int32_System_Byte___System_Int32_System_Int32_System_Byte___System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ToBase64Transform(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ToBase64Transform__TransformFinalBlock_System_Byte___System_Byte___System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ToBase64Transform__Dispose_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_ToBase64Transform__Clear_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_TripleDES__IsWeakKey_System_Boolean_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Security_Cryptography_TripleDES(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult_System_Int32__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_Task(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte_____GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_Task_System_Byte___(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte_____GetResult_System_Byte____(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Byte___(void);
 
 extern void chaos_initialize_array_from_field_data_int32(CHAOS_IL2CPP_INTPTR chaos_array_value, CHAOS_IL2CPP_INTPTR chaos_field_handle);
 extern CHAOS_IL2CPP_INTPTR chaos_create_field_data_span_int32(CHAOS_IL2CPP_INTPTR chaos_field_handle);
@@ -5255,7 +7421,6 @@ CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clea
 extern "C" void* kChaosExternalRuntimeFnTable[];
 
 extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
-
 namespace chaos::il2cpp::codegen::CombinedSubjects
 {
 extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_() noexcept;
@@ -7014,6 +9179,1273 @@ extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Security_Cryptography_T
 extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Security_Cryptography_TripleDES__IsWeakKey_System_Boolean_System_Byte___() noexcept;
 
 } // namespace chaos::il2cpp::codegen::CombinedSubjects
+
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c___Dispose_2__2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCcmTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___CreateDecryptor_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___CreateEncryptor_2__2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___GenerateIV_5__5_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___GenerateKey_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCngTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___CreateDecryptor_2__2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___CreateEncryptor_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___GenerateIV_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___GenerateKey_5__5_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesCryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c___Dispose_2__2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesGcmTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___CreateDecryptor_2__2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___CreateEncryptor_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___GenerateIV_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___GenerateKey_5__5_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AesManagedTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c___Add_0_AsnEncodedData_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c___GetEnumerator_2__2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c___Remove_1_AsnEncodedData_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataCollectionTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c___CopyFrom_0_AsnEncodedData_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c___Format_1_bool_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c___Format_1_bool_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsnEncodedDataTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___Clear_2__2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___Dispose_3__3_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___ExportPkcs8PrivateKey_4__4_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___ExportPkcs8PrivateKeyPem_6__6_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___ExportSubjectPublicKeyInfo_5__5_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___ExportSubjectPublicKeyInfoPem_7__7_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___FromXmlString_0_string_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___FromXmlString_0_string_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___ToXmlString_1_bool_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___ToXmlString_1_bool_1_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricAlgorithmTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c___DecryptKeyExchange_1_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c___DecryptKeyExchange_1_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c___DecryptKeyExchange_1_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeDeformatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_System_Type_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_System_Type_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_System_Type_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricKeyExchangeFormatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___SetHashAlgorithm_1_string_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___SetHashAlgorithm_1_string_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___VerifySignature_2_HashAlgorithm_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___VerifySignature_2_HashAlgorithm_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___VerifySignature_2_HashAlgorithm_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___VerifySignature_3_System_Byte_System_Byte_0_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___VerifySignature_3_System_Byte_System_Byte_1_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___VerifySignature_3_System_Byte_System_Byte_2_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureDeformatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c___CreateSignature_2_HashAlgorithm_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c___CreateSignature_3_System_Byte_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c___CreateSignature_3_System_Byte_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c___CreateSignature_3_System_Byte_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c___SetHashAlgorithm_1_string_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c___SetHashAlgorithm_1_string_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_AsymmetricSignatureFormatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c___Decrypt_1_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c___Dispose_2__2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c___Encrypt_0_System_Byte_System_Byte_System_Byte_System_Byte_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ChaCha20Poly1305Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Delete_1__1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Dispose_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Exists_2_string_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Exists_3_string_CngProvider_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Exists_3_string_CngProvider_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Exists_4_string_CngProvider_CngKeyOpenOptions_0_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Exists_4_string_CngProvider_CngKeyOpenOptions_1_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Export_5_CngKeyBlobFormat_0_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___GetProperty_12_string_CngPropertyOptions_0_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___GetProperty_12_string_CngPropertyOptions_1_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___HasProperty_13_string_CngPropertyOptions_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___HasProperty_13_string_CngPropertyOptions_1_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Import_6_System_Byte_CngKeyBlobFormat_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Import_6_System_Byte_CngKeyBlobFormat_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Import_6_System_Byte_CngKeyBlobFormat_2_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Import_7_System_Byte_CngKeyBlobFormat_CngProvider_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Import_7_System_Byte_CngKeyBlobFormat_CngProvider_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Import_7_System_Byte_CngKeyBlobFormat_CngProvider_2_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Open_10_string_CngProvider_CngKeyOpenOptions_0_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Open_10_string_CngProvider_CngKeyOpenOptions_1_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Open_11_SafeNCryptKeyHandle_CngKeyHandleOpenOptions_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Open_8_string_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Open_8_string_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Open_9_string_CngProvider_0_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___Open_9_string_CngProvider_1_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___SetProperty_14_CngProperty_0_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CngKeyTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___AddAlgorithm_0_System_Type_System_String_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___AddAlgorithm_0_System_Type_System_String_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___AddAlgorithm_0_System_Type_System_String_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___AddOID_3_string_System_String_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___AddOID_3_string_System_String_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___AddOID_3_string_System_String_2_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___AddOID_3_string_System_String_3_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___CreateFromName_1_string_System_Object_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___CreateFromName_1_string_System_Object_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___CreateFromName_1_string_System_Object_3_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___CreateFromName_2_string_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___EncodeOID_5_string_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___EncodeOID_5_string_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___MapNameToOID_4_string_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoConfigTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashData_0_HashAlgorithmName_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashData_0_HashAlgorithmName_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashData_0_HashAlgorithmName_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashData_1_HashAlgorithmName_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashData_1_HashAlgorithmName_Stream_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashDataAsync_2_HashAlgorithmName_Stream_System_Memorybyte_CancellationToken_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HashDataAsync_3_HashAlgorithmName_Stream_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacData_4_HashAlgorithmName_System_Byte_System_Byte_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacData_4_HashAlgorithmName_System_Byte_System_Byte_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacData_4_HashAlgorithmName_System_Byte_System_Byte_2_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacData_5_HashAlgorithmName_System_Byte_Stream_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacData_5_HashAlgorithmName_System_Byte_Stream_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacData_5_HashAlgorithmName_System_Byte_Stream_2_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacDataAsync_6_HashAlgorithmName_System_Byte_Stream_CancellationToken_2_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacDataAsync_7_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___HmacDataAsync_8_HashAlgorithmName_System_ReadOnlyMemorybyte_Stream_CancellationToken_1_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptographicOperationsTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_2_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_3_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginRead_8_System_Byte_int_int_System_AsyncCallback_object_4_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_0_b__70_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_1_b__72_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_2_b__74_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_3_b__76_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___BeginWrite_15_System_Byte_int_int_System_AsyncCallback_object_4_b__78_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Clear_20__20_b__104_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___CopyTo_18_Stream_int_0_b__92_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___CopyTo_18_Stream_int_1_b__94_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___CopyTo_18_Stream_int_2_b__96_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___CopyToAsync_19_Stream_int_CancellationToken_0_b__98_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___CopyToAsync_19_Stream_int_CancellationToken_1_b__100_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___CopyToAsync_19_Stream_int_CancellationToken_2_b__102_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___DisposeAsync_21__21_b__106_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___EndRead_9_System_IAsyncResult_0_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___EndWrite_16_System_IAsyncResult_0_b__80_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Flush_2__2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___FlushAsync_3_CancellationToken_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___FlushFinalBlock_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___FlushFinalBlockAsync_1_CancellationToken_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Read_12_System_Byte_int_int_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Read_12_System_Byte_int_int_1_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Read_12_System_Byte_int_int_2_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Read_12_System_Byte_int_int_3_b__54_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Read_12_System_Byte_int_int_4_b__56_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___ReadAsync_6_System_Byte_int_int_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___ReadAsync_6_System_Byte_int_int_CancellationToken_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___ReadAsync_6_System_Byte_int_int_CancellationToken_2_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___ReadAsync_6_System_Byte_int_int_CancellationToken_3_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___ReadAsync_6_System_Byte_int_int_CancellationToken_4_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___ReadAsync_7_System_Memorybyte_CancellationToken_0_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___ReadByte_10__10_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Seek_4_long_SeekOrigin_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Seek_4_long_SeekOrigin_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Seek_4_long_SeekOrigin_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___SetLength_5_long_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___SetLength_5_long_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Write_17_System_Byte_int_int_0_b__82_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Write_17_System_Byte_int_int_1_b__84_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Write_17_System_Byte_int_int_2_b__86_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Write_17_System_Byte_int_int_3_b__88_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___Write_17_System_Byte_int_int_4_b__90_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___WriteAsync_13_System_Byte_int_int_CancellationToken_0_b__58_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___WriteAsync_13_System_Byte_int_int_CancellationToken_1_b__60_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___WriteAsync_13_System_Byte_int_int_CancellationToken_2_b__62_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___WriteAsync_13_System_Byte_int_int_CancellationToken_3_b__64_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___WriteAsync_13_System_Byte_int_int_CancellationToken_4_b__66_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___WriteAsync_14_System_ReadOnlyMemorybyte_CancellationToken_0_b__68_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___WriteByte_11_byte_0_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___WriteByte_11_byte_1_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_CryptoStreamTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c___Dispose_1__1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c___GetBytes_0_int_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c___GetBytes_0_int_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DeriveBytesTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___CreateDecryptor_2__2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___CreateDecryptor_3_System_Byte_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___CreateDecryptor_3_System_Byte_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___CreateDecryptor_3_System_Byte_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___CreateEncryptor_4__4_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___CreateEncryptor_5_System_Byte_System_Byte_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___CreateEncryptor_5_System_Byte_System_Byte_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___CreateEncryptor_5_System_Byte_System_Byte_2_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___GenerateIV_1__1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___GenerateKey_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESCryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c___IsSemiWeakKey_1_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c___IsSemiWeakKey_1_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c___IsSemiWeakKey_1_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c___IsWeakKey_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c___IsWeakKey_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c___IsWeakKey_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DESTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___CreateSignature_2_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___CreateSignature_2_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___CreateSignature_2_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___ExportParameters_1_bool_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___ExportParameters_1_bool_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___ImportParameters_0_DSAParameters_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___VerifySignature_3_System_Byte_System_Byte_0_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___VerifySignature_3_System_Byte_System_Byte_1_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___VerifySignature_3_System_Byte_System_Byte_2_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACngTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___CreateSignature_8_System_Byte_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___CreateSignature_8_System_Byte_1_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___CreateSignature_8_System_Byte_2_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ExportCspBlob_0_bool_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ExportCspBlob_0_bool_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ExportParameters_1_bool_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ExportParameters_1_bool_1_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ImportCspBlob_2_System_Byte_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ImportCspBlob_2_System_Byte_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ImportCspBlob_2_System_Byte_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ImportParameters_3_DSAParameters_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_4_Stream_0_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_4_Stream_1_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_5_System_Byte_0_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_5_System_Byte_1_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_5_System_Byte_2_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_6_System_Byte_int_int_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_6_System_Byte_int_int_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_6_System_Byte_int_int_2_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_6_System_Byte_int_int_3_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignData_6_System_Byte_int_int_4_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignHash_10_System_Byte_string_0_b__54_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignHash_10_System_Byte_string_1_b__56_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignHash_10_System_Byte_string_2_b__58_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___SignHash_10_System_Byte_string_3_b__60_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifyData_7_System_Byte_System_Byte_0_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifyData_7_System_Byte_System_Byte_1_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifyData_7_System_Byte_System_Byte_2_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifyHash_11_System_Byte_string_System_Byte_0_b__62_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifyHash_11_System_Byte_string_System_Byte_1_b__64_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifyHash_11_System_Byte_string_System_Byte_2_b__66_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifyHash_11_System_Byte_string_System_Byte_3_b__68_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifySignature_9_System_Byte_System_Byte_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifySignature_9_System_Byte_System_Byte_1_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___VerifySignature_9_System_Byte_System_Byte_2_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSACryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___CreateSignature_1_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___CreateSignature_1_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___CreateSignature_1_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___DuplicateKeyHandle_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___ExportParameters_2_bool_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___ExportParameters_2_bool_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___ImportParameters_3_DSAParameters_0_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___VerifySignature_4_System_Byte_System_Byte_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___VerifySignature_4_System_Byte_System_Byte_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___VerifySignature_4_System_Byte_System_Byte_2_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSAOpenSslTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c___SetHashAlgorithm_1_string_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c___SetHashAlgorithm_1_string_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c___VerifySignature_2_System_Byte_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c___VerifySignature_2_System_Byte_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c___VerifySignature_2_System_Byte_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureDeformatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c___CreateSignature_2_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c___CreateSignature_2_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c___CreateSignature_2_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c___SetHashAlgorithm_1_string_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c___SetHashAlgorithm_1_string_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSASignatureFormatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___CreateSignature_14_System_Byte_DSASignatureFormat_0_b__90_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___CreateSignature_14_System_Byte_DSASignatureFormat_1_b__92_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___CreateSignature_14_System_Byte_DSASignatureFormat_2_b__94_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___CreateSignature_2_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___CreateSignature_2_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___CreateSignature_2_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___ExportParameters_0_bool_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___ExportParameters_0_bool_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___FromXmlString_19_string_0_b__116_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___FromXmlString_19_string_1_b__118_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___GetMaxSignatureSize_18_DSASignatureFormat_0_b__114_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___ImportParameters_1_DSAParameters_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_4_System_Byte_HashAlgorithmName_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_4_System_Byte_HashAlgorithmName_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_4_System_Byte_HashAlgorithmName_2_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_5_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_6_System_Byte_int_int_HashAlgorithmName_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_6_System_Byte_int_int_HashAlgorithmName_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_6_System_Byte_int_int_HashAlgorithmName_2_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_6_System_Byte_int_int_HashAlgorithmName_3_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_6_System_Byte_int_int_HashAlgorithmName_4_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_0_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_1_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_2_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_3_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_7_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_4_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_8_Stream_HashAlgorithmName_0_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_8_Stream_HashAlgorithmName_1_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_9_Stream_HashAlgorithmName_DSASignatureFormat_0_b__54_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___SignData_9_Stream_HashAlgorithmName_DSASignatureFormat_1_b__56_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___ToXmlString_20_bool_0_b__120_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___ToXmlString_20_bool_1_b__122_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_0_b__58_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_1_b__60_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_2_b__62_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_0_b__64_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_1_b__66_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_2_b__68_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_3_b__70_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_11_System_Byte_int_int_System_Byte_HashAlgorithmName_4_b__72_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__74_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__76_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__78_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_3_b__80_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_12_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_4_b__82_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_13_Stream_System_Byte_HashAlgorithmName_0_b__84_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_13_Stream_System_Byte_HashAlgorithmName_1_b__86_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_13_Stream_System_Byte_HashAlgorithmName_2_b__88_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__96_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__98_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_15_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__100_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__102_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__104_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifyData_16_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__106_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_0_b__108_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_1_b__110_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifySignature_17_System_Byte_System_Byte_DSASignatureFormat_2_b__112_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifySignature_3_System_Byte_System_Byte_0_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifySignature_3_System_Byte_System_Byte_1_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___VerifySignature_3_System_Byte_System_Byte_2_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_DSATests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___ExportECPrivateKey_4__4_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___ExportECPrivateKeyPem_5__5_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___ExportExplicitParameters_1_bool_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___ExportExplicitParameters_1_bool_1_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___ExportParameters_0_bool_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___ExportParameters_0_bool_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___GenerateKey_3_ECCurve_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___ImportParameters_2_ECParameters_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECAlgorithmTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c___CreateFromFriendlyName_1_string_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c___CreateFromFriendlyName_1_string_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c___CreateFromOid_0_Oid_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c___CreateFromValue_2_string_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c___CreateFromValue_2_string_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECCurveTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___ExportExplicitParameters_4__4_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___ExportParameters_5__5_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___FromByteArray_2_System_Byte_CngKeyBlobFormat_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___FromByteArray_2_System_Byte_CngKeyBlobFormat_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___FromByteArray_2_System_Byte_CngKeyBlobFormat_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___FromXmlString_1_string_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___FromXmlString_1_string_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___Import_3__3_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___ToXmlString_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngPublicKeyTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyFromHash_0_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyFromHmac_1_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyMaterial_7_ECDiffieHellmanPublicKey_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyMaterial_8_CngKey_0_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_0_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_1_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveKeyTls_2_ECDiffieHellmanPublicKey_System_Byte_System_Byte_2_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveRawSecretAgreement_3_ECDiffieHellmanPublicKey_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveSecretAgreementHandle_10_CngKey_0_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___DeriveSecretAgreementHandle_9_ECDiffieHellmanPublicKey_0_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___ExportExplicitParameters_5_bool_0_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___ExportExplicitParameters_5_bool_1_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___ExportParameters_6_bool_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___ExportParameters_6_bool_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___FromXmlString_12_string_ECKeyXmlFormat_0_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___FromXmlString_12_string_ECKeyXmlFormat_1_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___GenerateKey_11_ECCurve_0_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___ImportParameters_4_ECParameters_0_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___ToXmlString_13_ECKeyXmlFormat_0_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanCngTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c___DuplicateKeyHandle_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c___ExportParameters_1_bool_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c___ExportParameters_1_bool_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c___ImportParameters_2_ECParameters_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanOpenSslTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c___Dispose_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c___ExportExplicitParameters_4__4_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c___ExportParameters_3__3_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c___ToByteArray_1__1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c___ToXmlString_2__2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanPublicKeyTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHash_1_ECDiffieHellmanPublicKey_HashAlgorithmName_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_1_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHash_2_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHmac_3_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_0_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_1_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyFromHmac_4_ECDiffieHellmanPublicKey_HashAlgorithmName_System_Byte_System_Byte_System_Byte_2_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyMaterial_0_ECDiffieHellmanPublicKey_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_0_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_1_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveKeyTls_5_ECDiffieHellmanPublicKey_System_Byte_System_Byte_2_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___DeriveRawSecretAgreement_6_ECDiffieHellmanPublicKey_0_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___FromXmlString_7_string_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___FromXmlString_7_string_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___ToXmlString_8_bool_0_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___ToXmlString_8_bool_1_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDiffieHellmanTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___ExportExplicitParameters_1_bool_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___ExportExplicitParameters_1_bool_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___ExportParameters_2_bool_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___ExportParameters_2_bool_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___FromXmlString_5_string_ECKeyXmlFormat_0_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___FromXmlString_5_string_ECKeyXmlFormat_1_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___GenerateKey_13_ECCurve_0_b__70_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___ImportParameters_0_ECParameters_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_6_System_Byte_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_6_System_Byte_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_6_System_Byte_2_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_7_System_Byte_int_int_0_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_7_System_Byte_int_int_1_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_7_System_Byte_int_int_2_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_7_System_Byte_int_int_3_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_7_System_Byte_int_int_4_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_8_Stream_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignData_8_Stream_1_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignHash_3_System_Byte_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignHash_3_System_Byte_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___SignHash_3_System_Byte_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___ToXmlString_9_ECKeyXmlFormat_0_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_10_System_Byte_System_Byte_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_10_System_Byte_System_Byte_1_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_10_System_Byte_System_Byte_2_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_11_System_Byte_int_int_System_Byte_0_b__54_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_11_System_Byte_int_int_System_Byte_1_b__56_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_11_System_Byte_int_int_System_Byte_2_b__58_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_11_System_Byte_int_int_System_Byte_3_b__60_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_11_System_Byte_int_int_System_Byte_4_b__62_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_12_Stream_System_Byte_0_b__64_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_12_Stream_System_Byte_1_b__66_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyData_12_Stream_System_Byte_2_b__68_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyHash_4_System_Byte_System_Byte_0_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyHash_4_System_Byte_System_Byte_1_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___VerifyHash_4_System_Byte_System_Byte_2_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaCngTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c___DuplicateKeyHandle_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c___SignHash_1_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c___SignHash_1_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c___SignHash_1_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c___VerifyHash_2_System_Byte_System_Byte_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c___VerifyHash_2_System_Byte_System_Byte_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c___VerifyHash_2_System_Byte_System_Byte_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaOpenSslTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___FromXmlString_17_string_0_b__110_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___FromXmlString_17_string_1_b__112_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___GetMaxSignatureSize_16_DSASignatureFormat_0_b__108_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_0_System_Byte_HashAlgorithmName_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_0_System_Byte_HashAlgorithmName_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_0_System_Byte_HashAlgorithmName_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_1_System_Byte_int_int_HashAlgorithmName_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_1_System_Byte_int_int_HashAlgorithmName_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_1_System_Byte_int_int_HashAlgorithmName_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_1_System_Byte_int_int_HashAlgorithmName_3_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_1_System_Byte_int_int_HashAlgorithmName_4_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_0_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_1_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_2_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_3_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_2_System_Byte_int_int_HashAlgorithmName_DSASignatureFormat_4_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_3_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_4_Stream_HashAlgorithmName_DSASignatureFormat_0_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_4_Stream_HashAlgorithmName_DSASignatureFormat_1_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_6_Stream_HashAlgorithmName_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignData_6_Stream_HashAlgorithmName_1_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignHash_13_System_Byte_0_b__90_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignHash_13_System_Byte_1_b__92_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignHash_13_System_Byte_2_b__94_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignHash_5_System_Byte_DSASignatureFormat_0_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignHash_5_System_Byte_DSASignatureFormat_1_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___SignHash_5_System_Byte_DSASignatureFormat_2_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___ToXmlString_18_bool_0_b__114_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___ToXmlString_18_bool_1_b__116_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__72_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__74_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_10_System_Byte_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__76_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_11_Stream_System_Byte_HashAlgorithmName_0_b__78_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_11_Stream_System_Byte_HashAlgorithmName_1_b__80_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_11_Stream_System_Byte_HashAlgorithmName_2_b__82_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__84_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__86_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_12_Stream_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__88_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_0_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_1_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_7_System_Byte_System_Byte_HashAlgorithmName_2_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_0_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_1_b__54_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_2_b__56_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_3_b__58_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_8_System_Byte_int_int_System_Byte_HashAlgorithmName_4_b__60_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_0_b__62_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_1_b__64_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_2_b__66_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_3_b__68_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyData_9_System_Byte_int_int_System_Byte_HashAlgorithmName_DSASignatureFormat_4_b__70_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyHash_14_System_Byte_System_Byte_0_b__96_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyHash_14_System_Byte_System_Byte_1_b__98_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyHash_14_System_Byte_System_Byte_2_b__100_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_0_b__102_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_1_b__104_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___VerifyHash_15_System_Byte_System_Byte_DSASignatureFormat_2_b__106_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECDsaTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c___Validate_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ECParametersTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___Clear_2__2_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___Dispose_3__3_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_3_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_4_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_3_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_4_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_FromBase64TransformTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c___FromOid_1_string_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c___FromOid_1_string_1_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c__DisplayClass0_0___TryFromOid_0_string_HashAlgorithmName_0_b__0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmNameTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___Clear_5__5_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_1_System_Byte_int_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_1_System_Byte_int_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_1_System_Byte_int_int_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_1_System_Byte_int_int_3_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_1_System_Byte_int_int_4_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_2_Stream_0_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHash_2_Stream_1_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHashAsync_3_Stream_CancellationToken_0_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ComputeHashAsync_3_Stream_CancellationToken_1_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___Dispose_4__4_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___Initialize_8__8_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformBlock_6_System_Byte_int_int_System_Byte_int_0_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformBlock_6_System_Byte_int_int_System_Byte_int_1_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformBlock_6_System_Byte_int_int_System_Byte_int_2_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformBlock_6_System_Byte_int_int_System_Byte_int_3_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformBlock_6_System_Byte_int_int_System_Byte_int_4_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformFinalBlock_7_System_Byte_int_int_0_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformFinalBlock_7_System_Byte_int_int_1_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformFinalBlock_7_System_Byte_int_int_2_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformFinalBlock_7_System_Byte_int_int_3_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___TransformFinalBlock_7_System_Byte_int_int_4_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HashAlgorithmTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_2_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___DeriveKey_2_HashAlgorithmName_System_Byte_int_System_Byte_System_Byte_3_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___Expand_1_HashAlgorithmName_System_Byte_int_System_Byte_3_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___Extract_0_HashAlgorithmName_System_Byte_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___Extract_0_HashAlgorithmName_System_Byte_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___Extract_0_HashAlgorithmName_System_Byte_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HKDFTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c___HashData_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c___HashData_2_System_Byte_Stream_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c___HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c___HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACMD5Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c___HashData_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c___HashData_2_System_Byte_Stream_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c___HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c___HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA1Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c___HashData_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c___HashData_2_System_Byte_Stream_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c___HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c___HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA256Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c___HashData_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c___HashData_2_System_Byte_Stream_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c___HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c___HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_256Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c___HashData_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c___HashData_2_System_Byte_Stream_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c___HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c___HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_384Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c___HashData_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c___HashData_2_System_Byte_Stream_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c___HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c___HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA3_512Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c___HashData_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c___HashData_2_System_Byte_Stream_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c___HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c___HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA384Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c___HashData_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c___HashData_2_System_Byte_Stream_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c___HashDataAsync_3_System_ReadOnlyMemorybyte_Stream_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c___HashDataAsync_4_System_Byte_Stream_CancellationToken_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c___HashDataAsync_5_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_CancellationToken_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACSHA512Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_HMACTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___AppendData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___AppendData_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___AppendData_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___AppendData_1_System_Byte_int_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___AppendData_1_System_Byte_int_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___AppendData_1_System_Byte_int_int_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___AppendData_1_System_Byte_int_int_3_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___AppendData_1_System_Byte_int_int_4_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___Clone_4__4_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___CreateHash_6_HashAlgorithmName_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___CreateHMAC_7_HashAlgorithmName_System_Byte_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___CreateHMAC_7_HashAlgorithmName_System_Byte_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___CreateHMAC_7_HashAlgorithmName_System_Byte_2_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___Dispose_5__5_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___GetCurrentHash_3__3_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___GetHashAndReset_2__2_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_IncrementalHashTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___AppendData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___AppendData_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___AppendData_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___Clone_3__3_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___Dispose_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___GetCurrentHash_2_int_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___GetCurrentHash_2_int_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___GetHashAndReset_1_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___GetHashAndReset_1_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac128Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___AppendData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___AppendData_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___AppendData_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___Clone_3__3_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___Dispose_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___GetCurrentHash_2_int_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___GetCurrentHash_2_int_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___GetHashAndReset_1_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___GetHashAndReset_1_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Kmac256Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___AppendData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___AppendData_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___AppendData_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___Clone_3__3_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___Dispose_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___GetCurrentHash_2_int_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___GetCurrentHash_2_int_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___GetHashAndReset_1_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___GetHashAndReset_1_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof128Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___AppendData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___AppendData_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___AppendData_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___Clone_3__3_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___Dispose_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___GetCurrentHash_2_int_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___GetCurrentHash_2_int_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___GetHashAndReset_1_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___GetHashAndReset_1_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashData_5_System_Byte_System_Byte_int_System_Byte_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashData_5_System_Byte_System_Byte_int_System_Byte_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashData_6_System_Byte_Stream_int_System_Byte_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashData_6_System_Byte_Stream_int_System_Byte_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_0_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashDataAsync_7_System_Byte_Stream_int_System_Byte_CancellationToken_1_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashDataAsync_8_System_ReadOnlyMemorybyte_Stream_int_System_ReadOnlyMemorybyte_CancellationToken_1_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___HashDataAsync_9_System_ReadOnlyMemorybyte_Stream_System_Memorybyte_System_ReadOnlyMemorybyte_CancellationToken_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_KmacXof256Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c___GenerateMask_0_System_Byte_int_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c___GenerateMask_0_System_Byte_int_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c___GenerateMask_0_System_Byte_int_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c___GenerateMask_0_System_Byte_int_3_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MaskGenerationMethodTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5CryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c___HashData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c___HashData_1_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c___HashDataAsync_2_Stream_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_MD5Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c___Add_0_Oid_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c___GetEnumerator_1__1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidCollectionTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c___FromFriendlyName_0_string_OidGroup_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c___FromFriendlyName_0_string_OidGroup_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c___FromOidValue_1_string_OidGroup_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c___FromOidValue_1_string_OidGroup_1_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_OidTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_1_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_3_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_4_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_5_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___GetBytes_0_int_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___GetBytes_0_int_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PasswordDeriveBytesTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c___GenerateMask_0_System_Byte_int_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c___GenerateMask_0_System_Byte_int_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c___GenerateMask_0_System_Byte_int_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c___GenerateMask_0_System_Byte_int_3_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_PKCS1MaskGenerationMethodTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___Dispose_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetBytes_1_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetBytes_1_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetBytes_1_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetBytes_2_System_Byte_int_int_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetBytes_2_System_Byte_int_int_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetBytes_2_System_Byte_int_int_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetBytes_2_System_Byte_int_int_3_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetBytes_2_System_Byte_int_int_4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetInt32_4_int_int_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetInt32_4_int_int_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetInt32_4_int_int_2_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetInt32_5_int_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetInt32_5_int_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetNonZeroBytes_3_System_Byte_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetNonZeroBytes_3_System_Byte_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___GetNonZeroBytes_3_System_Byte_2_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RandomNumberGeneratorTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___CreateDecryptor_1_System_Byte_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___CreateDecryptor_1_System_Byte_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___CreateDecryptor_1_System_Byte_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___CreateEncryptor_0_System_Byte_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___CreateEncryptor_0_System_Byte_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___CreateEncryptor_0_System_Byte_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___GenerateIV_3__3_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___GenerateKey_2__2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RC2CryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_0_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_1_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_3_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_4_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___CryptDeriveKey_1_string_string_int_System_Byte_5_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___GetBytes_0_int_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___GetBytes_0_int_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_0_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_1_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_2_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_2_System_Byte_System_Byte_int_HashAlgorithmName_int_3_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_2_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_3_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___Pbkdf2_3_string_System_Byte_int_HashAlgorithmName_int_4_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Rfc2898DeriveBytesTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___CreateDecryptor_2__2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___CreateDecryptor_3_System_Byte_System_Byte_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___CreateDecryptor_3_System_Byte_System_Byte_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___CreateDecryptor_3_System_Byte_System_Byte_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___CreateEncryptor_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___CreateEncryptor_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___CreateEncryptor_1_System_Byte_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___CreateEncryptor_1_System_Byte_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___GenerateIV_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___GenerateKey_5__5_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RijndaelManagedTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetBytes_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetBytes_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetBytes_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetBytes_1_System_Byte_int_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetBytes_1_System_Byte_int_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetBytes_1_System_Byte_int_int_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetBytes_1_System_Byte_int_int_3_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetBytes_1_System_Byte_int_int_4_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetNonZeroBytes_2_System_Byte_0_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetNonZeroBytes_2_System_Byte_1_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___GetNonZeroBytes_2_System_Byte_2_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RNGCryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___Decrypt_1_System_Byte_RSAEncryptionPadding_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___Decrypt_1_System_Byte_RSAEncryptionPadding_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___Decrypt_1_System_Byte_RSAEncryptionPadding_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___Encrypt_0_System_Byte_RSAEncryptionPadding_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___Encrypt_0_System_Byte_RSAEncryptionPadding_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___Encrypt_0_System_Byte_RSAEncryptionPadding_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___ExportParameters_3_bool_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___ExportParameters_3_bool_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___ImportParameters_2_RSAParameters_0_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___SignHash_4_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___VerifyHash_5_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACngTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Decrypt_0_System_Byte_bool_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Decrypt_0_System_Byte_bool_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Decrypt_0_System_Byte_bool_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Decrypt_0_System_Byte_bool_3_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Decrypt_15_System_Byte_RSAEncryptionPadding_0_b__92_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Decrypt_15_System_Byte_RSAEncryptionPadding_1_b__94_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Decrypt_15_System_Byte_RSAEncryptionPadding_2_b__96_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___DecryptValue_1_System_Byte_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___DecryptValue_1_System_Byte_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___DecryptValue_1_System_Byte_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Encrypt_14_System_Byte_RSAEncryptionPadding_0_b__86_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Encrypt_14_System_Byte_RSAEncryptionPadding_1_b__88_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Encrypt_14_System_Byte_RSAEncryptionPadding_2_b__90_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Encrypt_2_System_Byte_bool_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Encrypt_2_System_Byte_bool_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Encrypt_2_System_Byte_bool_2_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___Encrypt_2_System_Byte_bool_3_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___EncryptValue_3_System_Byte_0_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___EncryptValue_3_System_Byte_1_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___EncryptValue_3_System_Byte_2_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ExportCspBlob_4_bool_0_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ExportCspBlob_4_bool_1_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ExportParameters_5_bool_0_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ExportParameters_5_bool_1_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ImportCspBlob_6_System_Byte_0_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ImportCspBlob_6_System_Byte_1_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ImportCspBlob_6_System_Byte_2_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ImportParameters_7_RSAParameters_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_10_Stream_object_0_b__60_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_10_Stream_object_1_b__62_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_8_System_Byte_int_int_object_0_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_8_System_Byte_int_int_object_1_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_8_System_Byte_int_int_object_2_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_8_System_Byte_int_int_object_3_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_8_System_Byte_int_int_object_4_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_9_System_Byte_object_0_b__54_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_9_System_Byte_object_1_b__56_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignData_9_System_Byte_object_2_b__58_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignHash_11_System_Byte_string_0_b__64_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignHash_11_System_Byte_string_1_b__66_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignHash_11_System_Byte_string_2_b__68_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignHash_11_System_Byte_string_3_b__70_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__98_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__100_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___SignHash_16_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__102_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyData_12_System_Byte_object_System_Byte_0_b__72_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyData_12_System_Byte_object_System_Byte_1_b__74_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyData_12_System_Byte_object_System_Byte_2_b__76_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyHash_13_System_Byte_string_System_Byte_0_b__78_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyHash_13_System_Byte_string_System_Byte_1_b__80_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyHash_13_System_Byte_string_System_Byte_2_b__82_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyHash_13_System_Byte_string_System_Byte_3_b__84_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__104_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__106_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___VerifyHash_17_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__108_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSACryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c___CreateOaep_0_HashAlgorithmName_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAEncryptionPaddingTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c___DecryptKeyExchange_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c___DecryptKeyExchange_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c___DecryptKeyExchange_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c___SetKey_1_AsymmetricAlgorithm_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeDeformatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_System_Type_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_System_Type_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_System_Type_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOAEPKeyExchangeFormatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c___DuplicateKeyHandle_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c___ExportParameters_1_bool_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c___ExportParameters_1_bool_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c___ImportParameters_2_RSAParameters_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAOpenSslTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c___DecryptKeyExchange_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c___DecryptKeyExchange_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c___DecryptKeyExchange_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c___SetKey_1_AsymmetricAlgorithm_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeDeformatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_System_Type_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_System_Type_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c___CreateKeyExchange_1_System_Byte_System_Type_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c___CreateKeyExchange_2_System_Byte_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1KeyExchangeFormatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c___SetHashAlgorithm_1_string_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c___SetHashAlgorithm_1_string_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c___VerifySignature_2_System_Byte_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c___VerifySignature_2_System_Byte_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c___VerifySignature_2_System_Byte_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureDeformatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c___CreateSignature_2_System_Byte_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c___CreateSignature_2_System_Byte_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c___CreateSignature_2_System_Byte_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c___SetHashAlgorithm_1_string_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c___SetHashAlgorithm_1_string_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c___SetKey_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSAPKCS1SignatureFormatterTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___Decrypt_4_System_Byte_RSAEncryptionPadding_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___Decrypt_4_System_Byte_RSAEncryptionPadding_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___Decrypt_4_System_Byte_RSAEncryptionPadding_2_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___DecryptValue_7_System_Byte_0_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___DecryptValue_7_System_Byte_1_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___DecryptValue_7_System_Byte_2_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___Encrypt_3_System_Byte_RSAEncryptionPadding_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___Encrypt_3_System_Byte_RSAEncryptionPadding_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___Encrypt_3_System_Byte_RSAEncryptionPadding_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___EncryptValue_8_System_Byte_0_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___EncryptValue_8_System_Byte_1_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___EncryptValue_8_System_Byte_2_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ExportParameters_1_bool_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ExportParameters_1_bool_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ExportRSAPrivateKey_15__15_b__86_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ExportRSAPrivateKeyPem_17__17_b__90_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ExportRSAPublicKey_16__16_b__88_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ExportRSAPublicKeyPem_18__18_b__92_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___FromXmlString_19_string_0_b__94_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___FromXmlString_19_string_1_b__96_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___GetMaxOutputSize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ImportParameters_2_RSAParameters_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_0_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_1_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_2_b__54_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_3_b__56_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_10_System_Byte_int_int_HashAlgorithmName_RSASignaturePadding_4_b__58_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_11_Stream_HashAlgorithmName_RSASignaturePadding_0_b__60_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_11_Stream_HashAlgorithmName_RSASignaturePadding_1_b__62_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignData_9_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___SignHash_5_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ToXmlString_20_bool_0_b__98_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ToXmlString_20_bool_1_b__100_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__64_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__66_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_12_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__68_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__70_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__72_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__74_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_3_b__76_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_13_System_Byte_int_int_System_Byte_HashAlgorithmName_RSASignaturePadding_4_b__78_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__80_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__82_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyData_14_Stream_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__84_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_0_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_1_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___VerifyHash_6_System_Byte_System_Byte_HashAlgorithmName_RSASignaturePadding_2_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_RSATests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___DuplicateHandle_3__3_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenKeyFromProvider_2_string_string_0_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenKeyFromProvider_2_string_string_1_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenKeyFromProvider_2_string_string_2_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenPrivateKeyFromEngine_0_string_string_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenPrivateKeyFromEngine_0_string_string_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenPrivateKeyFromEngine_0_string_string_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenPublicKeyFromEngine_1_string_string_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenPublicKeyFromEngine_1_string_string_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___OpenPublicKeyFromEngine_1_string_string_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SafeEvpPKeyHandleTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1CryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1ManagedTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c___HashData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c___HashData_1_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c___HashDataAsync_2_Stream_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA1Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256CryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256ManagedTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c___HashData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c___HashData_1_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c___HashDataAsync_2_Stream_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA256Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c___HashData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c___HashData_1_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c___HashDataAsync_2_Stream_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_256Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c___HashData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c___HashData_1_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c___HashDataAsync_2_Stream_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_384Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c___HashData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c___HashData_1_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c___HashDataAsync_2_Stream_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA3_512Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384CryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384ManagedTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c___HashData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c___HashData_1_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c___HashDataAsync_2_Stream_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA384Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512CryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c___Initialize_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512ManagedTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c___HashData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c___HashData_1_Stream_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c___HashDataAsync_2_Stream_CancellationToken_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c___HashDataAsync_3_Stream_System_Memorybyte_CancellationToken_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SHA512Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___AppendData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___AppendData_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___AppendData_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___Clone_4__4_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___Dispose_5__5_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___GetCurrentHash_2_int_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___GetCurrentHash_2_int_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___GetHashAndReset_1_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___GetHashAndReset_1_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___HashData_6_System_Byte_int_0_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___HashData_6_System_Byte_int_1_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___HashData_7_Stream_int_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___HashData_7_Stream_int_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___HashDataAsync_9_Stream_int_CancellationToken_0_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___HashDataAsync_9_Stream_int_CancellationToken_1_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___Read_3_int_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___Read_3_int_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake128Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___AppendData_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___AppendData_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___AppendData_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___Clone_4__4_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___Dispose_5__5_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___GetCurrentHash_2_int_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___GetCurrentHash_2_int_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___GetHashAndReset_1_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___GetHashAndReset_1_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___HashData_6_System_Byte_int_0_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___HashData_6_System_Byte_int_1_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___HashData_7_Stream_int_0_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___HashData_7_Stream_int_1_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___HashDataAsync_8_Stream_System_Memorybyte_CancellationToken_0_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___HashDataAsync_9_Stream_int_CancellationToken_0_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___HashDataAsync_9_Stream_int_CancellationToken_1_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___Read_3_int_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___Read_3_int_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_Shake256Tests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c___CreateDeformatter_0_AsymmetricAlgorithm_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c___CreateDigest_2__2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c___CreateFormatter_1_AsymmetricAlgorithm_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SignatureDescriptionTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveBytes_0_System_Byte_HashAlgorithmName_System_Byte_System_Byte_int_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_0_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_1_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_2_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveBytes_1_System_Byte_HashAlgorithmName_string_string_int_3_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveKey_2_System_Byte_System_Byte_int_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveKey_2_System_Byte_System_Byte_int_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveKey_2_System_Byte_System_Byte_int_2_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveKey_2_System_Byte_System_Byte_int_3_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveKey_3_string_string_int_0_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveKey_3_string_string_int_1_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveKey_3_string_string_int_2_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___DeriveKey_3_string_string_int_3_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___Dispose_4__4_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SP800108HmacCounterKdfTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___Clear_5__5_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___CreateDecryptor_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___CreateEncryptor_2__2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptCbc_14_System_Byte_System_Byte_PaddingMode_0_b__54_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptCbc_14_System_Byte_System_Byte_PaddingMode_1_b__56_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptCbc_14_System_Byte_System_Byte_PaddingMode_2_b__58_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_0_b__66_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_1_b__68_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptCfb_16_System_Byte_System_Byte_PaddingMode_int_2_b__70_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptEcb_12_System_Byte_PaddingMode_0_b__42_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptEcb_12_System_Byte_PaddingMode_1_b__44_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___DecryptEcb_12_System_Byte_PaddingMode_2_b__46_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___Dispose_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptCbc_15_System_Byte_System_Byte_PaddingMode_0_b__60_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptCbc_15_System_Byte_System_Byte_PaddingMode_1_b__62_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptCbc_15_System_Byte_System_Byte_PaddingMode_2_b__64_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_0_b__72_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_1_b__74_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptCfb_17_System_Byte_System_Byte_PaddingMode_int_2_b__76_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptEcb_13_System_Byte_PaddingMode_0_b__48_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptEcb_13_System_Byte_PaddingMode_1_b__50_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___EncryptEcb_13_System_Byte_PaddingMode_2_b__52_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GenerateIV_6__6_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GenerateKey_7__7_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GetCiphertextLengthCbc_10_int_PaddingMode_0_b__32_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GetCiphertextLengthCbc_10_int_PaddingMode_1_b__34_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GetCiphertextLengthCfb_11_int_PaddingMode_int_0_b__36_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GetCiphertextLengthCfb_11_int_PaddingMode_int_1_b__38_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GetCiphertextLengthCfb_11_int_PaddingMode_int_2_b__40_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GetCiphertextLengthEcb_9_int_PaddingMode_0_b__28_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___GetCiphertextLengthEcb_9_int_PaddingMode_1_b__30_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___ValidKeySize_8_int_0_b__24_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___ValidKeySize_8_int_1_b__26_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_SymmetricAlgorithmTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___Clear_3__3_b__22_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___Dispose_2__2_b__20_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_3_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformBlock_0_System_Byte_int_int_System_Byte_int_4_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_3_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___TransformFinalBlock_1_System_Byte_int_int_4_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_ToBase64TransformTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___CreateDecryptor_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___CreateDecryptor_1_System_Byte_System_Byte_0_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___CreateDecryptor_1_System_Byte_System_Byte_1_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___CreateDecryptor_1_System_Byte_System_Byte_2_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___CreateEncryptor_2__2_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___CreateEncryptor_3_System_Byte_System_Byte_0_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___CreateEncryptor_3_System_Byte_System_Byte_1_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___CreateEncryptor_3_System_Byte_System_Byte_2_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___GenerateIV_5__5_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___GenerateKey_4__4_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCngTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___CreateDecryptor_1__1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___CreateDecryptor_5_System_Byte_System_Byte_0_b__14_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___CreateDecryptor_5_System_Byte_System_Byte_1_b__16_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___CreateDecryptor_5_System_Byte_System_Byte_2_b__18_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___CreateEncryptor_0__0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___CreateEncryptor_4_System_Byte_System_Byte_0_b__8_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___CreateEncryptor_4_System_Byte_System_Byte_1_b__10_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___CreateEncryptor_4_System_Byte_System_Byte_2_b__12_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___GenerateIV_2__2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___GenerateKey_3__3_b__6_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESCryptoServiceProviderTests___c___ctor_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c___IsWeakKey_0_System_Byte_0_b__0_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c___IsWeakKey_0_System_Byte_1_b__2_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c___IsWeakKey_0_System_Byte_2_b__4_0_System_Void__(void);
+extern "C" void chaos_external_runtime_CombinedSubjects_AutoGenerated_System_Security_Cryptography_System_Security_Cryptography_TripleDESTests___c___ctor_System_Void__(void);
 
 void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);
 

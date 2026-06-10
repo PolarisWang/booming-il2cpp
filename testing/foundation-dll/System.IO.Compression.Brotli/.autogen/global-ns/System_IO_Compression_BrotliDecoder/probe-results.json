@@ -2,14 +2,14 @@
   {
     "methodIndex": 0,
     "setIndex": 0,
-    "subjectId": "System.IO.Compression.BrotliDecoder::Dispose:System.Void()__Set0",
+    "subjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
     "isVoid": true,
     "hasException": false,
     "exceptionType": null,
     "returnValue": null,
     "returnValueJson": null,
-    "returnValueType": null,
-    "isDeterministic": false,
+    "returnValueType": "System.Void",
+    "isDeterministic": true,
     "outRefValues": null
   }
 ]

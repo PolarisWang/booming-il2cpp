@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(chaos_runtime_core LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Note: CMAKE_MSVC_RUNTIME_LIBRARY intentionally not set.
 # MSVC defaults to /MD on this toolchain, which matches the main build's convention.
@@ -247,7 +249,7 @@ if(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB)
     target_compile_definitions(chaos_runtime_core PRIVATE
         CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB=${CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB})
 endif()
-target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /EHa /GS- /FS>)
+target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /EHa /GS- /FS /wd4716>)
 
 # guid_stubs uses SSE4.1 intrinsics (_mm_blendv_epi8) on x86; ARM64 uses NEON.
 if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")
@@ -297,4 +299,5 @@ endif()
 target_include_directories(chaos_runtime_core PRIVATE
     "${REPO_ROOT}/src/native"
     "${REPO_ROOT}/src/native/diagnostics"
+    "${REPO_ROOT}/src/native/pal"
     "${REPO_ROOT}/third_party/fmt/include")

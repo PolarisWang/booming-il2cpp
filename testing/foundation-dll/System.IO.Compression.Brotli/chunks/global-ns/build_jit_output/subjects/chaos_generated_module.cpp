@@ -12,155 +12,18 @@
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
 extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
-extern "C" const int kAotMethodCount;
+extern "C" CHAOS_IL2CPP_INT32 kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String(
-            CHAOS_IL2CPP_UINT8, 
-            CHAOS_IL2CPP_UINT8, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String(
-            double, 
-            double, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String(
-            CHAOS_IL2CPP_INT16, 
-            CHAOS_IL2CPP_INT16, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String(
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String(
-            CHAOS_IL2CPP_INT64, 
-            CHAOS_IL2CPP_INT64, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String(
-            CHAOS_IL2CPP_INT8, 
-            CHAOS_IL2CPP_INT8, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String(
-            float, 
-            float, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String(
-            CHAOS_IL2CPP_UINT16, 
-            CHAOS_IL2CPP_UINT16, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String(
-            CHAOS_IL2CPP_UINT64, 
-            CHAOS_IL2CPP_UINT64, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode(
-        void
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor(
-            CHAOS_IL2CPP_INTPTR
-);
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor(
             CHAOS_IL2CPP_INTPTR
 );
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0(
         void
+);
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Dispose_0__0(
+            CHAOS_IL2CPP_INTPTR
 );
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor(
             CHAOS_IL2CPP_INTPTR
@@ -173,6 +36,9 @@ extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_Syst
 );
 extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1(
         void
+);
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Dispose_0__0(
+            CHAOS_IL2CPP_INTPTR
 );
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0(
             CHAOS_IL2CPP_INTPTR
@@ -354,6 +220,9 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0(
             CHAOS_IL2CPP_INTPTR
 );
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndWrite_3_System_IAsyncResult_0(
+            CHAOS_IL2CPP_INTPTR
+);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0(
             CHAOS_IL2CPP_INTPTR
 );
@@ -402,6 +271,12 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2(
             CHAOS_IL2CPP_INTPTR
 );
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_SetLength_16_long_0(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_SetLength_16_long_1(
+            CHAOS_IL2CPP_INTPTR
+);
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0(
             CHAOS_IL2CPP_INTPTR
 );
@@ -420,112 +295,25 @@ extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compressi
 extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor(
-        void
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor(
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteByte_1_byte_0(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0(
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteByte_1_byte_1(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0(
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_0(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0(
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_1(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0(
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_2(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0(
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_3(
             CHAOS_IL2CPP_INTPTR
 );
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0(
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0(
+extern "C" CHAOS_IL2CPP_INT64 CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_4(
             CHAOS_IL2CPP_INTPTR
 );
 
@@ -535,57 +323,16 @@ extern "C" void CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_Syst
 
 static const Functions s_functions = {
     {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic,
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor,
-    },
-    {
-        &Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor,
-    },
-    {
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Dispose_0__0,
     },
     {
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Dispose_0__0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1,
     },
@@ -648,6 +395,7 @@ static const Functions s_functions = {
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndWrite_3_System_IAsyncResult_0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1,
@@ -664,52 +412,23 @@ static const Functions s_functions = {
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_SetLength_16_long_0,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_SetLength_16_long_1,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4,
         &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteByte_1_byte_0,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteByte_1_byte_1,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_0,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_1,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_2,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_3,
+        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_4,
     },
-    {
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0,
-        &CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0,
-    },
-    157,
+    100,
 };
 
 const Functions kFunctions = s_functions;
@@ -717,47 +436,16 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[157];
-void* kFunctionsFlat[157] = {
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_System_Byte_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Byte_array_System_Byte_array_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Char_System_Char_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Decimal_System_Decimal_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Double_System_Double_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int16_System_Int16_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int32_System_Int32_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Int64_System_Int64_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Object_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_SByte_System_SByte_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Single_System_Single_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_String_System_String_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt16_System_UInt16_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt32_System_UInt32_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_UInt64_System_UInt64_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_0_0_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreNotEqual_0_0_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsFalse_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNotNull_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsNull_System_Object_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_IsTrue_System_Boolean_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_RecordFailure),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_NullReferenceException_System_Action__generic),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_get_ExitCode),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute__ctor),
-    reinterpret_cast<void*>(&Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute__ctor),
+extern "C" void* kFunctionsFlat[100];
+void* kFunctionsFlat[100] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests__ctor),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Benchmark_Dispose_0__0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_Dispose_0__0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests__ctor),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_Dispose_0__0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Benchmark_GetMaxCompressedLength_1_int_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_Dispose_0__0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_GetMaxCompressedLength_1_int_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests__ctor),
@@ -818,6 +506,7 @@ void* kFunctionsFlat[157] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Benchmark_Write_0_System_Byte_int_int_4),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_DisposeAsync_14__14),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndRead_11_System_IAsyncResult_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_EndWrite_3_System_IAsyncResult_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_FlushAsync_7_CancellationToken_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_ReadAsync_12_System_Byte_int_int_CancellationToken_1),
@@ -834,48 +523,21 @@ void* kFunctionsFlat[157] = {
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Seek_15_long_SeekOrigin_2),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_SetLength_16_long_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_SetLength_16_long_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_0),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_1),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_2),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_3),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_4_System_Byte_int_int_CancellationToken_4),
     reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_cctor),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c__ctor),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_DisposeAsync_14__14_b__69_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_EndRead_11_System_IAsyncResult_0_b__55_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_FlushAsync_7_CancellationToken_0_b__31_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_ReadByte_9__9_b__43_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_0_b__33_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_1_b__35_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_2_b__37_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_3_b__39_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Read_8_System_Byte_int_int_4_b__41_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_0_b__71_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_1_b__73_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_Seek_15_long_SeekOrigin_2_b__75_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0),
-    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteByte_1_byte_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_WriteByte_1_byte_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_0),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_1),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_2),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_3),
+    reinterpret_cast<void*>(&CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests_Write_0_System_Byte_int_int_4),
 };
 
 

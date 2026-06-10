@@ -23,7 +23,18 @@ add_library(chaos_interpreter STATIC
     register_vm_profiler.h
     )
 
-target_compile_features(chaos_interpreter PUBLIC cxx_std_17)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+target_compile_features(chaos_interpreter PUBLIC cxx_std_20)
+
+# Runtime config: same as runtime-core (test-only for dev, desktop for ship).
+# chaos_runtime_core sets this via target_compile_definitions(PUBLIC ...)
+# but we need it here too since we may be compiled against the prebuilt lib.
+if(NOT CHAOS_IL2CPP_EXEC_PROFILE)
+  set(CHAOS_IL2CPP_EXEC_PROFILE "test-only")
+endif()
+target_compile_definitions(chaos_interpreter PUBLIC
+    CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/${CHAOS_IL2CPP_EXEC_PROFILE}.h")
 target_compile_options(chaos_interpreter PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /D_SILENCE_ALL_CXX17_C99_MATH_MACROS /D_CRT_SECURE_NO_WARNINGS /Zm200>)
 target_include_directories(
     chaos_interpreter
@@ -41,6 +52,7 @@ target_include_directories(
         "${REPO_ROOT}/src/native/jit"
         "${REPO_ROOT}/src/native/hot-update"
         "${REPO_ROOT}/src/native/diagnostics"
+        "${REPO_ROOT}/src/native/pal"
         "${REPO_ROOT}/third_party/fmt/include"
         "${REPO_ROOT}/third_party/unordered_dense/include")
 target_link_libraries(

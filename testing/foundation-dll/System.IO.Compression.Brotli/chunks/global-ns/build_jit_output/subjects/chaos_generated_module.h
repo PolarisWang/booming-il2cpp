@@ -31,7 +31,11 @@
 class ChaosRuntimeHost;
 
 // chaos_valuetype_* typedefs (opaque 32-bit managed value types)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Memory_System_Byte_;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_ReadOnlyMemory_System_Byte_;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Threading_CancellationToken;
 
 
 
@@ -43,162 +47,15 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_Chaos_TestFramework_Sdk___0;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_t {
-        void (*AreEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_1)(
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_UINT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_3)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_4)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_5)(
-                    double, 
-                    double, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_6)(
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_7)(
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_8)(
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_9)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_10)(
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INT8, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_11)(
-                    float, 
-                    float, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_12)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_13)(
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_UINT16, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_14)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_15)(
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_UINT64, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreEqual_16)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*AreNotEqual)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*Complete)(
-                void
-        );
-        void (*Fail)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsFalse)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNotNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsNull)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*IsTrue)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*RecordFailure)(
-                void
-        );
-        void (*Reset)(
-                void
-        );
-        void (*Throws)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*Throws_System_NullReferenceException_)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*get_ExitCode)(
-                void
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_Assert;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute;
-    struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute_t {
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute;
     struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         void (*Benchmark_Dispose_0__0)(
                 void
+        );
+        CHAOS_IL2CPP_INT64 (*Dispose_0__0)(
+                    CHAOS_IL2CPP_INTPTR
         );
     } combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests;
     struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests_t {
@@ -213,6 +70,9 @@ struct Functions {
         );
         void (*Benchmark_GetMaxCompressedLength_1_int_1)(
                 void
+        );
+        CHAOS_IL2CPP_INT64 (*Dispose_0__0)(
+                    CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT64 (*GetMaxCompressedLength_1_int_0)(
                     CHAOS_IL2CPP_INTPTR
@@ -396,6 +256,9 @@ struct Functions {
         CHAOS_IL2CPP_INT64 (*EndRead_11_System_IAsyncResult_0)(
                     CHAOS_IL2CPP_INTPTR
         );
+        CHAOS_IL2CPP_INT64 (*EndWrite_3_System_IAsyncResult_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT64 (*FlushAsync_7_CancellationToken_0)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -444,6 +307,12 @@ struct Functions {
         CHAOS_IL2CPP_INT64 (*Seek_15_long_SeekOrigin_2)(
                     CHAOS_IL2CPP_INTPTR
         );
+        CHAOS_IL2CPP_INT64 (*SetLength_16_long_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*SetLength_16_long_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
         CHAOS_IL2CPP_INT64 (*WriteAsync_4_System_Byte_int_int_CancellationToken_0)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -462,118 +331,29 @@ struct Functions {
         CHAOS_IL2CPP_INT64 (*WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0)(
                     CHAOS_IL2CPP_INTPTR
         );
+        CHAOS_IL2CPP_INT64 (*WriteByte_1_byte_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*WriteByte_1_byte_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*Write_0_System_Byte_int_int_0)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*Write_0_System_Byte_int_int_1)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*Write_0_System_Byte_int_int_2)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*Write_0_System_Byte_int_int_3)(
+                    CHAOS_IL2CPP_INTPTR
+        );
+        CHAOS_IL2CPP_INT64 (*Write_0_System_Byte_int_int_4)(
+                    CHAOS_IL2CPP_INTPTR
+        );
     } combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests;
-    struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c_t {
-        void (*cctor)(
-                void
-        );
-        void (*ctor)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_DisposeAsync_14__14_b__69_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_EndRead_11_System_IAsyncResult_0_b__55_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_FlushAsync_7_CancellationToken_0_b__31_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_ReadByte_9__9_b__43_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Read_8_System_Byte_int_int_0_b__33_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Read_8_System_Byte_int_int_1_b__35_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Read_8_System_Byte_int_int_2_b__37_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Read_8_System_Byte_int_int_3_b__39_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Read_8_System_Byte_int_int_4_b__41_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Seek_15_long_SeekOrigin_0_b__71_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Seek_15_long_SeekOrigin_1_b__73_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_Seek_15_long_SeekOrigin_2_b__75_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-        void (*_WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0)(
-                    CHAOS_IL2CPP_INTPTR
-        );
-    } combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c;
-    int32_t method_count;
+    CHAOS_IL2CPP_INT32 method_count;
 };
 
 extern const Functions kFunctions;
@@ -591,336 +371,6 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert {
-    static inline void AreEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_1(
-                CHAOS_IL2CPP_UINT8 arg_0, 
-                CHAOS_IL2CPP_UINT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_1(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_3(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_3(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_4(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_4(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_5(
-                double arg_0, 
-                double arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_5(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_6(
-                CHAOS_IL2CPP_INT16 arg_0, 
-                CHAOS_IL2CPP_INT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_6(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_7(
-                CHAOS_IL2CPP_INT32 arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_7(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_8(
-                CHAOS_IL2CPP_INT64 arg_0, 
-                CHAOS_IL2CPP_INT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_8(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_9(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_9(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_10(
-                CHAOS_IL2CPP_INT8 arg_0, 
-                CHAOS_IL2CPP_INT8 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_10(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_11(
-                float arg_0, 
-                float arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_11(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_12(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_12(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_13(
-                CHAOS_IL2CPP_UINT16 arg_0, 
-                CHAOS_IL2CPP_UINT16 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_13(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_14(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_14(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_15(
-                CHAOS_IL2CPP_UINT64 arg_0, 
-                CHAOS_IL2CPP_UINT64 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_15(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreEqual_16(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreEqual_16(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline void AreNotEqual(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.AreNotEqual(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 Complete(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Complete(
-        );
-    }
-    static inline void Fail(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Fail(
-                    arg_0
-        );
-    }
-    static inline void IsFalse(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsFalse(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNotNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNotNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsNull(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsNull(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void IsTrue(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.IsTrue(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline void RecordFailure(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.RecordFailure(
-        );
-    }
-    static inline void Reset(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Reset(
-        );
-    }
-    static inline void Throws(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws(
-                    arg_0
-        );
-    }
-    static inline void Throws_System_NullReferenceException_(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.Throws_System_NullReferenceException_(
-                    arg_0
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 get_ExitCode(
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_Assert.get_ExitCode(
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 29;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INTPTR arg_1
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException.ctor(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_FactAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
-struct Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute {
-    static inline void ctor(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateAttribute.ctor(
-                    arg_0
-        );
-    }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
-};
-
 struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
@@ -934,8 +384,15 @@ struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Com
         return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests.Benchmark_Dispose_0__0(
         );
     }
+    static inline CHAOS_IL2CPP_INT64 Dispose_0__0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliDecoderTests.Dispose_0__0(
+                    arg_0
+        );
+    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 2;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 3;
 };
 
 struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests {
@@ -961,6 +418,13 @@ struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Com
         return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests.Benchmark_GetMaxCompressedLength_1_int_1(
         );
     }
+    static inline CHAOS_IL2CPP_INT64 Dispose_0__0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliEncoderTests.Dispose_0__0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT64 GetMaxCompressedLength_1_int_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
@@ -976,7 +440,7 @@ struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Com
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 6;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 7;
 };
 
 struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests {
@@ -1296,6 +760,13 @@ struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Com
                     arg_0
         );
     }
+    static inline CHAOS_IL2CPP_INT64 EndWrite_3_System_IAsyncResult_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.EndWrite_3_System_IAsyncResult_0(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT64 FlushAsync_7_CancellationToken_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
@@ -1408,6 +879,20 @@ struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Com
                     arg_0
         );
     }
+    static inline CHAOS_IL2CPP_INT64 SetLength_16_long_0(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.SetLength_16_long_0(
+                    arg_0
+        );
+    }
+    static inline CHAOS_IL2CPP_INT64 SetLength_16_long_1(
+                CHAOS_IL2CPP_INTPTR arg_0
+    ) {
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.SetLength_16_long_1(
+                    arg_0
+        );
+    }
     static inline CHAOS_IL2CPP_INT64 WriteAsync_4_System_Byte_int_int_CancellationToken_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
@@ -1450,263 +935,57 @@ struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Com
                     arg_0
         );
     }
-    /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 80;
-};
-
-struct CombinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c {
-    static inline void cctor(
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c.cctor(
-        );
-    }
-    static inline void ctor(
+    static inline CHAOS_IL2CPP_INT64 WriteByte_1_byte_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c.ctor(
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.WriteByte_1_byte_0(
                     arg_0
         );
     }
-    static inline void _BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0(
+    static inline CHAOS_IL2CPP_INT64 WriteByte_1_byte_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_0_b__45_0(
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.WriteByte_1_byte_1(
                     arg_0
         );
     }
-    static inline void _BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0(
+    static inline CHAOS_IL2CPP_INT64 Write_0_System_Byte_int_int_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_1_b__47_0(
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.Write_0_System_Byte_int_int_0(
                     arg_0
         );
     }
-    static inline void _BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0(
+    static inline CHAOS_IL2CPP_INT64 Write_0_System_Byte_int_int_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_2_b__49_0(
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.Write_0_System_Byte_int_int_1(
                     arg_0
         );
     }
-    static inline void _BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0(
+    static inline CHAOS_IL2CPP_INT64 Write_0_System_Byte_int_int_2(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_3_b__51_0(
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.Write_0_System_Byte_int_int_2(
                     arg_0
         );
     }
-    static inline void _BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0(
+    static inline CHAOS_IL2CPP_INT64 Write_0_System_Byte_int_int_3(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginRead_10_System_Byte_int_int_System_AsyncCallback_object_4_b__53_0(
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.Write_0_System_Byte_int_int_3(
                     arg_0
         );
     }
-    static inline void _BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0(
+    static inline CHAOS_IL2CPP_INT64 Write_0_System_Byte_int_int_4(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_0_b__7_0(
-                    arg_0
-        );
-    }
-    static inline void _BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_1_b__9_0(
-                    arg_0
-        );
-    }
-    static inline void _BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_2_b__11_0(
-                    arg_0
-        );
-    }
-    static inline void _BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_3_b__13_0(
-                    arg_0
-        );
-    }
-    static inline void _BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._BeginWrite_2_System_Byte_int_int_System_AsyncCallback_object_4_b__15_0(
-                    arg_0
-        );
-    }
-    static inline void _DisposeAsync_14__14_b__69_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._DisposeAsync_14__14_b__69_0(
-                    arg_0
-        );
-    }
-    static inline void _EndRead_11_System_IAsyncResult_0_b__55_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._EndRead_11_System_IAsyncResult_0_b__55_0(
-                    arg_0
-        );
-    }
-    static inline void _FlushAsync_7_CancellationToken_0_b__31_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._FlushAsync_7_CancellationToken_0_b__31_0(
-                    arg_0
-        );
-    }
-    static inline void _ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._ReadAsync_12_System_Byte_int_int_CancellationToken_0_b__57_0(
-                    arg_0
-        );
-    }
-    static inline void _ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._ReadAsync_12_System_Byte_int_int_CancellationToken_1_b__59_0(
-                    arg_0
-        );
-    }
-    static inline void _ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._ReadAsync_12_System_Byte_int_int_CancellationToken_2_b__61_0(
-                    arg_0
-        );
-    }
-    static inline void _ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._ReadAsync_12_System_Byte_int_int_CancellationToken_3_b__63_0(
-                    arg_0
-        );
-    }
-    static inline void _ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._ReadAsync_12_System_Byte_int_int_CancellationToken_4_b__65_0(
-                    arg_0
-        );
-    }
-    static inline void _ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._ReadAsync_13_System_Memorybyte_CancellationToken_0_b__67_0(
-                    arg_0
-        );
-    }
-    static inline void _ReadByte_9__9_b__43_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._ReadByte_9__9_b__43_0(
-                    arg_0
-        );
-    }
-    static inline void _Read_8_System_Byte_int_int_0_b__33_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._Read_8_System_Byte_int_int_0_b__33_0(
-                    arg_0
-        );
-    }
-    static inline void _Read_8_System_Byte_int_int_1_b__35_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._Read_8_System_Byte_int_int_1_b__35_0(
-                    arg_0
-        );
-    }
-    static inline void _Read_8_System_Byte_int_int_2_b__37_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._Read_8_System_Byte_int_int_2_b__37_0(
-                    arg_0
-        );
-    }
-    static inline void _Read_8_System_Byte_int_int_3_b__39_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._Read_8_System_Byte_int_int_3_b__39_0(
-                    arg_0
-        );
-    }
-    static inline void _Read_8_System_Byte_int_int_4_b__41_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._Read_8_System_Byte_int_int_4_b__41_0(
-                    arg_0
-        );
-    }
-    static inline void _Seek_15_long_SeekOrigin_0_b__71_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._Seek_15_long_SeekOrigin_0_b__71_0(
-                    arg_0
-        );
-    }
-    static inline void _Seek_15_long_SeekOrigin_1_b__73_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._Seek_15_long_SeekOrigin_1_b__73_0(
-                    arg_0
-        );
-    }
-    static inline void _Seek_15_long_SeekOrigin_2_b__75_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._Seek_15_long_SeekOrigin_2_b__75_0(
-                    arg_0
-        );
-    }
-    static inline void _WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._WriteAsync_4_System_Byte_int_int_CancellationToken_0_b__18_0(
-                    arg_0
-        );
-    }
-    static inline void _WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._WriteAsync_4_System_Byte_int_int_CancellationToken_1_b__20_0(
-                    arg_0
-        );
-    }
-    static inline void _WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._WriteAsync_4_System_Byte_int_int_CancellationToken_2_b__22_0(
-                    arg_0
-        );
-    }
-    static inline void _WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._WriteAsync_4_System_Byte_int_int_CancellationToken_3_b__24_0(
-                    arg_0
-        );
-    }
-    static inline void _WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._WriteAsync_4_System_Byte_int_int_CancellationToken_4_b__26_0(
-                    arg_0
-        );
-    }
-    static inline void _WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0(
-                CHAOS_IL2CPP_INTPTR arg_0
-    ) {
-        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests___c._WriteAsync_5_System_ReadOnlyMemorybyte_CancellationToken_0_b__28_0(
+        return kFunctions.combinedSubjects_AutoGenerated_System_IO_Compression_Brotli_System_IO_Compression_BrotliStreamTests.Write_0_System_Byte_int_int_4(
                     arg_0
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 36;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 90;
 };
 
 

@@ -754,7 +754,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     # For crypto chunks, pass the crypto DLL as an additional assembly so the
     # codegen generates AotCoreIr JSON for its methods (interpreter fallback).
-    crypto_dll = _FOUNDATION_DLL / "crypto-refs" / "System.Security.Cryptography.dll"
+    crypto_dll = ctx.foundation_dir / "crypto-refs" / "System.Security.Cryptography.dll"
     if crypto_dll.exists() and any(x in ctx.slug for x in ("security-cryptography", "x509")):
         tpg_cmd.extend(['--additional-assembly', str(crypto_dll)])
         print(f"  [build] additional-assembly: {crypto_dll}")

@@ -495,11 +495,11 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
             errors.append(msg)
             continue
 
-        # Write to perf store (append after first to keep all technologies in one file)
+        # Write to perf store (always append — chaos-aot may have written first)
         perf_path = _RESULTS_BASE / ctx.assembly / slug / "perf" / "benchmark-history.jsonl"
         completed = _write_perf_records(
             perf_path, slug, technology, records, metadata_methods, now,
-            append=not is_first)
+            append=True)
 
         print(f"  [managed-benchmark] {technology}: {completed}/{len(records)} methods OK -> {perf_path}")
         techs_run.append(technology)

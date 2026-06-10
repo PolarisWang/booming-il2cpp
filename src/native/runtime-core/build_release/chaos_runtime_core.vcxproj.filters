@@ -91,6 +91,9 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\vector_stubs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\async_stubs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\misc_stubs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -373,8 +373,10 @@ def _write_perf_store(
                 method_table_index = benchmark_start_idx + i
                 method_subject_id = method_index_to_subject_id.get(method_table_index, "")
             elif i < len(metadata_methods):
-                # Fallback: position-based mapping into metadata
-                method_subject_id = metadata_methods[i].get("methodSubjectId", "")
+                # Fallback: position-based mapping into metadata.
+                # Metadata uses 'subjectId' (TPG output) or 'methodSubjectId' (ATG output).
+                method_subject_id = (metadata_methods[i].get("methodSubjectId", "")
+                                     or metadata_methods[i].get("subjectId", ""))
 
             record = {
                 "timestamp": now,

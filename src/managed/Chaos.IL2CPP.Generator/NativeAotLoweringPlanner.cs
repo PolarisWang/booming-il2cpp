@@ -1891,7 +1891,6 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Always declare kChaosExternalRuntimeCount for page files that use
         // BS-5 external runtime table bounds checks (defined in main file).
         sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;");
-        sb.AppendLine();
 
         // ── Runtime helper function declarations (global scope) ──
         // These functions are DEFINED in the native runtime library (not inside the
