@@ -1094,7 +1094,7 @@ public sealed partial class NativeAotLoweringPlanner
             ilSb.AppendLine("    void* patch_method;");
             ilSb.AppendLine("    const char* json_data;");
             ilSb.AppendLine("};");
-            ilSb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeIlCount;");  // forward decl
+            ilSb.AppendLine();
 
             for (int i = 0; i < entriesByIndex.Length; i++)
             {

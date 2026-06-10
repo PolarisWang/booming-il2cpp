@@ -806,10 +806,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         # ── Patch missing static field declarations ──
         # The codegen may emit ldsfld/stsfld references in page files for static
         # fields whose TargetReference.FieldTypeSubjectId is null, causing the
-        # static field declaration collector to miss them.  Scan the generated
-        # header for known patterns and add missing extern declarations.
         # This fixes C2065 "undeclared identifier" for chaos_static_* symbols
         # that are referenced by page files but not declared in the shared header.
+        # FIXME(codegen): Move to BuildTypeDeclarationsCode(). Remaining after
+        #   ObjectModelEmission.cs initobj fix (SqlTypes chunk, commit df609308d).
+        #   The ecma335 chunk still shows gaps for cross-assembly boxed types.
         _patch_missing_static_field_decls(tpg_subjects_dir)
         # Reconfigure cmake to include newly copied subjects/ files
         tpg_build_dir = ctx.native_dir / "build"
@@ -849,23 +850,14 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if p.exists():
                 p.unlink()
 
-    # ── Post-patch generated extern "C" syntax ──
-    # The linter may corrupt 'extern "C"' in generated code (missing types).
-    _patch_generated_extern_c(ctx.native_dir)
-
-    # ── Always write assert stub definitions ──
-    # These are needed by runtime-entry.cpp's CHAOS_FACT_CHECK macro.
-    # Written unconditionally (even if entry.exe exists from cache),
-    # because the cmake build will reconfigure and needs them.
-    _ase = ctx.native_dir / "chaos_assert_stubs.cpp"
-    print(f"  [build] DEBUG assert stub path: {_ase}")
-    if not _ase.exists():
-        _ase.write_text(
-            '// Auto-generated assert stubs\n'
-            '#include <chaos/native_types.h>\n'
-            'extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() noexcept {}\n'
-            'extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept { return 0; }\n',
-            encoding="utf-8")
+    # ── Post-patch missing type declarations ──
+    # FIXME(codegen): Move to codegen/TPG layers. This is a safety net for:
+    #   - chaos_static_* / chaos_boxed_type_* / chaos_mt_* missing declarations
+    #   - Assert_Reset/Assert_Complete stub definitions (should be in TPG template)
+    # See Task #71 (B1) for codegen-level fixes.
+    tpg_subjects_dir = ctx.native_dir / "subjects"
+    if tpg_subjects_dir.is_dir():
+        _patch_missing_static_field_decls(tpg_subjects_dir)
         print(f"  [build] Generated assert stubs: {_ase.name}")
 
     entry_exe = ctx.entry_exe_path
