@@ -11,8 +11,18 @@
 #include "runtime_core.h"
 #include "engine_binding.h"
 
+// For ChaosExternalRuntimeFallback interpreter dispatch
+#include "hotpatch_table.h"
+#include "interpreter_entry.h"
+
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
+
+// Forward declarations for dispatch table symbols (defined in generated code).
+// Used by ChaosExternalRuntimeFallback to resolve entries via Demeter Table.
+extern int32_t kChaosExternalRuntimeCount;
+extern void* kChaosExternalRuntimeFnTable[];
+extern const char* kChaosExternalRuntimeSubjects[];
 
 // ── Marshal P/Invoke error helpers ─────────────────────────────
 // These delegate to the runtime's ThreadState-based storage.
@@ -425,6 +435,29 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept
 {
     if (subject_id == nullptr) return 0;
+
+    // ── Try dispatch table first ─────────────────────────────────
+    // The kChaosExternalRuntimeFnTable is populated at startup by
+    // ChaosResolveExternalRuntimeFnTable.  If the table has a resolved
+    // entry for this subject_id, call through it instead of returning
+    // a default value.  This ensures chaos_external_runtime_* stubs
+    // actually execute the managed method through the interpreter/JIT.
+    extern int32_t kChaosExternalRuntimeCount;
+    extern void* kChaosExternalRuntimeFnTable[];
+    extern const char* kChaosExternalRuntimeSubjects[];
+    if (kChaosExternalRuntimeCount > 0) {
+        for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
+            if (kChaosExternalRuntimeFnTable[i] != nullptr &&
+                kChaosExternalRuntimeSubjects[i] != nullptr &&
+                std::strstr(kChaosExternalRuntimeSubjects[i], subject_id) != nullptr)
+            {
+                // Resolved entry found — call through the dispatch table.
+                // The entry is a void(*)() AOT wrapper; call it directly.
+                reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[i])();
+                return 0;
+            }
+        }
+    }
 
     // Find the return type: SubjectId format is "...:ReturnType(params...)"
     // Look for the last ':' before '('
