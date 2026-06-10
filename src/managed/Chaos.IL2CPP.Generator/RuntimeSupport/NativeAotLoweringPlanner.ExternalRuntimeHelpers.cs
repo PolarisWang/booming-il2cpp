@@ -61,24 +61,11 @@ public sealed partial class NativeAotLoweringPlanner
 		// Canonicalize assembly prefix so matching is assembly-agnostic
 		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
-		// If method compiled in AOT IR (has IL body instructions), use its real ParameterAbis.
-		// Methods in _methodsBySubjectId with 0 instructions are BCL/import methods that
-		// don't have compiled bodies -- they should fall through to external runtime stubs.
-		if (_methodsBySubjectId.TryGetValue(callee, out var existingMethod) &&
-			existingMethod is { Instructions.Count: > 0 })
-		{
-			helperDefinition = null;
-			_externalRuntimeHelperCache[callee] = null;
-			return false;
-		}
-		// Check cache first (P0)
-		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
-		{
-			helperDefinition = cached;
-			return cached != null;
-		}
-
-		// === Generic shape dispatch via Registry ===
+		// === Generic shape dispatch via Registry (check BEFORE _methodsBySubjectId) ===
+		// NormalizeSubjectIdAssembly may change System.Numerics.Vectors -> System.Private.CoreLib,
+		// making the method appear in _methodsBySubjectId with instructions.  Generic shape
+		// entries (RegisterVectorReduction, etc.) must be checked first so they win over the
+		// AOT IR path — otherwise Vector<T>.GreaterThanAll etc. never reach TryMatchGenericShape.
 		if (_shapeRegistry.TryMatchGenericShape(callee, out var genericDescriptor, out var typeArgs))
 		{
 			var resolution = genericDescriptor.Resolver(this, callee, typeArgs);
@@ -94,9 +81,26 @@ public sealed partial class NativeAotLoweringPlanner
 					resolution.ReferencedStaticFieldSubjectIds,
 					DirectNativeSymbol: resolution.DirectNativeSymbol,
 					DirectNativeHeader: resolution.DirectNativeHeader);
-									_externalRuntimeHelperCache[callee] = helperDefinition;
-					return true;
+								_externalRuntimeHelperCache[callee] = helperDefinition;
+				return true;
 			}
+		}
+
+		// If method compiled in AOT IR (has IL body instructions), use its real ParameterAbis.
+		// Methods in _methodsBySubjectId with 0 instructions are BCL/import methods that
+		// don't have compiled bodies -- they should fall through to external runtime stubs.
+		if (_methodsBySubjectId.TryGetValue(callee, out var existingMethod) &&
+			existingMethod is { Instructions.Count: > 0 })
+		{
+			helperDefinition = null;
+			_externalRuntimeHelperCache[callee] = null;
+			return false;
+		}
+		// Check cache first (P0)
+		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
+		{
+			helperDefinition = cached;
+			return cached != null;
 		}
 
 		// === Simple forward shape dispatch (native function call wrapper) ===
