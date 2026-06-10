@@ -123,6 +123,31 @@ public sealed partial class NativeAotLoweringPlanner
 		// Catch-all: generate ChaosExternalRuntimeFallback stub for any unmatched callee.
 		// Prevents undefined-chaos_external_runtime_* C++ symbol errors and CHAOS_IL2CPP_FAIL.
 		// Returns type-appropriate defaults (0/nullptr) via the runtime fallback function.
+
+		// --- Crypto AOT IR data collection ---
+		ManagedMethodModel? _crMm = null;
+		if (callee.IndexOf("System.Security.Cryptography/", System.StringComparison.Ordinal) >= 0 && _allManagedMethods != null &&
+		    _allManagedMethods.TryGetValue(callee, out _crMm))
+		{
+			var _sb = new System.Text.StringBuilder();
+			_sb.Append("[");
+			bool _first = true;
+			foreach (var _blk in _crMm.Body.Blocks)
+				foreach (var _inst in _blk.Instructions)
+				{
+					if (!_first) _sb.Append(",");
+					_first = false;
+					_sb.Append("{\"op\":\"" + _inst.Op + "\"");
+					if (_inst.Callee != null)
+						_sb.Append(",\"callee\":\"" + _inst.Callee + "\"");
+					if (_inst.Operand != null)
+						_sb.Append(",\"operand\":\"" + _inst.Operand + "\"");
+					_sb.Append("}");
+				}
+			_sb.Append("]");
+			var _json = "{\"subjectId\":\"" + callee + "\",\"instructions\":" + _sb + "}";
+			_cryptoAotIrEntries.Add((callee, _json));
+		}
 		var failReturnType = InferReturnTypeFromSubjectId(callee);
 		var failReturnAbi = !string.IsNullOrEmpty(failReturnType)
 			? CreateLegacyAbiSlot(failReturnType)
