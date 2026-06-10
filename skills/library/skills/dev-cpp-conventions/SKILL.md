@@ -1,3 +1,8 @@
+---
+name: dev-cpp-conventions
+description: C++ 编码规范 — 命名空间、Include 规范、extern "C"、头文件原则
+---
+
 # C++ 编码规范
 
 ## 命名空间

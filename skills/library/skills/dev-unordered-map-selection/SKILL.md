@@ -1,3 +1,8 @@
+---
+name: dev-unordered-map-selection
+description: unordered_map 选型规则 — 从 CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY 开始的决策链
+---
+
 # unordered_map 选型规则
 
 编写 native C++ 代码时，按以下决策链选择宏：

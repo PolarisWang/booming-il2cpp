@@ -52,6 +52,8 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 
 - “设计一个新功能 / 规范 / 架构”：
   先 `brainstorming` 把执行相关问题清零并拿到用户确认；之后进入 `writing-plans`，如果是多阶段主线则转 `roadmap`
+- **“il2cpp/AOT/GC/Runtime/翻译/CodeGen/interpreter/VTable 相关工作”**：
+  **→ `dev-il2cpp-core-agent`**（由 Controller 判断任务域，路由到对应的 Expert Agent 或降级处理；替换 direct implementation 路径）
 - “边界清晰的小范围改动 / 单文件修复 / 单会话任务”：
   直接实现；如已存在正式任务目录，则走 `STATUS.md` 轻量维护，不强制补 `plan` / `design`
 - “任务已经跨会话 / 多步骤，但还有执行前未确认的问题”：

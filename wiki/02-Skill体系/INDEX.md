@@ -16,16 +16,18 @@
 | 文档 | 主题 | 说明 |
 |------|------|------|
 | [`skill-registry.md`](./skill-registry.md) | 注册表 | 收录全部 `.codex/skills` 并标记 `core / project / general` |
+| [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) | il2cpp Agent 体系 | Master Controller + 7 Expert Agents 架构、路由矩阵、使用示例 |
 | [`01-主线工作流/executing-plans.md`](./01-%E4%B8%BB%E7%BA%BF%E5%B7%A5%E4%BD%9C%E6%B5%81/executing-plans.md) | 执行主线 | 说明 `STATUS.md`、`ACTIVE.md` 和目录终态 |
 | [`01-主线工作流/roadmap.md`](./01-%E4%B8%BB%E7%BA%BF%E5%B7%A5%E4%BD%9C%E6%B5%81/roadmap.md) | 路线图主线 | 说明 roadmap 父任务与子任务派生规则 |
 | [`02-执行守卫/active-execution-guard.md`](./02-%E6%89%A7%E8%A1%8C%E5%AE%88%E5%8D%AB/active-execution-guard.md) | 活动任务守卫 | 说明任何问答前必须先处理 active 任务 |
 
 ## 本层规则
 
-- skill 名称必须和 `.codex/skills/` 实现目录保持一致。
+- skill 名称必须和 `.claude/skills/` 或 `skills/library/skills/` 实现目录保持一致。
 - 项目强绑定 skill 要有说明页。
 - 通用 skill 至少要在 registry 中登记。
 
 ## 最近更新
 
+- `2026-06-10`：新增 `05-il2cpp核心开发Agent体系.md`，记录 Master Controller + 7 Expert Agents 体系
 - `2026-04-04`：主线工作流切换到 `docs/dev` 任务目录、`ACTIVE.md` 和 roadmap 分流。

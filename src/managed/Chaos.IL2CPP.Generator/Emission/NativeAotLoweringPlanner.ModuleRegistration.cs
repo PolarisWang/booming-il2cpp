@@ -1056,7 +1056,10 @@ public sealed partial class NativeAotLoweringPlanner
                                         string ns = tdef.Namespace.IsNil ? "" : md.GetString(tdef.Namespace);
                                         string tn = md.GetString(tdef.Name);
                                         string fullName = string.IsNullOrEmpty(ns) ? tn : ns + "." + tn;
-                                        if (fullName != typePart) continue;
+                                        // SubjectId may use simple type name (e.g. "AesCcm") or
+                                        // full qualified name (e.g. "System.Security.Cryptography.AesCcm").
+                                        // Try both to handle core crypto methods correctly.
+                                        if (fullName != typePart && tn != typePart) continue;
 
                                         foreach (var mh in tdef.GetMethods())
                                         {

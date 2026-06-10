@@ -36,6 +36,7 @@
 
 ## 最近变更
 
+- `2026-06-10`: 新增 04-历史决策/23-31，涵盖 LCAC 跨程序集编译、Crypto 解释器路由、JIT UNWIND_INFO nibble 修复、Non-CoreLib 构建修复、外部运行时表 Null 检查架构限制、并行 Codegen 构建竞争修复、SIMD Overload 挂起、Entry SEH 捕获缺口修复、Shutdown Abort longjmp 修复。
 - `2026-06-02`: 新增 `04-工具与集成/autotest-generator.md`，记录 AutoTestGenerator 管线结构与批量运行方式。
 - `2026-04-20`: 更新 `04-工具与集成/统一测试框架.md` 与 `04-工具与集成/INDEX.md`，明确 managed proof / benchmark 统一走 shared runtime host，现存 `Program.cs` / `ProofEntry` 仅可保留为 native 过渡契约。
 - `2026-04-12`: 更新 `04-工具与集成/INDEX.md`，新增 `hot-update-interpreter-vm-v1.md` 与 `hot-update-e2e-runtime-baseline-v1.md`，沉淀 Phase C 的原生 Interpreter VM 与热更端到端基线。

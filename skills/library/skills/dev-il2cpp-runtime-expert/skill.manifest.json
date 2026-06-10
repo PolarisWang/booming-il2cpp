@@ -1,0 +1,30 @@
+{
+    "kind": "project",
+    "domain": "il2cpp",
+    "name": "dev-il2cpp-runtime-expert",
+    "summary": "il2cpp 运行时专家 — runtime-core/interpreter/bootstrap/support 领域的修改与调试",
+    "trigger_signals": [
+        "修改 runtime-core / interpreter / bootstrap / support 模块",
+        "修改 VTable/method_table/线程状态/GC Safepoint",
+        "运行时合约（codegen_bridge.h / runtime_abi.h）变更"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-06-10",
+            "type": "created"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    }
+}

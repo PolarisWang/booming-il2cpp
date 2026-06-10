@@ -1,3 +1,8 @@
+---
+name: dev-pressure-test-management
+description: Pressure Test Management — GC/容量/线程压力测试管理，记录结果，检测回归
+---
+
 # Pressure Test Management
 
 ## 何时使用

@@ -23,6 +23,13 @@
 | `tools-find-skills` | `general` | 工具能力 | skill 发现与安装 | `.codex/skills/tools-find-skills/SKILL.md` | `-` |
 | `profile-code-optimization` | `general` | 分析能力 | Tracy 热点代码优化分析 | `.codex/skills/profile-code-optimization/SKILL.md` | `-` |
 | `profile-tracy-profile` | `general` | 分析能力 | Tracy 性能分析工作流 | `.codex/skills/profile-tracy-profile/skill.md` | `-` |
+| `dev-il2cpp-core-agent` | `project` | 主线工作流 | il2cpp 核心开发统一入口 — 分类任务并路由到 Expert Agent | `skills/library/skills/dev-il2cpp-core-agent/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
+| `dev-il2cpp-translation-expert` | `project` | il2cpp | IL→C++ 翻译路径专家 | `skills/library/skills/dev-il2cpp-translation-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
+| `dev-il2cpp-runtime-expert` | `project` | il2cpp | runtime-core/interpreter/bootstrap 专家 | `skills/library/skills/dev-il2cpp-runtime-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
+| `dev-il2cpp-debug-expert` | `project` | il2cpp | il2cpp 领域系统性调试专家 | `skills/library/skills/dev-il2cpp-debug-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
+| `dev-il2cpp-gc-expert` | `project` | il2cpp | CRAG GC 架构、分代策略、写屏障专家 | `skills/library/skills/dev-il2cpp-gc-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
+| `dev-il2cpp-codegen-expert` | `project` | il2cpp | C# codegen 管线、Scriban 模板、snapshot 专家 | `skills/library/skills/dev-il2cpp-codegen-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
+| `dev-il2cpp-hotupdate-expert` | `project` | il2cpp | Hotpatch/PatchLoader/.patchdata 热更新专家 | `skills/library/skills/dev-il2cpp-hotupdate-expert/SKILL.md` | [`05-il2cpp核心开发Agent体系.md`](./05-il2cpp核心开发Agent体系.md) |
 
 ## 规则
 

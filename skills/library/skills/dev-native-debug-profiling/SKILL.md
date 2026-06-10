@@ -1,3 +1,8 @@
+---
+name: dev-native-debug-profiling
+description: Native 调试与性能分析规范 — 三档构建配置、LOG 使用规则、PROFILE_SCOPE 预埋点
+---
+
 # Native 调试与性能分析规范
 
 ## 构建配置
