@@ -1,5 +1,32 @@
 # Chaos IL2CPP 开发规则
 
+> ⚠️ **第〇条规则（最优先）**：对用户每一条新消息，回复的**第一行必须是分类声明**：
+> 格式：`本轮任务涉及 {域1(编号)} + {域2(编号)} ... ，{action} 操作，第 N 轮`
+>
+> 域编号表：
+> | 编号 | 域 | 说明 |
+> |------|----|------|
+> | 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap |
+> | 2 | GC | 内存分配、分代、写屏障、stress test |
+> | 3 | 调试 | crash、segfault、测试失败、异常行为 |
+> | 4 | CodeGen | C# codegen、T4 模板、snapshot |
+> | 5 | 测试 | foundation-dll、subject、manifest |
+> | 6 | 翻译 | 新 IL 指令、Planner、Emission |
+> | 7 | 构建 | 编译、链接、SDK、cmake |
+> | 8 | 热更新 | PatchLoader、patchdata |
+>
+> action: `read` / `fix` / `build` / `verify` / `plan`
+>
+> 示例：`本轮任务涉及 运行时(1) + 构建(7) ，fix 操作，第 1 轮`
+>
+> **执行协议**：
+> 1. 输出分类声明
+> 2. `touch .claude/.classified`（创建标记文件）
+> 3. 使用工具（Edit/Write/Glob/Grep/Skill 会被 hook 检查）
+> 4. 响应结束时 `rm -f .claude/.classified`
+>
+> ⚠️ hook 会阻止未分类的 Edit/Write/Glob/Grep/Skill 调用。Bash 豁免（用于管理标记文件）。
+
 ## 全局优先级约束（强制）
 
 以下三条优先级在所有开发阶段必须遵守，从 brainstorm 到验证验收覆盖全流程：
@@ -12,15 +39,13 @@
 
 ## 分类硬规则（强制）
 
-**每收到一条用户消息后，在使用任何工具前，必须先输出分类声明。**
+格式见顶部 ⚠️ 第〇条规则：`本轮任务涉及 {域1(编号)} + {域2(编号)}，{action} 操作，第 N 轮`
 
-即使上一个消息已经分类过，新消息也必须重新分类。包括用户只说"继续"、"A"、"好"等简短回复的情况——这些可能意味着新任务，也可能意味着继续旧任务，分类声明会明确说明。
-
-1. **格式**：`classification: domains=[运行时, 调试] mode=knowledge-inject action=<read|fix|build|verify|plan> round=N`
-2. `action` 字段必填，描述本轮要做的操作类型
+1. **每收到一条用户消息后，回复第一行必须是分类声明**。即使上一个消息已经分类过。
+2. 包括用户只说"继续"、"A"、"好"等简短回复——这些可能意味着新任务。
 3. 单域 → Skill 加载 Expert 知识后自行实现
 4. 多域（≥2）→ 默认走 Workflow 委托，不询问用户
-5. **在输出分类声明之前，禁止使用任何工具**（包括 Read/Bash/Edit/Write/Grep/Glob/Skill/Workflow）
+5. **在输出分类声明之前，禁止使用任何工具**
 
 ### Workflow 分发循环规则
 

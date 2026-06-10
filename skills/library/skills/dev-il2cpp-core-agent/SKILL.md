@@ -108,7 +108,7 @@ while todo 非空:
     4. 收集各 Expert 结果:
        ✅ done / ⏳ remaining → 更新待办
 
-  输出 classification: "domains=[{domains}] mode=workflow round={round}"
+  输出 classification: "本轮任务涉及 {domain_names(IDs)} ，{mode} 操作，第{round}轮"
   /* 进入下一轮 while 循环 */
 ```
 
@@ -268,7 +268,7 @@ Step 3: 汇总裁决
 ## 输出约束
 
 1. **先分类再行动** — 禁止跳过分类直接实现
-2. **每轮输出 classification 声明** — 格式 `classification: domains=[...] expert=xxx round=N`
+2. **每轮输出 classification 声明** — 可读格式，如 `本轮任务涉及 运行时(1) + 构建(7) ，fix 操作，第 1 轮`
 3. **多域默认 Workflow** — ≥2 域直接走 Workflow 委托，不询问用户
 4. **维护待办清单** — 在上下文中显式维护 todo list，每轮同步
 5. **Expert 标记 completed/remaining** — 每个 Expert 执行完后必须输出 done/remaining
