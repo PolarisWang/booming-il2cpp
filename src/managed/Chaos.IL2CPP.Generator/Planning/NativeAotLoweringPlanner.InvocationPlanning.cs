@@ -224,6 +224,7 @@ public sealed partial class NativeAotLoweringPlanner
                 // Canonicalize assembly prefix so dispatch table keys match
                 // the normalized SubjectIds used by TryCreateExternalRuntimeHelperDefinition
                 // and the downstream helperSymbolBySubjectId lookup.
+                string originalCallee = callee;
                 callee = NormalizeSubjectIdAssemblyCached(callee);
 
                 // P0: skip already-processed callees
@@ -231,7 +232,24 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
 
                 // Already in method dictionary → direct call, no dispatch table needed
-                if (_methodsBySubjectId.ContainsKey(callee))
+                // UNLESS the original callee (before normalization) was from a different
+                // assembly that got mapped to CoreLib (e.g. System.Numerics.Vectors ->
+                // System.Private.CoreLib).  Such forwarded methods need to go through
+                // the external runtime helper / RHS generic shape path so that
+                // DirectNativeSymbol stubs (RegisterVectorReduction) can intercept them.
+                bool isCrossAssemblyAfterNormalization = false;
+                int origSlash = originalCallee.IndexOf('/');
+                int normSlash = callee.IndexOf('/');
+                if (origSlash > 0 && normSlash > 0)
+                {
+                    string origAsm = originalCallee.Substring(0, origSlash);
+                    string normAsm = callee.Substring(0, normSlash);
+                    isCrossAssemblyAfterNormalization = !string.Equals(origAsm, normAsm, StringComparison.Ordinal);
+                }
+
+                if (!isCrossAssemblyAfterNormalization &&
+                    _methodsBySubjectId.TryGetValue(callee, out var existingMethod) &&
+                    existingMethod is { Instructions.Count: > 0 })
                     continue;
 
                 // ShapeRegistry/ExternalRuntimeHelper handles it → still register in

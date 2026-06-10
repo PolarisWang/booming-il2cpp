@@ -66,11 +66,14 @@ public sealed partial class NativeAotLoweringPlanner
 		// making the method appear in _methodsBySubjectId with instructions.  Generic shape
 		// entries (RegisterVectorReduction, etc.) must be checked first so they win over the
 		// AOT IR path — otherwise Vector<T>.GreaterThanAll etc. never reach TryMatchGenericShape.
+		if (callee.Contains("Vector", StringComparison.Ordinal))
+			System.Console.Error.WriteLine($"[VECTOR_DEBUG] TryMatchGenericShape called for callee={callee}");
 		if (_shapeRegistry.TryMatchGenericShape(callee, out var genericDescriptor, out var typeArgs))
 		{
 			var resolution = genericDescriptor.Resolver(this, callee, typeArgs);
 			if (resolution != null)
 			{
+				System.Console.Error.WriteLine($"[VECTOR_REDUCTION] MATCHED callee={callee} symbol={resolution.Symbol} directNative={resolution.DirectNativeSymbol}");
 				helperDefinition = new ExternalRuntimeHelperDefinition(
 					callee,
 					resolution.Symbol,
