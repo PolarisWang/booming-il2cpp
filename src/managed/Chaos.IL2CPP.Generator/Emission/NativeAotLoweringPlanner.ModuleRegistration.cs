@@ -1092,8 +1092,8 @@ public sealed partial class NativeAotLoweringPlanner
             ilSb.AppendLine("// ABI export: C-language struct to hold embedded IL + AotCoreIr JSON for interpreter fallback");
             ilSb.AppendLine("struct ChaosIlDataEntry {");
             ilSb.AppendLine("    const char* subject_id;");
-            ilSb.AppendLine("    const uint8_t* il_data;");
-            ilSb.AppendLine("    int32_t il_size;");
+            ilSb.AppendLine("    const CHAOS_IL2CPP_UINT8* il_data;");
+            ilSb.AppendLine("    CHAOS_IL2CPP_INT32 il_size;");
             ilSb.AppendLine("    void* patch_method;");
             ilSb.AppendLine("    const char* json_data;");
             ilSb.AppendLine("};");
@@ -1103,7 +1103,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 if (ilBytes[i] == null) continue;
                 var hex = System.Convert.ToHexString(ilBytes[i]);
-                ilSb.AppendLine("static const uint8_t s_il_" + i + "[] = {");
+                ilSb.AppendLine("static const CHAOS_IL2CPP_UINT8 s_il_" + i + "[] = {");
                 for (int j = 0; j < hex.Length; j += 2)
                 {
                     if (j % 48 == 0) ilSb.Append("    ");

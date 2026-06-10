@@ -328,12 +328,16 @@ class HephaestusCache:
         return entry
 
     def compute_key(self, input_hash: str, assembly: str, chunk_slug: str) -> str:
-        """Derive a cache key from assembly, chunk slug, and input hash.
+        """Derive a cache key from assembly, chunk slug, input hash, and platform.
 
-        Format: "{assembly}/{chunk_slug}/{input_hash[:16]}"
+        Format: "{assembly}/{chunk_slug}/{platform}/{input_hash[:16]}"
+        The platform prefix prevents cross-platform cache contamination
+        (e.g. Windows-generated verification_dispatch.generated.cpp uses
+        __try/__except which can't compile on Linux with GCC).
         """
         short_hash = input_hash[:16]
-        return f"{assembly}/{chunk_slug}/{short_hash}"
+        platform = sys.platform  # e.g. 'linux', 'win32', 'darwin'
+        return f"{assembly}/{chunk_slug}/{platform}/{short_hash}"
 
     def invalidate_assembly(self, assembly: str) -> int:
         """Invalidate all cache entries for a given assembly.

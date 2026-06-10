@@ -41,7 +41,7 @@ extern "C" HotpatchEntryV0 s_hotpatch_entries[{{ total_method_count }}] = {
 
 // Accessor functions for verification_dispatch.generated.cpp
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
-extern "C" int32_t GetHotpatchEntryCount() noexcept { return {{ total_method_count }}; }
+extern "C" CHAOS_IL2CPP_INT32 GetHotpatchEntryCount() noexcept { return {{ total_method_count }}; }
 
 // Module hotpatch bundle (extern linkage — referenced across page files)
 extern constexpr HotpatchModuleV0 s_hotpatch_module = {
