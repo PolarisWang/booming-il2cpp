@@ -120,6 +120,79 @@ MAX_ROUNDS = 5（默认）
 - 所有 Expert 已尝试但 todo 仍有残留 → 终止，报"无法处理的子任务"
 ```
 
+### 阶段 3a: 未知域解析（Adversarial Jury）
+
+当子任务域在分类矩阵中无匹配时，触发对抗陪审流程。
+
+#### 检测与触发
+
+```
+分类矩阵无匹配 → 记录到 skills/.unknown-domains.json:
+  {
+    "domain": "ci-cd",
+    "first_seen": "2026-06-11",
+    "hit_count": 1,
+    "sample_task": "配置 GitHub Actions pipeline",
+    "status": "pending"   // pending | jury_passed | jury_rejected | registered
+  }
+
+hit_count >= 2 且 status == "pending" → 触发陪审
+```
+
+#### 陪审流程
+
+```
+Step 1: Generator — 根据 sample_task 生成 skill draft
+         模板强制包含:
+           □ name / description / trigger keywords
+           □ domain（做什么）
+           □ boundaries（不做什么）
+           □ 3 个 handling scenarios
+           □ quality checklist（自评）
+
+Step 2: 3 个独立 Jury Agent 并行审查（Workflow 委托）
+
+  ┌─────────────────────────────────────────────────────────┐
+  │ Jury 1 — 完整性审查                                      │
+  │ 问题: 这个 skill 完整覆盖了该领域吗？                       │
+  │ 输出: {verdict: PASS|FAIL, gaps: [...], suggestions: ...} │
+  ├─────────────────────────────────────────────────────────┤
+  │ Jury 2 — 边界性审查                                      │
+  │ 问题: 与现有 skill 冲突/重复吗？ scope 清晰吗？             │
+  │ 输出: {verdict: PASS|FAIL, overlaps: [...], fixes: ...}  │
+  ├─────────────────────────────────────────────────────────┤
+  │ Jury 3 — 可执行性审查                                     │
+  │ 问题: 指导内容正确且可操作吗？                              │
+  │ 输出: {verdict: PASS|FAIL, issues: [...], fixes: ...}   │
+  └─────────────────────────────────────────────────────────┘
+
+Step 3: 汇总裁决
+
+  ≥2/3 PASS → 注册:
+    1. 写 skills/library/skills/dev-il2cpp-{domain}-expert/SKILL.md
+    2. 更新分类矩阵（追加新行）
+    3. 更新 skills/.unknown-domains.json → status=registered
+    4. 当前轮继续用新 skill 处理子任务
+
+  <2/3 PASS → 拒绝:
+    1. 收集 3 个 jury 的改进建议
+    2. 更新 .unknown-domains.json → status=jury_rejected
+    3. 附加建议供下次改进
+    4. 当前轮走 Generic Fallback（当前 Agent 自行实现）
+    5. 如果同一域再次触发 → 用上次的建议做针对性重生成
+```
+
+#### Generic Fallback
+
+陪审拒绝后，或 hit_count < 2 时，走通用兜底：
+
+```
+分类矩阵无匹配 + 未触发陪审
+  → 不用 Skill 注入
+  → 当前 Agent 自行实现
+  → 标记 ⏳ remaining: ["域 {domain} 无 Expert，用 generic fallback 实现"]
+```
+
 ### 阶段 4: 质量门
 
 全部子任务完成后，执行质量门：

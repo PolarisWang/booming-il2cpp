@@ -3,6 +3,9 @@
 .claude/
 .codex/
 .hermes/
+
+# Runtime-generated unknown domain tracking for core-agent auto-evolution
+skills/.unknown-domains.json
 docs/executions/
 
 # Editor / IDE state
