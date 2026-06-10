@@ -5065,7 +5065,7 @@ struct ChaosIlDataEntry {
 	void* patch_method;
 	const char* json_data;
 };
-extern "C" int32_t kChaosExternalRuntimeIlCount;
+
 static const uint8_t s_il_0[] = {
 	0x2A, 
 };

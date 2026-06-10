@@ -3,39 +3,15 @@
   "max_entries": 50,
   "entries": [
     {
-      "cache_key": "System.Data.Common/global-ns/de46ef9346a99fe4",
+      "cache_key": "System.Data.Common/system-data-sqltypes/f196f73d698c49f1",
       "assembly": "System.Data.Common",
-      "chunk_slug": "global-ns",
-      "input_hash": "de46ef9346a99fe4d162a00a9564db8e2ea51b7f26142d1b6f3a3d071f3f9ce8",
-      "cached_at": "2026-06-09T20:09:15Z",
-      "duration_ms": 33873,
-      "commit_hash": "20f9980dc",
-      "entry_exe_size": 3670016,
-      "entry_count": 350,
-      "status": "valid"
-    },
-    {
-      "cache_key": "System.Data.Common/system-data-common/70f3e2e96446e3e5",
-      "assembly": "System.Data.Common",
-      "chunk_slug": "system-data-common",
-      "input_hash": "70f3e2e96446e3e55320976d1ecb7f15497a276fdd167613b916480626a1f40c",
-      "cached_at": "2026-06-09T20:06:41Z",
-      "duration_ms": 56819,
-      "commit_hash": "20f9980dc",
-      "entry_exe_size": 9674240,
-      "entry_count": 371,
-      "status": "valid"
-    },
-    {
-      "cache_key": "System.Data.Common/system-data/b28cac0e8a7c205b",
-      "assembly": "System.Data.Common",
-      "chunk_slug": "system-data",
-      "input_hash": "b28cac0e8a7c205b69554de78317f3b7f98643a9daabdc5cd2c449328fdb9366",
-      "cached_at": "2026-06-09T20:04:37Z",
-      "duration_ms": 71249,
-      "commit_hash": "20f9980dc",
-      "entry_exe_size": 13413376,
-      "entry_count": 383,
+      "chunk_slug": "system-data-sqltypes",
+      "input_hash": "f196f73d698c49f195ffb31e82caef69eda27ed0d7ba9fe8e1735d9db1616c1d",
+      "cached_at": "2026-06-09T23:59:40Z",
+      "duration_ms": 57643,
+      "commit_hash": "811795924",
+      "entry_exe_size": 9530880,
+      "entry_count": 372,
       "status": "valid"
     }
   ]

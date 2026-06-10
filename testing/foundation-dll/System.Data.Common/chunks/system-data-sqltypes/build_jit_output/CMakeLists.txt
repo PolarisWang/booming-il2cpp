@@ -14,7 +14,9 @@ if(MSVC)
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter)
   set(CHAOS_EHA_FLAG -fexceptions)
-  set(CHAOS_FORCE_MULTIPLE "")
+  # eager_compile.cpp is compiled locally AND present in prebuilt
+  # libchaos_interpreter.a — both define EagerCompilePatchMethods.
+  set(CHAOS_FORCE_MULTIPLE "-Wl,--allow-multiple-definition")
 endif()
 
 # ── Config tier ──
@@ -107,6 +109,9 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/dispatch.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
@@ -133,6 +138,12 @@ set(CHAOS_SIMD_STUBS
 set(CHAOS_CHAR_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/char_stubs.cpp"
 )
+set(CHAOS_VECTOR_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/vector_stubs.cpp"
+)
+set(CHAOS_ASYNC_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/async_stubs.cpp"
+)
 set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
@@ -141,6 +152,9 @@ set(CHAOS_INTEROP_STUBS
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
+)
+set(CHAOS_CRYPTO_STUBS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
 # hotpatch_table.cpp — compiled locally so the entry has the latest
 # SetPatchedBySlot (the prebuilt chaos_runtime_core.lib may be stale).
@@ -178,9 +192,12 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MATH_STUBS}
     ${CHAOS_SIMD_STUBS}
     ${CHAOS_CHAR_STUBS}
+    ${CHAOS_VECTOR_STUBS}
+    ${CHAOS_ASYNC_STUBS}
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
+    ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
@@ -234,5 +251,11 @@ if(MSVC)
 
   target_link_options(chaos_entry PRIVATE /STACK:8388608)
 
+endif()
+# OpenSSL: needed by crypto_stubs.cpp on Linux (SHA/HMAC via libcrypto).
+if(NOT MSVC)
+  find_package(OpenSSL REQUIRED)
+  target_include_directories(chaos_entry PRIVATE ${OPENSSL_INCLUDE_DIR})
+  target_link_libraries(chaos_entry PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})

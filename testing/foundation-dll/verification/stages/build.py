@@ -803,6 +803,14 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
             p = tpg_subjects_dir / stale
             if p.exists(): p.unlink()
+        # ── Patch missing static field declarations ──
+        # The codegen may emit ldsfld/stsfld references in page files for static
+        # fields whose TargetReference.FieldTypeSubjectId is null, causing the
+        # static field declaration collector to miss them.  Scan the generated
+        # header for known patterns and add missing extern declarations.
+        # This fixes C2065 "undeclared identifier" for chaos_static_* symbols
+        # that are referenced by page files but not declared in the shared header.
+        _patch_missing_static_field_decls(tpg_subjects_dir)
         # Reconfigure cmake to include newly copied subjects/ files
         tpg_build_dir = ctx.native_dir / "build"
         subprocess.run(['cmake', str(ctx.native_dir), '-B', str(tpg_build_dir)],
@@ -1092,3 +1100,72 @@ def _ensure_assert_stubs(native_dir: Path) -> None:
     stub_code += 'extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept { return 0; }\n'
     stub_file.write_text(stub_code, encoding="utf-8")
     print(f"  [build] Generated assert stubs: {stub_file.name}")
+
+
+def _patch_missing_static_field_decls(subjects_dir: Path) -> None:
+    """Patch missing chaos_static_* extern declarations and definitions.
+
+    The codegen may emit ldsfld/stsfld references to static fields in page files
+    for which it did not emit the corresponding extern declaration in the shared
+    header or the definition in the shared cpp.  Scan the page files for
+    undeclared chaos_static_ symbols and add them.
+    """
+    header = subjects_dir / "native-aot.generated.header.h"
+    cpp = subjects_dir / "native-aot.generated.cpp"
+    if not header.exists() or not cpp.exists():
+        return
+
+    # ── Step 1: Gather all chaos_static_ symbols declared in header ──
+    h_text = header.read_text(encoding="utf-8", errors="replace")
+    declared_statics: set[str] = set()
+    for m in re.finditer(r'\bextern\s+CHAOS_IL2CPP_INTPTR\s+(chaos_static_\w+)\s*;', h_text):
+        declared_statics.add(m.group(1))
+
+    # ── Step 2: Gather all chaos_static_ symbols referenced in page files ──
+    referenced_statics: set[str] = set()
+    for f in sorted(subjects_dir.glob("native-aot.page-*.cpp")):
+        text = f.read_text(encoding="utf-8", errors="replace")
+        for m in re.finditer(r'\b(chaos_static_\w+)\b', text):
+            referenced_statics.add(m.group(1))
+
+    # ── Step 3: Find missing symbols and add them ──
+    missing = referenced_statics - declared_statics
+    if not missing:
+        return
+
+    print(f"  [build] Patching {len(missing)} missing chaos_static_ declarations")
+
+    # Add extern declarations to header (before the first chaos_type_id_ line)
+    decl_lines = "\n".join(
+        f"extern CHAOS_IL2CPP_INTPTR {sym};"
+        for sym in sorted(missing)
+    )
+    # Insert after the last existing chaos_static_ extern in header
+    last_static_idx = max(
+        (i for i, line in enumerate(h_text.splitlines())
+         if line.strip().startswith("extern CHAOS_IL2CPP_INTPTR chaos_static_")),
+        default=-1
+    )
+    if last_static_idx >= 0:
+        lines = h_text.splitlines()
+        lines.insert(last_static_idx + 1, decl_lines)
+        header.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        print(f"  [build]   Added {len(missing)} extern declarations to header")
+
+    # Add definitions to generated.cpp (before the first chaos_external_runtime_ line)
+    cpp_text = cpp.read_text(encoding="utf-8", errors="replace")
+    def_lines = "\n".join(
+        f"CHAOS_IL2CPP_INTPTR {sym} = 0;"
+        for sym in sorted(missing)
+    )
+    # Find the last CHAOS_IL2CPP_INTPTR static definition line
+    cpp_lines = cpp_text.splitlines()
+    last_def_idx = max(
+        (i for i, line in enumerate(cpp_lines)
+         if re.match(r'^CHAOS_IL2CPP_INTPTR\s+chaos_static_\w+\s*=\s*0\s*;', line)),
+        default=-1
+    )
+    if last_def_idx >= 0:
+        cpp_lines.insert(last_def_idx + 1, def_lines)
+        cpp.write_text("\n".join(cpp_lines) + "\n", encoding="utf-8")
+        print(f"  [build]   Added {len(missing)} static field definitions to generated.cpp")

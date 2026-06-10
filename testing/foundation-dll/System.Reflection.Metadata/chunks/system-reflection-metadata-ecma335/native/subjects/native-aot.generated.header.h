@@ -6,9 +6,13 @@
 #include "generated_code_compat.h"  // PureTypeHeader for delegate type definitions
 #include "ChaosGeneratedRuntimePrelude.h"  // chaos_managed_array for array-compat checks
 
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Collections_Immutable_ImmutableArray_System_Byte_;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Collections_Immutable_ImmutableArray_System_Int32_;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Guid;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_AssemblyFileHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_AssemblyReferenceHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_BlobHandle;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_BlobReader;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_ConstantHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_CustomAttributeHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_CustomDebugInformationHandle;
@@ -17,6 +21,7 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_DocumentHa
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_DocumentNameBlobHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_EntityHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_EventDefinitionHandle;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_ExportedType;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_ExportedTypeHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_FieldDefinitionHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_GenericParameterConstraintHandle;
@@ -39,20 +44,35 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_ParameterH
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_PropertyDefinitionHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_StandaloneSignatureHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_StringHandle;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_TypeDefinitionHandle;
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_TypeReferenceHandle;
@@ -60,433 +80,1022 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_TypeSpecif
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Reflection_Metadata_UserStringHandle;
 
 struct chaos_type_System_Private_CoreLib_System_Object
+
 {
+
     ThinLockableHeader header{};
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExportedTypeExtensionsTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass0_0 : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
     CHAOS_IL2CPP_INT32 field_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass0_0____ref_0_0_0 = 0;
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass2_0 : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
     CHAOS_IL2CPP_INT32 field_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass2_0____ref_0_1_0 = 0;
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataSizesTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PortablePdbBuilderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Collections_Immutable_ImmutableArray_System_Byte_ : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
+
+struct chaos_type_System_Collections_Immutable_ImmutableArray_System_Int32_ : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Delegate : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
     CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
+
     CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
+
     CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
+
     CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
+
     CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
+
     CHAOS_IL2CPP_UINT32 _pad = 0;
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_MulticastDelegate : public chaos_type_System_Private_CoreLib_System_Delegate
+
 {
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Byte
+
 {
+
     ThinLockableHeader header{};
+
 };
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Guid : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
+
 {
+
     ThinLockableHeader header{};
+
     CHAOS_IL2CPP_INTPTR runtime_assembly_name_value = 0;
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName
+
 {
+
     ThinLockableHeader header{};
+
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodBase : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo : public chaos_type_System_Private_CoreLib_System_Reflection_MethodBase
+
 {
+
     CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
+
     CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
+
     CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
+
     CHAOS_IL2CPP_INTPTR generic_argument_type_handle = 0;
+
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
+
 {
+
     ThinLockableHeader header{};
+
     CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
+
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo : public chaos_type_System_Private_CoreLib_System_Reflection_MethodBase
+
 {
+
     CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
+
     CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
+
     CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
+
     CHAOS_IL2CPP_INTPTR generic_argument_type_handle = 0;
+
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_String
+
 {
+
     ThinLockableHeader header{};
+
     CHAOS_IL2CPP_INTPTR length = 0;
+
     const char* utf8_data = nullptr;
+
     CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
+
 };
+
+
 
 struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
     CHAOS_IL2CPP_INTPTR runtime_type_handle = 0;
+
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_AssemblyFileHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_AssemblyReferenceHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_BlobHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_BlobReader : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_ConstantHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_CustomAttributeHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_CustomDebugInformationHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_DeclarativeSecurityAttributeHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_DocumentHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_DocumentNameBlobHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_EntityHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_EventDefinitionHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_ExportedType : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_ExportedTypeHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_FieldDefinitionHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_GenericParameterConstraintHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_GenericParameterHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_GuidHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_Handle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_ImportScopeHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_InterfaceImplementationHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_LocalConstantHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_LocalScopeHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_LocalVariableHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_ManifestResourceHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_MemberReferenceHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_MethodDebugInformationHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_MethodDefinitionHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_MethodImplementationHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_MethodSpecificationHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_ModuleReferenceHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_ParameterHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_PropertyDefinitionHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_StandaloneSignatureHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_StringHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_ : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
+
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+};
+
+
 
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_TypeDefinitionHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_TypeReferenceHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 struct chaos_type_System_Reflection_Metadata_TypeSpecificationHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
 
+
+
 struct chaos_type_System_Reflection_Metadata_UserStringHandle : public chaos_type_System_Private_CoreLib_System_Object
+
 {
+
 };
+
+
 
 
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c;
@@ -557,6 +1166,16 @@ struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_Syst
 struct chaos_boxed_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c;
 struct chaos_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c;
 struct chaos_boxed_type_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c;
+struct chaos_type_System_Collections_Immutable_ImmutableArray_System_Byte_;
+struct chaos_boxed_type_System_Collections_Immutable_ImmutableArray_System_Byte_ {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Collections_Immutable_ImmutableArray_System_Byte_ value{};
+};
+struct chaos_type_System_Collections_Immutable_ImmutableArray_System_Int32_;
+struct chaos_boxed_type_System_Collections_Immutable_ImmutableArray_System_Int32_ {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Collections_Immutable_ImmutableArray_System_Int32_ value{};
+};
 struct chaos_type_System_Private_CoreLib_System_Action {
     PureTypeHeader header{};
     CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
@@ -701,6 +1320,11 @@ struct chaos_type_System_Private_CoreLib_System_Byte;
 struct chaos_boxed_type_System_Private_CoreLib_System_Byte;
 struct chaos_type_System_Private_CoreLib_System_Delegate;
 struct chaos_boxed_type_System_Private_CoreLib_System_Delegate;
+struct chaos_type_System_Private_CoreLib_System_Guid;
+struct chaos_boxed_type_System_Private_CoreLib_System_Guid {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Private_CoreLib_System_Guid value{};
+};
 struct chaos_type_System_Private_CoreLib_System_MulticastDelegate;
 struct chaos_boxed_type_System_Private_CoreLib_System_MulticastDelegate;
 struct chaos_type_System_Private_CoreLib_System_Object;
@@ -735,6 +1359,11 @@ struct chaos_type_System_Reflection_Metadata_BlobHandle;
 struct chaos_boxed_type_System_Reflection_Metadata_BlobHandle {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_BlobHandle value{};
+};
+struct chaos_type_System_Reflection_Metadata_BlobReader;
+struct chaos_boxed_type_System_Reflection_Metadata_BlobReader {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_BlobReader value{};
 };
 struct chaos_type_System_Reflection_Metadata_ConstantHandle;
 struct chaos_boxed_type_System_Reflection_Metadata_ConstantHandle {
@@ -775,6 +1404,11 @@ struct chaos_type_System_Reflection_Metadata_EventDefinitionHandle;
 struct chaos_boxed_type_System_Reflection_Metadata_EventDefinitionHandle {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_EventDefinitionHandle value{};
+};
+struct chaos_type_System_Reflection_Metadata_ExportedType;
+struct chaos_boxed_type_System_Reflection_Metadata_ExportedType {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_ExportedType value{};
 };
 struct chaos_type_System_Reflection_Metadata_ExportedTypeHandle;
 struct chaos_boxed_type_System_Reflection_Metadata_ExportedTypeHandle {
@@ -886,6 +1520,16 @@ struct chaos_boxed_type_System_Reflection_Metadata_StringHandle {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_StringHandle value{};
 };
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder value{};
+};
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder value{};
+};
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder {
     PureTypeHeader header{};
@@ -896,25 +1540,55 @@ struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ec
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder value{};
 };
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder value{};
+};
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder value{};
+};
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder value{};
 };
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder value{};
 };
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder value{};
+};
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder value{};
 };
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder value{};
+};
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle value{};
+};
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder value{};
+};
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder value{};
 };
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder {
@@ -926,10 +1600,25 @@ struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ec
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder value{};
 };
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder value{};
+};
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder value{};
+};
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder value{};
+};
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder value{};
 };
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder {
@@ -941,20 +1630,40 @@ struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ec
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder value{};
 };
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder value{};
+};
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder value{};
+};
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder value{};
 };
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder value{};
 };
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_ {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_ value{};
+};
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder {
     PureTypeHeader header{};
     chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder value{};
+};
+struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder;
+struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder {
+    PureTypeHeader header{};
+    chaos_valuetype_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder value{};
 };
 struct chaos_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder;
 struct chaos_boxed_type_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder {
@@ -1021,6 +1730,8 @@ extern MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Reflection_Met
 extern MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c;
 extern MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c;
 extern MethodTable chaos_mt_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c;
+extern MethodTable chaos_mt_System_Collections_Immutable_ImmutableArray_System_Byte_;
+extern MethodTable chaos_mt_System_Collections_Immutable_ImmutableArray_System_Int32_;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Action;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder_;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder_;
@@ -1037,6 +1748,7 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_Action_System_Reflecti
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_VectorEncoder_;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Byte;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Delegate;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Guid;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_MulticastDelegate;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Object;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly;
@@ -1050,6 +1762,7 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
 extern MethodTable chaos_mt_System_Reflection_Metadata_AssemblyFileHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_AssemblyReferenceHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_BlobHandle;
+extern MethodTable chaos_mt_System_Reflection_Metadata_BlobReader;
 extern MethodTable chaos_mt_System_Reflection_Metadata_ConstantHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_CustomAttributeHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_CustomDebugInformationHandle;
@@ -1058,6 +1771,7 @@ extern MethodTable chaos_mt_System_Reflection_Metadata_DocumentHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_DocumentNameBlobHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_EntityHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_EventDefinitionHandle;
+extern MethodTable chaos_mt_System_Reflection_Metadata_ExportedType;
 extern MethodTable chaos_mt_System_Reflection_Metadata_ExportedTypeHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_FieldDefinitionHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_GenericParameterConstraintHandle;
@@ -1080,20 +1794,35 @@ extern MethodTable chaos_mt_System_Reflection_Metadata_ParameterHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_PropertyDefinitionHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_StandaloneSignatureHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_StringHandle;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder;
+extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder;
 extern MethodTable chaos_mt_System_Reflection_Metadata_TypeDefinitionHandle;
 extern MethodTable chaos_mt_System_Reflection_Metadata_TypeReferenceHandle;
@@ -1135,12 +1864,26 @@ extern const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Reflection
 extern const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c[];
 extern const void* chaos_vtable_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c[];
 
+extern CHAOS_IL2CPP_INTPTR chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Boolean_System_Boolean_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__AreEqual_System_Void_System_Int32_System_Int32_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentException__System_Void_System_Action_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentNullException__System_Void_System_Action_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_ArgumentOutOfRangeException__System_Void_System_Action_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_InvalidOperationException__System_Void_System_Action_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Throws_System_NullReferenceException__System_Void_System_Action_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c____9__2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c___Shape_0_int_ImmutableArrayint_ImmutableArrayint_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c___Shape_0_int_ImmutableArrayint_ImmutableArrayint_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoderTests___c____9__20_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoderTests___c____9__20_1;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoderTests___c___Benchmark_CustomAttributeSignature_6_System_ActionFixedArgumentsEncoder_System_ActionCustomAttributeNamedArgumentsEncoder_1_b__20_0_System_Void_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoderTests___c___Benchmark_CustomAttributeSignature_6_System_ActionFixedArgumentsEncoder_System_ActionCustomAttributeNamedArgumentsEncoder_1_b__20_1_System_Void_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c____9__10_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c____9__12_0;
@@ -1154,15 +1897,37 @@ extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Re
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c____9__6_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c____9__8_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___CustomAttributeType_2_EntityHandle_0_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___HasConstant_1_EntityHandle_0_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___HasDeclSecurity_3_EntityHandle_0_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___HasFieldMarshal_4_EntityHandle_0_b__8_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___HasSemantics_5_EntityHandle_0_b__10_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___Implementation_6_EntityHandle_0_b__12_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___MemberForwarded_7_EntityHandle_0_b__14_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___MemberRefParent_8_EntityHandle_0_b__16_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___MethodDefOrRef_9_EntityHandle_0_b__18_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___TypeDefOrRefOrSpec_12_EntityHandle_0_b__24_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___TypeDefOrRef_11_EntityHandle_0_b__22_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndexTests___c___TypeOrMethodDef_13_EntityHandle_0_b__26_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c____9__2_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c____9__6_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c____9__8_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c___AddCatchRegion_3_LabelHandle_LabelHandle_LabelHandle_LabelHandle_EntityHandle_0_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c___AddFaultRegion_2_LabelHandle_LabelHandle_LabelHandle_LabelHandle_0_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c___AddFilterRegion_4_LabelHandle_LabelHandle_LabelHandle_LabelHandle_LabelHandle_0_b__8_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c___AddFinallyRegion_1_LabelHandle_LabelHandle_LabelHandle_LabelHandle_0_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilderTests___c___Clear_0__0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoderTests___c____9__2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoderTests___c___ElementType_1__1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoderTests___c___ObjectArray_0__0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c____9__10_0;
@@ -1181,12 +1946,36 @@ extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Re
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c____9__6_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c____9__8_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Boolean_0__0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Byte_3__3_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Char_1__1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Double_11__11_b__22_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Enum_15_string_0_b__30_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Enum_15_string_1_b__32_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Int16_4__4_b__8_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Int32_6__6_b__12_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Int64_8__8_b__16_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___PrimitiveType_13_PrimitiveSerializationTypeCode_0_b__26_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___SByte_2__2_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___Single_10__10_b__20_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___String_12__12_b__24_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___SystemType_14__14_b__28_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___UInt16_5__5_b__10_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___UInt32_7__7_b__14_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoderTests___c___UInt64_9__9_b__18_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoderTests___c____9__2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoderTests___c___Count_0_int_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoderTests___c___Count_0_int_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoderTests___c____9__2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoderTests___c___AddModifier_0_EntityHandle_bool_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoderTests___c___AddModifier_0_EntityHandle_bool_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c____9__10_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c____9__12_0;
@@ -1207,10 +1996,34 @@ extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Re
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c____9__42_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c____9__44_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c____9__46_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddCatch_4_int_int_int_int_EntityHandle_0_b__26_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddCatch_4_int_int_int_int_EntityHandle_1_b__28_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddCatch_4_int_int_int_int_EntityHandle_2_b__30_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddCatch_4_int_int_int_int_EntityHandle_3_b__32_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFault_3_int_int_int_int_0_b__18_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFault_3_int_int_int_int_1_b__20_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFault_3_int_int_int_int_2_b__22_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFault_3_int_int_int_int_3_b__24_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFilter_5_int_int_int_int_int_0_b__34_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFilter_5_int_int_int_int_int_1_b__36_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFilter_5_int_int_int_int_int_2_b__38_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFilter_5_int_int_int_int_int_3_b__40_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFinally_2_int_int_int_int_0_b__10_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFinally_2_int_int_int_int_1_b__12_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFinally_2_int_int_int_int_2_b__14_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___AddFinally_2_int_int_int_int_3_b__16_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___Add_6_ExceptionRegionKind_int_int_int_int_EntityHandle_int_0_b__42_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___Add_6_ExceptionRegionKind_int_int_int_int_EntityHandle_int_1_b__44_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoderTests___c___Add_6_ExceptionRegionKind_int_int_int_int_EntityHandle_int_2_b__46_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExportedTypeExtensionsTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExportedTypeExtensionsTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExportedTypeExtensionsTests___c____9__0_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExportedTypeExtensionsTests___c___GetTypeDefinitionId_0_ExportedType_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoderTests___c____9__6_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoderTests___c___TypedReference_2__2_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c____9__10_0;
@@ -1247,15 +2060,62 @@ extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Re
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c____9__68_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c____9__6_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c____9__8_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Branch_20_ILOpCode_LabelHandle_0_b__62_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___CallIndirect_8_StandaloneSignatureHandle_0_b__18_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Call_4_EntityHandle_0_b__10_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Call_5_MethodDefinitionHandle_0_b__12_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Call_6_MethodSpecificationHandle_0_b__14_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Call_7_MemberReferenceHandle_0_b__16_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___DefineLabel_19__19_b__60_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadArgumentAddress_17_int_0_b__52_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadArgumentAddress_17_int_1_b__54_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadArgument_16_int_0_b__48_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadArgument_16_int_1_b__50_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadConstantI4_9_int_0_b__20_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadConstantI4_9_int_1_b__22_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadConstantI8_10_long_0_b__24_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadConstantI8_10_long_1_b__26_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadConstantR4_11_float_0_b__28_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadConstantR4_11_float_1_b__30_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadConstantR8_12_double_0_b__32_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadConstantR8_12_double_1_b__34_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadLocalAddress_15_int_0_b__44_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadLocalAddress_15_int_1_b__46_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadLocal_13_int_0_b__36_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadLocal_13_int_1_b__38_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___LoadString_3_UserStringHandle_0_b__8_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___MarkLabel_22_LabelHandle_0_b__68_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___OpCode_0_ILOpCode_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___StoreArgument_18_int_0_b__56_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___StoreArgument_18_int_1_b__58_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___StoreLocal_14_int_0_b__40_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___StoreLocal_14_int_1_b__42_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Switch_21_int_0_b__64_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Switch_21_int_1_b__66_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Token_1_EntityHandle_0_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Token_2_int_0_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoderTests___c___Token_2_int_1_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c____9__4_1;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c____9__9_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c____9__9_1;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c___Benchmark_TaggedScalar_5_System_ActionCustomAttributeElementTypeEncoder_System_ActionScalarEncoder_1_b__9_0_System_Void_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c___Benchmark_TaggedScalar_5_System_ActionCustomAttributeElementTypeEncoder_System_ActionScalarEncoder_1_b__9_1_System_Void_System_Reflection_Metadata_Ecma335_ScalarEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c___Benchmark_TaggedVector_2_System_ActionCustomAttributeArrayTypeEncoder_System_ActionVectorEncoder_1_b__4_0_System_Void_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoderTests___c___Benchmark_TaggedVector_2_System_ActionCustomAttributeArrayTypeEncoder_System_ActionVectorEncoder_1_b__4_1_System_Void_System_Reflection_Metadata_Ecma335_VectorEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoderTests___c____9__8_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoderTests___c___TypedReference_2__2_b__8_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass0_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass0_0___GetGenerationHandle_0_Handle_int_0_b__0_System_Void__;
 extern CHAOS_IL2CPP_INT32 chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass0_0____ref_0_0_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass2_0___GetGenerationHandle_0_Handle_int_1_b__0_System_Void__;
 extern CHAOS_IL2CPP_INT32 chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregatorTests___c__DisplayClass2_0____ref_0_1_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c____9__100_0;
@@ -1346,6 +2206,96 @@ extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Re
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c____9__94_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c____9__96_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c____9__98_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddAssemblyFile_34_StringHandle_BlobHandle_bool_0_b__100_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddAssemblyFile_34_StringHandle_BlobHandle_bool_1_b__102_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddAssemblyReference_5_StringHandle_System_Version_StringHandle_BlobHandle_AssemblyFlags_BlobHandle_0_b__14_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddAssembly_4_StringHandle_System_Version_StringHandle_BlobHandle_AssemblyFlags_AssemblyHashAlgorithm_0_b__12_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddConstant_17_EntityHandle_object_0_b__48_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddCustomAttribute_19_EntityHandle_EntityHandle_BlobHandle_0_b__54_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddCustomDebugInformation_46_EntityHandle_GuidHandle_BlobHandle_0_b__130_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddDeclarativeSecurityAttribute_36_EntityHandle_DeclarativeSecurityAction_BlobHandle_0_b__108_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddDocument_39_BlobHandle_GuidHandle_BlobHandle_GuidHandle_0_b__114_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddEncLogEntry_37_EntityHandle_EditAndContinueOperation_0_b__110_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddEncMapEntry_38_EntityHandle_0_b__112_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddEventMap_16_TypeDefinitionHandle_EventDefinitionHandle_0_b__46_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddEvent_15_EventAttributes_StringHandle_EntityHandle_0_b__42_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddEvent_15_EventAttributes_StringHandle_EntityHandle_1_b__44_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddExportedType_35_TypeAttributes_StringHandle_StringHandle_EntityHandle_int_0_b__104_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddExportedType_35_TypeAttributes_StringHandle_StringHandle_EntityHandle_int_1_b__106_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddFieldDefinition_25_FieldAttributes_StringHandle_BlobHandle_0_b__72_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddFieldDefinition_25_FieldAttributes_StringHandle_BlobHandle_1_b__74_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddFieldLayout_26_FieldDefinitionHandle_int_0_b__76_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddFieldLayout_26_FieldDefinitionHandle_int_1_b__78_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddFieldRelativeVirtualAddress_28_FieldDefinitionHandle_int_0_b__82_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddFieldRelativeVirtualAddress_28_FieldDefinitionHandle_int_1_b__84_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddGenericParameterConstraint_24_GenericParameterHandle_EntityHandle_0_b__70_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddGenericParameter_23_EntityHandle_GenericParameterAttributes_StringHandle_int_0_b__66_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddGenericParameter_23_EntityHandle_GenericParameterAttributes_StringHandle_int_1_b__68_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddImportScope_44_ImportScopeHandle_BlobHandle_0_b__126_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddInterfaceImplementation_8_TypeDefinitionHandle_EntityHandle_0_b__26_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddLocalConstant_43_StringHandle_BlobHandle_0_b__124_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddLocalScope_41_MethodDefinitionHandle_ImportScopeHandle_LocalVariableHandle_LocalConstantHandle_int_int_0_b__118_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddLocalVariable_42_LocalVariableAttributes_int_StringHandle_0_b__120_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddLocalVariable_42_LocalVariableAttributes_int_StringHandle_1_b__122_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddManifestResource_33_ManifestResourceAttributes_StringHandle_EntityHandle_uint_0_b__98_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMarshallingDescriptor_27_EntityHandle_BlobHandle_0_b__80_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMemberReference_32_EntityHandle_StringHandle_BlobHandle_0_b__96_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodDebugInformation_40_DocumentHandle_BlobHandle_0_b__116_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodDefinition_29_MethodAttributes_MethodImplAttributes_StringHandle_BlobHandle_int_ParameterHandle_0_b__86_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodDefinition_29_MethodAttributes_MethodImplAttributes_StringHandle_BlobHandle_int_ParameterHandle_1_b__88_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodDefinition_29_MethodAttributes_MethodImplAttributes_StringHandle_BlobHandle_int_ParameterHandle_2_b__90_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodImplementation_31_TypeDefinitionHandle_EntityHandle_EntityHandle_0_b__94_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodImport_30_MethodDefinitionHandle_MethodImportAttributes_StringHandle_ModuleReferenceHandle_0_b__92_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodSemantics_18_EntityHandle_MethodSemanticsAttributes_MethodDefinitionHandle_0_b__50_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodSemantics_18_EntityHandle_MethodSemanticsAttributes_MethodDefinitionHandle_1_b__52_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddMethodSpecification_20_EntityHandle_BlobHandle_0_b__56_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddModuleReference_21_StringHandle_0_b__58_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddModule_3_int_StringHandle_GuidHandle_GuidHandle_GuidHandle_0_b__8_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddModule_3_int_StringHandle_GuidHandle_GuidHandle_GuidHandle_1_b__10_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddNestedType_9_TypeDefinitionHandle_TypeDefinitionHandle_0_b__28_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddParameter_22_ParameterAttributes_StringHandle_int_0_b__60_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddParameter_22_ParameterAttributes_StringHandle_int_1_b__62_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddParameter_22_ParameterAttributes_StringHandle_int_2_b__64_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddPropertyMap_14_TypeDefinitionHandle_PropertyDefinitionHandle_0_b__40_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddProperty_13_PropertyAttributes_StringHandle_BlobHandle_0_b__36_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddProperty_13_PropertyAttributes_StringHandle_BlobHandle_1_b__38_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddStandaloneSignature_12_BlobHandle_0_b__34_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddStateMachineMethod_45_MethodDefinitionHandle_MethodDefinitionHandle_0_b__128_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddTypeDefinition_6_TypeAttributes_StringHandle_StringHandle_EntityHandle_FieldDefinitionHandle_MethodDefinitionHandle_0_b__16_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddTypeDefinition_6_TypeAttributes_StringHandle_StringHandle_EntityHandle_FieldDefinitionHandle_MethodDefinitionHandle_1_b__18_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddTypeLayout_7_TypeDefinitionHandle_ushort_uint_0_b__20_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddTypeLayout_7_TypeDefinitionHandle_ushort_uint_1_b__22_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddTypeLayout_7_TypeDefinitionHandle_ushort_uint_2_b__24_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddTypeReference_10_EntityHandle_StringHandle_StringHandle_0_b__30_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___AddTypeSpecification_11_BlobHandle_0_b__32_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlobUTF16_52_string_0_b__148_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlobUTF16_52_string_1_b__150_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlobUTF8_53_string_bool_0_b__152_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlobUTF8_53_string_bool_1_b__154_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlobUTF8_53_string_bool_2_b__156_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlob_48_BlobBuilder_0_b__136_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlob_49_System_Byte_0_b__138_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlob_49_System_Byte_1_b__140_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlob_49_System_Byte_2_b__142_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddBlob_50_ImmutableArraybyte_0_b__144_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddConstantBlob_51_object_0_b__146_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddDocumentName_54_string_0_b__158_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddDocumentName_54_string_1_b__160_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddGuid_55_System_Guid_0_b__162_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddString_57_string_0_b__166_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddString_57_string_1_b__168_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddUserString_59_string_0_b__174_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetOrAddUserString_59_string_1_b__176_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetRowCount_1_TableIndex_0_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___GetRowCounts_2__2_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___ReserveGuid_56__56_b__164_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___ReserveUserString_58_int_0_b__170_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___ReserveUserString_58_int_1_b__172_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___SetCapacity_0_TableIndex_int_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___SetCapacity_0_TableIndex_int_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___SetCapacity_47_HeapIndex_int_0_b__132_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilderTests___c___SetCapacity_47_HeapIndex_int_1_b__134_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c____9__10_0;
@@ -1361,56 +2311,502 @@ extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Re
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c____9__6_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c____9__8_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetEditAndContinueLogEntries_8_MetadataReader_0_b__16_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetEditAndContinueMapEntries_9_MetadataReader_0_b__18_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetHeapMetadataOffset_4_MetadataReader_HeapIndex_0_b__8_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetHeapSize_3_MetadataReader_HeapIndex_0_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetNextHandle_5_MetadataReader_UserStringHandle_0_b__10_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetNextHandle_6_MetadataReader_BlobHandle_0_b__12_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetNextHandle_7_MetadataReader_StringHandle_0_b__14_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetTableMetadataOffset_2_MetadataReader_TableIndex_0_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetTableRowCount_0_MetadataReader_TableIndex_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetTableRowSize_1_MetadataReader_TableIndex_0_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetTypesWithEvents_11_MetadataReader_0_b__22_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___GetTypesWithProperties_10_MetadataReader_0_b__20_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___ResolveSignatureTypeKind_12_MetadataReader_EntityHandle_byte_0_b__24_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensionsTests___c___ResolveSignatureTypeKind_12_MetadataReader_EntityHandle_byte_1_b__26_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c____9__2_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c____9__4_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c___Serialize_0_BlobBuilder_int_int_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c___Serialize_0_BlobBuilder_int_int_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilderTests___c___Serialize_0_BlobBuilder_int_int_2_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataSizesTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataSizesTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataSizesTests___c____9__0_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataSizesTests___c___GetAlignedHeapSize_0_HeapIndex_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c____9__2_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c____9__6_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c___AddMethodBody_0_InstructionEncoder_int_StandaloneSignatureHandle_MethodBodyAttributes_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c___AddMethodBody_0_InstructionEncoder_int_StandaloneSignatureHandle_MethodBodyAttributes_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c___AddMethodBody_1_InstructionEncoder_int_StandaloneSignatureHandle_MethodBodyAttributes_bool_0_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoderTests___c___AddMethodBody_1_InstructionEncoder_int_StandaloneSignatureHandle_MethodBodyAttributes_bool_1_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoderTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoderTests___c____9__4_1;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoderTests___c___Benchmark_Parameters_1_int_System_ActionReturnTypeEncoder_System_ActionParametersEncoder_2_b__4_0_System_Void_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoderTests___c___Benchmark_Parameters_1_int_System_ActionReturnTypeEncoder_System_ActionParametersEncoder_2_b__4_1_System_Void_System_Reflection_Metadata_Ecma335_ParametersEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoderTests___c____9__2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoderTests___c___Name_0_string_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoderTests___c___Name_0_string_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoderTests___c____9__2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoderTests___c___Object_1__1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c____9__4_1;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c____9__4_2;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c___Benchmark_AddArgument_1_bool_System_ActionNamedArgumentTypeEncoder_System_ActionNameEncoder_System_ActionLiteralEncoder_2_b__4_0_System_Void_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c___Benchmark_AddArgument_1_bool_System_ActionNamedArgumentTypeEncoder_System_ActionNameEncoder_System_ActionLiteralEncoder_2_b__4_1_System_Void_System_Reflection_Metadata_Ecma335_NameEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoderTests___c___Benchmark_AddArgument_1_bool_System_ActionNamedArgumentTypeEncoder_System_ActionNameEncoder_System_ActionLiteralEncoder_2_b__4_2_System_Void_System_Reflection_Metadata_Ecma335_LiteralEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoderTests___c____9__6_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoderTests___c___TypedReference_2__2_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoderTests___c____9__2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoderTests___c___StartVarArgs_1__1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c____9__2_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c____9__6_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c___AddPermission_0_string_ImmutableArraybyte_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c___AddPermission_0_string_ImmutableArraybyte_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c___AddPermission_1_string_BlobBuilder_0_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoderTests___c___AddPermission_1_string_BlobBuilder_1_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PortablePdbBuilderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PortablePdbBuilderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PortablePdbBuilderTests___c____9__0_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PortablePdbBuilderTests___c___Serialize_0_BlobBuilder_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoderTests___c____9__6_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoderTests___c____9__8_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoderTests___c___TypedReference_2__2_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoderTests___c___Void_3__3_b__8_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c____9__2_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c____9__4_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c____9__6_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c___Constant_1_object_0_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c___NullArray_0__0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c___SystemType_2_string_0_b__4_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoderTests___c___SystemType_2_string_1_b__6_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c____9__20_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c____9__20_1;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c___Benchmark_Array_19_System_ActionSignatureTypeEncoder_System_ActionArrayShapeEncoder_1_b__20_0_System_Void_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c___Benchmark_Array_19_System_ActionSignatureTypeEncoder_System_ActionArrayShapeEncoder_1_b__20_1_System_Void_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c____9__0_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c___Branch_0_LabelHandle_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c____9;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c____9__0_0;
 extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c____9__2_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c___Count_0_int_0_b__0_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c___Count_0_int_1_b__2_0_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Collections_Immutable_ImmutableArray_System_Byte_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Collections_Immutable_ImmutableArray_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_LiteralEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_NameEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_ParametersEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_ScalarEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_VectorEncoder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Array__Empty_System_Byte__System_Byte____;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Byte;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Guid;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_Object___ctor_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_AssemblyFileHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_AssemblyReferenceHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_BlobHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_BlobReader;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_ConstantHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_CustomAttributeHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_CustomDebugInformationHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_DeclarativeSecurityAttributeHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_DocumentHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_DocumentNameBlobHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_EntityHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_EventDefinitionHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_ExportedType;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_ExportedTypeHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_FieldDefinitionHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_GenericParameterConstraintHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_GenericParameterHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_GuidHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_Handle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_ImportScopeHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_InterfaceImplementationHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_LocalConstantHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_LocalScopeHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_LocalVariableHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_ManifestResourceHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_MemberReferenceHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_MethodDebugInformationHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_MethodDefinitionHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_MethodImplementationHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_MethodSpecificationHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_ModuleReferenceHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_ParameterHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_PropertyDefinitionHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_StandaloneSignatureHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_StringHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder__Shape_System_Void_System_Int32_ImmutableArray_System_Int32__ImmutableArray_System_Int32__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__CustomAttributeSignature_System_Void_System_Action_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder__System_Action_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__CustomAttributeSignature_System_Void_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder__System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__Field_System_Reflection_Metadata_Ecma335_FieldTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__FieldSignature_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__LocalVariableSignature_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__MethodSignature_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder_SignatureCallingConvention_System_Int32_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__MethodSpecificationSignature_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__PermissionSetArguments_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__PermissionSetBlob_System_Reflection_Metadata_Ecma335_PermissionSetEncoder_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__PropertySignature_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder__TypeSpecificationSignature_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__CustomAttributeType_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__HasConstant_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__HasCustomAttribute_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__HasCustomDebugInformation_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__HasDeclSecurity_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__HasFieldMarshal_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__HasSemantics_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__Implementation_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__MemberForwarded_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__MemberRefParent_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__MethodDefOrRef_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__ResolutionScope_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__TypeDefOrRef_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__TypeDefOrRefOrSpec_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CodedIndex__TypeOrMethodDef_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilder__AddCatchRegion_System_Void_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilder__AddFaultRegion_System_Void_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilder__AddFilterRegion_System_Void_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilder__AddFinallyRegion_System_Void_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_System_Reflection_Metadata_Ecma335_LabelHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ControlFlowBuilder__Clear_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder__ElementType_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder__ObjectArray_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Boolean_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Byte_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Char_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Double_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Enum_System_Void_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Int16_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Int32_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Int64_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__PrimitiveType_System_Void_PrimitiveSerializationTypeCode_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__SByte_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__Single_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__String_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__SystemType_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__UInt16_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__UInt32_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__UInt64_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder__Count_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder__AddModifier_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder_EntityHandle_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder__Add_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder_ExceptionRegionKind_System_Int32_System_Int32_System_Int32_System_Int32_EntityHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder__AddCatch_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder_System_Int32_System_Int32_System_Int32_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder__AddFault_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder_System_Int32_System_Int32_System_Int32_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder__AddFilter_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder_System_Int32_System_Int32_System_Int32_System_Int32_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder__AddFinally_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder_System_Int32_System_Int32_System_Int32_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder__IsSmallExceptionRegion_System_Boolean_System_Int32_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder__IsSmallRegionCount_System_Boolean_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExportedTypeExtensions__GetTypeDefinitionId_System_Int32_ExportedType_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder__CustomModifiers_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder__Type_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder__TypedReference_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder__AddArgument_System_Reflection_Metadata_Ecma335_LiteralEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder__AddArgument_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__Branch_System_Void_ILOpCode_System_Reflection_Metadata_Ecma335_LabelHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__Call_System_Void_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__Call_System_Void_MemberReferenceHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__Call_System_Void_MethodDefinitionHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__Call_System_Void_MethodSpecificationHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__CallIndirect_System_Void_StandaloneSignatureHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__DefineLabel_System_Reflection_Metadata_Ecma335_LabelHandle__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadArgument_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadArgumentAddress_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadConstantI4_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadConstantI8_System_Void_System_Int64_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadConstantR4_System_Void_System_Single_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadConstantR8_System_Void_System_Double_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadLocal_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadLocalAddress_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__LoadString_System_Void_UserStringHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__MarkLabel_System_Void_System_Reflection_Metadata_Ecma335_LabelHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__OpCode_System_Void_ILOpCode_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__StoreArgument_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__StoreLocal_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__Switch_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__Token_System_Void_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder__Token_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder__Scalar_System_Reflection_Metadata_Ecma335_ScalarEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder__TaggedScalar_System_Void_System_Action_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__System_Action_System_Reflection_Metadata_Ecma335_ScalarEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder__TaggedScalar_System_Void_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__System_Reflection_Metadata_Ecma335_ScalarEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder__TaggedVector_System_Void_System_Action_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder__System_Action_System_Reflection_Metadata_Ecma335_VectorEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder__TaggedVector_System_Void_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder__System_Reflection_Metadata_Ecma335_VectorEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder__Vector_System_Reflection_Metadata_Ecma335_VectorEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder__AddLiteral_System_Reflection_Metadata_Ecma335_LiteralEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder__CustomModifiers_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder__Type_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder_System_Boolean_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder__TypedReference_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder__AddVariable_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataAggregator__GetGenerationHandle_Handle_Handle_System_Int32__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddAssembly_AssemblyDefinitionHandle_StringHandle_System_Version_StringHandle_BlobHandle_System_Reflection_AssemblyFlags_System_Reflection_AssemblyHashAlgorithm_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddAssemblyFile_AssemblyFileHandle_StringHandle_BlobHandle_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddAssemblyReference_AssemblyReferenceHandle_StringHandle_System_Version_StringHandle_BlobHandle_System_Reflection_AssemblyFlags_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddConstant_ConstantHandle_EntityHandle_System_Object_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddCustomAttribute_CustomAttributeHandle_EntityHandle_EntityHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddCustomDebugInformation_CustomDebugInformationHandle_EntityHandle_GuidHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddDeclarativeSecurityAttribute_DeclarativeSecurityAttributeHandle_EntityHandle_System_Reflection_DeclarativeSecurityAction_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddDocument_DocumentHandle_BlobHandle_GuidHandle_BlobHandle_GuidHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddEncLogEntry_System_Void_EntityHandle_System_Reflection_Metadata_Ecma335_EditAndContinueOperation_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddEncMapEntry_System_Void_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddEvent_EventDefinitionHandle_System_Reflection_EventAttributes_StringHandle_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddEventMap_System_Void_TypeDefinitionHandle_EventDefinitionHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddExportedType_ExportedTypeHandle_System_Reflection_TypeAttributes_StringHandle_StringHandle_EntityHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddFieldDefinition_FieldDefinitionHandle_System_Reflection_FieldAttributes_StringHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddFieldLayout_System_Void_FieldDefinitionHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddFieldRelativeVirtualAddress_System_Void_FieldDefinitionHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddGenericParameter_GenericParameterHandle_EntityHandle_System_Reflection_GenericParameterAttributes_StringHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddGenericParameterConstraint_GenericParameterConstraintHandle_GenericParameterHandle_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddImportScope_ImportScopeHandle_ImportScopeHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddInterfaceImplementation_InterfaceImplementationHandle_TypeDefinitionHandle_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddLocalConstant_LocalConstantHandle_StringHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddLocalScope_LocalScopeHandle_MethodDefinitionHandle_ImportScopeHandle_LocalVariableHandle_LocalConstantHandle_System_Int32_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddLocalVariable_LocalVariableHandle_LocalVariableAttributes_System_Int32_StringHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddManifestResource_ManifestResourceHandle_System_Reflection_ManifestResourceAttributes_StringHandle_EntityHandle_System_UInt32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddMarshallingDescriptor_System_Void_EntityHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddMemberReference_MemberReferenceHandle_EntityHandle_StringHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddMethodDebugInformation_MethodDebugInformationHandle_DocumentHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddMethodDefinition_MethodDefinitionHandle_System_Reflection_MethodAttributes_System_Reflection_MethodImplAttributes_StringHandle_BlobHandle_System_Int32_ParameterHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddMethodImplementation_MethodImplementationHandle_TypeDefinitionHandle_EntityHandle_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddMethodImport_System_Void_MethodDefinitionHandle_System_Reflection_MethodImportAttributes_StringHandle_ModuleReferenceHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddMethodSemantics_System_Void_EntityHandle_System_Reflection_MethodSemanticsAttributes_MethodDefinitionHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddMethodSpecification_MethodSpecificationHandle_EntityHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddModule_ModuleDefinitionHandle_System_Int32_StringHandle_GuidHandle_GuidHandle_GuidHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddModuleReference_ModuleReferenceHandle_StringHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddNestedType_System_Void_TypeDefinitionHandle_TypeDefinitionHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddParameter_ParameterHandle_System_Reflection_ParameterAttributes_StringHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddProperty_PropertyDefinitionHandle_System_Reflection_PropertyAttributes_StringHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddPropertyMap_System_Void_TypeDefinitionHandle_PropertyDefinitionHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddStandaloneSignature_StandaloneSignatureHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddStateMachineMethod_System_Void_MethodDefinitionHandle_MethodDefinitionHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddTypeDefinition_TypeDefinitionHandle_System_Reflection_TypeAttributes_StringHandle_StringHandle_EntityHandle_FieldDefinitionHandle_MethodDefinitionHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddTypeLayout_System_Void_TypeDefinitionHandle_System_UInt16_System_UInt32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddTypeReference_TypeReferenceHandle_EntityHandle_StringHandle_StringHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__AddTypeSpecification_TypeSpecificationHandle_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddBlob_BlobHandle_BlobBuilder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddBlob_BlobHandle_ImmutableArray_System_Byte__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddBlob_BlobHandle_System_Byte___;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddBlobUTF16_BlobHandle_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddBlobUTF8_BlobHandle_System_String_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddConstantBlob_BlobHandle_System_Object_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddDocumentName_BlobHandle_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddGuid_GuidHandle_System_Guid_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddString_StringHandle_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetOrAddUserString_UserStringHandle_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetRowCount_System_Int32_System_Reflection_Metadata_Ecma335_TableIndex_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__GetRowCounts_ImmutableArray_System_Int32___;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__ReserveGuid_ReservedBlob_GuidHandle___;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__ReserveUserString_ReservedBlob_UserStringHandle__System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__SetCapacity_System_Void_System_Reflection_Metadata_Ecma335_HeapIndex_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataBuilder__SetCapacity_System_Void_System_Reflection_Metadata_Ecma335_TableIndex_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetEditAndContinueLogEntries_System_Collections_Generic_IEnumerable_System_Reflection_Metadata_Ecma335_EditAndContinueLogEntry__MetadataReader_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetEditAndContinueMapEntries_System_Collections_Generic_IEnumerable_EntityHandle__MetadataReader_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetHeapMetadataOffset_System_Int32_MetadataReader_System_Reflection_Metadata_Ecma335_HeapIndex_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetHeapSize_System_Int32_MetadataReader_System_Reflection_Metadata_Ecma335_HeapIndex_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetNextHandle_BlobHandle_MetadataReader_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetNextHandle_StringHandle_MetadataReader_StringHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetNextHandle_UserStringHandle_MetadataReader_UserStringHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetTableMetadataOffset_System_Int32_MetadataReader_System_Reflection_Metadata_Ecma335_TableIndex_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetTableRowCount_System_Int32_MetadataReader_System_Reflection_Metadata_Ecma335_TableIndex_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetTableRowSize_System_Int32_MetadataReader_System_Reflection_Metadata_Ecma335_TableIndex_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetTypesWithEvents_System_Collections_Generic_IEnumerable_TypeDefinitionHandle__MetadataReader_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__GetTypesWithProperties_System_Collections_Generic_IEnumerable_TypeDefinitionHandle__MetadataReader_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataReaderExtensions__ResolveSignatureTypeKind_SignatureTypeKind_MetadataReader_EntityHandle_System_Byte_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataRootBuilder__Serialize_System_Void_BlobBuilder_System_Int32_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataSizes__GetAlignedHeapSize_System_Int32_System_Reflection_Metadata_Ecma335_HeapIndex_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__AssemblyFileHandle_AssemblyFileHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__AssemblyReferenceHandle_AssemblyReferenceHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__BlobHandle_BlobHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__ConstantHandle_ConstantHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__CustomAttributeHandle_CustomAttributeHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__CustomDebugInformationHandle_CustomDebugInformationHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__DeclarativeSecurityAttributeHandle_DeclarativeSecurityAttributeHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__DocumentHandle_DocumentHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__DocumentNameBlobHandle_DocumentNameBlobHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__EntityHandle_EntityHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__EntityHandle_EntityHandle_System_Reflection_Metadata_Ecma335_TableIndex_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__EventDefinitionHandle_EventDefinitionHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__ExportedTypeHandle_ExportedTypeHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__FieldDefinitionHandle_FieldDefinitionHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GenericParameterConstraintHandle_GenericParameterConstraintHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GenericParameterHandle_GenericParameterHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetHeapOffset_System_Int32_BlobHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetHeapOffset_System_Int32_GuidHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetHeapOffset_System_Int32_Handle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetHeapOffset_System_Int32_MetadataReader_Handle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetHeapOffset_System_Int32_StringHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetHeapOffset_System_Int32_UserStringHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetRowNumber_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetRowNumber_System_Int32_MetadataReader_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetToken_System_Int32_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetToken_System_Int32_Handle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetToken_System_Int32_MetadataReader_EntityHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GetToken_System_Int32_MetadataReader_Handle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__GuidHandle_GuidHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__Handle_EntityHandle_System_Reflection_Metadata_Ecma335_TableIndex_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__Handle_Handle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__ImportScopeHandle_ImportScopeHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__InterfaceImplementationHandle_InterfaceImplementationHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__LocalConstantHandle_LocalConstantHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__LocalScopeHandle_LocalScopeHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__LocalVariableHandle_LocalVariableHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__ManifestResourceHandle_ManifestResourceHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__MemberReferenceHandle_MemberReferenceHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__MethodDebugInformationHandle_MethodDebugInformationHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__MethodDefinitionHandle_MethodDefinitionHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__MethodImplementationHandle_MethodImplementationHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__MethodSpecificationHandle_MethodSpecificationHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__ModuleReferenceHandle_ModuleReferenceHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__ParameterHandle_ParameterHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__PropertyDefinitionHandle_PropertyDefinitionHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__StandaloneSignatureHandle_StandaloneSignatureHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__StringHandle_StringHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__TryGetHeapIndex_System_Boolean_HandleKind_System_Reflection_Metadata_Ecma335_HeapIndex__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__TryGetTableIndex_System_Boolean_HandleKind_System_Reflection_Metadata_Ecma335_TableIndex__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__TypeDefinitionHandle_TypeDefinitionHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__TypeReferenceHandle_TypeReferenceHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__TypeSpecificationHandle_TypeSpecificationHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MetadataTokens__UserStringHandle_UserStringHandle_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder__AddMethodBody_System_Int32_System_Reflection_Metadata_Ecma335_InstructionEncoder_System_Int32_StandaloneSignatureHandle_System_Reflection_Metadata_Ecma335_MethodBodyAttributes_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder__AddMethodBody_System_Int32_System_Reflection_Metadata_Ecma335_InstructionEncoder_System_Int32_StandaloneSignatureHandle_System_Reflection_Metadata_Ecma335_MethodBodyAttributes_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder__Parameters_System_Void_System_Int32_System_Action_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder__System_Action_System_Reflection_Metadata_Ecma335_ParametersEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder__Parameters_System_Void_System_Int32_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder__System_Reflection_Metadata_Ecma335_ParametersEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder__Name_System_Void_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder__Object_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder__SZArray_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder__ScalarType_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder__AddArgument_System_Void_System_Boolean_System_Action_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder__System_Action_System_Reflection_Metadata_Ecma335_NameEncoder__System_Action_System_Reflection_Metadata_Ecma335_LiteralEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder__AddArgument_System_Void_System_Boolean_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder__System_Reflection_Metadata_Ecma335_NameEncoder__System_Reflection_Metadata_Ecma335_LiteralEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder__CustomModifiers_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder__Type_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder__TypedReference_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder__AddParameter_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder__StartVarArgs_System_Reflection_Metadata_Ecma335_ParametersEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder__AddPermission_System_Reflection_Metadata_Ecma335_PermissionSetEncoder_System_String_BlobBuilder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder__AddPermission_System_Reflection_Metadata_Ecma335_PermissionSetEncoder_System_String_ImmutableArray_System_Byte__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PortablePdbBuilder__Serialize_BlobContentId_BlobBuilder_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder__CustomModifiers_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder__Type_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder__TypedReference_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder__Void_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder__Constant_System_Void_System_Object_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder__NullArray_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder__SystemType_System_Void_System_String_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32___DecodeFieldSignature_System_Int32_BlobReader__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32___DecodeLocalSignature_ImmutableArray_System_Int32__BlobReader__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32___DecodeMethodSignature_MethodSignature_System_Int32__BlobReader__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32___DecodeMethodSpecificationSignature_ImmutableArray_System_Int32__BlobReader__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32___DecodeType_System_Int32_BlobReader__System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Array_System_Void_System_Action_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__System_Action_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Array_System_Void_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__System_Reflection_Metadata_Ecma335_ArrayShapeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Boolean_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Byte_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Char_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__CustomModifiers_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Double_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__FunctionPointer_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder_SignatureCallingConvention_System_Reflection_Metadata_Ecma335_FunctionPointerAttributes_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__GenericInstantiation_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder_EntityHandle_System_Int32_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__GenericMethodTypeParameter_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__GenericTypeParameter_System_Void_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Int16_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Int32_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Int64_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__IntPtr_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Object_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Pointer_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__PrimitiveType_System_Void_PrimitiveTypeCode_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__SByte_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__SZArray_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Single_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__String_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__Type_System_Void_EntityHandle_System_Boolean_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__TypedReference_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__UInt16_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__UInt32_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__UInt64_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__UIntPtr_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder__VoidPointer_System_Void__;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder__Branch_System_Void_System_Reflection_Metadata_Ecma335_LabelHandle_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder__Count_System_Reflection_Metadata_Ecma335_LiteralsEncoder_System_Int32_;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_TypeDefinitionHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_TypeReferenceHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_TypeSpecificationHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_System_Reflection_Metadata_UserStringHandle;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c____9__24_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c____9__24_1;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c____9__25_0;
+extern CHAOS_IL2CPP_INTPTR chaos_static_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c____9__25_1;
 
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoderTests___c;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoderTests___c;
@@ -1446,6 +2842,8 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_Sy
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoderTests___c;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoderTests___c;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_CombinedSubjects_AutoGenerated_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoderTests___c;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Collections_Immutable_ImmutableArray_System_Byte_;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Collections_Immutable_ImmutableArray_System_Int32_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder_;
@@ -1462,6 +2860,7 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Act
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action_System_Reflection_Metadata_Ecma335_VectorEncoder_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Byte;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Guid;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_MulticastDelegate;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly;
@@ -1475,6 +2874,7 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Typ
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_AssemblyFileHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_AssemblyReferenceHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_BlobHandle;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_BlobReader;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_ConstantHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_CustomAttributeHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_CustomDebugInformationHandle;
@@ -1483,6 +2883,7 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_Docume
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_DocumentNameBlobHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_EntityHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_EventDefinitionHandle;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_ExportedType;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_ExportedTypeHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_FieldDefinitionHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_GenericParameterConstraintHandle;
@@ -1505,20 +2906,35 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_Parame
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_PropertyDefinitionHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_StandaloneSignatureHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_StringHandle;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodSignatureEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_TypeDefinitionHandle;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Reflection_Metadata_TypeReferenceHandle;
@@ -1585,6 +3001,11 @@ extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Refl
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_FieldInfo(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_Assembly(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_AssemblyName(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ArrayShapeEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Collections_Immutable_ImmutableArray_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FixedArgumentsEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeNamedArgumentsEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_BlobEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_FieldTypeEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureTypeEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariablesEncoder(void);
@@ -1592,51 +3013,66 @@ extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_GenericTypeArgumentsEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentsEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_PermissionSetEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_EntityHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LabelHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomModifiersEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ExceptionRegionEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ExportedType(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_InstructionEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_MethodDefinitionHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_MethodSpecificationHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_MemberReferenceHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_StandaloneSignatureHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_UserStringHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ScalarEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_VectorEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LiteralsEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_LocalVariableTypeEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_Handle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_StringHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_BlobHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_GuidHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_TypeDefinitionHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_EventDefinitionHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_FieldDefinitionHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_GenericParameterHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ImportScopeHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_LocalVariableHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_LocalConstantHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_DocumentHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ParameterHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ModuleReferenceHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_PropertyDefinitionHandle(void);
+extern "C" void chaos_ensure_type_initialized_System_Collections_Immutable_ImmutableArray_System_Byte_(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Guid(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_AssemblyFileHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_AssemblyReferenceHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_BlobHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ConstantHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_CustomAttributeHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_CustomDebugInformationHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_DeclarativeSecurityAttributeHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_DocumentHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_DocumentNameBlobHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_EntityHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_EventDefinitionHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ExportedTypeHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_FieldDefinitionHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_GenericParameterConstraintHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_GenericParameterHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_GuidHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_Handle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ImportScopeHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_InterfaceImplementationHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_LocalConstantHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_LocalScopeHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_LocalVariableHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ManifestResourceHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_MemberReferenceHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_MethodDebugInformationHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_MethodDefinitionHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_MethodImplementationHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_MethodSpecificationHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ModuleReferenceHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_ParameterHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_PropertyDefinitionHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_StandaloneSignatureHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_StringHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_TypeDefinitionHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_TypeReferenceHandle(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_TypeSpecificationHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_UserStringHandle(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeElementTypeEncoder(void);
-extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_CustomAttributeArrayTypeEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_MethodBodyStreamEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ReturnTypeEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParametersEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NamedArgumentTypeEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_NameEncoder(void);
 extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_ParameterTypeEncoder(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_BlobReader(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SignatureDecoder_System_Int32_System_Int32_(void);
+extern "C" void chaos_ensure_type_initialized_System_Reflection_Metadata_System_Reflection_Metadata_Ecma335_SwitchInstructionEncoder(void);
 
 CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;
 inline CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept { return chaos_value; }

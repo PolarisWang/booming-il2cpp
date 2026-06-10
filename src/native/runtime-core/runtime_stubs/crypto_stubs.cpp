@@ -29,6 +29,17 @@ extern "C" {
 
 #ifdef _WIN32
 
+// SHA-3 BCrypt algorithm identifiers (not available in older Windows SDKs)
+#ifndef BCRYPT_SHA3_256_ALGORITHM
+#define BCRYPT_SHA3_256_ALGORITHM L"SHA3_256"
+#endif
+#ifndef BCRYPT_SHA3_384_ALGORITHM
+#define BCRYPT_SHA3_384_ALGORITHM L"SHA3_384"
+#endif
+#ifndef BCRYPT_SHA3_512_ALGORITHM
+#define BCRYPT_SHA3_512_ALGORITHM L"SHA3_512"
+#endif
+
 // ── BCrypt NTSTATUS helper ────────────────────────────────────────
 static inline bool ChaosCngOk(NTSTATUS status) noexcept {
     return status >= 0;
@@ -126,8 +137,25 @@ CHAOS_IL2CPP_INTPTR ChaosSha512Hash(CHAOS_IL2CPP_INTPTR data) noexcept
     return ChaosCngHash(BCRYPT_SHA512_ALGORITHM, data);
 }
 
-// ── HMAC-SHA256 ───────────────────────────────────────────────────
-CHAOS_IL2CPP_INTPTR ChaosHmacSha256(
+// ── SHA-3 family one-shot hashes ──────────────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosSha3_256Hash(CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHash(BCRYPT_SHA3_256_ALGORITHM, data);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosSha3_384Hash(CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHash(BCRYPT_SHA3_384_ALGORITHM, data);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosSha3_512Hash(CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHash(BCRYPT_SHA3_512_ALGORITHM, data);
+}
+
+// ── HMAC helper (BCrypt) ──────────────────────────────────────────────
+static CHAOS_IL2CPP_INTPTR ChaosCngHmac(
+    LPCWSTR algorithm,
     CHAOS_IL2CPP_INTPTR key,
     CHAOS_IL2CPP_INTPTR data) noexcept
 {
@@ -140,7 +168,7 @@ CHAOS_IL2CPP_INTPTR ChaosHmacSha256(
     if (keyData == nullptr || dataBuf == nullptr) return 0;
 
     BCRYPT_ALG_HANDLE hAlg = nullptr;
-    NTSTATUS status = BCryptOpenAlgorithmProvider(&hAlg, BCRYPT_SHA256_ALGORITHM,
+    NTSTATUS status = BCryptOpenAlgorithmProvider(&hAlg, algorithm,
         nullptr, BCRYPT_ALG_HANDLE_HMAC_FLAG);
     if (!ChaosCngOk(status)) return 0;
 
@@ -160,6 +188,45 @@ CHAOS_IL2CPP_INTPTR ChaosHmacSha256(
 
     // TODO: Allocate managed byte[] and return
     return 0;
+}
+
+// ── HMAC-SHA1/256/384/512 ─────────────────────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosHmacSha1(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHmac(BCRYPT_SHA1_ALGORITHM, key, data);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosHmacSha256(
+    CHAOS_IL2CPP_INTPTR key,
+    CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHmac(BCRYPT_SHA256_ALGORITHM, key, data);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosHmacSha384(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHmac(BCRYPT_SHA384_ALGORITHM, key, data);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosHmacSha512(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHmac(BCRYPT_SHA512_ALGORITHM, key, data);
+}
+
+// ── HMAC-SHA3 family ──────────────────────────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosHmacSha3_256(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHmac(BCRYPT_SHA3_256_ALGORITHM, key, data);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosHmacSha3_384(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHmac(BCRYPT_SHA3_384_ALGORITHM, key, data);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosHmacSha3_512(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR data) noexcept
+{
+    return ChaosCngHmac(BCRYPT_SHA3_512_ALGORITHM, key, data);
 }
 
 // ── MD5 ──
@@ -169,39 +236,9 @@ CHAOS_IL2CPP_INTPTR ChaosMd5Hash(CHAOS_IL2CPP_INTPTR data) noexcept
 }
 
 // ── HMACMD5 ──
-CHAOS_IL2CPP_INTPTR ChaosHmacMd5(
-    CHAOS_IL2CPP_INTPTR key,
-    CHAOS_IL2CPP_INTPTR data) noexcept
+CHAOS_IL2CPP_INTPTR ChaosHmacMd5(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR data) noexcept
 {
-    if (key == 0 || data == 0) return 0;
-    auto* keyArr = get_managed_array(key);
-    auto* dataArr = get_managed_array(data);
-    if (keyArr == nullptr || dataArr == nullptr) return 0;
-    auto* keyData = accessor_get_elements(keyArr);
-    auto* dataBuf = accessor_get_elements(dataArr);
-    if (keyData == nullptr || dataBuf == nullptr) return 0;
-
-    BCRYPT_ALG_HANDLE hAlg = nullptr;
-    NTSTATUS status = BCryptOpenAlgorithmProvider(&hAlg, BCRYPT_MD5_ALGORITHM,
-        nullptr, BCRYPT_ALG_HANDLE_HMAC_FLAG);
-    if (!ChaosCngOk(status)) return 0;
-
-    ULONG hashLen = 0;
-    ULONG resultSize = 0;
-    BCryptGetProperty(hAlg, BCRYPT_HASH_LENGTH,
-        reinterpret_cast<PUCHAR>(&hashLen), sizeof(hashLen), &resultSize, 0);
-
-    auto buf = std::make_unique<UCHAR[]>(hashLen);
-    status = BCryptHash(hAlg,
-        (PUCHAR)(keyData), static_cast<ULONG>(keyArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
-        (PUCHAR)(dataBuf), static_cast<ULONG>(dataArr->length * sizeof(CHAOS_IL2CPP_INTPTR)),
-        buf.get(), hashLen);
-
-    BCryptCloseAlgorithmProvider(hAlg, 0);
-    if (!ChaosCngOk(status)) return 0;
-
-    // TODO: Allocate managed byte[] and return
-    return 0;
+    return ChaosCngHmac(BCRYPT_MD5_ALGORITHM, key, data);
 }
 
 // ── RNG GetBytes(int) ──

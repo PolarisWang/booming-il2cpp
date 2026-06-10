@@ -4260,18 +4260,58 @@ public sealed partial class NativeAotLoweringPlanner
                 // then heap-allocate a new carrier for the result and return its pointer.
                 const string ns = "chaos::il2cpp::vector_fixed::";
                 var tc = cppType + ", " + carrier;
+                // Compare functions (VectorFixedCompareEqual, etc.) need 3 type params:
+                // <TInputScalar, TMaskScalar, TCarrier> where TMaskScalar = TInputScalar.
+                string TcForCompare() => cppType + ", " + cppType + ", " + carrier;
+                // Select the right type-argument string for the template function.
+                string TcForTemplateFn(string fn) =>
+                    fn.StartsWith("VectorFixedCompare") ? TcForCompare() : tc;
                 string Deref(int i) =>
                     i < paramTypes.Count && (paramTypes[i].Contains("Vector128<") || paramTypes[i].Contains("Vector256<"))
                         ? $"*reinterpret_cast<{carrier}*>({{{i}}})"
                         : $"{{{i}}}";
 
+                // For arithmetic binary ops (Add, Subtract, Multiply, Divide where both
+                // operands must be carriers), broadcast any scalar params to carrier.
+                // Shift ops (ShiftLeft, ShiftRight*) take CHAOS_IL2CPP_INT32 as second arg
+                // and must NOT broadcast — use Deref() for those.
+                static bool IsArithmeticBinaryOp(string fn) => fn switch
+                {
+                    "VectorFixedAdd" or "VectorFixedSubtract" or
+                    "VectorFixedMultiply" or "VectorFixedDivide" => true,
+                    _ => false,
+                };
+                string Arg(int i) =>
+                    IsArithmeticBinaryOp(templateFn)
+                        ? (i < paramTypes.Count && (paramTypes[i].Contains("Vector128<") || paramTypes[i].Contains("Vector256<"))
+                            ? $"*reinterpret_cast<{carrier}*>({{{i}}})"
+                            : $"{ns}VectorFixedBroadcast<{cppType}, {carrier}>(static_cast<{cppType}>({{{i}}}))")
+                        : Deref(i);
+
                 // Check for SIMD hardware intrinsic stub first
+                // SIMD stubs expect ALL operands to be vector types (Vector128<T> or Vector256<T>).
+                // If ANY argument is a scalar (e.g., Multiply(Vector256<int>, int)), fall back to
+                // the template approach which handles mixed vector/scalar arguments correctly.
                 var simdStub = TryGetSimdStub(templateFn, carrier, requiresScalar ? cppType : null);
                 if (simdStub != null)
                 {
-                    if (paramTypes.Count >= 2)
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    // Only use SIMD stub when all parameters are vector types
+                    var allParamsAreVector = true;
+                    for (var pi = 0; pi < paramTypes.Count; pi++)
+                    {
+                        if (!paramTypes[pi].Contains("Vector128<") && !paramTypes[pi].Contains("Vector256<"))
+                        {
+                            allParamsAreVector = false;
+                            break;
+                        }
+                    }
+
+                    if (allParamsAreVector)
+                    {
+                        if (paramTypes.Count >= 2)
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    }
                 }
 
                 // VectorFixedGetElement returns a scalar, not a carrier
@@ -4293,17 +4333,17 @@ public sealed partial class NativeAotLoweringPlanner
                 // Binary ops: deref inputs (2 or 3), call function, heap-alloc result
                 if (paramTypes.Count >= 2 && paramTypes.Count <= 3)
                 {
-                    var argList = string.Join(", ", Enumerable.Range(0, paramTypes.Count).Select(i => Deref(i)));
+                    var argList = string.Join(", ", Enumerable.Range(0, paramTypes.Count).Select(i => Arg(i)));
                     var fnCall = requiresScalar
-                        ? $"{ns}{templateFn}<{tc}>({argList})"
+                        ? $"{ns}{templateFn}<{TcForTemplateFn(templateFn)}>({argList})"
                         : $"{ns}{templateFn}<{carrier}>({argList})";
                     return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }
                 if (paramTypes.Count >= 2)
                 {
                     var fnCall = requiresScalar
-                        ? $"{ns}{templateFn}<{tc}>({Deref(0)}, {Deref(1)})"
-                        : $"{ns}{templateFn}<{carrier}>({Deref(0)}, {Deref(1)})";
+                        ? $"{ns}{templateFn}<{TcForTemplateFn(templateFn)}>({Arg(0)}, {Arg(1)})"
+                        : $"{ns}{templateFn}<{carrier}>({Arg(0)}, {Arg(1)})";
                     return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }
 

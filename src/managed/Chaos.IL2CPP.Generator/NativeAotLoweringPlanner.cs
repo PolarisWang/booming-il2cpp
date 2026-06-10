@@ -1322,11 +1322,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                     }
                     // Static field references (for chaos_static_* declarations)
                     if (_inst?.TargetReference is { } _tr &&
-                        _tr.FieldTypeSubjectId is { Length: > 0 } _ft &&
                         !string.IsNullOrEmpty(_tr.SubjectId))
                     {
                         _staticFieldDeclarations ??= new Dictionary<string, string?>(StringComparer.Ordinal);
-                        _staticFieldDeclarations.TryAdd(_tr.SubjectId, _ft);
+                        _staticFieldDeclarations.TryAdd(_tr.SubjectId, _tr.FieldTypeSubjectId);
                     }
                 }
             }

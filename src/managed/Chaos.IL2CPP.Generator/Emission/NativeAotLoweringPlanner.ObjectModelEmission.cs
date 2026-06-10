@@ -245,11 +245,22 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 				if (targetReference.Kind == AotCoreIrReferenceKind.Type && instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.InitObject)
 				{
-					if (targetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType)
-					{
-						valueTypeSubjectIds.Add(targetReference.SubjectId);
-					}
-					continue;
+						// initobj is only emitted for value types in valid IL.  The IR may
+						// classify certain value types (e.g. System.Data.SqlTypes.SqlInt64)
+						// as ReferenceType (shape=1) instead of ValueType (shape=2).  Track
+						// these types in hashSet3 (for chaos_boxed_type_* struct definition)
+						// so boxing patterns generated during emission compile correctly.
+						if (targetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType)
+						{
+							valueTypeSubjectIds.Add(targetReference.SubjectId);
+						}
+						else
+						{
+							// IR classifies this value type as ReferenceType; still add to
+							// hashSet3 so the shared header gets a boxed_type_* struct.
+							hashSet3.Add(targetReference.SubjectId);
+						}
+						continue;
 				}
 				flag = targetReference.Kind == AotCoreIrReferenceKind.Type;
 				if (flag)
@@ -314,6 +325,7 @@ public sealed partial class NativeAotLoweringPlanner
 				hashSet3.Add(targetRef2.SubjectId);
 			}
 		}
+
 		foreach (string additionalReferenceTypeSubjectId in _customAttributeSupport.AdditionalReferenceTypeSubjectIds)
 		{
 			TrackReferenceType(additionalReferenceTypeSubjectId, "System.Private.CoreLib/System.Object");
