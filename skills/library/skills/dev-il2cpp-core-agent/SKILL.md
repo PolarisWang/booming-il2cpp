@@ -234,6 +234,7 @@ Step 3: 汇总裁决
 | 性能优化、profile 分析、benchmark | `dev-il2cpp-foundation-dll-optimizer` |
 | 热更新、PatchLoader、patchdata、HotpatchDispatch | `dev-il2cpp-hotupdate-expert` |
 | 编译失败、链接错误、codegen stub、dotnet build 失败、CMake 错误 | `dev-il2cpp-build-fixer` |
+| fact 验证、fact_chunk、skip-list 维护、value_suspicious、dll 验证结果审计、ATG/TPG 质量审查、codegen 输出审查 | `dev-il2cpp-fact-verification-expert` |
 
 ---
 
