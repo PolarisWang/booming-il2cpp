@@ -67,6 +67,14 @@ obj/
 TestResults/
 *.trx
 
+# Debug/ad-hoc scripts (moved from root to scripts/debug/)
+scripts/debug/
+
+# Generated codegen output and profiling data
+output/
+output_test_string/
+profile_data/
+
 # Python cache outputs
 __pycache__/
 *.pyc
