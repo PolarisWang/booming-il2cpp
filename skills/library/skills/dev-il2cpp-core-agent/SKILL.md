@@ -129,7 +129,17 @@ MAX_ROUNDS = 5（默认）
 □ dev-verification-before-completion
 □ 更新 STATUS.md（内容摘要、文件列表、验证结果）
 □ 如果涉及翻译路径变更 → wiki 维护
-□ 如果涉及多域串行修改（≥2 Expert）→ 运行 foundation-dll pipeline 集成验证
+□ 如果涉及多域修改（≥2 Expert）→ 运行 foundation-dll pipeline 集成验证
+□ ✅ 全部通过 → 提交并推送：
+   1. git add -A
+   2. git commit -m 按规范格式:
+      - 功能/优化: "<type>: <subject>\n\n<body>"
+        type: feat / refactor / perf / chore / test / docs
+      - bug 修复: 必须包含三段式根因摘要:
+        root_cause — 一句话根因
+        fix_strategy — 修复策略
+        regression_check — 验证范围
+   3. git push
 ```
 
 ---
