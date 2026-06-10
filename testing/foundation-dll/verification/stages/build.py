@@ -804,13 +804,9 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             p = tpg_subjects_dir / stale
             if p.exists(): p.unlink()
         # ── Patch missing static field declarations ──
-        # The codegen may emit ldsfld/stsfld references in page files for static
-        # fields whose TargetReference.FieldTypeSubjectId is null, causing the
-        # This fixes C2065 "undeclared identifier" for chaos_static_* symbols
-        # that are referenced by page files but not declared in the shared header.
-        # FIXME(codegen): Move to BuildTypeDeclarationsCode(). Remaining after
-        #   ObjectModelEmission.cs initobj fix (SqlTypes chunk, commit df609308d).
-        #   The ecma335 chunk still shows gaps for cross-assembly boxed types.
+        # Patch missing type declarations (safety net, Task #71 B1)
+        # Codegen post-scan in ObjectModelEmission.cs catches cross-assembly
+        # type references.  This handles edge cases (null FieldTypeSubjectId).
         _patch_missing_static_field_decls(tpg_subjects_dir)
         # Reconfigure cmake to include newly copied subjects/ files
         tpg_build_dir = ctx.native_dir / "build"
