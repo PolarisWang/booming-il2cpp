@@ -21,6 +21,13 @@ pipeline:
       assemblyDirs: ""
     global-ns:
       assemblyDirs: "chunks/global-ns/managed/subjects"
+    security-cryptography:
+      assemblyDirs: "crypto-refs"
+    security-cryptography-2:
+      assemblyDirs: "crypto-refs"
+    system-security-cryptography-x509certificates:
+      assemblyDirs: "crypto-refs"
+
 
   # Timeouts in seconds for specific stages
   timeouts:

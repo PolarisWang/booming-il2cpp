@@ -1027,6 +1027,25 @@ public sealed partial class NativeAotLoweringPlanner
                     Console.Error.WriteLine($"[NS-DEDUP] Dropped {subjectDropped} subject method(s) of {methodsForLowering.Count - filtered.Count} total deduped");
             }
         }
+        // Also skip crypto methods from C++ emission (AotCoreIr JSON only).
+        var cryptoSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        {
+            var cryptoFiltered = new List<AotCoreIrMethodArtifact>(emitMethods.Count);
+            foreach (var m in emitMethods)
+            {
+                if (m.SubjectId.StartsWith("System.Security.Cryptography/", System.StringComparison.Ordinal))
+                {
+                    cryptoSubjectIds.Add(m.SubjectId);
+                    continue;
+                }
+                cryptoFiltered.Add(m);
+            }
+            if (cryptoFiltered.Count < emitMethods.Count)
+            {
+                Console.Error.WriteLine($"[CRYPTO-SKIP] Skipped {emitMethods.Count - cryptoFiltered.Count} crypto methods");
+                emitMethods = cryptoFiltered;
+            }
+        }
         var allMethods = new List<NativeAotMethodTemplateModel>(emitMethods.Count);
         for (int i = 0; i < emitMethods.Count; i++)
             allMethods.Add(EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
@@ -1980,23 +1999,37 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 if (m.Instructions == null) continue;
                 foreach (var instr in m.Instructions)
                 {
-                    if (string.IsNullOrEmpty(instr.TargetSymbol)) continue;
-                    if (!instr.TargetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-                        continue;
-                    if (declaredExtSymbols.Contains(instr.TargetSymbol))
-                        continue;
-                    externalRuntimeSymbolsReferenced.Add(instr.TargetSymbol);
+                    // Check TargetSymbol directly (set by codegen for resolved calls)
+                    if (!string.IsNullOrEmpty(instr.TargetSymbol) &&
+                        instr.TargetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal) &&
+                        !declaredExtSymbols.Contains(instr.TargetSymbol))
+                    {
+                        externalRuntimeSymbolsReferenced.Add(instr.TargetSymbol);
+                    }
+                    // Check Callee for methods that fall through to catch-all dispatch
+                    // (TargetSymbol may be null, but the emission code will generate
+                    // a chaos_external_runtime_* symbol from the Callee SubjectId).
+                    else if (!string.IsNullOrEmpty(instr.Callee) &&
+                             instr.Callee.Contains('/') &&
+                             !instr.Callee.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+                    {
+                        var sym = GetExternalRuntimeHelperSymbol(instr.Callee);
+                        if (!declaredExtSymbols.Contains(sym))
+                            externalRuntimeSymbolsReferenced.Add(sym);
+                    }
                 }
             }
         }
         if (externalRuntimeSymbolsReferenced.Count > 0)
         {
-            sb.AppendLine("// ── External runtime function declarations (post-scan) ──");
+            sb.AppendLine("// ── External runtime function stubs (post-scan) ──");
             foreach (var sym in externalRuntimeSymbolsReferenced.OrderBy(s => s))
             {
-                sb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
+                // Emit inline stub definition (not just extern) so the linker
+                // doesn't need to find a definition in another translation unit.
+                sb.Append("static inline CHAOS_IL2CPP_INTPTR ");
                 sb.Append(sym);
-                sb.AppendLine("();");
+                sb.AppendLine("() noexcept { return 0; }");
             }
             sb.AppendLine();
         }
