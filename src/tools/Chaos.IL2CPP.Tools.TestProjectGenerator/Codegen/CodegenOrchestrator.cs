@@ -27,7 +27,8 @@ public sealed class CodegenOrchestrator
     public CodegenResult Run(IReadOnlyList<string> assemblyPaths, string outputDir,
         string codegenMode = "aot",
         IReadOnlyList<string>? subjectMethodIds = null,
-        IReadOnlyList<string>? assemblyDirs = null)
+        IReadOnlyList<string>? assemblyDirs = null,
+        IReadOnlyList<string>? additionalAssemblyPaths = null)
     {
         try
         {
@@ -66,6 +67,17 @@ public sealed class CodegenOrchestrator
                         args.Add("--assembly-dir");
                         args.Add(fullPath);
                     }
+                }
+            }
+
+            // Pass additional assemblies as primary --assembly args so their
+            // methods get AotCoreIr JSON (used for interpreter fallback dispatch).
+            if (additionalAssemblyPaths is { Count: > 0 })
+            {
+                foreach (var dll in additionalAssemblyPaths)
+                {
+                    args.Add("--assembly");
+                    args.Add(Path.GetFullPath(dll));
                 }
             }
 
