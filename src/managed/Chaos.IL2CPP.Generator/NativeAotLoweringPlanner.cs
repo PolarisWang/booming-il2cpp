@@ -1955,6 +1955,52 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         sb.AppendLine("void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);");
         sb.AppendLine();
 
+        // ── Post-scan: emit extern "C" declarations for ALL chaos_external_runtime_*
+        // symbols referenced in method instructions but not in _externalRuntimeSubjects.
+        // These are methods that the codegen resolves via TargetSymbol but never adds
+        // to the dispatch table (e.g. System.Attribute..ctor called from Brotli tests
+        // where the codegen generates a direct symbol reference without a dispatch entry).
+        var externalRuntimeSymbolsReferenced = new HashSet<string>(StringComparer.Ordinal);
+        if (_methodsBySubjectId is { Count: > 0 })
+        {
+            var declaredExtSymbols = new HashSet<string>(StringComparer.Ordinal);
+            if (_externalRuntimeSubjects is { Count: > 0 })
+            {
+                foreach (var kvp in _externalRuntimeSubjects)
+                    declaredExtSymbols.Add(GetExternalRuntimeHelperSymbol(kvp.Key));
+            }
+            if (_externalRuntimeHelpers is { Count: > 0 })
+            {
+                foreach (var h in _externalRuntimeHelpers)
+                    declaredExtSymbols.Add(h.TargetSymbol);
+            }
+
+            foreach (var m in _methodsBySubjectId.Values)
+            {
+                if (m.Instructions == null) continue;
+                foreach (var instr in m.Instructions)
+                {
+                    if (string.IsNullOrEmpty(instr.TargetSymbol)) continue;
+                    if (!instr.TargetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+                        continue;
+                    if (declaredExtSymbols.Contains(instr.TargetSymbol))
+                        continue;
+                    externalRuntimeSymbolsReferenced.Add(instr.TargetSymbol);
+                }
+            }
+        }
+        if (externalRuntimeSymbolsReferenced.Count > 0)
+        {
+            sb.AppendLine("// ── External runtime function declarations (post-scan) ──");
+            foreach (var sym in externalRuntimeSymbolsReferenced.OrderBy(s => s))
+            {
+                sb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
+                sb.Append(sym);
+                sb.AppendLine("();");
+            }
+            sb.AppendLine();
+        }
+
         return sb.ToString();
     }
 
