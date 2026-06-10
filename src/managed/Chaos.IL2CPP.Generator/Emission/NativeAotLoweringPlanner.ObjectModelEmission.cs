@@ -1291,6 +1291,34 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		}
 		// Build cached set of types with a non-static Finalize method (for O(1) lookup).
 		_typesWithFinalizer.Clear();
+
+		// ── Post-scan all methods for boxed/referenced types not yet tracked ──
+		// The instruction scanner above may miss types referenced in instructions
+		// from assemblies that are not the primary compilation unit (e.g. Brotli
+		// referencing Chaos.TestFramework.Sdk types, or ecma335 referencing
+		// System.Reflection.Metadata.BlobContentId).  Scan ALL instructions for
+		// TargetReference SubjectIds and add any missing types to the declaration set.
+		// This ensures chaos_boxed_type_* / chaos_mt_* / chaos_type_* declarations
+		// exist in the shared header for ALL referenced types, not just primary ones.
+		foreach (var m in _methodsBySubjectId.Values)
+		{
+			if (m.Instructions == null) continue;
+			foreach (var instr in m.Instructions)
+			{
+				var tr = instr.TargetReference;
+				if (tr == null || string.IsNullOrEmpty(tr.SubjectId)) continue;
+				string tid = tr.SubjectId;
+				if (_allEmittedTypeSubjectIds.Contains(tid)) continue;
+				// Only track types from assemblies other than the primary one
+				// (primary assembly types are already handled by the scanner above).
+				if (tid.StartsWith("CombinedSubjects/", StringComparison.Ordinal)) continue;
+				_allEmittedTypeSubjectIds.Add(tid);
+				// If this is a value type, also ensure it's tracked for boxing
+				if (!referenceTypeSubjectIds.Contains(tid) && !hashSet3.Contains(tid))
+					hashSet3.Add(tid);
+			}
+		}
+
 		foreach (var m in _methodsBySubjectId.Values)
 		{
 			if (!m.IsStatic &&
