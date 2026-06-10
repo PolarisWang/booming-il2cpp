@@ -198,6 +198,16 @@ public sealed class CppProjectEmitter
             Console.Error.WriteLine($"  [DIAG] subjects model key: {typeName}");
         }
         RenderToFile("TestProject.RuntimeEntry.cpp.scriban", model, outputDir, "runtime-entry.cpp");
+        // Re-patch runtime-entry.cpp after RenderToFile overwrites it.
+        // This is the second write site (post-TPG-copy) that also needs
+        // the PatchRuntimeEntry fixes (assert stubs, SEH output, etc.).
+        string repatchPath = Path.Combine(outputDir, "runtime-entry.cpp");
+        if (File.Exists(repatchPath))
+        {
+            string repatchCode = File.ReadAllText(repatchPath);
+            repatchCode = PatchRuntimeEntry(repatchCode);
+            File.WriteAllText(repatchPath, repatchCode);
+        }
         RenderToFile("TestProject.Entry.cpp.scriban", model, outputDir, "entry.cpp");
         RenderToFile("TestProject.Entry.h.scriban", model, outputDir, "entry.h");
 
@@ -700,11 +710,19 @@ public sealed class CppProjectEmitter
         // Fix 1: Inline assert stubs (Assert_Reset/Assert_Complete)
         string assertStubs =
             "\n// AOT assert stubs (patched by CppProjectEmitter.PatchRuntimeEntry)\n" +
-            "extern \"C\" int Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() noexcept { return 0; }\n" +
-            "extern \"C\" int Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() noexcept { return 0; }\n";
+            "#include <cstdint>\n" +
+            "extern \"C\" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() {}\n" +
+            "extern \"C\" int32_t Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() { return 0; }\n";
         if (!code.Contains(assertStubs.TrimStart()))
         {
-            int insertPos = code.IndexOf("\nstatic ", StringComparison.Ordinal);
+            // Try LF then CRLF (template output may use CRLF on Windows)
+            string[] seps = { "\nstatic ", "\r\nstatic " };
+            int insertPos = -1;
+            foreach (var sep in seps)
+            {
+                insertPos = code.IndexOf(sep, StringComparison.Ordinal);
+                if (insertPos > 0) break;
+            }
             if (insertPos > 0)
                 code = code.Insert(insertPos, assertStubs);
         }
