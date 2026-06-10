@@ -7,29 +7,29 @@ description: il2cpp 核心开发 Controller — Hub-and-Spoke 分发循环。派
 
 ## 概述
 
-本 skill 是 **所有 il2cpp 开发任务的统一入口**。采用 **Hub-and-Spoke + Loop-back** 分发模式：
+本 skill 是 **所有 il2cpp 开发任务的统一入口**。采用 **Workflow 委托 + Hub-and-Spoke 混合**模式：
 
 ```
 Dispatcher 接收任务
   │
   ├── 拆分子任务清单
   ├── 循环:
-  │     ├── 选一个 Expert
-  │     ├── Skill("dev-xxx-expert") → 注入知识
-  │     ├── Expert 做自己能做的部分
+  │     ├── 单域 → Skill 注入 → 当前 Agent 自行实现
+  │     ├── 多域 → Workflow 委托 → 并行分派给各 Expert
   │     ├── Expert 标记:
-  │     │   ✅ done:     [已处理的部分]
-  │     │   ⏳ remaining: [未处理的部分]
+  │     │   ✅ done:     [已处理的子任务]
+  │     │   ⏳ remaining: [未处理的子任务]
   │     ├── Dispatcher 更新待办清单
-  │     └── 待办为空? → 退出循环; 否则 → 选下一个 Expert
+  │     └── 待办为空? → 退出循环; 否则 → 继续下一轮
   │
   └── ✅ 全部完成 → 质量门
 ```
 
 核心原则：
-- **Expert 做 partial**：每个 Expert 只做自己域内的部分，做不完的标记 remaining 回 Dispatcher
-- **Dispatcher 管进度**：维护待办清单，循环分派直到清空
-- **终止守卫**：连续 N 轮无进展 → 报错终止，防止无限循环
+- **Workflow 优先**：多域任务默认走 `Workflow({scriptPath: ...})` 并行委托，不询问用户
+- **Expert 做 partial**：每个 Expert 只做自己域内的部分，做不完的标记 remaining 返回 Dispatcher
+- **Dispatcher 管编排**：生成 Workflow 脚本，定义 Expert 之间的依赖和并行关系
+- **终止守卫**：Workflow 中定义 bounded retry（max 3），超时或连续无进展 → 报错终止
 
 ---
 
@@ -76,40 +76,47 @@ Dispatcher 接收任务
 
 ### 阶段 3: 分发循环（Dispatch Loop）
 
-这是核心循环，反复执行直到待办清单为空。
+循环执行直到待办清单为空。单域走 Skill 注入，多域走 Workflow 委托。
 
 ```
 todo = [子任务清单]       ← 初始 = 阶段 2 的输出
-tried = []              ← 已尝试过的 Expert
 round = 0
 
 while todo 非空:
   round++
-  if round > MAX_ROUNDS (默认 10):
+  if round > MAX_ROUNDS (默认 5):
     报错: "超过最大轮次，未完成: {todo}" → 终止
 
-  target_expert = 从分类矩阵选最匹配 todo 的 Expert
-  if target_expert in tried:
-    报错: "Expert {target_expert} 已尝试过但仍有剩余，其他 Expert 也无法处理 → 人工介入"
+  domains = todo 涉及的所有域
 
-  tried.append(target_expert)
-  输出 classification: "domains=[{todo的域}] mode=knowledge-inject expert={target_expert} round={round}"
+  if domains == 1:
+    ── 单域: 用 Skill 注入
+    target_expert = 从分类矩阵选匹配的 Expert
+    Skill("dev-{target_expert}") → 加载知识
+    当前 Agent 处理 todo 中自己能做的部分
+    ✅ done / ⏳ remaining → 更新待办
 
-  Skill("dev-{target_expert}")  →  加载 Expert 知识到当前上下文
+  else:
+    ── 多域: 走 Workflow 委托（默认，不询问用户）
+    1. 子任务按 Expert 域分组
+    2. 生成 Workflow 脚本:
+       export const meta = { name, phases: [...] }
+       parallel: 各 Expert 并行处理（无依赖时）
+       pipeline: 有依赖时定义先后顺序
+       每个 agent() 带 schema 约束输出格式
+    3. Workflow({script}) → 异步并行执行
+    4. 收集各 Expert 结果:
+       ✅ done / ⏳ remaining → 更新待办
 
-  /* 当前 Agent 利用 Expert 知识处理 todo 中自己能做的部分 */
-  ✅ done:       [已处理的子任务]
-  ⏳ remaining:  [未处理的子任务]
-
-  todo = remaining
+  输出 classification: "domains=[{domains}] mode=workflow round={round}"
   /* 进入下一轮 while 循环 */
 ```
 
 **终止守卫**：
 ```
-MAX_ROUNDS = 10（默认）
-- 超过 10 轮 → 终止，报残留任务
-- 连续 3 轮 todo 无缩减 → 终止，报"无进展"
+MAX_ROUNDS = 5（默认）
+- 超过 5 轮 → 终止，报残留任务
+- 连续 2 轮 todo 无缩减 → 终止，报"无进展"
 - 所有 Expert 已尝试但 todo 仍有残留 → 终止，报"无法处理的子任务"
 ```
 
@@ -179,15 +186,16 @@ MAX_ROUNDS = 10（默认）
 
 1. **先分类再行动** — 禁止跳过分类直接实现
 2. **每轮输出 classification 声明** — 格式 `classification: domains=[...] expert=xxx round=N`
-3. **维护待办清单** — 在上下文中显式维护 todo list，每轮同步
-4. **终止守卫不可跳过** — 超过 MAX_ROUNDS 或无进展时必须终止，不能死循环
+3. **多域默认 Workflow** — ≥2 域直接走 Workflow 委托，不询问用户
+4. **维护待办清单** — 在上下文中显式维护 todo list，每轮同步
 5. **Expert 标记 completed/remaining** — 每个 Expert 执行完后必须输出 done/remaining
 6. **质量门不可跳过** — 阶段 4
+7. **Workflow bounded retry** — max 3 次重试，超时则终止报残留
 
 ## 集成点
 
 | 上游 | 本 skill | 下游 |
 |------|----------|------|
-| `dev-using-booming` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | `Skill("dev-il2cpp-*-expert")` — 知识注入 |
-| 用户直接输入 | | `Skill("dev-project-test-governance")` |
-| | | `Workflow({scriptPath: "orchestrator.workflow.js"})` |
+| `dev-using-booming` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | 单域: `Skill("dev-*-expert")` — 知识注入 |
+| 用户直接输入 | | 多域: `Workflow({script})` — 并行委托 |
+| | | 质量门: `dev-trace-enforcement` / `dev-verification-before-completion` |

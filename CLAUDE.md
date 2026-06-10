@@ -12,30 +12,29 @@
 
 ## 分类硬规则（强制）
 
-在任何实现操作（Read/Bash/Edit/Write/Grep/Glob）之前，必须先完成域分类：
+**每收到一条用户消息后，在使用任何工具前，必须先输出分类声明。**
 
-1. **输出一行分类声明**：`classification: domains=[运行时, 调试] mode=knowledge-inject expert=dev-il2cpp-runtime-expert round=1`
-2. 单域任务 → 用 Skill 工具加载对应 Expert 知识后自行实现
-3. 多域任务（≥2 域）→ 询问用户走串行还是 Workflow 委托
-4. **在输出分类声明之前，禁止任何文件操作或代码修改**
+即使上一个消息已经分类过，新消息也必须重新分类。包括用户只说"继续"、"A"、"好"等简短回复的情况——这些可能意味着新任务，也可能意味着继续旧任务，分类声明会明确说明。
 
-### Hub-and-Spoke 分发循环规则
+1. **格式**：`classification: domains=[运行时, 调试] mode=knowledge-inject action=<read|fix|build|verify|plan> round=N`
+2. `action` 字段必填，描述本轮要做的操作类型
+3. 单域 → Skill 加载 Expert 知识后自行实现
+4. 多域（≥2）→ 默认走 Workflow 委托，不询问用户
+5. **在输出分类声明之前，禁止使用任何工具**（包括 Read/Bash/Edit/Write/Grep/Glob/Skill/Workflow）
+
+### Workflow 分发循环规则
 
 当任务涉及多个域时，Controller 自动进入分发循环模式：
 
 1. **拆分子任务清单** — 将任务拆为多个子任务，每个子任务可被一个 Expert 处理
-2. **循环分派** — 每次选一个 Expert，用 Skill 工具注入知识，当前 Agent 参考实现
-3. **Partial completion** — Expert 处理自己能做的部分，标记：
+2. **Workflow 委托** — 生成 Workflow 脚本，按 Expert 域分组并行分派
+3. **Partial completion** — 每个 Expert 处理自己能做的部分，标记：
    - `✅ done: [已处理的子任务]`
    - `⏳ remaining: [未处理的子任务 + 原因]`
-4. **Loop-back** — Dispatcher 从 ✅ done 中移除已完成的，将 ⏳ remaining 保留，继续选择下一个 Expert
+4. **Loop-back** — Dispatcher 从 ✅ done 中移除已完成的，将 ⏳ remaining 保留，继续下一轮 Workflow
 5. **终止守卫**：
-   - 超过 10 轮 → 终止
-   - 连续 3 轮无进展 → 终止
-   - 所有 Expert 已尝试但仍有剩余 → 终止，需人工介入
-6. **每轮声明** — 每轮循环开始前输出：`classification: ... expert=xxx round=N`
-
-这条规则适用于所有任务阶段。
+   - 连续 2 轮 Workflow 无进展 → 终止，需人工介入
+6. **每轮声明** — 每轮 Workflow 前输出：`classification: ... workflow delegation round=N`
 
 ## Trace 优先调试
 
