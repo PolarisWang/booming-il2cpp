@@ -287,6 +287,14 @@ public sealed record ManagedClosureResult
     public required NativeAotLoweringPlanArtifact NativeAotLoweringPlan { get; init; }
 
     public required ManagedClosureManifestArtifact ClosureManifest { get; init; }
+
+    /// <summary>
+    /// All managed methods from the original linked world, including those that
+    /// were skipped during AotCoreIr lowering (e.g. crypto methods without shapes).
+    /// Keyed by SubjectId.  Used by the interpreter routing fallback to generate
+    /// AotCoreIr JSON for methods that failed the lowering pipeline.
+    /// </summary>
+    public IReadOnlyDictionary<string, ManagedMethodModel>? AllManagedMethods { get; init; }
 }
 
 public sealed record NativeReferenceProofRequest(string ManagedClosureRootPath, string OutputRootPath);

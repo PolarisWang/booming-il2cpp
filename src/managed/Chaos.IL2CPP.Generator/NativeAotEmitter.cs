@@ -43,7 +43,8 @@ public sealed class NativeAotEmitter
         string outputRootPath,
         CodegenMode mode = CodegenMode.Aot,
         HashSet<string>? subjectMethods = null,
-        string? goldProfilePath = null)
+        string? goldProfilePath = null,
+        IReadOnlyDictionary<string, ManagedMethodModel>? allManagedMethods = null)
     {
         ValidateLoweringPlan(loweringPlan, closureManifest);
         var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
@@ -66,7 +67,8 @@ public sealed class NativeAotEmitter
             supplementalMetadataTemplate,
             fullAssemblyMode: isFullAssembly,
             mode: mode,
-            subjectMethods: subjectMethods);
+            subjectMethods: subjectMethods,
+            allManagedMethods: allManagedMethods);
 
         var (generatedSources, generatedArtifacts) = BuildGeneratedSources(
             templateModel, loweringPlan);

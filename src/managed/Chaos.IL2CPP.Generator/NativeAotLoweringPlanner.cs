@@ -590,7 +590,8 @@ public sealed partial class NativeAotLoweringPlanner
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
         bool fullAssemblyMode = false,
         CodegenMode mode = CodegenMode.Aot,
-        HashSet<string>? subjectMethods = null)
+        HashSet<string>? subjectMethods = null,
+        IReadOnlyDictionary<string, ManagedMethodModel>? allManagedMethods = null)
     {
         ArgumentNullException.ThrowIfNull(loweringPlan);
         ArgumentNullException.ThrowIfNull(aotCoreIr);

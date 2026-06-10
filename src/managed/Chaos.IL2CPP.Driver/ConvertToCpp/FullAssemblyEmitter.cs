@@ -27,7 +27,8 @@ internal sealed class FullAssemblyEmitter
             outputRoot,
             mode,
             subjectMethods,
-            goldProfilePath: goldProfilePath);
+            goldProfilePath: goldProfilePath,
+            allManagedMethods: closureResult.AllManagedMethods);
 
         foreach (var source in emitResult.GeneratedSources)
         {
