@@ -694,6 +694,7 @@ public sealed partial class NativeAotLoweringPlanner
 		StringBuilder stringBuilder6 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(1, 1, stringBuilder);
 		handler.AppendFormatted(indentation);
+		builder.AppendLine($"{indentation}    chaos_func_end: ;");
 		handler.AppendLiteral("}");
 		stringBuilder6.AppendLine(ref handler);
 	}
@@ -2754,18 +2755,31 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine($"{indentation}    std::memset(chaos_value, 0, sizeof(*chaos_value));");
 		}
 		else
-		{
-			builder.AppendLine($"{indentation}    const auto chaos_address = {ConsumeEvalStackValueExpression()};");
-			builder.AppendLine($"{indentation}    if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)");
-			builder.AppendLine($"{indentation}    {{");
-			builder.AppendLine($"{indentation}        auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));");
-			builder.AppendLine($"{indentation}        *chaos_slot = 0;");
-			builder.AppendLine($"{indentation}    }}");
-			builder.AppendLine($"{indentation}    else");
-			builder.AppendLine($"{indentation}    {{");
-			builder.AppendLine($"{indentation}        *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;");
-			builder.AppendLine($"{indentation}    }}");
-		}
+			{
+				var initExpr = ConsumeEvalStackValueExpression();
+				// Carrier types (e.g. Vector<T>) on the managed pointer ABI store a pointer
+				// to carrier data in the slot. Writing 0 to the slot destroys the pointer.
+				// Instead, resolve the managed pointer and memset the carrier data.
+				if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType &&
+				    IsStructuredValueTypeSubjectId(requiredTargetReference.SubjectId))
+				{
+					builder.AppendLine($"{indentation}    auto* chaos_value = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(requiredTargetReference.SubjectId)}>({initExpr});");
+					builder.AppendLine($"{indentation}    std::memset(chaos_value, 0, sizeof(*chaos_value));");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_address = {initExpr};");
+					builder.AppendLine($"{indentation}    if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)");
+					builder.AppendLine($"{indentation}    {{");
+					builder.AppendLine($"{indentation}        auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));");
+					builder.AppendLine($"{indentation}        *chaos_slot = 0;");
+					builder.AppendLine($"{indentation}    }}");
+					builder.AppendLine($"{indentation}    else");
+					builder.AppendLine($"{indentation}    {{");
+					builder.AppendLine($"{indentation}        *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;");
+					builder.AppendLine($"{indentation}    }}");
+				}
+			}
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -2918,6 +2932,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			{
 				builder.AppendLine($"{indentation}{{");
 				builder.AppendLine($"{indentation}    CHAOS_IL2CPP_FAIL(\"Unlowered method body: self-call from {invocationTarget.TargetSymbol}\");");
+				builder.AppendLine($"{indentation}    chaos_extdirect_end: ;");
 				builder.AppendLine($"{indentation}}}");
 				return;
 			}
@@ -3560,6 +3575,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 					builder.AppendLine($"{indentation}    {{");
 					builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+					builder.AppendLine($"{indentation}        goto chaos_dt_end_{instruction.IlOffset};");
 					builder.AppendLine($"{indentation}    }}");
 					// RCW-aware COM object pointer extraction.
 					// If chaos_arg_0 is an RCW handle, extract the identity_unknown.
@@ -3653,6 +3669,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}    if (chaos_delegate_value == 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+		builder.AppendLine($"{indentation}        goto chaos_dinv_end_{instruction.IlOffset};");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    auto* chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
 		builder.AppendLine($"{indentation}    if (chaos_delegate->chaos_delegate_invocation_count > 0)");
@@ -3794,6 +3811,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}    }}");
+		builder.AppendLine($"{indentation}    chaos_dinv_end_{instruction.IlOffset}: ;");
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -4085,6 +4103,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 			builder.AppendLine(indentation + "    {");
 			builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+			builder.AppendLine(indentation + "        goto chaos_func_end;");
 			builder.AppendLine(indentation + "    }");
 		}
 		string argList = FormatAbiInvocationArgumentList(parameterAbis);
@@ -4158,6 +4177,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 				    builder.AppendLine(indentation + "    {");
 				    builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+				    builder.AppendLine(indentation + "        goto chaos_extdirect_end;");
 				    builder.AppendLine(indentation + "    }");
 				}
 				string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
@@ -4215,6 +4235,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 		    builder.AppendLine(indentation + "    {");
 		    builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+		    builder.AppendLine(indentation + "        goto chaos_extext_end;");
 		    builder.AppendLine(indentation + "    }");
 		}
 		else if (enforceInstanceNullCheck && (string.Equals(instruction?.Op, "callvirt", StringComparison.Ordinal) || string.Equals(instruction?.Op, "call", StringComparison.Ordinal) || string.Equals(instruction?.Op, "calli", StringComparison.Ordinal)))
@@ -4249,6 +4270,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine($"{indentation}    const auto chaos_result = reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
 			EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", indentation + "    ");
 		}
+		builder.AppendLine($"{indentation}    chaos_extext_end: ;");
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -4284,6 +4306,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
+		builder.AppendLine($"{indentation}        goto chaos_vcall_end_{instruction.IlOffset};");
 		builder.AppendLine($"{indentation}    }}");
 		// VTable resolve ¡ª always through type_info->vtable_array (unified ThinLockableHeader)
 		string vtableSource = $"chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array";
@@ -4317,6 +4340,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			EmitAbiReturnPush(builder, dispatchSlotMethod.ReturnAbi, "chaos_callvirt_result", indentation + "    ");
+		builder.AppendLine($"{indentation}    chaos_vcall_end_{instruction.IlOffset}: ;");
 		}
 		builder.AppendLine($"{indentation}}}");
 	}

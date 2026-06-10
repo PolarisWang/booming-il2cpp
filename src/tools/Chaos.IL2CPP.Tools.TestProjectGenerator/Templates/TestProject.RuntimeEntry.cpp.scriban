@@ -6,7 +6,6 @@
 //   --fact-json          — per-method JSON output (value-level verification)
 //   --benchmark N I      — benchmark method N for I iterations
 //   --benchmark-all I    — benchmark ALL methods for I iterations, per-line JSON
-//   --profile            — benchmark all methods with GC profile metrics (JSON)
 //   --hotupdate          — hotpatch fact: baseline + apply + semantic-check + revert
 //   --hotupdate-and-benchmark N I — post-patch benchmark
 //   --microbench         — interpreter microbenchmarks
@@ -608,52 +607,6 @@ static int RunBenchmarkAllMode(int iterations) {
     return 0;
 }
 
-
-// ── --profile: benchmark all methods with GC profile metrics ─────
-static int RunProfileMode() noexcept {
-    const int kCount = kSubjectEntryCount;
-    auto* entries = GetHotpatchEntries();
-    printf("{"profile":[");
-    fflush(stdout);
-    bool first = true;
-    for (int si = 0; si < kCount; si++) {
-        int i = kSubjectSlotMap[si];
-#if defined(_WIN32)
-        __try {
-#endif
-            auto gcBefore = chaos::il2cpp::runtime_core::chaos_gc_get_total_pause_duration();
-            auto allocBefore = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
-            auto gcCountBefore = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(0);
-            for (int w = 0; w < 100; w++)
-                chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, i);
-            if (!first) printf(",");
-            first = false;
-            auto start = std::chrono::steady_clock::now();
-            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, i);
-            auto end = std::chrono::steady_clock::now();
-            auto gcAfter = chaos::il2cpp::runtime_core::chaos_gc_get_total_pause_duration();
-            auto allocAfter = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
-            auto gcCountAfter = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(0);
-            double ms = std::chrono::duration<double, std::milli>(end - start).count();
-            printf("{"methodIndex":%d,"gcPauseNs":%" PRId64 ","maxGcPauseNs":%" PRId64 ","
-                   ""nurseryAllocBytes":%" PRId64 ","allocCount":%d,"elapsedMs":%.3f}",
-                   i, (int64_t)(gcAfter - gcBefore), (int64_t)(gcAfter - gcBefore),
-                   (int64_t)(allocAfter - allocBefore), (int)(gcCountAfter - gcCountBefore), ms);
-#if defined(_WIN32)
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
-            if (!first) printf(",");
-            first = false;
-            printf("{"methodIndex":%d,"gcPauseNs":0,"maxGcPauseNs":0,"nurseryAllocBytes":0,"allocCount":0,"error":"exception"}", i);
-        }
-#endif
-        fflush(stdout);
-    }
-    printf("],"summary":{"methodCount":%d}}
-", kCount);
-    fflush(stdout);
-    return 0;
-}
-
 // ── --benchmark-range: benchmark a contiguous range of method table indices ─
 // First argument: start index (inclusive), Second argument: end index (exclusive)
 static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
@@ -1174,11 +1127,6 @@ int main(int argc, char* argv[]) {
             printf("{\"elapsedMilliseconds\":-1.0,\"error\":\"subject index out of range\"}\n");
             ret = 1;
         }
-        goto shutdown;
-    }
-
-    if (std::strcmp(argv[1], "--profile") == 0) {
-        ret = RunProfileMode();
         goto shutdown;
     }
 

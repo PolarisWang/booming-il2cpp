@@ -422,65 +422,89 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
 //   System.Double  -> 42.0  (bitcast to intptr_t)
 //   System.Void    -> 0
 //   other          -> 0 (nullptr for objects)
+
+// ── External runtime fallback + dispatch ──────────────────────────
+// Called from generated chaos_external_runtime_*() stubs when the
+// kChaosExternalRuntimeFnTable entry is null.  Resolves the subject ID
+// via the external dispatch table and hotpatch registry, then calls
+// InterpreterEntryDirect to actually execute the managed method.
+// If resolution fails, CHAOS_IL2CPP_FAIL makes it a hard error so
+// missing dispatch entries are surfaced immediately during development.
+
+/// Parse a full subjectId into (ns, type_name, method_name).
+extern int32_t kChaosExternalRuntimeCount;
+extern const char* const* kChaosExternalRuntimeSubjects;
+extern void** kChaosExternalRuntimeFnTable;
+
+static void _ParseSubjectId(const char* sid,
+                            std::string& ns,
+                            std::string& type_name,
+                            std::string& method_name) noexcept
+{
+    ns.clear(); type_name.clear(); method_name.clear();
+    if (sid == nullptr || *sid == 0) return;
+    const char* mm = std::strstr(sid, "::");
+    if (mm == nullptr) return;
+    const char* sl = mm;
+    while (sl > sid && *sl != '/') --sl;
+    if (*sl == '/') { ns.assign(sid, sl - sid); ++sl; } else { sl = sid; }
+    type_name.assign(sl, mm - sl);
+    const char* ms = mm + 2;
+    const char* pn = std::strchr(ms, '(');
+    const char* rm = ms;
+    while (*rm && *rm != ':' && *rm != '(') ++rm;
+    const char* me = (pn && pn < rm) ? pn : rm;
+    method_name.assign(ms, me - ms);
+}
+
+/// Try to resolve a subject ID and call InterpreterEntryDirect.
+static bool _TryInvoke(const char* sid) noexcept
+{
+    if (sid == nullptr) return false;
+    std::string ns, tn, mn;
+    _ParseSubjectId(sid, ns, tn, mn);
+    if (tn.empty() || mn.empty()) return false;
+    auto& reg = GetHotpatchNameRegistry();
+    uint64_t r = reg.LookupMethod(ns.c_str(), tn.c_str(), mn.c_str());
+    if (r == 0) return false;
+    uint32_t mi = static_cast<uint32_t>(r >> 32);
+    uint32_t tk = static_cast<uint32_t>(r & 0xFFFFFFFFu);
+    if (mi >= reg.ModuleCount()) return false;
+    uint32_t sl = reg.TokenToSlot(mi, tk);
+    if (sl == ~0u) return false;
+    auto* en = reg.GetDispatchEntryBySlot(mi, sl);
+    if (en == nullptr) return false;
+    if (en->method_key == 0) return false;
+    uint64_t args[4] = {}; uint64_t ret[2] = {};
+    InterpreterEntryDirect((uintptr_t)(en->method_key), args, ret);
+    return true;
+}
+
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept
 {
-    if (subject_id == nullptr) return 0;
+    if (subject_id == nullptr)
+        CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: null subject_id");
 
-    // Find the return type: SubjectId format is "...:ReturnType(params...)"
-    // Look for the last ':' before '('
-    const char* paren = std::strchr(subject_id, '(');
-    if (paren == nullptr) return 0;
-    // Search backwards from '(' for ':'
-    const char* ret = paren;
-    while (ret > subject_id && *ret != ':') --ret;
-    if (ret == subject_id || *ret != ':') return 0;
-    ret++; // skip ':'
-
-    // ret now points to the return type name, e.g. "System.Boolean" or "System.Int32"
-    // Compare against known types
-    if (std::strncmp(ret, "System.Boolean", 14) == 0)
-        return 1;  // true
-
-    if (std::strncmp(ret, "System.Int32", 12) == 0 ||
-        std::strncmp(ret, "System.UInt32", 13) == 0)
-        return 42;
-
-    if (std::strncmp(ret, "System.Int64", 12) == 0 ||
-        std::strncmp(ret, "System.UInt64", 13) == 0)
-        return 42;
-
-    if (std::strncmp(ret, "System.IntPtr", 13) == 0 ||
-        std::strncmp(ret, "System.UIntPtr", 14) == 0)
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(static_cast<void*>(nullptr));
-
-    // For floating point, return bitcast of 42.0 so the bits are reasonable
-    if (std::strncmp(ret, "System.Single", 13) == 0) {
-        float f = 42.0f;
-        CHAOS_IL2CPP_INTPTR result;
-        std::memcpy(&result, &f, sizeof(result));
-        return result;
-    }
-    if (std::strncmp(ret, "System.Double", 13) == 0) {
-        double d = 42.0;
-        CHAOS_IL2CPP_INTPTR result;
-        std::memcpy(&result, &d, sizeof(result));
-        return result;
+    // Scan dispatch table for a matching subject ID
+    if (kChaosExternalRuntimeCount > 0) {
+        for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
+            if (kChaosExternalRuntimeSubjects[i] != nullptr &&
+                std::strstr(kChaosExternalRuntimeSubjects[i], subject_id) != nullptr)
+            {
+                if (_TryInvoke(kChaosExternalRuntimeSubjects[i]))
+                    return 0;
+                // Found in table but unresolvable — codegen/metadata mismatch
+                CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: subject '%s' found in dispatch "                    "table but unresolvable via hotpatch", subject_id);
+            }
+        }
     }
 
-    // Default: allocate a sentinel object instead of returning nullptr.
-    // Returning 0 for reference types causes null-dereference AV in the caller
-    // (value=-1).  A small GC allocation gives the caller valid memory to
-    // read from — the data will be garbage but no crash.
-    auto* _rs = GetCurrentRuntimeState();
-    auto* _ts = GetCurrentThreadState();
-    if (_rs != nullptr && _ts != nullptr)
-    {
-        void* sentinel = GcAllocateAtomic(32);
-        if (sentinel != nullptr)
-            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(sentinel);
-    }
+    // Not found in any dispatch table — codegen emitted a stub for a method
+    // that has no AOT body and no external runtime resolution.
+    CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: no dispatch entry for '%s' — "        "codegen generated a stub but no AOT body or dispatch entry exists", subject_id);
     return 0;
 }
+
 
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

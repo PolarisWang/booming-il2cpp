@@ -7862,6 +7862,95 @@ public sealed partial class NativeAotLoweringPlanner
                     CreateNativeIntAbiSlot()),
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
+            // ── ComWrappers stubs (AOT: COM not available, return 0/null) ─────────
+            registry.Register("System.Runtime.InteropServices.ComWrappers",
+                "RegisterForMarshalling", ["System.Runtime.InteropServices.ComWrappers"],
+                ShapeKind.SimpleForward, "ChaosComWrappersRegisterForMarshalling",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Runtime.InteropServices.ComWrappers", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Runtime.InteropServices.ComWrappers",
+                "GetOrCreateComInterfaceForObject", ["System.Object", "System.Int32", "System.Runtime.InteropServices.ComWrappers"],
+                ShapeKind.SimpleForward, "ChaosComWrappersGetOrCreateComInterfaceForObject",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                CreateNativeIntAbiSlot("System.Int32", AotCoreIrTypeShapeKind.ValueType),
+                CreateNativeIntAbiSlot("System.Runtime.InteropServices.ComWrappers", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1, 2 });
+
+            registry.Register("System.Runtime.InteropServices.ComWrappers",
+                "GetOrCreateObjectForComInstance", ["System.IntPtr", "System.Int32", "System.Runtime.InteropServices.ComWrappers"],
+                ShapeKind.SimpleForward, "ChaosComWrappersGetOrCreateObjectForComInstance",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                CreateNativeIntAbiSlot(),
+                CreateNativeIntAbiSlot("System.Int32", AotCoreIrTypeShapeKind.ValueType),
+                CreateNativeIntAbiSlot("System.Runtime.InteropServices.ComWrappers", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1, 2 });
+
+            registry.Register("System.Runtime.InteropServices.ComWrappers",
+                "TryGetComInstance", ["System.Object", "System.Runtime.InteropServices.ComWrappers"],
+                ShapeKind.SimpleForward, "ChaosComWrappersTryGetComInstance",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                CreateNativeIntAbiSlot("System.Runtime.InteropServices.ComWrappers", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Int32", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Runtime.InteropServices.ComWrappers",
+                "TryGetObject", ["System.IntPtr", "System.Runtime.InteropServices.ComWrappers"],
+                ShapeKind.SimpleForward, "ChaosComWrappersTryGetObject",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                CreateNativeIntAbiSlot(),
+                CreateNativeIntAbiSlot("System.Runtime.InteropServices.ComWrappers", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Int32", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1 });
+
+            // ── NativeLibrary stubs (DirectNativeSymbol) ──────────────────────────
+            registry.Register("System.Runtime.InteropServices.NativeLibrary",
+                "Load", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosNativeLibraryLoad",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Runtime.InteropServices.NativeLibrary",
+                "Free", ["System.IntPtr"],
+                ShapeKind.SimpleForward, "ChaosNativeLibraryFree",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot("System.Int32", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Runtime.InteropServices.NativeLibrary",
+                "GetExport", ["System.IntPtr", "System.String"],
+                ShapeKind.SimpleForward, "ChaosNativeLibraryGetExport",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                CreateNativeIntAbiSlot(),
+                CreateNativeIntAbiSlot("System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Runtime.InteropServices.NativeLibrary",
+                "GetMainProgramHandle", [],
+                ShapeKind.SimpleForward, "ChaosNativeLibraryGetMainProgramHandle",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>([]),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int>());
 
             // === BCL token stubs (Option C: value type as NativeInt token, primitives return 0) ===
             // These let the pipeline complete without lowering BCL methods.

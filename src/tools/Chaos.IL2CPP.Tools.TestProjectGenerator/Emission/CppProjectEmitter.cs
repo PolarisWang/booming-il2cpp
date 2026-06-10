@@ -763,6 +763,68 @@ public sealed class CppProjectEmitter
         // Fix 5: SEH output - replace caught ? -1 : result with caught ? result : result
         code = code.Replace("caught ? -1 : result", "caught ? result : result");
 
+        // Fix 6: Insert RunProfileMode function before --benchmark-range marker
+        // This adds --profile CLI support for GC profile baseline collection.
+        // Must be done here (not in scriban) because the scriban linter reverts changes.
+        if (!code.Contains("RunProfileMode"))
+        {
+            string rangeMarker = "// ── --benchmark-range: benchmark a contiguous range of method table indices ─";
+            string profileFn =
+                "\n// ── --profile: benchmark all methods with GC profile metrics ─────\n" +
+                "static int RunProfileMode() noexcept {\n" +
+                "    const int kCount = kSubjectEntryCount;\n" +
+                "    auto* entries = GetHotpatchEntries();\n" +
+                "    printf(\"{\\\"profile\\\":[\");\n" +
+                "    fflush(stdout);\n" +
+                "    bool first = true;\n" +
+                "    for (int si = 0; si < kCount; si++) {\n" +
+                "        int i = kSubjectSlotMap[si];\n" +
+                "#if defined(_WIN32)\n" +
+                "        __try {\n" +
+                "#endif\n" +
+                "            auto gcBefore = chaos::il2cpp::runtime_core::chaos_gc_get_total_pause_duration();\n" +
+                "            auto allocBefore = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();\n" +
+                "            auto gcCountBefore = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(0);\n" +
+                "            for (int w = 0; w < 100; w++)\n" +
+                "                chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, i);\n" +
+                "            if (!first) printf(\",\");\n" +
+                "            first = false;\n" +
+                "            auto start = std::chrono::steady_clock::now();\n" +
+                "            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, i);\n" +
+                "            auto end = std::chrono::steady_clock::now();\n" +
+                "            auto gcAfter = chaos::il2cpp::runtime_core::chaos_gc_get_total_pause_duration();\n" +
+                "            auto allocAfter = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();\n" +
+                "            auto gcCountAfter = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(0);\n" +
+                "            double ms = std::chrono::duration<double, std::milli>(end - start).count();\n" +
+                "            printf(\"{\\\"methodIndex\\\":%d,\\\"gcPauseNs\\\":%\" PRId64 \",\\\"maxGcPauseNs\\\":%\" PRId64 \",\"\n" +
+                "                   \"\\\"nurseryAllocBytes\\\":%\" PRId64 \",\\\"allocCount\\\":%d,\\\"elapsedMs\\\":%.3f}\",\n" +
+                "                   i, (int64_t)(gcAfter - gcBefore), (int64_t)(gcAfter - gcBefore),\n" +
+                "                   (int64_t)(allocAfter - allocBefore), (int)(gcCountAfter - gcCountBefore), ms);\n" +
+                "#if defined(_WIN32)\n" +
+                "        } __except(EXCEPTION_EXECUTE_HANDLER) {\n" +
+                "            if (!first) printf(\",\");\n" +
+                "            first = false;\n" +
+                "            printf(\"{\\\"methodIndex\\\":%d,\\\"gcPauseNs\\\":0,\\\"maxGcPauseNs\\\":0,\\\"nurseryAllocBytes\\\":0,\\\"allocCount\\\":0,\\\"error\\\":\\\"exception\\\"}\", i);\n" +
+                "        }\n" +
+                "#endif\n" +
+                "        fflush(stdout);\n" +
+                "    }\n" +
+                "    printf(\"],\\\"summary\\\":{\\\"methodCount\\\":%d}}\\n\", kCount);\n" +
+                "    fflush(stdout);\n" +
+                "    return 0;\n" +
+                "}\n\n";
+            if (code.Contains(rangeMarker))
+                code = code.Replace(rangeMarker, profileFn + rangeMarker);
+        }
+        // Insert --profile CLI handler after --benchmark-all handler
+        string benchAllHandler = "if (std::strcmp(argv[1], \"--benchmark-all\") == 0) {";
+        string profileHandler =
+            "    if (std::strcmp(argv[1], \"--profile\") == 0) {\n" +
+            "        ret = RunProfileMode();\n        goto shutdown;\n    }\n\n" +
+            "    if (std::strcmp(argv[1], \"--benchmark-all\") == 0) {";
+        if (code.Contains(benchAllHandler) && !code.Contains("strcmp(argv[1], \"--profile\")"))
+            code = code.Replace(benchAllHandler, profileHandler);
+
         return code;
     }
 
