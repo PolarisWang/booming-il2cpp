@@ -1417,6 +1417,16 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // System.Attribute..ctor(void) — base constructor called from attribute
+            // subclasses (e.g. FactAttribute).  Must be registered as an external
+            // runtime helper to ensure the chaos_external_runtime_* declaration is
+            // emitted in the generated header.
+            registry.Register("System.Attribute", ".ctor", [],
+                ShapeKind.SimpleForward, "ChaosExternalRuntimeFallback",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateVoidAbiSlot(),
+                EmptyRawArgumentIndices);
+
             registry.Register("System.Object", "Equals", ["System.Object"],
                 ShapeKind.SimpleForward, "chaos_object_equals",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]

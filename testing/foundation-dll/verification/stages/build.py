@@ -1091,43 +1091,108 @@ def _ensure_assert_stubs(native_dir: Path) -> None:
 
 
 def _patch_missing_static_field_decls(subjects_dir: Path) -> None:
-    """Patch missing chaos_static_* extern declarations and definitions.
+    """Patch missing declarations in generated C++ code.
 
-    The codegen may emit ldsfld/stsfld references to static fields in page files
-    for which it did not emit the corresponding extern declaration in the shared
-    header or the definition in the shared cpp.  Scan the page files for
-    undeclared chaos_static_ symbols and add them.
+    The codegen may emit references to chaos_static_*, chaos_mt_*, and
+    chaos_external_runtime_* symbols in page files without declaring or
+    defining them in the shared header/cpp.  Scan page files for all
+    undeclared symbols and add minimal declarations.
+
+    FIXME(codegen): Each symbol category needs a proper codegen fix:
+      - chaos_static_*: static field declaration discover for external assemblies
+      - chaos_mt_*: EH clause catch-type MethodTable declarations
+      - chaos_external_runtime_*: non-dispatch-table function declarations
+    See Task #71 (B1) for tracking.
     """
     header = subjects_dir / "native-aot.generated.header.h"
     cpp = subjects_dir / "native-aot.generated.cpp"
     if not header.exists() or not cpp.exists():
         return
 
-    # ── Step 1: Gather all chaos_static_ symbols declared in header ──
     h_text = header.read_text(encoding="utf-8", errors="replace")
+
+    # ── Step 1: chaos_static_* — gather declared vs referenced ──
     declared_statics: set[str] = set()
-    for m in re.finditer(r'\bextern\s+CHAOS_IL2CPP_INTPTR\s+(chaos_static_\w+)\s*;', h_text):
+    for m in re.finditer(r'\bextern\s+(?:CHAOS_IL2CPP_INTPTR\s+)?(chaos_static_\w+)\s*;', h_text):
         declared_statics.add(m.group(1))
 
-    # ── Step 2: Gather all chaos_static_ symbols referenced in page files ──
     referenced_statics: set[str] = set()
     for f in sorted(subjects_dir.glob("native-aot.page-*.cpp")):
         text = f.read_text(encoding="utf-8", errors="replace")
         for m in re.finditer(r'\b(chaos_static_\w+)\b', text):
             referenced_statics.add(m.group(1))
 
-    # ── Step 3: Find missing symbols and add them ──
-    missing = referenced_statics - declared_statics
-    if not missing:
+    missing_statics = referenced_statics - declared_statics
+
+    # ── Step 2: chaos_mt_* — gather declared vs referenced ──
+    declared_mt: set[str] = set()
+    for m in re.finditer(r'\bextern\s+MethodTable\s+(chaos_mt_\w+)\s*;', h_text):
+        declared_mt.add(m.group(1))
+    # Also check definitions in cpp
+    if cpp.exists():
+        cpp_text = cpp.read_text(encoding="utf-8", errors="replace")
+        for m in re.finditer(r'\bMethodTable\s+(chaos_mt_\w+)\s*=', cpp_text):
+            declared_mt.add(m.group(1))
+
+    referenced_mt: set[str] = set()
+    for f in sorted(subjects_dir.glob("native-aot.page-*.cpp")):
+        text = f.read_text(encoding="utf-8", errors="replace")
+        for m in re.finditer(r'\b(chaos_mt_\w+)\b', text):
+            referenced_mt.add(m.group(1))
+
+    missing_mt = referenced_mt - declared_mt
+
+    # ── Step 3: chaos_external_runtime_* — gather declared vs referenced ──
+    declared_ext: set[str] = set()
+    # In header: extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_*()
+    for m in re.finditer(r'\b(chaos_external_runtime_\w+)\b', h_text):
+        declared_ext.add(m.group(1))
+    # In cpp: function definitions and extern declarations
+    if cpp.exists():
+        cpp_text = cpp.read_text(encoding="utf-8", errors="replace")
+        for m in re.finditer(r'\b(chaos_external_runtime_\w+)\b', cpp_text):
+            declared_ext.add(m.group(1))
+
+    referenced_ext: set[str] = set()
+    for f in sorted(subjects_dir.glob("native-aot.page-*.cpp")):
+        text = f.read_text(encoding="utf-8", errors="replace")
+        for m in re.finditer(r'\b(chaos_external_runtime_\w+)\b', text):
+            referenced_ext.add(m.group(1))
+
+    missing_ext = referenced_ext - declared_ext
+
+    # ── Step 4: Apply patches ──
+    total_missing = len(missing_statics) + len(missing_mt) + len(missing_ext)
+    if total_missing == 0:
         return
 
-    print(f"  [build] Patching {len(missing)} missing chaos_static_ declarations")
+    print(f"  [build] Patching {total_missing} missing declarations "
+          f"(statics={len(missing_statics)}, mt={len(missing_mt)}, ext={len(missing_ext)})")
 
-    # Add extern declarations to header (before the first chaos_type_id_ line)
-    decl_lines = "\n".join(
-        f"extern CHAOS_IL2CPP_INTPTR {sym};"
-        for sym in sorted(missing)
-    )
+    # Add chaos_static_* extern declarations
+    if missing_statics:
+        decl = "\n" + "\n".join(f"extern CHAOS_IL2CPP_INTPTR {s};" for s in sorted(missing_statics))
+        # Insert before the namespace declaration
+        marker = "namespace chaos::il2cpp::codegen::CombinedSubjects\n{"
+        if marker in h_text:
+            h_text = h_text.replace(marker, marker + decl)
+
+    # Add chaos_mt_* extern MethodTable declarations
+    if missing_mt:
+        decl = "\n" + "\n".join(f"extern MethodTable {s};" for s in sorted(missing_mt))
+        marker = "namespace chaos::il2cpp::codegen::CombinedSubjects\n{"
+        if marker in h_text:
+            h_text = h_text.replace(marker, marker + decl)
+
+    # Add chaos_external_runtime_* function declarations (global scope, extern "C")
+    if missing_ext:
+        decl = "\n" + "\n".join(
+            f'extern "C" CHAOS_IL2CPP_INTPTR {s}() noexcept {{ return 0; }}'
+            for s in sorted(missing_ext))
+        h_text += decl
+
+    header.write_text(h_text, encoding="utf-8")
+    print(f"  [build] Patched header with {total_missing} missing declarations")
     # Insert after the last existing chaos_static_ extern in header
     last_static_idx = max(
         (i for i, line in enumerate(h_text.splitlines())

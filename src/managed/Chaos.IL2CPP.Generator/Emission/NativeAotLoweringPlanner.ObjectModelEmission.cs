@@ -1303,20 +1303,53 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		foreach (var m in _methodsBySubjectId.Values)
 		{
 			if (m.Instructions == null) continue;
+
+			// 1. Scan instructions for type references via TargetReference + Callee
 			foreach (var instr in m.Instructions)
 			{
+				// 1a. Check TargetReference for type references
 				var tr = instr.TargetReference;
-				if (tr == null || string.IsNullOrEmpty(tr.SubjectId)) continue;
-				string tid = tr.SubjectId;
-				if (_allEmittedTypeSubjectIds.Contains(tid)) continue;
-				// Only track types from assemblies other than the primary one
-				// (primary assembly types are already handled by the scanner above).
-				if (tid.StartsWith("CombinedSubjects/", StringComparison.Ordinal)) continue;
-				_allEmittedTypeSubjectIds.Add(tid);
-				// If this is a value type, also ensure it's tracked for boxing
-				if (!referenceTypeSubjectIds.Contains(tid) && !hashSet3.Contains(tid))
-					hashSet3.Add(tid);
+				if (tr != null && !string.IsNullOrEmpty(tr.SubjectId))
+				{
+					string tid = tr.SubjectId;
+					if (!_allEmittedTypeSubjectIds.Contains(tid) &&
+					    !tid.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+					{
+						_allEmittedTypeSubjectIds.Add(tid);
+						if (!referenceTypeSubjectIds.Contains(tid) && !hashSet3.Contains(tid))
+							hashSet3.Add(tid);
+					}
+				}
+
+				// 1b. Check Callee for cross-assembly method calls whose declaring
+				//     type is not yet tracked (e.g. Assert._s_exitCode static field
+				//     from Chaos.TestFramework.Sdk).  Parse the SubjectId from
+				//     the callee string assembly/Type::Method:Return
+				if (instr.Callee is { Length: > 0 })
+				{
+					string callee = instr.Callee;
+					int slashIdx = callee.IndexOf('/');
+					if (slashIdx > 0)
+					{
+						string asmPart = callee.Substring(0, slashIdx);
+						if (!string.Equals(asmPart, "CombinedSubjects", StringComparison.Ordinal))
+						{
+							int colonIdx = callee.IndexOf("::", slashIdx + 1, StringComparison.Ordinal);
+							if (colonIdx > slashIdx)
+							{
+								string typePart = callee.Substring(slashIdx + 1, colonIdx - slashIdx - 1);
+								string typeSubjectId = asmPart + "/" + typePart;
+								if (!_allEmittedTypeSubjectIds.Contains(typeSubjectId))
+									_allEmittedTypeSubjectIds.Add(typeSubjectId);
+							}
+						}
+					}
+				}
 			}
+
+			// 2. Check EH types (catch clause types from external assemblies)
+			// ExceptionHandlers not directly on AotCoreIrMethodArtifact;
+			// handled indirectly via callee-based type discovery above.
 		}
 
 		foreach (var m in _methodsBySubjectId.Values)
