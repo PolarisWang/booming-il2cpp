@@ -394,10 +394,12 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     dll_candidates: list[Path] = [
         ctx.foundation_dir / f"{ctx.assembly}.dll",
     ]
-    # Search DOTNET_ROOT shared framework, then fallback to standard Linux path
+    # Search DOTNET_ROOT shared framework, then fallback to standard paths
+    import sys as _sys
     for base in (
         Path(os.environ.get("DOTNET_ROOT", "")),
         Path("/usr/share/dotnet/shared"),
+        Path("C:/Program Files/dotnet/shared") if _sys.platform == "win32" else Path(""),
     ):
         if base.exists():
             for runtime_dir in sorted(base.rglob(f"**/{ctx.assembly}.dll")):
