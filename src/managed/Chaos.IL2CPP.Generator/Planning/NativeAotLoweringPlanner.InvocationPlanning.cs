@@ -230,8 +230,16 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!_seenCallees.Add(callee))
                     continue;
 
-                // ShapeRegistry/ExternalRuntimeHelper handles it → still register in
-                // the dispatch table so the interpreter's ResolveDirectFn can find it.
+                // Already in method dictionary with instructions -> direct AOT call, no table needed.
+                bool _isAot = _methodsBySubjectId.TryGetValue(callee, out var _e) && _e is { Instructions.Count: > 0 };
+                if (_isAot)
+                {
+                    // Try RHS for DirectNativeSymbol overrides, but don't add to dispatch table.
+                    TryCreateExternalRuntimeHelperDefinition(callee, out _);
+                    continue;
+                }
+
+                // ShapeRegistry/ExternalRuntimeHelper handles it -> register in dispatch table.
                 // System.Console.Error.WriteLine($"[COLLECT_DEBUG] callee={callee} method={method.SubjectId}");
                 if (TryCreateExternalRuntimeHelperDefinition(callee, out _))
                 {

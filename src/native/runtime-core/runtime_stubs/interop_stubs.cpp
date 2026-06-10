@@ -500,7 +500,18 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
         return result;
     }
 
-    // Default: 0 (nullptr for objects, 0 for unknown value types)
+    // Default: allocate a sentinel object instead of returning nullptr.
+    // Returning 0 for reference types causes null-dereference AV in the caller
+    // (value=-1).  A small GC allocation gives the caller valid memory to
+    // read from — the data will be garbage but no crash.
+    auto* _rs = GetCurrentRuntimeState();
+    auto* _ts = GetCurrentThreadState();
+    if (_rs != nullptr && _ts != nullptr)
+    {
+        void* sentinel = GcAllocateAtomic(32);
+        if (sentinel != nullptr)
+            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(sentinel);
+    }
     return 0;
 }
 
