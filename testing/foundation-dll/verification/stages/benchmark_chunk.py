@@ -167,13 +167,12 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
                           start_idx: int = 0, end_idx: int = 0) -> int:
     """Probe-run with 10 iterations, scale to target ~50ms total per method.
 
-    Pass start_idx/end_idx to use --benchmark-range for calibration;
-    otherwise falls back to --benchmark-all.
-
-    For large chunks (>5000 entries), caps iterations at 10000 instead of 50000
-    to keep total benchmark time reasonable.
+    Calibrates using a single method (index 0) to avoid process crashes
+    that occur when iterating all methods in a single entry.exe invocation.
+    The crash affects --benchmark-all but not --benchmark-range 0 1 10.
     """
-    result = _run_entry_once(exe_path, 10, min(timeout, 30), start_idx=start_idx, end_idx=end_idx)
+    # Always calibrate on method 0 only (avoids pre-existing crash in full scan)
+    result = _run_entry_once(exe_path, 10, min(timeout, 30), start_idx=0, end_idx=1)
     if result is None or not result.stdout:
         return 0  # calibration failed, skip benchmark
 

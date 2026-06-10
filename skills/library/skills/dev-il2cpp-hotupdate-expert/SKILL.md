@@ -149,6 +149,18 @@ g_token_slot[]: TokenSlotEntry { token, slot }
 
 ## 执行流程
 
+### 🚨 第一步：输出分类声明（强制阻断）
+
+**在使用任何工具之前，必须先输出：**
+
+```
+classification: domains=[热更新] mode=knowledge-inject expert=dev-il2cpp-hotupdate-expert
+```
+
+**不输出分类声明，不得进行任何文件操作。**
+
+---
+
 ### Step 0：架构语境加载（Architecture Pre-check）
 
 1. **确定子系统** — build-time（C#） / patch load（C++） / dispatch（C++）？

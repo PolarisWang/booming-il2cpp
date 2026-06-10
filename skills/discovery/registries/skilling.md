@@ -11,5 +11,6 @@
 | skill.name | 触发信号 | 摘要 | version | owner | budget | status |
 | ----------- | -------- | ---- | ------- | ----- | ------ | ------ |
 | [`dev-skill-evolution`](../../library/skills/dev-skill-evolution/SKILL.md) | 需要查看技能健康状态时；需要审查或晋升进化提案时；需要运行技能自进化管线时 | 技能自进化管线操作入口，包括健康检查、进化提案审查与晋升、自动退役。 | 1.0.0 | `00-skills-maintainers` | small | active |
+| [`dev-skill-registry`](../../library/skills/dev-skill-registry/SKILL.md) | 用户请求 /dev-<skill> 时需要定位技能路径和领域 | 技能注册中心：索引 skills/library/skills/ 下所有技能的目录、领域和用途。用户请求 /dev-<skill> 时通过本 registry 定位并加载对应 SKILL.md。 | 1.0.0 | `00-skills-maintainers` | small | active |
 | [`dev-using-booming`](../../library/skills/dev-using-booming/SKILL.md) | 开始任何对话时；需要判断激活哪些技能时 | 在开始对话时判断应该激活哪些技能，路由器/控制器技能。 | 1.0.0 | `00-skills-maintainers` | small | active |
 | [`dev-writing-skills`](../../library/skills/dev-writing-skills/SKILL.md) | 需要创建新技能时；需要编辑现有技能时；需要在部署前验证技能时 | 创建、编辑和验证技能，包括技能评估和优化。 | 1.0.0 | `00-skills-maintainers` | medium | active |

@@ -180,11 +180,16 @@ const EXPERT_RESULT_SCHEMA = {
 
 ### 方式 2：直接作为 Workflow 调用
 
+运行时脚本为 `orchestrator.workflow.js`（同目录），通过 Workflow 工具调用：
+
 ```
 请使用 Workflow 工具，args 传递任务描述：
 {
-    scriptPath: "skills/library/skills/dev-il2cpp-core-agent/orchestrator-template.workflow.md",
-    args: "翻译新 IL calli + 改 runtime helper + 加 GC 写屏障"
+    scriptPath: "skills/library/skills/dev-il2cpp-core-agent/orchestrator.workflow.js",
+    args: {
+        task: "翻译新 IL calli + 改 runtime helper + 加 GC 写屏障",
+        domains: ["translation", "runtime", "gc"]
+    }
 }
 ```
 

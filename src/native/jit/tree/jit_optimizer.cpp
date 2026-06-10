@@ -668,7 +668,7 @@ static bool ConstPropagate(
     if (out_instrs.empty() || max_vreg == 0) return false;
 
     enum ConstKind : uint8_t { kUnknown, kInt32, kInt64 };
-    struct ConstVal { ConstKind kind = kUnknown; int64_t value = 0; };
+    struct ConstVal { ConstKind kind = ConstKind::kUnknown; int64_t value = 0; };
 
     std::vector<ConstVal> const_vals(max_vreg);
     bool any_propagated = false;

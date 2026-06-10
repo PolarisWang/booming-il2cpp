@@ -122,6 +122,18 @@ description: dev-il2cpp-runtime-expert — il2cpp 运行时专家
 
 ## 执行流程
 
+### 🚨 第一步：输出分类声明（强制阻断）
+
+**在使用任何工具（Read/Bash/Edit/Write/Grep/Glob）之前，必须先输出：**
+
+```
+classification: domains=[运行时] mode=knowledge-inject action=<你要做的操作> expert=dev-il2cpp-runtime-expert
+```
+
+**不输出分类声明，不得进行任何文件操作。**
+
+---
+
 ### Step 0：架构语境加载（Architecture Pre-check）
 
 1. **加载运行时模块 DAG** — 阅读 [`11-CPP运行时模块分层.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/11-CPP运行时模块分层.md)

@@ -109,6 +109,18 @@ Phase 4: 迭代判定
 
 ---
 
+## 🚨 第一步：输出分类声明（强制阻断）
+
+**在使用任何工具之前，必须先输出：**
+
+```
+classification: domains=[优化] mode=knowledge-inject expert=dev-il2cpp-foundation-dll-optimizer
+```
+
+**不输出分类声明，不得进行任何文件操作。**
+
+---
+
 ## Phase 0: 基线扫描
 
 ### Step 0.1: chaos-aot benchmark

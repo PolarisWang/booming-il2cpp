@@ -548,8 +548,13 @@ static bool TransferPrecodeOwnership(HotpatchEntryV0* entry, void* method_key) n
     if (state != kPrecodeCompiled) return false;  // not yet compiled
 
     // Atomic exchange: take ownership of compiled JitMethod.
-    // compiled is a raw JitMethod* (not std::atomic), so use GCC __atomic_exchange_n.
+    // compiled is a raw JitMethod* (not std::atomic), so use platform atomic builtins.
+#if defined(_MSC_VER)
+    auto* jit = static_cast<JitMethod*>(_InterlockedExchangePointer(
+        reinterpret_cast<void* volatile*>(&precode->compiled), nullptr));
+#else
     auto* jit = __atomic_exchange_n(&precode->compiled, nullptr, __ATOMIC_ACQUIRE);
+#endif
     if (!jit) return false;  // another thread already took it
 
     auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(method_key);

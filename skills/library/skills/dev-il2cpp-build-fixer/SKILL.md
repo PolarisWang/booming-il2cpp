@@ -68,6 +68,18 @@ description: 编译失败与 codegen stub 修复专家。严格分层诊断（AT
 
 ## 执行流程
 
+### 🚨 第一步：输出分类声明（强制阻断）
+
+**在使用任何工具之前，必须先输出：**
+
+```
+classification: domains=[构建] mode=knowledge-inject expert=dev-il2cpp-build-fixer
+```
+
+**不输出分类声明，不得进行任何文件操作。**
+
+---
+
 ### Step 0：获取错误上下文
 
 1. 获取完整的错误输出（编译日志、stack trace、exit code）

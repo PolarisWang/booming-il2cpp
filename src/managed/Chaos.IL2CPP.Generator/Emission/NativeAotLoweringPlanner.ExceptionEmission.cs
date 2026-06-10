@@ -4103,7 +4103,6 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 			builder.AppendLine(indentation + "    {");
 			builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
-			builder.AppendLine(indentation + "        goto chaos_func_end;");
 			builder.AppendLine(indentation + "    }");
 		}
 		string argList = FormatAbiInvocationArgumentList(parameterAbis);
@@ -4177,7 +4176,6 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 				    builder.AppendLine(indentation + "    {");
 				    builder.AppendLine(indentation + "        ::chaos::il2cpp::runtime_core::RaiseNullReferenceException();");
-				    builder.AppendLine(indentation + "        goto chaos_extdirect_end;");
 				    builder.AppendLine(indentation + "    }");
 				}
 				string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
@@ -4191,15 +4189,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					: (callerIsShared ? ", chaos_generic_context" : ", 0");
 			}
 			if (string.Equals(returnType, "void", StringComparison.Ordinal))
-			{
-				builder.AppendLine($"{indentation}    {nativeSymbol}({directNativeArgs}{nativeCtxArg});");
-			}
-			else
-			{
-				builder.AppendLine($"{indentation}    const auto chaos_result = {nativeSymbol}({directNativeArgs}{nativeCtxArg});");
-				EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", indentation + "    ");
-			}
-			builder.AppendLine($"{indentation}}}");
+				{
+					builder.AppendLine($"{indentation}    {nativeSymbol}({directNativeArgs}{nativeCtxArg});");
+				}
+				else
+				{
+					builder.AppendLine($"{indentation}    const auto chaos_result = {nativeSymbol}({directNativeArgs}{nativeCtxArg});");
+					EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", indentation + "    ");
+				}
+				builder.AppendLine($"{indentation}}}");
 			return;
 		}
 

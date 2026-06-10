@@ -2586,6 +2586,13 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     constexpr int kMinPagesForParallelMark = 2;
 
     if (page_count_ >= kMinPagesForParallelMark) {
+#if CHAOS_IL2CPP_GC_SERVER
+        // Server GC: per-heap Collect() is already dispatched by worker pool.
+        // DrainMarkStackParallel would make a NESTED call to the non-re-entrant
+        // GcWorkerPool::RunWorkers, overwriting shared state (work_fn_, round_)
+        // and causing use-after-free or hang. Sequential mark is correct here.
+        DrainMarkStack();
+#else
         std::vector<OldGenPage*> pages;
         {
             std::lock_guard<std::mutex> lock(mutex_);
@@ -2599,6 +2606,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
             }
         }
         DrainMarkStackParallel(pages.data(), static_cast<int>(pages.size()));
+#endif
     } else {
         // Sequential mark for small heaps.
         DrainMarkStack();

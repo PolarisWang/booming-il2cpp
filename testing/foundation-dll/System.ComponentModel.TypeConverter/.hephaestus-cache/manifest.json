@@ -3,6 +3,30 @@
   "max_entries": 50,
   "entries": [
     {
+      "cache_key": "System.ComponentModel.TypeConverter/global-ns/16ca2578ef27c657",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "global-ns",
+      "input_hash": "16ca2578ef27c657d4c4f3f5a93ab4bf71b01126dc8ee40786a12c2361c5b811",
+      "cached_at": "2026-06-10T14:08:19Z",
+      "duration_ms": 58116,
+      "commit_hash": "5ee992524",
+      "entry_exe_size": 5049344,
+      "entry_count": 358,
+      "status": "valid"
+    },
+    {
+      "cache_key": "System.ComponentModel.TypeConverter/system-componentmodel-design/a05b193afd52b51d",
+      "assembly": "System.ComponentModel.TypeConverter",
+      "chunk_slug": "system-componentmodel-design",
+      "input_hash": "a05b193afd52b51d44622c30c21ee847bf3eddad8e9924ff3806f99c18b98a12",
+      "cached_at": "2026-06-10T14:06:33Z",
+      "duration_ms": 49891,
+      "commit_hash": "5ee992524",
+      "entry_exe_size": 3630080,
+      "entry_count": 352,
+      "status": "valid"
+    },
+    {
       "cache_key": "System.ComponentModel.TypeConverter/global-ns/e7884093d47f1c01",
       "assembly": "System.ComponentModel.TypeConverter",
       "chunk_slug": "global-ns",

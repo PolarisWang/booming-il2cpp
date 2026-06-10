@@ -95,6 +95,18 @@ description: dev-il2cpp-gc-expert — il2cpp GC 专家
 
 ## 执行流程
 
+### 🚨 第一步：输出分类声明（强制阻断）
+
+**在使用任何工具之前，必须先输出：**
+
+```
+classification: domains=[GC] mode=knowledge-inject expert=dev-il2cpp-gc-expert
+```
+
+**不输出分类声明，不得进行任何文件操作。**
+
+---
+
 ### Step 0：架构语境加载（Architecture Pre-check）
 
 1. **确认 GC 架构基线** — 阅读 [`24-CRAG-GC架构参考.md`](../../../wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/24-CRAG-GC架构参考.md)

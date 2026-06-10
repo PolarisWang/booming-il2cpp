@@ -115,38 +115,80 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event.inputs.mode }}" = "full" ]; then
             echo "mode=full" >> $GITHUB_OUTPUT
+            echo "stages=build,fact,hotupdate,coverage-audit,benchmark,benchmark_report" >> $GITHUB_OUTPUT
+            echo "check-regression=--check-regression" >> $GITHUB_OUTPUT
           else
             echo "mode=smoke" >> $GITHUB_OUTPUT
+            echo "stages=build,fact,coverage-audit" >> $GITHUB_OUTPUT
+            echo "check-regression=" >> $GITHUB_OUTPUT
           fi
 
       - name: Run Foundation-DLL Pipeline
         shell: bash
+        id: pipeline
         run: |
           cd testing/foundation-dll
-          python verification/ci_smoke.py --mode=${{ steps.ci-mode.outputs.mode }}
+          python verification/ci_smoke.py --mode=${{ steps.ci-mode.outputs.mode }} ${{ steps.ci-mode.outputs.check-regression }} 2>&1 | tee pipeline_output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
 
       - name: Upload Foundation-DLL Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: foundation-dll-results-${{ matrix.os }}-${{ github.sha }}
-          path: testing/foundation-dll/results/
+          path: |
+            testing/foundation-dll/results/
+            testing/foundation-dll/pipeline_output.txt
 
-      - name: Post PR Comment (on failure)
-        if: failure() && github.event_name == 'pull_request'
+      - name: Post PR Comment (on failure or regression)
+        if: (failure() || steps.pipeline.outputs.exit_code != '0') && github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
-            const output = `## Foundation-DLL Regression Failed
+            const fs = require('fs');
+            const path = require('path');
+            let pipelineOutput = '';
+            try {
+              pipelineOutput = fs.readFileSync('testing/foundation-dll/pipeline_output.txt', 'utf8');
+            } catch(e) { pipelineOutput = '(could not read pipeline output)'; }
+
+            // Extract failure/regression details from the pipeline output
+            const failedFamilies = (pipelineOutput.match(/FAILED families: (.+)/) || [])[1] || '(none)';
+            const regressionFamilies = (pipelineOutput.match(/REGRESSED families: (.+)/) || [])[1] || '';
+            const regressionLines = (pipelineOutput.match(/\[regression\] .+/g) || []).join('\n');
+            const passedLine = (pipelineOutput.match(/CI (Smoke|Full) complete: \d+\/\d+ passed/) || [])[0] || '';
+
+            let body = `## Foundation-DLL CI Report
 
             Mode: \`${{ steps.ci-mode.outputs.mode }}\`
             Commit: ${{ github.sha }}
+            ${passedLine}
 
-            Check the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
             `;
+
+            if (failedFamilies !== '(none)') {
+              body += `### ❌ Pipeline Failures
+            \`${failedFamilies}\`
+
+            `;
+            }
+
+            if (regressionFamilies) {
+              body += `### 📉 Benchmark Regressions
+            \`${regressionFamilies}\`
+
+            \`\`\`
+            ${regressionLines}
+            \`\`\`
+
+            `;
+            }
+
+            body += `[Workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: output
+              body: body
             });

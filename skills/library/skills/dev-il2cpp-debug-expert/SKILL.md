@@ -56,6 +56,18 @@ description: dev-il2cpp-debug-expert — il2cpp 调试专家
 
 ## 核心流程
 
+### 🚨 第一步：输出分类声明（强制阻断）
+
+**在使用任何工具之前，必须先输出：**
+
+```
+classification: domains=[调试] mode=knowledge-inject expert=dev-il2cpp-debug-expert
+```
+
+**不输出分类声明，不得进行任何文件操作。**
+
+---
+
 本 expert 基于 `dev-systematic-debugging` 的**四阶段流程**，并针对 il2cpp 领域做了以下增强：
 
 ### 增强 1：il2cpp 专属故障模式索引

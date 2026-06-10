@@ -50,6 +50,18 @@ description: dev-il2cpp-translation-expert — il2cpp 翻译专家
 
 ## 核心流程
 
+### 🚨 第一步：输出分类声明（强制阻断）
+
+**在使用任何工具之前，必须先输出：**
+
+```
+classification: domains=[翻译] mode=knowledge-inject expert=dev-il2cpp-translation-expert
+```
+
+**不输出分类声明，不得进行任何文件操作。**
+
+---
+
 本 expert 的核心是**封装 `dev-architecture-first-development` 的三阶段流程**，并在此基础上增加翻译领域的专业知识。
 
 ### Step 0：前置检查

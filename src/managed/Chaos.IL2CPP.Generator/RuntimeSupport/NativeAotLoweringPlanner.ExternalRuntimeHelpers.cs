@@ -56,6 +56,90 @@ internal sealed class _003C_003Ez__ReadOnlySingleElementList<T>(T item) : IReadO
 
 public sealed partial class NativeAotLoweringPlanner
 {
+	/// <summary>
+	/// Generates AOT Core IR JSON for a crypto method from the managed method model.
+	/// The JSON includes full instruction data (op, callee, operand, IlOffset, ResultType,
+	/// Reference, ConstrainedTypeSubjectId) for interpreter routing.  Returns null when
+	/// the method is not found in _allManagedMethods.
+	/// </summary>
+	private string? TryBuildCryptoAotIrJson(string callee)
+	{
+		if (_allManagedMethods == null ||
+			callee.IndexOf("System.Security.Cryptography/", StringComparison.Ordinal) < 0)
+			return null;
+
+		if (!_allManagedMethods.TryGetValue(callee, out var mm) || mm?.Body?.Blocks == null)
+			return null;
+
+		StringBuilder? sb = null;
+		bool first = true;
+		foreach (var blk in mm.Body.Blocks)
+		{
+			foreach (var inst in blk.Instructions)
+			{
+				if (sb == null)
+				{
+					sb = new StringBuilder();
+					sb.Append("{\"subjectId\":\"");
+					sb.Append(callee.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\",\"instructions\":[");
+				}
+				if (!first) sb.Append(",");
+				first = false;
+				sb.Append("{\"op\":\"");
+				sb.Append(inst.Op.Replace("\\", "\\\\").Replace("\"", "\\\""));
+				sb.Append("\"");
+				if (inst.Callee != null)
+				{
+					sb.Append(",\"callee\":\"");
+					sb.Append(inst.Callee.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"");
+				}
+				if (inst.Operand != null)
+				{
+					sb.Append(",\"operand\":\"");
+					var operandStr = inst.Operand.ToString();
+					if (operandStr != null)
+						sb.Append(operandStr.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"");
+				}
+				if (inst.IlOffset.HasValue)
+				{
+					sb.Append(",\"ilOffset\":");
+					sb.Append(inst.IlOffset.Value);
+				}
+				if (inst.ResultType != null)
+				{
+					sb.Append(",\"resultType\":\"");
+					sb.Append(inst.ResultType.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"");
+				}
+				if (inst.Reference != null)
+				{
+					sb.Append(",\"reference\":{");
+					sb.Append("\"assemblyName\":\"");
+					sb.Append(inst.Reference.AssemblyName.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\",\"subjectKind\":\"");
+					sb.Append(inst.Reference.SubjectKind.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\",\"subjectId\":\"");
+					sb.Append(inst.Reference.SubjectId.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"}");
+				}
+				if (inst.ConstrainedTypeSubjectId != null)
+				{
+					sb.Append(",\"constrainedTypeSubjectId\":\"");
+					sb.Append(inst.ConstrainedTypeSubjectId.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"");
+				}
+				sb.Append("}");
+			}
+		}
+
+		if (sb == null) return null;
+		sb.Append("]}");
+		return sb.ToString();
+	}
+
 	private bool TryCreateExternalRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		// Canonicalize assembly prefix so matching is assembly-agnostic
@@ -92,6 +176,12 @@ public sealed partial class NativeAotLoweringPlanner
 		// If method compiled in AOT IR (has IL body instructions), use its real ParameterAbis.
 		// Methods in _methodsBySubjectId with 0 instructions are BCL/import methods that
 		// don't have compiled bodies -- they should fall through to external runtime stubs.
+		// --- Crypto AOT IR data collection (run BEFORE early return) ---
+		// Collect rich AOT IR JSON data for crypto methods that are not AOT-compiled.
+		// This data is embedded in kChaosExternalRuntimeIlData[] via BuildExternalRuntimeDispatchTable
+		// and used by the interpreter at runtime when dispatching through InterpreterEntryDirect.
+		var crCryptoJson = TryBuildCryptoAotIrJson(callee);
+
 		if (_methodsBySubjectId.TryGetValue(callee, out var existingMethod) &&
 			existingMethod is { Instructions.Count: > 0 })
 		{
@@ -124,29 +214,12 @@ public sealed partial class NativeAotLoweringPlanner
 		// Prevents undefined-chaos_external_runtime_* C++ symbol errors and CHAOS_IL2CPP_FAIL.
 		// Returns type-appropriate defaults (0/nullptr) via the runtime fallback function.
 
-		// --- Crypto AOT IR data collection ---
-		ManagedMethodModel? _crMm = null;
-		if (callee.IndexOf("System.Security.Cryptography/", System.StringComparison.Ordinal) >= 0 && _allManagedMethods != null &&
-		    _allManagedMethods.TryGetValue(callee, out _crMm))
+		// --- Crypto AOT IR data collection (catch-all fallback) ---
+		// If the crypto method was not captured by the early-return path above (e.g.,
+		// _methodsBySubjectId lookup succeeded but with 0 instructions), try again here.
+		if (crCryptoJson == null)
 		{
-			var _sb = new System.Text.StringBuilder();
-			_sb.Append("[");
-			bool _first = true;
-			foreach (var _blk in _crMm.Body.Blocks)
-				foreach (var _inst in _blk.Instructions)
-				{
-					if (!_first) _sb.Append(",");
-					_first = false;
-					_sb.Append("{\"op\":\"" + _inst.Op + "\"");
-					if (_inst.Callee != null)
-						_sb.Append(",\"callee\":\"" + _inst.Callee + "\"");
-					if (_inst.Operand != null)
-						_sb.Append(",\"operand\":\"" + _inst.Operand + "\"");
-					_sb.Append("}");
-				}
-			_sb.Append("]");
-			var _json = "{\"subjectId\":\"" + callee + "\",\"instructions\":" + _sb + "}";
-			_cryptoAotIrEntries.Add((callee, _json));
+			crCryptoJson = TryBuildCryptoAotIrJson(callee);
 		}
 		var failReturnType = InferReturnTypeFromSubjectId(callee);
 		var failReturnAbi = !string.IsNullOrEmpty(failReturnType)

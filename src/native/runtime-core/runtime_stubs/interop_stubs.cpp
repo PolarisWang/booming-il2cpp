@@ -10,6 +10,7 @@
 #include "runtime_stubs/interop_stubs.h"
 #include "runtime_core.h"
 #include "engine_binding.h"
+#include "patch_loader.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -433,6 +434,18 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
 
 /// Parse a full subjectId into (ns, type_name, method_name).
 extern int32_t kChaosExternalRuntimeCount;
+
+// ── External runtime IL data table (generated code) ──────────────────
+// Each entry carries raw CIL bytes + optional AotCoreIr JSON for
+// interpreter fallback when hotpatch dispatch is unavailable.
+struct ChaosIlDataEntry {
+    const char* subject_id;
+    const uint8_t* il_data;
+    int32_t il_size;
+    void* patch_method;
+    const char* json_data;
+};
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[];
 extern const char* const* kChaosExternalRuntimeSubjects;
 extern void** kChaosExternalRuntimeFnTable;
 
@@ -493,8 +506,31 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
             {
                 if (_TryInvoke(kChaosExternalRuntimeSubjects[i]))
                     return 0;
-                // Found in table but unresolvable — codegen/metadata mismatch
-                CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: subject '%s' found in dispatch "                    "table but unresolvable via hotpatch", subject_id);
+
+                // Hotpatch dispatch failed — try embedded IL data fallback.
+                // Crypto methods with AotCoreIr JSON in kChaosExternalRuntimeIlData[]
+                // can still execute via the interpreter without hotpatch registration.
+                for (int32_t j = 0; ; ++j) {
+                    auto& entry = kChaosExternalRuntimeIlData[j];
+                    if (entry.subject_id == nullptr) break; // sentinel
+                    if (entry.json_data != nullptr &&
+                        std::strstr(entry.subject_id, subject_id) != nullptr)
+                    {
+                        // Create a lightweight PatchMethod with the JSON so
+                        // InterpreterEntryDirect / PatchMethodLowerIR can deserialize
+                        // and execute it without hotpatch dispatch tables.
+                        auto* pm = new PatchMethod();
+                        pm->aot_core_ir_json = entry.json_data;
+                        pm->aot_core_ir_json_length =
+                            static_cast<uint32_t>(std::strlen(entry.json_data));
+                        uint64_t args[4] = {}; uint64_t ret[2] = {};
+                        InterpreterEntryDirect(reinterpret_cast<uintptr_t>(pm), args, ret);
+                        return 0;
+                    }
+                }
+
+                // Found in dispatch table but unresolvable — codegen/metadata mismatch
+                CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: subject '%s' found in dispatch "                    "table but unresolvable via hotpatch or IL data", subject_id);
             }
         }
     }

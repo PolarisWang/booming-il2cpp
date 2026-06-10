@@ -117,6 +117,8 @@ def main():
                         help="Verbose output")
     parser.add_argument("--skip-probe", action="store_true",
                         help="Skip probe phase in AutoTestGenerator")
+    parser.add_argument("--skip-build", action="store_true",
+                        help="Skip build stage; reuse existing entry.exe for fast iteration")
 
     # ── Hephaestus cache management subcommand ──
     subparsers = parser.add_subparsers(dest="hephaestus_cmd",
@@ -291,6 +293,7 @@ def main():
             native_config=args.native_config,
             verbose=args.verbose,
             skip_probe=args.skip_probe,
+            skip_build=args.skip_build,
             stage_timeout_seconds=stage_timeout_seconds,
             assembly_dirs=assembly_dirs,
         )

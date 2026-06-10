@@ -23,6 +23,10 @@ add_library(chaos_jit STATIC
 
 target_compile_features(chaos_jit PUBLIC cxx_std_17)
 target_compile_options(chaos_jit PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+# MSVC 14.44 STL bug: _HAS_CXX20 leaks into C++17 mode, triggering
+# std::construct_at in <xmemory> which fails for some allocator types.
+# Force C++17 code path to use placement new instead.
+target_compile_definitions(chaos_jit PRIVATE $<$<CXX_COMPILER_ID:MSVC>:_HAS_CXX20=0>)
 
 # Propagate to consumers: they get this define so they can skip stubs for
 # symbols provided by jit_seh.cpp.
