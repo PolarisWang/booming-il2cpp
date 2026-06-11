@@ -20,23 +20,12 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "Read|Skill",
+        "matcher": "Edit|Write|Bash|Glob|Grep|Read|Skill",
         "hooks": [
           {
-            "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_track_usage.py\"",
-            "statusMessage": "Tracking skill usage...",
-            "timeout": 10,
-            "type": "command"
-          }
-        ]
-      },
-      {
-        "matcher": "Edit|Write|Bash|Glob|Grep",
-        "hooks": [
-          {
-            "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_track_tool_outcomes.py\"",
-            "statusMessage": "Logging tool outcome...",
-            "timeout": 5,
+            "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_track_all.py\"",
+            "statusMessage": "Tracking tool outcome + skill usage...",
+            "timeout": 8,
             "type": "command"
           }
         ]
