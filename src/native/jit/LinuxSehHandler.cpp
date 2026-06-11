@@ -492,7 +492,6 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
         );
 
 	if (code_addr == nullptr) { ChainSignalToPrev(sig, info, ucontext); return; }
-        return;
 
     const JitMethod* nm = self.FindCodeByAddress(code_addr);
     if (nm == nullptr || nm->seh_table_offset == 0) {
