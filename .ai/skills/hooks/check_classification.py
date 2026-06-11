@@ -54,17 +54,22 @@ tool_name = os.environ.get("CLAUDE_TOOL_NAME", sys.argv[1] if len(sys.argv) > 1 
 # 文件路径 → Expert 映射表
 # ═══════════════════════════════════════════════════════════════════
 FILE_TO_EXPERT: list[tuple[str, str]] = [
+    # GC 必须先于 runtime-core（gc/ 是 runtime-core/ 的子路径）
+    ("src/native/runtime-core/gc/",          "dev-il2cpp-gc-expert"),
     ("src/native/runtime-core/",             "dev-il2cpp-runtime-expert"),
     ("src/native/interpreter/",              "dev-il2cpp-runtime-expert"),
     ("src/native/bootstrap/",                "dev-il2cpp-runtime-expert"),
     ("src/native/support/",                  "dev-il2cpp-runtime-expert"),
-    ("src/native/runtime-core/gc/",          "dev-il2cpp-gc-expert"),
+    ("src/native/jit/",                      "dev-il2cpp-jit-expert"),
     ("src/managed/Chaos.IL2CPP.Generator/",  "dev-il2cpp-codegen-expert"),
     ("testing/foundation-dll/",              "dev-il2cpp-fact-verification-expert"),
     ("testing/foundation-dll/verification/stages/build.py", "dev-il2cpp-build-fixer"),
     ("src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/",  "dev-il2cpp-build-fixer"),
     ("src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/", "dev-il2cpp-build-fixer"),
     ("src/native/hot-update/",               "dev-il2cpp-hotupdate-expert"),
+    # build/ 映射到对应源域的 Expert（构建产物对应源码域）
+    ("build/native/",                        "dev-il2cpp-runtime-expert"),
+    ("build/native-profile/",                "dev-il2cpp-runtime-expert"),
 ]
 
 
@@ -125,7 +130,12 @@ if tool_name == "Bash":
     # 从命令中提取文件/目录路径参数
     cmd_paths = re.findall(r'(?:^|\s)(?:cd\s+)?([a-zA-Z]:/[^\s"\']+|\.\.?/[^\s"\']+)', cmd)
     cmd_paths += re.findall(r'(?:^|\s)(?:cd\s+)?([a-zA-Z]:\\[^\s"\']+)', cmd)
-    cmd_paths += re.findall(r'(?:^|\s)(?:--target\s+)?([a-zA-Z_][a-zA-Z0-9_]*)(?:\s|$)', cmd)
+
+    # 处理 cd X && Y 模式 — 提取 X 下的所有路径
+    cd_match = re.search(r'cd\s+([^\s&;|]+)\s*(?:&&|;)', cmd)
+    if cd_match:
+        cd_base = cd_match.group(1).replace("\\", "/")
+        cmd_paths.append(cd_base + "/")
 
     required_experts: set[str] = set()
     for p in cmd_paths:

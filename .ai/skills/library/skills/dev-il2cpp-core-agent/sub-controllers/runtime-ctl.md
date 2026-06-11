@@ -8,6 +8,7 @@
 | 子任务信号 | 路由目标 |
 |-----------|---------|
 | runtime-core、interpreter、VTable、bootstrap、method_table、线程状态 | `dev-il2cpp-runtime-expert` |
+| JIT 编译、T4 原生代码生成、寄存器分配、SEH、unwind info、tier promotion、OSR、inline cache | `dev-il2cpp-jit-expert` |
 | crash、segfault、test failure、异常行为 | `dev-il2cpp-debug-expert` |
 
 ## 路由策略

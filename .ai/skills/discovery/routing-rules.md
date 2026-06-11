@@ -8,7 +8,7 @@
 
 | 编号 | 域 | 说明 | 对应 Expert | 受保护的文件路径 |
 |------|----|------|------------|-----------------|
-| 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap | `dev-il2cpp-runtime-expert` | `src/native/runtime-core/`, `src/native/interpreter/`, `src/native/bootstrap/`, `src/native/support/` |
+| 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap、JIT、SEH、tier promotion | `dev-il2cpp-runtime-expert`、`dev-il2cpp-jit-expert` | `src/native/runtime-core/`, `src/native/interpreter/`, `src/native/bootstrap/`, `src/native/support/`, `src/native/jit/` |
 | 2 | GC | 内存分配、分代、写屏障、stress test | `dev-il2cpp-gc-expert` | `src/native/runtime-core/gc/` |
 | 3 | 调试 | crash、segfault、测试失败 | `dev-il2cpp-debug-expert` | 所有 native 源 |
 | 4 | CodeGen | C# codegen、T4 模板、snapshot | `dev-il2cpp-codegen-expert` | `src/managed/Chaos.IL2CPP.Generator/` |

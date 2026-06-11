@@ -1,0 +1,34 @@
+{
+    "kind": "project",
+    "domain": "il2cpp",
+    "name": "dev-il2cpp-jit-expert",
+    "summary": "JIT 原生代码生成专家 — T4 分层编译、寄存器分配、指令编码、SEH、unwind info、tier promotion、OSR",
+    "trigger_signals": [
+        "JIT 编译失败或生成的机器码崩溃",
+        "寄存器分配溢出、SEH 异常处理错误",
+        "Unwind info 编码错误（STATUS_INVALID_CRUNTIME_PARAMETER）",
+        "Tier 升级/降级逻辑故障",
+        "OSR deopt 崩溃",
+        "ARM64 JIT 支持"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "medium",
+    "core_length": "medium",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-06-11",
+            "type": "created"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": "dev-il2cpp-runtime-expert",
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    }
+}
