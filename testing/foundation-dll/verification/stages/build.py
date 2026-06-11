@@ -24,18 +24,25 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
-from verification.stages.runtime_entry_patcher import patch_runtime_entry
 
 from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash
+
+# Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
+_TESTING = Path(__file__).resolve().parents[3] / "testing"
+if str(_TESTING) not in sys.path:
+    sys.path.insert(0, str(_TESTING))
+
+from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
 # -- Tool paths --------------------------------------------------------------
 
-def _tool_dll(tool_name: str) -> Path:
-    return (_REPO_ROOT / "src" / "tools" / tool_name
-            / "bin" / "Debug" / "net8.0" / f"{tool_name}.dll")
+def _chaos_sdk_csproj() -> Path:
+    """Path to Chaos.TestFramework.Sdk.csproj."""
+    return (_REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk"
+            / "Chaos.TestFramework.Sdk.csproj")
 
 
 def _detect_tfm(dll_path: Path) -> str:
@@ -220,19 +227,8 @@ def _compile_custom_subjects(
 
 
 def _ensure_tool_built(tool_name: str) -> bool:
-    """Build the tool if its DLL doesn't exist."""
-    dll = _tool_dll(tool_name)
-    if dll.exists():
-        return True
-    proj = _REPO_ROOT / "src" / "tools" / tool_name / f"{tool_name}.csproj"
-    print(f"  [build] Building {tool_name}...")
-    result = subprocess.run(
-        ["dotnet", "build", str(proj), "-nologo"],
-        capture_output=True, text=True, timeout=180)
-    if result.returncode != 0:
-        print(f"  [build] ERROR: Failed to build {tool_name}: {result.stderr[:300]}")
-        return False
-    return dll.exists()
+    """Deprecated wrapper — delegates to tool_helpers.ensure_tool_built."""
+    return ensure_tool_built(tool_name)
 
 
 def _chaos_sdk_csproj() -> Path:
@@ -419,7 +415,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     print(f"  [build] Generating subjects...")
     auto_dll = _tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator")
     metadata_path = ctx.subjects_metadata_path
-    auto_output = ctx.foundation_dir / ".autogen" / ctx.slug
+    auto_output = ctx.foundation_dir / "chunks" / ctx.slug / "managed" / ".autogen"
 
     # Check if metadata + autogen .cs files already exist from a previous run.
     # If so, skip the expensive AutoTestGenerator probe phase and reuse them.
@@ -602,26 +598,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         pkg_block = "\n".join("    " + r for r in pkg_refs) if pkg_refs else ""
 
         nowarn_extra = ""
-        combined_csproj.write_text(
-            "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
-            "  <PropertyGroup>\n"
-            "    <OutputType>Library</OutputType>\n"
-            f"    <TargetFramework>{tfm}</TargetFramework>\n"
-            "    <ImplicitUsings>enable</ImplicitUsings>\n"
-            "    <Nullable>enable</Nullable>\n"
-            "    <DefineConstants>VERIFY</DefineConstants>\n"
-            "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
-            "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
-            "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
-            "  </PropertyGroup>\n"
-            "  <ItemGroup>\n"
-            f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
-            f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
-            f"{pkg_block}"
-            "  </ItemGroup>\n"
-            "</Project>\n"
-        )
-
         combined_csproj.write_text(
             "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
             "  <PropertyGroup>\n"

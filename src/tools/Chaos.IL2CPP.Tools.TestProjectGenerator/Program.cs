@@ -25,43 +25,12 @@ internal sealed record SubjectMethodEntry(
     [property: JsonPropertyName("methodSubjectId")] string MethodSubjectId,
     [property: JsonPropertyName("generatedMethodId")] string? GeneratedMethodId = null);
 
-// ── Server protocol types ─────────────────────────────────────────────
-// Line-delimited JSON on stdin/stdout:
-//   → {"id":1,"cmd":"generate","contract":"...","output":"...","jit":false,...}
-//   ← {"id":1,"status":"ok","entryExe":"..."}
-//   → {"id":2,"cmd":"exit"}
-//   ← {"id":2,"status":"ok"}
-internal record ServerCommand(
-    [property: JsonPropertyName("id")] int Id,
-    [property: JsonPropertyName("cmd")] string Cmd,
-    [property: JsonPropertyName("contract")] string? Contract = null,
-    [property: JsonPropertyName("output")] string? Output = null,
-    [property: JsonPropertyName("jit")] bool Jit = false,
-    [property: JsonPropertyName("configTier")] string ConfigTier = "check",
-    [property: JsonPropertyName("skipCodegen")] bool SkipCodegen = false,
-    [property: JsonPropertyName("codegenDir")] string? CodegenDir = null,
-    [property: JsonPropertyName("projectRoot")] string? ProjectRoot = null,
-    [property: JsonPropertyName("assemblies")] List<string>? Assemblies = null,
-    [property: JsonPropertyName("sourceOnly")] bool SourceOnly = false);
-
-internal record ServerResponse(
-    [property: JsonPropertyName("id")] int Id,
-    [property: JsonPropertyName("status")] string Status,
-    [property: JsonPropertyName("entryExe")] string? EntryExe = null,
-    [property: JsonPropertyName("error")] string? Error = null);
-
 public static class Program
 {
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-    };
-
-    private static readonly JsonSerializerOptions ServerJsonOptions = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     };
 
     private static readonly ContractReader ContractReader = new();
@@ -82,7 +51,6 @@ public static class Program
             "generate-dll" => RunGenerateDll(args[1..]),
             "extract-patch-data" => RunExtractPatchData(args[1..]),
             "emit" => RunEmit(args[1..]),
-            "server" => RunServer(),
             _ => Error($"Unknown command: {command}")
         };
     }
@@ -112,10 +80,6 @@ public static class Program
                   Runs IL2CPP codegen, emits C++ project, builds entry.exe.
                   --clean removes intermediate files (keeps only entry.exe).
 
-              server  (no args)
-                  Start TPG server mode. Reads line-delimited JSON commands from stdin,
-                  writes JSON responses to stdout. All progress goes to stderr.
-
               emit --contract <contract.json> --output <dir>
                    [--jit] [--config-tier check|profile|ship] [--platform windows|linux|osx]
                   Emit dispatch.cpp and metadata from contract only (no IL2CPP codegen).
@@ -130,177 +94,6 @@ public static class Program
               --skip-codegen         Skip IL2CPP codegen step (use with --codegen-dir)
               --codegen-dir <path>   Path to existing codegen output (for --skip-codegen)
             """);
-    }
-
-    // ── Server mode ──────────────────────────────────────────────────────
-    // Reads line-delimited JSON commands from stdin, processes them, writes
-    // JSON responses to stdout.  Keeps the process alive (no dotnet exec
-    // overhead per family).  Progress output goes to stderr.
-    private static int RunServer()
-    {
-        Console.Error.WriteLine("[TPG server] started, reading commands from stdin...");
-        string? line;
-        while ((line = Console.In.ReadLine()) != null)
-        {
-            line = line.Trim();
-            if (string.IsNullOrEmpty(line)) continue;
-
-            ServerCommand? cmd;
-            try { cmd = JsonSerializer.Deserialize<ServerCommand>(line, ServerJsonOptions); }
-            catch (JsonException ex)
-            {
-                var resp = new ServerResponse(0, "error", Error: $"Invalid JSON: {ex.Message}");
-                Console.WriteLine(JsonSerializer.Serialize(resp, ServerJsonOptions));
-                continue;
-            }
-            if (cmd is null) continue;
-
-            switch (cmd.Cmd)
-            {
-                case "generate":
-                {
-                    var result = ExecuteServerGenerate(cmd);
-                    Console.WriteLine(JsonSerializer.Serialize(result, ServerJsonOptions));
-                    break;
-                }
-                case "exit":
-                {
-                    var resp = new ServerResponse(cmd.Id, "ok");
-                    Console.WriteLine(JsonSerializer.Serialize(resp, ServerJsonOptions));
-                    Console.Error.WriteLine("[TPG server] exiting");
-                    return 0;
-                }
-                default:
-                {
-                    var resp = new ServerResponse(cmd.Id, "error", Error: $"Unknown command: {cmd.Cmd}");
-                    Console.WriteLine(JsonSerializer.Serialize(resp, ServerJsonOptions));
-                    break;
-                }
-            }
-        }
-        return 0;
-    }
-
-    private static ServerResponse ExecuteServerGenerate(ServerCommand cmd)
-    {
-        if (string.IsNullOrEmpty(cmd.Contract))
-            return new ServerResponse(cmd.Id, "error", Error: "Missing 'contract' field");
-        if (string.IsNullOrEmpty(cmd.Output))
-            return new ServerResponse(cmd.Id, "error", Error: "Missing 'output' field");
-
-        var contractPath = cmd.Contract;
-        var outputDir = cmd.Output;
-
-        var projectRoot = cmd.ProjectRoot;
-        if (projectRoot is not null)
-            projectRoot = Path.GetFullPath(projectRoot);
-
-        var codegenBase = cmd.CodegenDir is not null
-            ? Path.GetFullPath(cmd.CodegenDir)
-            : Path.GetFullPath(Path.Combine(outputDir, "codegen"));
-
-        // Step 1: Read subjects from contract
-        Console.Error.WriteLine("  [1/3] Reading subjects from contract...");
-        var subjects = ContractReader.ReadContract(contractPath);
-        Console.Error.WriteLine($"        Found {subjects.Count} subjects");
-
-        // Step 2: Codegen (or skip)
-        Codegen.CodegenResult codegenResult;
-        if (cmd.SkipCodegen)
-        {
-            Console.Error.WriteLine("  [2/3] Skipping codegen, using existing output...");
-            var generatedDirs = new List<string>();
-            if (Directory.Exists(codegenBase))
-            {
-                foreach (var subDir in Directory.GetDirectories(codegenBase))
-                {
-                    var genDir = Path.Combine(subDir, "generated");
-                    if (Directory.Exists(genDir) && Directory.GetFiles(genDir, "*.cpp").Length > 0)
-                        generatedDirs.Add(genDir);
-                }
-            }
-
-            codegenResult = new Codegen.CodegenResult
-            {
-                Success = true,
-                OutputDir = codegenBase,
-                GeneratedDirs = generatedDirs,
-            };
-        }
-        else
-        {
-            Console.Error.WriteLine("  [2/3] Running IL2CPP codegen...");
-            var codegenMode = cmd.Jit ? "jit" : "aot";
-            var orchestrator = new Codegen.CodegenOrchestrator();
-            codegenResult = orchestrator.Run(cmd.Assemblies ?? [], codegenBase, codegenMode);
-
-            if (!codegenResult.Success)
-                return new ServerResponse(cmd.Id, "error", Error: codegenResult.Error);
-
-            Console.Error.WriteLine($"        {codegenResult.GeneratedDirs.Count} generated directories");
-        }
-
-        // Resolve SDK directory
-        var sdkDir = codegenBase;
-        if (codegenBase is not null && Directory.Exists(codegenBase))
-        {
-            // Check if codegenBase itself is a valid SDK root
-            if (File.Exists(Path.Combine(codegenBase, "chaos-config.cmake")))
-            {
-                sdkDir = codegenBase;
-            }
-            else
-            {
-                // Check subdirectories for per-assembly SDK layout
-                foreach (var subDir in Directory.GetDirectories(codegenBase))
-                {
-                    if (File.Exists(Path.Combine(subDir, "chaos-config.cmake")) &&
-                        File.Exists(Path.Combine(subDir, "cmake", "chaos-targets.cmake")))
-                    {
-                        sdkDir = subDir;
-                        break;
-                    }
-                }
-
-                // If not found, check parent directory (pipeline mode:
-                // codegenBase = <SubjectDir>/generated/, config lives in <SubjectDir>/)
-                if (sdkDir == codegenBase)
-                {
-                    var parent = Path.GetDirectoryName(codegenBase);
-                    if (parent is not null && File.Exists(Path.Combine(parent, "chaos-config.cmake")))
-                    {
-                        sdkDir = parent;
-                    }
-                }
-            }
-        }
-
-        // Step 3: Emit + optionally build
-        Console.Error.WriteLine("  [3/3] Emitting C++ project...");
-        var emitter = new CppProjectEmitter();
-
-        if (cmd.SourceOnly)
-        {
-            emitter.Emit(
-                outputDir, codegenResult, subjects,
-                isJit: cmd.Jit, configTier: cmd.ConfigTier,
-                isWindows: OperatingSystem.IsWindows(), projectRoot: projectRoot,
-                codegenDir: codegenBase, sdkDir: sdkDir);
-            Console.Error.WriteLine("        Sources written (source-only mode)");
-            return new ServerResponse(cmd.Id, "ok");
-        }
-
-        var exePath = emitter.GenerateAndBuild(
-            outputDir, codegenResult, subjects,
-            isJit: cmd.Jit, configTier: cmd.ConfigTier,
-            isWindows: OperatingSystem.IsWindows(), projectRoot: projectRoot,
-            codegenDir: codegenBase, sdkDir: sdkDir);
-
-        if (exePath is null)
-            return new ServerResponse(cmd.Id, "error", Error: "Build failed");
-
-        Console.Error.WriteLine($"        entry.exe produced at: {exePath}");
-        return new ServerResponse(cmd.Id, "ok", EntryExe: exePath);
     }
 
     private static int RunScan(string[] args)

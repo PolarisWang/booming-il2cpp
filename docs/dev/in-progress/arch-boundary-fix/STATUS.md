@@ -21,9 +21,9 @@
 
 dispatch_doc: DISPATCH.md
 dispatch_model: hybrid
-active_batches: [batch-a3]
-completed_batches: [batch-a1, batch-b]
-pending_batches: [batch-c, batch-d]
+active_batches: [batch-c]
+completed_batches: [batch-a1, batch-a3, batch-b]
+pending_batches: [batch-d]
 ## updated_dispatch
 - A-1: ✅ completed — assert stubs moved to SDK runtime_stubs/
 - A-2: ✅ completed — JitVehHandler/CHAOS_FACT_CHECK/FactAbortHandler → Scriban; runtime_entry_patcher.py deleted
@@ -31,8 +31,9 @@ pending_batches: [batch-c, batch-d]
 - B-2: ✅ completed — .cache-contract.json written after each build
 - A-3: ✅ completed — Interop stub → Codegen emitter (BuildExternalRuntimeDispatchTable fixed)
 - A-4: ✅ completed — C# wrapper generation → ATG --generate-wrappers (WrapperEmitter.cs + build.py delegation)
-- A-5: 🔄 executing — Flat layout copy hack fix
-- recommended_next_child: A-3
+- A-5: ✅ completed — Flat layout copy hack removed from build.py (TPG emitter already handled it)
+- C-1 to C-6: 🔄 starting Phase 2 — 6 parallel engineering debt cleanup tasks
+- recommended_next_child: C-1
 
 ---
 

@@ -19,6 +19,13 @@ from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
 
+# Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
+_TESTING = Path(__file__).resolve().parents[3] / "testing"
+if str(_TESTING) not in sys.path:
+    sys.path.insert(0, str(_TESTING))
+
+from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
+
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
@@ -220,35 +227,6 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
     return True
 
 
-# -- Tool helpers (mirrors build.py) -----------------------------------------
-
-def _tool_dll(tool_name: str) -> Path:
-    return (_REPO_ROOT / "src" / "tools" / tool_name
-            / "bin" / "Debug" / "net8.0" / f"{tool_name}.dll")
-
-
-def _ensure_tool_built(tool_name: str) -> bool:
-    """Rebuild the tool DLL if the source has changed since last build."""
-    proj = (_REPO_ROOT / "src" / "tools" / tool_name / f"{tool_name}.csproj")
-    dll = _tool_dll(tool_name)
-    if dll.exists() and proj.exists():
-        src_time = max(
-            p.stat().st_mtime
-            for p in proj.parent.rglob("*.cs")
-            if p.is_file()
-        ) if any(True for _ in proj.parent.rglob("*.cs")) else proj.stat().st_mtime
-        if src_time <= dll.stat().st_mtime:
-            return True
-    result = subprocess.run(
-        ["dotnet", "build", str(proj), "-nologo"],
-        capture_output=True, text=True, timeout=120)
-    if result.returncode != 0:
-        for line in (result.stderr.splitlines() + result.stdout.splitlines())[-5:]:
-            print(f"      {line}")
-        return False
-    return True
-
-
 def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | None = None) -> bool:
     """Combine ATG --patch-mode generated .cs files and build into a DLL."""
     # Exclude obj/ build artifacts, CombinedPatchSubjects.cs (self-reference),
@@ -274,8 +252,7 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
 
     # Detect TFM from target DLL path (e.g. ".../9.0.0/...System.Private.CoreLib.dll" → net9.0)
     # Reuse build.py's exact TFM detection for consistency.
-    from verification.stages.build import _detect_tfm
-    tfm = _detect_tfm(target_dll)
+    tfm = detect_tfm(target_dll)
     sdk_csproj = (_REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk"
                   / "Chaos.TestFramework.Sdk.csproj")
     ref_block = ""
@@ -417,10 +394,10 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
 
     if target_dll is None:
         print(f"  [hotupdate] Target DLL not found, skipping ATG --patch-mode")
-    elif _ensure_tool_built("Chaos.IL2CPP.Tools.AutoTestGenerator"):
+    elif ensure_tool_built("Chaos.IL2CPP.Tools.AutoTestGenerator"):
         _patch_generation_attempted = True
-        auto_dll = _tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator")
-        patch_output = ctx.foundation_dir / ".autogen" / f"{ctx.slug}.patch"
+        auto_dll = tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator")
+        patch_output = ctx.foundation_dir / "chunks" / ctx.slug / "managed" / ".autogen.patch"
 
         cmd = [
             "dotnet", "exec", str(auto_dll),
@@ -444,8 +421,8 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             if _build_patch_dll(patch_output, patch_dll, target_dll):
                 print(f"  [hotupdate] Patch DLL built: {patch_dll}")
                 # Extract patch data via TPG (IL2CPP codegen layer)
-                if _ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
-                    tpg_dll = _tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
+                if ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
+                    tpg_dll = tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
                     patch_data_path = ctx.chunk_dir / "native" / "patch.patchdata"
                     patch_data_path.parent.mkdir(parents=True, exist_ok=True)
                     extract_cmd = [
