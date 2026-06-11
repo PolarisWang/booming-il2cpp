@@ -65,6 +65,8 @@ FILE_TO_EXPERT: list[tuple[str, str]] = [
     ("CMakePresets.json",                    "dev-il2cpp-platform-expert"),
     ("build/toolchains/",                    "dev-il2cpp-platform-expert"),
     (".github/workflows/",                   "dev-il2cpp-platform-expert"),
+    ("docs/",                                "dev-project-wiki-maintenance"),
+    ("wiki/",                                "dev-project-wiki-maintenance"),
     ("src/managed/Chaos.IL2CPP.Generator/",  "dev-il2cpp-codegen-expert"),
     ("testing/foundation-dll/",              "dev-il2cpp-fact-verification-expert"),
     ("testing/foundation-dll/verification/stages/build.py", "dev-il2cpp-build-fixer"),
