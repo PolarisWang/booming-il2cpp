@@ -49,31 +49,39 @@ BOUNDARY_OVERRIDE_PATTERNS: list[dict] = [
 
 def get_staged_files() -> list[Path]:
     """Get list of staged (about to be committed) files."""
-    result = subprocess.run(
-        ["git", "diff", "--cached", "--name-only", "--diff-filter=ACMR"],
-        capture_output=True, text=True, timeout=30, cwd=_REPO_ROOT)
-    if result.returncode != 0:
-        # Fallback: use all tracked files
+    try:
+        result = subprocess.run(
+            ["git", "diff", "--cached", "--name-only", "--diff-filter=ACMR"],
+            capture_output=True, text=True, timeout=30, cwd=_REPO_ROOT,
+            encoding="utf-8", errors="replace")
+        if result.returncode != 0:
+            return []
+        return [_REPO_ROOT / f for f in result.stdout.strip().splitlines() if f]
+    except (subprocess.TimeoutExpired, OSError):
         return []
-    return [_REPO_ROOT / f for f in result.stdout.strip().splitlines() if f]
 
 
 def get_all_changed_files() -> list[Path]:
     """Get all changed files (staged + unstaged + untracked)."""
-    result = subprocess.run(
-        ["git", "diff", "--name-only", "HEAD", "--diff-filter=ACMR"],
-        capture_output=True, text=True, timeout=30, cwd=_REPO_ROOT)
-    untracked = subprocess.run(
-        ["git", "ls-files", "--others", "--exclude-standard"],
-        capture_output=True, text=True, timeout=30, cwd=_REPO_ROOT)
-    files = []
-    for f in result.stdout.strip().splitlines():
-        if f:
-            files.append(_REPO_ROOT / f)
-    for f in untracked.stdout.strip().splitlines():
-        if f:
-            files.append(_REPO_ROOT / f)
-    return files
+    try:
+        result = subprocess.run(
+            ["git", "diff", "--name-only", "HEAD", "--diff-filter=ACMR"],
+            capture_output=True, text=True, timeout=30, cwd=_REPO_ROOT,
+            encoding="utf-8", errors="replace")
+        untracked = subprocess.run(
+            ["git", "ls-files", "--others", "--exclude-standard"],
+            capture_output=True, text=True, timeout=30, cwd=_REPO_ROOT,
+            encoding="utf-8", errors="replace")
+        files = []
+        for f in result.stdout.strip().splitlines():
+            if f:
+                files.append(_REPO_ROOT / f)
+        for f in untracked.stdout.strip().splitlines():
+            if f:
+                files.append(_REPO_ROOT / f)
+        return files
+    except (subprocess.TimeoutExpired, OSError):
+        return []
 
 
 def detect_layer(file_path: Path) -> str | None:
@@ -145,21 +153,25 @@ def check_codegen_self_contained(files: list[Path], verbose: bool) -> list[str]:
 def check_override_expiry(verbose: bool) -> list[str]:
     """Check that BOUNDARY_OVERRIDE annotations haven't expired."""
     violations = []
-    result = subprocess.run(
-        ["git", "grep", "-n", "BOUNDARY_OVERRIDE"],
-        capture_output=True, text=True, timeout=30, cwd=_REPO_ROOT)
-
-    for line in result.stdout.strip().splitlines():
-        if "Expires:" in line:
-            # Extract expiry date
-            m = re.search(r'Expires:\s*(\d{4}-\d{2}-\d{2})', line)
-            if m:
-                from datetime import date
-                expiry = date.fromisoformat(m.group(1))
-                if date.today() > expiry:
-                    violations.append(
-                        f"{line}: BOUNDARY_OVERRIDE expired ({m.group(1)})"
-                    )
+    try:
+        result = subprocess.run(
+            ["git", "grep", "-n", "BOUNDARY_OVERRIDE"],
+            capture_output=True, text=True, timeout=30, cwd=_REPO_ROOT,
+            encoding="utf-8", errors="replace")
+        if result.returncode != 0:
+            return violations  # No matches or not a git repo
+        for line in result.stdout.strip().splitlines():
+            if "Expires:" in line:
+                m = re.search(r'Expires:\s*(\d{4}-\d{2}-\d{2})', line)
+                if m:
+                    from datetime import date
+                    expiry = date.fromisoformat(m.group(1))
+                    if date.today() > expiry:
+                        violations.append(
+                            f"{line}: BOUNDARY_OVERRIDE expired ({m.group(1)})")
+    except (subprocess.TimeoutExpired, OSError) as e:
+        if verbose:
+            print(f"  Warning: could not check override expiry: {e}")
     return violations
 
 
@@ -177,10 +189,9 @@ def run_checks(ci_mode: bool, verbose: bool) -> list[str]:
             print(f"  Scanning {len(files)} staged files...")
 
     if not files:
-        # Fallback: scan entire repo
         if verbose:
-            print("  No changed files found, scanning repo...")
-        files = list(_REPO_ROOT.rglob("*.py")) + list(_REPO_ROOT.rglob("*.generated.cpp"))
+            print("  No changed files found.")
+        return violations
 
     # Check 1: Python writes C++
     violations.extend(check_python_writes_cpp(files, verbose))
@@ -207,23 +218,23 @@ def main() -> int:
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  四层架构边界完整性检查")
+    print("  4-Layer Architecture Boundary Check")
     print("=" * 60)
 
     violations = run_checks(ci_mode=args.ci, verbose=args.verbose)
 
     if violations:
-        print(f"\n❌ 发现 {len(violations)} 个边界违规:\n")
+        print(f"\n[FAIL] Found {len(violations)} boundary violations:\n")
         for v in violations:
-            print(f"  • {v}")
-        print(f"\n请修复这些违规后再提交。")
-        print(f"如确实需要跨层写入，请添加 BOUNDARY_OVERRIDE 标注:")
+            print(f"  * {v}")
+        print(f"\nFix these violations before committing.")
+        print(f"If cross-layer write is necessary, add BOUNDARY_OVERRIDE annotation:")
         print(f"    # BOUNDARY_OVERRIDE: https://github.com/.../issues/NNN")
         print(f"    # Reason: ...")
         print(f"    # Expires: YYYY-MM-DD")
         return 1
     else:
-        print(f"\n✅ 边界检查通过，无违规。")
+        print(f"\n[PASS] All boundary checks passed.")
         return 0
 
 

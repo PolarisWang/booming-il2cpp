@@ -63,9 +63,9 @@ if [ -z "$STAGED_PY" ]; then
     echo "=== [layer-boundary] No Python files staged, skipping ==="
 else
     # Run the boundary check script
-    BOUNDARY_OUTPUT=$(python testing/foundation-dll/verification/preflight/check_layer_boundaries.py 2>&1)
-    echo "$BOUNDARY_OUTPUT" | grep -v "^=" || true
-    if echo "$BOUNDARY_OUTPUT" | grep -q "❌"; then
+    BOUNDARY_OUTPUT=$(python testing/foundation-dll/verification/preflight/check_layer_boundaries.py 2>&1 | cat)
+    echo "$BOUNDARY_OUTPUT"
+    if echo "$BOUNDARY_OUTPUT" | grep -q "FAIL"; then
         echo ""
         echo "ERROR: Layer boundary check FAILED. Fix violations or add BOUNDARY_OVERRIDE."
         echo "Use 'git commit --no-verify' to bypass (not recommended)."
