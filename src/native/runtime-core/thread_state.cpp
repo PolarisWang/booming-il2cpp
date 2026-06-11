@@ -28,7 +28,9 @@
 #include <cerrno>
 #include <chrono>
 #include <cstring>
+#if !defined(_MSC_VER)
 #include <ucontext.h>
+#endif
 
 namespace chaos::il2cpp::runtime_core::threading {
 
@@ -328,6 +330,7 @@ static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
     // Capture ucontext from the PAL signal handler (only available
     // on POSIX with SA_SIGINFO).  The GC coordinator reads this via
     // GetPreemptSuspendUcontext() during the safepoint wait loop.
+#if !defined(_MSC_VER)
     const void* uctx = chaos::il2cpp::pal::PalPreemptGetUcontext();
     if (uctx != nullptr) {
         thread->preempt_ucontext.store(uctx, std::memory_order_release);
@@ -373,6 +376,7 @@ static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
         thread->preempt_ucontext.store(nullptr, std::memory_order_release);
         return;
     }
+#endif // !defined(_MSC_VER)
 
     // Preemptive mode: standard ack + spin-wait on signal stack.
     chaos::il2cpp::pal::PalPreemptiveSuspendAck(
