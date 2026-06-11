@@ -5,6 +5,12 @@
 
 extern "C" {
 
+// ── Internal helpers exposed for generated code inline shapes ──
+// These are used by the InlineShapeDescriptor in RuntimeHelperShapeRegistry
+// to avoid the extern "C" function call overhead on cache hits.
+// Defined in enum_stubs.cpp (non-static, in the runtime_core namespace).
+CHAOS_IL2CPP_INTPTR lookup_cached_enum_name(CHAOS_IL2CPP_INT64 value) noexcept;
+
 CHAOS_IL2CPP_INT32 ChaosEnumIsDefined(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosEnumGetName(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept;

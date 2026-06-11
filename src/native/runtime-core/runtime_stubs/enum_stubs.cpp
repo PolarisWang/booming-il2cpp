@@ -1607,13 +1607,21 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
             for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++)
                 accessor_get_elements(accessor)[i] = s_enum_str_names[i];
         } else {
-            // Fall back to direct allocation from meta.
+            // Fall back to direct allocation from meta (should be rare).
             for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
                 const auto* entry = &meta->fields[i];
-                const auto name_len = std::strlen(entry->name);
-                auto str_handle = enum_alloc_string(name_len);
-                write_string_data(str_handle, entry->name, name_len);
-                accessor_get_elements(accessor)[i] = str_handle;
+                // Try the hash table first (O(1) lookup)
+                auto cached = lookup_cached_enum_name(entry->value);
+                if (cached != 0) {
+                    accessor_get_elements(accessor)[i] = cached;
+                } else {
+                    const auto name_len = std::strlen(entry->name);
+                    auto str_handle = enum_alloc_string(name_len);
+                    write_string_data(str_handle, entry->name, name_len);
+                    accessor_get_elements(accessor)[i] = str_handle;
+                    // Insert into hash table for subsequent O(1) lookup
+                    enum_name_hash_insert(entry->value, str_handle);
+                }
             }
         }
 
@@ -1641,6 +1649,8 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
         auto str_handle = enum_alloc_string(name_len);
         write_string_data(str_handle, f.name_utf8, name_len);
         accessor_get_elements(accessor)[idx++] = str_handle;
+        // Insert each allocated string into the O(1) hash table
+        enum_name_hash_insert(f.constant_value, str_handle);
     }
 
     s_enum_names_array_key = type_handle;
