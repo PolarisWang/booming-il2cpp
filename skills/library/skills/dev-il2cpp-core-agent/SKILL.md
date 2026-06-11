@@ -43,14 +43,23 @@ Dispatcher 接收任务
 
 ## 四阶段流程
 
-### 阶段 1: il2cpp 语境加载（Context Loading）
+### 阶段 1: il2cpp 语境加载 + 健康自检（Context Loading & Self-Check）
 
 ```
 1. 重申全局优先级约束:
    P1（最高）= 性能最优 > P2 = 方案完美性 > P3 = HotUpdate 支持
 
-2. 加载 00-快速导航.md:
-   读取 wiki/03-功能模块/06-il2cpp核心架构/00-快速导航.md
+2. 健康自检（断路器）:
+   a. 列出 skills/library/skills/ 下所有 dev-il2cpp-*-expert 目录
+   b. 与分类矩阵对比，检查是否有 Expert 存在但未注册
+   c. 检查分类矩阵是否为空或只有退化条目
+   d. 结果:
+      - ✅ 正常 → 继续
+      - ⚠️ 有未注册 Expert → 发警告，继续
+      - ❌ 分类矩阵损坏 → 启用降级模式:
+        降级模式: 跳过分类矩阵，直接输出:
+        "请选择任务域: [1]运行时 [2]GC [3]调试 [4]CodeGen [5]测试 [6]翻译 [7]构建 [8]热更新"
+        用户选择后 → 路由到对应域的 Expert
 
 3. 检查工作区状态:
    - 当前分支和 git 状态
@@ -221,22 +230,25 @@ Step 3: 汇总裁决
 
 > ℹ️ 路由规则的权威源是 `skills/discovery/routing-rules.md`。以下矩阵是其副本，如有不一致以 routing-rules.md 为准。
 
-> ⚠️ **执行顺序约束**：Translation Expert 和 CodeGen Expert 都涉及 Planner/Emission 文件。
-> 当子任务同时包含翻译路径修改和 codegen 修改时，**必须先派发 Translation Expert，再派发 CodeGen Expert**。
-> Translation Expert 完成翻译路径设计后，CodeGen Expert 在此基础上做代码生成修改。
+顶层 core-agent 按域分组路由到子 Controller，子 Controller 再分派到具体 Expert。
 
-| 子任务信号 | 目标 Expert |
-|-----------|-----------|
-| 新 IL 指令、翻译路径、Emission、Planner、Lowering | `dev-il2cpp-translation-expert` |
-| runtime-core、interpreter、VTable、bootstrap、method_table、线程状态 | `dev-il2cpp-runtime-expert` |
-| crash、segfault、test failure、异常行为 | `dev-il2cpp-debug-expert` |
-| GC 相关、分配模式、内存回收、写屏障、stress test | `dev-il2cpp-gc-expert` |
-| C# codegen、T4 模板、NativeAot lowering、snapshot | `dev-il2cpp-codegen-expert` |
-| foundation-dll、subject、测试管线、manifest | `dev-project-test-governance` |
-| 性能优化、profile 分析、benchmark | `dev-il2cpp-foundation-dll-optimizer` |
-| 热更新、PatchLoader、patchdata、HotpatchDispatch | `dev-il2cpp-hotupdate-expert` |
-| 编译失败、链接错误、codegen stub、dotnet build 失败、CMake 错误 | `dev-il2cpp-build-fixer` |
-| fact 验证、fact_chunk、skip-list 维护、value_suspicious、dll 验证结果审计、ATG/TPG 质量审查、codegen 输出审查 | `dev-il2cpp-fact-verification-expert` |
+```
+顶层 core-agent                          子 Controller              Expert
+├── 运行时(1) / 调试(3)  → runtime-ctl → ├── dev-il2cpp-runtime-expert
+│                                          └── dev-il2cpp-debug-expert
+├── GC(2) / 优化(5)      → gc-ctl      → ├── dev-il2cpp-gc-expert
+│                                          └── dev-il2cpp-foundation-dll-optimizer
+└── CodeGen(4) / 翻译(6) / 构建(7)        → codegen-ctl → 6 个 Expert
+    测试(8) / 热更新(9)
+```
+
+### 顶层路由
+
+| 命中域 | 路由目标 |
+|--------|---------|
+| 运行时(1) / 调试(3) | 读取 `sub-controllers/runtime-ctl.md` 后自行实现 |
+| GC(2) / 优化(5) | 读取 `sub-controllers/gc-ctl.md` 后自行实现 |
+| CodeGen(4) / 翻译(6) / 构建(7) / 测试(8) / 热更新(9) | 读取 `sub-controllers/codegen-ctl.md` 后自行实现 |
 
 ---
 
