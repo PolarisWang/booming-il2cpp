@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaInference::InferSchema:System.Xml.Schema.XmlSchemaSet(System.Xml.XmlReader)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Xml.Schema.XmlSchemaSet",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Schema.XmlSchemaInference::InferSchema:System.Xml.Schema.XmlSchemaSet(System.Xml.XmlReader,System.Xml.Schema.XmlSchemaSet)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Xml.Schema.XmlSchemaSet",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

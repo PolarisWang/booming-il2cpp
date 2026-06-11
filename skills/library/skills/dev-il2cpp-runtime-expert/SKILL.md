@@ -170,6 +170,23 @@ classification: domains=[运行时] mode=knowledge-inject action=<你要做的�
 2. 检查 `[[dangling-vtable-pointer-segfault]]` 等已知陷阱
 3. 检查 `[[tiering-call-count-guard]]`（不 memset PatchMethod 的 call_count）
 
+### 热点路径性能对比（如涉及 fast_dispatch.cpp / runtime_core.cpp / interpreter_entry.cpp）
+
+修改热点路径后，必须在 commit message 中包含性能对比表：
+
+```
+## 热点路径性能对比
+| 函数 | 位置 | 修改前(ns) | 修改后(ns) | 变化 |
+|------|------|-----------|-----------|------|
+| SafepointPoll | thread_state.cpp | 0.5 | 0.5 | 0% |
+| Handle_Call | fast_dispatch.cpp | 8.0 | 12.5 | **+56%** ⚠️ |
+| Handle_Box | fast_dispatch.cpp | 25.0 | 25.0 | 0% |
+```
+
+- 如果任何函数变化 >10% → 标记 ⚠️ 并分析原因
+- 如果任何函数变化 >50% → 该修改不可接受，需重新设计
+- 性能数据通过 `cmake --preset profile` + `entry.exe --profile` 采集
+
 ## 执行前 Checklist
 
 ```
@@ -218,6 +235,7 @@ classification: domains=[运行时] mode=knowledge-inject action=<你要做的�
    - `root_cause` — 一句话根因
    - `fix_strategy` — 修复策略
    - `regression_check` — 验证范围
+   - 如果涉及热点路径 → 附加**热点路径性能对比表**（见验证流程）
 
 ---
 

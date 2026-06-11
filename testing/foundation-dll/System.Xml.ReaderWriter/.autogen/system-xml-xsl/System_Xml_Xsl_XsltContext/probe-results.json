@@ -1,0 +1,54 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveVariable:System.Xml.Xsl.IXsltContextVariable(System.String,System.String)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Xml.Xsl.IXsltContextVariable",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Xml.Xsl.IXsltContextFunction",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::PreserveWhitespace:System.Boolean(System.Xml.XPath.XPathNavigator)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::CompareDocument:System.Int32(System.String,System.String)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Int32",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

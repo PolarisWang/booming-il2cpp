@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-06-11T10:56:35+08:00",
+  "fix_candidates": 0,
+  "derive_candidates": 2,
+  "capture_candidates": 0,
+  "details": {
+    "fix": [],
+    "derive": [
+      {
+        "skill": "dev-il2cpp-build-fixer"
+      },
+      {
+        "skill": "dev-il2cpp-codegen-expert"
+      }
+    ],
+    "capture": 0
+  }
+}

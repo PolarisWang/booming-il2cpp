@@ -1,0 +1,2585 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.Xml",
+  "chunkSlug": "system-xml-xsl",
+  "totalMethods": 257,
+  "factMethodCount": 140,
+  "customEntryIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256
+  ],
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    246,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakePascal:System.String(System.String)",
+      "generatedMethodId": "MakePascal_0_string_0"
+    },
+    {
+      "index": 1,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakePascal:System.String(System.String)",
+      "generatedMethodId": "MakePascal_0_string_1"
+    },
+    {
+      "index": 2,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeCamel:System.String(System.String)",
+      "generatedMethodId": "MakeCamel_1_string_0"
+    },
+    {
+      "index": 3,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeCamel:System.String(System.String)",
+      "generatedMethodId": "MakeCamel_1_string_1"
+    },
+    {
+      "index": 4,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeValid:System.String(System.String)",
+      "generatedMethodId": "MakeValid_2_string_0"
+    },
+    {
+      "index": 5,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeValid:System.String(System.String)",
+      "generatedMethodId": "MakeValid_2_string_1"
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Clear:System.Void()",
+      "generatedMethodId": "Clear_0__0"
+    },
+    {
+      "index": 7,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::MakeRightCase:System.String(System.String)",
+      "generatedMethodId": "MakeRightCase_1_string_0"
+    },
+    {
+      "index": 8,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::MakeRightCase:System.String(System.String)",
+      "generatedMethodId": "MakeRightCase_1_string_1"
+    },
+    {
+      "index": 9,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::MakeUnique:System.String(System.String)",
+      "generatedMethodId": "MakeUnique_2_string_0"
+    },
+    {
+      "index": 10,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::MakeUnique:System.String(System.String)",
+      "generatedMethodId": "MakeUnique_2_string_1"
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::AddReserved:System.Void(System.String)",
+      "generatedMethodId": "AddReserved_3_string_0"
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::AddReserved:System.Void(System.String)",
+      "generatedMethodId": "AddReserved_3_string_1"
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::RemoveReserved:System.Void(System.String)",
+      "generatedMethodId": "RemoveReserved_4_string_0"
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::RemoveReserved:System.Void(System.String)",
+      "generatedMethodId": "RemoveReserved_4_string_1"
+    },
+    {
+      "index": 15,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::AddUnique:System.String(System.String,System.Object)",
+      "generatedMethodId": "AddUnique_5_string_object_0"
+    },
+    {
+      "index": 16,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::AddUnique:System.String(System.String,System.Object)",
+      "generatedMethodId": "AddUnique_5_string_object_1"
+    },
+    {
+      "index": 17,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::IsInUse:System.Boolean(System.String)",
+      "generatedMethodId": "IsInUse_6_string_0"
+    },
+    {
+      "index": 18,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::IsInUse:System.Boolean(System.String)",
+      "generatedMethodId": "IsInUse_6_string_1"
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Add:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Add_7_string_object_0"
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Add:System.Void(System.String,System.Object)",
+      "generatedMethodId": "Add_7_string_object_1"
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Remove:System.Void(System.String)",
+      "generatedMethodId": "Remove_8_string_0"
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::Remove:System.Void(System.String)",
+      "generatedMethodId": "Remove_8_string_1"
+    },
+    {
+      "index": 23,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifiers::ToArray:System.Object(System.Type)",
+      "generatedMethodId": "ToArray_9_System_Type_0"
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapAttributeOverrides::Add:System.Void(System.Type,System.Xml.Serialization.SoapAttributes)",
+      "generatedMethodId": "Add_0_System_Type_SoapAttributes_0"
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.SoapAttributes)",
+      "generatedMethodId": "Add_1_System_Type_string_SoapAttributes_0"
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.SoapAttributes)",
+      "generatedMethodId": "Add_1_System_Type_string_SoapAttributes_1"
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::IncludeTypes:System.Void(System.Reflection.ICustomAttributeProvider)",
+      "generatedMethodId": "IncludeTypes_0_ICustomAttributeProvider_0"
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::IncludeType:System.Void(System.Type)",
+      "generatedMethodId": "IncludeType_1_System_Type_0"
+    },
+    {
+      "index": 29,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type)",
+      "generatedMethodId": "ImportTypeMapping_2_System_Type_0"
+    },
+    {
+      "index": 30,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)",
+      "generatedMethodId": "ImportTypeMapping_3_System_Type_string_0"
+    },
+    {
+      "index": 31,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)",
+      "generatedMethodId": "ImportTypeMapping_3_System_Type_string_1"
+    },
+    {
+      "index": 32,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "generatedMethodId": "ImportMembersMapping_4_string_string_XmlReflectionMember_0"
+    },
+    {
+      "index": 33,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "generatedMethodId": "ImportMembersMapping_4_string_string_XmlReflectionMember_1"
+    },
+    {
+      "index": 34,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "generatedMethodId": "ImportMembersMapping_4_string_string_XmlReflectionMember_2"
+    },
+    {
+      "index": 35,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "generatedMethodId": "ImportMembersMapping_4_string_string_XmlReflectionMember_3"
+    },
+    {
+      "index": 36,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])",
+      "generatedMethodId": "ImportMembersMapping_4_string_string_XmlReflectionMember_4"
+    },
+    {
+      "index": 37,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_5_string_string_XmlReflectionMember_bool_bool_0"
+    },
+    {
+      "index": 38,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_5_string_string_XmlReflectionMember_bool_bool_1"
+    },
+    {
+      "index": 39,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_5_string_string_XmlReflectionMember_bool_bool_2"
+    },
+    {
+      "index": 40,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_5_string_string_XmlReflectionMember_bool_bool_3"
+    },
+    {
+      "index": 41,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_5_string_string_XmlReflectionMember_bool_bool_4"
+    },
+    {
+      "index": 42,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_bool_bool_0"
+    },
+    {
+      "index": 43,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_bool_bool_1"
+    },
+    {
+      "index": 44,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_bool_bool_2"
+    },
+    {
+      "index": 45,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_bool_bool_3"
+    },
+    {
+      "index": 46,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_bool_bool_4"
+    },
+    {
+      "index": 47,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_0"
+    },
+    {
+      "index": 48,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_1"
+    },
+    {
+      "index": 49,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_2"
+    },
+    {
+      "index": 50,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_3"
+    },
+    {
+      "index": 51,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.SoapReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_4"
+    },
+    {
+      "index": 52,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Add:System.Int32(System.Xml.Serialization.XmlAnyElementAttribute)",
+      "generatedMethodId": "Add_0_XmlAnyElementAttribute_0"
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlAnyElementAttribute)",
+      "generatedMethodId": "Insert_1_int_XmlAnyElementAttribute_0"
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlAnyElementAttribute)",
+      "generatedMethodId": "Insert_1_int_XmlAnyElementAttribute_1"
+    },
+    {
+      "index": 55,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlAnyElementAttribute)",
+      "generatedMethodId": "IndexOf_2_XmlAnyElementAttribute_0"
+    },
+    {
+      "index": 56,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlAnyElementAttribute)",
+      "generatedMethodId": "Contains_3_XmlAnyElementAttribute_0"
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAnyElementAttributes::Remove:System.Void(System.Xml.Serialization.XmlAnyElementAttribute)",
+      "generatedMethodId": "Remove_4_XmlAnyElementAttribute_0"
+    },
+    {
+      "index": 58,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Add:System.Int32(System.Xml.Serialization.XmlArrayItemAttribute)",
+      "generatedMethodId": "Add_0_XmlArrayItemAttribute_0"
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlArrayItemAttribute)",
+      "generatedMethodId": "Insert_1_int_XmlArrayItemAttribute_0"
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlArrayItemAttribute)",
+      "generatedMethodId": "Insert_1_int_XmlArrayItemAttribute_1"
+    },
+    {
+      "index": 61,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlArrayItemAttribute)",
+      "generatedMethodId": "IndexOf_2_XmlArrayItemAttribute_0"
+    },
+    {
+      "index": 62,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlArrayItemAttribute)",
+      "generatedMethodId": "Contains_3_XmlArrayItemAttribute_0"
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlArrayItemAttributes::Remove:System.Void(System.Xml.Serialization.XmlArrayItemAttribute)",
+      "generatedMethodId": "Remove_4_XmlArrayItemAttribute_0"
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeOverrides::Add:System.Void(System.Type,System.Xml.Serialization.XmlAttributes)",
+      "generatedMethodId": "Add_0_System_Type_XmlAttributes_0"
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.XmlAttributes)",
+      "generatedMethodId": "Add_1_System_Type_string_XmlAttributes_0"
+    },
+    {
+      "index": 66,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlAttributeOverrides::Add:System.Void(System.Type,System.String,System.Xml.Serialization.XmlAttributes)",
+      "generatedMethodId": "Add_1_System_Type_string_XmlAttributes_1"
+    },
+    {
+      "index": 67,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Add:System.Int32(System.Xml.Serialization.XmlElementAttribute)",
+      "generatedMethodId": "Add_0_XmlElementAttribute_0"
+    },
+    {
+      "index": 68,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlElementAttribute)",
+      "generatedMethodId": "Insert_1_int_XmlElementAttribute_0"
+    },
+    {
+      "index": 69,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Insert:System.Void(System.Int32,System.Xml.Serialization.XmlElementAttribute)",
+      "generatedMethodId": "Insert_1_int_XmlElementAttribute_1"
+    },
+    {
+      "index": 70,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::IndexOf:System.Int32(System.Xml.Serialization.XmlElementAttribute)",
+      "generatedMethodId": "IndexOf_2_XmlElementAttribute_0"
+    },
+    {
+      "index": 71,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Contains:System.Boolean(System.Xml.Serialization.XmlElementAttribute)",
+      "generatedMethodId": "Contains_3_XmlElementAttribute_0"
+    },
+    {
+      "index": 72,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlElementAttributes::Remove:System.Void(System.Xml.Serialization.XmlElementAttribute)",
+      "generatedMethodId": "Remove_4_XmlElementAttribute_0"
+    },
+    {
+      "index": 73,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlMapping::SetKey:System.Void(System.String)",
+      "generatedMethodId": "SetKey_0_string_0"
+    },
+    {
+      "index": 74,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlMapping::SetKey:System.Void(System.String)",
+      "generatedMethodId": "SetKey_0_string_1"
+    },
+    {
+      "index": 75,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::IncludeTypes:System.Void(System.Reflection.ICustomAttributeProvider)",
+      "generatedMethodId": "IncludeTypes_0_ICustomAttributeProvider_0"
+    },
+    {
+      "index": 76,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::IncludeType:System.Void(System.Type)",
+      "generatedMethodId": "IncludeType_1_System_Type_0"
+    },
+    {
+      "index": 77,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type)",
+      "generatedMethodId": "ImportTypeMapping_2_System_Type_0"
+    },
+    {
+      "index": 78,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)",
+      "generatedMethodId": "ImportTypeMapping_3_System_Type_string_0"
+    },
+    {
+      "index": 79,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.String)",
+      "generatedMethodId": "ImportTypeMapping_3_System_Type_string_1"
+    },
+    {
+      "index": 80,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute)",
+      "generatedMethodId": "ImportTypeMapping_4_System_Type_XmlRootAttribute_0"
+    },
+    {
+      "index": 81,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "generatedMethodId": "ImportTypeMapping_5_System_Type_XmlRootAttribute_string_0"
+    },
+    {
+      "index": 82,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Type,System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "generatedMethodId": "ImportTypeMapping_5_System_Type_XmlRootAttribute_string_1"
+    },
+    {
+      "index": 83,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_0"
+    },
+    {
+      "index": 84,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_1"
+    },
+    {
+      "index": 85,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_2"
+    },
+    {
+      "index": 86,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_3"
+    },
+    {
+      "index": 87,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_6_string_string_XmlReflectionMember_bool_4"
+    },
+    {
+      "index": 88,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_0"
+    },
+    {
+      "index": 89,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_1"
+    },
+    {
+      "index": 90,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_2"
+    },
+    {
+      "index": 91,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_3"
+    },
+    {
+      "index": 92,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_7_string_string_XmlReflectionMember_bool_bool_4"
+    },
+    {
+      "index": 93,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_8_string_string_XmlReflectionMember_bool_bool_bool_0"
+    },
+    {
+      "index": 94,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_8_string_string_XmlReflectionMember_bool_bool_bool_1"
+    },
+    {
+      "index": 95,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_8_string_string_XmlReflectionMember_bool_bool_bool_2"
+    },
+    {
+      "index": 96,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_8_string_string_XmlReflectionMember_bool_bool_bool_3"
+    },
+    {
+      "index": 97,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_8_string_string_XmlReflectionMember_bool_bool_bool_4"
+    },
+    {
+      "index": 98,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_9_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_0"
+    },
+    {
+      "index": 99,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_9_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_1"
+    },
+    {
+      "index": 100,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_9_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_2"
+    },
+    {
+      "index": 101,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_9_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_3"
+    },
+    {
+      "index": 102,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+      "generatedMethodId": "ImportMembersMapping_9_string_string_XmlReflectionMember_bool_bool_bool_XmlMappingAccess_4"
+    },
+    {
+      "index": 103,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportTypeMapping:System.Void(System.Xml.Serialization.XmlTypeMapping)",
+      "generatedMethodId": "ExportTypeMapping_0_XmlTypeMapping_0"
+    },
+    {
+      "index": 104,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportTypeMapping:System.Xml.XmlQualifiedName(System.Xml.Serialization.XmlMembersMapping)",
+      "generatedMethodId": "ExportTypeMapping_1_XmlMembersMapping_0"
+    },
+    {
+      "index": 105,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping)",
+      "generatedMethodId": "ExportMembersMapping_2_XmlMembersMapping_0"
+    },
+    {
+      "index": 106,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping,System.Boolean)",
+      "generatedMethodId": "ExportMembersMapping_3_XmlMembersMapping_bool_0"
+    },
+    {
+      "index": 107,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping,System.Boolean)",
+      "generatedMethodId": "ExportMembersMapping_3_XmlMembersMapping_bool_1"
+    },
+    {
+      "index": 108,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.String)",
+      "generatedMethodId": "ExportAnyType_4_string_0"
+    },
+    {
+      "index": 109,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.String)",
+      "generatedMethodId": "ExportAnyType_4_string_1"
+    },
+    {
+      "index": 110,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.Xml.Serialization.XmlMembersMapping)",
+      "generatedMethodId": "ExportAnyType_5_XmlMembersMapping_0"
+    },
+    {
+      "index": 111,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportDerivedTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type)",
+      "generatedMethodId": "ImportDerivedTypeMapping_0_XmlQualifiedName_System_Type_0"
+    },
+    {
+      "index": 112,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportDerivedTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)",
+      "generatedMethodId": "ImportDerivedTypeMapping_1_XmlQualifiedName_System_Type_bool_0"
+    },
+    {
+      "index": 113,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportDerivedTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)",
+      "generatedMethodId": "ImportDerivedTypeMapping_1_XmlQualifiedName_System_Type_bool_1"
+    },
+    {
+      "index": 114,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName)",
+      "generatedMethodId": "ImportSchemaType_2_XmlQualifiedName_0"
+    },
+    {
+      "index": 115,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type)",
+      "generatedMethodId": "ImportSchemaType_3_XmlQualifiedName_System_Type_0"
+    },
+    {
+      "index": 116,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)",
+      "generatedMethodId": "ImportSchemaType_4_XmlQualifiedName_System_Type_bool_0"
+    },
+    {
+      "index": 117,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportSchemaType:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)",
+      "generatedMethodId": "ImportSchemaType_4_XmlQualifiedName_System_Type_bool_1"
+    },
+    {
+      "index": 118,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportTypeMapping:System.Xml.Serialization.XmlTypeMapping(System.Xml.XmlQualifiedName)",
+      "generatedMethodId": "ImportTypeMapping_5_XmlQualifiedName_0"
+    },
+    {
+      "index": 119,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName)",
+      "generatedMethodId": "ImportMembersMapping_6_XmlQualifiedName_0"
+    },
+    {
+      "index": 120,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportAnyType:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName,System.String)",
+      "generatedMethodId": "ImportAnyType_7_XmlQualifiedName_string_0"
+    },
+    {
+      "index": 121,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportAnyType:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName,System.String)",
+      "generatedMethodId": "ImportAnyType_7_XmlQualifiedName_string_1"
+    },
+    {
+      "index": 122,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[])",
+      "generatedMethodId": "ImportMembersMapping_8_XmlQualifiedName_0"
+    },
+    {
+      "index": 123,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[])",
+      "generatedMethodId": "ImportMembersMapping_8_XmlQualifiedName_1"
+    },
+    {
+      "index": 124,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[])",
+      "generatedMethodId": "ImportMembersMapping_8_XmlQualifiedName_2"
+    },
+    {
+      "index": 125,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_9_XmlQualifiedName_System_Type_bool_0"
+    },
+    {
+      "index": 126,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_9_XmlQualifiedName_System_Type_bool_1"
+    },
+    {
+      "index": 127,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_9_XmlQualifiedName_System_Type_bool_2"
+    },
+    {
+      "index": 128,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.Xml.XmlQualifiedName[],System.Type,System.Boolean)",
+      "generatedMethodId": "ImportMembersMapping_9_XmlQualifiedName_System_Type_bool_3"
+    },
+    {
+      "index": 129,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "generatedMethodId": "ImportMembersMapping_10_string_string_SoapSchemaMember_0"
+    },
+    {
+      "index": 130,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "generatedMethodId": "ImportMembersMapping_10_string_string_SoapSchemaMember_1"
+    },
+    {
+      "index": 131,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "generatedMethodId": "ImportMembersMapping_10_string_string_SoapSchemaMember_2"
+    },
+    {
+      "index": 132,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "generatedMethodId": "ImportMembersMapping_10_string_string_SoapSchemaMember_3"
+    },
+    {
+      "index": 133,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])",
+      "generatedMethodId": "ImportMembersMapping_10_string_string_SoapSchemaMember_4"
+    },
+    {
+      "index": 134,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::GetSchemas:System.Collections.IList(System.String)",
+      "generatedMethodId": "GetSchemas_0_string_0"
+    },
+    {
+      "index": 135,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::GetSchemas:System.Collections.IList(System.String)",
+      "generatedMethodId": "GetSchemas_0_string_1"
+    },
+    {
+      "index": 136,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Add:System.Int32(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Add_1_XmlSchema_0"
+    },
+    {
+      "index": 137,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Add:System.Int32(System.Xml.Schema.XmlSchema,System.Uri)",
+      "generatedMethodId": "Add_2_XmlSchema_System_Uri_0"
+    },
+    {
+      "index": 138,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Add:System.Void(System.Xml.Serialization.XmlSchemas)",
+      "generatedMethodId": "Add_3_XmlSchemas_0"
+    },
+    {
+      "index": 139,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::AddReference:System.Void(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "AddReference_4_XmlSchema_0"
+    },
+    {
+      "index": 140,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Insert:System.Void(System.Int32,System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Insert_5_int_XmlSchema_0"
+    },
+    {
+      "index": 141,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Insert:System.Void(System.Int32,System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Insert_5_int_XmlSchema_1"
+    },
+    {
+      "index": 142,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::IndexOf:System.Int32(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "IndexOf_6_XmlSchema_0"
+    },
+    {
+      "index": 143,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Contains:System.Boolean(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Contains_7_XmlSchema_0"
+    },
+    {
+      "index": 144,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_8_string_0"
+    },
+    {
+      "index": 145,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Contains:System.Boolean(System.String)",
+      "generatedMethodId": "Contains_8_string_1"
+    },
+    {
+      "index": 146,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Remove:System.Void(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "Remove_9_XmlSchema_0"
+    },
+    {
+      "index": 147,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Find:System.Object(System.Xml.XmlQualifiedName,System.Type)",
+      "generatedMethodId": "Find_10_XmlQualifiedName_System_Type_0"
+    },
+    {
+      "index": 148,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::IsDataSet:System.Boolean(System.Xml.Schema.XmlSchema)",
+      "generatedMethodId": "IsDataSet_11_XmlSchema_0"
+    },
+    {
+      "index": 149,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Compile:System.Void(System.Xml.Schema.ValidationEventHandler,System.Boolean)",
+      "generatedMethodId": "Compile_12_ValidationEventHandler_bool_0"
+    },
+    {
+      "index": 150,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemas::Compile:System.Void(System.Xml.Schema.ValidationEventHandler,System.Boolean)",
+      "generatedMethodId": "Compile_12_ValidationEventHandler_bool_1"
+    },
+    {
+      "index": 151,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object)",
+      "generatedMethodId": "Serialize_0_TextWriter_object_0"
+    },
+    {
+      "index": 152,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object)",
+      "generatedMethodId": "Serialize_0_TextWriter_object_1"
+    },
+    {
+      "index": 153,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "generatedMethodId": "Serialize_1_TextWriter_object_XmlSerializerNamespaces_0"
+    },
+    {
+      "index": 154,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.TextWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "generatedMethodId": "Serialize_1_TextWriter_object_XmlSerializerNamespaces_1"
+    },
+    {
+      "index": 155,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "generatedMethodId": "Serialize_2_Stream_object_0"
+    },
+    {
+      "index": 156,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "generatedMethodId": "Serialize_2_Stream_object_1"
+    },
+    {
+      "index": 157,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "generatedMethodId": "Serialize_3_Stream_object_XmlSerializerNamespaces_0"
+    },
+    {
+      "index": 158,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.IO.Stream,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "generatedMethodId": "Serialize_3_Stream_object_XmlSerializerNamespaces_1"
+    },
+    {
+      "index": 159,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object)",
+      "generatedMethodId": "Serialize_4_XmlWriter_object_0"
+    },
+    {
+      "index": 160,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces)",
+      "generatedMethodId": "Serialize_5_XmlWriter_object_XmlSerializerNamespaces_0"
+    },
+    {
+      "index": 161,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces,System.String)",
+      "generatedMethodId": "Serialize_6_XmlWriter_object_XmlSerializerNamespaces_string_0"
+    },
+    {
+      "index": 162,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Serialize:System.Void(System.Xml.XmlWriter,System.Object,System.Xml.Serialization.XmlSerializerNamespaces,System.String,System.String)",
+      "generatedMethodId": "Serialize_7_XmlWriter_object_XmlSerializerNamespaces_string_string_0"
+    },
+    {
+      "index": 163,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.Stream)",
+      "generatedMethodId": "Deserialize_8_Stream_0"
+    },
+    {
+      "index": 164,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.Stream)",
+      "generatedMethodId": "Deserialize_8_Stream_1"
+    },
+    {
+      "index": 165,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.TextReader)",
+      "generatedMethodId": "Deserialize_9_TextReader_0"
+    },
+    {
+      "index": 166,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.IO.TextReader)",
+      "generatedMethodId": "Deserialize_9_TextReader_1"
+    },
+    {
+      "index": 167,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader)",
+      "generatedMethodId": "Deserialize_10_XmlReader_0"
+    },
+    {
+      "index": 168,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.Xml.Serialization.XmlDeserializationEvents)",
+      "generatedMethodId": "Deserialize_11_XmlReader_XmlDeserializationEvents_0"
+    },
+    {
+      "index": 169,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String)",
+      "generatedMethodId": "Deserialize_12_XmlReader_string_0"
+    },
+    {
+      "index": 170,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String)",
+      "generatedMethodId": "Deserialize_12_XmlReader_string_1"
+    },
+    {
+      "index": 171,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String,System.Xml.Serialization.XmlDeserializationEvents)",
+      "generatedMethodId": "Deserialize_13_XmlReader_string_XmlDeserializationEvents_0"
+    },
+    {
+      "index": 172,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::Deserialize:System.Object(System.Xml.XmlReader,System.String,System.Xml.Serialization.XmlDeserializationEvents)",
+      "generatedMethodId": "Deserialize_13_XmlReader_string_XmlDeserializationEvents_1"
+    },
+    {
+      "index": 173,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::CanDeserialize:System.Boolean(System.Xml.XmlReader)",
+      "generatedMethodId": "CanDeserialize_14_XmlReader_0"
+    },
+    {
+      "index": 174,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[])",
+      "generatedMethodId": "FromMappings_15_XmlMapping_0"
+    },
+    {
+      "index": 175,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[])",
+      "generatedMethodId": "FromMappings_15_XmlMapping_1"
+    },
+    {
+      "index": 176,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[])",
+      "generatedMethodId": "FromMappings_15_XmlMapping_2"
+    },
+    {
+      "index": 177,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[],System.Type)",
+      "generatedMethodId": "FromMappings_16_XmlMapping_System_Type_0"
+    },
+    {
+      "index": 178,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[],System.Type)",
+      "generatedMethodId": "FromMappings_16_XmlMapping_System_Type_1"
+    },
+    {
+      "index": 179,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromMappings:System.Xml.Serialization.XmlSerializer[](System.Xml.Serialization.XmlMapping[],System.Type)",
+      "generatedMethodId": "FromMappings_16_XmlMapping_System_Type_2"
+    },
+    {
+      "index": 180,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromTypes:System.Xml.Serialization.XmlSerializer[](System.Type[])",
+      "generatedMethodId": "FromTypes_17_System_Type_0"
+    },
+    {
+      "index": 181,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromTypes:System.Xml.Serialization.XmlSerializer[](System.Type[])",
+      "generatedMethodId": "FromTypes_17_System_Type_1"
+    },
+    {
+      "index": 182,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::FromTypes:System.Xml.Serialization.XmlSerializer[](System.Type[])",
+      "generatedMethodId": "FromTypes_17_System_Type_2"
+    },
+    {
+      "index": 183,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::GetXmlSerializerAssemblyName:System.String(System.Type)",
+      "generatedMethodId": "GetXmlSerializerAssemblyName_18_System_Type_0"
+    },
+    {
+      "index": 184,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::GetXmlSerializerAssemblyName:System.String(System.Type,System.String)",
+      "generatedMethodId": "GetXmlSerializerAssemblyName_19_System_Type_string_0"
+    },
+    {
+      "index": 185,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializer::GetXmlSerializerAssemblyName:System.String(System.Type,System.String)",
+      "generatedMethodId": "GetXmlSerializerAssemblyName_19_System_Type_string_1"
+    },
+    {
+      "index": 186,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "generatedMethodId": "CreateSerializer_0_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_0"
+    },
+    {
+      "index": 187,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "generatedMethodId": "CreateSerializer_0_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_1"
+    },
+    {
+      "index": 188,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String)",
+      "generatedMethodId": "CreateSerializer_0_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_2"
+    },
+    {
+      "index": 189,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlRootAttribute)",
+      "generatedMethodId": "CreateSerializer_1_System_Type_XmlRootAttribute_0"
+    },
+    {
+      "index": 190,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Type[])",
+      "generatedMethodId": "CreateSerializer_2_System_Type_System_Type_0"
+    },
+    {
+      "index": 191,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Type[])",
+      "generatedMethodId": "CreateSerializer_2_System_Type_System_Type_1"
+    },
+    {
+      "index": 192,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Type[])",
+      "generatedMethodId": "CreateSerializer_2_System_Type_System_Type_2"
+    },
+    {
+      "index": 193,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides)",
+      "generatedMethodId": "CreateSerializer_3_System_Type_XmlAttributeOverrides_0"
+    },
+    {
+      "index": 194,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Xml.Serialization.XmlTypeMapping)",
+      "generatedMethodId": "CreateSerializer_4_XmlTypeMapping_0"
+    },
+    {
+      "index": 195,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type)",
+      "generatedMethodId": "CreateSerializer_5_System_Type_0"
+    },
+    {
+      "index": 196,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.String)",
+      "generatedMethodId": "CreateSerializer_6_System_Type_string_0"
+    },
+    {
+      "index": 197,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.String)",
+      "generatedMethodId": "CreateSerializer_6_System_Type_string_1"
+    },
+    {
+      "index": 198,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String)",
+      "generatedMethodId": "CreateSerializer_7_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_string_0"
+    },
+    {
+      "index": 199,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String)",
+      "generatedMethodId": "CreateSerializer_7_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_string_1"
+    },
+    {
+      "index": 200,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerFactory::CreateSerializer:System.Xml.Serialization.XmlSerializer(System.Type,System.Xml.Serialization.XmlAttributeOverrides,System.Type[],System.Xml.Serialization.XmlRootAttribute,System.String,System.String)",
+      "generatedMethodId": "CreateSerializer_7_System_Type_XmlAttributeOverrides_System_Type_XmlRootAttribute_string_string_2"
+    },
+    {
+      "index": 201,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerImplementation::CanSerialize:System.Boolean(System.Type)",
+      "generatedMethodId": "CanSerialize_0_System_Type_0"
+    },
+    {
+      "index": 202,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerImplementation::GetSerializer:System.Xml.Serialization.XmlSerializer(System.Type)",
+      "generatedMethodId": "GetSerializer_1_System_Type_0"
+    },
+    {
+      "index": 203,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_0"
+    },
+    {
+      "index": 204,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_1"
+    },
+    {
+      "index": 205,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerNamespaces::Add:System.Void(System.String,System.String)",
+      "generatedMethodId": "Add_0_string_string_2"
+    },
+    {
+      "index": 206,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSerializerNamespaces::ToArray:System.Xml.XmlQualifiedName[]()",
+      "generatedMethodId": "ToArray_1__0"
+    },
+    {
+      "index": 207,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "Load_0_XmlReader_0"
+    },
+    {
+      "index": 208,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Xml.XmlReader,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_1_XmlReader_XsltSettings_XmlResolver_0"
+    },
+    {
+      "index": 209,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Xml.XPath.IXPathNavigable)",
+      "generatedMethodId": "Load_2_IXPathNavigable_0"
+    },
+    {
+      "index": 210,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_3_IXPathNavigable_XsltSettings_XmlResolver_0"
+    },
+    {
+      "index": 211,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.String)",
+      "generatedMethodId": "Load_4_string_0"
+    },
+    {
+      "index": 212,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.String)",
+      "generatedMethodId": "Load_4_string_1"
+    },
+    {
+      "index": 213,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.String,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_5_string_XsltSettings_XmlResolver_0"
+    },
+    {
+      "index": 214,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.String,System.Xml.Xsl.XsltSettings,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_5_string_XsltSettings_XmlResolver_1"
+    },
+    {
+      "index": 215,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Type)",
+      "generatedMethodId": "Load_6_System_Type_0"
+    },
+    {
+      "index": 216,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Reflection.MethodInfo,System.Byte[],System.Type[])",
+      "generatedMethodId": "Load_7_MethodInfo_System_Byte_System_Type_0"
+    },
+    {
+      "index": 217,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Reflection.MethodInfo,System.Byte[],System.Type[])",
+      "generatedMethodId": "Load_7_MethodInfo_System_Byte_System_Type_1"
+    },
+    {
+      "index": 218,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslCompiledTransform::Load:System.Void(System.Reflection.MethodInfo,System.Byte[],System.Type[])",
+      "generatedMethodId": "Load_7_MethodInfo_System_Byte_System_Type_2"
+    },
+    {
+      "index": 219,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "GetParam_0_string_string_0"
+    },
+    {
+      "index": 220,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "GetParam_0_string_string_1"
+    },
+    {
+      "index": 221,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "GetParam_0_string_string_2"
+    },
+    {
+      "index": 222,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetExtensionObject:System.Object(System.String)",
+      "generatedMethodId": "GetExtensionObject_1_string_0"
+    },
+    {
+      "index": 223,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::GetExtensionObject:System.Object(System.String)",
+      "generatedMethodId": "GetExtensionObject_1_string_1"
+    },
+    {
+      "index": 224,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddParam:System.Void(System.String,System.String,System.Object)",
+      "generatedMethodId": "AddParam_2_string_string_object_0"
+    },
+    {
+      "index": 225,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddParam:System.Void(System.String,System.String,System.Object)",
+      "generatedMethodId": "AddParam_2_string_string_object_1"
+    },
+    {
+      "index": 226,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddParam:System.Void(System.String,System.String,System.Object)",
+      "generatedMethodId": "AddParam_2_string_string_object_2"
+    },
+    {
+      "index": 227,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddExtensionObject:System.Void(System.String,System.Object)",
+      "generatedMethodId": "AddExtensionObject_3_string_object_0"
+    },
+    {
+      "index": 228,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::AddExtensionObject:System.Void(System.String,System.Object)",
+      "generatedMethodId": "AddExtensionObject_3_string_object_1"
+    },
+    {
+      "index": 229,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "RemoveParam_4_string_string_0"
+    },
+    {
+      "index": 230,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "RemoveParam_4_string_string_1"
+    },
+    {
+      "index": 231,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveParam:System.Object(System.String,System.String)",
+      "generatedMethodId": "RemoveParam_4_string_string_2"
+    },
+    {
+      "index": 232,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveExtensionObject:System.Object(System.String)",
+      "generatedMethodId": "RemoveExtensionObject_5_string_0"
+    },
+    {
+      "index": 233,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::RemoveExtensionObject:System.Object(System.String)",
+      "generatedMethodId": "RemoveExtensionObject_5_string_1"
+    },
+    {
+      "index": 234,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltArgumentList::Clear:System.Void()",
+      "generatedMethodId": "Clear_6__0"
+    },
+    {
+      "index": 235,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveVariable:System.Xml.Xsl.IXsltContextVariable(System.String,System.String)",
+      "generatedMethodId": "ResolveVariable_0_string_string_0"
+    },
+    {
+      "index": 236,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveVariable:System.Xml.Xsl.IXsltContextVariable(System.String,System.String)",
+      "generatedMethodId": "ResolveVariable_0_string_string_1"
+    },
+    {
+      "index": 237,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveVariable:System.Xml.Xsl.IXsltContextVariable(System.String,System.String)",
+      "generatedMethodId": "ResolveVariable_0_string_string_2"
+    },
+    {
+      "index": 238,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_0"
+    },
+    {
+      "index": 239,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_1"
+    },
+    {
+      "index": 240,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_2"
+    },
+    {
+      "index": 241,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_3"
+    },
+    {
+      "index": 242,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::ResolveFunction:System.Xml.Xsl.IXsltContextFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])",
+      "generatedMethodId": "ResolveFunction_1_string_string_XPathResultType_4"
+    },
+    {
+      "index": 243,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::PreserveWhitespace:System.Boolean(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "PreserveWhitespace_2_XPathNavigator_0"
+    },
+    {
+      "index": 244,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::CompareDocument:System.Int32(System.String,System.String)",
+      "generatedMethodId": "CompareDocument_3_string_string_0"
+    },
+    {
+      "index": 245,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::CompareDocument:System.Int32(System.String,System.String)",
+      "generatedMethodId": "CompareDocument_3_string_string_1"
+    },
+    {
+      "index": 246,
+      "kind": "hotupdate",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XsltContext::CompareDocument:System.Int32(System.String,System.String)",
+      "generatedMethodId": "CompareDocument_3_string_string_2"
+    },
+    {
+      "index": 247,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XmlReader)",
+      "generatedMethodId": "Load_0_XmlReader_0"
+    },
+    {
+      "index": 248,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XmlReader,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_1_XmlReader_XmlResolver_0"
+    },
+    {
+      "index": 249,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XPath.IXPathNavigable)",
+      "generatedMethodId": "Load_2_IXPathNavigable_0"
+    },
+    {
+      "index": 250,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XPath.IXPathNavigable,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_3_IXPathNavigable_XmlResolver_0"
+    },
+    {
+      "index": 251,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XPath.XPathNavigator)",
+      "generatedMethodId": "Load_4_XPathNavigator_0"
+    },
+    {
+      "index": 252,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.Xml.XPath.XPathNavigator,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_5_XPathNavigator_XmlResolver_0"
+    },
+    {
+      "index": 253,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String)",
+      "generatedMethodId": "Load_6_string_0"
+    },
+    {
+      "index": 254,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String)",
+      "generatedMethodId": "Load_6_string_1"
+    },
+    {
+      "index": 255,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_7_string_XmlResolver_0"
+    },
+    {
+      "index": 256,
+      "kind": "fact",
+      "methodSubjectId": "System.Private.Xml/System.Xml.Xsl.XslTransform::Load:System.Void(System.String,System.Xml.XmlResolver)",
+      "generatedMethodId": "Load_7_string_XmlResolver_1"
+    }
+  ]
+}

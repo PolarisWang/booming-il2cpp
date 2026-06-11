@@ -122,12 +122,18 @@ extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
             continue;
         const char* sid = static_cast<const char*>(kChaosExternalRuntimeSubjects[i]);
         if (sid == nullptr) continue;
+
         if (std::strstr(sid, "::GetHRForLastWin32Error") != nullptr) {
             kChaosExternalRuntimeFnTable[i] =
                 reinterpret_cast<void*>(ChaosMarshalGetHRForLastWin32Error);
         } else if (std::strstr(sid, "::GetLastPInvokeError") != nullptr) {
             kChaosExternalRuntimeFnTable[i] =
                 reinterpret_cast<void*>(ChaosMarshalGetLastPInvokeError);
+        } else if (std::strstr(sid, "Interop+BCrypt") != nullptr ||
+                   std::strstr(sid, "Interop+NCrypt") != nullptr) {
+            // BCrypt/NCrypt Interop P/Invoke stubs: keep nullptr so
+            // ChaosExternalRuntimeFallback Phase 1.5 handles them via
+            // the native ChaosBCrypt* stubs in crypto_stubs.cpp.
         }
     }
 }

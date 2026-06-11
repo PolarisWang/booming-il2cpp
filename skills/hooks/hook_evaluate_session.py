@@ -197,6 +197,21 @@ def main() -> int:
     with open(month_file, "a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
+    # ── Auto-evolution trigger ──────────────────────────────────────
+    # After a meaningful session, run lightweight proposal generation.
+    # Full pipeline (benchmark/review/promote) runs via cron.
+    if quality["edit_count"] >= 3 or quality["unique_skills"] >= 2:
+        try:
+            # Generate proposals from latest telemetry
+            subprocess.run(
+                [sys.executable or "python",
+                 str(repo_root / "skills" / "tooling" / "learning" / "evolve.py"),
+                 "auto-evolve"],
+                cwd=repo_root, capture_output=True, timeout=25,
+            )
+        except Exception:
+            pass  # Best-effort; never fail the hook
+
     return 0
 
 

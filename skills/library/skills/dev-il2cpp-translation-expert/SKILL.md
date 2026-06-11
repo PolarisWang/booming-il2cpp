@@ -112,6 +112,19 @@ classification: domains=[翻译] mode=knowledge-inject expert=dev-il2cpp-transla
 
 ### Step 3：一致性验证（Consistency Verification）
 
+### snapshot 基线变更说明
+
+如果 snapshot 测试基线发生变化，必须在 STATUS.md 中说明变化原因：
+
+```
+## Snapshot 基线变更说明
+- 变更的夹具: [N 个]
+- 变化类型: 结构变化 / 新增指令 / 优化降级
+- 变化原因: [简要说明]
+- 是否预期: 是 / 否（需要追踪）
+```
+
+
 实现完成后逐项检查：
 
 ```

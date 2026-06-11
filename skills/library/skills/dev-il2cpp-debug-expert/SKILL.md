@@ -169,7 +169,16 @@ il2cpp 调试经常涉及 Python → C# codegen → C++ native 三层管线，�
 
 1. 创建失败测试用例
 2. 实现单一修复（解决根因而非症状）
-3. 验证修复（测试通过 + 无回归）
+3. **验证修复不引入性能退化** — 如果修复涉及热点路径（fast_dispatch.cpp / runtime_core.cpp / interpreter_entry.cpp），跑 profile 确认基线未变：
+   ```
+   ## 性能验证
+   | 检查项 | 修复前 | 修复后 | 结论 |
+   |--------|--------|--------|------|
+   | SafepointPoll | ~0.5ns | ~0.5ns | ✅ |
+   | fact 测试通过率 | 1077/1222 | 1077/1222 | ✅ |
+   | stress test | 全部通过 | 全部通过 | ✅ |
+   ```
+4. 验证修复（测试通过 + 无回归）
 4. 如果 ≥ 3 次修复失败 → **质疑架构**（调用 `dev-architecture-first-development` 或 `dev-brainstorm`）
 
 ## 执行前 Checklist

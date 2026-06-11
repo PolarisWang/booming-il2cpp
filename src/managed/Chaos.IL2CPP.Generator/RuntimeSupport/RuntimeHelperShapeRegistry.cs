@@ -9392,6 +9392,109 @@ public sealed partial class NativeAotLoweringPlanner
                 }),
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
+
+            // ── BCrypt P/Invoke stubs (Interop+BCrypt methods) ────────────
+            // These methods are DllImport declarations in System.Private.CoreLib
+            // that the runtime's ChaosExternalRuntimeFallback would otherwise handle
+            // via _TryExecuteViaPInvoke.  By registering them as SimpleForward stubs,
+            // codegen generates direct native call wrappers that invoke the
+            // ChaosBCrypt* functions defined in crypto_stubs.cpp/crypto_stubs.h.
+            // This avoids going through ChaosExternalRuntimeFallback at runtime
+            // and enables actual BCrypt function execution.
+            RegisterBCryptStub(registry, "BCryptOpenAlgorithmProvider",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr", "System.Int32"],
+                "ChaosBCryptOpenAlgorithmProvider", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptCloseAlgorithmProvider",
+                ["System.IntPtr", "System.Int32"],
+                "ChaosBCryptCloseAlgorithmProvider", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptCreateHash",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr", "System.Int32",
+                 "System.IntPtr", "System.Int32", "System.Int32"],
+                "ChaosBCryptCreateHash", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptDestroyHash",
+                ["System.IntPtr"],
+                "ChaosBCryptDestroyHash", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptHashData",
+                ["System.IntPtr", "System.IntPtr", "System.Int32", "System.Int32"],
+                "ChaosBCryptHashData", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptFinishHash",
+                ["System.IntPtr", "System.IntPtr", "System.Int32", "System.Int32"],
+                "ChaosBCryptFinishHash", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptHash",
+                ["System.IntPtr", "System.IntPtr", "System.Int32",
+                 "System.IntPtr", "System.Int32", "System.IntPtr", "System.Int32"],
+                "ChaosBCryptHash", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptGenerateSymmetricKey",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr", "System.Int32",
+                 "System.IntPtr", "System.Int32", "System.Int32"],
+                "ChaosBCryptGenerateSymmetricKey", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptDestroyKey",
+                ["System.IntPtr"],
+                "ChaosBCryptDestroyKey", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptEncrypt",
+                ["System.IntPtr", "System.IntPtr", "System.Int32", "System.IntPtr",
+                 "System.IntPtr", "System.Int32", "System.IntPtr", "System.Int32",
+                 "System.IntPtr", "System.Int32"],
+                "ChaosBCryptEncrypt", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptDecrypt",
+                ["System.IntPtr", "System.IntPtr", "System.Int32", "System.IntPtr",
+                 "System.IntPtr", "System.Int32", "System.IntPtr", "System.Int32",
+                 "System.IntPtr", "System.Int32"],
+                "ChaosBCryptDecrypt", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptImportKey",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr", "System.IntPtr",
+                 "System.IntPtr", "System.Int32", "System.IntPtr", "System.Int32",
+                 "System.Int32"],
+                "ChaosBCryptImportKey", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptExportKey",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr",
+                 "System.IntPtr", "System.Int32", "System.IntPtr", "System.Int32"],
+                "ChaosBCryptExportKey", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptGetProperty",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr",
+                 "System.Int32", "System.IntPtr", "System.Int32"],
+                "ChaosBCryptGetProperty", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptSetProperty",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr",
+                 "System.Int32", "System.Int32"],
+                "ChaosBCryptSetProperty", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptGenerateKeyPair",
+                ["System.IntPtr", "System.IntPtr", "System.Int32", "System.Int32"],
+                "ChaosBCryptGenerateKeyPair", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptFinalizeKeyPair",
+                ["System.IntPtr", "System.Int32"],
+                "ChaosBCryptFinalizeKeyPair", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptImportKeyPair",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr", "System.IntPtr",
+                 "System.IntPtr", "System.Int32", "System.Int32"],
+                "ChaosBCryptImportKeyPair", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptSignHash",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr", "System.Int32",
+                 "System.IntPtr", "System.Int32", "System.IntPtr", "System.Int32"],
+                "ChaosBCryptSignHash", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptVerifySignature",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr", "System.Int32",
+                 "System.IntPtr", "System.Int32", "System.Int32"],
+                "ChaosBCryptVerifySignature", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptSecretAgreement",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr", "System.Int32"],
+                "ChaosBCryptSecretAgreement", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptDestroySecret",
+                ["System.IntPtr"],
+                "ChaosBCryptDestroySecret", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptDeriveKey",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr",
+                 "System.IntPtr", "System.Int32", "System.IntPtr", "System.Int32"],
+                "ChaosBCryptDeriveKey", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptKeyDerivation",
+                ["System.IntPtr", "System.IntPtr", "System.IntPtr",
+                 "System.Int32", "System.IntPtr", "System.Int32"],
+                "ChaosBCryptKeyDerivation", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptGenRandom",
+                ["System.IntPtr", "System.IntPtr", "System.Int32", "System.Int32"],
+                "ChaosBCryptGenRandom", CreateInt32AbiSlot());
+            RegisterBCryptStub(registry, "BCryptIsAvailable", [],
+                "ChaosBCryptIsAvailable", CreateInt32AbiSlot());
         }
 
         private static void RegisterShaStub(RuntimeHelperShapeRegistry registry, string algoName, string nativeFn)
@@ -9424,6 +9527,45 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0, 1 });
 
+        }
+
+        /// <summary>
+        /// Register a BCrypt/NCrypt P/Invoke method as a SimpleForward stub.
+        /// The type name is "Interop+BCrypt" for BCrypt methods and "Interop+NCrypt" for NCrypt methods.
+        /// Each IntPtr parameter maps to a NativeInt ABI slot, and each Int32 maps to an Int32 ABI slot.
+        /// The return type is always Int32 (NTSTATUS) for BCrypt API functions.
+        /// </summary>
+        private static void RegisterBCryptStub(
+            RuntimeHelperShapeRegistry registry,
+            string methodName,
+            string[] paramTypeDisplayNames,
+            string nativeFn,
+            AotCoreIrAbiSlotArtifact returnAbi)
+        {
+            var typeName = methodName.StartsWith("NCrypt", StringComparison.Ordinal)
+                ? "Interop+NCrypt"
+                : "Interop+BCrypt";
+
+            var abiSlots = new AotCoreIrAbiSlotArtifact[paramTypeDisplayNames.Length];
+            var rawIndices = new HashSet<int>();
+            for (int i = 0; i < paramTypeDisplayNames.Length; i++)
+            {
+                rawIndices.Add(i);
+                abiSlots[i] = paramTypeDisplayNames[i] switch
+                {
+                    "System.Int32" => CreateInt32AbiSlot(),
+                    _ => CreateNativeIntAbiSlot(),  // IntPtr -> NativeInt
+                };
+            }
+
+            registry.Register(
+                typeName,
+                methodName,
+                paramTypeDisplayNames,
+                ShapeKind.SimpleForward, nativeFn,
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots),
+                returnAbi,
+                rawIndices);
         }
     }
 }

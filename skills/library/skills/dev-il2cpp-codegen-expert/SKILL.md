@@ -181,7 +181,16 @@ classification: domains=[CodeGen] mode=knowledge-inject expert=dev-il2cpp-codege
    - 如果基线需更新：`SNAPSHOT_UPDATE=1`
    - 检查 git diff 确认基线变更符合预期
 3. **验证器**：运行 `NativeCodegenValidator`（9 条规则）
-4. **集成验证**：如果涉及 AOT 输出变更 → 运行 foundation-dll 验证管线
+	4. **代码质量对比** — 如果涉及 emitter/模板修改，检查生成代码变更：
+	   ```
+	   ## 生成代码对比
+	   | 指标 | 修改前 | 修改后 | 变化 |
+	   |------|--------|--------|------|
+	   | 生成 C++ 行数 | xxx | xxx | +N% |
+	   | 生成函数数 | xxx | xxx | N% |
+	   | snapshot 基线变更 | 0 | N | 需审查 |
+	   ```
+	5. **集成验证**
 
 ---
 

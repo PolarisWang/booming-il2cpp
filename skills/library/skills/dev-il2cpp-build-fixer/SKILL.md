@@ -115,6 +115,20 @@ classification: domains=[构建] mode=knowledge-inject expert=dev-il2cpp-build-f
 
 ### Step 4：验证
 
+### 诊断交接模板（转交 CodeGen Expert 时使用）
+
+当问题出在 CodeGen 层需要转交时，必须附带以下诊断上下文：
+
+```
+## 编译错误诊断
+- 错误文件: [文件名:行号]
+- 错误代码: [错误码]
+- 上下文行: [含错误行前后各2 行]
+- 根因判断: [简要说明]
+- 修复方向: [建议修改的文件 + 策略]
+```
+
+
 1. 重新构建：`cmake --build` 或 `dotnet build`
 2. 如果修的是 codegen 模板 → 运行 snapshot 测试
 3. 如果修的是 pipeline → 运行对应 chunk 的 build stage

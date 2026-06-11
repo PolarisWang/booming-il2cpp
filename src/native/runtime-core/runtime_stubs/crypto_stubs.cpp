@@ -482,6 +482,567 @@ void ChaosCngFill(CHAOS_IL2CPP_INTPTR buffer) noexcept
     RAND_bytes(data, static_cast<int>(arr->length));
 }
 
+#endif  // closes the main Windows vs OpenSSL implementation block
+
+// ── BCrypt P/Invoke stubs (Windows: delegate to bcrypt.dll) ──────────
+// These stubs are called from the P/Invoke routing path in ChaosExternalRuntimeFallback
+// when managed Interop+BCrypt methods are encountered.
+#ifdef _WIN32
+#include <Windows.h>
+#include <bcrypt.h>
+#pragma comment(lib, "bcrypt.lib")
+
+// Wrapper: extract a CHAOS_IL2CPP_INTPTR argument as a wide string pointer.
+// The managed Interop+BCrypt passes string arguments as IntPtr (wchar_t*).
+static inline LPCWSTR _AsWideStr(CHAOS_IL2CPP_INTPTR ptr) noexcept {
+    return reinterpret_cast<LPCWSTR>(ptr);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptOpenAlgorithmProvider(
+    CHAOS_IL2CPP_INTPTR phAlgorithm,
+    CHAOS_IL2CPP_INTPTR pszAlgId,
+    CHAOS_IL2CPP_INTPTR pszImplementation,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto* phAlg = reinterpret_cast<BCRYPT_ALG_HANDLE*>(phAlgorithm);
+    if (phAlg == nullptr) return -1; // STATUS_INVALID_PARAMETER
+    NTSTATUS status = BCryptOpenAlgorithmProvider(
+        phAlg,
+        _AsWideStr(pszAlgId),
+        _AsWideStr(pszImplementation),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptCloseAlgorithmProvider(
+    CHAOS_IL2CPP_INTPTR hAlgorithm,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hAlg = reinterpret_cast<BCRYPT_ALG_HANDLE>(hAlgorithm);
+    NTSTATUS status = BCryptCloseAlgorithmProvider(hAlg, static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptCreateHash(
+    CHAOS_IL2CPP_INTPTR hAlgorithm,
+    CHAOS_IL2CPP_INTPTR phHash,
+    CHAOS_IL2CPP_INTPTR pbHashObject,
+    CHAOS_IL2CPP_INT32 cbHashObject,
+    CHAOS_IL2CPP_INTPTR pbSecret,
+    CHAOS_IL2CPP_INT32 cbSecret,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hAlg = reinterpret_cast<BCRYPT_ALG_HANDLE>(hAlgorithm);
+    auto* phH = reinterpret_cast<BCRYPT_HASH_HANDLE*>(phHash);
+    if (phH == nullptr) return -1;
+    NTSTATUS status = BCryptCreateHash(
+        hAlg, phH,
+        reinterpret_cast<PUCHAR>(pbHashObject), static_cast<ULONG>(cbHashObject),
+        reinterpret_cast<PUCHAR>(pbSecret), static_cast<ULONG>(cbSecret),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDestroyHash(
+    CHAOS_IL2CPP_INTPTR hHash) noexcept
+{
+    auto hH = reinterpret_cast<BCRYPT_HASH_HANDLE>(hHash);
+    NTSTATUS status = BCryptDestroyHash(hH);
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptHashData(
+    CHAOS_IL2CPP_INTPTR hHash,
+    CHAOS_IL2CPP_INTPTR pbInput,
+    CHAOS_IL2CPP_INT32 cbInput,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hH = reinterpret_cast<BCRYPT_HASH_HANDLE>(hHash);
+    NTSTATUS status = BCryptHashData(
+        hH,
+        reinterpret_cast<PUCHAR>(pbInput), static_cast<ULONG>(cbInput),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptFinishHash(
+    CHAOS_IL2CPP_INTPTR hHash,
+    CHAOS_IL2CPP_INTPTR pbOutput,
+    CHAOS_IL2CPP_INT32 cbOutput,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hH = reinterpret_cast<BCRYPT_HASH_HANDLE>(hHash);
+    NTSTATUS status = BCryptFinishHash(
+        hH,
+        reinterpret_cast<PUCHAR>(pbOutput), static_cast<ULONG>(cbOutput),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptHash(
+    CHAOS_IL2CPP_INTPTR hAlgorithm,
+    CHAOS_IL2CPP_INTPTR pbSecret,
+    CHAOS_IL2CPP_INT32 cbSecret,
+    CHAOS_IL2CPP_INTPTR pbInput,
+    CHAOS_IL2CPP_INT32 cbInput,
+    CHAOS_IL2CPP_INTPTR pbOutput,
+    CHAOS_IL2CPP_INT32 cbOutput) noexcept
+{
+    auto hAlg = reinterpret_cast<BCRYPT_ALG_HANDLE>(hAlgorithm);
+    NTSTATUS status = BCryptHash(
+        hAlg,
+        reinterpret_cast<PUCHAR>(pbSecret), static_cast<ULONG>(cbSecret),
+        reinterpret_cast<PUCHAR>(pbInput), static_cast<ULONG>(cbInput),
+        reinterpret_cast<PUCHAR>(pbOutput), static_cast<ULONG>(cbOutput));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptGenerateSymmetricKey(
+    CHAOS_IL2CPP_INTPTR hAlgorithm,
+    CHAOS_IL2CPP_INTPTR phKey,
+    CHAOS_IL2CPP_INTPTR pbKeyObject,
+    CHAOS_IL2CPP_INT32 cbKeyObject,
+    CHAOS_IL2CPP_INTPTR pbSecret,
+    CHAOS_IL2CPP_INT32 cbSecret,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hAlg = reinterpret_cast<BCRYPT_ALG_HANDLE>(hAlgorithm);
+    BCRYPT_KEY_HANDLE* phK = reinterpret_cast<BCRYPT_KEY_HANDLE*>(phKey);
+    if (phK == nullptr) return -1;
+    NTSTATUS status = BCryptGenerateSymmetricKey(
+        hAlg, phK,
+        reinterpret_cast<PUCHAR>(pbKeyObject), static_cast<ULONG>(cbKeyObject),
+        reinterpret_cast<PUCHAR>(pbSecret), static_cast<ULONG>(cbSecret),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDestroyKey(
+    CHAOS_IL2CPP_INTPTR hKey) noexcept
+{
+    auto hK = reinterpret_cast<BCRYPT_KEY_HANDLE>(hKey);
+    NTSTATUS status = BCryptDestroyKey(hK);
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptEncrypt(
+    CHAOS_IL2CPP_INTPTR hKey,
+    CHAOS_IL2CPP_INTPTR pbInput,
+    CHAOS_IL2CPP_INT32 cbInput,
+    CHAOS_IL2CPP_INTPTR pPaddingInfo,
+    CHAOS_IL2CPP_INTPTR pbIV,
+    CHAOS_IL2CPP_INT32 cbIV,
+    CHAOS_IL2CPP_INTPTR pbOutput,
+    CHAOS_IL2CPP_INT32 cbOutput,
+    CHAOS_IL2CPP_INTPTR pcbResult,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hK = reinterpret_cast<BCRYPT_KEY_HANDLE>(hKey);
+    NTSTATUS status = BCryptEncrypt(
+        hK,
+        reinterpret_cast<PUCHAR>(pbInput), static_cast<ULONG>(cbInput),
+        reinterpret_cast<void*>(pPaddingInfo),
+        reinterpret_cast<PUCHAR>(pbIV), static_cast<ULONG>(cbIV),
+        reinterpret_cast<PUCHAR>(pbOutput), static_cast<ULONG>(cbOutput),
+        reinterpret_cast<ULONG*>(pcbResult),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDecrypt(
+    CHAOS_IL2CPP_INTPTR hKey,
+    CHAOS_IL2CPP_INTPTR pbInput,
+    CHAOS_IL2CPP_INT32 cbInput,
+    CHAOS_IL2CPP_INTPTR pPaddingInfo,
+    CHAOS_IL2CPP_INTPTR pbIV,
+    CHAOS_IL2CPP_INT32 cbIV,
+    CHAOS_IL2CPP_INTPTR pbOutput,
+    CHAOS_IL2CPP_INT32 cbOutput,
+    CHAOS_IL2CPP_INTPTR pcbResult,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hK = reinterpret_cast<BCRYPT_KEY_HANDLE>(hKey);
+    NTSTATUS status = BCryptDecrypt(
+        hK,
+        reinterpret_cast<PUCHAR>(pbInput), static_cast<ULONG>(cbInput),
+        reinterpret_cast<void*>(pPaddingInfo),
+        reinterpret_cast<PUCHAR>(pbIV), static_cast<ULONG>(cbIV),
+        reinterpret_cast<PUCHAR>(pbOutput), static_cast<ULONG>(cbOutput),
+        reinterpret_cast<ULONG*>(pcbResult),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptImportKey(
+    CHAOS_IL2CPP_INTPTR hAlgorithm,
+    CHAOS_IL2CPP_INTPTR hImportKey,
+    CHAOS_IL2CPP_INTPTR pszBlobType,
+    CHAOS_IL2CPP_INTPTR phKey,
+    CHAOS_IL2CPP_INTPTR pbKeyObject,
+    CHAOS_IL2CPP_INT32 cbKeyObject,
+    CHAOS_IL2CPP_INTPTR pbInput,
+    CHAOS_IL2CPP_INT32 cbInput,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hAlg = reinterpret_cast<BCRYPT_ALG_HANDLE>(hAlgorithm);
+    auto hImpKey = reinterpret_cast<BCRYPT_KEY_HANDLE>(hImportKey);
+    BCRYPT_KEY_HANDLE* phK = reinterpret_cast<BCRYPT_KEY_HANDLE*>(phKey);
+    if (phK == nullptr) return -1;
+    NTSTATUS status = BCryptImportKey(
+        hAlg, hImpKey,
+        _AsWideStr(pszBlobType), phK,
+        reinterpret_cast<PUCHAR>(pbKeyObject), static_cast<ULONG>(cbKeyObject),
+        reinterpret_cast<PUCHAR>(pbInput), static_cast<ULONG>(cbInput),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptExportKey(
+    CHAOS_IL2CPP_INTPTR hKey,
+    CHAOS_IL2CPP_INTPTR hExportKey,
+    CHAOS_IL2CPP_INTPTR pszBlobType,
+    CHAOS_IL2CPP_INTPTR pbOutput,
+    CHAOS_IL2CPP_INT32 cbOutput,
+    CHAOS_IL2CPP_INTPTR pcbResult,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hK = reinterpret_cast<BCRYPT_KEY_HANDLE>(hKey);
+    auto hExpKey = reinterpret_cast<BCRYPT_KEY_HANDLE>(hExportKey);
+    NTSTATUS status = BCryptExportKey(
+        hK, hExpKey,
+        _AsWideStr(pszBlobType),
+        reinterpret_cast<PUCHAR>(pbOutput), static_cast<ULONG>(cbOutput),
+        reinterpret_cast<ULONG*>(pcbResult),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptGetProperty(
+    CHAOS_IL2CPP_INTPTR hObject,
+    CHAOS_IL2CPP_INTPTR pszProperty,
+    CHAOS_IL2CPP_INTPTR pbOutput,
+    CHAOS_IL2CPP_INT32 cbOutput,
+    CHAOS_IL2CPP_INTPTR pcbResult,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    NTSTATUS status = BCryptGetProperty(
+        reinterpret_cast<void*>(hObject),
+        _AsWideStr(pszProperty),
+        reinterpret_cast<PUCHAR>(pbOutput), static_cast<ULONG>(cbOutput),
+        reinterpret_cast<ULONG*>(pcbResult),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptSetProperty(
+    CHAOS_IL2CPP_INTPTR hObject,
+    CHAOS_IL2CPP_INTPTR pszProperty,
+    CHAOS_IL2CPP_INTPTR pbInput,
+    CHAOS_IL2CPP_INT32 cbInput,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    NTSTATUS status = BCryptSetProperty(
+        reinterpret_cast<void*>(hObject),
+        _AsWideStr(pszProperty),
+        reinterpret_cast<PUCHAR>(pbInput), static_cast<ULONG>(cbInput),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptGenerateKeyPair(
+    CHAOS_IL2CPP_INTPTR hAlgorithm,
+    CHAOS_IL2CPP_INTPTR phKey,
+    CHAOS_IL2CPP_INT32 dwLength,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hAlg = reinterpret_cast<BCRYPT_ALG_HANDLE>(hAlgorithm);
+    BCRYPT_KEY_HANDLE* phK = reinterpret_cast<BCRYPT_KEY_HANDLE*>(phKey);
+    if (phK == nullptr) return -1;
+    NTSTATUS status = BCryptGenerateKeyPair(
+        hAlg, phK,
+        static_cast<ULONG>(dwLength),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptFinalizeKeyPair(
+    CHAOS_IL2CPP_INTPTR hKey,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hK = reinterpret_cast<BCRYPT_KEY_HANDLE>(hKey);
+    NTSTATUS status = BCryptFinalizeKeyPair(hK, static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptImportKeyPair(
+    CHAOS_IL2CPP_INTPTR hAlgorithm,
+    CHAOS_IL2CPP_INTPTR hImportKey,
+    CHAOS_IL2CPP_INTPTR pszBlobType,
+    CHAOS_IL2CPP_INTPTR phKey,
+    CHAOS_IL2CPP_INTPTR pbInput,
+    CHAOS_IL2CPP_INT32 cbInput,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hAlg = reinterpret_cast<BCRYPT_ALG_HANDLE>(hAlgorithm);
+    auto hImpKey = reinterpret_cast<BCRYPT_KEY_HANDLE>(hImportKey);
+    BCRYPT_KEY_HANDLE* phK = reinterpret_cast<BCRYPT_KEY_HANDLE*>(phKey);
+    if (phK == nullptr) return -1;
+    NTSTATUS status = BCryptImportKeyPair(
+        hAlg, hImpKey,
+        _AsWideStr(pszBlobType), phK,
+        reinterpret_cast<PUCHAR>(pbInput), static_cast<ULONG>(cbInput),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptSignHash(
+    CHAOS_IL2CPP_INTPTR hKey,
+    CHAOS_IL2CPP_INTPTR pPaddingInfo,
+    CHAOS_IL2CPP_INTPTR pbInput,
+    CHAOS_IL2CPP_INT32 cbInput,
+    CHAOS_IL2CPP_INTPTR pbOutput,
+    CHAOS_IL2CPP_INT32 cbOutput,
+    CHAOS_IL2CPP_INTPTR pcbResult,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hK = reinterpret_cast<BCRYPT_KEY_HANDLE>(hKey);
+    NTSTATUS status = BCryptSignHash(
+        hK,
+        reinterpret_cast<void*>(pPaddingInfo),
+        reinterpret_cast<PUCHAR>(pbInput), static_cast<ULONG>(cbInput),
+        reinterpret_cast<PUCHAR>(pbOutput), static_cast<ULONG>(cbOutput),
+        reinterpret_cast<ULONG*>(pcbResult),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptVerifySignature(
+    CHAOS_IL2CPP_INTPTR hKey,
+    CHAOS_IL2CPP_INTPTR pPaddingInfo,
+    CHAOS_IL2CPP_INTPTR pbHash,
+    CHAOS_IL2CPP_INT32 cbHash,
+    CHAOS_IL2CPP_INTPTR pbSignature,
+    CHAOS_IL2CPP_INT32 cbSignature,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hK = reinterpret_cast<BCRYPT_KEY_HANDLE>(hKey);
+    NTSTATUS status = BCryptVerifySignature(
+        hK,
+        reinterpret_cast<void*>(pPaddingInfo),
+        reinterpret_cast<PUCHAR>(pbHash), static_cast<ULONG>(cbHash),
+        reinterpret_cast<PUCHAR>(pbSignature), static_cast<ULONG>(cbSignature),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptSecretAgreement(
+    CHAOS_IL2CPP_INTPTR hPrivKey,
+    CHAOS_IL2CPP_INTPTR hPubKey,
+    CHAOS_IL2CPP_INTPTR phAgreedSecret,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hPriv = reinterpret_cast<BCRYPT_KEY_HANDLE>(hPrivKey);
+    auto hPub = reinterpret_cast<BCRYPT_KEY_HANDLE>(hPubKey);
+    BCRYPT_SECRET_HANDLE* phSecret = reinterpret_cast<BCRYPT_SECRET_HANDLE*>(phAgreedSecret);
+    if (phSecret == nullptr) return -1;
+    NTSTATUS status = BCryptSecretAgreement(
+        hPriv, hPub, phSecret,
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDestroySecret(
+    CHAOS_IL2CPP_INTPTR hSecret) noexcept
+{
+    auto hS = reinterpret_cast<BCRYPT_SECRET_HANDLE>(hSecret);
+    NTSTATUS status = BCryptDestroySecret(hS);
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDeriveKey(
+    CHAOS_IL2CPP_INTPTR hSecret,
+    CHAOS_IL2CPP_INTPTR pwszKDF,
+    CHAOS_IL2CPP_INTPTR pParameterList,
+    CHAOS_IL2CPP_INTPTR pbDerivedKey,
+    CHAOS_IL2CPP_INT32 cbDerivedKey,
+    CHAOS_IL2CPP_INTPTR pcbResult,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hS = reinterpret_cast<BCRYPT_SECRET_HANDLE>(hSecret);
+    NTSTATUS status = BCryptDeriveKey(
+        hS,
+        _AsWideStr(pwszKDF),
+        reinterpret_cast<BCryptBufferDesc*>(pParameterList),
+        reinterpret_cast<PUCHAR>(pbDerivedKey), static_cast<ULONG>(cbDerivedKey),
+        reinterpret_cast<ULONG*>(pcbResult),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptKeyDerivation(
+    CHAOS_IL2CPP_INTPTR hKey,
+    CHAOS_IL2CPP_INTPTR pParameterList,
+    CHAOS_IL2CPP_INTPTR pbDerivedKey,
+    CHAOS_IL2CPP_INT32 cbDerivedKey,
+    CHAOS_IL2CPP_INTPTR pcbResult,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hK = reinterpret_cast<BCRYPT_KEY_HANDLE>(hKey);
+    NTSTATUS status = BCryptKeyDerivation(
+        hK,
+        reinterpret_cast<BCryptBufferDesc*>(pParameterList),
+        reinterpret_cast<PUCHAR>(pbDerivedKey), static_cast<ULONG>(cbDerivedKey),
+        reinterpret_cast<ULONG*>(pcbResult),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptGenRandom(
+    CHAOS_IL2CPP_INTPTR hAlgorithm,
+    CHAOS_IL2CPP_INTPTR pbBuffer,
+    CHAOS_IL2CPP_INT32 cbBuffer,
+    CHAOS_IL2CPP_INT32 dwFlags) noexcept
+{
+    auto hAlg = reinterpret_cast<BCRYPT_ALG_HANDLE>(hAlgorithm);
+    NTSTATUS status = BCryptGenRandom(
+        hAlg,
+        reinterpret_cast<PUCHAR>(pbBuffer), static_cast<ULONG>(cbBuffer),
+        static_cast<ULONG>(dwFlags));
+    return static_cast<CHAOS_IL2CPP_INT32>(status);
+}
+
+CHAOS_IL2CPP_INT32 ChaosBCryptIsAvailable() noexcept
+{
+    return 1;  // Windows always has BCrypt available
+}
+
+#else  // !_WIN32 — OpenSSL-based BCrypt P/Invoke stubs
+
+// On non-Windows, BCrypt P/Invoke calls are not available.
+// These stubs return error codes so the managed code can handle
+// PlatformNotSupportedException gracefully.
+// Full implementation would require an OpenSSL-based abstraction
+// layer for each BCrypt function.
+
+CHAOS_IL2CPP_INT32 ChaosBCryptOpenAlgorithmProvider(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }  // STATUS_NOT_SUPPORTED
+
+CHAOS_IL2CPP_INT32 ChaosBCryptCloseAlgorithmProvider(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return 0; }  // STATUS_SUCCESS (no-op)
+
+CHAOS_IL2CPP_INT32 ChaosBCryptCreateHash(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDestroyHash(CHAOS_IL2CPP_INTPTR) noexcept
+{ return 0; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptHashData(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptFinishHash(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptHash(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptGenerateSymmetricKey(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDestroyKey(CHAOS_IL2CPP_INTPTR) noexcept
+{ return 0; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptEncrypt(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDecrypt(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptImportKey(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32,
+    CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptExportKey(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptGetProperty(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptSetProperty(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptGenerateKeyPair(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptFinalizeKeyPair(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptImportKeyPair(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptSignHash(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptVerifySignature(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptSecretAgreement(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDestroySecret(CHAOS_IL2CPP_INTPTR) noexcept
+{ return 0; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptDeriveKey(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptKeyDerivation(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR,
+    CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptGenRandom(
+    CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32, CHAOS_IL2CPP_INT32) noexcept
+{ return -1; }
+
+CHAOS_IL2CPP_INT32 ChaosBCryptIsAvailable() noexcept
+{
+    return 0;  // BCrypt not available on non-Windows
+}
+
 #endif
 
 // ── AES Create (stub — returns null sentinel) ────────────────────
