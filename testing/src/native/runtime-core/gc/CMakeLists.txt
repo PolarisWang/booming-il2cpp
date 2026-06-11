@@ -22,6 +22,7 @@ set(CHAOS_GC_LIBS
     chaos_hot_update
     chaos_common
     chaos_support
+    chaos_pal
     chaos_fmt
 )
 

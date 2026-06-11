@@ -39,6 +39,7 @@ set(CHAOS_INCLUDE_DIRS
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/threading"
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/tiering"
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc"
+    "${CHAOS_PROJECT_ROOT}/../src/native/pal"
     "${CHAOS_PROJECT_ROOT}/../src/native/jit"
     "${CHAOS_PROJECT_ROOT}/../src/native/engine-bridge"
     "${CHAOS_PROJECT_ROOT}/../contracts/native/v0"
@@ -70,6 +71,7 @@ add_chaos_imported_lib(chaos_support        support)
 add_chaos_imported_lib(chaos_hot_update     hot-update)
 add_chaos_imported_lib(chaos_engine_bridge  engine-bridge)
 add_chaos_imported_lib(chaos_debugger diagnostics/debugger)
+add_chaos_imported_lib(chaos_pal pal)
 
 # chaos_fmt is built as a standalone project outside the src/native tree
 if(NOT TARGET chaos_fmt)
