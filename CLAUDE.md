@@ -21,9 +21,12 @@
 >
 > **执行协议**：
 > 1. 输出分类声明
-> 2. `touch .claude/.classified`（创建标记文件）
-> 3. 使用工具（Edit/Write/Glob/Grep/Skill 会被 hook 检查）
-> 4. 响应结束时 `rm -f .claude/.classified`
+> 2. 如果分类命中域编号表 1-8 → 强制走 dev-il2cpp 工作流映射。
+>    执行步骤：读取 `dev-il2cpp/SKILL.md` → 按"工作流映射"找到目标 skill → 加载后执行。
+>    （所有 il2cpp 域的任务必须通过 dev-il2cpp 入口路由，不走通用回复）
+> 3. `touch .claude/.classified`（创建标记文件）
+> 4. 使用工具（Edit/Write/Glob/Grep/Skill 会被 hook 检查）
+> 5. 响应结束时 `rm -f .claude/.classified`
 >
 > ⚠️ hook 会阻止未分类的 Edit/Write/Glob/Grep/Skill 调用。Bash 豁免（用于管理标记文件）。
 
@@ -46,6 +49,9 @@
 3. 单域 → Skill 加载 Expert 知识后自行实现
 4. 多域（≥2）→ 默认走 Workflow 委托，不询问用户
 5. **在输出分类声明之前，禁止使用任何工具**
+6. **分类声明输出后，如果分类命中域编号表 1-8，必须先走 dev-il2cpp 工作流映射再回复**。
+    不允许走通用回复（即不使用 dev-il2cpp 路由就给出答案或提问）。
+    映射规则见 `dev-il2cpp/SKILL.md` 的"工作流映射"章节。
 
 ### Workflow 分发循环规则
 
