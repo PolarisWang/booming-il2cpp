@@ -45,6 +45,21 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 
 这些资源已自动可用，无需额外读取操作。在技能选择阶段应直接利用这些信息做判断。
 
+## 路由协议（强制 — 从 CLAUDE.md 分类门进入）
+
+当 CLAUDE.md 第〇条规则的分类声明命中域编号表 1-8 后，**强制**执行以下路由：
+
+```
+分类命中域 1-8
+  │
+  ├── 读取 skills/discovery/registries/<domain>.md
+  ├── 找到该域的核心入口 skill（通常是 dev-il2cpp-core-agent）
+  ├── 读取 library/skills/<name>/SKILL.md
+  └── 按 SKILL.md 指令执行，不走通用回复
+```
+
+此路由在分类声明后、任何工具使用前执行。所有 il2cpp 域的任务必须先经此门。
+
 ## 核心规则
 
 ### 1. 在任何响应或行动前先选技能
@@ -68,10 +83,16 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 
 ### 3. 工作流映射
 
+**⛔ 强制规则 — 由上方"路由协议"触发，优先于以下所有条目匹配：**
+分类命中域编号表 1-8（运行时/GC/调试/CodeGen/测试/翻译/构建/热更新）
+→ 读取 `skills/discovery/registries/il2cpp.md` 找到 `dev-il2cpp-core-agent`
+→ 由 Controller 判断任务域，路由到对应的 Expert Agent 或降级处理
+→ **不走通用回复，不跳过此路由**
+
+以下为通用任务的工作流参考（仅当上方强制规则未命中时使用）：
+
 - “设计一个新功能 / 规范 / 架构”：
   先 `brainstorming` 把执行相关问题清零并拿到用户确认；之后进入 `writing-plans`，如果是多阶段主线则转 `roadmap`
-- **“il2cpp/AOT/GC/Runtime/翻译/CodeGen/interpreter/VTable 相关工作”**：
-  **→ 读取 `skills/discovery/registries/il2cpp.md` 找到 `dev-il2cpp-core-agent`**（由 Controller 判断任务域，路由到对应的 Expert Agent 或降级处理）
 - “边界清晰的小范围改动 / 单文件修复 / 单会话任务”：
   直接实现；如已存在正式任务目录，则走 `STATUS.md` 轻量维护，不强制补 `plan` / `design`
 - “任务已经跨会话 / 多步骤，但还有执行前未确认的问题”：
