@@ -1,0 +1,43 @@
+{
+    "kind": "project",
+    "domain": "workflow",
+    "name": "dev-optimization-campaign",
+    "summary": "多 family 性能优化战役的编排技能。跨设备 git 异步协调，每次优化必须产出 docs/optimize/ 完整分析文档，commit 必须含性能对比数据。",
+    "trigger_signals": [
+        "需要跨设备协调多轮性能优化时",
+        "多个 agent 并行优化不同 capability family 时",
+        "需要性能优化的完整分析文档和横向方案对比时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "2.1.0",
+    "startup_visible": false,
+    "token_budget": "large",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-05-01",
+            "type": "initial"
+        },
+        {
+            "version": "2.0.0",
+            "date": "2026-05-27",
+            "type": "redesign",
+            "note": "从本地 state.json 原子写入重构为跨设备 git 异步协调 + docs/optimize/ 文档驱动模式"
+        },
+        {
+            "version": "2.1.0",
+            "date": "2026-05-28",
+            "type": "enhancement",
+            "note": "新增三级优化（L1/L2/L3），按复杂度分级验证和文档。Phase 3 加豁免机制（理论极限/无基线/架构性差距）。Phase 4 改为 L3 专属。state.json 改为可提交。简化 commit message 模板。分级时间预算。"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

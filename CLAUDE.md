@@ -114,11 +114,11 @@ Expert 分类矩阵、多域处理策略、终止守卫等路由规则详见 `sk
 
 ## 技能调用
 
-技能源代码在 `skills/library/skills/`（git 跟踪）。`.claude/skills/` 只注册了一个入口技能 `dev-il2cpp`（对话启动时自动加载），所有子技能通过 discovery index 发现。
+技能源代码在 `.ai/skills/library/skills/`（git 跟踪）。`.claude/skills/` 只注册了一个入口技能 `dev-il2cpp`（对话启动时自动加载），所有子技能通过 discovery index 发现。
 
 发现流程：
-1. 读取 `skills/discovery/skill-index.md`（已预加载到上下文）
-2. 根据任务领域选择对应的 registry 页面（`skills/discovery/registries/<domain>.md`）
+1. 读取 `.ai/skills/discovery/skill-index.md`（已预加载到上下文）
+2. 根据任务领域选择对应的 registry 页面（`.ai/skills/discovery/registries/<domain>.md`）
 3. 从 registry 中找到目标技能，获取其 SKILL.md 路径
 4. 读取 `skills/library/skills/<name>/SKILL.md` 并遵循其指令执行
 

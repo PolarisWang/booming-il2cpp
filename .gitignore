@@ -6,6 +6,10 @@
 
 # Runtime-generated unknown domain tracking for core-agent auto-evolution
 skills/.unknown-domains.json
+.ai/skills/.unknown-domains.json
+
+# User-local settings copy under .ai/
+.ai/dot-claude/
 docs/executions/
 
 # Editor / IDE state

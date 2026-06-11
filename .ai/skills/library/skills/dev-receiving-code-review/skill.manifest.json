@@ -1,0 +1,30 @@
+{
+    "kind": "project",
+    "domain": "quality",
+    "name": "dev-receiving-code-review",
+    "summary": "在收到代码审查反馈时技术严谨地评估建议，而非表演性同意。",
+    "trigger_signals": [
+        "收到代码审查反馈时",
+        "审查意见不清晰或有技术疑问时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2025-01-01",
+            "type": "initial"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

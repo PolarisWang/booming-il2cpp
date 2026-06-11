@@ -1,0 +1,31 @@
+{
+    "kind": "project",
+    "domain": "workflow",
+    "name": "dev-writing-plans",
+    "summary": "把多步骤任务写成可执行计划，并定义执行期状态与验收方式。",
+    "trigger_signals": [
+        "面对规格说明或多步骤任务时",
+        "尚未开始编码时",
+        "需要先形成执行计划时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "medium",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2025-01-01",
+            "type": "initial"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

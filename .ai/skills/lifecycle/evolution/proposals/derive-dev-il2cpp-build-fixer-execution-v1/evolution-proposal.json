@@ -1,0 +1,10 @@
+{
+  "proposal_id": "derive-dev-il2cpp-build-fixer-execution-v1",
+  "type": "derive",
+  "skill": "dev-il2cpp-build-fixer-execution",
+  "parent_skill": "dev-il2cpp-build-fixer",
+  "version": "1.0.0",
+  "timestamp": "2026-06-11T21:29:30+08:00",
+  "reason": "Context-switching ratio triggered, derived variant for execution",
+  "status": "proposed"
+}

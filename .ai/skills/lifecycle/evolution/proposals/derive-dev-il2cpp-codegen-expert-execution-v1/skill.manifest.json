@@ -1,0 +1,30 @@
+{
+  "kind": "project",
+  "domain": "il2cpp",
+  "name": "dev-il2cpp-codegen-expert-execution",
+  "summary": "Derived from dev-il2cpp-codegen-expert — 专注于执行阶段的子技能",
+  "trigger_signals": [
+    "TODO: Define trigger signals for dev-il2cpp-codegen-expert-execution"
+  ],
+  "owner": "00-skills-maintainers",
+  "status": "draft",
+  "version": "1.0.0",
+  "version_history": [
+    {
+      "version": "1.0.0",
+      "date": "2026-06-11",
+      "type": "derived",
+      "parent": "dev-il2cpp-codegen-expert",
+      "description": "Derived from dev-il2cpp-codegen-expert"
+    }
+  ],
+  "evolution_lineage": {
+    "parent": "dev-il2cpp-codegen-expert",
+    "derived_from": "dev-il2cpp-codegen-expert",
+    "derived_to": [],
+    "fixes": [],
+    "captured_from": null
+  },
+  "startup_visible": false,
+  "token_budget": "small"
+}

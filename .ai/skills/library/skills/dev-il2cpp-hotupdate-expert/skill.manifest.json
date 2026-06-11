@@ -1,0 +1,33 @@
+{
+    "kind": "project",
+    "domain": "il2cpp",
+    "name": "dev-il2cpp-hotupdate-expert",
+    "summary": "il2cpp 热更新专家 — Hotpatch 双层分派、PatchLoader、.patchdata、PatchMetadataCache、Interpreter 解释器路由",
+    "trigger_signals": [
+        "热更新架构修改（Hotpatch / PatchLoader）",
+        ".patchdata 格式或提取逻辑变更",
+        "InterpreterEntryDirect / HotpatchDispatch 修改",
+        "emit-patch-data CLI 相关",
+        "旧版 method_replacement 兼容"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-06-10",
+            "type": "created"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "medium"
+}

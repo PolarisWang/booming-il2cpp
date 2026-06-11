@@ -1,0 +1,33 @@
+{
+    "kind": "project",
+    "domain": "workflow",
+    "name": "dev-executing-plans",
+    "summary": "按批次执行已有计划，并维护状态文档和进度记录。",
+    "trigger_signals": [
+        "已有实现计划时",
+        "需要分批推进任务时",
+        "需要维护 STATUS 或 progress 记录时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "medium",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2025-01-01",
+            "type": "initial"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [
+            "dev-executing-plans-planning"
+        ],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

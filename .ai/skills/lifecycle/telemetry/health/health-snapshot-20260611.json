@@ -1,0 +1,763 @@
+{
+  "timestamp": "2026-06-11T02:56:35.771363+00:00",
+  "window_days": 7,
+  "total_skills": 36,
+  "skills": {
+    "dev-architecture-first-development": {
+      "skill": "dev-architecture-first-development",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.767362+00:00"
+    },
+    "dev-brainstorm": {
+      "skill": "dev-brainstorm",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.767362+00:00"
+    },
+    "dev-cpp-conventions": {
+      "skill": "dev-cpp-conventions",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.767362+00:00"
+    },
+    "dev-dispatching-parallel-agents": {
+      "skill": "dev-dispatching-parallel-agents",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.767362+00:00"
+    },
+    "dev-executing-plans": {
+      "skill": "dev-executing-plans",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.767362+00:00"
+    },
+    "dev-finishing-a-development-branch": {
+      "skill": "dev-finishing-a-development-branch",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.767362+00:00"
+    },
+    "dev-il2cpp": {
+      "skill": "dev-il2cpp",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.768361+00:00"
+    },
+    "dev-il2cpp-build-fixer": {
+      "skill": "dev-il2cpp-build-fixer",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.1034,
+        "completion_rate": 0.7586,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.2414,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 1.0
+      },
+      "raw_counts": {
+        "usage_reads": 3,
+        "tool_calls": 0,
+        "sessions": 29,
+        "quality_signals": 0,
+        "completed_sessions": 22,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.768361+00:00"
+    },
+    "dev-il2cpp-codegen-expert": {
+      "skill": "dev-il2cpp-codegen-expert",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.1515,
+        "completion_rate": 1.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 1.0
+      },
+      "raw_counts": {
+        "usage_reads": 5,
+        "tool_calls": 0,
+        "sessions": 33,
+        "quality_signals": 0,
+        "completed_sessions": 33,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.768361+00:00"
+    },
+    "dev-il2cpp-core-agent": {
+      "skill": "dev-il2cpp-core-agent",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.2857,
+        "completion_rate": 1.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 1.0
+      },
+      "raw_counts": {
+        "usage_reads": 2,
+        "tool_calls": 0,
+        "sessions": 7,
+        "quality_signals": 0,
+        "completed_sessions": 7,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.768361+00:00"
+    },
+    "dev-il2cpp-debug-expert": {
+      "skill": "dev-il2cpp-debug-expert",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 1.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 1.0
+      },
+      "raw_counts": {
+        "usage_reads": 2,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.768361+00:00"
+    },
+    "dev-il2cpp-fact-verification-expert": {
+      "skill": "dev-il2cpp-fact-verification-expert",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.768361+00:00"
+    },
+    "dev-il2cpp-foundation-dll-optimizer": {
+      "skill": "dev-il2cpp-foundation-dll-optimizer",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.1429,
+        "completion_rate": 1.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 1.0
+      },
+      "raw_counts": {
+        "usage_reads": 1,
+        "tool_calls": 0,
+        "sessions": 7,
+        "quality_signals": 0,
+        "completed_sessions": 7,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.768361+00:00"
+    },
+    "dev-il2cpp-gc-expert": {
+      "skill": "dev-il2cpp-gc-expert",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.768361+00:00"
+    },
+    "dev-il2cpp-hotupdate-expert": {
+      "skill": "dev-il2cpp-hotupdate-expert",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.769361+00:00"
+    },
+    "dev-il2cpp-runtime-expert": {
+      "skill": "dev-il2cpp-runtime-expert",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.8571,
+        "completion_rate": 1.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 1.0
+      },
+      "raw_counts": {
+        "usage_reads": 6,
+        "tool_calls": 0,
+        "sessions": 7,
+        "quality_signals": 0,
+        "completed_sessions": 7,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.769361+00:00"
+    },
+    "dev-il2cpp-translation-expert": {
+      "skill": "dev-il2cpp-translation-expert",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 1.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 1.0
+      },
+      "raw_counts": {
+        "usage_reads": 3,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.769361+00:00"
+    },
+    "dev-native-debug-profiling": {
+      "skill": "dev-native-debug-profiling",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.769361+00:00"
+    },
+    "dev-optimization-campaign": {
+      "skill": "dev-optimization-campaign",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.769361+00:00"
+    },
+    "dev-pressure-test-management": {
+      "skill": "dev-pressure-test-management",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.769361+00:00"
+    },
+    "dev-project-test-governance": {
+      "skill": "dev-project-test-governance",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.769361+00:00"
+    },
+    "dev-project-wiki-maintenance": {
+      "skill": "dev-project-wiki-maintenance",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.769361+00:00"
+    },
+    "dev-receiving-code-review": {
+      "skill": "dev-receiving-code-review",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.770361+00:00"
+    },
+    "dev-requesting-code-review": {
+      "skill": "dev-requesting-code-review",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.770361+00:00"
+    },
+    "dev-roadmap": {
+      "skill": "dev-roadmap",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.770361+00:00"
+    },
+    "dev-skill-evolution": {
+      "skill": "dev-skill-evolution",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.770361+00:00"
+    },
+    "dev-skill-registry": {
+      "skill": "dev-skill-registry",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.770361+00:00"
+    },
+    "dev-subagent-driven-development": {
+      "skill": "dev-subagent-driven-development",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.770361+00:00"
+    },
+    "dev-systematic-debugging": {
+      "skill": "dev-systematic-debugging",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.770361+00:00"
+    },
+    "dev-test-driven-development": {
+      "skill": "dev-test-driven-development",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.770361+00:00"
+    },
+    "dev-trace-enforcement": {
+      "skill": "dev-trace-enforcement",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.771363+00:00"
+    },
+    "dev-unordered-map-selection": {
+      "skill": "dev-unordered-map-selection",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.771363+00:00"
+    },
+    "dev-using-git-worktrees": {
+      "skill": "dev-using-git-worktrees",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.771363+00:00"
+    },
+    "dev-verification-before-completion": {
+      "skill": "dev-verification-before-completion",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.771363+00:00"
+    },
+    "dev-writing-plans": {
+      "skill": "dev-writing-plans",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.771363+00:00"
+    },
+    "dev-writing-skills": {
+      "skill": "dev-writing-skills",
+      "window_days": 7,
+      "metrics": {
+        "applied_rate": 0.0,
+        "completion_rate": 0.0,
+        "tool_success_rate": 1.0,
+        "fallback_rate": 0.0,
+        "quality_score_avg": 0.0,
+        "context_switching_ratio": 0.0
+      },
+      "raw_counts": {
+        "usage_reads": 0,
+        "tool_calls": 0,
+        "sessions": 0,
+        "quality_signals": 0,
+        "completed_sessions": 0,
+        "successful_tool_calls": 0
+      },
+      "timestamp": "2026-06-11T02:56:35.771363+00:00"
+    }
+  }
+}

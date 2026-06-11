@@ -1,0 +1,31 @@
+{
+    "kind": "project",
+    "domain": "il2cpp",
+    "name": "dev-unordered-map-selection",
+    "summary": "unordered_map 选型规则：何时用 CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY / MAP / std 退回避让。",
+    "trigger_signals": [
+        "编写 native C++ 代码时需要选择 unordered_map 实现时",
+        "需要在热点路径中使用哈希表时",
+        "需要确定使用 CHAOS_IL2CPP_UNORDERED_DENSE_MAP 还是 std::unordered_map 时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-05-16",
+            "type": "initial"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

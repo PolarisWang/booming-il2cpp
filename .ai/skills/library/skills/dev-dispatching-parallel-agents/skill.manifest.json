@@ -1,0 +1,31 @@
+{
+    "kind": "project",
+    "domain": "workflow",
+    "name": "dev-dispatching-parallel-agents",
+    "summary": "把可并行的独立子任务分派给多个 agent，减少串行等待。",
+    "trigger_signals": [
+        "存在两个以上互不依赖的子任务",
+        "需要并行探索或实现时",
+        "本地工作不依赖某个旁路结果时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2025-01-01",
+            "type": "initial"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

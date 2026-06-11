@@ -1,1 +1,0 @@
-{"timestamp": "2026-06-11T03:11:48.230268+00:00", "quality_score": 0.85, "domain_hint": "knowledge", "action_hint": "refine", "metrics": {"tool_calls": 0, "tool_success_rate": 1.0, "edit_count": 3, "completion_rate": 0.5367, "unique_skills": 8}, "details": "tool_ok=1.00; edit_ratio=1.00; complete=0.54; skills=8", "source": "telemetry"}

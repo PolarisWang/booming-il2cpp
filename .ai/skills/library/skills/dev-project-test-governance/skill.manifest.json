@@ -1,0 +1,33 @@
+{
+    "kind": "project",
+    "domain": "testing",
+    "name": "dev-project-test-governance",
+    "summary": "测试治理：subject/test 工作流、Chaos.TestFramework、runner、benchmark、codegen 结构变更。",
+    "trigger_signals": [
+        "修改 subject/test 工作流时",
+        "修改 Chaos.TestFramework 时",
+        "修改 managed/native/hotupdate runners 时",
+        "修改 benchmark 或 unit verification 流程时",
+        "修改项目 codegen 结构时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "large",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2025-01-01",
+            "type": "initial"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

@@ -1,0 +1,30 @@
+{
+    "kind": "project",
+    "domain": "git",
+    "name": "dev-finishing-a-development-branch",
+    "summary": "执行主线完成后合并回目标分支并完成本地提交收口。",
+    "trigger_signals": [
+        "执行主线已归档为 completed 时",
+        "需要合并结果回目标分支时"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2025-01-01",
+            "type": "initial"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

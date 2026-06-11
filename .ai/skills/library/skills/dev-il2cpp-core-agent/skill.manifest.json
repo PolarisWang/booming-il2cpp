@@ -1,0 +1,35 @@
+{
+    "kind": "project",
+    "domain": "il2cpp",
+    "name": "dev-il2cpp-core-agent",
+    "summary": "il2cpp 核心开发统一入口 — 分类任务并路由到对应的 Expert Agent，完成后自动执行质量门",
+    "trigger_signals": [
+        "il2cpp/AOT/GC/Runtime/翻译/CodeGen 相关工作",
+        "用户从 dev-using-booming 路由到 il2cpp 域",
+        "用户直接输入 /dev-il2cpp-core-agent"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-06-10",
+            "type": "created"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": "dev-il2cpp",
+        "derived_from": null,
+        "derived_to": [
+            "dev-il2cpp-translation-expert",
+            "dev-il2cpp-runtime-expert",
+            "dev-il2cpp-debug-expert"
+        ],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "small"
+}

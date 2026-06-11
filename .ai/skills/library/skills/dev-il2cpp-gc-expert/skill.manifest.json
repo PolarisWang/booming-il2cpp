@@ -1,0 +1,32 @@
+{
+    "kind": "project",
+    "domain": "il2cpp",
+    "name": "dev-il2cpp-gc-expert",
+    "summary": "il2cpp GC 专家 — CRAG GC 架构、分配策略、分代分析、写屏障、stress test、内存域",
+    "trigger_signals": [
+        "GC crash / 分配异常 / OOM / stress test 回归",
+        "CRAG GC 分代策略 / 写屏障 / Safepoint 修改",
+        "Page Decommission / Free List 问题",
+        "NurseryAllocateSlow / GcAllocate 修改"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-06-10",
+            "type": "created"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    },
+    "core_length": "medium"
+}
