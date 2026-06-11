@@ -978,14 +978,24 @@ public sealed partial class NativeAotLoweringPlanner
             string? resolvedHelper = null;
             bool hasHelper = helperSymbolBySubjectId?.TryGetValue(subjectId, out resolvedHelper) == true;
 
-            // If the helper has a DirectNativeSymbol, the chaos_external_runtime_*
-            // function doesn't actually exist — only the DirectNativeSymbol stub does.
-            // Use nullptr in the dispatch table to avoid unresolved linker symbols.
+            // If the helper has a DirectNativeSymbol AND no Source, the
+            // chaos_external_runtime_* wrapper function is NOT emitted — only the
+            // DirectNativeSymbol stub exists.  Use nullptr in the dispatch table
+            // to avoid unresolved linker symbols, letting the runtime/TTP
+            // Scriban template fill in the entry at startup via subject-id
+            // string matching.
+            //
+            // When Source is non-empty (e.g. SimpleForward / GenericShapeDescriptor
+            // entries like Marshal::GetLastPInvokeError), the wrapper IS emitted
+            // and the fn table should pre-populate with the wrapper symbol so
+            // runtime startup code does not need to patch nullptr entries.
             if (hasHelper && _externalRuntimeHelpers is { } helpers)
             {
                 foreach (var h in helpers)
                 {
-                    if (h.SubjectId == subjectId && h.DirectNativeSymbol != null)
+                    if (h.SubjectId == subjectId &&
+                        h.DirectNativeSymbol != null &&
+                        string.IsNullOrEmpty(h.Source))
                     {
                         hasHelper = false;
                         resolvedHelper = null;
