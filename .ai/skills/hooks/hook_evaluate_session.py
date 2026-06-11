@@ -18,6 +18,19 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+# R8: JSONL 文件大小上限 10MB
+_MAX_JSONL_BYTES = 10 * 1024 * 1024
+
+
+def _rotate_jsonl_if_needed(path: Path) -> None:
+    if path.exists() and path.stat().st_size > _MAX_JSONL_BYTES:
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+        rotated = path.with_name(f"{path.stem}.{timestamp}.jsonl")
+        try:
+            path.rename(rotated)
+        except OSError:
+            pass
+
 
 def resolve_repo_root() -> Path | None:
     try:
@@ -194,13 +207,12 @@ def main() -> int:
     }
 
     month_file = signals_dir / f"{datetime.now(timezone.utc).strftime('%Y-%m')}.jsonl"
+    _rotate_jsonl_if_needed(month_file)
     with open(month_file, "a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-    # ── Auto-evolution trigger ──────────────────────────────────────
-    # After a meaningful session, run lightweight proposal generation.
-    # Full pipeline (benchmark/review/promote) runs via cron.
-    if quality["edit_count"] >= 3 or quality["unique_skills"] >= 2:
+    # R5: 提高触发阈值 — 只有重度编辑会话才触发自动演化
+    if quality["edit_count"] >= 10 or quality["unique_skills"] >= 3:
         try:
             # Generate proposals from latest telemetry
             subprocess.run(

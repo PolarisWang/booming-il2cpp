@@ -1,6 +1,9 @@
 # Local workflow state
 .booming/
 .claude/
+!.claude/skills/
+!.claude/settings.json
+!.claude/scheduled_tasks.lock
 .codex/
 .hermes/
 

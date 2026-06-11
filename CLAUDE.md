@@ -23,21 +23,18 @@
 > 1. 输出分类声明（**必须包含 → 加载 dev-xxx-expert**）
 > 2. `echo "本轮任务涉及 {域1(编号)} ... ，{action} 操作，第 N 轮 → 加载 dev-xxx-expert" > .claude/.classified`
 >    （hook 验证格式 + 域编号 + action + Expert 名）
-> 3. 在首次 Edit/Write 域文件之前，**必须先通过 Skill 工具加载 Expert**:
->    `Skill("dev-xxx-expert")` → hook 自动写入 `.claude/.loaded_expert`
-> 4. 使用工具（hook 会在 Edit/Write 域文件时检查 loaded_expert 是否匹配）
+> 3. 通过 registry 发现流程加载 Expert 知识（读取对应的 SKILL.md）
+> 4. 使用工具（hook 对 Edit/Write 域文件做分类声明格式验证，不强制 loaded_expert）
 > 5. 响应结束时：
->    - 延续消息 → **保留** `.claude/.classified` + `.claude/.loaded_expert`
->    - 新任务 → `rm -f .claude/.classified .claude/.loaded_expert`
-> 6. **禁止**：在未加载对应 Expert 的情况下编辑域文件（src/managed/、src/native/、testing/、src/tools/）
->    违例会被 hook 阻断
+>    - 延续消息 → **保留** `.claude/.classified`
+>    - 新任务 → `rm -f .claude/.classified`
+> 6. **建议**：在编辑域文件前先通过 registry 发现加载对应 Expert 知识
 >
 >
 > **Bash 规则**：
-> - **管理 Bash**: `echo "..." > .claude/.classified`、`rm -f .claude/*` 等标记文件操作 → 无需分类
+> - **管理 Bash**: `echo "..." > .claude/.classified`、`rm -f .claude/.classified` 等标记文件操作 → 无需分类
 > - **只读 Bash**: `ls`, `cat`, `git status`, `grep`, `find`, `wc` 等 → 无需分类
-> - **域操作 Bash**: `rm -rf testing/...`, `cmake --build src/native/...`, `cd src/managed/...` → 必须匹配 loaded_expert
-> - 域操作 Bash 被拦截时，先 `Skill("dev-xxx-expert")` 加载 Expert
+> - **域操作 Bash**: 直接放行（loaded_expert 不强制）
 
 ## 全局优先级约束（强制）
 

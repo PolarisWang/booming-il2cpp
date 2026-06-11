@@ -17,6 +17,20 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+# R8: JSONL 文件大小上限 10MB
+_MAX_JSONL_BYTES = 10 * 1024 * 1024
+
+
+def _rotate_jsonl_if_needed(path: Path) -> None:
+    if path.exists() and path.stat().st_size > _MAX_JSONL_BYTES:
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+        rotated = path.with_name(f"{path.stem}.{timestamp}.jsonl")
+        try:
+            path.rename(rotated)
+        except OSError:
+            pass
+
+
 RESOLVED_REPO_ROOT: Path | None = None
 
 
@@ -202,6 +216,7 @@ def main() -> int:
         "event": "session_outcome",
     }
     log_path = telemetry_dir / "session_outcomes.jsonl"
+    _rotate_jsonl_if_needed(log_path)
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
@@ -210,6 +225,7 @@ def main() -> int:
         pattern = extract_success_pattern(repo_root, skill_path)
         if pattern:
             pattern_path = telemetry_dir / "success-patterns.jsonl"
+            _rotate_jsonl_if_needed(pattern_path)
             with open(pattern_path, "a", encoding="utf-8") as f:
                 f.write(json.dumps(pattern, ensure_ascii=False) + "\n")
 

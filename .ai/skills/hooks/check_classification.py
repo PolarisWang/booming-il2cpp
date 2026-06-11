@@ -1,13 +1,12 @@
-"""PreToolUse hook: 强制 Expert 加载验证 (A+B+方案4)
+"""PreToolUse hook: 验证分类声明格式 (简化版)
 
-方案4: Bash 无豁免。只读 Bash 放行，管理 Bash (.claude/) 放行，
-域操作 Bash 必须匹配 loaded_expert。
+Skill 工具在非标准 API 环境下无法加载子 Expert，
+因此 loaded_expert 强制验证已被移除。
 
 流程:
 1. 用户发消息 → Agent 输出分类声明 + "→ 加载 dev-xxx-expert"
 2. echo "..." > .claude/.classified (hook 验证格式)
-3. Agent 通过 Skill 工具加载 Expert → hook 自动写入 .loaded_expert
-4. 后续 Edit/Write/Bash 域文件 → hook 检查 loaded_expert 是否匹配
+3. 后续 Edit/Write/Bash 域文件 → 仅提醒分类声明要求，不阻止
 """
 
 import os
@@ -19,79 +18,63 @@ from pathlib import Path
 
 _RESOLVED_REPO_ROOT: Path | None = None
 
+
 def _get_repo_root() -> Path | None:
     global _RESOLVED_REPO_ROOT
     if _RESOLVED_REPO_ROOT is not None:
         return _RESOLVED_REPO_ROOT
-    try:
-        script_dir = Path(__file__).resolve().parent
-        output = subprocess.run(
-            ["git", "-C", str(script_dir), "rev-parse", "--show-toplevel"],
-            capture_output=True, text=True, timeout=5,
-        )
-        root = output.stdout.strip()
-        _RESOLVED_REPO_ROOT = Path(root).resolve() if root else None
-        return _RESOLVED_REPO_ROOT
-    except Exception:
-        return None
+    # R9: try multiple fallback strategies
+    strategies = [
+        lambda: Path(__file__).resolve().parent,   # script dir
+        lambda: Path.cwd(),                          # cwd
+        None,
+    ]
+    for get_dir in strategies:
+        if get_dir is None:
+            break
+        try:
+            d = get_dir()
+            output = subprocess.run(
+                ["git", "-C", str(d), "rev-parse", "--show-toplevel"],
+                capture_output=True, text=True, timeout=5,
+            )
+            root = output.stdout.strip()
+            if root:
+                _RESOLVED_REPO_ROOT = Path(root).resolve()
+                return _RESOLVED_REPO_ROOT
+        except Exception:
+            continue
+    return None
 
 
-_claude_dir = Path(__file__).resolve().parent.parent.parent / ".claude"
-if not _claude_dir.exists():
-    repo_root = _get_repo_root()
-    if repo_root:
-        _claude_dir = repo_root / ".claude"
-    else:
-        _claude_dir = Path.cwd() / ".claude"
+# R9: 多级 claude_dir 候选
+_claude_candidates: list[Path] = [
+    Path(__file__).resolve().parent.parent.parent / ".claude",
+]
+repo_root = _get_repo_root()
+if repo_root:
+    _claude_candidates.append(repo_root / ".claude")
+_claude_candidates.append(Path.cwd() / ".claude")
+
+_claude_dir = _claude_candidates[0]
+for c in _claude_candidates:
+    if c.exists():
+        _claude_dir = c
+        break
 
 flag_file = _claude_dir / ".classified"
-loaded_expert_file = _claude_dir / ".loaded_expert"
 
-tool_name = os.environ.get("CLAUDE_TOOL_NAME", sys.argv[1] if len(sys.argv) > 1 else "unknown")
-
-
-# ═══════════════════════════════════════════════════════════════════
-# 文件路径 → Expert 映射表
-# ═══════════════════════════════════════════════════════════════════
-FILE_TO_EXPERT: list[tuple[str, str]] = [
-    # GC 必须先于 runtime-core（gc/ 是 runtime-core/ 的子路径）
-    ("src/native/runtime-core/gc/",          "dev-il2cpp-gc-expert"),
-    ("src/native/runtime-core/",             "dev-il2cpp-runtime-expert"),
-    ("src/native/interpreter/",              "dev-il2cpp-runtime-expert"),
-    ("src/native/bootstrap/",                "dev-il2cpp-runtime-expert"),
-    ("src/native/support/",                  "dev-il2cpp-runtime-expert"),
-    ("src/native/jit/",                      "dev-il2cpp-jit-expert"),
-    ("src/native/pal/",                      "dev-il2cpp-platform-expert"),
-    ("CMakePresets.json",                    "dev-il2cpp-platform-expert"),
-    ("build/toolchains/",                    "dev-il2cpp-platform-expert"),
-    (".github/workflows/",                   "dev-il2cpp-platform-expert"),
-    ("docs/",                                "dev-project-wiki-maintenance"),
-    ("wiki/",                                "dev-project-wiki-maintenance"),
-    ("src/managed/Chaos.IL2CPP.Generator/",  "dev-il2cpp-codegen-expert"),
-    ("testing/foundation-dll/",              "dev-il2cpp-fact-verification-expert"),
-    ("testing/foundation-dll/verification/stages/build.py", "dev-il2cpp-build-fixer"),
-    ("src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/",  "dev-il2cpp-build-fixer"),
-    ("src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/", "dev-il2cpp-build-fixer"),
-    ("src/native/hot-update/",               "dev-il2cpp-hotupdate-expert"),
-    # build/ 映射到对应源域的 Expert（构建产物对应源码域）
-    ("build/native/",                        "dev-il2cpp-runtime-expert"),
-    ("build/native-profile/",                "dev-il2cpp-runtime-expert"),
-]
-
-
-def get_required_expert(file_path: str) -> str | None:
-    normalized = file_path.replace("\\", "/")
-    for prefix, expert in FILE_TO_EXPERT:
-        if normalized.startswith(prefix):
-            return expert
-    return None
-
-
-def get_loaded_expert() -> str | None:
-    if loaded_expert_file.exists():
-        expert = loaded_expert_file.read_text(encoding="utf-8", errors="replace").strip()
-        return expert if expert else None
-    return None
+# R1: 多源工具名解析，不依赖单一 env var
+tool_name = os.environ.get("CLAUDE_TOOL_NAME", "")
+if not tool_name:
+    for i, arg in enumerate(sys.argv):
+        if arg == "--tool" and i + 1 < len(sys.argv):
+            tool_name = sys.argv[i + 1]
+            break
+# R1: 如果仍无法获取工具名（非标准 API 未传递 env var），直接放行
+# 避免对 Read/Grep/Glob 产生误报
+if not tool_name:
+    sys.exit(0)
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -132,36 +115,8 @@ if tool_name == "Bash":
     if first_word in READONLY_BASH_WORDS:
         sys.exit(0)
 
-    # 第三档: 域操作 Bash — 检查 loaded_expert 是否匹配
-    # 从命令中提取文件/目录路径参数
-    cmd_paths = re.findall(r'(?:^|\s)(?:cd\s+)?([a-zA-Z]:/[^\s"\']+|\.\.?/[^\s"\']+)', cmd)
-    cmd_paths += re.findall(r'(?:^|\s)(?:cd\s+)?([a-zA-Z]:\\[^\s"\']+)', cmd)
-
-    # 处理 cd X && Y 模式 — 提取 X 下的所有路径
-    cd_match = re.search(r'cd\s+([^\s&;|]+)\s*(?:&&|;)', cmd)
-    if cd_match:
-        cd_base = cd_match.group(1).replace("\\", "/")
-        cmd_paths.append(cd_base + "/")
-
-    required_experts: set[str] = set()
-    for p in cmd_paths:
-        expert = get_required_expert(p)
-        if expert:
-            required_experts.add(expert)
-
-    if required_experts:
-        loaded = get_loaded_expert()
-        if loaded is None or loaded not in required_experts:
-            expert_list = " 或 ".join(required_experts)
-            print(file=sys.stderr)
-            print(f"  ⚠️  此 Bash 操作涉及域文件，需要先加载对应 Expert", file=sys.stderr)
-            print(f"  需加载: {expert_list}", file=sys.stderr)
-            print(f"  当前已加载: {loaded or '无'}", file=sys.stderr)
-            print(f"  请先执行: Skill(\"{list(required_experts)[0]}\")", file=sys.stderr)
-            print(file=sys.stderr)
-            sys.exit(1)
-
-    # 无域路径匹配 → 放行（可能是工具命令、第三方脚本等）
+    # 第三档: 域操作 Bash — 仅提醒分类要求（不强制 loaded_expert，因 Skill 工具不可用）
+    # 无域路径匹配 → 放行
     sys.exit(0)
 
 
@@ -179,9 +134,16 @@ if not classification:
     print("  ⚠️  分类文件为空！", file=sys.stderr)
     sys.exit(1)
 
-pattern = r'本轮任务涉及\s+(.+?)\s*，\s*(\w+)\s*操作，\s*第\s*(\d+)\s*轮\s*→\s*加载\s+(dev-\S+)'
+# R6: 兼容中英文逗号、->/→ 箭头、灵活空格
+pattern = (
+    r'本轮任务涉及\s+(.+?)\s*[，,]\s*(\w+)\s*操作\s*[，,]\s*'
+    r'第\s*(\d+)\s*轮\s*(?:→|->|=>|—>)?\s*加载\s+(dev-\S+)'
+)
 m = re.match(pattern, classification)
 if not m:
+    # R3: 格式错误 → 静默清理残留 .classified（非阻塞不打扰用户）
+    flag_file.unlink(missing_ok=True)
+    print(file=sys.stderr)
     print(f"  ⚠️  分类声明缺少 Expert 加载声明", file=sys.stderr)
     print("  格式: 本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp-codegen-expert", file=sys.stderr)
     sys.exit(1)
@@ -193,6 +155,8 @@ declared_expert = m.group(4)
 
 VALID_ACTIONS = {"read", "fix", "build", "verify", "plan"}
 if action not in VALID_ACTIONS:
+    # R3: 无效 action → 静默清理并退出（避免跨会话残留）
+    flag_file.unlink(missing_ok=True)
     print(f"  ⚠️  无效 action '{action}'", file=sys.stderr)
     sys.exit(1)
 
@@ -206,48 +170,6 @@ for dn in domain_nums:
 round_num = int(round_str)
 if round_num < 1:
     print(f"  ⚠️  无效轮次 {round_num}", file=sys.stderr)
-    sys.exit(1)
-
-# ═══════════════════════════════════════════════════════════════════
-# Skill 工具 → 自动写入 .loaded_expert
-# ═══════════════════════════════════════════════════════════════════
-if tool_name == "Skill":
-    skill_arg = ""
-    for i, arg in enumerate(sys.argv):
-        if arg == "--skill" and i + 1 < len(sys.argv):
-            skill_arg = sys.argv[i + 1]
-            break
-    if skill_arg and skill_arg.startswith("dev-"):
-        loaded_expert_file.write_text(skill_arg + "\n", encoding="utf-8")
-    sys.exit(0)
-
-# ═══════════════════════════════════════════════════════════════════
-# Edit/Write → 检查 Expert 是否已加载
-# ═══════════════════════════════════════════════════════════════════
-if tool_name in ("Edit", "Write"):
-    file_path = ""
-    for i, arg in enumerate(sys.argv):
-        if arg == "--file-path" and i + 1 < len(sys.argv):
-            file_path = sys.argv[i + 1]
-            break
-    if not file_path:
-        file_path = os.environ.get("CLAUDE_TOOL_FILE_PATH", "")
-    required = get_required_expert(file_path)
-    if required is not None:
-        loaded = get_loaded_expert()
-        if loaded != required:
-            print(file=sys.stderr)
-            print(f"  ⚠️  编辑域文件需要先加载 {required}", file=sys.stderr)
-            print(f"  当前已加载: {loaded or '无'}", file=sys.stderr)
-            sys.exit(1)
-
-# ═══════════════════════════════════════════════════════════════════
-# Sub-agent guard
-# ═══════════════════════════════════════════════════════════════════
-subagent_file = _claude_dir / ".subagent"
-if tool_name == "Skill" and subagent_file.exists():
-    subagent = subagent_file.read_text(encoding="utf-8", errors="replace").strip()
-    print(f"  ⚠️  已在子 Agent '{subagent}' 中", file=sys.stderr)
     sys.exit(1)
 
 sys.exit(0)

@@ -27,10 +27,10 @@
 
 **执行顺序**:
 1. 输出分类声明（含 Expert 声明）→ `echo "..." > .claude/.classified`
-2. `Skill("dev-xxx-expert")` → 加载 Expert 知识（hook 自动写 `.claude/.loaded_expert`）
-3. 编辑域文件 → hook 检查 `.claude/.loaded_expert` 是否匹配
+2. 通过 registry 发现流程读取 Expert 的 SKILL.md 加载知识（`Skill` 工具不支持子 Expert 加载）
+3. 编辑域文件 → hook 验证分类声明格式，**不强制 loaded_expert**
 
-**禁止**：未加载对应 Expert 直接编辑受保护文件路径下的文件。
+**建议**：在编辑受保护域文件前，先通过 discovery 流程阅读对应 Expert 的 SKILL.md。
 | 6 | 翻译 | 新 IL 指令、Planner、Emission |
 | 7 | 构建 | 编译、链接、SDK、cmake |
 | 8 | 热更新 | PatchLoader、patchdata |
@@ -135,26 +135,23 @@ Translation Expert 和 CodeGen Expert 都涉及 Planner/Emission 文件：
 □ ✅ 全部通过 → 提交并推送
 ```
 
-## 7. Sub-Agent 防护
+## 7. Expert 知识加载
 
-通过 Skill 工具加载子 Expert 时，必须设置 sub-agent 标记以防止递归循环：
+Expert 的知识通过 registry 发现流程加载：
 
-```bash
-# 进入子 Agent 前
-echo "dev-il2cpp-xxx-expert" > .claude/.subagent
+1. 读取 `skills/discovery/skill-index.md`（已预加载）
+2. 匹配领域 → 读取对应 `registries/<domain>.md`
+3. 找到目标 Expert 的 SKILL.md 路径
+4. 读取 `skills/library/skills/<name>/SKILL.md` 获取 domain knowledge
 
-# 子 Agent 返回后
-rm -f .claude/.subagent
-```
-
-hook 会检查：如果在 sub-agent 内再次调用 Skill 工具，将拒绝执行并提示"标记 remaining 后由 Dispatcher 分配"。
+注意：`Skill("dev-xxx-expert")` 在当前环境中**不可用**（Claude Code Skill 工具不支持子技能）。因此 loaded_expert 强制验证已被移除。
 
 ## 8. Hot Expert 缓存
 
 常用 Expert 可直接引用 `.claude/.hot_skills`，跳过发现链（3 步 → 1 步）。
 
 ```json
-.hot_skills 中列出的 Expert 可直接 Skill("dev-xxx-expert") 加载，
+.hot_skills 中列出的 Expert 可直接读取其 SKILL.md 加载知识，
 无需走 skill-index.md → registry → SKILL.md 的发现流程。
 ```
 
