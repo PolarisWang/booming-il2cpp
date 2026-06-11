@@ -304,28 +304,29 @@ if (allTypes)
                 {
                     if (pr.HasException)
                     {
+                        // Exception-throwing: hotupdate only, no [Benchmark]
                         kind = "hotupdate";
                         isBenchmark = false;
                     }
                     else if (pr.IsDeterministic && !pr.IsVoid)
                     {
+                        // Deterministic non-void: hotupdate + [Benchmark]
                         kind = "hotupdate";
-                        isBenchmark = false;
+                        isBenchmark = true;
                     }
                     else
-                {
-                    // Deterministic void-returning subject: this is a Fact test,
-                    // NOT a benchmark. The kind field distinguishes fact/hotupdate/benchmark
-                    // for the pipeline's hotupdate subject selection logic.
-                    kind = "fact";
-                    isBenchmark = false;
+                    {
+                        // Deterministic void / non-deterministic: fact + [Benchmark]
+                        kind = "fact";
+                        isBenchmark = true;
+                    }
                 }
-            }
-            else
-            {
-                kind = "fact";
-                isBenchmark = false;
-            }
+                else
+                {
+                    // No probe data: fact + [Benchmark]
+                    kind = "fact";
+                    isBenchmark = true;
+                }
 
                 // ── Generate per-value-set entries ──
                 // IMPORTANT: Must use the same sanitization as TestEmitter.SanitizeIdentifier

@@ -367,21 +367,29 @@ def _write_perf_store(
             ops = s.get("meanOpsPerSecond", 0)
 
             method_subject_id = ""
-            if method_index_to_subject_id is not None:
-                # Use manifest-based mapping: method table index → subjectId
-                method_table_index = benchmark_start_idx + i
-                method_subject_id = method_index_to_subject_id.get(method_table_index, "")
-            elif i < len(metadata_methods):
-                # Fallback: position-based mapping into metadata.
-                # Metadata uses 'subjectId' (TPG output) or 'methodSubjectId' (ATG output).
+            # Primary key: use the metadata methodSubjectId so chaos-aot and
+            # net8-jit records share the same identifier (raw .NET method name).
+            # This enables direct alignment in benchmark_report without needing
+            # the slug+methodIndex fallback.
+            if i < len(metadata_methods):
                 method_subject_id = (metadata_methods[i].get("methodSubjectId", "")
                                      or metadata_methods[i].get("subjectId", ""))
+
+            # Secondary key: CombinedSubjects wrapper name from codegen manifest.
+            # Stored as a separate field for debugging; NOT used for alignment.
+            combined_subjects_id = ""
+            if method_index_to_subject_id is not None:
+                method_table_index = benchmark_start_idx + i
+                combined_subjects_id = method_index_to_subject_id.get(method_table_index, "")
+                if not method_subject_id:
+                    method_subject_id = combined_subjects_id
 
             record = {
                 "timestamp": now,
                 "slug": ctx.slug,
                 "technology": technology,
                 "methodSubjectId": method_subject_id,
+                "combinedSubjectsId": combined_subjects_id,
                 "methodIndex": i,
                 "metrics": {
                     "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else 0.001,

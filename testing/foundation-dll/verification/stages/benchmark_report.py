@@ -67,17 +67,22 @@ def _compute_pct(net8_ms: float, tech_ms: float | None) -> float | None:
         return None
     return round((net8_ms - tech_ms) / net8_ms * 100, 2)
 
-
-def _read_jsonl_technology_map(jsonl_path: Path) -> dict[str, dict[str, Any]]:
+def _read_jsonl_technology_map(jsonl_path: Path) -> dict[str, dict[str, Any]]:
     """Read JSONL and build {methodSubjectId: {technology: latest_record}}.
 
     For each methodSubjectId, keeps only the latest timestamp per technology.
     Records with status='error' or elapsedMilliseconds < 0 are kept but marked.
+
+    Also builds a secondary index by (slug, methodIndex) so records with
+    divergent subject ID formats (CombinedSubjects wrappers vs raw metadata)
+    can still be aligned.  The slug+methodIndex pair is stable across both
+    AOT and managed benchmark paths because both index into the same metadata.
     """
     if not jsonl_path.exists():
         return {}
 
     tech_map: dict[str, dict[str, Any]] = defaultdict(dict)
+    idx_map: dict[tuple[str, int], dict[str, Any]] = defaultdict(dict)
 
     with open(jsonl_path, encoding="utf-8") as f:
         for line in f:
@@ -94,16 +99,50 @@ def _read_jsonl_technology_map(jsonl_path: Path) -> dict[str, dict[str, Any]]:
             if not msid or not tech:
                 continue
 
-            # Keep the record with the latest timestamp per technology.
-            # When timestamps tie (same run, appended JSONL), the later
-            # occurrence wins — it came from a more recent append.
+            # Primary index: by methodSubjectId
             existing = tech_map[msid].get(tech)
             if existing and rec.get("timestamp", "") < existing.get("timestamp", ""):
                 continue
             tech_map[msid][tech] = rec
 
-    return dict(tech_map)
+            # Secondary index: by (slug, methodIndex) for cross-format alignment
+            sl = rec.get("slug", "")
+            mi = rec.get("methodIndex")
+            if sl and isinstance(mi, int) and mi >= 0:
+                ikey = (sl, mi)
+                iex = idx_map[ikey].get(tech)
+                if iex and rec.get("timestamp", "") < iex.get("timestamp", ""):
+                    continue
+                idx_map[ikey][tech] = rec
 
+    # Merge primary and secondary indices
+    merged: dict[str, dict[str, Any]] = defaultdict(dict)
+
+    # First pass: copy all records from primary tech_map
+    for msid, techs in tech_map.items():
+        for tech, rec in techs.items():
+            merged[msid][tech] = rec
+
+    # Second pass: supplement missing technologies via slug+methodIndex
+    for (sl, mi), idx_techs in idx_map.items():
+        found_key = None
+        for msid in tech_map:
+            for tech, rec in tech_map[msid].items():
+                if rec.get("slug") == sl and rec.get("methodIndex") == mi:
+                    found_key = msid
+                    break
+            if found_key:
+                break
+        if found_key:
+            for tech, rec in idx_techs.items():
+                if tech not in merged[found_key]:
+                    merged[found_key][tech] = rec
+        else:
+            fkey = f'{sl}::{mi}'
+            for tech, rec in idx_techs.items():
+                merged[fkey][tech] = rec
+
+    return dict(merged)
 
 def _build_method_comparison(
     tech_map: dict[str, dict[str, Any]],

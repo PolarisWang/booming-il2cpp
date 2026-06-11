@@ -309,8 +309,8 @@ def _read_benchmark_metadata(metadata_path: Path) -> list[dict]:
     """Read subjects.metadata.json and return benchmark method entries in index order.
 
     Returns a list of dicts with keys: index, methodSubjectId.
-    When benchmarkMethodIndices is missing or empty, falls back to ALL methods
-    (some ATG versions don't populate benchmarkMethodIndices for CoreLib).
+    When benchmarkMethodIndices is missing or empty, returns EMPTY — meaning this
+    chunk has no BenchmarkDotNet benchmarks and should not produce managed data.
     """
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
     methods = metadata.get("methods", [])
@@ -320,8 +320,10 @@ def _read_benchmark_metadata(metadata_path: Path) -> list[dict]:
             m for m in sorted(methods, key=lambda x: x["index"])
             if m["index"] in benchmark_indices
         ]
-    # Fallback: no benchmark indices — use all methods
-    return sorted(methods, key=lambda x: x["index"])
+    # No benchmark indices defined — this chunk has no BenchmarkDotNet methods.
+    # Returning empty here means the managed benchmark stage produces no data,
+    # and benchmark_report will correctly report "no net8 baseline" for this chunk.
+    return []
 
 
 def _parse_runner_output(stdout: str) -> list[dict]:
@@ -384,6 +386,10 @@ def _write_perf_records(
                 "iterations": record.get("iterations", _ITERATIONS),
                 "status": "completed" if not is_error else "error",
             }
+            # Skip error records (elapsed < 0) — they have no meaningful timing data
+            # and only pollute the comparison report with noise.
+            if is_error or metrics_elapsed < 0:
+                continue
             f.write(json.dumps(jsonl_record, ensure_ascii=False, separators=(",", ":")) + "\n")
     return completed_count
 
