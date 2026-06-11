@@ -13,14 +13,37 @@ Bash 被豁免（可以创建/删除标记文件），但 Agent 应自觉先分�
 
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
+# 缓存 repo root（避免每次 hook 调用都跑 git）
+_RESOLVED_REPO_ROOT: Path | None = None
+
+def _get_repo_root() -> Path | None:
+    global _RESOLVED_REPO_ROOT
+    if _RESOLVED_REPO_ROOT is not None:
+        return _RESOLVED_REPO_ROOT
+    try:
+        script_dir = Path(__file__).resolve().parent
+        output = subprocess.run(
+            ["git", "-C", str(script_dir), "rev-parse", "--show-toplevel"],
+            capture_output=True, text=True, timeout=5,
+        )
+        root = output.stdout.strip()
+        _RESOLVED_REPO_ROOT = Path(root).resolve() if root else None
+        return _RESOLVED_REPO_ROOT
+    except Exception:
+        return None
+
 # 查找项目根目录下的 .claude
-_here = Path(__file__).resolve().parent  # skills/hooks/
-_claude_dir = _here.parent.parent / ".claude"
+_claude_dir = Path(__file__).resolve().parent.parent.parent / ".claude"
 if not _claude_dir.exists():
-    _claude_dir = Path.cwd() / ".claude"
+    repo_root = _get_repo_root()
+    if repo_root:
+        _claude_dir = repo_root / ".claude"
+    else:
+        _claude_dir = Path.cwd() / ".claude"
 
 flag_file = _claude_dir / ".classified"
 

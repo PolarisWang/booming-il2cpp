@@ -131,9 +131,25 @@ rm -f .claude/.subagent
 
 hook 会检查：如果在 sub-agent 内再次调用 Skill 工具，将拒绝执行并提示"标记 remaining 后由 Dispatcher 分配"。
 
+## 8. Hot Expert 缓存
+
+常用 Expert 可直接引用 `.claude/.hot_skills`，跳过发现链（3 步 → 1 步）。
+
+```json
+.hot_skills 中列出的 Expert 可直接 Skill("dev-xxx-expert") 加载，
+无需走 skill-index.md → registry → SKILL.md 的发现流程。
+```
+
+当前 Hot Expert：
+- `dev-il2cpp-runtime-expert`
+- `dev-il2cpp-codegen-expert`
+- `dev-il2cpp-gc-expert`
+- `dev-il2cpp-translation-expert`
+- `dev-il2cpp-build-fixer`
+
 ---
 
-## 8. 变更记录
+## 9. 变更记录
 
 | 日期 | 变更 | 原因 |
 |------|------|------|

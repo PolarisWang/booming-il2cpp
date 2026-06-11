@@ -202,26 +202,30 @@ Step 3: 汇总裁决
   → 标记 ⏳ remaining: ["域 {domain} 无 Expert，用 generic fallback 实现"]
 ```
 
-### 阶段 4: 质量门
+### 阶段 4: 质量门（三级）
 
-全部子任务完成后，执行质量门：
+根据修改范围和影响面自动选择级别：
 
 ```
-□ 如果有代码修改 → dev-trace-enforcement
-□ dev-verification-before-completion
-□ 更新 STATUS.md（内容摘要、文件列表、验证结果）
-□ 如果涉及翻译路径变更 → wiki 维护
-□ 如果涉及多域修改（≥2 Expert）→ 运行 foundation-dll pipeline 集成验证
-□ ✅ 全部通过 → 提交并推送：
-   1. git add -A
-   2. git commit -m 按规范格式:
-      - 功能/优化: "<type>: <subject>\n\n<body>"
-        type: feat / refactor / perf / chore / test / docs
-      - bug 修复: 必须包含三段式根因摘要:
-        root_cause — 一句话根因
-        fix_strategy — 修复策略
-        regression_check — 验证范围
-   3. git push
+L1（快速 — 注释/常量/纯新增文件）:
+  □ dotnet build（C# 项目）
+  □ git diff 自查（无遗留调试代码）
+  □ 更新 STATUS.md
+  耗时: ~10s
+
+L2（标准 — codegen 输出变更/翻译路径修改/已有逻辑修改）:
+  □ L1 全部
+  □ dev-trace-enforcement（trace 点检查）
+  □ 如果涉及 C# codegen → snapshot 测试
+  □ 如果涉及翻译路径 → wiki 维护
+  耗时: ~2min
+
+L3（完整 — 翻译路径变更/AOT 输出变更/ABI 修改/多域修改）:
+  □ L1 + L2 全部
+  □ dev-verification-before-completion
+  □ 如果涉及多域（≥2 Expert）→ foundation-dll pipeline 集成验证
+  □ ✅ 全部通过 → 提交并推送
+  耗时: ~10min
 ```
 
 ---

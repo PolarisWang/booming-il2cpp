@@ -12,7 +12,7 @@
           {
             "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/check_classification.py\"",
             "statusMessage": "Checking classification...",
-            "timeout": 5,
+            "timeout": 2,
             "type": "command"
           }
         ]
@@ -25,7 +25,7 @@
           {
             "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_track_all.py\"",
             "statusMessage": "Tracking tool outcome + skill usage...",
-            "timeout": 8,
+            "timeout": 3,
             "type": "command"
           }
         ]
@@ -38,13 +38,13 @@
           {
             "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_evaluate_session.py\"",
             "statusMessage": "Evaluating session quality + evolution...",
-            "timeout": 30,
+            "timeout": 5,
             "type": "command"
           },
           {
             "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_track_session_outcomes.py\"",
             "statusMessage": "Recording session outcome...",
-            "timeout": 10,
+            "timeout": 3,
             "type": "command"
           }
         ]
