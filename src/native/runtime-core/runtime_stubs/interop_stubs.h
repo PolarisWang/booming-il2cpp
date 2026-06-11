@@ -116,3 +116,8 @@ struct ChaosIlDataEntry {
 // Generated data table: embedded CIL + JSON for interpreter fallback.
 // Terminated by a sentinel entry with subject_id == nullptr.
 extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[];
+
+// Register the external IL data table (defined in generated codegen output).
+// Must be called once at startup.  Using an indirect pointer avoids unresolved
+// externals when runtime core is linked without generated codegen output.
+extern "C" void ChaosRegisterIlDataTable(ChaosIlDataEntry* table) noexcept;

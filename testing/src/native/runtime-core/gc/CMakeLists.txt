@@ -9,6 +9,10 @@
 #   CHAOS_GC_STUBS   — AOT codegen symbol stubs (for tests without real codegen)
 #   CHAOS_GC_BASE    — shared test fixture source (gc_test_base.cpp)
 
+if(MSVC)
+    add_compile_options(/utf-8)
+endif()
+
 set(CHAOS_GC_LIBS
     chaos_runtime_core
     chaos_bootstrap

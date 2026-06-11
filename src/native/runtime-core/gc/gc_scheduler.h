@@ -411,7 +411,7 @@ private:
     static constexpr double kEmaAlpha = 1.0 / 16.0;  // ~6% weight per sample
     static constexpr CHAOS_IL2CPP_SIZE kMinNurserySize = 64 * 1024;      // 64 KB
     static constexpr CHAOS_IL2CPP_SIZE kMaxNurserySize = 4 * 1024 * 1024; // 4 MB
-    static constexpr CHAOS_IL2CPP_SIZE kDefaultNurserySize = 256 * 1024; // 256 KB
+    static constexpr CHAOS_IL2CPP_SIZE kDefaultNurserySize = 512 * 1024; // 512 KB (was 256KB)
 
     // Young GC trigger: allocation since last young GC exceeds this
     // multiplier × last nursery size.
