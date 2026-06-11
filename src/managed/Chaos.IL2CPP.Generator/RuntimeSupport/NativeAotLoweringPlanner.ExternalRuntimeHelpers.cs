@@ -181,6 +181,12 @@ public sealed partial class NativeAotLoweringPlanner
 		// This data is embedded in kChaosExternalRuntimeIlData[] via BuildExternalRuntimeDispatchTable
 		// and used by the interpreter at runtime when dispatching through InterpreterEntryDirect.
 		var crCryptoJson = TryBuildCryptoAotIrJson(callee);
+		// Add to crypto AOT IR entries immediately (BEFORE early return)
+		// so the interpreter has IL data for methods that cannot be AOT-compiled.
+		if (crCryptoJson != null)
+		{
+			_cryptoAotIrEntries.Add((callee, crCryptoJson));
+		}
 
 		if (_methodsBySubjectId.TryGetValue(callee, out var existingMethod) &&
 			existingMethod is { Instructions.Count: > 0 })
@@ -220,6 +226,10 @@ public sealed partial class NativeAotLoweringPlanner
 		if (crCryptoJson == null)
 		{
 			crCryptoJson = TryBuildCryptoAotIrJson(callee);
+			if (crCryptoJson != null)
+			{
+				_cryptoAotIrEntries.Add((callee, crCryptoJson));
+			}
 		}
 		var failReturnType = InferReturnTypeFromSubjectId(callee);
 		var failReturnAbi = !string.IsNullOrEmpty(failReturnType)
