@@ -394,9 +394,9 @@ static void CompileAndCacheEntry(
     jit::CompileConfig cfg;
     cfg.enable_safepoint_polls = true;
     cfg.enable_liveness = true;
-    cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
-    cfg.cooperative_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterCooperativeMode);
-    cfg.preemptive_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterPreemptiveMode);
+    cfg.safepoint_fn = reinterpret_cast<void*>(&threading::SafepointPoll);
+    cfg.cooperative_fn = reinterpret_cast<void*>(&threading::EnterCooperativeMode);
+    cfg.preemptive_fn = reinterpret_cast<void*>(&threading::EnterPreemptiveMode);
     cfg.pic_dispatch_data = pm->pic_dispatch_data;
     cfg.per_instr_pic_count = pm->reg_ir_instr_count;
     if (cfg.pic_dispatch_data != nullptr && cfg.per_instr_pic_count > 0) {
@@ -440,13 +440,13 @@ static void CompileAndCacheEntry(
         // promotion to Full JIT).  Without this, GC sees two slot maps for the
         // same method — the old one may reference stale code regions.
         if (old_nm != nullptr && old_nm->slot_map_data != nullptr) {
-            chaos::il2cpp::runtime_core::GcUnregisterSlotMap(old_nm->code);
+            GcUnregisterSlotMap(old_nm->code);
         }
         if (nm->slot_map_data != nullptr) {
-            chaos::il2cpp::runtime_core::GcRegisterSlotMap(nm->code,
+            GcRegisterSlotMap(nm->code,
                 static_cast<const GcSlotMapV0*>(nm->slot_map_data));
         }
-        chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm, pm->token);
+        ::chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm, pm->token);
         // Sync to dispatch entry for Step A0/QuickJit direct dispatch.
         if (auto* entry = static_cast<HotpatchEntryV0*>(pm->dispatch_entry); entry != nullptr) {
             entry->direct_ptr = nm->code;
@@ -482,9 +482,9 @@ static void QuickJitAndCacheEntry(
     jit::CompileConfig cfg;
     cfg.enable_safepoint_polls = true;
     cfg.enable_liveness = true;
-    cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
-    cfg.cooperative_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterCooperativeMode);
-    cfg.preemptive_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterPreemptiveMode);
+    cfg.safepoint_fn = reinterpret_cast<void*>(&threading::SafepointPoll);
+    cfg.cooperative_fn = reinterpret_cast<void*>(&threading::EnterCooperativeMode);
+    cfg.preemptive_fn = reinterpret_cast<void*>(&threading::EnterPreemptiveMode);
     cfg.dispatch_ctx = dispatch_ctx;
     cfg.call_cache = pm->call_cache;
     cfg.call_cache_count = pm->reg_ir_instr_count;
@@ -503,19 +503,19 @@ static void QuickJitAndCacheEntry(
     pm->cached_native_method = jit;
     if (jit != nullptr) {
         if (jit->slot_map_data != nullptr) {
-            chaos::il2cpp::runtime_core::GcRegisterSlotMap(jit->code,
+            GcRegisterSlotMap(jit->code,
                 static_cast<const GcSlotMapV0*>(jit->slot_map_data));
         }
-        chaos::il2cpp::jit::RegisterNativeCodeSection(jit->code, jit->code_size, jit, pm->token);
+        ::chaos::il2cpp::jit::RegisterNativeCodeSection(jit->code, jit->code_size, jit, pm->token);
 
         // Atomically patch direct_ptr so subsequent dispatch goes straight to native.
         // (Only if the dispatch entry still points to us — entry may have been unpatched.)
         auto* entry = static_cast<HotpatchEntryV0*>(pm->dispatch_entry);
         if (entry == nullptr) {
             // Fallback: resolve via registry (method not from SetPatchedBySlot).
-            entry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry()
+            entry = GetHotpatchNameRegistry()
                 .GetDispatchEntryBySlot(pm->module_id,
-                    chaos::il2cpp::runtime_core::GetHotpatchNameRegistry().TokenToSlot(pm->module_id, pm->token));
+                    GetHotpatchNameRegistry().TokenToSlot(pm->module_id, pm->token));
         }
         if (entry != nullptr) {
             entry->direct_ptr = jit->code;
@@ -541,7 +541,7 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
     switch (action) {
     case TierManager::PromotionAction::kQuickJit:
 #if CHAOS_IL2CPP_ENABLE_JIT
-        if (chaos::il2cpp::pal::PalCanJit()) {
+        if (::chaos::il2cpp::pal::PalCanJit()) {
             QuickJitAndCacheEntry(patch_method, dispatch_ctx);
             break;
         }
@@ -562,7 +562,7 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
 
     case TierManager::PromotionAction::kCompileToNative:
 #if CHAOS_IL2CPP_ENABLE_JIT
-        if (chaos::il2cpp::pal::PalCanJit()) {
+        if (::chaos::il2cpp::pal::PalCanJit()) {
             CompileAndCacheEntry(patch_method, dispatch_ctx);
             break;
         }
@@ -707,7 +707,7 @@ void InterpreterEntryDirect(
         void* replacement = method_replacement::Resolve(patch_method->token);
         if (replacement != nullptr) {
             CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.MethodReplace");
-            chaos::il2cpp::interpreter::VmProfileScope profiler_scope(
+            ::chaos::il2cpp::interpreter::VmProfileScope profiler_scope(
                 static_cast<uintptr_t>(patch_method->token));
             using ReplacementFn = void (*)(void*, void*);
             auto repl_fn = reinterpret_cast<ReplacementFn>(replacement);
@@ -742,7 +742,7 @@ void InterpreterEntryDirect(
             native_entry(args_buf, ret_buf);
             GC_TRANSITION_TO_COOPERATIVE();
 
-            if (chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened) {
+            if (::chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened) {
                 GetTierCounters().deopt_t4.fetch_add(1, std::memory_order_relaxed);
                 ++patch_method->deopt_count;
 
@@ -750,8 +750,8 @@ void InterpreterEntryDirect(
                     patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
                     auto* dnm = patch_method->cached_native_method;
                     if (dnm != nullptr) {
-                        chaos::il2cpp::jit::UnregisterNativeCodeSection(dnm->code);
-                        chaos::il2cpp::runtime_core::GcUnregisterSlotMap(dnm->code);
+                        ::chaos::il2cpp::jit::UnregisterNativeCodeSection(dnm->code);
+                        GcUnregisterSlotMap(dnm->code);
                         patch_method->cached_native_method = nullptr;
                     }
                     // Restore dispatch entry to original AOT code so Step A0
@@ -801,21 +801,21 @@ void InterpreterEntryDirect(
         auto* reg_m = static_cast<interpreter::RegisterMethod*>(
             patch_method->cached_reg_method);
         if (reg_m != nullptr &&
-            chaos::il2cpp::jit::g_jit_deopt_state.instr_pc <
+            ::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc <
                 static_cast<uint32_t>(reg_m->stack_map.entries.size()))
         {
             auto& stack_entry =
-                reg_m->stack_map.entries[chaos::il2cpp::jit::g_jit_deopt_state.instr_pc];
+                reg_m->stack_map.entries[::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc];
 
             interpreter::OsrState osr;
             interpreter::CaptureNativeFrame(osr,
-                chaos::il2cpp::jit::g_jit_deopt_state.gpr_file,
-                chaos::il2cpp::jit::g_jit_deopt_state.fpr_file,
+                ::chaos::il2cpp::jit::g_jit_deopt_state.gpr_file,
+                ::chaos::il2cpp::jit::g_jit_deopt_state.fpr_file,
                 stack_entry,
                 patch_method->cached_arg_count,
                 interpreter::OsrState::kMaxLocals,
-                chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags);
-            osr.pc = chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
+                ::chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags);
+            osr.pc = ::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
 
             FastFrame* ff = tls_frame_pool.Acquire();
             FastFrame ff_fallback;
@@ -849,13 +849,13 @@ void InterpreterEntryDirect(
                 case interpreter::ValueTag::Int32:
                     ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
                     threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 case interpreter::ValueTag::Int64:
                     ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
                     threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 case interpreter::ValueTag::Float32: {
@@ -863,7 +863,7 @@ void InterpreterEntryDirect(
                     std::memcpy(&v, &ff->ret_val, sizeof(float));
                     ret_writer.WriteF32(v);
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
                     threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 }
@@ -872,14 +872,14 @@ void InterpreterEntryDirect(
                     std::memcpy(&v, &ff->ret_val, sizeof(double));
                     ret_writer.WriteF64(v);
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
                     threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 }
                 default:
                     ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    ::chaos::il2cpp::jit::g_jit_deopt_state = {};
                     threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 }
@@ -935,15 +935,15 @@ void InterpreterEntryDirect(
         }
 
         // Deoptimization-aware RegisterFrame setup
-        bool t4_deopt_happened = chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened;
+        bool t4_deopt_happened = ::chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened;
         if (t4_deopt_happened) {
-            std::memcpy(rf.regs.gpr, chaos::il2cpp::jit::g_jit_deopt_state.gpr_file, 64 * sizeof(uint64_t));
-            std::memcpy(rf.regs.fpr, chaos::il2cpp::jit::g_jit_deopt_state.fpr_file, 32 * sizeof(double));
-            std::memcpy(rf.regs.gpr_tags, chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags, 64);
-            std::memcpy(rf.regs.fpr_tags, chaos::il2cpp::jit::g_jit_deopt_state.fpr_tags, 32);
+            std::memcpy(rf.regs.gpr, ::chaos::il2cpp::jit::g_jit_deopt_state.gpr_file, 64 * sizeof(uint64_t));
+            std::memcpy(rf.regs.fpr, ::chaos::il2cpp::jit::g_jit_deopt_state.fpr_file, 32 * sizeof(double));
+            std::memcpy(rf.regs.gpr_tags, ::chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags, 64);
+            std::memcpy(rf.regs.fpr_tags, ::chaos::il2cpp::jit::g_jit_deopt_state.fpr_tags, 32);
             // H3: bound-check deopt PC before assignment to prevent out-of-range
             // access in RegisterExecute.  On mismatch, restart from PC 0.
-            auto deopt_pc = chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
+            auto deopt_pc = ::chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
             if (CHAOS_IL2CPP_UNLIKELY(deopt_pc >= exec_instr_count)) {
                 CHAOS_IL2CPP_LOG_WARN_M("jit", "Step B: deopt PC %u out of bounds "
                     "(max %u), restarting from PC 0", deopt_pc, exec_instr_count);
@@ -952,7 +952,7 @@ void InterpreterEntryDirect(
                 rf.pc = deopt_pc;
             }
             rf.osr_reenable = true;  // trigger immediate OSR on first backedge
-            chaos::il2cpp::jit::g_jit_deopt_state = {};
+            ::chaos::il2cpp::jit::g_jit_deopt_state = {};
         }
 
         CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: before RegisterExecute");

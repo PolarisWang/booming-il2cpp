@@ -121,11 +121,11 @@ static void* ResolveDirectFn(
                     // P/Invoke stubs (direct_ptr = InterpreterEntryDirect) have no IL body.
                     // Skip them here so Step 3 (kChaosExternalRuntimeFnTable) can route to
                     // native BCrypt stubs. hkKeepNative with non-null direct_ptr = real AOT code.
-                    if (entry != nullptr && entry->direct_ptr != nullptr)
+                    if (entry != nullptr && entry->direct_ptr != nullptr) {
                         // In JIT mode, direct_ptr may be a JIT trampoline.
                         // Query the original AOT ptr callback to get the real code pointer.
                         void* aot_ptr = entry->direct_ptr;
-                        auto original_cb = chaos::il2cpp::runtime_core::GetOriginalAotPtrCallback();
+                        auto original_cb = GetOriginalAotPtrCallback();
                         if (original_cb) {
                             void* original = original_cb(entry);
                             if (original) aot_ptr = original;
@@ -212,10 +212,10 @@ void* ResolveDirectFnSafe(
                     if (entry != nullptr && entry->direct_ptr != nullptr) {
                         // P/Invoke stubs (direct_ptr = InterpreterEntryDirect) have no
                         // IL body. Skip them so Step 3 can route to native BCrypt stubs.
-                        extern void InterpreterEntryDirect();
+                        extern void InterpreterEntryDirect(uintptr_t, void*, void*) noexcept;
                         if (entry->direct_ptr ==
                             reinterpret_cast<void*>(&InterpreterEntryDirect)) {
-                            break; // fall through to Step 3
+                            return nullptr; // fall through to caller's nullptr check
                         }
                         // In JIT mode, direct_ptr may be a JIT trampoline.
                         // Query the original AOT ptr callback to get the real code pointer.

@@ -163,7 +163,7 @@ public:
     // Idempotent: CAS ensures at most one caller wins each transition.
     // Thread-safe: no mutex, all atomic operations.
     static PromotionAction EvaluateTierPromotion(
-        chaos::il2cpp::runtime_core::PatchMethod* pm, uint32_t call_count) noexcept;
+        ::chaos::il2cpp::runtime_core::PatchMethod* pm, uint32_t call_count) noexcept;
 
 private:
     TierManager() = default;

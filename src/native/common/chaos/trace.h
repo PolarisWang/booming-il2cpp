@@ -119,8 +119,8 @@ inline const char* cached_iso8601() {
 #ifdef CHAOS_IL2CPP_TRACE_ENABLED
 
 #define CHAOS_IL2CPP_LOG_TRACE(stage, op, fmt_str, ...) do {                       \
-    const auto _ts_ = chaos::il2cpp::common::detail::cached_iso8601();              \
-    const auto _tid_ = chaos::il2cpp::common::detail::g_trace_id;                   \
+    const auto _ts_ = ::chaos::il2cpp::common::detail::cached_iso8601();              \
+    const auto _tid_ = ::chaos::il2cpp::common::detail::g_trace_id;                   \
     auto _buf_ = ::fmt::format(                                                    \
         "{{\"t\":\"{}Z\",\"l\":\"cpp\",\"traceId\":\"{}\","                       \
         "\"s\":\"{}\",\"o\":\"{}\",\"f\":\"{}:{}\"",                              \
@@ -131,27 +131,27 @@ inline const char* cached_iso8601() {
         _buf_ += _extra_;                                                          \
     }                                                                              \
     _buf_ += "}";                                                                  \
-    chaos::il2cpp::common::detail::g_trace_ring.write(_buf_.c_str());                \
+    ::chaos::il2cpp::common::detail::g_trace_ring.write(_buf_.c_str());                \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_TRACE_INIT() do {                                        \
     auto _trace_path_ = std::getenv("CHAOS_TRACE_PATH");                      \
     if (_trace_path_) {                                                        \
-        std::strncpy(chaos::il2cpp::common::detail::g_trace_flush_path,          \
+        std::strncpy(::chaos::il2cpp::common::detail::g_trace_flush_path,          \
                      _trace_path_,                                             \
-                     sizeof(chaos::il2cpp::common::detail::g_trace_flush_path) - 1); \
-        std::atexit(chaos::il2cpp::common::detail::trace_atexit_flush);          \
+                     sizeof(::chaos::il2cpp::common::detail::g_trace_flush_path) - 1); \
+        std::atexit(::chaos::il2cpp::common::detail::trace_atexit_flush);          \
     }                                                                          \
     auto _trace_id_ = std::getenv("CHAOS_TRACE_ID");                           \
     if (_trace_id_) {                                                           \
-        std::strncpy(chaos::il2cpp::common::detail::g_trace_id,                  \
+        std::strncpy(::chaos::il2cpp::common::detail::g_trace_id,                  \
                      _trace_id_,                                               \
-                     sizeof(chaos::il2cpp::common::detail::g_trace_id) - 1);     \
+                     sizeof(::chaos::il2cpp::common::detail::g_trace_id) - 1);     \
     }                                                                          \
 } while (0)
 
 #define CHAOS_IL2CPP_LOG_TRACE_FLUSH(path) do {                                   \
-    chaos::il2cpp::common::detail::g_trace_ring.flush(path);                     \
+    ::chaos::il2cpp::common::detail::g_trace_ring.flush(path);                     \
 } while (0)
 
 #else // !CHAOS_IL2CPP_TRACE_ENABLED

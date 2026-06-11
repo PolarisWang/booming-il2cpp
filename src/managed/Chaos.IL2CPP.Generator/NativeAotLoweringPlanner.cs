@@ -1391,6 +1391,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             "<gc/gc_bgc_inline.h>",
             // GC card table (post-write dirty card marking for generational GC).
             "<gc/gc_card_table.h>",
+            // GC root change tracking (BGC concurrent mark — records root slot
+            // overwrites so the re-mark phase can re-scan newly-unreachable objects).
+            "<gc/gc_root_change.h>",
             // Common generated runtime prelude (shared header, ~200 lines
             // of helper functions previously emitted inline in every file).
             "<ChaosGeneratedRuntimePrelude.h>",

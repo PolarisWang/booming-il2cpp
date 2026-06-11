@@ -17,4 +17,4 @@ extern "C" void* kChaosExternalRuntimeFnTable[{{ subject_count }}] = {
 {{~ end ~}}
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = {{ subject_count }};
+extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount = {{ subject_count }};

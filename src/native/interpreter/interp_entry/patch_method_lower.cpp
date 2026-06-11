@@ -145,7 +145,7 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
                         call_cache[i].ret_tag != 0xFF &&
                         !call_cache[i].is_struct_ret &&
                         call_cache[i].slot != ~0u) {
-                        void* fn = chaos::il2cpp::method_table::ResolveMethodTableByModuleSlot(
+                        void* fn = ::chaos::il2cpp::method_table::ResolveMethodTableByModuleSlot(
                             call_cache[i].module_id, call_cache[i].slot);
                         if (fn != nullptr) {
                             call_cache[i].direct_ptr = fn;

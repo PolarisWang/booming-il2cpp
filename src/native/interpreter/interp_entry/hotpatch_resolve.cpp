@@ -1,7 +1,7 @@
-namespace chaos::il2cpp::runtime_core {
-
 #include <cstring>
 #include "runtime_stubs/crypto_stubs.h"
+
+namespace chaos::il2cpp::runtime_core {
 
 // -- External Runtime Dispatch Table Resolution ----------------------------
 // Resolves subjectIds -> function pointers for the codegen-emitted
@@ -136,7 +136,7 @@ extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
             // Only BCrypt stubs are currently implemented (see crypto_stubs.cpp).
             // NCrypt entries without stubs remain nullptr -> will throw at runtime.
             #define BCROUTE(name) do { \
-                if (std::strstr(sid, "::" name ":")) { \
+                if (std::strstr(sid, "::" #name ":")) { \
                     kChaosExternalRuntimeFnTable[i] = \
                         reinterpret_cast<void*>(Chaos##name); \
                     break; \

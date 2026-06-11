@@ -1,6 +1,6 @@
 namespace chaos::il2cpp::runtime_core {
 
-using namespace chaos::il2cpp::runtime_instantiation;
+using namespace ::chaos::il2cpp::runtime_instantiation;
 
 // ── Phase 1 inlining: InlineLeafCallees ────────────────────────────────────
 // After IR deserialization, replace eligible Call instructions with the callee's
@@ -19,7 +19,7 @@ using namespace chaos::il2cpp::runtime_instantiation;
 
 static bool IsCalleeEligibleForInline(
     const interpreter::IRMethod& callee_ir,
-    const runtime_instantiation::CachedCallInfo& call_info) noexcept
+    const ::chaos::il2cpp::runtime_instantiation::CachedCallInfo& call_info) noexcept
 {
     // Must have IR, no calls, no branches, no Loc, no SFld.
     uint32_t max_sp = 0;
@@ -149,7 +149,7 @@ static void InlineLeafCallees(
     uint32_t instr_count = static_cast<uint32_t>(ir.instructions.size());
     if (instr_count == 0) return;
 
-    auto* call_cache = static_cast<runtime_instantiation::CachedCallInfo*>(patch_method.call_cache);
+    auto* call_cache = static_cast<::chaos::il2cpp::runtime_instantiation::CachedCallInfo*>(patch_method.call_cache);
     if (call_cache == nullptr) return;
 
     // Build new instruction list: iterate caller's instructions,
@@ -320,8 +320,8 @@ static void InlineLeafCallees(
         CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(patch_method.call_cache);
     }
     uint32_t new_count = static_cast<uint32_t>(ir.instructions.size());
-    auto* new_cc = static_cast<runtime_instantiation::CachedCallInfo*>(
-        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(new_count * sizeof(runtime_instantiation::CachedCallInfo)));
+    auto* new_cc = static_cast<::chaos::il2cpp::runtime_instantiation::CachedCallInfo*>(
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(new_count * sizeof(::chaos::il2cpp::runtime_instantiation::CachedCallInfo)));
     if (new_cc == nullptr) return;
     for (uint32_t i = 0; i < new_count; ++i) {
         const auto& ci = ir.instructions[i];
@@ -330,7 +330,7 @@ static void InlineLeafCallees(
             ci.op_code == interpreter::IROpCode::CallBridge ||
             ci.op_code == interpreter::IROpCode::CallVirtConstrained) {
             if (ci.call_target != nullptr) {
-                new_cc[i] = runtime_instantiation::PrecacheCallTarget(ci.call_target);
+                new_cc[i] = ::chaos::il2cpp::runtime_instantiation::PrecacheCallTarget(ci.call_target);
             } else {
                 new_cc[i].ret_tag = 0xFF;
             }

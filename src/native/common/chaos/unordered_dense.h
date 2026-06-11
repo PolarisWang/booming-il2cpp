@@ -136,7 +136,7 @@ struct identity_hash {
 } // namespace chaos::il2cpp::common
 
 #define CHAOS_IL2CPP_UNORDERED_DENSE_MAP(K, V)            ankerl::unordered_dense::map<K, V>
-#define CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(K, V)   ankerl::unordered_dense::map<K, V, chaos::il2cpp::common::identity_hash>
+#define CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(K, V)   ankerl::unordered_dense::map<K, V, ::chaos::il2cpp::common::identity_hash>
 #define CHAOS_IL2CPP_UNORDERED_DENSE_SET(K)               ankerl::unordered_dense::set<K>
 
 #endif // CHAOS_IL2CPP_COMMON_UNORDERED_DENSE_H_
