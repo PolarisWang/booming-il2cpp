@@ -4469,14 +4469,31 @@ public sealed partial class NativeAotLoweringPlanner
                     MethodName: methodName,
                     Resolver: (planner, callee, typeArgs) =>
                     {
-                        System.Console.Error.WriteLine($"[VECTOR_REDUCTION] callee={callee} typeArgs={typeArgs}");
+                        // Determine element type suffix for the native stub name.
+                        // typeArgs contains the concrete generic args from the instantiated
+                        // Vector<T> type (e.g. ["System.Int32"] for Vector<int>).
+                        // Map each element type to the corresponding native stub suffix.
+                        string suffix = "i32"; // default for int32
+                        string elemType = (typeArgs != null && typeArgs.Count > 0)
+                            ? typeArgs[0].Trim() : "";
+                        if (elemType.Contains("System.Int64")) suffix = "i64";
+                        else if (elemType.Contains("System.UInt64")) suffix = "u64";
+                        else if (elemType.Contains("System.UInt32")) suffix = "u32";
+                        else if (elemType.Contains("System.Single")) suffix = "f";
+                        else if (elemType.Contains("System.Double")) suffix = "d";
+                        else if (elemType.Contains("System.Int16")) suffix = "i16";
+                        else if (elemType.Contains("System.UInt16")) suffix = "u16";
+                        else if (elemType.Contains("System.Byte")) suffix = "u8";
+                        else if (elemType.Contains("System.SByte")) suffix = "i8";
+
+                        var typedSymbol = nativeSymbol + "_" + suffix;
                         var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                         return new GenericShapeResolution(
                             string.Empty, symbol,
                             [CreateNativeIntAbiSlot(), CreateNativeIntAbiSlot()],
                             CreateInt32AbiSlot(),
                             EmptyRawArgumentIndices,
-                            DirectNativeSymbol: nativeSymbol);
+                            DirectNativeSymbol: typedSymbol);
                     }));
             }
             RegisterVectorReduction("GreaterThanAny", "chaos_vector_greater_than_any");
