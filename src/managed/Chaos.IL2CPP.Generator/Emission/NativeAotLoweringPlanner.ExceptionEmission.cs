@@ -1681,7 +1681,7 @@ public sealed partial class NativeAotLoweringPlanner
 			if (fieldTypeId == null || !(PrimitiveValueTypeSubjectIds.Contains(fieldTypeId) || PrimitiveValueTypeSubjectIds.Contains("System.Private.CoreLib/" + fieldTypeId)))
 			{
 				builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&{fieldSymbol}));");
-				builder.AppendLine($"{indentation}    BgcRecordRootChange(reinterpret_cast<void**>(&{fieldSymbol}), {fieldSymbol});");
+				builder.AppendLine($"{indentation}    BgcRecordRootChange(reinterpret_cast<void**>(&{fieldSymbol}), reinterpret_cast<void*>({fieldSymbol}));");
 			}
 			builder.AppendLine($"{indentation}    {fieldSymbol} = chaos_value;");
 			builder.AppendLine($"{indentation}}}");
@@ -4117,7 +4117,8 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				}
 			}
 		}
-		if (enforceInstanceNullCheck && parameterAbis.Count > 0)
+		if (enforceInstanceNullCheck && parameterAbis.Count > 0
+		    && !IsValueTypeCarrierKind(parameterAbis[0].CarrierKindCode))
 		{
 			builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 			builder.AppendLine(indentation + "    {");
@@ -4190,7 +4191,8 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					? $"{indentation}    const auto chaos_arg_{i} = {rawExpr};"
 					: $"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[i], $"chaos_raw_arg_{i}")};");
 			}
-							if (enforceInstanceNullCheck && invocationTarget.ParameterAbis.Count > 0)
+							if (enforceInstanceNullCheck && invocationTarget.ParameterAbis.Count > 0
+				    && !IsValueTypeCarrierKind(invocationTarget.ParameterAbis[0].CarrierKindCode))
 				{
 				    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 				    builder.AppendLine(indentation + "    {");
@@ -4247,7 +4249,8 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				}
 			}
 		}
-		if (enforceInstanceNullCheck && invocationTarget.ParameterAbis.Count > 0)
+		if (enforceInstanceNullCheck && invocationTarget.ParameterAbis.Count > 0
+		    && !IsValueTypeCarrierKind(invocationTarget.ParameterAbis[0].CarrierKindCode))
 		{
 		    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 		    builder.AppendLine(indentation + "    {");
@@ -5132,5 +5135,29 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 			_pendingBoxSubjectId = null;
 		}
+
+
+		/// <summary>
+		/// Returns true if the carrier kind is a definite value type that cannot
+		/// represent a managed reference (i.e. checking chaos_arg_0 == 0 would
+		/// incorrectly treat value 0 as null this / null reference).
+		/// NativeInt is excluded because it may represent either IntPtr/UIntPtr
+		/// (value type) or a managed object reference (pointer).  ValueTypeByValue
+		/// is excluded because it may represent a pointer to a struct on the stack.
+		/// </summary>
+		private static bool IsValueTypeCarrierKind(AotCoreIrAbiCarrierKind kind) => kind switch
+		{
+			AotCoreIrAbiCarrierKind.Int32 => true,
+			AotCoreIrAbiCarrierKind.Int64 => true,
+			AotCoreIrAbiCarrierKind.UInt64 => true,
+			AotCoreIrAbiCarrierKind.Int8 => true,
+			AotCoreIrAbiCarrierKind.UInt8 => true,
+			AotCoreIrAbiCarrierKind.Int16 => true,
+			AotCoreIrAbiCarrierKind.UInt16 => true,
+			AotCoreIrAbiCarrierKind.Float32 => true,
+			AotCoreIrAbiCarrierKind.Float64 => true,
+			AotCoreIrAbiCarrierKind.Void => true,
+			_ => false,
+		};
 
 }

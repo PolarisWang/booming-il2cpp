@@ -4009,6 +4009,14 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateInt32AbiSlot(),
                 new HashSet<int> { 0 });
 
+            // ── Missing overloads for PopCount ──
+            registry.Register("System.Numerics.BitOperations", "PopCount", ["System.UIntPtr"],
+                ShapeKind.SimpleForward, "ChaosBitOpsPopCount64",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
             registry.Register("System.Numerics.BitOperations", "LeadingZeroCount", ["System.UInt32"],
                 ShapeKind.SimpleForward, "ChaosBitOpsLeadingZeroCount32",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -4094,6 +4102,17 @@ public sealed partial class NativeAotLoweringPlanner
                 new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                 new HashSet<int> { 0, 1 });
 
+            // ── Missing overloads for RotateLeft ──
+            registry.Register("System.Numerics.BitOperations", "RotateLeft", ["System.UIntPtr", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRotateLeft64",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    CreateInt32AbiSlot(),
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1 });
+
             registry.Register("System.Numerics.BitOperations", "RotateRight", ["System.UInt32", "System.Int32"],
                 ShapeKind.SimpleForward, "ChaosBitOpsRotateRight32",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -4105,6 +4124,17 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.Numerics.BitOperations", "RotateRight", ["System.UInt64", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitOpsRotateRight64",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    CreateInt32AbiSlot(),
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1 });
+
+            // ── Missing overloads for RotateRight ──
+            registry.Register("System.Numerics.BitOperations", "RotateRight", ["System.UIntPtr", "System.Int32"],
                 ShapeKind.SimpleForward, "ChaosBitOpsRotateRight64",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {

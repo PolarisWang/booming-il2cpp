@@ -760,8 +760,10 @@ public sealed class CppProjectEmitter
         if (code.Contains(oldMissingFwd) && !code.Contains("Forward declaration for FactAbortHandler"))
             code = code.Replace(oldMissingFwd, newWithFwd);
 
-        // Fix 5: SEH output - replace caught ? -1 : result with caught ? result : result
-        code = code.Replace("caught ? -1 : result", "caught ? result : result");
+        // Fix 5: SEH output — show -1 for caught methods (not result=0 which is ambiguous)
+        // The template produces `caught ? -1 : result`; we keep as-is.
+        // (Historically this was `caught ? result : result` which made crashed
+        //  methods indistinguishable from methods that genuinely returned 0.)
 
         // Fix 6: Insert RunProfileMode function before --benchmark-range marker
         // This adds --profile CLI support for GC profile baseline collection.

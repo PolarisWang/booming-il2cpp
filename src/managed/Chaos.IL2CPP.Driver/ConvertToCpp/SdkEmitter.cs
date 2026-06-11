@@ -240,7 +240,8 @@ internal sealed class SdkEmitter
         var gcHeaders = new[]
         {
             "gc_api.h", "gc_bgc_inline.h", "gc_helpers.h", "gc_card_table.h",
-            "gc_layout.h", "gc_bump_cache.h",
+            "gc_layout.h", "gc_bump_cache.h", "gc_root_change.h",
+            "gc_heap.h", "gc_old_gen.h",
         };
         foreach (var h in gcHeaders)
         {
