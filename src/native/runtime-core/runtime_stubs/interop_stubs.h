@@ -4,6 +4,7 @@
 #pragma once
 
 #include <chaos/native_types.h>
+#include <cstdint>
 
 // Marshal P/Invoke error helpers
 void    ChaosMarshalSetLastPInvokeError(CHAOS_IL2CPP_INT32 error) noexcept;
@@ -99,3 +100,19 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept;
 // This prevents CHAOS_IL2CPP_FAIL/crash for methods without
 // DirectNativeSymbol stubs or runtime DLL resolution.
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept;
+
+// ── External runtime IL data entry ─────────────────────────
+// Each entry carries raw CIL bytes + optional AotCoreIr JSON for
+// interpreter fallback when hotpatch dispatch is unavailable.
+// Defined in generated code and used by ChaosExternalRuntimeFallback.
+struct ChaosIlDataEntry {
+    const char*         subject_id;
+    const uint8_t*      il_data;
+    int32_t             il_size;
+    void*               patch_method;
+    const char*         json_data;
+};
+
+// Generated data table: embedded CIL + JSON for interpreter fallback.
+// Terminated by a sentinel entry with subject_id == nullptr.
+extern "C" ChaosIlDataEntry kChaosExternalRuntimeIlData[];
