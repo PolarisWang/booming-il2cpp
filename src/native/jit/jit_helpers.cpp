@@ -88,7 +88,11 @@ extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noex
         io->fields.resize(field_idx + 1u);
     } else {
         // SATB pre-write barrier: record old value before overwriting.
-        JitSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
+        // Guard with heap check: stack-allocated value type slots don't
+        // need SATB recording (stack is conservatively scanned by BGC).
+        if (chaos_is_gc_pointer(obj)) {
+            JitSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
+        }
     }
     io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
     if (chaos_is_gc_pointer(obj)) {
@@ -675,7 +679,12 @@ extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
     using namespace chaos::il2cpp::runtime_core;
     if (ptr == nullptr) return;
     auto* iv = static_cast<InterpreterValue*>(ptr);
-    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
+    // SATB pre-write barrier: record old value before overwriting.
+    // Guard with heap check: stack-allocated value type slots don't
+    // need SATB recording (stack is conservatively scanned by BGC).
+    if (chaos_is_gc_pointer(ptr)) {
+        JitSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
+    }
     *iv = InterpreterValue::from_i64(static_cast<int64_t>(value));
     if (chaos_is_gc_pointer(ptr)) {
         chaos_gc_dirty_card(ptr);

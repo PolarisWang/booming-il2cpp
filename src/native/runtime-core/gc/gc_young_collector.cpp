@@ -343,13 +343,14 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
 // ======================================================================
 
 YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
-    // If BGC is in concurrent mark, skip Young GC to avoid any potential
-    // race between forwarding pointer writes and BGC's concurrent object
-    // scan.  The caller (allocation path) falls through to old-gen
-    // allocation or full GC, which is safe under concurrent mark.
+    // If BGC is in concurrent mark, pause BGC before running young GC
+    // to avoid races between forwarding pointer writes and BGC's concurrent
+    // object scan.  BGC resumes after young GC completes.
+    bool bgc_was_paused = false;
     if (g_bgc_is_marking.load(std::memory_order_acquire)) [[unlikely]] {
-        CHAOS_IL2CPP_LOG_WARN("CRAG", "young_collection_skipped_bgc_marking");
-        return YoungCollectionResult{};
+        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "young_collection_pausing_bgc");
+        BgcController::Instance().PauseForYoungGc();
+        bgc_was_paused = true;
     }
 
     // If force_skip_gen1 is true, skip Phase 4 Gen1 collection even if
@@ -658,6 +659,26 @@ phase3:
         std::chrono::nanoseconds>(std::chrono::steady_clock::now() - pause_start).count())
         - pt.phase1_ns - pt.phase2_ns - pt.phase2b_ns;
 
+    // ── Phase 3d: Re-root BGC with promoted objects ──
+    // If BGC was paused for this young GC, scan the promoted objects
+    // (bfs_worklist) for old-gen references and push them to BGC's
+    // worker deque.  This ensures BGC can trace these new old-gen
+    // objects after resuming — without this, any old-gen object only
+    // reachable through a promoted object would be incorrectly swept
+    // by BGC when concurrent mark resumes.
+    if (bgc_was_paused && result.bfs_worklist != nullptr) {
+        auto& bgc_ctrl = BgcController::Instance();
+        for (int i = 0; i < result.bfs_worklist_count; i++) {
+            void* promoted = result.bfs_worklist[i];
+            if (promoted != nullptr && G_OldGen().IsInOldGen(promoted)) {
+                bgc_ctrl.PushToBgcMarkDeque(promoted);
+            }
+        }
+        CHAOS_IL2CPP_LOG_DEBUG_M("CRAG",
+            "bgc_reroot_promoted count={0}",
+            static_cast<unsigned long long>(result.bfs_worklist_count));
+    }
+
     // ── Phase 3b: Process weak GCHandles ──
     GcProcessWeakHandlesAfterYoungGC();
 
@@ -885,6 +906,12 @@ phase3:
 
     GcEtwFireGcYoungEnd(pause_ns, result.objects_promoted, result.bytes_promoted, result.bytes_reclaimed);
     GcFireEvent(GcEvent::GC_YOUNG_DONE);
+
+    // Resume BGC if it was paused for this young GC.
+    if (bgc_was_paused) {
+        BgcController::Instance().ResumeAfterYoungGc();
+    }
+
     return result;
 }
 

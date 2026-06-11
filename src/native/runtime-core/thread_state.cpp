@@ -8,6 +8,7 @@
 #include <chaos/pal/pal_preempt.h>
 
 #include "gc_region.h"
+#include "gc/gc_suspend_trampoline.h"
 #include "gc_root_scanner.h"
 #include "gc_static_roots.h"
 #include "gc_card_table.h"
@@ -27,6 +28,7 @@
 #include <cerrno>
 #include <chrono>
 #include <cstring>
+#include <ucontext.h>
 
 namespace chaos::il2cpp::runtime_core::threading {
 
@@ -298,19 +300,87 @@ void EnterPreemptiveMode() noexcept {
     thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
 }
 
+/// C-linkage wrapper for SafepointPoll, called from the assembly trampoline
+/// (gc_suspend_trampoline_x64).  The assembler cannot call C++ mangled names
+/// directly, so this bridge provides a stable extern "C" entry point.
+extern "C" void chaos_safepoint_poll() noexcept {
+    SafepointPoll();
+}
+
 /// Unified preemptive suspend handler — called from Windows APC and
 /// POSIX SIGUSR2 signal context.  Acknowledges the safepoint and waits
 /// for release.
 ///
-/// On POSIX: spin-waits (async-signal-safe; pthread_cond_wait is not).
-/// On Windows: event-waits via PalEvent (APC context permits it).
+/// On POSIX with SA_SIGINFO: captures the interrupted thread's register
+/// state (ucontext_t) from the PAL handler TLS so the GC coordinator
+/// can perform precise root scanning of the hijacked thread.
+///
+/// == Trampoline redirect (Phase 2) ==
+/// For cooperative-mode threads, instead of spin-waiting on the limited
+/// signal stack (SIGSTKSZ), we acknowledge the safepoint and redirect RIP
+/// to gc_suspend_trampoline_x64 via ucontext modification.  The trampoline
+/// runs SafepointPoll() on the thread's NORMAL stack, avoiding signal
+/// stack overflow during long GC pauses.
 static void PreemptiveSuspendHandler(uint64_t epoch) noexcept {
     auto* thread = tls_this_thread;
     if (thread == nullptr) return;
 
+    // Capture ucontext from the PAL signal handler (only available
+    // on POSIX with SA_SIGINFO).  The GC coordinator reads this via
+    // GetPreemptSuspendUcontext() during the safepoint wait loop.
+    const void* uctx = chaos::il2cpp::pal::PalPreemptGetUcontext();
+    if (uctx != nullptr) {
+        thread->preempt_ucontext.store(uctx, std::memory_order_release);
+    }
+
+    // Cooperative mode: redirect to trampoline instead of spin-waiting
+    // on the signal stack.  The trampoline calls SafepointPoll() on the
+    // thread's normal stack, which handles the actual safepoint wait.
+    if (thread->gc_mode.load(std::memory_order_acquire) == kGcModeCooperative) {
+        // Acknowledge the safepoint so the coordinator sees our response.
+        uint32_t seq = thread->suspend_seq.load(std::memory_order_acquire);
+        thread->suspend_ack.store(seq, std::memory_order_release);
+
+        // Redirect RIP to the trampoline via ucontext modification.
+        // This runs on the signal stack but writes to the normal stack
+        // (original_rsp - 8) — both are in the same address space.
+        if (uctx != nullptr) {
+            auto* uc = const_cast<ucontext_t*>(
+                static_cast<const ucontext_t*>(uctx));
+            uint64_t original_rip =
+                static_cast<uint64_t>(uc->uc_mcontext.gregs[REG_RIP]);
+            uint64_t original_rsp =
+                static_cast<uint64_t>(uc->uc_mcontext.gregs[REG_RSP]);
+
+            // Push original RIP onto the normal stack (at RSP - 8) so the
+            // trampoline's RET will return to the interrupted instruction.
+            uint64_t new_rsp = original_rsp - sizeof(uint64_t);
+            *reinterpret_cast<uint64_t*>(new_rsp) = original_rip;
+            uc->uc_mcontext.gregs[REG_RSP] = static_cast<greg_t>(new_rsp);
+
+            // Redirect RIP to the assembly trampoline.
+            uc->uc_mcontext.gregs[REG_RIP] =
+                reinterpret_cast<uint64_t>(&gc_suspend_trampoline_x64);
+        } else {
+            // No ucontext available (non-POSIX or missing SA_SIGINFO) —
+            // fallback to standard ack + spin-wait on signal stack.
+            chaos::il2cpp::pal::PalPreemptiveSuspendAck(
+                epoch, thread->suspend_event,
+                &thread->suspend_seq, &thread->suspend_ack);
+        }
+
+        // Clear ucontext — the trampoline handles the actual wait.
+        thread->preempt_ucontext.store(nullptr, std::memory_order_release);
+        return;
+    }
+
+    // Preemptive mode: standard ack + spin-wait on signal stack.
     chaos::il2cpp::pal::PalPreemptiveSuspendAck(
         epoch, thread->suspend_event,
         &thread->suspend_seq, &thread->suspend_ack);
+
+    // Clear ucontext after the safepoint is released.
+    thread->preempt_ucontext.store(nullptr, std::memory_order_release);
 }
 
 /// One-time initialization of the preemptive suspend subsystem.

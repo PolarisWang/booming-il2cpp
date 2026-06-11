@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(chaos_runtime_core LANGUAGES CXX)
+project(chaos_runtime_core LANGUAGES CXX ASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -214,7 +214,7 @@ option(CHAOS_IL2CPP_GC_PARALLEL_MARK "Enable parallel marking in GC"            
 option(CHAOS_IL2CPP_GC_EVENTS       "Enable GC event tracing and callbacks"                 ON)
 option(CHAOS_IL2CPP_GC_STRESS       "Enable GC stress testing mode (debug/validation only)" OFF)
 option(CHAOS_IL2CPP_GC_LARGE_PAGES  "Enable large page (2MB) support (requires SeLockMemoryPrivilege)" ON)
-option(CHAOS_IL2CPP_GC_SERVER      "Enable Server GC mode with per-NUMA-node heaps"              OFF)
+option(CHAOS_IL2CPP_GC_SERVER      "Enable Server GC mode with per-NUMA-node heaps"              ON)
 
 option(CHAOS_IL2CPP_GC_HEAP_HARD_LIMIT_MB
     "Hard memory limit in MB (0=disabled). Allocation exceeding this fails."
@@ -289,6 +289,7 @@ if(WIN32)
 elseif(UNIX AND NOT APPLE AND NOT ANDROID)
     target_sources(chaos_runtime_core PRIVATE
         gc/gc_numa_linux.cpp
+        gc/gc_suspend_trampoline_x64.S
         runtime_stubs/linux_platform_stubs.cpp
         runtime_stubs/mutex_stubs_posix.cpp)
 else()
