@@ -39,7 +39,7 @@ static constexpr CHAOS_IL2CPP_SIZE kGen1MaxEstObjectSize = 2048;
 /// Minimum object count threshold for Gen1 mark-sweep.
 /// If Gen1 has fewer live objects than this, skip mark-sweep overhead
 /// and promote all directly to Gen2.
-static constexpr CHAOS_IL2CPP_SIZE kGen1MinPromoteThreshold = 128;  // was 64
+static constexpr CHAOS_IL2CPP_SIZE kGen1MinPromoteThreshold = 64;
 
 /// Result of a Gen1 collection.
 struct Gen1CollectionResult {
