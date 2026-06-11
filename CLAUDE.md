@@ -24,7 +24,8 @@
 > 2. 如果分类命中域编号表 1-8 → 强制走 dev-il2cpp 工作流映射。
 >    执行步骤：读取 `dev-il2cpp/SKILL.md` → 按"工作流映射"找到目标 skill → 加载后执行。
 >    （所有 il2cpp 域的任务必须通过 dev-il2cpp 入口路由，不走通用回复）
-> 3. `touch .claude/.classified`（创建标记文件）
+> 3. `echo "本轮任务涉及 {域1(编号)} + {域2(编号)} ，{action} 操作，第 N 轮" > .claude/.classified`
+>    （写入分类声明到标记文件，hook 会验证内容格式）
 > 4. 使用工具（Edit/Write/Glob/Grep/Skill 会被 hook 检查）
 > 5. 响应结束时 `rm -f .claude/.classified`
 >
