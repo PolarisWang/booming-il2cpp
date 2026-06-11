@@ -31,4 +31,14 @@ CHAOS_VECTOR_REDUCTION_DECLS(i8)
 
 #undef CHAOS_VECTOR_REDUCTION_DECLS
 
+// Backward-compatible aliases (existing generated code uses non-suffixed names)
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_or_equal_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_or_equal_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+
 #endif

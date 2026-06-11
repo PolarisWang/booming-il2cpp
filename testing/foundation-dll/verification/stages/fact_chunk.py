@@ -183,6 +183,13 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     # test code).  The skip list is maintained in fix_all_failures.py and the
     # native fact_skip_indices.h header; the JSON copy is used by the pipeline
     # to filter JIT results that lack native skip support.
+    skip_indices: set[int] = set()
+    skip_path = ctx.chunk_dir / "native" / "fact_skip_indices.json"
+    if skip_path.exists():
+        try:
+            skip_indices = set(json.loads(skip_path.read_text(encoding="utf-8")))
+        except Exception:
+            pass
     if skip_indices:
         for result_list, label in [(aot_result["results"], "aot"),
                                     (jit_result["results"] if jit_result else [], "jit")]:

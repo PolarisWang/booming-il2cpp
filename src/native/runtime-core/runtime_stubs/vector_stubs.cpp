@@ -74,3 +74,34 @@ VECTOR_REDUCTION_STUBS(CHAOS_IL2CPP_INT16, i16)
 VECTOR_REDUCTION_STUBS(CHAOS_IL2CPP_UINT16, u16)
 VECTOR_REDUCTION_STUBS(CHAOS_IL2CPP_UINT8, u8)
 VECTOR_REDUCTION_STUBS(CHAOS_IL2CPP_INT8, i8)
+
+// ── Backward-compatible aliases (existing codegen output uses non-suffixed names) ──
+// These delegate to the i32 (int32) variants, preserving compatibility with
+// pre-existing generated code that was emitted before type-specific suffixes.
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_greater_than_any_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_greater_than_all_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_or_equal_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_greater_than_or_equal_any_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_greater_than_or_equal_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_greater_than_or_equal_all_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_less_than_any_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_less_than_all_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_any(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_less_than_or_equal_any_i32(left, right); }
+extern "C" CHAOS_IL2CPP_INT32 chaos_vector_less_than_or_equal_all(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right)
+    { return chaos_vector_less_than_or_equal_all_i32(left, right); }
+
+// ── Backward-compatible aliases (existing codegen output uses non-suffixed names) ──
+// The i32 variants serve as the default for old generated code.
+#pragma comment(linker, "/alternatename:chaos_vector_greater_than_any=chaos_vector_greater_than_any_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_greater_than_all=chaos_vector_greater_than_all_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_greater_than_or_equal_any=chaos_vector_greater_than_or_equal_any_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_greater_than_or_equal_all=chaos_vector_greater_than_or_equal_all_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_less_than_any=chaos_vector_less_than_any_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_less_than_all=chaos_vector_less_than_all_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_less_than_or_equal_any=chaos_vector_less_than_or_equal_any_i32")
+#pragma comment(linker, "/alternatename:chaos_vector_less_than_or_equal_all=chaos_vector_less_than_or_equal_all_i32")
