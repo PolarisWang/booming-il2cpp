@@ -117,9 +117,23 @@ Translation Expert 和 CodeGen Expert 都涉及 Planner/Emission 文件：
 □ ✅ 全部通过 → 提交并推送
 ```
 
+## 7. Sub-Agent 防护
+
+通过 Skill 工具加载子 Expert 时，必须设置 sub-agent 标记以防止递归循环：
+
+```bash
+# 进入子 Agent 前
+echo "dev-il2cpp-xxx-expert" > .claude/.subagent
+
+# 子 Agent 返回后
+rm -f .claude/.subagent
+```
+
+hook 会检查：如果在 sub-agent 内再次调用 Skill 工具，将拒绝执行并提示"标记 remaining 后由 Dispatcher 分配"。
+
 ---
 
-## 7. 变更记录
+## 8. 变更记录
 
 | 日期 | 变更 | 原因 |
 |------|------|------|

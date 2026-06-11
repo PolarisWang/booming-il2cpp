@@ -1,0 +1,65 @@
+{
+  "promptTemplate": [
+    "skills/discovery/skill-index.md",
+    "wiki/INDEX.md"
+  ],
+  "projectPrompt": "",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Edit|Write|Glob|Grep|Skill|Workflow",
+        "hooks": [
+          {
+            "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/check_classification.py\"",
+            "statusMessage": "Checking classification...",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Read|Skill",
+        "hooks": [
+          {
+            "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_track_usage.py\"",
+            "statusMessage": "Tracking skill usage...",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|Bash|Glob|Grep",
+        "hooks": [
+          {
+            "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_track_tool_outcomes.py\"",
+            "statusMessage": "Logging tool outcome...",
+            "timeout": 5,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_evaluate_session.py\"",
+            "statusMessage": "Evaluating session quality + evolution...",
+            "timeout": 30,
+            "type": "command"
+          },
+          {
+            "command": "python \"$(git rev-parse --show-toplevel)/skills/hooks/hook_track_session_outcomes.py\"",
+            "statusMessage": "Recording session outcome...",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  }
+}

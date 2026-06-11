@@ -93,6 +93,14 @@ def main() -> int:
         if skill_path:
             source = "expert_detected"
 
+    # Method 4: Classification marker — use as fallback for all non-Skill tools
+    if not skill_path:
+        ckass_dir = repo_root / ".claude" if repo_root else Path(".claude")
+        ckass_file = ckass_dir / ".classified"
+        if ckass_file.exists():
+            skill_path = "engineering"
+            source = "classification"
+
     if not skill_path:
         return 0
 

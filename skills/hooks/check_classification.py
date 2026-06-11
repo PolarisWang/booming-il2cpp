@@ -81,4 +81,14 @@ if round_num < 1:
     print(f"  ⚠️  无效的轮次 {round_num}，轮次必须是正整数", file=sys.stderr)
     sys.exit(1)
 
+# ── Sub-agent guard ─────────────────────────────────────────────
+# 检测是否通过 Skill 工具调用进入了子 Expert，防止递归循环
+subagent_file = _claude_dir / ".subagent"
+if tool_name == "Skill" and subagent_file.exists():
+    subagent = subagent_file.read_text(encoding="utf-8", errors="replace").strip()
+    print(f"  ⚠️ 已在子 Agent '{subagent}' 中，不允许通过 Skill 工具重新路由。",
+          file=sys.stderr)
+    print(f"  如需其他 Expert，请标记 remaining 后由 Dispatcher 分配。", file=sys.stderr)
+    sys.exit(1)
+
 sys.exit(0)
