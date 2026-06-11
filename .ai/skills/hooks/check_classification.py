@@ -1,11 +1,13 @@
-"""PreToolUse hook: 强制分类声明 + Expert 加载验证 + 文件路径拦截 (A+B)
+"""PreToolUse hook: 强制 Expert 加载验证 (A+B+方案4)
+
+方案4: Bash 无豁免。只读 Bash 放行，管理 Bash (.claude/) 放行，
+域操作 Bash 必须匹配 loaded_expert。
 
 流程:
 1. 用户发消息 → Agent 输出分类声明 + "→ 加载 dev-xxx-expert"
 2. echo "..." > .claude/.classified (hook 验证格式)
 3. Agent 通过 Skill 工具加载 Expert → hook 自动写入 .loaded_expert
-4. 后续 Edit/Write 域文件 → hook 检查 loaded_expert 是否匹配
-5. 不匹配 → 阻断并提示先加载对应 Expert
+4. 后续 Edit/Write/Bash 域文件 → hook 检查 loaded_expert 是否匹配
 """
 
 import os
@@ -49,7 +51,7 @@ tool_name = os.environ.get("CLAUDE_TOOL_NAME", sys.argv[1] if len(sys.argv) > 1 
 
 
 # ═══════════════════════════════════════════════════════════════════
-# 方案 A: 文件路径 → Expert 映射表
+# 文件路径 → Expert 映射表
 # ═══════════════════════════════════════════════════════════════════
 FILE_TO_EXPERT: list[tuple[str, str]] = [
     ("src/native/runtime-core/",             "dev-il2cpp-runtime-expert"),
@@ -82,19 +84,77 @@ def get_loaded_expert() -> str | None:
 
 
 # ═══════════════════════════════════════════════════════════════════
-# 豁免工具
+# 只读工具豁免
 # ═══════════════════════════════════════════════════════════════════
-ALLOWED_TOOLS = {"Read", "Grep", "Glob", "Bash"}
+ALLOWED_TOOLS = {"Read", "Grep", "Glob"}
 if tool_name in ALLOWED_TOOLS:
     sys.exit(0)
 
+
 # ═══════════════════════════════════════════════════════════════════
-# 方案 B: 分类声明 → 必须包含 Expert 加载声明
+# Bash 处理 — 三档过滤
+# ═══════════════════════════════════════════════════════════════════
+if tool_name == "Bash":
+    cmd = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else ""
+
+    # 第一档: 管理 Bash — 只操作 .claude/ 标记文件，不检查
+    MANAGEMENT_PATTERNS = [
+        r'echo\s+.*>.*\.claude/',
+        r'echo\s+.*>.*\.loaded_expert',
+        r'echo\s+.*>.*\.classified',
+        r'rm\s+-f.*\.claude/',
+        r'touch\s+.*\.claude/',
+    ]
+    for pat in MANAGEMENT_PATTERNS:
+        if re.search(pat, cmd):
+            sys.exit(0)
+
+    # 第二档: 只读 Bash — 不影响源文件，不检查
+    READONLY_BASH_WORDS = {
+        "ls", "pwd", "which", "type", "date", "printf",
+        "cat", "head", "tail", "wc", "sort", "uniq", "cut",
+        "file", "du", "df", "ps", "env", "which",
+        "git status", "git log", "git diff", "git show", "git branch",
+        "git ls-files", "git ls-tree",
+    }
+    first_word = cmd.strip().split()[0] if cmd.strip() else ""
+    if first_word in READONLY_BASH_WORDS:
+        sys.exit(0)
+
+    # 第三档: 域操作 Bash — 检查 loaded_expert 是否匹配
+    # 从命令中提取文件/目录路径参数
+    cmd_paths = re.findall(r'(?:^|\s)(?:cd\s+)?([a-zA-Z]:/[^\s"\']+|\.\.?/[^\s"\']+)', cmd)
+    cmd_paths += re.findall(r'(?:^|\s)(?:cd\s+)?([a-zA-Z]:\\[^\s"\']+)', cmd)
+    cmd_paths += re.findall(r'(?:^|\s)(?:--target\s+)?([a-zA-Z_][a-zA-Z0-9_]*)(?:\s|$)', cmd)
+
+    required_experts: set[str] = set()
+    for p in cmd_paths:
+        expert = get_required_expert(p)
+        if expert:
+            required_experts.add(expert)
+
+    if required_experts:
+        loaded = get_loaded_expert()
+        if loaded is None or loaded not in required_experts:
+            expert_list = " 或 ".join(required_experts)
+            print(file=sys.stderr)
+            print(f"  ⚠️  此 Bash 操作涉及域文件，需要先加载对应 Expert", file=sys.stderr)
+            print(f"  需加载: {expert_list}", file=sys.stderr)
+            print(f"  当前已加载: {loaded or '无'}", file=sys.stderr)
+            print(f"  请先执行: Skill(\"{list(required_experts)[0]}\")", file=sys.stderr)
+            print(file=sys.stderr)
+            sys.exit(1)
+
+    # 无域路径匹配 → 放行（可能是工具命令、第三方脚本等）
+    sys.exit(0)
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 分类声明 + Expert 声明验证（Edit/Write/Skill/Workflow）
 # ═══════════════════════════════════════════════════════════════════
 if not flag_file.exists():
     print(file=sys.stderr)
     print("  ⚠️  分类声明未输出！", file=sys.stderr)
-    print("  CLAUDE.md 规则要求回复第一行包含分类 + Expert 加载声明", file=sys.stderr)
     print(file=sys.stderr)
     sys.exit(1)
 
@@ -133,7 +193,7 @@ if round_num < 1:
     sys.exit(1)
 
 # ═══════════════════════════════════════════════════════════════════
-# Skill 工具加载 Expert → 自动写入 .loaded_expert
+# Skill 工具 → 自动写入 .loaded_expert
 # ═══════════════════════════════════════════════════════════════════
 if tool_name == "Skill":
     skill_arg = ""
@@ -146,7 +206,7 @@ if tool_name == "Skill":
     sys.exit(0)
 
 # ═══════════════════════════════════════════════════════════════════
-# 方案 A: Edit/Write 时检查 Expert 是否已加载
+# Edit/Write → 检查 Expert 是否已加载
 # ═══════════════════════════════════════════════════════════════════
 if tool_name in ("Edit", "Write"):
     file_path = ""
@@ -156,7 +216,6 @@ if tool_name in ("Edit", "Write"):
             break
     if not file_path:
         file_path = os.environ.get("CLAUDE_TOOL_FILE_PATH", "")
-
     required = get_required_expert(file_path)
     if required is not None:
         loaded = get_loaded_expert()
@@ -164,8 +223,6 @@ if tool_name in ("Edit", "Write"):
             print(file=sys.stderr)
             print(f"  ⚠️  编辑域文件需要先加载 {required}", file=sys.stderr)
             print(f"  当前已加载: {loaded or '无'}", file=sys.stderr)
-            print(f"  请先执行: Skill(\"{required}\") 后再编辑", file=sys.stderr)
-            print(file=sys.stderr)
             sys.exit(1)
 
 # ═══════════════════════════════════════════════════════════════════

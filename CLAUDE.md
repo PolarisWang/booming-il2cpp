@@ -32,7 +32,12 @@
 > 6. **禁止**：在未加载对应 Expert 的情况下编辑域文件（src/managed/、src/native/、testing/、src/tools/）
 >    违例会被 hook 阻断
 >
-> ⚠️ hook 会阻止未分类的 Edit/Write/Glob/Grep/Skill 调用。Bash 豁免（用于管理标记文件）。
+>
+> **Bash 规则**：
+> - **管理 Bash**: `echo "..." > .claude/.classified`、`rm -f .claude/*` 等标记文件操作 → 无需分类
+> - **只读 Bash**: `ls`, `cat`, `git status`, `grep`, `find`, `wc` 等 → 无需分类
+> - **域操作 Bash**: `rm -rf testing/...`, `cmake --build src/native/...`, `cd src/managed/...` → 必须匹配 loaded_expert
+> - 域操作 Bash 被拦截时，先 `Skill("dev-xxx-expert")` 加载 Expert
 
 ## 全局优先级约束（强制）
 
