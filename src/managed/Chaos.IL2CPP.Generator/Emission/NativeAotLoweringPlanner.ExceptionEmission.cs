@@ -322,6 +322,9 @@ public sealed partial class NativeAotLoweringPlanner
 				case "ldelem.i8":
 					typeStack.Push(SlotType.Int64);
 					break;
+				case "ldelem.i":
+					typeStack.Push(SlotType.NativeInt);
+					break;
 
 				// stloc: pop type and record for this local slot
 				case "stloc":
@@ -1770,6 +1773,12 @@ public sealed partial class NativeAotLoweringPlanner
 			ConsumeSlotType();
 			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT32");
+			PushSlotType(SlotType.NativeInt);
+			break;
+		case "ldelem.i":
+			ConsumeSlotType();
+			ConsumeSlotType();
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INTPTR");
 			PushSlotType(SlotType.NativeInt);
 			break;
 		case "ldelem.u4":
