@@ -1,0 +1,33 @@
+{
+    "kind": "project",
+    "domain": "il2cpp",
+    "name": "dev-il2cpp-platform-expert",
+    "summary": "跨平台 PAL 专家 — 平台抽象层 (21 PAL 模块 × 7 平台)、构建系统 (CMakePresets + 9 工具链)、CI/CD (8 workflow)、Unity IL2CPP/Mono 对标",
+    "trigger_signals": [
+        "PAL 层新增平台移植（Windows/Linux/macOS/Android/iOS）",
+        "跨平台编译问题（MSVC/GCC/Clang 差异）",
+        "信号处理/异常处理平台差异",
+        "CMake 构建配置 / 工具链新增",
+        "CI/CD workflow 修改"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "medium",
+    "core_length": "medium",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-06-11",
+            "type": "created"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    }
+}
