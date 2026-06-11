@@ -1,37 +1,36 @@
 # Chaos IL2CPP 开发规则
 
 > ⚠️ **第〇条规则（最优先）**：对用户每一条新消息，回复的**第一行必须是分类声明**：
-> 格式：`本轮任务涉及 {域1(编号)} + {域2(编号)} ... ，{action} 操作，第 N 轮`
+> 格式：`本轮任务涉及 {域1(编号)} + {域2(编号)} ... ，{action} 操作，第 N 轮 → 加载 dev-xxx-expert`
 >
 > 域编号表：
-> | 编号 | 域 | 说明 |
-> |------|----|------|
-> | 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap |
-> | 2 | GC | 内存分配、分代、写屏障、stress test |
-> | 3 | 调试 | crash、segfault、测试失败、异常行为 |
-> | 4 | CodeGen | C# codegen、T4 模板、snapshot |
-> | 5 | 测试 | foundation-dll、subject、manifest |
-> | 6 | 翻译 | 新 IL 指令、Planner、Emission |
-> | 7 | 构建 | 编译、链接、SDK、cmake |
-> | 8 | 热更新 | PatchLoader、patchdata |
+> | 编号 | 域 | 说明 | 对应 Expert |
+> |------|----|------|------------|
+> | 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap | `dev-il2cpp-runtime-expert` |
+> | 2 | GC | 内存分配、分代、写屏障、stress test | `dev-il2cpp-gc-expert` |
+> | 3 | 调试 | crash、segfault、测试失败、异常行为 | `dev-il2cpp-debug-expert` |
+> | 4 | CodeGen | C# codegen、T4 模板、snapshot | `dev-il2cpp-codegen-expert` |
+> | 5 | 测试 | foundation-dll、subject、manifest | `dev-il2cpp-fact-verification-expert` |
+> | 6 | 翻译 | 新 IL 指令、Planner、Emission | `dev-il2cpp-codegen-expert` |
+> | 7 | 构建 | 编译、链接、SDK、cmake | `dev-il2cpp-build-fixer` |
+> | 8 | 热更新 | PatchLoader、patchdata | `dev-il2cpp-hotupdate-expert` |
 >
 > action: `read` / `fix` / `build` / `verify` / `plan`
 >
-> 示例：`本轮任务涉及 运行时(1) + 构建(7) ，fix 操作，第 1 轮`
+> 示例：`本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp-codegen-expert`
 >
 > **执行协议**：
-> 1. 输出分类声明
-> 2. 如果分类命中域编号表 1-8 → 强制走 dev-il2cpp 工作流映射。
->    执行步骤：读取 `dev-il2cpp/SKILL.md` → 按"工作流映射"找到目标 skill → 加载后执行。
->    （所有 il2cpp 域的任务必须通过 dev-il2cpp 入口路由，不走通用回复）
-> 3. `echo "本轮任务涉及 {域1(编号)} + {域2(编号)} ，{action} 操作，第 N 轮" > .claude/.classified`
->    （写入分类声明到标记文件，hook 会验证内容格式）
-> 4. 使用工具（Edit/Write/Glob/Grep/Skill 会被 hook 检查）
+> 1. 输出分类声明（**必须包含 → 加载 dev-xxx-expert**）
+> 2. `echo "本轮任务涉及 {域1(编号)} ... ，{action} 操作，第 N 轮 → 加载 dev-xxx-expert" > .claude/.classified`
+>    （hook 验证格式 + 域编号 + action + Expert 名）
+> 3. 在首次 Edit/Write 域文件之前，**必须先通过 Skill 工具加载 Expert**:
+>    `Skill("dev-xxx-expert")` → hook 自动写入 `.claude/.loaded_expert`
+> 4. 使用工具（hook 会在 Edit/Write 域文件时检查 loaded_expert 是否匹配）
 > 5. 响应结束时：
->    - 如果用户消息是"继续"/"A"/"ok"/"好"/"接着"/"下一步"等明确延续信号
->      → **保留** `.claude/.classified`，下一轮自动复用当前分类
->    - 如果是新任务/新话题 → `rm -f .claude/.classified`
-> 6. 延续模式下，下一轮可以跳过分类声明直接从 Step 4 开始
+>    - 延续消息 → **保留** `.claude/.classified` + `.claude/.loaded_expert`
+>    - 新任务 → `rm -f .claude/.classified .claude/.loaded_expert`
+> 6. **禁止**：在未加载对应 Expert 的情况下编辑域文件（src/managed/、src/native/、testing/、src/tools/）
+>    违例会被 hook 阻断
 >
 > ⚠️ hook 会阻止未分类的 Edit/Write/Glob/Grep/Skill 调用。Bash 豁免（用于管理标记文件）。
 

@@ -1,14 +1,11 @@
-"""PreToolUse hook: 强制要求输出分类声明后才能使用非只读工具。
+"""PreToolUse hook: 强制分类声明 + Expert 加载验证 + 文件路径拦截 (A+B)
 
-流程：
-1. 用户发消息后，标记文件 `.claude/.classified` 不存在
-2. Agent 必须先输出分类声明，并用 Bash 写入标记文件:
-     echo "本轮任务涉及 运行时(1) + 构建(7) ，fix 操作，第 1 轮" > .claude/.classified
-3. 后续非只读工具调用通过 hook 验证文件内容
-4. Agent 在响应结束时用 Bash 删除标记文件
-5. 下一条用户消息 → 标记文件不存在 → 必须重新分类
-
-Bash 被豁免（可以创建/删除标记文件），但 Agent 应自觉先分类再用 Bash。
+流程:
+1. 用户发消息 → Agent 输出分类声明 + "→ 加载 dev-xxx-expert"
+2. echo "..." > .claude/.classified (hook 验证格式)
+3. Agent 通过 Skill 工具加载 Expert → hook 自动写入 .loaded_expert
+4. 后续 Edit/Write 域文件 → hook 检查 loaded_expert 是否匹配
+5. 不匹配 → 阻断并提示先加载对应 Expert
 """
 
 import os
@@ -17,7 +14,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-# 缓存 repo root（避免每次 hook 调用都跑 git）
+
 _RESOLVED_REPO_ROOT: Path | None = None
 
 def _get_repo_root() -> Path | None:
@@ -36,7 +33,7 @@ def _get_repo_root() -> Path | None:
     except Exception:
         return None
 
-# 查找项目根目录下的 .claude
+
 _claude_dir = Path(__file__).resolve().parent.parent.parent / ".claude"
 if not _claude_dir.exists():
     repo_root = _get_repo_root()
@@ -46,72 +43,138 @@ if not _claude_dir.exists():
         _claude_dir = Path.cwd() / ".claude"
 
 flag_file = _claude_dir / ".classified"
+loaded_expert_file = _claude_dir / ".loaded_expert"
 
 tool_name = os.environ.get("CLAUDE_TOOL_NAME", sys.argv[1] if len(sys.argv) > 1 else "unknown")
 
-# 只读工具和 Bash 可免检（Bash 用于管理标记文件）
+
+# ═══════════════════════════════════════════════════════════════════
+# 方案 A: 文件路径 → Expert 映射表
+# ═══════════════════════════════════════════════════════════════════
+FILE_TO_EXPERT: list[tuple[str, str]] = [
+    ("src/native/runtime-core/",             "dev-il2cpp-runtime-expert"),
+    ("src/native/interpreter/",              "dev-il2cpp-runtime-expert"),
+    ("src/native/bootstrap/",                "dev-il2cpp-runtime-expert"),
+    ("src/native/support/",                  "dev-il2cpp-runtime-expert"),
+    ("src/native/runtime-core/gc/",          "dev-il2cpp-gc-expert"),
+    ("src/managed/Chaos.IL2CPP.Generator/",  "dev-il2cpp-codegen-expert"),
+    ("testing/foundation-dll/",              "dev-il2cpp-fact-verification-expert"),
+    ("testing/foundation-dll/verification/stages/build.py", "dev-il2cpp-build-fixer"),
+    ("src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/",  "dev-il2cpp-build-fixer"),
+    ("src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/", "dev-il2cpp-build-fixer"),
+    ("src/native/hot-update/",               "dev-il2cpp-hotupdate-expert"),
+]
+
+
+def get_required_expert(file_path: str) -> str | None:
+    normalized = file_path.replace("\\", "/")
+    for prefix, expert in FILE_TO_EXPERT:
+        if normalized.startswith(prefix):
+            return expert
+    return None
+
+
+def get_loaded_expert() -> str | None:
+    if loaded_expert_file.exists():
+        expert = loaded_expert_file.read_text(encoding="utf-8", errors="replace").strip()
+        return expert if expert else None
+    return None
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 豁免工具
+# ═══════════════════════════════════════════════════════════════════
 ALLOWED_TOOLS = {"Read", "Grep", "Glob", "Bash"}
 if tool_name in ALLOWED_TOOLS:
     sys.exit(0)
 
-# 如果标记文件不存在，拒绝工具调用
+# ═══════════════════════════════════════════════════════════════════
+# 方案 B: 分类声明 → 必须包含 Expert 加载声明
+# ═══════════════════════════════════════════════════════════════════
 if not flag_file.exists():
     print(file=sys.stderr)
     print("  ⚠️  分类声明未输出！", file=sys.stderr)
-    print("  CLAUDE.md 第〇条规则要求：回复第一行必须是分类声明", file=sys.stderr)
-    print("  格式：本轮任务涉及 {域1(编号)} + {域2(编号)} ... ，{action} 操作，第 N 轮", file=sys.stderr)
-    print(file=sys.stderr)
-    print("  示例: 本轮任务涉及 运行时(1) + 构建(7) ，fix 操作，第 1 轮", file=sys.stderr)
+    print("  CLAUDE.md 规则要求回复第一行包含分类 + Expert 加载声明", file=sys.stderr)
     print(file=sys.stderr)
     sys.exit(1)
 
-# ── 内容验证 ────────────────────────────────────────────────────
-# 读取分类声明并验证格式
 classification = flag_file.read_text(encoding="utf-8", errors="replace").strip()
 if not classification:
-    print("  ⚠️  分类文件为空！请写入分类声明后再使用工具。", file=sys.stderr)
+    print("  ⚠️  分类文件为空！", file=sys.stderr)
     sys.exit(1)
 
-# 验证格式: "本轮任务涉及 ... ，{action} 操作，第 N 轮"
-pattern = r'本轮任务涉及\s+(.+?)\s*，\s*(\w+)\s*操作，\s*第\s*(\d+)\s*轮'
+pattern = r'本轮任务涉及\s+(.+?)\s*，\s*(\w+)\s*操作，\s*第\s*(\d+)\s*轮\s*→\s*加载\s+(dev-\S+)'
 m = re.match(pattern, classification)
 if not m:
-    print(f"  ⚠️  分类声明格式错误: '{classification}'", file=sys.stderr)
-    print("  正确格式: 本轮任务涉及 运行时(1) + 构建(7) ，fix 操作，第 1 轮", file=sys.stderr)
+    print(f"  ⚠️  分类声明缺少 Expert 加载声明", file=sys.stderr)
+    print("  格式: 本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp-codegen-expert", file=sys.stderr)
     sys.exit(1)
 
 domain_part = m.group(1)
 action = m.group(2)
 round_str = m.group(3)
+declared_expert = m.group(4)
 
-# 验证 action
 VALID_ACTIONS = {"read", "fix", "build", "verify", "plan"}
 if action not in VALID_ACTIONS:
-    print(f"  ⚠️  无效的 action '{action}'，允许: {', '.join(VALID_ACTIONS)}", file=sys.stderr)
+    print(f"  ⚠️  无效 action '{action}'", file=sys.stderr)
     sys.exit(1)
 
-# 验证 domain 编号（格式: "域1(编号1) + 域2(编号2)"）
 domain_nums = re.findall(r'\((\d+)\)', domain_part)
 for dn in domain_nums:
     num = int(dn)
     if num < 1 or num > 8:
-        print(f"  ⚠️  无效的域编号 {num}，域编号必须在 1-8 之间", file=sys.stderr)
+        print(f"  ⚠️  无效域编号 {num}", file=sys.stderr)
         sys.exit(1)
 
-# 验证 round
 round_num = int(round_str)
 if round_num < 1:
-    print(f"  ⚠️  无效的轮次 {round_num}，轮次必须是正整数", file=sys.stderr)
+    print(f"  ⚠️  无效轮次 {round_num}", file=sys.stderr)
     sys.exit(1)
 
-# ── Sub-agent guard ─────────────────────────────────────────────
-# 检测是否通过 Skill 工具调用进入了子 Expert，防止递归循环
+# ═══════════════════════════════════════════════════════════════════
+# Skill 工具加载 Expert → 自动写入 .loaded_expert
+# ═══════════════════════════════════════════════════════════════════
+if tool_name == "Skill":
+    skill_arg = ""
+    for i, arg in enumerate(sys.argv):
+        if arg == "--skill" and i + 1 < len(sys.argv):
+            skill_arg = sys.argv[i + 1]
+            break
+    if skill_arg and skill_arg.startswith("dev-"):
+        loaded_expert_file.write_text(skill_arg + "\n", encoding="utf-8")
+    sys.exit(0)
+
+# ═══════════════════════════════════════════════════════════════════
+# 方案 A: Edit/Write 时检查 Expert 是否已加载
+# ═══════════════════════════════════════════════════════════════════
+if tool_name in ("Edit", "Write"):
+    file_path = ""
+    for i, arg in enumerate(sys.argv):
+        if arg == "--file-path" and i + 1 < len(sys.argv):
+            file_path = sys.argv[i + 1]
+            break
+    if not file_path:
+        file_path = os.environ.get("CLAUDE_TOOL_FILE_PATH", "")
+
+    required = get_required_expert(file_path)
+    if required is not None:
+        loaded = get_loaded_expert()
+        if loaded != required:
+            print(file=sys.stderr)
+            print(f"  ⚠️  编辑域文件需要先加载 {required}", file=sys.stderr)
+            print(f"  当前已加载: {loaded or '无'}", file=sys.stderr)
+            print(f"  请先执行: Skill(\"{required}\") 后再编辑", file=sys.stderr)
+            print(file=sys.stderr)
+            sys.exit(1)
+
+# ═══════════════════════════════════════════════════════════════════
+# Sub-agent guard
+# ═══════════════════════════════════════════════════════════════════
 subagent_file = _claude_dir / ".subagent"
 if tool_name == "Skill" and subagent_file.exists():
     subagent = subagent_file.read_text(encoding="utf-8", errors="replace").strip()
-    print(f"  ⚠️ 已在子 Agent '{subagent}' 中，不允许通过 Skill 工具重新路由。",
-          file=sys.stderr)
-    print(f"  如需其他 Expert，请标记 remaining 后由 Dispatcher 分配。", file=sys.stderr)
+    print(f"  ⚠️  已在子 Agent '{subagent}' 中", file=sys.stderr)
     sys.exit(1)
 
 sys.exit(0)

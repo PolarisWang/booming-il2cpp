@@ -6,13 +6,31 @@
 
 ## 1. 域编号表
 
-| 编号 | 域 | 说明 |
-|------|----|------|
-| 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap |
-| 2 | GC | 内存分配、分代、写屏障、stress test |
-| 3 | 调试 | crash、segfault、测试失败、异常行为 |
-| 4 | CodeGen | C# codegen、T4 模板、snapshot |
-| 5 | 测试 | foundation-dll、subject、manifest |
+| 编号 | 域 | 说明 | 对应 Expert | 受保护的文件路径 |
+|------|----|------|------------|-----------------|
+| 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap | `dev-il2cpp-runtime-expert` | `src/native/runtime-core/`, `src/native/interpreter/`, `src/native/bootstrap/`, `src/native/support/` |
+| 2 | GC | 内存分配、分代、写屏障、stress test | `dev-il2cpp-gc-expert` | `src/native/runtime-core/gc/` |
+| 3 | 调试 | crash、segfault、测试失败 | `dev-il2cpp-debug-expert` | 所有 native 源 |
+| 4 | CodeGen | C# codegen、T4 模板、snapshot | `dev-il2cpp-codegen-expert` | `src/managed/Chaos.IL2CPP.Generator/` |
+| 5 | 测试 | foundation-dll、subject、manifest | `dev-il2cpp-fact-verification-expert` | `testing/foundation-dll/` |
+| 6 | 翻译 | 新 IL 指令、Planner、Emission | `dev-il2cpp-codegen-expert` | `src/managed/Chaos.IL2CPP.Generator/Planning/`, `src/managed/Chaos.IL2CPP.Generator/Emission/` |
+| 7 | 构建 | 编译、链接、SDK、cmake | `dev-il2cpp-build-fixer` | `src/tools/`, `testing/foundation-dll/verification/stages/build.py` |
+| 8 | 热更新 | PatchLoader、patchdata | `dev-il2cpp-hotupdate-expert` | `src/native/hot-update/` |
+
+## 2. Expert 加载强制规则
+
+**分类声明必须包含 Expert 加载声明**：
+
+```
+格式: 本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp-codegen-expert
+```
+
+**执行顺序**:
+1. 输出分类声明（含 Expert 声明）→ `echo "..." > .claude/.classified`
+2. `Skill("dev-xxx-expert")` → 加载 Expert 知识（hook 自动写 `.claude/.loaded_expert`）
+3. 编辑域文件 → hook 检查 `.claude/.loaded_expert` 是否匹配
+
+**禁止**：未加载对应 Expert 直接编辑受保护文件路径下的文件。
 | 6 | 翻译 | 新 IL 指令、Planner、Emission |
 | 7 | 构建 | 编译、链接、SDK、cmake |
 | 8 | 热更新 | PatchLoader、patchdata |
