@@ -1069,8 +1069,7 @@ public sealed partial class NativeAotLoweringPlanner
         var externalRuntimeTableCode = BuildExternalRuntimeDispatchTable(
             helperSymbolBySubjectId: externalRuntimeHelpers?
                 .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
-                .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal),
-            cryptoAotIrEntries: _cryptoAotIrEntries);
+                .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
         var cryptoAotIrCode = BuildCryptoAotIrCode();
         var moduleRegistrationCode = BuildModuleRegistration();
         var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);
