@@ -316,3 +316,59 @@ SDK 输出（`--sdk-out`）和 TPG 测试项目之间必须保持严格的自包
 | `runtime_stubs/*.cpp` 和 `profile_globals.cpp` 必须由 SdkEmitter 拷贝到 SDK | `SdkEmitter.CopyRuntimeStubSources()` 负责拷贝这些源码文件 | 测试 CMakeLists.txt 无法从 SDK 获取这些源文件，被迫回退到仓库路径 |
 | 构建脚本中的 native lib 路径必须可配置 | `hotupdate.py` 中 native build 输出目录等硬编码路径必须提取为模块级常量 | 切换 CMake generator 或修改构建目录结构时遗漏更新 |
 | 废弃的 codegen 构建代码必须标记 | `CmakeGenerator.cs` 等仅在测试中引用的死代码需添加 `[Obsolete]` 标记 | 新开发者误以为 CmakeGenerator 是当前方案，继续在其上开发 |
+
+## 四层架构合规规范（强制）
+
+验证管线的四层架构必须严格遵守。任何文件修改必须写入正确的层，禁止跨层写入。
+
+### 四层定义
+
+| 层 | 路径 | 允许产出 | 红线 |
+|----|------|---------|------|
+| **ATG** (C# 测试生成) | `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/` | `.cs`, `.csproj`, `.json` | 不得生成 C++ |
+| **Codegen** (C# IL→C++) | `src/managed/Chaos.IL2CPP.Generator/` | `.generated.cpp`, `.generated.h`, `.json` | 产出必须自包含，不依赖后处理 |
+| **TPG** (C# 脚手架) | `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/` | `.cpp`, `.h` (via Scriban), `.cmake`, `.scriban` | 不得修改 `.generated.*` |
+| **Python** (管线编排) | `testing/foundation-dll/verification/` | `.py`, `.json`, `.yaml`, `.md` | 不得 `write_text` 写入 `.cpp`/`.h` |
+
+### AI Agent 执行规则
+
+在执行任何文件写入操作前，必须:
+
+1. **识别当前修改所属层**: 根据文件路径判断
+2. **检查目标文件扩展名**:
+   - `.generated.cpp/.h` → 只允许 Codegen 层写入
+   - `.cpp/.h` (非 generated) → 只允许 TPG/Scriban 写入
+   - `.py` → 只允许 Python 层写入
+   - `.scriban` → 只允许 TPG 层写入
+3. **如果跨层写入是必要的**:
+   - 在前一行添加 `# BOUNDARY_OVERRIDE: https://github.com/.../issues/NNN`
+   - 添加 `# Reason: ...` 和 `# Expires: YYYY-MM-DD`
+   - 在 commit message 中说明为什么不能通过正确层解决
+4. **写入 `.cs` (C# 测试代码)**: 优先通过 `ATG --generate-wrappers` 完成
+
+### BOUNDARY_OVERRIDE 机制
+
+所有跨层写入必须标注:
+
+```python
+# BOUNDARY_OVERRIDE: https://github.com/.../issues/1234
+# Reason: ATG --custom-only not yet implemented, see issue for migration plan
+# Expires: 2026-07-15
+some_file.write_text('...')
+```
+
+过期超过 30 天的 BOUNDARY_OVERRIDE 会被 CI 检查拦截。
+
+### 预提交检查
+
+安装 hook 后自动运行:
+```bash
+git config core.hooksPath .githooks
+```
+
+pre-commit 检查:
+1. Python 写入 `.cpp`/`.h` 无 BOUNDARY_OVERRIDE → 拦截
+2. BOUNDARY_OVERRIDE 过期 → 拦截
+3. 生成的 `.generated.*` 文件含相对 include → 警告
+
+参见 `testing/foundation-dll/verification/preflight/check_layer_boundaries.py`。

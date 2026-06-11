@@ -21,18 +21,16 @@
 
 dispatch_doc: DISPATCH.md
 dispatch_model: hybrid
-active_batches: [batch-c]
-completed_batches: [batch-a1, batch-a3, batch-b]
-pending_batches: [batch-d]
+active_batches: [batch-d]
+completed_batches: [batch-a1, batch-a3, batch-b, batch-c]
+pending_batches: []
 ## updated_dispatch
-- A-1: ✅ completed — assert stubs moved to SDK runtime_stubs/
-- A-2: ✅ completed — JitVehHandler/CHAOS_FACT_CHECK/FactAbortHandler → Scriban; runtime_entry_patcher.py deleted
-- B-1: ✅ completed — cache key versioning with codegen/TPG/runtime hashes; escape hatch in pipeline-config.yaml
-- B-2: ✅ completed — .cache-contract.json written after each build
-- A-3: ✅ completed — Interop stub → Codegen emitter (BuildExternalRuntimeDispatchTable fixed)
-- A-4: ✅ completed — C# wrapper generation → ATG --generate-wrappers (WrapperEmitter.cs + build.py delegation)
-- A-5: ✅ completed — Flat layout copy hack removed from build.py (TPG emitter already handled it)
-- C-1 to C-6: 🔄 starting Phase 2 — 6 parallel engineering debt cleanup tasks
+- A-1 to A-5: ✅ completed — Phase 1 (C++ patching migration)
+- B-1 to B-2: ✅ completed — Phase 1 (Cache architecture)
+- C-1 to C-5: ✅ completed — Phase 2 (Engineering debt)
+- C-6: ⏳ skipped — CodegenOrchestrator move (lower priority, track for follow-up)
+- D-1 to D-4: 🔄 starting Phase 3 — AI compliance system
+- recommended_next_child: D-2
 - recommended_next_child: C-1
 
 ---
