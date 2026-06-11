@@ -15,6 +15,12 @@ if (args.Length < 2)
     Console.Error.WriteLine("  --chunk-slug <slug>     Chunk slug for metadata (default: assembly name)");
     Console.Error.WriteLine("  --namespace-filter <ns1,ns2,...>  Filter by namespace prefix (for chunk builds)");
     Console.Error.WriteLine("  --patch-mode  Generate patch subjects DLL (implies --skip-probe, returns .cs path)");
+    Console.Error.WriteLine("  --generate-wrappers  Generate CombinedSubjects.cs from custom .cs files");
+    Console.Error.WriteLine("    --custom-cs-files <file1;file2;...>  Semicolon-separated list of .Custom.cs paths");
+    Console.Error.WriteLine("    --output <dir>      Output directory for generated files");
+    Console.Error.WriteLine("    --slug <chunk-slug> Chunk slug for metadata");
+    Console.Error.WriteLine("    --sdk-csproj <path> Path to Chaos.TestFramework.Sdk.csproj");
+    Console.Error.WriteLine("    --tfm <netX.Y>      Target framework moniker (e.g. net10.0)");
     return args is ["--report", ..] ? 0 : 1;
 }
 
@@ -29,6 +35,11 @@ bool listTypes = false;
 bool allTypes = false;
 bool skipProbe = false;
 bool patchMode = false;
+bool generateWrappers = false;
+string? customCsFiles = null;
+string? wrapperSlug = null;
+string? sdkCsproj = null;
+string? tfm = null;
 
 for (int i = 0; i < args.Length; i++)
 {
@@ -65,7 +76,75 @@ for (int i = 0; i < args.Length; i++)
             patchMode = true;
             skipProbe = true;  // patch mode implies skip probe
             break;
+        case "--generate-wrappers":
+            generateWrappers = true;
+            break;
+        case "--custom-cs-files" when i + 1 < args.Length:
+            customCsFiles = args[++i];
+            break;
+        case "--slug" when i + 1 < args.Length:
+            wrapperSlug = args[++i];
+            break;
+        case "--sdk-csproj" when i + 1 < args.Length:
+            sdkCsproj = args[++i];
+            break;
+        case "--tfm" when i + 1 < args.Length:
+            tfm = args[++i];
+            break;
     }
+}
+
+// ── Generate wrappers mode: generate CombinedSubjects.cs from custom .cs files ──
+if (generateWrappers)
+{
+    if (string.IsNullOrEmpty(customCsFiles) || string.IsNullOrEmpty(outputDir) ||
+        string.IsNullOrEmpty(wrapperSlug) || string.IsNullOrEmpty(sdkCsproj) || string.IsNullOrEmpty(tfm))
+    {
+        Console.Error.WriteLine("ERROR: --generate-wrappers requires --custom-cs-files, --output, --slug, --sdk-csproj, --tfm");
+        return 1;
+    }
+
+    var csFileList = customCsFiles.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+    if (csFileList.Count == 0)
+    {
+        Console.Error.WriteLine("ERROR: --custom-cs-files is empty");
+        return 1;
+    }
+
+    // Validate that all custom .cs files exist
+    var missingFiles = csFileList.Where(f => !File.Exists(f)).ToList();
+    if (missingFiles.Count > 0)
+    {
+        Console.Error.WriteLine($"ERROR: Custom .cs files not found: {string.Join("; ", missingFiles)}");
+        return 1;
+    }
+
+    if (!File.Exists(sdkCsproj))
+    {
+        Console.Error.WriteLine($"ERROR: SDK csproj not found: {sdkCsproj}");
+        return 1;
+    }
+
+    Console.WriteLine("╔══════════════════════════════════════════════════╗");
+    Console.WriteLine("║  Chaos IL2CPP AutoTestGenerator (WRAPPERS)     ║");
+    Console.WriteLine("╚══════════════════════════════════════════════════╝");
+    Console.WriteLine($"  Custom .cs files: {csFileList.Count}");
+    Console.WriteLine($"  Output:           {outputDir}");
+    Console.WriteLine($"  Slug:             {wrapperSlug}");
+    Console.WriteLine($"  SDK csproj:       {sdkCsproj}");
+    Console.WriteLine($"  TFM:              {tfm}");
+    Console.WriteLine();
+
+    var result = WrapperEmitter.GenerateWrappers(csFileList, outputDir, wrapperSlug, sdkCsproj, tfm);
+    if (result is null)
+    {
+        Console.WriteLine("  No subject methods found in custom .cs files.");
+        Console.WriteLine("[Output] (no files generated)");
+        return 0;
+    }
+
+    Console.WriteLine($"[Output] {result.Count} methods wrapped");
+    return 0;
 }
 
 // ── Coverage report mode ──
