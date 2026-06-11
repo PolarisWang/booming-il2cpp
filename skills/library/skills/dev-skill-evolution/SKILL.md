@@ -89,6 +89,6 @@ description: Use when running skill health checks, reviewing evolution proposals
 
 ## 关联技能
 
-- 上游：无（由 `dev-using-booming` 或用户直接触发）
+- 上游：无（由 `dev-il2cpp` 或用户直接触发）
 - 协作：`dev-writing-skills`（创建/修改 skill 内容）
 - 下游：`dev-verification-before-completion`（promote 后验证）

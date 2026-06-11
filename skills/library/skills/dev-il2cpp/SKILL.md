@@ -1,6 +1,6 @@
 ---
-name: dev-using-booming
-description: 在开始任何对话时使用，负责先判断应该激活哪些技能，再进入设计、计划、实现或验证
+name: dev-il2cpp
+description: 项目唯一入口 skill — 对话启动时加载，通过 skill-index.md 发现领域并路由到对应技能
 ---
 
 <SUBAGENT-STOP>
@@ -11,6 +11,24 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 只要有任何一个技能与当前任务存在明显关联，就必须先使用该技能。
 不要先开始分析、读代码、写计划或写实现，再回头补技能。
 </EXTREMELY-IMPORTANT>
+
+## 架构说明
+
+`.claude/skills/` 只有本技能一个注册入口。所有子技能通过 discovery index 发现：
+
+```
+用户输入
+  │
+  ▼
+dev-il2cpp（.claude/skills/ 唯一入口）
+  │
+  ├── 读取 skills/discovery/skill-index.md（已预加载）
+  ├── 匹配领域 → 读取 registries/<domain>.md
+  ├── 找到 skill → 读取 library/skills/<name>/SKILL.md
+  └── 按 SKILL.md 指令执行
+```
+
+无需在 `.claude/skills/` 注册任何子技能，所有技能从 library 按需读取。
 
 ## 指令优先级
 
@@ -53,7 +71,7 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 - “设计一个新功能 / 规范 / 架构”：
   先 `brainstorming` 把执行相关问题清零并拿到用户确认；之后进入 `writing-plans`，如果是多阶段主线则转 `roadmap`
 - **“il2cpp/AOT/GC/Runtime/翻译/CodeGen/interpreter/VTable 相关工作”**：
-  **→ `dev-il2cpp-core-agent`**（由 Controller 判断任务域，路由到对应的 Expert Agent 或降级处理；替换 direct implementation 路径）
+  **→ 读取 `skills/discovery/registries/il2cpp.md` 找到 `dev-il2cpp-core-agent`**（由 Controller 判断任务域，路由到对应的 Expert Agent 或降级处理）
 - “边界清晰的小范围改动 / 单文件修复 / 单会话任务”：
   直接实现；如已存在正式任务目录，则走 `STATUS.md` 轻量维护，不强制补 `plan` / `design`
 - “任务已经跨会话 / 多步骤，但还有执行前未确认的问题”：
@@ -67,13 +85,27 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 - “调整 subject/test/runner/codegen 主线”：
   `project-test-governance -> writing-plans` 或 `executing-plans`
 
-### 4. 不要把 `docs/dev/ACTIVE.md` 当成每一步都要拦截用户的总开关
+### 4. 工作流：通过 skill-index.md 发现并加载技能
+
+当需要激活某个技能时，不依赖 Skill 工具直接调用（因为 `.claude/skills/` 只注册了本入口），改为：
+
+```
+1. 读取 skills/discovery/skill-index.md（已预加载）
+2. 根据任务领域选择对应的 registry 页面
+3. 从 registry 中找到目标技能，获取其 SKILL.md 路径
+4. 读取 skills/library/skills/<name>/SKILL.md
+5. 按 SKILL.md 中的指令执行
+```
+
+所有技能源码在 `skills/library/skills/` 中维护，`skills/discovery/registries/` 由 `generate_skill_catalog.py` 自动生成。
+
+### 5. 不要把 `docs/dev/ACTIVE.md` 当成每一步都要拦截用户的总开关
 
 - 小范围阅读、局部核对、低风险验证可以直接处理
 - 一旦进入新的正式主线任务，再由计划/执行类技能负责更新 `docs/dev/ACTIVE.md`、`STATUS.md` 和索引
 - 默认不要为了简单任务创建额外文档；只有跨会话/多步骤才引入 `plan`，只有边界或 authority 真实变化才引入 `design`
 
-### 5. `STATUS-only` 不是永久豁免
+### 6. `STATUS-only` 不是永久豁免
 
 - 边界清晰、单会话、单目标任务可以先走 `STATUS.md` 轻量维护
 - 但只要出现以下任一信号，就必须在继续实现前升级：
@@ -88,7 +120,7 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
   - 如果问题已清零，且已经形成多阶段或多个独立子任务：升级到 `roadmap`
   - 升级必须在原任务目录完成，并在 `STATUS.md` 记录升级原因与下一步入口
 
-### 6. 技能激活前检查健康仪表盘
+### 7. 技能激活前检查健康仪表盘
 
 在选定要激活的技能后、实际调用前，先做一次轻量健康检查：
 

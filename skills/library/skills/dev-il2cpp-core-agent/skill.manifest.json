@@ -21,7 +21,7 @@
         }
     ],
     "evolution_lineage": {
-        "parent": "dev-using-booming",
+        "parent": "dev-il2cpp",
         "derived_from": null,
         "derived_to": ["dev-il2cpp-translation-expert", "dev-il2cpp-runtime-expert", "dev-il2cpp-debug-expert"],
         "fixes": [],

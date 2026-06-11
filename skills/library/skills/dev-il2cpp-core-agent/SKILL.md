@@ -35,7 +35,7 @@ Dispatcher 接收任务
 
 ## 触发条件
 
-- 用户会话从 `dev-using-booming` 路由到 il2cpp 域（替换模式）
+- 用户会话从 `dev-il2cpp` 路由到 il2cpp 域（替换模式）
 - 用户直接输入 `/dev-il2cpp-core-agent`
 - 用户输入包含：il2cpp、翻译、IL 指令、AOT、codegen、GC、运行时、runtime-core、interpreter、VTable、Emission、Planner、NativeAot、热更新
 
@@ -280,6 +280,6 @@ Step 3: 汇总裁决
 
 | 上游 | 本 skill | 下游 |
 |------|----------|------|
-| `dev-using-booming` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | 单域: `Skill("dev-*-expert")` — 知识注入 |
+| `dev-il2cpp` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | 单域: `Skill("dev-*-expert")` — 知识注入 |
 | 用户直接输入 | | 多域: `Workflow({script})` — 并行委托 |
 | | | 质量门: `dev-trace-enforcement` / `dev-verification-before-completion` |

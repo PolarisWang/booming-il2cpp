@@ -1,0 +1,32 @@
+{
+    "kind": "project",
+    "domain": "il2cpp",
+    "name": "dev-il2cpp-foundation-dll-optimizer",
+    "summary": "foundation-dll 验证 DLL 的 benchmark 运行、性能分析和优化专家",
+    "trigger_signals": [
+        "benchmark 运行/分析/回归检测",
+        "profile 数据分析/GC 健康检查",
+        "pipeline 故障排查（build/fact/benchmark/profile）",
+        "性能优化（AOT vs JIT 对比、代码段大小优化）",
+        "snapshot 基线管理 / chunk 配置调优"
+    ],
+    "owner": "00-skills-maintainers",
+    "status": "active",
+    "version": "1.0.0",
+    "startup_visible": false,
+    "token_budget": "small",
+    "version_history": [
+        {
+            "version": "1.0.0",
+            "date": "2026-06-11",
+            "type": "created"
+        }
+    ],
+    "evolution_lineage": {
+        "parent": null,
+        "derived_from": null,
+        "derived_to": [],
+        "fixes": [],
+        "captured_from": null
+    }
+}

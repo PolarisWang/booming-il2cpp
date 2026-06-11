@@ -109,14 +109,15 @@
 
 ## 技能调用
 
-技能源代码在 `skills/library/skills/`（git 跟踪）。`.claude/skills/dev-skill-registry` 是注册中心，索引了所有技能的名称、触发信号和路径。
+技能源代码在 `skills/library/skills/`（git 跟踪）。`.claude/skills/` 只注册了一个入口技能 `dev-il2cpp`（对话启动时自动加载），所有子技能通过 discovery index 发现。
 
-当用户请求 `/dev-<name>` 或提及某个技能时，按以下顺序解析：
-1. 检查该技能是否在 `.claude/skills/` 中注册（可直接通过 Skill 工具调用）
-2. 如果不在，读取 `skills/discovery/skill-index.md` 或 `dev-skill-registry` 的索引，找到技能在 `skills/library/skills/<name>/SKILL.md` 的路径
-3. 读取对应 SKILL.md 并遵循其指令执行
+发现流程：
+1. 读取 `skills/discovery/skill-index.md`（已预加载到上下文）
+2. 根据任务领域选择对应的 registry 页面（`skills/discovery/registries/<domain>.md`）
+3. 从 registry 中找到目标技能，获取其 SKILL.md 路径
+4. 读取 `skills/library/skills/<name>/SKILL.md` 并遵循其指令执行
 
-注册中心不包含具体技能逻辑，只做索引路由。所有技能的修改在 `skills/library/skills/` 中完成。
+注册中心页面由 `skills/tooling/catalog/generate_skill_catalog.py` 自动生成。修改 `skill.manifest.json` 或 `discovery/domain-catalog.json` 后重新运行该脚本。
 
 ## 项目文档原则
 
