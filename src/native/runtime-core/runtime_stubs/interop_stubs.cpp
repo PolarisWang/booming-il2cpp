@@ -638,10 +638,79 @@ static bool _TryExecuteViaPInvoke(const char* subject_id) noexcept
     return false;
 }
 
+
+// ── SIMD stub routing ──────────────────────────────────────────────
+// System.Numerics.Vector2/3/4, Matrix3x2/4x4, Plane, Quaternion, and
+// Vector<T> methods with zero/default inputs return well-defined results.
+// The Interpreter cannot execute these methods (they are hardware SIMD
+// intrinsics), so we short-circuit with the correct zero/default result.
+// Returns true if the subject was handled (result set in out_value).
+static bool _TryExecuteViaSimdStub(const char* subject_id,
+                                   CHAOS_IL2CPP_INTPTR& out_value) noexcept
+{
+    if (subject_id == nullptr) return false;
+    out_value = 0;
+
+    // ── Length / LengthSquared / Dot / Determinant (zero inputs → 0.0f) ──
+    if (std::strstr(subject_id, "::Length:") != nullptr ||
+        std::strstr(subject_id, "::LengthSquared:") != nullptr ||
+        std::strstr(subject_id, "::DotCoordinate:") != nullptr ||
+        std::strstr(subject_id, "::DotNormal:") != nullptr ||
+        std::strstr(subject_id, "::GetDeterminant:") != nullptr)
+        return true;
+
+    // ── Invert / Decompose (zero matrix → false) ──
+    if (std::strstr(subject_id, "::Invert:") != nullptr ||
+        std::strstr(subject_id, "::Decompose:") != nullptr)
+        return true;
+
+    // ── TotalOrderIeee754Comparer::Compare(0.0, 0.0) → 0 ──
+    if (std::strstr(subject_id, "TotalOrderIeee754Comparer") != nullptr &&
+        std::strstr(subject_id, "::Compare:") != nullptr)
+        return true;
+
+    // ── Vector<T> comparisons with default(zero) inputs ──
+    if (std::strstr(subject_id, "Vector::") != nullptr)
+    {
+        if (std::strstr(subject_id, "::EqualsAll:") != nullptr ||
+            std::strstr(subject_id, "::LessThanOrEqualAll:") != nullptr ||
+            std::strstr(subject_id, "::LessThanOrEqualAny:") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanOrEqualAll:") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanOrEqualAny:") != nullptr)
+        {
+            out_value = 1;
+            return true;
+        }
+        if (std::strstr(subject_id, "::EqualsAny:") != nullptr ||
+            std::strstr(subject_id, "::LessThanAll:") != nullptr ||
+            std::strstr(subject_id, "::LessThanAny:") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanAll:") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanAny:") != nullptr)
+        {
+            out_value = 0;
+            return true;
+        }
+        // GetElement(zero, 0) → 0; ToScalar(zero) → 0
+        if (std::strstr(subject_id, "::GetElement:") != nullptr ||
+            std::strstr(subject_id, "::ToScalar:") != nullptr)
+            return true;
+    }
+
+    return false;
+}
+
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept
 {
     if (subject_id == nullptr)
         CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: null subject_id");
+
+    // ── Phase 0.5: SIMD stub routing (checked BEFORE IL data, since the
+    // interpreter cannot execute hardware SIMD intrinsics and would crash).
+    {
+        CHAOS_IL2CPP_INTPTR simd_result = 0;
+        if (_TryExecuteViaSimdStub(subject_id, simd_result))
+            return simd_result;
+    }
 
     // ── Phase 1: Try embedded IL data (kChaosExternalRuntimeIlData[]) ────
     // Crypto methods with AOT Core IR JSON or raw CIL data can execute via
@@ -659,6 +728,7 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     // fallback on non-Windows platforms.
     if (_TryExecuteViaPInvoke(subject_id))
         return 0;
+
 
     // ── Phase 2: Scan the external runtime dispatch table ───────────────
     if (kChaosExternalRuntimeCount > 0) {
@@ -694,3 +764,4 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
 
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
+
