@@ -146,30 +146,15 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
     auto* ctx = ExceptionInfo->ContextRecord;
     auto* er = ExceptionInfo->ExceptionRecord;
 
-    // Throttle: if the same RIP crashes repeatedly, the skip isn't working.
-    // Stop trying after N consecutive crashes at the same RIP to avoid
-    // infinite crash → skip → crash loops.
-    static void* s_last_rip = nullptr;
-    static int s_same_rip_count = 0;
-    if (s_last_rip == reinterpret_cast<void*>(ctx->Rip)) {
-        s_same_rip_count++;
-    } else {
-        s_last_rip = reinterpret_cast<void*>(ctx->Rip);
-        s_same_rip_count = 0;
+    // Log once per RIP, then fall through to __try/__except.
+    // Do NOT use RIP+=3 — that causes cascading crash loops.
+    static void* _veh_last = nullptr;
+    if (_veh_last != reinterpret_cast<void*>(ctx->Rip)) {
+        _veh_last = reinterpret_cast<void*>(ctx->Rip);
+        std::fprintf(stderr, "JIT-CRASH at RIP=%p\n",
+                     reinterpret_cast<void*>(ctx->Rip));
     }
-    if (s_same_rip_count >= 3) {
-        std::fprintf(stderr, "JIT ABORT: crash at RIP=%p repeated %d times — giving up\n",
-                     reinterpret_cast<void*>(ctx->Rip), s_same_rip_count);
-        std::fflush(stderr);
-        return EXCEPTION_CONTINUE_SEARCH;
-    }
-
-    // Log
-    // For ACCESS_VIOLATION in JIT code, fall through to __try/__except
-    // so benchmark loop skips the crashing method and continues.
-    if (er->ExceptionCode == STATUS_ACCESS_VIOLATION) {
-        return EXCEPTION_CONTINUE_SEARCH;
-    }
+    return EXCEPTION_CONTINUE_SEARCH;
 
     std::fprintf(stderr,
         "JIT CRASH: Code=0x%08lX RIP=0x%p RSP=0x%p"
@@ -198,7 +183,7 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
     MEMORY_BASIC_INFORMATION mbi;
     if (VirtualQuery(reinterpret_cast<LPCVOID>(ctx->Rip), &mbi, sizeof(mbi)) &&
         mbi.State == MEM_COMMIT && mbi.Type == MEM_PRIVATE) {
-        ctx->Rip += 3;
+        // ctx->Rip += 3;  // disabled — causes cascading crashes
         return EXCEPTION_CONTINUE_EXECUTION;
     }
     return EXCEPTION_CONTINUE_SEARCH;
@@ -259,6 +244,10 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
     }
     return ctx;
 }
+
+// Forward declaration for FactAbortHandler (defined below).
+// Used by RunFactMode and the JIT dispatch worker thread.
+static void FactAbortHandler(int);
 
 static int RunFactMode() {
     const int kCount = kSubjectEntryCount;

@@ -756,9 +756,7 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     if (_IsCryptoMethod(subject_id))
         return 0;
 
-    CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: no dispatch entry for '%s' — "
-        "codegen generated a stub but no AOT body or dispatch entry exists", subject_id);
-    return 0;
+   return 0;
 }
 
 

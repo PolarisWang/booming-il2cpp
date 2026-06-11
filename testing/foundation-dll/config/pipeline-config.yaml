@@ -34,3 +34,16 @@ pipeline:
     codegen_aot: 600
     fact_aot: 600
     benchmark: 600
+
+  # Cache configuration
+  cache:
+    # Force invalidation of all cached build outputs (set to true to bypass cache).
+    # Use this when you know the codegen/TPG/runtime hasn't changed but you
+    # want a clean build, e.g. after fixing a stale intermediate file.
+    invalidate_all: false
+
+    # Manual cache version bump.  Increment this to invalidate all existing
+    # cache entries without modifying the automatic version hashes.  The
+    # CACHE_KEY_VERSION constant in hephaestus_cache.py is the default;
+    # this config overrides it per-pipeline.
+    version: "2"

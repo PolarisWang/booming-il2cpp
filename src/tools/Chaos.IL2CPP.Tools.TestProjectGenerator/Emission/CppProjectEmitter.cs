@@ -700,72 +700,12 @@ public sealed class CppProjectEmitter
     }
 
     /// <summary>
-    /// Post-process generated runtime-entry.cpp to fix template limitations
-    /// that the scriban linter prevents from being applied directly to .scriban files.
-    /// Fixes: SEH output (-1→result), CHAOS_FACT_CHECK macro (remove try/catch C2713),
-    /// JitVehHandler (RIP+=3 → CONTINUE_SEARCH), FactAbortHandler forward declaration.
+    /// Post-process generated runtime-entry.cpp for template limitations.
+    /// Currently handles: RunProfileMode function injection (not expressible in scriban).
     /// </summary>
     private static string PatchRuntimeEntry(string code)
     {
-        // Fix 1: Inline assert stubs (Assert_Reset/Assert_Complete)
-        string assertStubs =
-            "\n// AOT assert stubs (patched by CppProjectEmitter.PatchRuntimeEntry)\n" +
-            "#include <cstdint>\n" +
-            "extern \"C\" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() {}\n" +
-            "extern \"C\" int32_t Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() { return 0; }\n";
-        if (!code.Contains(assertStubs.TrimStart()))
-        {
-            // Try LF then CRLF (template output may use CRLF on Windows)
-            string[] seps = { "\nstatic ", "\r\nstatic " };
-            int insertPos = -1;
-            foreach (var sep in seps)
-            {
-                insertPos = code.IndexOf(sep, StringComparison.Ordinal);
-                if (insertPos > 0) break;
-            }
-            if (insertPos > 0)
-                code = code.Insert(insertPos, assertStubs);
-        }
-
-        // Fix 2: CHAOS_FACT_CHECK macro - remove try/catch (causes C2713)
-        string oldMacro = "#define CHAOS_FACT_CHECK()   do { \\\n" +
-            "    try { \\\n" +
-            "        if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \\\n" +
-            "            std::fprintf(stderr, \"[ASSERT] s_exitCode was non-zero after fact loop\\n\"); \\\n" +
-            "        } \\\n" +
-            "    } catch (...) { \\\n" +
-            "        /* JIT mode: managed AssertionException may propagate; swallow gracefully */ \\\n" +
-            "        std::fprintf(stderr, \"[ASSERT] JIT assertion check threw\\n\"); \\\n" +
-            "    } \\\n" +
-            "} while(0)";
-        string newMacro = "#define CHAOS_FACT_CHECK()   do { \\\n" +
-            "    if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \\\n" +
-            "        std::fprintf(stderr, \"[ASSERT] s_exitCode was non-zero after fact loop\\n\"); \\\n" +
-            "    } \\\n" +
-            "} while(0)";
-        code = code.Replace(oldMacro, newMacro);
-
-        // Fix 3: JitVehHandler - replace RIP+=3 throttle with CONTINUE_SEARCH
-        string oldRip3 = "        ctx->Rip += 3;";
-        if (code.Contains(oldRip3))
-            code = code.Replace(oldRip3, "        // ctx->Rip += 3;  // disabled - causes cascading crashes");
-
-        // Fix 4: FactAbortHandler forward declaration
-        string oldMissingFwd = "static int RunFactMode() {";
-        string newWithFwd =
-            "// Forward declaration for FactAbortHandler (defined below).\n" +
-            "// Used by RunFactMode and the JIT dispatch worker thread.\n" +
-            "static void FactAbortHandler(int);\n\n" +
-            "static int RunFactMode() {";
-        if (code.Contains(oldMissingFwd) && !code.Contains("Forward declaration for FactAbortHandler"))
-            code = code.Replace(oldMissingFwd, newWithFwd);
-
-        // Fix 5: SEH output — show -1 for caught methods (not result=0 which is ambiguous)
-        // The template produces `caught ? -1 : result`; we keep as-is.
-        // (Historically this was `caught ? result : result` which made crashed
-        //  methods indistinguishable from methods that genuinely returned 0.)
-
-        // Fix 6: Insert RunProfileMode function before --benchmark-range marker
+        // Fix 1: Insert RunProfileMode function before --benchmark-range marker
         // This adds --profile CLI support for GC profile baseline collection.
         // Must be done here (not in scriban) because the scriban linter reverts changes.
         if (!code.Contains("RunProfileMode"))

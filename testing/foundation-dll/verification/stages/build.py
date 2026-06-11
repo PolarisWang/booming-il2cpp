@@ -855,21 +855,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
             duration_ms=int((time.perf_counter() - start) * 1000))
 
-    # ── Post-generation: ensure codegen generated files are in subjects/ ──
-    # The TPG's Emit() step should copy them, but may fail for flat layout.
-    codegen_gen_dir = ctx.native_dir / "codegen" / "generated"
-    subjects_dir = ctx.native_dir / "subjects"
-    if codegen_gen_dir.is_dir() and subjects_dir.is_dir():
-        import shutil
-        for pattern in ("*.cpp", "*.h"):
-            for f in codegen_gen_dir.glob(pattern):
-                shutil.copy2(str(f), str(subjects_dir / f.name))
-        # Remove stale bridge redirect files that cause LNK2019
-        for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
-            p = subjects_dir / stale
-            if p.exists():
-                p.unlink()
-
     # ── Post-patch missing type declarations ──
     # (removed: interop stub registration now handled by Codegen emitter
     #  in BuildExternalRuntimeDispatchTable + TPG Scriban template)
