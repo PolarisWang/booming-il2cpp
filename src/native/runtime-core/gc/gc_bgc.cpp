@@ -867,6 +867,24 @@ void BgcController::BgcThreadMain() {
             auto slice_start = std::chrono::steady_clock::now();
 
             while (true) {
+                // ── BGC-YoungGC coordinated pause (G-3) ──
+                // Young GC requests pause via bgc_pause_requested_ before
+                // evacuating the nursery.  BGC acknowledges via bgc_paused_
+                // and stops parallel workers (draining all deques) to avoid
+                // races with forwarding pointer writes.
+                if (bgc_pause_requested_.load(std::memory_order_acquire)) [[unlikely]] {
+                    // Stop parallel workers before pausing so they don't race
+                    // with young GC evacuation.  All deques are drained on stop.
+                    StopParallelMarkWorkers();
+                    bgc_paused_.store(true, std::memory_order_release);
+                    // Spin-wait until the pause is lifted (young GC done).
+                    while (bgc_pause_requested_.load(std::memory_order_acquire)) {
+                        std::this_thread::yield();
+                    }
+                    bgc_paused_.store(false, std::memory_order_release);
+                    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_released");
+                }
+
                 bool progressed = false;
 
                 // Process from worker 0's deque (BGC thread's own work).
@@ -1242,6 +1260,51 @@ void BgcController::WaitForFinalizerDrain() noexcept {
     bgc_finalizer_drain_cv_.wait(lock, [this]() {
         return bgc_finalizer_batches_pending_.load(std::memory_order_acquire) == 0;
     });
+}
+
+// ── BGC-YoungGC coordinated pause protocol (G-3) ─────────────────────
+
+void BgcController::PauseForYoungGc() noexcept {
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_pause_requested");
+    bgc_pause_requested_.store(true, std::memory_order_release);
+    // Wait for BGC thread to acknowledge (bgc_paused_ == true).
+    while (!bgc_paused_.load(std::memory_order_acquire)) {
+        std::this_thread::yield();
+    }
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_paused_acknowledged");
+    // Drain any stale nursery entries from work deques as a safety net.
+    DrainNurseryFromWorkDeques();
+}
+
+void BgcController::ResumeAfterYoungGc() noexcept {
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_resume");
+    bgc_pause_requested_.store(false, std::memory_order_release);
+    // Wait for BGC thread to clear bgc_paused_ (acknowledge resume).
+    while (bgc_paused_.load(std::memory_order_acquire)) {
+        std::this_thread::yield();
+    }
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "young_gc_resumed");
+}
+
+void BgcController::DrainNurseryFromWorkDeques() noexcept {
+    // Scan all worker deques and remove any entries pointing to nursery
+    // regions.  BGC deques should normally never contain nursery pointers
+    // (BGC only marks old-gen/LOH objects, filtering by IsInOldGen before
+    // pushing).  This is a safety net for any edge case that might have
+    // introduced a nursery reference.
+    auto& rm = RegionManager::Instance();
+    for (int i = 0; i < kMaxBgcWorkers; i++) {
+        std::lock_guard<std::mutex> lock(bgc_workers_[i].steal_mutex);
+        auto& dq = bgc_workers_[i].deque;
+        for (auto it = dq.begin(); it != dq.end(); ) {
+            if (*it != nullptr && rm.IsNurseryPointer(*it)) {
+                it = dq.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+    CHAOS_IL2CPP_LOG_DEBUG("BGC", "nursery_deque_drain_done");
 }
 
 // ── Parallel mark workers ──────────────────────────────────────────

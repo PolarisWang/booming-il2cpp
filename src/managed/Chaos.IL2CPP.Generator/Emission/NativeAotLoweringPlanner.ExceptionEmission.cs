@@ -1670,7 +1670,17 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}{{");
 			builder.AppendLine($"{indentation}    auto chaos_value = {ConsumeEvalStackValueExpression()};");
 			EmitStaticInitializationForField(builder, targetRef.SubjectId, indentation);
-			builder.AppendLine($"{indentation}    {GetNativeStaticFieldSymbol(targetRef.SubjectId)} = chaos_value;");
+			string fieldSymbol = GetNativeStaticFieldSymbol(targetRef.SubjectId);
+			// Root change barrier: record old value before overwriting, so BGC
+			// re-mark can re-scan roots that were already scanned.  Skip for
+			// primitive types (they never hold GC references).
+			string? fieldTypeId = targetRef.FieldTypeSubjectId;
+			if (fieldTypeId == null || !(PrimitiveValueTypeSubjectIds.Contains(fieldTypeId) || PrimitiveValueTypeSubjectIds.Contains("System.Private.CoreLib/" + fieldTypeId)))
+			{
+				builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&{fieldSymbol}));");
+				builder.AppendLine($"{indentation}    BgcRecordRootChange(reinterpret_cast<void**>(&{fieldSymbol}), {fieldSymbol});");
+			}
+			builder.AppendLine($"{indentation}    {fieldSymbol} = chaos_value;");
 			builder.AppendLine($"{indentation}}}");
 			break;
 		}

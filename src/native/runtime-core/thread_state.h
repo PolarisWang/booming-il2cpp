@@ -150,6 +150,17 @@ struct ManagedThread {
     /// Set to true when this thread is preemptively suspended (POSIX SIGUSR2).
     std::atomic<bool> preemptive_suspended{false};
 
+    /// ucontext_t pointer captured by the SA_SIGINFO signal handler during
+    /// preemptive suspend.  Provides access to the interrupted thread's
+    /// register state (RIP, RSP, RBP on x64) for precise root scanning and
+    /// optional RIP redirect (thread hijacking trampoline).
+    ///
+    /// Written by PreemptiveSuspendHandler from PalPreemptGetUcontext(),
+    /// cleared after safepoint release.  Valid only on POSIX (Linux) when
+    /// SA_SIGINFO is active; always nullptr on other platforms and outside
+    /// preemptive suspend context.
+    std::atomic<const void*> preempt_ucontext{nullptr};
+
     /// OS thread ID for pthread_kill-based preemptive suspend (Linux).
     /// Populated by PalGetCurrentThreadId().  Used on Linux (non-Apple,
     /// non-Android) for SIGUSR2-based preemptive suspend.

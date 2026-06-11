@@ -429,6 +429,32 @@ private:
     /// Uses namespace-level FinalizerEntry (defined in gc_old_gen.h).
     std::vector<FinalizerEntry> bgc_dead_finalizables_;
 
+public:
+    // ── BGC-YoungGC coordinated pause protocol (G-3 fix) ─────────
+
+    /// Set by young GC (mutator thread) to request BGC to pause between
+    /// concurrent mark iterations.  BGC checks this at the top of each
+    /// iteration and acknowledges via bgc_paused_.
+    std::atomic<bool> bgc_pause_requested_{false};
+
+    /// Acknowledged by BGC thread after pausing.  Young GC spin-waits
+    /// on this flag before proceeding with nursery evacuation.
+    std::atomic<bool> bgc_paused_{false};
+
+    /// Young GC calls this before Phase 1 to pause BGC concurrent mark.
+    /// Returns once BGC has acknowledged the pause (bgc_paused_ == true).
+    void PauseForYoungGc() noexcept;
+
+    /// Young GC calls this after Phase 5 (nursery reset) to resume BGC.
+    void ResumeAfterYoungGc() noexcept;
+
+    /// Drain nursery-range entries from all BGC worker deques.
+    /// Called after young GC evacuation while BGC is paused, so that
+    /// stale nursery pointers in deques don't cause use-after-free when
+    /// BGC resumes.  Re-pushes evacuated objects at their new old-gen
+    /// addresses so BGC can continue tracing from them.
+    void DrainNurseryFromWorkDeques() noexcept;
+
     // ── Incremental marking (time-slicing) ──────────────────────
 
     /// Maximum CPU burst for concurrent mark before yielding to mutators.

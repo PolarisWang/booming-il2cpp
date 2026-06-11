@@ -1,4 +1,8 @@
 // pal_preempt_posix.cpp — POSIX (Linux) preemptive suspend (pthread_kill SIGUSR2)
+//
+// Uses SA_SIGINFO to capture the interrupted thread's register state
+// (ucontext_t) for precise root scanning and optional RIP redirect
+// (thread hijacking trampoline).
 
 #include <chaos/pal/pal_preempt.h>
 
@@ -16,14 +20,23 @@ namespace {
 PalPreemptCallback s_preempt_callback = nullptr;
 std::atomic<bool> s_handler_installed{false};
 
-/// Signal forwarder: calls the registered consumer callback from
-/// SIGUSR2 signal context.  epoch=0 because signal handlers don't
-/// receive user data; the callback reads the actual epoch from TLS.
-static void PalPreemptSignalForwarder(int sig) noexcept {
+/// Thread-local storage for the ucontext_t captured by SA_SIGINFO.
+/// Set before calling the callback; cleared after the callback returns.
+/// Valid only within the scope of a PalPreemptCallback invocation.
+thread_local const void* tls_preempt_ucontext = nullptr;
+
+/// Signal forwarder: called from SIGUSR2 signal context with SA_SIGINFO.
+/// Saves the ucontext_t to TLS, then calls the registered consumer callback
+/// with epoch=0 (the callback reads the actual epoch from TLS suspend_seq).
+static void PalPreemptSignalForwarder(int sig, siginfo_t* /*info*/, void* ucontext) noexcept {
     if (sig != SIGUSR2) return;
+    // Save ucontext before calling callback so the consumer can access
+    // interrupted register state (RIP, RSP, RBP on x64).
+    tls_preempt_ucontext = ucontext;
     if (s_preempt_callback) {
         s_preempt_callback(0);
     }
+    tls_preempt_ucontext = nullptr;
 }
 
 }  // anonymous namespace
@@ -34,9 +47,14 @@ void PalPreemptInit(PalPreemptCallback callback) noexcept {
     if (!s_handler_installed.load(std::memory_order_acquire)) {
         struct sigaction sa;
         std::memset(&sa, 0, sizeof(sa));
-        sa.sa_handler = PalPreemptSignalForwarder;
+        sa.sa_sigaction = PalPreemptSignalForwarder;
         sigemptyset(&sa.sa_mask);
-        sa.sa_flags = SA_RESTART | SA_NODEFER;
+        // SA_SIGINFO: provides ucontext_t with register state at interruption.
+        // SA_RESTART: transparently restart interrupted syscalls.
+        // SA_NODEFER: allow re-entrant SIGUSR2 (important for nested handling).
+        // SA_ONSTACK: use alternate signal stack to avoid stack overflow in
+        //   deep call chains (sigaltstack set up by pal_eh_posix.cpp).
+        sa.sa_flags = SA_SIGINFO | SA_RESTART | SA_NODEFER | SA_ONSTACK;
         sigaction(SIGUSR2, &sa, nullptr);
         s_handler_installed.store(true, std::memory_order_release);
     }
@@ -56,6 +74,10 @@ void PalPreemptiveSuspendAck(uint64_t /*epoch*/, PalEvent* /*suspend_event*/,
     while (suspend_seq->load(std::memory_order_acquire) != 0) {
         PalYield();
     }
+}
+
+const void* PalPreemptGetUcontext() noexcept {
+    return tls_preempt_ucontext;
 }
 
 }  // namespace chaos::il2cpp::pal

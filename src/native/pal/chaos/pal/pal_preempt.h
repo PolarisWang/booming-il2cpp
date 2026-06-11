@@ -16,6 +16,8 @@ namespace chaos::il2cpp::pal {
 ///
 /// On POSIX (Linux): called from SIGUSR2 signal handler context with
 /// epoch=0.  The callback reads the actual epoch from TLS (suspend_seq).
+/// The ucontext from the signal handler is available via
+/// PalPreemptGetUcontext().
 ///
 /// The callback runs in the target thread's context and must be
 /// async-signal-safe on POSIX.
@@ -25,7 +27,8 @@ typedef void (*PalPreemptCallback)(uint64_t epoch) noexcept;
 ///
 /// On Windows: stores the callback for APC forwarding.
 /// On POSIX (Linux): stores the callback and installs the SIGUSR2
-/// signal handler (one-time, internally synchronized).
+/// signal handler (one-time, internally synchronized) using SA_SIGINFO
+/// to capture the interrupted thread's register state via ucontext_t.
 /// On Apple/Android: stores the callback (no-op delivery).
 ///
 /// Must be called at least once before any PalPreemptRequest call.
@@ -58,5 +61,18 @@ bool PalPreemptRequest(void* os_handle, uint64_t os_thread_id, uint64_t epoch) n
 void PalPreemptiveSuspendAck(uint64_t epoch, PalEvent* suspend_event,
                               std::atomic<uint32_t>* suspend_seq,
                               std::atomic<uint32_t>* suspend_ack) noexcept;
+
+/// Retrieve the ucontext_t pointer captured by the signal handler during
+/// the current preemptive suspend callback invocation.
+///
+/// On POSIX (Linux): returns the ucontext_t* from SA_SIGINFO's third
+/// argument, providing access to the interrupted thread's register state
+/// (RIP, RSP, RBP on x64).  Only valid during a PalPreemptCallback call.
+///
+/// On non-POSIX platforms: always returns nullptr.
+///
+/// The returned pointer is thread-local and valid only within the scope
+/// of the current callback invocation.
+const void* PalPreemptGetUcontext() noexcept;
 
 }  // namespace chaos::il2cpp::pal

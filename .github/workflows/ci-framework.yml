@@ -32,7 +32,10 @@ on:
       run_benchmarks:
         default: false
         type: boolean
-      dotnet_version:
+      gc_server:
+        description: "GC server mode (ON|OFF, or empty for default)"
+        default: ""
+        type: string
         default: "8.0.x"
         type: string
 
@@ -113,8 +116,12 @@ jobs:
               --toolchain build/toolchains/windows-x64-reference.cmake \
               -DROADMAP0_PRESET_TARGET=windows-x64-reference
           else
+            GC_SERVER_FLAG=""
+            if [ -n "${{ inputs.gc_server }}" ]; then
+              GC_SERVER_FLAG="-DCHAOS_IL2CPP_GC_SERVER=${{ inputs.gc_server }}"
+            fi
             cmake -S . -B build/native -DCMAKE_BUILD_TYPE=${{ inputs.build_config }} \
-              -DCHAOS_IL2CPP_CONFIG_TIER=debug
+              -DCHAOS_IL2CPP_CONFIG_TIER=debug ${GC_SERVER_FLAG}
           fi
           echo "build_dir=build/native" >> $GITHUB_OUTPUT
 
