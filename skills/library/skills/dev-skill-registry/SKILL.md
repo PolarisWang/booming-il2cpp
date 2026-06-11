@@ -5,6 +5,12 @@ description: 技能注册中心 — 索引 skills/library/skills/ 下所有技�
 
 # dev-skill-registry
 
+> ⚠️ **已弃用**：本 registry 是手工维护的旧版本，不再保证与发现系统同步。
+> 请使用自动生成的 `skills/discovery/skill-index.md` + `skills/discovery/registries/<domain>.md` 作为权威来源。
+>
+> 自动生成命令: `python skills/tooling/catalog/generate_skill_catalog.py`
+> 注册表文件: `skills/discovery/registries/` (7 个域)
+
 ## 用途
 
 技能注册中心，索引 `skills/library/skills/` 下所有技能的目录、领域和用途。

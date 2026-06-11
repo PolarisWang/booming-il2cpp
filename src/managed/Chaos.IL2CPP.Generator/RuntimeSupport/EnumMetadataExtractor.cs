@@ -148,6 +148,17 @@ internal static class EnumMetadataExtractor
             sb.AppendLine("};");
             sb.AppendLine();
 
+            // ── Pre-allocated global string pointer array ────────────────────
+            // Zero-initialized at program start. Populated once at static init
+            // time by ChaosRegisterEnumGeneratedMetadata via ChaosEnumPreInitStringCache.
+            // After that, ensure_enum_str_cache reads from this array and skips
+            // lazy POH allocation — zero GC allocation on the hot path.
+            sb.AppendLine($"// Pre-allocated managed string pointers for {et.SubjectId}.");
+            sb.AppendLine($"// Populated at static init time via ChaosEnumPreInitStringCache.");
+            sb.AppendLine($"// Zero-initialized: not yet populated; non-zero => pre-allocated.");
+            sb.AppendLine($"static CHAOS_IL2CPP_INTPTR kEnumStrings_{uniqueId}[{et.Fields.Count}] = {{}};");
+            sb.AppendLine();
+
             // Emit minimal type descriptor (matching ReflectionQueryTypeDescriptor layout)
             sb.AppendLine($"static constexpr EnumTypeDescriptor kEnumTypeDesc_{uniqueId} = {{");
             sb.AppendLine($"    0u,");
@@ -321,6 +332,46 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24, CHAOS_IL2CPP_INT64 value) noexcept;");
         sb.AppendLine("extern \"C\" void ChaosEnumRegisterToStringDispatchTable(");
         sb.AppendLine("    const EnumToStringDispatchEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept;");
+        sb.AppendLine("// Pre-allocate managed strings (in POH) from a compiled-in field entry array.");
+        sb.AppendLine("// Allocates count managed strings from entry names, stores them in out_strings.");
+        sb.AppendLine("// Called at static init time to eliminate lazy allocation on the hot path.");
+        sb.AppendLine("extern \"C\" void ChaosEnumPreInitStringCache(");
+        sb.AppendLine("    const EnumFieldEntry* entries, CHAOS_IL2CPP_UINT32 count,");
+        sb.AppendLine("    CHAOS_IL2CPP_INTPTR* out_strings) noexcept;");
+        sb.AppendLine("// Lookup function pointer for pre-allocated string arrays (set by");
+        sb.AppendLine("// ChaosEnumRegisterPreInitTable in enum_stubs.cpp).");
+        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR* (*g_chaos_enum_preinit_lookup)(");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24) noexcept;");
+        sb.AppendLine("extern \"C\" void ChaosEnumRegisterPreInitTable(");
+        sb.AppendLine("    const EnumPreInitEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept;");
+
+        // ── Pre-allocated string dispatch table ───────────────────────────
+        // Maps fnv24 to pre-allocated POH string pointer arrays.
+        // Registered via ChaosEnumRegisterPreInitTable at static init time.
+        // Used by ensure_enum_str_cache to skip lazy GC allocation.
+        var sortedFnv24List = hashToIdentifier.OrderBy(kv => kv.Key).ToList();
+        sb.AppendLine();
+        sb.AppendLine("// Enclosing struct definition for the pre-init dispatch table entry.");
+        sb.AppendLine("// (Defined in enum_stubs.cpp; redeclared here so the generated TU can");
+        sb.AppendLine("// create constexpr arrays of it.)");
+        sb.AppendLine("#ifndef CHAOS_IL2CPP_ENUM_PREINIT_ENTRY_DEFINED");
+        sb.AppendLine("#define CHAOS_IL2CPP_ENUM_PREINIT_ENTRY_DEFINED");
+        sb.AppendLine("struct EnumPreInitEntry {");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24;");
+        sb.AppendLine("    CHAOS_IL2CPP_INTPTR* strings;");
+        sb.AppendLine("};");
+        sb.AppendLine("#endif");
+        sb.AppendLine();
+        sb.AppendLine("// ── Pre-allocated string dispatch table (sorted by fnv24 for binary search) ──");
+        sb.AppendLine($"static constexpr EnumPreInitEntry kEnumPreInitTable[] = {{");
+        foreach (var kv in sortedFnv24List)
+        {
+            uint fnv24 = kv.Key & 0xFFFFFFu;
+            sb.AppendLine($"    {{ 0x{fnv24:X6}u, kEnumStrings_{kv.Value} }},");
+        }
+        sb.AppendLine("};");
+        sb.AppendLine($"static constexpr CHAOS_IL2CPP_UINT32 kEnumPreInitCount = {sortedFnv24List.Count}u;");
+        sb.AppendLine();
         sb.AppendLine();
         sb.AppendLine("// Static (internal linkage) so multiple TUs including this header don't ODR-violate.");
         sb.AppendLine("// Only the first page's IIFE calls this; other TUs' copies are dead code.");
@@ -349,6 +400,25 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    ChaosEnumRegisterToStringDispatchTable(");
         sb.AppendLine("        chaos::il2cpp::codegen::kEnumToStringDispatchTable,");
         sb.AppendLine("        chaos::il2cpp::codegen::kEnumToStringDispatchCount);");
+        sb.AppendLine("    // Register the pre-allocated string dispatch table.");
+        sb.AppendLine("    ChaosEnumRegisterPreInitTable(");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumPreInitTable,");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumPreInitCount);");
+
+        // Emit pre-allocated string cache initialization for each enum type.
+        // This allocates managed string objects (in POH) at static init time,
+        // so the hot path (ensure_enum_str_cache) finds pre-allocated strings
+        // and skips lazy allocation. Zero GC allocation on enum.ToString/Format.
+        foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
+        {
+            var et = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value);
+            sb.AppendLine($"    // Pre-allocate {et.Fields.Count} field name strings for {et.SubjectId}");
+            sb.AppendLine($"    ChaosEnumPreInitStringCache(");
+            sb.AppendLine($"        chaos::il2cpp::codegen::kEnumFields_{kv.Value},");
+            sb.AppendLine($"        {et.Fields.Count},");
+            sb.AppendLine($"        chaos::il2cpp::codegen::kEnumStrings_{kv.Value});");
+        }
+
         sb.AppendLine("}");
         sb.AppendLine();
 

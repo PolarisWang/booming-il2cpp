@@ -1,6 +1,7 @@
 namespace chaos::il2cpp::runtime_core {
 
 #include <cstring>
+#include "runtime_stubs/crypto_stubs.h"
 
 // -- External Runtime Dispatch Table Resolution ----------------------------
 // Resolves subjectIds -> function pointers for the codegen-emitted
@@ -131,9 +132,62 @@ extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
                 reinterpret_cast<void*>(ChaosMarshalGetLastPInvokeError);
         } else if (std::strstr(sid, "Interop+BCrypt") != nullptr ||
                    std::strstr(sid, "Interop+NCrypt") != nullptr) {
-            // BCrypt/NCrypt Interop P/Invoke stubs: keep nullptr so
-            // ChaosExternalRuntimeFallback Phase 1.5 handles them via
-            // the native ChaosBCrypt* stubs in crypto_stubs.cpp.
+            // Route BCrypt/NCrypt P/Invoke calls to native stub implementations.
+            // Only BCrypt stubs are currently implemented (see crypto_stubs.cpp).
+            // NCrypt entries without stubs remain nullptr -> will throw at runtime.
+            #define BCROUTE(name) do { \
+                if (std::strstr(sid, "::" name ":")) { \
+                    kChaosExternalRuntimeFnTable[i] = \
+                        reinterpret_cast<void*>(Chaos##name); \
+                    break; \
+                } \
+            } while(0)
+
+            // ── Algorithm provider ──
+            BCROUTE(BCryptOpenAlgorithmProvider);
+            BCROUTE(BCryptCloseAlgorithmProvider);
+
+            // ── Hash ──
+            BCROUTE(BCryptCreateHash);
+            BCROUTE(BCryptDestroyHash);
+            BCROUTE(BCryptHashData);
+            BCROUTE(BCryptFinishHash);
+            BCROUTE(BCryptHash);
+
+            // ── Symmetric key ──
+            BCROUTE(BCryptGenerateSymmetricKey);
+            BCROUTE(BCryptDestroyKey);
+            BCROUTE(BCryptEncrypt);
+            BCROUTE(BCryptDecrypt);
+            BCROUTE(BCryptImportKey);
+            BCROUTE(BCryptExportKey);
+
+            // ── Key properties ──
+            BCROUTE(BCryptGetProperty);
+            BCROUTE(BCryptSetProperty);
+
+            // ── Asymmetric key ──
+            BCROUTE(BCryptGenerateKeyPair);
+            BCROUTE(BCryptFinalizeKeyPair);
+            BCROUTE(BCryptImportKeyPair);
+
+            // ── Signatures ──
+            BCROUTE(BCryptSignHash);
+            BCROUTE(BCryptVerifySignature);
+
+            // ── Secret agreement (ECDH) ──
+            BCROUTE(BCryptSecretAgreement);
+            BCROUTE(BCryptDestroySecret);
+            BCROUTE(BCryptDeriveKey);
+            BCROUTE(BCryptKeyDerivation);
+
+            // ── RNG ──
+            BCROUTE(BCryptGenRandom);
+
+            // ── Capabilities ──
+            BCROUTE(BCryptIsAvailable);
+
+            #undef BCROUTE
         }
     }
 }

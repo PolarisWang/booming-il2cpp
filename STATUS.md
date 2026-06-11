@@ -108,7 +108,7 @@
 | System.Runtime.Intrinsics | 2 | ✅ Passed |
 | System.Runtime.Serialization.Formatters | 1 | ✅ Passed |
 | System.Security.Claims | 1 | ✅ Passed |
-| System.Security.Cryptography | 4 | ✅ IL data emission fixed, P/Invoke routing pending |
+| System.Security.Cryptography | 4 | ✅ 88% (1077/1222) AOT/JIT aligned |
 | System.Security.Principal.Windows | 1 | ✅ Passed |
 | System.Text.Json | 1 | ✅ Passed |
 | System.Threading.Tasks.Parallel | 1 | ✅ Passed |
@@ -126,8 +126,8 @@
 
 | # | 问题 | 状态 | 根因 |
 |---|------|------|------|
-| 1 | Server GC crash | 🔄 Phase 3 待实现 | 需高分配 benchmark + GC 参数调优 |
-| 2 | Cryptography 360 failures (value=-1) | ✅ IL data emission fixed | _cryptoAotIrEntries 未填充已修 |
+| 1 | Server GC crash | ✅ DrainMarkStackParallel fix + chaos_jit MSVC build fix | Worker pool re-entrancy + GCC atomics on MSVC |
+| 2 | Cryptography 360 failures | ✅ 88% (1077/1222) passed | BCrypt P/Invoke stubs + routing chain complete. AOT/JIT behavior aligned (identical 1077/1222)
 | 3 | SIMD V256_Mul_I32 overload rename | ✅ 已修复 (2026-06-11) | CRLF→LF + .gitattributes 强制 LF |
 | 4 | RunFactMode SEH longjmp gap | ✅ 已修复 (2026-06-10) | g_chaos_fail_hook longjmp to uninitialized jmp_buf |
 

@@ -219,6 +219,8 @@ Step 3: 汇总裁决
 
 ## 分类矩阵（用于阶段 3 选 Expert）
 
+> ℹ️ 路由规则的权威源是 `skills/discovery/routing-rules.md`。以下矩阵是其副本，如有不一致以 routing-rules.md 为准。
+
 > ⚠️ **执行顺序约束**：Translation Expert 和 CodeGen Expert 都涉及 Planner/Emission 文件。
 > 当子任务同时包含翻译路径修改和 codegen 修改时，**必须先派发 Translation Expert，再派发 CodeGen Expert**。
 > Translation Expert 完成翻译路径设计后，CodeGen Expert 在此基础上做代码生成修改。

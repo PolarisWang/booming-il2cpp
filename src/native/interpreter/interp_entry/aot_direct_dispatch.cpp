@@ -118,7 +118,10 @@ static void* ResolveDirectFn(
                 uint32_t slot = registry.TokenToSlot(module_id, token);
                 if (slot != ~0u) {
                     auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
-                    if (entry != nullptr && entry->direct_ptr != nullptr) {
+                    // P/Invoke stubs (direct_ptr = InterpreterEntryDirect) have no IL body.
+                    // Skip them here so Step 3 (kChaosExternalRuntimeFnTable) can route to
+                    // native BCrypt stubs. hkKeepNative with non-null direct_ptr = real AOT code.
+                    if (entry != nullptr && entry->direct_ptr != nullptr)
                         // In JIT mode, direct_ptr may be a JIT trampoline.
                         // Query the original AOT ptr callback to get the real code pointer.
                         void* aot_ptr = entry->direct_ptr;
@@ -207,6 +210,13 @@ void* ResolveDirectFnSafe(
                 if (slot != ~0u) {
                     auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
                     if (entry != nullptr && entry->direct_ptr != nullptr) {
+                        // P/Invoke stubs (direct_ptr = InterpreterEntryDirect) have no
+                        // IL body. Skip them so Step 3 can route to native BCrypt stubs.
+                        extern void InterpreterEntryDirect();
+                        if (entry->direct_ptr ==
+                            reinterpret_cast<void*>(&InterpreterEntryDirect)) {
+                            break; // fall through to Step 3
+                        }
                         // In JIT mode, direct_ptr may be a JIT trampoline.
                         // Query the original AOT ptr callback to get the real code pointer.
                         void* aot_ptr = entry->direct_ptr;

@@ -55,17 +55,11 @@
 
 ### Workflow 分发循环规则
 
-当任务涉及多个域时，Controller 自动进入分发循环模式：
+Expert 分类矩阵、多域处理策略、终止守卫等路由规则详见 `skills/discovery/routing-rules.md`。
 
-1. **拆分子任务清单** — 将任务拆为多个子任务，每个子任务可被一个 Expert 处理
-2. **Workflow 委托** — 生成 Workflow 脚本，按 Expert 域分组并行分派
-3. **Partial completion** — 每个 Expert 处理自己能做的部分，标记：
-   - `✅ done: [已处理的子任务]`
-   - `⏳ remaining: [未处理的子任务 + 原因]`
-4. **Loop-back** — Dispatcher 从 ✅ done 中移除已完成的，将 ⏳ remaining 保留，继续下一轮 Workflow
-5. **终止守卫**：
-   - 连续 2 轮 Workflow 无进展 → 终止，需人工介入
-6. **每轮声明** — 每轮 Workflow 前输出：`classification: ... workflow delegation round=N`
+核心原则：
+- ≥2 域 → Workflow 委托
+- 连续 2 轮无进展 → 终止，需人工介入
 
 ## Trace 优先调试
 

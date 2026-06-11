@@ -192,4 +192,27 @@ struct EnumToStringDispatchEntry {
 extern "C" CHAOS_IL2CPP_INTPTR (*g_chaos_enum_tostring_dispatch_lookup)(
     CHAOS_IL2CPP_UINT32 fnv24, CHAOS_IL2CPP_INT64 value) noexcept;
 
+// ── Pre-allocated enum string dispatch table ──────────────────────────
+// Maps fnv24 to pre-allocated POH string arrays.  Populated at static init
+// time via ChaosEnumPreInitStringCache() called from the generated code's
+// ChaosRegisterEnumGeneratedMetadata().  ensure_enum_str_cache uses this
+// to skip lazy POH allocation — zero GC allocation on ToString/Format.
+#ifndef CHAOS_IL2CPP_ENUM_PREINIT_ENTRY_DEFINED
+#define CHAOS_IL2CPP_ENUM_PREINIT_ENTRY_DEFINED
+struct EnumPreInitEntry {
+    CHAOS_IL2CPP_UINT32 fnv24;
+    CHAOS_IL2CPP_INTPTR* strings;
+};
+#endif
+
+// Lookup function pointer: returns pre-allocated CHAOS_IL2CPP_INTPTR* array
+// for the given fnv24, or nullptr if no pre-allocated strings exist.
+extern "C" CHAOS_IL2CPP_INTPTR* (*g_chaos_enum_preinit_lookup)(
+    CHAOS_IL2CPP_UINT32 fnv24) noexcept;
+
+// Registration function called from generated static initializer to
+// register the sorted-by-fnv24 pre-allocated string dispatch table.
+extern "C" void ChaosEnumRegisterPreInitTable(
+    const EnumPreInitEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept;
+
 #endif // CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_
