@@ -768,12 +768,20 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if not missing:
                 continue
             stubs = "\n".join(
-                f'extern "C" CHAOS_IL2CPP_INTPTR {sym}() noexcept {{ return 0; }}'
+                f'static inline CHAOS_IL2CPP_INTPTR {sym}() noexcept {{ return 0; }}'
                 for sym in missing
             )
             marker = "// ── Post-TPG: chaos_external_runtime_* stubs ──\n"
             if marker not in content:
-                content = marker + stubs + "\n\n" + content
+                # Insert stubs AFTER the #include block so CHAOS_IL2CPP_INTPTR is defined.
+                insert_pos = content.rfind("#include")
+                if insert_pos >= 0:
+                    eol = content.find("\n", insert_pos)
+                    if eol >= 0:
+                        insert_pos = eol + 1
+                else:
+                    insert_pos = 0
+                content = content[:insert_pos] + marker + stubs + "\n\n" + content[insert_pos:]
                 cpp_file.write_text(content, encoding="utf-8")
                 print(f"  [build] Added {len(missing)} external runtime stubs to {cpp_file.name}")
     # ── Post-TPG: cmake configure + build ──
