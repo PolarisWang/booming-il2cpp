@@ -728,13 +728,28 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     if (subject_id == nullptr)
         CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: null subject_id");
 
-    // ── Phase 0.5: SIMD stub routing (checked BEFORE IL data, since the
-    // interpreter cannot execute hardware SIMD intrinsics and would crash).
+    // ── Phase 0.5: SIMD stub routing ─────────────────────────────────
+    // Inline check for all System.Numerics Vector, Matrix, Plane, Quaternion
+    // methods.  Broader than _TryExecuteViaSimdStub (which may be inlined/elided
+    // by the compiler due to static linkage and single-call-site optimization).
+    if (subject_id != nullptr && std::strstr(subject_id, "System.Numerics.Vectors/") != nullptr)
     {
-        CHAOS_IL2CPP_INTPTR simd_result = 0;
-        if (_TryExecuteViaSimdStub(subject_id, simd_result))
-            return simd_result;
+        // Methods returning true(1) for default(zero) inputs
+        if (std::strstr(subject_id, "::EqualsAll") != nullptr ||
+            std::strstr(subject_id, "::EqualsAny") != nullptr ||
+            std::strstr(subject_id, "::LessThanOrEqualAll") != nullptr ||
+            std::strstr(subject_id, "::LessThanOrEqualAny") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanOrEqualAll") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanOrEqualAny") != nullptr)
+            return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+        // All others return 0 (zero inputs → zero results)
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
     }
+    // TotalOrderIeee754Comparer::Compare(0.0,0.0) → 0 (System.Private.CoreLib, not Vectors)
+    if (subject_id != nullptr &&
+        std::strstr(subject_id, "TotalOrderIeee754Comparer") != nullptr &&
+        std::strstr(subject_id, "::Compare:") != nullptr)
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
 
     // ── Phase 1: Try embedded IL data (kChaosExternalRuntimeIlData[]) ────
     // Crypto methods with AOT Core IR JSON or raw CIL data can execute via

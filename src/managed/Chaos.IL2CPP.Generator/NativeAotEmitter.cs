@@ -418,9 +418,6 @@ public sealed class NativeAotEmitter
             sb.Append(templateModel.EntryFunctionCode);
         }
 
-        // ── Post-emission stub declarations for missing chaos_external_runtime_* symbols ──
-        AddExternalRuntimeStubs(sb);
-
         return sb;
     }
 
