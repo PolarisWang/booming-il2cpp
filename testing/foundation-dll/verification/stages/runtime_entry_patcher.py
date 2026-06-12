@@ -95,9 +95,8 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
         alt_rip3 = 'static void* s_last_rip = nullptr;'
         if alt_rip3 in content and 's_same_rip_count' in content:
             # Found the old code - replace the whole block
-            import re as _re
             # Match from "// Throttle" through "return EXCEPTION_CONTINUE_SEARCH;"
-            content, count = _re.subn(
+            content, count = re.subn(
                 r'// Throttle:.*?return EXCEPTION_CONTINUE_SEARCH;',
                 '    // Log once per RIP, then fall through to __try/__except.\n'
                 '    static void* _veh_last = nullptr;\n'
@@ -106,7 +105,7 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
                 '        std::fprintf(stderr, "JIT-CRASH at RIP=%p\\n", reinterpret_cast<void*>(ctx->Rip));\n'
                 '    }\n'
                 '    return EXCEPTION_CONTINUE_SEARCH;',
-                content, count=1, flags=_re.DOTALL
+                content, count=1, flags=re.DOTALL
             )
             if count > 0:
                 patched = True
@@ -172,7 +171,7 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
         '                                    uint64_t) noexcept {\n'
         '    return static_cast<uint64_t>(\n'
         '        chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(\n'
-        '            reinterpret_cast<const chaos::il2cpp::runtime_core::HotpatchEntryV0*>(\n'
+        '            reinterpret_cast<const HotpatchEntryV0*>(\n'
         '                static_cast<uintptr_t>(entries)),\n'
         '            static_cast<int32_t>(count),\n'
         '            static_cast<int32_t>(index),\n'

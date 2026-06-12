@@ -831,7 +831,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     tpg_subjects_dir = ctx.native_dir / "subjects"
     if tpg_codegen_dir.is_dir():
         tpg_subjects_dir.mkdir(parents=True, exist_ok=True)
-        import shutil
         for pat in ("*.cpp", "*.h"):
             for f in tpg_codegen_dir.glob(pat):
                 shutil.copy2(str(f), str(tpg_subjects_dir / f.name))
@@ -856,6 +855,20 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             stage="build", status="error",
             summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
             duration_ms=int((time.perf_counter() - start) * 1000))
+
+    # ── Post-generation: ensure codegen generated files are in subjects/ ──
+    # The TPG's Emit() step should copy them, but may fail for flat layout.
+    codegen_gen_dir = ctx.native_dir / "codegen" / "generated"
+    subjects_dir = ctx.native_dir / "subjects"
+    if codegen_gen_dir.is_dir() and subjects_dir.is_dir():
+        for pattern in ("*.cpp", "*.h"):
+            for f in codegen_gen_dir.glob(pattern):
+                shutil.copy2(str(f), str(subjects_dir / f.name))
+        # Remove stale bridge redirect files that cause LNK2019
+        for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
+            p = subjects_dir / stale
+            if p.exists():
+                p.unlink()
 
     # ── Post-patch missing type declarations ──
     # (removed: interop stub registration now handled by Codegen emitter
@@ -893,16 +906,22 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             print(f"  [build] Patched JIT runtime-entry.cpp, rebuilding...")
             # Rebuild JIT entry (cmake only, no codegen)
             import subprocess as _sp
-            _jit_build = _jit_dir / "build_jit"
+            _jit_build = _jit_dir / "build"
             if _jit_build.exists():
-                _r = _sp.run(["cmake", "--build", str(_jit_build), "--config", "RelWithDebInfo", "--target", "chaos_entry"],
+                _r = subprocess.run(["cmake", "--build", str(_jit_build), "--config", "RelWithDebInfo", "--target", "chaos_entry"],
                             capture_output=True, text=True, timeout=600)
                 if _r.returncode == 0:
-                    import shutil as _su
-                    _jit_exe = _jit_build / "RelWithDebInfo" / "chaos_entry.exe"
-                    if _jit_exe.exists():
-                        _su.copy2(_jit_exe, ctx.native_dir / "entry-jit.exe")
-                        print(f"  [build] JIT entry rebuilt after patch ({_jit_exe.stat().st_size} bytes)")
+                    # Multi-Config generators (MSVC) put output in <config>/ subdir;
+                    # single-config (Make/Ninja on Linux) puts it directly in the build dir.
+                    _jit_exe_candidates = [
+                        _jit_build / "RelWithDebInfo" / "chaos_entry.exe",
+                        _jit_build / "chaos_entry",
+                    ]
+                    for _jit_exe in _jit_exe_candidates:
+                        if _jit_exe.exists():
+                            shutil.copy2(_jit_exe, ctx.native_dir / "entry-jit.exe")
+                            print(f"  [build] JIT entry rebuilt after patch ({_jit_exe.stat().st_size} bytes)")
+                            break
                 else:
                     print(f"  [build] JIT rebuild failed (rc={_r.returncode})")
 
