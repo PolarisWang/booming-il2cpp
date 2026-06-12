@@ -978,24 +978,20 @@ public sealed partial class NativeAotLoweringPlanner
             string? resolvedHelper = null;
             bool hasHelper = helperSymbolBySubjectId?.TryGetValue(subjectId, out resolvedHelper) == true;
 
-            // If the helper has a DirectNativeSymbol AND no Source, the
-            // chaos_external_runtime_* wrapper function is NOT emitted — only the
-            // DirectNativeSymbol stub exists.  Use nullptr in the dispatch table
-            // to avoid unresolved linker symbols, letting the runtime/TTP
-            // Scriban template fill in the entry at startup via subject-id
-            // string matching.
+            // If the helper has a DirectNativeSymbol, the chaos_external_runtime_*
+            // function doesn't actually exist — only the DirectNativeSymbol stub does.
+            // Use nullptr in the dispatch table to avoid unresolved linker symbols,
+            // letting the TPG Scriban template fill in the entry at runtime via
+            // subject-id string matching.
             //
-            // When Source is non-empty (e.g. SimpleForward / GenericShapeDescriptor
-            // entries like Marshal::GetLastPInvokeError), the wrapper IS emitted
-            // and the fn table should pre-populate with the wrapper symbol so
-            // runtime startup code does not need to patch nullptr entries.
+            // Note: Do NOT add extra conditions here (e.g. checking h.Source).
+            // DirectNativeSymbol alone is the reliable indicator that the wrapper
+            // function body is NOT emitted as C++ code, regardless of Source content.
             if (hasHelper && _externalRuntimeHelpers is { } helpers)
             {
                 foreach (var h in helpers)
                 {
-                    if (h.SubjectId == subjectId &&
-                        h.DirectNativeSymbol != null &&
-                        string.IsNullOrEmpty(h.Source))
+                    if (h.SubjectId == subjectId && h.DirectNativeSymbol != null)
                     {
                         hasHelper = false;
                         resolvedHelper = null;
