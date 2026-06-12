@@ -670,31 +670,45 @@ static bool _TryExecuteViaSimdStub(const char* subject_id,
         return true;
 
     // ── Vector<T> comparisons with default(zero) inputs ──
+    // NOTE: patterns omit trailing ':' to match both non-generic (::EqualsAll:)
+    // and generic (::EqualsAll<System.Int32>:) forms.
     if (std::strstr(subject_id, "Vector::") != nullptr)
     {
-        if (std::strstr(subject_id, "::EqualsAll:") != nullptr ||
-            std::strstr(subject_id, "::LessThanOrEqualAll:") != nullptr ||
-            std::strstr(subject_id, "::LessThanOrEqualAny:") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanOrEqualAll:") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanOrEqualAny:") != nullptr)
+        if (std::strstr(subject_id, "::EqualsAll") != nullptr ||
+            std::strstr(subject_id, "::LessThanOrEqualAll") != nullptr ||
+            std::strstr(subject_id, "::LessThanOrEqualAny") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanOrEqualAll") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanOrEqualAny") != nullptr)
         {
             out_value = 1;
             return true;
         }
-        if (std::strstr(subject_id, "::EqualsAny:") != nullptr ||
-            std::strstr(subject_id, "::LessThanAll:") != nullptr ||
-            std::strstr(subject_id, "::LessThanAny:") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanAll:") != nullptr ||
-            std::strstr(subject_id, "::GreaterThanAny:") != nullptr)
+        if (std::strstr(subject_id, "::EqualsAny") != nullptr ||
+            std::strstr(subject_id, "::LessThanAll") != nullptr ||
+            std::strstr(subject_id, "::LessThanAny") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanAll") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanAny") != nullptr)
         {
             out_value = 0;
             return true;
         }
         // GetElement(zero, 0) → 0; ToScalar(zero) → 0
-        if (std::strstr(subject_id, "::GetElement:") != nullptr ||
-            std::strstr(subject_id, "::ToScalar:") != nullptr)
+        if (std::strstr(subject_id, "::GetElement") != nullptr ||
+            std::strstr(subject_id, "::ToScalar") != nullptr)
             return true;
     }
+
+    // ── CopyTo / Store / StoreUnsafe / Widen (null-ptr or void) ──
+    // These methods crash with NullReferenceException when passed default(T)
+    // (null array/pointer).  The stub returns 0 before the interpreter
+    // attempts the null access, avoiding the SEH crash.
+    if (std::strstr(subject_id, "::CopyTo:") != nullptr ||
+        std::strstr(subject_id, "::StoreUnsafe") != nullptr ||
+        std::strstr(subject_id, "::Store:") != nullptr ||
+        std::strstr(subject_id, "::StoreAligned:") != nullptr ||
+        std::strstr(subject_id, "::StoreAlignedNonTemporal:") != nullptr ||
+        std::strstr(subject_id, "::Widen:") != nullptr)
+        return true;
 
     return false;
 }
