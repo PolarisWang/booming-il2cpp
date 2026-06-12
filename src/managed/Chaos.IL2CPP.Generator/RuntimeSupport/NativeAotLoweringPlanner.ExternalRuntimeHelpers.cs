@@ -246,7 +246,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else
 		{
-			var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
+			// Use correct C++ return type matching ABI carrier (Float32->float, Float64->double)
+			string _cppRet = failReturnAbi.CarrierKindCode switch
+			{
+			    AotCoreIrAbiCarrierKind.Float32 => "float",
+			    AotCoreIrAbiCarrierKind.Float64 => "double",
+			    _ => "CHAOS_IL2CPP_INTPTR",
+			};
+			var src = RenderSimpleExternalRuntimeHelper(_cppRet, failSymbol, "",
+			    ["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 				["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 				Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);

@@ -878,8 +878,12 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                             var paramType = rvi < refParamTypes.Count ? refParamTypes[rvi] : "object";
                             // Only integer-compatible types can be cast to long directly.
                             // For reference types, use null check as a safe sentinel.
+                            // For pointer types (byte*, void*, etc.), use null comparison
+                            // since (object)(byte*) is illegal (CS0030).
                             if (IsIntegerCompatibleType(paramType))
                                 refParts.Add($"((long)({vn}) ^ 0xFF)");
+                            else if (paramType.EndsWith("*"))
+                                refParts.Add($"({vn} != null ? 1L : 0L)");
                             else
                                 refParts.Add($"((object)({vn}) != null ? 1L : 0L)");
                         }
@@ -906,6 +910,8 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
                             var paramType = rvi < refParamTypes.Count ? refParamTypes[rvi] : "object";
                             if (IsIntegerCompatibleType(paramType))
                                 refParts.Add($"((long)({vn}) ^ 0xFF)");
+                            else if (paramType.EndsWith("*"))
+                                refParts.Add($"({vn} != null ? 1L : 0L)");
                             else
                                 refParts.Add($"((object)({vn}) != null ? 1L : 0L)");
                         }

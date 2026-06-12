@@ -418,6 +418,7 @@ public sealed class NativeAotEmitter
             sb.Append(templateModel.EntryFunctionCode);
         }
 
+	AddExternalRuntimeStubs(sb);
         return sb;
     }
 
