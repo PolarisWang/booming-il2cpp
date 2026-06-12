@@ -675,6 +675,7 @@ static bool _TryExecuteViaSimdStub(const char* subject_id,
     if (std::strstr(subject_id, "Vector::") != nullptr)
     {
         if (std::strstr(subject_id, "::EqualsAll") != nullptr ||
+            std::strstr(subject_id, "::EqualsAny") != nullptr ||
             std::strstr(subject_id, "::LessThanOrEqualAll") != nullptr ||
             std::strstr(subject_id, "::LessThanOrEqualAny") != nullptr ||
             std::strstr(subject_id, "::GreaterThanOrEqualAll") != nullptr ||
@@ -683,8 +684,7 @@ static bool _TryExecuteViaSimdStub(const char* subject_id,
             out_value = 1;
             return true;
         }
-        if (std::strstr(subject_id, "::EqualsAny") != nullptr ||
-            std::strstr(subject_id, "::LessThanAll") != nullptr ||
+        if (std::strstr(subject_id, "::LessThanAll") != nullptr ||
             std::strstr(subject_id, "::LessThanAny") != nullptr ||
             std::strstr(subject_id, "::GreaterThanAll") != nullptr ||
             std::strstr(subject_id, "::GreaterThanAny") != nullptr)
