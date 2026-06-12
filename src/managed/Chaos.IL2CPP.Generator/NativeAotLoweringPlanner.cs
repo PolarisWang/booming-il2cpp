@@ -4428,13 +4428,14 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         // Filter subject entries to only reference method indices that have
-        // corresponding dispatch entries in s_hotpatch_entries[].
-        // GetHotpatchableMethods() (used by BuildHotpatchTable) returns fewer
-        // entries than methodsForLowering — it excludes methods without IL bodies
-        // and deduplicates by NativeSymbol. Raw method indices from the
-        // methodsForLowering loop may exceed s_hotpatch_entries[] bounds, causing
-        // STATUS_ACCESS_VIOLATION when the hotupdate loop dispatches those subjects.
-        int actualEntryCount = HotpatchEntryCount;
+        // corresponding dispatch entries in kMethodTable[] (which has methods.Count
+        // entries from the methodsForLowering list).  HotpatchEntryCount reflects
+        // the hotpatch table which may have fewer entries when methods without IL
+        // bodies or NativeSymbol-duplicated methods are excluded — using it as the
+        // bound would allow OOB entries past the filter when methodsForLowering
+        // contains more entries than hotpatch table.  Using methods.Count ensures
+        // the slot map never references past the kMethodTable[]/kAotMethodCount.
+        int actualEntryCount = methods.Count;
         if (actualEntryCount > 0 && subjectEntries.Count > 0)
         {
             var filtered = new List<ScriptObject>(subjectEntries.Count);

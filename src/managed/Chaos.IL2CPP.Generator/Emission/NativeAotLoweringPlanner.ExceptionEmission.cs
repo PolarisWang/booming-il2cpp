@@ -4137,7 +4137,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				? (callerIsShared ? "chaos_generic_context" : "0")
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
-		string value = targetSymbol + "(" + argList + genericCtxArg + ")";
+		
+			// Emit extern declaration for chaos_external_runtime_* symbols at call site
+						Console.Error.WriteLine($"[CODEGEN-DEBUG-LINEAR] targetSymbol={targetSymbol} returnType={a}");
+if (targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+			{
+			    string _extRetType = string.Equals(a, "void", StringComparison.Ordinal) ? "void" : "CHAOS_IL2CPP_INTPTR";
+			    builder.AppendLine($"{indentation}    extern {_extRetType} {targetSymbol}() noexcept;");
+			}
+string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		if (string.Equals(a, "void", StringComparison.Ordinal))
 		{
 			stringBuilder = builder;
@@ -4457,7 +4465,8 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}    {{");
 		string nativeTarget = directNativeSymbol ?? targetSymbol;
 		// Collect chaos_external_runtime_* symbols for fallback declarations
-		if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+					Console.Error.WriteLine($"[CODEGEN-DEBUG-HOTPATCH] nativeTarget={nativeTarget}");
+if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
 			builder.AppendLine($"{indentation}    extern " + (hasReturn ? "CHAOS_IL2CPP_INTPTR" : "void") + " {nativeTarget}() noexcept;");
 		// Append hidden chaos_generic_context for shared canonical targets.
 		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
