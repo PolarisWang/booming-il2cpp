@@ -754,6 +754,29 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     for line in tpg_result.stdout.splitlines():
         print(f"      {line}")
 
+    # ── Post-TPG: add extern declarations for missing chaos_external_runtime_* symbols ──
+    subjects_dir = ctx.native_dir / "subjects"
+    if subjects_dir.is_dir():
+        import re
+        for cpp_file in sorted(subjects_dir.glob("*.cpp")):
+            content = cpp_file.read_text(encoding="utf-8")
+            calls = set(re.findall(r'\b(chaos_external_runtime_\w+)\(', content))
+            if not calls:
+                continue
+            missing = [sym for sym in sorted(calls)
+                       if not re.search(rf'(extern|static inline).*{re.escape(sym)}\s*\(', content)]
+            if not missing:
+                continue
+            stubs = "\n".join(
+                f"static inline CHAOS_IL2CPP_INTPTR {sym}() noexcept {{ return 0; }}"
+                for sym in missing
+            )
+            marker = "// ── Post-TPG: chaos_external_runtime_* stubs ──\n"
+            if marker not in content:
+                content = marker + stubs + "\n\n" + content
+                cpp_file.write_text(content, encoding="utf-8")
+                print(f"  [build] Added {len(missing)} external runtime stubs to {cpp_file.name}")
+
     # ── Post-TPG cleanup: remove duplicate headers from SDK include ──
     # The SDK copies vector_fixed_templates.h to codegen/include/, but the same
     # header is also in the source tree's include path.  MSVC treats these as

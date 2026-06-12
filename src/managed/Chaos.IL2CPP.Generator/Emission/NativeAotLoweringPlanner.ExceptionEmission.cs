@@ -4139,7 +4139,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		
 			// Emit extern declaration for chaos_external_runtime_* symbols at call site
-						Console.Error.WriteLine($"[CODEGEN-DEBUG-LINEAR] targetSymbol={targetSymbol} returnType={a}");
+						Console.Error.WriteLine($"[CODEGEN-DEBUG-LINEAR] targetSymbol={targetSymbol} returnType={a}"); 
 if (targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
 			{
 			    string _extRetType = string.Equals(a, "void", StringComparison.Ordinal) ? "void" : "CHAOS_IL2CPP_INTPTR";

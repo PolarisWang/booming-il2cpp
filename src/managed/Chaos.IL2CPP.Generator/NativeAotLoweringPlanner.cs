@@ -1347,12 +1347,15 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             {
                 foreach (var _inst in _method.Instructions ?? [])
                 {
-                    // ExternalRuntime callees
+                    // ExternalRuntime callees — register all cross-assembly call targets
+                    // in the dispatch table so extern "C" declarations are emitted for
+                    // their chaos_external_runtime_* symbols.  Without this, calls that
+                    // the invocation planning resolves via TargetSymbol derivation would
+                    // reference undeclared symbols, causing C3861 at compile time.
                     string? _callee = _inst.Callee ?? _inst.TargetReference?.SubjectId;
                     if (!string.IsNullOrEmpty(_callee) && _seen.Add(_callee))
                     {
-                        if (!_externalRuntimeSubjects.ContainsKey(_callee) &&
-                            !_methodsBySubjectId.ContainsKey(_callee))
+                        if (!_externalRuntimeSubjects.ContainsKey(_callee))
                         {
                             _externalRuntimeSubjects[_callee] = _nextIdx++;
                         }
