@@ -4456,6 +4456,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}    else");
 		builder.AppendLine($"{indentation}    {{");
 		string nativeTarget = directNativeSymbol ?? targetSymbol;
+		// Collect chaos_external_runtime_* symbols for fallback declarations
+		if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+			builder.AppendLine($"{indentation}    extern " + (hasReturn ? "CHAOS_IL2CPP_INTPTR" : "void") + " {nativeTarget}() noexcept;");
 		// Append hidden chaos_generic_context for shared canonical targets.
 		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
 		string hpCtxArg = "";

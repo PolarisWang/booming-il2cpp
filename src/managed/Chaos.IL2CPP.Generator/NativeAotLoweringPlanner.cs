@@ -1959,6 +1959,38 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
+        // ── chaos_external_runtime_* re-declarations (file scope) ──
+        // Call sites in page*.cpp are at file scope.  The namespace-scoped extern
+        // declarations above are not visible outside the namespace block, so we
+        // re-declare every symbol at file scope as well.
+        // Using `extern "C++"` is implicit (default for extern in .cpp files at
+        // file scope in C++).
+        //
+        // Only emit for helpers with non-empty Source (they have real signatures).
+        // DirectNativeSymbol-only helpers (empty Source) get a separate minimal
+        // extern "C" fallback below.
+        if (_externalRuntimeHelpers is { Count: > 0 })
+        {
+            foreach (var helper in _externalRuntimeHelpers)
+            {
+                var source = helper.Source;
+                if (string.IsNullOrEmpty(source))
+                    continue;
+                int newlineIdx = source.IndexOf('\n');
+                string signatureLine = newlineIdx >= 0
+                    ? source.Substring(0, newlineIdx).Trim()
+                    : source.Trim();
+                if (string.IsNullOrEmpty(signatureLine))
+                    continue;
+                if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
+                    signatureLine = signatureLine.Substring(7);
+                sb.Append("extern ");
+                sb.Append(signatureLine);
+                sb.AppendLine(";");
+            }
+            sb.AppendLine();
+        }
+
         // ── chaos_external_runtime_* fallback declarations (global scope) ──
         // For _externalRuntimeSubjects entries that lack a namespace-scoped extern
         // declaration from ExternalRuntimeHelpers (e.g., DirectNativeSymbol-only
@@ -1971,7 +2003,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // need a fallback declaration.
         if (_externalRuntimeSubjects is { Count: > 0 })
         {
-            // Build set of SubjectIds that already have namespace-scoped extern declarations
+            // Build set of SubjectIds that already have file-scope extern re-declarations
             var helpersWithSource = _externalRuntimeHelpers?
                 .Where(h => !string.IsNullOrEmpty(h.Source))
                 .Select(h => h.SubjectId)
@@ -2078,9 +2110,21 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             {
                 if (!alreadyDeclared.Contains(sym))
                 {
+                    // Stub: provide both declaration and trivial definition.
+                    // Used when no AOT IR declaration is available.
                     sb.Append("static inline CHAOS_IL2CPP_INTPTR ");
                     sb.Append(sym);
                     sb.AppendLine("() noexcept { return 0; }");
+                }
+                else
+                {
+                    // Extern declaration: the real definition lives in the first
+                    // translation unit (native-aot.generated.cpp).  Without this
+                    // declaration, page files cannot call the symbol (undeclared
+                    // function is an error in C++17 /permissive- mode).
+                    sb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
+                    sb.Append(sym);
+                    sb.AppendLine("() noexcept;");
                 }
             }
             if (alreadyDeclared.Count < _emittedExternalRuntimeSymbols.Count)
