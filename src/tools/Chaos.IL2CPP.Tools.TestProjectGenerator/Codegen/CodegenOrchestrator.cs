@@ -3,6 +3,17 @@ using Chaos.IL2CPP.Driver;
 
 namespace Chaos.IL2CPP.Tools.TestProjectGenerator.Codegen;
 
+// ── Layer boundary note ──
+// This file lives in the TPG project (Layer 3) because TPG references Driver,
+// and Driver references Generator. Moving this file into the Generator project
+// would create a circular dependency: Driver → Generator → Driver.
+//
+// TPG is the correct adapter layer: it sits between the Python pipeline (Layer 4)
+// and the Codegen (Layer 2), providing a stable orchestration boundary.
+// The actual IL→C++ translation logic remains in Generator (Layer 2).
+//
+// See: wiki/01-项目总览/codegen-tpg-python-module-boundaries.md
+
 public sealed class CodegenResult
 {
     public bool Success { get; init; }
@@ -71,13 +82,6 @@ public sealed class CodegenOrchestrator
 
             args.Add("--sdk-out");
             args.Add(Path.GetFullPath(outputDir));
-            // NOTE: --full-closure was previously disabled because the old family-based flow
-            // generated 49044 methods per family with incompatible function pointer types
-            // (C2440 in MSVC).  With the new namespace-chunk pipeline, each chunk contains
-            // ≤500 subject wrapper methods plus their transitive closure (~2000-3000 total
-            // methods). At this scale the typed dispatch table type incompatibility is
-            // manageable — the subject wrappers and the framework methods they call share
-            // compatible function pointer types.
             args.Add("--full-closure");
 
             if (codegenMode == "jit")
@@ -87,10 +91,6 @@ public sealed class CodegenOrchestrator
             }
 
             // ── Subject method IDs (--subject-methods) ──
-            // Pass the list of subject method SubjectIds to the Driver so that
-            // the generated dispatch entry code includes these in kSubjectSlotMap[].
-            // The Driver matches these against AotCoreIrMethodArtifact.SubjectId
-            // to identify which compiled methods are subject entries.
             string? subjectMethodsPath = null;
             if (subjectMethodIds is { Count: > 0 })
             {
@@ -105,7 +105,7 @@ public sealed class CodegenOrchestrator
                 args.Add(subjectMethodsPath);
             }
 
-            // Run ConvertToCppHandler directly — output goes to Console
+            // Run ConvertToCppHandler directly
             var exitCode = ConvertToCppHandler.Run([.. args]);
 
             // Clean up temp subject methods file
@@ -125,18 +125,15 @@ public sealed class CodegenOrchestrator
             }
 
             // Collect generated directories
-            // Driver writes to sdkRoot/<assembly-name>/generated/ when --sdk-out is used
             var generatedDirs = new List<string>();
             if (Directory.Exists(outputDir))
             {
-                // Per-assembly layout: <sdk-out>/<assembly>/generated/
                 foreach (var subDir in Directory.GetDirectories(outputDir))
                 {
                     var genDir = Path.Combine(subDir, "generated");
                     if (Directory.Exists(genDir) && Directory.GetFiles(genDir, "*.cpp").Length > 0)
                         generatedDirs.Add(genDir);
                 }
-                // Flat layout fallback: <sdk-out>/generated/
                 var flatGen = Path.Combine(outputDir, "generated");
                 if (generatedDirs.Count == 0 && Directory.Exists(flatGen))
                     generatedDirs.Add(flatGen);

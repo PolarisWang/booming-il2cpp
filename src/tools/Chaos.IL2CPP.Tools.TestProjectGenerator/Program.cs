@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Chaos.IL2CPP.Generator;
+using Chaos.IL2CPP.Tools.TestProjectGenerator.Codegen;
 using Chaos.IL2CPP.Tools.TestProjectGenerator.Emission;
 using Chaos.IL2CPP.Tools.TestProjectGenerator.Metadata;
 
