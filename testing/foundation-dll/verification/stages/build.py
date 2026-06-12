@@ -278,7 +278,7 @@ def _build_jit_entry(
         "--metadata", str(metadata_path),
         "--output", str(jit_output),
         "--config-tier", native_config,
-        "--source-only",  # Emit only, cmake runs after stub insertion
+        "--clean",
     ]
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
@@ -736,7 +736,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "--metadata", str(metadata_path),
         "--output", str(ctx.native_dir),
         "--config-tier", ctx.native_config,
-        "--source-only",  # Emit only, cmake runs after stub insertion
+        "--clean",
     ]
 
     # Pass assembly dirs from pipeline-config.yaml (populated by chunk_pipeline.py)
@@ -803,35 +803,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 _mf.write_text(_mc, encoding="utf-8")
                 print(f"  [build] Added {len(_mt_missing)} MethodTable decls to {_mf.name}")
 
-    # ── Post-TPG: cmake configure + build ──
-    tpg_build_dir = ctx.native_dir / "build"
-    tpg_build_dir.mkdir(parents=True, exist_ok=True)
-    _cfg = subprocess.run(
-        ["cmake", "-S", str(ctx.native_dir), "-B", str(tpg_build_dir),
-         "-G", "Visual Studio 17 2022", "-A", "x64",
-         f"-DCMAKE_CONFIGURATION_TYPES={ctx.native_config}"],
-        capture_output=True, text=True, timeout=120)
-    for _l in _cfg.stderr.splitlines():
-        if "error" in _l.lower():
-            print(f"  [TPG:err] [cmake] {_l}")
-    _br = subprocess.run(
-        ["cmake", "--build", str(tpg_build_dir), "--config", ctx.native_config],
-        capture_output=True, text=True, timeout=1800)
-    for _l in _br.stdout.splitlines():
-        print(f"      {_l}")
-    for _l in _br.stderr.splitlines():
-        if "error" in _l.lower() or "fatal" in _l.lower():
-            print(f"  [TPG:err] {_l}")
-    if _br.returncode != 0:
-        print(f"  [build] cmake build FAILED after TPG codegen")
-        return StageResult(
-            stage="build", status="error",
-            summary="cmake build failed after TPG codegen",
-            duration_ms=int((time.perf_counter() - start) * 1000))
-    else:
-        print(f"  [build] cmake build succeeded")
-
-    # ── Post-TPG cleanup: remove duplicate headers from SDK include ──
+        # ── Post-TPG cleanup: remove duplicate headers from SDK include ──
     # The SDK copies vector_fixed_templates.h to codegen/include/, but the same
     # header is also in the source tree's include path.  MSVC treats these as
     # different physical files despite the include guard, causing C2995 errors
