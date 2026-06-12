@@ -2289,10 +2289,6 @@ public sealed partial class NativeAotLoweringPlanner
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
 		{
 			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, indentation);
-			// Register static field for extern declaration
-			if (_staticFieldDeclarations == null)
-			    _staticFieldDeclarations = new(System.StringComparer.Ordinal);
-			_staticFieldDeclarations.TryAdd(requiredTargetReference.SubjectId, requiredTargetReference.FieldTypeSubjectId);
 			EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{GetNativeStaticFieldSymbol(requiredTargetReference.SubjectId)})");
 			return;
 		}
@@ -4667,6 +4663,10 @@ if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal)
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
 		{
 			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, indentation);
+			// Register static field for extern declaration (emission generates chaos_static_* references not in AotCoreIr)
+			if (_staticFieldDeclarations == null)
+				_staticFieldDeclarations = new Dictionary<string, string?>(System.StringComparer.Ordinal);
+			_staticFieldDeclarations.TryAdd(requiredTargetReference.SubjectId, requiredTargetReference.FieldTypeSubjectId);
 			stringBuilder = builder;
 			EmitEvalStackPush(builder, indentation, GetNativeStaticFieldSymbol(requiredTargetReference.SubjectId));
 			return;
