@@ -26,6 +26,7 @@ from typing import Any
 from verification.orchestration.context import ChunkContext, StageResult
 
 from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash
+from verification.stages.runtime_entry_patcher import patch_runtime_entry
 
 # Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
 _TESTING = str(Path(__file__).resolve().parents[3])

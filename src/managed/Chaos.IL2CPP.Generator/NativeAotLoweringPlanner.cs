@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -2102,45 +2102,28 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
-        // ── Emit stub declarations for all chaos_external_runtime_* symbols
+        // ──         // ── Emit stub declarations for all chaos_external_runtime_* symbols
         // collected during method body emission (EmitInvocation path) that were
         // not already declared by the post-scan above.  These are symbols whose
         // DirectNativeSymbol was set after IR instruction processing, so the
         // post-scan (which reads IR instructions) could not detect them.
+        //
+        // ALL emitted symbols get static inline stubs — internal linkage avoids
+        // conflicts with real definitions in the first TU.  Previously the else
+        // branch emitted extern "C" declarations for symbols in alreadyDeclared,
+        // which conflicted with static inline stubs (C2732 linkage contradiction).
         if (_emittedExternalRuntimeSymbols is { Count: > 0 })
         {
-            var alreadyDeclared = new HashSet<string>(StringComparer.Ordinal);
-            if (externalRuntimeSymbolsReferenced.Count > 0)
-            {
-                foreach (var sym in externalRuntimeSymbolsReferenced)
-                    alreadyDeclared.Add(sym);
-            }
             foreach (var sym in _emittedExternalRuntimeSymbols.OrderBy(s => s))
             {
-                if (!alreadyDeclared.Contains(sym))
-                {
-                    // Stub: provide both declaration and trivial definition.
-                    // Used when no AOT IR declaration is available.
-                    sb.Append("static inline CHAOS_IL2CPP_INTPTR ");
-                    sb.Append(sym);
-                    sb.AppendLine("() noexcept { return 0; }");
-                }
-                else
-                {
-                    // Extern declaration: the real definition lives in the first
-                    // translation unit (native-aot.generated.cpp).  Without this
-                    // declaration, page files cannot call the symbol (undeclared
-                    // function is an error in C++17 /permissive- mode).
-                    sb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
-                    sb.Append(sym);
-                    sb.AppendLine("() noexcept;");
-                }
+                sb.Append("static inline CHAOS_IL2CPP_INTPTR ");
+                sb.Append(sym);
+                sb.AppendLine("() noexcept { return 0; }");
             }
-            if (alreadyDeclared.Count < _emittedExternalRuntimeSymbols.Count)
-                sb.AppendLine();
+            sb.AppendLine();
         }
 
-        return sb.ToString();
+return sb.ToString();
     }
 
     /// <summary>Remove duplicate struct/boxed-type definitions from C++ code.

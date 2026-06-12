@@ -2289,6 +2289,10 @@ public sealed partial class NativeAotLoweringPlanner
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
 		{
 			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, indentation);
+			// Register static field for extern declaration
+			if (_staticFieldDeclarations == null)
+			    _staticFieldDeclarations = new(System.StringComparer.Ordinal);
+			_staticFieldDeclarations.TryAdd(requiredTargetReference.SubjectId, requiredTargetReference.FieldTypeSubjectId);
 			EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{GetNativeStaticFieldSymbol(requiredTargetReference.SubjectId)})");
 			return;
 		}

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -844,7 +844,14 @@ public sealed class NativeAotEmitter
 			stub.AppendLine("() noexcept { return 0; }");
 		}
 		stub.AppendLine();
-		sb.Insert(0, stub.ToString());
+		string genSrc = sb.ToString();
+            int anchor = genSrc.LastIndexOf("#include");
+            if (anchor < 0) anchor = 0;
+            else {
+                int nl = genSrc.IndexOf('\n', anchor);
+                if (nl >= 0) anchor = nl + 1;
+            }
+            sb.Insert(anchor, stub.ToString());
 	}
 
 }
