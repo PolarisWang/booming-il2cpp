@@ -67,6 +67,31 @@ Expert 分类矩阵、多域处理策略、终止守卫等路由规则详见 `sk
 - ≥2 域 → Workflow 委托
 - 连续 2 轮无进展 → 终止，需人工介入
 
+### 深度调试 Workflow 触发条件
+
+当以下任一条件满足时，**必须走 Workflow 深度调试**，不得手动迭代：
+
+1. **同一 chunk 的 fact 失败超过 5 轮仍未解决**
+2. **失败根因横跨 2 个以上域**（如同时涉及 CodeGen + 运行时 + 构建）
+3. **需要 trace C++ 编译/链接/运行的全链路**
+4. **当前 Agent 连续 3 次尝试未取得进展**
+
+深度调试 Workflow 模式：
+```javascript
+// 三个垂直 Expert 各自独立调查域内根因，并行执行
+const findings = await parallel([
+  () => agent("codegen: 分析 extern 声明 emit 逻辑，trace 哪些符号进表"),
+  () => agent("runtime: 编译 tail entry.exe 并 trace dispatch → test body 调用链"),
+  () => agent("build: 分析 Python stub 插入 + cmake 构建缓存问题"),
+]);
+// 汇聚根因
+const rootCause = await agent("synthesize: 综合三域调查结果，给出修复方案",
+  { schema: ROOT_CAUSE_SCHEMA });
+// 按方案逐域修复
+const fix1 = await agent("codegen fix", {...});
+const fix2 = await agent("runtime fix", {...});
+```
+
 ## Trace 优先调试
 
 遇到任何失败、测试红、编译错或意外行为时，**必须先查 trace 系统定位问题**，再分析代码或猜测原因：

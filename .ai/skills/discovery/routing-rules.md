@@ -122,6 +122,34 @@ Translation Expert 和 CodeGen Expert 都涉及 Planner/Emission 文件：
 | 连续 2 轮无进展 | 终止，报"无进展" |
 | 所有 Expert 已尝试但仍有残留 | 终止，报"无法处理的子任务" |
 
+## 5b. 深度调试 Workflow 触发条件
+
+当以下任一条件满足时，**必须切换为 Workflow 深度调试模式**，不得继续手动单域迭代：
+
+| 触发条件 | 说明 |
+|---------|------|
+| 同一 chunk 的 fact 失败超过 5 轮未解决 | 当前 numerics chunk 已达 9 轮 |
+| 失败根因横跨 2 个以上域 | CodeGen + 运行时 + 构建同时涉及 |
+| 需要 trace C++ 编译/链接/运行全链路 | extern 声明 → 编译 → dispatch → SEH |
+| 当前 Agent 连续 3 次尝试未取得进展 | 109/121 已停滞多轮 |
+
+深度调试 Workflow 执行模式：
+
+```
+Step 1 — 并行域内调查（3 个独立 agent）
+├── Expert A (CodeGen):   分析 extern 声明 emit 逻辑、slot map 生成、DirectNativeSymbol 路由
+├── Expert B (运行时):    编译 entry.exe → trace dispatch 链 → 确认 12 个方法卡在哪一步
+└── Expert C (构建):     分析 stub 插入点、cmake 增量编译导致 interop_stubs.cpp 不重新编译的问题
+
+Step 2 — 汇聚根因
+└── synthesize agent: 合并三域调查结果，输出 root_cause + fix_strategy + regression_check
+
+Step 3 — 分域修复
+├── CodeGen fix: 修改 extern 声明 emit
+├── 运行时 fix:  修改 ChaoternalRuntimeFallback 拦截逻辑
+└── 构建 fix:    修复 Python stub 插入点 + 缓存 key 含 runtime stub hash
+```
+
 ---
 
 ## 6. 质量门
