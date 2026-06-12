@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using Chaos.IL2CPP.Contracts;
 using Scriban.Runtime;
 
@@ -286,7 +287,10 @@ public sealed class NativeAotEmitter
                 : "",
             ["workload_abi"] = templateModel.WorkloadAbi,
         };
-        return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
+        var _rendered = ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
+        var _sb = new StringBuilder(_rendered);
+        AddExternalRuntimeStubs(_sb);
+        return _sb.ToString();
     }
 
     /// <summary>
@@ -814,33 +818,36 @@ public sealed class NativeAotEmitter
 
     /// <summary>
     /// Scan generated page content for calls to chaoternal_runtime_* functions
-    /// that lack declarations, and prepend static inline stub declarations.
-    /// </summary>
-    private static void AddExternalRuntimeStubs(StringBuilder sb)
-    {
-        string text = sb.ToString();
-        var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
-        var declRx = new Regex(@"(extern|static inline).*chaos_external_runtime_\w+\s*\(");
-        var calls = callRx.Matches(text);
-        if (calls.Count == 0) return;
-        var missing = new HashSet<string>();
-        foreach (Match m in calls) missing.Add(m.Groups[1].Value);
-        foreach (Match m in declRx.Matches(text))
-        {
-            string sv = m.Value;
-            foreach (var s in missing.ToList())
-                if (sv.Contains(s)) missing.Remove(s);
-        }
-        if (missing.Count == 0) return;
-        var stub = new StringBuilder();
-        stub.AppendLine("// ── External runtime stubs (post-emission) ──");
-        foreach (var sym in missing.OrderBy(s => s))
-        {
-            stub.Append("static inline CHAOS_IL2CPP_INTPTR ");
-            stub.Append(sym);
-            stub.AppendLine("() noexcept { return 0; }");
-        }
-        stub.AppendLine();
-        sb.Insert(0, stub.ToString());
-    }
+	/// <summary>
+	/// Scan generated page content for calls to chaoternal_runtime_* functions
+	/// that lack declarations, and prepend static inline stub declarations.
+	/// </summary>
+	private static void AddExternalRuntimeStubs(StringBuilder sb)
+	{
+		string text = sb.ToString();
+		var callRx = new Regex(@"(chaos_external_runtime_\w+)\(");
+		var declRx = new Regex(@"(extern|static inline).*chaos_external_runtime_\w+\s*\(");
+		var calls = callRx.Matches(text);
+		if (calls.Count == 0) return;
+		var missing = new HashSet<string>();
+		foreach (Match m in calls) missing.Add(m.Groups[1].Value);
+		foreach (Match m in declRx.Matches(text))
+		{
+			string sv = m.Value;
+			foreach (var s in missing.ToList())
+				if (sv.Contains(s)) missing.Remove(s);
+		}
+		if (missing.Count == 0) return;
+		var stub = new StringBuilder();
+		stub.AppendLine("// ── External runtime stubs (post-emission) ──");
+		foreach (var sym in missing.OrderBy(s => s))
+		{
+			stub.Append("static inline CHAOS_IL2CPP_INTPTR ");
+			stub.Append(sym);
+			stub.AppendLine("() noexcept { return 0; }");
+		}
+		stub.AppendLine();
+		sb.Insert(0, stub.ToString());
+	}
+
 }
