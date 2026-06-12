@@ -784,6 +784,24 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 content = content[:insert_pos] + marker + stubs + "\n\n" + content[insert_pos:]
                 cpp_file.write_text(content, encoding="utf-8")
                 print(f"  [build] Added {len(missing)} external runtime stubs to {cpp_file.name}")
+    # --- Post-TPG: chaos_mt_* MethodTable extern declarations ---
+    import re as _re
+    for _mf in sorted(subjects_dir.glob("*.cpp")):
+        _mc = _mf.read_text(encoding="utf-8")
+        _mt_refs = set(_re.findall(r"\b(chaos_mt_\w+)\.", _mc))
+        _mt_missing = [s for s in sorted(_mt_refs) if not _re.search(rf"extern MethodTable\s+{_re.escape(s)}\s*;", _mc)]
+        if _mt_missing:
+            _pos = _mc.rfind("#include")
+            if _pos >= 0:
+                _eol = _mc.find("\n", _pos)
+                _pos = _eol + 1 if _eol >= 0 else _pos
+            _mk = "// --- Post-TPG: chaos_mt_* MethodTable declarations ---\n"
+            if _mk not in _mc:
+                _stubs = "\n".join(f"extern MethodTable {s};" for s in _mt_missing)
+                _mc = _mc[:_pos] + _mk + _stubs + "\n\n" + _mc[_pos:]
+                _mf.write_text(_mc, encoding="utf-8")
+                print(f"  [build] Added {len(_mt_missing)} MethodTable decls to {_mf.name}")
+
     # ── Post-TPG: cmake configure + build ──
     tpg_build_dir = ctx.native_dir / "build"
     tpg_build_dir.mkdir(parents=True, exist_ok=True)
