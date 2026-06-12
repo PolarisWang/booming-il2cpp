@@ -255,7 +255,6 @@ public sealed partial class NativeAotLoweringPlanner
 			};
 			var src = RenderSimpleExternalRuntimeHelper(_cppRet, failSymbol, "",
 			    ["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
-				["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 				Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
 		}

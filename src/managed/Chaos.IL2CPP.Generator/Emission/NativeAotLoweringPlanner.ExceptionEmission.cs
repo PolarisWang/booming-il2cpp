@@ -4142,7 +4142,16 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						Console.Error.WriteLine($"[CODEGEN-DEBUG-LINEAR] targetSymbol={targetSymbol} returnType={a}"); 
 if (targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
 			{
-			    string _extRetType = string.Equals(a, "void", StringComparison.Ordinal) ? "void" : "CHAOS_IL2CPP_INTPTR";
+			    // Emit correct return type matching ABI carrier: Float32->float (XMM0),
+			    // Float64->double (XMM0), others->CHAOS_IL2CPP_INTPTR (RAX).
+			    // Wrong type causes ABI register mismatch at call site.
+			    string _extRetType = returnAbi.CarrierKindCode switch
+			    {
+			        AotCoreIrAbiCarrierKind.Float32 => "float",
+			        AotCoreIrAbiCarrierKind.Float64 => "double",
+			        AotCoreIrAbiCarrierKind.Void => "void",
+			        _ => "CHAOS_IL2CPP_INTPTR",
+			    };
 			    builder.AppendLine($"{indentation}    extern {_extRetType} {targetSymbol}() noexcept;");
 			}
 string value = targetSymbol + "(" + argList + genericCtxArg + ")";
