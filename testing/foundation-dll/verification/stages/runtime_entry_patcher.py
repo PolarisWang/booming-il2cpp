@@ -138,4 +138,87 @@ def patch_runtime_entry(content: str) -> tuple[str, bool]:
         patched = True
         print("  [build] Patched SEH output: -1 -> result (crash yields value=0)")
 
+    # Fix 6: Add PalTryCallNoExcept protection to Linux fact dispatch loop.
+    # The external runtime dispatch table (kChaosExternalRuntimeSubjects[]) has
+    # mutable const char* pointers that can get corrupted at runtime, causing
+    # SIGSEGV in ChaosExternalRuntimeFallback (strcmp against corrupted ptr).
+    # Without PalTryCallNoExcept, the SIGSEGV kills the entire process —
+    # with it, the individual subject is marked as "caught" and the loop continues.
+    #
+    # Step 6a: Add #include <chaos/pal/pal_eh.h>
+    old_pal_inc = '#include <csignal>'
+    new_pal_inc = '#include <csignal>\n#include <chaos/pal/pal_eh.h>'
+    if old_pal_inc in content and '#include <chaos/pal/pal_eh.h>' not in content:
+        content = content.replace(old_pal_inc, new_pal_inc, 1)
+        patched = True
+        print("  [build] Patched includes: added <chaos/pal/pal_eh.h>")
+
+    # Step 6b: Inject PalDispatchWrapper before RunFactJsonMode.
+    # Matches the last comment line before the function definition.
+    old_runjson_entry = (
+        '// all Subject_N wrappers from the subjects DLL as subject entries.\n'
+        'static int RunFactJsonMode() {'
+    )
+    pal_wrapper = (
+        '// all Subject_N wrappers from the subjects DLL as subject entries.\n'
+        '// ── PalDispatchWrapper for PalTryCallNoExcept ──────────────────────\n'
+        '// Wraps ChaosDispatchMethodGetValue into the PalTryCallNoExcept\n'
+        '// (uint64_t(*)(uint64_t,...,uint64_t)) function-pointer signature\n'
+        '// so that SIGSEGV from corrupted dispatch table entries is caught\n'
+        '// and the fact loop continues to the next subject.\n'
+        'static uint64_t PalDispatchWrapper(uint64_t entries, uint64_t count,\n'
+        '                                    uint64_t index, uint64_t thunks,\n'
+        '                                    uint64_t, uint64_t, uint64_t,\n'
+        '                                    uint64_t) noexcept {\n'
+        '    return static_cast<uint64_t>(\n'
+        '        chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(\n'
+        '            reinterpret_cast<const chaos::il2cpp::runtime_core::HotpatchEntryV0*>(\n'
+        '                static_cast<uintptr_t>(entries)),\n'
+        '            static_cast<int32_t>(count),\n'
+        '            static_cast<int32_t>(index),\n'
+        '            reinterpret_cast<void (* const*)() noexcept>(\n'
+        '                static_cast<uintptr_t>(thunks))));\n'
+        '}\n'
+        '\n'
+        'static int RunFactJsonMode() {'
+    )
+    if old_runjson_entry in content and 'PalDispatchWrapper' not in content:
+        content = content.replace(old_runjson_entry, pal_wrapper, 1)
+        patched = True
+        print("  [build] Patched PalDispatchWrapper before RunFactJsonMode")
+
+    # Step 6c: Replace the bare ChaosDispatchMethodGetValue call in the Linux
+    # dispatch loop with PalTryCallNoExcept + PalTryResetState wrapping.
+    # The old code had a raw call inside try/catch — SIGSEGV would kill the
+    # process before reaching catch.  New code resets PAL EH state, wraps
+    # the call in PalTryCallNoExcept (sigsetjmp/siglongjmp), then falls
+    # through to the existing C++ exception handler.
+    old_dispatch_call = (
+        'result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(\n'
+        '                        GetHotpatchEntries(), kAotMethodCount, v_i,'
+        ' CHAOS_USE_DEFAULT_THUNKS);'
+    )
+    new_dispatch_call = (
+        'chaos::il2cpp::pal::PalTryResetState();\n'
+        '                    uint64_t _pal_result = 0;\n'
+        '                    bool _pal_caught ='
+        ' chaos::il2cpp::pal::PalTryCallNoExcept(\n'
+        '                        PalDispatchWrapper,\n'
+        '                        reinterpret_cast<uint64_t>(GetHotpatchEntries()),\n'
+        '                        static_cast<uint64_t>(kAotMethodCount),\n'
+        '                        static_cast<uint64_t>(v_i),\n'
+        '                        reinterpret_cast<uint64_t>(CHAOS_USE_DEFAULT_THUNKS),\n'
+        '                        0, 0, 0, 0,\n'
+        '                        _pal_result);\n'
+        '                    if (_pal_caught) {\n'
+        '                        caught = true;\n'
+        '                    } else {\n'
+        '                        result = static_cast<int64_t>(_pal_result);\n'
+        '                    }'
+    )
+    if old_dispatch_call in content and '_pal_result' not in content:
+        content = content.replace(old_dispatch_call, new_dispatch_call, 1)
+        patched = True
+        print("  [build] Patched Linux dispatch call with PalTryCallNoExcept")
+
     return content, patched

@@ -20,4 +20,21 @@ bool PalTryCallNoExcept(uint64_t (*fn)(uint64_t, uint64_t, uint64_t, uint64_t,
                          uint64_t a4, uint64_t a5, uint64_t a6, uint64_t a7,
                          uint64_t& out_result) noexcept;
 
+/// Reset PAL EH thread-local state to safe defaults.
+/// Safe to call from any context (including inside a signal handler).
+/// Use after a longjmp that bypassed PalTryCallNoExcept's normal cleanup,
+/// to prevent stale sigsetjmp contexts from causing cascading crashes.
+///
+/// Defined as inline (accesses TLS state declared extern below) so that
+/// callers in test/foundation-dll entry.exe don't need to link against
+/// a runtime library with the definition.  The TLS storage is in the
+/// platform .cpp file.
+extern thread_local bool g_pal_try_active;
+extern thread_local int g_pal_try_reentry;
+
+inline void PalTryResetState() noexcept {
+    g_pal_try_active = false;
+    g_pal_try_reentry = 0;
+}
+
 }  // namespace chaos::il2cpp::pal

@@ -58,19 +58,18 @@ static void EnsureAltStack() noexcept {
     }
 }
 
+}  // anonymous namespace (AltStack)
+
 // ── Thread-local state for PalTryCallNoExcept ────────────────────────────
-// Saved execution context; sigsetjmp stores the register state + signal mask
-// before calling fn(). The signal handler uses siglongjmp to restore it.
+// g_pal_try_jmp_buf: saved execution context for sigsetjmp/siglongjmp.
+// g_pal_try_active / g_pal_try_reentry: declared extern in pal_eh.h so
+// PalTryResetState() can be inline (avoids link dependency on libchaos_pal.a
+// for test/foundation-dll builds).
 thread_local sigjmp_buf g_pal_try_jmp_buf;
-
-// Flag indicating the current thread is inside a PalTryCallNoExcept region.
-// The signal handler checks this before deciding to siglongjmp.
 thread_local bool g_pal_try_active = false;
-
-// Reentry counter: when > 1, we are already inside a protected region.
-// Skip sigsetjmp to avoid overwriting the outer context.  The inner
-// call executes directly — if it faults, the OUTER sigsetjmp catches it.
 thread_local int g_pal_try_reentry = 0;
+
+namespace {
 
 // ── Global saved previous signal handlers (installed once) ──────────────
 static struct sigaction s_prev_segv;
