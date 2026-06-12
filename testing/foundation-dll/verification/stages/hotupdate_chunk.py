@@ -120,7 +120,12 @@ def _generate_patch_host_arrays(native_dir: Path, metadata: dict) -> bool:
 
 
 def _run_cmake_rebuild(native_dir: Path) -> bool:
-    """Incremental cmake rebuild: recompiles patch-host-arrays.cpp and relinks entry.exe."""
+    """Incremental cmake rebuild: recompiles patch-host-arrays.cpp and relinks entry.exe.
+
+    Uses the existing cmake build directory from the build stage (no reconfigure).
+    Deleting CMakeCache.txt and reconfiguring would lose the CHAOS_SDK_DIR path,
+    causing find_package(chaos) to fail.
+    """
     build_dir = native_dir / 'build'
     if not build_dir.exists():
         print(f'  [hotupdate] Build directory not found: {build_dir}')
@@ -205,16 +210,10 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
                 f'set(CHAOS_FORCE_MULTIPLE "{allow_multiple}")')
         cmake_lists.write_text(text, encoding="utf-8")
 
-    # 6. Clear cmake cache so file(GLOB ...) re-evaluates with patched paths
-    cache_file = build_dir / "CMakeCache.txt"
-    if cache_file.exists():
-        cache_file.unlink()
-        print(f'  [hotupdate] Cleared stale cmake cache')
-
-    # 7. Reconfigure cmake to pick up any page file count changes and patched paths
-    subprocess.run(['cmake', str(native_dir), '-B', str(build_dir)],
-        capture_output=True, text=True, timeout=120)
-
+    # 6. Incremental cmake build — recompile patch-host-arrays.cpp and relink entry.exe.
+    #    Do NOT clear the cmake cache or reconfigure: the build stage already configured
+    #    cmake with the correct CHAOS_SDK_DIR path.  Deleting CMakeCache.txt would lose
+    #    that configuration, causing find_package(chaos) to fail on reconfigure.
     result = subprocess.run(
         ['cmake', '--build', str(build_dir), '--config', 'RelWithDebInfo'],
         capture_output=True, text=True, timeout=300)
@@ -470,23 +469,16 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     else:
         print(f"  [hotupdate] ATG build failed, falling back to no-patch mode")
 
-    # ── Step 2: Generate per-method host arrays and rebuild entry.exe ──
-    # When patch data was successfully extracted, generate patch-host-arrays.cpp
-    # with real per-method AOT registry mappings and do an incremental cmake
-    # rebuild.  This enables ApplyPatchFromMemoryEx in entry.exe to map
-    # Subject_N methods to their correct HotpatchNameRegistry entries.
-    if patch_data_path is not None:
-        if _generate_patch_host_arrays(ctx.native_dir, metadata):
-            if _run_cmake_rebuild(ctx.native_dir):
-                print(f"  [hotupdate] entry.exe rebuilt with per-method host arrays")
-            else:
-                print(f"  [hotupdate] WARN: cmake rebuild failed, falling back to no-patch mode")
-                patch_data_path = None
-        else:
-            print(f"  [hotupdate] WARN: host array generation failed, falling back to no-patch mode")
-            patch_data_path = None
-
-    # ── Step 3: Run entry.exe --hotupdate [--patch-data ...] [--benchmark-iterations N] ──
+    # ── Step 2: Run entry.exe --hotupdate [--patch-data ...] [--benchmark-iterations N] ──
+    # NOTE: We do NOT do a cmake rebuild here.  The cmake build infrastructure
+    # is managed by the build stage (TPG generate-dll) which regenerates
+    # CMakeLists.txt from Scriban templates with correct CHAOS_SDK_DIR paths.
+    # Incremental cmake rebuilds in the hotupdate stage fail because:
+    #   1. CMakeLists.txt may have been patched for Linux cross-builds
+    #   2. cmake auto-regeneration loses the CHAOS_SDK_DIR path
+    #   3. The patch-host-arrays.cpp data is optional (Subject_N → AOT registry
+    #      mapping), not critical for patch data correctness.
+    # The patch data (method return values) is loaded at runtime via --patch-data.
     hotupdate_args = [str(ctx.entry_exe_path), "--hotupdate"]
     if patch_data_path:
         hotupdate_args.extend(["--patch-data", str(patch_data_path)])
