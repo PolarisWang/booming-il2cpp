@@ -101,11 +101,17 @@ static void PalEhSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcep
     if (prev->sa_flags & SA_SIGINFO) {
         if (prev->sa_sigaction != nullptr) {
             prev->sa_sigaction(sig, info, ucontext);
+            return;
         }
     } else if (prev->sa_handler != SIG_DFL && prev->sa_handler != SIG_IGN) {
         prev->sa_handler(sig);
+        return;
     }
-    // SIG_DFL is implicit: the OS handles it (process termination).
+    // Chain exhausted (SIG_DFL/SIG_IGN): restore default and re-raise so the
+    // OS terminates the process.  Returning silently would resume execution at
+    // the faulting instruction, causing an infinite signal loop.
+    signal(sig, SIG_DFL);
+    raise(sig);
 }
 
 // ── One-time signal handler installation ────────────────────────────────

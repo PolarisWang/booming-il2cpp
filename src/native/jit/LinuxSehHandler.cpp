@@ -41,11 +41,18 @@ static void ChainSignalToPrev(int sig, siginfo_t* info, void* ucontext) noexcept
     if (prev->sa_flags & SA_SIGINFO) {
         if (prev->sa_sigaction != nullptr) {
             prev->sa_sigaction(sig, info, ucontext);
+            return;
         }
     } else if (prev->sa_handler != SIG_DFL && prev->sa_handler != SIG_IGN) {
         prev->sa_handler(sig);
+        return;
     }
-    // SIG_DFL/SIG_IGN: implicit OS default.
+    // Chain exhausted (SIG_DFL/SIG_IGN): restore default and re-raise so the
+    // OS performs the default action (terminate + core dump for SIGSEGV).
+    // Returning silently would resume execution at the faulting instruction,
+    // causing an infinite signal loop.
+    signal(sig, SIG_DFL);
+    raise(sig);
 }
 
 // ── kSpinLimitHard — spinlock warning threshold
