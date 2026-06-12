@@ -517,6 +517,14 @@ public sealed partial class NativeAotLoweringPlanner
     private readonly Dictionary<string, int> _externalRuntimeSubjects = new(StringComparer.Ordinal);
 
     /// <summary>
+    /// Collects all chaos_external_runtime_* symbols referenced during method body emission.
+    /// Populated by <see cref="EmitInvocation"/> when DirectNativeSymbol is set to an
+    /// external runtime stub.  Used by <see cref="BuildTypeDeclarationsCode"/> to emit
+    /// fallback static inline declarations for symbols the normal post-scan misses.
+    /// </summary>
+    private readonly HashSet<string> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
+
+    /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
     /// External runtime helper definitions are pure functions of the normalized subjectId;
     /// caching avoids redundant shape registry matching when the same callee is called
@@ -2051,6 +2059,32 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 sb.AppendLine("() noexcept { return 0; }");
             }
             sb.AppendLine();
+        }
+
+        // ── Emit stub declarations for all chaos_external_runtime_* symbols
+        // collected during method body emission (EmitInvocation path) that were
+        // not already declared by the post-scan above.  These are symbols whose
+        // DirectNativeSymbol was set after IR instruction processing, so the
+        // post-scan (which reads IR instructions) could not detect them.
+        if (_emittedExternalRuntimeSymbols is { Count: > 0 })
+        {
+            var alreadyDeclared = new HashSet<string>(StringComparer.Ordinal);
+            if (externalRuntimeSymbolsReferenced.Count > 0)
+            {
+                foreach (var sym in externalRuntimeSymbolsReferenced)
+                    alreadyDeclared.Add(sym);
+            }
+            foreach (var sym in _emittedExternalRuntimeSymbols.OrderBy(s => s))
+            {
+                if (!alreadyDeclared.Contains(sym))
+                {
+                    sb.Append("static inline CHAOS_IL2CPP_INTPTR ");
+                    sb.Append(sym);
+                    sb.AppendLine("() noexcept { return 0; }");
+                }
+            }
+            if (alreadyDeclared.Count < _emittedExternalRuntimeSymbols.Count)
+                sb.AppendLine();
         }
 
         return sb.ToString();

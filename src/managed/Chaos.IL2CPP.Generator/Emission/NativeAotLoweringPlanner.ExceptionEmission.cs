@@ -4181,6 +4181,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		//   3. Better code generation (the compiler sees the full call graph)
 		if (invocationTarget.DirectNativeSymbol is { } nativeSymbol)
 		{
+		    // Collect chaos_external_runtime_* symbols for fallback declaration emission
+		    if (nativeSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+		        _emittedExternalRuntimeSymbols.Add(nativeSymbol);
 			builder.AppendLine($"{indentation}{{");
 			for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
 			{

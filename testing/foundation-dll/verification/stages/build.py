@@ -28,9 +28,9 @@ from verification.orchestration.context import ChunkContext, StageResult
 from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash
 
 # Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
-_TESTING = Path(__file__).resolve().parents[3] / "testing"
-if str(_TESTING) not in sys.path:
-    sys.path.insert(0, str(_TESTING))
+_TESTING = str(Path(__file__).resolve().parents[3])
+if _TESTING not in sys.path:
+    sys.path.insert(0, _TESTING)
 
 from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
 
@@ -122,7 +122,7 @@ def _compile_custom_subjects(
     Returns list of (asmComponent, typePath, methodName, metadataRetType) tuples
     on success, or None on failure.
     """
-    atg_dll = _tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator")
+    atg_dll = tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator")
     if not atg_dll.exists():
         print("  [build] ATG DLL not found, building...")
         _ensure_tool_built("Chaos.IL2CPP.Tools.AutoTestGenerator")
@@ -413,7 +413,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     # -- 4. Generate subjects metadata (AutoTestGenerator or restore from cache) --
     print(f"  [build] Generating subjects...")
-    auto_dll = _tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator")
+    auto_dll = tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator")
     metadata_path = ctx.subjects_metadata_path
     auto_output = ctx.foundation_dir / "chunks" / ctx.slug / "managed" / ".autogen"
 
@@ -725,7 +725,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             summary="TPG build failed",
             duration_ms=int((time.perf_counter() - start) * 1000))
 
-    tpg_dll = _tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
+    tpg_dll = tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
     print(f"  [build] Running TPG generate-dll...")
 
     tpg_cmd = [
@@ -795,30 +795,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             p = tpg_subjects_dir / stale
             if p.exists(): p.unlink()
 
-    # ── Create entry_stubs.cpp for test framework link symbols ──
-    # The TPG-generated runtime-entry.cpp references Assert_Reset/Assert_Complete
-    # from Chaos.TestFramework.Sdk, but the prebuilt SDK libs don't provide them.
-    _stubs = ctx.native_dir / "entry_stubs.cpp"
-    if not _stubs.exists():
-        _stubs.write_text(
-            '// entry_stubs.cpp — Link-time stubs for test framework symbols\n'
-            '#include <cstdint>\n'
-            'extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset() {}\n'
-            'extern "C" std::int32_t Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() { return 0; }\n'
-        )
-        print(f"  [build] Created entry_stubs.cpp for test framework symbols")
-
-        # Reconfigure cmake to include newly copied subjects/ files
-        tpg_build_dir = ctx.native_dir / "build"
-        subprocess.run(['cmake', str(ctx.native_dir), '-B', str(tpg_build_dir)],
-            capture_output=True, text=True, timeout=120)
-        build_result = subprocess.run(
-            ['cmake', '--build', str(tpg_build_dir), '--config', 'RelWithDebInfo'],
-            capture_output=True, text=True, timeout=300)
-        if build_result.returncode == 0 and ctx.entry_exe_path.exists():
-            print(f"  [build] entry.exe built after post-TPG copy ({ctx.entry_exe_path.stat().st_size} bytes)")
-            # If post-TPG build succeeded, don't fail
-            tpg_result = subprocess.CompletedProcess(args=[], returncode=0, stdout=b'', stderr=b'')
+    # ── entry_stubs.cpp is provided by SDK runtime_stubs/ (no Python generation) ──
 
     if tpg_result.returncode != 0:
         print(f"  [build] TPG generate-dll FAILED (rc={tpg_result.returncode})")

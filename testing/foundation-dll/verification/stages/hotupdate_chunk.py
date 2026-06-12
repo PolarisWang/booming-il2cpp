@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -20,9 +21,9 @@ from typing import Any
 from verification.orchestration.context import ChunkContext, StageResult
 
 # Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
-_TESTING = Path(__file__).resolve().parents[3] / "testing"
-if str(_TESTING) not in sys.path:
-    sys.path.insert(0, str(_TESTING))
+_TESTING = str(Path(__file__).resolve().parents[3])
+if _TESTING not in sys.path:
+    sys.path.insert(0, _TESTING)
 
 from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
 

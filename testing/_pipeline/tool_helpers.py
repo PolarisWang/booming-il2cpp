@@ -8,19 +8,19 @@ import subprocess
 from pathlib import Path
 
 
-def _testing_root() -> Path:
-    """Root of the testing/ directory (parent of _pipeline/)."""
-    return Path(__file__).resolve().parent.parent
+def _repo_root() -> Path:
+    """Repository root (parent of the testing/ directory)."""
+    return Path(__file__).resolve().parent.parent.parent
 
 
 def _tool_dir(tool_name: str) -> Path:
     """Get path to a tool's source directory."""
-    return _testing_root() / "src" / "tools" / tool_name
+    return _repo_root() / "src" / "tools" / tool_name
 
 
 def tool_dll(tool_name: str) -> Path:
     """Get path to a tool's compiled DLL."""
-    return (_testing_root() / "src" / "tools" / tool_name
+    return (_repo_root() / "src" / "tools" / tool_name
             / "bin" / "Debug" / "net8.0" / f"{tool_name}.dll")
 
 
