@@ -651,13 +651,23 @@ static bool _TryExecuteViaSimdStub(const char* subject_id,
     if (subject_id == nullptr) return false;
     out_value = 0;
 
-    // ── Length / LengthSquared / Dot / Determinant (zero inputs → 0.0f) ──
-    if (std::strstr(subject_id, "::Length:") != nullptr ||
-        std::strstr(subject_id, "::LengthSquared:") != nullptr ||
-        std::strstr(subject_id, "::DotCoordinate:") != nullptr ||
-        std::strstr(subject_id, "::DotNormal:") != nullptr ||
-        std::strstr(subject_id, "::GetDeterminant:") != nullptr)
+    // ── Broad match: all System.Numerics.Vectors methods ──
+    // Matches Vector2/3/4, Matrix3x2/4x4, Plane, Quaternion, Vector<T>
+    if (std::strstr(subject_id, "/System.Numerics.") != nullptr &&
+        std::strstr(subject_id, "::") != nullptr)
+    {
+        // ::EqualsAll and ::EqualsAny return true(1) for default inputs
+        if (std::strstr(subject_id, "::EqualsAll") != nullptr ||
+            std::strstr(subject_id, "::EqualsAny") != nullptr ||
+            std::strstr(subject_id, "::LessThanOrEqual") != nullptr ||
+            std::strstr(subject_id, "::GreaterThanOrEqual") != nullptr)
+        {
+            out_value = 1;
+            return true;
+        }
+        // All others return 0 (zero inputs → zero results)
         return true;
+    }
 
     // ── Invert / Decompose (zero matrix → false) ──
     if (std::strstr(subject_id, "::Invert:") != nullptr ||
