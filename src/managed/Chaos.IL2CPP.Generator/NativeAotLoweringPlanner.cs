@@ -1355,6 +1355,12 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                     string? _callee = _inst.Callee ?? _inst.TargetReference?.SubjectId;
                     if (!string.IsNullOrEmpty(_callee) && _seen.Add(_callee))
                     {
+                        // Skip type-only subjects (no ::method:) — these are JIT type-loading
+                        // references (constrained., runtime type resolution, etc.) that should
+                        // NOT be in the external runtime dispatch table.  Including them
+                        // causes interpreter crashes in ChaosExternalRuntimeFallback.
+                        if (!_callee.Contains("::"))
+                            continue;
                         if (!_externalRuntimeSubjects.ContainsKey(_callee))
                         {
                             _externalRuntimeSubjects[_callee] = _nextIdx++;

@@ -230,6 +230,14 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!_seenCallees.Add(callee))
                     continue;
 
+                // P0.5: skip type-only subjects (no ::method:) — these are JIT type-loading
+                // references (e.g. constrained. calls, runtime type resolution) that should
+                // NOT appear in the external runtime dispatch table.  Including them causes
+                // the interpreter to crash with unhandled type-load IL when
+                // ChaosExternalRuntimeFallback tries to execute the subject.
+                if (!callee.Contains("::"))
+                    continue;
+
                 // Already in method dictionary with instructions -> direct AOT call, no table needed.
                 bool _isAot = _methodsBySubjectId.TryGetValue(callee, out var _e) && _e is { Instructions.Count: > 0 };
                 if (_isAot)
