@@ -92,6 +92,38 @@ def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     return "passed"
 
 
+def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | None) -> None:
+    """Append fact results to _dll/reports/history/fact-YYYY-MM-DD.jsonl."""
+    from datetime import datetime, timezone
+    history_dir = ctx.foundation_dir / "_dll" / "reports" / "history"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    history_path = history_dir / f"fact-{date_str}.jsonl"
+
+    entry = {
+        "runId": ctx.run_id,
+        "platform": ctx.platform,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "slug": ctx.slug,
+        "aot": {
+            "passed": aot_result.get("passed", 0),
+            "total": aot_result.get("total", 0),
+            "returncode": aot_result.get("returncode", 0),
+        },
+    }
+    if jit_result:
+        entry["jit"] = {
+            "passed": jit_result.get("passed", 0),
+            "total": jit_result.get("total", 0),
+            "returncode": jit_result.get("returncode", 0),
+        }
+    try:
+        with open(history_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except OSError:
+        pass  # non-fatal
+
+
 def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """Fact stage: run chunk's entry.exe and optionally entry-jit.exe --fact-json."""
     start = time.perf_counter()
@@ -191,6 +223,9 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     if value_suspicious and status == "passed":
         status = "partial"
         print(f"  [fact] Demoting status to partial: {value_warnings} method(s) returned negative values")
+
+    # ── Write fact history (_dll/reports/history/fact-YYYY-MM-DD.jsonl) ──
+    _write_fact_history(ctx, aot_result, jit_result)
 
     return StageResult(
         stage="fact", status=status,
