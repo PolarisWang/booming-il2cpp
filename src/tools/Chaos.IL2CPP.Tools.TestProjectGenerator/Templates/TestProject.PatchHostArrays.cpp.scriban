@@ -2,7 +2,7 @@
 // Per-method host arrays for ApplyPatchFromMemoryEx.
 // Maps Subject_N methods (patch DLL MethodDef index) to their AOT
 // HotpatchNameRegistry entries (namespace, type name, method name).
-{{ if hotupdate_active and host_type_names and host_type_names.size > 0 }}
+{{ if hotupdate_active }}
 // Real mappings computed from subjects.metadata.json hotupdate entries.
 #include <cstdint>
 

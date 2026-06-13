@@ -60,9 +60,11 @@ public sealed partial class NativeAotLoweringPlanner
         return stub.ToString();
     }
 
-    // Regex for declarations: extern / extern "C" / static inline returning CHAOS_IL2CPP_INTPTR
+    // Regex for declarations: extern / extern "C" / static inline
+    // Matches symbol followed by ';', ')', or '(' (covers both
+    // "Type name();" declarations and "static inline Type name() { ... }" definitions).
     private static readonly Regex s_declRx = new(
-        @"\b(chaos_external_runtime_\w+)\s*(?=[\);])",
+        @"\b(chaos_external_runtime_\w+)\s*(?=[\);\(])",
         RegexOptions.Compiled);
 
     // Regex for function-call references: symbol followed by '('
