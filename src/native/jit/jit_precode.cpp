@@ -573,26 +573,51 @@ static bool TransferPrecodeOwnership(HotpatchEntryV0* entry, void* method_key) n
 // ── RegisterJitEntryMethods ───────────────────────────────────────────────
 // Called once at startup (from runtime-entry.cpp) to register all methods
 // for JIT compilation via precode dispatch.  For each entry:
-//   1. Deserialize AotCoreIr JSON → IRMethod
-//   2. AllocateRegisters → RegisterMethod
-//   3. Heap-allocate JitPrecode with the RegisterMethod + CompileConfig
-//   4. Allocate a PrecodeArena trampoline for the JitPrecode
-//   5. Set HotpatchEntryV0::direct_ptr to the trampoline
+//   1. Resolve JSON data: either from .jdata file offset or embedded string
+//   2. Deserialize AotCoreIr JSON → IRMethod
+//   3. AllocateRegisters → RegisterMethod
+//   4. Heap-allocate JitPrecode with the RegisterMethod + CompileConfig
+//   5. Allocate a PrecodeArena trampoline for the JitPrecode
+//   6. Set HotpatchEntryV0::direct_ptr to the trampoline
+//
+// When jit_data is provided, each entry's json_offset + json_len points into
+// the loaded .jdata file content. When jit_data is nullptr, old-style embedded
+// string entries are not supported — all new codegen output uses .jdata files.
 //
 // After this call, first invocation of each method triggers JitStubDispatchImpl
 // which calls Compile() and atomically replaces direct_ptr with compiled code.
-extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count) noexcept {
+extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count,
+                                        const char* jit_data) noexcept {
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
 
     for (uint32_t i = 0; i < count; ++i) {
         const auto& entry = entries[i];
 
-        // Step 1: Deserialize AotCoreIr JSON → IRMethod
-        auto ir = DeserializeAotCoreIrMethod(
-            entry.json, entry.json_len, nullptr, nullptr, nullptr, nullptr);
+        // Step 1: Resolve the JSON data.
+        // When jit_data is provided, entries use file-offset-based addressing:
+        //   entry.json_offset + entry.json_len point into the .jdata blob.
+        // When jit_data is nullptr, fall back to the old embedded-string format
+        //   where entry.json was originally a const char* pointer (backward compat
+        //   with pre-existing test files). Since we changed JitEntry to store
+        //   uint32_t json_offset, the old string-pointer entries are not supported
+        //   — all new codegen output uses the .jdata file format.
+        const char* json_ptr;
+        if (jit_data && entry.json_offset < UINT32_MAX) {
+            // New .jdata file format: json_offset is a byte offset into jit_data.
+            json_ptr = jit_data + static_cast<size_t>(entry.json_offset);
+        } else {
+            CHAOS_IL2CPP_LOG_ERROR_M("jit",
+                "RegisterJitEntryMethods: no jit_data provided for token 0x{:x} module {}",
+                entry.token, entry.module_id);
+            continue;
+        }
 
-        // Step 2: Allocate registers → RegisterMethod (independent copy)
+        // Step 2: Deserialize AotCoreIr JSON → IRMethod
+        auto ir = DeserializeAotCoreIrMethod(
+            json_ptr, entry.json_len, nullptr, nullptr, nullptr, nullptr);
+
+        // Step 3: Allocate registers → RegisterMethod (independent copy)
         auto rm = AllocateRegisters(ir);
         if (rm.instructions.empty()) {
             CHAOS_IL2CPP_LOG_WARN_M("jit",
@@ -602,13 +627,13 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         }
         // ir goes out of scope — vectors auto-clean
 
-        // Step 3: Heap-allocate JitPrecode (lives for program lifetime)
+        // Step 4: Heap-allocate JitPrecode (lives for program lifetime)
         auto* precode = new JitPrecode();
         precode->ir = std::move(rm);
         precode->config = CompileConfig{};
         precode->config.enable_pgo = true;  // profile calls → trigger Tier 1 recompilation
 
-        // Step 4: Look up the HotpatchEntryV0 for this method
+        // Step 5: Look up the HotpatchEntryV0 for this method
         precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(
             entry.module_id, entry.token);
 
@@ -622,10 +647,10 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
             continue;
         }
 
-        // Step 5: Allocate trampoline from the RWX arena
+        // Step 6: Allocate trampoline from the RWX arena
         precode->trampoline = s_precode_arena.AllocateJitTrampoline(precode);
 
-        // Step 6: Point direct_ptr at the trampoline.
+        // Step 7: Point direct_ptr at the trampoline.
         // First call goes trampoline → JitStubEntry → JitStubDispatchImpl
         // → Compile() → direct_ptr atomically replaced with compiled code.
         // Save the original direct_ptr (AOT code) in case Compile() fails
