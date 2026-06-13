@@ -585,6 +585,19 @@ public sealed class CppProjectEmitter
                 // best-effort cleanup — files locked by cmake process may not delete
             }
         }
+
+        // Remove stale bridge-redirect stubs from subjects/ after successful build.
+        // These files (bridge-redirect.generated.cpp, chaos_register_bridge_redirects.generated.cpp)
+        // are injected by the hotupdate Python pipeline into subjects/ before cmake rebuild,
+        // but reference symbols no longer present after codegen changes and cause LNK2019
+        // on subsequent builds.  TPG must purge them to eliminate the LINK-HACK-1 workaround
+        // from the Python pipeline.
+        var subjectsDir2 = Path.Combine(projectDir, "subjects");
+        if (Directory.Exists(subjectsDir2))
+        {
+            TryDeleteFile(Path.Combine(subjectsDir2, "bridge-redirect.generated.cpp"));
+            TryDeleteFile(Path.Combine(subjectsDir2, "chaos_register_bridge_redirects.generated.cpp"));
+        }
     }
 
     private static void RenderToFile(string templateName, Scriban.Runtime.ScriptObject model, string outputDir, string outputFileName)
