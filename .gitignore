@@ -475,3 +475,8 @@ testing/foundation-dll/D:*_stdout.txt
 
 # Root-level native build artifacts
 native-build/
+
+# Learning signals and evolution lineage (auto-generated runtime data)
+skills/lifecycle/learning/signals/
+.ai/skills/lifecycle/learning/signals/
+.ai/skills/lifecycle/evolution/lineage/
