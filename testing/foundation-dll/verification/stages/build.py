@@ -261,7 +261,7 @@ def _build_jit_entry(
     codegen_cpp_total = sum(
         f.stat().st_size for f in (native_dir / "codegen" / "generated").glob("*.cpp")
     ) if (native_dir / "codegen" / "generated").exists() else 0
-    if codegen_cpp_total > 100 * 1024 * 1024:  # 100 MB
+    if codegen_cpp_total > 500 * 1024 * 1024:  # 500 MB (D1: .jdata externalized, PE32+ 2GB limit)
         print(f"  [build] JIT build skipped: codegen output {codegen_cpp_total // (1024*1024)}MB")
         print(f"  [build]   (PE32+ image size limit: 2GB)")
         return False
