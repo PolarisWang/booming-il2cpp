@@ -1,0 +1,17 @@
+{
+  "name": "dev-il2cpp-simd-expert",
+  "description": "SIMD 实现专家 — System.Numerics 软件回退、跨平台 SSE/NEON/Generic 实现、IEEE 754 精度、边缘情况处理",
+  "version": "1.0.0",
+  "owner": "00-skills-maintainers",
+  "budget": "small",
+  "status": "active",
+  "domain": "runtime",
+  "triggers": [
+    "Vector2/3/4/Matrix/Plane/Quaternion 方法实现",
+    "Vector<T> lane-by-lane 软件模拟",
+    "x86 SSE/AVX intrinsics 条件编译",
+    "ARM64 NEON intrinsics 条件编译",
+    "NaN/Inf/denormal 跨平台一致性",
+    "BitOperations 软件回退扩展"
+  ]
+}
