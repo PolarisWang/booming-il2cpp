@@ -34,4 +34,5 @@ public static class ManagedClosureArtifactNames
     public const string NativeReferenceLoweringPlan = "native-reference.lowering-plan.json";
     public const string NativeAotLoweringPlan = "native-aot.lowering-plan.json";
     public const string ClosureManifest = "closure.manifest.json";
+    public const string Capabilities = "capabilities.json";
 }
