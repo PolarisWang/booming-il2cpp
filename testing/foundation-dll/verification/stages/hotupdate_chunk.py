@@ -183,23 +183,9 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
                 encoding="utf-8")
             print(f'  [hotupdate] Generated chaos_assert_stubs.cpp (Assert_Complete stub)')  # LINK-HACK-3
 
-    # 4. Make runtime-patchdata.cpp sentinel symbols weak so they can be
-    #    overridden by patch-host-arrays.cpp strong definitions at link time.
-    #    Only patch if patch-host-arrays.cpp exists (i.e. we're in hotupdate mode).
-    patch_arrays = native_dir / "patch-host-arrays.cpp"
-    runtime_patchdata = native_dir / "runtime-patchdata.cpp"
-    if patch_arrays.exists() and runtime_patchdata.exists():
-        text = runtime_patchdata.read_text(encoding="utf-8")
-        weak_text = re.sub(
-            r'^(extern const (?:char\*|int) (?:kPatchDataHostNamespace|kPatchDataHost(TypeNames|MethodNames)|kPatchDataCount)\b)',
-            r'__attribute__((weak)) \1',
-            text, flags=re.MULTILINE)
-        runtime_patchdata.write_text(weak_text, encoding="utf-8")
-        print(f'  [hotupdate] LINK-HACK-4: Marked sentinel symbols as weak in runtime-patchdata.cpp')
-
-    # 5. Add --allow-multiple-definition to Linux link flags to handle
-    #    remaining non-weak multiple definitions (e.g. ChaosFindExternalTypeDescByStableId
-    #    which may be in both a stale stub and the prebuilt lib).
+    # 4. Cross-build path substitution in CMakeLists.txt (Win→Linux).
+    #    TPG on Windows generates drive-letter paths; the Linux cross-build
+    #    host needs POSIX paths.
     cmake_lists = native_dir / "CMakeLists.txt"
     if cmake_lists.exists():
         text = cmake_lists.read_text(encoding="utf-8")
@@ -209,14 +195,6 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
         text = re.sub(r'[A-Za-z]:/agent/booming-il2cpp', root, text)
         text = re.sub(r'"D:/([^"]+)"', lambda m: f'"/home/debian/agent/{m.group(1)}"', text)
         # LINK-HACK-5: cross-build path substitution (Win→Linux)
-
-        # Add --allow-multiple-definition on Linux (not MSVC, which has /FORCE:MULTIPLE)
-        if 'set(CHAOS_FORCE_MULTIPLE "")' in text:
-            allow_multiple = '-Wl,--allow-multiple-definition'
-            text = text.replace(
-                'set(CHAOS_FORCE_MULTIPLE "")',
-                f'set(CHAOS_FORCE_MULTIPLE "{allow_multiple}")')
-            # LINK-HACK-6: suppress multiple-definition linker errors
         cmake_lists.write_text(text, encoding="utf-8")
 
     # 6. Incremental cmake build — recompile patch-host-arrays.cpp and relink entry.exe.

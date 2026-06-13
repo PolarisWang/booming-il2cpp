@@ -123,25 +123,6 @@ def _sanitize_for_net8_retry(combined_src: Path, error_lines: set[int]) -> bool:
         print(f"  [managed-benchmark] Sanitized {sanitized_count} lines for net8.0 build")
     return sanitized_count > 0
 
-
-def _ensure_multitarget_csproj(combined_csproj: Path) -> str | None:
-    """Patch csproj to use TargetFrameworks (multi-target). Returns original TFM or None."""
-    csproj_text = combined_csproj.read_text(encoding="utf-8")
-    if "<TargetFramework>" not in csproj_text:
-        return None  # already multi-target
-
-    csproj_text = csproj_text.replace(
-        "<TargetFramework>", "<TargetFrameworks>")
-    csproj_text = csproj_text.replace(
-        "</TargetFramework>", "</TargetFrameworks>")
-    net9_matches = list(re.finditer(r"net\d+\.\d+", csproj_text))
-    current_tfm = net9_matches[0].group() if net9_matches else "net9.0"
-    csproj_text = csproj_text.replace(
-        current_tfm, f"net8.0;{current_tfm};net10.0")
-    combined_csproj.write_text(csproj_text, encoding="utf-8")
-    return current_tfm
-
-
 _NET8_REPLACEMENTS = [
     ("default(System.ReadOnlySpan<object>)", "default(object[])"),
     ("default(System.ReadOnlySpan<string>)", "default(string[])"),
@@ -216,9 +197,6 @@ def _build_combined_for_tfm(combined_csproj: Path, tfm: str, out_dir: Path) -> b
 
     out_dir.mkdir(parents=True, exist_ok=True)
     combined_src = combined_csproj.parent / "CombinedSubjects.cs"
-
-    # Patch csproj to multi-target
-    _ensure_multitarget_csproj(combined_csproj)
 
     # Pre-build: remove [Benchmark] from methods known to crash at runtime
     # (e.g. Vector.StoreUnsafe writes past stack slots). Applied for all TFMs.
