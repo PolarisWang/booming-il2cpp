@@ -215,4 +215,10 @@ extern "C" CHAOS_IL2CPP_INTPTR* (*g_chaos_enum_preinit_lookup)(
 extern "C" void ChaosEnumRegisterPreInitTable(
     const EnumPreInitEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept;
 
+/// Allocate a POH-managed string containing the given UTF-8 data.
+/// Called from codegen-generated inline enum ToString code for
+/// lazy-initialized static string holders.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosEnumAllocString(
+    const char* data, CHAOS_IL2CPP_INT32 len) noexcept;
+
 #endif // CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_

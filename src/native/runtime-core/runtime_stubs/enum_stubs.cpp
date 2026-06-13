@@ -126,6 +126,18 @@ static void write_string_data(CHAOS_IL2CPP_INTPTR str_handle, const char* data, 
     dest[len] = '\0';
 }
 
+// ── Public API for codegen-inline enum ToString ──
+// Called from native-aot.generated.cpp inline switch cases to lazily
+// allocate enum field name strings on first access.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosEnumAllocString(
+    const char* data, CHAOS_IL2CPP_INT32 len) noexcept
+{
+    auto str_h = enum_alloc_string_poh(static_cast<CHAOS_IL2CPP_UINTPTR>(len));
+    if (str_h == 0) return 0;
+    write_string_data(str_h, data, static_cast<CHAOS_IL2CPP_UINTPTR>(len));
+    return str_h;
+}
+
 /// Extract the UTF-8 data pointer and length from a managed string handle.
 static const char* get_string_data(CHAOS_IL2CPP_INTPTR str_handle, CHAOS_IL2CPP_UINTPTR& out_len) noexcept
 {

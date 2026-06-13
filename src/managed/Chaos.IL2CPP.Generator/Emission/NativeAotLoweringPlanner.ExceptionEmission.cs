@@ -4016,62 +4016,90 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		return instruction.Callee?.Contains("::Format:", StringComparison.Ordinal) == true;
 	}
 
-	private void EmitFusedEnumBoxToString(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
-	{
+		/// <summary>
+		/// Generate a C++ identifier-safe name from an enum field name.
+		/// Replaces non-alphanumeric characters with underscores.
+		/// </summary>
+		private static string SanitizeForCppIdent(string name)
+		{
+			var sb = new System.Text.StringBuilder(name.Length);
+			foreach (char c in name)
+			{
+				if (char.IsLetterOrDigit(c) || c == '_') sb.Append(c);
+				else sb.Append('_');
+			}
+			if (sb.Length > 0 && char.IsDigit(sb[0])) sb.Insert(0, '_');
+			return sb.Length > 0 ? sb.ToString() : "_empty";
+		}
+
+		private void EmitFusedEnumBoxToString(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+		{
+			// ── Inline string table ──
+			// Replaces CHAOS_IL2CPP_STRING_ID (tagged FNV hash) with lazy-initialized
+			// static string holders.  The first access allocates via ChaosEnumAllocString;
+			// subsequent accesses return the cached pointer directly — no tag-bit
+			// detection, no string-table resolve, no GC allocation after first use.
+
 			// A2.4: Constant-folded BoxToString — field name known at codegen time.
 			if (_enumToStringFoldMap.TryGetValue(instruction.IlOffset, out var foldedFieldName))
 			{
 				ConsumeEvalStackValueExpression();
 				_pendingEnumBoxSubjectId = null;
+				string strHolder = "s_enum_str_" + SanitizeForCppIdent(foldedFieldName);
 				builder.AppendLine($"{indentation}{{");
-				EmitEvalStackPush(builder, indentation + "    ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(foldedFieldName)})");
+				builder.AppendLine($"{indentation}    static CHAOS_IL2CPP_INTPTR {strHolder} = 0;");
+				builder.AppendLine($"{indentation}    if (!{strHolder})");
+				builder.AppendLine($"{indentation}        {strHolder} = ChaosEnumAllocString({ToCppStringLiteral(foldedFieldName)}, {foldedFieldName.Length});");
+				EmitEvalStackPush(builder, indentation + "    ", strHolder);
 				builder.AppendLine($"{indentation}}}");
 				return;
 			}
 
-		string rawValueExpr = ConsumeEvalStackValueExpression();
-		string enumSubjectId = _pendingEnumBoxSubjectId!;
-		_pendingEnumBoxSubjectId = null;
+			string rawValueExpr = ConsumeEvalStackValueExpression();
+			string enumSubjectId = _pendingEnumBoxSubjectId!;
+			_pendingEnumBoxSubjectId = null;
 
-		// A2.6: Per-enum switch — generate inline C++ switch when the enum type
-		// is known at codegen time and its metadata is available. Enables compiler
-		// jump-table generation for O(1) value→name lookup, avoiding generic stub
-		// dispatch (ChaosEnumToStringRaw) and its caching overhead.
-		if (_enumValueToNameMap.TryGetValue(enumSubjectId, out var valueToName) &&
-			valueToName.Count > 0 && valueToName.Count <= 64)
-		{
-			builder.AppendLine($"{indentation}{{");
-			builder.AppendLine($"{indentation}    switch (static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}))");
-			builder.AppendLine($"{indentation}    {{");
-
-			foreach (var kvp in valueToName)
+			// A2.6: Per-enum switch — lazy-initialized static string holders.
+			if (_enumValueToNameMap.TryGetValue(enumSubjectId, out var valueToName) &&
+				valueToName.Count > 0 && valueToName.Count <= 64)
 			{
-				builder.AppendLine($"{indentation}        case {kvp.Key}:");
-				EmitEvalStackPush(builder, indentation + "            ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(kvp.Value)})");
+				builder.AppendLine($"{indentation}{{");
+				builder.AppendLine($"{indentation}    switch (static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}))");
+				builder.AppendLine($"{indentation}    {{");
+
+				foreach (var kvp in valueToName)
+				{
+					string strHolder = "s_enum_str_" + SanitizeForCppIdent(kvp.Value);
+					builder.AppendLine($"{indentation}        case {kvp.Key}:");
+					builder.AppendLine($"{indentation}        {{");
+					builder.AppendLine($"{indentation}            static CHAOS_IL2CPP_INTPTR {strHolder} = 0;");
+					builder.AppendLine($"{indentation}            if (!{strHolder})");
+					builder.AppendLine($"{indentation}                {strHolder} = ChaosEnumAllocString({ToCppStringLiteral(kvp.Value)}, {kvp.Value.Length});");
+					EmitEvalStackPush(builder, indentation + "            ", strHolder);
+					builder.AppendLine($"{indentation}            break;");
+					builder.AppendLine($"{indentation}        }}");
+				}
+
+				// Default: unrecognized value — delegate to runtime stub
+				builder.AppendLine($"{indentation}        default:");
+				builder.AppendLine($"{indentation}        {{");
+				string typeHandle = $"static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(enumSubjectId)})";
+				builder.AppendLine($"{indentation}            const auto chaos_result = ChaosEnumToStringRaw({typeHandle}, static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
+				EmitEvalStackPush(builder, indentation + "            ", "chaos_result");
 				builder.AppendLine($"{indentation}            break;");
+				builder.AppendLine($"{indentation}        }}");
+
+				builder.AppendLine($"{indentation}    }}");
+				builder.AppendLine($"{indentation}}}");
+				return;
 			}
 
-			// Default: unrecognized value — delegate to runtime stub for correct
-			// flags-decomposition / decimal formatting behavior.
-			builder.AppendLine($"{indentation}        default:");
-			builder.AppendLine($"{indentation}        {{");
-			string typeHandle = $"static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(enumSubjectId)})";
-			builder.AppendLine($"{indentation}            const auto chaos_result = ChaosEnumToStringRaw({typeHandle}, static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
-			EmitEvalStackPush(builder, indentation + "            ", "chaos_result");
-			builder.AppendLine($"{indentation}            break;");
-			builder.AppendLine($"{indentation}        }}");
-
-			builder.AppendLine($"{indentation}    }}");
+			// Fallback: large enum (>64 fields) or no metadata — use runtime stub.
+			builder.AppendLine($"{indentation}{{");
+			builder.AppendLine($"{indentation}    const auto chaos_result = ChaosEnumToStringRaw(static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(enumSubjectId)}), static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
+			EmitEvalStackPush(builder, indentation + "    ", "chaos_result");
 			builder.AppendLine($"{indentation}}}");
-			return;
 		}
-
-		// Fallback: large enum (>64 fields) or no metadata — use runtime stub.
-		builder.AppendLine($"{indentation}{{");
-		builder.AppendLine($"{indentation}    const auto chaos_result = ChaosEnumToStringRaw(static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(enumSubjectId)}), static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
-		EmitEvalStackPush(builder, indentation + "    ", "chaos_result");
-		builder.AppendLine($"{indentation}}}");
-	}
 
 	private void EmitFusedEnumFormatBoxCall(StringBuilder builder, string indentation)
 	{
@@ -4142,16 +4170,12 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						Console.Error.WriteLine($"[CODEGEN-DEBUG-LINEAR] targetSymbol={targetSymbol} returnType={a}"); 
 if (targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
 			{
-			    // Emit correct return type matching ABI carrier: Float32->float (XMM0),
-			    // Float64->double (XMM0), others->CHAOS_IL2CPP_INTPTR (RAX).
-			    // Wrong type causes ABI register mismatch at call site.
-			    string _extRetType = returnAbi.CarrierKindCode switch
-			    {
-			        AotCoreIrAbiCarrierKind.Float32 => "float",
-			        AotCoreIrAbiCarrierKind.Float64 => "double",
-			        AotCoreIrAbiCarrierKind.Void => "void",
-			        _ => "CHAOS_IL2CPP_INTPTR",
-			    };
+			    // Use CHAOS_IL2CPP_INTPTR for the extern declaration to match the
+			    // definition in interop_stubs.cpp / codegen-generated stubs which
+			    // always return CHAOS_IL2CPP_INTPTR regardless of the actual ABI
+			    // carrier.  Using the ABI-correct type (float/double) would cause
+			    // C2371 redefinition errors since the definition type differs.
+			    string _extRetType = string.Equals(a, "void", StringComparison.Ordinal) ? "void" : "CHAOS_IL2CPP_INTPTR";
 			    builder.AppendLine($"{indentation}    extern {_extRetType} {targetSymbol}() noexcept;");
 			}
 string value = targetSymbol + "(" + argList + genericCtxArg + ")";
