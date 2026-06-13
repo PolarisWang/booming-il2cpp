@@ -1241,6 +1241,11 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 string jitDataFilename = Path.GetFileName(_jitDataOutputPath);
                 registerBody = $@"
+    // Forward declaration for the hotpatch module symbol (defined elsewhere in
+    // this translation unit by the module registration code).  This is needed
+    // because ChaosJitRegisterAll is emitted before the module registration
+    // section in the generated file order.
+    extern ""C"" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
     // Load JIT method data from {jitDataFilename} file.
     chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
     uint64_t jit_data_size = 0;
@@ -4499,16 +4504,37 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
-        // Sort subject entries by subject_index (metadata order) so the slot map
-        // maps subject indices correctly. Without sorting, the slot map order
-        // follows the codegen's internal iteration order, which doesn't match
-        // the ATG metadata order.
-        subjectEntries = [.. subjectEntries.OrderBy(se => (int)se["subject_index"])];
-        // Reassign sequential subject_index after sorting — the initial values
-        // were computed by scanning _subjectMethodSubjectIds which includes ALL
-        // chunks' methods (571+), not just the current chunk's 121, inflating indices.
-        for (int sei = 0; sei < subjectEntries.Count; sei++)
-            subjectEntries[sei]["subject_index"] = sei;
+        // Sort subject entries by metadata order so the slot map maps subject
+        // indices correctly.  Build a metadata-position lookup from the ordered
+        // _subjectMethodSubjectIds list (preserving TPG's ATG order), filtering out
+        // benchmark entries (which IsSubjectMethod already excludes).  Use the
+        // position in this filtered list as the sort key.
+        if (_subjectMethodSubjectIds is { Count: > 0 })
+        {
+            // Build SubjectId → metadata-order-position map (fact only)
+            var metadataOrder = new Dictionary<string, int>(StringComparer.Ordinal);
+            int factPos = 0;
+            foreach (var sid in _subjectMethodSubjectIds)
+            {
+                if (!sid.Contains("::Benchmark_", StringComparison.Ordinal))
+                {
+                    metadataOrder[sid] = factPos;
+                    factPos++;
+                }
+            }
+            subjectEntries = [.. subjectEntries.OrderBy(se =>
+            {
+                // Find this entry's SubjectId from its method_index
+                var methodIdx = (int)se["method_index"];
+                var method = methods[methodIdx];
+                if (method.SubjectId != null && metadataOrder.TryGetValue(method.SubjectId, out int order))
+                    return order;
+                return int.MaxValue; // Unknown methods go to the end
+            })];
+            // Reassign sequential subject_index after sorting
+            for (int sei = 0; sei < subjectEntries.Count; sei++)
+                subjectEntries[sei]["subject_index"] = sei;
+        }
 
         Console.Error.WriteLine($"[DISPATCH-DIAG] total methods: {methods.Count}, subject entries: {subjectEntries.Count}");
         if (subjectEntries.Count > 0)
