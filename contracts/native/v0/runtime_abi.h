@@ -262,6 +262,29 @@ typedef struct RuntimeAbiV0 {
         RuntimeState* runtime_state,
         int64_t bytes);
 
+    /* ── RuntimeAbiV3 additions (ReferenceProof kernel helpers) ── */
+
+    /* Interop kernel32 (no runtime/thread state). */
+    CHAOS_IL2CPP_INTPTR (*interop_kernel32_get_last_error)(void);
+    CHAOS_IL2CPP_UINT32 (*interop_kernel32_get_current_process_id)(void);
+    CHAOS_IL2CPP_INT32 (*interop_kernel32_get_current_thread_id)(void);
+    CHAOS_IL2CPP_INTPTR (*interop_kernel32_get_current_process)(void);
+    CHAOS_IL2CPP_INTPTR (*interop_kernel32_get_current_thread)(void);
+    bool (*interop_kernel32_close_handle)(CHAOS_IL2CPP_INTPTR handle);
+    bool (*interop_kernel32_free_library)(CHAOS_IL2CPP_INTPTR handle);
+
+    /* Marshal alloc/free/realloc (without runtime/thread params). */
+    void* (*marshal_alloc_h_global)(size_t size);
+    void* (*marshal_alloc_co_task_mem)(size_t size);
+    void* (*marshal_realloc_h_global)(void* ptr, size_t size);
+    void* (*marshal_realloc_co_task_mem)(void* ptr, size_t size);
+    void (*marshal_free_h_global)(void* ptr);
+    void (*marshal_zero_free_co_task_mem_utf8)(void* ptr);
+    void* (*marshal_string_to_co_task_mem_utf8)(const char* str);
+
+    /* Task kernel. */
+    int32_t (*task_kernel_new_id)(void);
+
     /* ═══════════════════════════════════════════════════════════════
      * V1 additions: dispatch, hotpatch, module, type registration
      * Added after struct_size so consumers can check abi_version.
@@ -378,6 +401,14 @@ CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV1* CHAOS_RUNTIME_ABI_CALL chaos_runtim
 
 /* Returns the process-wide v2 table (superset of v0, v1). */
 CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV2* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v2(void);
+
+/* RuntimeAbiV3 — inherits all V2 fields and adds ReferenceProof kernel helpers
+ * (interop kernel32, marshal alloc/free, task kernel, etc.).
+ * Layout-compatible with V0/V1/V2 for the first N fields. */
+typedef RuntimeAbiV0 RuntimeAbiV3;
+
+/* Returns the process-wide v3 table (superset of v2). */
+CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV3* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v3(void);
 
 #ifdef __cplusplus
 }
