@@ -16,8 +16,6 @@ internal static class TemplateCatalog
         "TestProject.RuntimeEntry.cpp.scriban",
         "TestProject.CMakeLists.txt.scriban",
         "TestProject.CMakePresets.json.scriban",
-        "TestProject.Entry.cpp.scriban",
-        "TestProject.Entry.h.scriban",
         "TestProject.Dispatch.cpp.scriban",
         "TestProject.RuntimePatchdata.cpp.scriban",
         "TestProject.PatchHostArrays.cpp.scriban",

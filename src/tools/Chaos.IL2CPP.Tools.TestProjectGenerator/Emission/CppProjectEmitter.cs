@@ -19,8 +19,6 @@ public sealed class CppProjectEmitter
     private static readonly string[] AllTemplateNames =
     [
         "TestProject.RuntimeEntry.cpp.scriban",
-        "TestProject.Entry.cpp.scriban",
-        "TestProject.Entry.h.scriban",
         "TestProject.Dispatch.cpp.scriban",
         "TestProject.CMakeLists.txt.scriban",
         "TestProject.CMakePresets.json.scriban",
@@ -208,9 +206,6 @@ public sealed class CppProjectEmitter
             repatchCode = PatchRuntimeEntry(repatchCode);
             File.WriteAllText(repatchPath, repatchCode);
         }
-        RenderToFile("TestProject.Entry.cpp.scriban", model, outputDir, "entry.cpp");
-        RenderToFile("TestProject.Entry.h.scriban", model, outputDir, "entry.h");
-
         RenderToFile("TestProject.Dispatch.cpp.scriban", model, outputDir, "verification_dispatch.generated.cpp");
 
         RenderToFile("TestProject.CMakeLists.txt.scriban", model, outputDir, "CMakeLists.txt");
