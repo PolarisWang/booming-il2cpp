@@ -17,6 +17,7 @@
 #include <cstdint>
 #include <cinttypes>
 #include <csignal>
+#include <chaos/pal/pal_eh.h>
 #include <csetjmp>
 
 #if defined(_WIN32)
@@ -311,6 +312,26 @@ static LONG CALLBACK FactVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept 
 // access uninitialized runtime state and cause uncatchable access violations;
 // the CombinedSubjects/ prefix detection in IsSubjectMethod() correctly marks
 // all Subject_N wrappers from the subjects DLL as subject entries.
+{{ if !is_jit }}
+// ── PalDispatchWrapper for PalTryCallNoExcept ──────────────────────
+// Wraps ChaosDispatchMethodGetValue into the PalTryCallNoExcept
+// (uint64_t(*)(uint64_t,...,uint64_t)) function-pointer signature
+// so that SIGSEGV from corrupted dispatch table entries is caught
+// and the fact loop continues to the next subject.
+static uint64_t PalDispatchWrapper(uint64_t entries, uint64_t count,
+                                    uint64_t index, uint64_t thunks,
+                                    uint64_t, uint64_t, uint64_t,
+                                    uint64_t) noexcept {
+    return static_cast<uint64_t>(
+        chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+            reinterpret_cast<const HotpatchEntryV0*>(
+                static_cast<uintptr_t>(entries)),
+            static_cast<int32_t>(count),
+            static_cast<int32_t>(index),
+            reinterpret_cast<void (* const*)() noexcept>(
+                static_cast<uintptr_t>(thunks))));
+}
+{{ end }}
 static int RunFactJsonMode() {
     const int kCount = kSubjectEntryCount;
 
@@ -419,8 +440,21 @@ static int RunFactJsonMode() {
         // Returns 0 on initial entry, non-zero after longjmp from fail hook.
         if (setjmp(t_abort_jmp) == 0) {
             try {
-                result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
-                        GetHotpatchEntries(), kAotMethodCount, v_i, CHAOS_USE_DEFAULT_THUNKS);
+                chaos::il2cpp::pal::PalTryResetState();
+                uint64_t _pal_result = 0;
+                bool _pal_caught = chaos::il2cpp::pal::PalTryCallNoExcept(
+                    PalDispatchWrapper,
+                    reinterpret_cast<uint64_t>(GetHotpatchEntries()),
+                    static_cast<uint64_t>(kAotMethodCount),
+                    static_cast<uint64_t>(v_i),
+                    reinterpret_cast<uint64_t>(CHAOS_USE_DEFAULT_THUNKS),
+                    0, 0, 0, 0,
+                    _pal_result);
+                if (_pal_caught) {
+                    caught = true;
+                } else {
+                    result = static_cast<int64_t>(_pal_result);
+                }
             } catch (...) {
                 caught = true;
             }

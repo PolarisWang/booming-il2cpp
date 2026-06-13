@@ -66,7 +66,6 @@ class ChunkContext:
     stage_timeout_seconds: int = 0
     resume: bool = False
     skip_probe: bool = False
-    skip_build: bool = False
     assembly_dirs: list[str] = field(default_factory=list)
 
     @property

@@ -82,7 +82,6 @@ class TestChunkContext:
         assert ctx.mode == "standard"
         assert not ctx.verbose
         assert ctx.stage_timeout_seconds == 0
-        assert not ctx.skip_build
 
     def test_managed_dir_derivation(self):
         ctx = ChunkContext(
@@ -114,16 +113,6 @@ class TestChunkContext:
             assembly_dirs=["/f/crypto-refs"],
         )
         assert len(ctx.assembly_dirs) == 1
-
-    def test_skip_build_flag(self):
-        ctx = ChunkContext(
-            slug="test",
-            assembly="Test",
-            chunk_dir=Path("/c"),
-            foundation_dir=Path("/f"),
-            skip_build=True,
-        )
-        assert ctx.skip_build
 
     def test_selected_properties_on_real_chunk(self):
         """Verify property paths are consistent with each other."""

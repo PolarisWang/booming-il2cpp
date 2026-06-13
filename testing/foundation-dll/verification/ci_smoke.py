@@ -30,8 +30,6 @@ def main() -> int:
     parser.add_argument("--mode", default="smoke", choices=["smoke", "full"],
                         help="smoke=key families only (default), full=all families")
     parser.add_argument("--verbose", action="store_true", help="Verbose output")
-    parser.add_argument("--skip-build", action="store_true",
-                        help="Skip build stage (reuse existing entry.exe)")
     parser.add_argument("--check-regression", action="store_true",
                         help="Run benchmark regression check after pipeline")
     args = parser.parse_args()
@@ -76,8 +74,6 @@ def main() -> int:
         ]
         if args.verbose:
             sys.argv.append("--verbose")
-        if args.skip_build:
-            sys.argv.append("--skip-build")
 
         rc = pipeline_main()
         if rc != 0:

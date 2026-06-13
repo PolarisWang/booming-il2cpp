@@ -1684,8 +1684,11 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"{indentation}    BgcRecordRootChange(reinterpret_cast<void**>(&{fieldSymbol}), reinterpret_cast<void*>({fieldSymbol}));");
 			}
 			builder.AppendLine($"{indentation}    {fieldSymbol} = chaos_value;");
-			builder.AppendLine($"{indentation}}}");
-			break;
+				builder.AppendLine($"{indentation}}}");
+				if (_staticFieldDeclarations == null)
+				    _staticFieldDeclarations = new Dictionary<string, string?>(System.StringComparer.Ordinal);
+				_staticFieldDeclarations.TryAdd(targetRef.SubjectId, targetRef.FieldTypeSubjectId);
+				break;
 		}
 		case "stfld":
 		{
@@ -2289,6 +2292,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
 		{
 			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, indentation);
+			if (_staticFieldDeclarations == null)
+				_staticFieldDeclarations = new Dictionary<string, string?>(System.StringComparer.Ordinal);
+			_staticFieldDeclarations.TryAdd(requiredTargetReference.SubjectId, requiredTargetReference.FieldTypeSubjectId);
 			EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{GetNativeStaticFieldSymbol(requiredTargetReference.SubjectId)})");
 			return;
 		}

@@ -294,7 +294,7 @@ public sealed partial class NativeAotLoweringPlanner
 				if (runtimeServiceKind.HasValue)
 				{
 					AotCoreIrRuntimeServiceKind valueOrDefault = runtimeServiceKind.GetValueOrDefault();
-					if (valueOrDefault - 4 <= AotCoreIrRuntimeServiceKind.NewObject)
+					if (valueOrDefault - 4 <= AotCoreIrRuntimeServiceKind.StoreStaticField)
 					{
 						flag = true;
 						goto IL_07fe;
@@ -339,9 +339,11 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (StaticInitializationPlan value9 in _staticInitializationSupport.PlansByTypeSubjectId.Values)
 		{
 			foreach (StaticInitializationAction action in value9.Actions)
-			{
-				TrackReferenceType(action.ConstructedTypeSubjectId, null);
-			}
+				{
+					TrackReferenceType(action.ConstructedTypeSubjectId, null);
+					if (!string.IsNullOrEmpty(action.FieldSubjectId))
+						hashSet2[action.FieldSubjectId] = null;
+				}
 		}
 		if (_reflectionMemberSupport.TypeEntries.Count > 0 || _reflectionMemberSupport.FieldEntries.Count > 0 || _reflectionMemberSupport.MethodEntries.Count > 0)
 		{
@@ -402,6 +404,15 @@ public sealed partial class NativeAotLoweringPlanner
 		int num = 2;
 		// Ensure System.String is always tracked (used in IsArrayStoreCompatible fast path)
 		TrackReferenceType("System.Private.CoreLib/System.String", null);
+		// Ensure System.Action (non-generic) is always tracked.  This concrete
+		// delegate type is used by Assert.Throws(Action) and lambda closure
+		// patterns in test code.  It is often referenced only via newobj
+		// instructions within structured EH regions (linear lowering path),
+		// making it invisible to the reachable-methods instruction scanner
+		// and the catch-all post-scan.  Without this explicit tracking,
+		// shared headers omit the chaos_type_* struct definition, causing
+		// C2027 (incomplete type) in CHAOS_IL2CPP_NEW_GC(sizeof(T)) calls.
+		TrackReferenceType("System.Private.CoreLib/System.Action", null);
 		// Ensure System.Type is always tracked (used in reflection and runtime type helpers)
 		TrackReferenceType("System.Private.CoreLib/System.Type", "System.Private.CoreLib/System.Object");
 		// Ensure reflection types used by ReflectionObjectEmission are tracked

@@ -11,6 +11,7 @@
 #include "runtime_core.h"
 #include "engine_binding.h"
 #include "patch_loader.h"
+#include <chaos/pal/pal_eh.h>
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -772,20 +773,33 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     // ── Phase 2: Scan the external runtime dispatch table ───────────────
     if (kChaosExternalRuntimeCount > 0) {
         for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
-            if (kChaosExternalRuntimeSubjects[i] != nullptr &&
-                std::strcmp(kChaosExternalRuntimeSubjects[i], subject_id) == 0)
-            {
-                if (_TryInvoke(kChaosExternalRuntimeSubjects[i]))
-                    return 0;
+            if (kChaosExternalRuntimeSubjects[i] == nullptr)
+                continue;
+            uint64_t cmp_result = INT64_MAX;
+            bool fault = chaos::il2cpp::pal::PalTryCallNoExcept(
+                [](uint64_t a, uint64_t b, uint64_t, uint64_t, uint64_t,
+                   uint64_t, uint64_t, uint64_t) -> uint64_t {
+                    return static_cast<uint64_t>(std::strcmp(
+                        reinterpret_cast<const char*>(a),
+                        reinterpret_cast<const char*>(b)));
+                },
+                reinterpret_cast<uint64_t>(kChaosExternalRuntimeSubjects[i]),
+                reinterpret_cast<uint64_t>(subject_id),
+                0, 0, 0, 0, 0, 0, cmp_result);
+            if (fault)
+                continue;
+            if (static_cast<int32_t>(cmp_result) != 0)
+                continue;
+            if (_TryInvoke(kChaosExternalRuntimeSubjects[i]))
+                return 0;
 
-                // Found in dispatch table but unresolvable — codegen/metadata mismatch.
-                // For crypto methods, this is acceptable (no hotpatch registration needed),
-                // return sentinel 0 instead of crashing.
-                if (_IsCryptoMethod(subject_id))
-                    return 0;
-                CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: subject '%s' found in dispatch "
-                    "table but unresolvable via hotpatch", subject_id);
-            }
+            // Found in dispatch table but unresolvable — codegen/metadata mismatch.
+            // For crypto methods, this is acceptable (no hotpatch registration needed),
+            // return sentinel 0 instead of crashing.
+            if (_IsCryptoMethod(subject_id))
+                return 0;
+            CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: subject '%s' found in dispatch "
+                "table but unresolvable via hotpatch", subject_id);
         }
     }
 

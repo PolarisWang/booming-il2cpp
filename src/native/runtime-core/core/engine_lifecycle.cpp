@@ -127,8 +127,17 @@ static CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_UINT64, DependentHandleNode
 // GcIsPinnedObject is called under STW safepoint during scavenge (single-threaded
 // in young GC) so the mutex is not strictly required for correctness, but we
 // take it anyway for safety.
-static CHAOS_IL2CPP_MUTEX s_pin_set_mutex;
-static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, bool) s_pin_set;
+// NOTE: These are function-local statics (Meyer's singleton) to avoid static
+// initialization order fiasco. GcAddPinnedObject is called during dynamic init
+// of other translation units (ChaosEnumPreInitStringCache from generated code).
+static CHAOS_IL2CPP_MUTEX& pin_set_mutex() noexcept {
+    static CHAOS_IL2CPP_MUTEX m;
+    return m;
+}
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, bool)& pin_set() noexcept {
+    static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, bool) s;
+    return s;
+}
 
 // These functions are defined here for external linkage (called from
 // gc_old_gen, gc_young_collector that link against chaos_runtime_core.lib).
@@ -564,20 +573,20 @@ void GcRelocateHandles(
 
 void GcAddPinnedObject(void* obj) noexcept {
     if (obj == nullptr) return;
-    std::lock_guard<std::mutex> lock(s_pin_set_mutex);
-    s_pin_set[obj] = true;
+    std::lock_guard<std::mutex> lock(pin_set_mutex());
+    pin_set()[obj] = true;
 }
 
 void GcRemovePinnedObject(void* obj) noexcept {
     if (obj == nullptr) return;
-    std::lock_guard<std::mutex> lock(s_pin_set_mutex);
-    s_pin_set.erase(obj);
+    std::lock_guard<std::mutex> lock(pin_set_mutex());
+    pin_set().erase(obj);
 }
 
 bool GcIsPinnedObject(void* obj) noexcept {
     if (obj == nullptr) return false;
-    std::lock_guard<std::mutex> lock(s_pin_set_mutex);
-    return s_pin_set.contains(obj);
+    std::lock_guard<std::mutex> lock(pin_set_mutex());
+    return pin_set().contains(obj);
 }
 
 // ── POH (Pinned Object Heap) API ───────────────────────────────

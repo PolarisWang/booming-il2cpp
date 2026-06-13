@@ -26,7 +26,6 @@ from typing import Any
 from verification.orchestration.context import ChunkContext, StageResult
 
 from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash
-from verification.stages.runtime_entry_patcher import patch_runtime_entry
 
 # Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
 _TESTING = str(Path(__file__).resolve().parents[3])
@@ -310,19 +309,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     start = time.perf_counter()
     print(f"  [build] Chunk: {ctx.slug}  Assembly: {ctx.assembly}")
 
-    # -- Fast: skip build when --skip-build is set, reuse existing entry.exe --
-    if ctx.skip_build:
-        if ctx.entry_exe_path.exists():
-            exe_size = ctx.entry_exe_path.stat().st_size
-            print(f"  [build] --skip-build: reusing existing entry.exe ({exe_size} bytes)")
-            return StageResult(
-                stage="build", status="passed",
-                summary=f"Skipped (--skip-build), entry.exe {exe_size} bytes",
-                duration_ms=int((time.perf_counter() - start) * 1000),
-            )
-        else:
-            print(f"  [build] --skip-build: entry.exe not found, falling through to full build")
-
     print(f"  [build] foundation_dir: {ctx.foundation_dir}")
 
     # -- 0. Ensure chunk directory structure --
@@ -466,23 +452,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
         total_subjects = metadata.get("totalMethods", 0)
         print(f"  [build] AutoTestGenerator subjects: {total_subjects}")
-
-        # ── Exclude subjects with async methods (can't be lowered by codegen) ──
-        # SseFormatter.WriteAsync is an async Task-returning method; its state
-        # machine IL cannot be translated by the AOT codegen.  Exclude these
-        # subjects to avoid fact failures from CHAOS_IL2CPP_FAIL() stubs.
-        if ctx.assembly == "System.Net.ServerSentEvents":
-            subjects = metadata.get("methods", metadata.get("subjects", []))
-            filtered = [s for s in subjects
-                        if "SseFormatter" not in s.get("methodSubjectId", s.get("subjectId", ""))]
-            removed = len(subjects) - len(filtered)
-            if removed > 0:
-                metadata["totalMethods"] = len(filtered)
-                if "methods" in metadata: metadata["methods"] = filtered
-                if "subjects" in metadata: metadata["subjects"] = filtered
-                metadata_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
-                total_subjects = len(filtered)
-                print(f"  [build] Excluded {removed} SseFormatter.WriteAsync subjects (async — codegen cannot lower)")
 
     if total_subjects == 0:
         # Fallback: check for custom subject .cs files
@@ -731,17 +700,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     print(f"  [build] [hephaestus] CACHE MISS: performing full build")
 
-    # Clean stale bridge redirect files from subjects/ before TPG.
-    # These are no longer generated (LCAC disabled BridgeAOT), but old files
-    # persist from previous codegen runs and cause C1083 (missing chaos/chaos.h).
-    tpg_subjects_before = ctx.native_dir / "subjects"
-    if tpg_subjects_before.is_dir():
-        for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
-            p = tpg_subjects_before / stale
-            if p.exists():
-                p.unlink()
-                print(f"  [build] Cleaned stale: {p.name}")
-
     # -- 8. Run TPG generate-dll --
     if not _ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
         return StageResult(
@@ -779,72 +737,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"      {line}")
 
     # ── Post-TPG: add extern declarations for missing chaos_external_runtime_* symbols ──
-    subjects_dir = ctx.native_dir / "subjects"
-    if subjects_dir.is_dir():
-        import re
-        for cpp_file in sorted(subjects_dir.glob("*.cpp")):
-            content = cpp_file.read_text(encoding="utf-8")
-            calls = set(re.findall(r'\b(chaos_external_runtime_\w+)\(', content))
-            if not calls:
-                continue
-            missing = [sym for sym in sorted(calls)
-                       if not re.search(rf'(extern|static inline).*{re.escape(sym)}\s*\(', content)]
-            if not missing:
-                continue
-            stubs = "\n".join(
-                f'static inline CHAOS_IL2CPP_INTPTR {sym}() noexcept {{ return 0; }}'
-                for sym in missing
-            )
-            marker = "// ── Post-TPG: chaos_external_runtime_* stubs ──\n"
-            if marker not in content:
-                # Insert stubs AFTER the #include block so CHAOS_IL2CPP_INTPTR is defined.
-                insert_pos = content.rfind("#include")
-                if insert_pos >= 0:
-                    eol = content.find("\n", insert_pos)
-                    if eol >= 0:
-                        insert_pos = eol + 1
-                else:
-                    insert_pos = 0
-                content = content[:insert_pos] + marker + stubs + "\n\n" + content[insert_pos:]
-                cpp_file.write_text(content, encoding="utf-8")
-                print(f"  [build] Added {len(missing)} external runtime stubs to {cpp_file.name}")
-    # --- Post-TPG: chaos_mt_* MethodTable extern declarations ---
-    import re as _re
-    for _mf in sorted(subjects_dir.glob("*.cpp")):
-        _mc = _mf.read_text(encoding="utf-8")
-        _mt_refs = set(_re.findall(r"\b(chaos_mt_\w+)\.", _mc))
-        _mt_missing = [s for s in sorted(_mt_refs) if not _re.search(rf"extern MethodTable\s+{_re.escape(s)}\s*;", _mc)]
-        if _mt_missing:
-            _pos = _mc.rfind("#include")
-            if _pos >= 0:
-                _eol = _mc.find("\n", _pos)
-                _pos = _eol + 1 if _eol >= 0 else _pos
-            _mk = "// --- Post-TPG: chaos_mt_* MethodTable declarations ---\n"
-            if _mk not in _mc:
-                _stubs = "\n".join(f"extern MethodTable {s};" for s in _mt_missing)
-                _mc = _mc[:_pos] + _mk + _stubs + "\n\n" + _mc[_pos:]
-                _mf.write_text(_mc, encoding="utf-8")
-                print(f"  [build] Added {len(_mt_missing)} MethodTable decls to {_mf.name}")
-
-        # ── Post-TPG cleanup: remove duplicate headers from SDK include ──
-    # The SDK copies vector_fixed_templates.h to codegen/include/, but the same
-    # header is also in the source tree's include path.  MSVC treats these as
-    # different physical files despite the include guard, causing C2995 errors
-    # for template functions in the header.  Delete the SDK copy to force all
-    # inclusions to resolve to the source tree copy.
-    sdk_include_dir = ctx.native_dir / "codegen" / "include"
-    if sdk_include_dir.is_dir():
-        for stale_h in ("vector_fixed_templates.h",):
-            p = sdk_include_dir / stale_h
-            if p.exists():
-                p.unlink()
-                print(f"  [build] Removed stale SDK copy: {p.name}")
-    # Also clear cmake cache so file(GLOB ...) re-evaluates
-    tpg_build_dir = ctx.native_dir / "build"
-    if tpg_build_dir.exists():
-        cache_file = tpg_build_dir / "CMakeCache.txt"
-        if cache_file.exists():
-            cache_file.unlink()
+    # (removed: codegen now emits correct extern declarations)
 
     # ── Post-TPG: ensure codegen/generated/* are in subjects/ ──
     # The TPG's Emit() copy step may fail for flat layout.  After TPG completes,
@@ -857,15 +750,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         for pat in ("*.cpp", "*.h"):
             for f in tpg_codegen_dir.glob(pat):
                 shutil.copy2(str(f), str(tpg_subjects_dir / f.name))
-        # Clean stale bridge redirect files (LCAC: BridgeAOT disabled)
-        for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
-            p = tpg_subjects_dir / stale
-            if p.exists(): p.unlink()
-        # Clean stale bridge redirect files
-        for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
-            p = tpg_subjects_dir / stale
-            if p.exists(): p.unlink()
-
     # ── entry_stubs.cpp is provided by SDK runtime_stubs/ (no Python generation) ──
 
     if tpg_result.returncode != 0:
@@ -874,10 +758,61 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             print(f"  [TPG:err] {line}")
         for line in tpg_result.stdout.splitlines()[-5:]:
             print(f"  [TPG:out] {line}")
-        return StageResult(
-            stage="build", status="error",
-            summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
-            duration_ms=int((time.perf_counter() - start) * 1000))
+
+        # ── Auto-repair: try to fix missing chaos_static_* declarations and retry cmake ──
+        # TPG's internal cmake build may fail when the generated header is missing
+        # extern declarations for chaos_static_* symbols referenced in page files.
+        # Patch the header, then run cmake directly.
+        subjects_dir = ctx.native_dir / "subjects"
+        header_file = subjects_dir / "native-aot.generated.header.h"
+        build_dir = ctx.native_dir / "build"
+        if subjects_dir.is_dir() and header_file.exists() and build_dir.exists():
+            # First ensure generated files are copied to subjects/
+            codegen_gen_dir = ctx.native_dir / "codegen" / "generated"
+            if codegen_gen_dir.is_dir():
+                for pattern in ("*.cpp", "*.h"):
+                    for f in codegen_gen_dir.glob(pattern):
+                        shutil.copy2(str(f), str(subjects_dir / f.name))
+            # Extract missing chaos_static_* symbols from TPG stderr
+            missing_statics = set()
+            for line in tpg_result.stderr.splitlines():
+                m = re.search(r"'((chaos_static_\w+))' was not declared", line)
+                if m:
+                    missing_statics.add(m.group(1))
+            if missing_statics:
+                header_content = header_file.read_text(encoding="utf-8")
+                existing_decls = set(re.findall(r'\b(chaos_static_\w+)\s*;', header_content))
+                truly_missing = [s for s in sorted(missing_statics) if s not in existing_decls]
+                if truly_missing:
+                    marker = "// ── Post-TPG: chaos_static_* extern declarations ──\n"
+                    if marker not in header_content:
+                        stubs = "\n".join(f"extern CHAOS_IL2CPP_INTPTR {s};" for s in truly_missing)
+                        insert_pos = header_content.rfind("#include")
+                        if insert_pos >= 0:
+                            eol = header_content.find("\n", insert_pos)
+                            if eol >= 0:
+                                insert_pos = eol + 1
+                        else:
+                            insert_pos = 0
+                        header_content = header_content[:insert_pos] + marker + stubs + "\n\n" + header_content[insert_pos:]
+                        header_file.write_text(header_content, encoding="utf-8")
+                        print(f"  [build] Added {len(truly_missing)} chaos_static_* extern decls to {header_file.name}")
+                        # Retry cmake build directly
+                        cmake_result = subprocess.run(
+                            ["cmake", "--build", str(build_dir), "--target", "chaos_entry"],
+                            capture_output=True, text=True, timeout=600)
+                        if cmake_result.returncode == 0:
+                            print(f"  [build] cmake build succeeded after chaos_static_* patch")
+                            tpg_result.returncode = 0  # Override: treat as success
+                        else:
+                            for l in cmake_result.stderr.splitlines():
+                                print(f"  [cmake:err] {l}")
+                            print(f"  [build] cmake build still failed after chaos_static_* patch")
+        if tpg_result.returncode != 0:
+            return StageResult(
+                stage="build", status="error",
+                summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
+                duration_ms=int((time.perf_counter() - start) * 1000))
 
     # ── Post-generation: ensure codegen generated files are in subjects/ ──
     # The TPG's Emit() step should copy them, but may fail for flat layout.
@@ -887,12 +822,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         for pattern in ("*.cpp", "*.h"):
             for f in codegen_gen_dir.glob(pattern):
                 shutil.copy2(str(f), str(subjects_dir / f.name))
-        # Remove stale bridge redirect files that cause LNK2019
-        for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
-            p = subjects_dir / stale
-            if p.exists():
-                p.unlink()
-
     # ── Post-patch missing type declarations ──
     # (removed: interop stub registration now handled by Codegen emitter
     #  in BuildExternalRuntimeDispatchTable + TPG Scriban template)
@@ -917,36 +846,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     # -- 9. Build JIT entry (non-blocking) --
     _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
-
-    # Post-patch JIT runtime-entry.cpp: same patches as AOT + fix JitVehHandler
-    _jit_dir = ctx.native_dir.parent / "build_jit_output"
-    _jit_rcpp = _jit_dir / "runtime-entry.cpp"
-    if _jit_rcpp.exists():
-        _jit_c = _jit_rcpp.read_text(encoding="utf-8")
-        _jit_c, _jit_p = patch_runtime_entry(_jit_c)
-        if _jit_p:
-            _jit_rcpp.write_text(_jit_c, encoding="utf-8")
-            print(f"  [build] Patched JIT runtime-entry.cpp, rebuilding...")
-            # Rebuild JIT entry (cmake only, no codegen)
-            import subprocess as _sp
-            _jit_build = _jit_dir / "build"
-            if _jit_build.exists():
-                _r = subprocess.run(["cmake", "--build", str(_jit_build), "--config", "RelWithDebInfo", "--target", "chaos_entry"],
-                            capture_output=True, text=True, timeout=600)
-                if _r.returncode == 0:
-                    # Multi-Config generators (MSVC) put output in <config>/ subdir;
-                    # single-config (Make/Ninja on Linux) puts it directly in the build dir.
-                    _jit_exe_candidates = [
-                        _jit_build / "RelWithDebInfo" / "chaos_entry.exe",
-                        _jit_build / "chaos_entry",
-                    ]
-                    for _jit_exe in _jit_exe_candidates:
-                        if _jit_exe.exists():
-                            shutil.copy2(_jit_exe, ctx.native_dir / "entry-jit.exe")
-                            print(f"  [build] JIT entry rebuilt after patch ({_jit_exe.stat().st_size} bytes)")
-                            break
-                else:
-                    print(f"  [build] JIT rebuild failed (rc={_r.returncode})")
 
     print(f"  [build] Done ({duration_ms}ms)")
 

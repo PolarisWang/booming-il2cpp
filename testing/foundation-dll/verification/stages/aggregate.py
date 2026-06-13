@@ -58,7 +58,6 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             summary["fact"] = {
                 "passed": fact_data.get("passed", 0),
                 "total": fact_data.get("total", 0),
-                "isShutdownAV": fact_data.get("isShutdownAV", False),
                 "valueSuspicious": fact_data.get("valueSuspicious", False),
                 "valueWarnings": fact_data.get("valueWarnings", 0),
                 "metaTotal": fact_data.get("metaTotal"),
@@ -134,11 +133,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         1 for s in chunk_summaries
         if s.get("fact", {}).get("total", 0) > 0
     )
-    # Track chunks that had shutdown-AV or value warnings
-    chunks_with_shutdown_av = sum(
-        1 for s in chunk_summaries
-        if s.get("fact", {}).get("isShutdownAV", False)
-    )
+    # Track chunks with value warnings
     chunks_with_value_warnings = sum(
         1 for s in chunk_summaries
         if s.get("fact", {}).get("valueSuspicious", False)
@@ -210,7 +205,6 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "totalChunks": len(chunk_slugs),
         "chunksWithFacts": chunks_with_fact,
-        "chunksShutdownAV": chunks_with_shutdown_av,
         "chunksWithValueWarnings": chunks_with_value_warnings,
         "totalPassed": total_passed,
         "totalFactMethods": total_fact,
@@ -237,7 +231,6 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "totalChunks": len(chunk_slugs),
         "chunksWithResults": chunks_with_fact,
-        "chunksWithShutdownAV": chunks_with_shutdown_av,
         "chunksWithValueWarnings": chunks_with_value_warnings,
         "chunksWithMetaMismatch": chunks_with_meta_mismatch,
         "totalDeclaredMethods": total_fact,
@@ -252,7 +245,6 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "summary": {
             "chunks": len(chunk_slugs),
             "chunksVerified": chunks_with_fact,
-            "chunksShutdownAV": chunks_with_shutdown_av,
             "chunksWithValueWarnings": chunks_with_value_warnings,
             "chunksWithMetaMismatch": chunks_with_meta_mismatch,
             "factPassRate": round(total_passed / total_fact * 100, 1) if total_fact else 0,
@@ -296,8 +288,6 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [aggregate] Reports written to {latest_dir}")
     print(f"  [aggregate] Fact: {total_passed}/{total_fact} passed across {chunks_with_fact} chunks")
-    if chunks_with_shutdown_av:
-        print(f"  [aggregate] Shutdown AV: {chunks_with_shutdown_av} chunk(s)")
     if chunks_with_value_warnings:
         print(f"  [aggregate] Value warnings: {chunks_with_value_warnings} chunk(s)")
     if chunks_with_meta_mismatch:

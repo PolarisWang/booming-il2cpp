@@ -4,8 +4,7 @@ Runs entry.exe and optionally entry-jit.exe --fact-json from the chunk's
 native directory and parses per-method JSON results.
 
 Status determination is exit-code based: a clean exit means all subjects
-were dispatched; a crash with passed==total is shutdown-AV (acceptable);
-a crash with passed<total is genuine failure.
+were dispatched; a crash with passed<total is genuine failure.
 
 Metadata cross-check (expectedTotal) is advisory-only — codegen may produce
 fewer subjects than metadata declares, and that's expected.
@@ -50,6 +49,7 @@ _KNOWN_FACT_FAILURES: set[int] = frozenset({
 })
 
 
+
 def _run_single_fact(exe_path: Path, tech: str) -> dict:
     """Run --fact-json for a single binary, return parsed results dict."""
     print(f"  [fact] [{tech}] Running {exe_path} --fact-json...")
@@ -91,12 +91,6 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
 
     passed = sum(1 for fr in fact_results if fr.get("passed"))
     total = len(fact_results)
-    # Remove known pre-existing failures from count (they are codegen issues)
-    known_mask = frozenset(fr.get("si", -1) for fr in fact_results
-                           if not fr.get("passed") and fr.get("si", -1) in _KNOWN_FACT_FAILURES)
-    if known_mask:
-        passed += len(known_mask)
-        total -= 0  # total stays same, we just adjust passed up for known issues
 
     # Parse assertion failure messages from stderr
     assert_messages: list[str] = []
@@ -125,20 +119,15 @@ def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     passed = tech_result["passed"]
     total = tech_result["total"]
     rc = tech_result["returncode"]
-    is_shutdown_av = (
-        rc != 0 and rc in _SHUTDOWN_AV_CODES and passed == total and total > 0
-    )
     is_clean = rc == 0
     if is_clean and passed == total and total > 0:
-        return "passed"
-    if is_shutdown_av:
         return "passed"
     if total == 0:
         return "skipped"
     if rc != 0 and passed < total:
         return "partial" if passed > 0 else "error"
     if rc != 0 and passed == total:
-        return "partial"  # shutdown AV or truncated JSON - incomplete data
+        return "partial"  # truncated JSON - incomplete data
     if rc == 0 and passed < total:
         return "partial"
     return "passed"
@@ -187,35 +176,6 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         jit_status = _tech_status(jit_result, meta_total)
         if jit_result["error"]:
             errors.append(f"jit: {jit_result['error']}")
-
-    # Apply pipeline-level skip list filtering.
-    # Methods in fact_skip_indices.json are known to fail due to stub limitations
-    # (e.g. XmlConvert methods returning sentinel pointers that crash managed
-    # test code).  The skip list is maintained in fix_all_failures.py and the
-    # native fact_skip_indices.h header; the JSON copy is used by the pipeline
-    # to filter JIT results that lack native skip support.
-    skip_indices: set[int] = set()
-    skip_path = ctx.chunk_dir / "native" / "fact_skip_indices.json"
-    if skip_path.exists():
-        try:
-            skip_indices = set(json.loads(skip_path.read_text(encoding="utf-8")))
-        except Exception:
-            pass
-    if skip_indices:
-        for result_list, label in [(aot_result["results"], "aot"),
-                                    (jit_result["results"] if jit_result else [], "jit")]:
-            filtered = 0
-            for fr in result_list:
-                if not fr.get("passed") and fr.get("si", -1) in skip_indices:
-                    fr["passed"] = True
-                    fr["_skipped"] = True
-                    filtered += 1
-            if filtered > 0:
-                print(f"  [fact] [{label}] Filtered {filtered} skipped failures")
-        # Recompute passed counts after filtering
-        aot_result["passed"] = sum(1 for fr in aot_result["results"] if fr.get("passed"))
-        if jit_result:
-            jit_result["passed"] = sum(1 for fr in jit_result["results"] if fr.get("passed"))
 
     # Combined status: JIT-as-sufficient if JIT passes (JIT can handle methods the AOT
     # codegen cannot compile), else fall back to AOT status.

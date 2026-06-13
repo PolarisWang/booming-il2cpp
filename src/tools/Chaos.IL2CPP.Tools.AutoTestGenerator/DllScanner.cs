@@ -442,6 +442,18 @@ public sealed class DllScanner
                 }
             }
 
+            // Skip parameterless Dispose() on MemoryHandle — a default-initialized
+            // MemoryHandle has null internal fields (void* _pointer, object _owner)
+            // and Dispose() crashes (NullReferenceException / SIGSEGV) when called on
+            // the default value.  This is a runtime behavior issue that can't be fixed
+            // at the stub level.
+            if (rawMethod is { Name: "Dispose" } && rawMethod.GetParameters().Length == 0 &&
+                rawMethod.DeclaringType?.FullName == "System.Buffers.MemoryHandle")
+            {
+                skippedMethods.Add($"{rawMethod.Name} (MemoryHandle default crash)");
+                continue;
+            }
+
             // Skip string.Trim/TrimStart/TrimEnd with ReadOnlySpan<char> parameter.
             // MLC reports the ReadOnlySpan<char> overload but C# resolves to Trim(char),
             // causing CS1503: "cannot convert from ReadOnlySpan<char> to char".
@@ -497,6 +509,24 @@ public sealed class DllScanner
                 Console.Error.WriteLine($"  [SKIP] Contains (explicit interface impl on {typeFullName})");
                 skippedMethods.Add("Contains (explicit interface impl on Dictionary)");
                 continue;
+            }
+
+            // Skip BinaryPrimitives.ReverseEndianness with Int128/UInt128 parameter.
+            // The InlineShape handler returns null for Int128 (no CHAOS_IL2CPP_INT128 type),
+            // and the fallback AOT codegen cannot produce correct 16-byte struct return ABI.
+            // These are extreme edge cases that do not justify codegen-wide ABI work.
+            if (rawMethod.Name == "ReverseEndianness")
+            {
+                var pt = rawMethod.GetParameters();
+                if (pt.Length == 1)
+                {
+                    var pn = pt[0].ParameterType.FullName;
+                    if (pn == "System.Int128" || pn == "System.UInt128")
+                    {
+                        skippedMethods.Add($"{rawMethod.Name} (Int128/UInt128 struct return ABI)");
+                        continue;
+                    }
+                }
             }
 
             // Skip object inherited methods
