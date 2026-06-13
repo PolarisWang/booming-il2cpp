@@ -195,6 +195,12 @@ def _build_method_comparison(
             method_entry["status"] = "completed"
             total_with_net8 += 1
 
+            # ── Bottleneck classification ──
+            method_entry["bottleneck"] = _classify_bottleneck(
+                chaos_aot_ms=chaos_aot_ms, net8_ms=net8_ms,
+                high_variance=net8_high_var,
+                gc_comparison=gc_comparison if 'gc_comparison' in dir() else None)
+
             pct = method_entry.get("chaosAotVsNet8Pct")
             if pct is not None:
                 all_chaos_aot_pcts.append(pct)
@@ -285,6 +291,31 @@ def _is_high_variance(rec: dict | None) -> bool:
     if rec is None:
         return False
     return rec.get("highVariance", False)
+
+
+def _classify_bottleneck(
+    chaos_aot_ms: float | None,
+    net8_ms: float | None,
+    high_variance: bool,
+    gc_comparison: dict | None = None,
+) -> str:
+    """Classify the performance bottleneck for a benchmarked method.
+
+    Returns one of: "gc_pause", "dispatch_overhead", "alloc_hot", "unstable", or "".
+    """
+    if high_variance:
+        return "unstable"
+    if chaos_aot_ms is None or net8_ms is None or net8_ms <= 0:
+        return ""
+
+    ratio = chaos_aot_ms / net8_ms
+    if ratio > 2.0:
+        return "dispatch_overhead"
+    if ratio > 1.5 and gc_comparison:
+        alloc_ratio = gc_comparison.get("aotVsNet8Ratio", 1.0)
+        if alloc_ratio and alloc_ratio > 2.0:
+            return "alloc_hot"
+    return ""
 
 
 def _get_elapsed(rec: dict | None) -> float | None:

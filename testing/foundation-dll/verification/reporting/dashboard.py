@@ -793,6 +793,29 @@ def main() -> None:
         print(f"Found {total} families ({n_with_data} with stage data)")
         # Derive output path from report_path
         report_path = _testing_root / "results" / "batch-report.json"
+
+        # ── Load cross-DLL summary (from reporting stage) ──
+        cross_dll_path = _testing_root / "results" / "summary" / "cross-dll-dashboard.json"
+        if cross_dll_path.exists():
+            try:
+                import json as _json
+                cross_dll = _json.loads(cross_dll_path.read_text(encoding="utf-8"))
+                assemblies = cross_dll.get("assemblies", [])
+                overall_pass = cross_dll.get("overallFactPassRate", 0)
+                print(f"\n{'='*50}")
+                print(f"Cross-DLL Summary ({cross_dll.get('totalAssemblies', 0)} assemblies)")
+                print(f"{'='*50}")
+                print(f"Overall fact pass rate: {overall_pass:.2%}")
+                print(f"{'Assembly':40s} {'Fact%':>8s} {'Benchmark':>10s}")
+                print(f"{'-'*40} {'-'*8} {'-'*10}")
+                for a in assemblies[:20]:
+                    name = a.get("assembly", "?")
+                    fpr = a.get("factPassRate", 0)
+                    bm = a.get("totalBenchmarkedMethods", 0)
+                    print(f"{name:40s} {fpr:>7.1%} {bm:>10d}")
+                print()
+            except Exception as ex:
+                print(f"  (cross-DLL summary load failed: {ex})")
     elif args.report:
         report_path = Path(args.report)
         if not report_path.exists():
