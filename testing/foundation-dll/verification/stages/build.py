@@ -125,7 +125,7 @@ def _compile_custom_subjects(
     atg_dll = tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator")
     if not atg_dll.exists():
         print("  [build] ATG DLL not found, building...")
-        _ensure_tool_built("Chaos.IL2CPP.Tools.AutoTestGenerator")
+        ensure_tool_built("Chaos.IL2CPP.Tools.AutoTestGenerator")
         if not atg_dll.exists():
             print("  [build] ERROR: AutoTestGenerator DLL not found after build")
             return None
@@ -226,17 +226,6 @@ def _compile_custom_subjects(
     return method_info
 
 
-def _ensure_tool_built(tool_name: str) -> bool:
-    """Deprecated wrapper — delegates to tool_helpers.ensure_tool_built."""
-    return ensure_tool_built(tool_name)
-
-
-def _chaos_sdk_csproj() -> Path:
-    """Path to Chaos.TestFramework.Sdk.csproj (used as ProjectReference)."""
-    return (_REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk"
-            / "Chaos.TestFramework.Sdk.csproj")
-
-
 def _build_jit_entry(
     tpg_dll: Path,
     subjects_dll: Path,
@@ -330,7 +319,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     print(f"  [build] Target DLL: {target_dll}")
 
     # -- 2. Ensure tools are built --
-    if not _ensure_tool_built("Chaos.IL2CPP.Tools.AutoTestGenerator"):
+    if not ensure_tool_built("Chaos.IL2CPP.Tools.AutoTestGenerator"):
         return StageResult(
             stage="build", status="error",
             summary="AutoTestGenerator build failed",
@@ -470,19 +459,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         sdk_csproj = _chaos_sdk_csproj()
         combined_csproj = combined_dir / "CombinedSubjects.csproj"
 
-        # Extra NuGet package references needed by specific assemblies.
-        # For assemblies not in the base framework (e.g. System.IO.Pipelines),
-        # add explicit PackageReference with version.
-        extra_packages: dict[str, list[str]] = {
-            "System.Text.Json": [
-                # System.Text.Json is in-box for .NET 8+; no extra ref needed
-            ],
-        }
         assembly_name = ctx.assembly
-        pkg_refs = extra_packages.get(assembly_name, [])
-        pkg_block = "\n".join("    " + r for r in pkg_refs) if pkg_refs else ""
+        pkg_refs: list[str] = []
+        pkg_block = ""
 
-        nowarn_extra = ""
         combined_csproj.write_text(
             "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
             "  <PropertyGroup>\n"
@@ -590,7 +570,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     print(f"  [build] [hephaestus] CACHE MISS: performing full build")
 
     # -- 8. Run TPG generate-dll --
-    if not _ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
+    if not ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
         return StageResult(
             stage="build", status="error",
             summary="TPG build failed",
@@ -625,8 +605,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     for line in tpg_result.stdout.splitlines():
         print(f"      {line}")
 
-    # ── Post-TPG: add extern declarations for missing chaos_external_runtime_* symbols ──
-    # (removed: codegen now emits correct extern declarations)
 
     # ── Post-TPG: ensure codegen/generated/* are in subjects/ ──
     # The TPG's Emit() copy step may fail for flat layout.  After TPG completes,
@@ -711,9 +689,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         for pattern in ("*.cpp", "*.h"):
             for f in codegen_gen_dir.glob(pattern):
                 shutil.copy2(str(f), str(subjects_dir / f.name))
-    # ── Post-patch missing type declarations ──
-    # (removed: interop stub registration now handled by Codegen emitter
-    #  in BuildExternalRuntimeDispatchTable + TPG Scriban template)
 
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():

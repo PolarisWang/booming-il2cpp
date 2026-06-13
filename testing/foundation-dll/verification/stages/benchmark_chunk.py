@@ -24,6 +24,16 @@ from verification.orchestration.context import ChunkContext, StageResult
 
 _RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
 
+# Benchmark calibration defaults
+_CALIB_TARGET_MS = 50.0          # target duration per method for iteration scaling
+_CALIB_MIN_ITERATIONS = 100      # minimum iterations regardless of method speed
+_CALIB_FALLBACK_PROBE_FAIL = 1000    # fallback when probe yields no data
+_CALIB_FALLBACK_ALL_FAST = 10000     # fallback when all methods are very fast
+_CALIB_CAP_LARGE_CHUNK = 10000       # iteration cap for chunks with >5000 entries
+_CALIB_CAP_DEFAULT = 50000           # iteration cap for normal chunks
+_CALIB_LARGE_THRESHOLD = 5000        # entry count threshold for large chunk cap
+_MIN_ELAPSED_FLOOR = 0.001           # minimum elapsed ms for perf store (avoid zero)
+
 
 def _mean(values: Sequence[float]) -> float:
     return sum(values) / len(values)
@@ -173,7 +183,7 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
 
     data, _ = _parse_benchmark_lines(result.stdout or "")
     if not data:
-        return 1000  # fallback
+        return _CALIB_FALLBACK_PROBE_FAIL  # fallback
 
     # Collect positive elapsed times to estimate per-call cost
     elapsed = [
@@ -182,16 +192,15 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
         and r['elapsedMilliseconds'] > 0
     ]
     if not elapsed:
-        return 10000  # all very fast, use high default
+        return _CALIB_FALLBACK_ALL_FAST  # all very fast, use high default
 
     # Per-call ms = median elapsed / 10 (probe iterations)
     median_elapsed = sorted(elapsed)[len(elapsed) // 2]
     per_call_ms = median_elapsed / 10.0
-    target_ms = 50.0
-    iterations = max(100, int(target_ms / max(per_call_ms, 0.001)))
+    iterations = max(_CALIB_MIN_ITERATIONS, int(_CALIB_TARGET_MS / max(per_call_ms, _MIN_ELAPSED_FLOOR)))
 
-    # Cap: 50000 normally, 10000 for large chunks
-    cap = 10000 if entry_count > 5000 else 50000
+    # Cap: use smaller cap for large chunks
+    cap = _CALIB_CAP_LARGE_CHUNK if entry_count > _CALIB_LARGE_THRESHOLD else _CALIB_CAP_DEFAULT
     return min(iterations, cap)
 
 
@@ -387,7 +396,7 @@ def _write_perf_store(
                 "combinedSubjectsId": combined_subjects_id,
                 "methodIndex": i,
                 "metrics": {
-                    "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else 0.001,
+                    "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else _MIN_ELAPSED_FLOOR,
                     "opsPerSecond": ops,
                 },
                 "iterations": iterations,
