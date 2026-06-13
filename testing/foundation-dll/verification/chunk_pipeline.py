@@ -227,6 +227,7 @@ def main():
         "hotupdate": None,
         "coverage-audit": None,
         "aggregate": None,
+        "reporting": None,
     }
 
     stage_names = [s.strip() for s in args.stages.split(",")]
