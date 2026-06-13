@@ -11,7 +11,8 @@
     "7": { "name": "dev-il2cpp-build-fixer", "domains": [7], "workflow_group": "build" },
     "8": { "name": "dev-il2cpp-hotupdate-expert", "domains": [8], "workflow_group": "runtime" },
     "9": { "name": "dev-il2cpp-platform-expert", "domains": [1, 7], "workflow_group": "platform" },
-    "10": { "name": "dev-il2cpp-codegen-capabilities", "domains": [4], "workflow_group": "codegen" }
+    "10": { "name": "dev-il2cpp-codegen-capabilities", "domains": [4], "workflow_group": "codegen" },
+    "11": { "name": "dev-il2cpp-verification-pipeline", "domains": [5, 7], "workflow_group": "testing" }
   },
   "cross_cutting": [
     { "name": "dev-il2cpp-abi-expert", "domains": [1, 4, 7] },
