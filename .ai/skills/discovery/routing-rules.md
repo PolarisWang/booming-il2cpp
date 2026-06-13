@@ -174,6 +174,18 @@ Expert 的知识通过 registry 发现流程加载：
 
 注意：`Skill("dev-xxx-expert")` 在当前环境中**不可用**（Claude Code Skill 工具不支持子技能）。因此 loaded_expert 强制验证已被移除。
 
+
+## 7b. 跨域技能（独立于域编号表）
+
+以下技能不绑定到单一域，需根据实际涉及域调用：
+
+| 技能 | 覆盖域 | 适用场景 |
+|------|--------|---------|
+| `dev-il2cpp-external-runtime-expert` | CodeGen(4) + 运行时(1) | extern stub 生成、ShapeRegistry 注册、跨程序集路由 |
+| `dev-il2cpp-abi-expert` | CodeGen(4) + 运行时(1) + 构建(7) | ABI 类型映射、返回类型一致性、跨平台调用约定 |
+
+激活方式：通过 discovery 流程读取 SKILL.md。
+
 ## 8. Hot Expert 缓存
 
 常用 Expert 可直接引用 `.claude/.hot_skills`，跳过发现链（3 步 → 1 步）。

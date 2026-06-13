@@ -1113,6 +1113,21 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
                     DirectNativeSymbol: goldSymbol);
             }
 
+            // Extended Gold Direct Link: for ANY lowerable method that has a helper
+            // definition, use the method's native AOT symbol directly.  This skips
+            // the kChaosExternalRuntimeFnTable dispatch for all methods with AOT
+            // bodies, not just PGO-identified hot methods.
+            if (TryGetLowerableMethod(callee) is { } lowerableAotMethod &&
+                helperDefinition!.DirectNativeSymbol == null)
+            {
+                return new InvocationTarget(
+                    helperDefinition!.TargetSymbol,
+                    helperDefinition.ParameterAbis,
+                    helperDefinition.ReturnAbi,
+                    helperDefinition.RawArgumentIndices,
+                    DirectNativeSymbol: ResolveCallTargetNativeSymbol(lowerableAotMethod));
+            }
+
             return new InvocationTarget(
                 helperDefinition!.TargetSymbol,
                 helperDefinition.ParameterAbis,

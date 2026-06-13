@@ -1,0 +1,16 @@
+{
+  "name": "dev-il2cpp-external-runtime-expert",
+  "description": "外部运行时调度专家 — CodeGen 层 stub 生成统一管理、跨程序集调用路由、ShapeRegistry 覆盖完整性",
+  "version": "1.0.0",
+  "owner": "00-skills-maintainers",
+  "budget": "small",
+  "status": "active",
+  "domain": "il2cpp",
+  "triggers": [
+    "chaos_external_runtime_* stub 生成/冲突修复",
+    "extern 声明类型不匹配 (C2556/C2371)",
+    "ShapeRegistry SimpleForward 注册新增",
+    "cross-assembly 调用在运行时 fallback 到 interpreter",
+    "post-TPG build.py 需要追加 stubs"
+  ]
+}
