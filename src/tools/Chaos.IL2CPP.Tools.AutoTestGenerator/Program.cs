@@ -40,6 +40,7 @@ string? customCsFiles = null;
 string? wrapperSlug = null;
 string? sdkCsproj = null;
 string? tfm = null;
+string? capabilitiesPath = null;
 
 for (int i = 0; i < args.Length; i++)
 {
@@ -90,6 +91,9 @@ for (int i = 0; i < args.Length; i++)
             break;
         case "--tfm" when i + 1 < args.Length:
             tfm = args[++i];
+            break;
+        case "--capabilities-path" when i + 1 < args.Length:
+            capabilitiesPath = args[++i];
             break;
     }
 }
@@ -170,7 +174,7 @@ if (patchMode)
         Console.Error.WriteLine("ERROR: --patch-mode requires --all-types");
         return 1;
     }
-    return RunPatchMode(dllPath, namespaceFilter, outputDir);
+    return RunPatchMode(dllPath, namespaceFilter, outputDir, capabilitiesPath);
 }
 
 // ── Known type-to-DLL mapping for types not in System.Runtime.dll ──
@@ -207,7 +211,7 @@ if (string.IsNullOrEmpty(dllPath) || !File.Exists(dllPath))
 // ── List types mode ──
 if (listTypes)
 {
-    var typeLister = new DllScanner();
+    var typeLister = new DllScanner(capabilitiesPath);
     var types = typeLister.ListPublicTypes(dllPath);
     Console.WriteLine($"Public types in {Path.GetFileName(dllPath)}:");
     foreach (var (name, methodCount) in types)
@@ -228,7 +232,7 @@ if (allTypes)
     Console.WriteLine($"  Out:  {baseOutput}");
     Console.WriteLine();
 
-    var allScanner = new DllScanner();
+    var allScanner = new DllScanner(capabilitiesPath);
     Console.WriteLine("[Phase 1/5] Scanning DLL for all public types...");
     IReadOnlyList<DllScanResult> allScanResults;
     try
@@ -511,7 +515,7 @@ Console.WriteLine();
 
 // ── Phase 1: Scan ──
 Console.WriteLine("[Phase 1/5] Scanning DLL for methods...");
-var scanner = new DllScanner();
+var scanner = new DllScanner(capabilitiesPath);
 DllScanResult scanResult;
 try
 {
@@ -682,7 +686,7 @@ static string EscapeCSharpKeyword(string name)
 // Scans DLL, generates values, and emits a single .cs file with [HotUpdate] subject
 // methods using GetPatchReturnExpression for return values.
 // The pipeline compiles this into PatchSubjects.dll for PatchDataExtractor.
-static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputDir)
+static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputDir, string? capabilitiesPath)
 {
     var assemblyName = Path.GetFileNameWithoutExtension(dllPath);
     var baseOutput = outputDir ?? Path.GetFullPath(Path.Combine("output", assemblyName));
@@ -694,7 +698,7 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     Console.WriteLine($"  Out:  {baseOutput}");
     Console.WriteLine();
 
-    var scanner = new DllScanner();
+    var scanner = new DllScanner(capabilitiesPath);
     Console.WriteLine("[Phase 1/3] Scanning DLL...");
     IReadOnlyList<DllScanResult> scanResults;
     try

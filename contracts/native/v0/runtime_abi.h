@@ -19,6 +19,7 @@ extern "C" {
 #endif
 
 #define CHAOS_RUNTIME_ABI_V0 0u
+#define CHAOS_RUNTIME_ABI_V1 1u
 #define CHAOS_GC_HANDLE_INVALID ((GCHandle)0u)
 
 /* Reflection and runtime handles — uint64_t encoding for cross-DLL identity.
@@ -297,10 +298,41 @@ typedef struct RuntimeAbiV0 {
 
     /* Array helpers. */
     CHAOS_IL2CPP_INTPTR (CHAOS_RUNTIME_ABI_CALL* array_empty)(void);
+
+    /* ── RuntimeAbiV1 additions ── */
+    /* GC allocation (raw, no type association). */
+    void* (CHAOS_RUNTIME_ABI_CALL* gc_alloc)(size_t size, int kind);
+    void* (CHAOS_RUNTIME_ABI_CALL* gc_alloc_atomic)(size_t size);
+
+    /* Value-type boxing — returns a boxed object on the GC heap. */
+    void* (CHAOS_RUNTIME_ABI_CALL* box_value_object)(void* value, TypeInfoHandle type);
+
+    /* VTable / method dispatch helpers. */
+    void* (CHAOS_RUNTIME_ABI_CALL* resolve_virtual_method)(void* obj, uint32_t slot);
+    void* (CHAOS_RUNTIME_ABI_CALL* resolve_method_table)(void* obj);
+
+    /* Type identity. */
+    void* (CHAOS_RUNTIME_ABI_CALL* get_type_info_handle)(TypeInfoHandle handle);
+
+    /* String ID resolution — returns a C string pointer. */
+    const char* (CHAOS_RUNTIME_ABI_CALL* resolve_string_id)(uint32_t string_id);
+
+    /* Thread-local static accessors. */
+    void* (CHAOS_RUNTIME_ABI_CALL* get_thread_static)(uint32_t index);
+    void  (CHAOS_RUNTIME_ABI_CALL* set_thread_static)(uint32_t index, void* value);
+    void* (CHAOS_RUNTIME_ABI_CALL* allocate_thread_static)(size_t size);
 } RuntimeAbiV0;
+
+/* RuntimeAbiV1 — inherits all V0 fields and adds GC/boxing/vtable/thread-static helpers.
+ * The struct is layout-compatible with V0 for the first N fields, so code that only
+ * uses V0 slots can continue to consume a V1 table via cast. */
+typedef RuntimeAbiV0 RuntimeAbiV1;
 
 /* Returns the process-wide v0 table or null when the ABI is unavailable. */
 CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV0* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v0(void);
+
+/* Returns the process-wide v1 table (superset of v0). */
+CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV1* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v1(void);
 
 #ifdef __cplusplus
 }

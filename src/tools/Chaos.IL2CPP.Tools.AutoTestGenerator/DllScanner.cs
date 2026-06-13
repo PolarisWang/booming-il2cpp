@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 
 namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 
@@ -10,13 +11,8 @@ public sealed class DllScanner
         "ToString", "Equals", "GetHashCode", "Finalize", "MemberwiseClone", "GetType"
     };
 
-    // Methods that require infrastructure not available in isolated tests,
-    // or are MLC interface-leaks that produce invalid C#.
-    // NOTE: These blacklists should eventually be replaced by capabilities.json
-    // from codegen (ConvertToCppHandler.WriteCapabilitiesJson). When codegen gains
-    // support for a feature, remove the corresponding entries here.
-    // The capabilities mechanism is defined in the P4 architecture plan.
-    private static readonly HashSet<string> UnprobableMethods = new(StringComparer.Ordinal)
+    /// <summary>Methods blacklisted from ATG probing regardless of codegen capabilities.</summary>
+    private static readonly HashSet<string> BaseUnprobableMethods = new(StringComparer.Ordinal)
     {
         "GetObjectData",          // requires SerializationInfo setup
         "OnDeserialization",      // requires deserialization infrastructure
@@ -29,94 +25,117 @@ public sealed class DllScanner
         "BeginInvoke",            // MLC delegate leak: BeginInvoke from delegate pattern
         "EndInvoke",              // MLC delegate leak: EndInvoke from delegate pattern
         // CS0315: concretized <int,int> doesn't satisfy the interface constraint on TAccessor
-        // (MemoryManager<TAccessor> / ICriticalNotifyCompletion).
         "TryGetMemoryManager",
-        "AwaitUnsafeOnCompleted",
         // CS1061: ILGenerator.MarkSequencePoint not in reference assemblies.
         "MarkSequencePoint",
-        // CS0117: Task.WhenEach is a .NET 9 API not available in reference assemblies
-        // when building combined subjects DLL.
+        // CS0117: Task.WhenEach is a .NET 9 API not in ref assemblies building combined subjects DLL.
         "WhenEach",
-        // CS1615: Marshal.WriteInt16(object, int, char) — MLC sees `object` param as
-        // `out` but the reference assembly disagrees (no `out` on that overload).
+        // CS1615: Marshal.WriteInt16(object, int, char)
         "WriteInt16",
-        // CS0315: concretized <int,int> doesn't satisfy INotifyCompletion / IAsyncStateMachine
-        // constraints on AsyncMethodBuilder.AwaitOnCompleted.
-        "AwaitOnCompleted",
-        // CS0117: RuntimeHelpers.Box(ref T, RuntimeTypeHandle) is a .NET 9 API
-        // not available in reference assemblies.
+        // CS0117: RuntimeHelpers.Box/RuntimeHelpers.SizeOf are .NET 9 APIs
         "Box",
-        // CS0117: RuntimeHelpers.SizeOf(RuntimeTypeHandle) is a .NET 9 API
-        // not available in reference assemblies.
         "SizeOf",
-        // CS0315: Async*MethodBuilder.Start<TStateMachine>(ref TStateMachine)
-        // where TStateMachine : IAsyncStateMachine — concretization picks int
-        // which doesn't satisfy the constraint. Non-generic Start() methods
-        // (e.g. Task.Start()) are unaffected since concretization only applies
-        // to generic methods.
-        "Start",
-        // CS0315: AsyncIteratorMethodBuilder.MoveNext<TStateMachine>(ref TStateMachine)
-        // same constraint issue. Non-generic MoveNext() methods (e.g.
-        // IEnumerator.MoveNext()) are unaffected.
-        "MoveNext",
-        // CS1061: ModuleBuilder.DefineDocument was added in .NET 9, not
-        // available in .NET 8 reference assemblies (net8.0 fallback).
+        // CS1061: ModuleBuilder.DefineDocument is .NET 9
         "DefineDocument",
-        // CS0117: .NET 9 Vector<T> SIMD APIs (AsVector4, AsPlane, etc.) not
-        // available in .NET 8 reference assemblies.
-        "AsVector4",
-        "AsVector4Unsafe",
-        "AsPlane",
-        "AsQuaternion",
-        "AsVector2",
-        "AsVector3",
-        // CS0019: Vector.Clamp/Normalize/Lerp etc return value type tuples that
-        // need the ValueTuple package which isn't always referenced.
-        "Clamp",
-        "Normalize",
-        "Lerp",
-        "Reflect",
-        "Abs",
-        "Min",
-        "Max",
-        "Sum",
-        "Distance",
-        "DistanceSquared",
-        "Dot",
-        "Transform",
-        // CS0117 + LNK2001: Vector.WidenLower/WidenUpper are .NET 9 APIs
-        // returning Vector<T> or ValueTuple<Vector<T>,Vector<T>>. The codegen
-        // doesn't emit MethodTable entries for these types when boxed.
-        "WidenLower",
-        "WidenUpper",
-        // CS0117 + LNK2001: Vector.Create<int>(int) is a .NET 9 API
-        // returning Vector<T>, same codegen limitation.
+        // CS0117: .NET 9 Vector<T> SIMD APIs
+        "AsVector4", "AsVector4Unsafe", "AsPlane", "AsQuaternion",
+        "AsVector2", "AsVector3",
+        // CS0019: Vector.Clamp/Normalize/Lerp etc return value type tuples
+        "Clamp", "Normalize", "Lerp", "Reflect", "Abs", "Min", "Max", "Sum",
+        "Distance", "DistanceSquared", "Dot", "Transform",
+        // CS0117: Vector.WidenLower/WidenUpper are .NET 9 APIs
+        "WidenLower", "WidenUpper",
+        // CS0117: Vector.Create<int>(int) is .NET 9
         "Create",
-        "ToHexStringLower",
-        "TryToHexStringLower",
-        // Half math methods: probe detects JsonReaderException from System.Text.Json
-        // (not in reference assemblies, CS0234 in combined subjects build).
-        "Acosh",
-        "Ieee754Remainder",
-        "Log",
-        "Log10",
-        "Log2",
-        "ReciprocalEstimate",
-        "ReciprocalSqrtEstimate",
-        "RootN",
-        // MultiplyAddEstimate is a .NET 9 API not in .NET 8 (CS0117).
+        // Hex string formatting
+        "ToHexStringLower", "TryToHexStringLower",
+        // Half math methods: JsonReaderException from System.Text.Json
+        "Acosh", "Ieee754Remainder", "Log", "Log10", "Log2",
+        "ReciprocalEstimate", "ReciprocalSqrtEstimate", "RootN",
+        // MultiplyAddEstimate is .NET 9
         "MultiplyAddEstimate",
-        // CS0117: TypeDescriptor.GetConverterFromRegisteredType/GetEventsFromRegisteredType/
-        // GetPropertiesFromRegisteredType are .NET 9+ APIs not available in reference
-        // assemblies (net8.0 fallback of combined subjects DLL).
-        "GetConverterFromRegisteredType",
-        "GetEventsFromRegisteredType",
+        // CS0117: TypeDescriptor .NET 9+ APIs
+        "GetConverterFromRegisteredType", "GetEventsFromRegisteredType",
         "GetPropertiesFromRegisteredType",
-        // CS1061: GetArgument() is a .NET 9 API on expression tree types
-        // (ElementInit, IndexExpression, InvocationExpression, etc.) not
-        // available in net8.0 reference assemblies.
+        // CS1061: GetArgument() is .NET 9 on expression tree types
         "GetArgument",
     };
+
+    /// <summary>Methods gated by codegen capabilities. Key = method name, Value = capabilities.json feature flag.</summary>
+    private static readonly Dictionary<string, string> CapabilityGatedMethods = new(StringComparer.Ordinal)
+    {
+        // Async state machine methods: gated by "async_methods" capability.
+        // When codegen supports async (features.async_methods = true), these are unblocked.
+        ["AwaitOnCompleted"] = "async_methods",
+        ["AwaitUnsafeOnCompleted"] = "async_methods",
+        ["Start"] = "async_methods",
+        ["MoveNext"] = "async_methods",
+    };
+
+    private string? _capabilitiesPath;
+    private HashSet<string>? _effectiveBlacklist;
+    private CapabilitiesFile? _capabilities;
+
+    public DllScanner(string? capabilitiesPath = null)
+    {
+        _capabilitiesPath = capabilitiesPath;
+    }
+
+    /// <summary>Get the effective blacklist, applying capabilities filtering.</summary>
+    private HashSet<string> GetEffectiveUnprobableMethods()
+    {
+        if (_effectiveBlacklist != null) return _effectiveBlacklist;
+
+        var result = new HashSet<string>(BaseUnprobableMethods, StringComparer.Ordinal);
+
+        // Load capabilities if available.
+        if (_capabilities == null && _capabilitiesPath != null && File.Exists(_capabilitiesPath))
+        {
+            try
+            {
+                string json = File.ReadAllText(_capabilitiesPath);
+                _capabilities = JsonSerializer.Deserialize<CapabilitiesFile>(json);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"[ATG] Failed to load capabilities.json: {ex.Message}");
+            }
+        }
+
+        // Add capability-gated methods only if their feature is NOT supported.
+        bool asyncSupported = _capabilities?.Codegen?.Features?.AsyncMethods == true;
+        foreach (var kvp in CapabilityGatedMethods)
+        {
+            bool isSupported = kvp.Value switch
+            {
+                "async_methods" => asyncSupported,
+                _ => false,
+            };
+            if (!isSupported)
+                result.Add(kvp.Key);
+        }
+
+        _effectiveBlacklist = result;
+        return result;
+    }
+
+    // Capabilities JSON model
+    private class CapabilitiesFile
+    {
+        public int Version { get; set; }
+        public CapabilitiesCodegen? Codegen { get; set; }
+    }
+
+    private class CapabilitiesCodegen
+    {
+        public CapabilitiesFeatures? Features { get; set; }
+    }
+
+    private class CapabilitiesFeatures
+    {
+        [System.Text.Json.Serialization.JsonPropertyName("async_methods")]
+        public bool AsyncMethods { get; set; }
+    }
 
     // Types that require complex infrastructure (e.g. JsonSerializerOptions) and
     // can't produce meaningful results in isolated auto-generated tests.
@@ -540,7 +559,7 @@ public sealed class DllScanner
                 continue;
 
             // Skip methods that need infrastructure not available in isolated tests
-            if (UnprobableMethods.Contains(rawMethod.Name))
+            if (GetEffectiveUnprobableMethods().Contains(rawMethod.Name))
             {
                 skippedMethods.Add(rawMethod.Name);
                 continue;
