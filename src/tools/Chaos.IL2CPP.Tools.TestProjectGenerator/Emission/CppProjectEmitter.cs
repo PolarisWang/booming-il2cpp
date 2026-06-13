@@ -395,69 +395,15 @@ public sealed class CppProjectEmitter
             }
         }
 
-        // ── Detect Ninja ──
-        string? ninjaPath = null;
-        try
-        {
-            using var proc = new Process();
-            proc.StartInfo.FileName = OperatingSystem.IsWindows() ? "where" : "which";
-            proc.StartInfo.Arguments = "ninja";
-            proc.StartInfo.RedirectStandardOutput = true;
-            proc.StartInfo.UseShellExecute = false;
-            proc.StartInfo.CreateNoWindow = true;
-            proc.Start();
-            var output = proc.StandardOutput.ReadToEnd();
-            proc.WaitForExit(3000);
-            if (proc.ExitCode == 0)
-            {
-                var lines = output.Split(["\r\n", "\n"], StringSplitOptions.RemoveEmptyEntries);
-                if (lines.Length > 0)
-                    ninjaPath = lines[0].Trim();
-            }
-        }
-        catch { /* fallback */ }
-
-        // VS-bundled Ninja fallback — only use when VSINSTALLDIR is set
-        if (ninjaPath is null)
-        {
-            var vsInstallDir = Environment.GetEnvironmentVariable("VSINSTALLDIR");
-            if (vsInstallDir is not null)
-            {
-                var vsNinja = Path.Combine(vsInstallDir,
-                    @"Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja\ninja.exe");
-                if (File.Exists(vsNinja))
-                    ninjaPath = vsNinja;
-            }
-        }
-
-        // Check whether VS environment variables are available.
-        // Ninja + MSVC requires INCLUDE/LIB/PATH to be set by VsDevCmd.bat at build time.
-        // When they are missing, fall back to the VS generator which embeds these paths
-        // in the .vcxproj files during cmake configure (no env vars needed at build time).
-        var vsInclude = Environment.GetEnvironmentVariable("INCLUDE");
-        var vsLib = Environment.GetEnvironmentVariable("LIB");
-        var vsEnvReady = !string.IsNullOrEmpty(vsInclude) && !string.IsNullOrEmpty(vsLib);
-
+        // ── CMake generator: use platform default (VS 2022 on Windows, Makefiles on Linux) ──
         var cmakeGeneratorArgs = new List<string>();
-        if (ninjaPath is not null && vsEnvReady)
+        if (OperatingSystem.IsWindows())
         {
-            cmakeGeneratorArgs.AddRange(["-G", "Ninja", "-DCMAKE_MAKE_PROGRAM=" + ninjaPath, "-DCMAKE_BUILD_TYPE=RelWithDebInfo"]);
+            cmakeGeneratorArgs.AddRange(["-G", "Visual Studio 17 2022", "-A", "x64"]);
         }
         else
         {
-            if (OperatingSystem.IsWindows())
-            {
-                if (ninjaPath is not null && !vsEnvReady)
-                    Console.Error.WriteLine($"  [build] VS env not ready (INCLUDE/LIB empty) — Ninja unavailable, using VS generator");
-                else
-                    Console.Error.WriteLine($"  [build] Ninja not found, falling back to Visual Studio generator");
-                cmakeGeneratorArgs.AddRange(["-G", "Visual Studio 17 2022", "-A", "x64"]);
-            }
-            else
-            {
-                Console.Error.WriteLine($"  [build] Ninja not found, falling back to Unix Makefiles");
-                cmakeGeneratorArgs.AddRange(["-G", "Unix Makefiles"]);
-            }
+            cmakeGeneratorArgs.AddRange(["-G", "Unix Makefiles"]);
         }
 
         cmakeGeneratorArgs.Add($"-DCHAOS_IL2CPP_CONFIG_TIER={configTier.ToLowerInvariant()}");
