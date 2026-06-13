@@ -61,3 +61,5 @@ CHAOS_IL2CPP_INTPTR = 通用载体类型
 | CarrierKindCode switch 修改 | 更新对应平台 ABI 映射 |
 | 新增 `chaos_external_runtime_*` stub | 验证返回类型与真实定义一致 |
 | reinterpret_cast 相关 crash | 检查 ABI 寄存器是否匹配 |
+| `RuntimeAbiV1` 新增函数指针 | 更新 `contracts/native/v0/runtime_abi_v1.h` + `abi_reflection.cpp` |
+| 生成代码的 include 列表修改 | 检查是否应替换为 ABI 函数表调用 |
