@@ -306,6 +306,43 @@ internal static class ConvertToCppHandler
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.NativeAotLoweringPlan), result.NativeAotLoweringPlan);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
+        WriteCapabilitiesJson(root);
+    }
+
+
+    private static void WriteCapabilitiesJson(string root)
+    {
+        var caps = new
+        {
+            version = 1,
+            codegen = new
+            {
+                version = "1.0.0",
+                features = new
+                {
+                    async_methods = false,
+                    vector_t_boxing = false,
+                    generic_constraints = new[] { "unmanaged", "new" },
+                    max_generic_params = 4,
+                },
+                known_limitations = new[]
+                {
+                    "async state machine MoveNext methods (interpreter fallback only)",
+                    "Vector<T> return types (LNK2001 for boxed MethodTable entries)",
+                    "SerializationInfo-based constructors (requires infrastructure)",
+                    "MetadataLoadContext dependent type discovery",
+                    "Generic constraints unsatisfied by concretization (CS0315)",
+                    ".NET 9 APIs not available in net8.0 reference assemblies",
+                    "Delegate Invoke/BeginInvoke/EndInvoke (MLC leak)",
+                },
+            },
+        };
+        var path = Path.Combine(root, "capabilities.json");
+        var json = System.Text.Json.JsonSerializer.Serialize(caps, new System.Text.Json.JsonSerializerOptions
+        {
+            WriteIndented = true,
+        });
+        File.WriteAllText(path, json + Environment.NewLine);
     }
 
     private static void WriteSupplementalMetadataResolved(string root, SupplementalMetadataTemplateArtifact template)

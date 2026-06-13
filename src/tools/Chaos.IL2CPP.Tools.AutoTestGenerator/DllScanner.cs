@@ -12,6 +12,10 @@ public sealed class DllScanner
 
     // Methods that require infrastructure not available in isolated tests,
     // or are MLC interface-leaks that produce invalid C#.
+    // NOTE: These blacklists should eventually be replaced by capabilities.json
+    // from codegen (ConvertToCppHandler.WriteCapabilitiesJson). When codegen gains
+    // support for a feature, remove the corresponding entries here.
+    // The capabilities mechanism is defined in the P4 architecture plan.
     private static readonly HashSet<string> UnprobableMethods = new(StringComparer.Ordinal)
     {
         "GetObjectData",          // requires SerializationInfo setup
@@ -116,6 +120,8 @@ public sealed class DllScanner
 
     // Types that require complex infrastructure (e.g. JsonSerializerOptions) and
     // can't produce meaningful results in isolated auto-generated tests.
+    // NOTE: Same capabilities.json dependency as UnprobableMethods.
+    // When codegen supports a type pattern, remove the corresponding entry.
     private static readonly HashSet<string> UnprobableTypeNames = new(StringComparer.Ordinal)
     {
         "System.Text.Json.Serialization.Metadata.JsonTypeInfo",
