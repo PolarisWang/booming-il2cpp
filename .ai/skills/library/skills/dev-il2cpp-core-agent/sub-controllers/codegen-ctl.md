@@ -12,7 +12,7 @@
 | 编译失败、链接错误、codegen stub、dotnet build 失败、CMake 错误 | `dev-il2cpp-build-fixer` |
 | 跨平台 PAL、构建系统、CMakePresets、工具链、CI/CD、平台移植 | `dev-il2cpp-platform-expert` |
 | 文档维护、wiki 更新、知识记录 | `dev-project-wiki-maintenance` |
-| foundation-dll、subject、测试管线、manifest | `dev-project-test-governance` |
+| foundation-dll、subject、测试管线、manifest | `dev-il2cpp-fact-verification-expert` |
 | fact 验证、fact_chunk、skip-list、dll 验证结果审计 | `dev-il2cpp-fact-verification-expert` |
 | 热更新、PatchLoader、patchdata、HotpatchDispatch | `dev-il2cpp-hotupdate-expert` |
 

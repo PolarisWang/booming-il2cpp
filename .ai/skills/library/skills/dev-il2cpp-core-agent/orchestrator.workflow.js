@@ -29,7 +29,7 @@ const DOMAIN_EXPERT = {
   hotupdate:   'dev-il2cpp-hotupdate-expert',
   optimizer:   'dev-il2cpp-foundation-dll-optimizer',
   build:       'dev-il2cpp-build-fixer',
-  test:        'dev-project-test-governance',
+  test:        'dev-il2cpp-fact-verification-expert',
 }
 
 // Expert 结果 Schema（各子 Agent 必须按此格式返回）

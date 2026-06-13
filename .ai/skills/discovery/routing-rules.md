@@ -60,7 +60,7 @@ action: `read` / `fix` / `build` / `verify` / `plan`
 ├── GC(2) / 优化(5)      → gc-ctl      → ├── dev-il2cpp-gc-expert
 │                                          └── dev-il2cpp-foundation-dll-optimizer
 └── CodeGen(4) / 翻译(6) / 构建(7)        → codegen-ctl → 6 个 Expert
-    测试(8) / 热更新(9)
+    测试(5) / 热更新(8)
 ```
 
 ### Expert 分类矩阵（完整清单）
@@ -72,7 +72,7 @@ action: `read` / `fix` / `build` / `verify` / `plan`
 | crash、segfault、test failure、异常行为 | `dev-il2cpp-debug-expert` |
 | GC 相关、分配模式、内存回收、写屏障、stress test | `dev-il2cpp-gc-expert` |
 | C# codegen、T4 模板、NativeAot lowering、snapshot | `dev-il2cpp-codegen-expert` |
-| foundation-dll、subject、测试管线、manifest | `dev-project-test-governance` |
+| foundation-dll、subject、测试管线、manifest | `dev-il2cpp-fact-verification-expert` |
 | 性能优化、profile 分析、benchmark | `dev-il2cpp-foundation-dll-optimizer` |
 | 热更新、PatchLoader、patchdata、HotpatchDispatch | `dev-il2cpp-hotupdate-expert` |
 | 编译失败、链接错误、codegen stub、dotnet build 失败、CMake 错误 | `dev-il2cpp-build-fixer` |
@@ -89,7 +89,7 @@ Translation Expert 和 CodeGen Expert 都涉及 Planner/Emission 文件：
 | crash、segfault、test failure、异常行为 | `dev-il2cpp-debug-expert` |
 | GC 相关、分配模式、内存回收、写屏障、stress test | `dev-il2cpp-gc-expert` |
 | C# codegen、T4 模板、NativeAot lowering、snapshot | `dev-il2cpp-codegen-expert` |
-| foundation-dll、subject、测试管线、manifest | `dev-project-test-governance` |
+| foundation-dll、subject、测试管线、manifest | `dev-il2cpp-fact-verification-expert` |
 | 性能优化、profile 分析、benchmark | `dev-il2cpp-foundation-dll-optimizer` |
 | 热更新、PatchLoader、patchdata、HotpatchDispatch | `dev-il2cpp-hotupdate-expert` |
 | 编译失败、链接错误、codegen stub、dotnet build 失败、CMake 错误 | `dev-il2cpp-build-fixer` |
