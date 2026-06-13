@@ -1248,8 +1248,7 @@ public sealed partial class NativeAotLoweringPlanner
                 registerBody = $@"
     // Load JIT method data from {jitDataFilename} file.
     // Phase 2: switched to ABI table
-    auto* __abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0();
-    if (__abi) __abi->register_hotpatch_module(chaos_il2cpp_aot_hotpatch_module);
+    chaos_runtime_get_abi_v0()->register_hotpatch_module(chaos_il2cpp_aot_hotpatch_module);
     uint64_t jit_data_size = 0;
     void* jit_data = ChaosJitDataLoad(""{jitDataFilename}"", &jit_data_size);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount,
@@ -1260,8 +1259,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 registerBody = @"
     // Phase 2: switched to ABI table
-    auto* __abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0();
-    if (__abi) __abi->register_hotpatch_module(chaos_il2cpp_aot_hotpatch_module);
+    chaos_runtime_get_abi_v0()->register_hotpatch_module(chaos_il2cpp_aot_hotpatch_module);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
 " + registerBodyClose;
             }
@@ -4355,9 +4353,9 @@ public sealed partial class NativeAotLoweringPlanner
     //     interpreter cannot execute it, keep on native path even when patched
     private static void EmitHotpatchDispatchCondition(StringBuilder sb, string entryExpr, string indent = "    ")
     {
-        sb.Append(indent).Append("if (auto* __abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0(); __abi && __abi->hotpatch_is_active(")
+        sb.Append(indent).Append("if (chaos_runtime_get_abi_v0()->hotpatch_is_active(")
           .Append(entryExpr).Append(")")
-          .Append(" && !__abi->hotpatch_should_keep_native(")
+          .Append(" && !chaos_runtime_get_abi_v0()->hotpatch_should_keep_native(")
           .Append(entryExpr).Append("))");
     }
 

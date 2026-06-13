@@ -782,7 +782,7 @@ public sealed partial class NativeAotLoweringPlanner
                 $"{{ CHAOS_IL2CPP_UINT16 __v; std::memcpy(&__v, p, 2); p += 2; attr->{fieldName} = __v; }}",
 
             CustomAttributeLiteralKind.String =>
-                $"{{ CHAOS_IL2CPP_UINT16 __len; std::memcpy(&__len, p, 2); p += 2; auto* __rt = chaos::il2cpp::runtime_core::GetCurrentRuntimeState(); auto* __th = chaos::il2cpp::runtime_core::GetCurrentThreadState(); auto* __abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0(); attr->{fieldName} = (__abi != nullptr && __abi->string_new_utf8 != nullptr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__abi->string_new_utf8(__rt, __th, reinterpret_cast<const char*>(p), __len)) : 0; p += __len; }}",
+                $"{{ CHAOS_IL2CPP_UINT16 __len; std::memcpy(&__len, p, 2); p += 2; auto* __abi = chaos_runtime_get_abi_v0(); auto* __rt = __abi ? __abi->get_current_runtime_state() : nullptr; auto* __th = __abi ? __abi->get_current_thread_state() : nullptr; attr->{fieldName} = (__abi != nullptr && __abi->string_new_utf8 != nullptr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__abi->string_new_utf8(__rt, __th, reinterpret_cast<const char*>(p), __len)) : 0; p += __len; }}",
 
             CustomAttributeLiteralKind.Type when value.Value is string typeSubjectId =>
                 $"{{ p += 4; attr->{fieldName} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>({GetNativeTypeInfoSymbol(typeSubjectId)}); }}",
