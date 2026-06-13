@@ -237,6 +237,27 @@ def _chaos_sdk_csproj() -> Path:
             / "Chaos.TestFramework.Sdk.csproj")
 
 
+def _probe_dll_type_count(dll_path: Path) -> int | None:
+    """Probe the number of public types in a managed DLL.
+
+    Uses monodis (Linux) to count TypeDef entries.  Returns None when
+    no suitable tool is available (probe is advisory, not critical).
+    """
+    dll = str(dll_path)
+    try:
+        if sys.platform != "win32":
+            result = subprocess.run(
+                ["monodis", "--typedef", dll],
+                capture_output=True, text=True, timeout=15,
+            )
+            if result.returncode == 0:
+                lines = [l.strip() for l in result.stdout.splitlines() if l.strip()]
+                return len(lines)
+    except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
+        pass
+    return None
+
+
 def _build_jit_entry(
     tpg_dll: Path,
     subjects_dll: Path,
@@ -354,8 +375,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "System.Xml.ReaderWriter":   "System.Private.Xml",
     }
     original_assembly = ctx.assembly
+    custom_subjects_used = False
+    tfm_fallback_used = False
     if ctx.assembly in TYPE_FORWARDER_DLL_MAP:
         real_asm = TYPE_FORWARDER_DLL_MAP[ctx.assembly]
+        print(f"  [build] Type-forwarder detected (known map): {ctx.assembly} -> {real_asm}")
         # Re-use the same directory as the original target to pick the same runtime version
         real_dll = target_dll.parent / f"{real_asm}.dll"
         if not real_dll.exists():
@@ -365,9 +389,15 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                     real_dll = runtime_dir
                     break
         if real_dll.exists():
-            print(f"  [build] Type-forwarder detected: {ctx.assembly} -> {real_asm}")
             print(f"  [build] Redirecting target DLL: {real_dll}")
             target_dll = real_dll
+        else:
+            print(f"  [build] WARNING: Real assembly '{real_asm}.dll' not found — will likely fail at ATG scan")
+    elif target_dll and target_dll.exists():
+        type_count = _probe_dll_type_count(target_dll)
+        if type_count == 0:
+            print(f"  [build] WARNING: {ctx.assembly}.dll has 0 public types — may be an unknown type-forwarder facade")
+            print(f"  [build]   Add to TYPE_FORWARDER_DLL_MAP in build.py if ATG scan fails")
 
     print(f"  [build] Target DLL: {target_dll}")
 
@@ -478,6 +508,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 duration_ms=int((time.perf_counter() - start) * 1000))
 
         print(f"  [build] Falling back to custom subjects: {len(custom_cs_files)} file(s)")
+        custom_subjects_used = True
 
         # Build custom subjects DLL
         sdk_csproj = _chaos_sdk_csproj()
@@ -603,6 +634,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             # Try net8.0 fallback when TFM is not net8.0
             if tfm != "net8.0":
                 print(f"  [build] Retrying with net8.0 fallback...")
+                tfm_fallback_used = True
                 combined_csproj.write_text(
                     "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
                     "  <PropertyGroup>\n"
@@ -642,6 +674,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     # -- 7. Hephaestus cache lookup: skip TPG if unchanged input --
     cache = HephaestusCache(ctx.foundation_dir, verbose=True)
+    cache_status = "miss"
     # Include runtime stub source files in hash so changes to interop_stubs.cpp
     # etc. invalidate the build cache and trigger a fresh rebuild.
     _runtime_stubs = [
@@ -681,7 +714,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 print(f"  [build] [hephaestus] Restored entry.exe ({exe_size} bytes)")
                 duration_ms = int((time.perf_counter() - start) * 1000)
                 # Also build JIT entry (non-blocking, not cached separately)
-                _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
+                _build_jit_entry(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"), subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
                 return StageResult(
                     stage="build", status="passed",
                     summary=f"[CACHE HIT] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",
@@ -689,6 +722,8 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                         "chunkSlug": ctx.slug,
                         "totalSubjects": total_subjects,
                         "tfm": tfm,
+                        "tfmFallback": tfm_fallback_used,
+                        "customSubjectsUsed": custom_subjects_used,
                         "durationMs": duration_ms,
                         "hephaestus": "cache_hit",
                         "cacheKey": cache_key,
@@ -697,7 +732,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             else:
                 print(f"  [build] [hephaestus] Cached entry.exe missing, falling through to full build")
                 cache.invalidate_assembly(ctx.assembly)
+                cache_status = "restore_failed_entry_missing"
         else:
+            cache_status = "restore_failed"
+            print(f"  [build] [hephaestus] Cache restore failed, falling through to full build")
             print(f"  [build] [hephaestus] Cache restore failed, falling through to full build")
 
     print(f"  [build] [hephaestus] CACHE MISS: performing full build")
@@ -847,7 +885,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     print(f"  [build] [hephaestus] Cached build output ({cache_key[:48]}...)")
 
     # -- 9. Build JIT entry (non-blocking) --
-    _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
+    jit_built = _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
 
     print(f"  [build] Done ({duration_ms}ms)")
 
@@ -858,9 +896,12 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "chunkSlug": ctx.slug,
             "totalSubjects": total_subjects,
             "tfm": tfm,
+            "tfmFallback": tfm_fallback_used,
+            "customSubjectsUsed": custom_subjects_used,
             "durationMs": duration_ms,
-            "hephaestus": "cache_miss",
+            "hephaestus": cache_status,
             "cacheKey": cache_key,
+            "jitSkipped": not jit_built,
         },
         duration_ms=duration_ms)
 

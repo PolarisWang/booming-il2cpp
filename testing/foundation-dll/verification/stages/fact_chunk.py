@@ -177,19 +177,36 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
 
     # Combined status: JIT-as-sufficient if JIT passes (JIT can handle methods the AOT
     # codegen cannot compile), else fall back to AOT status.
+    # UPGRADE: When JIT passes but AOT is completely broken (error/failed), promote
+    # to "partial" rather than "passed" — the AOT gap should not be hidden.
     if jit_status == "passed":
-        status = "passed"
-        if aot_status != "passed":
-            print(f"  [fact] JIT passes, promoting overall status to passed (AOT was {aot_status})")
+        if aot_status in ("error", "failed"):
+            status = "partial"
+            print(f"  [fact] JIT passes, promoting to partial (AOT was {aot_status})")
+        else:
+            status = "passed"
+            if aot_status != "passed":
+                print(f"  [fact] JIT passes, promoting overall status to passed (AOT was {aot_status})")
     else:
         status = aot_status
         if aot_status == "passed" and jit_status is not None and jit_status != "passed":
             status = "passed"  # AOT passing is sufficient for pipeline success
 
-    # Cross-check: detect silent method drops from metadata
+    # Cross-check: detect silent method drops from metadata.
+    # Small gaps are expected (void "no crash" assertions don't produce results).
+    # Drops >10% partial the status; >50% is severe and fails the stage.
     aot_dropped = (meta_total or 0) - aot_result['total'] if meta_total else 0
-    if aot_dropped > 0:
-        errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({meta_total})")
+    if aot_dropped > 0 and meta_total and meta_total > 0:
+        drop_ratio = aot_dropped / meta_total
+        if drop_ratio > 0.5:
+            status = "failed"
+            errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({meta_total}) — SEVERE ({drop_ratio:.0%})")
+        elif drop_ratio > 0.1:
+            if status == "passed":
+                status = "partial"
+            errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({meta_total})")
+        else:
+            errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({meta_total})")
     jit_dropped = (meta_total or 0) - jit_result['total'] if jit_result and meta_total else 0
     if jit_dropped > 0:
         errors.append(f"jit: {jit_dropped} methods dropped vs metadata ({meta_total})")
@@ -206,6 +223,13 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         if r.get("passed") and r.get("value", 0) < 0 and r.get("value", 0) != -1
     )
     value_suspicious = value_warnings > 0
+
+    # UPGRADE: value_suspicious indicates some methods returned negative values
+    # despite passing — this is suspicious and should not be hidden behind a
+    # clean "passed" status.  Demote to "partial" so it shows in dashboards.
+    if value_suspicious and status == "passed":
+        status = "partial"
+        print(f"  [fact] Demoting status to partial: {value_warnings} method(s) returned negative values")
 
     return StageResult(
         stage="fact", status=status,

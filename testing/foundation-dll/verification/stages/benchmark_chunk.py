@@ -279,6 +279,24 @@ def _write_records_jsonl(
             f.write(json.dumps(method_record, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
+def _check_range_support(exe_path: Path) -> bool:
+    """Probe whether the entry.exe supports --benchmark-range flag.
+
+    Older TPG templates do not implement this flag.  Detection is done by
+    running the exe with --help and checking for the presence of the flag
+    in the output.  Returns False on any probe failure (exe not found,
+    timeout, etc.) so the benchmark proceeds with --benchmark-all.
+    """
+    try:
+        result = subprocess.run(
+            [str(exe_path), "--help"],
+            capture_output=True, text=True, timeout=10,
+        )
+        return "benchmark-range" in (result.stdout or "")
+    except (subprocess.TimeoutExpired, OSError, ValueError):
+        return False
+
+
 def _get_entry_count(exe_path: Path) -> int:
     """Read kSubjectEntryCount from the generated native-aot.generated.cpp."""
     subject_file = exe_path.parent / "subjects" / "native-aot.generated.cpp"
@@ -428,10 +446,11 @@ def _run_single_benchmark(
     # Determine benchmark range
     benchmark_start_idx = 0
     benchmark_end_idx = 0
-    # NOTE: --benchmark-range is disabled because the current entry.exe
-    # (built from an older TPG template) does not support it.  The subject
-    # slot map based --benchmark-all mode is used instead.
-    use_range = False
+    # Probe entry.exe for --benchmark-range support (older TPG templates
+    # don't implement this flag).  Fall back to --benchmark-all if unsupported.
+    use_range = _check_range_support(exe_path)
+    if not use_range:
+        print(f"  [benchmark] [{technology}] entry.exe does not support --benchmark-range, using --benchmark-all")
 
     entry_count = _get_entry_count(exe_path) if not use_range else benchmark_end_idx
 
@@ -523,6 +542,23 @@ def _run_single_benchmark(
 
     # Phase 3: Aggregate summary
     summary = _compute_summary(per_method_stats)
+
+    # Phase 3b: Calibration quality monitoring.
+    # Calibration uses a single method (index 0).  If actual durations vary
+    # widely across methods, the per-call estimate from method 0 may not
+    # generalize.  Emit a WARN when the slowest method is >10x the median.
+    if per_method_stats:
+        valid_durations = [
+            s.get("meanDurationMs", 0) for s in per_method_stats
+            if s.get("meanDurationMs", 0) > 0
+        ]
+        if valid_durations:
+            sorted_d = sorted(valid_durations)
+            median_d = sorted_d[len(sorted_d) // 2]
+            max_d = sorted_d[-1]
+            if median_d > 0 and max_d > median_d * 10:
+                print(f"  [benchmark] [{technology}] WARNING: calibration from method 0 may under-estimate "
+                      f"— max={max_d:.1f}ms, median={median_d:.1f}ms ({max_d/median_d:.0f}x range)")
 
     tech_duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [benchmark] [{technology}] {method_count} methods "
@@ -634,8 +670,11 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     if status == "passed" and method_count > 0:
         zero_duration = sum(1 for m in per_method_stats if m.get("meanDurationMs", 0) <= 0)
         if zero_duration == method_count:
-            status = "warning_no_valid_data"
-            print(f"  [benchmark] WARNING: all {method_count} methods returned zero/negative duration")
+            # UPGRADE: all-zero duration means benchmark data is completely invalid —
+            # fail the stage instead of silently passing.
+            status = "failed"
+            errors.append("all methods returned zero/negative duration — benchmark data invalid")
+            print(f"  [benchmark] FAILED: all {method_count} methods returned zero/negative duration")
         elif zero_duration > method_count * 0.5:
             status = "warning_mostly_zero"
             print(f"  [benchmark] WARNING: {zero_duration}/{method_count} methods returned zero/negative duration")

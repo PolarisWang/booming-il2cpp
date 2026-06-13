@@ -194,6 +194,12 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     total_hu_failed = sum(
         s.get("hotupdate", {}).get("failed", 0) for s in chunk_summaries
     )
+    # Count hotupdate skip-status breakdowns for observability
+    hotupdate_skip_statuses: dict[str, int] = {}
+    for s in chunk_summaries:
+        hu_status = s.get("hotupdate", {}).get("status")
+        if hu_status and hu_status.startswith("skipped_"):
+            hotupdate_skip_statuses[hu_status] = hotupdate_skip_statuses.get(hu_status, 0) + 1
 
     # ── Write reports ──
     latest_dir.mkdir(parents=True, exist_ok=True)
@@ -256,6 +262,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "chunksWithRevertFailure": chunks_with_revert_failure,
                 "totalPassed": total_hu_passed,
                 "totalFailed": total_hu_failed,
+                "skipBreakdown": hotupdate_skip_statuses,
             },
         },
     }
@@ -295,9 +302,25 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     print(f"  [aggregate] Benchmark: {total_benchmarked} methods")
     print(f"  [aggregate] Done ({duration_ms}ms)")
 
+    # UPGRADE: severe metadata mismatch (>50% gap) or value warnings
+    # make aggregate partial rather than hiding issues behind a clean "passed".
+    aggregate_status = "passed"
+    if chunks_with_meta_mismatch > 0:
+        aggregate_status = "partial"
+    if chunks_with_value_warnings > 0 and aggregate_status == "passed":
+        aggregate_status = "partial"
+
+    # Build summary suffix for partial status details
+    partial_reasons = []
+    if chunks_with_meta_mismatch:
+        partial_reasons.append(f"{chunks_with_meta_mismatch} meta-mismatch")
+    if chunks_with_value_warnings:
+        partial_reasons.append(f"{chunks_with_value_warnings} value-warn")
+
     return StageResult(
-        stage="aggregate", status="passed",
-        summary=f"aggregated {chunks_with_fact}/{len(chunk_slugs)} chunks, {total_passed}/{total_fact} passed",
+        stage="aggregate", status=aggregate_status,
+        summary=f"aggregated {chunks_with_fact}/{len(chunk_slugs)} chunks, {total_passed}/{total_fact} passed"
+                + (f" ({', '.join(partial_reasons)})" if partial_reasons else ""),
         details=fact_summary,
         duration_ms=duration_ms,
     )

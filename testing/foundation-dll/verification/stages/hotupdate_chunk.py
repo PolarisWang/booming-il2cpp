@@ -135,6 +135,14 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
     for stale in ("bridge-redirect.generated.cpp", "chaos_register_bridge_redirects.generated.cpp"):
         for subj_file in (native_dir / "subjects").glob(stale):
             subj_file.unlink(missing_ok=True)
+    # LOG: LINK-HACK-1 — prevent LNK2019 from stale bridge-redirect stubs
+
+    # 2. Remove stale chaos_stub_*.cpp files — these define symbols that also
+    #    exist in the prebuilt libchaos_runtime_core.a / libchaos_interpreter.a,
+    #    causing multiple-definition linker errors on Linux (GNU ld is strict).
+    for stub_file in native_dir.glob("chaos_stub_*.cpp"):
+        stub_file.unlink(missing_ok=True)
+    # LOG: LINK-HACK-2 — prevent multiple-definition from stale chaos_stub_*.cpp
 
     # 2. Remove stale chaos_stub_*.cpp files — these define symbols that also
     #    exist in the prebuilt libchaos_runtime_core.a / libchaos_interpreter.a,
@@ -173,7 +181,7 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
                 '    return 0;\n'
                 '}\n',
                 encoding="utf-8")
-            print(f'  [hotupdate] Generated chaos_assert_stubs.cpp (Assert_Complete stub)')
+            print(f'  [hotupdate] Generated chaos_assert_stubs.cpp (Assert_Complete stub)')  # LINK-HACK-3
 
     # 4. Make runtime-patchdata.cpp sentinel symbols weak so they can be
     #    overridden by patch-host-arrays.cpp strong definitions at link time.
@@ -188,6 +196,7 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
             r'__attribute__((weak)) \1',
             text, flags=_re.MULTILINE)
         runtime_patchdata.write_text(weak_text, encoding="utf-8")
+        print(f'  [hotupdate] LINK-HACK-4: Marked sentinel symbols as weak in runtime-patchdata.cpp')
 
     # 5. Add --allow-multiple-definition to Linux link flags to handle
     #    remaining non-weak multiple definitions (e.g. ChaosFindExternalTypeDescByStableId
@@ -201,6 +210,7 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
         root = str(_REPO_ROOT).replace("\\", "/")
         text = _re.sub(r'[A-Za-z]:/agent/booming-il2cpp', root, text)
         text = _re.sub(r'"D:/([^"]+)"', lambda m: f'"/home/debian/agent/{m.group(1)}"', text)
+        # LINK-HACK-5: cross-build path substitution (Win→Linux)
 
         # Add --allow-multiple-definition on Linux (not MSVC, which has /FORCE:MULTIPLE)
         if 'set(CHAOS_FORCE_MULTIPLE "")' in text:
@@ -208,6 +218,7 @@ def _run_cmake_rebuild(native_dir: Path) -> bool:
             text = text.replace(
                 'set(CHAOS_FORCE_MULTIPLE "")',
                 f'set(CHAOS_FORCE_MULTIPLE "{allow_multiple}")')
+            # LINK-HACK-6: suppress multiple-definition linker errors
         cmake_lists.write_text(text, encoding="utf-8")
 
     # 6. Incremental cmake build — recompile patch-host-arrays.cpp and relink entry.exe.
@@ -591,7 +602,6 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "details": hotupdate_data,
         "stderr": stderr[:500] if stderr else "",
     }
-    result_path.write_text(json.dumps(result_data, indent=2), encoding="utf-8")
 
     # Determine status:
     # - Unified pass criterion (applies to both with and without patch data):
@@ -644,6 +654,10 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # Mark truncated JSON
     if json_truncated:
         result_data["_truncated"] = True
+
+    # Embed the determined status in result_data so aggregate.py can report it
+    result_data["status"] = status
+    result_path.write_text(json.dumps(result_data, indent=2), encoding="utf-8")
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     benchmark_note = f", bench={len(baseline_benchmark)}" if baseline_benchmark else ""
