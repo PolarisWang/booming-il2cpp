@@ -483,31 +483,13 @@ public sealed class CppProjectEmitter
                 catch { /* best-effort */ }
             }
             Console.Error.WriteLine($"  [build] cmake configure (fresh)...");
-            bool configureOk = false;
-            for (int attempt = 0; attempt < 3; attempt++)
+            var cfgArgs = new List<string> { "-S", projectDir, "-B", buildDir.FullName };
+            cfgArgs.AddRange(cmakeGeneratorArgs);
+            var cfgResult = RunProcess("cmake", cfgArgs, timeoutMs: 120_000);
+            if (cfgResult.ExitCode != 0)
             {
-                if (attempt > 0)
-                {
-                    var wait = 1 << attempt;
-                    Console.Error.WriteLine($"  [build] cmake configure retry #{attempt} after {wait}s...");
-                    Thread.Sleep(wait * 1000);
-                }
-
-                var cfgArgs = new List<string> { "-S", projectDir, "-B", buildDir.FullName };
-                cfgArgs.AddRange(cmakeGeneratorArgs);
-
-                var cfgResult = RunProcess("cmake", cfgArgs, timeoutMs: 120_000);
-                if (cfgResult.ExitCode == 0)
-                {
-                    configureOk = true;
-                    break;
-                }
                 PrintLastLines(cfgResult.StdErr + cfgResult.StdOut, 10);
-            }
-
-            if (!configureOk)
-            {
-                Console.Error.WriteLine($"  [build] cmake configure FAILED after retries");
+                Console.Error.WriteLine($"  [build] cmake configure FAILED");
                 return null;
             }
         }
@@ -518,28 +500,11 @@ public sealed class CppProjectEmitter
 
         // ── Step 2: CMake incremental build (3 retries) ──
         Console.Error.WriteLine($"  [build] cmake build (incremental)...");
-        bool buildOk = false;
-        for (int attempt = 0; attempt < 3; attempt++)
+        var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 300_000);
+        if (buildResult.ExitCode != 0)
         {
-            if (attempt > 0)
-            {
-                var wait = 1 << attempt;
-                Console.Error.WriteLine($"  [build] cmake build retry #{attempt} after {wait}s...");
-                Thread.Sleep(wait * 1000);
-            }
-
-            var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 300_000);
-            if (buildResult.ExitCode == 0)
-            {
-                buildOk = true;
-                break;
-            }
             PrintLastLines(buildResult.StdErr + buildResult.StdOut, 20);
-        }
-
-        if (!buildOk)
-        {
-            Console.Error.WriteLine($"  [build] cmake build FAILED after retries");
+            Console.Error.WriteLine($"  [build] cmake build FAILED");
             return null;
         }
 
@@ -575,26 +540,16 @@ public sealed class CppProjectEmitter
         // ── Step 4: Copy to output with retries ──
         var outputName = isJit ? "entry-jit.exe" : "entry.exe";
         var targetPath = Path.Combine(projectDir, outputName);
-        for (int attempt = 0; attempt < 5; attempt++)
+        try
         {
-            try
-            {
-                if (File.Exists(targetPath))
-                    File.Delete(targetPath);
-                File.Copy(exePath, targetPath, overwrite: true);
-                break;
-            }
-            catch (Exception ex) when (attempt < 4)
-            {
-                var wait = 1 << attempt;
-                Console.Error.WriteLine($"  [build] copy locked, retry #{attempt} after {wait}s...");
-                Thread.Sleep(wait * 1000);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine($"  [build] copy FAILED after retries: {ex.Message}");
-                return null;
-            }
+            if (File.Exists(targetPath))
+                File.Delete(targetPath);
+            File.Copy(exePath, targetPath, overwrite: true);
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"  [build] Copy failed: {ex.Message}");
+            return null;
         }
 
         var size = new FileInfo(targetPath).Length;
