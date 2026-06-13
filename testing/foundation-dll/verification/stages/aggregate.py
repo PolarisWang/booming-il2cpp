@@ -145,7 +145,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # Also emit a per-chunk advisory WARN for any gap >20%.
     chunks_with_meta_mismatch = 0
     for s in chunk_summaries:
-        meta = s.get("fact", {}).get("factMethodCount") or s.get("fact", {}).get("metaTotal")
+        fact = s.get("fact", {})
+        meta = fact.get("factMethodCount") if fact.get("factMethodCount") is not None else fact.get("metaTotal")
         total = s.get("fact", {}).get("total")
         if meta is not None and meta > 0 and total is not None and total != meta:
             ratio = total / meta

@@ -165,14 +165,9 @@ def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
 
 def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
                           start_idx: int = 0, end_idx: int = 0) -> int:
-    """Probe-run with 10 iterations, scale to target ~50ms total per method.
-
-    Calibrates using a single method (index 0) to avoid process crashes
-    that occur when iterating all methods in a single entry.exe invocation.
-    The crash affects --benchmark-all but not --benchmark-range 0 1 10.
-    """
-    # Always calibrate on method 0 only (avoids pre-existing crash in full scan)
-    result = _run_entry_once(exe_path, 10, min(timeout, 30), start_idx=0, end_idx=1)
+    """Probe-run with 10 iterations, scale to target ~50ms total per method."""
+    # Probe all methods in the given range to calibrate iteration count
+    result = _run_entry_once(exe_path, 10, min(timeout, 30), start_idx=start_idx, end_idx=end_idx or None)
     if result is None or not result.stdout:
         return 0  # calibration failed, skip benchmark
 
@@ -277,24 +272,6 @@ def _write_records_jsonl(
                 "alias": f"method-{i}",
             }
             f.write(json.dumps(method_record, ensure_ascii=False, separators=(",", ":")) + "\n")
-
-
-def _check_range_support(exe_path: Path) -> bool:
-    """Probe whether the entry.exe supports --benchmark-range flag.
-
-    Older TPG templates do not implement this flag.  Detection is done by
-    running the exe with --help and checking for the presence of the flag
-    in the output.  Returns False on any probe failure (exe not found,
-    timeout, etc.) so the benchmark proceeds with --benchmark-all.
-    """
-    try:
-        result = subprocess.run(
-            [str(exe_path), "--help"],
-            capture_output=True, text=True, timeout=10,
-        )
-        return "benchmark-range" in (result.stdout or "")
-    except (subprocess.TimeoutExpired, OSError, ValueError):
-        return False
 
 
 def _get_entry_count(exe_path: Path) -> int:
@@ -443,21 +420,12 @@ def _run_single_benchmark(
     total_method_count = _get_manifest_method_count(ctx) if method_index_to_subject_id else 0
     _ = total_method_count  # suppress unused (available for future range-mode support)
 
-    # Determine benchmark range
-    benchmark_start_idx = 0
-    benchmark_end_idx = 0
-    # Probe entry.exe for --benchmark-range support (older TPG templates
-    # don't implement this flag).  Fall back to --benchmark-all if unsupported.
-    use_range = _check_range_support(exe_path)
-    if not use_range:
-        print(f"  [benchmark] [{technology}] entry.exe does not support --benchmark-range, using --benchmark-all")
+    # Always use --benchmark-all (--benchmark-range is not supported by current entry.exe)
+    entry_count = _get_entry_count(exe_path)
 
-    entry_count = _get_entry_count(exe_path) if not use_range else benchmark_end_idx
-
-    mode_label = "--benchmark-range" if use_range else "--benchmark-all"
-    print(f"  [benchmark] [{technology}] {exe_path} {mode_label} 0..{benchmark_end_idx} (adaptive)")
+    print(f"  [benchmark] [{technology}] {exe_path} --benchmark-all (adaptive)")
     iterations = _calibrate_iterations(exe_path, timeout, entry_count,
-                                       start_idx=benchmark_start_idx, end_idx=benchmark_end_idx)
+                                       start_idx=0, end_idx=0)
     print(f"  [benchmark] [{technology}] calibrated iterations={iterations}, entries={entry_count}")
     if iterations <= 0:
         print(f"  [benchmark] [{technology}] calibration failed, skipping")
@@ -467,12 +435,10 @@ def _run_single_benchmark(
     max_rounds = 10
     min_rounds = 3
     all_rounds: list[list[dict]] = []
-    _dropped_count = 0
 
     for s in range(max_rounds):
         print(f"  [benchmark] [{technology}] sampling round {s + 1}/{max_rounds}...")
-        result = _run_entry_once(exe_path, iterations, timeout,
-                                  start_idx=benchmark_start_idx, end_idx=benchmark_end_idx)
+        result = _run_entry_once(exe_path, iterations, timeout)
         if result is None:
             if all_rounds:
                 break
@@ -513,9 +479,6 @@ def _run_single_benchmark(
         return None
 
     # Phase 2: Per-method statistical computation
-    # Warn if JSON lines were dropped (truncated/malformed output)
-    if _dropped_count > 0:
-        print(f"  [benchmark] WARNING: {_dropped_count} malformed JSON lines dropped from output")
     method_count = len(all_rounds[0])
     per_method_stats: list[dict] = []
 
@@ -567,7 +530,7 @@ def _run_single_benchmark(
     # Phase 4: Write perf store
     _write_perf_store(per_method_stats, ctx, technology, metadata_methods, iterations,
                       method_index_to_subject_id=method_index_to_subject_id,
-                      benchmark_start_idx=benchmark_start_idx)
+                      benchmark_start_idx=0)
 
     return {
         "per_method_stats": per_method_stats,
@@ -670,17 +633,16 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     if status == "passed" and method_count > 0:
         zero_duration = sum(1 for m in per_method_stats if m.get("meanDurationMs", 0) <= 0)
         if zero_duration == method_count:
-            # UPGRADE: all-zero duration means benchmark data is completely invalid —
-            # fail the stage instead of silently passing.
             status = "failed"
             errors.append("all methods returned zero/negative duration — benchmark data invalid")
             print(f"  [benchmark] FAILED: all {method_count} methods returned zero/negative duration")
         elif zero_duration > method_count * 0.5:
-            status = "warning_mostly_zero"
-            print(f"  [benchmark] WARNING: {zero_duration}/{method_count} methods returned zero/negative duration")
+            status = "failed"
+            errors.append(f"{zero_duration}/{method_count} methods returned zero/negative duration")
+            print(f"  [benchmark] FAILED: {zero_duration}/{method_count} methods returned zero/negative duration")
 
     if errors:
-        status = "passed_with_errors" if status == "passed" else "error"
+        status = "error"
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [benchmark] {status}: {method_count} methods "

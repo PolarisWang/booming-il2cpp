@@ -454,8 +454,11 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                         patch_data_size = patch_data_path.stat().st_size
                         print(f"  [hotupdate] Patch data: {patch_data_path} ({patch_data_size} bytes)")
                         if patch_data_size == 0:
-                            print(f"  [hotupdate] WARN: patch data is empty, disabling --patch-data")
-                            patch_data_path = None
+                            print(f"  [hotupdate] ERROR: patch data is empty")
+                            return StageResult(
+                                stage="hotupdate", status="error",
+                                summary="patch data is empty",
+                                duration_ms=int((time.perf_counter() - start) * 1000))
                     else:
                         print(f"  [hotupdate] TPG extract-patch-data failed, falling back to no-patch mode")
                         for line in (extract_result.stderr.splitlines() + extract_result.stdout.splitlines())[-5:]:
@@ -544,21 +547,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             payload = stdout[json_start:json_end]
             hotupdate_data = json.loads(payload)
     except (json.JSONDecodeError, KeyError):
-        # If parsing fails, try appending missing closing brackets.
-        # entry.exe may crash before flushing the final }}, but all
-        # section data is already written.
-        try:
-            if json_start >= 0:
-                payload = stdout[json_start:]
-                for suffix in ("}", "}}", ""):
-                    try:
-                        hotupdate_data = json.loads(payload + suffix)
-                        if hotupdate_data.get("passedMethods", 0) > 0:
-                            break
-                    except json.JSONDecodeError:
-                        continue
-        except Exception:
-            pass
+        json_truncated = True
 
     # B1: Structural integrity check — verify baselineFact count matches totalMethods.
     # If they don't match, the JSON was truncated and partial data is unreliable.
@@ -612,44 +601,29 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     #   correctly + revert cleanly" is sufficient to prove the mechanism works.
     # - assert_failed > 0 means the patch introduced a crash in a previously-passing
     #   method — this is a genuine regression and should fail.
-    # FP-9: Check patchFailed BEFORE the patch_data_path branch (the result_data
-    # field is always written for the no-patch-data path at line 498, so checking
-    # it inside the if patch_data_path: branch is dead code).
-    # FP-10: If JSON is truncated, NEVER report passed — partial data is unreliable.
-    # FP-11: When patch data is used but produces 0 semantic changes (passed=0), the
-    # stage should still pass as long as revert works cleanly.  0 semantic changes
-    # means the patch was applied but didn't encounter any methods with patched
-    # return values in this run — this is normal for chunks where the patched
-    # methods are not reachable from the current subject wrappers.
+    # Determine status: simplified — no skip status variants.
+    # JSON truncation or failed patch generation → error.
+    # With patch data → passed if no crash and revert clean; else failed.
+    # Without patch data → skipped (nothing meaningful was tested).
     if json_truncated:
-        status = "failed_truncated"
-    elif result_data.get("patchFailed") or hotupdate_data.get("patched_method_count", 1) == 0:
-        status = "skipped_patch_not_applied"
+        status = "error"
+        if not errors:
+            errors.append("hotupdate JSON truncated — results unreliable")
+    elif not hotupdate_data:
+        status = "error"
+        if not errors:
+            errors.append("hotupdate returned no data")
+    elif result_data.get("patchFailed"):
+        status = "error"
+        if not errors:
+            errors.append("patch data generation failed earlier")
     elif patch_data_path:
-        # When patch data was used: pass if no assertions failed and revert works.
-        # passed==0 is OK — it means the patch didn't encounter modified methods,
-        # which is normal when method-level patch data targets different methods
-        # than those exercised by the current chunk's subjects.
         status = "passed" if (assert_failed == 0 and all_revert) else "failed"
-        if passed == 0 and assert_failed == 0 and all_revert:
-            status = "passed"
     else:
-        # FP-10: Without patch data, hotupdate ran baseline+patched+revert on the
-        # SAME unpatched code. This tests nothing — report as skipped, not passed.
-        if _patch_generation_attempted:
-            status = "skipped_patch_failed"
-        elif passed > 0:
-            status = "skipped_no_patch"
-        elif passed == 0 and (r.returncode if hasattr(r, 'returncode') else r.get('exitCode', 0)) == 0:
-            status = "skipped_no_subjects"
-        else:
-            status = "passed" if failed == 0 and passed > 0 else "failed"
-
-    # A6: Warn when patch data generation was attempted but failed
-    if patch_data_path is None and _patch_generation_attempted:
-        print(f"  [hotupdate] WARNING: Patch data generation failed earlier — "
-              f"running without semantic verification (status={status})")
-        result_data["patchFailed"] = True
+        status = "skipped"
+        print(f"  [hotupdate] Skipped — no patch data was provided")
+        if not errors:
+            errors.append("no patch data — nothing meaningful was tested")
 
     # Mark truncated JSON
     if json_truncated:

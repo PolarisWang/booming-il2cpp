@@ -237,27 +237,6 @@ def _chaos_sdk_csproj() -> Path:
             / "Chaos.TestFramework.Sdk.csproj")
 
 
-def _probe_dll_type_count(dll_path: Path) -> int | None:
-    """Probe the number of public types in a managed DLL.
-
-    Uses monodis (Linux) to count TypeDef entries.  Returns None when
-    no suitable tool is available (probe is advisory, not critical).
-    """
-    dll = str(dll_path)
-    try:
-        if sys.platform != "win32":
-            result = subprocess.run(
-                ["monodis", "--typedef", dll],
-                capture_output=True, text=True, timeout=15,
-            )
-            if result.returncode == 0:
-                lines = [l.strip() for l in result.stdout.splitlines() if l.strip()]
-                return len(lines)
-    except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
-        pass
-    return None
-
-
 def _build_jit_entry(
     tpg_dll: Path,
     subjects_dll: Path,
@@ -270,22 +249,6 @@ def _build_jit_entry(
     Returns True if JIT build succeeded, False otherwise.
     JIT build failure does not block the pipeline.
     """
-    # Remove stale JIT binary before rebuild to prevent stale-binary false positives
-    jit_target = native_dir / "entry-jit.exe"
-    if jit_target.exists():
-        jit_target.unlink()
-    # ── Size check: skip JIT build for very large chunks ────────────
-    # The Windows PE32+ format has a 2GB image size limit. JIT-compiled
-    # code can be 10-20x larger than the generated C++ source. Chunks
-    # with >100MB of generated .cpp code produce JIT images >2GB.
-    # Skip the JIT build for those — AOT mode is unaffected.
-    codegen_cpp_total = sum(
-        f.stat().st_size for f in (native_dir / "codegen" / "generated").glob("*.cpp")
-    ) if (native_dir / "codegen" / "generated").exists() else 0
-    if codegen_cpp_total > 500 * 1024 * 1024:  # 500 MB (D1 .jdata externalized)
-        print(f"  [build] JIT build skipped: codegen output {codegen_cpp_total // (1024*1024)}MB")
-        print(f"  [build]   (PE32+ image size limit: 2GB)")
-        return False
     # Use a separate output directory so JIT codegen doesn't clobber AOT artifacts
     jit_output = native_dir.parent / "build_jit_output"
     jit_output.mkdir(parents=True, exist_ok=True)
@@ -363,41 +326,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             stage="build", status="error",
             summary=f"DLL not found for {ctx.assembly}",
             duration_ms=int((time.perf_counter() - start) * 1000))
-
-    # ── Type-forwarder assembly redirect ──
-    # Some assemblies (e.g. System.Runtime.Intrinsics) are pure type-forwarder
-    # facades whose types are actually defined in System.Private.CoreLib.
-    # MLC scanning of the facade DLL returns zero types, causing build failure.
-    # Redirect to the real assembly that contains the type definitions.
-    TYPE_FORWARDER_DLL_MAP: dict[str, str] = {
-        "System.Runtime.Intrinsics": "System.Private.CoreLib",
-        "System.Numerics.Vectors":   "System.Private.CoreLib",
-        "System.Xml.ReaderWriter":   "System.Private.Xml",
-    }
-    original_assembly = ctx.assembly
-    custom_subjects_used = False
-    tfm_fallback_used = False
-    if ctx.assembly in TYPE_FORWARDER_DLL_MAP:
-        real_asm = TYPE_FORWARDER_DLL_MAP[ctx.assembly]
-        print(f"  [build] Type-forwarder detected (known map): {ctx.assembly} -> {real_asm}")
-        # Re-use the same directory as the original target to pick the same runtime version
-        real_dll = target_dll.parent / f"{real_asm}.dll"
-        if not real_dll.exists():
-            # Fallback: scan runtime dirs for the real assembly
-            for runtime_dir in sorted(runtime_base.rglob(f"**/{real_asm}.dll")):
-                if runtime_dir.exists():
-                    real_dll = runtime_dir
-                    break
-        if real_dll.exists():
-            print(f"  [build] Redirecting target DLL: {real_dll}")
-            target_dll = real_dll
-        else:
-            print(f"  [build] WARNING: Real assembly '{real_asm}.dll' not found — will likely fail at ATG scan")
-    elif target_dll and target_dll.exists():
-        type_count = _probe_dll_type_count(target_dll)
-        if type_count == 0:
-            print(f"  [build] WARNING: {ctx.assembly}.dll has 0 public types — may be an unknown type-forwarder facade")
-            print(f"  [build]   Add to TYPE_FORWARDER_DLL_MAP in build.py if ATG scan fails")
 
     print(f"  [build] Target DLL: {target_dll}")
 
@@ -484,58 +412,14 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] AutoTestGenerator subjects: {total_subjects}")
 
     if total_subjects == 0:
-        # Fallback: check for custom subject .cs files
-        print(f"  [build] No auto-generated subjects — checking for custom subjects...")
+        return StageResult(
+            stage="build", status="error",
+            summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
+            duration_ms=int((time.perf_counter() - start) * 1000))
 
-        # Custom subject sources live under <foundation_dir>/<slug>/managed/
-        # (not under chunks/<slug>/ which is the pipeline build output directory)
-        custom_roots = [
-            ctx.foundation_dir / ctx.slug / "managed" / "subjects",
-            ctx.foundation_dir / ctx.slug / "managed",
-        ]
-        custom_cs_files: list[Path] = []
-        for root in custom_roots:
-            if root.is_dir():
-                found = sorted(root.rglob("*.Custom.cs")) if "subjects" in str(root) else sorted(root.glob("*.Custom.cs"))
-                if found:
-                    custom_cs_files = found
-                    break
-        if not custom_cs_files:
-            msg = "No subjects metadata and no custom subjects found"
-            return StageResult(
-                stage="build", status="skipped" if metadata_path.exists() else "error",
-                summary=msg,
-                duration_ms=int((time.perf_counter() - start) * 1000))
-
-        print(f"  [build] Falling back to custom subjects: {len(custom_cs_files)} file(s)")
-        custom_subjects_used = True
-
-        # Build custom subjects DLL
-        sdk_csproj = _chaos_sdk_csproj()
-        tfm = _detect_tfm(target_dll)
-        subjects_dll = ctx.subjects_dll_path
-        subjects_dll.parent.mkdir(parents=True, exist_ok=True)
-
-        method_names = _compile_custom_subjects(custom_cs_files, subjects_dll, tfm, sdk_csproj)
-        if method_names is None:
-            return StageResult(
-                stage="build", status="error",
-                summary="Custom subjects DLL build failed",
-                duration_ms=int((time.perf_counter() - start) * 1000))
-
-        # Generate metadata from custom subjects
-        meta = _custom_subjects_metadata(method_names, ctx.slug)
-
-        metadata_path.parent.mkdir(parents=True, exist_ok=True)
-        metadata_path.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
-        total_subjects = meta["totalMethods"]
-        print(f"  [build] Custom metadata: {total_subjects} subjects")
-
-        # Continue to TPG step below
-    else:
-        # -- 5. Detect TFM from target DLL --
-        tfm = _detect_tfm(target_dll)
-        print(f"  [build] Target framework: {tfm}")
+    # -- 5. Detect TFM from target DLL --
+    tfm = _detect_tfm(target_dll)
+    print(f"  [build] Target framework: {tfm}")
 
         # -- 6. Combine generated .cs files into a single Library project --
         print(f"  [build] Creating combined subjects DLL...")
@@ -628,47 +512,14 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             capture_output=True, text=True, timeout=120)
 
         if build_result.returncode != 0 or not subjects_dll.exists():
-            print(f"  [build] WARNING: Combined build failed for {tfm}")
-            for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-20:]:
+            print(f"  [build] Combined build FAILED for {tfm}")
+            for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
                 print(f"      {line}")
-            # Try net8.0 fallback when TFM is not net8.0
-            if tfm != "net8.0":
-                print(f"  [build] Retrying with net8.0 fallback...")
-                tfm_fallback_used = True
-                combined_csproj.write_text(
-                    "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
-                    "  <PropertyGroup>\n"
-                    "    <OutputType>Library</OutputType>\n"
-                    "    <TargetFramework>net8.0</TargetFramework>\n"
-                    "    <ImplicitUsings>enable</ImplicitUsings>\n"
-                    "    <Nullable>enable</Nullable>\n"
-                    "    <DefineConstants>VERIFY</DefineConstants>\n"
-                    "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
-                    "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
-                    "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
-                    "  </PropertyGroup>\n"
-                    "  <ItemGroup>\n"
-                    f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
-                    f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
-                    f"{pkg_block}"
-                    "  </ItemGroup>\n"
-                    "</Project>\n"
-                )
-                build_result = subprocess.run(
-                    ["dotnet", "build", str(combined_csproj),
-                     f"-p:OutDir={subjects_dll.parent}",
-                     "--nologo", "-v", "quiet"],
-                    capture_output=True, text=True, timeout=120)
-
-            if build_result.returncode != 0 or not subjects_dll.exists():
-                print(f"  [build] Combined build FAILED after fallback")
-                for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
-                    print(f"      {line}")
-                return StageResult(
-                    stage="build", status="error",
-                    summary="Combined subjects DLL build failed",
-                    details={"buildErrors": build_result.stderr[:500]},
-                    duration_ms=int((time.perf_counter() - start) * 1000))
+            return StageResult(
+                stage="build", status="error",
+                summary="Combined subjects DLL build failed",
+                details={"buildErrors": build_result.stderr[:500]},
+                duration_ms=int((time.perf_counter() - start) * 1000))
 
     print(f"  [build] Subjects DLL: {subjects_dll} ({subjects_dll.stat().st_size} bytes)")
 
@@ -722,8 +573,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                         "chunkSlug": ctx.slug,
                         "totalSubjects": total_subjects,
                         "tfm": tfm,
-                        "tfmFallback": tfm_fallback_used,
-                        "customSubjectsUsed": custom_subjects_used,
                         "durationMs": duration_ms,
                         "hephaestus": "cache_hit",
                         "cacheKey": cache_key,
@@ -896,8 +745,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "chunkSlug": ctx.slug,
             "totalSubjects": total_subjects,
             "tfm": tfm,
-            "tfmFallback": tfm_fallback_used,
-            "customSubjectsUsed": custom_subjects_used,
             "durationMs": duration_ms,
             "hephaestus": cache_status,
             "cacheKey": cache_key,
