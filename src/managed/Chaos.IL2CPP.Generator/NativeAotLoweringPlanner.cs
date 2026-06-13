@@ -521,8 +521,9 @@ public sealed partial class NativeAotLoweringPlanner
     /// Populated by <see cref="EmitInvocation"/> when DirectNativeSymbol is set to an
     /// external runtime stub.  Used by <see cref="BuildTypeDeclarationsCode"/> to emit
     /// fallback static inline declarations for symbols the normal post-scan misses.
+    /// Value is the return type's ABI carrier kind (needed to emit correct C++ return type).
     /// </summary>
-    private readonly HashSet<string> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
 
     /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
@@ -2114,10 +2115,20 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // which conflicted with static inline stubs (C2732 linkage contradiction).
         if (_emittedExternalRuntimeSymbols is { Count: > 0 })
         {
-            foreach (var sym in _emittedExternalRuntimeSymbols.OrderBy(s => s))
+            foreach (var kvp in _emittedExternalRuntimeSymbols.OrderBy(kv => kv.Key))
             {
-                sb.Append("static inline CHAOS_IL2CPP_INTPTR ");
-                sb.Append(sym);
+                // Use correct C++ return type matching ABI carrier: Float32->float (XMM0),
+                // Float64->double (XMM0), others->CHAOS_IL2CPP_INTPTR (RAX).
+                string cppType = kvp.Value switch
+                {
+                    AotCoreIrAbiCarrierKind.Float32 => "float",
+                    AotCoreIrAbiCarrierKind.Float64 => "double",
+                    _ => "CHAOS_IL2CPP_INTPTR",
+                };
+                sb.Append("static inline ");
+                sb.Append(cppType);
+                sb.Append(' ');
+                sb.Append(kvp.Key);
                 sb.AppendLine("() noexcept { return 0; }");
             }
             sb.AppendLine();

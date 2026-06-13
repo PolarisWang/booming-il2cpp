@@ -823,7 +823,7 @@ public sealed class NativeAotEmitter
 	private static void AddExternalRuntimeStubs(StringBuilder sb)
 	{
 		string text = sb.ToString();
-		Console.Error.WriteLine("[AOTEMITTER] AddExternalRuntimeStubs called"); if (sb.Length > 0) Console.Error.WriteLine("[AOTEMITTER] Content length: " + sb.Length); string text = sb.ToString(); Console.Error.WriteLine("[AOTEMITTER] Text contains chaos_runtime: " + text.Contains("chaos_external_runtime_")); var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
+		Console.Error.WriteLine("[AOTEMITTER] AddExternalRuntimeStubs called"); if (sb.Length > 0) Console.Error.WriteLine("[AOTEMITTER] Content length: " + sb.Length); string text2 = sb.ToString(); Console.Error.WriteLine("[AOTEMITTER] Text contains chaos_runtime: " + text2.Contains("chaos_external_runtime_")); var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
 		var declRx = new Regex(@"(extern|static inline).*chaos_external_runtime_\w+\s*\(");
 		var calls = callRx.Matches(text);
 		if (calls.Count == 0) return;

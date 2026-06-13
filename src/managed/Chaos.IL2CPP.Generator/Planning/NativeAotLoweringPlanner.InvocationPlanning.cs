@@ -987,13 +987,21 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
         {
             symbol = stubSymbol;
         }
-        else if (!string.IsNullOrEmpty(instruction.TargetSymbol))
+        else if (!string.IsNullOrEmpty(instruction.TargetSymbol) &&
+                 !instruction.TargetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
         {
+            // Use TargetSymbol for non-external-runtime symbols (e.g. native function pointers).
+            // For chaos_external_runtime_* symbols, derive from the normalized callee instead
+            // to ensure the symbol matches the dispatch table declaration format.
             symbol = instruction.TargetSymbol;
         }
-        else if (!string.IsNullOrEmpty(instruction.Callee))
+        else if (!string.IsNullOrEmpty(calleeOrTarget))
         {
-            symbol = GetExternalRuntimeHelperSymbol(instruction.Callee);
+            // Derive chaos_external_runtime_* from the NORMALIZED callee (without assembly
+            // prefix) so it matches the dispatch table's extern "C" void declarations.
+            // Using instruction.Callee (raw, non-normalized) would produce symbols with
+            // assembly prefixes that don't match the normalized dispatch table entries.
+            symbol = GetExternalRuntimeHelperSymbol(calleeOrTarget);
         }
         else
         {
