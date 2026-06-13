@@ -726,11 +726,16 @@ internal sealed class SdkEmitter
         var tmpLibPath = Path.Combine(libDir, "chaos_codegen.tmp.lib");
 
         // Step 1: Compile .cpp → .obj (to temp path)
-        // Use /EHsc (not /EHa) for precompiled lib since generated code uses
-        // C++ exception handling (throw chaos_managed_exception). The runtime
-        // entry point that catches these needs /EHa, but the generated method
-        // bodies themselves only throw, not catch.
-        var compileArgs = $"/nologo /std:c++20 /utf-8 /EHsc /GS- /DWIN32 /D_WINDOWS " +
+        // Use /EHa to match cmake's CHAOS_EHA_FLAG (/EHa), ensuring consistent
+        // SEH unwind tables between precompiled chaos_codegen.lib and locally
+        // compiled translation units.  Also pass config-tier macros so
+        // #if CHAOS_IL2CPP_CONFIG_CHECK etc. expand consistently.
+        // Note: /EHa bloats generated code slightly vs /EHsc but eliminates
+        // the flags-mismatch risk documented in Risk R1 of the architecture
+        // risk assessment.
+        var compileArgs = $"/nologo /std:c++20 /utf-8 /EHa /GS- /DWIN32 /D_WINDOWS " +
+                           $"/DCHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK " +
+                           $"/DCHAOS_IL2CPP_CONFIG_CHECK /DCHAOS_IL2CPP_LOG_LEVEL=3 " +
                            $"{includeArgs} /c \"{generatedCpp}\" /Fo\"{tmpObjPath}\"";
 
         Console.WriteLine($"    [precompile] compiling...");

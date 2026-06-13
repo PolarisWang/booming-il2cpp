@@ -78,6 +78,39 @@ def _compute_summary(profile_data: list[dict]) -> dict[str, Any]:
     }
 
 
+def _parse_profile_scope_output(stderr: str) -> list[dict]:
+    """Parse PROFILE_DUMP lines from stderr.
+
+    PROFILE_DUMP outputs lines in this format to stderr:
+      PROFILE|<name>|avg=<cycles>|avg_ns=<ns>|min=<cycles>|max=<cycles>|count=<n>|total_ns=<ns>
+    Returns list of dicts with keys: name, avgCycles, avgNs, minCycles, maxCycles, count, totalNs.
+    """
+    scopes: list[dict] = []
+    for line in stderr.splitlines():
+        if not line.startswith("PROFILE|"):
+            continue
+        parts = line.split("|")
+        if len(parts) < 3:
+            continue
+        name = parts[1]
+        kv = {}
+        for p in parts[2:]:
+            if "=" in p:
+                k, v = p.split("=", 1)
+                kv[k] = v
+        if name and kv:
+            scopes.append({
+                "name": name,
+                "avgCycles": float(kv.get("avg", 0)),
+                "avgNs": float(kv.get("avg_ns", 0)),
+                "minCycles": int(kv.get("min", 0)),
+                "maxCycles": int(kv.get("max", 0)),
+                "count": int(kv.get("count", 0)),
+                "totalNs": float(kv.get("total_ns", 0)),
+            })
+    return scopes
+
+
 def _get_entry_count(exe_path: Path) -> int:
     """Read kSubjectEntryCount from generated native-aot.generated.cpp."""
     subject_file = exe_path.parent / "subjects" / "native-aot.generated.cpp"
@@ -137,11 +170,6 @@ def run_profile(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResul
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # Only run in profile build config
-    if ctx.native_config != "profile":
-        print(f"  [profile] WARNING: native_config is '{ctx.native_config}', not 'profile'. "
-              f"Profile data may be incomplete. Use --native-config profile for full data.")
-
     entry_count = _get_entry_count(exe_path)
     if entry_count == 0:
         return StageResult(
@@ -167,8 +195,9 @@ def run_profile(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResul
         )
 
     stdout = r.stdout.decode("utf-8", errors="replace") if r.stdout else ""
+    stderr = r.stderr.decode("utf-8", errors="replace") if r.stderr else ""
 
-    # Parse profile output
+    # Parse profile output from stdout (--profile JSON)
     profile_data = _parse_profile_output(stdout)
     if not profile_data:
         return StageResult(
@@ -176,6 +205,14 @@ def run_profile(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResul
             summary="No profile data parsed from entry.exe output",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
+
+    # Parse PROFILE_SCOPE data from stderr (PROFILE_DUMP format)
+    scope_data = _parse_profile_scope_output(stderr)
+    if scope_data:
+        # Attach scope data to first method's profile for aggregation
+        for p in profile_data:
+            p["profileScopes"] = scope_data
+        print(f"  [profile]   PROFILE_SCOPE: {len(scope_data)} scopes")
 
     # Compute summary
     summary = _compute_summary(profile_data)

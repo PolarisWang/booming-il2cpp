@@ -681,10 +681,24 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                   "misc_stubs.cpp", "array_stubs.cpp", "char_stubs.cpp",
                   "async_stubs.cpp", "exception_stubs.cpp")
     ]
+    # Include TPG/build dependencies so changes to templates, emitter, or
+    # pipeline scripts invalidate the cache.  Without this, modifying
+    # .scriban templates or build.py produces stale entry.exe from cache.
+    _tpg_build_deps = [
+        _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator" / "Templates" / s
+        for s in ("TestProject.RuntimeEntry.cpp.scriban",
+                  "TestProject.CMakeLists.txt.scriban",
+                  "TestProject.Dispatch.cpp.scriban")
+    ] + [
+        _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator" / "Emission" / "CppProjectEmitter.cs",
+        _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "build.py",
+        _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "runtime_entry_patcher.py",
+        _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "hephaestus_cache.py",
+    ]
     input_hash = compute_input_hash(
         subjects_dll, metadata_path, ctx.assembly,
         additional_dlls=[target_dll] if target_dll else None,
-        extra_source_paths=_runtime_stubs,
+        extra_source_paths=_runtime_stubs + _tpg_build_deps,
     )
     cache_key = cache.compute_key(input_hash, ctx.assembly, ctx.slug)
     cache_hit = cache.is_cache_hit(cache_key)

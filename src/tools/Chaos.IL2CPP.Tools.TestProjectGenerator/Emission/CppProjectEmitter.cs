@@ -753,6 +753,7 @@ public sealed class CppProjectEmitter
                 "    }\n" +
                 "    printf(\"],\\\"summary\\\":{\\\"methodCount\\\":%d}}\\n\", kCount);\n" +
                 "    fflush(stdout);\n" +
+                "    CHAOS_IL2CPP_PROFILE_DUMP();\n" +
                 "    return 0;\n" +
                 "}\n\n";
             if (code.Contains(rangeMarker))
