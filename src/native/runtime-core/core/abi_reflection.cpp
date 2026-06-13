@@ -312,6 +312,15 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &GenericContextGetClassArg,
     &GenericContextGetMethodArgCount,
     &GenericContextGetMethodArg,
+    &RegisterModule,
+    &HotpatchIsActive,
+    &HotpatchShouldKeepNative,
+    &RaiseNullReferenceException,
+    &ChaosExternalRuntimeFallback,
+    &InterpreterEntryDirect,
+    &ChaosRegisterGcLayouts,
+    &RegisterHotpatchModule,
+    &ChaosArrayEmpty,
 };
 
 }  // anonymous namespace

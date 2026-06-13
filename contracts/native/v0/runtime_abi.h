@@ -260,6 +260,43 @@ typedef struct RuntimeAbiV0 {
     void (CHAOS_RUNTIME_ABI_CALL* gc_remove_memory_pressure)(
         RuntimeState* runtime_state,
         int64_t bytes);
+
+    /* ═══════════════════════════════════════════════════════════════
+     * V1 additions: dispatch, hotpatch, module, type registration
+     * Added after struct_size so consumers can check abi_version.
+     * ═══════════════════════════════════════════════════════════════ */
+
+    /* Module registration. */
+    uint32_t (CHAOS_RUNTIME_ABI_CALL* register_module)(
+        const char* name,
+        const struct ModuleDescriptor* descriptor);
+
+    /* Hotpatch dispatch. */
+    bool (CHAOS_RUNTIME_ABI_CALL* hotpatch_is_active)(
+        const struct HotpatchEntryV0* entry);
+    bool (CHAOS_RUNTIME_ABI_CALL* hotpatch_should_keep_native)(
+        const struct HotpatchEntryV0* entry);
+
+    /* Null check / exception helpers. */
+    void (CHAOS_RUNTIME_ABI_CALL* raise_null_reference_exception)(void);
+    CHAOS_IL2CPP_INTPTR (CHAOS_RUNTIME_ABI_CALL* external_runtime_fallback)(
+        const char* subject_id);
+
+    /* Interpreter entry dispatch. */
+    void (CHAOS_RUNTIME_ABI_CALL* interpreter_entry_direct)(
+        CHAOS_IL2CPP_UINTPTR method_key,
+        void* args_buf,
+        void* ret_buf);
+
+    /* GC layout registration. */
+    void (CHAOS_RUNTIME_ABI_CALL* register_gc_layouts)(void);
+
+    /* Hotpatch module registration. */
+    void (CHAOS_RUNTIME_ABI_CALL* register_hotpatch_module)(
+        const struct HotpatchModuleV0* module);
+
+    /* Array helpers. */
+    CHAOS_IL2CPP_INTPTR (CHAOS_RUNTIME_ABI_CALL* array_empty)(void);
 } RuntimeAbiV0;
 
 /* Returns the process-wide v0 table or null when the ABI is unavailable. */
