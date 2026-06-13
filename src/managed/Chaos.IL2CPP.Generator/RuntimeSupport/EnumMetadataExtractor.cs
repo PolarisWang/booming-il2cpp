@@ -402,22 +402,27 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("        chaos::il2cpp::codegen::kEnumToStringDispatchCount);");
         sb.AppendLine("    // Register the pre-allocated string dispatch table.");
         sb.AppendLine("    ChaosEnumRegisterPreInitTable(");
-        sb.AppendLine("        chaos::il2cpp::codegen::kEnumPreInitTable,");
-        sb.AppendLine("        chaos::il2cpp::codegen::kEnumPreInitCount);");
+        sb.AppendLine("        kEnumPreInitTable,");
+        sb.AppendLine("        kEnumPreInitCount);");
 
-        // Emit pre-allocated string cache initialization for each enum type.
-        // This allocates managed string objects (in POH) at static init time,
-        // so the hot path (ensure_enum_str_cache) finds pre-allocated strings
-        // and skips lazy allocation. Zero GC allocation on enum.ToString/Format.
-        foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
-        {
-            var et = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value);
-            sb.AppendLine($"    // Pre-allocate {et.Fields.Count} field name strings for {et.SubjectId}");
-            sb.AppendLine($"    ChaosEnumPreInitStringCache(");
-            sb.AppendLine($"        chaos::il2cpp::codegen::kEnumFields_{kv.Value},");
-            sb.AppendLine($"        {et.Fields.Count},");
-            sb.AppendLine($"        chaos::il2cpp::codegen::kEnumStrings_{kv.Value});");
-        }
+        // NOTE: Pre-allocating enum string cache at static init time causes
+        // 0xC0000005 (ACCESS_VIOLATION) because the GC heap is not yet initialized
+        // when static initializers run.  The enum string cache will be allocated
+        // lazily on first use via ensure_enum_str_cache instead.
+        // See gc-performance-optimizations.md for the deferred allocation path.
+        //// Emit pre-allocated string cache initialization for each enum type.
+        //// This allocates managed string objects (in POH) at static init time,
+        //// so the hot path (ensure_enum_str_cache) finds pre-allocated strings
+        //// and skips lazy allocation. Zero GC allocation on enum.ToString/Format.
+        //foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
+        //{
+        //    var et = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value);
+        //    sb.AppendLine($"    // Pre-allocate {et.Fields.Count} field name strings for {et.SubjectId}");
+        //    sb.AppendLine($"    ChaosEnumPreInitStringCache(");
+        //    sb.AppendLine($"        chaos::il2cpp::codegen::kEnumFields_{kv.Value},");
+        //    sb.AppendLine($"        {et.Fields.Count},");
+        //    sb.AppendLine($"        chaos::il2cpp::codegen::kEnumStrings_{kv.Value});");
+        //}
 
         sb.AppendLine("}");
         sb.AppendLine();
