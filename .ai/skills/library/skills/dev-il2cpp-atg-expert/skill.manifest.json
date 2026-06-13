@@ -1,0 +1,16 @@
+{
+  "name": "dev-il2cpp-atg-expert",
+  "description": "AutoTestGenerator 测试合约专家 — Probe 机制、SubjectId 规范、Metadata 管线完整性、测试代码质量门",
+  "version": "1.0.0",
+  "owner": "00-skills-maintainers",
+  "budget": "small",
+  "status": "active",
+  "domain": "testing",
+  "triggers": [
+    "chunk 的 fact subjects 为 0（enum-parsing, global-ns）",
+    "Probe 判定 IsDeterministic 逻辑变更",
+    "SubjectId 在 ATG/CodeGen/TPG 间不匹配",
+    "generatedMethodId 命名规范修改",
+    "subjects.metadata.json schema 变更"
+  ]
+}
