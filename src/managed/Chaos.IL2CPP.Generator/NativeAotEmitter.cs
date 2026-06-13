@@ -44,7 +44,7 @@ public sealed class NativeAotEmitter
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
         string outputRootPath,
         CodegenMode mode = CodegenMode.Aot,
-        HashSet<string>? subjectMethods = null,
+        List<string>? subjectMethods = null,
         string? goldProfilePath = null,
         IReadOnlyDictionary<string, ManagedMethodModel>? allManagedMethods = null)
     {

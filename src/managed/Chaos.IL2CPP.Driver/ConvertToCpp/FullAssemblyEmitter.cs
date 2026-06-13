@@ -12,7 +12,7 @@ internal sealed class FullAssemblyEmitter
         ManagedClosureResult closureResult,
         string outputRoot,
         CodegenMode mode = CodegenMode.Aot,
-        HashSet<string>? subjectMethods = null,
+        List<string>? subjectMethods = null,
         string? goldProfilePath = null)
     {
         ArgumentNullException.ThrowIfNull(closureResult);

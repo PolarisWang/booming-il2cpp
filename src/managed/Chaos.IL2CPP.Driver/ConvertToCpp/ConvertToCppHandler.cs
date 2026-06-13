@@ -54,7 +54,7 @@ internal static class ConvertToCppHandler
         Console.WriteLine($"  Output:   {outputRoot}");
 
         // Load subject methods if --subject-methods was provided
-        HashSet<string>? subjectMethods = null;
+        List<string>? subjectMethods = null;
         if (config.SubjectMethodsPath != null)
         {
             if (File.Exists(config.SubjectMethodsPath))
@@ -62,7 +62,7 @@ internal static class ConvertToCppHandler
                 var smJson = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(
                     File.ReadAllText(config.SubjectMethodsPath), JsonOptions);
                 if (smJson != null && smJson.TryGetValue("subjectMethods", out var ids))
-                    subjectMethods = new HashSet<string>(ids, StringComparer.Ordinal);
+                    subjectMethods = ids; // preserve JSON array order for correct slot map generation
                 Console.WriteLine($"  Subject methods: {subjectMethods?.Count ?? 0} IDs loaded from {config.SubjectMethodsPath}");
             }
             else

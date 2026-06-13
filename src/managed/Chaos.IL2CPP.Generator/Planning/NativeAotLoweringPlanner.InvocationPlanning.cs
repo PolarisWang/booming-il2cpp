@@ -41,7 +41,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private static IReadOnlyList<AotCoreIrMethodArtifact> CollectAllMethods(
         AotCoreIrArtifact aotCoreIr,
-        HashSet<string>? preserveSubjectIds = null)
+        List<string>? preserveSubjectIds = null)
     {
         // Filter out methods without instructions (interface declarations, abstract stubs)
         // that cannot be emitted as AOT C++ code. CCW/COM interface methods like

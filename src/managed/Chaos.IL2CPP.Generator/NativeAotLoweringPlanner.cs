@@ -165,7 +165,7 @@ public sealed partial class NativeAotLoweringPlanner
     private List<(string VarName, string Expression)>? _preTryFoldInitializers;
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
-    private HashSet<string>? _subjectMethodSubjectIds;
+    private List<string>? _subjectMethodSubjectIds;
     private IReadOnlyDictionary<string, ManagedMethodModel>? _allManagedMethods;
     private readonly List<(string SubjectId, string Json)> _cryptoAotIrEntries = new();
 
@@ -621,7 +621,7 @@ public sealed partial class NativeAotLoweringPlanner
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
         bool fullAssemblyMode = false,
         CodegenMode mode = CodegenMode.Aot,
-        HashSet<string>? subjectMethods = null,
+        List<string>? subjectMethods = null,
         IReadOnlyDictionary<string, ManagedMethodModel>? allManagedMethods = null)
     {
         ArgumentNullException.ThrowIfNull(loweringPlan);
@@ -638,7 +638,7 @@ public sealed partial class NativeAotLoweringPlanner
         _usedPseudoMetadataHandles.Clear();
 
         _codegenMode = mode;
-        _subjectMethodSubjectIds = subjectMethods;
+        _subjectMethodSubjectIds = subjectMethods; // keep List order for correct slot map
         _allManagedMethods = allManagedMethods;
 
         // Skip entry ABI validation for full-closure assembly translation
@@ -4443,7 +4443,9 @@ public sealed partial class NativeAotLoweringPlanner
             {
             int subjectIdx = ExtractSubjectIndex(method.SubjectId);
                 if (subjectIdx < 0)
-                    subjectIdx = subjectEntries.Count; // sequential index for CombinedSubjects
+                    // Assign temporary unique index — will be sorted by subject_index
+                    // and reassigned to sequential 0..N-1 after dedup+filter below.
+                    subjectIdx = subjectEntries.Count;
 
                 subjectEntries.Add(new ScriptObject
                 {
@@ -4496,6 +4498,17 @@ public sealed partial class NativeAotLoweringPlanner
                 subjectEntries = filtered;
             }
         }
+
+        // Sort subject entries by subject_index (metadata order) so the slot map
+        // maps subject indices correctly. Without sorting, the slot map order
+        // follows the codegen's internal iteration order, which doesn't match
+        // the ATG metadata order.
+        subjectEntries = [.. subjectEntries.OrderBy(se => (int)se["subject_index"])];
+        // Reassign sequential subject_index after sorting — the initial values
+        // were computed by scanning _subjectMethodSubjectIds which includes ALL
+        // chunks' methods (571+), not just the current chunk's 121, inflating indices.
+        for (int sei = 0; sei < subjectEntries.Count; sei++)
+            subjectEntries[sei]["subject_index"] = sei;
 
         Console.Error.WriteLine($"[DISPATCH-DIAG] total methods: {methods.Count}, subject entries: {subjectEntries.Count}");
         if (subjectEntries.Count > 0)
