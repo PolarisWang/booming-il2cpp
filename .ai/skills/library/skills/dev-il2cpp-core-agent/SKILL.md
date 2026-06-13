@@ -85,7 +85,7 @@ Dispatcher 接收任务
 
 ### 阶段 3: 分发循环（Dispatch Loop）
 
-循环执行直到待办清单为空。单域走 Skill 注入，多域走 Workflow 委托。
+循环执行直到待办清单为空。单域走 Agent spawn，多域走 Workflow 委托。
 
 ```
 todo = [子任务清单]       ← 初始 = 阶段 2 的输出
@@ -99,25 +99,36 @@ while todo 非空:
   domains = todo 涉及的所有域
 
   if domains == 1:
-    ── 单域: 用 Skill 注入
-    target_expert = 从分类矩阵选匹配的 Expert
-    Skill("dev-{target_expert}") → 加载知识
-    当前 Agent 处理 todo 中自己能做的部分
-    ✅ done / ⏳ remaining → 更新待办
+    ── 单域: 用 Agent spawn（替代不可用的 Skill 注入）
+    expert = 从 expert-registry.json 匹配 Expert 名
+    skill_md = 读取 skills/library/skills/{expert}/SKILL.md
+
+    // 提取 Agent 可执行指令块
+    agent_prompt = 从 skill_md 中提取 ===BEGIN_AGENT_PROMPT=== ... ===END_AGENT_PROMPT===
+    if agent_prompt 不存在:
+      agent_prompt = skill_md 的前 50 行摘要
+
+    result = Agent(spawn, {
+      prompt: agent_prompt + "\n---\n当前子任务: " + todo,
+      agentType: "general-purpose",
+    })
+
+    if result 为 null（用户跳过或错误）:
+      降级: 当前 Agent 自行实现
+    else:
+      ✅ done / ⏳ remaining → 更新待办
 
   else:
     ── 多域: 走 Workflow 委托（默认，不询问用户）
     1. 子任务按 Expert 域分组
-    2. 生成 Workflow 脚本:
-       export const meta = { name, phases: [...] }
-       parallel: 各 Expert 并行处理（无依赖时）
-       pipeline: 有依赖时定义先后顺序
-       每个 agent() 带 schema 约束输出格式
-    3. Workflow({script}) → 异步并行执行
-    4. 收集各 Expert 结果:
+    2. 从 expert-registry.json 读 workflow_templates
+    3. 选择模板: 2 域→dual, 3 域→triple, 深度调试→debug
+    4. Workflow({scriptPath: template_path, args: {agents, tasks}})
+    5. 收集各 Expert 结果:
        ✅ done / ⏳ remaining → 更新待办
 
-  输出 classification: "本轮任务涉及 {domain_names(IDs)} ，{mode} 操作，第{round}轮"
+  输出 classification: "本轮任务涉及 {domain_names(IDs)} ，{mode} 操作，第{round}轮 → 加载 {expert}"
+  echo classification > .claude/.classified
   /* 进入下一轮 while 循环 */
 ```
 
@@ -298,6 +309,6 @@ L3（完整 — 翻译路径变更/AOT 输出变更/ABI 修改/多域修改）:
 
 | 上游 | 本 skill | 下游 |
 |------|----------|------|
-| `dev-il2cpp` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | 单域: `Skill("dev-*-expert")` — 知识注入 |
-| 用户直接输入 | | 多域: `Workflow({script})` — 并行委托 |
+| `dev-il2cpp` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | 单域: `Agent(spawn, prompt)` — 子 Expert 自动执行 |
+| 用户直接输入 | | 多域: `Workflow({scriptPath})` — 并行委托 |
 | | | 质量门: `dev-trace-enforcement` / `dev-verification-before-completion` |

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "last_updated": "2026-06-13",
+  "routing": {
+    "1": { "name": "dev-il2cpp-runtime-expert", "domains": [1], "workflow_group": "runtime" },
+    "2": { "name": "dev-il2cpp-gc-expert", "domains": [2], "workflow_group": "gc" },
+    "3": { "name": "dev-il2cpp-debug-expert", "domains": [3], "workflow_group": "runtime" },
+    "4": { "name": "dev-il2cpp-codegen-expert", "domains": [4, 6], "workflow_group": "codegen" },
+    "5": { "name": "dev-il2cpp-fact-verification-expert", "domains": [5], "workflow_group": "testing" },
+    "6": { "name": "dev-il2cpp-translation-expert", "domains": [6], "workflow_group": "codegen", "order": 0 },
+    "7": { "name": "dev-il2cpp-build-fixer", "domains": [7], "workflow_group": "build" },
+    "8": { "name": "dev-il2cpp-hotupdate-expert", "domains": [8], "workflow_group": "runtime" },
+    "9": { "name": "dev-il2cpp-platform-expert", "domains": [1, 7], "workflow_group": "platform" },
+    "10": { "name": "dev-il2cpp-codegen-capabilities", "domains": [4], "workflow_group": "codegen" }
+  },
+  "cross_cutting": [
+    { "name": "dev-il2cpp-abi-expert", "domains": [1, 4, 7] },
+    { "name": "dev-il2cpp-external-runtime-expert", "domains": [1, 4] },
+    { "name": "dev-il2cpp-pipeline-expert", "domains": [5, 7] },
+    { "name": "dev-il2cpp-simd-expert", "domains": [4, 6] },
+    { "name": "dev-il2cpp-jit-expert", "domains": [1] }
+  ],
+  "workflow_templates": {
+    "dual": ".ai/skills/workflows/dual-expert.template.js",
+    "debug": ".ai/skills/workflows/deep-debug.template.js",
+    "triple": ".ai/skills/workflows/triple-expert.template.js"
+  }
+}

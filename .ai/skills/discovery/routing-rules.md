@@ -163,17 +163,28 @@ Step 3 — 分域修复
 □ ✅ 全部通过 → 提交并推送
 ```
 
-## 7. Expert 知识加载
+## 7. Expert 加载（A+B 模式）
 
-Expert 的知识通过 registry 发现流程加载：
+Expert 的知识通过 Agent spawn 加载和执行：
 
-1. 读取 `skills/discovery/skill-index.md`（已预加载）
-2. 匹配领域 → 读取对应 `registries/<domain>.md`
-3. 找到目标 Expert 的 SKILL.md 路径
-4. 读取 `skills/library/skills/<name>/SKILL.md` 获取 domain knowledge
+```
+单域:
+  Core Agent 从 expert-registry.json 匹配 Expert 名
+  → 读取 skills/library/skills/{expert}/SKILL.md
+  → 提取 ===BEGIN_AGENT_PROMPT=== 块
+  → Agent({spawn}, prompt=expert_knowledge + task)
+  → 子 Agent 自动执行并返回结果
 
-注意：`Skill("dev-xxx-expert")` 在当前环境中**不可用**（Claude Code Skill 工具不支持子技能）。因此 loaded_expert 强制验证已被移除。
+多域:
+  Core Agent 按域分组
+  → 选择 Workflow 模板（dual/triple/debug）
+  → Workflow({scriptPath: template_path, args: {agents, tasks}})
+  → 各 Expert 并行/串行执行
+```
 
+`Skill("dev-xxx-expert")` **不可用**（Claude Code 不支持子技能），替换为 Agent spawn。
+
+Expert 注册表: `skills/discovery/expert-registry.json`
 
 ## 7b. 跨域技能（独立于域编号表）
 
