@@ -467,7 +467,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
             "  <PropertyGroup>\n"
             "    <OutputType>Library</OutputType>\n"
-            f"    <TargetFrameworks>net8.0;{tfm};net10.0</TargetFrameworks>\n"
+            f"    <TargetFramework>{tfm}</TargetFramework>\n"
             "    <ImplicitUsings>enable</ImplicitUsings>\n"
             "    <Nullable>enable</Nullable>\n"
             "    <DefineConstants>VERIFY</DefineConstants>\n"
