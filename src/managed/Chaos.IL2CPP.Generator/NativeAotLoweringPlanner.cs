@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
@@ -540,6 +541,14 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private readonly Dictionary<string, string> _normalizedSubjectIdCache = new(StringComparer.Ordinal);
 
+    /// <summary>
+    /// Path to the .jdata binary output file for JIT mode.
+    /// When non-null, BuildJitMethodRegistration writes AotCoreIr JSON data
+    /// to this binary file instead of embedding C++ string literals.
+    /// Set before calling Create() by NativeAotEmitter.
+    /// </summary>
+    private string? _jitDataOutputPath;
+
     private string NormalizeSubjectIdAssemblyCached(string subjectId)
     {
         if (_normalizedSubjectIdCache.TryGetValue(subjectId, out var cached))
@@ -590,6 +599,17 @@ public sealed partial class NativeAotLoweringPlanner
     {
         if (!string.IsNullOrEmpty(calleeSubjectId))
             _goldDirectCallCache.Add(calleeSubjectId);
+    }
+
+    /// <summary>
+    /// Set the output path for the JIT .jdata binary file.
+    /// When set, BuildJitMethodRegistration writes AotCoreIr JSON data
+    /// to this file instead of embedding C++ string literals, greatly
+    /// reducing generated C++ source size and compilation time.
+    /// </summary>
+    public void SetJitDataOutputPath(string jitDataOutputPath)
+    {
+        _jitDataOutputPath = jitDataOutputPath;
     }
 
     public NativeAotTemplateModel Create(
@@ -1208,14 +1228,37 @@ public sealed partial class NativeAotLoweringPlanner
         if (_codegenMode.HasFlag(CodegenMode.Jit) && methodCount > 0)
         {
             globalDeclarations += "\n#ifdef CHAOS_IL2CPP_JIT_MODE\n";
-            globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
-            globalDeclarations += $@"
-extern ""C"" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
-extern ""C"" void ChaosJitRegisterAll() {{
-    // Register hotpatch module so GetDispatchEntry can resolve tokens → slots
+            // Include jit_data_loader.h at file scope (outside function) when .jdata file is used.
+            if (_jitDataOutputPath != null)
+                globalDeclarations += "#include \"jit_data_loader.h\"\n";
+            globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration, _jitDataOutputPath);
+
+            // Build ChaosJitRegisterAll body.
+            // When using .jdata file, load it at startup and pass the pointer.
+            string registerBodyClose = "}";
+            string registerBody;
+            if (_jitDataOutputPath != null)
+            {
+                string jitDataFilename = Path.GetFileName(_jitDataOutputPath);
+                registerBody = $@"
+    // Load JIT method data from {jitDataFilename} file.
+    chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
+    uint64_t jit_data_size = 0;
+    void* jit_data = ChaosJitDataLoad(""{jitDataFilename}"", &jit_data_size);
+    RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount,
+                            static_cast<const char*>(jit_data));
+" + registerBodyClose;
+            }
+            else
+            {
+                registerBody = @"
     chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
-}}
+" + registerBodyClose;
+            }
+            globalDeclarations += $@"
+extern ""C"" void ChaosJitRegisterAll() {{
+{registerBody}
 #endif
 ";
         }
@@ -1434,6 +1477,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                                         // the header is tiny (~15 lines) and the stubs are only
                                         // referenced when async yield methods are present.
                                         includes_.Add("\"async_stubs.h\"");
+	        includes_.Add("<coroutine>");
         // Exception stubs (ChaosInvokeAction) — needed by verification dispatch.
         // Always included; the header is tiny and the inline function is zero-cost.
         includes_.Add("\"exception_stubs.h\"");
@@ -2915,7 +2959,7 @@ return sb.ToString();
         {
             SubjectId = method.SubjectId,
             NativeSymbol = method.NativeSymbol,
-            MethodSource = aotReachableSubjectIds.Contains(method.SubjectId)
+            MethodSource = aotReachableSubjectIds.Contains(method.SubjectId) || IsAsyncStateMachineMoveNext(method.SubjectId)
                 ? BuildMethodSourceSafe(method)
                 : BuildAotUnreachableMethodStub(method),
         };

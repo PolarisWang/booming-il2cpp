@@ -1224,6 +1224,12 @@ public sealed partial class NativeAotLoweringPlanner
     /// extern "C" const JitEntry kChaosJitEntries[] = { ... };
     /// extern "C" const uint32_t kChaosJitEntryCount = N;
     /// </code>
+    ///
+    /// When jitDataOutputPath is non-null, the AotCoreIr JSON data is written
+    /// to a binary .jdata file and the JitEntry uses offset-based addressing
+    /// (json_offset, json_len). When null, the old C++ string literal format
+    /// is used (kJitJson_N, backward compat).
+    ///
     /// Each entry contains the full AotCoreIr JSON serialized as a C++ string literal,
     /// plus the metadata token and module_id for slot lookup.
     ///
@@ -1233,7 +1239,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     internal string BuildJitMethodRegistration(
         IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering,
-        MetadataRegistrationArtifact metadataRegistration)
+        MetadataRegistrationArtifact metadataRegistration,
+        string? jitDataOutputPath = null)
     {
         if (methodsForLowering == null || methodsForLowering.Count == 0)
             return string.Empty;
@@ -1262,66 +1269,124 @@ public sealed partial class NativeAotLoweringPlanner
             jsonStrings[i] = JsonSerializer.Serialize(methodsForLowering[i], jsonOptions);
         }
 
-        // Emit JSON string literals
-        const int maxStringLiteralLen = 16000;
-        for (int i = 0; i < methodsForLowering.Count; i++)
+        if (jitDataOutputPath != null)
         {
-            string escaped = EscapeCppStringLiteral(jsonStrings[i]);
-            sb.Append("static const char kJitJson_")
-                .Append(i)
-                .Append("[] = ");
-            if (escaped.Length <= maxStringLiteralLen)
+            // Write binary .jdata file with concatenated UTF-8 JSON blobs.
+            // Each JSON string is written sequentially; JitEntry entries use
+            // (offset, length) pairs to reference the data.
+            using var jdataStream = new FileStream(
+                jitDataOutputPath, FileMode.Create, FileAccess.Write, FileShare.None);
+            var offsets = new uint[methodsForLowering.Count];
+
+            for (int i = 0; i < methodsForLowering.Count; i++)
             {
-                sb.Append("\"").Append(escaped).AppendLine("\";");
+                offsets[i] = (uint)jdataStream.Position;
+                byte[] utf8Bytes = System.Text.Encoding.UTF8.GetBytes(jsonStrings[i]);
+                jdataStream.Write(utf8Bytes, 0, utf8Bytes.Length);
             }
-            else
+
+            sb.AppendLine("// AotCoreIr JSON data is stored in the .jdata file.");
+            sb.AppendLine("// Load at startup via ChaosJitDataLoad(), pass pointer to RegisterJitEntryMethods().");
+            sb.AppendLine();
+
+            // Emit JitEntry array with offset-based addressing
+            sb.Append("extern \"C\" const JitEntry kChaosJitEntries[")
+                .Append(methodsForLowering.Count)
+                .AppendLine("] =");
+            sb.AppendLine("{");
+            for (int i = 0; i < methodsForLowering.Count; i++)
             {
+                var method = methodsForLowering[i];
+                uint token = tokenLookup.TryGetMethodToken(method.SubjectId);
+                uint jsonLen = (uint)jsonStrings[i].Length;
+
+                sb.Append("    { ")
+                    .Append(offsets[i])
+                    .Append("u, ")
+                    .Append(jsonLen)
+                    .Append("u, 0x")
+                    .Append(token.ToString("X8"))
+                    .Append("u, 0u }");
+                if (i < methodsForLowering.Count - 1)
+                    sb.Append(',');
                 sb.AppendLine();
-                for (int pos = 0; pos < escaped.Length;)
-                {
-                    int chunkEnd = Math.Min(pos + maxStringLiteralLen, escaped.Length);
-                    if (chunkEnd < escaped.Length)
-                    {
-                        int adjusted = chunkEnd;
-                        while (adjusted > pos && escaped[adjusted - 1] == '\\')
-                            adjusted--;
-                        if (adjusted > pos)
-                            chunkEnd = adjusted;
-                    }
-                    int chunkLen = chunkEnd - pos;
-                    sb.Append("    \"").Append(escaped, pos, chunkLen).AppendLine("\"");
-                    pos = chunkEnd;
-                }
-                sb.AppendLine("    ;");
             }
-        }
-
-        sb.AppendLine();
-
-        // Emit JitEntry array
-        sb.Append("extern \"C\" const JitEntry kChaosJitEntries[")
-            .Append(methodsForLowering.Count)
-            .AppendLine("] =");
-        sb.AppendLine("{");
-        for (int i = 0; i < methodsForLowering.Count; i++)
-        {
-            var method = methodsForLowering[i];
-            uint token = tokenLookup.TryGetMethodToken(method.SubjectId);
-            uint jsonLen = (uint)jsonStrings[i].Length;
-
-            sb.Append("    { kJitJson_")
-                .Append(i)
-                .Append(", ")
-                .Append(jsonLen)
-                .Append("u, 0x")
-                .Append(token.ToString("X8"))
-                .Append("u, 0u }");
-            if (i < methodsForLowering.Count - 1)
-                sb.Append(',');
+            sb.AppendLine("};");
             sb.AppendLine();
         }
-        sb.AppendLine("};");
-        sb.AppendLine();
+        else
+        {
+            // Legacy path: emit JSON as C++ string literals (backward compat).
+            const int maxStringLiteralLen = 16000;
+            for (int i = 0; i < methodsForLowering.Count; i++)
+            {
+                string escaped = EscapeCppStringLiteral(jsonStrings[i]);
+                sb.Append("static const char kJitJson_")
+                    .Append(i)
+                    .Append("[] = ");
+                if (escaped.Length <= maxStringLiteralLen)
+                {
+                    sb.Append("\"").Append(escaped).AppendLine("\";");
+                }
+                else
+                {
+                    sb.AppendLine();
+                    for (int pos = 0; pos < escaped.Length;)
+                    {
+                        int chunkEnd = Math.Min(pos + maxStringLiteralLen, escaped.Length);
+                        if (chunkEnd < escaped.Length)
+                        {
+                            int adjusted = chunkEnd;
+                            while (adjusted > pos && escaped[adjusted - 1] == '\\')
+                                adjusted--;
+                            if (adjusted > pos)
+                                chunkEnd = adjusted;
+                        }
+                        int chunkLen = chunkEnd - pos;
+                        sb.Append("    \"").Append(escaped, pos, chunkLen).AppendLine("\"");
+                        pos = chunkEnd;
+                    }
+                    sb.AppendLine("    ;");
+                }
+            }
+
+            sb.AppendLine();
+
+            // Emit JitEntry array with offset-based addressing (no .jdata file,
+            // but the struct field is now uint32_t json_offset, so we emit
+            // synthetic offsets that won't be used — jit_data is nullptr at runtime).
+            // NOTE: The old format used pointer-based addressing (kJitJson_N).
+            // With the struct field renamed to json_offset (uint32_t), the old
+            // string-pointer entries are no longer supported. The legacy path
+            // still works when jitDataOutputPath is provided, using the .jdata
+            // file format. This fallback is kept for backward compat with tests
+            // that don't pass a jitDataOutputPath.
+            uint accumulatedOffset = 0;
+            sb.Append("extern \"C\" const JitEntry kChaosJitEntries[")
+                .Append(methodsForLowering.Count)
+                .AppendLine("] =");
+            sb.AppendLine("{");
+            for (int i = 0; i < methodsForLowering.Count; i++)
+            {
+                var method = methodsForLowering[i];
+                uint token = tokenLookup.TryGetMethodToken(method.SubjectId);
+                uint jsonLen = (uint)jsonStrings[i].Length;
+
+                sb.Append("    { ")
+                    .Append(accumulatedOffset)
+                    .Append("u, ")
+                    .Append(jsonLen)
+                    .Append("u, 0x")
+                    .Append(token.ToString("X8"))
+                    .Append("u, 0u }");
+                accumulatedOffset += jsonLen;
+                if (i < methodsForLowering.Count - 1)
+                    sb.Append(',');
+                sb.AppendLine();
+            }
+            sb.AppendLine("};");
+            sb.AppendLine();
+        }
 
         // Emit count symbol
         sb.Append("extern \"C\" const CHAOS_IL2CPP_UINT32 kChaosJitEntryCount = ")

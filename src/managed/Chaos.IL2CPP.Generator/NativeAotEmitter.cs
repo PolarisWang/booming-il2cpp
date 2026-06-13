@@ -60,6 +60,14 @@ public sealed class NativeAotEmitter
             planner.LoadGoldDirectCallProfile(goldProfilePath);
         }
 
+        // In JIT mode, set the .jdata output path so AotCoreIr JSON is written
+        // to a binary file instead of embedded C++ string literals.
+        if (mode.HasFlag(CodegenMode.Jit))
+        {
+            var jitDataPath = Path.Combine(outputRootPath, "aot-core-ir.jdata");
+            planner.SetJitDataOutputPath(jitDataPath);
+        }
+
         var templateModel = planner.Create(
             loweringPlan,
             aotCoreIr,
@@ -71,6 +79,14 @@ public sealed class NativeAotEmitter
             mode: mode,
             subjectMethods: subjectMethods,
             allManagedMethods: allManagedMethods);
+
+        // In JIT mode, set the .jdata output path so AotCoreIr JSON is written
+        // to a binary file instead of embedded C++ string literals.
+        if (mode.HasFlag(CodegenMode.Jit))
+        {
+            var jitDataPath = Path.Combine(outputRootPath, "aot-core-ir.jdata");
+            planner.SetJitDataOutputPath(jitDataPath);
+        }
 
         var (generatedSources, generatedArtifacts) = BuildGeneratedSources(
             templateModel, loweringPlan);
