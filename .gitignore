@@ -367,6 +367,7 @@ tests/fixtures/**/*.lib
 
 # Generated C++ in native/ (hand-written stubs like enum_stubs.cpp stay tracked)
 testing/foundation-dll/**/native/**/generated/
+testing/foundation-dll/**/native/chaos_stub_*.cpp
 testing/foundation-dll/**/native/runtime-entry.cpp
 testing/foundation-dll/**/native/runtime-patchdata.cpp
 testing/foundation-dll/**/native/verification_dispatch.generated.cpp
