@@ -84,6 +84,9 @@ public sealed class CodegenOrchestrator
             args.Add(Path.GetFullPath(outputDir));
             args.Add("--full-closure");
 
+            // Cross-assembly: add SPC runtime dir as --assembly-dir (F15)
+            try { var d = System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(); if (d != null) { var p = System.IO.Path.Combine(d, "System.Private.CoreLib.dll"); if (System.IO.File.Exists(p)) { args.Add("--assembly-dir"); args.Add(d); } } } catch { }
+
             if (codegenMode == "jit")
             {
                 args.Add("--mode");
