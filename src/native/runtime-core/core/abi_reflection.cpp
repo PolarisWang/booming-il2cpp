@@ -476,6 +476,12 @@ void* CHAOS_RUNTIME_ABI_CALL ABI_TryResolveDllImport(const char* dll_name, const
         ? marshal->try_resolve_dll_import(dll_name, entry_point) : nullptr;
 }
 
+/* ── V2 GC finalization (delegate to GC API) ── */
+
+void CHAOS_RUNTIME_ABI_CALL ABI_GcRegisterFinalizable(void* obj) {
+    chaos_gc_register_finalizable(obj);
+}
+
 /* ── ABI v0 function table, fully positionally aligned with runtime_abi.h ── */
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
@@ -579,7 +585,7 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &ABI_GetLastOsError,                         /* field 84: get_last_os_error */
     &ABI_ClearLastOsError,                       /* field 85: clear_last_os_error */
     &ABI_TryResolveDllImport,                    /* field 86: try_resolve_dll_import */
-    nullptr,  /* field 87: gc_register_finalizable */
+    &ABI_GcRegisterFinalizable,                  /* field 87: gc_register_finalizable */
     &ABI_GetCurrentRuntimeState,                  /* field 88: get_current_runtime_state */
     &ABI_GetCurrentThreadState,                   /* field 89: get_current_thread_state */
 };
