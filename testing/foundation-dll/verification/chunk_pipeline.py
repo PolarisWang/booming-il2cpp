@@ -21,9 +21,12 @@ Usage:
 
 from __future__ import annotations
 
+import os
 import re
+import subprocess
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 # Ensure foundation-dll/ is on sys.path
@@ -264,6 +267,7 @@ def main():
                            timeouts.get("codegen_aot",
                            timeouts.get("fact_aot", 0)))
     chunk_mode = _PIPELINE_CONFIG.get("defaultMode", "standard")
+    seq = 0
 
     for chunk_slug in chunks:
         chunk_dir = foundation_dir / "chunks" / chunk_slug
@@ -282,6 +286,21 @@ def main():
                 if resolved.is_dir():
                     assembly_dirs.append(str(resolved))
 
+        # ── Run identity / provenance metadata ──
+        seq += 1
+        run_id = f"fdn-{datetime.now(timezone.utc).strftime('%Y%m%d')}-{seq:03d}"
+        platform_map = {"win32": "windows-x64", "linux": "linux-x64", "darwin": "macos-arm64"}
+        platform = platform_map.get(sys.platform, sys.platform)
+        device_id = os.environ.get("CHAOS_DEVICE_ID") or os.environ.get("HOSTNAME") or os.environ.get("COMPUTERNAME") or "unknown"
+        device = {"id": device_id}
+        try:
+            import subprocess as _sp
+            git_commit = _sp.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=5).stdout.strip()
+            git_branch = _sp.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True, timeout=5).stdout.strip()
+        except Exception:
+            git_commit = ""
+            git_branch = ""
+
         ctx = ChunkContext(
             slug=chunk_slug,
             assembly=assembly,
@@ -293,6 +312,11 @@ def main():
             skip_probe=args.skip_probe,
             stage_timeout_seconds=stage_timeout_seconds,
             assembly_dirs=assembly_dirs,
+            run_id=run_id,
+            platform=platform,
+            device=device,
+            git_commit=git_commit,
+            git_branch=git_branch,
         )
 
         print(f"\n{'='*60}")

@@ -68,6 +68,13 @@ class ChunkContext:
     skip_probe: bool = False
     assembly_dirs: list[str] = field(default_factory=list)
 
+    # ── Run identity / provenance (populated by chunk_pipeline.py at start) ──
+    run_id: str = ""                  # "fdn-{YYYYMMDD}-{seq:03d}"
+    platform: str = ""                # "windows-x64" | "linux-x64" | "arm64"
+    device: dict[str, Any] = field(default_factory=dict)  # {id, name, cpu, ram_gb}
+    git_commit: str = ""
+    git_branch: str = ""
+
     @property
     def managed_dir(self) -> Path:
         return self.chunk_dir / "managed" / "subjects"

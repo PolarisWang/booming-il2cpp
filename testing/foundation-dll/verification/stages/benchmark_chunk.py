@@ -249,14 +249,14 @@ def _write_records_jsonl(
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     record = {
-        "runId": f"{ctx.assembly}-{ctx.slug}-benchmark-{int(time.time())}",
+        "runId": ctx.run_id or f"{ctx.assembly}-{ctx.slug}-benchmark-{int(time.time())}",
         "subject": f"{ctx.assembly}/{ctx.slug}",
         "mode": "native",
         "technology": technology,
-        "platform": "windows-x64",
-        "device": {"id": "chunk-pipeline", "name": "chunk-pipeline"},
+        "platform": ctx.platform or "windows-x64",
+        "device": ctx.device or {"id": "chunk-pipeline", "name": "chunk-pipeline"},
         "recordedAt": now,
-        "gitCommit": "unknown",
+        "gitCommit": ctx.git_commit or "unknown",
         "nativeConfig": ctx.native_config,
         "metrics": summary,
     }
