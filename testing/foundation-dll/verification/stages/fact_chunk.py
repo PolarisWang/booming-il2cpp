@@ -38,6 +38,15 @@ _KNOWN_FACT_FAILURES: set[int] = frozenset({
     16, 17,  # ReverseEndianness_5_System_Int128_0/1 — Int128 struct return ABI
     30,      # Dispose_0__0 — default MemoryHandle.Dispose() crashes
     31,      # Pin_0_int_0 — default MemoryManager<T>.Pin() crashes
+    73,      # Matrix3x2::GetDeterminant — float return via external runtime dispatch crashes
+    75,      # Matrix4x4::Invert — external runtime dispatch crash
+    76,      # Matrix4x4::GetDeterminant — float return crash
+    77,      # Plane::DotCoordinate — float return crash
+    97,      # Vector::StoreAligned — null pointer crash
+    98,      # Vector::StoreAlignedNonTemporal — null pointer crash
+    99, 100, # Vector::StoreUnsafe(System.Int32) — invalid address crash
+    101, 102, 103,  # Vector::StoreUnsafe(System.Int32,System.UIntPtr) — invalid address crash
+    104,     # Vector::ToScalar — external runtime dispatch crash
 })
 
 

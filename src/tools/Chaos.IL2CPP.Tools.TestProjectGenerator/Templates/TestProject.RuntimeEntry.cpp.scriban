@@ -376,7 +376,7 @@ static int RunFactJsonMode() {
 
             if (!first) printf(",");
             printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
-                   si, i, caught ? "false" : "true", caught ? -1 : result);
+                   si, i, caught ? "false" : "true", caught ? result : result);
             first = false;
         }
         printf("]}\n");
@@ -431,7 +431,7 @@ static int RunFactJsonMode() {
 
         if (!first) printf(",");
         printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
-               si, v_i, caught ? "false" : "true", caught ? -1 : result);
+               si, v_i, caught ? "false" : "true", caught ? result : result);
         first = false;
     }
     printf("]}\n");
