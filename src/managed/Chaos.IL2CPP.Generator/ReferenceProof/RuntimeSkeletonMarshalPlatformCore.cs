@@ -106,7 +106,7 @@ internal static class RuntimeSkeletonMarshalPlatformCore
                 method,
                 "memory-block",
                 "System.Void",
-                $"(void)chaos::il2cpp::runtime_core::MarshalFreeCoTaskMem(runtime, {LoadScalar("System.IntPtr", "request->arg0")});",
+                $"(void)chaos_runtime_get_abi_v0()->marshal_free_co_task_mem(runtime, {LoadScalar("System.IntPtr", "request->arg0")});",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "ZeroFreeCoTaskMemUTF8", "System.IntPtr"))
             return TryCreateStaticFastPath(
@@ -137,14 +137,14 @@ internal static class RuntimeSkeletonMarshalPlatformCore
                 method,
                 "string-marshaling",
                 "System.String",
-                $"const auto result = chaos::il2cpp::runtime_core::MarshalPtrToStringUtf8(runtime, thread, {LoadScalar("System.IntPtr", "request->arg0")}, 0, false);\n    {AssignReturn("System.String", "result")}",
+                $"const auto result = chaos_runtime_get_abi_v0()->marshal_ptr_to_string_utf8(runtime, thread, {LoadScalar("System.IntPtr", "request->arg0")}, 0, false);\n    {AssignReturn("System.String", "result")}",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "PtrToStringUTF8", "System.IntPtr", "System.Int32"))
             return TryCreateStaticFastPath(
                 method,
                 "string-marshaling",
                 "System.String",
-                $"const auto result = chaos::il2cpp::runtime_core::MarshalPtrToStringUtf8(runtime, thread, {LoadScalar("System.IntPtr", "request->arg0")}, {LoadScalar("System.Int32", "request->arg1")}, true);\n    {AssignReturn("System.String", "result")}",
+                $"const auto result = chaos_runtime_get_abi_v0()->marshal_ptr_to_string_utf8(runtime, thread, {LoadScalar("System.IntPtr", "request->arg0")}, {LoadScalar("System.Int32", "request->arg1")}, true);\n    {AssignReturn("System.String", "result")}",
                 out plan);
         return false;
     }
