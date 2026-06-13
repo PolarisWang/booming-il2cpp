@@ -125,3 +125,5 @@ registry.Register("TypeName", "MethodName", ["ParamType1", ...],
 | `build.py` 的 `Added N external runtime stubs` 日志 | CodeGen 未覆盖 → 需要修复 Path 1/2 |
 | ShapeRegistry 的 `TryMatchGenericShape` 调试日志 | 泛型方法类型参数未匹配 |
 | `ChaosExternalRuntimeFallback` 被调用 | 需要检查 shape 注册是否遗漏 |
+| fact 结果 `value=0` | `interrupt_ptr` fallback 已实现，但仍需确认 HotpatchNameRegistry 有对应条目 |
+| fact 结果 `value=-1` | 运行时函数未注册，检查 ShapeRegistry 覆盖 |
