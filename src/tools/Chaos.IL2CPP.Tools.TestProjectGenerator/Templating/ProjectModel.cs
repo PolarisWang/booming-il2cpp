@@ -22,7 +22,11 @@ internal sealed class ProjectModelBuilder
         string? codegenDir = null,
         string? sdkDir = null,
         List<string>? codegenAssemblyNames = null,
-        bool verificationEnabled = true)
+        bool verificationEnabled = true,
+        bool hotupdateActive = false,
+        string hostNamespace = "",
+        List<string>? hostTypeNames = null,
+        List<string>? hostMethodNames = null)
     {
         var model = new ScriptObject();
 
@@ -200,6 +204,32 @@ internal sealed class ProjectModelBuilder
         model["defines"] = defines;
 
         model["verification_enabled"] = verificationEnabled ? "1" : "0";
+
+        // ── Hotupdate host arrays for patch-host-arrays.cpp ──
+        model["hotupdate_active"] = hotupdateActive;
+        model["host_namespace"] = hostNamespace;
+        if (hostTypeNames is not null)
+        {
+            var typeArray = new ScriptArray();
+            foreach (var n in hostTypeNames)
+                typeArray.Add(n);
+            model["host_type_names"] = typeArray;
+        }
+        else
+        {
+            model["host_type_names"] = new ScriptArray();
+        }
+        if (hostMethodNames is not null)
+        {
+            var methodArray = new ScriptArray();
+            foreach (var n in hostMethodNames)
+                methodArray.Add(n);
+            model["host_method_names"] = methodArray;
+        }
+        else
+        {
+            model["host_method_names"] = new ScriptArray();
+        }
 
         return model;
     }

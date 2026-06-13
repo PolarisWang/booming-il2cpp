@@ -2,12 +2,29 @@
 // Per-method host arrays for ApplyPatchFromMemoryEx.
 // Maps Subject_N methods (patch DLL MethodDef index) to their AOT
 // HotpatchNameRegistry entries (namespace, type name, method name).
-// Sentinel: no overrides (default state for TPG builds).
-// The hotupdate pipeline replaces this file with real per-method mappings
-// and triggers an incremental cmake rebuild.
+{{ if hotupdate_active and host_type_names and host_type_names.size > 0 }}
+// Real mappings computed from subjects.metadata.json hotupdate entries.
+#include <cstdint>
+
+extern const char* const kPatchDataHostNamespace = "{{ host_namespace }}";
+extern const char* const kPatchDataHostTypeNames[] = {
+{{ for type_name in host_type_names }}
+    "{{ type_name }}",
+{{ end }}
+};
+extern const char* const kPatchDataHostMethodNames[] = {
+{{ for method_name in host_method_names }}
+    "{{ method_name }}",
+{{ end }}
+};
+extern const int kPatchDataCount = {{ host_type_names.size }};
+{{ else }}
+// Sentinel: no overrides (default state for TPG builds without hotupdate).
+// The hotupdate pipeline can regenerate this file with real per-method mappings.
 #include <cstdint>
 
 extern const char* const kPatchDataHostNamespace = nullptr;
 extern const char* const kPatchDataHostTypeNames[] = { nullptr };
 extern const char* const kPatchDataHostMethodNames[] = { nullptr };
 extern const int kPatchDataCount = 0;
+{{ end }}
