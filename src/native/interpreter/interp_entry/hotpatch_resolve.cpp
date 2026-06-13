@@ -108,17 +108,8 @@ extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
         if (slot == ~0u) continue;
 
         auto* entry = registry.GetDispatchEntryBySlot(module_index, slot);
-        if (entry != nullptr) {
-            if (entry->direct_ptr != nullptr) {
-                kChaosExternalRuntimeFnTable[i] = entry->direct_ptr;
-            } else if (entry->interrupt_ptr != nullptr) {
-                // Fallback to interpreter entry when no AOT body exists.
-                // This handles methods that are in the AotCoreIr but whose
-                // wrappers have simplified IL (no call instructions visible
-                // to the reachability analysis), so they get routed through
-                // the interpreter instead of CHAOS_IL2CPP_FAIL.
-                kChaosExternalRuntimeFnTable[i] = entry->interrupt_ptr;
-            }
+        if (entry != nullptr && entry->direct_ptr != nullptr) {
+            kChaosExternalRuntimeFnTable[i] = entry->direct_ptr;
         }
     }
 

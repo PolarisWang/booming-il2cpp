@@ -170,5 +170,3 @@ def run_build(ctx):
 | `Hephaestus CACHE HIT` 但期望 `CACHE MISS` | 检查缓存键是否包含 runtime_stubs hash |
 | `Added N external runtime stubs` 在 build.py 日志中 | 通知外部运行时 Expert — CodeGen 覆盖不足 |
 | `patch_runtime_entry` NameError | `build.py` import 缺失 → 已修复 ✅ |
-| `BuildProject()` 中 `cmake configure` 失败 | 不再重试（P3 已移除重试逻辑），检查 cmake 配置 |
-| `capabilities.json` 不存在 | codegen 需添加输出，检查 PipelineOrchestrator.WriteCapabilities |

@@ -62,9 +62,6 @@ public sealed class PipelineOrchestrator
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.NativeAotLoweringPlan), result.NativeAotLoweringPlan);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
 
-        // ── P4: Write capabilities.json ──
-        WriteCapabilities(result.OutputRootPath, result.AotCoreIr);
-
         return result;
     }
 
@@ -116,31 +113,5 @@ public sealed class PipelineOrchestrator
 
         var json = JsonSerializer.Serialize(value, JsonOptions);
         File.WriteAllText(path, json + Environment.NewLine);
-    }
-
-    /// <summary>Write capabilities.json (P4).</summary>
-    private static void WriteCapabilities(string outputRoot, AotCoreIrArtifact aotCoreIr)
-    {
-        var methods = aotCoreIr?.Methods ?? [];
-        var asyncCount = methods.Count(m => (m.SubjectId ?? "").Contains(">d__") && m.Instructions.Count > 0);
-        var capPath = Path.Combine(outputRoot, ManagedClosureArtifactNames.Capabilities);
-        var cap = new
-        {
-            version = 1,
-            schema_version = "1.0",
-            categories = new
-            {
-                async_methods = new { level = asyncCount > 0 ? "partial" : "none", total = asyncCount },
-                generics = new { level = "partial", max_params = 4 },
-                simd = new { level = "basic", vector_widths = new[] { 128, 256 } },
-                reflection = new { level = "partial" },
-            },
-            method_stats = new
-            {
-                total = methods.Count,
-                async_count = asyncCount,
-            },
-        };
-        WriteJson(capPath, cap);
     }
 }

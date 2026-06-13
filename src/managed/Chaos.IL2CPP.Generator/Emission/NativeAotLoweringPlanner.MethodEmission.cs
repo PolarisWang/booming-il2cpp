@@ -196,20 +196,6 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
-		// F1 async detect
-		if (IsAsyncStateMachineMoveNext(method.SubjectId))
-		{
-			AsyncMethodCount++;
-			var ak = ClassifyAsyncMethod(method);
-			if (ak == AsyncMethodKind.Complex) { AsyncInterpreterFallbackCount++; builder.AppendLine("// Complex async"); var fd = FormatMethodDeclaration(method, _sharedContextSymbols); builder.AppendLine(fd.Length > 0 && fd[^1] == ";"[0] ? fd[..^1] : fd); builder.AppendLine("{ CHAOS_IL2CPP_FAIL(); }"); return; }
-			AsyncCoroutineMethodCount++;
-			var abody = BuildAsyncStructuredBody(method);
-			var uid = GetAsyncUid(method);
-			var hr = ak == AsyncMethodKind.AsyncTaskOfT || ak == AsyncMethodKind.AsyncValueTaskOfT;
-			builder.Append(GenPromise(uid, hr));
-			builder.Append(GenCoro(uid, hr, method.SubjectId ?? "", abody ?? new IRSequence(new List<StructuredIRNode>())));
-			return;
-		}
 		IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;
 
 		// Handle 0-instruction subject methods: emit simple return instead of throwing.

@@ -5,7 +5,6 @@
 #pragma once
 
 #include <chaos/native_types.h>
-#include <coroutine>
 
 extern "C" {
 
