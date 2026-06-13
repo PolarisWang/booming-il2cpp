@@ -28,25 +28,25 @@ internal static class RuntimeSkeletonInteropKernel32PlatformCore
         {
             "System.Private.CoreLib/Interop+Kernel32::GetLastError:System.Int32()" =>
                 TryCreateStaticFastPath(method, "env-diagnostics-loader", "System.Int32",
-                    "const auto result = chaos::il2cpp::runtime_core::InteropKernel32GetLastError();\n    *static_cast<CHAOS_IL2CPP_INT32*>(return_value_ptr) = result;", out plan),
+                    "const auto result = chaos_runtime_get_abi_v0()->interop_kernel32_get_last_error();\n    *static_cast<CHAOS_IL2CPP_INT32*>(return_value_ptr) = result;", out plan),
             "System.Private.CoreLib/Interop+Kernel32::GetCurrentProcessId:System.UInt32()" =>
                 TryCreateStaticFastPath(method, "process-thread-io", "System.UInt32",
-                    "const auto result = static_cast<CHAOS_IL2CPP_UINT32>(chaos::il2cpp::runtime_core::InteropKernel32GetCurrentProcessId());\n    *static_cast<CHAOS_IL2CPP_UINT32*>(return_value_ptr) = result;", out plan),
+                    "const auto result = static_cast<CHAOS_IL2CPP_UINT32>(chaos_runtime_get_abi_v0()->interop_kernel32_get_current_process_id());\n    *static_cast<CHAOS_IL2CPP_UINT32*>(return_value_ptr) = result;", out plan),
             "System.Private.CoreLib/Interop+Kernel32::GetCurrentThreadId:System.Int32()" =>
                 TryCreateStaticFastPath(method, "process-thread-io", "System.Int32",
-                    "const auto result = chaos::il2cpp::runtime_core::InteropKernel32GetCurrentThreadId();\n    *static_cast<CHAOS_IL2CPP_INT32*>(return_value_ptr) = result;", out plan),
+                    "const auto result = chaos_runtime_get_abi_v0()->interop_kernel32_get_current_thread_id();\n    *static_cast<CHAOS_IL2CPP_INT32*>(return_value_ptr) = result;", out plan),
             "System.Private.CoreLib/Interop+Kernel32::GetCurrentProcess:System.IntPtr()" =>
                 TryCreateStaticFastPath(method, "process-thread-io", "System.IntPtr",
-                    "const auto result = chaos::il2cpp::runtime_core::InteropKernel32GetCurrentProcess();\n    *static_cast<CHAOS_IL2CPP_INTPTR*>(return_value_ptr) = result;", out plan),
+                    "const auto result = chaos_runtime_get_abi_v0()->interop_kernel32_get_current_process();\n    *static_cast<CHAOS_IL2CPP_INTPTR*>(return_value_ptr) = result;", out plan),
             "System.Private.CoreLib/Interop+Kernel32::GetCurrentThread:System.IntPtr()" =>
                 TryCreateStaticFastPath(method, "process-thread-io", "System.IntPtr",
-                    "const auto result = chaos::il2cpp::runtime_core::InteropKernel32GetCurrentThread();\n    *static_cast<CHAOS_IL2CPP_INTPTR*>(return_value_ptr) = result;", out plan),
+                    "const auto result = chaos_runtime_get_abi_v0()->interop_kernel32_get_current_thread();\n    *static_cast<CHAOS_IL2CPP_INTPTR*>(return_value_ptr) = result;", out plan),
             "System.Private.CoreLib/Interop+Kernel32::CloseHandle:System.Boolean(System.IntPtr)" =>
                 TryCreateStaticFastPath(method, "process-thread-io", "System.Boolean",
-                    $"const auto result = chaos::il2cpp::runtime_core::InteropKernel32CloseHandle({LoadScalar("System.IntPtr", "request->arg0")});\n    *static_cast<bool*>(return_value_ptr) = result;", out plan),
+                    $"const auto result = chaos_runtime_get_abi_v0()->interop_kernel32_close_handle({LoadScalar("System.IntPtr", "request->arg0")});\n    *static_cast<bool*>(return_value_ptr) = result;", out plan),
             "System.Private.CoreLib/Interop+Kernel32::FreeLibrary:System.Boolean(System.IntPtr)" =>
                 TryCreateStaticFastPath(method, "env-diagnostics-loader", "System.Boolean",
-                    $"const auto result = chaos::il2cpp::runtime_core::InteropKernel32FreeLibrary({LoadScalar("System.IntPtr", "request->arg0")});\n    *static_cast<bool*>(return_value_ptr) = result;", out plan),
+                    $"const auto result = chaos_runtime_get_abi_v0()->interop_kernel32_free_library({LoadScalar("System.IntPtr", "request->arg0")});\n    *static_cast<bool*>(return_value_ptr) = result;", out plan),
             _ => false,
         };
     }

@@ -130,7 +130,7 @@ internal static class RuntimeSkeletonConvertCharKernelAbiFactory
         }
         else
         {
-            kernelCallExpression = $"chaos::il2cpp::runtime_core::{helperName}(request->arg0)";
+            kernelCallExpression = $"chaos_runtime_get_abi_v0()->{helperName}(request->arg0)";
         }
 
         // Build range check code

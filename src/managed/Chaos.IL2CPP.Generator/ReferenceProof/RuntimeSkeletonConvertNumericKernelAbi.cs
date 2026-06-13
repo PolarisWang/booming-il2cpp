@@ -139,7 +139,7 @@ internal static class RuntimeSkeletonConvertNumericKernelAbiFactory
         var targetTypeName = returnManagedType.Replace("System.", "");
         var helperName = $"ConvertTo{targetTypeName}From{sourceTypeSuffix.Replace("System.", "")}";
 
-        var kernelCallExpression = $"chaos::il2cpp::runtime_core::{helperName}(request->arg0)";
+        var kernelCallExpression = $"chaos_runtime_get_abi_v0()->{helperName}(request->arg0)";
 
         // Build range check code based on the narrowing risk
         string rangeCheckCode = BuildRangeCheckCode(paramManagedType, returnManagedType);

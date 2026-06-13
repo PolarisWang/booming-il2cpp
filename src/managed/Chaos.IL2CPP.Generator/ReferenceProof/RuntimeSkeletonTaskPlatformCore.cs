@@ -31,7 +31,7 @@ internal static class RuntimeSkeletonTaskPlatformCore
                     method,
                     "introspection",
                     "System.Int32",
-                    "const auto result = chaos::il2cpp::runtime_core::TaskKernelNewId();\n    *static_cast<CHAOS_IL2CPP_INT32*>(return_value_ptr) = result;",
+                    "const auto result = chaos_runtime_get_abi_v0()->task_kernel_new_id();\n    *static_cast<CHAOS_IL2CPP_INT32*>(return_value_ptr) = result;",
                     out plan),
             _ => false,
         };

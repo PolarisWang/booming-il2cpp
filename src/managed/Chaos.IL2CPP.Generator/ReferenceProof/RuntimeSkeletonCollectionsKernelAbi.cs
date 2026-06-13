@@ -166,7 +166,7 @@ internal static class RuntimeSkeletonCollectionsKernelAbiFactory
             argExprs.Add($"request->arg{i}");
         }
 
-        var callExpression = $"chaos::il2cpp::runtime_core::{helperName}({string.Join(", ", argExprs)})";
+        var callExpression = $"chaos_runtime_get_abi_v0()->{helperName}({string.Join(", ", argExprs)})";
 
         abi = new RuntimeSkeletonCollectionsKernelAbi(
             RuntimeSkeletonCollectionsKernelAbi.HotUpdateStableContractId,

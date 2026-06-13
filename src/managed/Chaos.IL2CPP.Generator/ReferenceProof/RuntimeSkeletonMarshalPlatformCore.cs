@@ -64,42 +64,42 @@ internal static class RuntimeSkeletonMarshalPlatformCore
                 method,
                 "memory-block",
                 "System.IntPtr",
-                $"const auto result = chaos::il2cpp::runtime_core::MarshalAllocHGlobal(runtime, {LoadScalar("System.Int32", "request->arg0")});\n    {AssignReturn("System.IntPtr", "result")}",
+                $"const auto result = chaos_runtime_get_abi_v0()->marshal_alloc_h_global({LoadScalar("System.Int32", "request->arg0")});\n    {AssignReturn("System.IntPtr", "result")}",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "AllocHGlobal", "System.IntPtr"))
             return TryCreateStaticFastPath(
                 method,
                 "memory-block",
                 "System.IntPtr",
-                $"const auto result = chaos::il2cpp::runtime_core::MarshalAllocHGlobal(runtime, {LoadScalar("System.IntPtr", "request->arg0")});\n    {AssignReturn("System.IntPtr", "result")}",
+                $"const auto result = chaos_runtime_get_abi_v0()->marshal_alloc_h_global({LoadScalar("System.IntPtr", "request->arg0")});\n    {AssignReturn("System.IntPtr", "result")}",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "AllocCoTaskMem", "System.Int32"))
             return TryCreateStaticFastPath(
                 method,
                 "memory-block",
                 "System.IntPtr",
-                $"const auto result = chaos::il2cpp::runtime_core::MarshalAllocCoTaskMem(runtime, {LoadScalar("System.Int32", "request->arg0")});\n    {AssignReturn("System.IntPtr", "result")}",
+                $"const auto result = chaos_runtime_get_abi_v0()->marshal_alloc_co_task_mem({LoadScalar("System.Int32", "request->arg0")});\n    {AssignReturn("System.IntPtr", "result")}",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "ReAllocHGlobal", "System.IntPtr", "System.IntPtr"))
             return TryCreateStaticFastPath(
                 method,
                 "memory-block",
                 "System.IntPtr",
-                $"const auto result = chaos::il2cpp::runtime_core::MarshalReAllocHGlobal(runtime, {LoadScalar("System.IntPtr", "request->arg0")}, {LoadScalar("System.IntPtr", "request->arg1")});\n    {AssignReturn("System.IntPtr", "result")}",
+                $"const auto result = chaos_runtime_get_abi_v0()->marshal_realloc_h_global({LoadScalar("System.IntPtr", "request->arg0")}, {LoadScalar("System.IntPtr", "request->arg1")});\n    {AssignReturn("System.IntPtr", "result")}",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "ReAllocCoTaskMem", "System.IntPtr", "System.Int32"))
             return TryCreateStaticFastPath(
                 method,
                 "memory-block",
                 "System.IntPtr",
-                $"const auto result = chaos::il2cpp::runtime_core::MarshalReAllocCoTaskMem(runtime, {LoadScalar("System.IntPtr", "request->arg0")}, {LoadScalar("System.Int32", "request->arg1")});\n    {AssignReturn("System.IntPtr", "result")}",
+                $"const auto result = chaos_runtime_get_abi_v0()->marshal_realloc_co_task_mem({LoadScalar("System.IntPtr", "request->arg0")}, {LoadScalar("System.Int32", "request->arg1")});\n    {AssignReturn("System.IntPtr", "result")}",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "FreeHGlobal", "System.IntPtr"))
             return TryCreateStaticFastPath(
                 method,
                 "memory-block",
                 "System.Void",
-                $"(void)chaos::il2cpp::runtime_core::MarshalFreeHGlobal(runtime, {LoadScalar("System.IntPtr", "request->arg0")});",
+                $"(void)chaos_runtime_get_abi_v0()->marshal_free_h_global({LoadScalar("System.IntPtr", "request->arg0")});",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "FreeCoTaskMem", "System.IntPtr"))
             return TryCreateStaticFastPath(
@@ -113,7 +113,7 @@ internal static class RuntimeSkeletonMarshalPlatformCore
                 method,
                 "memory-block",
                 "System.Void",
-                $"(void)chaos::il2cpp::runtime_core::MarshalZeroFreeCoTaskMemUtf8(runtime, {LoadScalar("System.IntPtr", "request->arg0")});",
+                $"(void)chaos_runtime_get_abi_v0()->marshal_zero_free_co_task_mem_utf8({LoadScalar("System.IntPtr", "request->arg0")});",
                 out plan);
         return false;
     }
@@ -130,7 +130,7 @@ internal static class RuntimeSkeletonMarshalPlatformCore
                 method,
                 "string-marshaling",
                 "System.IntPtr",
-                $"const auto result = chaos::il2cpp::runtime_core::MarshalStringToCoTaskMemUtf8(runtime, thread, {LoadReference("request->arg0")});\n    {AssignReturn("System.IntPtr", "result")}",
+                $"const auto result = chaos_runtime_get_abi_v0()->marshal_string_to_co_task_mem_utf8({LoadReference("request->arg0")});\n    {AssignReturn("System.IntPtr", "result")}",
                 out plan);
         if (ManagedNaming.MatchesMethod(subjectId, "System.Runtime.InteropServices.Marshal", "PtrToStringUTF8", "System.IntPtr"))
             return TryCreateStaticFastPath(
@@ -284,7 +284,7 @@ internal static class RuntimeSkeletonMarshalPlatformCore
             method,
             "memory-block",
             managedType,
-            $"const auto result = chaos::il2cpp::runtime_core::{helperName}({LoadScalar("System.IntPtr", "request->arg0")}, {offsetExpression});\n    {AssignReturn(managedType, "result", cppType)}",
+            $"const auto result = chaos_runtime_get_abi_v0()->{helperName}({LoadScalar("System.IntPtr", "request->arg0")}, {offsetExpression});\n    {AssignReturn(managedType, "result", cppType)}",
             out plan);
     }
 
@@ -299,7 +299,7 @@ internal static class RuntimeSkeletonMarshalPlatformCore
             method,
             "memory-block",
             "System.Void",
-            $"chaos::il2cpp::runtime_core::{helperName}({LoadScalar("System.IntPtr", "request->arg0")}, {offsetExpression}, {valueExpression});",
+            $"chaos_runtime_get_abi_v0()->{helperName}({LoadScalar("System.IntPtr", "request->arg0")}, {offsetExpression}, {valueExpression});",
             out plan);
     }
 
