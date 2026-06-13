@@ -1,7 +1,8 @@
 # Chaos IL2CPP 开发规则
 
-> ⚠️ **第〇条规则（最优先）**：对用户每一条新消息，回复的**第一行必须是分类声明**：
+> ⚠️ **第〇条规则（最优先）**：进入新域或新任务时，回复的**第一行必须是分类声明**：
 > 格式：`本轮任务涉及 {域1(编号)} + {域2(编号)} ... ，{action} 操作，第 N 轮 → 加载 dev-xxx-expert`
+> 对已在该域中的简单回复（"继续"、"ok"、"A"等）不需要重复输出分类。
 >
 > 域编号表：
 > | 编号 | 域 | 说明 | 对应 Expert |
@@ -103,6 +104,42 @@ const fix2 = await agent("runtime fix", {...});
 详见 `wiki/04-工具与集成/统一追踪体系.md#错误排查工作流`。
 
 ## 架构优先开发
+
+## Linter 工作区约束
+
+项目存在一个持久化 linter，会在文件保存后自动还原以下文件的未提交修改：
+- `src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/Emission/CppProjectEmitter.cs`
+- `src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs`
+
+**工作区规则**：
+1. 修改上述文件后，**立即构建并提交**，不要在未提交状态下进行二次编辑
+2. 使用 `git add && git commit` 在修改后立即固化，避免 linter 还原
+3. `.editorconfig` 的 `indent_style = space` 可能触发自动格式化，确保修改后的缩进与文件现有风格一致（多数文件使用空格缩进）
+
+## 多域 Workflow 委托
+
+当任务涉及 **3 个或以上域**（如 CodeGen + 运行时 + 构建），默认启动 Workflow 并行调查：
+
+```javascript
+// 在 .ai/skills/hooks/ 或 skills/library/ 中创建 workflow 脚本
+export const meta = {
+  name: 'multi-domain-investigation',
+  description: '跨域问题并行调查 — 每个 Expert 独立分析后汇聚',
+};
+phase('Domain Investigation');
+// CodeGen agent: 分析 emission/planner 相关根因
+// 运行时 agent: 分析 interpreter/dispatch 相关根因
+// 构建 agent: 分析 cmake/build pipeline 相关根因
+phase('Synthesis');
+// synthesize agent: 合并三域根因，输出 fix_strategy
+```
+
+**多域 Workflow 触发条件**：
+- 根因可能横跨 2 个以上域（如 text chunk C3861：CodeGen + 运行时 + 构建）
+- 同一问题连续 3 轮无进展
+- 需要 trace C++ 编译/链接/运行全链路
+
+## 完成前自测
 
 在开发任何 il2cpp 新功能或修改现有翻译行为前，必须先执行 `dev-architecture-first-development` 技能完成架构查询，确认翻译路径与既有架构一致。禁止在未查表的情况下直接进入实现。
 
