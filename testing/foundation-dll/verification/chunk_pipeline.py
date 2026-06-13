@@ -245,6 +245,7 @@ def main():
     from verification.stages.benchmark_report import run_benchmark_report
     from verification.stages.coverage_audit import run_coverage_audit
     from verification.stages.aggregate import run_aggregate
+    from verification.stages.reporting import run_reporting
 
     runners = {
         "build": run_build,
@@ -256,6 +257,7 @@ def main():
         "benchmark_report": run_benchmark_report,
         "coverage-audit": run_coverage_audit,
         "aggregate": run_aggregate,
+        "reporting": run_reporting,
     }
 
     overall_start = time.perf_counter()
