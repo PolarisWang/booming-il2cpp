@@ -321,18 +321,63 @@ typedef struct RuntimeAbiV0 {
     void* (CHAOS_RUNTIME_ABI_CALL* get_thread_static)(uint32_t index);
     void  (CHAOS_RUNTIME_ABI_CALL* set_thread_static)(uint32_t index, void* value);
     void* (CHAOS_RUNTIME_ABI_CALL* allocate_thread_static)(size_t size);
+
+    /* ── RuntimeAbiV2 additions (codegen emitter inline-call migration) ── */
+
+    /* Exception helper. */
+    void (CHAOS_RUNTIME_ABI_CALL* raise_exception)(void* exception_obj);
+
+    /* COM / RCW interop. */
+    bool (CHAOS_RUNTIME_ABI_CALL* marshal_is_rcw_handle)(CHAOS_IL2CPP_INTPTR handle);
+    void* (CHAOS_RUNTIME_ABI_CALL* marshal_get_rcw_unknown)(CHAOS_IL2CPP_INTPTR handle);
+    void (CHAOS_RUNTIME_ABI_CALL* throw_com_exception_for_hr)(int32_t hr);
+
+    /* Delegate / hotpatch. */
+    bool (CHAOS_RUNTIME_ABI_CALL* delegate_hotpatch_checkpoint)(void* delegate);
+
+    /* Marshal helpers. */
+    void (CHAOS_RUNTIME_ABI_CALL* marshal_free_co_task_mem)(void* ptr);
+    void* (CHAOS_RUNTIME_ABI_CALL* marshal_ptr_to_string_utf8)(const char* ptr);
+    void* (CHAOS_RUNTIME_ABI_CALL* marshal_ptr_to_string_wide)(const uint16_t* ptr);
+    CHAOS_IL2CPP_INTPTR (CHAOS_RUNTIME_ABI_CALL* marshal_safe_handle_get_handle)(void* safe_handle);
+    void (CHAOS_RUNTIME_ABI_CALL* marshal_struct_managed_to_native)(void* managed, void* native, void* type);
+    void (CHAOS_RUNTIME_ABI_CALL* marshal_struct_native_to_managed)(void* native, void* managed, void* type);
+
+    /* Native library loading. */
+    void* (CHAOS_RUNTIME_ABI_CALL* native_library_load)(const char* path);
+    void* (CHAOS_RUNTIME_ABI_CALL* native_library_get_proc_address)(void* handle, const char* name);
+
+    /* PInvoke error tracking. */
+    void (CHAOS_RUNTIME_ABI_CALL* set_last_pinvoke_error)(int32_t error);
+    int32_t (CHAOS_RUNTIME_ABI_CALL* get_last_os_error)(void);
+    void (CHAOS_RUNTIME_ABI_CALL* clear_last_os_error)(void);
+
+    /* PInvoke DLL resolution. */
+    void* (CHAOS_RUNTIME_ABI_CALL* try_resolve_dll_import)(const char* dll_name, const char* entry_point);
+
+    /* GC finalization. */
+    void (CHAOS_RUNTIME_ABI_CALL* gc_register_finalizable)(void* obj);
+
+    /* Thread state helpers. */
+    void* (CHAOS_RUNTIME_ABI_CALL* get_current_runtime_state)(void);
+    void* (CHAOS_RUNTIME_ABI_CALL* get_current_thread_state)(void);
 } RuntimeAbiV0;
 
-/* RuntimeAbiV1 — inherits all V0 fields and adds GC/boxing/vtable/thread-static helpers.
- * The struct is layout-compatible with V0 for the first N fields, so code that only
- * uses V0 slots can continue to consume a V1 table via cast. */
+/* RuntimeAbiV1/V2 — V1 adds GC/boxing/vtable/thread-static helpers;
+ * V2 adds exception/marshal/PInvoke/GC-finalization/thread-state helpers.
+ * The struct is layout-compatible with V0 for the first N fields, so code that
+ * only uses V0 slots can continue to consume a V1/V2 table via cast. */
 typedef RuntimeAbiV0 RuntimeAbiV1;
+typedef RuntimeAbiV0 RuntimeAbiV2;
 
 /* Returns the process-wide v0 table or null when the ABI is unavailable. */
 CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV0* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v0(void);
 
 /* Returns the process-wide v1 table (superset of v0). */
 CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV1* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v1(void);
+
+/* Returns the process-wide v2 table (superset of v0, v1). */
+CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV2* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v2(void);
 
 #ifdef __cplusplus
 }
