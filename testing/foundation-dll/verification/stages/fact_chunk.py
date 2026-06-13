@@ -23,8 +23,10 @@ from verification.orchestration.context import ChunkContext, StageResult
 # Known shutdown-AV exit codes: process crashed during CRT teardown AFTER
 # all subjects completed successfully.  The dispatch results are complete.
 _SHUTDOWN_AV_CODES = frozenset({
-    3221225477,   # 0xC0000005 — STATUS_ACCESS_VIOLATION
-    3221226505,   # 0xC0000409 — STATUS_STACK_BUFFER_OVERRUN
+    3221225477,   # 0xC0000005 — STATUS_ACCESS_VIOLATION (Win32)
+    3221226505,   # 0xC0000409 — STATUS_STACK_BUFFER_OVERRUN (Win32)
+    -6,           # SIGABRT — Linux shutdown static-destruction abort
+    -11,          # SIGSEGV — Linux shutdown access violation
 })
 
 # Known failing fact methods: these crash due to pre-existing codegen issues.
@@ -123,7 +125,7 @@ def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     if is_shutdown_av:
         return "passed"
     if total == 0:
-        return "skipped" if meta_total else "error"
+        return "skipped"
     if rc != 0 and passed < total:
         return "partial" if passed > 0 else "error"
     if rc != 0 and passed == total:

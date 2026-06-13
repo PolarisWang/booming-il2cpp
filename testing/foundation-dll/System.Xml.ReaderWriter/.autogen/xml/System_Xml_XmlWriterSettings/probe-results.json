@@ -2,13 +2,13 @@
   {
     "methodIndex": 0,
     "setIndex": 0,
-    "subjectId": "System.Private.Xml/System.Xml.XmlWriterSettings::Clone:System.Xml.XmlWriterSettings()",
+    "subjectId": "System.Xml.XmlWriterSettings::Clone:System.Xml.XmlWriterSettings()__Set0",
     "isVoid": false,
-    "hasException": false,
-    "exceptionType": null,
-    "returnValue": 0,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
     "returnValueJson": null,
-    "returnValueType": "System.Xml.XmlWriterSettings",
+    "returnValueType": null,
     "isDeterministic": true,
     "outRefValues": null
   }

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-10T14:03:07.8892572Z",
+  "generatedAt": "2026-06-11T07:27:56.6912983Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
     {
       "index": 0,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary",
@@ -15,7 +15,7 @@
     },
     {
       "index": 1,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary",
@@ -24,7 +24,7 @@
     },
     {
       "index": 2,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary",
@@ -33,7 +33,7 @@
     },
     {
       "index": 3,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary",
@@ -42,7 +42,7 @@
     },
     {
       "index": 4,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary",
@@ -51,7 +51,7 @@
     },
     {
       "index": 5,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary",
@@ -60,7 +60,7 @@
     },
     {
       "index": 6,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -69,7 +69,7 @@
     },
     {
       "index": 7,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -78,7 +78,7 @@
     },
     {
       "index": 8,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -87,7 +87,7 @@
     },
     {
       "index": 9,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -96,7 +96,7 @@
     },
     {
       "index": 10,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::GetValueRefOrNullRef:System.Int32(System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -105,7 +105,7 @@
     },
     {
       "index": 11,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::GetValueRefOrNullRef:System.Int32(System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -114,7 +114,7 @@
     },
     {
       "index": 12,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -123,7 +123,7 @@
     },
     {
       "index": 13,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -132,7 +132,7 @@
     },
     {
       "index": 14,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -141,7 +141,7 @@
     },
     {
       "index": 15,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -150,7 +150,7 @@
     },
     {
       "index": 16,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
@@ -159,7 +159,7 @@
     },
     {
       "index": 17,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet",
@@ -168,7 +168,7 @@
     },
     {
       "index": 18,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet",
@@ -177,7 +177,7 @@
     },
     {
       "index": 19,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -186,7 +186,7 @@
     },
     {
       "index": 20,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -195,7 +195,7 @@
     },
     {
       "index": 21,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -204,7 +204,7 @@
     },
     {
       "index": 22,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -213,7 +213,7 @@
     },
     {
       "index": 23,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -222,7 +222,7 @@
     },
     {
       "index": 24,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -231,7 +231,7 @@
     },
     {
       "index": 25,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -240,7 +240,7 @@
     },
     {
       "index": 26,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -249,7 +249,7 @@
     },
     {
       "index": 27,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -258,7 +258,7 @@
     },
     {
       "index": 28,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -267,7 +267,7 @@
     },
     {
       "index": 29,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -276,7 +276,7 @@
     },
     {
       "index": 30,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -285,7 +285,7 @@
     },
     {
       "index": 31,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -294,7 +294,7 @@
     },
     {
       "index": 32,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Overlaps:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -303,7 +303,7 @@
     },
     {
       "index": 33,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Overlaps:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -312,7 +312,7 @@
     },
     {
       "index": 34,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::SetEquals:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -321,7 +321,7 @@
     },
     {
       "index": 35,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::SetEquals:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "assemblyName": "System.Collections.Immutable",
       "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
@@ -331,8 +331,8 @@
   ],
   "summary": {
     "totalSubjects": 36,
-    "factCount": 0,
-    "benchmarkCount": 36,
+    "factCount": 36,
+    "benchmarkCount": 0,
     "hotUpdateCount": 0
   }
 }

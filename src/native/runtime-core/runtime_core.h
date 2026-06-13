@@ -178,6 +178,7 @@ ResolveStructMarshallingDescriptor(const TypeInfo* type) noexcept;
 #include "gc_helpers.h"
 #include "gc_api.h"
 #include "gc/gc_region.h"
+#include "gc/gc_root_change.h"
 #include "core/gc_alloc_stubs.h"
 #include "thread_state.h"
 #include "engine_binding.h"

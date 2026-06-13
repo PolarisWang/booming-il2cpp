@@ -50,5 +50,18 @@
     "returnValueType": null,
     "isDeterministic": true,
     "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 2,
+    "subjectId": "System.ComponentModel.ListSortDescriptionCollection::CopyTo:System.Void(System.Array,System.Int32)__Set2",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
   }
 ]

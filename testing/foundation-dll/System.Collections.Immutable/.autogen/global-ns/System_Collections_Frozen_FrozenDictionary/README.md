@@ -7,10 +7,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Methods | 3 |
+| Total Methods | 5 |
 | Auto-generated (Fact + Benchmark + HotUpdate) | 3 |
 | Benchmark-only (pure void / non-deterministic) | 0 |
-| Skipped (generic / unresolvable) | 0 |
+| Skipped (generic / unresolvable) | 2 |
 | Total Subjects | 6 |
 
 ## Build
@@ -29,3 +29,8 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
+
+## Skipped Methods
+
+- `Create` — contains generic parameters, needs manual handling
+- `Create` — contains generic parameters, needs manual handling

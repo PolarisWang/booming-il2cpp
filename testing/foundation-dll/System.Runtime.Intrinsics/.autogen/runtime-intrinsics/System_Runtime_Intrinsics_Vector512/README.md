@@ -7,11 +7,11 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Methods | 265 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 190 |
+| Total Methods | 304 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 229 |
 | Benchmark-only (pure void / non-deterministic) | 2 |
 | Skipped (generic / unresolvable) | 73 |
-| Total Subjects | 264 |
+| Total Subjects | 309 |
 
 ## Build
 
@@ -33,7 +33,7 @@ dotnet run --project .
 ## Skipped Methods
 
 - `Abs` — contains generic parameters, needs manual handling
-- `AsVector (unboxable return type: System.Numerics.Vector`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])` — contains generic parameters, needs manual handling
+- `AsVector (unboxable return type: System.Numerics.Vector`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])` — contains generic parameters, needs manual handling
 - `Clamp` — contains generic parameters, needs manual handling
 - `CopyTo (ref struct parameter: System.Span<System.Int32>)` — contains generic parameters, needs manual handling
 - `Create` — contains generic parameters, needs manual handling

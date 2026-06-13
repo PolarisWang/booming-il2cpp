@@ -362,6 +362,65 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("};");
         sb.AppendLine("#endif");
         sb.AppendLine();
+        sb.AppendLine("// ── Pre-allocated string dispatch table (sorted by fnv24 for binary search) ──");
+        sb.AppendLine($"static const EnumPreInitEntry kEnumPreInitTable[] = {{");
+        foreach (var kv in sortedFnv24List)
+        {
+            uint fnv24 = kv.Key & 0xFFFFFFu;
+            sb.AppendLine($"    {{ 0x{fnv24:X6}u, chaos::il2cpp::codegen::kEnumStrings_{kv.Value} }},");
+        }
+        sb.AppendLine("};");
+        sb.AppendLine($"static const CHAOS_IL2CPP_UINT32 kEnumPreInitCount = {sortedFnv24List.Count}u;");
+        sb.AppendLine();
+        sb.AppendLine();
+        sb.AppendLine("// Static (internal linkage) so multiple TUs including this header don't ODR-violate.");
+        sb.AppendLine("// Only the first page's IIFE calls this; other TUs' copies are dead code.");
+        sb.AppendLine("static void ChaosRegisterEnumGeneratedMetadata() noexcept {");
+
+        // Emit type registration for each enum type
+        foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
+        {
+            var et = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value);
+            sb.AppendLine($"    ChaosRegisterExternalType(");
+            sb.AppendLine($"        compute_enum_hash24(\"{EscapeCppString(et.SubjectId)}\"),");
+            sb.AppendLine($"        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(");
+            sb.AppendLine($"            &chaos::il2cpp::codegen::kEnumTypeDesc_{kv.Value}));");
+        }
+
+        sb.AppendLine();
+        sb.AppendLine("    if (g_chaos_resolve_enum_metadata == nullptr) {");
+        sb.AppendLine("        g_chaos_resolve_enum_metadata =");
+        sb.AppendLine("            &chaos::il2cpp::codegen::chaos_find_enum_metadata;");
+        sb.AppendLine("    }");
+        sb.AppendLine("    // Register the sorted dispatch table for binary-search metadata lookup.");
+        sb.AppendLine("    ChaosEnumRegisterDispatchTable(");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumDispatchTable,");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumDispatchCount);");
+        sb.AppendLine("    // Register the per-enum ToString dispatch table.");
+        sb.AppendLine("    ChaosEnumRegisterToStringDispatchTable(");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumToStringDispatchTable,");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumToStringDispatchCount);");
+        sb.AppendLine("    // Register the pre-allocated string dispatch table.");
+        sb.AppendLine("    ChaosEnumRegisterPreInitTable(");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumPreInitTable,");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumPreInitCount);");
+
+        // Emit pre-allocated string cache initialization for each enum type.
+        // This allocates managed string objects (in POH) at static init time,
+        // so the hot path (ensure_enum_str_cache) finds pre-allocated strings
+        // and skips lazy allocation. Zero GC allocation on enum.ToString/Format.
+        foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
+        {
+            var et = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value);
+            sb.AppendLine($"    // Pre-allocate {et.Fields.Count} field name strings for {et.SubjectId}");
+            sb.AppendLine($"    ChaosEnumPreInitStringCache(");
+            sb.AppendLine($"        chaos::il2cpp::codegen::kEnumFields_{kv.Value},");
+            sb.AppendLine($"        {et.Fields.Count},");
+            sb.AppendLine($"        chaos::il2cpp::codegen::kEnumStrings_{kv.Value});");
+        }
+
+        sb.AppendLine("}");
+        sb.AppendLine();
         return sb.ToString();
     }
 

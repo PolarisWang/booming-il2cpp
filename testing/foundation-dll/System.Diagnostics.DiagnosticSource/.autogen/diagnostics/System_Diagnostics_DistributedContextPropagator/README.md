@@ -7,11 +7,11 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Methods | 6 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 6 |
+| Total Methods | 8 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 8 |
 | Benchmark-only (pure void / non-deterministic) | 0 |
 | Skipped (generic / unresolvable) | 0 |
-| Total Subjects | 7 |
+| Total Subjects | 9 |
 
 ## Build
 

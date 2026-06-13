@@ -1,0 +1,20 @@
+# CMake generated Testfile for 
+# Source directory: /home/debian/agent/booming-il2cpp/testing/src/native/hot-update
+# Build directory: /home/debian/agent/booming-il2cpp/testing/foundation-dll/src/native/hot-update
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test([=[test_method_replacement_smoke]=] "/home/debian/agent/booming-il2cpp/testing/foundation-dll/src/native/hot-update/test_method_replacement_smoke")
+set_tests_properties([=[test_method_replacement_smoke]=] PROPERTIES  LABELS "unit;hotupdate" _BACKTRACE_TRIPLES "/home/debian/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;155;add_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;29;add_chaos_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;0;")
+add_test([=[test_hotupdate_verification]=] "/home/debian/agent/booming-il2cpp/testing/foundation-dll/src/native/hot-update/test_hotupdate_verification")
+set_tests_properties([=[test_hotupdate_verification]=] PROPERTIES  LABELS "unit;hotupdate" _BACKTRACE_TRIPLES "/home/debian/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;155;add_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;35;add_chaos_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;0;")
+add_test([=[test_hotupdate_package_e2e]=] "/home/debian/agent/booming-il2cpp/testing/foundation-dll/src/native/hot-update/test_hotupdate_package_e2e")
+set_tests_properties([=[test_hotupdate_package_e2e]=] PROPERTIES  LABELS "unit;hotupdate" _BACKTRACE_TRIPLES "/home/debian/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;155;add_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;42;add_chaos_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;0;")
+add_test([=[test_interpreter_mixed_execution]=] "/home/debian/agent/booming-il2cpp/testing/foundation-dll/src/native/hot-update/test_interpreter_mixed_execution")
+set_tests_properties([=[test_interpreter_mixed_execution]=] PROPERTIES  LABELS "unit;hotupdate;interpreter" _BACKTRACE_TRIPLES "/home/debian/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;155;add_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;49;add_chaos_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;0;")
+add_test([=[test_hotupdate_vtable_sync]=] "/home/debian/agent/booming-il2cpp/testing/foundation-dll/src/native/hot-update/test_hotupdate_vtable_sync")
+set_tests_properties([=[test_hotupdate_vtable_sync]=] PROPERTIES  LABELS "unit;hotupdate" _BACKTRACE_TRIPLES "/home/debian/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;155;add_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;56;add_chaos_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;0;")
+add_test([=[test_hotupdate_generics]=] "/home/debian/agent/booming-il2cpp/testing/foundation-dll/src/native/hot-update/test_hotupdate_generics")
+set_tests_properties([=[test_hotupdate_generics]=] PROPERTIES  LABELS "unit;hotupdate" _BACKTRACE_TRIPLES "/home/debian/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;155;add_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;63;add_chaos_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;0;")
+add_test([=[test_hotupdate_replacement_benchmark]=] "/home/debian/agent/booming-il2cpp/testing/foundation-dll/src/native/hot-update/test_hotupdate_replacement_benchmark")
+set_tests_properties([=[test_hotupdate_replacement_benchmark]=] PROPERTIES  LABELS "unit;hotupdate;benchmark" _BACKTRACE_TRIPLES "/home/debian/agent/booming-il2cpp/testing/src/native/CMakeLists.txt;155;add_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;70;add_chaos_test;/home/debian/agent/booming-il2cpp/testing/src/native/hot-update/CMakeLists.txt;0;")

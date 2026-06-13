@@ -2,13 +2,13 @@
   {
     "methodIndex": 0,
     "setIndex": 0,
-    "subjectId": "System.Private.Xml/System.Xml.XmlReaderSettings::Clone:System.Xml.XmlReaderSettings()",
+    "subjectId": "System.Xml.XmlReaderSettings::Clone:System.Xml.XmlReaderSettings()__Set0",
     "isVoid": false,
-    "hasException": false,
-    "exceptionType": null,
-    "returnValue": 0,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
     "returnValueJson": null,
-    "returnValueType": "System.Xml.XmlReaderSettings",
+    "returnValueType": null,
     "isDeterministic": true,
     "outRefValues": null
   }

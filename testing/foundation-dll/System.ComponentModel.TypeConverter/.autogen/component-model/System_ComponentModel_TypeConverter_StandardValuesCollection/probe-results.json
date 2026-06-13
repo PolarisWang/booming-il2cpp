@@ -26,6 +26,19 @@
     "outRefValues": null
   },
   {
+    "methodIndex": 0,
+    "setIndex": 2,
+    "subjectId": "TypeConverter.StandardValuesCollection::CopyTo:System.Void(System.Array,System.Int32)__Set2",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
     "methodIndex": 1,
     "setIndex": 1,
     "subjectId": "TypeConverter.StandardValuesCollection::GetEnumerator:System.Collections.IEnumerator()__Set1",

@@ -7,11 +7,11 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Methods | 273 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 197 |
+| Total Methods | 316 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 238 |
 | Benchmark-only (pure void / non-deterministic) | 2 |
-| Skipped (generic / unresolvable) | 74 |
-| Total Subjects | 271 |
+| Skipped (generic / unresolvable) | 76 |
+| Total Subjects | 318 |
 
 ## Build
 
@@ -33,10 +33,6 @@ dotnet run --project .
 ## Skipped Methods
 
 - `Abs` — contains generic parameters, needs manual handling
-- `AsVector2` — contains generic parameters, needs manual handling
-- `AsVector3` — contains generic parameters, needs manual handling
-- `AsVector4` — contains generic parameters, needs manual handling
-- `AsVector (unboxable return type: System.Numerics.Vector`1[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])` — contains generic parameters, needs manual handling
 - `Clamp` — contains generic parameters, needs manual handling
 - `CopyTo (ref struct parameter: System.Span<System.Int32>)` — contains generic parameters, needs manual handling
 - `Create` — contains generic parameters, needs manual handling
@@ -106,3 +102,9 @@ dotnet run --project .
 - `WidenUpper` — contains generic parameters, needs manual handling
 - `WidenUpper` — contains generic parameters, needs manual handling
 - `WidenUpper` — contains generic parameters, needs manual handling
+- `AsPlane` — contains generic parameters, needs manual handling
+- `AsQuaternion` — contains generic parameters, needs manual handling
+- `AsVector2` — contains generic parameters, needs manual handling
+- `AsVector3` — contains generic parameters, needs manual handling
+- `AsVector4` — contains generic parameters, needs manual handling
+- `AsVector (unboxable return type: System.Numerics.Vector`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]])` — contains generic parameters, needs manual handling

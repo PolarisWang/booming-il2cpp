@@ -8,8 +8,8 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 104 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 3 |
-| Benchmark-only (pure void / non-deterministic) | 89 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 92 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
 | Skipped (generic / unresolvable) | 12 |
 | Total Subjects | 180 |
 

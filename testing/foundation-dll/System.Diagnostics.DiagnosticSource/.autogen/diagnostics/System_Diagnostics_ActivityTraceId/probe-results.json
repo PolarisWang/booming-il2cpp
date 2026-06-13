@@ -6,7 +6,7 @@
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 1754767184,
+    "returnValue": -571170350,
     "returnValueJson": "{}",
     "returnValueType": "System.Diagnostics.ActivityTraceId",
     "isDeterministic": true,

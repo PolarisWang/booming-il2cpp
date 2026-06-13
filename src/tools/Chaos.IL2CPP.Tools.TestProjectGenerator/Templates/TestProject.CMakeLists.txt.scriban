@@ -12,7 +12,7 @@ if(MSVC)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
-  add_compile_options(-Wall -Wextra -Wno-unused-parameter)
+  add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
   set(CHAOS_EHA_FLAG -fexceptions)
   # eager_compile.cpp is compiled locally AND present in prebuilt
   # libchaos_interpreter.a — both define EagerCompilePatchMethods.

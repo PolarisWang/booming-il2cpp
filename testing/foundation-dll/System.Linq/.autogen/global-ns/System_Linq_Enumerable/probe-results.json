@@ -216,7 +216,7 @@
     "exceptionType": null,
     "returnValue": 30542218,
     "returnValueJson": "[0]",
-    "returnValueType": "System.Linq.Enumerable\u002BAppendPrepend1Iterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BAppendPrepend1Iterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -255,7 +255,7 @@
     "exceptionType": null,
     "returnValue": 6444509,
     "returnValueJson": "[0]",
-    "returnValueType": "System.Linq.Enumerable\u002BAppendPrepend1Iterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BAppendPrepend1Iterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -801,7 +801,7 @@
     "exceptionType": null,
     "returnValue": 3841804,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BCastICollectionIterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BCastICollectionIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -983,7 +983,7 @@
     "exceptionType": null,
     "returnValue": 20538874,
     "returnValueJson": "[]",
-    "returnValueType": "System.Collections.Generic.KeyValuePair\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+    "returnValueType": "System.Collections.Generic.KeyValuePair\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1009,7 +1009,7 @@
     "exceptionType": null,
     "returnValue": 20538874,
     "returnValueJson": "[]",
-    "returnValueType": "System.Collections.Generic.KeyValuePair\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+    "returnValueType": "System.Collections.Generic.KeyValuePair\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1035,7 +1035,7 @@
     "exceptionType": null,
     "returnValue": 20538874,
     "returnValueJson": "[]",
-    "returnValueType": "System.Collections.Generic.KeyValuePair\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+    "returnValueType": "System.Collections.Generic.KeyValuePair\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1206,7 +1206,7 @@
     "exceptionType": null,
     "returnValue": 50632145,
     "returnValueJson": "[0]",
-    "returnValueType": "System.Linq.Enumerable\u002BDefaultIfEmptyIterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BDefaultIfEmptyIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1245,7 +1245,7 @@
     "exceptionType": null,
     "returnValue": 53036123,
     "returnValueJson": "[0]",
-    "returnValueType": "System.Linq.Enumerable\u002BDefaultIfEmptyIterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BDefaultIfEmptyIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1570,7 +1570,7 @@
     "exceptionType": null,
     "returnValue": 7563067,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CExceptIterator\u003Ed__117\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CExceptIterator\u003Ed__88\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1596,7 +1596,7 @@
     "exceptionType": null,
     "returnValue": 958745,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CExceptIterator\u003Ed__117\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CExceptIterator\u003Ed__88\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1622,7 +1622,7 @@
     "exceptionType": null,
     "returnValue": 8628710,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CExceptByIterator\u003Ed__118\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CExceptByIterator\u003Ed__89\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1648,7 +1648,7 @@
     "exceptionType": null,
     "returnValue": 10549531,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CExceptByIterator\u003Ed__118\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CExceptByIterator\u003Ed__89\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1856,7 +1856,7 @@
     "exceptionType": null,
     "returnValue": 40198173,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.IGrouping\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+    "returnValueType": "System.Linq.IGrouping\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1882,7 +1882,7 @@
     "exceptionType": null,
     "returnValue": 40198173,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.IGrouping\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+    "returnValueType": "System.Linq.IGrouping\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1908,7 +1908,7 @@
     "exceptionType": null,
     "returnValue": 40198173,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.IGrouping\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+    "returnValueType": "System.Linq.IGrouping\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -1934,7 +1934,7 @@
     "exceptionType": null,
     "returnValue": 40198173,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.IGrouping\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+    "returnValueType": "System.Linq.IGrouping\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -2116,7 +2116,7 @@
     "exceptionType": null,
     "returnValue": 45004109,
     "returnValueJson": "[]",
-    "returnValueType": "System.ValueTuple\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
+    "returnValueType": "System.ValueTuple\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -2142,7 +2142,7 @@
     "exceptionType": null,
     "returnValue": 2383799,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CIntersectIterator\u003Ed__145\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CIntersectIterator\u003Ed__121\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -2168,7 +2168,7 @@
     "exceptionType": null,
     "returnValue": 21454193,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CIntersectIterator\u003Ed__145\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CIntersectIterator\u003Ed__121\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -2194,7 +2194,7 @@
     "exceptionType": null,
     "returnValue": 58870012,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CIntersectByIterator\u003Ed__146\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CIntersectByIterator\u003Ed__122\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -2220,7 +2220,7 @@
     "exceptionType": null,
     "returnValue": 60068066,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CIntersectByIterator\u003Ed__146\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CIntersectByIterator\u003Ed__122\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
@@ -2461,7 +2461,7 @@
   {
     "methodIndex": 86,
     "setIndex": 0,
-    "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
+    "subjectId": "System.Linq.Enumerable::LeftJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
     "hasException": true,
     "exceptionType": "System.ArgumentNullException",
@@ -2474,18 +2474,70 @@
   {
     "methodIndex": 86,
     "setIndex": 1,
+    "subjectId": "System.Linq.Enumerable::LeftJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 34576242,
+    "returnValueJson": "[]",
+    "returnValueType": "System.Int32[]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 87,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Enumerable::LeftJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 87,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Enumerable::LeftJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 34576242,
+    "returnValueJson": "[]",
+    "returnValueType": "System.Int32[]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 88,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 88,
+    "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
     "returnValue": 33675143,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.EmptyLookup\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.EmptyLookup\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 87,
+    "methodIndex": 89,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2498,7 +2550,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 87,
+    "methodIndex": 89,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2506,12 +2558,12 @@
     "exceptionType": null,
     "returnValue": 33675143,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.EmptyLookup\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.EmptyLookup\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 88,
+    "methodIndex": 90,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2524,7 +2576,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 88,
+    "methodIndex": 90,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2532,12 +2584,12 @@
     "exceptionType": null,
     "returnValue": 33675143,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.EmptyLookup\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.EmptyLookup\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 89,
+    "methodIndex": 91,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2550,7 +2602,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 89,
+    "methodIndex": 91,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToLookup:System.Linq.ILookup\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2558,12 +2610,12 @@
     "exceptionType": null,
     "returnValue": 33675143,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.EmptyLookup\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.EmptyLookup\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 90,
+    "methodIndex": 92,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::MaxBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2576,7 +2628,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 90,
+    "methodIndex": 92,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::MaxBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2589,7 +2641,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 91,
+    "methodIndex": 93,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::MaxBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2602,7 +2654,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 91,
+    "methodIndex": 93,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::MaxBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2615,7 +2667,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 92,
+    "methodIndex": 94,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::MinBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2628,7 +2680,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 92,
+    "methodIndex": 94,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::MinBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2641,7 +2693,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 93,
+    "methodIndex": 95,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::MinBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2654,7 +2706,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 93,
+    "methodIndex": 95,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::MinBy:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2667,7 +2719,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 94,
+    "methodIndex": 96,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::OfType:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.IEnumerable)__Set0",
     "isVoid": false,
@@ -2680,7 +2732,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 94,
+    "methodIndex": 96,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::OfType:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.IEnumerable)__Set1",
     "isVoid": false,
@@ -2688,12 +2740,12 @@
     "exceptionType": null,
     "returnValue": 34640832,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOfTypeIterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOfTypeIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 95,
+    "methodIndex": 97,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Order:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2706,7 +2758,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 95,
+    "methodIndex": 97,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Order:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2714,12 +2766,12 @@
     "exceptionType": null,
     "returnValue": 54444047,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BImplicitlyStableOrderedIterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BImplicitlyStableOrderedIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 96,
+    "methodIndex": 98,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Order:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2732,7 +2784,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 96,
+    "methodIndex": 98,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Order:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2740,12 +2792,12 @@
     "exceptionType": null,
     "returnValue": 20234383,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BImplicitlyStableOrderedIterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BImplicitlyStableOrderedIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 97,
+    "methodIndex": 99,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::OrderBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2758,7 +2810,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 97,
+    "methodIndex": 99,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::OrderBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2766,12 +2818,12 @@
     "exceptionType": null,
     "returnValue": 47891719,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 98,
+    "methodIndex": 100,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::OrderBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2784,7 +2836,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 98,
+    "methodIndex": 100,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::OrderBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2792,12 +2844,12 @@
     "exceptionType": null,
     "returnValue": 28372289,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 99,
+    "methodIndex": 101,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::OrderDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2810,7 +2862,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 99,
+    "methodIndex": 101,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::OrderDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2818,12 +2870,12 @@
     "exceptionType": null,
     "returnValue": 54024015,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BImplicitlyStableOrderedIterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BImplicitlyStableOrderedIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 100,
+    "methodIndex": 102,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::OrderDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2836,7 +2888,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 100,
+    "methodIndex": 102,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::OrderDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2844,12 +2896,12 @@
     "exceptionType": null,
     "returnValue": 16454088,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BImplicitlyStableOrderedIterator\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BImplicitlyStableOrderedIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 101,
+    "methodIndex": 103,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::OrderByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2862,7 +2914,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 101,
+    "methodIndex": 103,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::OrderByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2870,12 +2922,12 @@
     "exceptionType": null,
     "returnValue": 13869071,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 102,
+    "methodIndex": 104,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::OrderByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2888,7 +2940,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 102,
+    "methodIndex": 104,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::OrderByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2896,12 +2948,12 @@
     "exceptionType": null,
     "returnValue": 57712780,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 103,
+    "methodIndex": 105,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ThenBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2914,7 +2966,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 103,
+    "methodIndex": 105,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ThenBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2922,12 +2974,12 @@
     "exceptionType": null,
     "returnValue": 49652976,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 104,
+    "methodIndex": 106,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ThenBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2940,7 +2992,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 104,
+    "methodIndex": 106,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ThenBy:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2948,12 +3000,12 @@
     "exceptionType": null,
     "returnValue": 44223604,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 105,
+    "methodIndex": 107,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ThenByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2966,7 +3018,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 105,
+    "methodIndex": 107,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ThenByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -2974,12 +3026,12 @@
     "exceptionType": null,
     "returnValue": 62468121,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 106,
+    "methodIndex": 108,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ThenByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -2992,7 +3044,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 106,
+    "methodIndex": 108,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ThenByDescending:System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E(System.Linq.IOrderedEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3000,12 +3052,12 @@
     "exceptionType": null,
     "returnValue": 25342185,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BOrderedIterator\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 107,
+    "methodIndex": 109,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -3018,7 +3070,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 107,
+    "methodIndex": 109,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -3031,7 +3083,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 107,
+    "methodIndex": 109,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -3044,7 +3096,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 108,
+    "methodIndex": 110,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Repeat:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -3057,7 +3109,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 108,
+    "methodIndex": 110,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Repeat:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -3070,7 +3122,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 108,
+    "methodIndex": 110,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::Repeat:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -3083,7 +3135,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 109,
+    "methodIndex": 111,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Enumerable::Shuffle:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 111,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Enumerable::Shuffle:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 34576242,
+    "returnValueJson": "[]",
+    "returnValueType": "System.Int32[]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 112,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3096,7 +3174,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 109,
+    "methodIndex": 112,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3109,7 +3187,98 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 110,
+    "methodIndex": 113,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32[])__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 113,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32[])__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 34576242,
+    "returnValueJson": "[]",
+    "returnValueType": "System.Int32[]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 113,
+    "setIndex": 2,
+    "subjectId": "System.Linq.Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32[])__Set2",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 26753075,
+    "returnValueJson": "[0,0]",
+    "returnValueType": "System.Linq.Enumerable\u002BReverseIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 114,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Enumerable::RightJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 114,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Enumerable::RightJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 34576242,
+    "returnValueJson": "[]",
+    "returnValueType": "System.Int32[]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 115,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Enumerable::RightJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 115,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Enumerable::RightJoin:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 34576242,
+    "returnValueJson": "[]",
+    "returnValueType": "System.Int32[]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 116,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Select:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3122,7 +3291,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 110,
+    "methodIndex": 116,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Select:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3135,7 +3304,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 111,
+    "methodIndex": 117,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Select:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3148,7 +3317,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 111,
+    "methodIndex": 117,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Select:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3161,7 +3330,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 112,
+    "methodIndex": 118,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)__Set0",
     "isVoid": false,
@@ -3174,7 +3343,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 112,
+    "methodIndex": 118,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)__Set1",
     "isVoid": false,
@@ -3187,7 +3356,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 113,
+    "methodIndex": 119,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)__Set0",
     "isVoid": false,
@@ -3200,7 +3369,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 113,
+    "methodIndex": 119,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E)__Set1",
     "isVoid": false,
@@ -3213,7 +3382,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 114,
+    "methodIndex": 120,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3226,7 +3395,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 114,
+    "methodIndex": 120,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3239,7 +3408,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 115,
+    "methodIndex": 121,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3252,7 +3421,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 115,
+    "methodIndex": 121,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SelectMany:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3265,7 +3434,59 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 116,
+    "methodIndex": 122,
+    "setIndex": 0,
+    "subjectId": "System.Linq.Enumerable::Sequence:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32,System.Int32)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 39451090,
+    "returnValueJson": "[0]",
+    "returnValueType": "System.Linq.Enumerable\u002BRepeatIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 122,
+    "setIndex": 1,
+    "subjectId": "System.Linq.Enumerable::Sequence:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32,System.Int32)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 19515494,
+    "returnValueJson": "[0]",
+    "returnValueType": "System.Linq.Enumerable\u002BRepeatIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 122,
+    "setIndex": 2,
+    "subjectId": "System.Linq.Enumerable::Sequence:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32,System.Int32)__Set2",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 41421720,
+    "returnValueJson": "[0]",
+    "returnValueType": "System.Linq.Enumerable\u002BRepeatIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 122,
+    "setIndex": 3,
+    "subjectId": "System.Linq.Enumerable::Sequence:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32,System.Int32,System.Int32)__Set3",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 37251161,
+    "returnValueJson": "[0]",
+    "returnValueType": "System.Linq.Enumerable\u002BRepeatIterator\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 123,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SequenceEqual:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3278,7 +3499,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 116,
+    "methodIndex": 123,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SequenceEqual:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3291,7 +3512,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 117,
+    "methodIndex": 124,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SequenceEqual:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3304,7 +3525,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 117,
+    "methodIndex": 124,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SequenceEqual:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3317,7 +3538,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 118,
+    "methodIndex": 125,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Single:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3330,7 +3551,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 118,
+    "methodIndex": 125,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Single:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3343,7 +3564,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 119,
+    "methodIndex": 126,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Single:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set0",
     "isVoid": false,
@@ -3356,7 +3577,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 119,
+    "methodIndex": 126,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Single:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set1",
     "isVoid": false,
@@ -3369,7 +3590,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 120,
+    "methodIndex": 127,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3382,7 +3603,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 120,
+    "methodIndex": 127,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3395,7 +3616,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 121,
+    "methodIndex": 128,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set0",
     "isVoid": false,
@@ -3408,7 +3629,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 121,
+    "methodIndex": 128,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set1",
     "isVoid": false,
@@ -3421,7 +3642,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 121,
+    "methodIndex": 128,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set2",
     "isVoid": false,
@@ -3434,7 +3655,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 122,
+    "methodIndex": 129,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set0",
     "isVoid": false,
@@ -3447,7 +3668,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 122,
+    "methodIndex": 129,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set1",
     "isVoid": false,
@@ -3460,7 +3681,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 123,
+    "methodIndex": 130,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)__Set0",
     "isVoid": false,
@@ -3473,7 +3694,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 123,
+    "methodIndex": 130,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)__Set1",
     "isVoid": false,
@@ -3486,7 +3707,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 123,
+    "methodIndex": 130,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::SingleOrDefault:System.Int32(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E,System.Int32)__Set2",
     "isVoid": false,
@@ -3499,7 +3720,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 124,
+    "methodIndex": 131,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Skip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set0",
     "isVoid": false,
@@ -3512,7 +3733,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 124,
+    "methodIndex": 131,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Skip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set1",
     "isVoid": false,
@@ -3525,7 +3746,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 124,
+    "methodIndex": 131,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::Skip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set2",
     "isVoid": false,
@@ -3538,7 +3759,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 125,
+    "methodIndex": 132,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set0",
     "isVoid": false,
@@ -3551,7 +3772,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 125,
+    "methodIndex": 132,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set1",
     "isVoid": false,
@@ -3564,7 +3785,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 126,
+    "methodIndex": 133,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)__Set0",
     "isVoid": false,
@@ -3577,7 +3798,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 126,
+    "methodIndex": 133,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SkipWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)__Set1",
     "isVoid": false,
@@ -3590,7 +3811,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 127,
+    "methodIndex": 134,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::SkipLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set0",
     "isVoid": false,
@@ -3603,7 +3824,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 127,
+    "methodIndex": 134,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::SkipLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set1",
     "isVoid": false,
@@ -3616,7 +3837,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 127,
+    "methodIndex": 134,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::SkipLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set2",
     "isVoid": false,
@@ -3629,7 +3850,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 128,
+    "methodIndex": 135,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set0",
     "isVoid": false,
@@ -3642,7 +3863,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 128,
+    "methodIndex": 135,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set1",
     "isVoid": false,
@@ -3655,7 +3876,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 128,
+    "methodIndex": 135,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set2",
     "isVoid": false,
@@ -3668,7 +3889,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 129,
+    "methodIndex": 136,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Range)__Set0",
     "isVoid": false,
@@ -3681,7 +3902,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 129,
+    "methodIndex": 136,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Range)__Set1",
     "isVoid": false,
@@ -3694,7 +3915,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 129,
+    "methodIndex": 136,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::Take:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Range)__Set2",
     "isVoid": false,
@@ -3707,7 +3928,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 130,
+    "methodIndex": 137,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set0",
     "isVoid": false,
@@ -3720,7 +3941,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 130,
+    "methodIndex": 137,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set1",
     "isVoid": false,
@@ -3733,7 +3954,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 131,
+    "methodIndex": 138,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)__Set0",
     "isVoid": false,
@@ -3746,7 +3967,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 131,
+    "methodIndex": 138,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::TakeWhile:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)__Set1",
     "isVoid": false,
@@ -3759,7 +3980,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 132,
+    "methodIndex": 139,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::TakeLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set0",
     "isVoid": false,
@@ -3772,7 +3993,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 132,
+    "methodIndex": 139,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::TakeLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set1",
     "isVoid": false,
@@ -3785,7 +4006,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 132,
+    "methodIndex": 139,
     "setIndex": 2,
     "subjectId": "System.Linq.Enumerable::TakeLast:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32)__Set2",
     "isVoid": false,
@@ -3798,7 +4019,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 133,
+    "methodIndex": 140,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToArray:System.Int32[](System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3811,7 +4032,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 133,
+    "methodIndex": 140,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToArray:System.Int32[](System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -3824,7 +4045,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 134,
+    "methodIndex": 141,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToList:System.Collections.Generic.List\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3837,20 +4058,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 134,
+    "methodIndex": 141,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToList:System.Collections.Generic.List\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 19515494,
+    "returnValue": 44115416,
     "returnValueJson": "[]",
-    "returnValueType": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 135,
+    "methodIndex": 142,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E)__Set0",
     "isVoid": false,
@@ -3863,20 +4084,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 135,
+    "methodIndex": 142,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 37251161,
+    "returnValue": 16578980,
     "returnValueJson": "{}",
-    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 136,
+    "methodIndex": 143,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3889,20 +4110,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 136,
+    "methodIndex": 143,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 66824994,
+    "returnValue": 14993092,
     "returnValueJson": "{}",
-    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 137,
+    "methodIndex": 144,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E)__Set0",
     "isVoid": false,
@@ -3915,20 +4136,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 137,
+    "methodIndex": 144,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 64554036,
+    "returnValue": 720107,
     "returnValueJson": "{}",
-    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 138,
+    "methodIndex": 145,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3941,20 +4162,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 138,
+    "methodIndex": 145,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 44115416,
+    "returnValue": 6480969,
     "returnValueJson": "{}",
-    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 139,
+    "methodIndex": 146,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3967,20 +4188,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 139,
+    "methodIndex": 146,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 61494432,
+    "returnValue": 58328727,
     "returnValueJson": "{}",
-    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 140,
+    "methodIndex": 147,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -3993,20 +4214,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 140,
+    "methodIndex": 147,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 16578980,
+    "returnValue": 55196503,
     "returnValueJson": "{}",
-    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 141,
+    "methodIndex": 148,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4019,20 +4240,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 141,
+    "methodIndex": 148,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 14993092,
+    "returnValue": 27006480,
     "returnValueJson": "{}",
-    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 142,
+    "methodIndex": 149,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4045,20 +4266,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 142,
+    "methodIndex": 149,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToDictionary:System.Collections.Generic.Dictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 720107,
+    "returnValue": 41731733,
     "returnValueJson": "{}",
-    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.Dictionary\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 143,
+    "methodIndex": 150,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToHashSet:System.Collections.Generic.HashSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4071,20 +4292,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 143,
+    "methodIndex": 150,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToHashSet:System.Collections.Generic.HashSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 58328727,
+    "returnValue": 24827179,
     "returnValueJson": "[]",
-    "returnValueType": "System.Collections.Generic.HashSet\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.HashSet\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 144,
+    "methodIndex": 151,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::ToHashSet:System.Collections.Generic.HashSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4097,20 +4318,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 144,
+    "methodIndex": 151,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::ToHashSet:System.Collections.Generic.HashSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 55196503,
+    "returnValue": 22118023,
     "returnValueJson": "[]",
-    "returnValueType": "System.Collections.Generic.HashSet\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Collections.Generic.HashSet\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 145,
+    "methodIndex": 152,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Union:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4123,20 +4344,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 145,
+    "methodIndex": 152,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Union:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 27006480,
+    "returnValue": 64844482,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BUnionIterator2\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BUnionIterator2\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 146,
+    "methodIndex": 153,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Union:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4149,20 +4370,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 146,
+    "methodIndex": 153,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Union:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 41731733,
+    "returnValue": 46729429,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002BUnionIterator2\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002BUnionIterator2\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 147,
+    "methodIndex": 154,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::UnionBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4175,20 +4396,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 147,
+    "methodIndex": 154,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::UnionBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 40041277,
+    "returnValue": 17911681,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CUnionByIterator\u003Ed__334\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CUnionByIterator\u003Ed__344\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 148,
+    "methodIndex": 155,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::UnionBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4201,20 +4422,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 148,
+    "methodIndex": 155,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::UnionBy:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 24827179,
+    "returnValue": 26987408,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CUnionByIterator\u003Ed__334\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CUnionByIterator\u003Ed__344\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 149,
+    "methodIndex": 156,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Where:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set0",
     "isVoid": false,
@@ -4227,7 +4448,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 149,
+    "methodIndex": 156,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Where:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Boolean\u003E)__Set1",
     "isVoid": false,
@@ -4240,7 +4461,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 150,
+    "methodIndex": 157,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Where:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)__Set0",
     "isVoid": false,
@@ -4253,7 +4474,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 150,
+    "methodIndex": 157,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Where:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Boolean\u003E)__Set1",
     "isVoid": false,
@@ -4266,7 +4487,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 151,
+    "methodIndex": 158,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4279,20 +4500,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 151,
+    "methodIndex": 158,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 22118023,
+    "returnValue": 41560081,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CZipIterator\u003Ed__344\u00603[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CZipIterator\u003Ed__362\u00603[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 152,
+    "methodIndex": 159,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4305,20 +4526,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 152,
+    "methodIndex": 159,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 64844482,
+    "returnValue": 38496415,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CZipIterator\u003Ed__343\u00602[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CZipIterator\u003Ed__361\u00602[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   },
   {
-    "methodIndex": 153,
+    "methodIndex": 160,
     "setIndex": 0,
     "subjectId": "System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -4331,15 +4552,15 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 153,
+    "methodIndex": 160,
     "setIndex": 1,
     "subjectId": "System.Linq.Enumerable::Zip:System.Collections.Generic.IEnumerable\u003CSystem.ValueTuple\u003CSystem.Int32,System.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": 26987408,
+    "returnValue": 12381635,
     "returnValueJson": "[]",
-    "returnValueType": "System.Linq.Enumerable\u002B\u003CZipIterator\u003Ed__345\u00603[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "returnValueType": "System.Linq.Enumerable\u002B\u003CZipIterator\u003Ed__363\u00603[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
     "isDeterministic": true,
     "outRefValues": null
   }

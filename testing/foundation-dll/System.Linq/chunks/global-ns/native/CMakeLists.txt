@@ -12,7 +12,7 @@ if(MSVC)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
-  add_compile_options(-Wall -Wextra -Wno-unused-parameter)
+  add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
   set(CHAOS_EHA_FLAG -fexceptions)
   # eager_compile.cpp is compiled locally AND present in prebuilt
   # libchaos_interpreter.a — both define EagerCompilePatchMethods.
@@ -70,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Linq/chunks/global-ns/native/codegen")
-set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Linq/chunks/global-ns/native/codegen")
+set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Linq/chunks/global-ns/native/codegen")
+set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Linq/chunks/global-ns/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -139,6 +139,9 @@ set(CHAOS_CHAR_STUBS
 set(CHAOS_VECTOR_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/vector_stubs.cpp"
 )
+set(CHAOS_ASYNC_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/async_stubs.cpp"
+)
 set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
@@ -188,6 +191,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_SIMD_STUBS}
     ${CHAOS_CHAR_STUBS}
     ${CHAOS_VECTOR_STUBS}
+    ${CHAOS_ASYNC_STUBS}
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}

@@ -65,6 +65,19 @@
     "outRefValues": null
   },
   {
+    "methodIndex": 3,
+    "setIndex": 2,
+    "subjectId": "System.ComponentModel.PropertyDescriptorCollection::CopyTo:System.Void(System.Array,System.Int32)__Set2",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.NullReferenceException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
     "methodIndex": 4,
     "setIndex": 0,
     "subjectId": "System.ComponentModel.PropertyDescriptorCollection::Find:System.ComponentModel.PropertyDescriptor(System.String,System.Boolean)__Set0",

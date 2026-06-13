@@ -6,7 +6,7 @@
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
-    "returnValue": -714334379,
+    "returnValue": 1713865612,
     "returnValueJson": "{}",
     "returnValueType": "System.Diagnostics.ActivitySpanId",
     "isDeterministic": true,

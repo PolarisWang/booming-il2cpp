@@ -7,11 +7,11 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Methods | 220 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 154 |
+| Total Methods | 228 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 161 |
 | Benchmark-only (pure void / non-deterministic) | 0 |
-| Skipped (generic / unresolvable) | 66 |
-| Total Subjects | 334 |
+| Skipped (generic / unresolvable) | 67 |
+| Total Subjects | 351 |
 
 ## Build
 
@@ -32,6 +32,7 @@ dotnet run --project .
 
 ## Skipped Methods
 
+- `InfiniteSequence` — contains generic parameters, needs manual handling
 - `Max` — contains generic parameters, needs manual handling
 - `Max` — contains generic parameters, needs manual handling
 - `Max` — contains generic parameters, needs manual handling
