@@ -411,6 +411,71 @@ int32_t CHAOS_RUNTIME_ABI_CALL ABI_TaskKernelNewId(void) {
         ? task->task_kernel_new_id() : 0;
 }
 
+/* ── V1 GC/boxing/vtable (wrappers around existing runtime API) ── */
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_GcAlloc(size_t size, int kind) {
+    (void)kind;
+    return GcAllocate(static_cast<CHAOS_IL2CPP_SIZE>(size));
+}
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_GcAllocAtomic(size_t size) {
+    return GcAllocateAtomic(static_cast<CHAOS_IL2CPP_SIZE>(size));
+}
+
+/* ── V2 thread state helpers ── */
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_GetCurrentRuntimeState(void) {
+    return GetCurrentRuntimeState();
+}
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_GetCurrentThreadState(void) {
+    return GetCurrentThreadState();
+}
+
+/* ── V2 exception helpers ── */
+
+void CHAOS_RUNTIME_ABI_CALL ABI_RaiseException(void* exception_obj) {
+    chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(exception_obj));
+}
+
+/* ── V2 PInvoke error helpers (delegate to marshal ABI) ── */
+
+void CHAOS_RUNTIME_ABI_CALL ABI_SetLastPinvokeError(int32_t error) {
+    auto* ts = GetCurrentThreadState();
+    if (ts != nullptr) SetLastPInvokeError(ts, error);
+}
+
+int32_t CHAOS_RUNTIME_ABI_CALL ABI_GetLastOsError(void) {
+    auto* ts = GetCurrentThreadState();
+    if (ts == nullptr) return 0;
+    return GetLastPInvokeError(ts);
+}
+
+void CHAOS_RUNTIME_ABI_CALL ABI_ClearLastOsError(void) {
+    auto* ts = GetCurrentThreadState();
+    if (ts != nullptr) SetLastPInvokeError(ts, 0);
+}
+
+/* ── V2 native library helpers (delegate to marshal ABI) ── */
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_NativeLibraryLoad(const char* path) {
+    const auto* marshal = GetMarshalPlatformAbiRootV1();
+    return marshal != nullptr && marshal->native_library_load != nullptr
+        ? marshal->native_library_load(path) : nullptr;
+}
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_NativeLibraryGetProcAddress(void* handle, const char* name) {
+    const auto* marshal = GetMarshalPlatformAbiRootV1();
+    return marshal != nullptr && marshal->native_library_get_proc_address != nullptr
+        ? marshal->native_library_get_proc_address(handle, name) : nullptr;
+}
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_TryResolveDllImport(const char* dll_name, const char* entry_point) {
+    const auto* marshal = GetMarshalPlatformAbiRootV1();
+    return marshal != nullptr && marshal->try_resolve_dll_import != nullptr
+        ? marshal->try_resolve_dll_import(dll_name, entry_point) : nullptr;
+}
+
 /* ── ABI v0 function table, fully positionally aligned with runtime_abi.h ── */
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),
@@ -483,9 +548,9 @@ int32_t CHAOS_RUNTIME_ABI_CALL ABI_TaskKernelNewId(void) {
     &RegisterHotpatchModule,                         // field 58: register_hotpatch_module
     &ChaosArrayEmpty,                                // field 59: array_empty
 
-    /* ═══ V1 GC/boxing/vtable/thread-static (10 fields) — NOT YET IMPLEMENTED ═══ */
-    nullptr,  /* field 60: gc_alloc */
-    nullptr,  /* field 61: gc_alloc_atomic */
+    /* ═══ V1 GC/boxing/vtable/thread-static (10 fields) ═══ */
+    &ABI_GcAlloc,                /* field 60: gc_alloc */
+    &ABI_GcAllocAtomic,          /* field 61: gc_alloc_atomic */
     nullptr,  /* field 62: box_value_object */
     nullptr,  /* field 63: resolve_virtual_method */
     nullptr,  /* field 64: resolve_method_table */
@@ -495,8 +560,8 @@ int32_t CHAOS_RUNTIME_ABI_CALL ABI_TaskKernelNewId(void) {
     nullptr,  /* field 68: set_thread_static */
     nullptr,  /* field 69: allocate_thread_static */
 
-    /* ═══ V2 exception/marshal/PInvoke/thread-state (20 fields) — NOT YET IMPLEMENTED ═══ */
-    nullptr,  /* field 70: raise_exception */
+    /* ═══ V2 exception/marshal/PInvoke/thread-state (20 fields) ═══ */
+    &ABI_RaiseException,                         /* field 70: raise_exception */
     nullptr,  /* field 71: marshal_is_rcw_handle */
     nullptr,  /* field 72: marshal_get_rcw_unknown */
     nullptr,  /* field 73: throw_com_exception_for_hr */
@@ -507,15 +572,15 @@ int32_t CHAOS_RUNTIME_ABI_CALL ABI_TaskKernelNewId(void) {
     nullptr,  /* field 78: marshal_safe_handle_get_handle */
     nullptr,  /* field 79: marshal_struct_managed_to_native */
     nullptr,  /* field 80: marshal_struct_native_to_managed */
-    nullptr,  /* field 81: native_library_load */
-    nullptr,  /* field 82: native_library_get_proc_address */
-    nullptr,  /* field 83: set_last_pinvoke_error */
-    nullptr,  /* field 84: get_last_os_error */
-    nullptr,  /* field 85: clear_last_os_error */
-    nullptr,  /* field 86: try_resolve_dll_import */
+    &ABI_NativeLibraryLoad,                      /* field 81: native_library_load */
+    &ABI_NativeLibraryGetProcAddress,            /* field 82: native_library_get_proc_address */
+    &ABI_SetLastPinvokeError,                    /* field 83: set_last_pinvoke_error */
+    &ABI_GetLastOsError,                         /* field 84: get_last_os_error */
+    &ABI_ClearLastOsError,                       /* field 85: clear_last_os_error */
+    &ABI_TryResolveDllImport,                    /* field 86: try_resolve_dll_import */
     nullptr,  /* field 87: gc_register_finalizable */
-    nullptr,  /* field 88: get_current_runtime_state */
-    nullptr,  /* field 89: get_current_thread_state */
+    &ABI_GetCurrentRuntimeState,                  /* field 88: get_current_runtime_state */
+    &ABI_GetCurrentThreadState,                   /* field 89: get_current_thread_state */
 };
 
 }  // anonymous namespace
