@@ -467,7 +467,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
             "  <PropertyGroup>\n"
             "    <OutputType>Library</OutputType>\n"
-            f"    <TargetFramework>{tfm}</TargetFramework>\n"
+            f"    <TargetFrameworks>net8.0;{tfm};net10.0</TargetFrameworks>\n"
             "    <ImplicitUsings>enable</ImplicitUsings>\n"
             "    <Nullable>enable</Nullable>\n"
             "    <DefineConstants>VERIFY</DefineConstants>\n"
@@ -525,7 +525,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     ] + [
         _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator" / "Emission" / "CppProjectEmitter.cs",
         _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "build.py",
-        _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "runtime_entry_patcher.py",
         _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "hephaestus_cache.py",
     ]
     input_hash = compute_input_hash(
