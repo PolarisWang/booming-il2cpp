@@ -477,6 +477,7 @@ void* CHAOS_RUNTIME_ABI_CALL ABI_TryResolveDllImport(const char* dll_name, const
 }
 
 /* ── ABI v0 function table, fully positionally aligned with runtime_abi.h ── */
+const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),
 
