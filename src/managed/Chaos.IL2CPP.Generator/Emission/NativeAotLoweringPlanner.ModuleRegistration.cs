@@ -1126,7 +1126,9 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 if (ilBytes[i] == null) continue;
                 string sid = entriesByIndex[i].Key;
-                ilSb.AppendLine($"    {{ \"{EscapeCppStringLiteral(sid)}\", s_il_{i}, sizeof(s_il_{i}), nullptr, nullptr }},");
+                string? jsonData = _externalRuntimeIlDataJson.TryGetValue(sid, out var jd) ? jd : null;
+                string jsonField = jsonData != null ? $"\"{EscapeCppStringLiteral(jsonData)}\"" : "nullptr";
+                ilSb.AppendLine($"    {{ \"{EscapeCppStringLiteral(sid)}\", s_il_{i}, sizeof(s_il_{i}), nullptr, {jsonField} }},");
             }
             ilSb.AppendLine("    { nullptr, nullptr, 0, nullptr, nullptr }");
             ilSb.AppendLine("};");

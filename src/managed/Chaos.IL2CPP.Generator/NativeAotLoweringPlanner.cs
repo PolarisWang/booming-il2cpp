@@ -169,6 +169,15 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlyDictionary<string, ManagedMethodModel>? _allManagedMethods;
     private readonly List<(string SubjectId, string Json)> _cryptoAotIrEntries = new();
 
+    /// <summary>
+    /// AOT Core IR JSON data for external runtime methods that are NOT AOT-compiled.
+    /// Populated in TryCreateExternalRuntimeHelperDefinition catch-all fallback path
+    /// and consumed by BuildExternalRuntimeDispatchTable to populate json_data in
+    /// kChaosExternalRuntimeIlData[] entries.  This enables the interpreter to execute
+    /// BCL/referenced-assembly methods via InterpreterEntryDirect at runtime.
+    /// </summary>
+    private readonly Dictionary<string, string> _externalRuntimeIlDataJson = new(StringComparer.Ordinal);
+
     // Verification dispatch manifest (populated by BuildDispatchEntryCode)
     private string? _manifestJson;
 

@@ -140,6 +140,96 @@ public sealed partial class NativeAotLoweringPlanner
 		return sb.ToString();
 	}
 
+	/// <summary>
+	/// Generates AOT Core IR JSON for any managed method from _allManagedMethods,
+	/// regardless of assembly.  Used in the catch-all fallback path of
+	/// TryCreateExternalRuntimeHelperDefinition to provide interpreter-executable
+	/// JSON for BCL/referenced-assembly methods that lack AOT lowering plans.
+	/// Returns null when the method is not found in _allManagedMethods.
+	/// </summary>
+	private string? TryBuildExternalRuntimeAotIrJson(string callee)
+	{
+		if (_allManagedMethods == null)
+			return null;
+
+		// Skip methods that already have AOT lowering plans — they compile to
+		// dedicated chaos_external_runtime_* functions at the C++ level, so
+		// embedding interpreter JSON would create conflicting declarations.
+		if (_methodsBySubjectId.ContainsKey(callee))
+			return null;
+
+		if (!_allManagedMethods.TryGetValue(callee, out var mm) || mm?.Body?.Blocks == null)
+			return null;
+
+		StringBuilder? sb = null;
+		bool first = true;
+		foreach (var blk in mm.Body.Blocks)
+		{
+			foreach (var inst in blk.Instructions)
+			{
+				if (sb == null)
+				{
+					sb = new StringBuilder();
+					sb.Append("{\"subjectId\":\"");
+					sb.Append(callee.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\",\"instructions\":[");
+				}
+				if (!first) sb.Append(",");
+				first = false;
+				sb.Append("{\"op\":\"");
+				sb.Append(inst.Op.Replace("\\", "\\\\").Replace("\"", "\\\""));
+				sb.Append("\"");
+				if (inst.Callee != null)
+				{
+					sb.Append(",\"callee\":\"");
+					sb.Append(inst.Callee.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"");
+				}
+				if (inst.Operand != null)
+				{
+					sb.Append(",\"operand\":\"");
+					var operandStr = inst.Operand.ToString();
+					if (operandStr != null)
+						sb.Append(operandStr.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"");
+				}
+				if (inst.IlOffset.HasValue)
+				{
+					sb.Append(",\"ilOffset\":");
+					sb.Append(inst.IlOffset.Value);
+				}
+				if (inst.ResultType != null)
+				{
+					sb.Append(",\"resultType\":\"");
+					sb.Append(inst.ResultType.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"");
+				}
+				if (inst.Reference != null)
+				{
+					sb.Append(",\"reference\":{");
+					sb.Append("\"assemblyName\":\"");
+					sb.Append(inst.Reference.AssemblyName.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\",\"subjectKind\":\"");
+					sb.Append(inst.Reference.SubjectKind.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\",\"subjectId\":\"");
+					sb.Append(inst.Reference.SubjectId.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"}");
+				}
+				if (inst.ConstrainedTypeSubjectId != null)
+				{
+					sb.Append(",\"constrainedTypeSubjectId\":\"");
+					sb.Append(inst.ConstrainedTypeSubjectId.Replace("\\", "\\\\").Replace("\"", "\\\""));
+					sb.Append("\"");
+				}
+				sb.Append("}");
+			}
+		}
+
+		if (sb == null) return null;
+		sb.Append("]}");
+		return sb.ToString();
+	}
+
 	private bool TryCreateExternalRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		// Canonicalize assembly prefix so matching is assembly-agnostic
@@ -230,6 +320,20 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				_cryptoAotIrEntries.Add((callee, crCryptoJson));
 			}
+		}
+
+		// --- External Runtime AOT IR data collection (catch-all fallback) ---
+		// Build AOT Core IR JSON for ANY method that has a managed method model
+		// in _allManagedMethods, not just crypto methods.  This JSON data is
+		// embedded in kChaosExternalRuntimeIlData[].json_data via
+		// BuildExternalRuntimeDispatchTable and used by the interpreter at runtime
+		// to dispatch through InterpreterEntryDirect (_TryExecuteViaIlData Phase 1).
+		// This enables BCL/referenced-assembly methods to execute correctly even
+		// when they lack AOT lowering plans in _methodsBySubjectId.
+		var externalIrJson = TryBuildExternalRuntimeAotIrJson(callee);
+		if (externalIrJson != null)
+		{
+			_externalRuntimeIlDataJson[callee] = externalIrJson;
 		}
 		var failReturnType = InferReturnTypeFromSubjectId(callee);
 		var failReturnAbi = !string.IsNullOrEmpty(failReturnType)
