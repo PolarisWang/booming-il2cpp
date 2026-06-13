@@ -239,6 +239,13 @@ class HephaestusCache:
                 print(f"  [hephaestus] Cache entry {cache_key[:24]}... directory missing, marking stale")
             self._mark_stale(cache_key)
             return False
+        # Verify core files exist and are non-empty (Risk R8 integrity check)
+        exe = entry_dir / "entry.exe"
+        if not exe.exists() or exe.stat().st_size == 0:
+            if self._verbose:
+                print(f"  [hephaestus] Cache entry {cache_key[:24]}... entry.exe missing/empty, treating as miss")
+            self._mark_stale(cache_key)
+            return False
         return True
 
     def restore_to(self, cache_key: str, target_dir: Path) -> bool:
@@ -297,17 +304,23 @@ class HephaestusCache:
         # Remove stale entry if exists
         self._remove_entry(cache_key)
 
-        # Copy build artifacts to cache
+        # Copy build artifacts to temp dir then atomically rename (Risk R8)
+        # Prevents partial writes from corrupting cache if process crashes mid-copy.
+        # tmp and dest are on the same filesystem (both under .hephaestus-cache/),
+        # so os.replace() is atomic.
         dest = self._entry_dir(cache_key)
-        dest.mkdir(parents=True, exist_ok=True)
+        tmp = dest.parent / f".tmp_{dest.name}"
+        if tmp.is_dir():
+            shutil.rmtree(tmp)
+        tmp.mkdir(parents=True)
         for item in source_dir.iterdir():
-            d = dest / item.name
+            td = tmp / item.name
             if item.is_dir():
-                if d.is_dir():
-                    shutil.rmtree(d)
-                shutil.copytree(item, d, symlinks=True)
+                shutil.copytree(item, td, symlinks=True)
             else:
-                shutil.copy2(item, d)
+                shutil.copy2(item, td)
+        # Atomically replace dest with tmp
+        os.replace(str(tmp), str(dest))
 
         # Compute metadata
         entry_exe = source_dir / "entry.exe"
