@@ -605,20 +605,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     for line in tpg_result.stdout.splitlines():
         print(f"      {line}")
 
-
-    # ── Post-TPG: ensure codegen/generated/* are in subjects/ ──
-    # The TPG's Emit() copy step may fail for flat layout.  After TPG completes,
-    # copy all .cpp and .h files from codegen/generated/ to subjects/ so cmake
-    # can find them.  Then reconfigure cmake to pick up the new files.
-    tpg_codegen_dir = ctx.native_dir / "codegen" / "generated"
-    tpg_subjects_dir = ctx.native_dir / "subjects"
-    if tpg_codegen_dir.is_dir():
-        tpg_subjects_dir.mkdir(parents=True, exist_ok=True)
-        for pat in ("*.cpp", "*.h"):
-            for f in tpg_codegen_dir.glob(pat):
-                shutil.copy2(str(f), str(tpg_subjects_dir / f.name))
-    # ── entry_stubs.cpp is provided by SDK runtime_stubs/ (no Python generation) ──
-
     if tpg_result.returncode != 0:
         print(f"  [build] TPG generate-dll FAILED (rc={tpg_result.returncode})")
         for line in tpg_result.stderr.splitlines():
@@ -626,69 +612,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         for line in tpg_result.stdout.splitlines()[-5:]:
             print(f"  [TPG:out] {line}")
 
-        # ── Auto-repair: try to fix missing chaos_static_* declarations and retry cmake ──
-        # TPG's internal cmake build may fail when the generated header is missing
-        # extern declarations for chaos_static_* symbols referenced in page files.
-        # Patch the header, then run cmake directly.
-        subjects_dir = ctx.native_dir / "subjects"
-        header_file = subjects_dir / "native-aot.generated.header.h"
-        build_dir = ctx.native_dir / "build"
-        if subjects_dir.is_dir() and header_file.exists() and build_dir.exists():
-            # First ensure generated files are copied to subjects/
-            codegen_gen_dir = ctx.native_dir / "codegen" / "generated"
-            if codegen_gen_dir.is_dir():
-                for pattern in ("*.cpp", "*.h"):
-                    for f in codegen_gen_dir.glob(pattern):
-                        shutil.copy2(str(f), str(subjects_dir / f.name))
-            # Extract missing chaos_static_* symbols from TPG stderr
-            missing_statics = set()
-            for line in tpg_result.stderr.splitlines():
-                m = re.search(r"'((chaos_static_\w+))' was not declared", line)
-                if m:
-                    missing_statics.add(m.group(1))
-            if missing_statics:
-                header_content = header_file.read_text(encoding="utf-8")
-                existing_decls = set(re.findall(r'\b(chaos_static_\w+)\s*;', header_content))
-                truly_missing = [s for s in sorted(missing_statics) if s not in existing_decls]
-                if truly_missing:
-                    marker = "// ── Post-TPG: chaos_static_* extern declarations ──\n"
-                    if marker not in header_content:
-                        stubs = "\n".join(f"extern CHAOS_IL2CPP_INTPTR {s};" for s in truly_missing)
-                        insert_pos = header_content.rfind("#include")
-                        if insert_pos >= 0:
-                            eol = header_content.find("\n", insert_pos)
-                            if eol >= 0:
-                                insert_pos = eol + 1
-                        else:
-                            insert_pos = 0
-                        header_content = header_content[:insert_pos] + marker + stubs + "\n\n" + header_content[insert_pos:]
-                        header_file.write_text(header_content, encoding="utf-8")
-                        print(f"  [build] Added {len(truly_missing)} chaos_static_* extern decls to {header_file.name}")
-                        # Retry cmake build directly
-                        cmake_result = subprocess.run(
-                            ["cmake", "--build", str(build_dir), "--target", "chaos_entry"],
-                            capture_output=True, text=True, timeout=600)
-                        if cmake_result.returncode == 0:
-                            print(f"  [build] cmake build succeeded after chaos_static_* patch")
-                            tpg_result.returncode = 0  # Override: treat as success
-                        else:
-                            for l in cmake_result.stderr.splitlines():
-                                print(f"  [cmake:err] {l}")
-                            print(f"  [build] cmake build still failed after chaos_static_* patch")
         if tpg_result.returncode != 0:
             return StageResult(
                 stage="build", status="error",
                 summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
                 duration_ms=int((time.perf_counter() - start) * 1000))
-
-    # ── Post-generation: ensure codegen generated files are in subjects/ ──
-    # The TPG's Emit() step should copy them, but may fail for flat layout.
-    codegen_gen_dir = ctx.native_dir / "codegen" / "generated"
-    subjects_dir = ctx.native_dir / "subjects"
-    if codegen_gen_dir.is_dir() and subjects_dir.is_dir():
-        for pattern in ("*.cpp", "*.h"):
-            for f in codegen_gen_dir.glob(pattern):
-                shutil.copy2(str(f), str(subjects_dir / f.name))
 
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
