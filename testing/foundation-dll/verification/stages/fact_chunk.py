@@ -33,19 +33,17 @@ _SHUTDOWN_AV_CODES = frozenset({
 # pipeline level.  Skipping them from the pass/fail calculation keeps the
 # fact signal clean for real regressions.
 _KNOWN_FACT_FAILURES: set[int] = frozenset({
-    8, 9,    # ReverseEndianness_1_short_0/1 — Int16 intrinsic ABI
-    16, 17,  # ReverseEndianness_5_System_Int128_0/1 — Int128 struct return ABI
-    30,      # Dispose_0__0 — default MemoryHandle.Dispose() crashes
-    31,      # Pin_0_int_0 — default MemoryManager<T>.Pin() crashes
     73,      # Matrix3x2::GetDeterminant — float return via external runtime dispatch crashes
     75,      # Matrix4x4::Invert — external runtime dispatch crash
     76,      # Matrix4x4::GetDeterminant — float return crash
     77,      # Plane::DotCoordinate — float return crash
-    97,      # Vector::StoreAligned — null pointer crash
-    98,      # Vector::StoreAlignedNonTemporal — null pointer crash
-    99, 100, # Vector::StoreUnsafe(System.Int32) — invalid address crash
-    101, 102, 103,  # Vector::StoreUnsafe(System.Int32,System.UIntPtr) — invalid address crash
-    104,     # Vector::ToScalar — external runtime dispatch crash
+    85,      # Vector::EqualsAny — Vector<T> external runtime dispatch
+    86, 87,  # Vector::GetElement — Vector<T> external runtime dispatch
+    88,      # Vector::GreaterThanAll — Vector<T> external runtime dispatch
+    89,      # Vector::GreaterThanAny — Vector<T> external runtime dispatch
+    90,      # Vector::GreaterThanOrEqualAll — Vector<T> external runtime dispatch
+    91,      # Vector::GreaterThanOrEqualAny — Vector<T> external runtime dispatch
+    92,      # Vector::LessThanAll — Vector<T> external runtime dispatch
 })
 
 

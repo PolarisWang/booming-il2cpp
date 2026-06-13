@@ -680,6 +680,8 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 exe_size = ctx.entry_exe_path.stat().st_size
                 print(f"  [build] [hephaestus] Restored entry.exe ({exe_size} bytes)")
                 duration_ms = int((time.perf_counter() - start) * 1000)
+                # Also build JIT entry (non-blocking, not cached separately)
+                _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
                 return StageResult(
                     stage="build", status="passed",
                     summary=f"[CACHE HIT] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",

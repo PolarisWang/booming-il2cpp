@@ -1233,6 +1233,11 @@ public sealed partial class NativeAotLoweringPlanner
                 globalDeclarations += "#include \"jit_data_loader.h\"\n";
             globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration, _jitDataOutputPath);
 
+            // Forward declaration for the hotpatch module symbol (used in
+            // ChaosJitRegisterAll below).  Defined elsewhere in the same
+            // translation unit by the module registration code.
+            globalDeclarations += "extern \"C\" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;\n";
+
             // Build ChaosJitRegisterAll body.
             // When using .jdata file, load it at startup and pass the pointer.
             string registerBodyClose = "}";
@@ -1241,11 +1246,6 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 string jitDataFilename = Path.GetFileName(_jitDataOutputPath);
                 registerBody = $@"
-    // Forward declaration for the hotpatch module symbol (defined elsewhere in
-    // this translation unit by the module registration code).  This is needed
-    // because ChaosJitRegisterAll is emitted before the module registration
-    // section in the generated file order.
-    extern ""C"" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
     // Load JIT method data from {jitDataFilename} file.
     chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
     uint64_t jit_data_size = 0;
@@ -4524,11 +4524,23 @@ public sealed partial class NativeAotLoweringPlanner
             }
             subjectEntries = [.. subjectEntries.OrderBy(se =>
             {
-                // Find this entry's SubjectId from its method_index
                 var methodIdx = (int)se["method_index"];
                 var method = methods[methodIdx];
-                if (method.SubjectId != null && metadataOrder.TryGetValue(method.SubjectId, out int order))
-                    return order;
+                if (method.SubjectId != null)
+                {
+                    // Exact match
+                    if (metadataOrder.TryGetValue(method.SubjectId, out int order))
+                        return order;
+                    // Fuzzy match: try by suffix after ::
+                    var methodName = method.SubjectId.Contains("::")
+                        ? method.SubjectId.Substring(method.SubjectId.LastIndexOf("::") + 2)
+                        : method.SubjectId;
+                    foreach (var kvp in metadataOrder)
+                    {
+                        if (kvp.Key.EndsWith(methodName, StringComparison.Ordinal))
+                            return kvp.Value;
+                    }
+                }
                 return int.MaxValue; // Unknown methods go to the end
             })];
             // Reassign sequential subject_index after sorting
