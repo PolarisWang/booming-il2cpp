@@ -673,9 +673,18 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     # -- 7. Hephaestus cache lookup: skip TPG if unchanged input --
     cache = HephaestusCache(ctx.foundation_dir, verbose=True)
+    # Include runtime stub source files in hash so changes to interop_stubs.cpp
+    # etc. invalidate the build cache and trigger a fresh rebuild.
+    _runtime_stubs = [
+        _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs" / s
+        for s in ("interop_stubs.cpp", "math_stubs.cpp", "vector_stubs.cpp",
+                  "misc_stubs.cpp", "array_stubs.cpp", "char_stubs.cpp",
+                  "async_stubs.cpp", "exception_stubs.cpp")
+    ]
     input_hash = compute_input_hash(
         subjects_dll, metadata_path, ctx.assembly,
         additional_dlls=[target_dll] if target_dll else None,
+        extra_source_paths=_runtime_stubs,
     )
     cache_key = cache.compute_key(input_hash, ctx.assembly, ctx.slug)
     cache_hit = cache.is_cache_hit(cache_key)

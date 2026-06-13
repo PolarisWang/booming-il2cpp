@@ -145,6 +145,7 @@ def compute_input_hash(
     metadata_path: Path,
     assembly: str,
     additional_dlls: list[Path] | None = None,
+    extra_source_paths: list[Path] | None = None,
 ) -> str:
     """Compute the input hash for cache key derivation.
 
@@ -152,6 +153,8 @@ def compute_input_hash(
     1. The subjects DLL (CombinedSubjects.dll)
     2. The metadata file (subjects.metadata.json)
     3. Any additional dependency DLLs (CoreLib, System.Runtime, etc.)
+    4. Extra source files whose changes should invalidate the cache
+       (e.g. runtime_stubs/*.cpp that are compiled from source).
 
     Returns a hexadecimal SHA-256 digest.
     """
@@ -173,6 +176,12 @@ def compute_input_hash(
         if dll.exists():
             h.update(dll.name.encode("utf-8"))
             h.update(_sha256_file(dll).encode("utf-8"))
+
+    # Extra source files (runtime stub changes invalidate cache)
+    for src in (extra_source_paths or []):
+        if src.exists():
+            h.update(str(src).encode("utf-8"))
+            h.update(_sha256_file(src).encode("utf-8"))
 
     return h.hexdigest()
 
