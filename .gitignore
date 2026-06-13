@@ -267,6 +267,7 @@ build/snapshot-prover/
 
 # CMake preset build output directories
 build/linux-arm64-smoke/
+build/linux-x64-profile/
 
 # Root-level CMake build output directories (CMAKE_BINARY_DIR at repo root)
 /codegen/
@@ -293,6 +294,9 @@ build/linux-arm64-smoke/
 
 # Root-level CMake dependency downloads
 /_deps/
+
+# Foundation-DLL CMake dependency downloads (unzip cache, fully generated)
+testing/foundation-dll/_deps/
 
 # Build output under testing/ (CMake-generated)
 testing/build/
@@ -369,6 +373,10 @@ testing/foundation-dll/**/native/entry.cpp
 testing/foundation-dll/**/native/entry.h
 testing/foundation-dll/**/native/chaos_assert_stubs.cpp
 testing/foundation-dll/**/native/CMakePresets.json
+
+# Generated codegen temp output (managed .autogen/ + entry.exe.new_codegen)
+testing/foundation-dll/**/.autogen/
+testing/foundation-dll/**/entry.exe.new_codegen
 
 # Generated test harness / benchmark output directories
 testing/foundation-dll/**/multi-run/
