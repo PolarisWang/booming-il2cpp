@@ -423,83 +423,83 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             summary="No generated .cs files found for combined build",
             duration_ms=int((time.perf_counter() - start) * 1000))
 
-        print(f"  [build]   {len(all_cs_files)} source files to combine")
-        combined_dir = ctx.chunk_dir / "managed" / "combined"
-        combined_dir.mkdir(parents=True, exist_ok=True)
+    print(f"  [build]   {len(all_cs_files)} source files to combine")
+    combined_dir = ctx.chunk_dir / "managed" / "combined"
+    combined_dir.mkdir(parents=True, exist_ok=True)
 
-        combined_cs_path = combined_dir / "CombinedSubjects.cs"
-        all_usings: set[str] = set()
-        namespace_blocks: list[str] = []
-        for cs_file in sorted(all_cs_files):
-            text = cs_file.read_text(encoding="utf-8")
-            ns_idx = text.find("\nnamespace ")
-            if ns_idx < 0:
-                # Fallback: whole file if no namespace
-                namespace_blocks.append(text)
-            else:
-                # Extract using directives from the preamble (before namespace)
-                preamble = text[:ns_idx]
-                for line in preamble.splitlines():
-                    stripped = line.strip()
-                    if stripped.startswith("using ") and stripped.endswith(";"):
-                        all_usings.add(stripped)
-                # Keep from namespace onward
-                namespace_blocks.append(text[ns_idx + 1:])
+    combined_cs_path = combined_dir / "CombinedSubjects.cs"
+    all_usings: set[str] = set()
+    namespace_blocks: list[str] = []
+    for cs_file in sorted(all_cs_files):
+        text = cs_file.read_text(encoding="utf-8")
+        ns_idx = text.find("\nnamespace ")
+        if ns_idx < 0:
+            # Fallback: whole file if no namespace
+            namespace_blocks.append(text)
+        else:
+            # Extract using directives from the preamble (before namespace)
+            preamble = text[:ns_idx]
+            for line in preamble.splitlines():
+                stripped = line.strip()
+                if stripped.startswith("using ") and stripped.endswith(";"):
+                    all_usings.add(stripped)
+            # Keep from namespace onward
+            namespace_blocks.append(text[ns_idx + 1:])
 
-        with open(combined_cs_path, "w", encoding="utf-8") as f:
-            f.write("// Auto-generated combined subjects file\n")
-            f.write("// Combined from all per-type AutoTestGenerator outputs\n\n")
-            for u in sorted(all_usings):
-                f.write(u + "\n")
-            f.write("\n")
-            for block in namespace_blocks:
-                f.write(block)
-                f.write("\n\n")
+    with open(combined_cs_path, "w", encoding="utf-8") as f:
+        f.write("// Auto-generated combined subjects file\n")
+        f.write("// Combined from all per-type AutoTestGenerator outputs\n\n")
+        for u in sorted(all_usings):
+            f.write(u + "\n")
+        f.write("\n")
+        for block in namespace_blocks:
+            f.write(block)
+            f.write("\n\n")
 
-        sdk_csproj = _chaos_sdk_csproj()
-        combined_csproj = combined_dir / "CombinedSubjects.csproj"
+    sdk_csproj = _chaos_sdk_csproj()
+    combined_csproj = combined_dir / "CombinedSubjects.csproj"
 
-        assembly_name = ctx.assembly
-        pkg_refs: list[str] = []
-        pkg_block = ""
+    assembly_name = ctx.assembly
+    pkg_refs: list[str] = []
+    pkg_block = ""
 
-        combined_csproj.write_text(
-            "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
-            "  <PropertyGroup>\n"
-            "    <OutputType>Library</OutputType>\n"
-            f"    <TargetFramework>{tfm}</TargetFramework>\n"
-            "    <ImplicitUsings>enable</ImplicitUsings>\n"
-            "    <Nullable>enable</Nullable>\n"
-            "    <DefineConstants>VERIFY</DefineConstants>\n"
-            "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
-            "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
-            "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
-            "  </PropertyGroup>\n"
-            "  <ItemGroup>\n"
-            f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
-            f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
-            f"{pkg_block}"
-            "  </ItemGroup>\n"
-            "</Project>\n"
-        )
+    combined_csproj.write_text(
+        "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
+        "  <PropertyGroup>\n"
+        "    <OutputType>Library</OutputType>\n"
+        f"    <TargetFramework>{tfm}</TargetFramework>\n"
+        "    <ImplicitUsings>enable</ImplicitUsings>\n"
+        "    <Nullable>enable</Nullable>\n"
+        "    <DefineConstants>VERIFY</DefineConstants>\n"
+        "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
+        "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
+        "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
+        "  </PropertyGroup>\n"
+        "  <ItemGroup>\n"
+        f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
+        f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
+        f"{pkg_block}"
+        "  </ItemGroup>\n"
+        "</Project>\n"
+    )
 
-        print(f"  [build] Building combined project ({tfm})...")
-        build_result = subprocess.run(
-            ["dotnet", "build", str(combined_csproj),
-             f"-p:OutDir={subjects_dll.parent}",
-             "-p:ImportDirectoryBuildProps=false",
-             "--nologo", "-v", "quiet"],
-            capture_output=True, text=True, timeout=120)
+    print(f"  [build] Building combined project ({tfm})...")
+    build_result = subprocess.run(
+        ["dotnet", "build", str(combined_csproj),
+         f"-p:OutDir={subjects_dll.parent}",
+         "-p:ImportDirectoryBuildProps=false",
+         "--nologo", "-v", "quiet"],
+        capture_output=True, text=True, timeout=120)
 
-        if build_result.returncode != 0 or not subjects_dll.exists():
-            print(f"  [build] Combined build FAILED for {tfm}")
-            for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
-                print(f"      {line}")
-            return StageResult(
-                stage="build", status="error",
-                summary="Combined subjects DLL build failed",
-                details={"buildErrors": build_result.stderr[:500]},
-                duration_ms=int((time.perf_counter() - start) * 1000))
+    if build_result.returncode != 0 or not subjects_dll.exists():
+        print(f"  [build] Combined build FAILED for {tfm}")
+        for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
+            print(f"      {line}")
+        return StageResult(
+            stage="build", status="error",
+            summary="Combined subjects DLL build failed",
+            details={"buildErrors": build_result.stderr[:500]},
+            duration_ms=int((time.perf_counter() - start) * 1000))
 
     print(f"  [build] Subjects DLL: {subjects_dll} ({subjects_dll.stat().st_size} bytes)")
 
