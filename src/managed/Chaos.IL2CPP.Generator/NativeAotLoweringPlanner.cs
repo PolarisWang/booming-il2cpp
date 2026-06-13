@@ -1477,7 +1477,6 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                                         // the header is tiny (~15 lines) and the stubs are only
                                         // referenced when async yield methods are present.
                                         includes_.Add("\"async_stubs.h\"");
-	        includes_.Add("<coroutine>");
         // Exception stubs (ChaosInvokeAction) — needed by verification dispatch.
         // Always included; the header is tiny and the inline function is zero-cost.
         includes_.Add("\"exception_stubs.h\"");
@@ -2959,7 +2958,7 @@ return sb.ToString();
         {
             SubjectId = method.SubjectId,
             NativeSymbol = method.NativeSymbol,
-            MethodSource = aotReachableSubjectIds.Contains(method.SubjectId) || IsAsyncStateMachineMoveNext(method.SubjectId)
+            MethodSource = aotReachableSubjectIds.Contains(method.SubjectId)
                 ? BuildMethodSourceSafe(method)
                 : BuildAotUnreachableMethodStub(method),
         };
