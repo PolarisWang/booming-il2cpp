@@ -482,6 +482,65 @@ void CHAOS_RUNTIME_ABI_CALL ABI_GcRegisterFinalizable(void* obj) {
     chaos_gc_register_finalizable(obj);
 }
 
+/* ── V3 GC introspection (wrappers around GC API) ── */
+
+int64_t CHAOS_RUNTIME_ABI_CALL ABI_GcGetTotalMemory(RuntimeState* runtime_state) {
+    (void)runtime_state;
+    return chaos_gc_get_total_memory(0);
+}
+
+void CHAOS_RUNTIME_ABI_CALL ABI_GcAddMemoryPressure(
+    RuntimeState* runtime_state, int64_t bytes) {
+    (void)runtime_state;
+    chaos_gc_add_memory_pressure(bytes);
+}
+
+void CHAOS_RUNTIME_ABI_CALL ABI_GcRemoveMemoryPressure(
+    RuntimeState* runtime_state, int64_t bytes) {
+    (void)runtime_state;
+    chaos_gc_remove_memory_pressure(bytes);
+}
+
+/* ── V1 resolve_method_table (wraps existing runtime API) ── */
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_ResolveMethodTable(TypeInfoHandle handle) {
+    return ResolveMethodTable(static_cast<uint32_t>(handle));
+}
+
+/* ── V2 marshal helpers (directly wrappable) ── */
+
+bool CHAOS_RUNTIME_ABI_CALL ABI_MarshalIsRcwHandle(CHAOS_IL2CPP_INTPTR handle) {
+    return MarshalIsRcwHandle(handle);
+}
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_MarshalGetRcwUnknown(CHAOS_IL2CPP_INTPTR handle) {
+    return reinterpret_cast<void*>(MarshalGetRcwUnknown(handle));
+}
+
+void CHAOS_RUNTIME_ABI_CALL ABI_ThrowComExceptionForHr(int32_t hr) {
+    ChaosThrowComExceptionForHR(hr);
+}
+
+CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL ABI_MarshalSafeHandleGetHandle(void* safe_handle) {
+    return MarshalSafeHandleGetHandle(
+        GetCurrentRuntimeState(), GetCurrentThreadState(),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(safe_handle));
+}
+
+void CHAOS_RUNTIME_ABI_CALL ABI_MarshalFreeCoTaskMem(void* ptr) {
+    MarshalFreeCoTaskMem(GetCurrentRuntimeState(),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(ptr));
+}
+
+/* ── V1 box_value_object (dedicated ABI wrapper) ── */
+
+void* CHAOS_RUNTIME_ABI_CALL ABI_BoxValueObject(void* value, TypeInfoHandle type) {
+    auto* rs = GetCurrentRuntimeState();
+    auto* ts = GetCurrentThreadState();
+    if (rs == nullptr || ts == nullptr) return nullptr;
+    return BoxValueObject(rs, ts, type, value, sizeof(void*));
+}
+
 /* ── ABI v0 function table, fully positionally aligned with runtime_abi.h ── */
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
@@ -522,10 +581,10 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &GcHandleGet,                                    // field 31: gc_handle_get
     &GcHandleSet,                                    // field 32: gc_handle_set
 
-    /* ═══ V3 GC introspection (3 fields) — NOT YET IMPLEMENTED ═══ */
-    nullptr,  /* field 33: gc_get_total_memory */
-    nullptr,  /* field 34: gc_add_memory_pressure */
-    nullptr,  /* field 35: gc_remove_memory_pressure */
+    /* ═══ V3 GC introspection (3 fields) ═══ */
+    &ABI_GcGetTotalMemory,                           /* field 33: gc_get_total_memory */
+    &ABI_GcAddMemoryPressure,                        /* field 34: gc_add_memory_pressure */
+    &ABI_GcRemoveMemoryPressure,                     /* field 35: gc_remove_memory_pressure */
 
     /* ═══ V3 kernel helpers (15 fields) ═══ */
     &ABI_InteropKernel32GetLastError,                // field 36: interop_kernel32_get_last_error
@@ -558,9 +617,9 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     /* ═══ V1 GC/boxing/vtable/thread-static (10 fields) ═══ */
     &ABI_GcAlloc,                /* field 60: gc_alloc */
     &ABI_GcAllocAtomic,          /* field 61: gc_alloc_atomic */
-    nullptr,  /* field 62: box_value_object */
-    nullptr,  /* field 63: resolve_virtual_method */
-    nullptr,  /* field 64: resolve_method_table */
+    &ABI_BoxValueObject,             /* field 62: box_value_object */
+    nullptr,  /* field 63: resolve_virtual_method — ABI sig mismatch, needs dedicated impl */
+    &ABI_ResolveMethodTable,         /* field 64: resolve_method_table */
     nullptr,  /* field 65: get_type_info_handle */
     nullptr,  /* field 66: resolve_string_id */
     nullptr,  /* field 67: get_thread_static */
@@ -569,14 +628,14 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
 
     /* ═══ V2 exception/marshal/PInvoke/thread-state (20 fields) ═══ */
     &ABI_RaiseException,                         /* field 70: raise_exception */
-    nullptr,  /* field 71: marshal_is_rcw_handle */
-    nullptr,  /* field 72: marshal_get_rcw_unknown */
-    nullptr,  /* field 73: throw_com_exception_for_hr */
-    nullptr,  /* field 74: delegate_hotpatch_checkpoint */
-    nullptr,  /* field 75: marshal_free_co_task_mem */
-    nullptr,  /* field 76: marshal_ptr_to_string_utf8 */
-    nullptr,  /* field 77: marshal_ptr_to_string_wide */
-    nullptr,  /* field 78: marshal_safe_handle_get_handle */
+    &ABI_MarshalIsRcwHandle,                     /* field 71: marshal_is_rcw_handle */
+    &ABI_MarshalGetRcwUnknown,                   /* field 72: marshal_get_rcw_unknown */
+    &ABI_ThrowComExceptionForHr,                 /* field 73: throw_com_exception_for_hr */
+    nullptr,  /* field 74: delegate_hotpatch_checkpoint — ABI sig mismatch, needs dedicated impl */
+    &ABI_MarshalFreeCoTaskMem,                   /* field 75: marshal_free_co_task_mem */
+    nullptr,  /* field 76: marshal_ptr_to_string_utf8 — ABI sig mismatch, needs dedicated impl */
+    nullptr,  /* field 77: marshal_ptr_to_string_wide — ABI sig mismatch, needs dedicated impl */
+    &ABI_MarshalSafeHandleGetHandle,             /* field 78: marshal_safe_handle_get_handle */
     nullptr,  /* field 79: marshal_struct_managed_to_native */
     nullptr,  /* field 80: marshal_struct_native_to_managed */
     &ABI_NativeLibraryLoad,                      /* field 81: native_library_load */
