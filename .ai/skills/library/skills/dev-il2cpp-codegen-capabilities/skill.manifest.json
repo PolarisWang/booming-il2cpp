@@ -1,0 +1,17 @@
+{
+  "name": "dev-il2cpp-codegen-capabilities",
+  "description": "capabilities.json schema、ATG 特性过滤、codegen 能力反馈机制",
+  "version": "1.0.0",
+  "owner": "00-skills-maintainers",
+  "budget": "small",
+  "status": "active",
+  "domain": "codegen",
+  "triggers": [
+    "capabilities.json schema 修改",
+    "ATG 黑名单方法在 codegen 新能力就绪后需要放行",
+    "capability taxonomy 新增或调整 family 定义",
+    "GenericCapabilityMatrix 新增条件约束",
+    "TypeCapability 注册逻辑修改",
+    "codegen 构建产出 capabilities.json 文件"
+  ]
+}

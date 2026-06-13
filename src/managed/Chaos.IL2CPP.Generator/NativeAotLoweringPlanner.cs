@@ -2182,6 +2182,14 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
+        // Phase 1a: ChaosAbiExportCollector — ensure every chaos_external_runtime_*
+        // symbol referenced in the generated header has a visible extern "C" declaration.
+        string postCollector = BuildAbiExportDeclarations(sb);
+        if (postCollector.Length > 0)
+        {
+            return postCollector;
+        }
+
 return sb.ToString();
     }
 
