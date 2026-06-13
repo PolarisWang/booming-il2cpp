@@ -1,0 +1,17 @@
+{
+  "name": "dev-il2cpp-pipeline-expert",
+  "description": "构建管线专家 — Hephaestus 缓存策略、cmake 增量编译、SDK 路径解析、Python 编排净化",
+  "version": "1.0.0",
+  "owner": "00-skills-maintainers",
+  "budget": "small",
+  "status": "active",
+  "domain": "build",
+  "triggers": [
+    "hephaestus 缓存命中/未命中策略",
+    "cmake 增量编译不重新编译运行时 stub",
+    "SDK lib 损坏 (LNK1107)",
+    "artifacts/presets/ 目录缺失",
+    "build.py post-TPG 步骤错误",
+    "缓存键需包含 runtime_stubs hash"
+  ]
+}

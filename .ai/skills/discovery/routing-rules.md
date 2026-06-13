@@ -183,6 +183,7 @@ Expert 的知识通过 registry 发现流程加载：
 |------|--------|---------|
 | `dev-il2cpp-external-runtime-expert` | CodeGen(4) + 运行时(1) | extern stub 生成、ShapeRegistry 注册、跨程序集路由 |
 | `dev-il2cpp-abi-expert` | CodeGen(4) + 运行时(1) + 构建(7) | ABI 类型映射、返回类型一致性、跨平台调用约定 |
+| `dev-il2cpp-pipeline-expert` | 构建(7) + 测试(5) | 缓存策略、SDK 路径、cmake 增量编译、编排净化 |
 
 激活方式：通过 discovery 流程读取 SKILL.md。
 
