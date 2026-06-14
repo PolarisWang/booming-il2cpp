@@ -171,7 +171,7 @@ class CodeSizeTracker:
         """Parse dumpbin /HEADERS output for section sizes."""
         sizes: dict[str, int] = {}
         for line in stdout.splitlines():
-            m = re.match(r"\s+\.(\w+)\s+size\s*=\s*0x([0-9a-fA-F]+)", line.strip())
+            m = re.match(r"\s+\.(\w+)\s+size\s*=\s*0x([0-9a-fA-F]+)", line)
             if m:
                 section = m.group(1).lower()
                 size = int(m.group(2), 16)
@@ -188,7 +188,7 @@ class CodeSizeTracker:
         """
         sizes: dict[str, int] = {}
         for line in stdout.splitlines():
-            m = re.match(r"\s+\d+\s+\.(\w+)\s+([0-9a-fA-F]+)\s+", line.strip())
+            m = re.match(r"\s+\d+\s+\.(\w+)\s+([0-9a-fA-F]+)\s+", line)
             if m:
                 section = m.group(1).lower()
                 size = int(m.group(2), 16)
