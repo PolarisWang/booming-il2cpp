@@ -232,6 +232,8 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private bool TryCreateExternalRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
+		string originalCallee = callee;
+
 		// Canonicalize assembly prefix so matching is assembly-agnostic
 		callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
 
@@ -240,14 +242,11 @@ public sealed partial class NativeAotLoweringPlanner
 		// making the method appear in _methodsBySubjectId with instructions.  Generic shape
 		// entries (RegisterVectorReduction, etc.) must be checked first so they win over the
 		// AOT IR path — otherwise Vector<T>.GreaterThanAll etc. never reach TryMatchGenericShape.
-		if (callee.Contains("Vector", StringComparison.Ordinal))
-			System.Console.Error.WriteLine($"[VECTOR_DEBUG] TryMatchGenericShape called for callee={callee}");
 		if (_shapeRegistry.TryMatchGenericShape(callee, out var genericDescriptor, out var typeArgs))
 		{
 			var resolution = genericDescriptor.Resolver(this, callee, typeArgs);
 			if (resolution != null)
 			{
-				System.Console.Error.WriteLine($"[VECTOR_REDUCTION] MATCHED callee={callee} symbol={resolution.Symbol} directNative={resolution.DirectNativeSymbol}");
 				helperDefinition = new ExternalRuntimeHelperDefinition(
 					callee,
 					resolution.Symbol,
@@ -263,9 +262,9 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 
-		// If method compiled in AOT IR (has IL body instructions), use its real ParameterAbis.
-		// Methods in _methodsBySubjectId with 0 instructions are BCL/import methods that
-		// don't have compiled bodies -- they should fall through to external runtime stubs.
+		// If method has an AOT lowering plan, skip catch-all fallback generation.
+		// The AOT lowering already generates chaos_external_runtime_* declarations,
+		// so the catch-all would create conflicting C++ function declarations.
 		// --- Crypto AOT IR data collection (run BEFORE early return) ---
 		// Collect rich AOT IR JSON data for crypto methods that are not AOT-compiled.
 		// This data is embedded in kChaosExternalRuntimeIlData[] via BuildExternalRuntimeDispatchTable
@@ -274,18 +273,14 @@ public sealed partial class NativeAotLoweringPlanner
 		// Add to crypto AOT IR entries immediately (BEFORE early return)
 		// so the interpreter has IL data for methods that cannot be AOT-compiled.
 		if (crCryptoJson != null)
-		{
 			_cryptoAotIrEntries.Add((callee, crCryptoJson));
-		}
 
-		if (_methodsBySubjectId.TryGetValue(callee, out var existingMethod) &&
-			existingMethod is { Instructions.Count: > 0 })
+		if (_methodsBySubjectId.ContainsKey(callee) || _methodsBySubjectId.ContainsKey(originalCallee))
 		{
 			helperDefinition = null;
 			_externalRuntimeHelperCache[callee] = null;
 			return false;
 		}
-		// Check cache first (P0)
 		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
 		{
 			helperDefinition = cached;

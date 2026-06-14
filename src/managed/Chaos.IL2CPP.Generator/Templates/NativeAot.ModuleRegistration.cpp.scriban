@@ -62,7 +62,7 @@
 
 {{ custom_attribute_blob_code }}
 
-{{ indentation }}static const ::chaos::il2cpp::runtime_core::ModuleDescriptor s_native_aot_module = {
+{{ indentation }}static const ModuleDescriptor s_native_aot_module = {
 {{ indentation }}{{ tab }}/* .name_utf8         = */ "{{ assembly_name }}",
 {{ indentation }}{{ tab }}/* .image             = */ &kReflImage,
 {{~ if has_type_data ~}}
@@ -92,4 +92,4 @@
 {{ indentation }}{{ tab }}/* .abi_manifest      = */ s_abi_manifest,
 {{ indentation }}};
 {{ indentation }}static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
-{{ indentation }}{{ tab }}::chaos::il2cpp::runtime_core::GetRuntimeAbiV0()->register_module("{{ assembly_name }}", &s_native_aot_module);
+{{ indentation }}{{ tab }}::chaos::il2cpp::runtime_core::GetRuntimeAbiV0()->register_module("{{ assembly_name }}", reinterpret_cast<const struct ::ModuleDescriptor*>(&s_native_aot_module));

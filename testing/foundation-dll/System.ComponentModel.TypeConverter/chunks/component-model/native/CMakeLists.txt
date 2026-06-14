@@ -12,7 +12,7 @@ if(MSVC)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
-  add_compile_options(-Wall -Wextra -Wno-unused-parameter -Wno-unused-function -Wno-unused-variable -Wno-return-type -Wno-missing-field-initializers)
+  add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
   set(CHAOS_EHA_FLAG -fexceptions)
   # eager_compile.cpp is compiled locally AND present in prebuilt
   # libchaos_interpreter.a — both define EagerCompilePatchMethods.
@@ -151,6 +151,9 @@ set(CHAOS_INTEROP_STUBS
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
 )
+set(CHAOS_ENTRY_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
+)
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
@@ -195,6 +198,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
+    ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}

@@ -212,9 +212,9 @@ void* ResolveDirectFnSafe(
                     if (entry != nullptr && entry->direct_ptr != nullptr) {
                         // P/Invoke stubs (direct_ptr = InterpreterEntryDirect) have no
                         // IL body. Skip them so Step 3 can route to native BCrypt stubs.
-                        extern void InterpreterEntryDirect(uintptr_t, void*, void*) noexcept;
+                        using InterpreterEntryDirectFn = void(uintptr_t, void*, void*) noexcept;
                         if (entry->direct_ptr ==
-                            reinterpret_cast<void*>(&InterpreterEntryDirect)) {
+                            reinterpret_cast<void*>(static_cast<InterpreterEntryDirectFn*>(&chaos::il2cpp::runtime_core::InterpreterEntryDirect))) {
                             return nullptr; // fall through to caller's nullptr check
                         }
                         // In JIT mode, direct_ptr may be a JIT trampoline.

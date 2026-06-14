@@ -2077,6 +2077,15 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 .Where(h => !string.IsNullOrEmpty(h.Source))
                 .Select(h => h.SubjectId)
                 .ToHashSet(StringComparer.Ordinal) ?? new HashSet<string>();
+            // Pre-compute methods that have AOT extern "C" declarations
+            // (from helpers with source or static inline stubs).
+            var aotDeclaredSymbols = new HashSet<string>(StringComparer.Ordinal);
+            if (_externalRuntimeHelpers is { Count: > 0 })
+            {
+                foreach (var h in _externalRuntimeHelpers)
+                    if (!string.IsNullOrEmpty(h.TargetSymbol))
+                        aotDeclaredSymbols.Add(h.TargetSymbol);
+            }
             var fallbackSb = new System.Text.StringBuilder(1024);
             int fallbackCount = 0;
             foreach (var kvp in _externalRuntimeSubjects)
@@ -2084,9 +2093,16 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 if (helpersWithSource.Contains(kvp.Key))
                     continue;
                 var symbol = GetExternalRuntimeHelperSymbol(kvp.Key);
-                fallbackSb.Append("extern \"C\" void ");
+                // Skip if the symbol already has an AOT declaration
+                // (from _externalRuntimeHelpers or BuildAbiExportDeclarations)
+                if (aotDeclaredSymbols.Contains(symbol))
+                    continue;
+                // Generate extern "C" CHAOS_IL2CPP_INTPTR (same format as
+                // BuildAbiExportDeclarations) to avoid conflicting return type
+                // declarations at global scope.
+                fallbackSb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
                 fallbackSb.Append(symbol);
-                fallbackSb.AppendLine("(void);");
+                fallbackSb.AppendLine("() noexcept;");
                 fallbackCount++;
             }
             if (fallbackCount > 0)

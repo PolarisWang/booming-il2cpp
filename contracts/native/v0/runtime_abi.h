@@ -5,6 +5,30 @@
 #include <stddef.h>
 #include <stdint.h>
 
+/* Provide CHAOS_IL2CPP_* type aliases so this header is self-contained.
+ * When compiled from C++ code that includes chaos/native_types.h first,
+ * these fallbacks are skipped via the #ifndef guard.
+ * When compiled standalone (C or C++), we define lightweight aliases
+ * that match the C++-only chaos/native_types.h definitions. */
+#ifndef CHAOS_IL2CPP_INTPTR
+#  ifdef __cplusplus
+#    include <cstdint>
+#    define CHAOS_IL2CPP_INTPTR   std::intptr_t
+#    define CHAOS_IL2CPP_UINTPTR  std::uintptr_t
+#    define CHAOS_IL2CPP_INT32    std::int32_t
+#    define CHAOS_IL2CPP_UINT32   std::uint32_t
+#    define CHAOS_IL2CPP_INT      int
+#    define CHAOS_IL2CPP_UINT     unsigned int
+#  else
+#    define CHAOS_IL2CPP_INTPTR   intptr_t
+#    define CHAOS_IL2CPP_UINTPTR  uintptr_t
+#    define CHAOS_IL2CPP_INT32    int32_t
+#    define CHAOS_IL2CPP_UINT32   uint32_t
+#    define CHAOS_IL2CPP_INT      int
+#    define CHAOS_IL2CPP_UINT     unsigned int
+#  endif
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
