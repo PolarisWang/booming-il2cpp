@@ -872,13 +872,13 @@ public sealed class NativeAotEmitter
 	/// </summary>
 	private static void FixFallbackZeroArgCalls(StringBuilder sb)
 	{
-		string text = sb.ToString();
-		if (!text.Contains("ChaosExternalRuntimeFallback();"))
+		if (sb.ToString().IndexOf("ChaosExternalRuntimeFallback();") < 0)
 			return;
 		sb.Replace("ChaosExternalRuntimeFallback();", "ChaosExternalRuntimeFallbackDefault();");
-		// Prepend extern declaration so ChaosExternalRuntimeFallbackDefault is visible
-		int anchor = text.LastIndexOf("#include");
-		anchor = anchor >= 0 ? text.IndexOf('\n', anchor) + 1 : 0;
+		// Prepend extern declaration — use StringBuilder search on modified content
+		string modified = sb.ToString();
+		int anchor = modified.LastIndexOf("#include");
+		anchor = anchor >= 0 ? modified.IndexOf('\n', anchor) + 1 : 0;
 		sb.Insert(anchor,
 			"extern \"C\" CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;\n");
 	}
@@ -936,7 +936,7 @@ public sealed class NativeAotEmitter
 						if (c == '(') depth++;
 						else if (c == ')')
 						{
-							if (depth == 0) { argCount = 0; break; }
+							if (depth == 0) { if (i == pos) argCount = 0; break; }
 							depth--;
 						}
 						else if (c == ',' && depth == 0) argCount++;
@@ -994,7 +994,7 @@ public sealed class NativeAotEmitter
 						if (c == '(') depth++;
 						else if (c == ')')
 						{
-							if (depth == 0) { argCount = 0; break; }
+							if (depth == 0) { if (i == pos) argCount = 0; break; }
 							depth--;
 						}
 						else if (c == ',' && depth == 0) argCount++;
