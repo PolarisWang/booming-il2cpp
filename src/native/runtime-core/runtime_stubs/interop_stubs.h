@@ -101,6 +101,7 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept;
 // DirectNativeSymbol stubs or runtime DLL resolution.
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept;
 // Default-arg bridge for codegen entry stubs with null subjectIds
+CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;
 
 
 // ── External runtime IL data entry ─────────────────────────

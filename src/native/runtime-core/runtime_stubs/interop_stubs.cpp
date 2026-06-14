@@ -818,3 +818,9 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
 
+
+// ── External runtime fallback default stub ──
+CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept
+{
+    return 0;
+}
