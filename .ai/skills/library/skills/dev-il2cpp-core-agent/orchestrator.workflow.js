@@ -160,29 +160,33 @@ if (abiChanges.length > 0) {
   log('需要集成验证确保 codegen ↔ runtime 合约一致')
 }
 
-// ── Phase 4: 集成验证 ───────────────────────────────────────────
+// ── Phase 4: 集成验证（结构性检查 + 交接清单） ─────────────────
 phase('验证')
 
-const buildResult = await agent(`集成验证：\n${task}\n\n修改涉及以下文件：\n${
-  succeeded.flatMap(r => (r.filesModified || [])).join('\n')
-}\n\n请执行：\n1. cmake build 确认编译通过\n2. 运行相关测试\n3. 返回成功/失败状态`, {
-  label: '集成编译验证',
-  schema: {
-    type: 'object',
-    properties: {
-      success: { type: 'boolean' },
-      buildErrors: { type: 'array', items: { type: 'string' } },
-      testResults: { type: 'string' },
-    },
-    required: ['success'],
-  },
-})
+// 汇总所有修改文件
+const allFiles = [...new Set(succeeded.flatMap(r => (r.filesModified || [])))]
+const hasAbiChanges = succeeded.some(r => r.abiChanges)
 
-if (buildResult?.success) {
-  log('集成验证通过 ✓')
-} else {
-  log(`集成验证失败: ${(buildResult?.buildErrors || ['unknown']).join(', ')}`)
+log('=== 集成验证交接清单 ===')
+log(`修改涉及 ${succeeded.length} 个域，${allFiles.length} 个文件`)
+log('')
+log('需人工验证的项：')
+log('  [ ] 编译验证 — cmake build / dotnet build 通过')
+
+if (hasAbiChanges) {
+  log('  [ ] ABI 合约 — 确认 codegen ↔ runtime 接口一致')
+  log(`      ⚠️ 涉及域: ${succeeded.filter(r => r.abiChanges).map(r => r.domain).join(', ')}`)
 }
+
+if (conflicts.length > 0) {
+  log('  [ ] 文件冲突 — 检查多域同时修改的文件兼容性')
+  conflicts.forEach(c => log(`      ⚠️ ${c.file} (${c.domains.join(', ')})`))
+}
+
+log('  [ ] 测试验证 — 运行受影响测试')
+log('')
+log('> 集成构建和测试交由 core-agent L3 质量门执行，')
+log('> 本 Orchestrator 不直接执行编译/测试。')
 
 // ── 结果摘要 ────────────────────────────────────────────────────
 log('=== 结果摘要 ===')
@@ -196,5 +200,6 @@ return {
   succeeded: succeeded.length,
   results: succeeded,
   conflicts,
-  buildVerified: buildResult?.success ?? false,
+  integrationReady: succeeded.length > 0 && conflicts.length === 0,
+  needsAbiReview: hasAbiChanges,
 }
