@@ -1,5 +1,35 @@
 // Required forward declarations: ChaosRegisterGcLayouts etc.
 #include "chaos_runtime_host.h"
+#include <generic_context.h>
+#include <bootstrap.h>
+
+// ── Forward declarations for functions defined in other .cpp files ──
+// These are used to populate the RuntimeAbiV0 dispatch table below.
+// Declarations were previously in the generated runtime_abi.h but that
+// file is now part of the per-chunk SDK rather than the runtime library.
+
+RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
+    const RuntimeInitParams* init_params,
+    const RuntimeConfig* config,
+    RuntimeState** out_runtime_state);
+void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state);
+RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
+    RuntimeState* runtime_state, ThreadState** out_thread_state);
+void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
+    RuntimeState* runtime_state, ThreadState* thread_state);
+void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
+    RuntimeState* runtime_state, ThreadState* thread_state, TypeInfoHandle type);
+void* CHAOS_RUNTIME_ABI_CALL ArrayNew(
+    RuntimeState* runtime_state, ThreadState* thread_state,
+    TypeInfoHandle element_type, uintptr_t length);
+void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
+    RuntimeState* runtime_state, ThreadState* thread_state,
+    const char* utf8_bytes, CHAOS_IL2CPP_UINTPTR byte_count);
+RuntimeStatus CHAOS_RUNTIME_ABI_CALL ClassInit(
+    RuntimeState* runtime_state, TypeInfoHandle type);
+RuntimeStatus CHAOS_RUNTIME_ABI_CALL TypeQueryCapabilityImpl(
+    TypeInfoHandle type, RuntimeTypeCapabilityInfoV0* out_capability_info);
+CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void);
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
@@ -344,9 +374,9 @@ static void CHAOS_RUNTIME_ABI_CALL _gc_pressure_noop(RuntimeState*, int64_t) {}
 /* ── V1 register_gc_layouts ── */
 static void CHAOS_RUNTIME_ABI_CALL _register_gc_noop(void) {}
 /* ── CHAOS_IL2CPP_INTPTR sentinel for V2 no-ops ── */
-static CHAOS_IL2CPP_INTPTR _noop_sentinel;
-static CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL _noop0() { return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&_noop_sentinel); }
-static CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL _noop1(CHAOS_IL2CPP_INTPTR) { return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&_noop_sentinel); }
+static uintptr_t _noop_sentinel;
+static uintptr_t CHAOS_RUNTIME_ABI_CALL _noop0() { return reinterpret_cast<uintptr_t>(&_noop_sentinel); }
+static uintptr_t CHAOS_RUNTIME_ABI_CALL _noop1(uintptr_t) { return reinterpret_cast<uintptr_t>(&_noop_sentinel); }
 static bool CHAOS_RUNTIME_ABI_CALL _noop_bool1(CHAOS_IL2CPP_INTPTR) { return false; }
 static void CHAOS_RUNTIME_ABI_CALL _noop_void1(CHAOS_IL2CPP_INTPTR) {}
 static void CHAOS_RUNTIME_ABI_CALL _noop_void3(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) {}
