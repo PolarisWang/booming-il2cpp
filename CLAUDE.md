@@ -20,8 +20,12 @@
 > **执行协议**：
 > 1. 输出分类声明 → `echo "..." > .claude/.classified`
 > 2. 通过 registry 发现流程加载 Expert 知识（见下方技能调用）
-> 3. 响应结束时：延续消息保留 `.classified`；新任务 `rm -f .claude/.classified`
-> 4. **Bash**: 管理 Bash（echo/rm .claude/）和只读 Bash（ls/cat/git status）无需分类
+> 3. **🔴 强制阻断门**：分类声明后、任何工具使用前，必须先读取对应 Expert/Core-Agent 的 SKILL.md。
+>    — 单域：读对应 Expert 的 SKILL.md 注入领域知识
+>    — 多域（≥2）：读 `dev-il2cpp-core-agent` 的 SKILL.md 执行调度循环
+>    — 验证方式：`.claude/.classified` 文件必须含 `loaded_expert:<name>` 行
+> 4. 响应结束时：延续消息保留 `.classified`；新任务 `rm -f .claude/.classified`
+> 5. **Bash**: 管理 Bash（echo/rm .claude/）和只读 Bash（ls/cat/git status）无需分类
 
 ## 全局优先级（强制）
 

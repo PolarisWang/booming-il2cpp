@@ -1,12 +1,10 @@
-"""PreToolUse hook: 验证分类声明格式 (简化版)
-
-Skill 工具在非标准 API 环境下无法加载子 Expert，
-因此 loaded_expert 强制验证已被移除。
+"""PreToolUse hook: 验证分类声明格式 + Expert SKILL.md 加载检查
 
 流程:
 1. 用户发消息 → Agent 输出分类声明 + "→ 加载 dev-xxx-expert"
-2. echo "..." > .claude/.classified (hook 验证格式)
-3. 后续 Edit/Write/Bash 域文件 → 仅提醒分类声明要求，不阻止
+2. echo "..." > .claude/.classified (含 loaded_expert:<name> 行)
+3. hook 验证: 格式正确 + .classified 含 loaded_expert 行 + 对应 SKILL.md 存在
+4. 后续 Edit/Write/Bash 域文件 → 检查 loaded_expert 是否声明
 """
 
 import os
@@ -171,5 +169,31 @@ round_num = int(round_str)
 if round_num < 1:
     print(f"  ⚠️  无效轮次 {round_num}", file=sys.stderr)
     sys.exit(1)
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔴 强制阻断门：验证 loaded_expert 声明 + SKILL.md 存在
+# ═══════════════════════════════════════════════════════════════════
+classified_content = flag_file.read_text(encoding="utf-8", errors="replace").strip()
+has_loaded = "loaded_expert:" in classified_content
+if not has_loaded:
+    print(file=sys.stderr)
+    print("  ⚠️  .claude/.classified 缺少 loaded_expert:<name> 行！", file=sys.stderr)
+    print("  请在分类 echo 命令中附加：", file=sys.stderr)
+    print('    echo "... → 加载 dev-xxx-expert" > .claude/.classified', file=sys.stderr)
+    print('    echo "loaded_expert:dev-xxx-expert" >> .claude/.classified', file=sys.stderr)
+    sys.exit(1)
+
+# 验证 SKILL.md 文件存在
+loaded_expert = ""
+for line in classified_content.splitlines():
+    if "loaded_expert:" in line:
+        loaded_expert = line.split("loaded_expert:")[-1].strip()
+        break
+
+if loaded_expert:
+    skill_path = Path(__file__).resolve().parent.parent / "library" / "skills" / loaded_expert / "SKILL.md"
+    if not skill_path.exists():
+        print(f"  ⚠️  Expert SKILL.md 不存在: {skill_path}", file=sys.stderr)
+        sys.exit(1)
 
 sys.exit(0)
