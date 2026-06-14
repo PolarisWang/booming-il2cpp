@@ -185,7 +185,7 @@ def compute_skill_health(
 
     # tool_success_rate
     successful = sum(1 for t in tools if t.get("success", True))
-    tool_success_rate = successful / max(total_tools, 1) if total_tools > 0 else 1.0
+    tool_success_rate = successful / max(total_tools, 1) if total_tools > 0 else None
 
     # fallback_rate: sessions where user switched to another skill afterward
     fallback_rate = 0.0

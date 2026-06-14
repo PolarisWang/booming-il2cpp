@@ -81,7 +81,7 @@ def record_skill_usage(repo_root: Path, skill_path: str, source: str) -> None:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
-def record_tool_outcome(repo_root: Path, tool_call: dict) -> None:
+def record_tool_outcome(repo_root: Path, tool_call: dict, skill_path: str | None = None) -> None:
     telemetry_dir = repo_root / "skills" / "lifecycle" / "telemetry"
     telemetry_dir.mkdir(parents=True, exist_ok=True)
 
@@ -96,6 +96,8 @@ def record_tool_outcome(repo_root: Path, tool_call: dict) -> None:
         "error_preview": error_msg[:200] if error_msg else "",
         "event": "tool_outcome",
     }
+    if skill_path:
+        record["skill_path"] = skill_path
     log_path = telemetry_dir / "tool_outcomes.jsonl"
     _rotate_jsonl_if_needed(log_path)
     with open(log_path, "a", encoding="utf-8") as f:
@@ -126,10 +128,7 @@ def main() -> int:
     except json.JSONDecodeError:
         return 0
 
-    # ── Always record tool outcome ──
-    record_tool_outcome(repo_root, tool_call)
-
-    # ── Record skill usage ──
+    # ── Detect skill path first (shared between usage + tool outcome) ──
     skill_path = None
     source = None
 
@@ -160,6 +159,10 @@ def main() -> int:
             skill_path = "engineering"
             source = "classification"
 
+    # ── Always record tool outcome (with skill_path if detected) ──
+    record_tool_outcome(repo_root, tool_call, skill_path=skill_path)
+
+    # ── Record skill usage ──
     if skill_path and source:
         record_skill_usage(repo_root, skill_path, source)
 
