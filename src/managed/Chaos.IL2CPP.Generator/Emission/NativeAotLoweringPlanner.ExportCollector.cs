@@ -62,7 +62,7 @@ public sealed partial class NativeAotLoweringPlanner
         foreach (var sym in missing)
         {
             int argCount = referenced[sym];
-            stub.Append("extern CHAOS_IL2CPP_INTPTR ");
+            stub.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
             stub.Append(sym);
             stub.Append('(');
             for (int i = 0; i < argCount; i++)
