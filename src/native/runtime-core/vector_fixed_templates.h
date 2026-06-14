@@ -1219,6 +1219,251 @@ inline TCarrier VectorFixedTestAllBitsSet(const TCarrier& value) {
     return result;
 }
 
+// ── Saturating arithmetic ──
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedAddSaturate(const TCarrier& a, const TCarrier& b) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* al = reinterpret_cast<const TScalar*>(&a);
+    const TScalar* bl = reinterpret_cast<const TScalar*>(&b);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        // Use wider type for overflow detection
+        if constexpr (sizeof(TScalar) == 1) {
+            CHAOS_IL2CPP_INT16 wide = static_cast<CHAOS_IL2CPP_INT16>(al[i]) + static_cast<CHAOS_IL2CPP_INT16>(bl[i]);
+            rl[i] = static_cast<TScalar>(wide > 127 ? 127 : (wide < -128 ? -128 : wide));
+        } else if constexpr (sizeof(TScalar) == 2) {
+            CHAOS_IL2CPP_INT32 wide = static_cast<CHAOS_IL2CPP_INT32>(al[i]) + static_cast<CHAOS_IL2CPP_INT32>(bl[i]);
+            rl[i] = static_cast<TScalar>(wide > 32767 ? 32767 : (wide < -32768 ? -32768 : wide));
+        } else if constexpr (sizeof(TScalar) == 4) {
+            CHAOS_IL2CPP_INT64 wide = static_cast<CHAOS_IL2CPP_INT64>(al[i]) + static_cast<CHAOS_IL2CPP_INT64>(bl[i]);
+            rl[i] = static_cast<TScalar>(wide > 2147483647LL ? 2147483647 : (wide < -2147483648LL ? -2147483648 : wide));
+        } else {
+            rl[i] = static_cast<TScalar>(0);
+        }
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedSubtractSaturate(const TCarrier& a, const TCarrier& b) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* al = reinterpret_cast<const TScalar*>(&a);
+    const TScalar* bl = reinterpret_cast<const TScalar*>(&b);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if constexpr (sizeof(TScalar) == 1) {
+            CHAOS_IL2CPP_INT16 wide = static_cast<CHAOS_IL2CPP_INT16>(al[i]) - static_cast<CHAOS_IL2CPP_INT16>(bl[i]);
+            rl[i] = static_cast<TScalar>(wide > 127 ? 127 : (wide < -128 ? -128 : wide));
+        } else if constexpr (sizeof(TScalar) == 2) {
+            CHAOS_IL2CPP_INT32 wide = static_cast<CHAOS_IL2CPP_INT32>(al[i]) - static_cast<CHAOS_IL2CPP_INT32>(bl[i]);
+            rl[i] = static_cast<TScalar>(wide > 32767 ? 32767 : (wide < -32768 ? -32768 : wide));
+        } else if constexpr (sizeof(TScalar) == 4) {
+            CHAOS_IL2CPP_INT64 wide = static_cast<CHAOS_IL2CPP_INT64>(al[i]) - static_cast<CHAOS_IL2CPP_INT64>(bl[i]);
+            rl[i] = static_cast<TScalar>(wide > 2147483647LL ? 2147483647 : (wide < -2147483648LL ? -2147483648 : wide));
+        } else {
+            rl[i] = static_cast<TScalar>(0);
+        }
+    }
+    return result;
+}
+
+// ── Math (float/double) ──
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedSqrt(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>)
+            rl[i] = std::sqrt(sl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>)
+            rl[i] = std::sqrt(sl[i]);
+        else rl[i] = static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedCeiling(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>)
+            rl[i] = std::ceil(sl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>)
+            rl[i] = std::ceil(sl[i]);
+        else rl[i] = sl[i];
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedFloor(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>)
+            rl[i] = std::floor(sl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>)
+            rl[i] = std::floor(sl[i]);
+        else rl[i] = sl[i];
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedTruncate(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>)
+            rl[i] = std::trunc(sl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>)
+            rl[i] = std::trunc(sl[i]);
+        else rl[i] = sl[i];
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedCopySign(const TCarrier& magnitude, const TCarrier& sign) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* ml = reinterpret_cast<const TScalar*>(&magnitude);
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&sign);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>)
+            rl[i] = std::copysignf(ml[i], sl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>)
+            rl[i] = std::copysign(ml[i], sl[i]);
+        else rl[i] = static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+// ── Min/Max variants ──
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedMaxNative(const TCarrier& a, const TCarrier& b) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* al = reinterpret_cast<const TScalar*>(&a);
+    const TScalar* bl = reinterpret_cast<const TScalar*>(&b);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        rl[i] = al[i] > bl[i] ? al[i] : bl[i];  // same as Max for integral types
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedMinNative(const TCarrier& a, const TCarrier& b) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* al = reinterpret_cast<const TScalar*>(&a);
+    const TScalar* bl = reinterpret_cast<const TScalar*>(&b);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        rl[i] = al[i] < bl[i] ? al[i] : bl[i];
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedClampNative(const TCarrier& value, const TCarrier& min, const TCarrier& max) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* vl = reinterpret_cast<const TScalar*>(&value);
+    const TScalar* mn = reinterpret_cast<const TScalar*>(&min);
+    const TScalar* mx = reinterpret_cast<const TScalar*>(&max);
+    TScalar* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        rl[i] = vl[i] < mn[i] ? mn[i] : (vl[i] > mx[i] ? mx[i] : vl[i]);
+    }
+    return result;
+}
+
+// ── Conversions ──
+
+template <typename TFromScalar, typename TToScalar, typename TFromCarrier, typename TToCarrier>
+inline TToCarrier VectorFixedConvertToVector(const TFromCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TFromCarrier) / sizeof(TFromScalar);
+    TToCarrier result{};
+    const TFromScalar* sl = reinterpret_cast<const TFromScalar*>(&value);
+    TToScalar* rl = reinterpret_cast<TToScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i)
+        rl[i] = static_cast<TToScalar>(sl[i]);
+    return result;
+}
+
+template <typename TFromScalar, typename TFromCarrier, typename TToCarrier>
+inline TToCarrier VectorFixedWiden(const TFromCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TFromCarrier) / sizeof(TFromScalar);
+    TToCarrier result{};
+    using TToScalar = decltype(static_cast<TFromScalar>(0) + static_cast<TFromScalar>(0));  // fallback, won't compile
+    const TFromScalar* sl = reinterpret_cast<const TFromScalar*>(&value);
+    auto* rl = reinterpret_cast<TFromScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i)
+        rl[i] = sl[i];
+    return result;
+}
+
+// ── Reduction ──
+
+template <typename TScalar, typename TCarrier>
+inline TScalar VectorFixedSum(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    TScalar acc = static_cast<TScalar>(0);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i)
+        acc += sl[i];
+    return acc;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TScalar VectorFixedDot(const TCarrier& a, const TCarrier& b) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    const TScalar* al = reinterpret_cast<const TScalar*>(&a);
+    const TScalar* bl = reinterpret_cast<const TScalar*>(&b);
+    TScalar acc = static_cast<TScalar>(0);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i)
+        acc += al[i] * bl[i];
+    return acc;
+}
+
+template <typename TScalar, typename TCarrier>
+inline CHAOS_IL2CPP_UINT64 VectorFixedExtractMostSignificantBits(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    CHAOS_IL2CPP_UINT64 result = 0;
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count && i < 64; ++i)
+        if ((sl[i] & (static_cast<TScalar>(1) << (sizeof(TScalar) * 8 - 1))) != 0)
+            result |= (static_cast<CHAOS_IL2CPP_UINT64>(1) << i);
+    return result;
+}
+
+// ── CopyTo ──
+
+template <typename TScalar, typename TCarrier>
+inline void VectorFixedCopyTo(const TCarrier& value, TScalar* dest, CHAOS_IL2CPP_INT32 startIndex) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i)
+        dest[startIndex + i] = sl[i];
+}
+
 }  // namespace chaos::il2cpp::vector_fixed
 
 

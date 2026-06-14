@@ -4779,6 +4779,181 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterVectorPredicate("LastIndexOfWhereAllBitsSet",
                 $"static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedLastIndexOf<{{CPPTYPE}}, {{CARRIER}}>(*reinterpret_cast<{{CARRIER}}*>({{0}}), static_cast<{{CPPTYPE}}>(~static_cast<{{CPPTYPE}}>(0))))");
 
+            // ── Saturating arithmetic ──
+            RegisterVectorBinOp("AddSaturate", "VectorFixedAddSaturate", true);
+            RegisterVectorBinOp("SubtractSaturate", "VectorFixedSubtractSaturate", true);
+
+            // ── Math (float/double only) ──
+            RegisterVectorUnaryOp("Sqrt", "VectorFixedSqrt");
+            RegisterVectorUnaryOp("Ceiling", "VectorFixedCeiling");
+            RegisterVectorUnaryOp("Floor", "VectorFixedFloor");
+            RegisterVectorUnaryOp("Truncate", "VectorFixedTruncate");
+
+            // ── CopySign ──
+            RegisterVectorBinOp("CopySign", "VectorFixedCopySign", true);
+
+            // ── Min/Max variants ──
+            RegisterVectorBinOp("MaxNative", "VectorFixedMaxNative", true);
+            RegisterVectorBinOp("MinNative", "VectorFixedMinNative", true);
+            RegisterVectorBinOp("MaxMagnitude", "VectorFixedMax", true);
+            RegisterVectorBinOp("MinMagnitude", "VectorFixedMin", true);
+            RegisterVectorBinOp("MaxMagnitudeNumber", "VectorFixedMax", true);
+            RegisterVectorBinOp("MinMagnitudeNumber", "VectorFixedMin", true);
+            RegisterVectorBinOp("MaxNumber", "VectorFixedMax", true);
+            RegisterVectorBinOp("MinNumber", "VectorFixedMin", true);
+
+            // ── ClampNative (ternary) ──
+            RegisterVectorBinOp("ClampNative", "VectorFixedClampNative", true);
+
+            // ── Sum / Dot (reduction → scalar) ──
+            void RegisterVectorReductionScalar(string methodName, string templateFn)
+            {
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                {
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix,
+                        MethodName: methodName,
+                        Resolver: (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var cppType = MapTypeArgToCppType(elemType);
+                            if (cppType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            var ns = "chaos::il2cpp::vector_fixed::";
+                            return $"static_cast<CHAOS_IL2CPP_INTPTR>({ns}{templateFn}<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})))";
+                        }));
+                }
+            }
+            RegisterVectorReductionScalar("Sum", "VectorFixedSum");
+            RegisterVectorReductionScalar("ExtractMostSignificantBits", "VectorFixedExtractMostSignificantBits");
+
+            // ── Count ──
+            RegisterVectorPredicate("Count",
+                $"static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedCountWhereAllBitsSet<{{CPPTYPE}}, {{CARRIER}}>(*reinterpret_cast<{{CARRIER}}*>({{0}})))");
+
+            // ── ConvertTo* — these use VectorFixedConvertToVector ──
+            // Specialized inline shape that handles type conversion
+            void RegisterVectorConvertTo(string methodName)
+            {
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                {
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix,
+                        MethodName: methodName,
+                        Resolver: (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var fromType = MapTypeArgToCppType(elemType);
+                            if (fromType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            // Determine target type from method name
+                            string toType = methodName switch
+                            {
+                                "ConvertToInt32" or "ConvertToInt32Native" => "CHAOS_IL2CPP_INT32",
+                                "ConvertToInt64" or "ConvertToInt64Native" => "CHAOS_IL2CPP_INT64",
+                                "ConvertToUInt32" or "ConvertToUInt32Native" => "CHAOS_IL2CPP_UINT32",
+                                "ConvertToUInt64" or "ConvertToUInt64Native" => "CHAOS_IL2CPP_UINT64",
+                                "ConvertToSingle" => "float",
+                                "ConvertToDouble" => "double",
+                                _ => null
+                            };
+                            if (toType == null) return null;
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedConvertToVector<{fromType}, {toType}, {carrier}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        }));
+                }
+            }
+            RegisterVectorConvertTo("ConvertToInt32");
+            RegisterVectorConvertTo("ConvertToInt64");
+            RegisterVectorConvertTo("ConvertToUInt32");
+            RegisterVectorConvertTo("ConvertToUInt64");
+            RegisterVectorConvertTo("ConvertToSingle");
+            RegisterVectorConvertTo("ConvertToDouble");
+            RegisterVectorConvertTo("ConvertToInt32Native");
+            RegisterVectorConvertTo("ConvertToInt64Native");
+            RegisterVectorConvertTo("ConvertToUInt32Native");
+            RegisterVectorConvertTo("ConvertToUInt64Native");
+
+            // ── GetLower / GetUpper ──
+            // GetLower: Vector256<T> → Vector128<T> (lower 128 bits)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector256",
+                MethodName: "GetLower",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+            // GetUpper: Vector256<T> → Vector128<T> (upper 128 bits)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector256",
+                MethodName: "GetUpper",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes + 16, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+
+            // ── ToVector128 / ToVector256 ──
+            // ToVector128: Vector256<T> → Vector128<T> (truncate)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector256",
+                MethodName: "ToVector128",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+            // ToVector128Unsafe: same as ToVector128
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector256",
+                MethodName: "ToVector128Unsafe",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+            // ToVector256: Vector128<T> → Vector256<T> (extend)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector128",
+                MethodName: "ToVector256",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector128",
+                MethodName: "ToVector256Unsafe",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+
+            // ── CreateScalarUnsafe — same as CreateScalar but unchecked ──
+            // Already covered by RegisterVectorCreateScalar
+
+            // ── CreateSequence ──
+            foreach (var prefix in new[] { "Vector128", "Vector256" })
+            {
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix,
+                    MethodName: "CreateSequence",
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var elemType = ExtractVectorElementType(callee, paramTypes);
+                        if (elemType == null) return null;
+                        var cppType = MapTypeArgToCppType(elemType);
+                        if (cppType == null) return null;
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ " +
+                            $"constexpr CHAOS_IL2CPP_SIZE N = sizeof({carrier}) / sizeof({cppType}); " +
+                            $"{carrier} __r{{}}; " +
+                            $"auto* rl = reinterpret_cast<{cppType}*>(&__r); " +
+                            $"for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) rl[i] = static_cast<{cppType}>({{0}}) + static_cast<{cppType}>(i * static_cast<{cppType}>({{1}})); " +
+                            $"auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    }));
+            }
+
             // === Activator::CreateInstance with param array ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Activator",
