@@ -363,7 +363,7 @@ def main() -> int:
     print(f"  Nightly build complete ({total_duration:.0f}s)")
     failed_builds = len(all_results) - build_ok
     if failed_builds > 0:
-        print(f"  ⚠️  {failed_builds} chunk(s) failed")
+        print(f"  WARN: {failed_builds} chunk(s) failed")
     print(f"{'='*60}\n")
 
     return 1 if failed_builds > 0 else 0
