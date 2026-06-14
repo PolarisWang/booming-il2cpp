@@ -262,129 +262,7 @@ typedef struct RuntimeAbiV0 {
         RuntimeState* runtime_state,
         int64_t bytes);
 
-    /* ── RuntimeAbiV3 additions (ReferenceProof kernel helpers) ── */
-
-    /* Interop kernel32 (no runtime/thread state). */
-    CHAOS_IL2CPP_INTPTR (*interop_kernel32_get_last_error)(void);
-    CHAOS_IL2CPP_UINT32 (*interop_kernel32_get_current_process_id)(void);
-    CHAOS_IL2CPP_INT32 (*interop_kernel32_get_current_thread_id)(void);
-    CHAOS_IL2CPP_INTPTR (*interop_kernel32_get_current_process)(void);
-    CHAOS_IL2CPP_INTPTR (*interop_kernel32_get_current_thread)(void);
-    bool (*interop_kernel32_close_handle)(CHAOS_IL2CPP_INTPTR handle);
-    bool (*interop_kernel32_free_library)(CHAOS_IL2CPP_INTPTR handle);
-
-    /* Marshal alloc/free/realloc (without runtime/thread params). */
-    void* (*marshal_alloc_h_global)(size_t size);
-    void* (*marshal_alloc_co_task_mem)(size_t size);
-    void* (*marshal_realloc_h_global)(void* ptr, size_t size);
-    void* (*marshal_realloc_co_task_mem)(void* ptr, size_t size);
-    void (*marshal_free_h_global)(void* ptr);
-    void (*marshal_zero_free_co_task_mem_utf8)(void* ptr);
-    void* (*marshal_string_to_co_task_mem_utf8)(const char* str);
-
-    /* Task kernel. */
-    int32_t (*task_kernel_new_id)(void);
-
-    /* ═══════════════════════════════════════════════════════════════
-     * V1 additions: dispatch, hotpatch, module, type registration
-     * Added after struct_size so consumers can check abi_version.
-     * ═══════════════════════════════════════════════════════════════ */
-
-    /* Module registration. */
-    uint32_t (CHAOS_RUNTIME_ABI_CALL* register_module)(
-        const char* name,
-        const void* descriptor);
-
-    /* Hotpatch dispatch. */
-    bool (CHAOS_RUNTIME_ABI_CALL* hotpatch_is_active)(
-        const struct HotpatchEntryV0* entry);
-    bool (CHAOS_RUNTIME_ABI_CALL* hotpatch_should_keep_native)(
-        const struct HotpatchEntryV0* entry);
-
-    /* Null check / exception helpers. */
-    void (CHAOS_RUNTIME_ABI_CALL* raise_null_reference_exception)(void);
-    CHAOS_IL2CPP_INTPTR (CHAOS_RUNTIME_ABI_CALL* external_runtime_fallback)(
-        const char* subject_id);
-
-    /* Interpreter entry dispatch. */
-    void (CHAOS_RUNTIME_ABI_CALL* interpreter_entry_direct)(
-        CHAOS_IL2CPP_UINTPTR method_key,
-        void* args_buf,
-        void* ret_buf);
-
-    /* GC layout registration. */
-    void (CHAOS_RUNTIME_ABI_CALL* register_gc_layouts)(void);
-
-    /* Hotpatch module registration. */
-    void (CHAOS_RUNTIME_ABI_CALL* register_hotpatch_module)(
-        const struct HotpatchModuleV0* module);
-
-    /* Array helpers. */
-    CHAOS_IL2CPP_INTPTR (CHAOS_RUNTIME_ABI_CALL* array_empty)(void);
-
-    /* ── RuntimeAbiV1 additions ── */
-    /* GC allocation (raw, no type association). */
-    void* (CHAOS_RUNTIME_ABI_CALL* gc_alloc)(size_t size, int kind);
-    void* (CHAOS_RUNTIME_ABI_CALL* gc_alloc_atomic)(size_t size);
-
-    /* Value-type boxing — returns a boxed object on the GC heap. */
-    void* (CHAOS_RUNTIME_ABI_CALL* box_value_object)(void* value, TypeInfoHandle type);
-
-    /* VTable / method dispatch helpers. */
-    void* (CHAOS_RUNTIME_ABI_CALL* resolve_virtual_method)(void* obj, uint32_t slot);
-    void* (CHAOS_RUNTIME_ABI_CALL* resolve_method_table)(void* obj);
-
-    /* Type identity. */
-    void* (CHAOS_RUNTIME_ABI_CALL* get_type_info_handle)(TypeInfoHandle handle);
-
-    /* String ID resolution — returns a C string pointer. */
-    const char* (CHAOS_RUNTIME_ABI_CALL* resolve_string_id)(uint32_t string_id);
-
-    /* Thread-local static accessors. */
-    void* (CHAOS_RUNTIME_ABI_CALL* get_thread_static)(uint32_t index);
-    void  (CHAOS_RUNTIME_ABI_CALL* set_thread_static)(uint32_t index, void* value);
-    void* (CHAOS_RUNTIME_ABI_CALL* allocate_thread_static)(size_t size);
-
-    /* ── RuntimeAbiV2 additions (codegen emitter inline-call migration) ── */
-
-    /* Exception helper. */
-    void (CHAOS_RUNTIME_ABI_CALL* raise_exception)(void* exception_obj);
-
-    /* COM / RCW interop. */
-    bool (CHAOS_RUNTIME_ABI_CALL* marshal_is_rcw_handle)(CHAOS_IL2CPP_INTPTR handle);
-    void* (CHAOS_RUNTIME_ABI_CALL* marshal_get_rcw_unknown)(CHAOS_IL2CPP_INTPTR handle);
-    void (CHAOS_RUNTIME_ABI_CALL* throw_com_exception_for_hr)(int32_t hr);
-
-    /* Delegate / hotpatch. */
-    bool (CHAOS_RUNTIME_ABI_CALL* delegate_hotpatch_checkpoint)(void* delegate);
-
-    /* Marshal helpers. */
-    void (CHAOS_RUNTIME_ABI_CALL* marshal_free_co_task_mem)(void* ptr);
-    void* (CHAOS_RUNTIME_ABI_CALL* marshal_ptr_to_string_utf8)(const char* ptr);
-    void* (CHAOS_RUNTIME_ABI_CALL* marshal_ptr_to_string_wide)(const uint16_t* ptr);
-    CHAOS_IL2CPP_INTPTR (CHAOS_RUNTIME_ABI_CALL* marshal_safe_handle_get_handle)(void* safe_handle);
-    void (CHAOS_RUNTIME_ABI_CALL* marshal_struct_managed_to_native)(void* managed, void* native, void* type);
-    void (CHAOS_RUNTIME_ABI_CALL* marshal_struct_native_to_managed)(void* native, void* managed, void* type);
-
-    /* Native library loading. */
-    void* (CHAOS_RUNTIME_ABI_CALL* native_library_load)(const char* path);
-    void* (CHAOS_RUNTIME_ABI_CALL* native_library_get_proc_address)(void* handle, const char* name);
-
-    /* PInvoke error tracking. */
-    void (CHAOS_RUNTIME_ABI_CALL* set_last_pinvoke_error)(int32_t error);
-    int32_t (CHAOS_RUNTIME_ABI_CALL* get_last_os_error)(void);
-    void (CHAOS_RUNTIME_ABI_CALL* clear_last_os_error)(void);
-
-    /* PInvoke DLL resolution. */
-    void* (CHAOS_RUNTIME_ABI_CALL* try_resolve_dll_import)(const char* dll_name, const char* entry_point);
-
-    /* GC finalization. */
-    void (CHAOS_RUNTIME_ABI_CALL* gc_register_finalizable)(void* obj);
-
-    /* Thread state helpers. */
-    void* (CHAOS_RUNTIME_ABI_CALL* get_current_runtime_state)(void);
-    void* (CHAOS_RUNTIME_ABI_CALL* get_current_thread_state)(void);
-} RuntimeAbiV0;
+    } RuntimeAbiV0;
 
 /* RuntimeAbiV1/V2 — V1 adds GC/boxing/vtable/thread-static helpers;
  * V2 adds exception/marshal/PInvoke/GC-finalization/thread-state helpers.
@@ -402,13 +280,6 @@ CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV1* CHAOS_RUNTIME_ABI_CALL chaos_runtim
 /* Returns the process-wide v2 table (superset of v0, v1). */
 CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV2* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v2(void);
 
-/* RuntimeAbiV3 — inherits all V2 fields and adds ReferenceProof kernel helpers
- * (interop kernel32, marshal alloc/free, task kernel, etc.).
- * Layout-compatible with V0/V1/V2 for the first N fields. */
-typedef RuntimeAbiV0 RuntimeAbiV3;
-
-/* Returns the process-wide v3 table (superset of v2). */
-CHAOS_RUNTIME_ABI_EXPORT const RuntimeAbiV3* CHAOS_RUNTIME_ABI_CALL chaos_runtime_get_abi_v3(void);
 
 #ifdef __cplusplus
 }
