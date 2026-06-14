@@ -4236,7 +4236,7 @@ public sealed partial class NativeAotLoweringPlanner
                 string? candidate = null;
                 for (var i = 0; i < paramTypes.Count; i++)
                 {
-                    var m = System.Text.RegularExpressions.Regex.Match(paramTypes[i], @"Vector(?:128|256)<([^>]+)>");
+                    var m = System.Text.RegularExpressions.Regex.Match(paramTypes[i], @"Vector(?:64|128|256|512)<([^>]+)>");
                     if (m.Success)
                     {
                         candidate = m.Groups[1].Value;
@@ -4246,7 +4246,7 @@ public sealed partial class NativeAotLoweringPlanner
                 // Fall back to matching in the callee SubjectId
                 if (candidate == null)
                 {
-                    var m = System.Text.RegularExpressions.Regex.Match(callee, @"Vector(?:128|256)<([^>]+)>");
+                    var m = System.Text.RegularExpressions.Regex.Match(callee, @"Vector(?:64|128|256|512)<([^>]+)>");
                     if (m.Success) candidate = m.Groups[1].Value;
                 }
                 if (candidate == null || candidate.Contains('<')) return null;
@@ -4275,7 +4275,9 @@ public sealed partial class NativeAotLoweringPlanner
 
             static string? InferVectorCarrierType(string callee)
             {
+                if (callee.Contains("Vector512")) return "RuntimeIntrinsicVector512Carrier";
                 if (callee.Contains("Vector256")) return "RuntimeIntrinsicVector256Carrier";
+                if (callee.Contains("Vector64")) return "RuntimeIntrinsicVector64Carrier";
                 return "RuntimeIntrinsicVector128Carrier"; // default for Vector128
             }
 
@@ -4307,7 +4309,7 @@ public sealed partial class NativeAotLoweringPlanner
                 string TcForTemplateFn(string fn) =>
                     fn.StartsWith("VectorFixedCompare") ? TcForCompare() : tc;
                 string Deref(int i) =>
-                    i < paramTypes.Count && (paramTypes[i].Contains("Vector128<") || paramTypes[i].Contains("Vector256<"))
+                    i < paramTypes.Count && (paramTypes[i].Contains("Vector64<") || paramTypes[i].Contains("Vector128<") || paramTypes[i].Contains("Vector256<") || paramTypes[i].Contains("Vector512<"))
                         ? $"*reinterpret_cast<{carrier}*>({{{i}}})"
                         : $"{{{i}}}";
 
@@ -4339,7 +4341,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var allParamsAreVector = true;
                     for (var pi = 0; pi < paramTypes.Count; pi++)
                     {
-                        if (!paramTypes[pi].Contains("Vector128<") && !paramTypes[pi].Contains("Vector256<"))
+                        if (!paramTypes[pi].Contains("Vector64<") && !paramTypes[pi].Contains("Vector128<") && !paramTypes[pi].Contains("Vector256<") && !paramTypes[pi].Contains("Vector512<"))
                         {
                             allParamsAreVector = false;
                             break;
@@ -4552,7 +4554,7 @@ public sealed partial class NativeAotLoweringPlanner
             void RegisterVectorCreateZero()
             {
                 // get_Zero: VectorFixedBroadcast<TScalar, TCarrier>(0)
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
@@ -4573,7 +4575,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             void RegisterVectorAllBitsSet()
             {
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
@@ -4595,7 +4597,7 @@ public sealed partial class NativeAotLoweringPlanner
             // ── CreateScalar / CreateScalarUnsafe ──
             void RegisterVectorCreateScalar()
             {
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     foreach (var methodName in new[] { "CreateScalar", "CreateScalarUnsafe" })
                     {
@@ -4620,7 +4622,7 @@ public sealed partial class NativeAotLoweringPlanner
             // ── GetElement / ToScalar ──
             void RegisterVectorAccess()
             {
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
@@ -4663,7 +4665,7 @@ public sealed partial class NativeAotLoweringPlanner
                     "AsNInt", "AsNUInt", "AsSByte", "AsSingle", "AsUInt16",
                     "AsUInt32", "AsUInt64",
                 };
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     foreach (var methodName in reinterpretMethods)
                     {
@@ -4710,7 +4712,7 @@ public sealed partial class NativeAotLoweringPlanner
             // These return bool/int scalars, not vectors.
             void RegisterVectorPredicate(string methodName, string exprTemplate)
             {
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
@@ -4734,7 +4736,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // IsZero — returns Vector128/256 mask (carrier), not bool
-            foreach (var prefix in new[] { "Vector128", "Vector256" })
+            foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
             {
                 registry.RegisterInline(new InlineShapeDescriptor(
                     TypeDisplayNamePrefix: prefix,
@@ -4808,7 +4810,7 @@ public sealed partial class NativeAotLoweringPlanner
             // ── Sum / Dot (reduction → scalar) ──
             void RegisterVectorReductionScalar(string methodName, string templateFn)
             {
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
@@ -4837,7 +4839,7 @@ public sealed partial class NativeAotLoweringPlanner
             // Specialized inline shape that handles type conversion
             void RegisterVectorConvertTo(string methodName)
             {
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     registry.RegisterInline(new InlineShapeDescriptor(
                         TypeDisplayNamePrefix: prefix,
@@ -4932,7 +4934,7 @@ public sealed partial class NativeAotLoweringPlanner
             // Already covered by RegisterVectorCreateScalar
 
             // ── CreateSequence ──
-            foreach (var prefix in new[] { "Vector128", "Vector256" })
+            foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
             {
                 registry.RegisterInline(new InlineShapeDescriptor(
                     TypeDisplayNamePrefix: prefix,
@@ -4969,7 +4971,7 @@ public sealed partial class NativeAotLoweringPlanner
             // ── Dot (binary reduction → scalar) ──
             void RegisterVectorDot()
             {
-                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
                 {
                     var ns = "chaos::il2cpp::vector_fixed::";
                     registry.RegisterInline(new InlineShapeDescriptor(
@@ -4990,7 +4992,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterVectorDot();
 
             // ── EqualsAll / EqualsAny ──
-            foreach (var prefix in new[] { "Vector128", "Vector256" })
+            foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
             {
                 registry.RegisterInline(new InlineShapeDescriptor(
                     TypeDisplayNamePrefix: prefix, MethodName: "EqualsAll",
@@ -5019,7 +5021,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // ── WithElement ──
-            foreach (var prefix in new[] { "Vector128", "Vector256" })
+            foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
             {
                 registry.RegisterInline(new InlineShapeDescriptor(
                     TypeDisplayNamePrefix: prefix, MethodName: "WithElement",
@@ -5057,6 +5059,47 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterVectorUnaryOp("Sin", "VectorFixedSin");
             RegisterVectorUnaryOp("Exp", "VectorFixedExp");
             RegisterVectorUnaryOp("Round", "VectorFixedRound");
+
+            // ── Additional math ──
+            RegisterVectorBinOp("Hypot", "VectorFixedHypot", true);
+            RegisterVectorUnaryOp("DegreesToRadians", "VectorFixedDegreesToRadians");
+            RegisterVectorUnaryOp("RadiansToDegrees", "VectorFixedRadiansToDegrees");
+
+            // ── All / Any (scalar comparison) ──
+            foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
+            {
+                foreach (var methodName in new[] { "All", "Any" })
+                {
+                    var templateFn = methodName == "All" ? "VectorFixedAllEqual" : "VectorFixedAnyEqual";
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix, MethodName: methodName,
+                        Resolver: (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var cppType = MapTypeArgToCppType(elemType);
+                            if (cppType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            var ns = "chaos::il2cpp::vector_fixed::";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ return static_cast<CHAOS_IL2CPP_INTPTR>({ns}{templateFn}<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), static_cast<{cppType}>({{1}})) ? 1 : 0); }}()";
+                        }));
+                }
+            }
+
+            // ── LoadUnsafe ──
+            foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
+            {
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix, MethodName: "LoadUnsafe",
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        var ns = "chaos::il2cpp::vector_fixed::";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedLoadUnsafe<{carrier}>({{0}}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    }));
+            }
 
             // === Activator::CreateInstance with param array ===
             registry.RegisterGeneric(new GenericShapeDescriptor(

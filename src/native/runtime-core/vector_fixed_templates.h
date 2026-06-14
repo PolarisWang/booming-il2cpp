@@ -1881,6 +1881,90 @@ inline void VectorFixedStoreUnsafe(CHAOS_IL2CPP_INTPTR dest, const TCarrier& val
     std::memcpy(reinterpret_cast<void*>(dest), &value, sizeof(TCarrier));
 }
 
+// ── Additional math ──
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedHypot(const TCarrier& a, const TCarrier& b) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* al = reinterpret_cast<const TScalar*>(&a);
+    const TScalar* bl = reinterpret_cast<const TScalar*>(&b);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>) rl[i] = std::hypotf(al[i], bl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>) rl[i] = std::hypot(al[i], bl[i]);
+        else rl[i] = static_cast<TScalar>(0);
+    }
+    return result;
+}
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedDegreesToRadians(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if constexpr (std::is_floating_point_v<TScalar>) {
+            constexpr TScalar pi = TScalar(3.14159265358979323846);
+            rl[i] = sl[i] * pi / TScalar(180);
+        } else rl[i] = static_cast<TScalar>(0);
+    }
+    return result;
+}
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedRadiansToDegrees(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if constexpr (std::is_floating_point_v<TScalar>) {
+            constexpr TScalar pi = TScalar(3.14159265358979323846);
+            rl[i] = sl[i] * TScalar(180) / pi;
+        } else rl[i] = static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+// ── NarrowWithSaturation ──
+template <typename TFromScalar, typename TToScalar, typename TFromCarrier, typename TToCarrier>
+inline TToCarrier VectorFixedNarrowWithSaturation(const TFromCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TFromCarrier) / sizeof(TFromScalar);
+    TToCarrier result{};
+    const TFromScalar* sl = reinterpret_cast<const TFromScalar*>(&value);
+    auto* rl = reinterpret_cast<TToScalar*>(&result);
+    TToScalar min_val{}, max_val{};
+    if constexpr (std::is_signed_v<TToScalar>) {
+        min_val = static_cast<TToScalar>(static_cast<TToScalar>(1) << (sizeof(TToScalar) * 8 - 1));
+        max_val = static_cast<TToScalar>(~(static_cast<TToScalar>(1) << (sizeof(TToScalar) * 8 - 1)));
+    } else {
+        max_val = static_cast<TToScalar>(~static_cast<TToScalar>(0));
+    }
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if (sl[i] > static_cast<TFromScalar>(max_val)) rl[i] = max_val;
+        else if (sl[i] < static_cast<TFromScalar>(min_val)) rl[i] = min_val;
+        else rl[i] = static_cast<TToScalar>(sl[i]);
+    }
+    return result;
+}
+
+// ── All/Any scalar comparison ──
+template <typename TScalar, typename TCarrier>
+inline bool VectorFixedAllEqual(const TCarrier& value, TScalar scalar) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i)
+        if (sl[i] != scalar) return false;
+    return true;
+}
+template <typename TScalar, typename TCarrier>
+inline bool VectorFixedAnyEqual(const TCarrier& value, TScalar scalar) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i)
+        if (sl[i] == scalar) return true;
+    return false;
+}
+
 }  // namespace chaos::il2cpp::vector_fixed
 
 
