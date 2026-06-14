@@ -136,9 +136,10 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			if (!string.Equals(instructions[i].Op, "initobj", StringComparison.Ordinal))
 				continue;
-			var targetRef = instructions[i].TargetReference;
-			if (targetRef?.TypeShape != AotCoreIrTypeShapeKind.ValueType)
-				continue;
+			// initobj only operates on value types per IL spec, so the
+			// targetRef typeShape check is redundant. Explicitly omitted
+			// because generic value types (e.g. Vector128<T>) may carry
+			// an incorrect typeShape (ReferenceType=1) in the AOT core IR.
 			if (!string.Equals(instructions[i - 1].Op, "ldloca", StringComparison.Ordinal))
 				continue;
 			structLocals.Add(GetRequiredIntOperand(instructions[i - 1]));

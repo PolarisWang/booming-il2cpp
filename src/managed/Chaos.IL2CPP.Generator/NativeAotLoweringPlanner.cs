@@ -4064,8 +4064,14 @@ return sb.ToString();
             double doubleValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Double, doubleValue),
             char charValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Char, charValue),
             string stringValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.String, stringValue),
-            _ => throw new NotSupportedException(
-                $"native-aot custom-attribute materialization does not support literal value '{value.GetType().FullName}'."),
+            _ => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.String,
+                value.GetType().FullName switch
+                {
+                    not null when value.GetType().FullName.StartsWith("System.Collections.Immutable.ImmutableArray")
+                        => $"(immutable-array:{value})",
+                    not null => $"(literal:{value})",
+                    null => $"(literal)",
+                }),
         };
     }
 
