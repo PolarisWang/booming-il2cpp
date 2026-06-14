@@ -163,7 +163,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"));
 			builder.AppendLine(";");
 			builder.AppendLine("    chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);");
-			builder.AppendLine("    auto* owned_utf8 = static_cast<char*>(chaos_runtime_get_abi_v0()->gc_alloc_atomic(chaos_view.byte_count + 1));");
+			builder.AppendLine("    auto* owned_utf8 = static_cast<char*>(GcAllocateAtomic(chaos_view.byte_count + 1));");
 			builder.AppendLine("    CHAOS_IL2CPP_MEMCPY(owned_utf8, chaos_view.utf8_data, chaos_view.byte_count);");
 			builder.AppendLine("    owned_utf8[chaos_view.byte_count] = '\\0';");
 			builder.AppendLine("    chaos_string->utf8_data = owned_utf8;");
