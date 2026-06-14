@@ -22,7 +22,7 @@ import sys
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime, timezone
-from multiprocessing import Lock
+from multiprocessing import Manager
 from pathlib import Path
 from typing import Any
 
@@ -261,7 +261,7 @@ def main() -> int:
     print(f"\n  Phase 1-2: Running chunks (build={args.max_workers} workers, "
           f"bench={args.bench_workers} workers)...")
 
-    bench_lock = Lock()
+    bench_lock = Manager().Lock()
     all_results: dict[str, dict[str, StageResult]] = {}
     futures = []
 
