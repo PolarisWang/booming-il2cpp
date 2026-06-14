@@ -1,6 +1,6 @@
 # Chaos IL2CPP — 项目状态
 
-> 最后更新: 2026-06-11
+> 最后更新: 2026-06-14
 
 ---
 
@@ -169,3 +169,43 @@
 | TCVC | Thread-local VTable Cache |
 | TLAB | Thread-Local Allocation Buffer |
 | TPG | Test Project Generator |
+
+---
+
+## 技能系统 & 管线治理 (2026-06-14)
+
+### 技能系统审查（6 轮）
+
+| 轮次 | 重点 | 关键修复 |
+|------|------|---------|
+| 1 | 加载机制 | CLAUDE.md 执行协议加步骤 0（强制 Skill 加载），hook 强制 dev-il2cpp 为首位 |
+| 2 | 全流程风险 | routing-rules.md 重复表清理、core-agent 域编号修正、.hot_skills 补 dev-il2cpp、typo 修复、loaded_skills_cache 会话缓存 |
+| 3 | 数据源统一 | expert-registry.json 重写为唯一权威源（v1→v2），CLAUDE.md/routing-rules/core-agent/子控制器全部精简为引用 JSON |
+| 4 | 外部一致性 | hook 正则修正（捕获正确 Expert 名）、registries/il2cpp.md 补 4 个缺失 Expert（10→14→18）、skill-index 数量同步 |
+| 5 | 内部一致性 | 路径前缀 .ai/skills/ vs skills/ 统一、架构图与路由协议对齐、verification-before-completion 加入关联技能、ATG 关键词扩充 |
+| 6 | 执行时序 | Hook 竞态修复（CLAUDE 步骤 0/1 交换顺序 + loaded_expert 提前写入）、步骤 5 sed 替代覆盖写入、manifest 版本 2.0.0→2.1.0 |
+
+### Expert 路由
+
+- **单一权威源**: `.ai/skills/discovery/expert-registry.json` (v2)
+  - 12 domains / 19 experts with keywords / 3 sub-controllers / 5 cross-cutting
+  - 域 6 修正: `codegen-expert` → `translation-expert`
+  - 删除 workflow_group（统一用 expert_sub_controller）
+- **自动化工具**: `testing/foundation-dll/verification/tools/expert_lookup.py`
+  - `--domain N` / `--keyword X` / `--list-domains` / `--controller`
+- **会话缓存**: `.claude/.loaded_skills_cache` — 同域连续轮次跳过重读
+- **Hook 防护**: PreToolUse 验证 loaded_expert 首位=dev-il2cpp，阻断未分类的工具调用
+
+### 管线优化
+
+| 优先级 | 修复 | 文件 |
+|--------|------|------|
+| P0 | Cache key 加入 ATG/TPG 工具二进制 hash | `build.py`, `hephaestus_cache.py` |
+| P0 | CI 三级 family 体系 (core/standard/extended) | `ci_smoke.py` |
+| P1 | 阶段依赖 DAG 校验 | `chunk_pipeline.py` |
+| P1 | coverage_audit --mode strict (缺口 >5% → failed) | `coverage_audit.py` |
+| P2 | Cross-tech fact diff (AOT vs JIT 通过性对比) | `fact_chunk.py` |
+| P2 | BOUNDARY_OVERRIDE 30 天过期预警 | `check_layer_boundaries.py` |
+| P3 | net8.0 sanitization 简化 (删除脆弱重试逻辑) | `managed_benchmark.py` |
+| P3 | 进度/ETA 显示 `[3/28 (11%), ETA 12min]` | `chunk_pipeline.py` |
+| P3 | README.md 重写 (chunk-based pipeline) | `README.md` |

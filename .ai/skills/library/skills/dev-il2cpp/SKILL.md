@@ -80,11 +80,12 @@ dev-il2cpp（.claude/skills/ 唯一入口）
    echo "dev-il2cpp" >> .claude/.loaded_skills_cache
    ```
 4. 按下方 **路由协议** 找到域名对应 Expert，继续读取其 SKILL.md
-5. 读取完所有 Expert 的 SKILL.md 后，确认 `.claude/.classified` 中已写入完整标记：
+5. 读取完所有 Expert 的 SKILL.md 后，更新 loaded_expert 行追加 Expert 名：
    ```bash
-   echo "本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp → dev-il2cpp-codegen-expert" > .claude/.classified
-   echo 'loaded_expert:dev-il2cpp→dev-il2cpp-codegen-expert' >> .claude/.classified
+   # 将 loaded_expert:dev-il2cpp 更新为 loaded_expert:dev-il2cpp→<expert_name>
+   sed -i "s/^loaded_expert:dev-il2cpp$/loaded_expert:dev-il2cpp→dev-il2cpp-codegen-expert/" .claude/.classified
    ```
+   > 注意：分类声明已在 CLAUDE.md 步骤 0 写入，本步骤**只追加 Expert 名**，不覆盖分类文本。
 6. 将对应 Expert 也加入会话缓存：
    ```bash
    echo "dev-il2cpp-codegen-expert" >> .claude/.loaded_skills_cache

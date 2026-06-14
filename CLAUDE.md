@@ -22,9 +22,13 @@
 > action: `read` / `fix` / `build` / `verify` / `plan`
 >
 > **执行协议**：
-> 0. **强制**：调用 `Skill("dev-il2cpp")` 加载入口技能，读取其 SKILL.md 获取路由指令和核心规则
-> 1. 输出分类声明（格式见上，`dev-il2cpp` 为固定首加载）→ `echo "..." > .claude/.classified`
-> 2. **🔴 强制阻断门**：分类声明后、任何工具使用前，必须按 dev-il2cpp 的路由协议加载对应知识
+> 0. 输出分类声明（`dev-il2cpp` 为固定首加载）并写入标记文件：
+>    ```bash
+>    echo "本轮任务涉及 {域1(编号)} + {域2(编号)} ，{action} 操作，第 N 轮 → 加载 dev-il2cpp → dev-xxx-expert" > .claude/.classified
+>    echo 'loaded_expert:dev-il2cpp' >> .claude/.classified
+>    ```
+> 1. **强制**：调用 `Skill("dev-il2cpp")` 加载入口技能，读取其 SKILL.md 获取路由指令和核心规则
+> 2. **🔴 强制阻断门**：分类声明后，必须按 dev-il2cpp 的路由协议加载对应知识
 >    — 单域：dev-il2cpp → 读对应 Expert 的 SKILL.md 注入领域知识
 >    — 多域（≥2）：dev-il2cpp → 读 `dev-il2cpp-core-agent` 的 SKILL.md 执行调度循环
 >    — 验证方式：`.claude/.classified` 文件必须含 `loaded_expert:<name>` 行，且首位必须是 `dev-il2cpp`
