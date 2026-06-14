@@ -921,8 +921,8 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"{indentation}    // Hotpatch-aware ldftn wrapper (slot {ftnSlot})");
 				builder.AppendLine($"{indentation}    static auto* chaos_ftn_thunk = +[]({ftnSig}) -> {ftnRet} {{");
 				builder.AppendLine($"{indentation}        auto& _d_entry = s_hotpatch_entries[{ftnSlot}];");
-				builder.AppendLine($"{indentation}        if (chaos_runtime_get_abi_v0()->hotpatch_is_active(_d_entry)");
-				builder.AppendLine($"{indentation}            && !chaos_runtime_get_abi_v0()->hotpatch_should_keep_native(_d_entry))");
+				builder.AppendLine($"{indentation}        if (chaos_runtime_get_abi_v0()->hotpatch_is_active(&_d_entry)");
+				builder.AppendLine($"{indentation}            && !chaos_runtime_get_abi_v0()->hotpatch_should_keep_native(&_d_entry))");
 				builder.AppendLine($"{indentation}        {{");
 				if (ftnParams.Count > 0)
 				{
@@ -4476,8 +4476,8 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		{
 			builder.AppendLine($"{indentation}    {returnType} _d_hpresult{{}};");
 		}
-		builder.AppendLine($"{indentation}    if (chaos_runtime_get_abi_v0()->hotpatch_is_active(_d{dispatchSlotIndex})");
-			builder.AppendLine($"{indentation}        && !chaos_runtime_get_abi_v0()->hotpatch_should_keep_native(_d{dispatchSlotIndex}))");
+		builder.AppendLine($"{indentation}    if (chaos_runtime_get_abi_v0()->hotpatch_is_active(&_d{dispatchSlotIndex})");
+			builder.AppendLine($"{indentation}        && !chaos_runtime_get_abi_v0()->hotpatch_should_keep_native(&_d{dispatchSlotIndex}))");
 		builder.AppendLine($"{indentation}    {{");
 		if (parameterAbis.Count > 0)
 		{
