@@ -313,7 +313,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             info = subprocess.run(
                 ["dotnet", "--info"], capture_output=True, text=True, timeout=15
             )
-            m = re.search(r"Base Path:\s*(\S+)", info.stdout)
+            m = re.search(r"Base Path:\s*(.+)", info.stdout)
             if m:
                 base = Path(m.group(1).strip())
                 if base.is_dir():

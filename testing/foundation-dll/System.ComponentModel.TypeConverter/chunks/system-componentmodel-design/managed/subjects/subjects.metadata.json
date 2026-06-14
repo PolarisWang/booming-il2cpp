@@ -2,7 +2,8 @@
   "schemaVersion": 1,
   "assemblyName": "System.ComponentModel.TypeConverter",
   "chunkSlug": "system-componentmodel-design",
-  "totalMethods": 38,
+  "totalMethods": 39,
+  "factMethodCount": 28,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -42,7 +43,8 @@
     34,
     35,
     36,
-    37
+    37,
+    38
   ],
   "hotupdateMethodIndices": [
     0,
@@ -82,234 +84,241 @@
     34,
     35,
     36,
-    37
+    37,
+    38
   ],
   "methods": [
     {
       "index": 0,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerCollection::GetEnumerator:System.Collections.IEnumerator()",
       "generatedMethodId": "GetEnumerator_0__0"
     },
     {
       "index": 1,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
       "generatedMethodId": "CopyTo_0_System_Array_int_0"
     },
     {
       "index": 2,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
       "generatedMethodId": "CopyTo_0_System_Array_int_1"
     },
     {
       "index": 3,
-      "kind": "benchmark",
+      "kind": "fact",
+      "methodSubjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_0_System_Array_int_2"
+    },
+    {
+      "index": 4,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::GetEnumerator:System.Collections.IEnumerator()",
       "generatedMethodId": "GetEnumerator_1__0"
     },
     {
-      "index": 4,
-      "kind": "benchmark",
+      "index": 5,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::IndexOf:System.Int32(DesignerOptionService.DesignerOptionCollection)",
       "generatedMethodId": "IndexOf_2_DesignerOptionService_DesignerOptionCollection_0"
     },
     {
-      "index": 5,
-      "kind": "benchmark",
+      "index": 6,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/DesignerOptionService.DesignerOptionCollection::ShowDialog:System.Boolean()",
       "generatedMethodId": "ShowDialog_3__0"
     },
     {
-      "index": 6,
-      "kind": "benchmark",
+      "index": 7,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransaction::Cancel:System.Void()",
       "generatedMethodId": "Cancel_0__0"
     },
     {
-      "index": 7,
-      "kind": "benchmark",
+      "index": 8,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerTransaction::Commit:System.Void()",
       "generatedMethodId": "Commit_1__0"
     },
     {
-      "index": 8,
-      "kind": "benchmark",
+      "index": 9,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Add:System.Int32(System.ComponentModel.Design.DesignerVerb)",
       "generatedMethodId": "Add_0_DesignerVerb_0"
     },
     {
-      "index": 9,
-      "kind": "benchmark",
+      "index": 10,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerb[])",
       "generatedMethodId": "AddRange_1_DesignerVerb_0"
     },
     {
-      "index": 10,
-      "kind": "benchmark",
+      "index": 11,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerb[])",
       "generatedMethodId": "AddRange_1_DesignerVerb_1"
     },
     {
-      "index": 11,
-      "kind": "benchmark",
+      "index": 12,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerb[])",
       "generatedMethodId": "AddRange_1_DesignerVerb_2"
     },
     {
-      "index": 12,
-      "kind": "benchmark",
+      "index": 13,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::AddRange:System.Void(System.ComponentModel.Design.DesignerVerbCollection)",
       "generatedMethodId": "AddRange_2_DesignerVerbCollection_0"
     },
     {
-      "index": 13,
-      "kind": "benchmark",
+      "index": 14,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Insert:System.Void(System.Int32,System.ComponentModel.Design.DesignerVerb)",
       "generatedMethodId": "Insert_3_int_DesignerVerb_0"
     },
     {
-      "index": 14,
-      "kind": "benchmark",
+      "index": 15,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Insert:System.Void(System.Int32,System.ComponentModel.Design.DesignerVerb)",
       "generatedMethodId": "Insert_3_int_DesignerVerb_1"
     },
     {
-      "index": 15,
-      "kind": "benchmark",
+      "index": 16,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::IndexOf:System.Int32(System.ComponentModel.Design.DesignerVerb)",
       "generatedMethodId": "IndexOf_4_DesignerVerb_0"
     },
     {
-      "index": 16,
-      "kind": "benchmark",
+      "index": 17,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Contains:System.Boolean(System.ComponentModel.Design.DesignerVerb)",
       "generatedMethodId": "Contains_5_DesignerVerb_0"
     },
     {
-      "index": 17,
-      "kind": "benchmark",
+      "index": 18,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesignerVerbCollection::Remove:System.Void(System.ComponentModel.Design.DesignerVerb)",
       "generatedMethodId": "Remove_6_DesignerVerb_0"
     },
     {
-      "index": 18,
-      "kind": "benchmark",
+      "index": 19,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContext::GetSavedLicenseKey:System.String(System.Type,System.Reflection.Assembly)",
       "generatedMethodId": "GetSavedLicenseKey_0_System_Type_Assembly_0"
     },
     {
-      "index": 19,
-      "kind": "benchmark",
+      "index": 20,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContext::SetSavedLicenseKey:System.Void(System.Type,System.String)",
       "generatedMethodId": "SetSavedLicenseKey_1_System_Type_string_0"
     },
     {
-      "index": 20,
-      "kind": "benchmark",
+      "index": 21,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContext::SetSavedLicenseKey:System.Void(System.Type,System.String)",
       "generatedMethodId": "SetSavedLicenseKey_1_System_Type_string_1"
     },
     {
-      "index": 21,
-      "kind": "benchmark",
+      "index": 22,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)",
       "generatedMethodId": "Serialize_0_Stream_string_DesigntimeLicenseContext_0"
     },
     {
-      "index": 22,
-      "kind": "benchmark",
+      "index": 23,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)",
       "generatedMethodId": "Serialize_0_Stream_string_DesigntimeLicenseContext_1"
     },
     {
-      "index": 23,
-      "kind": "benchmark",
+      "index": 24,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.DesigntimeLicenseContextSerializer::Serialize:System.Void(System.IO.Stream,System.String,System.ComponentModel.Design.DesigntimeLicenseContext)",
       "generatedMethodId": "Serialize_0_Stream_string_DesigntimeLicenseContext_2"
     },
     {
-      "index": 24,
-      "kind": "benchmark",
+      "index": 25,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.HelpKeywordAttribute::IsDefaultAttribute:System.Boolean()",
       "generatedMethodId": "IsDefaultAttribute_0__0"
     },
     {
-      "index": 25,
-      "kind": "benchmark",
+      "index": 26,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.Object)",
       "generatedMethodId": "AddService_0_System_Type_object_0"
     },
     {
-      "index": 26,
-      "kind": "benchmark",
+      "index": 27,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.Object,System.Boolean)",
       "generatedMethodId": "AddService_1_System_Type_object_bool_0"
     },
     {
-      "index": 27,
-      "kind": "benchmark",
+      "index": 28,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.Object,System.Boolean)",
       "generatedMethodId": "AddService_1_System_Type_object_bool_1"
     },
     {
-      "index": 28,
-      "kind": "benchmark",
+      "index": 29,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.ComponentModel.Design.ServiceCreatorCallback)",
       "generatedMethodId": "AddService_2_System_Type_ServiceCreatorCallback_0"
     },
     {
-      "index": 29,
-      "kind": "benchmark",
+      "index": 30,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.ComponentModel.Design.ServiceCreatorCallback,System.Boolean)",
       "generatedMethodId": "AddService_3_System_Type_ServiceCreatorCallback_bool_0"
     },
     {
-      "index": 30,
-      "kind": "benchmark",
+      "index": 31,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::AddService:System.Void(System.Type,System.ComponentModel.Design.ServiceCreatorCallback,System.Boolean)",
       "generatedMethodId": "AddService_3_System_Type_ServiceCreatorCallback_bool_1"
     },
     {
-      "index": 31,
-      "kind": "benchmark",
+      "index": 32,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::Dispose:System.Void()",
       "generatedMethodId": "Dispose_4__0"
     },
     {
-      "index": 32,
-      "kind": "benchmark",
+      "index": 33,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::GetService:System.Object(System.Type)",
       "generatedMethodId": "GetService_5_System_Type_0"
     },
     {
-      "index": 33,
-      "kind": "benchmark",
+      "index": 34,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::RemoveService:System.Void(System.Type)",
       "generatedMethodId": "RemoveService_6_System_Type_0"
     },
     {
-      "index": 34,
-      "kind": "benchmark",
+      "index": 35,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::RemoveService:System.Void(System.Type,System.Boolean)",
       "generatedMethodId": "RemoveService_7_System_Type_bool_0"
     },
     {
-      "index": 35,
-      "kind": "benchmark",
+      "index": 36,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.ServiceContainer::RemoveService:System.Void(System.Type,System.Boolean)",
       "generatedMethodId": "RemoveService_7_System_Type_bool_1"
     },
     {
-      "index": 36,
-      "kind": "benchmark",
+      "index": 37,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.TypeDescriptionProviderService::GetProvider:System.ComponentModel.TypeDescriptionProvider(System.Object)",
       "generatedMethodId": "GetProvider_0_object_0"
     },
     {
-      "index": 37,
-      "kind": "benchmark",
+      "index": 38,
+      "kind": "fact",
       "methodSubjectId": "System.ComponentModel.TypeConverter/System.ComponentModel.Design.TypeDescriptionProviderService::GetProvider:System.ComponentModel.TypeDescriptionProvider(System.Type)",
       "generatedMethodId": "GetProvider_1_System_Type_0"
     }
