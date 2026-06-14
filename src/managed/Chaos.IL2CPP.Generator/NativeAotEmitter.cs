@@ -318,7 +318,8 @@ public sealed class NativeAotEmitter
         NativeAotTemplateModel templateModel,
         List<string> includes,
         bool includeRegistration,
-        string? perPageTypeDeclarations = null)
+        string? perPageTypeDeclarations = null,
+        IReadOnlyList<string>? perPageIncludes = null)
     {
         int objectModelLength = templateModel.ObjectModelCodeBuilder?.Length
                              ?? templateModel.ObjectModelCode?.Length
@@ -332,8 +333,9 @@ public sealed class NativeAotEmitter
                           + 51200;
         var sb = new StringBuilder(Math.Max(estimatedSize, 8192));
 
-        // Includes
-        foreach (var include in includes)
+        // Includes — use per-page filtered includes when available, else full set
+        var effectiveIncludes = perPageIncludes ?? includes;
+        foreach (var include in effectiveIncludes)
         {
             sb.Append("#include ");
             sb.Append(include);
@@ -397,9 +399,12 @@ public sealed class NativeAotEmitter
         string[] methodSections,
         List<string> includes,
         bool includeRegistration,
-        bool includeObjectModel)
+        bool includeObjectModel,
+        string? perPageTypeDeclarations = null,
+        IReadOnlyList<string>? perPageIncludes = null)
     {
-        var sb = BuildGeneratedPageSkeleton(templateModel, includes, includeRegistration);
+        var sb = BuildGeneratedPageSkeleton(templateModel, includes, includeRegistration,
+            perPageTypeDeclarations, perPageIncludes);
 
         // Object model code — the bulk of page 0 content
         if (includeObjectModel)
@@ -672,6 +677,11 @@ public sealed class NativeAotEmitter
                 var pageFileName = Path.GetFileName(page.Path.AsSpan());
                 string pageRelativePath = pageFileName.Length > 0 ? pageFileName.ToString() : page.Path;
 
+                // Per-page type declarations and includes (for paging optimization)
+                int pageNumber = page.PageNumber;
+                string? pageTypeDecl = templateModel.PerPageTypeDeclarations?.GetValueOrDefault(pageNumber);
+                IReadOnlyList<string>? pageIncludes = templateModel.PerPageIncludes?.GetValueOrDefault(pageNumber);
+
                 // For page 0 with an ObjectModelCodeBuilder (large content), build
                 // directly into a StringBuilder and store as ContentsBuilder to avoid
                 // a 3+ GB ToString() copy on the Large Object Heap.
@@ -680,12 +690,14 @@ public sealed class NativeAotEmitter
                     var methodSections = pageMethods
                         .Select(BuildMethodSection)
                         .ToArray();
-                    var includes = new List<string>(templateModel.Includes);
+                    var includes = new List<string>(pageIncludes ?? templateModel.Includes);
                     // Page 0 includes inline TypeInfoV0 → no shared header needed
                     var pageBuilder = BuildGeneratedPageToBuilder(
                         templateModel, methodSections, includes,
                         includeRegistration: true,
-                        includeObjectModel: true);
+                        includeObjectModel: true,
+                        perPageTypeDeclarations: pageTypeDecl,
+                        perPageIncludes: pageIncludes);
                     sources.Add(new NativeAotGeneratedSource
                     {
                         RelativePath = pageRelativePath,

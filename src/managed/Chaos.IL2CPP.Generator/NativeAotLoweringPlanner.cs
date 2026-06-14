@@ -5508,6 +5508,14 @@ public StringBuilder? ObjectModelCodeBuilder { get; init; }
     /// </summary>
     public Dictionary<int, string>? PerPageTypeDeclarations { get; init; }
 
+    /// <summary>
+    /// Per-page include paths, allowing each translation unit to only
+    /// include the runtime headers its methods actually need.
+    /// Dictionary maps page number → list of include paths.
+    /// Null when paging is not active or per-page include optimization disabled.
+    /// </summary>
+    public Dictionary<int, IReadOnlyList<string>>? PerPageIncludes { get; init; }
+
     public required string WorkloadAbi { get; init; }
 
     /// <summary>
