@@ -46,6 +46,14 @@ internal sealed class FullAssemblyEmitter
             }
         }
 
+        // Emit cross-assembly export header (if non-empty)
+        if (!string.IsNullOrEmpty(closureResult.CrossAssemblyExportHeader))
+        {
+            var exportHeaderPath = Path.Combine(outputRoot, "chaos_assembly_exports.h");
+            File.WriteAllText(exportHeaderPath, closureResult.CrossAssemblyExportHeader, Encoding.UTF8);
+            Console.WriteLine($"    emitted cross-assembly export header -> {exportHeaderPath}");
+        }
+
         Console.WriteLine($"    emitted {emitResult.GeneratedSources.Count} files -> {outputRoot}");
         Console.WriteLine($"    ({emitResult.CodegenMetrics.TotalMethodCount} methods, " +
             $"{emitResult.CodegenMetrics.StructuredMethodCount} structured, " +

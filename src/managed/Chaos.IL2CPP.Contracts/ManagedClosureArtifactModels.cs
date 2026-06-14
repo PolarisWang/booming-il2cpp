@@ -289,6 +289,16 @@ public sealed record ManagedClosureResult
     public required ManagedClosureManifestArtifact ClosureManifest { get; init; }
 
     /// <summary>
+    /// Cross-assembly export header content (C++ source).
+    /// When non-empty, this header should be emitted as part of the generated
+    /// sources. It declares only the types and methods that other assemblies
+    /// consume from this assembly, enabling per-assembly include optimization.
+    /// Empty when no cross-assembly exports are needed or when running
+    /// single-assembly codegen.
+    /// </summary>
+    public string CrossAssemblyExportHeader { get; init; } = "";
+
+    /// <summary>
     /// All managed methods from the original linked world, including those that
     /// were skipped during AotCoreIr lowering (e.g. crypto methods without shapes).
     /// Keyed by SubjectId.  Used by the interpreter routing fallback to generate

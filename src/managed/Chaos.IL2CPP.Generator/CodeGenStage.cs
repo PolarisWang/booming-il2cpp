@@ -259,6 +259,8 @@ public sealed class CodeGenStage
                 NativeReferenceLoweringPlan = fullResult.NativeReferenceLoweringPlan,
                 NativeAotLoweringPlan = filteredLoweringPlan,
                 ClosureManifest = fullResult.ClosureManifest,
+                CrossAssemblyExportHeader = new AssemblyExportHeaderGenerator(
+                    exportRegistry, symbolRegistry, asmName).GenerateExportHeader(),
             });
         }
 
