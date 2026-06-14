@@ -5052,6 +5052,12 @@ public sealed partial class NativeAotLoweringPlanner
                     return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithUpper(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
+            // ── Transcendental ──
+            RegisterVectorUnaryOp("Cos", "VectorFixedCos");
+            RegisterVectorUnaryOp("Sin", "VectorFixedSin");
+            RegisterVectorUnaryOp("Exp", "VectorFixedExp");
+            RegisterVectorUnaryOp("Round", "VectorFixedRound");
+
             // === Activator::CreateInstance with param array ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Activator",

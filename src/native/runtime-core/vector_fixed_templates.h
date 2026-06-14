@@ -1822,6 +1822,65 @@ inline TCarrier VectorFixedCreateFromArray(const TScalar* values, CHAOS_IL2CPP_I
     return result;
 }
 
+// ── Transcendental ──
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedCos(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>) rl[i] = std::cos(sl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>) rl[i] = std::cos(sl[i]);
+        else rl[i] = static_cast<TScalar>(0);
+    }
+    return result;
+}
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedSin(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>) rl[i] = std::sin(sl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>) rl[i] = std::sin(sl[i]);
+        else rl[i] = static_cast<TScalar>(0);
+    }
+    return result;
+}
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedExp(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>) rl[i] = std::exp(sl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>) rl[i] = std::exp(sl[i]);
+        else rl[i] = static_cast<TScalar>(0);
+    }
+    return result;
+}
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedRound(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if constexpr (std::is_floating_point_v<TScalar>) rl[i] = std::round(sl[i]);
+        else rl[i] = sl[i];
+    }
+    return result;
+}
+
+// ── StoreUnsafe (write carrier to memory) ──
+template <typename TCarrier>
+inline void VectorFixedStoreUnsafe(CHAOS_IL2CPP_INTPTR dest, const TCarrier& value) {
+    std::memcpy(reinterpret_cast<void*>(dest), &value, sizeof(TCarrier));
+}
+
 }  // namespace chaos::il2cpp::vector_fixed
 
 
