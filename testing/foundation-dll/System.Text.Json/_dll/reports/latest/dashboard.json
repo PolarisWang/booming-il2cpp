@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Text.Json",
-  "timestamp": "2026-06-14T13:27:40",
+  "timestamp": "2026-06-14T15:47:47",
   "summary": {
     "chunks": 3,
     "chunksVerified": 0,
@@ -16,6 +16,21 @@
       "totalPassed": 0,
       "totalFailed": 0,
       "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 14,
+      "methodsWithNet8": 14,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
+      "net10VsNet8": {
+        "mean": 6.18,
+        "median": 6.18,
+        "min": 6.18,
+        "max": 6.18,
+        "p25": 6.18,
+        "p75": 6.18
+      },
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Collections",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -52.96,
+      "median": -52.96,
+      "min": -52.96,
+      "max": -52.96,
+      "p25": -52.96,
+      "p75": -52.96
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 3,
+      "methodsWithNet8": 3,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -52.96,
+          "median": -63.64,
+          "min": -66.67,
+          "max": -28.57,
+          "p25": -65.16,
+          "p75": -46.11
+        }
+      }
+    }
+  ]
+}

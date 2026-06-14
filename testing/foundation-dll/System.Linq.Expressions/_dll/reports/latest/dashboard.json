@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Linq.Expressions",
-  "timestamp": "2026-06-14T13:27:40",
+  "timestamp": "2026-06-14T15:47:47",
   "summary": {
     "chunks": 1,
     "chunksVerified": 0,
@@ -16,6 +16,21 @@
       "totalPassed": 0,
       "totalFailed": 0,
       "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 11,
+      "methodsWithNet8": 11,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
+      "net10VsNet8": {
+        "mean": -4.45,
+        "median": -4.45,
+        "min": -4.45,
+        "max": -4.45,
+        "p25": -4.45,
+        "p75": -4.45
+      },
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

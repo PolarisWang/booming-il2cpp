@@ -1,18 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>
+    <NoWarn>$(NoWarn);SYSLIB0011;CS0433;SYSLIB5007;CA2252</NoWarn>
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);CS0433;SYSLIB5007</WarningsNotAsErrors>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CombinedPatchSubjects.cs" />
-    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="D:\agent\chaos-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
     <Reference Include="System.Reflection.Metadata">
-      <HintPath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\9.0.0\System.Reflection.Metadata.dll</HintPath>
+      <HintPath>C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\10.0.6\ref\net10.0\System.Reflection.Metadata.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

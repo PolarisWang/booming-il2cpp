@@ -1,0 +1,65 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Data.Common",
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -4.54,
+      "median": -3.27,
+      "min": -51.78,
+      "max": 41.44,
+      "p25": -27.53,
+      "p75": 19.08
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "system-data",
+      "methodCount": 2,
+      "methodsWithNet8": 2,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -51.78,
+          "median": -51.78,
+          "min": -100.0,
+          "max": -3.57,
+          "p25": -75.89,
+          "p75": -27.68
+        }
+      }
+    },
+    {
+      "slug": "system-data-common",
+      "methodCount": 7,
+      "methodsWithNet8": 7,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -3.27,
+          "median": -5.56,
+          "min": -18.18,
+          "max": 12.54,
+          "p25": -11.41,
+          "p75": 5.55
+        }
+      }
+    },
+    {
+      "slug": "system-data-sqltypes",
+      "methodCount": 37,
+      "methodsWithNet8": 37,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 41.44,
+          "median": 43.24,
+          "min": 7.14,
+          "max": 66.67,
+          "p25": 36.36,
+          "p75": 50.0
+        }
+      }
+    }
+  ]
+}

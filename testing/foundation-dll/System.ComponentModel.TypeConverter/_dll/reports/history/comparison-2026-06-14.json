@@ -1,0 +1,17 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "aggregate": {
+    "highValueMethods_betterThanNet8": 0
+  },
+  "perChunk": [
+    {
+      "slug": "component-model",
+      "methodCount": 62,
+      "methodsWithNet8": 0,
+      "aggregate": {
+        "methodsBetterThanNet8": 0
+      }
+    }
+  ]
+}

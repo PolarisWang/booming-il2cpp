@@ -1,0 +1,833 @@
+{
+  "assemblyName": "System.Private.Xml",
+  "timestamp": "2026-06-14T23:40:57",
+  "totalMethods": 40,
+  "methodsWithNet8": 40,
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -10.24,
+      "median": 6.27,
+      "min": -58.53,
+      "max": 21.54,
+      "p25": -26.13,
+      "p75": 13.9
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "system-xml-schema",
+      "methodCount": 3,
+      "methodsWithNet8": 3,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -58.53,
+          "median": -71.43,
+          "min": -112.5,
+          "max": 8.33,
+          "p25": -91.97,
+          "p75": -31.55
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::ResolveUri:System.Uri(System.Uri,System.String)",
+          "net8Ms": 0.007,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1528,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Resolvers.XmlPreloadedResolver::GetEntity:System.Object(System.Uri,System.String,System.Type)",
+          "net8Ms": 0.012,
+          "net10Ms": 0.011,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1592,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "system-xml-schema::0",
+          "net8Ms": 0.008,
+          "net10Ms": 0.017,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 2360,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        }
+      ]
+    },
+    {
+      "slug": "system-xml-serialization",
+      "methodCount": 9,
+      "methodsWithNet8": 9,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 6.27,
+          "median": 9.52,
+          "min": -26.09,
+          "max": 28.57,
+          "p25": -6.25,
+          "p75": 23.08
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakePascal:System.String(System.String)",
+          "net8Ms": 0.046,
+          "net10Ms": 0.058,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 97528,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 98688
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.CodeIdentifier::MakeCamel:System.String(System.String)",
+          "net8Ms": 0.015,
+          "net10Ms": 0.015,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1528,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlReflectionImporter::ImportMembersMapping:System.Xml.Serialization.XmlMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean,System.Xml.Serialization.XmlMappingAccess)",
+          "net8Ms": 0.019,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1536,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportTypeMapping:System.Void(System.Xml.Serialization.XmlTypeMapping)",
+          "net8Ms": 0.028,
+          "net10Ms": 0.02,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1536,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping)",
+          "net8Ms": 0.016,
+          "net10Ms": 0.017,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1560,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportMembersMapping:System.Void(System.Xml.Serialization.XmlMembersMapping,System.Boolean)",
+          "net8Ms": 0.021,
+          "net10Ms": 0.019,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1560,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.Serialization.XmlSchemaExporter::ExportAnyType:System.String(System.String)",
+          "net8Ms": 1.167,
+          "net10Ms": 0.862,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 4945536,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4960256
+          }
+        },
+        {
+          "methodSubjectId": "system-xml-serialization::0",
+          "net8Ms": 0.026,
+          "net10Ms": 0.02,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 2456,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "system-xml-serialization::108",
+          "net8Ms": 0.014,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1536,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        }
+      ]
+    },
+    {
+      "slug": "xml",
+      "methodCount": 28,
+      "methodsWithNet8": 28,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 21.54,
+          "median": 29.16,
+          "min": -33.33,
+          "max": 42.86,
+          "p25": 14.29,
+          "p75": 38.46
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.NameTable::Add:System.String(System.String)",
+          "net8Ms": 0.013,
+          "net10Ms": 0.008,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1456,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.NameTable::Add:System.String(System.Char[],System.Int32,System.Int32)",
+          "net8Ms": 0.018,
+          "net10Ms": 0.011,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1456,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.NameTable::Get:System.String(System.String)",
+          "net8Ms": 0.013,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.NameTable::Get:System.String(System.Char[],System.Int32,System.Int32)",
+          "net8Ms": 0.014,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::CloneNode:System.Xml.XmlNode(System.Boolean)",
+          "net8Ms": 0.014,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::InsertBefore:System.Xml.XmlNode(System.Xml.XmlNode,System.Xml.XmlNode)",
+          "net8Ms": 0.014,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::InsertAfter:System.Xml.XmlNode(System.Xml.XmlNode,System.Xml.XmlNode)",
+          "net8Ms": 0.014,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1456,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::ReplaceChild:System.Xml.XmlNode(System.Xml.XmlNode,System.Xml.XmlNode)",
+          "net8Ms": 0.014,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1456,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::RemoveChild:System.Xml.XmlNode(System.Xml.XmlNode)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.006,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1480,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::PrependChild:System.Xml.XmlNode(System.Xml.XmlNode)",
+          "net8Ms": 0.011,
+          "net10Ms": 0.007,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1480,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::AppendChild:System.Xml.XmlNode(System.Xml.XmlNode)",
+          "net8Ms": 0.007,
+          "net10Ms": 0.007,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1480,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::WriteTo:System.Void(System.Xml.XmlWriter)",
+          "net8Ms": 0.007,
+          "net10Ms": 0.007,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttribute::WriteContentTo:System.Void(System.Xml.XmlWriter)",
+          "net8Ms": 0.012,
+          "net10Ms": 0.007,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttributeCollection::SetNamedItem:System.Xml.XmlNode(System.Xml.XmlNode)",
+          "net8Ms": 0.017,
+          "net10Ms": 0.011,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttributeCollection::Prepend:System.Xml.XmlAttribute(System.Xml.XmlAttribute)",
+          "net8Ms": 0.014,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttributeCollection::Append:System.Xml.XmlAttribute(System.Xml.XmlAttribute)",
+          "net8Ms": 0.016,
+          "net10Ms": 0.01,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1448,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Private.Xml/System.Xml.XmlAttributeCollection::InsertBefore:System.Xml.XmlAttribute(System.Xml.XmlAttribute,System.Xml.XmlAttribute)",
+          "net8Ms": 0.015,
+          "net10Ms": 0.01,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::0",
+          "net8Ms": 0.014,
+          "net10Ms": 0.015,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 2384,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "xml::2",
+          "net8Ms": 0.014,
+          "net10Ms": 0.008,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::3",
+          "net8Ms": 0.014,
+          "net10Ms": 0.008,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::4",
+          "net8Ms": 0.013,
+          "net10Ms": 0.008,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::5",
+          "net8Ms": 0.014,
+          "net10Ms": 0.008,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::7",
+          "net8Ms": 0.018,
+          "net10Ms": 0.024,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1456,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::9",
+          "net8Ms": 0.012,
+          "net10Ms": 0.008,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::10",
+          "net8Ms": 0.016,
+          "net10Ms": 0.01,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::11",
+          "net8Ms": 0.024,
+          "net10Ms": 0.02,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1464,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::12",
+          "net8Ms": 0.021,
+          "net10Ms": 0.021,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "xml::14",
+          "net8Ms": 0.016,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        }
+      ]
+    }
+  ]
+}

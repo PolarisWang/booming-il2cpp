@@ -1,0 +1,113 @@
+{
+  "assemblyName": "System.IO.Compression.Brotli",
+  "timestamp": "2026-06-14T23:21:36",
+  "totalMethods": 4,
+  "methodsWithNet8": 4,
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -4.69,
+      "median": -4.69,
+      "min": -4.69,
+      "max": -4.69,
+      "p25": -4.69,
+      "p75": -4.69
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 4,
+      "methodsWithNet8": 4,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -4.69,
+          "median": -3.12,
+          "min": -12.5,
+          "max": 0.0,
+          "p25": -7.81,
+          "p75": 0.0
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+          "net8Ms": 0.012,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 2424,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
+          "net8Ms": 0.012,
+          "net10Ms": 0.012,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1496,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
+          "net8Ms": 0.016,
+          "net10Ms": 0.018,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1528,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::2",
+          "net8Ms": 0.016,
+          "net10Ms": 0.017,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1528,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        }
+      ]
+    }
+  ]
+}

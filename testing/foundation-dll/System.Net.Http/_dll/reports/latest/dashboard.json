@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Net.Http",
-  "timestamp": "2026-06-14T13:27:40",
+  "timestamp": "2026-06-14T15:47:47",
   "summary": {
     "chunks": 2,
     "chunksVerified": 0,
@@ -18,17 +18,17 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 136,
-      "methodsWithNet8": 24,
+      "methodsAnalyzed": 44,
+      "methodsWithNet8": 44,
       "chaosAotVsNet8": {},
       "chaosJitVsNet8": {},
       "net10VsNet8": {
-        "mean": -8.08,
-        "median": -8.08,
-        "min": -8.08,
-        "max": -8.08,
-        "p25": -8.08,
-        "p75": -8.08
+        "mean": 11.56,
+        "median": 11.56,
+        "min": 11.56,
+        "max": 11.56,
+        "p25": 11.56,
+        "p75": 11.56
       },
       "highValueMethods_betterThanNet8": 0.0
     }

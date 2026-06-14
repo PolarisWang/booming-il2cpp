@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Data.Common",
-  "timestamp": "2026-06-14T13:27:40",
+  "timestamp": "2026-06-14T15:47:46",
   "summary": {
     "chunks": 4,
     "chunksVerified": 0,
@@ -18,17 +18,17 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 943,
-      "methodsWithNet8": 277,
+      "methodsAnalyzed": 46,
+      "methodsWithNet8": 46,
       "chaosAotVsNet8": {},
       "chaosJitVsNet8": {},
       "net10VsNet8": {
-        "mean": -1.91,
-        "median": -3.43,
-        "min": -9.83,
-        "max": 7.54,
-        "p25": -6.63,
-        "p75": 2.05
+        "mean": -4.54,
+        "median": -3.27,
+        "min": -51.78,
+        "max": 41.44,
+        "p25": -27.53,
+        "p75": 19.08
       },
       "highValueMethods_betterThanNet8": 0.0
     }

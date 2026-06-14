@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Collections",
-  "timestamp": "2026-06-14T13:27:40",
+  "timestamp": "2026-06-14T15:47:46",
   "summary": {
     "chunks": 1,
     "chunksVerified": 0,
@@ -18,12 +18,19 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 14,
-      "methodsWithNet8": 0,
+      "methodsAnalyzed": 3,
+      "methodsWithNet8": 3,
       "chaosAotVsNet8": {},
       "chaosJitVsNet8": {},
-      "net10VsNet8": {},
-      "highValueMethods_betterThanNet8": 0
+      "net10VsNet8": {
+        "mean": -52.96,
+        "median": -52.96,
+        "min": -52.96,
+        "max": -52.96,
+        "p25": -52.96,
+        "p75": -52.96
+      },
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

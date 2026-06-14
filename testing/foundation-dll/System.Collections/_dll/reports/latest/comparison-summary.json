@@ -1,201 +1,92 @@
 {
   "assemblyName": "System.Collections",
-  "timestamp": "2026-06-04T20:45:54",
-  "totalMethods": 14,
-  "methodsWithNet8": 0,
+  "timestamp": "2026-06-14T23:07:19",
+  "totalMethods": 3,
+  "methodsWithNet8": 3,
   "aggregate": {
-    "highValueMethods_betterThanNet8": 0
+    "net10VsNet8Pct": {
+      "mean": -52.96,
+      "median": -52.96,
+      "min": -52.96,
+      "max": -52.96,
+      "p25": -52.96,
+      "p75": -52.96
+    },
+    "highValueMethods_betterThanNet8": 0.0
   },
   "perChunk": [
     {
       "slug": "global-ns",
-      "methodCount": 14,
-      "methodsWithNet8": 0,
+      "methodCount": 3,
+      "methodsWithNet8": 3,
       "aggregate": {
-        "methodsBetterThanNet8": 0
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -52.96,
+          "median": -63.64,
+          "min": -66.67,
+          "max": -28.57,
+          "p25": -65.16,
+          "p75": -46.11
+        }
       },
       "methods": [
         {
           "methodSubjectId": "System.Collections/System.Collections.BitArray::Get:System.Boolean(System.Int32)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
+          "net8Ms": 0.022,
+          "net10Ms": 0.036,
           "chaosAotMs": null,
           "chaosJitMs": null,
-          "net8Error": true,
+          "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
           "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 97608,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 102464
+          }
         },
         {
           "methodSubjectId": "System.Collections/System.Collections.BitArray::Set:System.Void(System.Int32,System.Boolean)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
+          "net8Ms": 0.015,
+          "net10Ms": 0.025,
           "chaosAotMs": null,
           "chaosJitMs": null,
-          "net8Error": true,
+          "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
           "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 97608,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 98688
+          }
         },
         {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::SetAll:System.Void(System.Boolean)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
+          "methodSubjectId": "global-ns::0",
+          "net8Ms": 0.028,
+          "net10Ms": 0.036,
           "chaosAotMs": null,
           "chaosJitMs": null,
-          "net8Error": true,
+          "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
           "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::And:System.Collections.BitArray(System.Collections.BitArray)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::Or:System.Collections.BitArray(System.Collections.BitArray)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::Xor:System.Collections.BitArray(System.Collections.BitArray)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::Not:System.Collections.BitArray()",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::RightShift:System.Collections.BitArray(System.Int32)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::LeftShift:System.Collections.BitArray(System.Int32)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::CopyTo:System.Void(System.Array,System.Int32)",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::HasAllSet:System.Boolean()",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::HasAnySet:System.Boolean()",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::Clone:System.Object()",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
-        },
-        {
-          "methodSubjectId": "System.Collections/System.Collections.BitArray::GetEnumerator:System.Collections.IEnumerator()",
-          "net8Ms": -1.0,
-          "net10Ms": -1.0,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
-          "net8Error": true,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "net8_error"
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 98496,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 102464
+          }
         }
       ]
     }

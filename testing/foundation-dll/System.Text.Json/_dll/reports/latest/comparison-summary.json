@@ -1,0 +1,303 @@
+{
+  "assemblyName": "System.Text.Json",
+  "timestamp": "2026-06-14T23:47:05",
+  "totalMethods": 14,
+  "methodsWithNet8": 14,
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": 6.18,
+      "median": 6.18,
+      "min": 6.18,
+      "max": 6.18,
+      "p25": 6.18,
+      "p75": 6.18
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "text-json",
+      "methodCount": 14,
+      "methodsWithNet8": 14,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": 6.18,
+          "median": 4.18,
+          "min": -45.45,
+          "max": 38.58,
+          "p25": -1.82,
+          "p75": 15.98
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Dispose:System.Void()",
+          "net8Ms": 0.816,
+          "net10Ms": 0.672,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 49658304,
+            "net8CollectionCount0": 2,
+            "net8HeapDelta": 16294488
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter)",
+          "net8Ms": 0.661,
+          "net10Ms": 0.406,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 49657552,
+            "net8CollectionCount0": 2,
+            "net8HeapDelta": 16293736
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory<System.Byte>,System.Text.Json.JsonDocumentOptions)",
+          "net8Ms": 0.313,
+          "net10Ms": 0.213,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 433552,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 444048
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence<System.Byte>,System.Text.Json.JsonDocumentOptions)",
+          "net8Ms": 0.228,
+          "net10Ms": 0.203,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 433552,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 444048
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.IO.Stream,System.Text.Json.JsonDocumentOptions)",
+          "net8Ms": 0.247,
+          "net10Ms": 0.221,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 697544,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 715448
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task<System.Text.Json.JsonDocument>(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+          "net8Ms": 0.095,
+          "net10Ms": 0.096,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 97552,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 106864
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory<System.Char>,System.Text.Json.JsonDocumentOptions)",
+          "net8Ms": 0.182,
+          "net10Ms": 0.194,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 457592,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 468704
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.String,System.Text.Json.JsonDocumentOptions)",
+          "net8Ms": 0.108,
+          "net10Ms": 0.112,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73536,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82200
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetArrayLength:System.Int32()",
+          "net8Ms": 0.112,
+          "net10Ms": 0.112,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73536,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82200
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetPropertyCount:System.Int32()",
+          "net8Ms": 0.009,
+          "net10Ms": 0.009,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 16448
+          }
+        },
+        {
+          "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.String)",
+          "net8Ms": 0.011,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1480,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 16448
+          }
+        },
+        {
+          "methodSubjectId": "text-json::4",
+          "net8Ms": 0.251,
+          "net10Ms": 0.23,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 697544,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 715448
+          }
+        },
+        {
+          "methodSubjectId": "text-json::6",
+          "net8Ms": 0.096,
+          "net10Ms": 0.098,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 97552,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 106864
+          }
+        },
+        {
+          "methodSubjectId": "text-json::9",
+          "net8Ms": 0.128,
+          "net10Ms": 0.093,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 457544,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 468656
+          }
+        }
+      ]
+    }
+  ]
+}

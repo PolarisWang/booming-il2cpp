@@ -181,6 +181,12 @@ set(CHAOS_METHOD_REPLACEMENT
 set(CHAOS_JIT_DATA_LOADER
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/jit_data_loader.cpp"
 )
+# abi_reflection.cpp — the prebuilt chaos_runtime_core.lib may have nullptr
+# ABI entries.  Compile locally so runtime fixes take effect.  /FORCE:MULTIPLE
+# allows the linker to pick the local definition over the prebuilt one.
+set(CHAOS_ABI_REFLECTION
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/abi_reflection.cpp"
+)
 # profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
 # missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
 # symbols added after the SDK was last rebuilt.  Compile locally.
@@ -209,6 +215,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
     ${CHAOS_JIT_DATA_LOADER}
+    ${CHAOS_ABI_REFLECTION}
     ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )

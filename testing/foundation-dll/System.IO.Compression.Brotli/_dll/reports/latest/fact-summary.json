@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.IO.Compression.Brotli",
-  "timestamp": "2026-06-14T13:27:40",
+  "timestamp": "2026-06-14T15:47:47",
   "totalChunks": 1,
   "chunksWithFacts": 0,
   "chunksWithValueWarnings": 0,
@@ -19,7 +19,11 @@
         "status": "no_results"
       },
       "build": {
-        "status": "not_run"
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     }
   ]

@@ -1,0 +1,246 @@
+{
+  "assemblyName": "System.Linq.Expressions",
+  "timestamp": "2026-06-14T23:25:47",
+  "totalMethods": 11,
+  "methodsWithNet8": 11,
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -4.45,
+      "median": -4.45,
+      "min": -4.45,
+      "max": -4.45,
+      "p25": -4.45,
+      "p75": -4.45
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 11,
+      "methodsWithNet8": 11,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -4.45,
+          "median": 0.0,
+          "min": -50.0,
+          "max": 38.46,
+          "p25": -10.23,
+          "p75": 7.33
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.BindingRestrictions::Combine:System.Dynamic.BindingRestrictions(System.Collections.Generic.IList<System.Dynamic.DynamicMetaObject>)",
+          "net8Ms": 0.017,
+          "net10Ms": 0.018,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1536,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.InvokeMemberBinder::FallbackInvokeMember:System.Dynamic.DynamicMetaObject(System.Dynamic.DynamicMetaObject,System.Dynamic.DynamicMetaObject[])",
+          "net8Ms": 0.017,
+          "net10Ms": 0.017,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1552,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.InvokeMemberBinder::FallbackInvokeMember:System.Dynamic.DynamicMetaObject(System.Dynamic.DynamicMetaObject,System.Dynamic.DynamicMetaObject[],System.Dynamic.DynamicMetaObject)",
+          "net8Ms": 0.015,
+          "net10Ms": 0.014,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1560,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.InvokeMemberBinder::FallbackInvoke:System.Dynamic.DynamicMetaObject(System.Dynamic.DynamicMetaObject,System.Dynamic.DynamicMetaObject[],System.Dynamic.DynamicMetaObject)",
+          "net8Ms": 0.05,
+          "net10Ms": 0.046,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 217544,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 225312
+          }
+        },
+        {
+          "methodSubjectId": "System.Linq.Expressions/System.Dynamic.SetIndexBinder::Bind:System.Dynamic.DynamicMetaObject(System.Dynamic.DynamicMetaObject,System.Dynamic.DynamicMetaObject[])",
+          "net8Ms": 0.019,
+          "net10Ms": 0.026,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 217592,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 222048
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::9",
+          "net8Ms": 0.013,
+          "net10Ms": 0.008,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1536,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::133",
+          "net8Ms": 0.027,
+          "net10Ms": 0.024,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1552,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::134",
+          "net8Ms": 0.028,
+          "net10Ms": 0.03,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 121552,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 127136
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::136",
+          "net8Ms": 0.028,
+          "net10Ms": 0.042,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 121560,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 127136
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::137",
+          "net8Ms": 0.03,
+          "net10Ms": 0.034,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73520,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::139",
+          "net8Ms": 0.029,
+          "net10Ms": 0.029,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 217568,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 222048
+          }
+        }
+      ]
+    }
+  ]
+}

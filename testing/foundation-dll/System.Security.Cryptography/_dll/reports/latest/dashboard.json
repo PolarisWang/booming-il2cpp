@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Security.Cryptography",
-  "timestamp": "2026-06-14T13:27:40",
+  "timestamp": "2026-06-14T15:47:47",
   "summary": {
     "chunks": 3,
     "chunksVerified": 0,
@@ -18,19 +18,12 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 1470,
-      "methodsWithNet8": 256,
+      "methodsAnalyzed": 290,
+      "methodsWithNet8": 0,
       "chaosAotVsNet8": {},
       "chaosJitVsNet8": {},
-      "net10VsNet8": {
-        "mean": -3524.92,
-        "median": -3524.92,
-        "min": -3974.8,
-        "max": -3075.04,
-        "p25": -3749.86,
-        "p75": -3299.98
-      },
-      "highValueMethods_betterThanNet8": 0.0
+      "net10VsNet8": {},
+      "highValueMethods_betterThanNet8": 0
     }
   }
 }

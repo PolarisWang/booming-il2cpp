@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Private.Xml",
-  "timestamp": "2026-06-14T13:27:40",
+  "timestamp": "2026-06-14T15:47:47",
   "summary": {
     "chunks": 5,
     "chunksVerified": 0,
@@ -16,6 +16,21 @@
       "totalPassed": 0,
       "totalFailed": 0,
       "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 40,
+      "methodsWithNet8": 40,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
+      "net10VsNet8": {
+        "mean": -10.24,
+        "median": 6.27,
+        "min": -58.53,
+        "max": 21.54,
+        "p25": -26.13,
+        "p75": 13.9
+      },
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

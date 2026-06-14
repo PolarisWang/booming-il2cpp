@@ -2019,7 +2019,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 // but handle gracefully for any remaining static helpers)
                 if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
                     signatureLine = signatureLine.Substring(7);
-                sb.Append("extern ");
+                // Skip redundant 'extern' prefix to avoid 'extern extern "C"' C2159
+                if (!signatureLine.StartsWith("extern ", StringComparison.Ordinal))
+                    sb.Append("extern ");
                 sb.Append(signatureLine);
                 sb.AppendLine(";");
             }
@@ -2053,7 +2055,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                     continue;
                 if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
                     signatureLine = signatureLine.Substring(7);
-                sb.Append("extern ");
+                // Skip redundant 'extern' prefix to avoid 'extern extern "C"' C2159
+                if (!signatureLine.StartsWith("extern ", StringComparison.Ordinal))
+                    sb.Append("extern ");
                 sb.Append(signatureLine);
                 sb.AppendLine(";");
             }

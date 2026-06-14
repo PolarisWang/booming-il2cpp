@@ -29,7 +29,7 @@
         "status": "no_results"
       },
       "build": {
-        "status": "not_run"
+        "status": "failed"
       }
     }
   ]

@@ -1,0 +1,132 @@
+{
+  "assemblyName": "System.Formats.Asn1",
+  "timestamp": "2026-06-14T23:19:45",
+  "totalMethods": 5,
+  "methodsWithNet8": 5,
+  "aggregate": {
+    "net10VsNet8Pct": {
+      "mean": -81.43,
+      "median": -81.43,
+      "min": -81.43,
+      "max": -81.43,
+      "p25": -81.43,
+      "p75": -81.43
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "system-formats-asn1",
+      "methodCount": 5,
+      "methodsWithNet8": 5,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "net10VsNet8Pct": {
+          "mean": -81.43,
+          "median": -75.0,
+          "min": -100.0,
+          "max": -57.14,
+          "p25": -100.0,
+          "p75": -75.0
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()",
+          "net8Ms": 0.008,
+          "net10Ms": 0.014,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 2400,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()",
+          "net8Ms": 0.008,
+          "net10Ms": 0.014,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1472,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 8224
+          }
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()",
+          "net8Ms": 0.007,
+          "net10Ms": 0.014,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1488,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)",
+          "net8Ms": 0.007,
+          "net10Ms": 0.014,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1504,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        },
+        {
+          "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ThrowIfNotEmpty:System.Void()",
+          "net8Ms": 0.007,
+          "net10Ms": 0.011,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1496,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 4032
+          }
+        }
+      ]
+    }
+  ]
+}

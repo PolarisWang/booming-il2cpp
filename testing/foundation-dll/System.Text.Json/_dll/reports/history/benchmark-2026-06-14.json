@@ -44,7 +44,11 @@
         "status": "no_results"
       },
       "build": {
-        "status": "not_run"
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     }
   ]

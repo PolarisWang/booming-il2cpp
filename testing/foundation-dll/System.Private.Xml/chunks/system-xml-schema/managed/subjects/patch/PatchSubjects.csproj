@@ -5,12 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <NoWarn>$(NoWarn);SYSLIB0011;CS0433</NoWarn>
-    <WarningsNotAsErrors>$(WarningsNotAsErrors);CS0433</WarningsNotAsErrors>
+    <NoWarn>$(NoWarn);SYSLIB0011;CS0433;SYSLIB5007;CA2252</NoWarn>
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);CS0433;SYSLIB5007</WarningsNotAsErrors>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CombinedPatchSubjects.cs" />
-    <ProjectReference Include="/home/debian/agent/booming-il2cpp/src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="D:\agent\chaos-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
 </Project>

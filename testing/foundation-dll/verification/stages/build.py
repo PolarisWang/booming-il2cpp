@@ -652,7 +652,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     if tpg_result.returncode != 0:
         print(f"  [build] TPG generate-dll FAILED (rc={tpg_result.returncode})")
         for line in tpg_result.stderr.splitlines():
-            print(f"  [TPG:err] {line}")
+            try:
+                print(f"  [TPG:err] {line}")
+            except UnicodeEncodeError:
+                print(f"  [TPG:err] {line.encode('ascii', errors='replace').decode('ascii')}")
         for line in tpg_result.stdout.splitlines()[-5:]:
             print(f"  [TPG:out] {line}")
 
