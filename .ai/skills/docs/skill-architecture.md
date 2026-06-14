@@ -29,8 +29,8 @@ skills/
       INDEX.md                     # 领域注册表索引
       <domain>.md                  # 按领域分组的 registry
   runtime/
-    bootstrap-skills.ps1           # 初始化：生成索引 + 创建 junction
-    sync-skills.ps1                # 增量同步（junction 失效时降级为复制）
+    bootstrap-skills.ps1           # 初始化：生成索引 + 验证入口桩
+    sync-skills.ps1                # 验证入口桩 + library 一致性
   tooling/
     catalog/
       generate_skill_catalog.py    # 索引生成器
@@ -72,12 +72,12 @@ skills/
 
 ## 关键约束
 
-1. `library/skills/` 是唯一编辑点。`.claude/skills/` 和 `.codex/skills/` 由 junction 自动同步。
+1. `library/skills/` 是唯一编辑点。`.claude/skills/dev-il2cpp/SKILL.md` 包含最小路由桩指向 library。
 2. `discovery/skill-index.md` 与 `discovery/registries/*.md` 是生成产物，不手工维护长表。
 3. `library/skills/` 只接收正式内容；draft 必须停留在 `lifecycle/incubator/`。
 4. `lifecycle/` 不直接参与发现层。
-5. `runtime/bootstrap-skills.ps1` 必须先刷新 catalog，再更新 junction。
-6. `tooling/verify-skill-pipeline.ps1` 负责校验 bootstrap、catalog、junction 和 formal library 准入规则。
+5. `runtime/bootstrap-skills.ps1` 必须先刷新 catalog，再验证入口桩。
+6. `tooling/verify-skill-pipeline.ps1` 负责校验 bootstrap、catalog、入口桩和 formal library 准入规则。
 
 ## 变更规则
 

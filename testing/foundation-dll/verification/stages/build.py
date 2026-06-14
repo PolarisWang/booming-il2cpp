@@ -25,7 +25,7 @@ from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
 
-from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash
+from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash, compute_context_fingerprint
 
 # Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
 _TESTING = str(Path(__file__).resolve().parents[3])
@@ -533,13 +533,16 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     input_hash = compute_input_hash(
         subjects_dll, metadata_path, ctx.assembly,
         additional_dlls=[target_dll] if target_dll else None,
-        extra_source_paths=_runtime_stubs + _tpg_build_deps,
+        extra_source_paths=_runtime_stubs,  # content hash only: DLLs + stubs
     )
+    # Context fingerprint: fast mtime check on tools/templates (not full SHA-256)
+    context_fp = compute_context_fingerprint(_tpg_build_deps)
+
     cache_key = cache.compute_key(input_hash, ctx.assembly, ctx.slug)
     cache_hit = cache.is_cache_hit(cache_key)
-
-    if cache_hit:
-        print(f"  [build] [hephaestus] CACHE HIT: {cache_key[:48]}...")
+    # Full cache hit: content + tools/templates all match
+    if cache_hit and cache.is_context_fresh(cache_key, context_fp):
+        print(f"  [build] [hephaestus] FULL CACHE HIT: {cache_key[:48]}...")
         if cache.restore_to(cache_key, ctx.native_dir):
             # Verify the restored entry.exe exists
             if ctx.entry_exe_path.exists():
@@ -635,6 +638,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         cache_key, ctx.native_dir,
         assembly=ctx.assembly, chunk_slug=ctx.slug,
         input_hash=input_hash, duration_ms=duration_ms,
+        context_fingerprint=context_fp,
     )
     print(f"  [build] [hephaestus] Cached build output ({cache_key[:48]}...)")
 

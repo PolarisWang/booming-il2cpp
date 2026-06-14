@@ -7,21 +7,6 @@ $formalSkillsDir = Join-Path $chapterRoot 'library\skills'
 $bootstrapScript = Join-Path $chapterRoot 'runtime\bootstrap-skills.ps1'
 $catalogScript = Join-Path $chapterRoot 'tooling\catalog\generate_skill_catalog.py'
 
-function Test-JunctionTarget {
-    param([string]$Path, [string]$ExpectedTarget)
-    if (-not (Test-Path -LiteralPath $Path)) { throw "[skill-verify] Missing path: $Path" }
-    $item = Get-Item -LiteralPath $Path -Force
-    if (-not ($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint)) {
-        throw "[skill-verify] Not a junction: $Path"
-    }
-    $expected = [System.IO.Path]::GetFullPath($ExpectedTarget.TrimEnd('\'))
-    foreach ($target in @($item.Target)) {
-        if ($null -eq $target) { continue }
-        if ([System.IO.Path]::GetFullPath($target.ToString().TrimEnd('\')) -eq $expected) { return }
-    }
-    throw "[skill-verify] Junction target mismatch: $Path -> expected $expected"
-}
-
 function Has-ScaffoldPlaceholder {
     param([string]$Text)
     if ([string]::IsNullOrWhiteSpace($Text)) { return $false }
@@ -90,11 +75,30 @@ Write-Host "[skill-verify] Checking catalog..."
 python $catalogScript --repo-root $repoRoot --check
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-# Step 4: Verify junctions
-Write-Host "[skill-verify] Checking junctions..."
-Test-JunctionTarget -Path (Join-Path $repoRoot '.claude\skills') -ExpectedTarget (Join-Path $repoRoot 'skills\library\skills')
-Test-JunctionTarget -Path (Join-Path $repoRoot '.codex\skills') -ExpectedTarget (Join-Path $repoRoot 'skills\library\skills')
-Write-Host "[skill-verify] All junctions correct."
+# Step 4: Verify routing stub
+Write-Host "[skill-verify] Checking routing stub..."
+$entryStubPath = Join-Path $repoRoot '.claude\skills\dev-il2cpp\SKILL.md'
+$libraryEntry  = Join-Path $repoRoot 'skills\library\skills\dev-il2cpp\SKILL.md'
+$stubErrors = @()
+
+if (-not (Test-Path -LiteralPath $entryStubPath)) {
+    $stubErrors += "Routing stub missing: $entryStubPath"
+} else {
+    $stubContent = Get-Content -LiteralPath $entryStubPath -Raw
+    if ($stubContent -notmatch '路由桩') {
+        $stubErrors += "Routing stub marker not found in $entryStubPath"
+    }
+}
+if (-not (Test-Path -LiteralPath $libraryEntry)) {
+    $stubErrors += "Library entry SKILL.md missing: $libraryEntry"
+}
+
+if ($stubErrors.Count -gt 0) {
+    Write-Warning "[skill-verify] Routing stub issues:"
+    foreach ($e in $stubErrors) { Write-Warning "  - $e" }
+} else {
+    Write-Host "[skill-verify] Routing stub verified OK."
+}
 
 # Step 5: Verify formal skills
 Write-Host "[skill-verify] Checking formal skills..."

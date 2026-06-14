@@ -49,20 +49,16 @@ export async function run(agents, args) {
     },
   })
   if (!synthesis) {
-    // 降级: 把第一个有效的诊断当根因
-    phase('Domain Fix')
-    for (let i = 0; i < agents.length; i++) {
-      const diag = validResults[i]
-      if (!diag) continue
-      await agent([
-        '你是 ' + agents[i].name + '。',
-        '诊断结果：' + diag.diagnosis,
-        '---',
-        '请按诊断结果执行修复。',
-        '完成后输出：✅ done / ⏳ remaining',
-      ].join('\n'))
-    }
-    return
+    // 根因汇聚失败 — 这是严重问题，不可静默降级
+    log('❌ 根因汇聚失败：合成 agent 未返回有效结果')
+    log('   各域原始诊断：')
+    validResults.forEach((r, i) => {
+      log(`   [${agents[i].name}] ${(r.diagnosis || '').substring(0, 120)}`)
+    })
+    throw new Error(
+      `deep-debug 根因汇聚失败：合成 agent 未返回结果。` +
+      `需要人工审查 ${validResults.length} 个域的诊断后再决定修复方案。`
+    )
   }
 
   phase('Domain Fix')

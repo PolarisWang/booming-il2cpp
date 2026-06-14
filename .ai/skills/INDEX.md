@@ -11,8 +11,8 @@ skills/
     skill-index.md                 # 所有技能索引
     registries/                    # 按领域分组的 registry
   runtime/                         # 跨 Agent 分发
-    bootstrap-skills.ps1           # 初始化：生成索引 + 创建 junction
-    sync-skills.ps1                # 增量同步（junction 失效时降级为复制）
+    bootstrap-skills.ps1           # 初始化：生成索引 + 验证入口桩
+    sync-skills.ps1                # 验证入口桩 + library 一致性
   lifecycle/                       # 自学习 + 自进化
     telemetry/usage.jsonl          # 使用率数据
     telemetry/tool_outcomes.jsonl  # 工具调用成败
@@ -40,7 +40,7 @@ skills/
 
 ## 核心原则
 
-1. **唯一可信源**: `skills/library/skills/` 是唯一编辑点，`.claude/skills/` 和 `.codex/skills/` 由 junction 自动同步
+1. **唯一可信源**: `skills/library/skills/` 是唯一编辑点，`.claude/skills/dev-il2cpp/SKILL.md` 包含最小路由桩指向 library。
 2. **自动发现**: 每个技能必须有 `skill.manifest.json`，目录由脚本自动生成
 3. **自学习闭环**: 埋点 → 信号 → 聚类 → 晋升 → 进化 → 版本谱系
 4. **Git 提交**: 所有修改都在 `skills/` 下完成，无需分别提交到 `.claude/skills/` 和 `.codex/skills/`

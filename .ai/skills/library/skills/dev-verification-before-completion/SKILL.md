@@ -215,7 +215,7 @@ assert not failures, failures
 [ ] python skills/tooling/learning/evolve.py propose --dry-run
      — 确认无意外进化提案
 [ ] python skills/tooling/verification/verify-skill-pipeline.ps1
-     — 确认 junction、manifest、catalog、evolution 目录一致
+     — 确认入口桩、manifest、catalog、evolution 目录一致
 ```
 
 ### 每日/每周维护

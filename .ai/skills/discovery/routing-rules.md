@@ -14,10 +14,14 @@
 ```
 
 **执行顺序**:
-0. 调用 `Skill("dev-il2cpp")` 加载入口技能，读取其 SKILL.md 获取路由指令
-1. 输出分类声明（`dev-il2cpp` 为固定首加载）→ `echo "..." > .claude/.classified`
-2. 按 dev-il2cpp 的路由协议读取对应 Expert 的 SKILL.md 加载知识
-3. 编辑域文件 → hook 验证分类声明格式 + `loaded_expert` 首位为 `dev-il2cpp`
+0. 入口技能 `dev-il2cpp` 已通过 Skill 工具加载（`.claude/skills/dev-il2cpp/SKILL.md` 为路由桩）
+1. 读取路由桩指令 → 加载 `.ai/skills/library/skills/dev-il2cpp/SKILL.md`（library 完整版）
+2. 输出分类声明（`dev-il2cpp` 为固定首加载）→ `echo "..." > .claude/.classified`
+3. 按 library 路由协议读取对应 Expert 的 SKILL.md 加载知识
+4. 编辑域文件 → hook 验证分类声明格式 + `loaded_expert` 首位为 `dev-il2cpp`
+
+> library 版本（`.ai/skills/library/skills/dev-il2cpp/SKILL.md`）是本路由协议的权威源。
+> routing-rules.md 只定义策略，不重复定义路由拓扑。
 
 ---
 
@@ -28,9 +32,9 @@
 Expert 与子控制器的完整映射见 `expert-registry.json` 中的 `expert_sub_controller` 字段。
 
 ```
-core-agent  →  runtime-ctl  →  运行时/调试/热更新 Expert
+core-agent  →  runtime-ctl  →  运行时/调试 Expert
             →  gc-ctl       →  GC/优化 Expert
-            →  codegen-ctl  →  CodeGen/翻译/构建/测试/热更新/平台 Expert
+            →  codegen-ctl  →  CodeGen/翻译/构建/测试/热更新/平台/能力/验证 Expert
 ```
 
 ### 执行顺序约束
@@ -111,26 +115,20 @@ Step 3 — 分域修复
 
 ---
 
-## 7. Expert 加载（A+B 模式）
+## 7. Expert 加载
 
-Expert 的知识通过 Agent spawn 加载和执行：
+Expert 的知识通过以下路径加载：
 
 ```
-单域:
-  Core Agent 从 expert-registry.json 匹配 Expert 名
-  → 读取 skills/library/skills/{expert}/SKILL.md
-  → 提取 ===BEGIN_AGENT_PROMPT=== 块
-  → Agent({spawn}, prompt=expert_knowledge + task)
-  → 子 Agent 自动执行并返回结果
-
-多域:
-  Core Agent 按域分组
-  → 选择 Workflow 模板（dual/triple/debug）
-  → Workflow({scriptPath: template_path, args: {agents, tasks}})
-  → 各 Expert 并行/串行执行
+1. dev-il2cpp 入口桩加载 library SKILL.md（读取路由协议）
+2. 分类声明后，从 expert-registry.json 匹配 Expert 名
+3. 读取 skills/library/skills/{expert}/SKILL.md
+4. 按 SKILL.md 指令执行，不走通用回复
 ```
 
-`Skill("dev-xxx-expert")` **不可用**（Claude Code 不支持子技能），替换为 Agent spawn。
+单域时当前 Agent 自行实现，多域时走 Workflow 委托。详见 core-agent SKILL.md 的分发循环。
+
+`Skill("dev-xxx-expert")` **不可用**（Claude Code 不支持子技能），所有 Expert 知识通过读 SKILL.md 注入。
 
 Expert 注册表（唯一权威数据源）: `skills/discovery/expert-registry.json`
 

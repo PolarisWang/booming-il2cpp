@@ -180,7 +180,7 @@ python skills/tooling/learning/skill_learn.py auto-report
 - promote 默认要求 benchmark + review 双通过
 - FIX promote 前自动备份原 skill 到 `governance/backups/`
 - 自动退役默认 dry-run；`auto-cleanup --health-engine` 会额外检查健康快照中的 LOW-USE 标记
-- Promote 后自动运行管线验证（PS1 → Python 降级），确保 junction/manifest/evolution 目录一致
+- Promote 后自动运行管线验证（PS1 → Python 降级），确保入口桩/manifest/evolution 目录一致
 - 所有操作写入 governance log
 
 ## 验证

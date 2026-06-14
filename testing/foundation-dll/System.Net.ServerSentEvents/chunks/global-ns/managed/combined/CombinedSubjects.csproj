@@ -11,6 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CombinedSubjects.cs" />
-    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="D:\agent\chaos-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
 </Project>

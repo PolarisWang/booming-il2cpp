@@ -4,7 +4,7 @@
 
 ## 当前加载链
 
-1. 技能唯一可信源为 `skills/library/skills/`，通过 NTFS junction 分发至 `.claude/skills/` 和 `.codex/skills/`。
+1. 技能唯一可信源为 `skills/library/skills/`。`.claude/skills/dev-il2cpp/SKILL.md` 包含最小路由桩，加载后立即读取 library 版本。
 2. 启动时 Agent 可通过 `skills/discovery/skill-index.md` 查阅完整技能目录。
 3. 命中领域后读取 `skills/discovery/registries/<domain>.md`。
 4. 最后按需读取 `skills/library/skills/<name>/SKILL.md`，以及 `references/` / `scripts/` / `assets/`。
@@ -27,8 +27,8 @@
 
 | 工具 | 技能路径 |
 |------|---------|
-| Claude Code | `.claude/skills/` -> junction -> `skills/library/skills/` |
-| Codex CLI | `.codex/skills/` -> junction -> `skills/library/skills/` |
+| Claude Code | `.claude/skills/dev-il2cpp/SKILL.md` (routing stub) → `.ai/skills/library/skills/dev-il2cpp/SKILL.md` |
+| Codex CLI | `.codex/skills/` (if configured, similar routing approach) |
 
 ## 维护要求
 

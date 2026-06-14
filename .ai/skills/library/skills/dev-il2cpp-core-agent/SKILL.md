@@ -85,7 +85,7 @@ Dispatcher 接收任务
 
 ### 阶段 3: 分发循环（Dispatch Loop）
 
-循环执行直到待办清单为空。单域走 Agent spawn，多域走 Workflow 委托。
+循环执行直到待办清单为空。单域当前 Agent 自行实现，多域走 Workflow 委托。
 
 ```
 todo = [子任务清单]       ← 初始 = 阶段 2 的输出
@@ -99,30 +99,22 @@ while todo 非空:
   domains = todo 涉及的所有域
 
   if domains == 1:
-    ── 单域: 用 Agent spawn（替代不可用的 Skill 注入）
+    ── 单域: 当前 Agent 自行实现
     expert = 从 expert-registry.json 匹配 Expert 名
     skill_md = 读取 skills/library/skills/{expert}/SKILL.md
 
-    // 提取 Agent 可执行指令块
-    agent_prompt = 从 skill_md 中提取 ===BEGIN_AGENT_PROMPT=== ... ===END_AGENT_PROMPT===
-    if agent_prompt 不存在:
-      agent_prompt = skill_md 的前 50 行摘要
+    // 注入领域知识到当前上下文
+    读取 SKILL.md → 提取领域边界、已知约束、执行流程
+    // 当前 Agent 自行实现代码修改、编译、验证
+    // 输出 done/remaining 标记
 
-    result = Agent(spawn, {
-      prompt: agent_prompt + "\n---\n当前子任务: " + todo,
-      agentType: "general-purpose",
-    })
-
-    if result 为 null（用户跳过或错误）:
-      降级: 当前 Agent 自行实现
-    else:
-      ✅ done / ⏳ remaining → 更新待办
+    ✅ done / ⏳ remaining → 更新待办
 
   else:
     ── 多域: 走 Workflow 委托（默认，不询问用户）
     1. 子任务按 Expert 域分组
     2. 从 expert-registry.json 读 workflow_templates
-    3. 选择模板: 2 域→dual, 3 域→triple, 深度调试→debug
+    3. 选择模板: 任意数量→multi, 深度调试→debug
     4. Workflow({scriptPath: template_path, args: {agents, tasks}})
     5. 收集各 Expert 结果:
        ✅ done / ⏳ remaining → 更新待办
@@ -245,14 +237,23 @@ L3（完整 — 翻译路径变更/AOT 输出变更/ABI 修改/多域修改）:
 
 域编号 → Expert 名、关键词 → Expert 名、子控制器分组的**完整映射**统一在 `skills/discovery/expert-registry.json` 中定义，本文不重复。
 
-拓扑结构：
+拓扑结构（完整映射见 expert-registry.json）：
 
 ```
+
 core-agent  →  runtime-ctl  →  runtime-expert / jit-expert / debug-expert
             →  gc-ctl       →  gc-expert / foundation-dll-optimizer
             →  codegen-ctl  →  codegen-expert / translation-expert / build-fixer /
-                               fact-verification-expert / hotupdate-expert / platform-expert
+                               fact-verification-expert / hotupdate-expert / platform-expert /
+                               abi-expert / external-runtime-expert / pipeline-expert /
+                               simd-expert / codegen-capabilities / verification-pipeline
 ```
+
+跨域 Expert（跨越多个 domain，组织上归属于 codegen-ctl）：
+- abi-expert — 涉及运行时(1) + CodeGen(4) + 构建(7)
+- external-runtime-expert — 涉及运行时(1) + CodeGen(4)
+- pipeline-expert — 涉及测试(5) + 构建(7)
+- simd-expert — 涉及 CodeGen(4) + 翻译(6)
 
 ### Expert 查找顺序
 
@@ -305,6 +306,6 @@ core-agent  →  runtime-ctl  →  runtime-expert / jit-expert / debug-expert
 
 | 上游 | 本 skill | 下游 |
 |------|----------|------|
-| `dev-il2cpp` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | 单域: `Agent(spawn, prompt)` — 子 Expert 自动执行 |
+| `dev-il2cpp` → il2cpp 路由 | **dev-il2cpp-core-agent** (Dispatcher) | 单域: 当前 Agent 自行实现（注入 Expert SKILL.md 知识） |
 | 用户直接输入 | | 多域: `Workflow({scriptPath})` — 并行委托 |
 | | | 质量门: `dev-trace-enforcement` / `dev-verification-before-completion` |

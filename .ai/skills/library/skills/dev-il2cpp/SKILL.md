@@ -44,7 +44,7 @@ dev-il2cpp（.claude/skills/ 唯一入口）
   ├── 路由协议: 读取 .ai/skills/discovery/registries/il2cpp.md
   ├── 找到 dev-il2cpp-core-agent → 读取其 SKILL.md
   ├── core-agent 读取 expert-registry.json 获取 Expert 名
-  └── core-agent 读 Expert SKILL.md → Agent spawn 执行
+  └── core-agent 读 Expert SKILL.md → 自行实现或 Workflow 委托
 ```
 
 无需在 `.claude/skills/` 注册任何子技能。Expert 路由通过 `expert-registry.json` 集中管理，所有路径使用 `.ai/skills/` 前缀。

@@ -1,13 +1,19 @@
+// multi-expert 模板 — 通用并行调查 + 串行修复 Workflow
+// 可接受 2+ 个 Expert Agent，替代之前的 dual/triple 独立模板。
+//
+// agents: [{ name, skillMd, task }] — 任意数量 Expert
+// 用法: Workflow({scriptPath: '...multi-expert.template.js', args: {agents}})
+
 export const meta = {
-  name: 'dual-expert',
-  description: '双 Expert 并行调查 + 串行修复',
+  name: 'multi-expert',
+  description: '多 Expert 并行调查 + 串行修复（通用模板，替代 dual/triple）',
   phases: [
     { title: 'Parallel Investigation' },
     { title: 'Sequential Fix' },
   ],
 }
 
-// agents: [{ name, skillMd, task }]
+// agents: [{ name, skillMd, task }] — 2 个或更多
 export async function run(agents, args) {
   phase('Parallel Investigation')
   const results = await parallel(

@@ -74,6 +74,7 @@ class ChunkContext:
     device: dict[str, Any] = field(default_factory=dict)  # {id, name, cpu, ram_gb}
     git_commit: str = ""
     git_branch: str = ""
+    context_fp: str = ""  # fast context fingerprint for soft cache invalidation
 
     @property
     def managed_dir(self) -> Path:

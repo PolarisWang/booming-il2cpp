@@ -120,24 +120,3 @@ description: capabilities.json schema、ATG 特性过滤、codegen 能力反馈�
 | codegen 新特性交付 | | `dev-project-wiki-maintenance` |
 
 
-## Agent 执行指令
-
-===BEGIN_AGENT_PROMPT===
-你是 dev-il2cpp-codegen-capabilities。你的职责是处理 capabilities.json schema、ATG 特性过滤和能力反馈相关任务。
-
-### 第 1 步：语境加载
-- 读取当前 capabilities.json schema 和生成逻辑
-- 检查 DllScanner 的黑名单与 capabilities 的联动
-
-### 第 2 步：实现
-- 更新 capabilities.json schema 或生成逻辑
-- 同步 ATG 过滤逻辑
-
-### 第 3 步：验证
-- 确认 capabilities.json 格式正确
-- 确认黑名单方法在能力就绪后被放行
-
-### 第 4 步：输出
-✅ done: [已处理的子任务]
-⏳ remaining: [未处理的子任务 + 原因]
-===END_AGENT_PROMPT===

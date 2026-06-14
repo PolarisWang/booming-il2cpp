@@ -20,16 +20,26 @@ export const meta = {
 }
 
 // ── 域→Expert 映射 ──────────────────────────────────────────────
+// ⚠️ 必须与 skills/discovery/expert-registry.json 保持同步！
+//    新增/重命名 Expert 时请同时更新本映射。
+//    检查项：domains[1-12].defaultExpert + cross_cutting[].name
 const DOMAIN_EXPERT = {
-  translation: 'dev-il2cpp-translation-expert',
-  runtime:     'dev-il2cpp-runtime-expert',
-  debug:       'dev-il2cpp-debug-expert',
-  gc:          'dev-il2cpp-gc-expert',
-  codegen:     'dev-il2cpp-codegen-expert',
-  hotupdate:   'dev-il2cpp-hotupdate-expert',
-  optimizer:   'dev-il2cpp-foundation-dll-optimizer',
-  build:       'dev-il2cpp-build-fixer',
-  test:        'dev-il2cpp-fact-verification-expert',
+  translation:      'dev-il2cpp-translation-expert',
+  runtime:          'dev-il2cpp-runtime-expert',
+  debug:            'dev-il2cpp-debug-expert',
+  gc:               'dev-il2cpp-gc-expert',
+  codegen:          'dev-il2cpp-codegen-expert',
+  hotupdate:        'dev-il2cpp-hotupdate-expert',
+  optimizer:        'dev-il2cpp-foundation-dll-optimizer',
+  build:            'dev-il2cpp-build-fixer',
+  test:             'dev-il2cpp-fact-verification-expert',
+  platform:         'dev-il2cpp-platform-expert',
+  abi:              'dev-il2cpp-abi-expert',
+  external:         'dev-il2cpp-external-runtime-expert',
+  pipeline:         'dev-il2cpp-pipeline-expert',
+  simd:             'dev-il2cpp-simd-expert',
+  codegenCaps:      'dev-il2cpp-codegen-capabilities',
+  verificationPipe: 'dev-il2cpp-verification-pipeline',
 }
 
 // Expert 结果 Schema（各子 Agent 必须按此格式返回）
@@ -66,6 +76,26 @@ function buildSubtaskPrompt(domain, originalTask) {
       return `作为 il2cpp CodeGen 专家，处理以下任务中的 codegen 部分：\n${originalTask}\n\n要求：\n1. 确认 NativeAotLoweringPlanner 文件布局\n2. 修改 T4 模板后运行 snapshot 测试\n3. CHAOS_IL2CPP_ 宏约束`
     case 'hotupdate':
       return `作为 il2cpp 热更新专家，处理以下任务中的热更新部分：\n${originalTask}\n\n要求：\n1. 确认 HotpatchDispatch 架构决策\n2. PatchLoader 修改需通过 hotupdate verification\n3. 注意 kHotpatchKeepNative/kHotpatchActive flags`
+    case 'platform':
+      return `作为 il2cpp 平台专家，处理以下任务中的跨平台部分：\n${originalTask}\n\n要求：\n1. 确认 PAL 抽象层接口\n2. CMakePresets 跨平台配置\n3. 工具链差异处理`
+    case 'abi':
+      return `作为 il2cpp ABI 专家，处理以下任务中的 ABI 部分：\n${originalTask}\n\n要求：\n1. 确认类型映射兼容性\n2. extern C 声明一致性\n3. 跨平台调用约定`
+    case 'external':
+      return `作为 il2cpp 外部运行时专家，处理以下任务中的 extern 部分：\n${originalTask}\n\n要求：\n1. extern stub 生成规则\n2. ShapeRegistry 注册\n3. 跨程序集路由`
+    case 'pipeline':
+      return `作为 il2cpp pipeline 专家，处理以下任务中的管线部分：\n${originalTask}\n\n要求：\n1. 缓存策略优化\n2. SDK 路径配置\n3. 编排净化`
+    case 'simd':
+      return `作为 il2cpp SIMD 专家，处理以下任务中的 SIMD 部分：\n${originalTask}\n\n要求：\n1. SIMD Intrinsics 翻译路径\n2. 向量化优化策略`
+    case 'codegenCaps':
+      return `作为 il2cpp codegen 能力专家，评估以下任务中 codegen 能力矩阵的覆盖情况：\n${originalTask}\n\n要求：\n1. 确认支持的特性列表\n2. 输出能力覆盖报告`
+    case 'verificationPipe':
+      return `作为 il2cpp 验证管线专家，处理以下任务中的测试管线部分：\n${originalTask}\n\n要求：\n1. 缓存治理\n2. 验证 gate 配置`
+    case 'test':
+      return `作为 il2cpp fact 验证专家，处理以下任务中的测试验证部分：\n${originalTask}\n\n要求：\n1. ATG/TPG 质量门\n2. codegen 输出审查\n3. skip-list 维护`
+    case 'build':
+      return `作为 il2cpp 构建专家，处理以下任务中的构建修复部分：\n${originalTask}\n\n要求：\n1. 严格分层诊断（ATG/TPG/CodeGen/Python）\n2. 在哪层出问题就在哪层修\n3. 转交时附诊断上下文`
+    case 'optimizer':
+      return `作为 il2cpp 优化专家，处理以下任务中的性能优化部分：\n${originalTask}\n\n要求：\n1. benchmark/profile 数据分析\n2. GC 健康检查\n3. AOT vs JIT 对比`
     default:
       return `处理以下任务中关于 ${domain} 的部分：\n${originalTask}`
   }

@@ -64,6 +64,7 @@ class CacheEntry:
         entry_exe_size: Size of entry.exe in bytes.
         entry_count: Number of files stored in this cache entry.
         status: "valid", "stale", or "invalid".
+        context_fingerprint: Fast mtime-based fingerprint of tools/templates at cache time.
     """
     cache_key: str
     assembly: str
@@ -75,6 +76,7 @@ class CacheEntry:
     entry_exe_size: int = 0
     entry_count: int = 0
     status: str = "valid"
+    context_fingerprint: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -187,6 +189,27 @@ def compute_input_hash(
     return h.hexdigest()
 
 
+def compute_context_fingerprint(
+    extra_source_paths: list[Path] | None = None,
+) -> str:
+    """Compute a fast context fingerprint using mtime (not full hash).
+
+    This is used to detect tool/template changes without expensive SHA-256
+    hashing of large tool DLLs (40MB+). Changes to these files typically
+    only require cmake reconfigure + rebuild, not full TPG rerun.
+
+    Returns a hexadecimal digest of all file paths + mtimes.
+    """
+    h = hashlib.sha256()
+    for src in (extra_source_paths or []):
+        if src.exists():
+            stat = src.stat()
+            h.update(str(src).encode("utf-8"))
+            h.update(str(stat.st_mtime).encode("utf-8"))
+            h.update(str(stat.st_size).encode("utf-8"))
+    return h.hexdigest()[:16]  # Short fingerprint
+
+
 # ── Cache manager ────────────────────────────────────────────────────────────
 
 class HephaestusCache:
@@ -249,6 +272,18 @@ class HephaestusCache:
             return False
         return True
 
+    def is_context_fresh(self, cache_key: str, current_fingerprint: str) -> bool:
+        """Check if the context fingerprint matches the cache entry.
+
+        When context matches, the full cache entry (including entry.exe) is valid.
+        When context doesn't match, the C++ codegen files are still valid but
+        the binary (entry.exe) needs cmake rebuild from the cached sources.
+        """
+        entry = self.lookup(cache_key)
+        if entry is None:
+            return False
+        return entry.context_fingerprint == current_fingerprint
+
     def restore_to(self, cache_key: str, target_dir: Path) -> bool:
         """Restore a cached build to the target directory.
 
@@ -293,6 +328,7 @@ class HephaestusCache:
         chunk_slug: str,
         input_hash: str,
         duration_ms: int = 0,
+        context_fingerprint: str = "",
     ) -> CacheEntry:
         """Store a build output in the cache.
 
@@ -339,6 +375,7 @@ class HephaestusCache:
             entry_exe_size=exe_size,
             entry_count=entry_count,
             status="valid",
+            context_fingerprint=context_fingerprint,
         )
 
         # Add to manifest

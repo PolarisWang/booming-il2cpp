@@ -31,6 +31,24 @@ def resolve_repo_root() -> Path | None:
         return None
 
 
+def check_routing_stub(repo_root: Path) -> list[str]:
+    """Verify the routing stub exists and points to the library version."""
+    errors: list[str] = []
+    stub_path = repo_root / ".claude" / "skills" / "dev-il2cpp" / "SKILL.md"
+    library_path = repo_root / "skills" / "library" / "skills" / "dev-il2cpp" / "SKILL.md"
+
+    if not stub_path.exists():
+        errors.append(f"Routing stub missing: {stub_path}")
+    else:
+        content = stub_path.read_text(encoding="utf-8")
+        if "路由桩" not in content:
+            errors.append(f"Routing stub marker not found in {stub_path}")
+    if not library_path.exists():
+        errors.append(f"Library entry SKILL.md missing: {library_path}")
+
+    return errors
+
+
 def has_todo(text: str) -> bool:
     return "todo" in text.lower() if text else False
 
@@ -40,18 +58,6 @@ def has_scaffold_placeholder(text: str) -> bool:
         return False
     placeholders = ["TODO: 用 1-2 句话描述该 skill 的核心职责、输入信号和输出边界。"]
     return any(p in text for p in placeholders)
-
-
-def check_junction(path: Path, expected_target: Path) -> bool:
-    """Check if path exists and is a junction pointing to expected_target."""
-    if not path.exists():
-        return False
-    try:
-        resolved = path.resolve()
-        expected = expected_target.resolve()
-        return resolved == expected
-    except (OSError, ValueError):
-        return False
 
 
 def main() -> int:
@@ -100,22 +106,12 @@ def main() -> int:
         print(f"[verify] Catalog check failed:\n{result.stdout[:500]}\n{result.stderr[:500]}", file=sys.stderr)
         return result.returncode
 
-    # ── Check 4: Junctions ─────────────────────────────────────────────────
-    print("[verify] Checking junctions...")
-    claude_skills = repo_root / ".claude" / "skills"
-    codex_skills = repo_root / ".codex" / "skills"
-    library_skills = formal_skills_dir
-
-    if not check_junction(claude_skills, library_skills):
-        errors.append(f".claude/skills junction mismatch or missing (expected -> {library_skills})")
-    if not check_junction(codex_skills, library_skills):
-        errors.append(f".codex/skills junction mismatch or missing (expected -> {library_skills})")
-
-    if errors:
-        # Junctions are nice-to-have on some setups; warn but don't fail
-        for e in errors:
-            print(f"[verify] WARN: {e}")
-        errors.clear()
+    # ── Check 4: Routing stub ────────────────────────────────────────────────
+    print("[verify] Checking routing stub...")
+    stub_errors = check_routing_stub(repo_root)
+    for e in stub_errors:
+        print(f"[verify] FAIL: {e}")
+        errors.append(e)
 
     # ── Check 5: Formal skills ─────────────────────────────────────────────
     print("[verify] Checking formal skills...")

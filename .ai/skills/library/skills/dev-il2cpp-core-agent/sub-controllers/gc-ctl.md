@@ -1,18 +1,17 @@
 # gc-ctl — GC 子 Controller
 
 ## 职责
-管理 GC 域 + 性能优化域的任务分发。
+管理 GC 域（2）+ 性能优化域（12）的任务分发。
 
-## Expert 映射
+## 管理的 Expert
 
-Expert 的完整关键词映射和分组定义在 `skills/discovery/expert-registry.json` 中：
+- `dev-il2cpp-gc-expert` — 内存分配/分代策略/写屏障/stress test
+- `dev-il2cpp-foundation-dll-optimizer` — benchmark/profile/性能优化/GC 健康检查
 
-- `expert_keywords` — 任务描述关键词 → Expert 名
-- `expert_sub_controller.gc-ctl` — 本控制器负责的 Expert 列表
+## 分组路由策略
 
-当前本控制器管理的 Expert 见 `expert-registry.json` 的 `expert_sub_controller.gc-ctl` 字段。
+路由策略、执行顺序、混合域处理统一在 `expert-registry.json` 的 `expert_sub_controller.gc-ctl.routing_strategy` 中定义。
+本文不重复维护。
 
-## 路由策略
-- 单域 → Skill 注入后自行实现
-- 双域 → [主域 → 从域] 串行
-- 处理不完 → 标记 remaining 回顶层 core-agent
+## 输出约束
+- 处理不完 → 标记 `⏳ remaining` 回顶层 core-agent
