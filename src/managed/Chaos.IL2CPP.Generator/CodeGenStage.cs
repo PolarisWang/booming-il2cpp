@@ -53,7 +53,7 @@ public sealed class CodeGenStage
                 .ToList(),
             TypeCapabilities = BuildCodeRegistrationTypeCapabilities(metadataWriterOutput.MetadataRegistration),
         };
-        var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration, request.SubjectMethodIds);
+        var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
 
         var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
             ?? new GenericInstantiationDemandGraphModel
