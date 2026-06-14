@@ -38,26 +38,56 @@ public sealed partial class NativeAotLoweringPlanner
         foreach (Match m in s_declRx.Matches(text))
             declared.Add(m.Groups[1].Value);
 
-        // 2. Collect function-call references.
-        var referenced = new HashSet<string>();
+        // 2. Collect function-call references with argument counts.
+        //    Map symbol → max argument count seen at call sites.
+        var referenced = new Dictionary<string, int>();
         foreach (Match m in s_callRx.Matches(text))
-            referenced.Add(m.Groups[1].Value);
+        {
+            string sym = m.Groups[1].Value;
+            string fullMatch = m.Value;
+            int argCount = CountCallArgs(fullMatch);
+            if (referenced.TryGetValue(sym, out int prev) && prev >= argCount)
+                continue;
+            referenced[sym] = argCount;
+        }
 
         // 3. Difference — referenced but not declared.
-        referenced.ExceptWith(declared);
-        if (referenced.Count == 0) return string.Empty;
+        var missing = referenced.Keys
+            .Where(k => !declared.Contains(k))
+            .OrderBy(k => k)
+            .ToList();
+        if (missing.Count == 0) return string.Empty;
 
-        // 4. Emit missing extern "C" declarations.
+        // 4. Emit missing extern "C" declarations with correct parameter count.
         var stub = new StringBuilder();
         stub.AppendLine("// ── External runtime ABI export declarations (auto-generated) ──");
-        foreach (var sym in referenced.OrderBy(s => s))
+        foreach (var sym in missing)
         {
+            int argCount = referenced[sym];
             stub.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
             stub.Append(sym);
-            stub.AppendLine("() noexcept;");
+            stub.Append('(');
+            for (int i = 0; i < argCount; i++)
+            {
+                if (i > 0) stub.Append(", ");
+                stub.Append("CHAOS_IL2CPP_INTPTR");
+            }
+            stub.AppendLine(") noexcept;");
         }
         stub.AppendLine();
         return stub.ToString();
+    }
+
+    /// <summary>Count comma-separated arguments inside the first (...) of a function call.</summary>
+    private static int CountCallArgs(string call)
+    {
+        int open = call.IndexOf('(');
+        if (open < 0) return 0;
+        int close = call.LastIndexOf(')');
+        if (close <= open + 1) return 0;
+        string args = call.Substring(open + 1, close - open - 1);
+        if (string.IsNullOrWhiteSpace(args)) return 0;
+        return args.Split(',').Length;
     }
 
     // Regex for declarations: extern / extern "C" / static inline

@@ -4510,7 +4510,16 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		// Collect chaos_external_runtime_* symbols for fallback declarations
 					Console.Error.WriteLine($"[CODEGEN-DEBUG-HOTPATCH] nativeTarget={nativeTarget}");
 if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-			builder.AppendLine($"{indentation}    extern " + (hasReturn ? (returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float32 ? "float" : returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float64 ? "double" : "CHAOS_IL2CPP_INTPTR") : "void") + " {nativeTarget}() noexcept;");
+{
+    string declReturn = hasReturn
+        ? (returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float32 ? "float"
+            : returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float64 ? "double"
+            : "CHAOS_IL2CPP_INTPTR")
+        : "void";
+    string declParams = FormatAbiSlotParameterSignature(parameterAbis);
+    if (declParams.Length == 0) declParams = "void";
+    builder.AppendLine($"{indentation}    extern {declReturn} {nativeTarget}({declParams}) noexcept;");
+}
 		// Append hidden chaos_generic_context for shared canonical targets.
 		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
 		string hpCtxArg = "";
