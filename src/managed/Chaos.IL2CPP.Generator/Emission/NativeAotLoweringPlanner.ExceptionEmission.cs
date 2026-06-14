@@ -4528,7 +4528,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		    if (hpCtxArg.Length > 0) hpParamCount++;
 		    string hpDeclParams = string.Join(", ", Enumerable.Repeat("CHAOS_IL2CPP_INTPTR", hpParamCount));
 		    if (hpDeclParams.Length == 0) hpDeclParams = "void";
-		    builder.AppendLine($"{indentation}    extern {declReturn} {nativeTarget}({hpDeclParams}) noexcept;");
+		    builder.AppendLine($"{indentation}    extern {returnType} {nativeTarget}({hpDeclParams}) noexcept;");
 		}
 		if (hasReturn)
 		{
