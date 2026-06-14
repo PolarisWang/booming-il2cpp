@@ -1,40 +1,20 @@
 # Chaos IL2CPP 开发规则
 
-> **第〇条规则**：进入新域/新任务时，回复第一行必须是分类声明。
+> **第〇条规则（🔴 不可跳过）**：
+> 进入新域/新任务时，回复第一行必须是分类声明，第二行输出 `Skill("dev-il2cpp")` 调用。
+> **dev-il2cpp 是固定首加载**，不可替换为其他 skill。
+>
 > 格式：`本轮任务涉及 {域1(编号)} + {域2(编号)} ，{action} 操作，第 N 轮 → 加载 dev-il2cpp → dev-xxx-expert`
 > 已在该域中的简单回复（"继续"/"ok"/"A"）不需要重复输出。
 >
-> | 编号 | 域 | 说明 |
-> |------|----|------|
-> | 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap |
-> | 2 | GC | 内存分配、分代、写屏障 |
-> | 3 | 调试 | crash/segfault/测试失败 |
-> | 4 | CodeGen | C# codegen/T4/snapshot |
-> | 5 | 测试 | foundation-dll/subject/manifest |
-> | 6 | 翻译 | 新 IL 指令/Planner/Emission |
-> | 7 | 构建 | 编译/链接/SDK/cmake |
-> | 8 | 热更新 | PatchLoader/patchdata |
-> >
-> > Expert 映射、关键词匹配、子控制器分组统一在 `skills/discovery/expert-registry.json` 中定义，
-> > 其他文件不重复定义。域 9-12 见该 JSON 中的 domains 字段（platform / codegen-capabilities /
-> > verification-pipeline / optimization）。分类声明时域编号只能用 1-8；域 9-12 由内部路由逻辑匹配。
->
-> action: `read` / `fix` / `build` / `verify` / `plan`
->
-> **执行协议**：
-> 0. 输出分类声明（`dev-il2cpp` 为固定首加载）并写入标记文件：
->    ```bash
->    echo "本轮任务涉及 {域1(编号)} + {域2(编号)} ，{action} 操作，第 N 轮 → 加载 dev-il2cpp → dev-xxx-expert" > .claude/.classified
->    echo 'loaded_expert:dev-il2cpp' >> .claude/.classified
->    ```
-> 1. **强制**：调用 `Skill("dev-il2cpp")` 加载入口技能，读取其 SKILL.md 获取路由指令和核心规则
-> 2. **🔴 强制阻断门**：分类声明后，必须按 dev-il2cpp 的路由协议加载对应知识
->    — 单域：dev-il2cpp → 读对应 Expert 的 SKILL.md 注入领域知识
->    — 多域（≥2）：dev-il2cpp → 读 `dev-il2cpp-core-agent` 的 SKILL.md 执行调度循环
->    — 验证方式：`.claude/.classified` 文件必须含 `loaded_expert:<name>` 行，且首位必须是 `dev-il2cpp`
-> 3. 同一域连续多轮：检查 `.claude/.loaded_skills_cache`，已加载的技能可跳过重读 SKILL.md
-> 4. 响应结束时：延续消息保留 `.classified`；新任务 `rm -f .claude/.classified .claude/.loaded_skills_cache`
-> 5. **Bash**: 管理 Bash（echo/rm .claude/）和只读 Bash（ls/cat/git status）无需分类
+> **执行协议（🔴 每一步必须执行）**：
+> 0. 输出分类声明 → `echo "本轮任务涉及..." > .claude/.classified`；`echo 'loaded_expert:dev-il2cpp→{expert}' >> .claude/.classified`
+> 1. **强制**：在分类声明后、任何其他工具使用前，调用 `Skill("dev-il2cpp")` 加载入口技能
+>    — 这不是可选项。跳过此步骤会被 hook 拦截。
+> 2. **🔴 强制阻断门**：按 dev-il2cpp 的路由协议加载对应知识
+>    — 单域：读取对应 Expert 的 SKILL.md 注入领域知识
+>    — 多域（≥2）：读取 `dev-il2cpp-core-agent` 的 SKILL.md 执行调度循环
+>    — 验证方式：`.claude/.classified` 文件必须含 `loaded_expert:dev-il2cpp→{expert}` 行
 
 ## 全局优先级（强制）
 
