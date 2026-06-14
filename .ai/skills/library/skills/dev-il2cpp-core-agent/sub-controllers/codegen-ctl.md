@@ -5,16 +5,12 @@
 
 ## Expert 映射
 
-| 子任务信号 | 路由目标 |
-|-----------|---------|
-| 新 IL 指令、翻译路径、Emission、Planner、Lowering | `dev-il2cpp-translation-expert` |
-| C# codegen、T4 模板、NativeAot lowering、snapshot | `dev-il2cpp-codegen-expert` |
-| 编译失败、链接错误、codegen stub、dotnet build 失败、CMake 错误 | `dev-il2cpp-build-fixer` |
-| 跨平台 PAL、构建系统、CMakePresets、工具链、CI/CD、平台移植 | `dev-il2cpp-platform-expert` |
-| 文档维护、wiki 更新、知识记录 | `dev-project-wiki-maintenance` |
-| foundation-dll、subject、测试管线、manifest | `dev-il2cpp-fact-verification-expert` |
-| fact 验证、fact_chunk、skip-list、dll 验证结果审计 | `dev-il2cpp-fact-verification-expert` |
-| 热更新、PatchLoader、patchdata、HotpatchDispatch | `dev-il2cpp-hotupdate-expert` |
+Expert 的完整关键词映射和分组定义在 `skills/discovery/expert-registry.json` 中：
+
+- `expert_keywords` — 任务描述关键词 → Expert 名
+- `expert_sub_controller.codegen-ctl` — 本控制器负责的 Expert 列表
+
+当前本控制器管理的 Expert 见 `expert-registry.json` 的 `expert_sub_controller.codegen-ctl` 字段。
 
 ## 执行顺序约束
 **必须先派发 translation-expert，再派发 codegen-expert**（两者都涉及 Planner/Emission 文件）。

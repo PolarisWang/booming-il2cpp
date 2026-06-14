@@ -5,10 +5,12 @@
 
 ## Expert 映射
 
-| 子任务信号 | 路由目标 |
-|-----------|---------|
-| GC 相关、分配模式、内存回收、写屏障、stress test | `dev-il2cpp-gc-expert` |
-| 性能优化、profile 分析、benchmark | `dev-il2cpp-foundation-dll-optimizer` |
+Expert 的完整关键词映射和分组定义在 `skills/discovery/expert-registry.json` 中：
+
+- `expert_keywords` — 任务描述关键词 → Expert 名
+- `expert_sub_controller.gc-ctl` — 本控制器负责的 Expert 列表
+
+当前本控制器管理的 Expert 见 `expert-registry.json` 的 `expert_sub_controller.gc-ctl` 字段。
 
 ## 路由策略
 - 单域 → Skill 注入后自行实现

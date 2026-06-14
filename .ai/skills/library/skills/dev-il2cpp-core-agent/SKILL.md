@@ -51,13 +51,13 @@ Dispatcher 接收任务
 
 2. 健康自检（断路器）:
    a. 列出 skills/library/skills/ 下所有 dev-il2cpp-*-expert 目录
-   b. 与分类矩阵对比，检查是否有 Expert 存在但未注册
-   c. 检查分类矩阵是否为空或只有退化条目
+   b. 与 <code>skills/discovery/expert-registry.json</code> 对比，检查是否有 Expert 存在但未注册
+   c. 检查 registry 中 domains 字段是否为空或只有退化条目
    d. 结果:
       - ✅ 正常 → 继续
       - ⚠️ 有未注册 Expert → 发警告，继续
-      - ❌ 分类矩阵损坏 → 启用降级模式:
-        降级模式: 跳过分类矩阵，直接输出:
+      - ❌ registry 损坏 → 启用降级模式:
+        降级模式: 跳过 registry，直接输出:
         "请选择任务域: [1]运行时 [2]GC [3]调试 [4]CodeGen [5]测试 [6]翻译 [7]构建 [8]热更新"
         用户选择后 → 路由到对应域的 Expert
 
@@ -142,12 +142,12 @@ MAX_ROUNDS = 5（默认）
 
 ### 阶段 3a: 未知域解析（Adversarial Jury）
 
-当子任务域在分类矩阵中无匹配时，触发对抗陪审流程。
+当子任务域在 registry 中无匹配时，触发对抗陪审流程。
 
 #### 检测与触发
 
 ```
-分类矩阵无匹配 → 记录到 skills/.unknown-domains.json:
+registry 无匹配 → 记录到 skills/.unknown-domains.json:
   {
     "domain": "ci-cd",
     "first_seen": "2026-06-11",
@@ -190,7 +190,7 @@ Step 3: 汇总裁决
 
   ≥2/3 PASS → 注册:
     1. 写 skills/library/skills/dev-il2cpp-{domain}-expert/SKILL.md
-    2. 更新分类矩阵（追加新行）
+    2. 更新 expert-registry.json（追加新行）
     3. 更新 skills/.unknown-domains.json → status=registered
     4. 当前轮继续用新 skill 处理子任务
 
@@ -207,7 +207,7 @@ Step 3: 汇总裁决
 陪审拒绝后，或 hit_count < 2 时，走通用兜底：
 
 ```
-分类矩阵无匹配 + 未触发陪审
+registry 无匹配 + 未触发陪审
   → 不用 Skill 注入
   → 当前 Agent 自行实现
   → 标记 ⏳ remaining: ["域 {domain} 无 Expert，用 generic fallback 实现"]
@@ -241,29 +241,25 @@ L3（完整 — 翻译路径变更/AOT 输出变更/ABI 修改/多域修改）:
 
 ---
 
-## 分类矩阵（用于阶段 3 选 Expert）
+## Expert 路由
 
-> ℹ️ 路由规则的权威源是 `skills/discovery/routing-rules.md`。以下矩阵是其副本，如有不一致以 routing-rules.md 为准。
+域编号 → Expert 名、关键词 → Expert 名、子控制器分组的**完整映射**统一在 `skills/discovery/expert-registry.json` 中定义，本文不重复。
 
-顶层 core-agent 按域分组路由到子 Controller，子 Controller 再分派到具体 Expert。
+拓扑结构：
 
 ```
-顶层 core-agent                          子 Controller              Expert
-├── 运行时(1) / 调试(3)  → runtime-ctl → ├── dev-il2cpp-runtime-expert
-│                                          └── dev-il2cpp-debug-expert
-├── GC(2) / 优化(5)      → gc-ctl      → ├── dev-il2cpp-gc-expert
-│                                          └── dev-il2cpp-foundation-dll-optimizer
-└── CodeGen(4) / 翻译(6) / 构建(7)        → codegen-ctl → 6 个 Expert
-    测试(5) / 热更新(8)
+core-agent  →  runtime-ctl  →  runtime-expert / jit-expert / debug-expert
+            →  gc-ctl       →  gc-expert / foundation-dll-optimizer
+            →  codegen-ctl  →  codegen-expert / translation-expert / build-fixer /
+                               fact-verification-expert / hotupdate-expert / platform-expert
 ```
 
-### 顶层路由
+### Expert 查找顺序
 
-| 命中域 | 路由目标 |
-|--------|---------|
-| 运行时(1) / 调试(3) | 读取 `sub-controllers/runtime-ctl.md` 后自行实现 |
-| GC(2) / 优化(5) | 读取 `sub-controllers/gc-ctl.md` 后自行实现 |
-| CodeGen(4) / 翻译(6) / 构建(7) / 测试(5) / 热更新(8) | 读取 `sub-controllers/codegen-ctl.md` 后自行实现 |
+1. 按域编号查 `expert-registry.json.domains[N].defaultExpert`
+2. 如果域编号不明确，按任务描述关键词查 `expert_registry.json.expert_keywords`
+3. 如果仍不匹配，通过子控制器查 `expert_registry.json.expert_sub_controller`
+4. 以上都不匹配 → 降级为当前 Agent 自行实现
 
 ---
 

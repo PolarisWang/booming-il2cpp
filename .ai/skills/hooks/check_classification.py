@@ -133,9 +133,14 @@ if not classification:
     sys.exit(1)
 
 # R6: 兼容中英文逗号、->/→ 箭头、灵活空格
+# 兼容两种格式:
+#   新格式: "... 第 N 轮 → 加载 dev-il2cpp → dev-xxx-expert"
+#   旧格式: "... 第 N 轮 → 加载 dev-xxx-expert"
+# group 4 始终为实际 Expert 名
 pattern = (
     r'本轮任务涉及\s+(.+?)\s*[，,]\s*(\w+)\s*操作\s*[，,]\s*'
-    r'第\s*(\d+)\s*轮\s*(?:→|->|=>|—>)?\s*加载\s+(dev-\S+)'
+    r'第\s*(\d+)\s*轮\s*(?:→|->|=>|—>)?\s*加载\s+'
+    r'(?:dev-il2cpp\s*(?:→|->|=>|—>)\s*)?(dev-\S+)'
 )
 m = re.match(pattern, classification)
 if not m:

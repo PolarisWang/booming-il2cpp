@@ -5,11 +5,12 @@
 
 ## Expert 映射
 
-| 子任务信号 | 路由目标 |
-|-----------|---------|
-| runtime-core、interpreter、VTable、bootstrap、method_table、线程状态 | `dev-il2cpp-runtime-expert` |
-| JIT 编译、T4 原生代码生成、寄存器分配、SEH、unwind info、tier promotion、OSR、inline cache | `dev-il2cpp-jit-expert` |
-| crash、segfault、test failure、异常行为 | `dev-il2cpp-debug-expert` |
+Expert 的完整关键词映射和分组定义在 `skills/discovery/expert-registry.json` 中：
+
+- `expert_keywords` — 任务描述关键词 → Expert 名
+- `expert_sub_controller.runtime-ctl` — 本控制器负责的 Expert 列表
+
+当前本控制器管理的 Expert 见 `expert-registry.json` 的 `expert_sub_controller.runtime-ctl` 字段。
 
 ## 路由策略
 - 单域 → Skill 注入后自行实现

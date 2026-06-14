@@ -176,6 +176,11 @@ endif()
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
 )
+# jit_data_loader.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing ChaosJitDataLoad symbol needed by JIT build's native-aot.generated.obj.
+set(CHAOS_JIT_DATA_LOADER
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/jit_data_loader.cpp"
+)
 # profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
 # missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
 # symbols added after the SDK was last rebuilt.  Compile locally.
@@ -203,6 +208,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_JIT_DATA_LOADER}
     ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )

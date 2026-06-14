@@ -1,6 +1,7 @@
 {
   "promptTemplate": [
     ".ai/skills/discovery/skill-index.md",
+    ".ai/skills/discovery/expert-registry.json",
     "wiki/INDEX.md"
   ],
   "projectPrompt": "",

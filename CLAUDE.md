@@ -4,16 +4,20 @@
 > 格式：`本轮任务涉及 {域1(编号)} + {域2(编号)} ，{action} 操作，第 N 轮 → 加载 dev-il2cpp → dev-xxx-expert`
 > 已在该域中的简单回复（"继续"/"ok"/"A"）不需要重复输出。
 >
-> | 编号 | 域 | Expert |
-> |------|----|--------|
-> | 1 | 运行时（runtime-core/interpreter/VTable/bootstrap） | `dev-il2cpp-runtime-expert` |
-> | 2 | GC | `dev-il2cpp-gc-expert` |
-> | 3 | 调试 | `dev-il2cpp-debug-expert` |
-> | 4 | CodeGen（C# codegen/T4/snapshot） | `dev-il2cpp-codegen-expert` |
-> | 5 | 测试（foundation-dll/subject/manifest） | `dev-il2cpp-fact-verification-expert` |
-> | 6 | 翻译（新 IL 指令/Planner/Emission） | `dev-il2cpp-codegen-expert` |
-> | 7 | 构建（编译/链接/SDK/cmake） | `dev-il2cpp-build-fixer` |
-> | 8 | 热更新（PatchLoader/patchdata） | `dev-il2cpp-hotupdate-expert` |
+> | 编号 | 域 | 说明 |
+> |------|----|------|
+> | 1 | 运行时 | runtime-core/interpreter/VTable/bootstrap |
+> | 2 | GC | 内存分配、分代、写屏障 |
+> | 3 | 调试 | crash/segfault/测试失败 |
+> | 4 | CodeGen | C# codegen/T4/snapshot |
+> | 5 | 测试 | foundation-dll/subject/manifest |
+> | 6 | 翻译 | 新 IL 指令/Planner/Emission |
+> | 7 | 构建 | 编译/链接/SDK/cmake |
+> | 8 | 热更新 | PatchLoader/patchdata |
+> >
+> > Expert 映射、关键词匹配、子控制器分组统一在 `skills/discovery/expert-registry.json` 中定义，
+> > 其他文件不重复定义。域 9-12 见该 JSON 中的 domains 字段（platform / codegen-capabilities /
+> > verification-pipeline / optimization）。分类声明时域编号只能用 1-8；域 9-12 由内部路由逻辑匹配。
 >
 > action: `read` / `fix` / `build` / `verify` / `plan`
 >
