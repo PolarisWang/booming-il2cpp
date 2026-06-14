@@ -5595,14 +5595,14 @@ public sealed partial class NativeAotLoweringPlanner
             { IsInstanceMethod = true });
 
             // === List<T>::Remove — InlineShapeDescriptor (no function call) ===
-            // IILE lambda: linear scan + std::memmove shift on inline field buffer.
+            // IILE lambda: linear scan + CHAOS_IL2CPP_MEMMOVE shift on inline field buffer.
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Remove",
                 Resolver: static (callee, paramTypes) =>
                 {
                     if (paramTypes.Count != 1) return null;
-                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) { auto _shift = static_cast<CHAOS_IL2CPP_SIZE>(_list->size - _i - 1); if (_shift > 0) std::memmove(&_elems[_i], &_elems[_i + 1], _shift * sizeof(CHAOS_IL2CPP_INTPTR)); _list->size--; _list->version++; return 1; } } return 0; })()";
+                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) { auto _shift = static_cast<CHAOS_IL2CPP_SIZE>(_list->size - _i - 1); if (_shift > 0) CHAOS_IL2CPP_MEMMOVE(&_elems[_i], &_elems[_i + 1], _shift * sizeof(CHAOS_IL2CPP_INTPTR)); _list->size--; _list->version++; return 1; } } return 0; })()";
                 })
             { IsInstanceMethod = true });
 
@@ -5649,7 +5649,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "        auto* new_elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(new_hdr + 1);",
                         "        if (hdr != nullptr && _list->size > 0) {",
                         "            auto* old_elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
-                        "            std::memcpy(new_elems, old_elems, static_cast<CHAOS_IL2CPP_SIZE>(_list->size) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "            CHAOS_IL2CPP_MEMCPY(new_elems, old_elems, static_cast<CHAOS_IL2CPP_SIZE>(_list->size) * sizeof(CHAOS_IL2CPP_INTPTR));",
                         "            CHAOS_IL2CPP_FREE(hdr);",
                         "        }",
                         "        _list->items_array = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new_hdr);",
@@ -5745,7 +5745,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "    for (CHAOS_IL2CPP_INT32 i = 0; i < _list->size; i++) {",
                         "        if (elems[i] == chaos_arg_1) {",
                         "            auto move_count = _list->size - i - 1;",
-                        "            if (move_count > 0) std::memmove(&elems[i], &elems[i + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "            if (move_count > 0) CHAOS_IL2CPP_MEMMOVE(&elems[i], &elems[i + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
                         "            _list->size--;",
                         "            _list->version++;",
                         "            return 1;",
@@ -5778,7 +5778,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "    if (hdr == nullptr || chaos_arg_1 < 0 || chaos_arg_1 >= _list->size) return;",
                         "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
                         "    auto move_count = _list->size - chaos_arg_1 - 1;",
-                        "    if (move_count > 0) std::memmove(&elems[chaos_arg_1], &elems[chaos_arg_1 + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "    if (move_count > 0) CHAOS_IL2CPP_MEMMOVE(&elems[chaos_arg_1], &elems[chaos_arg_1 + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
                         "    _list->size--;",
                         "    _list->version++;",
                     ]);
@@ -9154,7 +9154,7 @@ public sealed partial class NativeAotLoweringPlanner
                     return """
                         ([&]() -> CHAOS_IL2CPP_INTPTR {
                             CHAOS_IL2CPP_INT64 _v = 0;
-                            std::memcpy(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
+                            CHAOS_IL2CPP_MEMCPY(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
                             auto _cached = lookup_cached_enum_name(_v);
                             return _cached != 0 ? _cached : ChaosEnumToString({0});
                         })()
@@ -9176,8 +9176,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return """
                         ([&]() -> CHAOS_IL2CPP_INT32 {
                             CHAOS_IL2CPP_INT64 _v = 0, _f = 0;
-                            std::memcpy(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
-                            std::memcpy(&_f, reinterpret_cast<const void*>({1} + 16), sizeof(_f));
+                            CHAOS_IL2CPP_MEMCPY(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
+                            CHAOS_IL2CPP_MEMCPY(&_f, reinterpret_cast<const void*>({1} + 16), sizeof(_f));
                             return (_v & _f) == _f ? 1 : 0;
                         })()
                         """.Replace("\r\n", "\n").Trim();
@@ -9614,14 +9614,14 @@ public sealed partial class NativeAotLoweringPlanner
 	                                else if (({0}) == 0 || ({1}) == 0) _cae_eq = false;
 	                                else {
 	                                    auto _cae_l0 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
-	                                        reinterpret_cast<const uint8_t*>({0}) + 24);
+	                                        reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({0}) + 24);
 	                                    auto _cae_l1 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
-	                                        reinterpret_cast<const uint8_t*>({1}) + 24);
+	                                        reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({1}) + 24);
 	                                    if (_cae_l0 != _cae_l1) _cae_eq = false;
 	                                    else {
-	                                        _cae_eq = std::memcmp(
-	                                            reinterpret_cast<const void*>(reinterpret_cast<const uint8_t*>({0}) + 32),
-	                                            reinterpret_cast<const void*>(reinterpret_cast<const uint8_t*>({1}) + 32),
+	                                        _cae_eq = CHAOS_IL2CPP_MEMCMP(
+	                                            reinterpret_cast<const void*>(reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({0}) + 32),
+	                                            reinterpret_cast<const void*>(reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({1}) + 32),
 	                                            static_cast<size_t>(_cae_l0)) == 0;
 	                                    }
 	                                }
