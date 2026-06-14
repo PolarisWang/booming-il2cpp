@@ -3,6 +3,7 @@
   "assemblyName": "System.Runtime.Serialization.Formatters",
   "chunkSlug": "global-ns",
   "totalMethods": 84,
+  "factMethodCount": 51,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -179,505 +180,505 @@
   "methods": [
     {
       "index": 0,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Deserialize:System.Object(System.IO.Stream)",
       "generatedMethodId": "Deserialize_0_Stream_0"
     },
     {
       "index": 1,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Deserialize:System.Object(System.IO.Stream)",
       "generatedMethodId": "Deserialize_0_Stream_1"
     },
     {
       "index": 2,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Serialize:System.Void(System.IO.Stream,System.Object)",
       "generatedMethodId": "Serialize_1_Stream_object_0"
     },
     {
       "index": 3,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Serialize:System.Void(System.IO.Stream,System.Object)",
       "generatedMethodId": "Serialize_1_Stream_object_1"
     },
     {
       "index": 4,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.Type)",
       "generatedMethodId": "Convert_0_object_System_Type_0"
     },
     {
       "index": 5,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.TypeCode)",
       "generatedMethodId": "Convert_1_object_System_TypeCode_0"
     },
     {
       "index": 6,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.TypeCode)",
       "generatedMethodId": "Convert_1_object_System_TypeCode_1"
     },
     {
       "index": 7,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToBoolean:System.Boolean(System.Object)",
       "generatedMethodId": "ToBoolean_2_object_0"
     },
     {
       "index": 8,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToChar:System.Char(System.Object)",
       "generatedMethodId": "ToChar_3_object_0"
     },
     {
       "index": 9,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSByte:System.SByte(System.Object)",
       "generatedMethodId": "ToSByte_4_object_0"
     },
     {
       "index": 10,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToByte:System.Byte(System.Object)",
       "generatedMethodId": "ToByte_5_object_0"
     },
     {
       "index": 11,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt16:System.Int16(System.Object)",
       "generatedMethodId": "ToInt16_6_object_0"
     },
     {
       "index": 12,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt16:System.UInt16(System.Object)",
       "generatedMethodId": "ToUInt16_7_object_0"
     },
     {
       "index": 13,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt32:System.Int32(System.Object)",
       "generatedMethodId": "ToInt32_8_object_0"
     },
     {
       "index": 14,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt32:System.UInt32(System.Object)",
       "generatedMethodId": "ToUInt32_9_object_0"
     },
     {
       "index": 15,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt64:System.Int64(System.Object)",
       "generatedMethodId": "ToInt64_10_object_0"
     },
     {
       "index": 16,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt64:System.UInt64(System.Object)",
       "generatedMethodId": "ToUInt64_11_object_0"
     },
     {
       "index": 17,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSingle:System.Single(System.Object)",
       "generatedMethodId": "ToSingle_12_object_0"
     },
     {
       "index": 18,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDouble:System.Double(System.Object)",
       "generatedMethodId": "ToDouble_13_object_0"
     },
     {
       "index": 19,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDecimal:System.Decimal(System.Object)",
       "generatedMethodId": "ToDecimal_14_object_0"
     },
     {
       "index": 20,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDateTime:System.DateTime(System.Object)",
       "generatedMethodId": "ToDateTime_15_object_0"
     },
     {
       "index": 21,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)",
       "generatedMethodId": "Deserialize_0_Stream_0"
     },
     {
       "index": 22,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)",
       "generatedMethodId": "Deserialize_0_Stream_1"
     },
     {
       "index": 23,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
       "generatedMethodId": "Serialize_1_Stream_object_0"
     },
     {
       "index": 24,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
       "generatedMethodId": "Serialize_1_Stream_object_1"
     },
     {
       "index": 25,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type)",
       "generatedMethodId": "GetSerializableMembers_0_System_Type_0"
     },
     {
       "index": 26,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type,System.Runtime.Serialization.StreamingContext)",
       "generatedMethodId": "GetSerializableMembers_1_System_Type_StreamingContext_0"
     },
     {
       "index": 27,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::CheckTypeSecurity:System.Void(System.Type,System.Runtime.Serialization.Formatters.TypeFilterLevel)",
       "generatedMethodId": "CheckTypeSecurity_2_System_Type_TypeFilterLevel_0"
     },
     {
       "index": 28,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetUninitializedObject:System.Object(System.Type)",
       "generatedMethodId": "GetUninitializedObject_3_System_Type_0"
     },
     {
       "index": 29,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSafeUninitializedObject:System.Object(System.Type)",
       "generatedMethodId": "GetSafeUninitializedObject_4_System_Type_0"
     },
     {
       "index": 30,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])",
       "generatedMethodId": "PopulateObjectMembers_5_object_MemberInfo_System_Object_0"
     },
     {
       "index": 31,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])",
       "generatedMethodId": "PopulateObjectMembers_5_object_MemberInfo_System_Object_1"
     },
     {
       "index": 32,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])",
       "generatedMethodId": "PopulateObjectMembers_5_object_MemberInfo_System_Object_2"
     },
     {
       "index": 33,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSurrogateForCyclicalReference:System.Runtime.Serialization.ISerializationSurrogate(System.Runtime.Serialization.ISerializationSurrogate)",
       "generatedMethodId": "GetSurrogateForCyclicalReference_6_ISerializationSurrogate_0"
     },
     {
       "index": 34,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetTypeFromAssembly:System.Type(System.Reflection.Assembly,System.String)",
       "generatedMethodId": "GetTypeFromAssembly_7_Assembly_string_0"
     },
     {
       "index": 35,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetTypeFromAssembly:System.Type(System.Reflection.Assembly,System.String)",
       "generatedMethodId": "GetTypeFromAssembly_7_Assembly_string_1"
     },
     {
       "index": 36,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean)",
       "generatedMethodId": "GetId_0_object_bool_0"
     },
     {
       "index": 37,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean)",
       "generatedMethodId": "GetId_0_object_bool_1"
     },
     {
       "index": 38,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean)",
       "generatedMethodId": "HasId_1_object_bool_0"
     },
     {
       "index": 39,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean)",
       "generatedMethodId": "HasId_1_object_bool_1"
     },
     {
       "index": 40,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)",
       "generatedMethodId": "GetObject_0_long_0"
     },
     {
       "index": 41,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)",
       "generatedMethodId": "GetObject_0_long_1"
     },
     {
       "index": 42,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64)",
       "generatedMethodId": "RegisterObject_1_object_long_0"
     },
     {
       "index": 43,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64)",
       "generatedMethodId": "RegisterObject_1_object_long_1"
     },
     {
       "index": 44,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo)",
       "generatedMethodId": "RegisterObject_2_object_long_SerializationInfo_0"
     },
     {
       "index": 45,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo)",
       "generatedMethodId": "RegisterObject_2_object_long_SerializationInfo_1"
     },
     {
       "index": 46,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo)",
       "generatedMethodId": "RegisterObject_3_object_long_SerializationInfo_long_MemberInfo_0"
     },
     {
       "index": 47,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo)",
       "generatedMethodId": "RegisterObject_3_object_long_SerializationInfo_long_MemberInfo_1"
     },
     {
       "index": 48,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
       "generatedMethodId": "RegisterObject_4_object_long_SerializationInfo_long_MemberInfo_System_Int32_0"
     },
     {
       "index": 49,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
       "generatedMethodId": "RegisterObject_4_object_long_SerializationInfo_long_MemberInfo_System_Int32_1"
     },
     {
       "index": 50,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
       "generatedMethodId": "RegisterObject_4_object_long_SerializationInfo_long_MemberInfo_System_Int32_2"
     },
     {
       "index": 51,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
       "generatedMethodId": "RegisterObject_4_object_long_SerializationInfo_long_MemberInfo_System_Int32_3"
     },
     {
       "index": 52,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::DoFixups:System.Void()",
       "generatedMethodId": "DoFixups_5__0"
     },
     {
       "index": 53,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)",
       "generatedMethodId": "RecordFixup_6_long_MemberInfo_long_0"
     },
     {
       "index": 54,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)",
       "generatedMethodId": "RecordFixup_6_long_MemberInfo_long_1"
     },
     {
       "index": 55,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)",
       "generatedMethodId": "RecordFixup_6_long_MemberInfo_long_2"
     },
     {
       "index": 56,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
       "generatedMethodId": "RecordDelayedFixup_7_long_string_long_0"
     },
     {
       "index": 57,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
       "generatedMethodId": "RecordDelayedFixup_7_long_string_long_1"
     },
     {
       "index": 58,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
       "generatedMethodId": "RecordDelayedFixup_7_long_string_long_2"
     },
     {
       "index": 59,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
       "generatedMethodId": "RecordDelayedFixup_7_long_string_long_3"
     },
     {
       "index": 60,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_8_long_int_long_0"
     },
     {
       "index": 61,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_8_long_int_long_1"
     },
     {
       "index": 62,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_8_long_int_long_2"
     },
     {
       "index": 63,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_8_long_int_long_3"
     },
     {
       "index": 64,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_9_long_System_Int32_long_0"
     },
     {
       "index": 65,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_9_long_System_Int32_long_1"
     },
     {
       "index": 66,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_9_long_System_Int32_long_2"
     },
     {
       "index": 67,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_9_long_System_Int32_long_3"
     },
     {
       "index": 68,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
       "generatedMethodId": "RecordArrayElementFixup_9_long_System_Int32_long_4"
     },
     {
       "index": 69,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseDeserializationEvent:System.Void()",
       "generatedMethodId": "RaiseDeserializationEvent_10__0"
     },
     {
       "index": 70,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseOnDeserializingEvent:System.Void(System.Object)",
       "generatedMethodId": "RaiseOnDeserializingEvent_11_object_0"
     },
     {
       "index": 71,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String,System.String)",
       "generatedMethodId": "BindToName_0_System_Type_string_string_0"
     },
     {
       "index": 72,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String,System.String)",
       "generatedMethodId": "BindToName_0_System_Type_string_string_1"
     },
     {
       "index": 73,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String,System.String)",
       "generatedMethodId": "BindToName_0_System_Type_string_string_2"
     },
     {
       "index": 74,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
       "generatedMethodId": "BindToType_1_string_string_0"
     },
     {
       "index": 75,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
       "generatedMethodId": "BindToType_1_string_string_1"
     },
     {
       "index": 76,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
       "generatedMethodId": "BindToType_1_string_string_2"
     },
     {
       "index": 77,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RegisterObject:System.Void(System.Object)",
       "generatedMethodId": "RegisterObject_0_object_0"
     },
     {
       "index": 78,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RaiseOnSerializedEvent:System.Void()",
       "generatedMethodId": "RaiseOnSerializedEvent_1__0"
     },
     {
       "index": 79,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::AddSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISerializationSurrogate)",
       "generatedMethodId": "AddSurrogate_0_System_Type_StreamingContext_ISerializationSurrogate_0"
     },
     {
       "index": 80,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::ChainSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
       "generatedMethodId": "ChainSelector_1_ISurrogateSelector_0"
     },
     {
       "index": 81,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
       "generatedMethodId": "GetNextSelector_2__0"
     },
     {
       "index": 82,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)",
       "generatedMethodId": "GetSurrogate_3_System_Type_StreamingContext_ISurrogateSelector_0"
     },
     {
       "index": 83,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::RemoveSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext)",
       "generatedMethodId": "RemoveSurrogate_4_System_Type_StreamingContext_0"
     }

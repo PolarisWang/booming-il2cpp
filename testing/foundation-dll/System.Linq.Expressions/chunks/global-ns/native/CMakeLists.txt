@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
@@ -176,6 +176,11 @@ endif()
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
 )
+# jit_data_loader.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing ChaosJitDataLoad symbol needed by JIT build's native-aot.generated.obj.
+set(CHAOS_JIT_DATA_LOADER
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/jit_data_loader.cpp"
+)
 # profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
 # missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
 # symbols added after the SDK was last rebuilt.  Compile locally.
@@ -203,6 +208,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_JIT_DATA_LOADER}
     ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )

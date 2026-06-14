@@ -3,6 +3,7 @@
   "assemblyName": "System.Data.Common",
   "chunkSlug": "global-ns",
   "totalMethods": 21,
+  "factMethodCount": 11,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -53,127 +54,127 @@
   "methods": [
     {
       "index": 0,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
       "generatedMethodId": "CreateElement_0_string_string_string_0"
     },
     {
       "index": 1,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
       "generatedMethodId": "CreateElement_0_string_string_string_1"
     },
     {
       "index": 2,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
       "generatedMethodId": "CreateElement_0_string_string_string_2"
     },
     {
       "index": 3,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateElement:System.Xml.XmlElement(System.String,System.String,System.String)",
       "generatedMethodId": "CreateElement_0_string_string_string_3"
     },
     {
       "index": 4,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateEntityReference:System.Xml.XmlEntityReference(System.String)",
       "generatedMethodId": "CreateEntityReference_1_string_0"
     },
     {
       "index": 5,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CreateEntityReference:System.Xml.XmlEntityReference(System.String)",
       "generatedMethodId": "CreateEntityReference_1_string_1"
     },
     {
       "index": 6,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetRowFromElement:System.Data.DataRow(System.Xml.XmlElement)",
       "generatedMethodId": "GetRowFromElement_2_XmlElement_0"
     },
     {
       "index": 7,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementFromRow:System.Xml.XmlElement(System.Data.DataRow)",
       "generatedMethodId": "GetElementFromRow_3_DataRow_0"
     },
     {
       "index": 8,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CloneNode:System.Xml.XmlNode(System.Boolean)",
       "generatedMethodId": "CloneNode_4_bool_0"
     },
     {
       "index": 9,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::CloneNode:System.Xml.XmlNode(System.Boolean)",
       "generatedMethodId": "CloneNode_4_bool_1"
     },
     {
       "index": 10,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.String)",
       "generatedMethodId": "Load_5_string_0"
     },
     {
       "index": 11,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.String)",
       "generatedMethodId": "Load_5_string_1"
     },
     {
       "index": 12,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.Stream)",
       "generatedMethodId": "Load_6_Stream_0"
     },
     {
       "index": 13,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.Stream)",
       "generatedMethodId": "Load_6_Stream_1"
     },
     {
       "index": 14,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.TextReader)",
       "generatedMethodId": "Load_7_TextReader_0"
     },
     {
       "index": 15,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.IO.TextReader)",
       "generatedMethodId": "Load_7_TextReader_1"
     },
     {
       "index": 16,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::Load:System.Void(System.Xml.XmlReader)",
       "generatedMethodId": "Load_8_XmlReader_0"
     },
     {
       "index": 17,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementById:System.Xml.XmlElement(System.String)",
       "generatedMethodId": "GetElementById_9_string_0"
     },
     {
       "index": 18,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementById:System.Xml.XmlElement(System.String)",
       "generatedMethodId": "GetElementById_9_string_1"
     },
     {
       "index": 19,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementsByTagName:System.Xml.XmlNodeList(System.String)",
       "generatedMethodId": "GetElementsByTagName_10_string_0"
     },
     {
       "index": 20,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Data.Common/System.Xml.XmlDataDocument::GetElementsByTagName:System.Xml.XmlNodeList(System.String)",
       "generatedMethodId": "GetElementsByTagName_10_string_1"
     }

@@ -3,6 +3,7 @@
   "assemblyName": "System.Formats.Asn1",
   "chunkSlug": "system-formats-asn1",
   "totalMethods": 77,
+  "factMethodCount": 59,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -165,463 +166,463 @@
   "methods": [
     {
       "index": 0,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()",
       "generatedMethodId": "AsConstructed_0__0"
     },
     {
       "index": 1,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()",
       "generatedMethodId": "AsPrimitive_1__0"
     },
     {
       "index": 2,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()",
       "generatedMethodId": "CalculateEncodedSize_2__0"
     },
     {
       "index": 3,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)",
       "generatedMethodId": "HasSameClassAndValue_3_Asn1Tag_0"
     },
     {
       "index": 4,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ThrowIfNotEmpty:System.Void()",
       "generatedMethodId": "ThrowIfNotEmpty_0__0"
     },
     {
       "index": 5,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekTag:System.Formats.Asn1.Asn1Tag()",
       "generatedMethodId": "PeekTag_1__0"
     },
     {
       "index": 6,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekEncodedValue:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
       "generatedMethodId": "PeekEncodedValue_2__0"
     },
     {
       "index": 7,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekContentBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
       "generatedMethodId": "PeekContentBytes_3__0"
     },
     {
       "index": 8,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
       "generatedMethodId": "ReadEncodedValue_4__0"
     },
     {
       "index": 9,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Clone:System.Formats.Asn1.AsnReader()",
       "generatedMethodId": "Clone_5__0"
     },
     {
       "index": 10,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0"
     },
     {
       "index": 11,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadPrimitiveBitString_6_int_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_1"
     },
     {
       "index": 12,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadBitString_7_int_System_NullableAsn1Tag_0"
     },
     {
       "index": 13,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadBitString_7_int_System_NullableAsn1Tag_1"
     },
     {
       "index": 14,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBoolean:System.Boolean(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadBoolean_8_System_NullableAsn1Tag_0"
     },
     {
       "index": 15,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadEnumeratedBytes_9_System_NullableAsn1Tag_0"
     },
     {
       "index": 16,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.DayOfWeek(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadEnumeratedValue_10_System_NullableAsn1Tag_0"
     },
     {
       "index": 17,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadEnumeratedValue_11_System_Type_System_NullableAsn1Tag_0"
     },
     {
       "index": 18,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadGeneralizedTime_12_System_NullableAsn1Tag_0"
     },
     {
       "index": 19,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadIntegerBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadIntegerBytes_13_System_NullableAsn1Tag_0"
     },
     {
       "index": 20,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadInteger_14_System_NullableAsn1Tag_0"
     },
     {
       "index": 21,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadInt32_15_int_System_NullableAsn1Tag_0"
     },
     {
       "index": 22,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadInt32_15_int_System_NullableAsn1Tag_1"
     },
     {
       "index": 23,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadUInt32_16_uint_System_NullableAsn1Tag_0"
     },
     {
       "index": 24,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadUInt32_16_uint_System_NullableAsn1Tag_1"
     },
     {
       "index": 25,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadInt64_17_long_System_NullableAsn1Tag_0"
     },
     {
       "index": 26,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadInt64_17_long_System_NullableAsn1Tag_1"
     },
     {
       "index": 27,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadUInt64_18_ulong_System_NullableAsn1Tag_0"
     },
     {
       "index": 28,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadUInt64_18_ulong_System_NullableAsn1Tag_1"
     },
     {
       "index": 29,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.DayOfWeek(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadNamedBitListValue_19_System_NullableAsn1Tag_0"
     },
     {
       "index": 30,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadNamedBitListValue_20_System_Type_System_NullableAsn1Tag_0"
     },
     {
       "index": 31,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitList:System.Collections.BitArray(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadNamedBitList_21_System_NullableAsn1Tag_0"
     },
     {
       "index": 32,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNull:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadNull_22_System_NullableAsn1Tag_0"
     },
     {
       "index": 33,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadOctetString:System.Byte[](System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadOctetString_23_System_NullableAsn1Tag_0"
     },
     {
       "index": 34,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "TryReadPrimitiveOctetString_24_System_ReadOnlyMemorybyte_System_NullableAsn1Tag_0"
     },
     {
       "index": 35,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadObjectIdentifier:System.String(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadObjectIdentifier_25_System_NullableAsn1Tag_0"
     },
     {
       "index": 36,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSequence:System.Formats.Asn1.AsnReader(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadSequence_26_System_NullableAsn1Tag_0"
     },
     {
       "index": 37,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadSetOf_27_System_NullableAsn1Tag_0"
     },
     {
       "index": 38,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadSetOf_28_bool_System_NullableAsn1Tag_0"
     },
     {
       "index": 39,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadSetOf_28_bool_System_NullableAsn1Tag_1"
     },
     {
       "index": 40,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.Formats.Asn1.Asn1Tag,System.ReadOnlyMemory\u003CSystem.Byte\u003E)",
       "generatedMethodId": "TryReadPrimitiveCharacterStringBytes_29_Asn1Tag_System_ReadOnlyMemorybyte_0"
     },
     {
       "index": 41,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadCharacterString:System.String(System.Formats.Asn1.UniversalTagNumber,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadCharacterString_30_UniversalTagNumber_System_NullableAsn1Tag_0"
     },
     {
       "index": 42,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadUtcTime_31_System_NullableAsn1Tag_0"
     },
     {
       "index": 43,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadUtcTime_32_int_System_NullableAsn1Tag_0"
     },
     {
       "index": 44,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "ReadUtcTime_32_int_System_NullableAsn1Tag_1"
     },
     {
       "index": 45,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::GetEncodedLength:System.Int32()",
       "generatedMethodId": "GetEncodedLength_0__0"
     },
     {
       "index": 46,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.Formats.Asn1.AsnWriter)",
       "generatedMethodId": "EncodedValueEquals_1_AsnWriter_0"
     },
     {
       "index": 47,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::CopyTo:System.Void(System.Formats.Asn1.AsnWriter)",
       "generatedMethodId": "CopyTo_2_AsnWriter_0"
     },
     {
       "index": 48,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteBoolean_3_bool_System_NullableAsn1Tag_0"
     },
     {
       "index": 49,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteBoolean_3_bool_System_NullableAsn1Tag_1"
     },
     {
       "index": 50,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteEnumeratedValue_4_System_Enum_System_NullableAsn1Tag_0"
     },
     {
       "index": 51,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_0"
     },
     {
       "index": 52,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteEnumeratedValue_5_System_DayOfWeek_System_NullableAsn1Tag_1"
     },
     {
       "index": 53,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_0"
     },
     {
       "index": 54,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteGeneralizedTime_6_System_DateTimeOffset_bool_System_NullableAsn1Tag_1"
     },
     {
       "index": 55,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteInteger_7_long_System_NullableAsn1Tag_0"
     },
     {
       "index": 56,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteInteger_7_long_System_NullableAsn1Tag_1"
     },
     {
       "index": 57,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteInteger_8_ulong_System_NullableAsn1Tag_0"
     },
     {
       "index": 58,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteInteger_8_ulong_System_NullableAsn1Tag_1"
     },
     {
       "index": 59,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteInteger_9_BigInteger_System_NullableAsn1Tag_0"
     },
     {
       "index": 60,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteInteger_9_BigInteger_System_NullableAsn1Tag_1"
     },
     {
       "index": 61,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteNamedBitList_10_System_Enum_System_NullableAsn1Tag_0"
     },
     {
       "index": 62,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_0"
     },
     {
       "index": 63,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteNamedBitList_11_System_DayOfWeek_System_NullableAsn1Tag_1"
     },
     {
       "index": 64,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Collections.BitArray,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteNamedBitList_12_BitArray_System_NullableAsn1Tag_0"
     },
     {
       "index": 65,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNull:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteNull_13_System_NullableAsn1Tag_0"
     },
     {
       "index": 66,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopOctetString:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "PopOctetString_14_System_NullableAsn1Tag_0"
     },
     {
       "index": 67,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteObjectIdentifier_15_string_System_NullableAsn1Tag_0"
     },
     {
       "index": 68,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteObjectIdentifier_15_string_System_NullableAsn1Tag_1"
     },
     {
       "index": 69,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSequence:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "PopSequence_16_System_NullableAsn1Tag_0"
     },
     {
       "index": 70,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSetOf:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "PopSetOf_17_System_NullableAsn1Tag_0"
     },
     {
       "index": 71,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_0"
     },
     {
       "index": 72,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteCharacterString_18_UniversalTagNumber_string_System_NullableAsn1Tag_1"
     },
     {
       "index": 73,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteUtcTime_19_System_DateTimeOffset_System_NullableAsn1Tag_0"
     },
     {
       "index": 74,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_0"
     },
     {
       "index": 75,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
       "generatedMethodId": "WriteUtcTime_20_System_DateTimeOffset_int_System_NullableAsn1Tag_1"
     },
     {
       "index": 76,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Formats.Asn1/AsnWriter.Scope::Dispose:System.Void()",
       "generatedMethodId": "Dispose_0__0"
     }

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-10T05:08:39.5641450Z",
+  "generatedAt": "2026-06-14T13:11:40.5465019Z",
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
     {
       "index": 0,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -15,7 +15,7 @@
     },
     {
       "index": 1,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -24,7 +24,7 @@
     },
     {
       "index": 2,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -33,7 +33,7 @@
     },
     {
       "index": 3,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32,System.Int32,System.Action\u003CSystem.Reflection.Metadata.BlobBuilder,System.Int32\u003E)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -42,7 +42,7 @@
     },
     {
       "index": 4,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32,System.Int32,System.Action\u003CSystem.Reflection.Metadata.BlobBuilder,System.Int32\u003E)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -51,7 +51,7 @@
     },
     {
       "index": 5,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32,System.Int32,System.Action\u003CSystem.Reflection.Metadata.BlobBuilder,System.Int32\u003E)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -60,7 +60,7 @@
     },
     {
       "index": 6,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEntry:System.Void(System.Reflection.PortableExecutable.DebugDirectoryEntryType,System.UInt32,System.UInt32,System.Int32,System.Action\u003CSystem.Reflection.Metadata.BlobBuilder,System.Int32\u003E)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -69,7 +69,7 @@
     },
     {
       "index": 7,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -78,7 +78,7 @@
     },
     {
       "index": 8,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -87,7 +87,7 @@
     },
     {
       "index": 9,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -96,7 +96,7 @@
     },
     {
       "index": 10,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -105,7 +105,7 @@
     },
     {
       "index": 11,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -114,7 +114,7 @@
     },
     {
       "index": 12,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddCodeViewEntry:System.Void(System.String,System.Reflection.Metadata.BlobContentId,System.UInt16,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -123,7 +123,7 @@
     },
     {
       "index": 13,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddReproducibleEntry:System.Void()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -132,7 +132,7 @@
     },
     {
       "index": 14,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddPdbChecksumEntry:System.Void(System.String,System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -141,7 +141,7 @@
     },
     {
       "index": 15,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddPdbChecksumEntry:System.Void(System.String,System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -150,7 +150,7 @@
     },
     {
       "index": 16,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEmbeddedPortablePdbEntry:System.Void(System.Reflection.Metadata.BlobBuilder,System.UInt16)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -159,7 +159,7 @@
     },
     {
       "index": 17,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.DebugDirectoryBuilder::AddEmbeddedPortablePdbEntry:System.Void(System.Reflection.Metadata.BlobBuilder,System.UInt16)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.DebugDirectoryBuilder",
@@ -168,7 +168,7 @@
     },
     {
       "index": 18,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.ManagedPEBuilder::Sign:System.Void(System.Reflection.Metadata.BlobBuilder,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.Blob\u003E,System.Byte[]\u003E)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.ManagedPEBuilder",
@@ -177,7 +177,7 @@
     },
     {
       "index": 19,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.ManagedPEBuilder::Sign:System.Void(System.Reflection.Metadata.BlobBuilder,System.Func\u003CSystem.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.Blob\u003E,System.Byte[]\u003E)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.ManagedPEBuilder",
@@ -186,7 +186,7 @@
     },
     {
       "index": 20,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEBuilder::Serialize:System.Reflection.Metadata.BlobContentId(System.Reflection.Metadata.BlobBuilder)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEBuilder",
@@ -195,7 +195,7 @@
     },
     {
       "index": 21,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaderBuilder::CreateExecutableHeader:System.Reflection.PortableExecutable.PEHeaderBuilder()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEHeaderBuilder",
@@ -204,7 +204,7 @@
     },
     {
       "index": 22,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaderBuilder::CreateLibraryHeader:System.Reflection.PortableExecutable.PEHeaderBuilder()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEHeaderBuilder",
@@ -213,7 +213,7 @@
     },
     {
       "index": 23,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::TryGetDirectoryOffset:System.Boolean(System.Reflection.PortableExecutable.DirectoryEntry,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEHeaders",
@@ -222,7 +222,7 @@
     },
     {
       "index": 24,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::TryGetDirectoryOffset:System.Boolean(System.Reflection.PortableExecutable.DirectoryEntry,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEHeaders",
@@ -231,7 +231,7 @@
     },
     {
       "index": 25,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::GetContainingSectionIndex:System.Int32(System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEHeaders",
@@ -240,7 +240,7 @@
     },
     {
       "index": 26,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEHeaders::GetContainingSectionIndex:System.Int32(System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEHeaders",
@@ -249,7 +249,7 @@
     },
     {
       "index": 27,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEMemoryBlock",
@@ -258,7 +258,7 @@
     },
     {
       "index": 28,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader(System.Int32,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEMemoryBlock",
@@ -267,7 +267,7 @@
     },
     {
       "index": 29,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader(System.Int32,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEMemoryBlock",
@@ -276,7 +276,7 @@
     },
     {
       "index": 30,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetReader:System.Reflection.Metadata.BlobReader(System.Int32,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEMemoryBlock",
@@ -285,7 +285,7 @@
     },
     {
       "index": 31,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEMemoryBlock",
@@ -294,7 +294,7 @@
     },
     {
       "index": 32,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEMemoryBlock",
@@ -303,7 +303,7 @@
     },
     {
       "index": 33,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEMemoryBlock",
@@ -312,7 +312,7 @@
     },
     {
       "index": 34,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEMemoryBlock::GetContent:System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E(System.Int32,System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEMemoryBlock",
@@ -321,7 +321,7 @@
     },
     {
       "index": 35,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::Dispose:System.Void()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -330,7 +330,7 @@
     },
     {
       "index": 36,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetEntireImage:System.Reflection.PortableExecutable.PEMemoryBlock()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -339,7 +339,7 @@
     },
     {
       "index": 37,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetMetadata:System.Reflection.PortableExecutable.PEMemoryBlock()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -348,7 +348,7 @@
     },
     {
       "index": 38,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -357,7 +357,7 @@
     },
     {
       "index": 39,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.Int32)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -366,7 +366,7 @@
     },
     {
       "index": 40,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.String)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -375,7 +375,7 @@
     },
     {
       "index": 41,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::GetSectionData:System.Reflection.PortableExecutable.PEMemoryBlock(System.String)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -384,7 +384,7 @@
     },
     {
       "index": 42,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadDebugDirectory:System.Collections.Immutable.ImmutableArray\u003CSystem.Reflection.PortableExecutable.DebugDirectoryEntry\u003E()",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -393,7 +393,7 @@
     },
     {
       "index": 43,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadCodeViewDebugDirectoryData:System.Reflection.PortableExecutable.CodeViewDebugDirectoryData(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -402,7 +402,7 @@
     },
     {
       "index": 44,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadPdbChecksumDebugDirectoryData:System.Reflection.PortableExecutable.PdbChecksumDebugDirectoryData(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -411,7 +411,7 @@
     },
     {
       "index": 45,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::TryOpenAssociatedPortablePdb:System.Boolean(System.String,System.Func\u003CSystem.String,System.IO.Stream\u003E,System.Reflection.Metadata.MetadataReaderProvider,System.String)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -420,7 +420,7 @@
     },
     {
       "index": 46,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::TryOpenAssociatedPortablePdb:System.Boolean(System.String,System.Func\u003CSystem.String,System.IO.Stream\u003E,System.Reflection.Metadata.MetadataReaderProvider,System.String)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -429,7 +429,7 @@
     },
     {
       "index": 47,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::TryOpenAssociatedPortablePdb:System.Boolean(System.String,System.Func\u003CSystem.String,System.IO.Stream\u003E,System.Reflection.Metadata.MetadataReaderProvider,System.String)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -438,7 +438,7 @@
     },
     {
       "index": 48,
-      "kind": "benchmark",
+      "kind": "fact",
       "subjectId": "System.Reflection.Metadata/System.Reflection.PortableExecutable.PEReader::ReadEmbeddedPortablePdbDebugDirectoryData:System.Reflection.Metadata.MetadataReaderProvider(System.Reflection.PortableExecutable.DebugDirectoryEntry)",
       "assemblyName": "System.Reflection.Metadata",
       "typeName": "System.Reflection.PortableExecutable.PEReader",
@@ -448,8 +448,8 @@
   ],
   "summary": {
     "totalSubjects": 49,
-    "factCount": 0,
-    "benchmarkCount": 49,
+    "factCount": 49,
+    "benchmarkCount": 0,
     "hotUpdateCount": 0
   }
 }

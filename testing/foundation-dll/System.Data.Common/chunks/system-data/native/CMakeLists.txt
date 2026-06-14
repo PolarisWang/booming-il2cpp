@@ -8,11 +8,11 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
-  add_compile_options(-Wall -Wextra -Wno-unused-parameter -Wno-unused-function -Wno-unused-variable -Wno-return-type -Wno-missing-field-initializers)
+  add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
   set(CHAOS_EHA_FLAG -fexceptions)
   # eager_compile.cpp is compiled locally AND present in prebuilt
   # libchaos_interpreter.a — both define EagerCompilePatchMethods.
@@ -70,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Data.Common/chunks/system-data/native/codegen")
-set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Data.Common/chunks/system-data/native/codegen")
+set(CHAOS_SDK_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Data.Common/chunks/system-data/native/codegen")
+set(CHAOS_PROJECT_ROOT "D:/agent/chaos-il2cpp")
+set(CHAOS_CODEGEN_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Data.Common/chunks/system-data/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -151,6 +151,9 @@ set(CHAOS_INTEROP_STUBS
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
 )
+set(CHAOS_ENTRY_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
+)
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
@@ -172,6 +175,11 @@ endif()
 # (SetPatchedBySlot signature changed — domain_id parameter added).
 set(CHAOS_METHOD_REPLACEMENT
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
+)
+# jit_data_loader.cpp — the prebuilt chaos_runtime_core.lib may be stale,
+# missing ChaosJitDataLoad symbol needed by JIT build's native-aot.generated.obj.
+set(CHAOS_JIT_DATA_LOADER
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/jit_data_loader.cpp"
 )
 # profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
 # missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
@@ -195,10 +203,12 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_MISC_STUBS}
     ${CHAOS_INTEROP_STUBS}
     ${CHAOS_EXCEPTION_STUBS}
+    ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_HOTPATCH_TABLE}
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
+    ${CHAOS_JIT_DATA_LOADER}
     ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )

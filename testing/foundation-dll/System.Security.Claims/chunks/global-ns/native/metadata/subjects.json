@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-14T13:13:13.9769388Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.Claim::Clone:System.Security.Claims.Claim()",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.Claim",
+      "methodName": "Clone",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.Claim::Clone:System.Security.Claims.Claim(System.Security.Claims.ClaimsIdentity)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.Claim",
+      "methodName": "Clone",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.Claim::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.Claim",
+      "methodName": "WriteTo",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "Clone",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaim:System.Void(System.Security.Claims.Claim)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "AddClaim",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "AddClaims",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaims:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "AddClaims",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::TryRemoveClaim:System.Boolean(System.Security.Claims.Claim)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "TryRemoveClaim",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::RemoveClaim:System.Void(System.Security.Claims.Claim)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "RemoveClaim",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindAll",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindAll",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindAll",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindAll",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindFirst",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindFirst",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindFirst",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::FindFirst:System.Security.Claims.Claim(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "FindFirst",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsIdentity::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsIdentity",
+      "methodName": "WriteTo",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentity:System.Void(System.Security.Claims.ClaimsIdentity)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "AddIdentity",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.ClaimsIdentity\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "AddIdentities",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentities:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.ClaimsIdentity\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "AddIdentities",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::Clone:System.Security.Claims.ClaimsPrincipal()",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "Clone",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindAll",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindAll",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindAll",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindAll:System.Collections.Generic.IEnumerable\u003CSystem.Security.Claims.Claim\u003E(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindAll",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindFirst",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindFirst",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindFirst",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::FindFirst:System.Security.Claims.Claim(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "FindFirst",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.Predicate\u003CSystem.Security.Claims.Claim\u003E)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.String,System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "HasClaim",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::IsInRole:System.Boolean(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "IsInRole",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::IsInRole:System.Boolean(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "IsInRole",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::WriteTo:System.Void(System.IO.BinaryWriter)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Claims.ClaimsPrincipal",
+      "methodName": "WriteTo",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Principal.GenericIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Principal.GenericIdentity",
+      "methodName": "Clone",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Principal.GenericPrincipal::IsInRole:System.Boolean(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Principal.GenericPrincipal",
+      "methodName": "IsInRole",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "subjectId": "System.Security.Claims/System.Security.Principal.GenericPrincipal::IsInRole:System.Boolean(System.String)",
+      "assemblyName": "System.Security.Claims",
+      "typeName": "System.Security.Principal.GenericPrincipal",
+      "methodName": "IsInRole",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 46,
+    "factCount": 46,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}

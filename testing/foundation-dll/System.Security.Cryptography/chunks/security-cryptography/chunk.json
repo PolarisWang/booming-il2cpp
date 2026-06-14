@@ -1,5 +1,0 @@
-{
-  "slug": "security-cryptography",
-  "methodCount": 0,
-  "additionalAssemblies": ["System.Security.Cryptography.dll"]
-}

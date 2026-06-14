@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "assemblyName": "System.Diagnostics.DiagnosticSource",
   "chunkSlug": "diagnostics",
-  "totalMethods": 146,
-  "factMethodCount": 85,
+  "totalMethods": 144,
+  "factMethodCount": 83,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -149,9 +149,7 @@
     140,
     141,
     142,
-    143,
-    144,
-    145
+    143
   ],
   "hotupdateMethodIndices": [
     0,
@@ -297,9 +295,7 @@
     140,
     141,
     142,
-    143,
-    144,
-    145
+    143
   ],
   "methods": [
     {
@@ -1067,113 +1063,101 @@
     {
       "index": 127,
       "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateW3CPropagator:System.Diagnostics.DistributedContextPropagator()",
-      "generatedMethodId": "CreateW3CPropagator_5__0"
+      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateNoOutputPropagator:System.Diagnostics.DistributedContextPropagator()",
+      "generatedMethodId": "CreateNoOutputPropagator_5__0"
     },
     {
       "index": 128,
-      "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreatePreW3CPropagator:System.Diagnostics.DistributedContextPropagator()",
-      "generatedMethodId": "CreatePreW3CPropagator_6__0"
-    },
-    {
-      "index": 129,
-      "kind": "fact",
-      "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.DistributedContextPropagator::CreateNoOutputPropagator:System.Diagnostics.DistributedContextPropagator()",
-      "generatedMethodId": "CreateNoOutputPropagator_7__0"
-    },
-    {
-      "index": 130,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)",
       "generatedMethodId": "Add_0_string_object_0"
     },
     {
-      "index": 131,
+      "index": 129,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.String,System.Object)",
       "generatedMethodId": "Add_0_string_object_1"
     },
     {
-      "index": 132,
+      "index": 130,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Add:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
       "generatedMethodId": "Add_1_KeyValuePairstringobject_0"
     },
     {
-      "index": 133,
+      "index": 131,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
       "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_0"
     },
     {
-      "index": 134,
+      "index": 132,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
       "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_1"
     },
     {
-      "index": 135,
+      "index": 133,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
       "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_2"
     },
     {
-      "index": 136,
+      "index": 134,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E[],System.Int32)",
       "generatedMethodId": "CopyTo_2_KeyValuePairstringobject_int_3"
     },
     {
-      "index": 137,
+      "index": 135,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
       "generatedMethodId": "Insert_3_int_KeyValuePairstringobject_0"
     },
     {
-      "index": 138,
+      "index": 136,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Insert:System.Void(System.Int32,System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
       "generatedMethodId": "Insert_3_int_KeyValuePairstringobject_1"
     },
     {
-      "index": 139,
+      "index": 137,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)",
       "generatedMethodId": "RemoveAt_4_int_0"
     },
     {
-      "index": 140,
+      "index": 138,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::RemoveAt:System.Void(System.Int32)",
       "generatedMethodId": "RemoveAt_4_int_1"
     },
     {
-      "index": 141,
+      "index": 139,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Clear:System.Void()",
       "generatedMethodId": "Clear_5__0"
     },
     {
-      "index": 142,
+      "index": 140,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Contains:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
       "generatedMethodId": "Contains_6_KeyValuePairstringobject_0"
     },
     {
-      "index": 143,
+      "index": 141,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::Remove:System.Boolean(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
       "generatedMethodId": "Remove_7_KeyValuePairstringobject_0"
     },
     {
-      "index": 144,
+      "index": 142,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E\u003E()",
       "generatedMethodId": "GetEnumerator_8__0"
     },
     {
-      "index": 145,
+      "index": 143,
       "kind": "fact",
       "methodSubjectId": "System.Diagnostics.DiagnosticSource/System.Diagnostics.TagList::IndexOf:System.Int32(System.Collections.Generic.KeyValuePair\u003CSystem.String,System.Object\u003E)",
       "generatedMethodId": "IndexOf_9_KeyValuePairstringobject_0"

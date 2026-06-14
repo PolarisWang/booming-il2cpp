@@ -3,6 +3,7 @@
   "assemblyName": "System.Net.Sockets",
   "chunkSlug": "system-net-sockets",
   "totalMethods": 521,
+  "factMethodCount": 246,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -1053,3127 +1054,3127 @@
   "methods": [
     {
       "index": 0,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
       "generatedMethodId": "Seek_0_long_SeekOrigin_0"
     },
     {
       "index": 1,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
       "generatedMethodId": "Seek_0_long_SeekOrigin_1"
     },
     {
       "index": 2,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
       "generatedMethodId": "Seek_0_long_SeekOrigin_2"
     },
     {
       "index": 3,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Read_1_System_Byte_int_int_0"
     },
     {
       "index": 4,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Read_1_System_Byte_int_int_1"
     },
     {
       "index": 5,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Read_1_System_Byte_int_int_2"
     },
     {
       "index": 6,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Read_1_System_Byte_int_int_3"
     },
     {
       "index": 7,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Read_1_System_Byte_int_int_4"
     },
     {
       "index": 8,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadByte:System.Int32()",
       "generatedMethodId": "ReadByte_2__0"
     },
     {
       "index": 9,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Write_3_System_Byte_int_int_0"
     },
     {
       "index": 10,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Write_3_System_Byte_int_int_1"
     },
     {
       "index": 11,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Write_3_System_Byte_int_int_2"
     },
     {
       "index": 12,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Write_3_System_Byte_int_int_3"
     },
     {
       "index": 13,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "Write_3_System_Byte_int_int_4"
     },
     {
       "index": 14,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteByte:System.Void(System.Byte)",
       "generatedMethodId": "WriteByte_4_byte_0"
     },
     {
       "index": 15,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteByte:System.Void(System.Byte)",
       "generatedMethodId": "WriteByte_4_byte_1"
     },
     {
       "index": 16,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Close:System.Void(System.Int32)",
       "generatedMethodId": "Close_5_int_0"
     },
     {
       "index": 17,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Close:System.Void(System.Int32)",
       "generatedMethodId": "Close_5_int_1"
     },
     {
       "index": 18,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Close:System.Void(System.TimeSpan)",
       "generatedMethodId": "Close_6_System_TimeSpan_0"
     },
     {
       "index": 19,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Close:System.Void(System.TimeSpan)",
       "generatedMethodId": "Close_6_System_TimeSpan_1"
     },
     {
       "index": 20,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginRead_7_System_Byte_int_int_System_AsyncCallback_object_0"
     },
     {
       "index": 21,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginRead_7_System_Byte_int_int_System_AsyncCallback_object_1"
     },
     {
       "index": 22,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginRead_7_System_Byte_int_int_System_AsyncCallback_object_2"
     },
     {
       "index": 23,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginRead_7_System_Byte_int_int_System_AsyncCallback_object_3"
     },
     {
       "index": 24,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginRead:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginRead_7_System_Byte_int_int_System_AsyncCallback_object_4"
     },
     {
       "index": 25,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::EndRead:System.Int32(System.IAsyncResult)",
       "generatedMethodId": "EndRead_8_System_IAsyncResult_0"
     },
     {
       "index": 26,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginWrite_9_System_Byte_int_int_System_AsyncCallback_object_0"
     },
     {
       "index": 27,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginWrite_9_System_Byte_int_int_System_AsyncCallback_object_1"
     },
     {
       "index": 28,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginWrite_9_System_Byte_int_int_System_AsyncCallback_object_2"
     },
     {
       "index": 29,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginWrite_9_System_Byte_int_int_System_AsyncCallback_object_3"
     },
     {
       "index": 30,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::BeginWrite:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginWrite_9_System_Byte_int_int_System_AsyncCallback_object_4"
     },
     {
       "index": 31,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::EndWrite:System.Void(System.IAsyncResult)",
       "generatedMethodId": "EndWrite_10_System_IAsyncResult_0"
     },
     {
       "index": 32,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_0"
     },
     {
       "index": 33,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_1"
     },
     {
       "index": 34,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_2"
     },
     {
       "index": 35,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_3"
     },
     {
       "index": 36,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_11_System_Byte_int_int_CancellationToken_4"
     },
     {
       "index": 37,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::ReadAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
       "generatedMethodId": "ReadAsync_12_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 38,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_13_System_Byte_int_int_CancellationToken_0"
     },
     {
       "index": 39,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_13_System_Byte_int_int_CancellationToken_1"
     },
     {
       "index": 40,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_13_System_Byte_int_int_CancellationToken_2"
     },
     {
       "index": 41,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_13_System_Byte_int_int_CancellationToken_3"
     },
     {
       "index": 42,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.Task(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_13_System_Byte_int_int_CancellationToken_4"
     },
     {
       "index": 43,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
       "generatedMethodId": "WriteAsync_14_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 44,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::Flush:System.Void()",
       "generatedMethodId": "Flush_15__0"
     },
     {
       "index": 45,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
       "generatedMethodId": "FlushAsync_16_CancellationToken_0"
     },
     {
       "index": 46,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::SetLength:System.Void(System.Int64)",
       "generatedMethodId": "SetLength_17_long_0"
     },
     {
       "index": 47,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.NetworkStream::SetLength:System.Void(System.Int64)",
       "generatedMethodId": "SetLength_17_long_1"
     },
     {
       "index": 48,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Bind:System.Void(System.Net.EndPoint)",
       "generatedMethodId": "Bind_0_EndPoint_0"
     },
     {
       "index": 49,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.EndPoint)",
       "generatedMethodId": "Connect_1_EndPoint_0"
     },
     {
       "index": 50,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "Connect_2_IPAddress_int_0"
     },
     {
       "index": 51,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "Connect_2_IPAddress_int_1"
     },
     {
       "index": 52,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_3_string_int_0"
     },
     {
       "index": 53,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_3_string_int_1"
     },
     {
       "index": 54,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_3_string_int_2"
     },
     {
       "index": 55,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "Connect_4_IPAddress_int_0"
     },
     {
       "index": 56,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "Connect_4_IPAddress_int_1"
     },
     {
       "index": 57,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "Connect_4_IPAddress_int_2"
     },
     {
       "index": 58,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "Connect_4_IPAddress_int_3"
     },
     {
       "index": 59,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Close:System.Void()",
       "generatedMethodId": "Close_5__0"
     },
     {
       "index": 60,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Close:System.Void(System.Int32)",
       "generatedMethodId": "Close_6_int_0"
     },
     {
       "index": 61,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Close:System.Void(System.Int32)",
       "generatedMethodId": "Close_6_int_1"
     },
     {
       "index": 62,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Listen:System.Void()",
       "generatedMethodId": "Listen_7__0"
     },
     {
       "index": 63,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Listen:System.Void(System.Int32)",
       "generatedMethodId": "Listen_8_int_0"
     },
     {
       "index": 64,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Listen:System.Void(System.Int32)",
       "generatedMethodId": "Listen_8_int_1"
     },
     {
       "index": 65,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Accept:System.Net.Sockets.Socket()",
       "generatedMethodId": "Accept_9__0"
     },
     {
       "index": 66,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_10_System_Byte_int_SocketFlags_0"
     },
     {
       "index": 67,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_10_System_Byte_int_SocketFlags_1"
     },
     {
       "index": 68,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_10_System_Byte_int_SocketFlags_2"
     },
     {
       "index": 69,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_10_System_Byte_int_SocketFlags_3"
     },
     {
       "index": 70,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_11_System_Byte_SocketFlags_0"
     },
     {
       "index": 71,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_11_System_Byte_SocketFlags_1"
     },
     {
       "index": 72,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_11_System_Byte_SocketFlags_2"
     },
     {
       "index": 73,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[])",
       "generatedMethodId": "Send_12_System_Byte_0"
     },
     {
       "index": 74,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[])",
       "generatedMethodId": "Send_12_System_Byte_1"
     },
     {
       "index": 75,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[])",
       "generatedMethodId": "Send_12_System_Byte_2"
     },
     {
       "index": 76,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
       "generatedMethodId": "Send_13_IListSystem_ArraySegmentbyte_0"
     },
     {
       "index": 77,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
       "generatedMethodId": "Send_13_IListSystem_ArraySegmentbyte_1"
     },
     {
       "index": 78,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_14_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 79,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_14_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 80,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0"
     },
     {
       "index": 81,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_15_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1"
     },
     {
       "index": 82,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_16_System_Byte_int_int_SocketFlags_0"
     },
     {
       "index": 83,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_16_System_Byte_int_int_SocketFlags_1"
     },
     {
       "index": 84,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_16_System_Byte_int_int_SocketFlags_2"
     },
     {
       "index": 85,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_16_System_Byte_int_int_SocketFlags_3"
     },
     {
       "index": 86,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Send_16_System_Byte_int_int_SocketFlags_4"
     },
     {
       "index": 87,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_17_System_Byte_int_int_SocketFlags_SocketError_0"
     },
     {
       "index": 88,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_17_System_Byte_int_int_SocketFlags_SocketError_1"
     },
     {
       "index": 89,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_17_System_Byte_int_int_SocketFlags_SocketError_2"
     },
     {
       "index": 90,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_17_System_Byte_int_int_SocketFlags_SocketError_3"
     },
     {
       "index": 91,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Send:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Send_17_System_Byte_int_int_SocketFlags_SocketError_4"
     },
     {
       "index": 92,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String)",
       "generatedMethodId": "SendFile_18_string_0"
     },
     {
       "index": 93,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String)",
       "generatedMethodId": "SendFile_18_string_1"
     },
     {
       "index": 94,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions)",
       "generatedMethodId": "SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_0"
     },
     {
       "index": 95,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions)",
       "generatedMethodId": "SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_1"
     },
     {
       "index": 96,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions)",
       "generatedMethodId": "SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_2"
     },
     {
       "index": 97,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFile:System.Void(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions)",
       "generatedMethodId": "SendFile_19_string_System_Byte_System_Byte_TransmitFileOptions_3"
     },
     {
       "index": 98,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_0"
     },
     {
       "index": 99,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_1"
     },
     {
       "index": 100,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_2"
     },
     {
       "index": 101,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_3"
     },
     {
       "index": 102,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_20_System_Byte_int_int_SocketFlags_EndPoint_4"
     },
     {
       "index": 103,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_21_System_Byte_int_SocketFlags_EndPoint_0"
     },
     {
       "index": 104,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_21_System_Byte_int_SocketFlags_EndPoint_1"
     },
     {
       "index": 105,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_21_System_Byte_int_SocketFlags_EndPoint_2"
     },
     {
       "index": 106,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_21_System_Byte_int_SocketFlags_EndPoint_3"
     },
     {
       "index": 107,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_22_System_Byte_SocketFlags_EndPoint_0"
     },
     {
       "index": 108,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_22_System_Byte_SocketFlags_EndPoint_1"
     },
     {
       "index": 109,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendTo_22_System_Byte_SocketFlags_EndPoint_2"
     },
     {
       "index": 110,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.EndPoint)",
       "generatedMethodId": "SendTo_23_System_Byte_EndPoint_0"
     },
     {
       "index": 111,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.EndPoint)",
       "generatedMethodId": "SendTo_23_System_Byte_EndPoint_1"
     },
     {
       "index": 112,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendTo:System.Int32(System.Byte[],System.Net.EndPoint)",
       "generatedMethodId": "SendTo_23_System_Byte_EndPoint_2"
     },
     {
       "index": 113,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_24_System_Byte_int_SocketFlags_0"
     },
     {
       "index": 114,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_24_System_Byte_int_SocketFlags_1"
     },
     {
       "index": 115,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_24_System_Byte_int_SocketFlags_2"
     },
     {
       "index": 116,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_24_System_Byte_int_SocketFlags_3"
     },
     {
       "index": 117,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_25_System_Byte_SocketFlags_0"
     },
     {
       "index": 118,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_25_System_Byte_SocketFlags_1"
     },
     {
       "index": 119,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_25_System_Byte_SocketFlags_2"
     },
     {
       "index": 120,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[])",
       "generatedMethodId": "Receive_26_System_Byte_0"
     },
     {
       "index": 121,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[])",
       "generatedMethodId": "Receive_26_System_Byte_1"
     },
     {
       "index": 122,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[])",
       "generatedMethodId": "Receive_26_System_Byte_2"
     },
     {
       "index": 123,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_27_System_Byte_int_int_SocketFlags_0"
     },
     {
       "index": 124,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_27_System_Byte_int_int_SocketFlags_1"
     },
     {
       "index": 125,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_27_System_Byte_int_int_SocketFlags_2"
     },
     {
       "index": 126,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_27_System_Byte_int_int_SocketFlags_3"
     },
     {
       "index": 127,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_27_System_Byte_int_int_SocketFlags_4"
     },
     {
       "index": 128,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_28_System_Byte_int_int_SocketFlags_SocketError_0"
     },
     {
       "index": 129,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_28_System_Byte_int_int_SocketFlags_SocketError_1"
     },
     {
       "index": 130,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_28_System_Byte_int_int_SocketFlags_SocketError_2"
     },
     {
       "index": 131,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_28_System_Byte_int_int_SocketFlags_SocketError_3"
     },
     {
       "index": 132,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_28_System_Byte_int_int_SocketFlags_SocketError_4"
     },
     {
       "index": 133,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
       "generatedMethodId": "Receive_29_IListSystem_ArraySegmentbyte_0"
     },
     {
       "index": 134,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
       "generatedMethodId": "Receive_29_IListSystem_ArraySegmentbyte_1"
     },
     {
       "index": 135,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_30_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 136,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "Receive_30_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 137,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_0"
     },
     {
       "index": 138,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Receive:System.Int32(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError)",
       "generatedMethodId": "Receive_31_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_1"
     },
     {
       "index": 139,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
       "generatedMethodId": "ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_0"
     },
     {
       "index": 140,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
       "generatedMethodId": "ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_1"
     },
     {
       "index": 141,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
       "generatedMethodId": "ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_2"
     },
     {
       "index": 142,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
       "generatedMethodId": "ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_3"
     },
     {
       "index": 143,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
       "generatedMethodId": "ReceiveMessageFrom_32_System_Byte_int_int_SocketFlags_EndPoint_IPPacketInformation_4"
     },
     {
       "index": 144,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_0"
     },
     {
       "index": 145,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_1"
     },
     {
       "index": 146,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_2"
     },
     {
       "index": 147,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_3"
     },
     {
       "index": 148,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_33_System_Byte_int_int_SocketFlags_EndPoint_4"
     },
     {
       "index": 149,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_0"
     },
     {
       "index": 150,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_1"
     },
     {
       "index": 151,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_2"
     },
     {
       "index": 152,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_34_System_Byte_int_SocketFlags_EndPoint_3"
     },
     {
       "index": 153,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_0"
     },
     {
       "index": 154,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_1"
     },
     {
       "index": 155,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_35_System_Byte_SocketFlags_EndPoint_2"
     },
     {
       "index": 156,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_36_System_Byte_EndPoint_0"
     },
     {
       "index": 157,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_36_System_Byte_EndPoint_1"
     },
     {
       "index": 158,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFrom:System.Int32(System.Byte[],System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFrom_36_System_Byte_EndPoint_2"
     },
     {
       "index": 159,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Int32,System.Byte[],System.Byte[])",
       "generatedMethodId": "IOControl_37_int_System_Byte_System_Byte_0"
     },
     {
       "index": 160,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Int32,System.Byte[],System.Byte[])",
       "generatedMethodId": "IOControl_37_int_System_Byte_System_Byte_1"
     },
     {
       "index": 161,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Int32,System.Byte[],System.Byte[])",
       "generatedMethodId": "IOControl_37_int_System_Byte_System_Byte_2"
     },
     {
       "index": 162,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Int32,System.Byte[],System.Byte[])",
       "generatedMethodId": "IOControl_37_int_System_Byte_System_Byte_3"
     },
     {
       "index": 163,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Net.Sockets.IOControlCode,System.Byte[],System.Byte[])",
       "generatedMethodId": "IOControl_38_IOControlCode_System_Byte_System_Byte_0"
     },
     {
       "index": 164,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Net.Sockets.IOControlCode,System.Byte[],System.Byte[])",
       "generatedMethodId": "IOControl_38_IOControlCode_System_Byte_System_Byte_1"
     },
     {
       "index": 165,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::IOControl:System.Int32(System.Net.Sockets.IOControlCode,System.Byte[],System.Byte[])",
       "generatedMethodId": "IOControl_38_IOControlCode_System_Byte_System_Byte_2"
     },
     {
       "index": 166,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)",
       "generatedMethodId": "SetSocketOption_39_SocketOptionLevel_SocketOptionName_int_0"
     },
     {
       "index": 167,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)",
       "generatedMethodId": "SetSocketOption_39_SocketOptionLevel_SocketOptionName_int_1"
     },
     {
       "index": 168,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
       "generatedMethodId": "SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_0"
     },
     {
       "index": 169,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
       "generatedMethodId": "SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_1"
     },
     {
       "index": 170,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
       "generatedMethodId": "SetSocketOption_40_SocketOptionLevel_SocketOptionName_System_Byte_2"
     },
     {
       "index": 171,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Boolean)",
       "generatedMethodId": "SetSocketOption_41_SocketOptionLevel_SocketOptionName_bool_0"
     },
     {
       "index": 172,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Boolean)",
       "generatedMethodId": "SetSocketOption_41_SocketOptionLevel_SocketOptionName_bool_1"
     },
     {
       "index": 173,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Object)",
       "generatedMethodId": "SetSocketOption_42_SocketOptionLevel_SocketOptionName_object_0"
     },
     {
       "index": 174,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Object(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName)",
       "generatedMethodId": "GetSocketOption_43_SocketOptionLevel_SocketOptionName_0"
     },
     {
       "index": 175,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
       "generatedMethodId": "GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_0"
     },
     {
       "index": 176,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
       "generatedMethodId": "GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_1"
     },
     {
       "index": 177,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Void(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Byte[])",
       "generatedMethodId": "GetSocketOption_44_SocketOptionLevel_SocketOptionName_System_Byte_2"
     },
     {
       "index": 178,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Byte[](System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)",
       "generatedMethodId": "GetSocketOption_45_SocketOptionLevel_SocketOptionName_int_0"
     },
     {
       "index": 179,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::GetSocketOption:System.Byte[](System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)",
       "generatedMethodId": "GetSocketOption_45_SocketOptionLevel_SocketOptionName_int_1"
     },
     {
       "index": 180,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SetIPProtectionLevel:System.Void(System.Net.Sockets.IPProtectionLevel)",
       "generatedMethodId": "SetIPProtectionLevel_46_IPProtectionLevel_0"
     },
     {
       "index": 181,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Poll:System.Boolean(System.Int32,System.Net.Sockets.SelectMode)",
       "generatedMethodId": "Poll_47_int_SelectMode_0"
     },
     {
       "index": 182,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Poll:System.Boolean(System.Int32,System.Net.Sockets.SelectMode)",
       "generatedMethodId": "Poll_47_int_SelectMode_1"
     },
     {
       "index": 183,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Poll:System.Boolean(System.TimeSpan,System.Net.Sockets.SelectMode)",
       "generatedMethodId": "Poll_48_System_TimeSpan_SelectMode_0"
     },
     {
       "index": 184,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Poll:System.Boolean(System.TimeSpan,System.Net.Sockets.SelectMode)",
       "generatedMethodId": "Poll_48_System_TimeSpan_SelectMode_1"
     },
     {
       "index": 185,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Select:System.Void(System.Collections.IList,System.Collections.IList,System.Collections.IList,System.Int32)",
       "generatedMethodId": "Select_49_IList_IList_IList_int_0"
     },
     {
       "index": 186,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Select:System.Void(System.Collections.IList,System.Collections.IList,System.Collections.IList,System.Int32)",
       "generatedMethodId": "Select_49_IList_IList_IList_int_1"
     },
     {
       "index": 187,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Select:System.Void(System.Collections.IList,System.Collections.IList,System.Collections.IList,System.TimeSpan)",
       "generatedMethodId": "Select_50_IList_IList_IList_System_TimeSpan_0"
     },
     {
       "index": 188,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Select:System.Void(System.Collections.IList,System.Collections.IList,System.Collections.IList,System.TimeSpan)",
       "generatedMethodId": "Select_50_IList_IList_IList_System_TimeSpan_1"
     },
     {
       "index": 189,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_51_EndPoint_System_AsyncCallback_object_0"
     },
     {
       "index": 190,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_52_string_int_System_AsyncCallback_object_0"
     },
     {
       "index": 191,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_52_string_int_System_AsyncCallback_object_1"
     },
     {
       "index": 192,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_52_string_int_System_AsyncCallback_object_2"
     },
     {
       "index": 193,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_53_IPAddress_int_System_AsyncCallback_object_0"
     },
     {
       "index": 194,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_53_IPAddress_int_System_AsyncCallback_object_1"
     },
     {
       "index": 195,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_54_IPAddress_int_System_AsyncCallback_object_0"
     },
     {
       "index": 196,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_54_IPAddress_int_System_AsyncCallback_object_1"
     },
     {
       "index": 197,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_54_IPAddress_int_System_AsyncCallback_object_2"
     },
     {
       "index": 198,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_54_IPAddress_int_System_AsyncCallback_object_3"
     },
     {
       "index": 199,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndConnect:System.Void(System.IAsyncResult)",
       "generatedMethodId": "EndConnect_55_System_IAsyncResult_0"
     },
     {
       "index": 200,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginDisconnect:System.IAsyncResult(System.Boolean,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginDisconnect_56_bool_System_AsyncCallback_object_0"
     },
     {
       "index": 201,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginDisconnect:System.IAsyncResult(System.Boolean,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginDisconnect_56_bool_System_AsyncCallback_object_1"
     },
     {
       "index": 202,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Disconnect:System.Void(System.Boolean)",
       "generatedMethodId": "Disconnect_57_bool_0"
     },
     {
       "index": 203,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Disconnect:System.Void(System.Boolean)",
       "generatedMethodId": "Disconnect_57_bool_1"
     },
     {
       "index": 204,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndDisconnect:System.Void(System.IAsyncResult)",
       "generatedMethodId": "EndDisconnect_58_System_IAsyncResult_0"
     },
     {
       "index": 205,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_59_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_0"
     },
     {
       "index": 206,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_59_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_1"
     },
     {
       "index": 207,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_59_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_2"
     },
     {
       "index": 208,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_59_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_3"
     },
     {
       "index": 209,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_59_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_4"
     },
     {
       "index": 210,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_0"
     },
     {
       "index": 211,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_1"
     },
     {
       "index": 212,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_2"
     },
     {
       "index": 213,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_3"
     },
     {
       "index": 214,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_60_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_4"
     },
     {
       "index": 215,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_61_IListSystem_ArraySegmentbyte_SocketFlags_System_AsyncCallback_object_0"
     },
     {
       "index": 216,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_61_IListSystem_ArraySegmentbyte_SocketFlags_System_AsyncCallback_object_1"
     },
     {
       "index": 217,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_62_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_0"
     },
     {
       "index": 218,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSend:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_62_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_1"
     },
     {
       "index": 219,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSend:System.Int32(System.IAsyncResult)",
       "generatedMethodId": "EndSend_63_System_IAsyncResult_0"
     },
     {
       "index": 220,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSend:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketError)",
       "generatedMethodId": "EndSend_64_System_IAsyncResult_SocketError_0"
     },
     {
       "index": 221,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendFile_65_string_System_AsyncCallback_object_0"
     },
     {
       "index": 222,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendFile_65_string_System_AsyncCallback_object_1"
     },
     {
       "index": 223,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendFile_66_string_System_Byte_System_Byte_TransmitFileOptions_System_AsyncCallback_object_0"
     },
     {
       "index": 224,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendFile_66_string_System_Byte_System_Byte_TransmitFileOptions_System_AsyncCallback_object_1"
     },
     {
       "index": 225,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendFile_66_string_System_Byte_System_Byte_TransmitFileOptions_System_AsyncCallback_object_2"
     },
     {
       "index": 226,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendFile:System.IAsyncResult(System.String,System.Byte[],System.Byte[],System.Net.Sockets.TransmitFileOptions,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendFile_66_string_System_Byte_System_Byte_TransmitFileOptions_System_AsyncCallback_object_3"
     },
     {
       "index": 227,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSendFile:System.Void(System.IAsyncResult)",
       "generatedMethodId": "EndSendFile_67_System_IAsyncResult_0"
     },
     {
       "index": 228,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendTo:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendTo_68_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_0"
     },
     {
       "index": 229,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendTo:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendTo_68_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_1"
     },
     {
       "index": 230,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendTo:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendTo_68_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_2"
     },
     {
       "index": 231,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendTo:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendTo_68_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_3"
     },
     {
       "index": 232,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginSendTo:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSendTo_68_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_4"
     },
     {
       "index": 233,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndSendTo:System.Int32(System.IAsyncResult)",
       "generatedMethodId": "EndSendTo_69_System_IAsyncResult_0"
     },
     {
       "index": 234,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_70_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_0"
     },
     {
       "index": 235,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_70_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_1"
     },
     {
       "index": 236,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_70_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_2"
     },
     {
       "index": 237,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_70_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_3"
     },
     {
       "index": 238,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_70_System_Byte_int_int_SocketFlags_System_AsyncCallback_object_4"
     },
     {
       "index": 239,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_0"
     },
     {
       "index": 240,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_1"
     },
     {
       "index": 241,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_2"
     },
     {
       "index": 242,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_3"
     },
     {
       "index": 243,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_71_System_Byte_int_int_SocketFlags_SocketError_System_AsyncCallback_object_4"
     },
     {
       "index": 244,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_72_IListSystem_ArraySegmentbyte_SocketFlags_System_AsyncCallback_object_0"
     },
     {
       "index": 245,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_72_IListSystem_ArraySegmentbyte_SocketFlags_System_AsyncCallback_object_1"
     },
     {
       "index": 246,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_73_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_0"
     },
     {
       "index": 247,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceive:System.IAsyncResult(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags,System.Net.Sockets.SocketError,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_73_IListSystem_ArraySegmentbyte_SocketFlags_SocketError_System_AsyncCallback_object_1"
     },
     {
       "index": 248,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceive:System.Int32(System.IAsyncResult)",
       "generatedMethodId": "EndReceive_74_System_IAsyncResult_0"
     },
     {
       "index": 249,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceive:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketError)",
       "generatedMethodId": "EndReceive_75_System_IAsyncResult_SocketError_0"
     },
     {
       "index": 250,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveMessageFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveMessageFrom_76_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_0"
     },
     {
       "index": 251,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveMessageFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveMessageFrom_76_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_1"
     },
     {
       "index": 252,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveMessageFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveMessageFrom_76_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_2"
     },
     {
       "index": 253,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveMessageFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveMessageFrom_76_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_3"
     },
     {
       "index": 254,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveMessageFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveMessageFrom_76_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_4"
     },
     {
       "index": 255,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceiveMessageFrom:System.Int32(System.IAsyncResult,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Net.Sockets.IPPacketInformation)",
       "generatedMethodId": "EndReceiveMessageFrom_77_System_IAsyncResult_SocketFlags_EndPoint_IPPacketInformation_0"
     },
     {
       "index": 256,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveFrom_78_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_0"
     },
     {
       "index": 257,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveFrom_78_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_1"
     },
     {
       "index": 258,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveFrom_78_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_2"
     },
     {
       "index": 259,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveFrom_78_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_3"
     },
     {
       "index": 260,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginReceiveFrom:System.IAsyncResult(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceiveFrom_78_System_Byte_int_int_SocketFlags_EndPoint_System_AsyncCallback_object_4"
     },
     {
       "index": 261,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndReceiveFrom:System.Int32(System.IAsyncResult,System.Net.EndPoint)",
       "generatedMethodId": "EndReceiveFrom_79_System_IAsyncResult_EndPoint_0"
     },
     {
       "index": 262,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginAccept_80_System_AsyncCallback_object_0"
     },
     {
       "index": 263,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.IAsyncResult)",
       "generatedMethodId": "EndAccept_81_System_IAsyncResult_0"
     },
     {
       "index": 264,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginAccept_82_int_System_AsyncCallback_object_0"
     },
     {
       "index": 265,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginAccept_82_int_System_AsyncCallback_object_1"
     },
     {
       "index": 266,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.Net.Sockets.Socket,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginAccept_83_Socket_int_System_AsyncCallback_object_0"
     },
     {
       "index": 267,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::BeginAccept:System.IAsyncResult(System.Net.Sockets.Socket,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginAccept_83_Socket_int_System_AsyncCallback_object_1"
     },
     {
       "index": 268,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.IAsyncResult)",
       "generatedMethodId": "EndAccept_84_System_Byte_System_IAsyncResult_0"
     },
     {
       "index": 269,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.IAsyncResult)",
       "generatedMethodId": "EndAccept_84_System_Byte_System_IAsyncResult_1"
     },
     {
       "index": 270,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.IAsyncResult)",
       "generatedMethodId": "EndAccept_84_System_Byte_System_IAsyncResult_2"
     },
     {
       "index": 271,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.Int32,System.IAsyncResult)",
       "generatedMethodId": "EndAccept_85_System_Byte_int_System_IAsyncResult_0"
     },
     {
       "index": 272,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.Int32,System.IAsyncResult)",
       "generatedMethodId": "EndAccept_85_System_Byte_int_System_IAsyncResult_1"
     },
     {
       "index": 273,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.Int32,System.IAsyncResult)",
       "generatedMethodId": "EndAccept_85_System_Byte_int_System_IAsyncResult_2"
     },
     {
       "index": 274,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::EndAccept:System.Net.Sockets.Socket(System.Byte[],System.Int32,System.IAsyncResult)",
       "generatedMethodId": "EndAccept_85_System_Byte_int_System_IAsyncResult_3"
     },
     {
       "index": 275,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Shutdown:System.Void(System.Net.Sockets.SocketShutdown)",
       "generatedMethodId": "Shutdown_86_SocketShutdown_0"
     },
     {
       "index": 276,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "AcceptAsync_87_SocketAsyncEventArgs_0"
     },
     {
       "index": 277,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "ConnectAsync_88_SocketAsyncEventArgs_0"
     },
     {
       "index": 278,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Boolean(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "ConnectAsync_89_SocketType_ProtocolType_SocketAsyncEventArgs_0"
     },
     {
       "index": 279,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::CancelConnectAsync:System.Void(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "CancelConnectAsync_90_SocketAsyncEventArgs_0"
     },
     {
       "index": 280,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DisconnectAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "DisconnectAsync_91_SocketAsyncEventArgs_0"
     },
     {
       "index": 281,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "ReceiveAsync_92_SocketAsyncEventArgs_0"
     },
     {
       "index": 282,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "ReceiveFromAsync_93_SocketAsyncEventArgs_0"
     },
     {
       "index": 283,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "ReceiveMessageFromAsync_94_SocketAsyncEventArgs_0"
     },
     {
       "index": 284,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "SendAsync_95_SocketAsyncEventArgs_0"
     },
     {
       "index": 285,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendPacketsAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "SendPacketsAsync_96_SocketAsyncEventArgs_0"
     },
     {
       "index": 286,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Boolean(System.Net.Sockets.SocketAsyncEventArgs)",
       "generatedMethodId": "SendToAsync_97_SocketAsyncEventArgs_0"
     },
     {
       "index": 287,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::Dispose:System.Void()",
       "generatedMethodId": "Dispose_98__0"
     },
     {
       "index": 288,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E()",
       "generatedMethodId": "AcceptAsync_99__0"
     },
     {
       "index": 289,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.Socket\u003E(System.Threading.CancellationToken)",
       "generatedMethodId": "AcceptAsync_100_CancellationToken_0"
     },
     {
       "index": 290,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E(System.Net.Sockets.Socket)",
       "generatedMethodId": "AcceptAsync_101_Socket_0"
     },
     {
       "index": 291,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::AcceptAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.Socket\u003E(System.Net.Sockets.Socket,System.Threading.CancellationToken)",
       "generatedMethodId": "AcceptAsync_102_Socket_CancellationToken_0"
     },
     {
       "index": 292,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.EndPoint)",
       "generatedMethodId": "ConnectAsync_103_EndPoint_0"
     },
     {
       "index": 293,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_104_EndPoint_CancellationToken_0"
     },
     {
       "index": 294,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "ConnectAsync_105_IPAddress_int_0"
     },
     {
       "index": 295,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "ConnectAsync_105_IPAddress_int_1"
     },
     {
       "index": 296,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_106_IPAddress_int_CancellationToken_0"
     },
     {
       "index": 297,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_106_IPAddress_int_CancellationToken_1"
     },
     {
       "index": 298,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_107_IPAddress_int_0"
     },
     {
       "index": 299,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_107_IPAddress_int_1"
     },
     {
       "index": 300,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_107_IPAddress_int_2"
     },
     {
       "index": 301,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_107_IPAddress_int_3"
     },
     {
       "index": 302,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_108_IPAddress_int_CancellationToken_0"
     },
     {
       "index": 303,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_108_IPAddress_int_CancellationToken_1"
     },
     {
       "index": 304,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_108_IPAddress_int_CancellationToken_2"
     },
     {
       "index": 305,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_108_IPAddress_int_CancellationToken_3"
     },
     {
       "index": 306,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_109_string_int_0"
     },
     {
       "index": 307,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_109_string_int_1"
     },
     {
       "index": 308,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_109_string_int_2"
     },
     {
       "index": 309,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_110_string_int_CancellationToken_0"
     },
     {
       "index": 310,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_110_string_int_CancellationToken_1"
     },
     {
       "index": 311,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_110_string_int_CancellationToken_2"
     },
     {
       "index": 312,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DisconnectAsync:System.Threading.Tasks.ValueTask(System.Boolean,System.Threading.CancellationToken)",
       "generatedMethodId": "DisconnectAsync_111_bool_CancellationToken_0"
     },
     {
       "index": 313,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DisconnectAsync:System.Threading.Tasks.ValueTask(System.Boolean,System.Threading.CancellationToken)",
       "generatedMethodId": "DisconnectAsync_111_bool_CancellationToken_1"
     },
     {
       "index": 314,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E)",
       "generatedMethodId": "ReceiveAsync_112_System_ArraySegmentbyte_0"
     },
     {
       "index": 315,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_113_System_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 316,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveAsync_114_System_Memorybyte_CancellationToken_0"
     },
     {
       "index": 317,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveAsync_115_System_Memorybyte_SocketFlags_CancellationToken_0"
     },
     {
       "index": 318,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
       "generatedMethodId": "ReceiveAsync_116_IListSystem_ArraySegmentbyte_0"
     },
     {
       "index": 319,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
       "generatedMethodId": "ReceiveAsync_116_IListSystem_ArraySegmentbyte_1"
     },
     {
       "index": 320,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_117_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 321,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_117_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 322,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFromAsync_118_System_ArraySegmentbyte_EndPoint_0"
     },
     {
       "index": 323,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFromAsync_119_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 324,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveFromAsync_120_System_Memorybyte_EndPoint_CancellationToken_0"
     },
     {
       "index": 325,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveFromAsync_121_System_Memorybyte_SocketFlags_EndPoint_CancellationToken_0"
     },
     {
       "index": 326,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveFromAsync_122_System_Memorybyte_SocketFlags_SocketAddress_CancellationToken_0"
     },
     {
       "index": 327,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveMessageFromAsync_123_System_ArraySegmentbyte_EndPoint_0"
     },
     {
       "index": 328,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveMessageFromAsync_124_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 329,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveMessageFromAsync_125_System_Memorybyte_EndPoint_CancellationToken_0"
     },
     {
       "index": 330,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::ReceiveMessageFromAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveMessageFromAsync_126_System_Memorybyte_SocketFlags_EndPoint_CancellationToken_0"
     },
     {
       "index": 331,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E)",
       "generatedMethodId": "SendAsync_127_System_ArraySegmentbyte_0"
     },
     {
       "index": 332,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_128_System_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 333,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_129_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 334,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_130_System_ReadOnlyMemorybyte_SocketFlags_CancellationToken_0"
     },
     {
       "index": 335,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
       "generatedMethodId": "SendAsync_131_IListSystem_ArraySegmentbyte_0"
     },
     {
       "index": 336,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E)",
       "generatedMethodId": "SendAsync_131_IListSystem_ArraySegmentbyte_1"
     },
     {
       "index": 337,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_132_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 338,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_132_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 339,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.EndPoint)",
       "generatedMethodId": "SendToAsync_133_System_ArraySegmentbyte_EndPoint_0"
     },
     {
       "index": 340,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendToAsync_134_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 341,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "SendToAsync_135_System_ReadOnlyMemorybyte_EndPoint_CancellationToken_0"
     },
     {
       "index": 342,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "SendToAsync_136_System_ReadOnlyMemorybyte_SocketFlags_EndPoint_CancellationToken_0"
     },
     {
       "index": 343,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendToAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.SocketAddress,System.Threading.CancellationToken)",
       "generatedMethodId": "SendToAsync_137_System_ReadOnlyMemorybyte_SocketFlags_SocketAddress_CancellationToken_0"
     },
     {
       "index": 344,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "SendFileAsync_138_string_CancellationToken_0"
     },
     {
       "index": 345,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.Threading.CancellationToken)",
       "generatedMethodId": "SendFileAsync_138_string_CancellationToken_1"
     },
     {
       "index": 346,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.TransmitFileOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SendFileAsync_139_string_System_ReadOnlyMemorybyte_System_ReadOnlyMemorybyte_TransmitFileOptions_CancellationToken_0"
     },
     {
       "index": 347,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::SendFileAsync:System.Threading.Tasks.ValueTask(System.String,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.TransmitFileOptions,System.Threading.CancellationToken)",
       "generatedMethodId": "SendFileAsync_139_string_System_ReadOnlyMemorybyte_System_ReadOnlyMemorybyte_TransmitFileOptions_CancellationToken_1"
     },
     {
       "index": 348,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DuplicateAndClose:System.Net.Sockets.SocketInformation(System.Int32)",
       "generatedMethodId": "DuplicateAndClose_140_int_0"
     },
     {
       "index": 349,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.Socket::DuplicateAndClose:System.Net.Sockets.SocketInformation(System.Int32)",
       "generatedMethodId": "DuplicateAndClose_140_int_1"
     },
     {
       "index": 350,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "SetBuffer_0_int_int_0"
     },
     {
       "index": 351,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "SetBuffer_0_int_int_1"
     },
     {
       "index": 352,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Int32,System.Int32)",
       "generatedMethodId": "SetBuffer_0_int_int_2"
     },
     {
       "index": 353,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "SetBuffer_1_System_Byte_int_int_0"
     },
     {
       "index": 354,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "SetBuffer_1_System_Byte_int_int_1"
     },
     {
       "index": 355,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "SetBuffer_1_System_Byte_int_int_2"
     },
     {
       "index": 356,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "SetBuffer_1_System_Byte_int_int_3"
     },
     {
       "index": 357,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Byte[],System.Int32,System.Int32)",
       "generatedMethodId": "SetBuffer_1_System_Byte_int_int_4"
     },
     {
       "index": 358,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::SetBuffer:System.Void(System.Memory\u003CSystem.Byte\u003E)",
       "generatedMethodId": "SetBuffer_2_System_Memorybyte_0"
     },
     {
       "index": 359,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketAsyncEventArgs::Dispose:System.Void()",
       "generatedMethodId": "Dispose_3__0"
     },
     {
       "index": 360,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E(System.Net.Sockets.Socket)",
       "generatedMethodId": "AcceptAsync_0_Socket_0"
     },
     {
       "index": 361,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::AcceptAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E(System.Net.Sockets.Socket,System.Net.Sockets.Socket)",
       "generatedMethodId": "AcceptAsync_1_Socket_Socket_0"
     },
     {
       "index": 362,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.EndPoint)",
       "generatedMethodId": "ConnectAsync_2_Socket_EndPoint_0"
     },
     {
       "index": 363,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.EndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_3_Socket_EndPoint_CancellationToken_0"
     },
     {
       "index": 364,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "ConnectAsync_4_Socket_IPAddress_int_0"
     },
     {
       "index": 365,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "ConnectAsync_4_Socket_IPAddress_int_1"
     },
     {
       "index": 366,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_5_Socket_IPAddress_int_CancellationToken_0"
     },
     {
       "index": 367,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_5_Socket_IPAddress_int_CancellationToken_1"
     },
     {
       "index": 368,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_6_Socket_IPAddress_int_0"
     },
     {
       "index": 369,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_6_Socket_IPAddress_int_1"
     },
     {
       "index": 370,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_6_Socket_IPAddress_int_2"
     },
     {
       "index": 371,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_6_Socket_IPAddress_int_3"
     },
     {
       "index": 372,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_7_Socket_IPAddress_int_CancellationToken_0"
     },
     {
       "index": 373,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_7_Socket_IPAddress_int_CancellationToken_1"
     },
     {
       "index": 374,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_7_Socket_IPAddress_int_CancellationToken_2"
     },
     {
       "index": 375,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_7_Socket_IPAddress_int_CancellationToken_3"
     },
     {
       "index": 376,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_8_Socket_string_int_0"
     },
     {
       "index": 377,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_8_Socket_string_int_1"
     },
     {
       "index": 378,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.Task(System.Net.Sockets.Socket,System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_8_Socket_string_int_2"
     },
     {
       "index": 379,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_9_Socket_string_int_CancellationToken_0"
     },
     {
       "index": 380,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_9_Socket_string_int_CancellationToken_1"
     },
     {
       "index": 381,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.Sockets.Socket,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_9_Socket_string_int_CancellationToken_2"
     },
     {
       "index": 382,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_10_Socket_System_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 383,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Memory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveAsync_11_Socket_System_Memorybyte_SocketFlags_CancellationToken_0"
     },
     {
       "index": 384,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_12_Socket_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 385,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "ReceiveAsync_12_Socket_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 386,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveFromResult\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveFromAsync_13_Socket_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 387,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::ReceiveMessageFromAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.SocketReceiveMessageFromResult\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "ReceiveMessageFromAsync_14_Socket_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 388,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_15_Socket_System_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 389,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_16_Socket_System_ReadOnlyMemorybyte_SocketFlags_CancellationToken_0"
     },
     {
       "index": 390,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_17_Socket_IListSystem_ArraySegmentbyte_SocketFlags_0"
     },
     {
       "index": 391,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.Collections.Generic.IList\u003CSystem.ArraySegment\u003CSystem.Byte\u003E\u003E,System.Net.Sockets.SocketFlags)",
       "generatedMethodId": "SendAsync_17_Socket_IListSystem_ArraySegmentbyte_SocketFlags_1"
     },
     {
       "index": 392,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.SocketTaskExtensions::SendToAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Net.Sockets.Socket,System.ArraySegment\u003CSystem.Byte\u003E,System.Net.Sockets.SocketFlags,System.Net.EndPoint)",
       "generatedMethodId": "SendToAsync_18_Socket_System_ArraySegmentbyte_SocketFlags_EndPoint_0"
     },
     {
       "index": 393,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_0_string_int_0"
     },
     {
       "index": 394,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_0_string_int_1"
     },
     {
       "index": 395,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_0_string_int_2"
     },
     {
       "index": 396,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "Connect_1_IPAddress_int_0"
     },
     {
       "index": 397,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "Connect_1_IPAddress_int_1"
     },
     {
       "index": 398,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPEndPoint)",
       "generatedMethodId": "Connect_2_IPEndPoint_0"
     },
     {
       "index": 399,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "Connect_3_IPAddress_int_0"
     },
     {
       "index": 400,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "Connect_3_IPAddress_int_1"
     },
     {
       "index": 401,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "Connect_3_IPAddress_int_2"
     },
     {
       "index": 402,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Connect:System.Void(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "Connect_3_IPAddress_int_3"
     },
     {
       "index": 403,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "ConnectAsync_4_IPAddress_int_0"
     },
     {
       "index": 404,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "ConnectAsync_4_IPAddress_int_1"
     },
     {
       "index": 405,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_5_string_int_0"
     },
     {
       "index": 406,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_5_string_int_1"
     },
     {
       "index": 407,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.String,System.Int32)",
       "generatedMethodId": "ConnectAsync_5_string_int_2"
     },
     {
       "index": 408,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_6_IPAddress_int_0"
     },
     {
       "index": 409,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_6_IPAddress_int_1"
     },
     {
       "index": 410,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_6_IPAddress_int_2"
     },
     {
       "index": 411,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPAddress[],System.Int32)",
       "generatedMethodId": "ConnectAsync_6_IPAddress_int_3"
     },
     {
       "index": 412,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.Task(System.Net.IPEndPoint)",
       "generatedMethodId": "ConnectAsync_7_IPEndPoint_0"
     },
     {
       "index": 413,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_8_IPAddress_int_CancellationToken_0"
     },
     {
       "index": 414,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_8_IPAddress_int_CancellationToken_1"
     },
     {
       "index": 415,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_9_string_int_CancellationToken_0"
     },
     {
       "index": 416,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_9_string_int_CancellationToken_1"
     },
     {
       "index": 417,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_9_string_int_CancellationToken_2"
     },
     {
       "index": 418,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_10_IPAddress_int_CancellationToken_0"
     },
     {
       "index": 419,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_10_IPAddress_int_CancellationToken_1"
     },
     {
       "index": 420,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_10_IPAddress_int_CancellationToken_2"
     },
     {
       "index": 421,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPAddress[],System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_10_IPAddress_int_CancellationToken_3"
     },
     {
       "index": 422,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::ConnectAsync:System.Threading.Tasks.ValueTask(System.Net.IPEndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "ConnectAsync_11_IPEndPoint_CancellationToken_0"
     },
     {
       "index": 423,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_12_IPAddress_int_System_AsyncCallback_object_0"
     },
     {
       "index": 424,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_12_IPAddress_int_System_AsyncCallback_object_1"
     },
     {
       "index": 425,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_13_string_int_System_AsyncCallback_object_0"
     },
     {
       "index": 426,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_13_string_int_System_AsyncCallback_object_1"
     },
     {
       "index": 427,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_13_string_int_System_AsyncCallback_object_2"
     },
     {
       "index": 428,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_14_IPAddress_int_System_AsyncCallback_object_0"
     },
     {
       "index": 429,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_14_IPAddress_int_System_AsyncCallback_object_1"
     },
     {
       "index": 430,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_14_IPAddress_int_System_AsyncCallback_object_2"
     },
     {
       "index": 431,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::BeginConnect:System.IAsyncResult(System.Net.IPAddress[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginConnect_14_IPAddress_int_System_AsyncCallback_object_3"
     },
     {
       "index": 432,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::EndConnect:System.Void(System.IAsyncResult)",
       "generatedMethodId": "EndConnect_15_System_IAsyncResult_0"
     },
     {
       "index": 433,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::GetStream:System.Net.Sockets.NetworkStream()",
       "generatedMethodId": "GetStream_16__0"
     },
     {
       "index": 434,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Close:System.Void()",
       "generatedMethodId": "Close_17__0"
     },
     {
       "index": 435,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpClient::Dispose:System.Void()",
       "generatedMethodId": "Dispose_18__0"
     },
     {
       "index": 436,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AllowNatTraversal:System.Void(System.Boolean)",
       "generatedMethodId": "AllowNatTraversal_0_bool_0"
     },
     {
       "index": 437,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AllowNatTraversal:System.Void(System.Boolean)",
       "generatedMethodId": "AllowNatTraversal_0_bool_1"
     },
     {
       "index": 438,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Stop:System.Void()",
       "generatedMethodId": "Stop_1__0"
     },
     {
       "index": 439,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Dispose:System.Void()",
       "generatedMethodId": "Dispose_2__0"
     },
     {
       "index": 440,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::Pending:System.Boolean()",
       "generatedMethodId": "Pending_3__0"
     },
     {
       "index": 441,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocket:System.Net.Sockets.Socket()",
       "generatedMethodId": "AcceptSocket_4__0"
     },
     {
       "index": 442,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClient:System.Net.Sockets.TcpClient()",
       "generatedMethodId": "AcceptTcpClient_5__0"
     },
     {
       "index": 443,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::BeginAcceptSocket:System.IAsyncResult(System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginAcceptSocket_6_System_AsyncCallback_object_0"
     },
     {
       "index": 444,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::EndAcceptSocket:System.Net.Sockets.Socket(System.IAsyncResult)",
       "generatedMethodId": "EndAcceptSocket_7_System_IAsyncResult_0"
     },
     {
       "index": 445,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::BeginAcceptTcpClient:System.IAsyncResult(System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginAcceptTcpClient_8_System_AsyncCallback_object_0"
     },
     {
       "index": 446,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::EndAcceptTcpClient:System.Net.Sockets.TcpClient(System.IAsyncResult)",
       "generatedMethodId": "EndAcceptTcpClient_9_System_IAsyncResult_0"
     },
     {
       "index": 447,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.Socket\u003E()",
       "generatedMethodId": "AcceptSocketAsync_10__0"
     },
     {
       "index": 448,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptSocketAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.Socket\u003E(System.Threading.CancellationToken)",
       "generatedMethodId": "AcceptSocketAsync_11_CancellationToken_0"
     },
     {
       "index": 449,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.TcpClient\u003E()",
       "generatedMethodId": "AcceptTcpClientAsync_12__0"
     },
     {
       "index": 450,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.TcpListener::AcceptTcpClientAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.TcpClient\u003E(System.Threading.CancellationToken)",
       "generatedMethodId": "AcceptTcpClientAsync_13_CancellationToken_0"
     },
     {
       "index": 451,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::AllowNatTraversal:System.Void(System.Boolean)",
       "generatedMethodId": "AllowNatTraversal_0_bool_0"
     },
     {
       "index": 452,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::AllowNatTraversal:System.Void(System.Boolean)",
       "generatedMethodId": "AllowNatTraversal_0_bool_1"
     },
     {
       "index": 453,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Dispose:System.Void()",
       "generatedMethodId": "Dispose_1__0"
     },
     {
       "index": 454,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_2_System_Byte_int_System_AsyncCallback_object_0"
     },
     {
       "index": 455,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_2_System_Byte_int_System_AsyncCallback_object_1"
     },
     {
       "index": 456,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_2_System_Byte_int_System_AsyncCallback_object_2"
     },
     {
       "index": 457,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_2_System_Byte_int_System_AsyncCallback_object_3"
     },
     {
       "index": 458,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_3_System_Byte_int_string_int_System_AsyncCallback_object_0"
     },
     {
       "index": 459,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_3_System_Byte_int_string_int_System_AsyncCallback_object_1"
     },
     {
       "index": 460,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_3_System_Byte_int_string_int_System_AsyncCallback_object_2"
     },
     {
       "index": 461,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_3_System_Byte_int_string_int_System_AsyncCallback_object_3"
     },
     {
       "index": 462,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.String,System.Int32,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_3_System_Byte_int_string_int_System_AsyncCallback_object_4"
     },
     {
       "index": 463,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Net.IPEndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_4_System_Byte_int_IPEndPoint_System_AsyncCallback_object_0"
     },
     {
       "index": 464,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Net.IPEndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_4_System_Byte_int_IPEndPoint_System_AsyncCallback_object_1"
     },
     {
       "index": 465,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Net.IPEndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_4_System_Byte_int_IPEndPoint_System_AsyncCallback_object_2"
     },
     {
       "index": 466,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginSend:System.IAsyncResult(System.Byte[],System.Int32,System.Net.IPEndPoint,System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginSend_4_System_Byte_int_IPEndPoint_System_AsyncCallback_object_3"
     },
     {
       "index": 467,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::EndSend:System.Int32(System.IAsyncResult)",
       "generatedMethodId": "EndSend_5_System_IAsyncResult_0"
     },
     {
       "index": 468,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::BeginReceive:System.IAsyncResult(System.AsyncCallback,System.Object)",
       "generatedMethodId": "BeginReceive_6_System_AsyncCallback_object_0"
     },
     {
       "index": 469,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::EndReceive:System.Byte[](System.IAsyncResult,System.Net.IPEndPoint)",
       "generatedMethodId": "EndReceive_7_System_IAsyncResult_IPEndPoint_0"
     },
     {
       "index": 470,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress)",
       "generatedMethodId": "JoinMulticastGroup_8_IPAddress_0"
     },
     {
       "index": 471,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress,System.Net.IPAddress)",
       "generatedMethodId": "JoinMulticastGroup_9_IPAddress_IPAddress_0"
     },
     {
       "index": 472,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Int32,System.Net.IPAddress)",
       "generatedMethodId": "JoinMulticastGroup_10_int_IPAddress_0"
     },
     {
       "index": 473,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Int32,System.Net.IPAddress)",
       "generatedMethodId": "JoinMulticastGroup_10_int_IPAddress_1"
     },
     {
       "index": 474,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "JoinMulticastGroup_11_IPAddress_int_0"
     },
     {
       "index": 475,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::JoinMulticastGroup:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "JoinMulticastGroup_11_IPAddress_int_1"
     },
     {
       "index": 476,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::DropMulticastGroup:System.Void(System.Net.IPAddress)",
       "generatedMethodId": "DropMulticastGroup_12_IPAddress_0"
     },
     {
       "index": 477,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::DropMulticastGroup:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "DropMulticastGroup_13_IPAddress_int_0"
     },
     {
       "index": 478,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::DropMulticastGroup:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "DropMulticastGroup_13_IPAddress_int_1"
     },
     {
       "index": 479,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32)",
       "generatedMethodId": "SendAsync_14_System_Byte_int_0"
     },
     {
       "index": 480,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32)",
       "generatedMethodId": "SendAsync_14_System_Byte_int_1"
     },
     {
       "index": 481,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32)",
       "generatedMethodId": "SendAsync_14_System_Byte_int_2"
     },
     {
       "index": 482,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32)",
       "generatedMethodId": "SendAsync_14_System_Byte_int_3"
     },
     {
       "index": 483,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_15_System_ReadOnlyMemorybyte_CancellationToken_0"
     },
     {
       "index": 484,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_0"
     },
     {
       "index": 485,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_1"
     },
     {
       "index": 486,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_2"
     },
     {
       "index": 487,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_3"
     },
     {
       "index": 488,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "SendAsync_16_System_Byte_int_string_int_4"
     },
     {
       "index": 489,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_17_System_ReadOnlyMemorybyte_string_int_CancellationToken_0"
     },
     {
       "index": 490,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_17_System_ReadOnlyMemorybyte_string_int_CancellationToken_1"
     },
     {
       "index": 491,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.String,System.Int32,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_17_System_ReadOnlyMemorybyte_string_int_CancellationToken_2"
     },
     {
       "index": 492,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "SendAsync_18_System_Byte_int_IPEndPoint_0"
     },
     {
       "index": 493,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "SendAsync_18_System_Byte_int_IPEndPoint_1"
     },
     {
       "index": 494,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "SendAsync_18_System_Byte_int_IPEndPoint_2"
     },
     {
       "index": 495,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Int32\u003E(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "SendAsync_18_System_Byte_int_IPEndPoint_3"
     },
     {
       "index": 496,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::SendAsync:System.Threading.Tasks.ValueTask\u003CSystem.Int32\u003E(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Net.IPEndPoint,System.Threading.CancellationToken)",
       "generatedMethodId": "SendAsync_19_System_ReadOnlyMemorybyte_IPEndPoint_CancellationToken_0"
     },
     {
       "index": 497,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.Task\u003CSystem.Net.Sockets.UdpReceiveResult\u003E()",
       "generatedMethodId": "ReceiveAsync_20__0"
     },
     {
       "index": 498,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::ReceiveAsync:System.Threading.Tasks.ValueTask\u003CSystem.Net.Sockets.UdpReceiveResult\u003E(System.Threading.CancellationToken)",
       "generatedMethodId": "ReceiveAsync_21_CancellationToken_0"
     },
     {
       "index": 499,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Close:System.Void()",
       "generatedMethodId": "Close_22__0"
     },
     {
       "index": 500,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_23_string_int_0"
     },
     {
       "index": 501,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_23_string_int_1"
     },
     {
       "index": 502,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.String,System.Int32)",
       "generatedMethodId": "Connect_23_string_int_2"
     },
     {
       "index": 503,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "Connect_24_IPAddress_int_0"
     },
     {
       "index": 504,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.Net.IPAddress,System.Int32)",
       "generatedMethodId": "Connect_24_IPAddress_int_1"
     },
     {
       "index": 505,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Connect:System.Void(System.Net.IPEndPoint)",
       "generatedMethodId": "Connect_25_IPEndPoint_0"
     },
     {
       "index": 506,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Receive:System.Byte[](System.Net.IPEndPoint)",
       "generatedMethodId": "Receive_26_IPEndPoint_0"
     },
     {
       "index": 507,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "Send_27_System_Byte_int_IPEndPoint_0"
     },
     {
       "index": 508,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "Send_27_System_Byte_int_IPEndPoint_1"
     },
     {
       "index": 509,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "Send_27_System_Byte_int_IPEndPoint_2"
     },
     {
       "index": 510,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.Net.IPEndPoint)",
       "generatedMethodId": "Send_27_System_Byte_int_IPEndPoint_3"
     },
     {
       "index": 511,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "Send_28_System_Byte_int_string_int_0"
     },
     {
       "index": 512,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "Send_28_System_Byte_int_string_int_1"
     },
     {
       "index": 513,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "Send_28_System_Byte_int_string_int_2"
     },
     {
       "index": 514,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "Send_28_System_Byte_int_string_int_3"
     },
     {
       "index": 515,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32,System.String,System.Int32)",
       "generatedMethodId": "Send_28_System_Byte_int_string_int_4"
     },
     {
       "index": 516,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32)",
       "generatedMethodId": "Send_29_System_Byte_int_0"
     },
     {
       "index": 517,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32)",
       "generatedMethodId": "Send_29_System_Byte_int_1"
     },
     {
       "index": 518,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32)",
       "generatedMethodId": "Send_29_System_Byte_int_2"
     },
     {
       "index": 519,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UdpClient::Send:System.Int32(System.Byte[],System.Int32)",
       "generatedMethodId": "Send_29_System_Byte_int_3"
     },
     {
       "index": 520,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Net.Sockets/System.Net.Sockets.UnixDomainSocketEndPoint::Serialize:System.Net.SocketAddress()",
       "generatedMethodId": "Serialize_0__0"
     }

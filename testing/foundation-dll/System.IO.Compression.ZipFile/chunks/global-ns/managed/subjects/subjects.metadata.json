@@ -1,0 +1,542 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Compression.ZipFile",
+  "chunkSlug": "global-ns",
+  "totalMethods": 66,
+  "factMethodCount": 23,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenRead:System.IO.Compression.ZipArchive(System.String)",
+      "generatedMethodId": "OpenRead_0_string_0"
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenRead:System.IO.Compression.ZipArchive(System.String)",
+      "generatedMethodId": "OpenRead_0_string_1"
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode)",
+      "generatedMethodId": "Open_1_string_ZipArchiveMode_0"
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode)",
+      "generatedMethodId": "Open_1_string_ZipArchiveMode_1"
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode,System.Text.Encoding)",
+      "generatedMethodId": "Open_2_string_ZipArchiveMode_Encoding_0"
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::Open:System.IO.Compression.ZipArchive(System.String,System.IO.Compression.ZipArchiveMode,System.Text.Encoding)",
+      "generatedMethodId": "Open_2_string_ZipArchiveMode_Encoding_1"
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String)",
+      "generatedMethodId": "CreateFromDirectory_3_string_string_0"
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String)",
+      "generatedMethodId": "CreateFromDirectory_3_string_string_1"
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String)",
+      "generatedMethodId": "CreateFromDirectory_3_string_string_2"
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "generatedMethodId": "CreateFromDirectory_4_string_string_CompressionLevel_bool_0"
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "generatedMethodId": "CreateFromDirectory_4_string_string_CompressionLevel_bool_1"
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "generatedMethodId": "CreateFromDirectory_4_string_string_CompressionLevel_bool_2"
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "generatedMethodId": "CreateFromDirectory_5_string_string_CompressionLevel_bool_Encoding_0"
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "generatedMethodId": "CreateFromDirectory_5_string_string_CompressionLevel_bool_Encoding_1"
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "generatedMethodId": "CreateFromDirectory_5_string_string_CompressionLevel_bool_Encoding_2"
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream)",
+      "generatedMethodId": "CreateFromDirectory_6_string_Stream_0"
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream)",
+      "generatedMethodId": "CreateFromDirectory_6_string_Stream_1"
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream)",
+      "generatedMethodId": "CreateFromDirectory_6_string_Stream_2"
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "generatedMethodId": "CreateFromDirectory_7_string_Stream_CompressionLevel_bool_0"
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "generatedMethodId": "CreateFromDirectory_7_string_Stream_CompressionLevel_bool_1"
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+      "generatedMethodId": "CreateFromDirectory_7_string_Stream_CompressionLevel_bool_2"
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "generatedMethodId": "CreateFromDirectory_8_string_Stream_CompressionLevel_bool_Encoding_0"
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "generatedMethodId": "CreateFromDirectory_8_string_Stream_CompressionLevel_bool_Encoding_1"
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::CreateFromDirectory:System.Void(System.String,System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean,System.Text.Encoding)",
+      "generatedMethodId": "CreateFromDirectory_8_string_Stream_CompressionLevel_bool_Encoding_2"
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String)",
+      "generatedMethodId": "ExtractToDirectory_9_string_string_0"
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String)",
+      "generatedMethodId": "ExtractToDirectory_9_string_string_1"
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String)",
+      "generatedMethodId": "ExtractToDirectory_9_string_string_2"
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_10_string_string_bool_0"
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_10_string_string_bool_1"
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_10_string_string_bool_2"
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_10_string_string_bool_3"
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding)",
+      "generatedMethodId": "ExtractToDirectory_11_string_string_Encoding_0"
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding)",
+      "generatedMethodId": "ExtractToDirectory_11_string_string_Encoding_1"
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding)",
+      "generatedMethodId": "ExtractToDirectory_11_string_string_Encoding_2"
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_12_string_string_Encoding_bool_0"
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_12_string_string_Encoding_bool_1"
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.String,System.String,System.Text.Encoding,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_12_string_string_Encoding_bool_2"
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String)",
+      "generatedMethodId": "ExtractToDirectory_13_Stream_string_0"
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String)",
+      "generatedMethodId": "ExtractToDirectory_13_Stream_string_1"
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String)",
+      "generatedMethodId": "ExtractToDirectory_13_Stream_string_2"
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_14_Stream_string_bool_0"
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_14_Stream_string_bool_1"
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_14_Stream_string_bool_2"
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_14_Stream_string_bool_3"
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding)",
+      "generatedMethodId": "ExtractToDirectory_15_Stream_string_Encoding_0"
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding)",
+      "generatedMethodId": "ExtractToDirectory_15_Stream_string_Encoding_1"
+    },
+    {
+      "index": 46,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding)",
+      "generatedMethodId": "ExtractToDirectory_15_Stream_string_Encoding_2"
+    },
+    {
+      "index": 47,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_16_Stream_string_Encoding_bool_0"
+    },
+    {
+      "index": 48,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_16_Stream_string_Encoding_bool_1"
+    },
+    {
+      "index": 49,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::ExtractToDirectory:System.Void(System.IO.Stream,System.String,System.Text.Encoding,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_16_Stream_string_Encoding_bool_2"
+    },
+    {
+      "index": 50,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String)",
+      "generatedMethodId": "CreateEntryFromFile_0_ZipArchive_string_string_0"
+    },
+    {
+      "index": 51,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String)",
+      "generatedMethodId": "CreateEntryFromFile_0_ZipArchive_string_string_1"
+    },
+    {
+      "index": 52,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String)",
+      "generatedMethodId": "CreateEntryFromFile_0_ZipArchive_string_string_2"
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)",
+      "generatedMethodId": "CreateEntryFromFile_1_ZipArchive_string_string_CompressionLevel_0"
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)",
+      "generatedMethodId": "CreateEntryFromFile_1_ZipArchive_string_string_CompressionLevel_1"
+    },
+    {
+      "index": 55,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:System.IO.Compression.ZipArchiveEntry(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)",
+      "generatedMethodId": "CreateEntryFromFile_1_ZipArchive_string_string_CompressionLevel_2"
+    },
+    {
+      "index": 56,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String)",
+      "generatedMethodId": "ExtractToDirectory_2_ZipArchive_string_0"
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String)",
+      "generatedMethodId": "ExtractToDirectory_2_ZipArchive_string_1"
+    },
+    {
+      "index": 58,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_3_ZipArchive_string_bool_0"
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_3_ZipArchive_string_bool_1"
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToDirectory:System.Void(System.IO.Compression.ZipArchive,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToDirectory_3_ZipArchive_string_bool_2"
+    },
+    {
+      "index": 61,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String)",
+      "generatedMethodId": "ExtractToFile_4_ZipArchiveEntry_string_0"
+    },
+    {
+      "index": 62,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String)",
+      "generatedMethodId": "ExtractToFile_4_ZipArchiveEntry_string_1"
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToFile_5_ZipArchiveEntry_string_bool_0"
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToFile_5_ZipArchiveEntry_string_bool_1"
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "methodSubjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::ExtractToFile:System.Void(System.IO.Compression.ZipArchiveEntry,System.String,System.Boolean)",
+      "generatedMethodId": "ExtractToFile_5_ZipArchiveEntry_string_bool_2"
+    }
+  ]
+}

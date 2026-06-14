@@ -2,9 +2,9 @@
 // Per-method host arrays for ApplyPatchFromMemoryEx.
 // Maps Subject_N methods (patch DLL MethodDef index) to their AOT
 // HotpatchNameRegistry entries (namespace, type name, method name).
-// Sentinel: no overrides (default state for TPG builds).
-// The hotupdate pipeline replaces this file with real per-method mappings
-// and triggers an incremental cmake rebuild.
+
+// Sentinel: no overrides (default state for TPG builds without hotupdate).
+// The hotupdate pipeline regenerates this file with real per-method mappings.
 #include <cstdint>
 
 extern const char* const kPatchDataHostNamespace = nullptr;

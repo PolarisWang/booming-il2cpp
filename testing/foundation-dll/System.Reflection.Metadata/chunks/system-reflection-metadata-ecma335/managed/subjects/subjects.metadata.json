@@ -3,6 +3,7 @@
   "assemblyName": "System.Reflection.Metadata",
   "chunkSlug": "system-reflection-metadata-ecma335",
   "totalMethods": 430,
+  "factMethodCount": 289,
   "customEntryIndices": null,
   "benchmarkMethodIndices": [
     0,
@@ -871,2581 +872,2581 @@
   "methods": [
     {
       "index": 0,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ArrayShapeEncoder::Shape:System.Void(System.Int32,System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E,System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E)",
       "generatedMethodId": "Shape_0_int_ImmutableArrayint_ImmutableArrayint_0"
     },
     {
       "index": 1,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ArrayShapeEncoder::Shape:System.Void(System.Int32,System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E,System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E)",
       "generatedMethodId": "Shape_0_int_ImmutableArrayint_ImmutableArrayint_1"
     },
     {
       "index": 2,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::Field:System.Reflection.Metadata.Ecma335.FieldTypeEncoder()",
       "generatedMethodId": "Field_0__0"
     },
     {
       "index": 3,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::FieldSignature:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
       "generatedMethodId": "FieldSignature_1__0"
     },
     {
       "index": 4,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::MethodSpecificationSignature:System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder(System.Int32)",
       "generatedMethodId": "MethodSpecificationSignature_2_int_0"
     },
     {
       "index": 5,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::MethodSpecificationSignature:System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder(System.Int32)",
       "generatedMethodId": "MethodSpecificationSignature_2_int_1"
     },
     {
       "index": 6,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::MethodSignature:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Reflection.Metadata.SignatureCallingConvention,System.Int32,System.Boolean)",
       "generatedMethodId": "MethodSignature_3_SignatureCallingConvention_int_bool_0"
     },
     {
       "index": 7,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::MethodSignature:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Reflection.Metadata.SignatureCallingConvention,System.Int32,System.Boolean)",
       "generatedMethodId": "MethodSignature_3_SignatureCallingConvention_int_bool_1"
     },
     {
       "index": 8,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::MethodSignature:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Reflection.Metadata.SignatureCallingConvention,System.Int32,System.Boolean)",
       "generatedMethodId": "MethodSignature_3_SignatureCallingConvention_int_bool_2"
     },
     {
       "index": 9,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PropertySignature:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Boolean)",
       "generatedMethodId": "PropertySignature_4_bool_0"
     },
     {
       "index": 10,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PropertySignature:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Boolean)",
       "generatedMethodId": "PropertySignature_4_bool_1"
     },
     {
       "index": 11,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::CustomAttributeSignature:System.Void(System.Reflection.Metadata.Ecma335.FixedArgumentsEncoder,System.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder)",
       "generatedMethodId": "CustomAttributeSignature_5_FixedArgumentsEncoder_CustomAttributeNamedArgumentsEncoder_0"
     },
     {
       "index": 12,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::CustomAttributeSignature:System.Void(System.Action\u003CSystem.Reflection.Metadata.Ecma335.FixedArgumentsEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder\u003E)",
       "generatedMethodId": "CustomAttributeSignature_6_System_ActionFixedArgumentsEncoder_System_ActionCustomAttributeNamedArgumentsEncoder_0"
     },
     {
       "index": 13,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::CustomAttributeSignature:System.Void(System.Action\u003CSystem.Reflection.Metadata.Ecma335.FixedArgumentsEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder\u003E)",
       "generatedMethodId": "CustomAttributeSignature_6_System_ActionFixedArgumentsEncoder_System_ActionCustomAttributeNamedArgumentsEncoder_1"
     },
     {
       "index": 14,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::LocalVariableSignature:System.Reflection.Metadata.Ecma335.LocalVariablesEncoder(System.Int32)",
       "generatedMethodId": "LocalVariableSignature_7_int_0"
     },
     {
       "index": 15,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::LocalVariableSignature:System.Reflection.Metadata.Ecma335.LocalVariablesEncoder(System.Int32)",
       "generatedMethodId": "LocalVariableSignature_7_int_1"
     },
     {
       "index": 16,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::TypeSpecificationSignature:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
       "generatedMethodId": "TypeSpecificationSignature_8__0"
     },
     {
       "index": 17,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PermissionSetBlob:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.Int32)",
       "generatedMethodId": "PermissionSetBlob_9_int_0"
     },
     {
       "index": 18,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PermissionSetBlob:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.Int32)",
       "generatedMethodId": "PermissionSetBlob_9_int_1"
     },
     {
       "index": 19,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PermissionSetArguments:System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder(System.Int32)",
       "generatedMethodId": "PermissionSetArguments_10_int_0"
     },
     {
       "index": 20,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.BlobEncoder::PermissionSetArguments:System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder(System.Int32)",
       "generatedMethodId": "PermissionSetArguments_10_int_1"
     },
     {
       "index": 21,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasCustomAttribute:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "HasCustomAttribute_0_EntityHandle_0"
     },
     {
       "index": 22,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasConstant:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "HasConstant_1_EntityHandle_0"
     },
     {
       "index": 23,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::CustomAttributeType:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "CustomAttributeType_2_EntityHandle_0"
     },
     {
       "index": 24,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasDeclSecurity:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "HasDeclSecurity_3_EntityHandle_0"
     },
     {
       "index": 25,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasFieldMarshal:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "HasFieldMarshal_4_EntityHandle_0"
     },
     {
       "index": 26,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasSemantics:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "HasSemantics_5_EntityHandle_0"
     },
     {
       "index": 27,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::Implementation:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "Implementation_6_EntityHandle_0"
     },
     {
       "index": 28,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::MemberForwarded:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "MemberForwarded_7_EntityHandle_0"
     },
     {
       "index": 29,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::MemberRefParent:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "MemberRefParent_8_EntityHandle_0"
     },
     {
       "index": 30,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::MethodDefOrRef:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "MethodDefOrRef_9_EntityHandle_0"
     },
     {
       "index": 31,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::ResolutionScope:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "ResolutionScope_10_EntityHandle_0"
     },
     {
       "index": 32,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::TypeDefOrRef:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "TypeDefOrRef_11_EntityHandle_0"
     },
     {
       "index": 33,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::TypeDefOrRefOrSpec:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "TypeDefOrRefOrSpec_12_EntityHandle_0"
     },
     {
       "index": 34,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::TypeOrMethodDef:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "TypeOrMethodDef_13_EntityHandle_0"
     },
     {
       "index": 35,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CodedIndex::HasCustomDebugInformation:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "HasCustomDebugInformation_14_EntityHandle_0"
     },
     {
       "index": 36,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::Clear:System.Void()",
       "generatedMethodId": "Clear_0__0"
     },
     {
       "index": 37,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::AddFinallyRegion:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle)",
       "generatedMethodId": "AddFinallyRegion_1_LabelHandle_LabelHandle_LabelHandle_LabelHandle_0"
     },
     {
       "index": 38,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::AddFaultRegion:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle)",
       "generatedMethodId": "AddFaultRegion_2_LabelHandle_LabelHandle_LabelHandle_LabelHandle_0"
     },
     {
       "index": 39,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::AddCatchRegion:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddCatchRegion_3_LabelHandle_LabelHandle_LabelHandle_LabelHandle_EntityHandle_0"
     },
     {
       "index": 40,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ControlFlowBuilder::AddFilterRegion:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle,System.Reflection.Metadata.Ecma335.LabelHandle)",
       "generatedMethodId": "AddFilterRegion_4_LabelHandle_LabelHandle_LabelHandle_LabelHandle_LabelHandle_0"
     },
     {
       "index": 41,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder::ObjectArray:System.Void()",
       "generatedMethodId": "ObjectArray_0__0"
     },
     {
       "index": 42,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder::ElementType:System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder()",
       "generatedMethodId": "ElementType_1__0"
     },
     {
       "index": 43,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Boolean:System.Void()",
       "generatedMethodId": "Boolean_0__0"
     },
     {
       "index": 44,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Char:System.Void()",
       "generatedMethodId": "Char_1__0"
     },
     {
       "index": 45,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::SByte:System.Void()",
       "generatedMethodId": "SByte_2__0"
     },
     {
       "index": 46,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Byte:System.Void()",
       "generatedMethodId": "Byte_3__0"
     },
     {
       "index": 47,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Int16:System.Void()",
       "generatedMethodId": "Int16_4__0"
     },
     {
       "index": 48,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::UInt16:System.Void()",
       "generatedMethodId": "UInt16_5__0"
     },
     {
       "index": 49,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Int32:System.Void()",
       "generatedMethodId": "Int32_6__0"
     },
     {
       "index": 50,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::UInt32:System.Void()",
       "generatedMethodId": "UInt32_7__0"
     },
     {
       "index": 51,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Int64:System.Void()",
       "generatedMethodId": "Int64_8__0"
     },
     {
       "index": 52,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::UInt64:System.Void()",
       "generatedMethodId": "UInt64_9__0"
     },
     {
       "index": 53,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Single:System.Void()",
       "generatedMethodId": "Single_10__0"
     },
     {
       "index": 54,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Double:System.Void()",
       "generatedMethodId": "Double_11__0"
     },
     {
       "index": 55,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::String:System.Void()",
       "generatedMethodId": "String_12__0"
     },
     {
       "index": 56,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::PrimitiveType:System.Void(System.Reflection.Metadata.PrimitiveSerializationTypeCode)",
       "generatedMethodId": "PrimitiveType_13_PrimitiveSerializationTypeCode_0"
     },
     {
       "index": 57,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::SystemType:System.Void()",
       "generatedMethodId": "SystemType_14__0"
     },
     {
       "index": 58,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Enum:System.Void(System.String)",
       "generatedMethodId": "Enum_15_string_0"
     },
     {
       "index": 59,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder::Enum:System.Void(System.String)",
       "generatedMethodId": "Enum_15_string_1"
     },
     {
       "index": 60,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder::Count:System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder(System.Int32)",
       "generatedMethodId": "Count_0_int_0"
     },
     {
       "index": 61,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomAttributeNamedArgumentsEncoder::Count:System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder(System.Int32)",
       "generatedMethodId": "Count_0_int_1"
     },
     {
       "index": 62,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomModifiersEncoder::AddModifier:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder(System.Reflection.Metadata.EntityHandle,System.Boolean)",
       "generatedMethodId": "AddModifier_0_EntityHandle_bool_0"
     },
     {
       "index": 63,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.CustomModifiersEncoder::AddModifier:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder(System.Reflection.Metadata.EntityHandle,System.Boolean)",
       "generatedMethodId": "AddModifier_0_EntityHandle_bool_1"
     },
     {
       "index": 64,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::IsSmallRegionCount:System.Boolean(System.Int32)",
       "generatedMethodId": "IsSmallRegionCount_0_int_0"
     },
     {
       "index": 65,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::IsSmallRegionCount:System.Boolean(System.Int32)",
       "generatedMethodId": "IsSmallRegionCount_0_int_1"
     },
     {
       "index": 66,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::IsSmallExceptionRegion:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "IsSmallExceptionRegion_1_int_int_0"
     },
     {
       "index": 67,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::IsSmallExceptionRegion:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "IsSmallExceptionRegion_1_int_int_1"
     },
     {
       "index": 68,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::IsSmallExceptionRegion:System.Boolean(System.Int32,System.Int32)",
       "generatedMethodId": "IsSmallExceptionRegion_1_int_int_2"
     },
     {
       "index": 69,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFinally:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFinally_2_int_int_int_int_0"
     },
     {
       "index": 70,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFinally:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFinally_2_int_int_int_int_1"
     },
     {
       "index": 71,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFinally:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFinally_2_int_int_int_int_2"
     },
     {
       "index": 72,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFinally:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFinally_2_int_int_int_int_3"
     },
     {
       "index": 73,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFault:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFault_3_int_int_int_int_0"
     },
     {
       "index": 74,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFault:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFault_3_int_int_int_int_1"
     },
     {
       "index": 75,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFault:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFault_3_int_int_int_int_2"
     },
     {
       "index": 76,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFault:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFault_3_int_int_int_int_3"
     },
     {
       "index": 77,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddCatch:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddCatch_4_int_int_int_int_EntityHandle_0"
     },
     {
       "index": 78,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddCatch:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddCatch_4_int_int_int_int_EntityHandle_1"
     },
     {
       "index": 79,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddCatch:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddCatch_4_int_int_int_int_EntityHandle_2"
     },
     {
       "index": 80,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddCatch:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddCatch_4_int_int_int_int_EntityHandle_3"
     },
     {
       "index": 81,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFilter:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFilter_5_int_int_int_int_int_0"
     },
     {
       "index": 82,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFilter:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFilter_5_int_int_int_int_int_1"
     },
     {
       "index": 83,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFilter:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFilter_5_int_int_int_int_int_2"
     },
     {
       "index": 84,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::AddFilter:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
       "generatedMethodId": "AddFilter_5_int_int_int_int_int_3"
     },
     {
       "index": 85,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::Add:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Reflection.Metadata.ExceptionRegionKind,System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle,System.Int32)",
       "generatedMethodId": "Add_6_ExceptionRegionKind_int_int_int_int_EntityHandle_int_0"
     },
     {
       "index": 86,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::Add:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Reflection.Metadata.ExceptionRegionKind,System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle,System.Int32)",
       "generatedMethodId": "Add_6_ExceptionRegionKind_int_int_int_int_EntityHandle_int_1"
     },
     {
       "index": 87,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder::Add:System.Reflection.Metadata.Ecma335.ExceptionRegionEncoder(System.Reflection.Metadata.ExceptionRegionKind,System.Int32,System.Int32,System.Int32,System.Int32,System.Reflection.Metadata.EntityHandle,System.Int32)",
       "generatedMethodId": "Add_6_ExceptionRegionKind_int_int_int_int_EntityHandle_int_2"
     },
     {
       "index": 88,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ExportedTypeExtensions::GetTypeDefinitionId:System.Int32(System.Reflection.Metadata.ExportedType)",
       "generatedMethodId": "GetTypeDefinitionId_0_ExportedType_0"
     },
     {
       "index": 89,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FieldTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
       "generatedMethodId": "CustomModifiers_0__0"
     },
     {
       "index": 90,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FieldTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
       "generatedMethodId": "Type_1_bool_0"
     },
     {
       "index": 91,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FieldTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
       "generatedMethodId": "Type_1_bool_1"
     },
     {
       "index": 92,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FieldTypeEncoder::TypedReference:System.Void()",
       "generatedMethodId": "TypedReference_2__0"
     },
     {
       "index": 93,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.FixedArgumentsEncoder::AddArgument:System.Reflection.Metadata.Ecma335.LiteralEncoder()",
       "generatedMethodId": "AddArgument_0__0"
     },
     {
       "index": 94,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder::AddArgument:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
       "generatedMethodId": "AddArgument_0__0"
     },
     {
       "index": 95,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::OpCode:System.Void(System.Reflection.Metadata.ILOpCode)",
       "generatedMethodId": "OpCode_0_ILOpCode_0"
     },
     {
       "index": 96,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Token:System.Void(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "Token_1_EntityHandle_0"
     },
     {
       "index": 97,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Token:System.Void(System.Int32)",
       "generatedMethodId": "Token_2_int_0"
     },
     {
       "index": 98,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Token:System.Void(System.Int32)",
       "generatedMethodId": "Token_2_int_1"
     },
     {
       "index": 99,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadString:System.Void(System.Reflection.Metadata.UserStringHandle)",
       "generatedMethodId": "LoadString_3_UserStringHandle_0"
     },
     {
       "index": 100,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Call:System.Void(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "Call_4_EntityHandle_0"
     },
     {
       "index": 101,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Call:System.Void(System.Reflection.Metadata.MethodDefinitionHandle)",
       "generatedMethodId": "Call_5_MethodDefinitionHandle_0"
     },
     {
       "index": 102,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Call:System.Void(System.Reflection.Metadata.MethodSpecificationHandle)",
       "generatedMethodId": "Call_6_MethodSpecificationHandle_0"
     },
     {
       "index": 103,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Call:System.Void(System.Reflection.Metadata.MemberReferenceHandle)",
       "generatedMethodId": "Call_7_MemberReferenceHandle_0"
     },
     {
       "index": 104,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::CallIndirect:System.Void(System.Reflection.Metadata.StandaloneSignatureHandle)",
       "generatedMethodId": "CallIndirect_8_StandaloneSignatureHandle_0"
     },
     {
       "index": 105,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantI4:System.Void(System.Int32)",
       "generatedMethodId": "LoadConstantI4_9_int_0"
     },
     {
       "index": 106,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantI4:System.Void(System.Int32)",
       "generatedMethodId": "LoadConstantI4_9_int_1"
     },
     {
       "index": 107,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantI8:System.Void(System.Int64)",
       "generatedMethodId": "LoadConstantI8_10_long_0"
     },
     {
       "index": 108,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantI8:System.Void(System.Int64)",
       "generatedMethodId": "LoadConstantI8_10_long_1"
     },
     {
       "index": 109,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantR4:System.Void(System.Single)",
       "generatedMethodId": "LoadConstantR4_11_float_0"
     },
     {
       "index": 110,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantR4:System.Void(System.Single)",
       "generatedMethodId": "LoadConstantR4_11_float_1"
     },
     {
       "index": 111,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantR8:System.Void(System.Double)",
       "generatedMethodId": "LoadConstantR8_12_double_0"
     },
     {
       "index": 112,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadConstantR8:System.Void(System.Double)",
       "generatedMethodId": "LoadConstantR8_12_double_1"
     },
     {
       "index": 113,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadLocal:System.Void(System.Int32)",
       "generatedMethodId": "LoadLocal_13_int_0"
     },
     {
       "index": 114,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadLocal:System.Void(System.Int32)",
       "generatedMethodId": "LoadLocal_13_int_1"
     },
     {
       "index": 115,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::StoreLocal:System.Void(System.Int32)",
       "generatedMethodId": "StoreLocal_14_int_0"
     },
     {
       "index": 116,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::StoreLocal:System.Void(System.Int32)",
       "generatedMethodId": "StoreLocal_14_int_1"
     },
     {
       "index": 117,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadLocalAddress:System.Void(System.Int32)",
       "generatedMethodId": "LoadLocalAddress_15_int_0"
     },
     {
       "index": 118,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadLocalAddress:System.Void(System.Int32)",
       "generatedMethodId": "LoadLocalAddress_15_int_1"
     },
     {
       "index": 119,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadArgument:System.Void(System.Int32)",
       "generatedMethodId": "LoadArgument_16_int_0"
     },
     {
       "index": 120,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadArgument:System.Void(System.Int32)",
       "generatedMethodId": "LoadArgument_16_int_1"
     },
     {
       "index": 121,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadArgumentAddress:System.Void(System.Int32)",
       "generatedMethodId": "LoadArgumentAddress_17_int_0"
     },
     {
       "index": 122,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::LoadArgumentAddress:System.Void(System.Int32)",
       "generatedMethodId": "LoadArgumentAddress_17_int_1"
     },
     {
       "index": 123,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::StoreArgument:System.Void(System.Int32)",
       "generatedMethodId": "StoreArgument_18_int_0"
     },
     {
       "index": 124,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::StoreArgument:System.Void(System.Int32)",
       "generatedMethodId": "StoreArgument_18_int_1"
     },
     {
       "index": 125,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::DefineLabel:System.Reflection.Metadata.Ecma335.LabelHandle()",
       "generatedMethodId": "DefineLabel_19__0"
     },
     {
       "index": 126,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Branch:System.Void(System.Reflection.Metadata.ILOpCode,System.Reflection.Metadata.Ecma335.LabelHandle)",
       "generatedMethodId": "Branch_20_ILOpCode_LabelHandle_0"
     },
     {
       "index": 127,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Switch:System.Reflection.Metadata.Ecma335.SwitchInstructionEncoder(System.Int32)",
       "generatedMethodId": "Switch_21_int_0"
     },
     {
       "index": 128,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::Switch:System.Reflection.Metadata.Ecma335.SwitchInstructionEncoder(System.Int32)",
       "generatedMethodId": "Switch_21_int_1"
     },
     {
       "index": 129,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.InstructionEncoder::MarkLabel:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle)",
       "generatedMethodId": "MarkLabel_22_LabelHandle_0"
     },
     {
       "index": 130,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::Vector:System.Reflection.Metadata.Ecma335.VectorEncoder()",
       "generatedMethodId": "Vector_0__0"
     },
     {
       "index": 131,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedVector:System.Void(System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder,System.Reflection.Metadata.Ecma335.VectorEncoder)",
       "generatedMethodId": "TaggedVector_1_CustomAttributeArrayTypeEncoder_VectorEncoder_0"
     },
     {
       "index": 132,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedVector:System.Void(System.Action\u003CSystem.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.VectorEncoder\u003E)",
       "generatedMethodId": "TaggedVector_2_System_ActionCustomAttributeArrayTypeEncoder_System_ActionVectorEncoder_0"
     },
     {
       "index": 133,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedVector:System.Void(System.Action\u003CSystem.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.VectorEncoder\u003E)",
       "generatedMethodId": "TaggedVector_2_System_ActionCustomAttributeArrayTypeEncoder_System_ActionVectorEncoder_1"
     },
     {
       "index": 134,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::Scalar:System.Reflection.Metadata.Ecma335.ScalarEncoder()",
       "generatedMethodId": "Scalar_3__0"
     },
     {
       "index": 135,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedScalar:System.Void(System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder,System.Reflection.Metadata.Ecma335.ScalarEncoder)",
       "generatedMethodId": "TaggedScalar_4_CustomAttributeElementTypeEncoder_ScalarEncoder_0"
     },
     {
       "index": 136,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedScalar:System.Void(System.Action\u003CSystem.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ScalarEncoder\u003E)",
       "generatedMethodId": "TaggedScalar_5_System_ActionCustomAttributeElementTypeEncoder_System_ActionScalarEncoder_0"
     },
     {
       "index": 137,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralEncoder::TaggedScalar:System.Void(System.Action\u003CSystem.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ScalarEncoder\u003E)",
       "generatedMethodId": "TaggedScalar_5_System_ActionCustomAttributeElementTypeEncoder_System_ActionScalarEncoder_1"
     },
     {
       "index": 138,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LiteralsEncoder::AddLiteral:System.Reflection.Metadata.Ecma335.LiteralEncoder()",
       "generatedMethodId": "AddLiteral_0__0"
     },
     {
       "index": 139,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariablesEncoder::AddVariable:System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder()",
       "generatedMethodId": "AddVariable_0__0"
     },
     {
       "index": 140,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
       "generatedMethodId": "CustomModifiers_0__0"
     },
     {
       "index": 141,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean,System.Boolean)",
       "generatedMethodId": "Type_1_bool_bool_0"
     },
     {
       "index": 142,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean,System.Boolean)",
       "generatedMethodId": "Type_1_bool_bool_1"
     },
     {
       "index": 143,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean,System.Boolean)",
       "generatedMethodId": "Type_1_bool_bool_2"
     },
     {
       "index": 144,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.LocalVariableTypeEncoder::TypedReference:System.Void()",
       "generatedMethodId": "TypedReference_2__0"
     },
     {
       "index": 145,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataAggregator::GetGenerationHandle:System.Reflection.Metadata.Handle(System.Reflection.Metadata.Handle,System.Int32)",
       "generatedMethodId": "GetGenerationHandle_0_Handle_int_0"
     },
     {
       "index": 146,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataAggregator::GetGenerationHandle:System.Reflection.Metadata.Handle(System.Reflection.Metadata.Handle,System.Int32)",
       "generatedMethodId": "GetGenerationHandle_0_Handle_int_1"
     },
     {
       "index": 147,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::SetCapacity:System.Void(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
       "generatedMethodId": "SetCapacity_0_TableIndex_int_0"
     },
     {
       "index": 148,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::SetCapacity:System.Void(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
       "generatedMethodId": "SetCapacity_0_TableIndex_int_1"
     },
     {
       "index": 149,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetRowCount:System.Int32(System.Reflection.Metadata.Ecma335.TableIndex)",
       "generatedMethodId": "GetRowCount_1_TableIndex_0"
     },
     {
       "index": 150,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetRowCounts:System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E()",
       "generatedMethodId": "GetRowCounts_2__0"
     },
     {
       "index": 151,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddModule:System.Reflection.Metadata.ModuleDefinitionHandle(System.Int32,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.GuidHandle)",
       "generatedMethodId": "AddModule_3_int_StringHandle_GuidHandle_GuidHandle_GuidHandle_0"
     },
     {
       "index": 152,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddModule:System.Reflection.Metadata.ModuleDefinitionHandle(System.Int32,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.GuidHandle)",
       "generatedMethodId": "AddModule_3_int_StringHandle_GuidHandle_GuidHandle_GuidHandle_1"
     },
     {
       "index": 153,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddAssembly:System.Reflection.Metadata.AssemblyDefinitionHandle(System.Reflection.Metadata.StringHandle,System.Version,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Reflection.AssemblyFlags,System.Reflection.AssemblyHashAlgorithm)",
       "generatedMethodId": "AddAssembly_4_StringHandle_System_Version_StringHandle_BlobHandle_AssemblyFlags_AssemblyHashAlgorithm_0"
     },
     {
       "index": 154,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddAssemblyReference:System.Reflection.Metadata.AssemblyReferenceHandle(System.Reflection.Metadata.StringHandle,System.Version,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Reflection.AssemblyFlags,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddAssemblyReference_5_StringHandle_System_Version_StringHandle_BlobHandle_AssemblyFlags_BlobHandle_0"
     },
     {
       "index": 155,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeDefinition:System.Reflection.Metadata.TypeDefinitionHandle(System.Reflection.TypeAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.FieldDefinitionHandle,System.Reflection.Metadata.MethodDefinitionHandle)",
       "generatedMethodId": "AddTypeDefinition_6_TypeAttributes_StringHandle_StringHandle_EntityHandle_FieldDefinitionHandle_MethodDefinitionHandle_0"
     },
     {
       "index": 156,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeDefinition:System.Reflection.Metadata.TypeDefinitionHandle(System.Reflection.TypeAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.FieldDefinitionHandle,System.Reflection.Metadata.MethodDefinitionHandle)",
       "generatedMethodId": "AddTypeDefinition_6_TypeAttributes_StringHandle_StringHandle_EntityHandle_FieldDefinitionHandle_MethodDefinitionHandle_1"
     },
     {
       "index": 157,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeLayout:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.UInt16,System.UInt32)",
       "generatedMethodId": "AddTypeLayout_7_TypeDefinitionHandle_ushort_uint_0"
     },
     {
       "index": 158,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeLayout:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.UInt16,System.UInt32)",
       "generatedMethodId": "AddTypeLayout_7_TypeDefinitionHandle_ushort_uint_1"
     },
     {
       "index": 159,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeLayout:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.UInt16,System.UInt32)",
       "generatedMethodId": "AddTypeLayout_7_TypeDefinitionHandle_ushort_uint_2"
     },
     {
       "index": 160,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddInterfaceImplementation:System.Reflection.Metadata.InterfaceImplementationHandle(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddInterfaceImplementation_8_TypeDefinitionHandle_EntityHandle_0"
     },
     {
       "index": 161,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddNestedType:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.TypeDefinitionHandle)",
       "generatedMethodId": "AddNestedType_9_TypeDefinitionHandle_TypeDefinitionHandle_0"
     },
     {
       "index": 162,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeReference:System.Reflection.Metadata.TypeReferenceHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.StringHandle)",
       "generatedMethodId": "AddTypeReference_10_EntityHandle_StringHandle_StringHandle_0"
     },
     {
       "index": 163,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddTypeSpecification:System.Reflection.Metadata.TypeSpecificationHandle(System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddTypeSpecification_11_BlobHandle_0"
     },
     {
       "index": 164,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddStandaloneSignature:System.Reflection.Metadata.StandaloneSignatureHandle(System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddStandaloneSignature_12_BlobHandle_0"
     },
     {
       "index": 165,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddProperty:System.Reflection.Metadata.PropertyDefinitionHandle(System.Reflection.PropertyAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddProperty_13_PropertyAttributes_StringHandle_BlobHandle_0"
     },
     {
       "index": 166,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddProperty:System.Reflection.Metadata.PropertyDefinitionHandle(System.Reflection.PropertyAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddProperty_13_PropertyAttributes_StringHandle_BlobHandle_1"
     },
     {
       "index": 167,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddPropertyMap:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.PropertyDefinitionHandle)",
       "generatedMethodId": "AddPropertyMap_14_TypeDefinitionHandle_PropertyDefinitionHandle_0"
     },
     {
       "index": 168,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEvent:System.Reflection.Metadata.EventDefinitionHandle(System.Reflection.EventAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddEvent_15_EventAttributes_StringHandle_EntityHandle_0"
     },
     {
       "index": 169,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEvent:System.Reflection.Metadata.EventDefinitionHandle(System.Reflection.EventAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddEvent_15_EventAttributes_StringHandle_EntityHandle_1"
     },
     {
       "index": 170,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEventMap:System.Void(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.EventDefinitionHandle)",
       "generatedMethodId": "AddEventMap_16_TypeDefinitionHandle_EventDefinitionHandle_0"
     },
     {
       "index": 171,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddConstant:System.Reflection.Metadata.ConstantHandle(System.Reflection.Metadata.EntityHandle,System.Object)",
       "generatedMethodId": "AddConstant_17_EntityHandle_object_0"
     },
     {
       "index": 172,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodSemantics:System.Void(System.Reflection.Metadata.EntityHandle,System.Reflection.MethodSemanticsAttributes,System.Reflection.Metadata.MethodDefinitionHandle)",
       "generatedMethodId": "AddMethodSemantics_18_EntityHandle_MethodSemanticsAttributes_MethodDefinitionHandle_0"
     },
     {
       "index": 173,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodSemantics:System.Void(System.Reflection.Metadata.EntityHandle,System.Reflection.MethodSemanticsAttributes,System.Reflection.Metadata.MethodDefinitionHandle)",
       "generatedMethodId": "AddMethodSemantics_18_EntityHandle_MethodSemanticsAttributes_MethodDefinitionHandle_1"
     },
     {
       "index": 174,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddCustomAttribute:System.Reflection.Metadata.CustomAttributeHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddCustomAttribute_19_EntityHandle_EntityHandle_BlobHandle_0"
     },
     {
       "index": 175,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodSpecification:System.Reflection.Metadata.MethodSpecificationHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddMethodSpecification_20_EntityHandle_BlobHandle_0"
     },
     {
       "index": 176,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddModuleReference:System.Reflection.Metadata.ModuleReferenceHandle(System.Reflection.Metadata.StringHandle)",
       "generatedMethodId": "AddModuleReference_21_StringHandle_0"
     },
     {
       "index": 177,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddParameter:System.Reflection.Metadata.ParameterHandle(System.Reflection.ParameterAttributes,System.Reflection.Metadata.StringHandle,System.Int32)",
       "generatedMethodId": "AddParameter_22_ParameterAttributes_StringHandle_int_0"
     },
     {
       "index": 178,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddParameter:System.Reflection.Metadata.ParameterHandle(System.Reflection.ParameterAttributes,System.Reflection.Metadata.StringHandle,System.Int32)",
       "generatedMethodId": "AddParameter_22_ParameterAttributes_StringHandle_int_1"
     },
     {
       "index": 179,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddParameter:System.Reflection.Metadata.ParameterHandle(System.Reflection.ParameterAttributes,System.Reflection.Metadata.StringHandle,System.Int32)",
       "generatedMethodId": "AddParameter_22_ParameterAttributes_StringHandle_int_2"
     },
     {
       "index": 180,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddGenericParameter:System.Reflection.Metadata.GenericParameterHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.GenericParameterAttributes,System.Reflection.Metadata.StringHandle,System.Int32)",
       "generatedMethodId": "AddGenericParameter_23_EntityHandle_GenericParameterAttributes_StringHandle_int_0"
     },
     {
       "index": 181,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddGenericParameter:System.Reflection.Metadata.GenericParameterHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.GenericParameterAttributes,System.Reflection.Metadata.StringHandle,System.Int32)",
       "generatedMethodId": "AddGenericParameter_23_EntityHandle_GenericParameterAttributes_StringHandle_int_1"
     },
     {
       "index": 182,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddGenericParameterConstraint:System.Reflection.Metadata.GenericParameterConstraintHandle(System.Reflection.Metadata.GenericParameterHandle,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddGenericParameterConstraint_24_GenericParameterHandle_EntityHandle_0"
     },
     {
       "index": 183,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldDefinition:System.Reflection.Metadata.FieldDefinitionHandle(System.Reflection.FieldAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddFieldDefinition_25_FieldAttributes_StringHandle_BlobHandle_0"
     },
     {
       "index": 184,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldDefinition:System.Reflection.Metadata.FieldDefinitionHandle(System.Reflection.FieldAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddFieldDefinition_25_FieldAttributes_StringHandle_BlobHandle_1"
     },
     {
       "index": 185,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldLayout:System.Void(System.Reflection.Metadata.FieldDefinitionHandle,System.Int32)",
       "generatedMethodId": "AddFieldLayout_26_FieldDefinitionHandle_int_0"
     },
     {
       "index": 186,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldLayout:System.Void(System.Reflection.Metadata.FieldDefinitionHandle,System.Int32)",
       "generatedMethodId": "AddFieldLayout_26_FieldDefinitionHandle_int_1"
     },
     {
       "index": 187,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMarshallingDescriptor:System.Void(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddMarshallingDescriptor_27_EntityHandle_BlobHandle_0"
     },
     {
       "index": 188,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldRelativeVirtualAddress:System.Void(System.Reflection.Metadata.FieldDefinitionHandle,System.Int32)",
       "generatedMethodId": "AddFieldRelativeVirtualAddress_28_FieldDefinitionHandle_int_0"
     },
     {
       "index": 189,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddFieldRelativeVirtualAddress:System.Void(System.Reflection.Metadata.FieldDefinitionHandle,System.Int32)",
       "generatedMethodId": "AddFieldRelativeVirtualAddress_28_FieldDefinitionHandle_int_1"
     },
     {
       "index": 190,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodDefinition:System.Reflection.Metadata.MethodDefinitionHandle(System.Reflection.MethodAttributes,System.Reflection.MethodImplAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Int32,System.Reflection.Metadata.ParameterHandle)",
       "generatedMethodId": "AddMethodDefinition_29_MethodAttributes_MethodImplAttributes_StringHandle_BlobHandle_int_ParameterHandle_0"
     },
     {
       "index": 191,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodDefinition:System.Reflection.Metadata.MethodDefinitionHandle(System.Reflection.MethodAttributes,System.Reflection.MethodImplAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Int32,System.Reflection.Metadata.ParameterHandle)",
       "generatedMethodId": "AddMethodDefinition_29_MethodAttributes_MethodImplAttributes_StringHandle_BlobHandle_int_ParameterHandle_1"
     },
     {
       "index": 192,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodDefinition:System.Reflection.Metadata.MethodDefinitionHandle(System.Reflection.MethodAttributes,System.Reflection.MethodImplAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Int32,System.Reflection.Metadata.ParameterHandle)",
       "generatedMethodId": "AddMethodDefinition_29_MethodAttributes_MethodImplAttributes_StringHandle_BlobHandle_int_ParameterHandle_2"
     },
     {
       "index": 193,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodImport:System.Void(System.Reflection.Metadata.MethodDefinitionHandle,System.Reflection.MethodImportAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.ModuleReferenceHandle)",
       "generatedMethodId": "AddMethodImport_30_MethodDefinitionHandle_MethodImportAttributes_StringHandle_ModuleReferenceHandle_0"
     },
     {
       "index": 194,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodImplementation:System.Reflection.Metadata.MethodImplementationHandle(System.Reflection.Metadata.TypeDefinitionHandle,System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddMethodImplementation_31_TypeDefinitionHandle_EntityHandle_EntityHandle_0"
     },
     {
       "index": 195,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMemberReference:System.Reflection.Metadata.MemberReferenceHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddMemberReference_32_EntityHandle_StringHandle_BlobHandle_0"
     },
     {
       "index": 196,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddManifestResource:System.Reflection.Metadata.ManifestResourceHandle(System.Reflection.ManifestResourceAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle,System.UInt32)",
       "generatedMethodId": "AddManifestResource_33_ManifestResourceAttributes_StringHandle_EntityHandle_uint_0"
     },
     {
       "index": 197,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddAssemblyFile:System.Reflection.Metadata.AssemblyFileHandle(System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Boolean)",
       "generatedMethodId": "AddAssemblyFile_34_StringHandle_BlobHandle_bool_0"
     },
     {
       "index": 198,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddAssemblyFile:System.Reflection.Metadata.AssemblyFileHandle(System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle,System.Boolean)",
       "generatedMethodId": "AddAssemblyFile_34_StringHandle_BlobHandle_bool_1"
     },
     {
       "index": 199,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddExportedType:System.Reflection.Metadata.ExportedTypeHandle(System.Reflection.TypeAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle,System.Int32)",
       "generatedMethodId": "AddExportedType_35_TypeAttributes_StringHandle_StringHandle_EntityHandle_int_0"
     },
     {
       "index": 200,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddExportedType:System.Reflection.Metadata.ExportedTypeHandle(System.Reflection.TypeAttributes,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.EntityHandle,System.Int32)",
       "generatedMethodId": "AddExportedType_35_TypeAttributes_StringHandle_StringHandle_EntityHandle_int_1"
     },
     {
       "index": 201,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddDeclarativeSecurityAttribute:System.Reflection.Metadata.DeclarativeSecurityAttributeHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.DeclarativeSecurityAction,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddDeclarativeSecurityAttribute_36_EntityHandle_DeclarativeSecurityAction_BlobHandle_0"
     },
     {
       "index": 202,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEncLogEntry:System.Void(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.Ecma335.EditAndContinueOperation)",
       "generatedMethodId": "AddEncLogEntry_37_EntityHandle_EditAndContinueOperation_0"
     },
     {
       "index": 203,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddEncMapEntry:System.Void(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "AddEncMapEntry_38_EntityHandle_0"
     },
     {
       "index": 204,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddDocument:System.Reflection.Metadata.DocumentHandle(System.Reflection.Metadata.BlobHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.BlobHandle,System.Reflection.Metadata.GuidHandle)",
       "generatedMethodId": "AddDocument_39_BlobHandle_GuidHandle_BlobHandle_GuidHandle_0"
     },
     {
       "index": 205,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddMethodDebugInformation:System.Reflection.Metadata.MethodDebugInformationHandle(System.Reflection.Metadata.DocumentHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddMethodDebugInformation_40_DocumentHandle_BlobHandle_0"
     },
     {
       "index": 206,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddLocalScope:System.Reflection.Metadata.LocalScopeHandle(System.Reflection.Metadata.MethodDefinitionHandle,System.Reflection.Metadata.ImportScopeHandle,System.Reflection.Metadata.LocalVariableHandle,System.Reflection.Metadata.LocalConstantHandle,System.Int32,System.Int32)",
       "generatedMethodId": "AddLocalScope_41_MethodDefinitionHandle_ImportScopeHandle_LocalVariableHandle_LocalConstantHandle_int_int_0"
     },
     {
       "index": 207,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddLocalVariable:System.Reflection.Metadata.LocalVariableHandle(System.Reflection.Metadata.LocalVariableAttributes,System.Int32,System.Reflection.Metadata.StringHandle)",
       "generatedMethodId": "AddLocalVariable_42_LocalVariableAttributes_int_StringHandle_0"
     },
     {
       "index": 208,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddLocalVariable:System.Reflection.Metadata.LocalVariableHandle(System.Reflection.Metadata.LocalVariableAttributes,System.Int32,System.Reflection.Metadata.StringHandle)",
       "generatedMethodId": "AddLocalVariable_42_LocalVariableAttributes_int_StringHandle_1"
     },
     {
       "index": 209,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddLocalConstant:System.Reflection.Metadata.LocalConstantHandle(System.Reflection.Metadata.StringHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddLocalConstant_43_StringHandle_BlobHandle_0"
     },
     {
       "index": 210,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddImportScope:System.Reflection.Metadata.ImportScopeHandle(System.Reflection.Metadata.ImportScopeHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddImportScope_44_ImportScopeHandle_BlobHandle_0"
     },
     {
       "index": 211,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddStateMachineMethod:System.Void(System.Reflection.Metadata.MethodDefinitionHandle,System.Reflection.Metadata.MethodDefinitionHandle)",
       "generatedMethodId": "AddStateMachineMethod_45_MethodDefinitionHandle_MethodDefinitionHandle_0"
     },
     {
       "index": 212,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::AddCustomDebugInformation:System.Reflection.Metadata.CustomDebugInformationHandle(System.Reflection.Metadata.EntityHandle,System.Reflection.Metadata.GuidHandle,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "AddCustomDebugInformation_46_EntityHandle_GuidHandle_BlobHandle_0"
     },
     {
       "index": 213,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::SetCapacity:System.Void(System.Reflection.Metadata.Ecma335.HeapIndex,System.Int32)",
       "generatedMethodId": "SetCapacity_47_HeapIndex_int_0"
     },
     {
       "index": 214,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::SetCapacity:System.Void(System.Reflection.Metadata.Ecma335.HeapIndex,System.Int32)",
       "generatedMethodId": "SetCapacity_47_HeapIndex_int_1"
     },
     {
       "index": 215,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlob:System.Reflection.Metadata.BlobHandle(System.Reflection.Metadata.BlobBuilder)",
       "generatedMethodId": "GetOrAddBlob_48_BlobBuilder_0"
     },
     {
       "index": 216,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlob:System.Reflection.Metadata.BlobHandle(System.Byte[])",
       "generatedMethodId": "GetOrAddBlob_49_System_Byte_0"
     },
     {
       "index": 217,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlob:System.Reflection.Metadata.BlobHandle(System.Byte[])",
       "generatedMethodId": "GetOrAddBlob_49_System_Byte_1"
     },
     {
       "index": 218,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlob:System.Reflection.Metadata.BlobHandle(System.Byte[])",
       "generatedMethodId": "GetOrAddBlob_49_System_Byte_2"
     },
     {
       "index": 219,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlob:System.Reflection.Metadata.BlobHandle(System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
       "generatedMethodId": "GetOrAddBlob_50_ImmutableArraybyte_0"
     },
     {
       "index": 220,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddConstantBlob:System.Reflection.Metadata.BlobHandle(System.Object)",
       "generatedMethodId": "GetOrAddConstantBlob_51_object_0"
     },
     {
       "index": 221,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlobUTF16:System.Reflection.Metadata.BlobHandle(System.String)",
       "generatedMethodId": "GetOrAddBlobUTF16_52_string_0"
     },
     {
       "index": 222,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlobUTF16:System.Reflection.Metadata.BlobHandle(System.String)",
       "generatedMethodId": "GetOrAddBlobUTF16_52_string_1"
     },
     {
       "index": 223,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlobUTF8:System.Reflection.Metadata.BlobHandle(System.String,System.Boolean)",
       "generatedMethodId": "GetOrAddBlobUTF8_53_string_bool_0"
     },
     {
       "index": 224,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlobUTF8:System.Reflection.Metadata.BlobHandle(System.String,System.Boolean)",
       "generatedMethodId": "GetOrAddBlobUTF8_53_string_bool_1"
     },
     {
       "index": 225,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddBlobUTF8:System.Reflection.Metadata.BlobHandle(System.String,System.Boolean)",
       "generatedMethodId": "GetOrAddBlobUTF8_53_string_bool_2"
     },
     {
       "index": 226,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddDocumentName:System.Reflection.Metadata.BlobHandle(System.String)",
       "generatedMethodId": "GetOrAddDocumentName_54_string_0"
     },
     {
       "index": 227,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddDocumentName:System.Reflection.Metadata.BlobHandle(System.String)",
       "generatedMethodId": "GetOrAddDocumentName_54_string_1"
     },
     {
       "index": 228,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddGuid:System.Reflection.Metadata.GuidHandle(System.Guid)",
       "generatedMethodId": "GetOrAddGuid_55_System_Guid_0"
     },
     {
       "index": 229,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::ReserveGuid:System.Reflection.Metadata.ReservedBlob\u003CSystem.Reflection.Metadata.GuidHandle\u003E()",
       "generatedMethodId": "ReserveGuid_56__0"
     },
     {
       "index": 230,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddString:System.Reflection.Metadata.StringHandle(System.String)",
       "generatedMethodId": "GetOrAddString_57_string_0"
     },
     {
       "index": 231,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddString:System.Reflection.Metadata.StringHandle(System.String)",
       "generatedMethodId": "GetOrAddString_57_string_1"
     },
     {
       "index": 232,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::ReserveUserString:System.Reflection.Metadata.ReservedBlob\u003CSystem.Reflection.Metadata.UserStringHandle\u003E(System.Int32)",
       "generatedMethodId": "ReserveUserString_58_int_0"
     },
     {
       "index": 233,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::ReserveUserString:System.Reflection.Metadata.ReservedBlob\u003CSystem.Reflection.Metadata.UserStringHandle\u003E(System.Int32)",
       "generatedMethodId": "ReserveUserString_58_int_1"
     },
     {
       "index": 234,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddUserString:System.Reflection.Metadata.UserStringHandle(System.String)",
       "generatedMethodId": "GetOrAddUserString_59_string_0"
     },
     {
       "index": 235,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataBuilder::GetOrAddUserString:System.Reflection.Metadata.UserStringHandle(System.String)",
       "generatedMethodId": "GetOrAddUserString_59_string_1"
     },
     {
       "index": 236,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTableRowCount:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.TableIndex)",
       "generatedMethodId": "GetTableRowCount_0_MetadataReader_TableIndex_0"
     },
     {
       "index": 237,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTableRowSize:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.TableIndex)",
       "generatedMethodId": "GetTableRowSize_1_MetadataReader_TableIndex_0"
     },
     {
       "index": 238,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTableMetadataOffset:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.TableIndex)",
       "generatedMethodId": "GetTableMetadataOffset_2_MetadataReader_TableIndex_0"
     },
     {
       "index": 239,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetHeapSize:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.HeapIndex)",
       "generatedMethodId": "GetHeapSize_3_MetadataReader_HeapIndex_0"
     },
     {
       "index": 240,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetHeapMetadataOffset:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Ecma335.HeapIndex)",
       "generatedMethodId": "GetHeapMetadataOffset_4_MetadataReader_HeapIndex_0"
     },
     {
       "index": 241,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetNextHandle:System.Reflection.Metadata.UserStringHandle(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.UserStringHandle)",
       "generatedMethodId": "GetNextHandle_5_MetadataReader_UserStringHandle_0"
     },
     {
       "index": 242,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetNextHandle:System.Reflection.Metadata.BlobHandle(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "GetNextHandle_6_MetadataReader_BlobHandle_0"
     },
     {
       "index": 243,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetNextHandle:System.Reflection.Metadata.StringHandle(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.StringHandle)",
       "generatedMethodId": "GetNextHandle_7_MetadataReader_StringHandle_0"
     },
     {
       "index": 244,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetEditAndContinueLogEntries:System.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.Ecma335.EditAndContinueLogEntry\u003E(System.Reflection.Metadata.MetadataReader)",
       "generatedMethodId": "GetEditAndContinueLogEntries_8_MetadataReader_0"
     },
     {
       "index": 245,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetEditAndContinueMapEntries:System.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.EntityHandle\u003E(System.Reflection.Metadata.MetadataReader)",
       "generatedMethodId": "GetEditAndContinueMapEntries_9_MetadataReader_0"
     },
     {
       "index": 246,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTypesWithProperties:System.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.TypeDefinitionHandle\u003E(System.Reflection.Metadata.MetadataReader)",
       "generatedMethodId": "GetTypesWithProperties_10_MetadataReader_0"
     },
     {
       "index": 247,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::GetTypesWithEvents:System.Collections.Generic.IEnumerable\u003CSystem.Reflection.Metadata.TypeDefinitionHandle\u003E(System.Reflection.Metadata.MetadataReader)",
       "generatedMethodId": "GetTypesWithEvents_11_MetadataReader_0"
     },
     {
       "index": 248,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::ResolveSignatureTypeKind:System.Reflection.Metadata.SignatureTypeKind(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.EntityHandle,System.Byte)",
       "generatedMethodId": "ResolveSignatureTypeKind_12_MetadataReader_EntityHandle_byte_0"
     },
     {
       "index": 249,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataReaderExtensions::ResolveSignatureTypeKind:System.Reflection.Metadata.SignatureTypeKind(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.EntityHandle,System.Byte)",
       "generatedMethodId": "ResolveSignatureTypeKind_12_MetadataReader_EntityHandle_byte_1"
     },
     {
       "index": 250,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataRootBuilder::Serialize:System.Void(System.Reflection.Metadata.BlobBuilder,System.Int32,System.Int32)",
       "generatedMethodId": "Serialize_0_BlobBuilder_int_int_0"
     },
     {
       "index": 251,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataRootBuilder::Serialize:System.Void(System.Reflection.Metadata.BlobBuilder,System.Int32,System.Int32)",
       "generatedMethodId": "Serialize_0_BlobBuilder_int_int_1"
     },
     {
       "index": 252,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataRootBuilder::Serialize:System.Void(System.Reflection.Metadata.BlobBuilder,System.Int32,System.Int32)",
       "generatedMethodId": "Serialize_0_BlobBuilder_int_int_2"
     },
     {
       "index": 253,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataSizes::GetAlignedHeapSize:System.Int32(System.Reflection.Metadata.Ecma335.HeapIndex)",
       "generatedMethodId": "GetAlignedHeapSize_0_HeapIndex_0"
     },
     {
       "index": 254,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetRowNumber:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "GetRowNumber_0_MetadataReader_EntityHandle_0"
     },
     {
       "index": 255,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Handle)",
       "generatedMethodId": "GetHeapOffset_1_MetadataReader_Handle_0"
     },
     {
       "index": 256,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetToken:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "GetToken_2_MetadataReader_EntityHandle_0"
     },
     {
       "index": 257,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetToken:System.Int32(System.Reflection.Metadata.MetadataReader,System.Reflection.Metadata.Handle)",
       "generatedMethodId": "GetToken_3_MetadataReader_Handle_0"
     },
     {
       "index": 258,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetRowNumber:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "GetRowNumber_4_EntityHandle_0"
     },
     {
       "index": 259,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.Handle)",
       "generatedMethodId": "GetHeapOffset_5_Handle_0"
     },
     {
       "index": 260,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.BlobHandle)",
       "generatedMethodId": "GetHeapOffset_6_BlobHandle_0"
     },
     {
       "index": 261,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.GuidHandle)",
       "generatedMethodId": "GetHeapOffset_7_GuidHandle_0"
     },
     {
       "index": 262,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.UserStringHandle)",
       "generatedMethodId": "GetHeapOffset_8_UserStringHandle_0"
     },
     {
       "index": 263,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetHeapOffset:System.Int32(System.Reflection.Metadata.StringHandle)",
       "generatedMethodId": "GetHeapOffset_9_StringHandle_0"
     },
     {
       "index": 264,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetToken:System.Int32(System.Reflection.Metadata.Handle)",
       "generatedMethodId": "GetToken_10_Handle_0"
     },
     {
       "index": 265,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GetToken:System.Int32(System.Reflection.Metadata.EntityHandle)",
       "generatedMethodId": "GetToken_11_EntityHandle_0"
     },
     {
       "index": 266,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TryGetTableIndex:System.Boolean(System.Reflection.Metadata.HandleKind,System.Reflection.Metadata.Ecma335.TableIndex)",
       "generatedMethodId": "TryGetTableIndex_12_HandleKind_TableIndex_0"
     },
     {
       "index": 267,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TryGetHeapIndex:System.Boolean(System.Reflection.Metadata.HandleKind,System.Reflection.Metadata.Ecma335.HeapIndex)",
       "generatedMethodId": "TryGetHeapIndex_13_HandleKind_HeapIndex_0"
     },
     {
       "index": 268,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::Handle:System.Reflection.Metadata.Handle(System.Int32)",
       "generatedMethodId": "Handle_14_int_0"
     },
     {
       "index": 269,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::Handle:System.Reflection.Metadata.Handle(System.Int32)",
       "generatedMethodId": "Handle_14_int_1"
     },
     {
       "index": 270,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EntityHandle:System.Reflection.Metadata.EntityHandle(System.Int32)",
       "generatedMethodId": "EntityHandle_15_int_0"
     },
     {
       "index": 271,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EntityHandle:System.Reflection.Metadata.EntityHandle(System.Int32)",
       "generatedMethodId": "EntityHandle_15_int_1"
     },
     {
       "index": 272,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EntityHandle:System.Reflection.Metadata.EntityHandle(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
       "generatedMethodId": "EntityHandle_16_TableIndex_int_0"
     },
     {
       "index": 273,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EntityHandle:System.Reflection.Metadata.EntityHandle(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
       "generatedMethodId": "EntityHandle_16_TableIndex_int_1"
     },
     {
       "index": 274,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::Handle:System.Reflection.Metadata.EntityHandle(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
       "generatedMethodId": "Handle_17_TableIndex_int_0"
     },
     {
       "index": 275,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::Handle:System.Reflection.Metadata.EntityHandle(System.Reflection.Metadata.Ecma335.TableIndex,System.Int32)",
       "generatedMethodId": "Handle_17_TableIndex_int_1"
     },
     {
       "index": 276,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodDefinitionHandle:System.Reflection.Metadata.MethodDefinitionHandle(System.Int32)",
       "generatedMethodId": "MethodDefinitionHandle_18_int_0"
     },
     {
       "index": 277,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodDefinitionHandle:System.Reflection.Metadata.MethodDefinitionHandle(System.Int32)",
       "generatedMethodId": "MethodDefinitionHandle_18_int_1"
     },
     {
       "index": 278,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodImplementationHandle:System.Reflection.Metadata.MethodImplementationHandle(System.Int32)",
       "generatedMethodId": "MethodImplementationHandle_19_int_0"
     },
     {
       "index": 279,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodImplementationHandle:System.Reflection.Metadata.MethodImplementationHandle(System.Int32)",
       "generatedMethodId": "MethodImplementationHandle_19_int_1"
     },
     {
       "index": 280,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodSpecificationHandle:System.Reflection.Metadata.MethodSpecificationHandle(System.Int32)",
       "generatedMethodId": "MethodSpecificationHandle_20_int_0"
     },
     {
       "index": 281,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodSpecificationHandle:System.Reflection.Metadata.MethodSpecificationHandle(System.Int32)",
       "generatedMethodId": "MethodSpecificationHandle_20_int_1"
     },
     {
       "index": 282,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeDefinitionHandle:System.Reflection.Metadata.TypeDefinitionHandle(System.Int32)",
       "generatedMethodId": "TypeDefinitionHandle_21_int_0"
     },
     {
       "index": 283,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeDefinitionHandle:System.Reflection.Metadata.TypeDefinitionHandle(System.Int32)",
       "generatedMethodId": "TypeDefinitionHandle_21_int_1"
     },
     {
       "index": 284,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ExportedTypeHandle:System.Reflection.Metadata.ExportedTypeHandle(System.Int32)",
       "generatedMethodId": "ExportedTypeHandle_22_int_0"
     },
     {
       "index": 285,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ExportedTypeHandle:System.Reflection.Metadata.ExportedTypeHandle(System.Int32)",
       "generatedMethodId": "ExportedTypeHandle_22_int_1"
     },
     {
       "index": 286,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeReferenceHandle:System.Reflection.Metadata.TypeReferenceHandle(System.Int32)",
       "generatedMethodId": "TypeReferenceHandle_23_int_0"
     },
     {
       "index": 287,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeReferenceHandle:System.Reflection.Metadata.TypeReferenceHandle(System.Int32)",
       "generatedMethodId": "TypeReferenceHandle_23_int_1"
     },
     {
       "index": 288,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeSpecificationHandle:System.Reflection.Metadata.TypeSpecificationHandle(System.Int32)",
       "generatedMethodId": "TypeSpecificationHandle_24_int_0"
     },
     {
       "index": 289,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::TypeSpecificationHandle:System.Reflection.Metadata.TypeSpecificationHandle(System.Int32)",
       "generatedMethodId": "TypeSpecificationHandle_24_int_1"
     },
     {
       "index": 290,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::InterfaceImplementationHandle:System.Reflection.Metadata.InterfaceImplementationHandle(System.Int32)",
       "generatedMethodId": "InterfaceImplementationHandle_25_int_0"
     },
     {
       "index": 291,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::InterfaceImplementationHandle:System.Reflection.Metadata.InterfaceImplementationHandle(System.Int32)",
       "generatedMethodId": "InterfaceImplementationHandle_25_int_1"
     },
     {
       "index": 292,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MemberReferenceHandle:System.Reflection.Metadata.MemberReferenceHandle(System.Int32)",
       "generatedMethodId": "MemberReferenceHandle_26_int_0"
     },
     {
       "index": 293,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MemberReferenceHandle:System.Reflection.Metadata.MemberReferenceHandle(System.Int32)",
       "generatedMethodId": "MemberReferenceHandle_26_int_1"
     },
     {
       "index": 294,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::FieldDefinitionHandle:System.Reflection.Metadata.FieldDefinitionHandle(System.Int32)",
       "generatedMethodId": "FieldDefinitionHandle_27_int_0"
     },
     {
       "index": 295,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::FieldDefinitionHandle:System.Reflection.Metadata.FieldDefinitionHandle(System.Int32)",
       "generatedMethodId": "FieldDefinitionHandle_27_int_1"
     },
     {
       "index": 296,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EventDefinitionHandle:System.Reflection.Metadata.EventDefinitionHandle(System.Int32)",
       "generatedMethodId": "EventDefinitionHandle_28_int_0"
     },
     {
       "index": 297,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::EventDefinitionHandle:System.Reflection.Metadata.EventDefinitionHandle(System.Int32)",
       "generatedMethodId": "EventDefinitionHandle_28_int_1"
     },
     {
       "index": 298,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::PropertyDefinitionHandle:System.Reflection.Metadata.PropertyDefinitionHandle(System.Int32)",
       "generatedMethodId": "PropertyDefinitionHandle_29_int_0"
     },
     {
       "index": 299,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::PropertyDefinitionHandle:System.Reflection.Metadata.PropertyDefinitionHandle(System.Int32)",
       "generatedMethodId": "PropertyDefinitionHandle_29_int_1"
     },
     {
       "index": 300,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::StandaloneSignatureHandle:System.Reflection.Metadata.StandaloneSignatureHandle(System.Int32)",
       "generatedMethodId": "StandaloneSignatureHandle_30_int_0"
     },
     {
       "index": 301,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::StandaloneSignatureHandle:System.Reflection.Metadata.StandaloneSignatureHandle(System.Int32)",
       "generatedMethodId": "StandaloneSignatureHandle_30_int_1"
     },
     {
       "index": 302,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ParameterHandle:System.Reflection.Metadata.ParameterHandle(System.Int32)",
       "generatedMethodId": "ParameterHandle_31_int_0"
     },
     {
       "index": 303,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ParameterHandle:System.Reflection.Metadata.ParameterHandle(System.Int32)",
       "generatedMethodId": "ParameterHandle_31_int_1"
     },
     {
       "index": 304,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GenericParameterHandle:System.Reflection.Metadata.GenericParameterHandle(System.Int32)",
       "generatedMethodId": "GenericParameterHandle_32_int_0"
     },
     {
       "index": 305,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GenericParameterHandle:System.Reflection.Metadata.GenericParameterHandle(System.Int32)",
       "generatedMethodId": "GenericParameterHandle_32_int_1"
     },
     {
       "index": 306,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GenericParameterConstraintHandle:System.Reflection.Metadata.GenericParameterConstraintHandle(System.Int32)",
       "generatedMethodId": "GenericParameterConstraintHandle_33_int_0"
     },
     {
       "index": 307,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GenericParameterConstraintHandle:System.Reflection.Metadata.GenericParameterConstraintHandle(System.Int32)",
       "generatedMethodId": "GenericParameterConstraintHandle_33_int_1"
     },
     {
       "index": 308,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ModuleReferenceHandle:System.Reflection.Metadata.ModuleReferenceHandle(System.Int32)",
       "generatedMethodId": "ModuleReferenceHandle_34_int_0"
     },
     {
       "index": 309,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ModuleReferenceHandle:System.Reflection.Metadata.ModuleReferenceHandle(System.Int32)",
       "generatedMethodId": "ModuleReferenceHandle_34_int_1"
     },
     {
       "index": 310,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::AssemblyReferenceHandle:System.Reflection.Metadata.AssemblyReferenceHandle(System.Int32)",
       "generatedMethodId": "AssemblyReferenceHandle_35_int_0"
     },
     {
       "index": 311,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::AssemblyReferenceHandle:System.Reflection.Metadata.AssemblyReferenceHandle(System.Int32)",
       "generatedMethodId": "AssemblyReferenceHandle_35_int_1"
     },
     {
       "index": 312,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::CustomAttributeHandle:System.Reflection.Metadata.CustomAttributeHandle(System.Int32)",
       "generatedMethodId": "CustomAttributeHandle_36_int_0"
     },
     {
       "index": 313,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::CustomAttributeHandle:System.Reflection.Metadata.CustomAttributeHandle(System.Int32)",
       "generatedMethodId": "CustomAttributeHandle_36_int_1"
     },
     {
       "index": 314,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DeclarativeSecurityAttributeHandle:System.Reflection.Metadata.DeclarativeSecurityAttributeHandle(System.Int32)",
       "generatedMethodId": "DeclarativeSecurityAttributeHandle_37_int_0"
     },
     {
       "index": 315,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DeclarativeSecurityAttributeHandle:System.Reflection.Metadata.DeclarativeSecurityAttributeHandle(System.Int32)",
       "generatedMethodId": "DeclarativeSecurityAttributeHandle_37_int_1"
     },
     {
       "index": 316,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ConstantHandle:System.Reflection.Metadata.ConstantHandle(System.Int32)",
       "generatedMethodId": "ConstantHandle_38_int_0"
     },
     {
       "index": 317,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ConstantHandle:System.Reflection.Metadata.ConstantHandle(System.Int32)",
       "generatedMethodId": "ConstantHandle_38_int_1"
     },
     {
       "index": 318,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ManifestResourceHandle:System.Reflection.Metadata.ManifestResourceHandle(System.Int32)",
       "generatedMethodId": "ManifestResourceHandle_39_int_0"
     },
     {
       "index": 319,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ManifestResourceHandle:System.Reflection.Metadata.ManifestResourceHandle(System.Int32)",
       "generatedMethodId": "ManifestResourceHandle_39_int_1"
     },
     {
       "index": 320,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::AssemblyFileHandle:System.Reflection.Metadata.AssemblyFileHandle(System.Int32)",
       "generatedMethodId": "AssemblyFileHandle_40_int_0"
     },
     {
       "index": 321,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::AssemblyFileHandle:System.Reflection.Metadata.AssemblyFileHandle(System.Int32)",
       "generatedMethodId": "AssemblyFileHandle_40_int_1"
     },
     {
       "index": 322,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DocumentHandle:System.Reflection.Metadata.DocumentHandle(System.Int32)",
       "generatedMethodId": "DocumentHandle_41_int_0"
     },
     {
       "index": 323,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DocumentHandle:System.Reflection.Metadata.DocumentHandle(System.Int32)",
       "generatedMethodId": "DocumentHandle_41_int_1"
     },
     {
       "index": 324,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodDebugInformationHandle:System.Reflection.Metadata.MethodDebugInformationHandle(System.Int32)",
       "generatedMethodId": "MethodDebugInformationHandle_42_int_0"
     },
     {
       "index": 325,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::MethodDebugInformationHandle:System.Reflection.Metadata.MethodDebugInformationHandle(System.Int32)",
       "generatedMethodId": "MethodDebugInformationHandle_42_int_1"
     },
     {
       "index": 326,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalScopeHandle:System.Reflection.Metadata.LocalScopeHandle(System.Int32)",
       "generatedMethodId": "LocalScopeHandle_43_int_0"
     },
     {
       "index": 327,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalScopeHandle:System.Reflection.Metadata.LocalScopeHandle(System.Int32)",
       "generatedMethodId": "LocalScopeHandle_43_int_1"
     },
     {
       "index": 328,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalVariableHandle:System.Reflection.Metadata.LocalVariableHandle(System.Int32)",
       "generatedMethodId": "LocalVariableHandle_44_int_0"
     },
     {
       "index": 329,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalVariableHandle:System.Reflection.Metadata.LocalVariableHandle(System.Int32)",
       "generatedMethodId": "LocalVariableHandle_44_int_1"
     },
     {
       "index": 330,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalConstantHandle:System.Reflection.Metadata.LocalConstantHandle(System.Int32)",
       "generatedMethodId": "LocalConstantHandle_45_int_0"
     },
     {
       "index": 331,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::LocalConstantHandle:System.Reflection.Metadata.LocalConstantHandle(System.Int32)",
       "generatedMethodId": "LocalConstantHandle_45_int_1"
     },
     {
       "index": 332,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ImportScopeHandle:System.Reflection.Metadata.ImportScopeHandle(System.Int32)",
       "generatedMethodId": "ImportScopeHandle_46_int_0"
     },
     {
       "index": 333,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::ImportScopeHandle:System.Reflection.Metadata.ImportScopeHandle(System.Int32)",
       "generatedMethodId": "ImportScopeHandle_46_int_1"
     },
     {
       "index": 334,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::CustomDebugInformationHandle:System.Reflection.Metadata.CustomDebugInformationHandle(System.Int32)",
       "generatedMethodId": "CustomDebugInformationHandle_47_int_0"
     },
     {
       "index": 335,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::CustomDebugInformationHandle:System.Reflection.Metadata.CustomDebugInformationHandle(System.Int32)",
       "generatedMethodId": "CustomDebugInformationHandle_47_int_1"
     },
     {
       "index": 336,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::UserStringHandle:System.Reflection.Metadata.UserStringHandle(System.Int32)",
       "generatedMethodId": "UserStringHandle_48_int_0"
     },
     {
       "index": 337,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::UserStringHandle:System.Reflection.Metadata.UserStringHandle(System.Int32)",
       "generatedMethodId": "UserStringHandle_48_int_1"
     },
     {
       "index": 338,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::StringHandle:System.Reflection.Metadata.StringHandle(System.Int32)",
       "generatedMethodId": "StringHandle_49_int_0"
     },
     {
       "index": 339,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::StringHandle:System.Reflection.Metadata.StringHandle(System.Int32)",
       "generatedMethodId": "StringHandle_49_int_1"
     },
     {
       "index": 340,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::BlobHandle:System.Reflection.Metadata.BlobHandle(System.Int32)",
       "generatedMethodId": "BlobHandle_50_int_0"
     },
     {
       "index": 341,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::BlobHandle:System.Reflection.Metadata.BlobHandle(System.Int32)",
       "generatedMethodId": "BlobHandle_50_int_1"
     },
     {
       "index": 342,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GuidHandle:System.Reflection.Metadata.GuidHandle(System.Int32)",
       "generatedMethodId": "GuidHandle_51_int_0"
     },
     {
       "index": 343,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::GuidHandle:System.Reflection.Metadata.GuidHandle(System.Int32)",
       "generatedMethodId": "GuidHandle_51_int_1"
     },
     {
       "index": 344,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DocumentNameBlobHandle:System.Reflection.Metadata.DocumentNameBlobHandle(System.Int32)",
       "generatedMethodId": "DocumentNameBlobHandle_52_int_0"
     },
     {
       "index": 345,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MetadataTokens::DocumentNameBlobHandle:System.Reflection.Metadata.DocumentNameBlobHandle(System.Int32)",
       "generatedMethodId": "DocumentNameBlobHandle_52_int_1"
     },
     {
       "index": 346,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Int32(System.Reflection.Metadata.Ecma335.InstructionEncoder,System.Int32,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes)",
       "generatedMethodId": "AddMethodBody_0_InstructionEncoder_int_StandaloneSignatureHandle_MethodBodyAttributes_0"
     },
     {
       "index": 347,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Int32(System.Reflection.Metadata.Ecma335.InstructionEncoder,System.Int32,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes)",
       "generatedMethodId": "AddMethodBody_0_InstructionEncoder_int_StandaloneSignatureHandle_MethodBodyAttributes_1"
     },
     {
       "index": 348,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Int32(System.Reflection.Metadata.Ecma335.InstructionEncoder,System.Int32,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes,System.Boolean)",
       "generatedMethodId": "AddMethodBody_1_InstructionEncoder_int_StandaloneSignatureHandle_MethodBodyAttributes_bool_0"
     },
     {
       "index": 349,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodBodyStreamEncoder::AddMethodBody:System.Int32(System.Reflection.Metadata.Ecma335.InstructionEncoder,System.Int32,System.Reflection.Metadata.StandaloneSignatureHandle,System.Reflection.Metadata.Ecma335.MethodBodyAttributes,System.Boolean)",
       "generatedMethodId": "AddMethodBody_1_InstructionEncoder_int_StandaloneSignatureHandle_MethodBodyAttributes_bool_1"
     },
     {
       "index": 350,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodSignatureEncoder::Parameters:System.Void(System.Int32,System.Reflection.Metadata.Ecma335.ReturnTypeEncoder,System.Reflection.Metadata.Ecma335.ParametersEncoder)",
       "generatedMethodId": "Parameters_0_int_ReturnTypeEncoder_ParametersEncoder_0"
     },
     {
       "index": 351,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodSignatureEncoder::Parameters:System.Void(System.Int32,System.Reflection.Metadata.Ecma335.ReturnTypeEncoder,System.Reflection.Metadata.Ecma335.ParametersEncoder)",
       "generatedMethodId": "Parameters_0_int_ReturnTypeEncoder_ParametersEncoder_1"
     },
     {
       "index": 352,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodSignatureEncoder::Parameters:System.Void(System.Int32,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ReturnTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ParametersEncoder\u003E)",
       "generatedMethodId": "Parameters_1_int_System_ActionReturnTypeEncoder_System_ActionParametersEncoder_0"
     },
     {
       "index": 353,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodSignatureEncoder::Parameters:System.Void(System.Int32,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ReturnTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ParametersEncoder\u003E)",
       "generatedMethodId": "Parameters_1_int_System_ActionReturnTypeEncoder_System_ActionParametersEncoder_1"
     },
     {
       "index": 354,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.MethodSignatureEncoder::Parameters:System.Void(System.Int32,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ReturnTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ParametersEncoder\u003E)",
       "generatedMethodId": "Parameters_1_int_System_ActionReturnTypeEncoder_System_ActionParametersEncoder_2"
     },
     {
       "index": 355,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder::AddArgument:System.Void(System.Boolean,System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder,System.Reflection.Metadata.Ecma335.NameEncoder,System.Reflection.Metadata.Ecma335.LiteralEncoder)",
       "generatedMethodId": "AddArgument_0_bool_NamedArgumentTypeEncoder_NameEncoder_LiteralEncoder_0"
     },
     {
       "index": 356,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder::AddArgument:System.Void(System.Boolean,System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder,System.Reflection.Metadata.Ecma335.NameEncoder,System.Reflection.Metadata.Ecma335.LiteralEncoder)",
       "generatedMethodId": "AddArgument_0_bool_NamedArgumentTypeEncoder_NameEncoder_LiteralEncoder_1"
     },
     {
       "index": 357,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder::AddArgument:System.Void(System.Boolean,System.Action\u003CSystem.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.NameEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.LiteralEncoder\u003E)",
       "generatedMethodId": "AddArgument_1_bool_System_ActionNamedArgumentTypeEncoder_System_ActionNameEncoder_System_ActionLiteralEncoder_0"
     },
     {
       "index": 358,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder::AddArgument:System.Void(System.Boolean,System.Action\u003CSystem.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.NameEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.LiteralEncoder\u003E)",
       "generatedMethodId": "AddArgument_1_bool_System_ActionNamedArgumentTypeEncoder_System_ActionNameEncoder_System_ActionLiteralEncoder_1"
     },
     {
       "index": 359,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentsEncoder::AddArgument:System.Void(System.Boolean,System.Action\u003CSystem.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.NameEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.LiteralEncoder\u003E)",
       "generatedMethodId": "AddArgument_1_bool_System_ActionNamedArgumentTypeEncoder_System_ActionNameEncoder_System_ActionLiteralEncoder_2"
     },
     {
       "index": 360,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder::ScalarType:System.Reflection.Metadata.Ecma335.CustomAttributeElementTypeEncoder()",
       "generatedMethodId": "ScalarType_0__0"
     },
     {
       "index": 361,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder::Object:System.Void()",
       "generatedMethodId": "Object_1__0"
     },
     {
       "index": 362,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NamedArgumentTypeEncoder::SZArray:System.Reflection.Metadata.Ecma335.CustomAttributeArrayTypeEncoder()",
       "generatedMethodId": "SZArray_2__0"
     },
     {
       "index": 363,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NameEncoder::Name:System.Void(System.String)",
       "generatedMethodId": "Name_0_string_0"
     },
     {
       "index": 364,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.NameEncoder::Name:System.Void(System.String)",
       "generatedMethodId": "Name_0_string_1"
     },
     {
       "index": 365,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParametersEncoder::AddParameter:System.Reflection.Metadata.Ecma335.ParameterTypeEncoder()",
       "generatedMethodId": "AddParameter_0__0"
     },
     {
       "index": 366,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParametersEncoder::StartVarArgs:System.Reflection.Metadata.Ecma335.ParametersEncoder()",
       "generatedMethodId": "StartVarArgs_1__0"
     },
     {
       "index": 367,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParameterTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
       "generatedMethodId": "CustomModifiers_0__0"
     },
     {
       "index": 368,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParameterTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
       "generatedMethodId": "Type_1_bool_0"
     },
     {
       "index": 369,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParameterTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
       "generatedMethodId": "Type_1_bool_1"
     },
     {
       "index": 370,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ParameterTypeEncoder::TypedReference:System.Void()",
       "generatedMethodId": "TypedReference_2__0"
     },
     {
       "index": 371,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.PermissionSetEncoder::AddPermission:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.String,System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
       "generatedMethodId": "AddPermission_0_string_ImmutableArraybyte_0"
     },
     {
       "index": 372,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.PermissionSetEncoder::AddPermission:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.String,System.Collections.Immutable.ImmutableArray\u003CSystem.Byte\u003E)",
       "generatedMethodId": "AddPermission_0_string_ImmutableArraybyte_1"
     },
     {
       "index": 373,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.PermissionSetEncoder::AddPermission:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.String,System.Reflection.Metadata.BlobBuilder)",
       "generatedMethodId": "AddPermission_1_string_BlobBuilder_0"
     },
     {
       "index": 374,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.PermissionSetEncoder::AddPermission:System.Reflection.Metadata.Ecma335.PermissionSetEncoder(System.String,System.Reflection.Metadata.BlobBuilder)",
       "generatedMethodId": "AddPermission_1_string_BlobBuilder_1"
     },
     {
       "index": 375,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.PortablePdbBuilder::Serialize:System.Reflection.Metadata.BlobContentId(System.Reflection.Metadata.BlobBuilder)",
       "generatedMethodId": "Serialize_0_BlobBuilder_0"
     },
     {
       "index": 376,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
       "generatedMethodId": "CustomModifiers_0__0"
     },
     {
       "index": 377,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
       "generatedMethodId": "Type_1_bool_0"
     },
     {
       "index": 378,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::Type:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder(System.Boolean)",
       "generatedMethodId": "Type_1_bool_1"
     },
     {
       "index": 379,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::TypedReference:System.Void()",
       "generatedMethodId": "TypedReference_2__0"
     },
     {
       "index": 380,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ReturnTypeEncoder::Void:System.Void()",
       "generatedMethodId": "Void_3__0"
     },
     {
       "index": 381,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ScalarEncoder::NullArray:System.Void()",
       "generatedMethodId": "NullArray_0__0"
     },
     {
       "index": 382,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ScalarEncoder::Constant:System.Void(System.Object)",
       "generatedMethodId": "Constant_1_object_0"
     },
     {
       "index": 383,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ScalarEncoder::SystemType:System.Void(System.String)",
       "generatedMethodId": "SystemType_2_string_0"
     },
     {
       "index": 384,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.ScalarEncoder::SystemType:System.Void(System.String)",
       "generatedMethodId": "SystemType_2_string_1"
     },
     {
       "index": 385,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureDecoder\u003CSystem.Int32,System.Int32\u003E::DecodeType:System.Int32(System.Reflection.Metadata.BlobReader,System.Boolean)",
       "generatedMethodId": "DecodeType_0_BlobReader_bool_0"
     },
     {
       "index": 386,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureDecoder\u003CSystem.Int32,System.Int32\u003E::DecodeType:System.Int32(System.Reflection.Metadata.BlobReader,System.Boolean)",
       "generatedMethodId": "DecodeType_0_BlobReader_bool_1"
     },
     {
       "index": 387,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureDecoder\u003CSystem.Int32,System.Int32\u003E::DecodeMethodSignature:System.Reflection.Metadata.MethodSignature\u003CSystem.Int32\u003E(System.Reflection.Metadata.BlobReader)",
       "generatedMethodId": "DecodeMethodSignature_1_BlobReader_0"
     },
     {
       "index": 388,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureDecoder\u003CSystem.Int32,System.Int32\u003E::DecodeMethodSpecificationSignature:System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E(System.Reflection.Metadata.BlobReader)",
       "generatedMethodId": "DecodeMethodSpecificationSignature_2_BlobReader_0"
     },
     {
       "index": 389,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureDecoder\u003CSystem.Int32,System.Int32\u003E::DecodeLocalSignature:System.Collections.Immutable.ImmutableArray\u003CSystem.Int32\u003E(System.Reflection.Metadata.BlobReader)",
       "generatedMethodId": "DecodeLocalSignature_3_BlobReader_0"
     },
     {
       "index": 390,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureDecoder\u003CSystem.Int32,System.Int32\u003E::DecodeFieldSignature:System.Int32(System.Reflection.Metadata.BlobReader)",
       "generatedMethodId": "DecodeFieldSignature_4_BlobReader_0"
     },
     {
       "index": 391,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Boolean:System.Void()",
       "generatedMethodId": "Boolean_0__0"
     },
     {
       "index": 392,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Char:System.Void()",
       "generatedMethodId": "Char_1__0"
     },
     {
       "index": 393,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::SByte:System.Void()",
       "generatedMethodId": "SByte_2__0"
     },
     {
       "index": 394,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Byte:System.Void()",
       "generatedMethodId": "Byte_3__0"
     },
     {
       "index": 395,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Int16:System.Void()",
       "generatedMethodId": "Int16_4__0"
     },
     {
       "index": 396,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::UInt16:System.Void()",
       "generatedMethodId": "UInt16_5__0"
     },
     {
       "index": 397,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Int32:System.Void()",
       "generatedMethodId": "Int32_6__0"
     },
     {
       "index": 398,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::UInt32:System.Void()",
       "generatedMethodId": "UInt32_7__0"
     },
     {
       "index": 399,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Int64:System.Void()",
       "generatedMethodId": "Int64_8__0"
     },
     {
       "index": 400,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::UInt64:System.Void()",
       "generatedMethodId": "UInt64_9__0"
     },
     {
       "index": 401,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Single:System.Void()",
       "generatedMethodId": "Single_10__0"
     },
     {
       "index": 402,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Double:System.Void()",
       "generatedMethodId": "Double_11__0"
     },
     {
       "index": 403,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::String:System.Void()",
       "generatedMethodId": "String_12__0"
     },
     {
       "index": 404,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::TypedReference:System.Void()",
       "generatedMethodId": "TypedReference_13__0"
     },
     {
       "index": 405,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::IntPtr:System.Void()",
       "generatedMethodId": "IntPtr_14__0"
     },
     {
       "index": 406,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::UIntPtr:System.Void()",
       "generatedMethodId": "UIntPtr_15__0"
     },
     {
       "index": 407,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Object:System.Void()",
       "generatedMethodId": "Object_16__0"
     },
     {
       "index": 408,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::PrimitiveType:System.Void(System.Reflection.Metadata.PrimitiveTypeCode)",
       "generatedMethodId": "PrimitiveType_17_PrimitiveTypeCode_0"
     },
     {
       "index": 409,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Array:System.Void(System.Reflection.Metadata.Ecma335.SignatureTypeEncoder,System.Reflection.Metadata.Ecma335.ArrayShapeEncoder)",
       "generatedMethodId": "Array_18_SignatureTypeEncoder_ArrayShapeEncoder_0"
     },
     {
       "index": 410,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Array:System.Void(System.Action\u003CSystem.Reflection.Metadata.Ecma335.SignatureTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ArrayShapeEncoder\u003E)",
       "generatedMethodId": "Array_19_System_ActionSignatureTypeEncoder_System_ActionArrayShapeEncoder_0"
     },
     {
       "index": 411,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Array:System.Void(System.Action\u003CSystem.Reflection.Metadata.Ecma335.SignatureTypeEncoder\u003E,System.Action\u003CSystem.Reflection.Metadata.Ecma335.ArrayShapeEncoder\u003E)",
       "generatedMethodId": "Array_19_System_ActionSignatureTypeEncoder_System_ActionArrayShapeEncoder_1"
     },
     {
       "index": 412,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Type:System.Void(System.Reflection.Metadata.EntityHandle,System.Boolean)",
       "generatedMethodId": "Type_20_EntityHandle_bool_0"
     },
     {
       "index": 413,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Type:System.Void(System.Reflection.Metadata.EntityHandle,System.Boolean)",
       "generatedMethodId": "Type_20_EntityHandle_bool_1"
     },
     {
       "index": 414,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::FunctionPointer:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Reflection.Metadata.SignatureCallingConvention,System.Reflection.Metadata.Ecma335.FunctionPointerAttributes,System.Int32)",
       "generatedMethodId": "FunctionPointer_21_SignatureCallingConvention_FunctionPointerAttributes_int_0"
     },
     {
       "index": 415,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::FunctionPointer:System.Reflection.Metadata.Ecma335.MethodSignatureEncoder(System.Reflection.Metadata.SignatureCallingConvention,System.Reflection.Metadata.Ecma335.FunctionPointerAttributes,System.Int32)",
       "generatedMethodId": "FunctionPointer_21_SignatureCallingConvention_FunctionPointerAttributes_int_1"
     },
     {
       "index": 416,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericInstantiation:System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder(System.Reflection.Metadata.EntityHandle,System.Int32,System.Boolean)",
       "generatedMethodId": "GenericInstantiation_22_EntityHandle_int_bool_0"
     },
     {
       "index": 417,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericInstantiation:System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder(System.Reflection.Metadata.EntityHandle,System.Int32,System.Boolean)",
       "generatedMethodId": "GenericInstantiation_22_EntityHandle_int_bool_1"
     },
     {
       "index": 418,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericInstantiation:System.Reflection.Metadata.Ecma335.GenericTypeArgumentsEncoder(System.Reflection.Metadata.EntityHandle,System.Int32,System.Boolean)",
       "generatedMethodId": "GenericInstantiation_22_EntityHandle_int_bool_2"
     },
     {
       "index": 419,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericMethodTypeParameter:System.Void(System.Int32)",
       "generatedMethodId": "GenericMethodTypeParameter_23_int_0"
     },
     {
       "index": 420,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericMethodTypeParameter:System.Void(System.Int32)",
       "generatedMethodId": "GenericMethodTypeParameter_23_int_1"
     },
     {
       "index": 421,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericTypeParameter:System.Void(System.Int32)",
       "generatedMethodId": "GenericTypeParameter_24_int_0"
     },
     {
       "index": 422,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::GenericTypeParameter:System.Void(System.Int32)",
       "generatedMethodId": "GenericTypeParameter_24_int_1"
     },
     {
       "index": 423,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::Pointer:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
       "generatedMethodId": "Pointer_25__0"
     },
     {
       "index": 424,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::VoidPointer:System.Void()",
       "generatedMethodId": "VoidPointer_26__0"
     },
     {
       "index": 425,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::SZArray:System.Reflection.Metadata.Ecma335.SignatureTypeEncoder()",
       "generatedMethodId": "SZArray_27__0"
     },
     {
       "index": 426,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SignatureTypeEncoder::CustomModifiers:System.Reflection.Metadata.Ecma335.CustomModifiersEncoder()",
       "generatedMethodId": "CustomModifiers_28__0"
     },
     {
       "index": 427,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.SwitchInstructionEncoder::Branch:System.Void(System.Reflection.Metadata.Ecma335.LabelHandle)",
       "generatedMethodId": "Branch_0_LabelHandle_0"
     },
     {
       "index": 428,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.VectorEncoder::Count:System.Reflection.Metadata.Ecma335.LiteralsEncoder(System.Int32)",
       "generatedMethodId": "Count_0_int_0"
     },
     {
       "index": 429,
-      "kind": "benchmark",
+      "kind": "fact",
       "methodSubjectId": "System.Reflection.Metadata/System.Reflection.Metadata.Ecma335.VectorEncoder::Count:System.Reflection.Metadata.Ecma335.LiteralsEncoder(System.Int32)",
       "generatedMethodId": "Count_0_int_1"
     }

@@ -1,0 +1,770 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-14T13:12:53.0884490Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Deserialize:System.Object(System.IO.Stream)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.Formatter",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Deserialize:System.Object(System.IO.Stream)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.Formatter",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.Formatter",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.Formatter",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.Type)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "Convert",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.TypeCode)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "Convert",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.TypeCode)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "Convert",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToBoolean:System.Boolean(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToBoolean",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToChar:System.Char(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToChar",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSByte:System.SByte(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToSByte",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToByte:System.Byte(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToByte",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt16:System.Int16(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToInt16",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt16:System.UInt16(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToUInt16",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt32:System.Int32(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToInt32",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt32:System.UInt32(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToUInt32",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt64:System.Int64(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToInt64",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt64:System.UInt64(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToUInt64",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSingle:System.Single(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToSingle",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDouble:System.Double(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToDouble",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDecimal:System.Decimal(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToDecimal",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDateTime:System.DateTime(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterConverter",
+      "methodName": "ToDateTime",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter",
+      "methodName": "Deserialize",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter",
+      "methodName": "Serialize",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "GetSerializableMembers",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo[](System.Type,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "GetSerializableMembers",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::CheckTypeSecurity:System.Void(System.Type,System.Runtime.Serialization.Formatters.TypeFilterLevel)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "CheckTypeSecurity",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetUninitializedObject:System.Object(System.Type)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "GetUninitializedObject",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSafeUninitializedObject:System.Object(System.Type)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "GetSafeUninitializedObject",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "PopulateObjectMembers",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "PopulateObjectMembers",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo[],System.Object[])",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "PopulateObjectMembers",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSurrogateForCyclicalReference:System.Runtime.Serialization.ISerializationSurrogate(System.Runtime.Serialization.ISerializationSurrogate)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "GetSurrogateForCyclicalReference",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetTypeFromAssembly:System.Type(System.Reflection.Assembly,System.String)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "GetTypeFromAssembly",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetTypeFromAssembly:System.Type(System.Reflection.Assembly,System.String)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.FormatterServices",
+      "methodName": "GetTypeFromAssembly",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectIDGenerator",
+      "methodName": "GetId",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectIDGenerator",
+      "methodName": "GetId",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectIDGenerator",
+      "methodName": "HasId",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectIDGenerator",
+      "methodName": "HasId",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "GetObject",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "GetObject",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RegisterObject:System.Void(System.Object,System.Int64,System.Runtime.Serialization.SerializationInfo,System.Int64,System.Reflection.MemberInfo,System.Int32[])",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::DoFixups:System.Void()",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "DoFixups",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordFixup",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordFixup",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordFixup:System.Void(System.Int64,System.Reflection.MemberInfo,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordFixup",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordDelayedFixup",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordDelayedFixup",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordDelayedFixup",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordDelayedFixup:System.Void(System.Int64,System.String,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordDelayedFixup",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32,System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RecordArrayElementFixup:System.Void(System.Int64,System.Int32[],System.Int64)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RecordArrayElementFixup",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseDeserializationEvent:System.Void()",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RaiseDeserializationEvent",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::RaiseOnDeserializingEvent:System.Void(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.ObjectManager",
+      "methodName": "RaiseOnDeserializingEvent",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String,System.String)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SerializationBinder",
+      "methodName": "BindToName",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String,System.String)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SerializationBinder",
+      "methodName": "BindToName",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String,System.String)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SerializationBinder",
+      "methodName": "BindToName",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SerializationBinder",
+      "methodName": "BindToType",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SerializationBinder",
+      "methodName": "BindToType",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SerializationBinder",
+      "methodName": "BindToType",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RegisterObject:System.Void(System.Object)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SerializationObjectManager",
+      "methodName": "RegisterObject",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RaiseOnSerializedEvent:System.Void()",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SerializationObjectManager",
+      "methodName": "RaiseOnSerializedEvent",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::AddSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISerializationSurrogate)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "AddSurrogate",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::ChainSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "ChainSelector",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "GetNextSelector",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "GetSurrogate",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "fact",
+      "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::RemoveSurrogate:System.Void(System.Type,System.Runtime.Serialization.StreamingContext)",
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "typeName": "System.Runtime.Serialization.SurrogateSelector",
+      "methodName": "RemoveSurrogate",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 84,
+    "factCount": 84,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}

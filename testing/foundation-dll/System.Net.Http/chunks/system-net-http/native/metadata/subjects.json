@@ -1,0 +1,977 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-14T13:12:26.3564440Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.Uri)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.Uri,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStringAsync",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.Uri)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.Uri,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetByteArrayAsync",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.Uri)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.Uri,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetStreamAsync",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpCompletionOption)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpCompletionOption)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpCompletionOption)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::GetAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "GetAsync",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PostAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PostAsync",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PutAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PutAsync",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::PatchAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "PatchAsync",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.String,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::DeleteAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Uri,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "DeleteAsync",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "Send",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "Send",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "Send",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "Send",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "SendAsync",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "SendAsync",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "SendAsync",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "SendAsync",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpClient::CancelPendingRequests:System.Void()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpClient",
+      "methodName": "CancelPendingRequests",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "ReadAsStringAsync",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStringAsync:System.Threading.Tasks.Task\u003CSystem.String\u003E(System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "ReadAsStringAsync",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "ReadAsByteArrayAsync",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsByteArrayAsync:System.Threading.Tasks.Task\u003CSystem.Byte[]\u003E(System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "ReadAsByteArrayAsync",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStream:System.IO.Stream()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "ReadAsStream",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStream:System.IO.Stream(System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "ReadAsStream",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "ReadAsStreamAsync",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::ReadAsStreamAsync:System.Threading.Tasks.Task\u003CSystem.IO.Stream\u003E(System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "ReadAsStreamAsync",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyTo:System.Void(System.IO.Stream,System.Net.TransportContext,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyTo:System.Void(System.IO.Stream,System.Net.TransportContext,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyToAsync",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyToAsync",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyToAsync",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyToAsync",
+      "isStatic": true
+    },
+    {
+      "index": 77,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Net.TransportContext)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyToAsync",
+      "isStatic": true
+    },
+    {
+      "index": 78,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Net.TransportContext)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyToAsync",
+      "isStatic": true
+    },
+    {
+      "index": 79,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Net.TransportContext,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyToAsync",
+      "isStatic": true
+    },
+    {
+      "index": 80,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Net.TransportContext,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "CopyToAsync",
+      "isStatic": true
+    },
+    {
+      "index": 81,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::LoadIntoBufferAsync:System.Threading.Tasks.Task()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "LoadIntoBufferAsync",
+      "isStatic": true
+    },
+    {
+      "index": 82,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::LoadIntoBufferAsync:System.Threading.Tasks.Task(System.Int64)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "LoadIntoBufferAsync",
+      "isStatic": true
+    },
+    {
+      "index": 83,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::LoadIntoBufferAsync:System.Threading.Tasks.Task(System.Int64)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "LoadIntoBufferAsync",
+      "isStatic": true
+    },
+    {
+      "index": 84,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::LoadIntoBufferAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "LoadIntoBufferAsync",
+      "isStatic": true
+    },
+    {
+      "index": 85,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::LoadIntoBufferAsync:System.Threading.Tasks.Task(System.Int64,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "LoadIntoBufferAsync",
+      "isStatic": true
+    },
+    {
+      "index": 86,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::LoadIntoBufferAsync:System.Threading.Tasks.Task(System.Int64,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "LoadIntoBufferAsync",
+      "isStatic": true
+    },
+    {
+      "index": 87,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpContent::Dispose:System.Void()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpContent",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 88,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpMessageHandler::Dispose:System.Void()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpMessageHandler",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 89,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::Send:System.Net.Http.HttpResponseMessage(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpMessageInvoker",
+      "methodName": "Send",
+      "isStatic": true
+    },
+    {
+      "index": 90,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::SendAsync:System.Threading.Tasks.Task\u003CSystem.Net.Http.HttpResponseMessage\u003E(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpMessageInvoker",
+      "methodName": "SendAsync",
+      "isStatic": true
+    },
+    {
+      "index": 91,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpMessageInvoker::Dispose:System.Void()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpMessageInvoker",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 92,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpRequestMessage::Dispose:System.Void()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpRequestMessage",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 93,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::TryGetValue:System.Boolean(System.Net.Http.HttpRequestOptionsKey\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpRequestOptions",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 94,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::TryGetValue:System.Boolean(System.Net.Http.HttpRequestOptionsKey\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpRequestOptions",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 95,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::Set:System.Void(System.Net.Http.HttpRequestOptionsKey\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpRequestOptions",
+      "methodName": "Set",
+      "isStatic": true
+    },
+    {
+      "index": 96,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpRequestOptions::Set:System.Void(System.Net.Http.HttpRequestOptionsKey\u003CSystem.Int32\u003E,System.Int32)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpRequestOptions",
+      "methodName": "Set",
+      "isStatic": true
+    },
+    {
+      "index": 97,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpResponseMessage::EnsureSuccessStatusCode:System.Net.Http.HttpResponseMessage()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpResponseMessage",
+      "methodName": "EnsureSuccessStatusCode",
+      "isStatic": true
+    },
+    {
+      "index": 98,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.HttpResponseMessage::Dispose:System.Void()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.HttpResponseMessage",
+      "methodName": "Dispose",
+      "isStatic": true
+    },
+    {
+      "index": 99,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.MultipartContent::Add:System.Void(System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.MultipartContent",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 100,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.MultipartContent::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Net.Http.HttpContent\u003E()",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.MultipartContent",
+      "methodName": "GetEnumerator",
+      "isStatic": true
+    },
+    {
+      "index": 101,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 102,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 103,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 104,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 105,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "isStatic": true
+    },
+    {
+      "index": 106,
+      "kind": "fact",
+      "subjectId": "System.Net.Http/System.Net.Http.MultipartFormDataContent::Add:System.Void(System.Net.Http.HttpContent,System.String,System.String)",
+      "assemblyName": "System.Net.Http",
+      "typeName": "System.Net.Http.MultipartFormDataContent",
+      "methodName": "Add",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 107,
+    "factCount": 107,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}
