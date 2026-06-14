@@ -2,6 +2,7 @@
 #include "chaos_runtime_host.h"
 #include <generic_context.h>
 #include <bootstrap.h>
+#include <instantiation_engine.h>
 
 // ── Forward declarations for functions defined in other .cpp files ──
 // These are used to populate the RuntimeAbiV0 dispatch table below.
