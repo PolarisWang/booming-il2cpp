@@ -336,7 +336,8 @@ public sealed partial class NativeAotLoweringPlanner
 			: CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType);
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
 		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
-		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
+		string paramSig = InferParameterSignatureFromSubjectId(callee);
+		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, paramSig,
 			["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
