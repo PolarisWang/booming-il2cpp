@@ -337,10 +337,14 @@ public sealed partial class NativeAotLoweringPlanner
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
 		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
 		string paramSig = InferParameterSignatureFromSubjectId(callee);
-		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, paramSig,
+		// Prepend implicit 'this' pointer
+		string paramSigWithThis = string.IsNullOrEmpty(paramSig)
+			? "CHAOS_IL2CPP_INTPTR"
+			: "CHAOS_IL2CPP_INTPTR, " + paramSig;
+		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, paramSigWithThis,
 			["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
-			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
+			Enumerable.Repeat(CreateNativeIntAbiSlot(), (paramSig.Length > 0 ? paramSig.Split(',').Length : 0) + 1).Cast<AotCoreIrAbiSlotArtifact>().ToArray(), failReturnAbi, EmptyRawArgumentIndices);
 		_externalRuntimeHelperCache[callee] = helperDefinition;
 		return true;
 
