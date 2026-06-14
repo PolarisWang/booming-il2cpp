@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import time
+from datetime import datetime, timezone
 from datetime import date
 from pathlib import Path
 
@@ -204,7 +205,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # fact-summary.json
     fact_summary = {
         "assemblyName": ctx.assembly,
-        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
         "totalChunks": len(chunk_slugs),
         "chunksWithFacts": chunks_with_fact,
         "chunksWithValueWarnings": chunks_with_value_warnings,
@@ -218,7 +219,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # benchmark-summary.json
     bench_summary = {
         "assemblyName": ctx.assembly,
-        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
         "totalChunks": len(chunk_slugs),
         "totalBenchmarkedMethods": total_benchmarked,
         "aggregatePerformance": aggregate_perf,
@@ -230,7 +231,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # coverage-audit.json
     coverage_audit = {
         "assemblyName": ctx.assembly,
-        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
         "totalChunks": len(chunk_slugs),
         "chunksWithResults": chunks_with_fact,
         "chunksWithValueWarnings": chunks_with_value_warnings,

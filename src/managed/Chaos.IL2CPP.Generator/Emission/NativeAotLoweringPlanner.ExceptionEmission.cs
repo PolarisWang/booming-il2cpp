@@ -19,6 +19,7 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private int _linearScratchCounter;
 	private int _nextInlineId;
+	private int _dinvCounter;
 	private string? _pendingEnumBoxSubjectId;
 	private string? _pendingBoxSubjectId;
 	private bool _pendingBoxHasProvider;
@@ -3691,13 +3692,16 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 			builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(parameterAbis[i], $"chaos_raw_arg_{i}")};");
 		}
-		builder.AppendLine($"{indentation}    const auto chaos_delegate_value = {ConsumeEvalStackValueExpression()};");
+		builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_delegate_value;");
+		builder.AppendLine($"{indentation}    chaos_delegate_value = {ConsumeEvalStackValueExpression()};");
 		builder.AppendLine($"{indentation}    if (chaos_delegate_value == 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
-		builder.AppendLine($"{indentation}        goto chaos_dinv_end_{instruction.IlOffset};");
+		int dinvId = _dinvCounter++;
+		builder.AppendLine($"{indentation}        goto chaos_dinv_end_{instruction.IlOffset}_{dinvId};");
 		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    auto* chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
+		builder.AppendLine($"{indentation}    {GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}* chaos_delegate;");
+		builder.AppendLine($"{indentation}    chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
 		builder.AppendLine($"{indentation}    if (chaos_delegate->chaos_delegate_invocation_count > 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        const auto* chaos_invocation_list = reinterpret_cast<const CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR)*>(chaos_delegate->chaos_delegate_invocation_list);");
@@ -3837,7 +3841,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    chaos_dinv_end_{instruction.IlOffset}: ;");
+		builder.AppendLine($"{indentation}    chaos_dinv_end_{instruction.IlOffset}_{_dinvCounter}: ;");
 		builder.AppendLine($"{indentation}}}");
 	}
 
