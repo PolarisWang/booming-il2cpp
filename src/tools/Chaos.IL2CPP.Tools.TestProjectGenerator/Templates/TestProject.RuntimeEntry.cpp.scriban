@@ -101,14 +101,20 @@ extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations)
 extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset();
 extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete();
 
-// No-op fallback definition for Assert_Complete when the subjects code has no
-// assertions (and therefore no definition is provided by codegen output).
-// Without this fallback, linkers emit LNK2019 for the unresolved symbol,
-// requiring a workaround in the Python pipeline (chaos_assert_stubs.cpp generation).
-// This inline fallback eliminates that pipeline hack (LINK-HACK-3 elimination).
-#ifndef Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete(void) noexcept { return 0; }
+// Weak fallback definition for Assert_Complete. Provides a linkable symbol
+// when subjects code has no assertions (no definition from codegen).
+// __declspec(selectany) allows the subjects definition to override this at
+// link time, eliminating the Python LINK-HACK-3 (chaos_assert_stubs.cpp).
+// MSVC: selectany. GCC: __attribute__((weak)).
+#if defined(_MSC_VER)
+__declspec(selectany)
+#else
+__attribute__((weak))
 #endif
+extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete()
+{
+    return 0;
+}
 
 // Interop stub declarations (defined in interop_stubs.cpp from SDK runtime_stubs)
 extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
