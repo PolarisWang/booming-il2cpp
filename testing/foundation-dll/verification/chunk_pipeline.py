@@ -291,6 +291,17 @@ def main():
     overall_status = "passed"
     total_chunks = len(chunks)
 
+    # ── Preflight: layer boundary check ──────────────────────────
+    try:
+        from verification.preflight.check_layer_boundaries import check_layer_boundaries_ci
+        boundary_issues = check_layer_boundaries_ci()
+        if boundary_issues:
+            print(f"  [preflight] ⚠️  {len(boundary_issues)} layer boundary issue(s):")
+            for issue in boundary_issues:
+                print(f"      {issue}")
+    except ImportError:
+        pass  # preflight is optional
+
     # Use the config's stage timeout (look up benchmark first as most time-sensitive; fall back to any)
     timeouts = _PIPELINE_CONFIG.get("timeouts", {})
     stage_timeout_seconds = timeouts.get("benchmark",

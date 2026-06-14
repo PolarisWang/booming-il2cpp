@@ -37,26 +37,12 @@ LAYER_PERMISSIONS: dict[str, set[str]] = {
 
 # Python 层写入 .cpp/.h 的白名单（BOUNDARY_OVERRIDE）
 # 每一项标注了一个已知的 Python-writes-C++ 违规，必须在 Expires 前修复。
-BOUNDARY_OVERRIDE_PATTERNS: list[dict] = [
-    {
-        "file": "stages/build.py",
-        "line_pattern": "write_text",
-        "reason": "BOUNDARY_OVERRIDE: issues/XXX — post-TPG chaos_external_runtime_* stub injection",
-        "expires": "2026-09-15",
-    },
-    {
-        "file": "stages/build.py",
-        "line_pattern": "write_text",
-        "reason": "BOUNDARY_OVERRIDE: issues/XXX — post-TPG chaos_mt_* MethodTable declarations",
-        "expires": "2026-09-15",
-    },
-    {
-        "file": "stages/build.py",
-        "line_pattern": "write_text",
-        "reason": "BOUNDARY_OVERRIDE: issues/XXX — JIT runtime-entry.cpp SEH patch rewrite",
-        "expires": "2026-09-15",
-    },
-]
+# 所有条目已过期或已解决——当前无活跃的 BOUNDARY_OVERRIDE。
+# TPG CppProjectEmitter.cs 已接管所有 Python → C++ 写入：
+#   - chaos_stub_*.cpp → TPG CleanupGeneratedSources()
+#   - patch-host-arrays.cpp → TPG BuildHostArrays()
+#   - runtime-entry.cpp SEH patch → TPG TestProject.RuntimeEntry.cpp.scriban
+BOUNDARY_OVERRIDE_PATTERNS: list[dict] = []
 
 # ── Check functions ─────────────────────────────────────────────────────
 
@@ -277,3 +263,35 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+else:
+    # Importable by pipeline for preflight CI check
+    from datetime import date
+
+
+    def check_layer_boundaries_ci() -> list[str]:
+        """Lightweight pipeline preflight check. Returns list of issues, empty if clean.
+
+        Checks:
+          1. Expired BOUNDARY_OVERRIDE entries (past their expires date).
+          2. BOUNDARY_OVERRIDE patterns referencing obsolete code.
+        """
+        issues: list[str] = []
+        today = date.today()
+
+        for entry in BOUNDARY_OVERRIDE_PATTERNS:
+            expires_str = entry.get("expires", "")
+            if not expires_str:
+                continue
+            try:
+                expires_date = date.fromisoformat(expires_str)
+            except ValueError:
+                issues.append(
+                    f"BOUNDARY_OVERRIDE: invalid expires date '{expires_str}' "
+                    f"in {entry.get('file', '?')}")
+                continue
+            if today > expires_date:
+                issues.append(
+                    f"BOUNDARY_OVERRIDE EXPIRED: {entry['reason']} "
+                    f"({expires_str}, {entry['file']})")
+
+        return issues
