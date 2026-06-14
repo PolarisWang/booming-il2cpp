@@ -4864,7 +4864,15 @@ public sealed partial class NativeAotLoweringPlanner
                                 _ => null
                             };
                             if (toType == null) return null;
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedConvertToVector<{fromType}, {toType}, {carrier}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            // Use VectorFixedConvertToVector128 for Vector128 to avoid
+                            // overload ambiguity when input/output carriers are the same.
+                            string convertFn = carrier.Contains("Vector128")
+                                ? "VectorFixedConvertToVector128"
+                                : "VectorFixedConvertToVector";
+                            string convertTemplateArgs = carrier.Contains("Vector128")
+                                ? $"<{fromType}, {toType}, {carrier}>"
+                                : $"<{fromType}, {toType}, {carrier}, {carrier}>";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::{convertFn}<{convertTemplateArgs}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }

@@ -2097,12 +2097,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 // (from _externalRuntimeHelpers or BuildAbiExportDeclarations)
                 if (aotDeclaredSymbols.Contains(symbol))
                     continue;
-                // Generate extern "C" CHAOS_IL2CPP_INTPTR (same format as
-                // BuildAbiExportDeclarations) to avoid conflicting return type
-                // declarations at global scope.
-                fallbackSb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
-                fallbackSb.Append(symbol);
-                fallbackSb.AppendLine("() noexcept;");
+                // Skip: the full definition (with correct parameter types) is emitted
+                // in the entry stubs section later in the same translation unit.
+                // Emitting a parameter-less extern declaration here causes C2660
+                // when the function is later called with actual arguments.
                 fallbackCount++;
             }
             if (fallbackCount > 0)
