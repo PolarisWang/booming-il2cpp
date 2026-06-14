@@ -458,7 +458,7 @@ public sealed class CppProjectEmitter
 
         // ── Step 2: CMake incremental build (3 retries) ──
         Console.Error.WriteLine($"  [build] cmake build (incremental)...");
-        var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 300_000);
+        var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 1_800_000);
         if (buildResult.ExitCode != 0)
         {
             PrintLastLines(buildResult.StdErr + buildResult.StdOut, 20);

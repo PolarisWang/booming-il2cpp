@@ -3679,7 +3679,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		string openFnType = parameterAbis.Count == 0 ? (returnType + "(*)()") : string.Concat(returnType, "(*)(", sigCache, ")");
 		string closedFnType = (parameterAbis.Count == 0 ? (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)") : (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target, " + sigCache + ")"));
 
-		builder.AppendLine($"{indentation}{{");
+		builder.AppendLine($"{indentation}    do {{");
 		for (int i = parameterAbis.Count - 1; i >= 0; i--)
 		{
 			builder.AppendLine($"{indentation}    auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
@@ -3698,7 +3698,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
 		int dinvId = _dinvCounter++;
-		builder.AppendLine($"{indentation}        goto chaos_dinv_end_{instruction.IlOffset}_{dinvId};");
+		builder.AppendLine($"{indentation}        break;");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    {GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}* chaos_delegate;");
 		builder.AppendLine($"{indentation}    chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
@@ -3841,7 +3841,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    chaos_dinv_end_{instruction.IlOffset}_{_dinvCounter}: ;");
+		builder.AppendLine($"{indentation}    }} while(0);");
 		builder.AppendLine($"{indentation}}}");
 	}
 
