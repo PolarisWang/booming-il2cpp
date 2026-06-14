@@ -244,7 +244,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     # dashboard.json
     dashboard = {
         "assemblyName": ctx.assembly,
-        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
         "summary": {
             "chunks": len(chunk_slugs),
             "chunksVerified": chunks_with_fact,
