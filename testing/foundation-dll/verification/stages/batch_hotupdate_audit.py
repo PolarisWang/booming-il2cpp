@@ -77,7 +77,7 @@ def run_stage(family: str, chunk_slug: str, stage: str) -> dict:
     ]
     print(f"  [{family}/{chunk_slug}] Running {stage}...")
     start = time.perf_counter()
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=1800, cwd=_FOUNDATION_DLL)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=1800, cwd=_FOUNDATION_DLL)
     elapsed = time.perf_counter() - start
 
     # Print output

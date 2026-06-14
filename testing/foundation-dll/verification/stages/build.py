@@ -162,7 +162,7 @@ def _compile_custom_subjects(
     ]
 
     print(f"  [build] Running ATG --generate-wrappers...")
-    result = subprocess.run(args, capture_output=True, text=True, timeout=60)
+    result = subprocess.run(args, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=60)
 
     if result.returncode != 0:
         print(f"  [build] ATG --generate-wrappers FAILED (rc={result.returncode})")
@@ -229,7 +229,7 @@ def _compile_custom_subjects(
          f"-p:OutDir={subjects_dll.parent}",
          "-p:ImportDirectoryBuildProps=false",
          "--nologo", "-v", "quiet"],
-        capture_output=True, text=True, timeout=120)
+        capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
 
     if build_result.returncode != 0 or not subjects_dll.exists():
         print(f"  [build] Custom subjects build FAILED for {tfm}")
@@ -271,7 +271,7 @@ def _build_jit_entry(
         "--clean",
     ]
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=7200)
+        result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=7200)
     except subprocess.TimeoutExpired:
         print(f"  [build] JIT entry build TIMEOUT — continuing")
         return False
@@ -311,7 +311,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     if "DOTNET_ROOT" not in os.environ:
         try:
             info = subprocess.run(
-                ["dotnet", "--info"], capture_output=True, text=True, timeout=15
+                ["dotnet", "--info"], capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=15
             )
             m = re.search(r"Base Path:\s*(.+)", info.stdout)
             if m:
@@ -407,7 +407,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         if ctx.skip_probe:
             cmd.append("--skip-probe")
             print(f"  [build] Probe phase skipped (--skip-probe)")
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=1200)
+        result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=1200)
 
         if result.returncode != 0:
             print(f"  [build] AutoTestGenerator FAILED (rc={result.returncode})")
@@ -517,7 +517,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
          f"-p:OutDir={subjects_dll.parent}",
          "-p:ImportDirectoryBuildProps=false",
          "--nologo", "-v", "quiet"],
-        capture_output=True, text=True, timeout=120)
+        capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
 
     if build_result.returncode != 0 or not subjects_dll.exists():
         print(f"  [build] Combined build FAILED for {tfm}")
@@ -644,7 +644,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         if crypto_dll.exists() and any(x in ctx.slug for x in ("security-cryptography", "x509")):
             tpg_cmd.extend(['--additional-assembly', str(crypto_dll)])
             print(f"  [build] additional-assembly: {crypto_dll} (slug fallback)")
-    tpg_result = subprocess.run(tpg_cmd, capture_output=True, text=True, timeout=7200)
+    tpg_result = subprocess.run(tpg_cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=7200)
 
     for line in tpg_result.stdout.splitlines():
         print(f"      {line}")

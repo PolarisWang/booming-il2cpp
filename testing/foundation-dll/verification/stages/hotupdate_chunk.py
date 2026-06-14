@@ -117,7 +117,7 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
         ["dotnet", "build", str(csproj),
          f"-p:OutDir={patch_dll.parent}",
          "--nologo"],
-        capture_output=True, text=True, timeout=120,
+        capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120,
     )
     if result.returncode != 0:
         for line in (result.stderr.splitlines() + result.stdout.splitlines())[-10:]:
@@ -224,7 +224,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         if chunk_def and chunk_def.get("namespaces"):
             cmd.extend(["--namespace-filter", ",".join(chunk_def["namespaces"])])
 
-        atg_result = subprocess.run(cmd, capture_output=True, text=True, timeout=1200)
+        atg_result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=1200)
         if atg_result.returncode == 0:
             # Try to build the generated patch DLL
             patch_dll = ctx.chunk_dir / "managed" / "subjects" / "patch" / "PatchSubjects.dll"
@@ -248,7 +248,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                         extract_cmd.extend(["--subject-indices", ",".join(str(i) for i in hu_indices)])
                         extract_cmd.extend(["--subject-only"])
                     extract_result = subprocess.run(
-                        extract_cmd, capture_output=True, text=True, timeout=120)
+                        extract_cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
                     if extract_result.returncode == 0:
                         patch_data_size = patch_data_path.stat().st_size
                         print(f"  [hotupdate] Patch data: {patch_data_path} ({patch_data_size} bytes)")
@@ -324,7 +324,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     try:
         r = subprocess.run(
             hotupdate_args,
-            capture_output=True, text=True, timeout=hotupdate_timeout,
+            capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=hotupdate_timeout,
         )
     except subprocess.TimeoutExpired:
         return StageResult(
