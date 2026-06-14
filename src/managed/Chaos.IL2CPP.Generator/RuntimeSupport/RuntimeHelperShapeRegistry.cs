@@ -4652,6 +4652,59 @@ public sealed partial class NativeAotLoweringPlanner
             }
             RegisterVectorAccess();
 
+            // ── Reinterpret casts (As, AsByte, AsDouble, AsInt16, etc.) ──
+            // These methods reinterpret the bit pattern of a Vector128/256 carrier
+            // as a different element type. No computation — just copy the carrier.
+            void RegisterVectorReinterpretCast()
+            {
+                var reinterpretMethods = new[]
+                {
+                    "As", "AsByte", "AsDouble", "AsInt16", "AsInt32", "AsInt64",
+                    "AsNInt", "AsNUInt", "AsSByte", "AsSingle", "AsUInt16",
+                    "AsUInt32", "AsUInt64",
+                };
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                {
+                    foreach (var methodName in reinterpretMethods)
+                    {
+                        registry.RegisterInline(new InlineShapeDescriptor(
+                            TypeDisplayNamePrefix: prefix,
+                            MethodName: methodName,
+                            Resolver: (callee, paramTypes) =>
+                            {
+                                var carrier = InferVectorCarrierType(callee);
+                                if (carrier == null) return null;
+                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = *reinterpret_cast<{carrier}*>({{0}}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            }));
+                    }
+                }
+            }
+            RegisterVectorReinterpretCast();
+
+            // ── AsVector128 / AsVector256 — cross-carrier reinterpret ──
+            // AsVector256: Vector128<T> → Vector256<T> (zero-extend lower 16→32 bytes)
+            // AsVector128: Vector256<T> → Vector128<T> (take lower 16 bytes)
+            void RegisterVectorCrossCast()
+            {
+                // Vector128<T>::AsVector256 → Vector256<T>
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: "Vector128",
+                    MethodName: "AsVector256",
+                    Resolver: static (callee, paramTypes) =>
+                    {
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    }));
+                // Vector256<T>::AsVector128 → Vector128<T>
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: "Vector256",
+                    MethodName: "AsVector128",
+                    Resolver: static (callee, paramTypes) =>
+                    {
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    }));
+            }
+            RegisterVectorCrossCast();
+
             // === Activator::CreateInstance with param array ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Activator",
