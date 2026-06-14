@@ -1,169 +1,68 @@
 {
   "assemblyName": "System.Data.Common",
-  "timestamp": "2026-06-05T09:28:20",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 4,
-  "totalBenchmarkedMethods": 1186,
-  "aggregatePerformance": {
-    "meanDurationMs": 0.4973537552111611,
-    "meanOpsPerSecond": 297932450.6866083,
-    "aggregateMeanCv": 0.09463562656891861,
-    "totalOutliers": 654
-  },
+  "totalBenchmarkedMethods": 0,
+  "aggregatePerformance": {},
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 21,
-        "total": 21,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 21,
-        "metaBenchmarkCount": 21
+        "status": "no_results"
       },
       "benchmark": {
-        "methodCount": 76,
-        "iterations": 38461,
-        "meanDurationMs": 0.6193263157894736,
-        "meanOpsPerSecond": 298412846.7777778,
-        "minDurationMs": 0,
-        "maxDurationMs": 34.0958,
-        "totalDurationMs": 47.068799999999996,
-        "totalAllocatedBytes": 13538272.0,
-        "meanSampleCount": 3.2,
-        "totalOutliers": 46,
-        "meanCv": 0.07212012500000001,
-        "maxCv": 0.367607
+        "status": "no_results"
       },
       "hotupdate": {
-        "passed": 20,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
       "slug": "system-data",
       "fact": {
-        "passed": 592,
-        "total": 592,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 648,
-        "metaBenchmarkCount": 648
+        "status": "no_results"
       },
       "benchmark": {
-        "methodCount": 187,
-        "iterations": 50000,
-        "meanDurationMs": 0.5543860962566846,
-        "meanOpsPerSecond": 294289550.196776,
-        "minDurationMs": 0,
-        "maxDurationMs": 45.6809,
-        "totalDurationMs": 103.67020000000001,
-        "totalAllocatedBytes": 67200000.0,
-        "meanSampleCount": 6.2,
-        "totalOutliers": 123,
-        "meanCv": 0.133127087431694,
-        "maxCv": 0.711537
+        "status": "no_results"
       },
       "hotupdate": {
-        "passed": 592,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
       "slug": "system-data-common",
       "fact": {
-        "passed": 331,
-        "total": 331,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 436,
-        "metaBenchmarkCount": 436
+        "status": "no_results"
       },
       "benchmark": {
-        "methodCount": 168,
-        "iterations": 50000,
-        "meanDurationMs": 0.5661803571428572,
-        "meanOpsPerSecond": 270980674.44664633,
-        "minDurationMs": 0,
-        "maxDurationMs": 44.1115,
-        "totalDurationMs": 95.1183,
-        "totalAllocatedBytes": 67200000.0,
-        "meanSampleCount": 3.4,
-        "totalOutliers": 77,
-        "meanCv": 0.07948685975609757,
-        "maxCv": 0.343043
+        "status": "no_results"
       },
       "hotupdate": {
-        "passed": 332,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
       "slug": "system-data-sqltypes",
       "fact": {
-        "passed": 246,
-        "total": 248,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 353,
-        "metaBenchmarkCount": 353
+        "status": "no_results"
       },
       "benchmark": {
-        "methodCount": 755,
-        "iterations": 50000,
-        "meanDurationMs": 0.24952225165562913,
-        "meanOpsPerSecond": 328046731.32523304,
-        "minDurationMs": 0,
-        "maxDurationMs": 45.0328,
-        "totalDurationMs": 188.3893,
-        "totalAllocatedBytes": 41600000.0,
-        "meanSampleCount": 3.4,
-        "totalOutliers": 408,
-        "meanCv": 0.09380843408788284,
-        "maxCv": 1.349939
+        "status": "no_results"
       },
       "hotupdate": {
-        "passed": 247,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     }
   ]

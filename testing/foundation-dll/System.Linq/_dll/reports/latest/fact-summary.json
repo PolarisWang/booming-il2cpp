@@ -1,50 +1,25 @@
 {
   "assemblyName": "System.Linq",
-  "timestamp": "2026-06-05T09:28:17",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 1,
-  "chunksWithFacts": 1,
-  "chunksShutdownAV": 0,
+  "chunksWithFacts": 0,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 337,
-  "totalFactMethods": 337,
+  "totalPassed": 0,
+  "totalFactMethods": 0,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 337,
-        "total": 337,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 339,
-        "metaBenchmarkCount": 339
+        "status": "no_results"
       },
       "benchmark": {
-        "methodCount": 337,
-        "iterations": 10000,
-        "meanDurationMs": 0.039149554896142434,
-        "meanOpsPerSecond": 289405006.63899106,
-        "minDurationMs": 0.0247,
-        "maxDurationMs": 0.144,
-        "totalDurationMs": 13.1934,
-        "totalAllocatedBytes": 1680000.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.08914105044510386,
-        "maxCv": 0.956375
+        "status": "no_results"
       },
       "hotupdate": {
-        "passed": 337,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     }
   ]

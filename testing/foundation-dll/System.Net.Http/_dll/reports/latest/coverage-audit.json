@@ -1,10 +1,9 @@
 {
   "assemblyName": "System.Net.Http",
-  "timestamp": "2026-06-05T09:28:20",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 2,
-  "chunksWithResults": 2,
-  "chunksWithShutdownAV": 0,
+  "chunksWithResults": 0,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 209
+  "totalDeclaredMethods": 0
 }

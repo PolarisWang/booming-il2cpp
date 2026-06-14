@@ -1,10 +1,9 @@
 {
   "assemblyName": "System.Formats.Asn1",
-  "timestamp": "2026-06-05T09:28:18",
-  "totalChunks": 2,
-  "chunksWithResults": 1,
-  "chunksWithShutdownAV": 0,
+  "timestamp": "2026-06-14T12:01:15",
+  "totalChunks": 1,
+  "chunksWithResults": 0,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 1,
-  "totalDeclaredMethods": 37
+  "chunksWithMetaMismatch": 0,
+  "totalDeclaredMethods": 0
 }

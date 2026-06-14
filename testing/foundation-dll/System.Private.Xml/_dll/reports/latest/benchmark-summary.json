@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Private.Xml",
-  "timestamp": "2026-06-05T09:28:21",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 5,
   "totalBenchmarkedMethods": 0,
   "aggregatePerformance": {},
@@ -8,55 +8,46 @@
     {
       "slug": "system-xml-schema",
       "fact": {
-        "passed": 112,
-        "total": 112,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 120,
-        "metaBenchmarkCount": 120
+        "status": "no_results"
       },
       "benchmark": {
         "status": "no_results"
       },
       "hotupdate": {
         "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
       "slug": "system-xml-serialization",
       "fact": {
-        "passed": 189,
-        "total": 189,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 207,
-        "metaBenchmarkCount": 207
+        "status": "no_results"
       },
       "benchmark": {
         "status": "no_results"
       },
       "hotupdate": {
         "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
       "slug": "system-xml-xsl",
       "fact": {
-        "passed": 186,
-        "total": 186,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 208,
-        "metaBenchmarkCount": 208
+        "status": "no_results"
       },
       "benchmark": {
         "status": "no_results"
       },
       "hotupdate": {
         "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
@@ -69,24 +60,24 @@
       },
       "hotupdate": {
         "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
       "slug": "xml",
       "fact": {
-        "passed": 916,
-        "total": 916,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 1025,
-        "metaBenchmarkCount": 1025
+        "status": "no_results"
       },
       "benchmark": {
         "status": "no_results"
       },
       "hotupdate": {
         "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     }
   ]

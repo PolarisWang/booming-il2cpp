@@ -4864,12 +4864,14 @@ public sealed partial class NativeAotLoweringPlanner
                                 _ => null
                             };
                             if (toType == null) return null;
-                            // Use VectorFixedConvertToVector128 for Vector128 to avoid
-                            // overload ambiguity when input/output carriers are the same.
-                            string convertFn = carrier.Contains("Vector128")
-                                ? "VectorFixedConvertToVector128"
+                            string convertFn = carrier.Contains("Vector128") ? "VectorFixedConvertToVector128"
+                                : carrier.Contains("Vector256") ? "VectorFixedConvertToVector256"
+                                : carrier.Contains("Vector512") ? "VectorFixedConvertToVector512"
                                 : "VectorFixedConvertToVector";
-                            string convertTemplateArgs = carrier.Contains("Vector128")
+                            // Wrappers use 3 template args: <FromScalar, ToScalar, Carrier>
+                            // Generic version uses 4: <FromScalar, ToScalar, FromCarrier, ToCarrier>
+                            bool useWrapper = convertFn != "VectorFixedConvertToVector";
+                            string convertTemplateArgs = useWrapper
                                 ? $"{fromType}, {toType}, {carrier}"
                                 : $"{fromType}, {toType}, {carrier}, {carrier}";
                             return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::{convertFn}<{convertTemplateArgs}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";

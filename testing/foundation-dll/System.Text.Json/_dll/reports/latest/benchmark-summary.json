@@ -1,130 +1,53 @@
 {
   "assemblyName": "System.Text.Json",
-  "timestamp": "2026-06-05T09:28:20",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 3,
-  "totalBenchmarkedMethods": 233,
-  "aggregatePerformance": {
-    "meanDurationMs": 0.14232292495479207,
-    "meanOpsPerSecond": 334042028.03785896,
-    "aggregateMeanCv": 0.11917972647679324,
-    "totalOutliers": 240
-  },
+  "totalBenchmarkedMethods": 0,
+  "aggregatePerformance": {},
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 35,
-        "total": 35,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 36,
-        "metaBenchmarkCount": 36
+        "status": "no_results"
       },
       "benchmark": {
-        "methodCount": 35,
-        "iterations": 50000,
-        "meanDurationMs": 0.24570285714285717,
-        "meanOpsPerSecond": 316300163.7422857,
-        "minDurationMs": 0.1243,
-        "maxDurationMs": 2.6547,
-        "totalDurationMs": 8.5996,
-        "totalAllocatedBytes": 2800000.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.10772659999999999,
-        "maxCv": 0.629565
+        "status": "no_results"
       },
       "hotupdate": {
-        "passed": 35,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
       "slug": "system-text-json-serialization-converters",
       "fact": {
-        "passed": 40,
-        "total": 40,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 84,
-        "metaBenchmarkCount": 84
+        "status": "no_results"
       },
       "benchmark": {
-        "methodCount": 40,
-        "iterations": 50000,
-        "meanDurationMs": 0.1518925,
-        "meanOpsPerSecond": 335968673.858,
-        "minDurationMs": 0.13,
-        "maxDurationMs": 0.1963,
-        "totalDurationMs": 6.0757,
-        "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.081727225,
-        "maxCv": 0.417747
+        "status": "no_results"
       },
       "hotupdate": {
-        "passed": 40,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     },
     {
       "slug": "text-json",
       "fact": {
-        "passed": 158,
-        "total": 158,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 329,
-        "metaBenchmarkCount": 329
+        "status": "no_results"
       },
       "benchmark": {
-        "methodCount": 158,
-        "iterations": 10000,
-        "meanDurationMs": 0.029373417721518986,
-        "meanOpsPerSecond": 349857246.5132911,
-        "minDurationMs": 0.0248,
-        "maxDurationMs": 0.1195,
-        "totalDurationMs": 4.641,
-        "totalAllocatedBytes": 160000.0,
-        "meanSampleCount": 8.5,
-        "totalOutliers": 240,
-        "meanCv": 0.16808535443037975,
-        "maxCv": 1.853759
+        "status": "no_results"
       },
       "hotupdate": {
-        "passed": 158,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     }
   ]

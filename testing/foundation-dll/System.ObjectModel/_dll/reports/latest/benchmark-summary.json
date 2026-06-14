@@ -1,0 +1,39 @@
+{
+  "assemblyName": "System.ObjectModel",
+  "timestamp": "2026-06-14T12:01:15",
+  "totalChunks": 2,
+  "totalBenchmarkedMethods": 0,
+  "aggregatePerformance": {},
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
+    {
+      "slug": "native",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    }
+  ]
+}

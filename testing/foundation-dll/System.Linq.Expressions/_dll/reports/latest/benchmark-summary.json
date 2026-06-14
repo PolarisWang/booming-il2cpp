@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Linq.Expressions",
-  "timestamp": "2026-06-05T09:28:21",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 0,
   "aggregatePerformance": {},
@@ -8,29 +8,16 @@
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 737,
-        "total": 737,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 752,
-        "metaBenchmarkCount": 752
+        "status": "no_results"
       },
       "benchmark": {
         "status": "no_results"
       },
       "hotupdate": {
-        "passed": 737,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": false,
-        "patchFailed": true,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     }
   ]

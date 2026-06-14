@@ -1,6 +1,6 @@
 {
   "date": "2026-06-14",
-  "generatedAt": "2026-06-14T11:37:49.177000+00:00",
+  "generatedAt": "2026-06-14T11:53:11.427487+00:00",
   "overall": {
     "totalAssemblies": 22,
     "totalChunks": 41,
@@ -577,7 +577,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 15,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Collections.Immutable/global-ns": {
       "slug": "global-ns",
@@ -595,7 +603,15 @@
       "benchOpsDelta": null,
       "huPassed": 32,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.ComponentModel.TypeConverter/component-model": {
       "slug": "component-model",
@@ -613,7 +629,15 @@
       "benchOpsDelta": null,
       "huPassed": 536,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.ComponentModel.TypeConverter/global-ns": {
       "slug": "global-ns",
@@ -631,7 +655,15 @@
       "benchOpsDelta": null,
       "huPassed": 74,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.ComponentModel.TypeConverter/system-componentmodel-design": {
       "slug": "system-componentmodel-design",
@@ -649,7 +681,15 @@
       "benchOpsDelta": null,
       "huPassed": 24,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Data.Common/global-ns": {
       "slug": "global-ns",
@@ -667,7 +707,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 20,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Data.Common/system-data": {
       "slug": "system-data",
@@ -685,7 +733,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 592,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Data.Common/system-data-common": {
       "slug": "system-data-common",
@@ -703,7 +759,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 332,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Data.Common/system-data-sqltypes": {
       "slug": "system-data-sqltypes",
@@ -721,7 +785,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 247,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Diagnostics.DiagnosticSource/diagnostics": {
       "slug": "diagnostics",
@@ -739,7 +811,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 131,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Diagnostics.DiagnosticSource/global-ns": {
       "slug": "global-ns",
@@ -757,7 +837,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 172,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Formats.Asn1/global-ns": {
       "slug": "global-ns",
@@ -775,7 +863,15 @@
       "benchOpsDelta": null,
       "huPassed": 0,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Formats.Asn1/system-formats-asn1": {
       "slug": "system-formats-asn1",
@@ -793,7 +889,15 @@
       "benchOpsDelta": null,
       "huPassed": 37,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.IO.Compression.Brotli/global-ns": {
       "slug": "global-ns",
@@ -811,7 +915,15 @@
       "benchOpsDelta": null,
       "huPassed": 33,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.IO.Pipelines/global-ns": {
       "slug": "global-ns",
@@ -829,7 +941,15 @@
       "benchOpsDelta": null,
       "huPassed": 0,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.IO.Pipelines/system-io-pipelines": {
       "slug": "system-io-pipelines",
@@ -847,7 +967,15 @@
       "benchOpsDelta": null,
       "huPassed": 18,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Linq/global-ns": {
       "slug": "global-ns",
@@ -865,7 +993,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 337,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Linq.Expressions/global-ns": {
       "slug": "global-ns",
@@ -883,7 +1019,15 @@
       "benchOpsDelta": null,
       "huPassed": 737,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Net.Http/global-ns": {
       "slug": "global-ns",
@@ -901,7 +1045,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 111,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Net.Http/system-net-http": {
       "slug": "system-net-http",
@@ -919,7 +1071,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 98,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Net.ServerSentEvents/global-ns": {
       "slug": "global-ns",
@@ -937,7 +1097,15 @@
       "benchOpsDelta": null,
       "huPassed": 5,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Net.Sockets/system-net-sockets": {
       "slug": "system-net-sockets",
@@ -955,7 +1123,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 500,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Private.Xml/system-xml-schema": {
       "slug": "system-xml-schema",
@@ -973,7 +1149,15 @@
       "benchOpsDelta": null,
       "huPassed": 0,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Private.Xml/system-xml-serialization": {
       "slug": "system-xml-serialization",
@@ -991,7 +1175,15 @@
       "benchOpsDelta": null,
       "huPassed": 0,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Private.Xml/system-xml-xsl": {
       "slug": "system-xml-xsl",
@@ -1009,7 +1201,15 @@
       "benchOpsDelta": null,
       "huPassed": 0,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Private.Xml/system-xml-xsl-runtime": {
       "slug": "system-xml-xsl-runtime",
@@ -1027,7 +1227,15 @@
       "benchOpsDelta": null,
       "huPassed": 0,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Private.Xml/xml": {
       "slug": "xml",
@@ -1045,7 +1253,15 @@
       "benchOpsDelta": null,
       "huPassed": 0,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Reflection.Metadata/global-ns": {
       "slug": "global-ns",
@@ -1063,7 +1279,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 43,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Reflection.Metadata/system-reflection-metadata": {
       "slug": "system-reflection-metadata",
@@ -1081,7 +1305,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 246,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Reflection.Metadata/system-reflection-metadata-ecma335": {
       "slug": "system-reflection-metadata-ecma335",
@@ -1099,7 +1331,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 351,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Runtime.InteropServices/global-ns": {
       "slug": "global-ns",
@@ -1117,7 +1357,15 @@
       "benchOpsDelta": null,
       "huPassed": 31,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Runtime.Serialization.Formatters/global-ns": {
       "slug": "global-ns",
@@ -1135,7 +1383,15 @@
       "benchOpsDelta": null,
       "huPassed": 40,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Security.Claims/global-ns": {
       "slug": "global-ns",
@@ -1153,7 +1409,15 @@
       "benchOpsDelta": null,
       "huPassed": 34,
       "huFailed": 0,
-      "huPatchFailed": true
+      "huPatchFailed": true,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Security.Cryptography/security-cryptography": {
       "slug": "security-cryptography",
@@ -1171,7 +1435,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 1221,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Security.Cryptography/security-cryptography-2": {
       "slug": "security-cryptography-2",
@@ -1189,7 +1461,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 1221,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Security.Cryptography/system-security-cryptography-x509certificates": {
       "slug": "system-security-cryptography-x509certificates",
@@ -1207,7 +1487,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 236,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Security.Principal.Windows/global-ns": {
       "slug": "global-ns",
@@ -1225,7 +1513,15 @@
       "benchOpsDelta": null,
       "huPassed": 29,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Text.Json/global-ns": {
       "slug": "global-ns",
@@ -1243,7 +1539,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 35,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Text.Json/system-text-json-serialization-converters": {
       "slug": "system-text-json-serialization-converters",
@@ -1261,7 +1565,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 40,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Text.Json/text-json": {
       "slug": "text-json",
@@ -1279,7 +1591,15 @@
       "benchOpsDelta": 0.0,
       "huPassed": 158,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     },
     "System.Threading.Tasks.Parallel/global-ns": {
       "slug": "global-ns",
@@ -1297,7 +1617,15 @@
       "benchOpsDelta": null,
       "huPassed": 112,
       "huFailed": 0,
-      "huPatchFailed": false
+      "huPatchFailed": false,
+      "buildStatus": "not_run",
+      "profileMethodCount": 0,
+      "profileTotalSize": 0,
+      "profileSource": "",
+      "mbPassed": 0,
+      "mbTotal": 0,
+      "comparisonMethods": 0,
+      "comparisonWithNet8": 0
     }
   }
 }

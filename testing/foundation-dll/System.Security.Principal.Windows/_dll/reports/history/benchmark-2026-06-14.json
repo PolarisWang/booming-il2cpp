@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-14",
+  "assemblyName": "System.Security.Principal.Windows",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    }
+  ]
+}

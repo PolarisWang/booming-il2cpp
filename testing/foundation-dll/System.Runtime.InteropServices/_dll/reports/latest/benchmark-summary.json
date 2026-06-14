@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Runtime.InteropServices",
-  "timestamp": "2026-06-05T09:28:19",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 0,
   "aggregatePerformance": {},
@@ -8,29 +8,16 @@
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 31,
-        "total": 31,
-        "isShutdownAV": false,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 38,
-        "metaBenchmarkCount": 38
+        "status": "no_results"
       },
       "benchmark": {
         "status": "no_results"
       },
       "hotupdate": {
-        "passed": 31,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": false,
-        "patchFailed": true,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
       }
     }
   ]

@@ -1,10 +1,9 @@
 {
   "assemblyName": "System.Private.Xml",
-  "timestamp": "2026-06-05T09:28:21",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 5,
-  "chunksWithResults": 4,
-  "chunksWithShutdownAV": 0,
+  "chunksWithResults": 0,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 1403
+  "totalDeclaredMethods": 0
 }

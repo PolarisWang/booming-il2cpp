@@ -1,25 +1,21 @@
 {
   "assemblyName": "System.Diagnostics.DiagnosticSource",
-  "timestamp": "2026-06-05T09:28:20",
+  "timestamp": "2026-06-14T12:01:15",
   "summary": {
     "chunks": 2,
-    "chunksVerified": 2,
-    "chunksShutdownAV": 0,
+    "chunksVerified": 0,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 0,
-    "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 374,
-    "aggregatePerformance": {
-      "meanDurationMs": 0.5116212139423078,
-      "meanOpsPerSecond": 276019348.547838,
-      "aggregateMeanCv": 0.06371185136098895
-    },
+    "factPassRate": 0,
+    "totalBenchmarkedMethods": 0,
+    "aggregatePerformance": {},
     "hotupdate": {
       "chunksWithPatchData": 0,
-      "chunksPatchFailed": 2,
+      "chunksPatchFailed": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 303,
-      "totalFailed": 0
+      "totalPassed": 0,
+      "totalFailed": 0,
+      "skipBreakdown": {}
     },
     "benchmarkComparison": {
       "methodsAnalyzed": 141,

@@ -1,10 +1,9 @@
 {
   "assemblyName": "System.Security.Cryptography",
-  "timestamp": "2026-06-05T09:28:21",
+  "timestamp": "2026-06-14T12:01:15",
   "totalChunks": 3,
   "chunksWithResults": 0,
-  "chunksWithShutdownAV": 0,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 3,
+  "chunksWithMetaMismatch": 0,
   "totalDeclaredMethods": 0
 }
