@@ -456,8 +456,8 @@ extern "C" void ChaosRegisterIlDataTable(ChaosIlDataEntry* table) noexcept {
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
-extern const char* const* kChaosExternalRuntimeSubjects;
-extern void** kChaosExternalRuntimeFnTable;
+extern const char* kChaosExternalRuntimeSubjects[];
+extern void* kChaosExternalRuntimeFnTable[];
 
 static void _ParseSubjectId(const char* sid,
                             std::string& ns,
