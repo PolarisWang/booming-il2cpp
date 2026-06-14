@@ -1464,6 +1464,364 @@ inline void VectorFixedCopyTo(const TCarrier& value, TScalar* dest, CHAOS_IL2CPP
         dest[startIndex + i] = sl[i];
 }
 
+// ── Float/double predicates (return carrier mask: all-ones = true, 0 = false) ──
+
+// Helper: float reinterpret as uint32
+inline CHAOS_IL2CPP_UINT32 FloatAsUInt32(float f) {
+    CHAOS_IL2CPP_UINT32 u;
+    std::memcpy(&u, &f, sizeof(u));
+    return u;
+}
+inline CHAOS_IL2CPP_UINT64 DoubleAsUInt64(double d) {
+    CHAOS_IL2CPP_UINT64 u;
+    std::memcpy(&u, &d, sizeof(u));
+    return u;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsNaN(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool isnan = false;
+        if constexpr (std::is_same_v<TScalar, float>) isnan = (FloatAsUInt32(sl[i]) & 0x7F800000u) == 0x7F800000u && (FloatAsUInt32(sl[i]) & 0x007FFFFFu) != 0;
+        else if constexpr (std::is_same_v<TScalar, double>) isnan = (DoubleAsUInt64(sl[i]) & 0x7FF0000000000000ULL) == 0x7FF0000000000000ULL && (DoubleAsUInt64(sl[i]) & 0x000FFFFFFFFFFFFFULL) != 0;
+        rl[i] = isnan ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsInfinity(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool isinf = false;
+        if constexpr (std::is_same_v<TScalar, float>) {
+            CHAOS_IL2CPP_UINT32 u = FloatAsUInt32(sl[i]);
+            isinf = (u & 0x7FFFFFFFu) == 0x7F800000u;
+        } else if constexpr (std::is_same_v<TScalar, double>) {
+            CHAOS_IL2CPP_UINT64 u = DoubleAsUInt64(sl[i]);
+            isinf = (u & 0x7FFFFFFFFFFFFFFFULL) == 0x7FF0000000000000ULL;
+        }
+        rl[i] = isinf ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsFinite(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool finite = true;
+        if constexpr (std::is_same_v<TScalar, float>) {
+            CHAOS_IL2CPP_UINT32 u = FloatAsUInt32(sl[i]);
+            finite = (u & 0x7F800000u) != 0x7F800000u;
+        } else if constexpr (std::is_same_v<TScalar, double>) {
+            CHAOS_IL2CPP_UINT64 u = DoubleAsUInt64(sl[i]);
+            finite = (u & 0x7FF0000000000000ULL) != 0x7FF0000000000000ULL;
+        }
+        rl[i] = finite ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsNegative(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool neg = false;
+        if constexpr (std::is_same_v<TScalar, float>) neg = (FloatAsUInt32(sl[i]) & 0x80000000u) != 0;
+        else if constexpr (std::is_same_v<TScalar, double>) neg = (DoubleAsUInt64(sl[i]) & 0x8000000000000000ULL) != 0;
+        else neg = sl[i] < 0;
+        rl[i] = neg ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsPositive(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool pos = false;
+        if constexpr (std::is_same_v<TScalar, float>) {
+            CHAOS_IL2CPP_UINT32 u = FloatAsUInt32(sl[i]);
+            pos = (u & 0x7FFFFFFFu) != 0 && (u & 0x7F800000u) != 0x7F800000u && (u & 0x80000000u) == 0;
+        } else if constexpr (std::is_same_v<TScalar, double>) {
+            CHAOS_IL2CPP_UINT64 u = DoubleAsUInt64(sl[i]);
+            pos = (u & 0x7FFFFFFFFFFFFFFFULL) != 0 && (u & 0x7FF0000000000000ULL) != 0x7FF0000000000000ULL && (u & 0x8000000000000000ULL) == 0;
+        } else pos = sl[i] > 0;
+        rl[i] = pos ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsNegativeInfinity(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool match = false;
+        if constexpr (std::is_same_v<TScalar, float>) match = FloatAsUInt32(sl[i]) == 0xFF800000u;
+        else if constexpr (std::is_same_v<TScalar, double>) match = DoubleAsUInt64(sl[i]) == 0xFFF0000000000000ULL;
+        rl[i] = match ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsPositiveInfinity(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool match = false;
+        if constexpr (std::is_same_v<TScalar, float>) match = FloatAsUInt32(sl[i]) == 0x7F800000u;
+        else if constexpr (std::is_same_v<TScalar, double>) match = DoubleAsUInt64(sl[i]) == 0x7FF0000000000000ULL;
+        rl[i] = match ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsNormal(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool normal = false;
+        if constexpr (std::is_same_v<TScalar, float>) {
+            CHAOS_IL2CPP_UINT32 u = FloatAsUInt32(sl[i]);
+            CHAOS_IL2CPP_UINT32 exp = (u >> 23) & 0xFFu;
+            normal = exp != 0 && exp != 0xFF;
+        } else if constexpr (std::is_same_v<TScalar, double>) {
+            CHAOS_IL2CPP_UINT64 u = DoubleAsUInt64(sl[i]);
+            CHAOS_IL2CPP_UINT64 exp = (u >> 52) & 0x7FFULL;
+            normal = exp != 0 && exp != 0x7FF;
+        }
+        rl[i] = normal ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsSubnormal(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool sub = false;
+        if constexpr (std::is_same_v<TScalar, float>) {
+            CHAOS_IL2CPP_UINT32 u = FloatAsUInt32(sl[i]);
+            sub = (u & 0x7F800000u) == 0 && (u & 0x007FFFFFu) != 0;
+        } else if constexpr (std::is_same_v<TScalar, double>) {
+            CHAOS_IL2CPP_UINT64 u = DoubleAsUInt64(sl[i]);
+            sub = (u & 0x7FF0000000000000ULL) == 0 && (u & 0x000FFFFFFFFFFFFFULL) != 0;
+        }
+        rl[i] = sub ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsInteger(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool isint = false;
+        if constexpr (std::is_floating_point_v<TScalar>) {
+            isint = std::trunc(sl[i]) == sl[i] && !std::isinf(sl[i]) && !std::isnan(static_cast<double>(sl[i]));
+        } else isint = true;
+        rl[i] = isint ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsEvenInteger(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool even = false;
+        if constexpr (std::is_floating_point_v<TScalar>) {
+            even = std::trunc(sl[i]) == sl[i] && !std::isinf(sl[i]) && !std::isnan(static_cast<double>(sl[i])) && std::fmod(sl[i], static_cast<TScalar>(2)) == static_cast<TScalar>(0);
+        } else even = (sl[i] & static_cast<TScalar>(1)) == 0;
+        rl[i] = even ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsOddInteger(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    TScalar all_ones; std::memset(&all_ones, 0xFF, sizeof(TScalar));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        bool odd = false;
+        if constexpr (std::is_floating_point_v<TScalar>) {
+            odd = std::trunc(sl[i]) == sl[i] && !std::isinf(sl[i]) && !std::isnan(static_cast<double>(sl[i])) && std::fmod(sl[i], static_cast<TScalar>(2)) != static_cast<TScalar>(0);
+        } else odd = (sl[i] & static_cast<TScalar>(1)) != 0;
+        rl[i] = odd ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+// ── FusedMultiplyAdd ──
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedFusedMultiplyAdd(const TCarrier& a, const TCarrier& b, const TCarrier& c) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* al = reinterpret_cast<const TScalar*>(&a);
+    const TScalar* bl = reinterpret_cast<const TScalar*>(&b);
+    const TScalar* cl = reinterpret_cast<const TScalar*>(&c);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        if constexpr (std::is_same_v<TScalar, float>)
+            rl[i] = std::fmaf(al[i], bl[i], cl[i]);
+        else if constexpr (std::is_same_v<TScalar, double>)
+            rl[i] = std::fma(al[i], bl[i], cl[i]);
+        else
+            rl[i] = al[i] * bl[i] + cl[i];
+    }
+    return result;
+}
+
+// ── Narrow (TScalar → smaller type, TFromCarrier → TToCarrier) ──
+template <typename TFromScalar, typename TToScalar, typename TFromCarrier, typename TToCarrier>
+inline TToCarrier VectorFixedNarrow(const TFromCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TFromCarrier) / sizeof(TFromScalar);
+    TToCarrier result{};
+    const TFromScalar* sl = reinterpret_cast<const TFromScalar*>(&value);
+    auto* rl = reinterpret_cast<TToScalar*>(&result);
+    TToScalar min_val{}, max_val{};
+    if constexpr (std::is_signed_v<TToScalar>) {
+        min_val = static_cast<TToScalar>(static_cast<TToScalar>(1) << (sizeof(TToScalar) * 8 - 1));
+        max_val = static_cast<TToScalar>(~(static_cast<TToScalar>(1) << (sizeof(TToScalar) * 8 - 1)));
+    } else {
+        max_val = static_cast<TToScalar>(~static_cast<TToScalar>(0));
+    }
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        // Saturating narrow
+        if (sl[i] > static_cast<TFromScalar>(max_val))
+            rl[i] = max_val;
+        else if (sl[i] < static_cast<TFromScalar>(min_val))
+            rl[i] = min_val;
+        else
+            rl[i] = static_cast<TToScalar>(sl[i]);
+    }
+    return result;
+}
+
+// ── Widen (TScalar → larger type, lower/upper halves) ──
+template <typename TFromScalar, typename TToScalar, typename TFromCarrier, typename TToCarrier>
+inline TToCarrier VectorFixedWidenLower(const TFromCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TToCarrier) / sizeof(TToScalar);
+    TToCarrier result{};
+    const TFromScalar* sl = reinterpret_cast<const TFromScalar*>(&value);
+    auto* rl = reinterpret_cast<TToScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i)
+        rl[i] = static_cast<TToScalar>(sl[i]);
+    return result;
+}
+
+template <typename TFromScalar, typename TToScalar, typename TFromCarrier, typename TToCarrier>
+inline TToCarrier VectorFixedWidenUpper(const TFromCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE half = sizeof(TFromCarrier) / sizeof(TFromScalar) / 2;
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TToCarrier) / sizeof(TToScalar);
+    TToCarrier result{};
+    const TFromScalar* sl = reinterpret_cast<const TFromScalar*>(&value);
+    auto* rl = reinterpret_cast<TToScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i)
+        rl[i] = static_cast<TToScalar>(sl[half + i]);
+    return result;
+}
+
+// ── WithElement ──
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedWithElement(const TCarrier& value, CHAOS_IL2CPP_INT32 index, TScalar newValue) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i)
+        rl[i] = sl[i];
+    if (index >= 0 && static_cast<CHAOS_IL2CPP_SIZE>(index) < N)
+        rl[index] = newValue;
+    return result;
+}
+
+// ── WithLower / WithUpper ──
+template <typename TCarrier>
+inline TCarrier VectorFixedWithLower(const TCarrier& upper, const RuntimeIntrinsicVector128Carrier& lower) {
+    TCarrier result = upper;
+    std::memcpy(reinterpret_cast<CHAOS_IL2CPP_UINT8*>(&result), lower.bytes, 16);
+    return result;
+}
+
+template <typename TCarrier>
+inline TCarrier VectorFixedWithUpper(const TCarrier& lower, const RuntimeIntrinsicVector128Carrier& upper) {
+    TCarrier result = lower;
+    std::memcpy(reinterpret_cast<CHAOS_IL2CPP_UINT8*>(&result) + 16, upper.bytes, 16);
+    return result;
+}
+
+// ── LoadUnsafe (from pointer) ──
+template <typename TCarrier>
+inline TCarrier VectorFixedLoadUnsafe(const CHAOS_IL2CPP_INTPTR source) {
+    TCarrier result{};
+    std::memcpy(&result, reinterpret_cast<const void*>(source), sizeof(TCarrier));
+    return result;
+}
+
+// ── Create (from element array) ──
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedCreateFromArray(const TScalar* values, CHAOS_IL2CPP_INT32 count) {
+    TCarrier result{};
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    CHAOS_IL2CPP_SIZE i = 0;
+    for (; i < static_cast<CHAOS_IL2CPP_SIZE>(count) && i < N; ++i)
+        rl[i] = values[i];
+    for (; i < N; ++i)
+        rl[i] = static_cast<TScalar>(0);
+    return result;
+}
+
 }  // namespace chaos::il2cpp::vector_fixed
 
 

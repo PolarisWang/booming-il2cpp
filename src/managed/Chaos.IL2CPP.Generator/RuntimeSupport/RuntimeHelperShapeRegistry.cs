@@ -4954,6 +4954,104 @@ public sealed partial class NativeAotLoweringPlanner
                     }));
             }
 
+            // ── Float/double predicates (return carrier mask) ──
+            var floatPredicates = new[] {
+                "IsNaN", "IsInfinity", "IsFinite", "IsNegative", "IsPositive",
+                "IsNegativeInfinity", "IsPositiveInfinity", "IsNormal", "IsSubnormal",
+                "IsInteger", "IsEvenInteger", "IsOddInteger"
+            };
+            foreach (var methodName in floatPredicates)
+                RegisterVectorUnaryOp(methodName, $"VectorFixed{methodName}");
+
+            // ── FusedMultiplyAdd (ternary) ──
+            RegisterVectorBinOp("FusedMultiplyAdd", "VectorFixedFusedMultiplyAdd", true);
+
+            // ── Dot (binary reduction → scalar) ──
+            void RegisterVectorDot()
+            {
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                {
+                    var ns = "chaos::il2cpp::vector_fixed::";
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix,
+                        MethodName: "Dot",
+                        Resolver: (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var cppType = MapTypeArgToCppType(elemType);
+                            if (cppType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            return $"static_cast<CHAOS_IL2CPP_INTPTR>({ns}VectorFixedDot<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), *reinterpret_cast<{carrier}*>({{1}})))";
+                        }));
+                }
+            }
+            RegisterVectorDot();
+
+            // ── EqualsAll / EqualsAny ──
+            foreach (var prefix in new[] { "Vector128", "Vector256" })
+            {
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix, MethodName: "EqualsAll",
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var elemType = ExtractVectorElementType(callee, paramTypes);
+                        if (elemType == null) return null;
+                        var cppType = MapTypeArgToCppType(elemType);
+                        if (cppType == null) return null;
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto cmp = chaos::il2cpp::vector_fixed::VectorFixedCompareEqual<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), *reinterpret_cast<{carrier}*>({{1}})); return static_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::vector_fixed::VectorFixedAllLanesSet<{cppType}, {carrier}>(cmp) ? 1 : 0); }}()";
+                    }));
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix, MethodName: "EqualsAny",
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var elemType = ExtractVectorElementType(callee, paramTypes);
+                        if (elemType == null) return null;
+                        var cppType = MapTypeArgToCppType(elemType);
+                        if (cppType == null) return null;
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto cmp = chaos::il2cpp::vector_fixed::VectorFixedCompareEqual<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), *reinterpret_cast<{carrier}*>({{1}})); return static_cast<CHAOS_IL2CPP_INTPTR>(!chaos::il2cpp::vector_fixed::VectorFixedIsAllZeros(cmp) ? 1 : 0); }}()";
+                    }));
+            }
+
+            // ── WithElement ──
+            foreach (var prefix in new[] { "Vector128", "Vector256" })
+            {
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix, MethodName: "WithElement",
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var elemType = ExtractVectorElementType(callee, paramTypes);
+                        if (elemType == null) return null;
+                        var cppType = MapTypeArgToCppType(elemType);
+                        if (cppType == null) return null;
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        var ns = "chaos::il2cpp::vector_fixed::";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedWithElement<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), static_cast<CHAOS_IL2CPP_INT32>({{1}}), static_cast<{cppType}>({{2}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    }));
+            }
+
+            // ── WithLower (V256 only) ──
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector256", MethodName: "WithLower",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithLower(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+
+            // ── WithUpper (V256 only) ──
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector256", MethodName: "WithUpper",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithUpper(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+
             // === Activator::CreateInstance with param array ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Activator",
