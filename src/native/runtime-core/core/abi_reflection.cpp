@@ -338,6 +338,23 @@ uintptr_t CHAOS_RUNTIME_ABI_CALL ChaosArrayEmptyWrapper(void)
 }
 
 
+/* ── V3 GC introspection no-ops ── */
+static int64_t CHAOS_RUNTIME_ABI_CALL _gc_total_memory_noop(RuntimeState*) { return 0; }
+static void CHAOS_RUNTIME_ABI_CALL _gc_pressure_noop(RuntimeState*, int64_t) {}
+/* ── V1 register_gc_layouts ── */
+static void CHAOS_RUNTIME_ABI_CALL _register_gc_noop(void) {}
+/* ── CHAOS_IL2CPP_INTPTR sentinel for V2 no-ops ── */
+static CHAOS_IL2CPP_INTPTR _noop_sentinel;
+static CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL _noop0() { return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&_noop_sentinel); }
+static CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL _noop1(CHAOS_IL2CPP_INTPTR) { return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&_noop_sentinel); }
+static bool CHAOS_RUNTIME_ABI_CALL _noop_bool1(CHAOS_IL2CPP_INTPTR) { return false; }
+static void CHAOS_RUNTIME_ABI_CALL _noop_void1(CHAOS_IL2CPP_INTPTR) {}
+static void CHAOS_RUNTIME_ABI_CALL _noop_void3(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) {}
+
+/* ── V2 GC handle no-ops ── */
+static GCHandle CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_new(RuntimeState*, void*, bool, bool) { return 0; }
+static void* CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_get(RuntimeState*, GCHandle) { return nullptr; }
+static void CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_set(RuntimeState*, GCHandle, void*) {}
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),
@@ -369,41 +386,41 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &GenericContextGetClassArg,
     &GenericContextGetMethodArgCount,
     &GenericContextGetMethodArg,
-    nullptr,  // gc_handle_new_ex (V2)
-    nullptr,  // gc_handle_get (V2)
-    nullptr,  // gc_handle_set (V2)
-    nullptr,  // gc_get_total_memory (V3)
-    nullptr,  // gc_add_memory_pressure (V3)
-    nullptr,  // gc_remove_memory_pressure (V3)
+    &_gc_handle_noop_new,
+    &_gc_handle_noop_get,
+    &_gc_handle_noop_set,
+    &_gc_total_memory_noop,  // gc_get_total_memory
+    &_gc_pressure_noop,  // gc_add_memory_pressure
+    &_gc_pressure_noop,  // gc_remove_memory_pressure
     &RegisterModuleWrapper,
     &HotpatchIsActiveWrapper,
     &HotpatchShouldKeepNativeWrapper,
     &RaiseNullReferenceExceptionWrapper,
     &ChaosExternalRuntimeFallbackWrapper,
     &InterpreterEntryDirectWrapper,
-    nullptr,  // register_gc_layouts
+    &_register_gc_noop,  // register_gc_layouts
     &RegisterHotpatchModuleWrapper,
     &ChaosArrayEmptyWrapper,
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
-    nullptr,  // V2 extended field
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
+    &_noop0,  // V2 extended
 };
 
 
