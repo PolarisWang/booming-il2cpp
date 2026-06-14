@@ -97,6 +97,8 @@ add_library(chaos_runtime_core STATIC
     patch_loader.cpp
     jit_registration.h
     jit_registration.cpp
+    jit_data_loader.h
+    jit_data_loader.cpp
     metadata_interface.h
     metadata_interface.cpp
     assembly_manager.h
