@@ -3,9 +3,9 @@
 $ErrorActionPreference = 'Continue'
 $repoRoot = git -C $PSScriptRoot rev-parse --show-toplevel
 $chapterRoot = Join-Path $repoRoot 'skills'
-$formalSkillsDir = Join-Path $chapterRoot 'library\skills'
-$bootstrapScript = Join-Path $chapterRoot 'runtime\bootstrap-skills.ps1'
-$catalogScript = Join-Path $chapterRoot 'tooling\catalog\generate_skill_catalog.py'
+$formalSkillsDir = Join-Path $chapterRoot 'library/skills'
+$bootstrapScript = Join-Path $chapterRoot 'runtime/bootstrap-skills.ps1'
+$catalogScript = Join-Path $chapterRoot 'tooling/catalog/generate_skill_catalog.py'
 
 function Has-ScaffoldPlaceholder {
     param([string]$Text)
@@ -77,8 +77,8 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 # Step 4: Verify routing stub
 Write-Host "[skill-verify] Checking routing stub..."
-$entryStubPath = Join-Path $repoRoot '.claude\skills\dev-il2cpp\SKILL.md'
-$libraryEntry  = Join-Path $repoRoot 'skills\library\skills\dev-il2cpp\SKILL.md'
+$entryStubPath = Join-Path $repoRoot '.claude/skills/dev-il2cpp/SKILL.md'
+$libraryEntry  = Join-Path $repoRoot 'skills/library/skills/dev-il2cpp/SKILL.md'
 $stubErrors = @()
 
 if (-not (Test-Path -LiteralPath $entryStubPath)) {
@@ -120,9 +120,9 @@ if ($formalSkillIssues.Count -gt 0) {
 # Step 6: Verify evolution infrastructure
 Write-Host "[skill-verify] Checking evolution infrastructure..."
 $evolutionDirs = @(
-    'lifecycle\evolution\proposals',
-    'lifecycle\evolution\lineage',
-    'lifecycle\telemetry\health'
+    'lifecycle/evolution/proposals',
+    'lifecycle/evolution/lineage',
+    'lifecycle/telemetry/health'
 )
 foreach ($relDir in $evolutionDirs) {
     $fullPath = Join-Path $chapterRoot $relDir

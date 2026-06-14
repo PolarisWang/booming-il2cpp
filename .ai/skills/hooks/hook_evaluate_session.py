@@ -153,7 +153,7 @@ def _detect_domain_from_skills(usage: list[dict]) -> str:
         "workflow": ["dev-brainstorm", "dev-roadmap", "dev-writing-plans", "dev-executing-plans", "dev-dispatching"],
         "quality": ["dev-verification", "dev-receiving-code-review", "dev-requesting-code-review", "dev-trace"],
         "testing": ["dev-foundation-dll", "dev-test-driven-development", "dev-project-test-governance"],
-        "il2cpp": ["dev-architecture-first-development", "dev-using-booming"],
+        "il2cpp": ["dev-architecture-first-development", "dev-il2cpp"],
         "knowledge": ["dev-project-wiki"],
         "skilling": ["dev-skill-evolution", "dev-writing-skills"],
     }

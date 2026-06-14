@@ -214,7 +214,7 @@ assert not failures, failures
      — 确认无异常指标（LOW-TOOL、HIGH-FALLBACK 等）
 [ ] python skills/tooling/learning/evolve.py propose --dry-run
      — 确认无意外进化提案
-[ ] python skills/tooling/verification/verify-skill-pipeline.ps1
+[ ] python skills/tooling/verification/verify_skill_pipeline.py
      — 确认入口桩、manifest、catalog、evolution 目录一致
 ```
 

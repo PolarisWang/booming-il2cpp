@@ -468,19 +468,18 @@ def _refresh_catalog() -> None:
     verify_py = Path(__file__).resolve().parent.parent / "verification" / "verify_skill_pipeline.py"
     if verify_ps1.exists():
         try:
-            pwsh_path = subprocess.run(
-                ["where", "pwsh"], capture_output=True, text=True
-            ).stdout.strip().split("\n")[0].strip()
+            pwsh_path = shutil.which("pwsh")
             if not pwsh_path:
-                pwsh_path = "pwsh"
-            result = subprocess.run(
-                [pwsh_path, str(verify_ps1)],
-                check=False, capture_output=True, text=True, timeout=60,
-            )
-            if result.returncode == 0:
-                print(f"[skill-learn] Pipeline verification passed.")
+                print("[skill-learn] pwsh not found, skipping pipeline verification.")
             else:
-                print(f"[skill-learn] Pipeline verification reported issues:\n{result.stderr[:500]}")
+                result = subprocess.run(
+                    [pwsh_path, str(verify_ps1)],
+                    check=False, capture_output=True, text=True, timeout=60,
+                )
+                if result.returncode == 0:
+                    print(f"[skill-learn] Pipeline verification passed.")
+                else:
+                    print(f"[skill-learn] Pipeline verification reported issues:\n{result.stderr[:500]}")
         except (FileNotFoundError, OSError):
             # Fallback to Python verify script
             if verify_py.exists():

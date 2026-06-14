@@ -7,8 +7,8 @@ if (-not $RepoRoot) {
     $RepoRoot = git -C $PSScriptRoot rev-parse --show-toplevel
 }
 
-$entryStubPath = Join-Path $RepoRoot '.claude\skills\dev-il2cpp\SKILL.md'
-$libraryEntry   = Join-Path $RepoRoot 'skills\library\skills\dev-il2cpp\SKILL.md'
+$entryStubPath = Join-Path $RepoRoot '.claude/skills/dev-il2cpp/SKILL.md'
+$libraryEntry   = Join-Path $RepoRoot 'skills/library/skills/dev-il2cpp/SKILL.md'
 
 Write-Host "[skill-sync] Verifying routing stub and library consistency..."
 Write-Host "[skill-sync] (Junction mechanism removed; routing via skill registry)"

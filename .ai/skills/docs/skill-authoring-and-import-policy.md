@@ -24,7 +24,7 @@ library/skills/<name>/
 推荐使用脚手架创建新 skill：
 
 ```powershell
-powershell -File skills/tooling/scaffolding/create-skill-scaffold.ps1 -DirectoryName <Name> -Domain <Domain>
+pwsh -File skills/tooling/scaffolding/create-skill-scaffold.ps1 -DirectoryName <Name> -Domain <Domain>
 ```
 
 约束：
