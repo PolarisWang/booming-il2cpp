@@ -726,13 +726,8 @@ static bool _TryExecuteViaSimdStub(const char* subject_id,
 
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept
 
-// Default-argument overload for codegen entry stubs with null subjectId.
-// (Cannot overload extern "C" functions, so this is a separate C++ function.)
-CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept {
-    return ChaosExternalRuntimeFallback("AOT:unknown-subject");
-}
-
 {
+
     if (subject_id == nullptr)
         CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: null subject_id");
 

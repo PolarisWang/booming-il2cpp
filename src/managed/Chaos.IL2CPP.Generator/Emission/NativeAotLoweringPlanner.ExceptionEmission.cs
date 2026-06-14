@@ -921,7 +921,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 				builder.AppendLine($"{indentation}{{");
 				builder.AppendLine($"{indentation}    // Hotpatch-aware ldftn wrapper (slot {ftnSlot})");
-				builder.AppendLine($"{indentation}    static auto* chaos_ftn_thunk = +[]({ftnSig}) -> {ftnRet} {{");
+				builder.AppendLine($"{indentation}    auto chaos_ftn_thunk = +[]({ftnSig}) -> {ftnRet} {{");
 				builder.AppendLine($"{indentation}        auto& _d_entry = s_hotpatch_entries[{ftnSlot}];");
 				builder.AppendLine($"{indentation}        if (chaos_runtime_get_abi_v0()->hotpatch_is_active(&_d_entry)");
 				builder.AppendLine($"{indentation}            && !chaos_runtime_get_abi_v0()->hotpatch_should_keep_native(&_d_entry))");
@@ -3842,7 +3842,6 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}    }}");
 		builder.AppendLine($"{indentation}    }} while(0);");
-		builder.AppendLine($"{indentation}}}");
 	}
 
 	private void EmitLinearNewObject(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)

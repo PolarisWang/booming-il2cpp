@@ -169,6 +169,26 @@ def compute_assembly_delta(
         delta["huFailed"] = th.get("failed", 0)
         delta["huPatchFailed"] = th.get("patchFailed", False)
 
+        # ── Build status ──
+        tb = tc.get("build", {}) if tc else {}
+        delta["buildStatus"] = tb.get("status", "not_run")
+
+        # ── Profile (AOT code size) ──
+        tp = tc.get("profile", {}) if tc else {}
+        delta["profileMethodCount"] = tp.get("methodCount", 0)
+        delta["profileTotalSize"] = tp.get("totalSize", 0)
+        delta["profileSource"] = tp.get("source", "")
+
+        # ── Managed benchmark ──
+        tm = tc.get("managedBenchmark", {}) if tc else {}
+        delta["mbPassed"] = tm.get("passed", 0)
+        delta["mbTotal"] = tm.get("total", 0)
+
+        # ── Benchmark report (cross-technology comparison) ──
+        tr = tc.get("benchmarkReport", {}) if tc else {}
+        delta["comparisonMethods"] = tr.get("totalMethods", 0)
+        delta["comparisonWithNet8"] = tr.get("methodsWithNet8", 0)
+
         per_chunk[key] = delta
 
     # ── Assembly-level aggregate ──

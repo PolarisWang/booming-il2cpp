@@ -4870,8 +4870,8 @@ public sealed partial class NativeAotLoweringPlanner
                                 ? "VectorFixedConvertToVector128"
                                 : "VectorFixedConvertToVector";
                             string convertTemplateArgs = carrier.Contains("Vector128")
-                                ? $"<{fromType}, {toType}, {carrier}>"
-                                : $"<{fromType}, {toType}, {carrier}, {carrier}>";
+                                ? $"{fromType}, {toType}, {carrier}"
+                                : $"{fromType}, {toType}, {carrier}, {carrier}";
                             return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::{convertFn}<{convertTemplateArgs}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }

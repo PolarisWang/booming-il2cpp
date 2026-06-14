@@ -124,6 +124,55 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         else:
             summary["hotupdate"] = {"status": "no_results"}
 
+        # Build status
+        result_files = [f.name for f in results_dir.iterdir()] if results_dir.is_dir() else []
+        if fact_path.exists():
+            summary["build"] = {"status": "passed"}
+        elif any(rf.endswith(".json") for rf in result_files):
+            summary["build"] = {"status": "passed"}
+        elif results_dir.is_dir():
+            summary["build"] = {"status": "failed"}
+        else:
+            summary["build"] = {"status": "not_run"}
+
+        # Profile results (AOT code size, optional)
+        profile_path = results_dir / "profile.json"
+        if profile_path.exists():
+            try:
+                pd = json.loads(profile_path.read_text(encoding="utf-8"))
+                summary["profile"] = {
+                    "methodCount": pd.get("methodCount", 0),
+                    "totalSize": pd.get("sectionSizes", {}).get("total", 0),
+                    "source": pd.get("source", "none"),
+                }
+            except (json.JSONDecodeError, OSError):
+                summary["profile"] = {"status": "error"}
+
+        # Managed benchmark results
+        mb_path = results_dir / "managed_benchmark.json"
+        if mb_path.exists():
+            try:
+                mb = json.loads(mb_path.read_text(encoding="utf-8"))
+                summary["managedBenchmark"] = {
+                    "passed": mb.get("passed", 0),
+                    "total": mb.get("total", 0),
+                    "mode": mb.get("mode", ""),
+                }
+            except (json.JSONDecodeError, OSError):
+                summary["managedBenchmark"] = {"status": "error"}
+
+        # Benchmark comparison (cross-technology)
+        comp_path = results_dir / "comparison.json"
+        if comp_path.exists():
+            try:
+                cp = json.loads(comp_path.read_text(encoding="utf-8"))
+                summary["benchmarkReport"] = {
+                    "totalMethods": cp.get("totalMethods", 0),
+                    "methodsWithNet8": cp.get("methodsWithNet8", 0),
+                }
+            except (json.JSONDecodeError, OSError):
+                summary["benchmarkReport"] = {"status": "error"}
+
         chunk_summaries.append(summary)
 
     # ── Build aggregate metrics ──

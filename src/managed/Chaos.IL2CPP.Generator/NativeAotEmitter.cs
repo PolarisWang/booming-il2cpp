@@ -872,7 +872,15 @@ public sealed class NativeAotEmitter
 	/// </summary>
 	private static void FixFallbackZeroArgCalls(StringBuilder sb)
 	{
+		string text = sb.ToString();
+		if (!text.Contains("ChaosExternalRuntimeFallback();"))
+			return;
 		sb.Replace("ChaosExternalRuntimeFallback();", "ChaosExternalRuntimeFallbackDefault();");
+		// Prepend extern declaration so ChaosExternalRuntimeFallbackDefault is visible
+		int anchor = text.LastIndexOf("#include");
+		anchor = anchor >= 0 ? text.IndexOf('\n', anchor) + 1 : 0;
+		sb.Insert(anchor,
+			"extern \"C\" CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;\n");
 	}
 
 	private static void AddExternalRuntimeStubs(StringBuilder sb)
