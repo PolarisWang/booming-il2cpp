@@ -287,5 +287,14 @@
     },
     "total": 737,
     "failed": 139
+  },
+  "analysis": {
+    "rootCause": "external_runtime_fallback",
+    "description": "Methods route through ChaosExternalRuntimeFallback which returns 0 because the external runtime dispatch table has no entry for them.",
+    "fixDirection": "Register these methods as SimpleForward in RuntimeHelperShapeRegistry.cs, or add interpreter dispatch entries.",
+    "affectedAssemblies": [
+      "System.Linq",
+      "System.Linq.Expressions"
+    ]
   }
 }
