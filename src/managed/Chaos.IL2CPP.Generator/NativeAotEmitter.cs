@@ -866,8 +866,9 @@ public sealed class NativeAotEmitter
 	private static void AddExternalRuntimeStubs(StringBuilder sb)
 	{
 		string text = sb.ToString();
-		Console.Error.WriteLine("[AOTEMITTER] AddExternalRuntimeStubs called"); if (sb.Length > 0) Console.Error.WriteLine("[AOTEMITTER] Content length: " + sb.Length); string text2 = sb.ToString(); Console.Error.WriteLine("[AOTEMITTER] Text contains chaos_runtime: " + text2.Contains("chaos_external_runtime_")); var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
-		var declRx = new Regex(@"(extern|static inline).*chaos_external_runtime_\w+\s*\(");
+		var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
+		// Match declarations/definitions: extern "C" / static inline / void return-type
+		var declRx = new Regex(@"(?:extern|static inline|\bvoid)\b.*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Multiline);
 		var calls = callRx.Matches(text);
 		if (calls.Count == 0) return;
 		var missing = new HashSet<string>();
@@ -889,13 +890,14 @@ public sealed class NativeAotEmitter
 		}
 		stub.AppendLine();
 		string genSrc = sb.ToString();
-            int anchor = genSrc.LastIndexOf("#include");
-            if (anchor < 0) anchor = 0;
-            else {
-                int nl = genSrc.IndexOf('\n', anchor);
-                if (nl >= 0) anchor = nl + 1;
-            }
-            sb.Insert(anchor, stub.ToString());
+		int anchor = genSrc.LastIndexOf("#include");
+		if (anchor < 0) anchor = 0;
+		else {
+			int nl = genSrc.IndexOf('\n', anchor);
+			if (nl >= 0) anchor = nl + 1;
+		}
+		sb.Insert(anchor, stub.ToString());
 	}
+
 
 }

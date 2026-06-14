@@ -3607,9 +3607,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					// If chaos_arg_0 is an RCW handle, extract the identity_unknown.
 					// Otherwise treat it as a raw COM object pointer.
 					builder.AppendLine($"{indentation}    void* chaos_com_obj = nullptr;");
-					builder.AppendLine($"{indentation}    if (chaos_runtime_get_abi_v0()->marshal_is_rcw_handle(chaos_arg_0))");
+					builder.AppendLine($"{indentation}    if (chaos::il2cpp::runtime_core::MarshalIsRcwHandle(chaos_arg_0))");
 					builder.AppendLine($"{indentation}    {{");
-					builder.AppendLine($"{indentation}        auto chaos_rcw_ptr = chaos_runtime_get_abi_v0()->marshal_get_rcw_unknown(chaos_arg_0);");
+					builder.AppendLine($"{indentation}        auto chaos_rcw_ptr = chaos::il2cpp::runtime_core::MarshalGetRcwUnknown(chaos_arg_0);");
 					builder.AppendLine($"{indentation}        chaos_com_obj = reinterpret_cast<void*>(chaos_rcw_ptr);");
 					builder.AppendLine($"{indentation}    }}");
 					builder.AppendLine($"{indentation}    else");
@@ -3647,7 +3647,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					builder.AppendLine($"{indentation}    auto chaos_hr = chaos_com_fn({comArgs});");
 					builder.AppendLine($"{indentation}    if (CHAOS_IL2CPP_FAILED(chaos_hr))");
 					builder.AppendLine($"{indentation}    {{");
-					builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->throw_com_exception_for_hr(chaos_hr);");
+					builder.AppendLine($"{indentation}        chaos::il2cpp::runtime_core::ChaosThrowComExceptionForHR(chaos_hr);");
 					builder.AppendLine($"{indentation}    }}");
 					if (!string.Equals(comRetType, "void", StringComparison.Ordinal))
 					{
@@ -3782,7 +3782,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_UINT64 __chaos_ret_buf[2] = {{}};");
 		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_method_token != 0)");
 		builder.AppendLine($"{indentation}        {{");
-		builder.AppendLine($"{indentation}            __chaos_hotpatch_taken = chaos_runtime_get_abi_v0()->delegate_hotpatch_checkpoint(");
+		builder.AppendLine($"{indentation}            __chaos_hotpatch_taken = chaos::il2cpp::runtime_core::DelegateHotpatchCheckpoint(");
 		builder.AppendLine($"{indentation}                chaos_delegate->chaos_delegate_method_token,");
 		builder.AppendLine($"{indentation}                __chaos_args_buf, __chaos_ret_buf, {paramCount});");
 		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
@@ -3957,7 +3957,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({ctorArgs2}{ctorCtxArg2});");
 				if (TypeHasFinalizer(requiredTargetReference.SubjectId))
 				{
-				    builder.AppendLine($"{indentation}    chaos_runtime_get_abi_v0()->gc_register_finalizable(chaos_object);");
+				    builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::chaos_gc_register_finalizable(chaos_object);");
 				}
 			EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)");
 			builder.AppendLine(indentation + "}");
@@ -3980,7 +3980,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}    chaos_object->header.type_info = {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 		if (TypeHasFinalizer(requiredTargetReference.SubjectId))
 		{
-		    builder.AppendLine($"{indentation}    chaos_runtime_get_abi_v0()->gc_register_finalizable(chaos_object);");
+		    builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::chaos_gc_register_finalizable(chaos_object);");
 		}
 		EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)");
 		builder.AppendLine(indentation + "}");
@@ -5172,11 +5172,11 @@ if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal)
 				"System.Byte" or "System.Char" or "System.UInt16"
 					=> $"static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr})",
 				"System.SByte"
-					=> $"({rawValueExpr} < 0 ? (chaos_runtime_get_abi_v0()->raise_exception(0), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
+					=> $"({rawValueExpr} < 0 ? (chaos::il2cpp::runtime_core::chaos_raise_exception(0), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
 				"System.Int16" or "System.Int32" or "System.Int64" or "System.UInt32" or "System.UInt64"
-					=> $"(({rawValueExpr} < 0 || {rawValueExpr} > 0xFFFF) ? (chaos_runtime_get_abi_v0()->raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
+					=> $"(({rawValueExpr} < 0 || {rawValueExpr} > 0xFFFF) ? (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
 				"System.Boolean" or "System.DateTime"
-					=> $"(chaos_runtime_get_abi_v0()->raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0))",
+					=> $"(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0))",
 				_ => null
 			};
 

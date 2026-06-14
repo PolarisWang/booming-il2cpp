@@ -286,7 +286,51 @@ typedef struct RuntimeAbiV0 {
         RuntimeState* runtime_state,
         int64_t bytes);
 
-    /* ── V1 codegen-facing fields ── */
+    
+    /* ── V2 extended helpers ── */
+    
+    /* GC allocation. */
+    void* (CHAOS_RUNTIME_ABI_CALL* gc_alloc)(size_t size, int kind);
+    void* (CHAOS_RUNTIME_ABI_CALL* gc_alloc_atomic)(size_t size);
+
+    /* COM / RCW interop. */
+    bool (CHAOS_RUNTIME_ABI_CALL* marshal_is_rcw_handle)(CHAOS_IL2CPP_INTPTR handle);
+    void* (CHAOS_RUNTIME_ABI_CALL* marshal_get_rcw_unknown)(CHAOS_IL2CPP_INTPTR handle);
+    void (CHAOS_RUNTIME_ABI_CALL* throw_com_exception_for_hr)(int32_t hr);
+
+    /* Delegate / hotpatch fallback. */
+    bool (CHAOS_RUNTIME_ABI_CALL* delegate_hotpatch_checkpoint)(void* delegate);
+
+    /* Marshal helpers. */
+    void (CHAOS_RUNTIME_ABI_CALL* marshal_free_co_task_mem)(void* ptr);
+    void* (CHAOS_RUNTIME_ABI_CALL* marshal_ptr_to_string_utf8)(const char* ptr);
+    void* (CHAOS_RUNTIME_ABI_CALL* marshal_ptr_to_string_wide)(const uint16_t* ptr);
+    void (CHAOS_RUNTIME_ABI_CALL* marshal_struct_managed_to_native)(
+        void* managed, void* native, void* type);
+    void (CHAOS_RUNTIME_ABI_CALL* marshal_struct_native_to_managed)(
+        void* native, void* managed, void* type);
+
+    /* Native library loading. */
+    void* (CHAOS_RUNTIME_ABI_CALL* native_library_load)(const char* path);
+    void* (CHAOS_RUNTIME_ABI_CALL* native_library_get_proc_address)(
+        void* handle, const char* name);
+
+    /* PInvoke error tracking. */
+    void (CHAOS_RUNTIME_ABI_CALL* set_last_pinvoke_error)(int32_t error);
+    int32_t (CHAOS_RUNTIME_ABI_CALL* get_last_os_error)(void);
+    void (CHAOS_RUNTIME_ABI_CALL* clear_last_os_error)(void);
+
+    /* GC finalization. */
+    void (CHAOS_RUNTIME_ABI_CALL* gc_register_finalizable)(void* obj);
+
+    /* Thread state helpers. */
+    void* (CHAOS_RUNTIME_ABI_CALL* get_current_runtime_state)(void);
+    void* (CHAOS_RUNTIME_ABI_CALL* get_current_thread_state)(void);
+
+    /* Exception helper. */
+    void (CHAOS_RUNTIME_ABI_CALL* raise_exception)(void* exception_obj);
+
+/* ── V1 codegen-facing fields ── */
     uint32_t (CHAOS_RUNTIME_ABI_CALL* register_module)(
         const char* name,
         const void* descriptor);

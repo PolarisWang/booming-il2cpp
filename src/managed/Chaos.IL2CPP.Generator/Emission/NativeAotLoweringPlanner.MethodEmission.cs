@@ -535,18 +535,18 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    {");
 			if (isDeclaringAssemblyKnown)
 			{
-				builder.AppendLine($"        s_pinvoke_lib_ = chaos_runtime_get_abi_v0()->try_resolve_dll_import(\"{method.DeclaringAssemblyName}\", \"{moduleName}\");");
+				builder.AppendLine($"        s_pinvoke_lib_ = chaos::il2cpp::runtime_core::TryResolveDllImport(\"{method.DeclaringAssemblyName}\", \"{moduleName}\");");
 				builder.AppendLine("        if (s_pinvoke_lib_ == nullptr)");
 				builder.AppendLine("        {");
 			}
-			builder.AppendLine($"        s_pinvoke_lib_ = chaos_runtime_get_abi_v0()->native_library_load(\"{moduleName}\");");
+			builder.AppendLine($"        s_pinvoke_lib_ = chaos::il2cpp::runtime_core::NativeLibraryLoad(\"{moduleName}\");");
 			if (isDeclaringAssemblyKnown)
 			{
 				builder.AppendLine("        }");
 			}
 			builder.AppendLine("        if (s_pinvoke_lib_ == nullptr) CHAOS_IL2CPP_FAIL();");
 			builder.AppendLine($"        s_pinvoke_fn_ = reinterpret_cast<FnPtr>(");
-			builder.AppendLine($"            chaos_runtime_get_abi_v0()->native_library_get_proc_address(s_pinvoke_lib_, \"{entryPointName}\"));");
+			builder.AppendLine($"            chaos::il2cpp::runtime_core::NativeLibraryGetProcAddress(s_pinvoke_lib_, \"{entryPointName}\"));");
 			builder.AppendLine("        if (s_pinvoke_fn_ == nullptr) CHAOS_IL2CPP_FAIL();");
 			builder.AppendLine("    }");
 		}
@@ -560,7 +560,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"    if (chaos_arg_{idx} != 0)");
 				builder.AppendLine("    {");
 				builder.AppendLine($"        chaos_marshal_{idx} = reinterpret_cast<void*>(");
-				builder.AppendLine($"            chaos_runtime_get_abi_v0()->{marshalStringFn}(");
+				builder.AppendLine($"            chaos::il2cpp::runtime_core::{marshalStringFn}(");
 				builder.AppendLine($"                chaos_rs_, chaos_ts_, reinterpret_cast<void*>(chaos_arg_{idx})));");
 				builder.AppendLine("    }");
 			}
@@ -578,7 +578,7 @@ public sealed partial class NativeAotLoweringPlanner
 					string fieldMember = GetNativeFieldMemberName(fieldSubjectId);
 					builder.AppendLine($"    if (chaos_struct_copy_{paramIdx}.{fieldMember} != 0)");
 					builder.AppendLine("    {");
-					builder.AppendLine($"        auto* chaos_marshal_str_ = chaos_runtime_get_abi_v0()->{marshalStringFn}(");
+					builder.AppendLine($"        auto* chaos_marshal_str_ = chaos::il2cpp::runtime_core::{marshalStringFn}(");
 					builder.AppendLine($"            chaos_rs_, chaos_ts_, reinterpret_cast<void*>(chaos_struct_copy_{paramIdx}.{fieldMember}));");
 					builder.AppendLine($"        chaos_struct_copy_{paramIdx}.{fieldMember} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_marshal_str_);");
 					builder.AppendLine("    }");
@@ -594,7 +594,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				if (complexStructDescriptorSymbols.TryGetValue(idx, out string? descSymbol))
 				{
-					builder.AppendLine("    chaos_runtime_get_abi_v0()->marshal_struct_managed_to_native(");
+					builder.AppendLine("    chaos::il2cpp::runtime_core::MarshalStructManagedToNative(");
 					builder.AppendLine("        &" + descSymbol + ",");
 					builder.AppendLine("        reinterpret_cast<unsigned char*>(&chaos_struct_complex_copy_" + idx + "),");
 					builder.AppendLine("        reinterpret_cast<const unsigned char*>(&chaos_arg_" + idx + "),");
@@ -626,7 +626,7 @@ public sealed partial class NativeAotLoweringPlanner
 		// SetLastError: clear OS error before the native call.
 		if (hasSetLastError)
 		{
-			builder.AppendLine("    chaos_runtime_get_abi_v0()->clear_last_os_error();");
+			builder.AppendLine("    chaos::il2cpp::runtime_core::ClearOsLastError();");
 		}
 
 		if (!hasStringParams && !hasStringReturn && !hasBlittableStructParams && !hasSimpleNonBlittableStructParams && !hasComplexStructParams && !hasSafeHandleParams && !hasSetLastError)
@@ -675,9 +675,9 @@ public sealed partial class NativeAotLoweringPlanner
 		// SetLastError: capture OS error after the native call.
 		if (hasSetLastError)
 		{
-			builder.AppendLine("    chaos_runtime_get_abi_v0()->set_last_pinvoke_error(");
+			builder.AppendLine("    chaos::il2cpp::runtime_core::SetLastPInvokeError(");
 			builder.AppendLine("        chaos_runtime_get_abi_v0()->get_current_thread_state(),");
-			builder.AppendLine("        chaos_runtime_get_abi_v0()->get_last_os_error());");
+			builder.AppendLine("        chaos::il2cpp::runtime_core::GetOsLastError());");
 		}
 
 
@@ -724,7 +724,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				if (complexStructDescriptorSymbols.TryGetValue(idx, out string? descSymbol))
 				{
-					builder.AppendLine("    chaos_runtime_get_abi_v0()->marshal_struct_native_to_managed(");
+					builder.AppendLine("    chaos::il2cpp::runtime_core::MarshalStructNativeToManaged(");
 					builder.AppendLine("        &" + descSymbol + ",");
 					builder.AppendLine("        reinterpret_cast<unsigned char*>(&chaos_arg_" + idx + "),");
 					builder.AppendLine("        reinterpret_cast<const unsigned char*>(&chaos_struct_complex_copy_" + idx + "),");
