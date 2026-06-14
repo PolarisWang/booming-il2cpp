@@ -896,6 +896,10 @@ public sealed class NativeAotEmitter
 		foreach (Match m in declRx.Matches(text))
 		{
 			string sv = m.Value;
+			// Skip declarations with empty parens "()" — they are stubs with
+			// wrong arg count and need to be replaced by corrected declarations.
+			int nextIdx = m.Index + m.Length;
+			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
 			foreach (var s in missing.ToList())
 				if (sv.Contains(s)) missing.Remove(s);
 		}
@@ -930,7 +934,7 @@ public sealed class NativeAotEmitter
 				}
 				argCount++;
 			}
-			stub.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
+			stub.Append("extern CHAOS_IL2CPP_INTPTR ");
 			stub.Append(sym);
 			stub.Append('(');
 			for (int i = 0; i < argCount; i++)
@@ -949,6 +953,51 @@ public sealed class NativeAotEmitter
 			if (nl >= 0) anchor = nl + 1;
 		}
 		sb.Insert(anchor, stub.ToString());
+
+		// Fix existing () declarations: replace with corrected arg counts
+		string postText = sb.ToString();
+		foreach (var sym in missing.OrderBy(s => s))
+		{
+			int argCount = 0;
+			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
+				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
+			if (callMatch.Success)
+			{
+				int pos = callMatch.Index + callMatch.Length;
+				int depth = 0;
+				bool inString = false;
+				for (int i = pos; i < text.Length; i++)
+				{
+					char c = text[i];
+					if (c == '"') inString = !inString;
+					else if (!inString)
+					{
+						if (c == '(') depth++;
+						else if (c == ')')
+						{
+							if (depth == 0) { argCount = 1; break; }
+							depth--;
+						}
+						else if (c == ',' && depth == 0) argCount++;
+					}
+				}
+				argCount++;
+			}
+			string wrongDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
+			string wrongDeclC = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
+			string correctDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "(";
+			for (int i = 0; i < argCount; i++)
+			{
+				if (i > 0) correctDecl += ", ";
+				correctDecl += "CHAOS_IL2CPP_INTPTR";
+			}
+			correctDecl += ") noexcept;";
+			if (postText.Contains(wrongDecl))
+				sb.Replace(wrongDecl, correctDecl);
+			if (postText.Contains(wrongDeclC))
+				sb.Replace(wrongDeclC, correctDecl);
+		}
+
 	}
 
 
