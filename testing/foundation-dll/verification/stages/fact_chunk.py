@@ -16,8 +16,26 @@ import json
 import subprocess
 import time
 from pathlib import Path
+from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+
+
+def _load_chunk_config(chunk_dir: Path) -> dict[str, Any]:
+    """Load chunk.json config, returning {} if missing or corrupt."""
+    config_path = chunk_dir / "chunk.json"
+    if config_path.exists():
+        try:
+            return json.loads(config_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            print(f"  [fact] WARNING: corrupt chunk.json at {config_path}")
+    return {}
+
+
+def _is_jit_enabled(chunk_dir: Path) -> bool:
+    """Check if JIT codegen is enabled for this chunk via chunk.json."""
+    config = _load_chunk_config(chunk_dir)
+    return config.get("jitEnabled", False)
 
 
 def _run_single_fact(exe_path: Path, tech: str) -> dict:
@@ -137,10 +155,20 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # JIT: optional
+    # JIT: check chunk config first, then verify the binary exists
     jit_exe = ctx.entry_jit_exe_path
+    jit_enabled = _is_jit_enabled(ctx.chunk_dir)
     has_jit = jit_exe.exists()
-    if not has_jit:
+
+    if jit_enabled and not has_jit:
+        # Config says JIT should be enabled, but binary is missing — hard error
+        errors.append("jit_enabled in chunk.json but entry-jit.exe not found")
+        print(f"  [fact] ERROR: jit_enabled in chunk.json but entry-jit.exe not found")
+        has_jit = False
+    elif not jit_enabled and has_jit:
+        # Config says JIT disabled, but binary exists — info only, still run it
+        print(f"  [fact] entry-jit.exe exists but chunk.json has jitEnabled=false, running anyway")
+    elif not has_jit:
         print(f"  [fact] entry-jit.exe not found, skipping chaos-jit fact")
 
     # Build metadata reference — None if unavailable (handled by callers)

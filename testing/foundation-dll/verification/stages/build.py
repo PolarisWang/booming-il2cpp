@@ -45,6 +45,23 @@ def _chaos_sdk_csproj() -> Path:
             / "Chaos.TestFramework.Sdk.csproj")
 
 
+def _load_chunk_config(chunk_dir: Path) -> dict[str, Any]:
+    """Load chunk.json config, returning {} if missing or corrupt."""
+    config_path = chunk_dir / "chunk.json"
+    if config_path.exists():
+        try:
+            return json.loads(config_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            print(f"  [build] WARNING: corrupt chunk.json at {config_path}")
+    return {}
+
+
+def _get_additional_assemblies(chunk_dir: Path) -> list[str]:
+    """Get additional assemblies for codegen from chunk config."""
+    config = _load_chunk_config(chunk_dir)
+    return config.get("additionalAssemblies", [])
+
+
 def _detect_tfm(dll_path: Path) -> str:
     """Detect target framework moniker from the DLL's runtime directory path.
 
@@ -610,12 +627,23 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         tpg_cmd.extend(['--assembly-dir', ad])
         print(f"  [build] assembly-dir: {ad}")
 
-    # For crypto chunks, pass the crypto DLL as an additional assembly so the
-    # codegen generates AotCoreIr JSON for its methods (interpreter fallback).
-    crypto_dll = ctx.foundation_dir / "crypto-refs" / "System.Security.Cryptography.dll"
-    if crypto_dll.exists() and any(x in ctx.slug for x in ("security-cryptography", "x509")):
-        tpg_cmd.extend(['--additional-assembly', str(crypto_dll)])
-        print(f"  [build] additional-assembly: {crypto_dll}")
+    # Additional assemblies from chunk config (declared in chunk.json)
+    # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.
+    config_assemblies = _get_additional_assemblies(ctx.chunk_dir)
+    if config_assemblies:
+        for aa in config_assemblies:
+            aa_path = ctx.foundation_dir / "crypto-refs" / aa
+            if aa_path.exists():
+                tpg_cmd.extend(['--additional-assembly', str(aa_path)])
+                print(f"  [build] additional-assembly: {aa_path}")
+            else:
+                print(f"  [build] WARNING: additional assembly {aa} not found at {aa_path}")
+    else:
+        # Fallback: slug-based detection for chunks without chunk.json (e.g. CoreLib)
+        crypto_dll = ctx.foundation_dir / "crypto-refs" / "System.Security.Cryptography.dll"
+        if crypto_dll.exists() and any(x in ctx.slug for x in ("security-cryptography", "x509")):
+            tpg_cmd.extend(['--additional-assembly', str(crypto_dll)])
+            print(f"  [build] additional-assembly: {crypto_dll} (slug fallback)")
     tpg_result = subprocess.run(tpg_cmd, capture_output=True, text=True, timeout=7200)
 
     for line in tpg_result.stdout.splitlines():
