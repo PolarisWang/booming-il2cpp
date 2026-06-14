@@ -106,7 +106,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine();
 			builder.AppendLine("    const auto chaos_combined_length = chaos_left_length + chaos_right_length;");
 			builder.AppendLine("    auto* chaos_raw = static_cast<char*>(");
-			builder.AppendLine("        chaos_runtime_get_abi_v0()->gc_alloc_atomic(");
+			builder.AppendLine("        GcAllocateAtomic(");
 			builder.AppendLine("            sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_combined_length + 1));");
 			builder.AppendLine("    auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);");
 			builder.AppendLine("    chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();");
