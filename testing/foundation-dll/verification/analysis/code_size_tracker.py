@@ -139,22 +139,78 @@ class CodeSizeTracker:
         return functions
 
     def _dumpbin_sections(self, exe_path: Path) -> dict[str, int]:
-        """Get section sizes from dumpbin /HEADERS output."""
+        """Get section sizes from platform-appropriate tool.
+
+        Priority chain:
+          1. dumpbin /HEADERS (Windows, MSVC)
+          2. objdump -h (Linux, GNU binutils, available via homebrew on macOS)
+          3. readelf -S (Linux, more portable)
+        """
         sizes: dict[str, int] = {}
-        try:
-            result = subprocess.run(
-                ["dumpbin", "/HEADERS", str(exe_path)],
-                capture_output=True, text=True, timeout=30,
-            )
-            if result.returncode == 0:
-                for line in result.stdout.splitlines():
-                    m = re.match(r"\s+\.(\w+)\s+size\s*=\s*0x([0-9a-fA-F]+)", line.strip())
-                    if m:
-                        section = m.group(1).lower()
-                        size = int(m.group(2), 16)
-                        sizes[section] = size
-        except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
-            pass
+
+        for tool, args, parser in [
+            (["dumpbin", "/HEADERS", str(exe_path)], None, self._parse_dumpbin_output),
+            (["objdump", "-h", str(exe_path)], None, self._parse_objdump_output),
+            (["readelf", "-S", str(exe_path)], None, self._parse_readelf_output),
+        ]:
+            try:
+                result = subprocess.run(
+                    tool, capture_output=True, text=True, timeout=30,
+                )
+                if result.returncode == 0:
+                    sizes = parser(result.stdout)
+                    if sizes.get("text", 0) > 0:
+                        break
+            except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
+                continue
+
+        return sizes
+
+    @staticmethod
+    def _parse_dumpbin_output(stdout: str) -> dict[str, int]:
+        """Parse dumpbin /HEADERS output for section sizes."""
+        sizes: dict[str, int] = {}
+        for line in stdout.splitlines():
+            m = re.match(r"\s+\.(\w+)\s+size\s*=\s*0x([0-9a-fA-F]+)", line.strip())
+            if m:
+                section = m.group(1).lower()
+                size = int(m.group(2), 16)
+                sizes[section] = size
+        return sizes
+
+    @staticmethod
+    def _parse_objdump_output(stdout: str) -> dict[str, int]:
+        """Parse objdump -h output for section sizes.
+
+        Output format:
+          Idx Name          Size      VMA       LMA       File off  Algn
+            0 .text         0001a2f4  00401000  00401000  00000400  2**4
+        """
+        sizes: dict[str, int] = {}
+        for line in stdout.splitlines():
+            m = re.match(r"\s+\d+\s+\.(\w+)\s+([0-9a-fA-F]+)\s+", line.strip())
+            if m:
+                section = m.group(1).lower()
+                size = int(m.group(2), 16)
+                sizes[section] = size
+        return sizes
+
+    @staticmethod
+    def _parse_readelf_output(stdout: str) -> dict[str, int]:
+        """Parse readelf -S output for section sizes.
+
+        Output format:
+          [Nr] Name              Type            Address          Off    Size
+          [ 0]                   NULL            0000000000000000 000000 000000
+          [ 1] .text             PROGBITS        0000000000401000 001000 01a2f4
+        """
+        sizes: dict[str, int] = {}
+        for line in stdout.splitlines():
+            m = re.match(r"\s*\[\s*\d+\]\s+\.(\w+)\s+\S+\s+[0-9a-fA-F]+\s+[0-9a-fA-F]+\s+([0-9a-fA-F]+)", line.strip())
+            if m:
+                section = m.group(1).lower()
+                size = int(m.group(2), 16)
+                sizes[section] = size
         return sizes
 
 

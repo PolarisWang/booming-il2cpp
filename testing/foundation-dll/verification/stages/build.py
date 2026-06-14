@@ -289,20 +289,36 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     ctx.native_dir.mkdir(parents=True, exist_ok=True)
 
     # -- 1. Find target DLL --
-    # Auto-detect DOTNET_ROOT from common Linux paths if not set
+    # Auto-detect DOTNET_ROOT from common paths if not set
     if "DOTNET_ROOT" not in os.environ:
         for candidate in ["/usr/share/dotnet", "/usr/share/dotnet8", "/usr/lib/dotnet"]:
             if (Path(candidate) / "shared" / "Microsoft.NETCore.App").is_dir():
                 os.environ["DOTNET_ROOT"] = candidate
                 break
-    dotnet_root = os.environ.get("DOTNET_ROOT", "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11")
-    runtime_base = Path(os.environ.get("DOTNET_ROOT", "C:/Program Files/dotnet/shared"))
+    if "DOTNET_ROOT" not in os.environ:
+        # Try dotnet --info to find runtime path (cross-platform)
+        try:
+            info = subprocess.run(
+                ["dotnet", "--info"], capture_output=True, text=True, timeout=15
+            )
+            m = re.search(r"Base Path:\s*(\S+)", info.stdout)
+            if m:
+                base = Path(m.group(1).strip())
+                if base.is_dir():
+                    os.environ["DOTNET_ROOT"] = str(base.parent.parent)
+        except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
+            pass
+
+    dotnet_root = os.environ.get("DOTNET_ROOT")
+    runtime_base = Path(dotnet_root) / "shared" if dotnet_root else None
     dll_candidates = [
         ctx.foundation_dir / f"{ctx.assembly}.dll",
-        Path(dotnet_root) / f"{ctx.assembly}.dll",
     ]
-    for runtime_dir in sorted(runtime_base.rglob(f"**/{ctx.assembly}.dll")):
-        dll_candidates.insert(0, runtime_dir)
+    if dotnet_root:
+        dll_candidates.append(Path(dotnet_root) / f"{ctx.assembly}.dll")
+    if runtime_base:
+        for runtime_dir in sorted(runtime_base.rglob(f"**/{ctx.assembly}.dll")):
+            dll_candidates.insert(0, runtime_dir)
 
     target_dll: Path | None = None
     for c in dll_candidates:

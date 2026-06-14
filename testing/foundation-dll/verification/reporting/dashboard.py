@@ -234,25 +234,76 @@ def stage_cn(key: str) -> dict[str, Any]:
 # ──────────────────────────────────────────────────────────────────────
 
 
+def _extract_json_fragment(text: str, key: str) -> str | None:
+    """Extract a JSON object value for a given key using brace counting.
+
+    Unlike regex-based extraction, this correctly handles nested objects,
+    escaped quotes, and truncated JSON. Returns the raw fragment text
+    (including braces) or None.
+    """
+    key_pattern = rf'"{re.escape(key)}"\s*:\s*'
+    m = re.search(key_pattern, text)
+    if not m:
+        return None
+    start = m.end()
+    if start >= len(text):
+        return None
+    if text[start] != '{':
+        return None
+
+    depth = 0
+    in_str = False
+    escape = False
+    for i in range(start, len(text)):
+        ch = text[i]
+        if escape:
+            escape = False
+            continue
+        if ch == '\\' and in_str:
+            escape = True
+            continue
+        if ch == '"' and not escape:
+            in_str = not in_str
+            continue
+        if in_str:
+            continue
+        if ch == '{':
+            depth += 1
+        elif ch == '}':
+            depth -= 1
+            if depth == 0:
+                return text[start:i+1]
+    # Truncated — depth never returned to 0, return what we can
+    return text[start:] if depth > 0 else None
+
+
+def _safe_parse_json_fragment(text: str, key: str) -> dict | None:
+    """Parse a JSON object value for a key, returning None on failure."""
+    fragment = _extract_json_fragment(text, key)
+    if not fragment:
+        return None
+    try:
+        # fragment is already a valid JSON object like {"a": 1}, parse directly
+        return json.loads(fragment)
+    except (json.JSONDecodeError, KeyError):
+        return None
+
+
 def extract_json_tail(text: str) -> dict[str, Any]:
     """Extract structured data from truncated JSON tail in stdout.
 
     The stdout_tail captures the last ~2000 chars of the UnifiedReport JSON.
-    The tail typically contains: coverage, dashboard, regression,
-    and sometimes the last 1-3 stage entries.
+    Uses brace-counting extraction which handles nested objects properly,
+    unlike regex-only approaches.
     """
     result: dict[str, Any] = {}
 
-    # Extract coverage section (greedy match to capture all props until last })
-    m = re.search(r'"coverage"\s*:\s*\{[^}]+\}', text)
-    if m:
-        try:
-            result["coverage"] = json.loads("{" + m.group(0) + "}")["coverage"]
-        except (json.JSONDecodeError, KeyError):
-            pass
+    # Extract coverage section
+    coverage = _safe_parse_json_fragment(text, "coverage")
+    if coverage:
+        result["coverage"] = coverage
 
-    # Fallback: coverage key may be truncated (e.g., "rage": or "erage":)
-    # Extract individual coverage fields directly from text
+    # Fallback: coverage key may be truncated, extract individual fields
     if "coverage" not in result:
         coverage = {}
         m = re.search(r'"stagePassRate"\s*:\s*([0-9.]+)', text)
@@ -262,37 +313,24 @@ def extract_json_tail(text: str) -> dict[str, Any]:
             m = re.search(rf'"{key}"\s*:\s*(\d+)', text)
             if m:
                 coverage[key] = int(m.group(1))
-        if coverage.get("stagesTotal"):  # require at least stagesTotal to consider valid
+        if coverage.get("stagesTotal"):
             result["coverage"] = coverage
 
-    # Extract dashboard section (greedy match)
-    m = re.search(r'"dashboard"\s*:\s*\{[^}]*\}', text)
-    if m:
-        try:
-            result["dashboard"] = json.loads("{" + m.group(0) + "}")["dashboard"]
-        except (json.JSONDecodeError, KeyError):
-            pass
+    # Extract dashboard section
+    dashboard = _safe_parse_json_fragment(text, "dashboard")
+    if dashboard:
+        result["dashboard"] = dashboard
 
-    # Extract regression section (greedy match, handles nested objects)
-    m = re.search(r'"regression"\s*:\s*\{.+?"hasRegression"\s*:\s*(?:true|false).+?\}', text)
-    if m:
-        try:
-            result["regression"] = json.loads("{" + m.group(0) + "}")["regression"]
-        except (json.JSONDecodeError, KeyError):
-            pass
+    # Extract regression section
+    regression = _safe_parse_json_fragment(text, "regression")
+    if regression:
+        result["regression"] = regression
 
-    # Extract partial stage data (last stages may survive in tail, greedy match)
+    # Extract partial stage data (last stages may survive in tail)
     for stage_key in reversed(STAGE_KEYS):
-        # Look for "stage_key": {...status...} pattern
-        # Greedy match: [^}]+ captures all properties until the closing }
-        pattern = r'"' + re.escape(stage_key) + r'"\s*:\s*\{[^}]+"status"\s*:\s*"[^"]+"[^}]*\}'
-        m = re.search(pattern, text)
-        if m:
-            try:
-                stage_data = json.loads("{" + m.group(0) + "}")[stage_key]
-                result.setdefault("stages", {})[stage_key] = stage_data
-            except (json.JSONDecodeError, KeyError):
-                pass
+        stage_data = _safe_parse_json_fragment(text, stage_key)
+        if stage_data and "status" in stage_data:
+            result.setdefault("stages", {})[stage_key] = stage_data
 
     # Extract overall_status
     m = re.search(r'"overall_status"\s*:\s*"([^"]+)"', text)
