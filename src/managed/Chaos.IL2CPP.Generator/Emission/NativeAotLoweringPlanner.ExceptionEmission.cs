@@ -4517,6 +4517,9 @@ if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal)
             : "CHAOS_IL2CPP_INTPTR")
         : "void";
     string declParams = FormatAbiSlotParameterSignature(parameterAbis);
+    // Add hidden chaos_generic_context for shared canonical targets
+    if (_sharedContextSymbols.Contains(nativeTarget))
+        declParams = string.IsNullOrEmpty(declParams) ? "CHAOS_IL2CPP_INTPTR" : declParams + ", CHAOS_IL2CPP_INTPTR";
     if (declParams.Length == 0) declParams = "void";
     builder.AppendLine($"{indentation}    extern {declReturn} {nativeTarget}({declParams}) noexcept;");
 }
