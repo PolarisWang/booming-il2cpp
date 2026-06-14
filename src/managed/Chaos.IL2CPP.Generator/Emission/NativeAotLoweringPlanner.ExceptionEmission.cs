@@ -4509,20 +4509,6 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		string nativeTarget = directNativeSymbol ?? targetSymbol;
 		// Collect chaos_external_runtime_* symbols for fallback declarations
 					Console.Error.WriteLine($"[CODEGEN-DEBUG-HOTPATCH] nativeTarget={nativeTarget}");
-if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-{
-    string declReturn = hasReturn
-        ? (returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float32 ? "float"
-            : returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float64 ? "double"
-            : "CHAOS_IL2CPP_INTPTR")
-        : "void";
-    string declParams = FormatAbiSlotParameterSignature(parameterAbis);
-    // Add hidden chaos_generic_context for shared canonical targets
-    if (_sharedContextSymbols.Contains(nativeTarget))
-        declParams = string.IsNullOrEmpty(declParams) ? "CHAOS_IL2CPP_INTPTR" : declParams + ", CHAOS_IL2CPP_INTPTR";
-    if (declParams.Length == 0) declParams = "void";
-    builder.AppendLine($"{indentation}    extern {declReturn} {nativeTarget}({declParams}) noexcept;");
-}
 		// Append hidden chaos_generic_context for shared canonical targets.
 		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
 		string hpCtxArg = "";
@@ -4535,6 +4521,15 @@ if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal)
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
 		string callExpr = $"{nativeTarget}({hpArgList}{hpCtxArg})";
+		if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+		{
+		    int hpCommaCount = hpArgList.Count(c => c == ',');
+		    int hpParamCount = string.IsNullOrEmpty(hpArgList) ? 0 : hpCommaCount + 1;
+		    if (hpCtxArg.Length > 0) hpParamCount++;
+		    string hpDeclParams = string.Join(", ", Enumerable.Repeat("CHAOS_IL2CPP_INTPTR", hpParamCount));
+		    if (hpDeclParams.Length == 0) hpDeclParams = "void";
+		    builder.AppendLine($"{indentation}    extern {declReturn} {nativeTarget}({hpDeclParams}) noexcept;");
+		}
 		if (hasReturn)
 		{
 			builder.AppendLine($"{indentation}        _d_hpresult = {callExpr};");
