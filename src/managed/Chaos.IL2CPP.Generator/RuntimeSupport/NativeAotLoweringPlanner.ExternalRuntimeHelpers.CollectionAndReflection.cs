@@ -10,6 +10,13 @@ public sealed partial class NativeAotLoweringPlanner
     private bool TryCreateCustomAttributeRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
     {
         helperDefinition = null;
+        // Skip constructors — let the catch-all path handle them with
+        // a uniform CHAOS_IL2CPP_INTPTR return type to avoid C2733/C2556
+        // overload conflicts with extern "C" ChaosExternalRuntimeFallback.
+        if (callee.Contains(".ctor", StringComparison.Ordinal) ||
+            callee.Contains(".cctor", StringComparison.Ordinal))
+            return false;
+
         if (_customAttributeSupport.UsesMemberInfoIsDefined && MatchesMethodSubject(callee, "System.Private.CoreLib/System.Reflection.MemberInfo", "IsDefined", "System.Type", "System.Boolean"))
         {
             helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
