@@ -588,23 +588,23 @@ public sealed partial class NativeAotLoweringPlanner
         // When an IRBlock is emitted as a child of IRSequence or inside a
         // branch body, it may start with instructions that pop values pushed
         // by predecessor CFG blocks. Ensure the structured slot depth is
-        // adequate by simulating the initial pop-only prefix.
-        if (_activeStructuredSlotContext is { Depth: 0 } ctx)
+        // adequate by simulating the block's stack effect — accounting for
+        // call/callvirt/newobj argument pops via TargetParameterCount.
+        if (_activeStructuredSlotContext is { } ctx)
         {
-            int requiredDepth = 0;
+            int maxDeficit = 0;
+            int simDepth = ctx.Depth;
             foreach (var instr in block.BodyInstructions)
             {
-                int pops = EstimatePopCount(instr.Op);
-                int pushes = EstimatePushCount(instr.Op);
-                if (pushes > 0 && pushes >= pops)
-                    break; // Self-sustaining from here
-                if (pops > pushes)
-                    requiredDepth += pops - pushes;
-                else
-                    break;
+                int pops = EstimatePopCountForBlockDepth(instr);
+                int pushes = EstimatePushCountForBlockDepth(instr);
+                simDepth -= pops;
+                if (simDepth < 0 && -simDepth > maxDeficit)
+                    maxDeficit = -simDepth;
+                simDepth += pushes;
             }
-            if (requiredDepth > 0)
-                ctx.RestoreDepth(requiredDepth);
+            for (int i = 0; i < maxDeficit; i++)
+                ctx.AllocatePushTarget();
         }
 
         EmitInstructionLookahead(builder, block.BodyInstructions, indentation);
@@ -977,6 +977,35 @@ public sealed partial class NativeAotLoweringPlanner
         "call" or "callvirt" or "calli" or "newobj" => 1,
         _ => 0,
     };
+
+    /// <summary>
+    /// Pop-count estimate for IRBlock depth compensation — handles call/callvirt/newobj
+    /// argument pops via <see cref="AotCoreIrInstructionArtifact.TargetParameterCount"/>.
+    /// </summary>
+    private static int EstimatePopCountForBlockDepth(AotCoreIrInstructionArtifact instr)
+    {
+        return instr.Op switch
+        {
+            "call" or "callvirt" or "calli" => instr.TargetParameterCount ?? 0,
+            "newobj" => instr.TargetParameterCount ?? 0,
+            _ => EstimatePopCount(instr.Op)
+        };
+    }
+
+    /// <summary>
+    /// Push-count estimate for IRBlock depth compensation — for call/callvirt/calli,
+    /// returns 0 for void returns and 1 otherwise; newobj always pushes 1.
+    /// </summary>
+    private static int EstimatePushCountForBlockDepth(AotCoreIrInstructionArtifact instr)
+    {
+        return instr.Op switch
+        {
+            "call" or "callvirt" or "calli" =>
+                (!string.IsNullOrEmpty(instr.TargetReturnType) && instr.TargetReturnType != "System.Void") ? 1 : 0,
+            "newobj" => 1,
+            _ => EstimatePushCount(instr.Op)
+        };
+    }
 
     private void EmitIRWhileLoop(
         StringBuilder builder,

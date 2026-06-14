@@ -61,7 +61,7 @@ def detect_tfm(dll_path: Path) -> str:
     """
     path = str(dll_path).replace("\\", "/")
     # Primary: standard runtime layout
-    m = re.search(r"Microsoft\.NETCore\.App/(\d+)\.(\d+)\.", path)
+    m = re.search(r"Microsoft\.NETCore\.App(?:\.Ref)?/(\d+)\.(\d+)\.", path)
     if m:
         return f"net{m.group(1)}.{m.group(2)}"
     # Fallback: custom layout like dotnet-foundation/netX.Y/runtime/
