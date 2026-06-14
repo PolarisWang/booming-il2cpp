@@ -8,10 +8,10 @@ if (-not $RepoRoot) {
     $RepoRoot = git -C $PSScriptRoot rev-parse --show-toplevel
 }
 
-$sourceDir       = Join-Path $RepoRoot 'skills\library\skills'
-$catalogScript   = Join-Path $RepoRoot 'skills\tooling\catalog\generate_skill_catalog.py'
-$entryStubPath   = Join-Path $RepoRoot '.claude\skills\dev-il2cpp\SKILL.md'
-$libraryEntry    = Join-Path $sourceDir 'dev-il2cpp\SKILL.md'
+$sourceDir       = Join-Path $RepoRoot 'skills/library/skills'
+$catalogScript   = Join-Path $RepoRoot 'skills/tooling/catalog/generate_skill_catalog.py'
+$entryStubPath   = Join-Path $RepoRoot '.claude/skills/dev-il2cpp/SKILL.md'
+$libraryEntry    = Join-Path $sourceDir 'dev-il2cpp/SKILL.md'
 
 if (-not (Test-Path -LiteralPath $sourceDir)) {
     Write-Error "[skill-bootstrap] Source skill directory not found: $sourceDir"
@@ -59,10 +59,10 @@ if ($stubOk) {
 # Step 3: Sync template files for gitignored run-time essentials
 $templateDir = Join-Path $PSScriptRoot 'templates'
 $syncTargets = @(
-    @{ Source = Join-Path $templateDir '.claude\settings.json'; Dest = Join-Path $RepoRoot '.claude\settings.json' },
-    @{ Source = Join-Path $templateDir '.codex\docs\testing.md'; Dest = Join-Path $RepoRoot '.codex\docs\testing.md' },
-    @{ Source = Join-Path $templateDir '.codex\docs\windows\polyglot-hooks.md'; Dest = Join-Path $RepoRoot '.codex\docs\windows\polyglot-hooks.md' },
-    @{ Source = Join-Path $templateDir '.hermes\config.yaml'; Dest = Join-Path $RepoRoot '.hermes\config.yaml' }
+    @{ Source = Join-Path $templateDir '.claude/settings.json'; Dest = Join-Path $RepoRoot '.claude/settings.json' },
+    @{ Source = Join-Path $templateDir '.codex/docs/testing.md'; Dest = Join-Path $RepoRoot '.codex/docs/testing.md' },
+    @{ Source = Join-Path $templateDir '.codex/docs/windows/polyglot-hooks.md'; Dest = Join-Path $RepoRoot '.codex/docs/windows/polyglot-hooks.md' },
+    @{ Source = Join-Path $templateDir '.hermes/config.yaml'; Dest = Join-Path $RepoRoot '.hermes/config.yaml' }
 )
 $synced = 0
 foreach ($entry in $syncTargets) {
