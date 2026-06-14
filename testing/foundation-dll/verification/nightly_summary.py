@@ -119,12 +119,52 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
         lines.append("_No improvements detected._")
     lines.append("")
 
-    # ── Per-Assembly Detail ──
+    # ── Build Failures / No-Fact Warning ──
+    lines.append("### Stage Detail")
+    lines.append("")
+    build_failed = []
+    no_fact = []
+    large_gap = []
+    for ck, cd in sorted(chunks.items()):
+        slug = cd.get("slug", "?")
+        asm_name = ck.split("/")[0] if "/" in ck else "?"
+        build_st = cd.get("buildStatus", "not_run")
+        if build_st in ("failed", "not_run"):
+            build_failed.append(f"{asm_name}/{slug} ({build_st})")
+        ft = cd.get("factTotal", 0)
+        if ft == 0 and cd.get("coverageGap", 0) > 0:
+            no_fact.append(f"{asm_name}/{slug} (metaTotal={cd['coverageGap']})")
+        elif cd.get("coverageGap", 0) > 10:
+            gap_pct = cd["coverageGap"] / (cd["coverageGap"] + ft) * 100
+            large_gap.append(f"{asm_name}/{slug} gap={cd['coverageGap']} ({gap_pct:.0f}%)")
+
+    if build_failed:
+        lines.append(f"#### Build Failures ❌ ({len(build_failed)})")
+        lines.append("")
+        for bf in build_failed[:20]:
+            lines.append(f"- {bf}")
+        lines.append("")
+
+    if no_fact:
+        lines.append(f"#### No Fact Data ⚠️ ({len(no_fact)})")
+        lines.append("")
+        for nf in no_fact:
+            lines.append(f"- {nf}")
+        lines.append("")
+
+    if large_gap:
+        lines.append(f"#### Large Coverage Gaps ⚠️ ({len(large_gap)})")
+        lines.append("")
+        for lg in large_gap[:20]:
+            lines.append(f"- {lg}")
+        lines.append("")
+
+    # ── Per-Assembly Detail (full stage breakdown) ──
     lines.append("### Per-Assembly Detail")
     lines.append("")
     if assemblies:
-        lines.append("| Assembly | Fact | ΔFact | Bench(ms) | ΔBench | Coverage | HU |")
-        lines.append("|----------|------|-------|-----------|--------|----------|-----|")
+        lines.append("| Assembly | Build | Fact | ΔFact | Bench(ms) | ΔBench | Coverage | Profile | MBench | HU |")
+        lines.append("|----------|-------|------|-------|-----------|--------|----------|---------|--------|-----|")
         for a in sorted(assemblies, key=lambda x: x.get("assembly", "")):
             name = a.get("assembly", "?")
             rate = a.get("factPassRate")
@@ -135,6 +175,22 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             gap = a.get("totalCoverageGap", 0)
             hu = a.get("hotupdate", {})
             hu_str = "✅" if hu.get("chunksPatchFailed", 0) == 0 and hu.get("totalFailed", 0) == 0 else "❌"
+
+            # Aggregate build status across chunks
+            asm_chunks = {k: v for k, v in chunks.items() if k.startswith(name + "/")}
+            build_ok = sum(1 for c in asm_chunks.values() if c.get("buildStatus") == "passed")
+            build_total = len(asm_chunks)
+            build_str = f"{build_ok}/{build_total}" if build_total > 0 else "—"
+
+            # Profile aggregated
+            prof_count = sum(1 for c in asm_chunks.values() if c.get("profileMethodCount", 0) > 0)
+            prof_total = sum(c.get("profileTotalSize", 0) for c in asm_chunks.values())
+            prof_str = f"{prof_count}c/{prof_total//1024}KB" if prof_count > 0 else "—"
+
+            # Managed benchmark
+            mb_passed = sum(c.get("mbPassed", 0) for c in asm_chunks.values())
+            mb_total = sum(c.get("mbTotal", 0) for c in asm_chunks.values())
+            mb_str = f"{mb_passed}/{mb_total}" if mb_total > 0 else "—"
 
             # Find benchmark delta from per-chunk aggregates
             bench_delta_sum = 0
@@ -149,7 +205,7 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
                 round(bench_delta_sum / bench_delta_count, 1) if bench_delta_count > 0 else None, "%"
             )
 
-            lines.append(f"| {name} | {rate_str} | {delta_str} | {dur_str} | {bench_delta_str} | {gap} | {hu_str} |")
+            lines.append(f"| {name} | {build_str} | {rate_str} | {delta_str} | {dur_str} | {bench_delta_str} | {gap} | {prof_str} | {mb_str} | {hu_str} |")
     else:
         lines.append("_No assembly data available._")
     lines.append("")
