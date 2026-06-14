@@ -166,6 +166,11 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
 			builder.AppendLine("{");
 			builder.AppendLine("    CHAOS_IL2CPP_FAIL();");
+			// Suppress MSVC C4715: CHAOS_IL2CPP_FAIL is not noreturn in CHECK config
+			if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+			{
+			    builder.AppendLine("    return {};");
+			}
 			builder.AppendLine("}");
 			return;
 		}

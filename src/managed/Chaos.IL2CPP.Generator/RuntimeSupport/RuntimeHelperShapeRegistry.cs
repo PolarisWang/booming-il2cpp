@@ -1834,7 +1834,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                        ["    CHAOS_IL2CPP_FAIL();"]);
+                        ["    CHAOS_IL2CPP_FAIL();", "    return 0;"]);
                     return new GenericShapeResolution(src, symbol,
                         new AotCoreIrAbiSlotArtifact[] { CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType) },
                         CreateVoidAbiSlot(), EmptyRawArgumentIndices);
@@ -1861,7 +1861,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol, "",
-                        ["    CHAOS_IL2CPP_FAIL();"]);
+                        ["    CHAOS_IL2CPP_FAIL();", "    return 0;"]);
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateVoidAbiSlot(), EmptyRawArgumentIndices);
