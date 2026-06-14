@@ -904,9 +904,41 @@ public sealed class NativeAotEmitter
 		stub.AppendLine("// ── External runtime stubs (post-emission) ──");
 		foreach (var sym in missing.OrderBy(s => s))
 		{
-			stub.Append("static inline CHAOS_IL2CPP_INTPTR ");
+			int argCount = 0;
+			// Count arguments from first call site
+			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
+				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
+			if (callMatch.Success)
+			{
+				int pos = callMatch.Index + callMatch.Length;
+				int depth = 0;
+				bool inString = false;
+				for (int i = pos; i < text.Length; i++)
+				{
+					char c = text[i];
+					if (c == '"') inString = !inString;
+					else if (!inString)
+					{
+						if (c == '(') depth++;
+						else if (c == ')')
+						{
+							if (depth == 0) { argCount = 1; break; }
+							depth--;
+						}
+						else if (c == ',' && depth == 0) argCount++;
+					}
+				}
+				argCount++;
+			}
+			stub.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
 			stub.Append(sym);
-			stub.AppendLine("() noexcept { return 0; }");
+			stub.Append('(');
+			for (int i = 0; i < argCount; i++)
+			{
+				if (i > 0) stub.Append(", ");
+				stub.Append("CHAOS_IL2CPP_INTPTR");
+			}
+			stub.AppendLine(") noexcept;");
 		}
 		stub.AppendLine();
 		string genSrc = sb.ToString();
