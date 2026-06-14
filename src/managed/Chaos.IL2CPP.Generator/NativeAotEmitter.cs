@@ -306,6 +306,7 @@ public sealed class NativeAotEmitter
         var _rendered = ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
         var _sb = new StringBuilder(_rendered);
         AddExternalRuntimeStubs(_sb);
+        FixFallbackZeroArgCalls(_sb);
         return _sb.ToString();
     }
 
@@ -455,6 +456,7 @@ public sealed class NativeAotEmitter
         }
 
 	AddExternalRuntimeStubs(sb);
+	FixFallbackZeroArgCalls(sb);
         return sb;
     }
 
@@ -863,6 +865,16 @@ public sealed class NativeAotEmitter
 	/// Scan generated page content for calls to chaoternal_runtime_* functions
 	/// that lack declarations, and prepend static inline stub declarations.
 	/// </summary>
+	/// <summary>
+	/// Replace ChaosExternalRuntimeFallback() zero-arg calls with ChaosExternalRuntimeFallbackDefault().
+	/// Catch-all external runtime helpers for void-returning methods (constructors) may emit
+	/// ChaosExternalRuntimeFallback() without the required subject_id argument.
+	/// </summary>
+	private static void FixFallbackZeroArgCalls(StringBuilder sb)
+	{
+		sb.Replace("ChaosExternalRuntimeFallback();", "ChaosExternalRuntimeFallbackDefault();");
+	}
+
 	private static void AddExternalRuntimeStubs(StringBuilder sb)
 	{
 		string text = sb.ToString();
