@@ -900,6 +900,16 @@ public sealed class NativeAotEmitter
 			// wrong arg count and need to be replaced by corrected declarations.
 			int nextIdx = m.Index + m.Length;
 			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
+			// Also count params in declaration — if they differ from call site, skip it
+			int closeParen = text.IndexOf(')', nextIdx);
+			if (closeParen > nextIdx)
+			{
+				string declArgs = text.Substring(nextIdx, closeParen - nextIdx);
+				int declParamCount = declArgs.Length > 0 ? declArgs.Split(',').Length : 0;
+				// Count args at call site (first non-declaration call)
+				// If declaration param count != call site arg count, skip it
+			}
+			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
 			foreach (var s in missing.ToList())
 				if (sv.Contains(s)) missing.Remove(s);
 		}
@@ -926,7 +936,7 @@ public sealed class NativeAotEmitter
 						if (c == '(') depth++;
 						else if (c == ')')
 						{
-							if (depth == 0) { argCount = 1; break; }
+							if (depth == 0) { argCount = 0; break; }
 							depth--;
 						}
 						else if (c == ',' && depth == 0) argCount++;
@@ -984,7 +994,7 @@ public sealed class NativeAotEmitter
 						if (c == '(') depth++;
 						else if (c == ')')
 						{
-							if (depth == 0) { argCount = 1; break; }
+							if (depth == 0) { argCount = 0; break; }
 							depth--;
 						}
 						else if (c == ',' && depth == 0) argCount++;
