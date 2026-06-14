@@ -4,7 +4,7 @@ Hephaestus caches the output of IL2CPP codegen + native build at the chunk level
 When a chunk's input DLLs haven't changed, the cached entry.exe is reused,
 saving ~500s of codegen time per chunk.
 
-Cache key: SHA-256 hash of (assembly DLL + all dependency DLLs + metadata).
+Cache key: SHA-256 hash of (assembly DLL + all dependency DLLs + metadata + tool binaries).
 Cache entries are stored under <foundation-dll>/.hephaestus-cache/ with a
 manifest.json tracking all entries.
 
@@ -154,7 +154,8 @@ def compute_input_hash(
     2. The metadata file (subjects.metadata.json)
     3. Any additional dependency DLLs (CoreLib, System.Runtime, etc.)
     4. Extra source files whose changes should invalidate the cache
-       (e.g. runtime_stubs/*.cpp that are compiled from source).
+       (e.g. runtime_stubs/*.cpp, tool binaries, pipeline scripts).
+    5. Tool binaries (ATG, TPG) — any tool rebuild invalidates all caches
 
     Returns a hexadecimal SHA-256 digest.
     """

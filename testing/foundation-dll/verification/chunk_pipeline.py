@@ -113,6 +113,9 @@ def main():
                         help="Run all chunks for the assembly")
     parser.add_argument("--stages", default="build,fact,hotupdate,coverage-audit",
                         help="Comma-separated stages to run (default: build,fact,hotupdate,coverage-audit)")
+    parser.add_argument("--mode", default=None,
+                        choices=["standard", "strict"],
+                        help="Verification mode: standard (default) or strict (coverage fails if >5% methods missing)")
     parser.add_argument("--native-config", default="check",
                         choices=["check", "profile", "ship"],
                         help="Native build config (default: check)")
@@ -236,6 +239,29 @@ def main():
             print(f"ERROR: Unknown stage '{s}'. Valid: {', '.join(stage_functions.keys())}")
             return 1
 
+    # ── Stage dependency DAG validation ──
+    STAGE_DEPS: dict[str, list[str]] = {
+        "fact":              ["build"],
+        "benchmark":         ["build", "fact"],
+        "managed_benchmark": ["build"],
+        "benchmark_report":  ["benchmark", "managed_benchmark"],
+        "hotupdate":         ["build", "fact"],
+        "coverage-audit":    ["build", "fact"],
+        "profile":           ["build"],
+        "aggregate":         ["build", "fact", "coverage-audit"],
+        "reporting":         ["aggregate"],
+    }
+    stage_set = set(stage_names)
+    missing_deps = False
+    for s in stage_names:
+        for dep in STAGE_DEPS.get(s, []):
+            if dep not in stage_set:
+                print(f"ERROR: Stage '{s}' requires '{dep}' but it's not in --stages")
+                missing_deps = True
+    if missing_deps:
+        print(f"  Hint: typical pipeline is --stages build,fact,coverage-audit")
+        return 1
+
     # Import stage functions
     from verification.stages.build import run_build
     from verification.stages.fact_chunk import run_fact_chunk
@@ -263,6 +289,7 @@ def main():
 
     overall_start = time.perf_counter()
     overall_status = "passed"
+    total_chunks = len(chunks)
 
     # Use the config's stage timeout (look up benchmark first as most time-sensitive; fall back to any)
     timeouts = _PIPELINE_CONFIG.get("timeouts", {})
@@ -270,6 +297,8 @@ def main():
                            timeouts.get("codegen_aot",
                            timeouts.get("fact_aot", 0)))
     chunk_mode = _PIPELINE_CONFIG.get("defaultMode", "standard")
+    if args.mode:
+        chunk_mode = args.mode
     seq = 0
 
     for chunk_slug in chunks:
@@ -322,8 +351,16 @@ def main():
             git_branch=git_branch,
         )
 
+        # ── Progress / ETA ──
+        elapsed = time.perf_counter() - overall_start
+        pct = (seq - 1) / total_chunks * 100 if total_chunks > 0 else 0
+        if seq > 1 and elapsed > 5:
+            eta_seconds = (elapsed / (seq - 1)) * (total_chunks - seq + 1)
+            eta_str = f", ETA {eta_seconds:.0f}s"
+        else:
+            eta_str = ""
         print(f"\n{'='*60}")
-        print(f"Chunk: {chunk_slug}  [{assembly}]")
+        print(f"[{seq}/{total_chunks} ({pct:.0f}%){eta_str}] Chunk: {chunk_slug}  [{assembly}]")
         print(f"{'='*60}")
 
         stages_result: dict[str, dict] = {}

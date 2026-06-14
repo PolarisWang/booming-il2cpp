@@ -168,6 +168,36 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         if jit_result["error"]:
             errors.append(f"jit: {jit_result['error']}")
 
+    # ── Cross-tech diff (AOT vs JIT) ──
+    cross_tech_diffs: list[dict] = []
+    if jit_result and aot_result.get("results") and jit_result.get("results"):
+        aot_by_id = {r.get("methodSubjectId", f"idx_{i}"): r
+                     for i, r in enumerate(aot_result["results"])}
+        jit_by_id = {r.get("methodSubjectId", f"idx_{i}"): r
+                     for i, r in enumerate(jit_result["results"])}
+        all_ids = set(aot_by_id) | set(jit_by_id)
+        for mid in sorted(all_ids):
+            aot_pass = aot_by_id.get(mid, {}).get("passed", False)
+            jit_pass = jit_by_id.get(mid, {}).get("passed", False)
+            if aot_pass != jit_pass:
+                cross_tech_diffs.append({
+                    "methodSubjectId": mid,
+                    "aotPassed": aot_pass,
+                    "jitPassed": jit_pass,
+                })
+        if cross_tech_diffs:
+            print(f"  [fact] Cross-tech diff: {len(cross_tech_diffs)} method(s) with inconsistent AOT/JIT results")
+            for d in cross_tech_diffs[:10]:
+                aot_s = "PASS" if d["aotPassed"] else "FAIL"
+                jit_s = "PASS" if d["jitPassed"] else "FAIL"
+                print(f"    {d['methodSubjectId']}: AOT={aot_s}  JIT={jit_s}")
+            if len(cross_tech_diffs) > 10:
+                print(f"    ... and {len(cross_tech_diffs) - 10} more")
+            # Downgrade status if any cross-tech inconsistency exists
+            if status == "passed":
+                status = "partial"
+                print(f"  [fact] Demoting status to partial: {len(cross_tech_diffs)} cross-tech diff(s)")
+
     # Combined status: JIT-as-sufficient if JIT passes (JIT can handle methods the AOT
     # codegen cannot compile), else fall back to AOT status.
     # UPGRADE: When JIT passes but AOT is completely broken (error/failed), promote
@@ -236,6 +266,7 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             **({"jit": {"passed": jit_result["passed"], "total": jit_result["total"],
                        "returncode": jit_result["returncode"], "results": jit_result["results"]}}
                if jit_result else {}),
+            **({"crossTechDiffs": cross_tech_diffs} if cross_tech_diffs else {}),
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
         value_suspicious=value_suspicious,

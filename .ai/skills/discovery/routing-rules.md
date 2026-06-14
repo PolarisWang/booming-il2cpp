@@ -1,6 +1,12 @@
 # 路由规则（Routing Rules）— 单一权威源
 
 > 本文是项目路由规则**唯一权威来源**。所有引用路由规则的文件必须引用本文，不得重复定义。
+>
+> **一致性检查清单**（修改本文后验证以下各方是否同步）：
+> - [ ] `CLAUDE.md` 中的域编号表
+> - [ ] `dev-il2cpp-core-agent/SKILL.md` 中的分类矩阵
+> - [ ] `expert-registry.json` 中的 routing 映射
+> - [ ] `domain-catalog.json` 中的领域定义
 
 ---
 
@@ -30,13 +36,6 @@
 1. 输出分类声明（`dev-il2cpp` 为固定首加载）→ `echo "..." > .claude/.classified`
 2. 按 dev-il2cpp 的路由协议读取对应 Expert 的 SKILL.md 加载知识
 3. 编辑域文件 → hook 验证分类声明格式 + `loaded_expert` 首位为 `dev-il2cpp`
-
-**建议**：在编辑受保护域文件前，先通过 discovery 流程阅读对应 Expert 的 SKILL.md。
-| 6 | 翻译 | 新 IL 指令、Planner、Emission |
-| 7 | 构建 | 编译、链接、SDK、cmake |
-| 8 | 热更新 | PatchLoader、patchdata |
-
-action: `read` / `fix` / `build` / `verify` / `plan`
 
 ---
 
@@ -82,19 +81,6 @@ action: `read` / `fix` / `build` / `verify` / `plan`
 ### 执行顺序约束
 Translation Expert 和 CodeGen Expert 都涉及 Planner/Emission 文件：
 - **必须先派发 Translation Expert，再派发 CodeGen Expert**
-
-| 子任务信号 | 目标 Expert |
-|-----------|-----------|
-| 新 IL 指令、翻译路径、Emission、Planner、Lowering | `dev-il2cpp-translation-expert` |
-| runtime-core、interpreter、VTable、bootstrap、method_table、线程状态 | `dev-il2cpp-runtime-expert` |
-| crash、segfault、test failure、异常行为 | `dev-il2cpp-debug-expert` |
-| GC 相关、分配模式、内存回收、写屏障、stress test | `dev-il2cpp-gc-expert` |
-| C# codegen、T4 模板、NativeAot lowering、snapshot | `dev-il2cpp-codegen-expert` |
-| foundation-dll、subject、测试管线、manifest | `dev-il2cpp-fact-verification-expert` |
-| 性能优化、profile 分析、benchmark | `dev-il2cpp-foundation-dll-optimizer` |
-| 热更新、PatchLoader、patchdata、HotpatchDispatch | `dev-il2cpp-hotupdate-expert` |
-| 编译失败、链接错误、codegen stub、dotnet build 失败、CMake 错误 | `dev-il2cpp-build-fixer` |
-| fact 验证、fact_chunk、skip-list 维护、value_suspicious、dll 验证结果审计 | `dev-il2cpp-fact-verification-expert` |
 
 ---
 
@@ -208,7 +194,10 @@ Expert 注册表: `skills/discovery/expert-registry.json`
 无需走 skill-index.md → registry → SKILL.md 的发现流程。
 ```
 
+> ⚠️ `dev-il2cpp` 为固定首加载，使用 Hot Expert 前必须先走 dev-il2cpp 路由协议。Hot Expert 仅加速「找到入口后→读具体 Expert」这一步。
+
 当前 Hot Expert：
+- `dev-il2cpp`（入口技能，始终首加载）
 - `dev-il2cpp-runtime-expert`
 - `dev-il2cpp-codegen-expert`
 - `dev-il2cpp-gc-expert`

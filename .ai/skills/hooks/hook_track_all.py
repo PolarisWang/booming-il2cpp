@@ -155,8 +155,8 @@ def main() -> int:
 
     # Method 4: Classification marker fallback
     if not skill_path:
-        ckass_file = repo_root / ".claude" / ".classified"
-        if ckass_file.exists():
+        class_file = repo_root / ".claude" / ".classified"
+        if class_file.exists():
             skill_path = "engineering"
             source = "classification"
 

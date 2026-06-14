@@ -526,6 +526,9 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator" / "Emission" / "CppProjectEmitter.cs",
         _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "build.py",
         _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "hephaestus_cache.py",
+        # Tool binaries — any rebuild of ATG/TPG invalidates all caches
+        tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator"),
+        tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
     ]
     input_hash = compute_input_hash(
         subjects_dll, metadata_path, ctx.assembly,

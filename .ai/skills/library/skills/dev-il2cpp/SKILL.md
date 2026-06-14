@@ -12,6 +12,21 @@ description: 项目唯一入口 skill — 对话启动时加载，通过 skill-i
 不要先开始分析、读代码、写计划或写实现，再回头补技能。
 </EXTREMELY-IMPORTANT>
 
+## 会话缓存（跳过已加载）
+
+**同一会话连续多轮时，如果缓存存在则跳过重读本 SKILL.md：**
+
+```bash
+# 如果以下文件存在且含 dev-il2cpp，说明本轮已加载，跳过本 SKILL.md
+grep -q '^dev-il2cpp$' .claude/.loaded_skills_cache 2>/dev/null \
+  && echo "[cache] dev-il2cpp 已加载，跳过" \
+  && exit 0
+```
+
+> ⚠️ 仅在分类轮次 N ≥ 2 且域与前一轮相同时检查缓存。第 1 轮或新任务必须完整加载。
+>
+> 新任务开始时：`rm -f .claude/.loaded_skills_cache`
+
 ## 架构说明
 
 `.claude/skills/` 只有本技能一个注册入口。所有子技能通过 discovery index 发现：
@@ -191,11 +206,19 @@ dev-il2cpp（.claude/skills/ 唯一入口）
    格式示例: loaded_expert:dev-il2cpp→dev-il2cpp-codegen-expert
    ```
    其中 `dev-il2cpp` 必须在 `→` 分隔的首位
-3. 按上方 **路由协议** 找到域名对应 Expert，继续读取其 SKILL.md
-4. 读取完所有 Expert 的 SKILL.md 后，确认 `.claude/.classified` 中已写入完整标记：
+3. 写入会话缓存（跳过后续轮次重复加载）：
+   ```bash
+   echo "dev-il2cpp" >> .claude/.loaded_skills_cache
+   ```
+4. 按上方 **路由协议** 找到域名对应 Expert，继续读取其 SKILL.md
+5. 读取完所有 Expert 的 SKILL.md 后，确认 `.claude/.classified` 中已写入完整标记：
    ```bash
    echo "本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp → dev-il2cpp-codegen-expert" > .claude/.classified
    echo 'loaded_expert:dev-il2cpp→dev-il2cpp-codegen-expert' >> .claude/.classified
    ```
+6. 将对应 Expert 也加入会话缓存：
+   ```bash
+   echo "dev-il2cpp-codegen-expert" >> .claude/.loaded_skills_cache
+   ```
 
-> ⚠️ 不执行此步骤会导致 hook 阻断后续工具调用。`dev-il2cpp` 必须出现在 `loaded_expert:` 行的首位。
+> ⚠️ 不执行步骤 1-6 会导致 hook 阻断后续工具调用。`dev-il2cpp` 必须出现在 `loaded_expert:` 行的首位，且 `loaded_skills_cache` 必须写入对应条目。

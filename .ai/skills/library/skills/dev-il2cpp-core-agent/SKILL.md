@@ -254,7 +254,7 @@ L3（完整 — 翻译路径变更/AOT 输出变更/ABI 修改/多域修改）:
 ├── GC(2) / 优化(5)      → gc-ctl      → ├── dev-il2cpp-gc-expert
 │                                          └── dev-il2cpp-foundation-dll-optimizer
 └── CodeGen(4) / 翻译(6) / 构建(7)        → codegen-ctl → 6 个 Expert
-    测试(8) / 热更新(9)
+    测试(5) / 热更新(8)
 ```
 
 ### 顶层路由
@@ -263,7 +263,7 @@ L3（完整 — 翻译路径变更/AOT 输出变更/ABI 修改/多域修改）:
 |--------|---------|
 | 运行时(1) / 调试(3) | 读取 `sub-controllers/runtime-ctl.md` 后自行实现 |
 | GC(2) / 优化(5) | 读取 `sub-controllers/gc-ctl.md` 后自行实现 |
-| CodeGen(4) / 翻译(6) / 构建(7) / 测试(8) / 热更新(9) | 读取 `sub-controllers/codegen-ctl.md` 后自行实现 |
+| CodeGen(4) / 翻译(6) / 构建(7) / 测试(5) / 热更新(8) | 读取 `sub-controllers/codegen-ctl.md` 后自行实现 |
 
 ---
 

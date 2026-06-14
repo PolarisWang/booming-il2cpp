@@ -207,8 +207,9 @@ def _build_combined_for_tfm(combined_csproj: Path, tfm: str, out_dir: Path) -> b
     """Rebuild CombinedSubjects.csproj for the given TFM.
 
     For net8.0, applies targeted source replacements for net9.0+ APIs
-    (ReadOnlySpan<T>/ReadOnlyMemory<T> overloads) then retries with
-    comment-out sanitization as fallback.
+    (ReadOnlySpan<T>/ReadOnlyMemory<T> overloads). If the build still
+    fails after deterministic replacements, net8.0 is skipped (it's an
+    optional baseline, not a blocking requirement).
     """
     if not combined_csproj.exists():
         return False
@@ -251,48 +252,24 @@ def _build_combined_for_tfm(combined_csproj: Path, tfm: str, out_dir: Path) -> b
         if result.returncode == 0:
             return True
 
-        # Build failed. For net8.0, try comment-out retry as fallback.
-        if tfm != "net8.0":
+        # Build failed after deterministic replacements.
+        # For net8.0, this is non-fatal — report the first error and skip.
+        # The net8.0 baseline is optional; missing it means "no net8 baseline"
+        # for comparison, which benchmark_report handles gracefully.
+        if tfm == "net8.0":
             errors = [l for l in (result.stderr + result.stdout).splitlines()
                       if "error CS" in l]
-            for e in errors:
+            print(f"  [managed-benchmark] net8.0 build failed with {len(errors)} error(s) — skipping (non-fatal)")
+            for e in errors[:5]:
                 print(f"      {e}")
+            if len(errors) > 5:
+                print(f"      ... and {len(errors) - 5} more")
             return False
 
-        max_retries = 3
-        for attempt in range(max_retries):
-            error_lines: set[int] = set()
-            for line in (result.stderr + result.stdout).splitlines():
-                m = re.match(r"^.*CombinedSubjects\.cs\((\d+),\d+\):\s*(error\s+(CS\d{4})).*", line)
-                if m:
-                    code = m.group(3)
-                    if code in ("CS1503", "CS0117", "CS1061", "CS0103",
-                                "CS0234", "CS0426", "CS0305", "CS0161",
-                                "CS1501", "CS0452"):
-                        error_lines.add(int(m.group(1)))
-
-            if not error_lines:
-                if attempt == 0:
-                    errors = [l for l in (result.stderr + result.stdout).splitlines()
-                              if "error" in l.lower()]
-                    for e in errors:
-                        print(f"      {e}")
-                break
-
-            ok = _sanitize_for_net8_retry(combined_src, error_lines)
-            if not ok:
-                break
-
-            result = subprocess.run(
-                ["dotnet", "build", str(combined_csproj), "-f", tfm,
-                 f"-p:OutDir={out_dir}", "--nologo", "-v", "q"],
-                capture_output=True, text=True, timeout=120)
-            if result.returncode == 0:
-                return True
-
-        remaining = [l for l in (result.stderr + result.stdout).splitlines()
-                     if "error CS" in l]
-        for e in remaining:
+        # For net10.0, errors are unexpected — report them
+        errors = [l for l in (result.stderr + result.stdout).splitlines()
+                  if "error CS" in l]
+        for e in errors:
             print(f"      {e}")
         return False
     finally:

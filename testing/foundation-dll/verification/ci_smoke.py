@@ -27,8 +27,10 @@ def main() -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description="Foundation-DLL CI smoke test")
-    parser.add_argument("--mode", default="smoke", choices=["smoke", "full"],
-                        help="smoke=key families only (default), full=all families")
+    parser.add_argument("--mode", default="smoke", choices=["smoke", "full", "extended"],
+                        help="smoke=core families only (default), full=core+standard, extended=all families")
+    parser.add_argument("--families", default=None,
+                        help="Comma-separated override of specific families to run (e.g. 'System.Private.CoreLib,System.Linq')")
     parser.add_argument("--verbose", action="store_true", help="Verbose output")
     parser.add_argument("--check-regression", action="store_true",
                         help="Run benchmark regression check after pipeline")
@@ -40,10 +42,45 @@ def main() -> int:
     if str(_FOUNDATION_DLL) not in sys.path:
         sys.path.insert(0, str(_FOUNDATION_DLL))
 
-    # Key families for smoke mode — these cover the most critical paths
-    SMOKE_FAMILIES = [
+    # Tiered family lists
+    # Core: critical paths, runs every smoke and full
+    CORE_FAMILIES = [
         "System.Private.CoreLib",
     ]
+    # Standard: high-traffic assemblies, runs in `full` mode
+    STANDARD_FAMILIES = [
+        "System.Collections",
+        "System.Collections.Immutable",
+        "System.Linq",
+        "System.Linq.Expressions",
+        "System.Runtime",
+        "System.Runtime.InteropServices",
+        "System.Text.Json",
+        "System.Net.Http",
+        "System.Net.Sockets",
+        "System.ObjectModel",
+        "System.IO.Compression.ZipFile",
+        "System.Security.Cryptography",
+        "System.Threading.Tasks.Parallel",
+        "System.Xml.ReaderWriter",
+    ]
+    # Extended: remaining assemblies, runs with `--families extended` or `all`
+    EXTENDED_FAMILIES = [
+        "System.ComponentModel.TypeConverter",
+        "System.Data.Common",
+        "System.Diagnostics.DiagnosticSource",
+        "System.Formats.Asn1",
+        "System.IO.Compression.Brotli",
+        "System.IO.Pipelines",
+        "System.Net.ServerSentEvents",
+        "System.Private.Xml",
+        "System.Reflection.Metadata",
+        "System.Runtime.Intrinsics",
+        "System.Runtime.Serialization.Formatters",
+        "System.Security.Claims",
+        "System.Security.Principal.Windows",
+    ]
+    ALL_FAMILIES = CORE_FAMILIES + STANDARD_FAMILIES + EXTENDED_FAMILIES
 
     from verification.chunk_pipeline import main as pipeline_main
     from verification.benchmark_diff import _load_comparison, _diff_aggregate, _print_report
@@ -51,14 +88,24 @@ def main() -> int:
     overall_start = time.perf_counter()
     failures = []
 
+    # Determine which families to run
     if args.mode == "smoke":
-        families = SMOKE_FAMILIES
+        families = CORE_FAMILIES
         stages = "build,fact,coverage-audit"
-        print(f"CI Smoke mode: {len(families)} families, stages=[{stages}]")
-    else:
-        families = ["System.Private.CoreLib"]
+        print(f"CI Smoke mode: {len(families)} core family(ies), stages=[{stages}]")
+    elif args.mode == "full":
+        families = CORE_FAMILIES + STANDARD_FAMILIES
         stages = "build,fact,hotupdate,coverage-audit,benchmark,benchmark_report"
-        print(f"CI Full mode: all families, stages=[{stages}]")
+        print(f"CI Full mode: {len(families)} families (core+standard), stages=[{stages}]")
+    elif args.mode == "extended":
+        families = ALL_FAMILIES
+        stages = "build,fact,coverage-audit"
+        print(f"CI Extended mode: {len(families)} families (all), stages=[{stages}]")
+
+    # Override: --families takes precedence over --mode
+    if args.families:
+        families = [f.strip() for f in args.families.split(",") if f.strip()]
+        print(f"CI override: {len(families)} specific family(ies)")
 
     for family in families:
         print(f"\n{'=' * 60}")

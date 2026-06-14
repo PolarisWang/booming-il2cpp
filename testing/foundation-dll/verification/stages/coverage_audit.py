@@ -69,13 +69,22 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
         missing = chunk_method_ids - subject_method_ids
         extra = subject_method_ids - chunk_method_ids
 
+        coverage_pct = round(len(subject_method_ids) / len(chunk_method_ids) * 100, 1) if chunk_method_ids else 100.0
+
         if missing:
-            msg = f"{len(missing)} chunk methods not in subjects metadata"
+            missing_pct = round(len(missing) / len(chunk_method_ids) * 100, 1)
+            msg = f"{len(missing)} chunk methods not in subjects metadata ({missing_pct}% of chunk)"
             errors.append(msg)
             for mid in sorted(missing)[:10]:
                 print(f"  [coverage-audit]   MISSING: {mid}")
             if len(missing) > 10:
                 print(f"  [coverage-audit]   ... and {len(missing) - 10} more")
+
+            # Strict mode: fail if >5% methods are missing
+            if ctx.mode == "strict" and missing_pct > 5.0:
+                errors.append(
+                    f"STRICT MODE: {missing_pct}% methods missing exceeds 5% threshold"
+                )
 
         if extra:
             # Extra subjects are harmless — they represent additional coverage

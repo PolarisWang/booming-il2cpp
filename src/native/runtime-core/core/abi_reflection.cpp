@@ -281,52 +281,89 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL GenericContextGetMethodArg(
     return chaos::il2cpp::generic_context::GetMethodTypeArg(generic_context, index);
 }
 
+
+/* ── V1 ABI wrapper functions (type-safe bridges) ── */
+
+uint32_t CHAOS_RUNTIME_ABI_CALL RegisterModuleWrapper(
+    const char* name, const void* descriptor) {
+    return RegisterModule(name, static_cast<const ModuleDescriptor*>(descriptor));
+}
+
+bool CHAOS_RUNTIME_ABI_CALL HotpatchIsActiveWrapper(const void* entry) {
+    return HotpatchIsActive(*static_cast<const HotpatchEntryV0*>(entry));
+}
+
+bool CHAOS_RUNTIME_ABI_CALL HotpatchShouldKeepNativeWrapper(const void* entry) {
+    return HotpatchShouldKeepNative(*static_cast<const HotpatchEntryV0*>(entry));
+}
+
+void CHAOS_RUNTIME_ABI_CALL RaiseNullReferenceExceptionWrapper(void) {
+    RaiseNullReferenceException();
+}
+
+uintptr_t CHAOS_RUNTIME_ABI_CALL ChaosExternalRuntimeFallbackWrapper(const char* subject_id) {
+    return static_cast<uintptr_t>(ChaosExternalRuntimeFallback(subject_id));
+}
+
+void CHAOS_RUNTIME_ABI_CALL InterpreterEntryDirectWrapper(
+    uintptr_t method_key, void* args_buf, void* ret_buf) {
+    InterpreterEntryDirect(method_key, args_buf, ret_buf);
+}
+
+void CHAOS_RUNTIME_ABI_CALL RegisterHotpatchModuleWrapper(const void* module) {
+    RegisterHotpatchModule(static_cast<const HotpatchModuleV0*>(module));
+}
+
+uintptr_t CHAOS_RUNTIME_ABI_CALL ChaosArrayEmptyWrapper(void) {
+    return static_cast<uintptr_t>(ChaosArrayEmpty());
+}
+
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
-    nullptr,
+    &RuntimeInit,
+    &RuntimeShutdown,
+    &ThreadAttach,
+    &ThreadDetach,
+    &ObjectNew,
+    &ArrayNew,
+    &StringNewUtf8,
+    &ClassInit,
+    &GcHandleNew,
+    &GcHandleFree,
+    &RaiseManagedException,
+    &FieldGetValue,
+    &FieldSetValue,
+    &MethodInvoke,
+    &AssemblyGetImage,
+    &ImageFindType,
+    &TypeFindMethod,
+    &TypeFindField,
+    &TypeFindProperty,
+    &TypeFindEvent,
+    &TypeGetGenericTypeDefinition,
+    &TypeQueryCapabilityImpl,
+    &MethodGetParameter,
+    &MethodGetGenericContext,
+    &GenericContextGetClassArgCount,
+    &GenericContextGetClassArg,
+    &GenericContextGetMethodArgCount,
+    &GenericContextGetMethodArg,
+    nullptr,  // gc_handle_new_ex — no wrapper in V0
+    nullptr,  // gc_handle_get — no wrapper in V0
+    nullptr,  // gc_handle_set — no wrapper in V0
+    nullptr,  // gc_get_total_memory — no wrapper
+    nullptr,  // gc_add_memory_pressure — no wrapper
+    nullptr,  // gc_remove_memory_pressure — no wrapper
+    &RegisterModuleWrapper,
+    &HotpatchIsActiveWrapper,
+    &HotpatchShouldKeepNativeWrapper,
+    &RaiseNullReferenceExceptionWrapper,
+    &ChaosExternalRuntimeFallbackWrapper,
+    &InterpreterEntryDirectWrapper,
+    nullptr,  // register_gc_layouts — no wrapper
+    &RegisterHotpatchModuleWrapper,
+    &ChaosArrayEmptyWrapper,
 };
 
 

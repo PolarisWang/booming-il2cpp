@@ -179,7 +179,11 @@ def check_codegen_self_contained(files: list[Path], verbose: bool) -> list[str]:
 
 
 def check_override_expiry(verbose: bool) -> list[str]:
-    """Check that BOUNDARY_OVERRIDE annotations haven't expired."""
+    """Check that BOUNDARY_OVERRIDE annotations haven't expired.
+
+    Returns violations for expired overrides and warnings for those
+    expiring within 30 days.
+    """
     violations = []
     try:
         result = subprocess.run(
@@ -188,15 +192,20 @@ def check_override_expiry(verbose: bool) -> list[str]:
             encoding="utf-8", errors="replace")
         if result.returncode != 0:
             return violations  # No matches or not a git repo
+        from datetime import date, timedelta
+        today = date.today()
+        warning_delta = timedelta(days=30)
         for line in result.stdout.strip().splitlines():
             if "Expires:" in line:
                 m = re.search(r'Expires:\s*(\d{4}-\d{2}-\d{2})', line)
                 if m:
-                    from datetime import date
                     expiry = date.fromisoformat(m.group(1))
-                    if date.today() > expiry:
+                    if today > expiry:
                         violations.append(
-                            f"{line}: BOUNDARY_OVERRIDE expired ({m.group(1)})")
+                            f"{line}: BOUNDARY_OVERRIDE EXPIRED ({m.group(1)})")
+                    elif today >= expiry - warning_delta:
+                        violations.append(
+                            f"{line}: BOUNDARY_OVERRIDE expiring soon ({m.group(1)}, { (expiry - today).days } days remaining)")
     except (subprocess.TimeoutExpired, OSError) as e:
         if verbose:
             print(f"  Warning: could not check override expiry: {e}")
