@@ -455,8 +455,9 @@ class HephaestusCache:
                 }
                 return manifest
             except (json.JSONDecodeError, OSError):
+                print(f"  [hephaestus] ERROR: Corrupt manifest, starting fresh")
                 if self._verbose:
-                    print(f"  [hephaestus] WARNING: Corrupt manifest, starting fresh")
+                    print(f"    (path: {manifest_path})")
         manifest = HephaestusManifest(max_entries=self._max_entries)
         manifest.entries_by_key = {}
         return manifest
@@ -476,7 +477,15 @@ class HephaestusCache:
         tmp.replace(self._manifest_path)
 
     def _prune_old_entries(self) -> None:
-        """Remove oldest entries if we exceed max_entries."""
+        """Remove stale entries + oldest valid entries if we exceed max_entries."""
+        stale_count = 0
+        for entry in list(self._manifest.entries):
+            if entry.status == "stale":
+                self._remove_entry(entry.cache_key)
+                stale_count += 1
+        if stale_count > 0 and self._verbose:
+            print(f"  [hephaestus] Pruned {stale_count} stale entries")
+
         valid = [e for e in self._manifest.entries if e.status == "valid"]
         if len(valid) <= self._max_entries:
             return

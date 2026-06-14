@@ -290,14 +290,8 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     ctx.native_dir.mkdir(parents=True, exist_ok=True)
 
     # -- 1. Find target DLL --
-    # Auto-detect DOTNET_ROOT from common paths if not set
+    # Auto-detect DOTNET_ROOT if not set, via dotnet --info (cross-platform)
     if "DOTNET_ROOT" not in os.environ:
-        for candidate in ["/usr/share/dotnet", "/usr/share/dotnet8", "/usr/lib/dotnet"]:
-            if (Path(candidate) / "shared" / "Microsoft.NETCore.App").is_dir():
-                os.environ["DOTNET_ROOT"] = candidate
-                break
-    if "DOTNET_ROOT" not in os.environ:
-        # Try dotnet --info to find runtime path (cross-platform)
         try:
             info = subprocess.run(
                 ["dotnet", "--info"], capture_output=True, text=True, timeout=15
