@@ -5499,6 +5499,15 @@ public StringBuilder? ObjectModelCodeBuilder { get; init; }
     /// </summary>
     public string TypeDeclarationsCode { get; init; } = "";
 
+    /// <summary>
+    /// Per-page type declarations generated lazily during emission.
+    /// Dictionary maps page number → minimal type declaration C++ code
+    /// (forward declarations + extern symbols) for only the types
+    /// referenced by methods on that page.
+    /// Null when paging is not active or per-page optimization disabled.
+    /// </summary>
+    public Dictionary<int, string>? PerPageTypeDeclarations { get; init; }
+
     public required string WorkloadAbi { get; init; }
 
     /// <summary>

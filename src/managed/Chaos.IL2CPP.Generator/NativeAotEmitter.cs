@@ -317,7 +317,8 @@ public sealed class NativeAotEmitter
     private static StringBuilder BuildGeneratedPageSkeleton(
         NativeAotTemplateModel templateModel,
         List<string> includes,
-        bool includeRegistration)
+        bool includeRegistration,
+        string? perPageTypeDeclarations = null)
     {
         int objectModelLength = templateModel.ObjectModelCodeBuilder?.Length
                              ?? templateModel.ObjectModelCode?.Length
@@ -339,7 +340,17 @@ public sealed class NativeAotEmitter
             sb.Append('\n');
         }
 
-        sb.Append("#include \"native-aot.generated.header.h\"");
+        // Use per-page type declarations when available (optimization: only declare
+        // types referenced by methods on this page). Fall back to shared header when
+        // per-page declarations are not provided.
+        if (perPageTypeDeclarations is { Length: > 0 })
+        {
+            sb.Append(perPageTypeDeclarations);
+        }
+        else
+        {
+            sb.Append("#include \"native-aot.generated.header.h\"");
+        }
         sb.Append("\n\n// Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)\n");
         sb.Append("extern \"C\" void InterpreterEntryDirect(\n");
         sb.Append("    CHAOS_IL2CPP_UINTPTR method_key,\n");
