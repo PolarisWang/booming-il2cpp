@@ -41,7 +41,8 @@ public sealed class AotCoreIrLowering
     public AotCoreIrArtifact Create(
         LinkedWorldModel linkedWorld,
         TypedIlIrArtifact typedIl,
-        CodeRegistrationArtifact codeRegistration)
+        CodeRegistrationArtifact codeRegistration,
+        IReadOnlySet<string>? subjectMethodIds = null)
     {
         ArgumentNullException.ThrowIfNull(linkedWorld);
         ArgumentNullException.ThrowIfNull(typedIl);
@@ -57,7 +58,37 @@ public sealed class AotCoreIrLowering
             .Where(registration => string.Equals(registration.RegistrationKind, "methodPointer", StringComparison.Ordinal))
             .GroupBy(registration => registration.SubjectId, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.First().Symbol, StringComparer.Ordinal);
-        var methods = linkedWorld.Methods
+
+        // ── Subject method filtering ──
+        // When subjectMethodIds is provided, limit lowering to subject
+        // methods and their direct callees instead of the full assembly.
+        IReadOnlyList<ManagedMethodModel> loweringCandidates;
+        if (subjectMethodIds is { Count: > 0 })
+        {
+            var candidates = new HashSet<string>(subjectMethodIds, StringComparer.Ordinal);
+            foreach (var method in linkedWorld.Methods)
+            {
+                if (!candidates.Contains(method.SubjectId)) continue;
+                foreach (var block in method.Body.Blocks)
+                {
+                    foreach (var inst in block.Instructions)
+                    {
+                        if (!string.IsNullOrEmpty(inst.Callee))
+                            candidates.Add(inst.Callee);
+                    }
+                }
+            }
+            loweringCandidates = linkedWorld.Methods
+                .Where(m => candidates.Contains(m.SubjectId))
+                .ToList();
+            Console.Error.WriteLine($"[AotCoreIr] Subject-only: {subjectMethodIds.Count} subjects + callees => {loweringCandidates.Count} methods lowered ({linkedWorld.Methods.Count} total)");
+        }
+        else
+        {
+            loweringCandidates = linkedWorld.Methods;
+        }
+
+        var methods = loweringCandidates
             .Select(method => TryCreateMethod(
                 method,
                 GetRequiredTypedMethod(typedMethods, method.SubjectId),

@@ -13,7 +13,8 @@ public sealed class CodeGenStage
     public PipelineResult<ManagedClosureResult> Generate(
         ManagedClosureRequest request,
         LinkedWorldModel linkedWorld,
-        MetadataWriterOutput metadataWriterOutput)
+        MetadataWriterOutput metadataWriterOutput,
+        IReadOnlySet<string>? subjectMethodIds = null)
     {
         try
         {
@@ -53,7 +54,7 @@ public sealed class CodeGenStage
                 .ToList(),
             TypeCapabilities = BuildCodeRegistrationTypeCapabilities(metadataWriterOutput.MetadataRegistration),
         };
-        var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
+        var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration, subjectMethodIds);
 
         var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
             ?? new GenericInstantiationDemandGraphModel
