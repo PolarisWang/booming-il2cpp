@@ -963,8 +963,7 @@ public sealed class NativeAotEmitter
 				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
 			while (callMatch.Success)
 			{
-				int ls = text.LastIndexOf('
-', callMatch.Index);
+				int ls = text.LastIndexOf((char)10, callMatch.Index);
 				if (ls < 0) ls = 0;
 				string lp = text.Substring(ls, callMatch.Index - ls).TrimStart();
 				if (!lp.StartsWith("extern") && !lp.StartsWith("static"))
