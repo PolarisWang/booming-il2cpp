@@ -44,11 +44,9 @@ public sealed partial class NativeAotLoweringPlanner
         foreach (Match m in s_callRx.Matches(text))
         {
             string sym = m.Groups[1].Value;
-            string fullMatch = m.Value;
-            int argCount = CountCallArgs(fullMatch);
-            if (referenced.TryGetValue(sym, out int prev) && prev >= argCount)
-                continue;
-            referenced[sym] = argCount;
+            // Count args from the actual call site text (includes arguments after '(')
+            int argCount = CountCallArgs(text, m.Index, m.Length);
+            referenced[sym] = Math.Max(referenced.GetValueOrDefault(sym, 0), argCount);
         }
 
         // 3. Difference — referenced but not declared.
@@ -78,14 +76,13 @@ public sealed partial class NativeAotLoweringPlanner
         return stub.ToString();
     }
 
-    /// <summary>Count comma-separated arguments inside the first (...) of a function call.</summary>
-    private static int CountCallArgs(string call)
+    /// <summary>Count comma-separated arguments in a function call starting at pos in text.</summary>
+    private static int CountCallArgs(string text, int startPos, int matchLen)
     {
-        int open = call.IndexOf('(');
-        if (open < 0) return 0;
-        int close = call.LastIndexOf(')');
-        if (close <= open + 1) return 0;
-        string args = call.Substring(open + 1, close - open - 1);
+        int open = startPos + matchLen - 1; // matchLen includes the '('
+        int close = text.IndexOf(')', open + 1);
+        if (close < 0 || close <= open + 1) return 0;
+        string args = text.Substring(open + 1, close - open - 1);
         if (string.IsNullOrWhiteSpace(args)) return 0;
         return args.Split(',').Length;
     }
