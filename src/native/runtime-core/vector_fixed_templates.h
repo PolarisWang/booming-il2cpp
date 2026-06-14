@@ -1124,6 +1124,99 @@ inline TCarrier VectorFixedOneFromCapability(const RuntimeTypeCapabilityInfoV0& 
         default:
             return {};
     }
+	}
+
+// ── Boolean predicates ──
+
+/// Returns true if all bytes of the carrier are zero.
+template <typename TCarrier>
+inline bool VectorFixedIsAllZeros(const TCarrier& value) {
+    for (CHAOS_IL2CPP_SIZE i = 0; i < sizeof(TCarrier); ++i) {
+        if (reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(&value)[i] != 0)
+            return false;
+    }
+    return true;
+}
+
+/// Returns true if every lane has all bits set.
+template <typename TScalar, typename TCarrier>
+inline bool VectorFixedAllLanesSet(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    const auto* lanes = reinterpret_cast<const TScalar*>(&value);
+    TScalar all_ones = static_cast<TScalar>(~static_cast<TScalar>(0));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if (lanes[i] != all_ones) return false;
+    }
+    return true;
+}
+
+/// Returns the number of lanes where all bits are set.
+template <typename TScalar, typename TCarrier>
+inline CHAOS_IL2CPP_INT32 VectorFixedCountWhereAllBitsSet(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    const auto* lanes = reinterpret_cast<const TScalar*>(&value);
+    CHAOS_IL2CPP_INT32 count = 0;
+    TScalar all_ones = static_cast<TScalar>(~static_cast<TScalar>(0));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if (lanes[i] == all_ones) ++count;
+    }
+    return count;
+}
+
+/// Returns index of first lane matching scalar, or -1.
+template <typename TScalar, typename TCarrier>
+inline CHAOS_IL2CPP_INT32 VectorFixedIndexOf(const TCarrier& value, TScalar scalar) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    const auto* lanes = reinterpret_cast<const TScalar*>(&value);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        if (lanes[i] == scalar) return static_cast<CHAOS_IL2CPP_INT32>(i);
+    }
+    return -1;
+}
+
+/// Returns index of last lane matching scalar, or -1.
+template <typename TScalar, typename TCarrier>
+inline CHAOS_IL2CPP_INT32 VectorFixedLastIndexOf(const TCarrier& value, TScalar scalar) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    const auto* lanes = reinterpret_cast<const TScalar*>(&value);
+    for (CHAOS_IL2CPP_SIZE i_ = lane_count; i_ > 0; --i_) {
+        if (lanes[i_ - 1] == scalar) return static_cast<CHAOS_IL2CPP_INT32>(i_ - 1);
+    }
+    return -1;
+}
+
+/// For each lane: returns all-ones if the lane is zero, zero otherwise.
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedIsZero(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    TScalar* dst = reinterpret_cast<TScalar*>(&result);
+    const TScalar* src = reinterpret_cast<const TScalar*>(&value);
+    TScalar all_ones = static_cast<TScalar>(~static_cast<TScalar>(0));
+    // Use unsigned type for comparison to match JIT signed/unsigned behavior
+    using UTScalar = typename std::conditional<sizeof(TScalar) == 1, CHAOS_IL2CPP_UINT8,
+        typename std::conditional<sizeof(TScalar) == 2, CHAOS_IL2CPP_UINT16,
+        typename std::conditional<sizeof(TScalar) == 4, CHAOS_IL2CPP_UINT32,
+        CHAOS_IL2CPP_UINT64>::type>::type>::type;
+    const UTScalar* usrc = reinterpret_cast<const UTScalar*>(&value);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        dst[i] = (usrc[i] == 0) ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
+/// For each lane: returns all-ones if the lane is all-ones, zero otherwise.
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedTestAllBitsSet(const TCarrier& value) {
+    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    TScalar* dst = reinterpret_cast<TScalar*>(&result);
+    const TScalar* src = reinterpret_cast<const TScalar*>(&value);
+    TScalar all_ones = static_cast<TScalar>(~static_cast<TScalar>(0));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i) {
+        dst[i] = (src[i] == all_ones) ? all_ones : static_cast<TScalar>(0);
+    }
+    return result;
 }
 
 }  // namespace chaos::il2cpp::vector_fixed

@@ -4705,6 +4705,80 @@ public sealed partial class NativeAotLoweringPlanner
             }
             RegisterVectorCrossCast();
 
+            // ── Boolean predicates (unary → scalar) ──
+            // IsZero, AllWhereAllBitsSet, AnyWhereAllBitsSet, CountWhereAllBitsSet, IndexOf, etc.
+            // These return bool/int scalars, not vectors.
+            void RegisterVectorPredicate(string methodName, string exprTemplate)
+            {
+                foreach (var prefix in new[] { "Vector128", "Vector256" })
+                {
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: prefix,
+                        MethodName: methodName,
+                        Resolver: (callee, paramTypes) =>
+                        {
+                            var elemType = ExtractVectorElementType(callee, paramTypes);
+                            if (elemType == null) return null;
+                            var cppType = MapTypeArgToCppType(elemType);
+                            if (cppType == null) return null;
+                            var carrier = InferVectorCarrierType(callee);
+                            if (carrier == null) return null;
+                            var ns = "chaos::il2cpp::vector_fixed::";
+                            var expr = exprTemplate
+                                .Replace("{NS}", ns)
+                                .Replace("{CPPTYPE}", cppType)
+                                .Replace("{CARRIER}", carrier);
+                            return expr;
+                        }));
+                }
+            }
+
+            // IsZero — returns Vector128/256 mask (carrier), not bool
+            foreach (var prefix in new[] { "Vector128", "Vector256" })
+            {
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix,
+                    MethodName: "IsZero",
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var elemType = ExtractVectorElementType(callee, paramTypes);
+                        if (elemType == null) return null;
+                        var cppType = MapTypeArgToCppType(elemType);
+                        if (cppType == null) return null;
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedIsZero<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    }));
+            }
+
+            // AllWhereAllBitsSet — every lane has all bits set
+            RegisterVectorPredicate("AllWhereAllBitsSet",
+                $"[&]() -> CHAOS_IL2CPP_INTPTR {{ return static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedAllLanesSet<{{CPPTYPE}}, {{CARRIER}}>(*reinterpret_cast<{{CARRIER}}*>({{0}})) ? 1 : 0); }}()");
+
+            // AnyWhereAllBitsSet — any lane has all bits set
+            RegisterVectorPredicate("AnyWhereAllBitsSet",
+                $"[&]() -> CHAOS_IL2CPP_INTPTR {{ return static_cast<CHAOS_IL2CPP_INTPTR>(!{{NS}}VectorFixedIsAllZeros(*reinterpret_cast<{{CARRIER}}*>({{0}})) ? 1 : 0); }}()");
+
+            // CountWhereAllBitsSet — count lanes with all bits set
+            RegisterVectorPredicate("CountWhereAllBitsSet",
+                $"static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedCountWhereAllBitsSet<{{CPPTYPE}}, {{CARRIER}}>(*reinterpret_cast<{{CARRIER}}*>({{0}})))");
+
+            // IndexOf — first lane matching scalar param
+            RegisterVectorPredicate("IndexOf",
+                $"static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedIndexOf<{{CPPTYPE}}, {{CARRIER}}>(*reinterpret_cast<{{CARRIER}}*>({{0}}), static_cast<{{CPPTYPE}}>({{1}})))");
+
+            // LastIndexOf — last lane matching scalar param
+            RegisterVectorPredicate("LastIndexOf",
+                $"static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedLastIndexOf<{{CPPTYPE}}, {{CARRIER}}>(*reinterpret_cast<{{CARRIER}}*>({{0}}), static_cast<{{CPPTYPE}}>({{1}})))");
+
+            // IndexOfWhereAllBitsSet — index of first lane with all bits set
+            RegisterVectorPredicate("IndexOfWhereAllBitsSet",
+                $"static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedIndexOf<{{CPPTYPE}}, {{CARRIER}}>(*reinterpret_cast<{{CARRIER}}*>({{0}}), static_cast<{{CPPTYPE}}>(~static_cast<{{CPPTYPE}}>(0))))");
+
+            // LastIndexOfWhereAllBitsSet — index of last lane with all bits set
+            RegisterVectorPredicate("LastIndexOfWhereAllBitsSet",
+                $"static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedLastIndexOf<{{CPPTYPE}}, {{CARRIER}}>(*reinterpret_cast<{{CARRIER}}*>({{0}}), static_cast<{{CPPTYPE}}>(~static_cast<{{CPPTYPE}}>(0))))");
+
             // === Activator::CreateInstance with param array ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Activator",
