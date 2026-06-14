@@ -345,6 +345,11 @@ public sealed partial class NativeAotLoweringPlanner
 			    builder.AppendLine("		}");
 			    _braceCount--;
 			}
+	    // Fallback return for non-void: suppress MSVC C4715
+	    if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+	    {
+	        builder.AppendLine("    return {};");
+	    }
 		builder.AppendLine("}");
 	}
 
