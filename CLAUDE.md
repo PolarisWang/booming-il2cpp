@@ -32,10 +32,6 @@ P1（性能最优）> P2（方案完美性）> P3（HotUpdate 支持）。低优
 
 详见 `skills/discovery/routing-rules.md`。
 
-## Linter 工作区约束
-
-`CppProjectEmitter.cs` 和 `NativeAotEmitter.cs` 会被持久化 linter 还原未提交修改。修改后**立即构建并提交**，不要在未提交状态下二次编辑。
-
 ## 架构优先开发
 
 开发新翻译路径前，必须执行 `dev-architecture-first-development` 完成架构查询，确认与既有架构一致。禁止未查表直接实现。
