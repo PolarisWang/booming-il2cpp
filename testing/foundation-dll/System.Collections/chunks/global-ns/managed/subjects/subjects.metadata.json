@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections",
+  "chunkSlug": "global-ns",
+  "totalMethods": 22,
+  "factMethodCount": 14,
+  "customEntryIndices": null,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "methods": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Get:System.Boolean(System.Int32)",
+      "generatedMethodId": "Get_0_int_0"
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Get:System.Boolean(System.Int32)",
+      "generatedMethodId": "Get_0_int_1"
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Set:System.Void(System.Int32,System.Boolean)",
+      "generatedMethodId": "Set_1_int_bool_0"
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Set:System.Void(System.Int32,System.Boolean)",
+      "generatedMethodId": "Set_1_int_bool_1"
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Set:System.Void(System.Int32,System.Boolean)",
+      "generatedMethodId": "Set_1_int_bool_2"
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::SetAll:System.Void(System.Boolean)",
+      "generatedMethodId": "SetAll_2_bool_0"
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::SetAll:System.Void(System.Boolean)",
+      "generatedMethodId": "SetAll_2_bool_1"
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::And:System.Collections.BitArray(System.Collections.BitArray)",
+      "generatedMethodId": "And_3_BitArray_0"
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Or:System.Collections.BitArray(System.Collections.BitArray)",
+      "generatedMethodId": "Or_4_BitArray_0"
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Xor:System.Collections.BitArray(System.Collections.BitArray)",
+      "generatedMethodId": "Xor_5_BitArray_0"
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Not:System.Collections.BitArray()",
+      "generatedMethodId": "Not_6__0"
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::RightShift:System.Collections.BitArray(System.Int32)",
+      "generatedMethodId": "RightShift_7_int_0"
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::RightShift:System.Collections.BitArray(System.Int32)",
+      "generatedMethodId": "RightShift_7_int_1"
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::LeftShift:System.Collections.BitArray(System.Int32)",
+      "generatedMethodId": "LeftShift_8_int_0"
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::LeftShift:System.Collections.BitArray(System.Int32)",
+      "generatedMethodId": "LeftShift_8_int_1"
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_9_System_Array_int_0"
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_9_System_Array_int_1"
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::CopyTo:System.Void(System.Array,System.Int32)",
+      "generatedMethodId": "CopyTo_9_System_Array_int_2"
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::HasAllSet:System.Boolean()",
+      "generatedMethodId": "HasAllSet_10__0"
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::HasAnySet:System.Boolean()",
+      "generatedMethodId": "HasAnySet_11__0"
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::Clone:System.Object()",
+      "generatedMethodId": "Clone_12__0"
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "methodSubjectId": "System.Collections/System.Collections.BitArray::GetEnumerator:System.Collections.IEnumerator()",
+      "generatedMethodId": "GetEnumerator_13__0"
+    }
+  ]
+}

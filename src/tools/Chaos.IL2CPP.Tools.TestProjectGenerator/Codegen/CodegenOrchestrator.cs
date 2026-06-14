@@ -84,17 +84,25 @@ public sealed class CodegenOrchestrator
             args.Add(Path.GetFullPath(outputDir));
             args.Add("--full-closure");
 
-            // Cross-assembly: add SPC runtime dir as --assembly-dir (F15)
-            try
+            // Cross-assembly: add target DLL directory as --assembly-dir.
+            // The subjects DLL references the target assembly (e.g. System.Linq.dll).
+            // Adding its directory lets the codegen resolve cross-assembly methods
+            // directly, rather than routing them through ChaosExternalRuntimeFallback.
+            // IMPORTANT: only add the target DLL's own directory, NOT the full runtime
+            // dir — that would pull in 174K+ methods from 182 DLLs.
+            if (assemblyPaths.Count > 0)
             {
-                var d = System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
-                if (d != null)
+                try
                 {
-                    args.Add("--assembly-dir");
-                    args.Add(d);
+                    var targetDir = Path.GetDirectoryName(Path.GetFullPath(assemblyPaths[0]));
+                    if (targetDir != null && Directory.Exists(targetDir))
+                    {
+                        args.Add("--assembly-dir");
+                        args.Add(targetDir);
+                    }
                 }
+                catch { }
             }
-            catch { }
 
             if (codegenMode == "jit")
             {
