@@ -1965,6 +1965,21 @@ inline bool VectorFixedAnyEqual(const TCarrier& value, TScalar scalar) {
     return false;
 }
 
+// ── Shuffle ── Permute lanes by index vector (out-of-range index → 0)
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedShuffle(const TCarrier& value, const TCarrier& indices) {
+    constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    TCarrier result{};
+    const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
+    const CHAOS_IL2CPP_INT32* il = reinterpret_cast<const CHAOS_IL2CPP_INT32*>(&indices);
+    auto* rl = reinterpret_cast<TScalar*>(&result);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
+        CHAOS_IL2CPP_INT32 idx = il[i];
+        rl[i] = (idx >= 0 && static_cast<CHAOS_IL2CPP_SIZE>(idx) < N) ? sl[idx] : static_cast<TScalar>(0);
+    }
+    return result;
+}
+
 }  // namespace chaos::il2cpp::vector_fixed
 
 

@@ -5101,6 +5101,54 @@ public sealed partial class NativeAotLoweringPlanner
                     }));
             }
 
+            // ── AsVector128Unsafe (same as AsVector128) ──
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Vector256", MethodName: "AsVector128Unsafe",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                }));
+
+            // ── None (boolean) ──
+            RegisterVectorPredicate("None",
+                $"[&]() -> CHAOS_IL2CPP_INTPTR {{ return static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedIsAllZeros(*reinterpret_cast<{{CARRIER}}*>({{0}})) ? 1 : 0); }}()");
+
+            // ── Shuffle / ShuffleNative ──
+            RegisterVectorBinOp("Shuffle", "VectorFixedShuffle", false);
+            RegisterVectorBinOp("ShuffleNative", "VectorFixedShuffle", false);
+
+            // ── StoreUnsafe ──
+            foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
+            {
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix, MethodName: "StoreUnsafe",
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        var ns = "chaos::il2cpp::vector_fixed::";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ {ns}VectorFixedStoreUnsafe<{carrier}>({{0}}, *reinterpret_cast<{carrier}*>({{1}})); return static_cast<CHAOS_IL2CPP_INTPTR>(0); }}()";
+                    }));
+            }
+
+            // ── CopyTo ──
+            foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
+            {
+                registry.RegisterInline(new InlineShapeDescriptor(
+                    TypeDisplayNamePrefix: prefix, MethodName: "CopyTo",
+                    Resolver: (callee, paramTypes) =>
+                    {
+                        var elemType = ExtractVectorElementType(callee, paramTypes);
+                        if (elemType == null) return null;
+                        var cppType = MapTypeArgToCppType(elemType);
+                        if (cppType == null) return null;
+                        var carrier = InferVectorCarrierType(callee);
+                        if (carrier == null) return null;
+                        var ns = "chaos::il2cpp::vector_fixed::";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ {ns}VectorFixedCopyTo<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), reinterpret_cast<{cppType}*>({{1}}), static_cast<CHAOS_IL2CPP_INT32>({{2}})); return static_cast<CHAOS_IL2CPP_INTPTR>(0); }}()";
+                    }));
+            }
+
             // === Activator::CreateInstance with param array ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Activator",
