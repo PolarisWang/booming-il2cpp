@@ -293,7 +293,7 @@ typedef struct RuntimeAbiV0 {
     /* Module registration. */
     uint32_t (CHAOS_RUNTIME_ABI_CALL* register_module)(
         const char* name,
-        const struct ModuleDescriptor* descriptor);
+        const void* descriptor);
 
     /* Hotpatch dispatch. */
     bool (CHAOS_RUNTIME_ABI_CALL* hotpatch_is_active)(
