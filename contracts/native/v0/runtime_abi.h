@@ -262,6 +262,26 @@ typedef struct RuntimeAbiV0 {
         RuntimeState* runtime_state,
         int64_t bytes);
 
+    /* ── V1 codegen-facing fields ── */
+    uint32_t (CHAOS_RUNTIME_ABI_CALL* register_module)(
+        const char* name,
+        const void* descriptor);
+    bool (CHAOS_RUNTIME_ABI_CALL* hotpatch_is_active)(
+        const void* entry);
+    bool (CHAOS_RUNTIME_ABI_CALL* hotpatch_should_keep_native)(
+        const void* entry);
+    void (CHAOS_RUNTIME_ABI_CALL* raise_null_reference_exception)(void);
+    uintptr_t (CHAOS_RUNTIME_ABI_CALL* external_runtime_fallback)(
+        const char* subject_id);
+    void (CHAOS_RUNTIME_ABI_CALL* interpreter_entry_direct)(
+        uintptr_t method_key,
+        void* args_buf,
+        void* ret_buf);
+    void (CHAOS_RUNTIME_ABI_CALL* register_gc_layouts)(void);
+    void (CHAOS_RUNTIME_ABI_CALL* register_hotpatch_module)(
+        const void* module);
+    uintptr_t (CHAOS_RUNTIME_ABI_CALL* array_empty)(void);
+
     } RuntimeAbiV0;
 
 /* RuntimeAbiV1/V2 — V1 adds GC/boxing/vtable/thread-static helpers;

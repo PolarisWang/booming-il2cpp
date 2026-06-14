@@ -1,9 +1,9 @@
 """PreToolUse hook: 验证分类声明格式 + Expert SKILL.md 加载检查
 
 流程:
-1. 用户发消息 → Agent 输出分类声明 + "→ 加载 dev-xxx-expert"
-2. echo "..." > .claude/.classified (含 loaded_expert:<name> 行)
-3. hook 验证: 格式正确 + .classified 含 loaded_expert 行 + 对应 SKILL.md 存在
+1. 用户发消息 → Agent 输出分类声明 + "→ 加载 dev-il2cpp → dev-xxx-expert"
+2. echo "..." > .claude/.classified (含 loaded_expert:dev-il2cpp→dev-xxx-expert 行)
+3. hook 验证: 格式正确 + .classified 含 loaded_expert 行 + 首位为 dev-il2cpp + 对应 SKILL.md 存在
 4. 后续 Edit/Write/Bash 域文件 → 检查 loaded_expert 是否声明
 """
 
@@ -143,7 +143,7 @@ if not m:
     flag_file.unlink(missing_ok=True)
     print(file=sys.stderr)
     print(f"  ⚠️  分类声明缺少 Expert 加载声明", file=sys.stderr)
-    print("  格式: 本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp-codegen-expert", file=sys.stderr)
+    print("  格式: 本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp → dev-il2cpp-codegen-expert", file=sys.stderr)
     sys.exit(1)
 
 domain_part = m.group(1)
@@ -171,7 +171,7 @@ if round_num < 1:
     sys.exit(1)
 
 # ═══════════════════════════════════════════════════════════════════
-# 🔴 强制阻断门：验证 loaded_expert 声明 + SKILL.md 存在
+# 🔴 强制阻断门：验证 loaded_expert 声明 + 首位为 dev-il2cpp + SKILL.md 存在
 # ═══════════════════════════════════════════════════════════════════
 classified_content = flag_file.read_text(encoding="utf-8", errors="replace").strip()
 has_loaded = "loaded_expert:" in classified_content
@@ -179,21 +179,43 @@ if not has_loaded:
     print(file=sys.stderr)
     print("  ⚠️  .claude/.classified 缺少 loaded_expert:<name> 行！", file=sys.stderr)
     print("  请在分类 echo 命令中附加：", file=sys.stderr)
-    print('    echo "... → 加载 dev-xxx-expert" > .claude/.classified', file=sys.stderr)
-    print('    echo "loaded_expert:dev-xxx-expert" >> .claude/.classified', file=sys.stderr)
+    print('    echo "... → 加载 dev-il2cpp → dev-xxx-expert" > .claude/.classified', file=sys.stderr)
+    print('    echo "loaded_expert:dev-il2cpp→dev-xxx-expert" >> .claude/.classified', file=sys.stderr)
     sys.exit(1)
 
-# 验证 SKILL.md 文件存在
+# 解析 loaded_expert 行（支持 "→" 或 "," 分隔多 expert）
 loaded_expert = ""
 for line in classified_content.splitlines():
     if "loaded_expert:" in line:
         loaded_expert = line.split("loaded_expert:")[-1].strip()
         break
 
-if loaded_expert:
-    skill_path = Path(__file__).resolve().parent.parent / "library" / "skills" / loaded_expert / "SKILL.md"
+if not loaded_expert:
+    print(f"  ⚠️  loaded_expert 值为空", file=sys.stderr)
+    sys.exit(1)
+
+# 用 "→" 或 "," 拆分，取第一个
+experts = [e.strip() for e in loaded_expert.replace("→", ",").split(",") if e.strip()]
+first_expert = experts[0] if experts else ""
+
+if first_expert != "dev-il2cpp":
+    print(file=sys.stderr)
+    print(f"  ⚠️  首位加载必须是 dev-il2cpp，实际为 '{first_expert}'", file=sys.stderr)
+    print("  分类格式: 本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp → dev-il2cpp-codegen-expert", file=sys.stderr)
+    sys.exit(1)
+
+# 验证所有声明的 expert 的 SKILL.md 都存在
+skills_base = Path(__file__).resolve().parent.parent / "library" / "skills"
+missing = []
+for expert in experts:
+    skill_path = skills_base / expert / "SKILL.md"
     if not skill_path.exists():
-        print(f"  ⚠️  Expert SKILL.md 不存在: {skill_path}", file=sys.stderr)
-        sys.exit(1)
+        missing.append(expert)
+
+if missing:
+    print(f"  ⚠️  以下 Expert 的 SKILL.md 不存在:", file=sys.stderr)
+    for m in missing:
+        print(f"     - {skills_base / m / 'SKILL.md'}", file=sys.stderr)
+    sys.exit(1)
 
 sys.exit(0)

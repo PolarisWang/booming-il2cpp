@@ -22,13 +22,14 @@
 **分类声明必须包含 Expert 加载声明**：
 
 ```
-格式: 本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp-codegen-expert
+格式: 本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp → dev-il2cpp-codegen-expert
 ```
 
 **执行顺序**:
-1. 输出分类声明（含 Expert 声明）→ `echo "..." > .claude/.classified`
-2. 通过 registry 发现流程读取 Expert 的 SKILL.md 加载知识（`Skill` 工具不支持子 Expert 加载）
-3. 编辑域文件 → hook 验证分类声明格式，**不强制 loaded_expert**
+0. 调用 `Skill("dev-il2cpp")` 加载入口技能，读取其 SKILL.md 获取路由指令
+1. 输出分类声明（`dev-il2cpp` 为固定首加载）→ `echo "..." > .claude/.classified`
+2. 按 dev-il2cpp 的路由协议读取对应 Expert 的 SKILL.md 加载知识
+3. 编辑域文件 → hook 验证分类声明格式 + `loaded_expert` 首位为 `dev-il2cpp`
 
 **建议**：在编辑受保护域文件前，先通过 discovery 流程阅读对应 Expert 的 SKILL.md。
 | 6 | 翻译 | 新 IL 指令、Planner、Emission |

@@ -114,7 +114,10 @@ internal static class ConvertToCppHandler
                 outputRoot,
                 EntryPointSubjectIdOverride: config.EntryPoint,
                 AdditionalAssemblyPaths: additionalPaths,
-                FullAssemblyClosure: config.FullClosure);
+                FullAssemblyClosure: config.FullClosure)
+            {
+                SubjectMethodIds = subjectMethods?.ToHashSet(StringComparer.Ordinal),
+            };
 
             var closureResult = pipeline.Execute(request);
             if (closureResult.IsFailure)

@@ -1,7 +1,7 @@
 # Chaos IL2CPP 开发规则
 
 > **第〇条规则**：进入新域/新任务时，回复第一行必须是分类声明。
-> 格式：`本轮任务涉及 {域1(编号)} + {域2(编号)} ，{action} 操作，第 N 轮 → 加载 dev-xxx-expert`
+> 格式：`本轮任务涉及 {域1(编号)} + {域2(编号)} ，{action} 操作，第 N 轮 → 加载 dev-il2cpp → dev-xxx-expert`
 > 已在该域中的简单回复（"继续"/"ok"/"A"）不需要重复输出。
 >
 > | 编号 | 域 | Expert |
@@ -18,14 +18,14 @@
 > action: `read` / `fix` / `build` / `verify` / `plan`
 >
 > **执行协议**：
-> 1. 输出分类声明 → `echo "..." > .claude/.classified`
-> 2. 通过 registry 发现流程加载 Expert 知识（见下方技能调用）
-> 3. **🔴 强制阻断门**：分类声明后、任何工具使用前，必须先读取对应 Expert/Core-Agent 的 SKILL.md。
->    — 单域：读对应 Expert 的 SKILL.md 注入领域知识
->    — 多域（≥2）：读 `dev-il2cpp-core-agent` 的 SKILL.md 执行调度循环
->    — 验证方式：`.claude/.classified` 文件必须含 `loaded_expert:<name>` 行
-> 4. 响应结束时：延续消息保留 `.classified`；新任务 `rm -f .claude/.classified`
-> 5. **Bash**: 管理 Bash（echo/rm .claude/）和只读 Bash（ls/cat/git status）无需分类
+> 0. **强制**：调用 `Skill("dev-il2cpp")` 加载入口技能，读取其 SKILL.md 获取路由指令和核心规则
+> 1. 输出分类声明（格式见上，`dev-il2cpp` 为固定首加载）→ `echo "..." > .claude/.classified`
+> 2. **🔴 强制阻断门**：分类声明后、任何工具使用前，必须按 dev-il2cpp 的路由协议加载对应知识
+>    — 单域：dev-il2cpp → 读对应 Expert 的 SKILL.md 注入领域知识
+>    — 多域（≥2）：dev-il2cpp → 读 `dev-il2cpp-core-agent` 的 SKILL.md 执行调度循环
+>    — 验证方式：`.claude/.classified` 文件必须含 `loaded_expert:<name>` 行，且首位必须是 `dev-il2cpp`
+> 3. 响应结束时：延续消息保留 `.classified`；新任务 `rm -f .claude/.classified`
+> 4. **Bash**: 管理 Bash（echo/rm .claude/）和只读 Bash（ls/cat/git status）无需分类
 
 ## 全局优先级（强制）
 

@@ -180,3 +180,22 @@ dev-il2cpp（.claude/skills/ 唯一入口）
 - 上游：无
 - 协作：`project-test-governance`、`test-driven-development`、`project-wiki-maintenance`
 - 下游：`brainstorming`、`roadmap`、`writing-plans`、`executing-plans`、`systematic-debugging`
+
+## 加载确认（强制）
+
+读取本 SKILL.md 后，**立即执行以下操作**以完成加载：
+
+1. 确认 `.claude/.classified` 已存在（由分类声明 echo 创建）
+2. 确认其内容含单行 `loaded_expert` 标记，格式为：
+   ```
+   格式示例: loaded_expert:dev-il2cpp→dev-il2cpp-codegen-expert
+   ```
+   其中 `dev-il2cpp` 必须在 `→` 分隔的首位
+3. 按上方 **路由协议** 找到域名对应 Expert，继续读取其 SKILL.md
+4. 读取完所有 Expert 的 SKILL.md 后，确认 `.claude/.classified` 中已写入完整标记：
+   ```bash
+   echo "本轮任务涉及 CodeGen(4) ，fix 操作，第 1 轮 → 加载 dev-il2cpp → dev-il2cpp-codegen-expert" > .claude/.classified
+   echo 'loaded_expert:dev-il2cpp→dev-il2cpp-codegen-expert' >> .claude/.classified
+   ```
+
+> ⚠️ 不执行此步骤会导致 hook 阻断后续工具调用。`dev-il2cpp` 必须出现在 `loaded_expert:` 行的首位。

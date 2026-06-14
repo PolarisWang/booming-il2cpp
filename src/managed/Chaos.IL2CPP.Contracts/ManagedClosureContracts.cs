@@ -5,7 +5,15 @@ public sealed record ManagedClosureRequest(
     string OutputRootPath,
     string? EntryPointSubjectIdOverride = null,
     IReadOnlyList<string>? AdditionalAssemblyPaths = null,
-    bool FullAssemblyClosure = false);
+    bool FullAssemblyClosure = false)
+{
+    /// <summary>
+    /// Optional set of SubjectIds to limit lowering to only these methods
+    /// plus their direct callees. When null or empty, all methods in the
+    /// assembly are lowered (default behavior).
+    /// </summary>
+    public IReadOnlySet<string>? SubjectMethodIds { get; init; }
+}
 
 /// <summary>
 /// Request to process multiple assemblies in a single pipeline run.
