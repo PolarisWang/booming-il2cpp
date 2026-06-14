@@ -247,12 +247,11 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     )
     value_suspicious = value_warnings > 0
 
-    # UPGRADE: value_suspicious indicates some methods returned negative values
-    # despite passing — this is suspicious and should not be hidden behind a
-    # clean "passed" status.  Demote to "partial" so it shows in dashboards.
-    if value_suspicious and status == "passed":
-        status = "partial"
-        print(f"  [fact] Demoting status to partial: {value_warnings} method(s) returned negative values")
+    # Negative return values despite passing assertions are data anomalies —
+    # append to errors so the pipeline fails rather than silently demoting status.
+    if value_suspicious:
+        errors.append(f"{value_warnings} method(s) returned negative values")
+        print(f"  [fact] ERROR: {value_warnings} method(s) returned negative values")
 
     # ── Write fact history (_dll/reports/history/fact-YYYY-MM-DD.jsonl) ──
     _write_fact_history(ctx, aot_result, jit_result)

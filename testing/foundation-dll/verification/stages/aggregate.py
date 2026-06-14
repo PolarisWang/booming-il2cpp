@@ -138,24 +138,19 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         1 for s in chunk_summaries
         if s.get("fact", {}).get("valueSuspicious", False)
     )
-    # Track chunks with severe metadata mismatch (metaTotal >> total).
-    # Small gaps are expected: void methods (A3 "no crash" assertions) contribute
-    # to metaTotal but don't produce individual fact results.  Flag when
-    # the gap exceeds 50% (fewer than half of declared methods produce results).
-    # Also emit a per-chunk advisory WARN for any gap >20%.
+    # Track chunks with metadata mismatch: C++ fact total must exactly
+    # match managed fact metaTotal.  Any gap is an error — if managed
+    # verified a method, C++ must verify it too.
     chunks_with_meta_mismatch = 0
     for s in chunk_summaries:
         fact = s.get("fact", {})
         meta = fact.get("factMethodCount") if fact.get("factMethodCount") is not None else fact.get("metaTotal")
         total = s.get("fact", {}).get("total")
         if meta is not None and meta > 0 and total is not None and total != meta:
-            ratio = total / meta
-            if ratio < 0.5:
-                chunks_with_meta_mismatch += 1
-            if ratio < 0.8:
-                chunk_slug = s.get("info", {}).get("slug", "?")
-                meta_label = "factMethodCount" if s.get("fact", {}).get("factMethodCount") else "metaTotal"
-                print(f"  [aggregate] WARN: {chunk_slug} fact total={total} < {meta_label}={meta} (ratio={ratio:.0%})")
+            chunks_with_meta_mismatch += 1
+            chunk_slug = s.get("info", {}).get("slug", "?")
+            meta_label = "factMethodCount" if s.get("fact", {}).get("factMethodCount") else "metaTotal"
+            print(f"  [aggregate] ERROR: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={meta - total})")
 
     # ── Compute aggregate benchmark performance ──
     chunks_with_benchmark = [s.get("benchmark", {}) for s in chunk_summaries if "methodCount" in s.get("benchmark", {})]
@@ -303,20 +298,20 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     print(f"  [aggregate] Benchmark: {total_benchmarked} methods")
     print(f"  [aggregate] Done ({duration_ms}ms)")
 
-    # UPGRADE: severe metadata mismatch (>50% gap) or value warnings
-    # make aggregate partial rather than hiding issues behind a clean "passed".
-    aggregate_status = "passed"
+    # Metadata mismatch = C++ fact didn't cover all managed methods — hard error.
+    # Value warnings = methods returned negative values — also a hard error.
+    aggregate_errors = []
     if chunks_with_meta_mismatch > 0:
-        aggregate_status = "partial"
-    if chunks_with_value_warnings > 0 and aggregate_status == "passed":
-        aggregate_status = "partial"
+        aggregate_errors.append(f"{chunks_with_meta_mismatch} meta-mismatch")
+    if chunks_with_value_warnings > 0:
+        aggregate_errors.append(f"{chunks_with_value_warnings} value-warn")
 
-    # Build summary suffix for partial status details
-    partial_reasons = []
-    if chunks_with_meta_mismatch:
-        partial_reasons.append(f"{chunks_with_meta_mismatch} meta-mismatch")
-    if chunks_with_value_warnings:
-        partial_reasons.append(f"{chunks_with_value_warnings} value-warn")
+    aggregate_status = "passed"
+    if aggregate_errors:
+        aggregate_status = "error"
+
+    # Build summary suffix for error status details
+    partial_reasons = aggregate_errors
 
     return StageResult(
         stage="aggregate", status=aggregate_status,

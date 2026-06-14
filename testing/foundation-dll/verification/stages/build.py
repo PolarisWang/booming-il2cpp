@@ -219,6 +219,7 @@ def _compile_custom_subjects(
         for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
             print(f"      {line}")
         if tfm != "net8.0":
+            print(f"  [build] Retrying with net8.0 fallback (original TFM={tfm} failed)")
             return _compile_custom_subjects(
                 custom_cs_files, subjects_dll, "net8.0", sdk_csproj)
         return None
