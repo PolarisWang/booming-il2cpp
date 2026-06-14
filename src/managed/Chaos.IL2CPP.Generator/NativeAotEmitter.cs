@@ -347,8 +347,10 @@ public sealed class NativeAotEmitter
         sb.Append("    void*     ret_buf) noexcept;\n");
         sb.Append("\n#pragma warning(push)\n");
         sb.Append("#pragma warning(disable: 4065 4244)\n");
+        sb.Append("#ifdef __GNUC__\n");
         sb.Append("#pragma GCC diagnostic push\n");
         sb.Append("#pragma GCC diagnostic ignored \"-Wunused-variable\"\n");
+        sb.Append("#endif\n");
         sb.Append("\nnamespace chaos::il2cpp::codegen::");
         sb.Append(templateModel.CodegenNamespace);
         sb.Append(" {\n\n");
@@ -423,7 +425,9 @@ public sealed class NativeAotEmitter
         sb.Append("\n}  // namespace chaos::il2cpp::codegen::");
         sb.Append(templateModel.CodegenNamespace);
         sb.Append('\n');
+        sb.Append("#ifdef __GNUC__\n");
         sb.Append("#pragma GCC diagnostic pop\n");
+        sb.Append("#endif\n");
         sb.Append("#pragma warning(pop)\n\n");
 
         // Global declarations + entry function code (outside namespace)
