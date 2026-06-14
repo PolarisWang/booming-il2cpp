@@ -36,8 +36,12 @@ from verification.orchestration.context import ChunkContext, StageResult
 from verification.orchestration.discovery import discover_chunks
 from verification.stages.build import run_build
 from verification.stages.fact_chunk import run_fact_chunk
+from verification.stages.profile import run_profile
 from verification.stages.benchmark_chunk import run_benchmark_chunk
+from verification.stages.managed_benchmark import run_managed_benchmark
 from verification.stages.hotupdate_chunk import run_hotupdate_chunk
+from verification.stages.benchmark_report import run_benchmark_report
+from verification.stages.coverage_audit import run_coverage_audit
 from verification.stages.aggregate import run_aggregate
 from verification.stages.reporting import run_reporting
 
@@ -135,15 +139,21 @@ def _run_chunk_stages(
     stage_order = [
         ("build", run_build),
         ("fact", run_fact_chunk),
+        ("profile", run_profile),
         ("benchmark", run_benchmark_chunk),
+        ("managed_benchmark", run_managed_benchmark),
         ("hotupdate", run_hotupdate_chunk),
+        ("benchmark_report", run_benchmark_report),
+        ("coverage_audit", run_coverage_audit),
     ]
+
+    serialized_stages = {"benchmark", "managed_benchmark"}
 
     for stage_name, stage_fn in stage_order:
         if verbose:
             print(f"\n  [nightly] [{assembly}/{slug}] {stage_name}...")
         try:
-            if stage_name == "benchmark":
+            if stage_name in serialized_stages:
                 # Benchmark must be serialized — acquire lock
                 if verbose:
                     print(f"  [nightly] [{assembly}/{slug}] waiting for benchmark lock...")

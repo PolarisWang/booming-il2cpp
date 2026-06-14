@@ -132,11 +132,14 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
         if build_st in ("failed", "not_run"):
             build_failed.append(f"{asm_name}/{slug} ({build_st})")
         ft = cd.get("factTotal", 0)
-        if ft == 0 and cd.get("coverageGap", 0) > 0:
-            no_fact.append(f"{asm_name}/{slug} (metaTotal={cd['coverageGap']})")
-        elif cd.get("coverageGap", 0) > 10:
-            gap_pct = cd["coverageGap"] / (cd["coverageGap"] + ft) * 100
-            large_gap.append(f"{asm_name}/{slug} gap={cd['coverageGap']} ({gap_pct:.0f}%)")
+        gap = cd.get("coverageGap")
+        if gap is None:
+            no_fact.append(f"{asm_name}/{slug} (no fact data)")
+        elif ft == 0 and gap > 0:
+            no_fact.append(f"{asm_name}/{slug} (metaTotal={gap})")
+        elif gap is not None and gap > 10:
+            gap_pct = gap / (gap + ft) * 100
+            large_gap.append(f"{asm_name}/{slug} gap={gap} ({gap_pct:.0f}%)")
 
     if build_failed:
         lines.append(f"#### Build Failures ❌ ({len(build_failed)})")

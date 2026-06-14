@@ -134,10 +134,12 @@ def compute_assembly_delta(
             delta["factDelta"] = None
 
         # Coverage gap: metaTotal - total
-        t_gap = max(0, (tf.get("metaTotal", 0) or 0) - t_total)
-        p_gap = max(0, (pf.get("metaTotal", 0) or 0) - p_total)
+        t_meta = tf.get("metaTotal") if tf.get("metaTotal") is not None else None
+        t_gap = max(0, t_meta - t_total) if t_meta is not None and t_total > 0 else None
+        p_meta = pf.get("metaTotal") if pf.get("metaTotal") is not None else None
+        p_gap = max(0, p_meta - p_total) if p_meta is not None and p_total > 0 else None
         delta["coverageGap"] = t_gap
-        if delta["status"] == "compared":
+        if delta["status"] == "compared" and t_gap is not None and p_gap is not None:
             delta["coverageGapDelta"] = t_gap - p_gap
         else:
             delta["coverageGapDelta"] = None
@@ -214,7 +216,7 @@ def compute_assembly_delta(
         "totalBenchmarked": today_summary.get("totalBenchmarkedMethods", 0),
         "benchComparison": today_summary.get("benchmarkComparison", {}),
         "hotupdate": today_summary.get("hotupdate", {}),
-        "totalCoverageGap": sum(c.get("coverageGap", 0) for c in per_chunk.values()),
+        "totalCoverageGap": sum(c.get("coverageGap") or 0 for c in per_chunk.values()),
         "hasPrevious": prev_path is not None,
         "previousDate": prev_date,
     }
