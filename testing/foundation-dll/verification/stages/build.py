@@ -400,6 +400,13 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     if runtime_base:
         for runtime_dir in sorted(runtime_base.rglob(f"**/{ctx.assembly}.dll")):
             dll_candidates.insert(0, runtime_dir)
+        # Also search reference assembly packs (e.g. System.ObjectModel.dll)
+        packs_base = Path(dotnet_root) / "packs"
+        if packs_base.exists():
+            for pack_dir in sorted(packs_base.rglob(f"**/{ctx.assembly}.dll")):
+                dll_candidates.append(pack_dir)
+        # Prefer Microsoft.NETCore.App.Ref over NETStandard.Library.Ref
+        dll_candidates.sort(key=lambda p: 1 if "NETStandard" in str(p) else 0)
 
     target_dll: Path | None = None
     for c in dll_candidates:
