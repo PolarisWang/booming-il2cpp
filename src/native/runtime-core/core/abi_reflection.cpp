@@ -1,5 +1,14 @@
 // Required forward declarations: ChaosRegisterGcLayouts etc.
 #include "chaos_runtime_host.h"
+// Forward declarations for standalone compilation (normally from unity build)
+namespace chaos::il2cpp::runtime_core {
+bool IsAttached(RuntimeState*, ThreadState*);
+inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) noexcept {
+    // FatHeader if bit 0 set, else PureHeader
+    return (flags & 1) ? sizeof(void*) * 4 : sizeof(void*) * 2;
+}
+}
+
 #include <generic_context.h>
 #include <bootstrap.h>
 #include <instantiation_engine.h>
