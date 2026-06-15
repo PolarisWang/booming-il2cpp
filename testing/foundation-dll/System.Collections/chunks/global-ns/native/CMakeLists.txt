@@ -181,12 +181,6 @@ set(CHAOS_METHOD_REPLACEMENT
 set(CHAOS_JIT_DATA_LOADER
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/jit_data_loader.cpp"
 )
-# abi_reflection.cpp — the prebuilt chaos_runtime_core.lib may have nullptr
-# ABI entries.  Compile locally so runtime fixes take effect.  /FORCE:MULTIPLE
-# allows the linker to pick the local definition over the prebuilt one.
-set(CHAOS_ABI_REFLECTION
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/abi_reflection.cpp"
-)
 # profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
 # missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
 # symbols added after the SDK was last rebuilt.  Compile locally.
@@ -215,7 +209,6 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EAGER_COMPILE}
     ${CHAOS_METHOD_REPLACEMENT}
     ${CHAOS_JIT_DATA_LOADER}
-    ${CHAOS_ABI_REFLECTION}
     ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
@@ -257,12 +250,12 @@ target_link_libraries(chaos_entry PRIVATE chaos::runtime
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
 # MSVC: chaos_hot_update.lib references SetPatchedBySlot from
-# chaos_runtime_core.lib. /WHOLEARCHIVE forces MSVC to include ALL
-# objects from the runtime core lib, not just those needed by the
-# first pass (MSVC processes static libs left-to-right without rescan).
+# chaos_runtime_core.lib. Use targeted /INCLUDE instead of
+# /WHOLEARCHIVE (which would force ALL objects including the
+# old abi_reflection.obj with nullptr ABI entries, overriding
+# the locally-compiled fix).
 if(MSVC)
   target_link_libraries(chaos_entry PRIVATE bcrypt)
-  target_link_options(chaos_entry PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
 
 endif()
 # OpenSSL: needed by crypto_stubs.cpp on Linux (SHA/HMAC via libcrypto).

@@ -98,3 +98,4 @@ using namespace chaos::il2cpp::marshal_abi;
 #include "core/struct_marshal_descriptors.cpp"
 #include "core/struct_marshal.cpp"
 #include "core/abi_export.cpp"
+#include "instantiation/aot_method_map.cpp"
