@@ -481,6 +481,23 @@ static void _ParseSubjectId(const char* sid,
 }
 
 /// Try to resolve a subject ID and call InterpreterEntryDirect.
+// SEH-safe wrapper around InterpreterEntryDirect for use inside _TryInvoke.
+// _TryInvoke has C++ objects (std::string) which prevent __try inside its body.
+// This helper has no C++ objects so __try is legal.
+static bool _TryInvokeInterpreterSafe(uintptr_t method_key) noexcept {
+    uint64_t args[4] = {}; uint64_t ret[2] = {};
+#if defined(_MSC_VER)
+    __try {
+        InterpreterEntryDirect(method_key, args, ret);
+    } __except(EXCEPTION_EXECUTE_HANDLER) {
+        return false;
+    }
+#else
+    InterpreterEntryDirect(method_key, args, ret);
+#endif
+    return true;
+}
+
 static bool _TryInvoke(const char* sid) noexcept
 {
     if (sid == nullptr) return false;
@@ -498,9 +515,7 @@ static bool _TryInvoke(const char* sid) noexcept
     auto* en = reg.GetDispatchEntryBySlot(mi, sl);
     if (en == nullptr) return false;
     if (en->method_key == 0) return false;
-    uint64_t args[4] = {}; uint64_t ret[2] = {};
-    InterpreterEntryDirect((uintptr_t)(en->method_key), args, ret);
-    return true;
+    return _TryInvokeInterpreterSafe(en->method_key);
 }
 
 /// Try to execute a crypto method via embedded IL data (kChaosExternalRuntimeIlData[]).
