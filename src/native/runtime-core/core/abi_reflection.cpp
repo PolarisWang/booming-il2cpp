@@ -1,36 +1,5 @@
 // Required forward declarations: ChaosRegisterGcLayouts etc.
 #include "chaos_runtime_host.h"
-#include <generic_context.h>
-#include <bootstrap.h>
-#include <instantiation_engine.h>
-
-// ── Forward declarations for functions defined in other .cpp files ──
-// These are used to populate the RuntimeAbiV0 dispatch table below.
-// Declarations were previously in the generated runtime_abi.h but that
-// file is now part of the per-chunk SDK rather than the runtime library.
-
-RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
-    const RuntimeInitParams* init_params,
-    const RuntimeConfig* config,
-    RuntimeState** out_runtime_state);
-void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state);
-RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
-    RuntimeState* runtime_state, ThreadState** out_thread_state);
-void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
-    RuntimeState* runtime_state, ThreadState* thread_state);
-void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
-    RuntimeState* runtime_state, ThreadState* thread_state, TypeInfoHandle type);
-void* CHAOS_RUNTIME_ABI_CALL ArrayNew(
-    RuntimeState* runtime_state, ThreadState* thread_state,
-    TypeInfoHandle element_type, uintptr_t length);
-void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
-    RuntimeState* runtime_state, ThreadState* thread_state,
-    const char* utf8_bytes, CHAOS_IL2CPP_UINTPTR byte_count);
-RuntimeStatus CHAOS_RUNTIME_ABI_CALL ClassInit(
-    RuntimeState* runtime_state, TypeInfoHandle type);
-RuntimeStatus CHAOS_RUNTIME_ABI_CALL TypeQueryCapabilityImpl(
-    TypeInfoHandle type, RuntimeTypeCapabilityInfoV0* out_capability_info);
-CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void);
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
@@ -315,77 +284,24 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL GenericContextGetMethodArg(
     return chaos::il2cpp::generic_context::GetMethodTypeArg(generic_context, index);
 }
 
-/* ── V1 ABI wrapper functions (type-safe bridges from void* to runtime types) ── */
-
-// register_module: void* descriptor → ModuleDescriptor*
-uint32_t CHAOS_RUNTIME_ABI_CALL RegisterModuleWrapper(
-    const char* name, const void* descriptor)
-{
-    return RegisterModule(name, static_cast<const ModuleDescriptor*>(descriptor));
-}
-
-// hotpatch_is_active: void* entry → HotpatchEntryV0&
-bool CHAOS_RUNTIME_ABI_CALL HotpatchIsActiveWrapper(const void* entry)
-{
-    return HotpatchIsActive(*static_cast<const HotpatchEntryV0*>(entry));
-}
-
-// hotpatch_should_keep_native: void* entry → HotpatchEntryV0&
-bool CHAOS_RUNTIME_ABI_CALL HotpatchShouldKeepNativeWrapper(const void* entry)
-{
-    return HotpatchShouldKeepNative(*static_cast<const HotpatchEntryV0*>(entry));
-}
-
-// raise_null_reference_exception: void wrapper
-void CHAOS_RUNTIME_ABI_CALL RaiseNullReferenceExceptionWrapper(void)
-{
-    RaiseNullReferenceException();
-}
-
-// external_runtime_fallback: CHAOS_IL2CPP_INTPTR → uintptr_t
-uintptr_t CHAOS_RUNTIME_ABI_CALL ChaosExternalRuntimeFallbackWrapper(
-    const char* subject_id)
-{
-    return static_cast<uintptr_t>(ChaosExternalRuntimeFallback(subject_id));
-}
-
-// interpreter_entry_direct: uintptr_t key → CHAOS_IL2CPP_UINTPTR
-void CHAOS_RUNTIME_ABI_CALL InterpreterEntryDirectWrapper(
-    uintptr_t method_key, void* args_buf, void* ret_buf)
-{
-    InterpreterEntryDirect(method_key, args_buf, ret_buf);
-}
-
-// register_hotpatch_module: void* module → HotpatchModuleV0*
-void CHAOS_RUNTIME_ABI_CALL RegisterHotpatchModuleWrapper(const void* module)
-{
-    RegisterHotpatchModule(static_cast<const HotpatchModuleV0*>(module));
-}
-
-// array_empty: CHAOS_IL2CPP_INTPTR → uintptr_t
-uintptr_t CHAOS_RUNTIME_ABI_CALL ChaosArrayEmptyWrapper(void)
-{
-    return static_cast<uintptr_t>(ChaosArrayEmpty());
-}
-
 
 /* ── V3 GC introspection no-ops ── */
 static int64_t CHAOS_RUNTIME_ABI_CALL _gc_total_memory_noop(RuntimeState*) { return 0; }
 static void CHAOS_RUNTIME_ABI_CALL _gc_pressure_noop(RuntimeState*, int64_t) {}
 /* ── V1 register_gc_layouts ── */
 static void CHAOS_RUNTIME_ABI_CALL _register_gc_noop(void) {}
-/* ── CHAOS_IL2CPP_INTPTR sentinel for V2 no-ops ── */
+/* ── V2 no-op sentinel ── */
 static uintptr_t _noop_sentinel;
 static uintptr_t CHAOS_RUNTIME_ABI_CALL _noop0() { return reinterpret_cast<uintptr_t>(&_noop_sentinel); }
 static uintptr_t CHAOS_RUNTIME_ABI_CALL _noop1(uintptr_t) { return reinterpret_cast<uintptr_t>(&_noop_sentinel); }
-static bool CHAOS_RUNTIME_ABI_CALL _noop_bool1(CHAOS_IL2CPP_INTPTR) { return false; }
-static void CHAOS_RUNTIME_ABI_CALL _noop_void1(CHAOS_IL2CPP_INTPTR) {}
-static void CHAOS_RUNTIME_ABI_CALL _noop_void3(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) {}
-
+static bool CHAOS_RUNTIME_ABI_CALL _noop_bool1(uintptr_t) { return false; }
+static void CHAOS_RUNTIME_ABI_CALL _noop_void1(uintptr_t) {}
+static void CHAOS_RUNTIME_ABI_CALL _noop_void3(uintptr_t, uintptr_t, uintptr_t) {}
 /* ── V2 GC handle no-ops ── */
 static GCHandle CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_new(RuntimeState*, void*, bool, bool) { return 0; }
 static void* CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_get(RuntimeState*, GCHandle) { return nullptr; }
 static void CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_set(RuntimeState*, GCHandle, void*) {}
+
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),
@@ -417,43 +333,51 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &GenericContextGetClassArg,
     &GenericContextGetMethodArgCount,
     &GenericContextGetMethodArg,
-    &_gc_handle_noop_new,
-    &_gc_handle_noop_get,
-    &_gc_handle_noop_set,
-    &_gc_total_memory_noop,  // gc_get_total_memory
-    &_gc_pressure_noop,  // gc_add_memory_pressure
-    &_gc_pressure_noop,  // gc_remove_memory_pressure
-    &RegisterModuleWrapper,
-    &HotpatchIsActiveWrapper,
-    &HotpatchShouldKeepNativeWrapper,
-    &RaiseNullReferenceExceptionWrapper,
-    &ChaosExternalRuntimeFallbackWrapper,
-    &InterpreterEntryDirectWrapper,
-    &_register_gc_noop,  // register_gc_layouts
-    &RegisterHotpatchModuleWrapper,
-    &ChaosArrayEmptyWrapper,
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
+    /* Extended GC handle helpers (V2) — null, filled at runtime by codegen bridge */
+    nullptr,  // gc_handle_new_ex
+    nullptr,  // gc_handle_get
+    nullptr,  // gc_handle_set
+    /* GC memory introspection (V3) */
+    nullptr,  // gc_get_total_memory
+    nullptr,  // gc_add_memory_pressure
+    nullptr,  // gc_remove_memory_pressure
+    /* Interop kernel32 */
+    nullptr,  // interop_kernel32_get_last_error
+    nullptr,  // interop_kernel32_get_current_process_id
+    nullptr,  // interop_kernel32_get_current_thread_id
+    nullptr,  // interop_kernel32_get_current_process
+    nullptr,  // interop_kernel32_get_current_thread
+    nullptr,  // interop_kernel32_close_handle
+    nullptr,  // interop_kernel32_free_library
+    /* Marshal alloc/free/realloc */
+    nullptr,  // marshal_alloc_h_global
+    nullptr,  // marshal_alloc_co_task_mem
+    nullptr,  // marshal_realloc_h_global
+    nullptr,  // marshal_realloc_co_task_mem
+    nullptr,  // marshal_free_h_global
+    nullptr,  // marshal_zero_free_co_task_mem_utf8
+    nullptr,  // marshal_string_to_co_task_mem_utf8
+    /* Task kernel */
+    nullptr,  // task_kernel_new_id
+    /* V1 additions: dispatch, hotpatch, module, type registration */
+    /* Wrappers: match RuntimeAbiV0 function pointer signatures
+     * (plain C pointers, not C++ references or namespaced types). */
+    [](const char* name, const struct ::ModuleDescriptor* descriptor) -> uint32_t {
+        return RegisterModule(name, reinterpret_cast<const chaos::il2cpp::runtime_core::ModuleDescriptor*>(descriptor));
+    },
+    [](const struct ::HotpatchEntryV0* entry) -> bool {
+        return HotpatchIsActive(*entry);
+    },
+    [](const struct ::HotpatchEntryV0* entry) -> bool {
+        return HotpatchShouldKeepNative(*entry);
+    },
+    &RaiseNullReferenceException,
+    &ChaosExternalRuntimeFallback,
+    &InterpreterEntryDirect,
+    &ChaosRegisterGcLayouts,
+    &RegisterHotpatchModule,
+    &ChaosArrayEmpty,
 };
-
 
 }  // anonymous namespace
 
