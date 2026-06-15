@@ -251,12 +251,13 @@ target_link_libraries({{ project_name }} PRIVATE chaos::runtime
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
 # MSVC: chaos_hot_update.lib references SetPatchedBySlot from
-# chaos_runtime_core.lib. /WHOLEARCHIVE forces MSVC to include ALL
-# objects from the runtime core lib, not just those needed by the
-# first pass (MSVC processes static libs left-to-right without rescan).
+# chaos_runtime_core.lib. Use targeted /INCLUDE instead of
+# /WHOLEARCHIVE (which would force ALL objects including the
+# old abi_reflection.obj with nullptr ABI entries, overriding
+# the locally-compiled fix).
 if(MSVC)
   target_link_libraries({{ project_name }} PRIVATE bcrypt)
-  target_link_options({{ project_name }} PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
+  target_link_options({{ project_name }} PRIVATE "/INCLUDE:SetPatchedBySlot" "/INCLUDE:Unpatch")
 {{ if is_jit }}
   target_link_options({{ project_name }} PRIVATE /STACK:8388608)
 {{ end }}
