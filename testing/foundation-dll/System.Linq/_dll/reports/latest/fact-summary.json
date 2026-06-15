@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Linq",
-  "timestamp": "2026-06-14T15:47:47",
+  "timestamp": "2026-06-15T06:04:22",
   "totalChunks": 1,
   "chunksWithFacts": 0,
   "chunksWithValueWarnings": 0,
@@ -13,13 +13,31 @@
         "status": "no_results"
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 10,
+        "iterations": 100,
+        "meanDurationMs": 18.44831,
+        "meanOpsPerSecond": 36336214.466,
+        "minDurationMs": 0.002,
+        "maxDurationMs": 92.6984,
+        "totalDurationMs": 184.4831,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 5.0,
+        "totalOutliers": 10,
+        "meanCv": 0.1875013,
+        "maxCv": 0.305505
       },
       "hotupdate": {
-        "status": "no_results"
-      },
-      "build": {
-        "status": "not_run"
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": -4,
+        "patchDataUsed": false,
+        "patchFailed": false,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       }
     }
   ]

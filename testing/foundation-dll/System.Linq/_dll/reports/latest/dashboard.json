@@ -1,18 +1,23 @@
 {
   "assemblyName": "System.Linq",
-  "timestamp": "2026-06-14T15:47:47",
+  "timestamp": "2026-06-15T06:04:22",
   "summary": {
     "chunks": 1,
     "chunksVerified": 0,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 0,
     "factPassRate": 0,
-    "totalBenchmarkedMethods": 0,
-    "aggregatePerformance": {},
+    "totalBenchmarkedMethods": 10,
+    "aggregatePerformance": {
+      "meanDurationMs": 18.44831,
+      "meanOpsPerSecond": 36336214.466,
+      "aggregateMeanCv": 0.1875013,
+      "totalOutliers": 10
+    },
     "hotupdate": {
       "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
-      "chunksWithRevertFailure": 0,
+      "chunksWithRevertFailure": 1,
       "totalPassed": 0,
       "totalFailed": 0,
       "skipBreakdown": {}

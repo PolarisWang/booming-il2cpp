@@ -1395,19 +1395,6 @@ inline TCarrier VectorFixedClampNative(const TCarrier& value, const TCarrier& mi
     return result;
 }
 
-// ── Conversions ──
-
-template <typename TFromScalar, typename TToScalar, typename TFromCarrier, typename TToCarrier>
-inline TToCarrier VectorFixedConvertToVector(const TFromCarrier& value) {
-    constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TFromCarrier) / sizeof(TFromScalar);
-    TToCarrier result{};
-    const TFromScalar* sl = reinterpret_cast<const TFromScalar*>(&value);
-    TToScalar* rl = reinterpret_cast<TToScalar*>(&result);
-    for (CHAOS_IL2CPP_SIZE i = 0; i < lane_count; ++i)
-        rl[i] = static_cast<TToScalar>(sl[i]);
-    return result;
-}
-
 template <typename TFromScalar, typename TFromCarrier, typename TToCarrier>
 inline TToCarrier VectorFixedWiden(const TFromCarrier& value) {
     constexpr CHAOS_IL2CPP_SIZE lane_count = sizeof(TFromCarrier) / sizeof(TFromScalar);

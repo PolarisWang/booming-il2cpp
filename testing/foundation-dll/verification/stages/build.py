@@ -67,17 +67,17 @@ static int RunProfileMode() {
 
 """
 
-_PROFILE_MODE_CLI = '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\\n'
+_PROFILE_MODE_CLI = '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n'
 
 
 def _inject_profile_mode(native_dir: Path) -> None:
-    \"\"\"Inject --profile mode into runtime-entry.cpp after TPG generation.
+    """Inject --profile mode into runtime-entry.cpp after TPG generation.
 
     The TPG generates runtime-entry.cpp without --profile support even though
     the native infrastructure (profile_stats.h, ProfileStoreInit, ProfileEmitJson)
     is compiled in when CHAOS_IL2CPP_CONFIG_TIER=profile. This function patches
     the generated file to add the missing RunProfileMode() function and CLI handler.
-    \"\"\"
+    """
     entry_path = native_dir / "runtime-entry.cpp"
     if not entry_path.exists():
         print(f"  [build] [profile-inject] runtime-entry.cpp not found at {entry_path}, skipping")
@@ -89,7 +89,7 @@ def _inject_profile_mode(native_dir: Path) -> None:
     if '#include <profile_stats.h>' not in content:
         content = content.replace(
             '#include <gc/gc_api.h>',
-            '#include <gc/gc_api.h>\\n#include <profile_stats.h>')
+            '#include <gc/gc_api.h>\n#include <profile_stats.h>')
         print(f"  [build] [profile-inject] added #include <profile_stats.h>")
 
     # 2. Inject RunProfileMode() before int main()
@@ -103,7 +103,7 @@ def _inject_profile_mode(native_dir: Path) -> None:
     if '--profile' not in content:
         content = content.replace(
             'printf("Unknown flag: %s\\n", argv[1]);',
-            '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\\n    printf("Unknown flag: %s\\n", argv[1]);')
+            '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n    printf("Unknown flag: %s\\n", argv[1]);')
         print(f"  [build] [profile-inject] added --profile CLI handler")
 
     entry_path.write_text(content, encoding="utf-8")
