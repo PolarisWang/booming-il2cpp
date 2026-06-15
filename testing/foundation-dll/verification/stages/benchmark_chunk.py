@@ -146,13 +146,15 @@ def _compute_summary(stats: list[dict]) -> dict:
     }
 
 
-def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
+def _parse_benchmark_lines(stdout: str | bytes) -> tuple[list[dict], dict]:
     """Parse line-by-line JSON benchmark output from entry.exe stdout.
 
     Each method produces one complete JSON line ending with \n.
     The last line is {"summary":{...}}.
     Stray lines that aren't valid JSON are silently skipped.
     """
+    if isinstance(stdout, bytes):
+        stdout = stdout.decode("utf-8", errors="replace")
     lines = stdout.strip().split('\n')
     results = []
     summary = {}
@@ -231,11 +233,12 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int,
         )
     except subprocess.TimeoutExpired as e:
         partial = e.stdout  # partial stdout captured before timeout
+        partial_str = partial.decode("utf-8", errors="replace") if isinstance(partial, bytes) else (partial or "")
         # Always return a CompletedProcess, even with empty stdout, so the
         # benchmark can continue past hanging methods (e.g. WaitHandle.WaitOne).
         return subprocess.CompletedProcess(
             args=e.cmd, returncode=-1,
-            stdout=partial or "", stderr=e.stderr or "",
+            stdout=partial_str, stderr=e.stderr or "",
         )
 
 
