@@ -4495,10 +4495,12 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		builder.AppendLine($"{indentation}    else");
 		builder.AppendLine($"{indentation}    {{");
 		string nativeTarget = directNativeSymbol ?? targetSymbol;
-		// Collect chaos_external_runtime_* symbols for fallback declarations
-					Console.Error.WriteLine($"[CODEGEN-DEBUG-HOTPATCH] nativeTarget={nativeTarget}");
-if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-			builder.AppendLine($"{indentation}    extern " + (hasReturn ? (returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float32 ? "float" : returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float64 ? "double" : "CHAOS_IL2CPP_INTPTR") : "void") + " {nativeTarget}() noexcept;");
+		// Collect chaos_external_runtime_* symbols for file-scope static inline stubs.
+		// Do NOT emit a block-scope extern declaration — it conflicts with the
+		// file-scope extern "C" declaration that has the correct parameter list,
+		// causing C2733 (cannot overload extern "C" with mismatched params).
+		if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+			_emittedExternalRuntimeSymbols[nativeTarget] = returnAbi.CarrierKindCode;
 		// Append hidden chaos_generic_context for shared canonical targets.
 		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
 		string hpCtxArg = "";
