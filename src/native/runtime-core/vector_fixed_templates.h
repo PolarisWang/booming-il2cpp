@@ -1861,6 +1861,10 @@ inline TCarrier VectorFixedRound(const TCarrier& value) {
     }
     return result;
 }
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedRound(const TCarrier& value, CHAOS_IL2CPP_INTPTR) {
+    return VectorFixedRound<TScalar, TCarrier>(value);
+}
 
 // ── StoreUnsafe (write carrier to memory) ──
 template <typename TCarrier>
@@ -1962,7 +1966,7 @@ inline TCarrier VectorFixedShuffle(const TCarrier& value, const TCarrier& indice
     auto* rl = reinterpret_cast<TScalar*>(&result);
     for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
         CHAOS_IL2CPP_INT32 idx = il[i];
-        rl[i] = (idx >= 0 && static_cast<CHAOS_IL2CPP_SIZE>(idx) < N) ? sl[idx] : static_cast<TScalar>(0);
+        rl[i] = (idx >= 0 && static_cast<CHAOS_IL2CPP_SIZE>(idx) < N) ? sl[idx] : TScalar();
     }
     return result;
 }
