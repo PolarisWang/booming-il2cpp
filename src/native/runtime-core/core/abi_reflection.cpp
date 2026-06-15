@@ -284,31 +284,24 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL GenericContextGetMethodArg(
     return chaos::il2cpp::generic_context::GetMethodTypeArg(generic_context, index);
 }
 
-
 /* ── V3 GC introspection no-ops ── */
-static int64_t CHAOS_RUNTIME_ABI_CALL _gc_total_memory_noop(RuntimeState*) { return 0; }
-static void CHAOS_RUNTIME_ABI_CALL _gc_pressure_noop(RuntimeState*, int64_t) {}
-/* ── V1 register_gc_layouts ── */
-static void CHAOS_RUNTIME_ABI_CALL _register_gc_noop(void) {}
-/* ── V2 no-op sentinel ── */
-static uintptr_t _noop_sentinel;
-static uintptr_t CHAOS_RUNTIME_ABI_CALL _noop0() { return reinterpret_cast<uintptr_t>(&_noop_sentinel); }
-static uintptr_t CHAOS_RUNTIME_ABI_CALL _noop1(uintptr_t) { return reinterpret_cast<uintptr_t>(&_noop_sentinel); }
-static bool CHAOS_RUNTIME_ABI_CALL _noop_bool1(uintptr_t) { return false; }
-static void CHAOS_RUNTIME_ABI_CALL _noop_void1(uintptr_t) {}
-static void CHAOS_RUNTIME_ABI_CALL _noop_void3(uintptr_t, uintptr_t, uintptr_t) {}
+static int64_t CHAOS_RUNTIME_ABI_CALL _gc_mem_noop(RuntimeState*) { return 0; }
+static void CHAOS_RUNTIME_ABI_CALL _gc_press_noop(RuntimeState*, int64_t) {}
+/* ── V1 register_gc_layouts no-op ── */
+static void CHAOS_RUNTIME_ABI_CALL _reg_gc_noop(void) {}
 /* ── V2 GC handle no-ops ── */
-static GCHandle CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_new(RuntimeState*, void*, bool, bool) { return 0; }
-static void* CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_get(RuntimeState*, GCHandle) { return nullptr; }
-static void CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_set(RuntimeState*, GCHandle, void*) {}
+static GCHandle CHAOS_RUNTIME_ABI_CALL _hnew_noop(RuntimeState*, void*, bool, bool) { return 0; }
+static void* CHAOS_RUNTIME_ABI_CALL _hget_noop(RuntimeState*, GCHandle) { return nullptr; }
+static void CHAOS_RUNTIME_ABI_CALL _hset_noop(RuntimeState*, GCHandle, void*) {}
+/* ── V3/V2 extended no-ops ── */
+static uintptr_t _sentinel;
+static uintptr_t CHAOS_RUNTIME_ABI_CALL _n0() { return reinterpret_cast<uintptr_t>(&_sentinel); }
+static uintptr_t CHAOS_RUNTIME_ABI_CALL _n1(uintptr_t) { return reinterpret_cast<uintptr_t>(&_sentinel); }
+static bool CHAOS_RUNTIME_ABI_CALL _n_bool(uintptr_t) { return false; }
+static void CHAOS_RUNTIME_ABI_CALL _n_void1(uintptr_t) {}
+static void CHAOS_RUNTIME_ABI_CALL _n_void3(uintptr_t, uintptr_t, uintptr_t) {}
 
-
-{ /* balance */ }  // anonymous namespace
-
-const RuntimeAbiV0* GetRuntimeAbiV0() {
-    // Function-local static: initialized on first call to avoid static init
-    // order fiasco with generated code dynamic initializers.
-    static const RuntimeAbiV0 s_runtime_abi_v0 = 
+const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),
     &RuntimeInit,
@@ -340,31 +333,31 @@ const RuntimeAbiV0* GetRuntimeAbiV0() {
     &GenericContextGetMethodArgCount,
     &GenericContextGetMethodArg,
     /* Extended GC handle helpers (V2) — null, filled at runtime by codegen bridge */
-    nullptr,  // gc_handle_new_ex
-    nullptr,  // gc_handle_get
-    nullptr,  // gc_handle_set
+    &_hnew_noop,
+    &_hget_noop,
+    &_hset_noop,
     /* GC memory introspection (V3) */
-    nullptr,  // gc_get_total_memory
-    nullptr,  // gc_add_memory_pressure
-    nullptr,  // gc_remove_memory_pressure
+    &_gc_mem_noop,
+    &_gc_press_noop,
+    &_gc_press_noop,
     /* Interop kernel32 */
-    nullptr,  // interop_kernel32_get_last_error
-    nullptr,  // interop_kernel32_get_current_process_id
-    nullptr,  // interop_kernel32_get_current_thread_id
-    nullptr,  // interop_kernel32_get_current_process
-    nullptr,  // interop_kernel32_get_current_thread
-    nullptr,  // interop_kernel32_close_handle
-    nullptr,  // interop_kernel32_free_library
+    &_n0,  // interop_kernel32_get_last_error
+    &_n0,  // interop_kernel32_get_current_process_id
+    &_n0,  // interop_kernel32_get_current_thread_id
+    &_n0,  // interop_kernel32_get_current_process
+    &_n0,  // interop_kernel32_get_current_thread
+    &_n1,  // interop_kernel32_close_handle
+    &_n1,  // interop_kernel32_free_library
     /* Marshal alloc/free/realloc */
-    nullptr,  // marshal_alloc_h_global
-    nullptr,  // marshal_alloc_co_task_mem
-    nullptr,  // marshal_realloc_h_global
-    nullptr,  // marshal_realloc_co_task_mem
-    nullptr,  // marshal_free_h_global
-    nullptr,  // marshal_zero_free_co_task_mem_utf8
-    nullptr,  // marshal_string_to_co_task_mem_utf8
+    &_n1,  // marshal_alloc_h_global
+    &_n1,  // marshal_alloc_co_task_mem
+    &_n1,  // marshal_realloc_h_global
+    &_n1,  // marshal_realloc_co_task_mem
+    &_n_void1,  // marshal_free_h_global
+    &_n_void1,  // marshal_zero_free_co_task_mem_utf8
+    &_n1,  // marshal_string_to_co_task_mem_utf8
     /* Task kernel */
-    nullptr,  // task_kernel_new_id
+    &_n0,  // task_kernel_new_id
     /* V1 additions: dispatch, hotpatch, module, type registration */
     /* Wrappers: match RuntimeAbiV0 function pointer signatures
      * (plain C pointers, not C++ references or namespaced types). */
@@ -384,10 +377,12 @@ const RuntimeAbiV0* GetRuntimeAbiV0() {
     &RegisterHotpatchModule,
     &ChaosArrayEmpty,
 };
-    return &s_runtime_abi_v0;
+
+}  // anonymous namespace
+
+const RuntimeAbiV0* GetRuntimeAbiV0() {
+    return &kRuntimeAbiV0;
 }
-
-
 
 const MarshalPlatformAbiRootV1* GetMarshalPlatformAbiRootV1() {
     return &kMarshalPlatformAbiRootV1;

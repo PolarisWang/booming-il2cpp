@@ -301,7 +301,6 @@ else()
 endif()
 target_include_directories(chaos_runtime_core PRIVATE
     "${REPO_ROOT}/src/native"
-    "${REPO_ROOT}/src/native/bootstrap"
     "${REPO_ROOT}/src/native/diagnostics"
     "${REPO_ROOT}/src/native/pal"
     "${REPO_ROOT}/third_party/fmt/include")
