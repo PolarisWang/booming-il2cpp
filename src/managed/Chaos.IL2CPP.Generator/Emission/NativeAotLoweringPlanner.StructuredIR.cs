@@ -1822,7 +1822,9 @@ public sealed partial class NativeAotLoweringPlanner
     {
         body = null;
         maxDepth = 0;
-        if (instructions.Count == 0)
+        try
+        {
+            if (instructions.Count == 0)
         {
             body = new IRSequence(Array.Empty<StructuredIRNode>());
             return true;
@@ -1908,6 +1910,13 @@ public sealed partial class NativeAotLoweringPlanner
         // StructuredSlotEmissionContext._maxDepth which tracks the maximum
         // concurrently-live slot count via RestoreDepth at merge points.
         return true;
+        }
+        catch (InvalidOperationException)
+        {
+            body = null;
+            maxDepth = 0;
+            return false;
+        }
     }
 
     private StructuredSlotEmissionContext? EmitViaStructuredIR(
