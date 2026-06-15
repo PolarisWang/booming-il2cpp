@@ -633,6 +633,9 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         # Tool binaries — any rebuild of ATG/TPG invalidates all caches
         tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator"),
         tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
+        # Runtime library — cmake rebuild invalidates all cached entry.exe
+        _REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference" / "src" / "native" / "runtime-core" / "RelWithDebInfo" / "chaos_runtime_core.lib",
+        _REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference" / "src" / "native" / "bootstrap" / "RelWithDebInfo" / "chaos_bootstrap.lib",
     ]
     input_hash = compute_input_hash(
         subjects_dll, metadata_path, ctx.assembly,
