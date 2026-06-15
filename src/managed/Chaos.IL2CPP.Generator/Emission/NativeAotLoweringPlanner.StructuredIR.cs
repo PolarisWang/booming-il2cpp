@@ -1005,7 +1005,15 @@ public sealed partial class NativeAotLoweringPlanner
         int close = callee.IndexOf(')', paren);
         if (close < 0 || close == paren + 1) return 0;
         string args = callee.Substring(paren + 1, close - paren - 1);
-        return args.Split(',').Length;
+        int count = 1;
+        int depth = 0;
+        foreach (char c in args)
+        {
+            if (c == '<' || c == '[') depth++;
+            else if (c == '>' || c == ']') depth--;
+            else if (c == ',' && depth == 0) count++;
+        }
+        return count;
     }
 
     /// <summary>
