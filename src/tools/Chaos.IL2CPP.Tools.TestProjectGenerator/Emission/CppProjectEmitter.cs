@@ -689,6 +689,23 @@ public sealed class CppProjectEmitter
         if (code.Contains(benchAllHandler) && !code.Contains("strcmp(argv[1], \"--profile\")"))
             code = code.Replace(benchAllHandler, profileHandler);
 
+        // Fix 3: Replace broken printf in Windows fact-json path with proper \n escape.
+        // The Scriban linter reverts \n to real newlines; patch here as post-processing.
+        code = System.Text.RegularExpressions.Regex.Replace(
+            code,
+            @"printf\(""\]\}\s*\n\s*""\);",
+            "printf(\"]}\\n\");");
+
+        // Fix 4: Replace Windows worker thread in RunFactJsonMode with direct dispatch.
+        // The Scriban template's worker thread cannot access TLS runtime state set up
+        // by ChaosRuntimeHost on the main thread, causing intermittent AV crashes.
+        code = System.Text.RegularExpressions.Regex.Replace(
+            code,
+            @"// Use a worker thread with 300s timeout.*?" +
+            @"TerminateProcess\(GetCurrentProcess\(\), 0\);\s*\}\s*return 0;\s*#else",
+            "// Direct dispatch on main thread (worker thread removed).",
+            System.Text.RegularExpressions.RegexOptions.Singleline);
+
         return code;
     }
 
