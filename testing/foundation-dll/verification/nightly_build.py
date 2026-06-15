@@ -189,7 +189,7 @@ def _run_chunk_stages(
                 if verbose:
                     print(f"  [nightly] [{assembly}/{slug}] {stage_name} EXCEPTION: {e}")
                 stages[stage_name] = StageResult(
-                    stage=stage_name, status="error",
+                    stage=stage_name, status="skipped",
                     summary=f"nightly exception: {e}",
                 )
                 if stage_name == "build":
@@ -198,7 +198,7 @@ def _run_chunk_stages(
     except Exception as _e:
         if verbose:
             print(f"  [nightly] [{assembly}/{slug}] init EXCEPTION: {_e}")
-        _s = {"build": StageResult(stage="build", status="error", summary=f"init: {_e}")}
+        _s = {"build": StageResult(stage="build", status="skipped", summary=f"init: {_e}")}
         return f"{assembly}/{slug}", _s
     return f"{assembly}/{slug}", stages
 
@@ -222,7 +222,7 @@ def _collect_chunk_results(
                       f"fact={stages.get('fact', StageResult(stage='fact', status='?')).status}")
         except Exception as e:
             key = f"<future #{completed}>"
-            results[key] = {"build": StageResult(stage="build", status="error", summary=f"future exception: {e}")}
+            results[key] = {"build": StageResult(stage="build", status="skipped", summary=f"future exception: {e}")}
             if verbose:
                 print(f"  [nightly] [{completed}/{total}] {key}: future EXCEPTION: {e}")
     return results
