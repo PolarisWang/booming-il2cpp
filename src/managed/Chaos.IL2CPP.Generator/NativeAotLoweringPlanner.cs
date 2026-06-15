@@ -2187,10 +2187,14 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         if (externalRuntimeSymbolsReferenced.Count > 0)
         {
             sb.AppendLine("// ── External runtime function stubs (post-scan) ──");
+            // Skip symbols that will get typed stubs from _emittedExternalRuntimeSymbols
+            // to avoid C2556/C2371: extern "C" cannot overload by return type.
+            var typedStubSymbols = _emittedExternalRuntimeSymbols is { Count: > 0 }
+                ? new HashSet<string>(_emittedExternalRuntimeSymbols.Keys, StringComparer.Ordinal)
+                : new HashSet<string>(StringComparer.Ordinal);
             foreach (var sym in externalRuntimeSymbolsReferenced.OrderBy(s => s))
             {
-                // Emit inline stub definition (not just extern) so the linker
-                // doesn't need to find a definition in another translation unit.
+                if (typedStubSymbols.Contains(sym)) continue;
                 sb.Append("static inline CHAOS_IL2CPP_INTPTR ");
                 sb.Append(sym);
                 sb.AppendLine("() noexcept { return 0; }");
