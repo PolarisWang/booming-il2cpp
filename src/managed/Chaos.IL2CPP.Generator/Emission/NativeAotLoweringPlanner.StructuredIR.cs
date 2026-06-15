@@ -986,10 +986,26 @@ public sealed partial class NativeAotLoweringPlanner
     {
         return instr.Op switch
         {
-            "call" or "callvirt" or "calli" => instr.TargetParameterCount ?? 0,
+            "call" or "callvirt" or "calli" => instr.TargetParameterCount
+                ?? EstimateParamCountFromCallee(instr.Callee),
             "newobj" => instr.TargetParameterCount ?? 0,
             _ => EstimatePopCount(instr.Op)
         };
+    }
+
+    /// <summary>
+    /// Parse parameter count from a SubjectId string like
+    /// "Namespace.Type::Method:ReturnType(Param1,Param2)"
+    /// </summary>
+    private static int EstimateParamCountFromCallee(string? callee)
+    {
+        if (string.IsNullOrEmpty(callee)) return 0;
+        int paren = callee.LastIndexOf('(');
+        if (paren < 0) return 0;
+        int close = callee.IndexOf(')', paren);
+        if (close < 0 || close == paren + 1) return 0;
+        string args = callee.Substring(paren + 1, close - paren - 1);
+        return args.Split(',').Length;
     }
 
     /// <summary>
