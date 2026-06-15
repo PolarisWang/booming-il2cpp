@@ -2016,11 +2016,22 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 if (string.IsNullOrEmpty(signatureLine))
                     continue;
                 // Remove `static ` prefix if present (should be gone after template fix,
-                // but handle gracefully for any remaining static helpers)
+                // but handle gracefully for any remaining static helpers).
+                // Also skip `extern "C" ` prefix if present — the declaration already
+                // has C linkage and prepending another `extern` would cause C2159
+                // ("more than one storage class specified") on MSVC.
                 if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
                     signatureLine = signatureLine.Substring(7);
-                sb.Append("extern ");
-                sb.Append(signatureLine);
+                if (signatureLine.StartsWith("extern \"C\" ", StringComparison.Ordinal))
+                {
+                    // Already has extern "C" linkage — emit as-is (don't double extern)
+                    sb.Append(signatureLine);
+                }
+                else
+                {
+                    sb.Append("extern ");
+                    sb.Append(signatureLine);
+                }
                 sb.AppendLine(";");
             }
             sb.AppendLine();
@@ -2053,8 +2064,16 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                     continue;
                 if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
                     signatureLine = signatureLine.Substring(7);
-                sb.Append("extern ");
-                sb.Append(signatureLine);
+                if (signatureLine.StartsWith("extern \"C\" ", StringComparison.Ordinal))
+                {
+                    // Already has extern "C" linkage — emit as-is
+                    sb.Append(signatureLine);
+                }
+                else
+                {
+                    sb.Append("extern ");
+                    sb.Append(signatureLine);
+                }
                 sb.AppendLine(";");
             }
             sb.AppendLine();
