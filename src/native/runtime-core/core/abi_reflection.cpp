@@ -30,7 +30,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ClassInit(
     RuntimeState* runtime_state, TypeInfoHandle type);
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL TypeQueryCapabilityImpl(
     TypeInfoHandle type, RuntimeTypeCapabilityInfoV0* out_capability_info);
-CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void);
+const struct RuntimeInstantiationBridgeV0* CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void);
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
@@ -402,6 +402,23 @@ static uintptr_t CHAOS_RUNTIME_ABI_CALL _n1(uintptr_t) { return reinterpret_cast
 static bool CHAOS_RUNTIME_ABI_CALL _n_bool(uintptr_t) { return false; }
 static void CHAOS_RUNTIME_ABI_CALL _n_void1(uintptr_t) {}
 static void CHAOS_RUNTIME_ABI_CALL _n_void3(uintptr_t, uintptr_t, uintptr_t) {}
+/* ── V2 typed no-ops ── */
+static void* CHAOS_RUNTIME_ABI_CALL _v2_alloc(size_t, int) { return nullptr; }
+static void* CHAOS_RUNTIME_ABI_CALL _v2_alloc_atomic(size_t) { return nullptr; }
+static void CHAOS_RUNTIME_ABI_CALL _v2_void_int32(int32_t) {}
+static bool CHAOS_RUNTIME_ABI_CALL _v2_intptr_bool(CHAOS_IL2CPP_INTPTR) { return false; }
+static void* CHAOS_RUNTIME_ABI_CALL _v2_intptr_voidptr(CHAOS_IL2CPP_INTPTR) { return nullptr; }
+static bool CHAOS_RUNTIME_ABI_CALL _v2_voidptr_bool(void*) { return false; }
+static void CHAOS_RUNTIME_ABI_CALL _v2_voidptr_void(void*) {}
+static void* CHAOS_RUNTIME_ABI_CALL _v2_cstr_voidptr(const char*) { return nullptr; }
+static void* CHAOS_RUNTIME_ABI_CALL _v2_ustr_voidptr(const uint16_t*) { return nullptr; }
+static CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL _v2_ptr2(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) { return 0; }
+static void CHAOS_RUNTIME_ABI_CALL _v2_voidptr3(void*, void*, void*) {}
+static void* CHAOS_RUNTIME_ABI_CALL _v2_voidptr_cstr(void*, const char*) { return nullptr; }
+static int32_t CHAOS_RUNTIME_ABI_CALL _v2_int32() { return 0; }
+static void CHAOS_RUNTIME_ABI_CALL _v2_void() {}
+static void CHAOS_RUNTIME_ABI_CALL _v2_void_voidptr(void*) {}
+static void* CHAOS_RUNTIME_ABI_CALL _v2_void_ptr_ret() { return nullptr; }
 
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
@@ -440,6 +457,26 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &_gc_total_memory_noop,  // gc_get_total_memory
     &_gc_pressure_noop,  // gc_add_memory_pressure
     &_gc_pressure_noop,  // gc_remove_memory_pressure
+    &_v2_alloc,  // V2: gc_alloc (void* (*)(size_t,int))
+    &_v2_alloc_atomic,  // V2: gc_alloc_atomic (void* (*)(size_t))
+    &_v2_intptr_bool,  // V2: marshal_is_rcw_handle (bool (*)(CHAOS_IL2CPP_INTPTR))
+    &_v2_intptr_voidptr,  // V2: marshal_get_rcw_unknown (void* (*)(CHAOS_IL2CPP_INTPTR))
+    &_v2_void_int32,  // V2: throw_com_exception_for_hr (void (*)(int32_t))
+    &_v2_voidptr_bool,  // V2: delegate_hotpatch_checkpoint (bool (*)(void*))
+    &_v2_voidptr_void,  // V2: marshal_free_co_task_mem (void (*)(void*))
+    &_v2_cstr_voidptr,  // V2: marshal_ptr_to_string_utf8 (void* (*)(const char*))
+    &_v2_ustr_voidptr,  // V2: marshal_ptr_to_string_wide (void* (*)(const uint16_t*))
+    &_v2_voidptr3,  // V2: marshal_struct_managed_to_native (void (*)(void*,void*,void*))
+    &_v2_voidptr3,  // V2: marshal_struct_native_to_managed (void (*)(void*,void*,void*))
+    &_v2_cstr_voidptr,  // V2: native_library_load (void* (*)(const char*))
+    &_v2_voidptr_cstr,  // V2: native_library_get_proc_address (void* (*)(void*,const char*))
+    &_v2_void_int32,  // V2: set_last_pinvoke_error (void (*)(int32_t))
+    &_v2_int32,  // V2: get_last_os_error (int32_t (*)(void))
+    &_v2_void,  // V2: clear_last_os_error (void (*)(void))
+    &_v2_void_voidptr,  // V2: gc_register_finalizable (void (*)(void*))
+    &_v2_void_ptr_ret,  // V2: get_current_runtime_state (void* (*)(void))
+    &_v2_void_ptr_ret,  // V2: get_current_thread_state (void* (*)(void))
+    &_v2_void_voidptr,  // V2: raise_exception (void (*)(void*))
     &RegisterModuleWrapper,
     &HotpatchIsActiveWrapper,
     &HotpatchShouldKeepNativeWrapper,
@@ -449,26 +486,6 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &_register_gc_noop,  // register_gc_layouts
     &RegisterHotpatchModuleWrapper,
     &ChaosArrayEmptyWrapper,
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
-    &_noop0,  // V2 extended
 };
 
 
