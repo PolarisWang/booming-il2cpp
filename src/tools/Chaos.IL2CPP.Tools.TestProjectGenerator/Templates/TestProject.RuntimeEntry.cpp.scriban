@@ -375,62 +375,39 @@ static int RunFactJsonMode() {
 {{ end }}
 {{ end }}
 {{ end }}
-    // Use a worker thread with 300s timeout so a hanging dispatch (infinite
-    // loop, deadlock) doesn't block the process forever.  On timeout the
-    // process is killed; whatever was flushed to stdout is the partial result.
-    HANDLE worker = CreateThread(nullptr, 4 * 1024 * 1024, [](LPVOID) -> DWORD {
-        void* g_fact_veh = AddVectoredExceptionHandler(1, FactVehHandler);
-        const int kCount = kSubjectEntryCount;
-        printf("{\"factResults\":[");
-        bool first = true;
-        for (int si = 0; si < kCount; si++) {
-            int i = kSubjectSlotMap[si];
-            int64_t result = 0;
-            bool caught = false;
+    // Direct dispatch on main thread (no worker thread — worker threads
+    // cannot access TLS runtime state set up by ChaosRuntimeHost on main thread).
+    printf("{\"factResults\":[");
+    bool first = true;
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+        int64_t result = 0;
+        bool caught = false;
 
-            // Re-arm SIGABRT handler each iteration: MSVC signal() resets to
-            // SIG_DFL after delivery, so a second abort would otherwise call
-            // _exit(3) without going through longjmp.
-            signal(SIGABRT, [](int) {
-                longjmp(t_abort_jmp, 1);
-            });
+        signal(SIGABRT, [](int) {
+            longjmp(t_abort_jmp, 1);
+        });
 
-            // _setjmp _must_ be outside __try on x64 (MSVC restriction).
-            // If abort() fires, the SIGABRT handler longjmps here with
-            // value 1, and we record the method as caught.
-            if (_setjmp(t_abort_jmp) == 0) {
-                __try {
-                    result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
-                        GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-                } __except(EXCEPTION_EXECUTE_HANDLER) {
-                    caught = true;
-                }
-            } else {
-                // longjmp from SIGABRT handler — abort was called
+        if (_setjmp(t_abort_jmp) == 0) {
+            __try {
+                result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
                 caught = true;
             }
-
-            if (!first) printf(",");
-            printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
-                   si, i, caught ? "false" : "true", caught ? result : result);
-            first = false;
+        } else {
+            caught = true;
         }
-        printf("]}\n");
-        std::fflush(stdout);
-        CHAOS_FACT_CHECK();
-{{ if is_jit }}
-        RemoveVectoredExceptionHandler(g_fact_veh);
-{{ end }}
-        return 0;
-    }, nullptr, 0, nullptr);
 
-    DWORD wait_result = WaitForSingleObject(worker, 300000);  // 300s global timeout
-    CloseHandle(worker);
-    if (wait_result == WAIT_TIMEOUT) {
-        // Partial results already flushed.  TerminateProcess kills the
-        // hanging thread — fact_chunk.py handles truncated JSON recovery.
-        TerminateProcess(GetCurrentProcess(), 0);
+        if (!first) printf(",");
+        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 "}",
+               si, i, caught ? "false" : "true", caught ? result : result);
+        first = false;
     }
+    printf("]}
+");
+    std::fflush(stdout);
+    CHAOS_FACT_CHECK();
     return 0;
 #else
     // No worker thread on Linux (no intermittent-hang pattern observed);
