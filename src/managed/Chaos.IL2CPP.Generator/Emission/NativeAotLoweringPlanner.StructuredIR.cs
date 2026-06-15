@@ -376,7 +376,7 @@ public sealed partial class NativeAotLoweringPlanner
     private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, int maxInt64Slots, int maxWideSlots, string indentation)
     {
         for (int i = 0; i < maxIntSlots; i++)
-            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)};");
+            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)}{{}};");
         for (int i = 0; i < maxFloat64Slots; i++)
             builder.AppendLine($"{indentation}double {FormatDoubleSlotName(i)};");
         for (int i = 0; i < maxFloat32Slots; i++)
