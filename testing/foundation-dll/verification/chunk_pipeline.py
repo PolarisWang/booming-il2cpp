@@ -32,8 +32,21 @@ from pathlib import Path
 # Ensure foundation-dll/ is on sys.path
 _HERE = Path(__file__).resolve().parent  # verification/
 _FOUNDATION_DLL = _HERE.parent  # testing/foundation-dll/
+_TESTING_DIR = _HERE.parent.parent  # testing/
 if str(_FOUNDATION_DLL) not in sys.path:
     sys.path.insert(0, str(_FOUNDATION_DLL))
+if str(_TESTING_DIR) not in sys.path:
+    sys.path.insert(0, str(_TESTING_DIR))
+
+# SDK auto-build: ensure prebuilt native runtime libs are available
+from _pipeline.tool_helpers import ensure_sdk
+_REPO_ROOT = _TESTING_DIR.parent  # repo root
+try:
+    ensure_sdk(_REPO_ROOT)
+    print("[chunk-pipeline] SDK ready")
+except RuntimeError as e:
+    print(f"[chunk-pipeline] WARNING: SDK not available: {e}")
+    print("[chunk-pipeline] Will attempt codegen inline (may fail if no prebuilt libs)")
 
 # Path to pipeline config YAML (kept as single source of truth)
 _PIPELINE_CONFIG_PATH = _FOUNDATION_DLL / "config" / "pipeline-config.yaml"
@@ -115,7 +128,7 @@ def main():
                         help="Comma-separated stages to run (default: build,fact,hotupdate,coverage-audit)")
     parser.add_argument("--mode", default=None,
                         choices=["standard", "strict"],
-                        help="Verification mode: standard (default) or strict (coverage fails if >5% methods missing)")
+                        help="Verification mode: standard (default) or strict (coverage fails if >5%% methods missing)")
     parser.add_argument("--native-config", default="check",
                         choices=["check", "profile", "ship"],
                         help="Native build config (default: check)")

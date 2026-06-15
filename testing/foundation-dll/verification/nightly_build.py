@@ -28,9 +28,23 @@ from typing import Any
 
 # Ensure testing/foundation-dll is on sys.path for verification. imports
 _HERE = Path(__file__).resolve().parent
-_FOUNDATION_DLL = _HERE  # testing/foundation-dll/
+_FOUNDATION_DLL = _HERE.parent                                # .../testing/foundation-dll/
+_TESTING_DIR = _HERE.parent.parent                            # .../testing/
+_REPO_ROOT = _HERE.parent.parent.parent                       # repo root
 if str(_FOUNDATION_DLL) not in sys.path:
     sys.path.insert(0, str(_FOUNDATION_DLL))
+if str(_TESTING_DIR) not in sys.path:
+    sys.path.insert(0, str(_TESTING_DIR))
+
+# SDK auto-build: ensure prebuilt native runtime libs are available
+from _pipeline.tool_helpers import ensure_sdk
+try:
+    ensure_sdk(_REPO_ROOT)
+    print("[nightly-build] SDK ready")
+except RuntimeError as e:
+    print(f"[nightly-build] WARNING: SDK not available: {e}")
+    print("[nightly-build] Will attempt codegen inline (may fail if no prebuilt libs)")
+
 
 from verification.orchestration.context import ChunkContext, StageResult
 from verification.orchestration.discovery import discover_chunks
@@ -381,3 +395,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
