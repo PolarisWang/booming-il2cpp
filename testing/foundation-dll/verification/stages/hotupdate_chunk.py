@@ -404,6 +404,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # JSON truncation or failed patch generation → error.
     # With patch data → passed if no crash and revert clean; else failed.
     # Without patch data → skipped (nothing meaningful was tested).
+    errors: list[str] = []
     if json_truncated:
         status = "error"
         if not errors:
