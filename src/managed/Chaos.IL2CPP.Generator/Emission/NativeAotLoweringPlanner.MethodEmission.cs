@@ -332,6 +332,15 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"	const auto {varName} = {expr};");
 		}
 
+		// Wrap subject methods w/o EH regions in try/catch to prevent
+		// C++ exceptions from propagating to the fact-json __except handler.
+		bool _isSubjectMethod = method.SubjectId is not null &&
+			(method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) ||
+			 method.SubjectId.StartsWith("Chaos.TestFramework.Sdk/", StringComparison.Ordinal));
+		bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0;
+		if (_wrapInTryCatch)
+			builder.AppendLine("	try {");
+
 		builder.Append(bodyBuilder);
 			// Safety: close any unmatched { from structured IR lowering (e.g. failed newobj)
 			// to prevent C2598/C2601 cascading to subsequent functions.
@@ -351,6 +360,13 @@ public sealed partial class NativeAotLoweringPlanner
 	    {
 	        builder.AppendLine("    return {};");
 	    }
+	if (_wrapInTryCatch)
+	{
+	    builder.AppendLine("} catch (...) {");
+	    if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+	        builder.AppendLine("    return {};");
+	    builder.AppendLine("}");
+	}
 		builder.AppendLine("}");
 	}
 
