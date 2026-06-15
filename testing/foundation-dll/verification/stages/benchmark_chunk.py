@@ -146,13 +146,15 @@ def _compute_summary(stats: list[dict]) -> dict:
     }
 
 
-def _parse_benchmark_lines(stdout: str) -> tuple[list[dict], dict]:
+def _parse_benchmark_lines(stdout: str | bytes) -> tuple[list[dict], dict]:
     """Parse line-by-line JSON benchmark output from entry.exe stdout.
 
     Each method produces one complete JSON line ending with \n.
     The last line is {"summary":{...}}.
     Stray lines that aren't valid JSON are silently skipped.
     """
+    if isinstance(stdout, bytes):
+        stdout = stdout.decode("utf-8", errors="replace")
     lines = stdout.strip().split('\n')
     results = []
     summary = {}
@@ -183,7 +185,7 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
 
     data, _ = _parse_benchmark_lines(result.stdout or "")
     if not data:
-        _log_calibration_failure(ctx, "probe yielded no data, using fallback iteration count")
+        print("  [benchmark] [calibrate] probe yielded no data, using fallback iteration count")
         return _CALIB_FALLBACK_PROBE_FAIL  # fallback
 
     # Collect positive elapsed times to estimate per-call cost
@@ -193,7 +195,7 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
         and r['elapsedMilliseconds'] > 0
     ]
     if not elapsed:
-        _log_calibration_failure(ctx, "all methods very fast (no elapsed > 0), using fallback iteration count")
+        print("  [benchmark] [calibrate] all methods very fast (no elapsed > 0), using fallback iteration count")
         return _CALIB_FALLBACK_ALL_FAST  # all very fast, use high default
 
     # Per-call ms = median elapsed / 10 (probe iterations)
@@ -231,11 +233,12 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int,
         )
     except subprocess.TimeoutExpired as e:
         partial = e.stdout  # partial stdout captured before timeout
+        partial_str = partial.decode("utf-8", errors="replace") if isinstance(partial, bytes) else (partial or "")
         # Always return a CompletedProcess, even with empty stdout, so the
         # benchmark can continue past hanging methods (e.g. WaitHandle.WaitOne).
         return subprocess.CompletedProcess(
             args=e.cmd, returncode=-1,
-            stdout=partial or "", stderr=e.stderr or "",
+            stdout=partial_str, stderr=e.stderr or "",
         )
 
 

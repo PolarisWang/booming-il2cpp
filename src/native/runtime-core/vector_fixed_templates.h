@@ -1861,6 +1861,10 @@ inline TCarrier VectorFixedRound(const TCarrier& value) {
     }
     return result;
 }
+template <typename TScalar, typename TCarrier>
+inline TCarrier VectorFixedRound(const TCarrier& value, CHAOS_IL2CPP_INTPTR) {
+    return VectorFixedRound<TScalar, TCarrier>(value);
+}
 
 // ── StoreUnsafe (write carrier to memory) ──
 template <typename TCarrier>
@@ -1956,13 +1960,14 @@ inline bool VectorFixedAnyEqual(const TCarrier& value, TScalar scalar) {
 template <typename TScalar, typename TCarrier>
 inline TCarrier VectorFixedShuffle(const TCarrier& value, const TCarrier& indices) {
     constexpr CHAOS_IL2CPP_SIZE N = sizeof(TCarrier) / sizeof(TScalar);
+    constexpr CHAOS_IL2CPP_SIZE M = sizeof(TCarrier) / sizeof(CHAOS_IL2CPP_INT32);
     TCarrier result{};
     const TScalar* sl = reinterpret_cast<const TScalar*>(&value);
     const CHAOS_IL2CPP_INT32* il = reinterpret_cast<const CHAOS_IL2CPP_INT32*>(&indices);
     auto* rl = reinterpret_cast<TScalar*>(&result);
     for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) {
-        CHAOS_IL2CPP_INT32 idx = il[i];
-        rl[i] = (idx >= 0 && static_cast<CHAOS_IL2CPP_SIZE>(idx) < N) ? sl[idx] : static_cast<TScalar>(0);
+        CHAOS_IL2CPP_INT32 idx = i < M ? il[i] : -1;
+        rl[i] = (idx >= 0 && static_cast<CHAOS_IL2CPP_SIZE>(idx) < N) ? sl[idx] : TScalar();
     }
     return result;
 }

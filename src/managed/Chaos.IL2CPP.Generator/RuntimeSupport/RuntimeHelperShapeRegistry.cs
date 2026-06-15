@@ -5119,8 +5119,8 @@ public sealed partial class NativeAotLoweringPlanner
                 $"[&]() -> CHAOS_IL2CPP_INTPTR {{ return static_cast<CHAOS_IL2CPP_INTPTR>({{NS}}VectorFixedIsAllZeros(*reinterpret_cast<{{CARRIER}}*>({{0}})) ? 1 : 0); }}()");
 
             // ── Shuffle / ShuffleNative ──
-            RegisterVectorBinOp("Shuffle", "VectorFixedShuffle", false);
-            RegisterVectorBinOp("ShuffleNative", "VectorFixedShuffle", false);
+            RegisterVectorBinOp("Shuffle", "VectorFixedShuffle", true);
+            RegisterVectorBinOp("ShuffleNative", "VectorFixedShuffle", true);
 
             // ── StoreUnsafe ──
             foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
@@ -5150,7 +5150,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
                         var ns = "chaos::il2cpp::vector_fixed::";
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ {ns}VectorFixedCopyTo<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), reinterpret_cast<{cppType}*>({{1}}), static_cast<CHAOS_IL2CPP_INT32>({{2}})); return static_cast<CHAOS_IL2CPP_INTPTR>(0); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ {ns}VectorFixedCopyTo<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), reinterpret_cast<{cppType}*>({{1}}), 0); return static_cast<CHAOS_IL2CPP_INTPTR>(0); }}()";
                     }));
             }
 
