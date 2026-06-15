@@ -4420,6 +4420,7 @@ public sealed partial class NativeAotLoweringPlanner
     private string BuildDispatchEntryCode(IReadOnlyList<AotCoreIrMethodArtifact> methods)
     {
         if (methods.Count == 0) return string.Empty;
+        System.Console.WriteLine("F_a64e93");
 
         ulong defaultStringId = _stringIdMapping is { Count: > 0 }
             ? _stringIdMapping.First().Value
