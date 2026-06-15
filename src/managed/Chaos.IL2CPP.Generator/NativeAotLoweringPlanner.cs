@@ -1421,9 +1421,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                         // causes interpreter crashes in ChaosExternalRuntimeFallback.
                         if (!_callee.Contains("::"))
                             continue;
-                        if (!_externalRuntimeSubjects.ContainsKey(_callee))
+                        string normCallee = ManagedNaming.NormalizeSubjectIdAssembly(_callee);
+                        if (!_externalRuntimeSubjects.ContainsKey(normCallee))
                         {
-                            _externalRuntimeSubjects[_callee] = _nextIdx++;
+                            _externalRuntimeSubjects[normCallee] = _nextIdx++;
                         }
                     }
                     // Static field references (for chaos_static_* declarations)
