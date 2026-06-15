@@ -11,8 +11,10 @@ inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) noexcept 
 // unity build (sync_mutex.cpp, etc.).  Required for standalone compilation
 // when this file is compiled outside the runtime-core unity build context.
 bool IsLikelyMetadataTokenHandle(MethodInfoHandle method);
-extern const struct MarshalPlatformAbiRootV1* kMarshalPlatformAbiRootV1;
-extern const struct TaskRuntimeKernelV1* kTaskRuntimeKernelV1;
+using chaos::il2cpp::marshal_abi::MarshalPlatformAbiRootV1;
+using chaos::il2cpp::marshal_abi::TaskRuntimeKernelV1;
+extern const MarshalPlatformAbiRootV1 kMarshalPlatformAbiRootV1;
+extern const TaskRuntimeKernelV1 kTaskRuntimeKernelV1;
 }
 
 #include <generic_context.h>
