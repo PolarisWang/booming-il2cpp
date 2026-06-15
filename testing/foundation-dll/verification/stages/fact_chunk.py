@@ -142,6 +142,30 @@ def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         pass  # non-fatal
 
 
+def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | None,
+                        meta_total: int | None, value_warnings: int) -> None:
+    """Write fact.json to chunk results dir for aggregate stage to read."""
+    chunk_results_dir = ctx.chunk_dir / "results"
+    chunk_results_dir.mkdir(parents=True, exist_ok=True)
+    fact_path = chunk_results_dir / "fact.json"
+    passed = aot_result.get("passed", 0)
+    total = aot_result.get("total", 0)
+    if jit_result and jit_result.get("passed", 0) > passed:
+        passed = jit_result.get("passed", 0)
+        total = jit_result.get("total", 0)
+    fact_data = {
+        "passed": passed,
+        "total": total,
+        "valueSuspicious": value_warnings > 0,
+        "valueWarnings": value_warnings,
+        "metaTotal": meta_total or total,
+    }
+    try:
+        fact_path.write_text(json.dumps(fact_data, ensure_ascii=False, indent=2), encoding="utf-8")
+    except OSError:
+        pass  # non-fatal
+
+
 def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """Fact stage: run chunk's entry.exe and optionally entry-jit.exe --fact-json."""
     start = time.perf_counter()
@@ -280,6 +304,9 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
 
     # ── Write fact history (_dll/reports/history/fact-YYYY-MM-DD.jsonl) ──
     _write_fact_history(ctx, aot_result, jit_result)
+
+    # ── Also write fact.json to chunk results dir for aggregate consumption ──
+    _write_fact_results(ctx, aot_result, jit_result, meta_total, value_warnings)
 
     return StageResult(
         stage="fact", status=status,
