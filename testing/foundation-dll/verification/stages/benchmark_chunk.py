@@ -219,7 +219,7 @@ def _run_entry_once(exe_path: Path, iterations: int, timeout: int,
     """
     env = os.environ.copy()
     env["CHAOS_IL2CPP_LOG_LEVEL"] = "0"  # suppress debug logs in benchmark output
-    if end_idx > start_idx:
+    if end_idx is not None and end_idx > start_idx:
         cmd = [str(exe_path), "--benchmark-range", str(start_idx), str(end_idx), str(iterations)]
     else:
         cmd = [str(exe_path), "--benchmark-all", str(iterations)]
