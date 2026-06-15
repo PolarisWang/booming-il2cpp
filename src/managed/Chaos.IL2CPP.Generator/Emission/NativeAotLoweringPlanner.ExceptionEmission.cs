@@ -4176,18 +4176,6 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
 		
-			// Emit extern declaration for chaos_external_runtime_* symbols at call site
-						Console.Error.WriteLine($"[CODEGEN-DEBUG-LINEAR] targetSymbol={targetSymbol} returnType={a}"); 
-if (targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-			{
-			    // Use CHAOS_IL2CPP_INTPTR for the extern declaration to match the
-			    // definition in interop_stubs.cpp / codegen-generated stubs which
-			    // always return CHAOS_IL2CPP_INTPTR regardless of the actual ABI
-			    // carrier.  Using the ABI-correct type (float/double) would cause
-			    // C2371 redefinition errors since the definition type differs.
-			    string _extRetType = string.Equals(a, "void", StringComparison.Ordinal) ? "void" : "CHAOS_IL2CPP_INTPTR";
-			    builder.AppendLine($"{indentation}    extern {_extRetType} {targetSymbol}() noexcept;");
-			}
 string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		if (string.Equals(a, "void", StringComparison.Ordinal))
 		{
