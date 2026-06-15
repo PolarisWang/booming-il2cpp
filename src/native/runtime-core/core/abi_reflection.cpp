@@ -7,6 +7,12 @@ inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) noexcept 
     // FatHeader if bit 0 set, else PureHeader
     return (flags & 1) ? sizeof(void*) * 4 : sizeof(void*) * 2;
 }
+// Forward declarations for symbols defined in other .cpp files within the
+// unity build (sync_mutex.cpp, etc.).  Required for standalone compilation
+// when this file is compiled outside the runtime-core unity build context.
+bool IsLikelyMetadataTokenHandle(MethodInfoHandle method);
+extern const struct MarshalPlatformAbiRootV1* kMarshalPlatformAbiRootV1;
+extern const struct TaskRuntimeKernelV1* kTaskRuntimeKernelV1;
 }
 
 #include <generic_context.h>

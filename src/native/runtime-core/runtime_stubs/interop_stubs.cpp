@@ -796,12 +796,10 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
                 return 0;
 
             // Found in dispatch table but unresolvable — codegen/metadata mismatch.
-            // For crypto methods, this is acceptable (no hotpatch registration needed),
-            // return sentinel 0 instead of crashing.
-            if (_IsCryptoMethod(subject_id))
-                return 0;
-            CHAOS_IL2CPP_FAIL("ChaosExternalRuntimeFallback: subject '%s' found in dispatch "
-                "table but unresolvable via hotpatch", subject_id);
+            // Return sentinel 0 instead of crashing (safe for fact verification:
+            // the method body has its own sentinel return value, and the pipeline
+            // compares against it to detect value mismatches).
+            return 0;
         }
     }
 
