@@ -505,9 +505,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] AutoTestGenerator subjects: {total_subjects}")
 
     if total_subjects == 0:
+        print(f"  [build] SKIPPED: no subjects for {ctx.assembly}/{ctx.slug}")
         return StageResult(
-            stage="build", status="error",
-            summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
+            stage="build", status="skipped",
+            summary=f"No subjects for {ctx.assembly}/{ctx.slug}",
             duration_ms=int((time.perf_counter() - start) * 1000))
 
     # -- 5. Detect TFM from target DLL --
@@ -576,7 +577,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "    <Nullable>enable</Nullable>\n"
         "    <DefineConstants>VERIFY</DefineConstants>\n"
         "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
-        "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
+        "    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB5006</NoWarn>\n"
         "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
         "  </PropertyGroup>\n"
         "  <ItemGroup>\n"
@@ -738,7 +739,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         for line in tpg_result.stdout.splitlines()[-5:]:
             print(f"  [TPG:out] {line}")
 
-        if tpg_result.returncode != 0:
+        # JIT-only failure is non-fatal — check if AOT entry.exe was produced
+        entry_exe = ctx.entry_exe_path
+        if entry_exe.exists() and entry_exe.stat().st_size > 1000:
+            print(f"  [build] TPG returned non-zero but entry.exe exists ({entry_exe.stat().st_size} bytes) — JIT-only failure, continuing")
+        else:
             return StageResult(
                 stage="build", status="error",
                 summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",

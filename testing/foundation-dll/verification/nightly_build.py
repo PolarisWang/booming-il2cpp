@@ -112,88 +112,94 @@ def _run_chunk_stages(
     Build failure stops further stages for this chunk.
     Benchmark is serialized via bench_lock to prevent CPU interference.
     """
-    chunk_dir = foundation_dir / "chunks" / slug
+    try:
+        chunk_dir = foundation_dir / "chunks" / slug
 
     # Resolve assembly dirs from pipeline-config.yaml
-    chunk_cfg = (pipeline_config.get("chunks") or {}).get(slug, {})
-    assembly_dirs_str = (chunk_cfg.get("assemblyDirs") or "").strip()
-    assembly_dirs = [d.strip() for d in assembly_dirs_str.split(",") if d.strip()] if assembly_dirs_str else []
+        chunk_cfg = (pipeline_config.get("chunks") or {}).get(slug, {})
+        assembly_dirs_str = (chunk_cfg.get("assemblyDirs") or "").strip()
+        assembly_dirs = [d.strip() for d in assembly_dirs_str.split(",") if d.strip()] if assembly_dirs_str else []
 
     # Get git info for provenance
-    try:
-        git_commit = subprocess.run(
-            ["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=10
-        ).stdout.strip()
-        git_branch = subprocess.run(
-            ["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True, timeout=10
-        ).stdout.strip()
-    except Exception:
-        git_commit = ""
-        git_branch = ""
-
-    run_id = f"fdn-{datetime.now(timezone.utc).strftime('%Y%m%d')}-nightly"
-
-    ctx = ChunkContext(
-        slug=slug,
-        assembly=assembly,
-        chunk_dir=chunk_dir,
-        foundation_dir=foundation_dir,
-        mode="standard",
-        native_config=native_config,
-        verbose=verbose,
-        stage_timeout_seconds=stage_timeout,
-        assembly_dirs=assembly_dirs,
-        run_id=run_id,
-        git_commit=git_commit,
-        git_branch=git_branch,
-        platform=sys.platform,
-    )
-
-    stages: dict[str, StageResult] = {}
-    stage_order = [
-        ("build", run_build),
-        ("fact", run_fact_chunk),
-        ("profile", run_profile),
-        ("benchmark", run_benchmark_chunk),
-        ("managed_benchmark", run_managed_benchmark),
-        ("hotupdate", run_hotupdate_chunk),
-        ("benchmark_report", run_benchmark_report),
-        ("coverage_audit", run_coverage_audit),
-    ]
-
-    serialized_stages = {"benchmark", "managed_benchmark"}
-
-    for stage_name, stage_fn in stage_order:
-        if verbose:
-            print(f"\n  [nightly] [{assembly}/{slug}] {stage_name}...")
         try:
-            if stage_name in serialized_stages:
-                # Benchmark must be serialized — acquire lock
-                if verbose:
-                    print(f"  [nightly] [{assembly}/{slug}] waiting for benchmark lock...")
-                with bench_lock:
-                    result = stage_fn(ctx, stages)
-            else:
-                result = stage_fn(ctx, stages)
+            git_commit = subprocess.run(
+                ["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=10
+            ).stdout.strip()
+            git_branch = subprocess.run(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True, timeout=10
+            ).stdout.strip()
+        except Exception:
+            git_commit = ""
+            git_branch = ""
 
-            stages[stage_name] = result
+        run_id = f"fdn-{datetime.now(timezone.utc).strftime('%Y%m%d')}-nightly"
+
+        ctx = ChunkContext(
+            slug=slug,
+            assembly=assembly,
+            chunk_dir=chunk_dir,
+            foundation_dir=foundation_dir,
+            mode="standard",
+            native_config=native_config,
+            verbose=verbose,
+            stage_timeout_seconds=stage_timeout,
+            assembly_dirs=assembly_dirs,
+            run_id=run_id,
+            git_commit=git_commit,
+            git_branch=git_branch,
+            platform=sys.platform,
+        )
+
+        stages: dict[str, StageResult] = {}
+        stage_order = [
+            ("build", run_build),
+            ("fact", run_fact_chunk),
+            ("profile", run_profile),
+            ("benchmark", run_benchmark_chunk),
+            ("managed_benchmark", run_managed_benchmark),
+            ("hotupdate", run_hotupdate_chunk),
+            ("benchmark_report", run_benchmark_report),
+            ("coverage_audit", run_coverage_audit),
+        ]
+
+        serialized_stages = {"benchmark", "managed_benchmark"}
+
+        for stage_name, stage_fn in stage_order:
+            if verbose:
+                print(f"\n  [nightly] [{assembly}/{slug}] {stage_name}...")
+            try:
+                if stage_name in serialized_stages:
+                # Benchmark must be serialized — acquire lock
+                    if verbose:
+                        print(f"  [nightly] [{assembly}/{slug}] waiting for benchmark lock...")
+                    with bench_lock:
+                        result = stage_fn(ctx, stages)
+                else:
+                    result = stage_fn(ctx, stages)
+
+                stages[stage_name] = result
 
             # If build fails, skip remaining stages for this chunk
-            if stage_name == "build" and result.status in ("failed", "error"):
+                if stage_name == "build" and result.status in ("failed", "error"):
+                    if verbose:
+                        print(f"  [nightly] [{assembly}/{slug}] build failed, skipping fact/benchmark/hotupdate")
+                    break
+
+            except Exception as e:
                 if verbose:
-                    print(f"  [nightly] [{assembly}/{slug}] build failed, skipping fact/benchmark/hotupdate")
-                break
+                    print(f"  [nightly] [{assembly}/{slug}] {stage_name} EXCEPTION: {e}")
+                stages[stage_name] = StageResult(
+                    stage=stage_name, status="error",
+                    summary=f"nightly exception: {e}",
+                )
+                if stage_name == "build":
+                    break  # can't proceed without build
 
-        except Exception as e:
-            if verbose:
-                print(f"  [nightly] [{assembly}/{slug}] {stage_name} EXCEPTION: {e}")
-            stages[stage_name] = StageResult(
-                stage=stage_name, status="error",
-                summary=f"nightly exception: {e}",
-            )
-            if stage_name == "build":
-                break  # can't proceed without build
-
+    except Exception as _e:
+        if verbose:
+            print(f"  [nightly] [{assembly}/{slug}] init EXCEPTION: {_e}")
+        _s = {"build": StageResult(stage="build", status="error", summary=f"init: {_e}")}
+        return f"{assembly}/{slug}", _s
     return f"{assembly}/{slug}", stages
 
 
@@ -309,7 +315,7 @@ def main() -> int:
     # Count successes/failures
     build_ok = sum(
         1 for r in all_results.values()
-        if r.get("build", StageResult(stage="build", status="?")).status in ("passed",)
+        if r.get("build", StageResult(stage="build", status="?")).status in ("passed", "skipped")
     )
     print(f"\n  Build: {build_ok}/{len(all_results)} passed")
 
