@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -49,6 +50,33 @@ def ensure_tool_built(tool_name: str) -> bool:
             print(f"      {line}")
         return False
     return True
+
+
+def ensure_sdk(repo_root: Path | None = None) -> Path:
+    """Ensure the native SDK is built, building it if needed."""
+    if repo_root is None:
+        repo_root = _repo_root()
+    sdk_dir = repo_root / "testing" / "foundation-dll" / "sdk" / "windows-x64-reference"
+    sdk_lib = sdk_dir / "lib" / "chaos_runtime_core.lib"
+    if sdk_lib.exists():
+        return sdk_dir
+    
+    print("[tool_helpers] SDK not found, building presets...")
+    script = repo_root / "testing" / "foundation-dll" / "artifacts" / "build_presets.py"
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        capture_output=True, text=True, timeout=1200,
+    )
+    if result.returncode != 0:
+        print("[tool_helpers] SDK build FAILED")
+        print(result.stderr[-500:])
+        raise RuntimeError(f"SDK build failed: {result.stderr[-200:]}")
+    
+    if not sdk_lib.exists():
+        raise RuntimeError(f"SDK built but {sdk_lib} not found")
+    
+    print(f"[tool_helpers] SDK ready: {sdk_dir}")
+    return sdk_dir
 
 
 def detect_tfm(dll_path: Path) -> str:

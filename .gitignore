@@ -31,6 +31,7 @@ Thumbs.db
 
 # Project-generated artifacts
 artifacts/
+!testing/foundation-dll/artifacts/*.py
 .artifact/
 artifact/
 verification/workspaces/
@@ -481,3 +482,6 @@ native-build/
 skills/lifecycle/learning/signals/
 .ai/skills/lifecycle/learning/signals/
 .ai/skills/lifecycle/evolution/lineage/
+
+# Native SDK (CI-built, not tracked in git)
+testing/foundation-dll/sdk/
