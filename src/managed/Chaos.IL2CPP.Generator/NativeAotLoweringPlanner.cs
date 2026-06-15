@@ -4463,6 +4463,17 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             }
         }
+        // Build set of SubjectIds that have a _0 variant (fact wrapper).
+        // Used to skip _1/_2 variants when _0 covers the fact test.
+        var subjectIdsWithZero = new HashSet<string>(StringComparer.Ordinal);
+        for (int vi = 0; vi < methods.Count; vi++)
+        {
+            var vm = methods[vi];
+            if (IsSubjectMethod(vm.SubjectId) && vm.NativeSymbol != null
+                && vm.NativeSymbol.EndsWith("_0", StringComparison.Ordinal))
+                subjectIdsWithZero.Add(vm.SubjectId ?? string.Empty);
+        }
+        int skippedSubjectVariants = 0;
         for (int i = 0; i < methods.Count; i++)
         {
             var method = methods[i];
@@ -4506,6 +4517,38 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (IsSubjectMethod(method.SubjectId))
             {
+            // Skip _1/_2 when _0 exists with same SubjectId AND calls external
+            if (method.NativeSymbol != null
+                && (method.NativeSymbol.EndsWith("_1", StringComparison.Ordinal)
+                    || method.NativeSymbol.EndsWith("_2", StringComparison.Ordinal))
+                && subjectIdsWithZero.Contains(method.SubjectId ?? string.Empty))
+            {
+                bool extCall = false;
+                foreach (var instr in method.Instructions)
+                {
+                    string callee = instr.Callee ?? string.Empty;
+                    if (callee.Length > 0 && _externalRuntimeSubjects.ContainsKey(
+                            ManagedNaming.NormalizeSubjectIdAssembly(callee)))
+                    { extCall = true; break; }
+                }
+                if (extCall) { skippedSubjectVariants++; continue; }
+            }
+            // Skip _1/_2 variants when _0 exists with same SubjectId AND calls external
+            if (method.NativeSymbol != null
+                && (method.NativeSymbol.EndsWith("_1", StringComparison.Ordinal)
+                    || method.NativeSymbol.EndsWith("_2", StringComparison.Ordinal))
+                && subjectIdsWithZero.Contains(method.SubjectId ?? string.Empty))
+            {
+                bool extCall = false;
+                foreach (var instr in method.Instructions)
+                {
+                    string callee = instr.Callee ?? string.Empty;
+                    if (callee.Length > 0 && _externalRuntimeSubjects.ContainsKey(
+                            ManagedNaming.NormalizeSubjectIdAssembly(callee)))
+                    { extCall = true; break; }
+                }
+                if (extCall) { skippedSubjectVariants++; continue; }
+            }
             int subjectIdx = ExtractSubjectIndex(method.SubjectId);
                 if (subjectIdx < 0)
                     // Assign temporary unique index — will be sorted by subject_index
@@ -4521,6 +4564,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        if (skippedSubjectVariants > 0)
+            Console.Error.WriteLine($"[SUBJECT-VARIANT-SKIP] Skipped {skippedSubjectVariants} subject variant(s) (SubjectId-based)");
+        if (skippedSubjectVariants > 0)
+            Console.Error.WriteLine($"[SUBJECT-VARIANT-SKIP] {skippedSubjectVariants} variant(s) skipped (SubjectId-based)");
         // Deduplicate subject entries by subject_index — each unique subject
         // produces both a wrapper and the actual method body (2 entries) but
         // the slot map should expose only one entry per subject (the wrapper).
