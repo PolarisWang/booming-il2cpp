@@ -298,8 +298,9 @@ typedef struct RuntimeAbiV0 {
     void* (CHAOS_RUNTIME_ABI_CALL* marshal_get_rcw_unknown)(CHAOS_IL2CPP_INTPTR handle);
     void (CHAOS_RUNTIME_ABI_CALL* throw_com_exception_for_hr)(int32_t hr);
 
-    /* Delegate / hotpatch fallback. */
-    bool (CHAOS_RUNTIME_ABI_CALL* delegate_hotpatch_checkpoint)(void* delegate);
+    /* Delegate / hotpatch fallback.
+     * codegen passes: method_token (UINT32), args_buf (void*), ret_buf (void*), param_count (INT32). */
+    bool (CHAOS_RUNTIME_ABI_CALL* delegate_hotpatch_checkpoint)(CHAOS_IL2CPP_UINT32 method_token, void* args_buf, void* ret_buf, CHAOS_IL2CPP_INT32 param_count);
 
     /* Marshal helpers. */
     void (CHAOS_RUNTIME_ABI_CALL* marshal_free_co_task_mem)(void* ptr);

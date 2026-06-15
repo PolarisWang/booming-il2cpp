@@ -147,6 +147,7 @@ public sealed partial class NativeAotLoweringPlanner
 		ValidateMethod(method);
 		_linearScratchCounter = 0;
 		_nextInlineId = 0;
+		_dispatchLabelSeq = 0;
 		_preTryFoldInitializers = null;  // reset per-method
 
 		// P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.

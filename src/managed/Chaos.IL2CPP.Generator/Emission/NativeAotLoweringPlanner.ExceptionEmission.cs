@@ -19,6 +19,7 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private int _linearScratchCounter;
 	private int _nextInlineId;
+	private int _dispatchLabelSeq;
 	private string? _pendingEnumBoxSubjectId;
 	private string? _pendingBoxSubjectId;
 	private bool _pendingBoxHasProvider;
@@ -3434,6 +3435,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			return;
 		}
 
+		int dispatchSeq = _dispatchLabelSeq++;
 		// Phase 3: AOT Devirtualization fast-path for linear emission (inside branches of structured nodes)
 		string devirtKey = instruction.Callee ?? instruction.TargetReference?.SubjectId ?? "";
 		if (devirtKey.Length > 0 && _devirtualizationHints.TryGetValue(devirtKey, out DevirtualizationHint devirtHint) && devirtHint.CanDevirtualize)
@@ -3480,7 +3482,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			    builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 			    builder.AppendLine($"{indentation}    {{");
 			    builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
-			    builder.AppendLine($"{indentation}        goto chaos_dt_end_{instruction.IlOffset};");
+			    builder.AppendLine($"{indentation}        goto chaos_dt_end_{dispatchSeq};");
 			    builder.AppendLine($"{indentation}    }}");
 			}
 			if (devirtHint.GuardTypeSubjectId != null)
@@ -3601,7 +3603,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 					builder.AppendLine($"{indentation}    {{");
 					builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
-					builder.AppendLine($"{indentation}        goto chaos_dt_end_{instruction.IlOffset};");
+					builder.AppendLine($"{indentation}        goto chaos_dt_end_{dispatchSeq};");
 					builder.AppendLine($"{indentation}    }}");
 					// RCW-aware COM object pointer extraction.
 					// If chaos_arg_0 is an RCW handle, extract the identity_unknown.
@@ -3656,7 +3658,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						EmitAbiReturnPush(builder, comRetAbi, "chaos_hr", $"{indentation}    ");
 					}
 				}
-                builder.AppendLine($"{indentation}chaos_dt_end_{instruction.IlOffset}: ;");
+                builder.AppendLine($"{indentation}chaos_dt_end_{dispatchSeq}: ;");
 				builder.AppendLine($"{indentation}}}");
 				return;
 			}
@@ -3673,6 +3675,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		string methodDeclaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(instruction.Callee!);
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis = ResolveDelegateInvokeParameterAbis(instruction);
 		AotCoreIrAbiSlotArtifact returnAbi = ResolveDelegateInvokeReturnAbi(instruction);
+		int dispatchSeq = _dispatchLabelSeq++;
 		string returnType = MapAbiSlotReturnType(returnAbi);
 		string sigCache = FormatAbiSlotParameterSignature(parameterAbis);
 		string openFnType = parameterAbis.Count == 0 ? (returnType + "(*)()") : string.Concat(returnType, "(*)(", sigCache, ")");
@@ -3692,12 +3695,12 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(parameterAbis[i], $"chaos_raw_arg_{i}")};");
 		}
 		builder.AppendLine($"{indentation}    const auto chaos_delegate_value = {ConsumeEvalStackValueExpression()};");
+		builder.AppendLine($"{indentation}    auto* chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
 		builder.AppendLine($"{indentation}    if (chaos_delegate_value == 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
-		builder.AppendLine($"{indentation}        goto chaos_dinv_end_{instruction.IlOffset};");
+		builder.AppendLine($"{indentation}        goto chaos_dinv_end_{dispatchSeq};");
 		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    auto* chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
 		builder.AppendLine($"{indentation}    if (chaos_delegate->chaos_delegate_invocation_count > 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        const auto* chaos_invocation_list = reinterpret_cast<const CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR)*>(chaos_delegate->chaos_delegate_invocation_list);");
@@ -3837,7 +3840,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    chaos_dinv_end_{instruction.IlOffset}: ;");
+		builder.AppendLine($"{indentation}    chaos_dinv_end_{dispatchSeq}: ;");
 		builder.AppendLine($"{indentation}}}");
 	}
 

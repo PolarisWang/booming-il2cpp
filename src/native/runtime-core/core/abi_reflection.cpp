@@ -425,6 +425,7 @@ static void CHAOS_RUNTIME_ABI_CALL _v2_void_int32(int32_t) {}
 static bool CHAOS_RUNTIME_ABI_CALL _v2_intptr_bool(CHAOS_IL2CPP_INTPTR) { return false; }
 static void* CHAOS_RUNTIME_ABI_CALL _v2_intptr_voidptr(CHAOS_IL2CPP_INTPTR) { return nullptr; }
 static bool CHAOS_RUNTIME_ABI_CALL _v2_voidptr_bool(void*) { return false; }
+static bool CHAOS_RUNTIME_ABI_CALL _v2_delegate_hotpatch_checkpoint(CHAOS_IL2CPP_UINT32, void*, void*, CHAOS_IL2CPP_INT32) { return false; }
 static void CHAOS_RUNTIME_ABI_CALL _v2_voidptr_void(void*) {}
 static void* CHAOS_RUNTIME_ABI_CALL _v2_cstr_voidptr(const char*) { return nullptr; }
 static void* CHAOS_RUNTIME_ABI_CALL _v2_ustr_voidptr(const uint16_t*) { return nullptr; }
@@ -478,7 +479,7 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &_v2_intptr_bool,  // V2: marshal_is_rcw_handle (bool (*)(CHAOS_IL2CPP_INTPTR))
     &_v2_intptr_voidptr,  // V2: marshal_get_rcw_unknown (void* (*)(CHAOS_IL2CPP_INTPTR))
     &_v2_void_int32,  // V2: throw_com_exception_for_hr (void (*)(int32_t))
-    &_v2_voidptr_bool,  // V2: delegate_hotpatch_checkpoint (bool (*)(void*))
+    &_v2_delegate_hotpatch_checkpoint,  // V2: delegate_hotpatch_checkpoint
     &_v2_voidptr_void,  // V2: marshal_free_co_task_mem (void (*)(void*))
     &_v2_cstr_voidptr,  // V2: marshal_ptr_to_string_utf8 (void* (*)(const char*))
     &_v2_ustr_voidptr,  // V2: marshal_ptr_to_string_wide (void* (*)(const uint16_t*))
