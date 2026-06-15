@@ -198,6 +198,7 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
 
     # ── Cross-tech diff (AOT vs JIT) ──
     cross_tech_diffs: list[dict] = []
+    status = aot_status  # initial: AOT status; cross-tech + JIT upgrade may modify below
     if jit_result and aot_result.get("results") and jit_result.get("results"):
         aot_by_id = {r.get("methodSubjectId", f"idx_{i}"): r
                      for i, r in enumerate(aot_result["results"])}
@@ -226,10 +227,8 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
                 status = "partial"
                 print(f"  [fact] Demoting status to partial: {len(cross_tech_diffs)} cross-tech diff(s)")
 
-    # Combined status: JIT-as-sufficient if JIT passes (JIT can handle methods the AOT
-    # codegen cannot compile), else fall back to AOT status.
-    # UPGRADE: When JIT passes but AOT is completely broken (error/failed), promote
-    # to "partial" rather than "passed" — the AOT gap should not be hidden.
+    # Combined status: JIT-as-sufficient if JIT passes, else fall back to AOT status.
+    # UPGRADE: When JIT passes but AOT is completely broken, promote to "partial".
     if jit_status == "passed":
         if aot_status in ("error", "failed"):
             status = "partial"
@@ -239,7 +238,6 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             if aot_status != "passed":
                 print(f"  [fact] JIT passes, promoting overall status to passed (AOT was {aot_status})")
     else:
-        status = aot_status
         if aot_status == "passed" and jit_status is not None and jit_status != "passed":
             status = "passed"  # AOT passing is sufficient for pipeline success
 
