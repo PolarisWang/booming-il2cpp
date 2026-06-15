@@ -183,7 +183,7 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
 
     data, _ = _parse_benchmark_lines(result.stdout or "")
     if not data:
-        _log_calibration_failure(ctx, "probe yielded no data, using fallback iteration count")
+        print("  [benchmark] [calibrate] probe yielded no data, using fallback iteration count")
         return _CALIB_FALLBACK_PROBE_FAIL  # fallback
 
     # Collect positive elapsed times to estimate per-call cost
@@ -193,7 +193,7 @@ def _calibrate_iterations(exe_path: Path, timeout: int, entry_count: int = 0,
         and r['elapsedMilliseconds'] > 0
     ]
     if not elapsed:
-        _log_calibration_failure(ctx, "all methods very fast (no elapsed > 0), using fallback iteration count")
+        print("  [benchmark] [calibrate] all methods very fast (no elapsed > 0), using fallback iteration count")
         return _CALIB_FALLBACK_ALL_FAST  # all very fast, use high default
 
     # Per-call ms = median elapsed / 10 (probe iterations)
