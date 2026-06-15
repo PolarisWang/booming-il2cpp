@@ -332,6 +332,10 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"	const auto {varName} = {expr};");
 		}
 
+		// Phase 4: The try/catch below also guards against calls to unregistered
+		// external runtime symbols (chaos_external_runtime_*). If the symbol is
+		// not in _externalRuntimeSubjects or the kChaosExternalRuntimeFnTable,
+		// the fallback throws a C++ exception — caught here, returning default.
 		// Wrap subject methods w/o EH regions in try/catch to prevent
 		// C++ exceptions from propagating to the fact-json __except handler.
 		bool _isSubjectMethod = method.SubjectId is not null &&
