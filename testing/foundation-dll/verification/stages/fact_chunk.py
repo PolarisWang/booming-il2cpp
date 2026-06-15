@@ -160,8 +160,8 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     jit_enabled = _is_jit_enabled(ctx.chunk_dir)
     has_jit = jit_exe.exists()
 
+    errors: list[str] = []
     if jit_enabled and not has_jit:
-        # Config says JIT should be enabled, but binary is missing — hard error
         errors.append("jit_enabled in chunk.json but entry-jit.exe not found")
         print(f"  [fact] ERROR: jit_enabled in chunk.json but entry-jit.exe not found")
         has_jit = False
@@ -183,7 +183,6 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     # Run AOT
     aot_result = _run_single_fact(aot_exe, "aot")
     aot_status = _tech_status(aot_result, meta_total)
-    errors: list[str] = []
     if aot_result["error"]:
         errors.append(f"aot: {aot_result['error']}")
 
