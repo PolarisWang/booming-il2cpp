@@ -5009,7 +5009,7 @@ public sealed partial class NativeAotLoweringPlanner
                         if (cppType == null) return null;
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto cmp = chaos::il2cpp::vector_fixed::VectorFixedCompareEqual<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), *reinterpret_cast<{carrier}*>({{1}})); return static_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::vector_fixed::VectorFixedAllLanesSet<{cppType}, {carrier}>(cmp) ? 1 : 0); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto cmp = chaos::il2cpp::vector_fixed::VectorFixedCompareEqual<{cppType}, {cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), *reinterpret_cast<{carrier}*>({{1}})); return static_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::vector_fixed::VectorFixedAllLanesSet<{cppType}, {carrier}>(cmp) ? 1 : 0); }}()";
                     }));
                 registry.RegisterInline(new InlineShapeDescriptor(
                     TypeDisplayNamePrefix: prefix, MethodName: "EqualsAny",
