@@ -109,19 +109,25 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
         print(result.stderr[-500:])
         return False
 
-    # Step 2: cmake --build all targets
+    # Step 2: cmake --build only the main lib targets (skip test targets)
     preset_dir = _PRESETS_DIR / preset_name
-    result = subprocess.run(
-        ["cmake", "--build", str(preset_dir), "--config", config],
-        capture_output=True, text=True, timeout=1200,
-    )
-    if result.returncode != 0:
-        print(f"[build-presets] cmake build FAILED for {preset_name}")
-        # Print only the last 30 lines of errors
-        errors = [l for l in (result.stderr + result.stdout).split("\n") if "error" in l.lower()]
-        for e in errors[-20:]:
-            print(f"  {e.strip()}")
-        return False
+    # List only the library/executable targets we need for the SDK.
+    sdk_targets = [
+        "chaos_runtime_core", "chaos_bootstrap", "chaos_common",
+        "chaos_pal", "chaos_support", "chaos_fmt",
+        "chaos_interpreter", "chaos_jit", "chaos_debugger",
+        "chaos_eventpipe", "chaos_hot_update",
+    ]
+    for target in sdk_targets:
+        result = subprocess.run(
+            ["cmake", "--build", str(preset_dir), "--config", config, "--target", target],
+            capture_output=True, text=True, timeout=600,
+        )
+        if result.returncode != 0:
+            errors = [l for l in (result.stderr + result.stdout).split("\n") if "error" in l.lower()]
+            if errors:
+                print(f"  [{target}] {errors[-1].strip()}")
+                return False
 
     # Step 3: Collect .lib files into SDK directory
     sdk_target = _SDK_ROOT / sdk_subdir

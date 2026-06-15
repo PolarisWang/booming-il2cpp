@@ -44,7 +44,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ClassInit(
     RuntimeState* runtime_state, TypeInfoHandle type);
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL TypeQueryCapabilityImpl(
     TypeInfoHandle type, RuntimeTypeCapabilityInfoV0* out_capability_info);
-const struct RuntimeInstantiationBridgeV0* CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void);
+extern "C" const struct RuntimeInstantiationBridgeV0* CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void);
 
 }  // namespace chaos::il2cpp::runtime_core
 
