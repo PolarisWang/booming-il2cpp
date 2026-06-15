@@ -223,6 +223,12 @@ typedef struct GcSlotMapSectionEntryHdrV0 {
  * by both generated code and the runtime PatchLoader.                           */
 #define kHotpatchActive      (1u << 0)
 #define kHotpatchKeepNative  (1u << 1)
+/* Arg count is encoded in flags bits 2-5 for correct dispatch calling convention. */
+#define kHotpatchArgCountShift   2u
+#define kHotpatchArgCountMask    (0xFu << 2u)
+
+static inline uint32_t HotpatchEncodeArgCount(uint32_t n) { return (n << kHotpatchArgCountShift) & kHotpatchArgCountMask; }
+static inline uint32_t HotpatchGetArgCount(uint32_t flags) { return (flags >> kHotpatchArgCountShift) & 0xFu; }
 
 typedef struct HotpatchEntryV0 {
     void*       direct_ptr;        /* AOT function pointer (set by jit)   */

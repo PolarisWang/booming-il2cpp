@@ -447,9 +447,9 @@ static void CHAOS_RUNTIME_ABI_CALL _abi_raise_exception(void*) { /* noop: except
 static void* CHAOS_RUNTIME_ABI_CALL _abi_get_current_runtime_state() { return reinterpret_cast<void*>(GetCurrentRuntimeState()); }
 static void* CHAOS_RUNTIME_ABI_CALL _abi_get_current_thread_state() { return reinterpret_cast<void*>(GetCurrentThreadState()); }
 
-static const void* CHAOS_RUNTIME_ABI_CALL _abi_object_get_type_info(const void* obj) noexcept { return chaos_object_get_type_info(obj); }
-static bool CHAOS_RUNTIME_ABI_CALL _abi_is_string_id(uintptr_t value) noexcept { return chaos_is_string_id(value); }
-static uintptr_t CHAOS_RUNTIME_ABI_CALL _abi_string_materialize(uintptr_t value) noexcept { return chaos_string_materialize(value); }
+static const void* CHAOS_RUNTIME_ABI_CALL _abi_object_get_type_info(const void* obj) noexcept { return obj; }
+static bool CHAOS_RUNTIME_ABI_CALL _abi_is_string_id(uintptr_t value) noexcept { return false; }
+static uintptr_t CHAOS_RUNTIME_ABI_CALL _abi_string_materialize(uintptr_t value) noexcept { return value; }
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),

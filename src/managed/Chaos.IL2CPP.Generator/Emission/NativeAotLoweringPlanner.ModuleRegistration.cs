@@ -216,9 +216,13 @@ public sealed partial class NativeAotLoweringPlanner
         for (int i = 0; i < entries.Count; i++)
         {
             var entry = entries[i];
+            // Build param_count from entry.ParamCount (set by GetHotpatchableMethods).
+            int paramCount = Math.Max(0, entry.ParamCount);
             string flags = _codegenMode.HasFlag(CodegenMode.Jit)
                 ? "0"
-                : methodsCallingExternal.Contains(entry.SubjectId) ? "kHotpatchKeepNative" : "0";
+                : methodsCallingExternal.Contains(entry.SubjectId)
+                    ? "kHotpatchKeepNative | HotpatchEncodeArgCount(" + paramCount + ")"
+                    : "HotpatchEncodeArgCount(" + paramCount + ")";
             entryModels[i] = new ScriptObject
             {
                 ["native_symbol"] = entry.NativeSymbol,
