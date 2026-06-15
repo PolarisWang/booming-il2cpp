@@ -8,6 +8,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Do NOT add explicit MultiThreadedDLL here — it's the MSVC default when unset.
 
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
+include_directories(
+    "${REPO_ROOT}/src/native"
+    "${REPO_ROOT}/src/native/runtime-core"
+    "${REPO_ROOT}/src/native/runtime-core/gc"
+    "${REPO_ROOT}/src/native/runtime-core/runtime_stubs"
+    "${REPO_ROOT}/src/native/common"
+    "${REPO_ROOT}/src/native/bootstrap"
+    "${REPO_ROOT}/src/native/pal"
+    "${REPO_ROOT}/src/native/interpreter"
+    "${REPO_ROOT}/src/native/interpreter/generated"
+    "${REPO_ROOT}/src/native/support"
+    "${REPO_ROOT}/src/native/hot-update"
+    "${REPO_ROOT}/src/native/jit"
+    "${REPO_ROOT}/src/native/jit/llvm"
+    "${REPO_ROOT}/third_party/unordered_dense/include"
+    "${REPO_ROOT}/cmake"
+)
+
 
 include("${REPO_ROOT}/cmake/config-tier.cmake")
 
@@ -181,6 +199,7 @@ add_library(chaos_runtime_core STATIC
     tier_manager.cpp
     profile_stats.h
     profile_stats.cpp
+    core/abi_reflection.cpp
     )
 # ── 执行引擎配置（编译时常量）─────────────────────────────────────
 # 选择 ExecutionConfig 平台配置，控制 JIT/AOT 引擎的激活状态。
