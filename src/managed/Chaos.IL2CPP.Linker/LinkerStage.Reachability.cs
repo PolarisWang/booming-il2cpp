@@ -28,12 +28,21 @@ public sealed partial class LinkerStage
                 semanticWorld.Methods);
         }
 
-        var methodMap = semanticWorld.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
-        var fieldMap = semanticWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal);
-        var propertyMap = semanticWorld.Properties.ToDictionary(property => property.SubjectId, StringComparer.Ordinal);
-        var typeMap = semanticWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal);
-        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
-            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
+        // Last-wins dedup: when 172 runtime assemblies are loaded via --assembly-dir,
+        // duplicate SubjectIds exist across assemblies. ToDictionary would throw.
+        static Dictionary<string, T> BuildDict<T>(IEnumerable<T> items, Func<T, string> keyFn)
+        {
+            var d = new Dictionary<string, T>(StringComparer.Ordinal);
+            foreach (var item in items) { var k = keyFn(item); if (!string.IsNullOrEmpty(k)) d[k] = item; }
+            return d;
+        }
+        var methodMap = BuildDict(semanticWorld.Methods, m => m.SubjectId);
+        var fieldMap = BuildDict(semanticWorld.Fields, f => f.SubjectId);
+        var propertyMap = BuildDict(semanticWorld.Properties, p => p.SubjectId);
+        var typeMap = BuildDict(semanticWorld.Types, t => t.SubjectId);
+        var capDict = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
+        foreach (var b in semanticWorld.CapabilityBundles.Methods) { if (!string.IsNullOrEmpty(b.SubjectId)) capDict[b.SubjectId] = b.Capabilities; }
+        var methodCapabilities = capDict;
 
         ManagedMethodModel? entryPointMethod = null;
         if (!string.IsNullOrWhiteSpace(semanticWorld.EntryPointSubjectId) &&

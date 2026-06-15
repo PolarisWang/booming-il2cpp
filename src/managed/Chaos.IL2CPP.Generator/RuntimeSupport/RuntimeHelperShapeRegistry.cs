@@ -198,6 +198,11 @@ public sealed partial class NativeAotLoweringPlanner
             if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
                 System.Console.Error.WriteLine($"[SHAPE_DEBUG] callee={callee} typeDisplayName={typeDisplayName} methodName={methodName}");
 
+            bool _dbg = methodName.StartsWith("AddSaturate", StringComparison.Ordinal)
+                || methodName.StartsWith("Ceiling", StringComparison.Ordinal)
+                || methodName.StartsWith("IsZero", StringComparison.Ordinal);
+            if (_dbg) System.Console.Error.WriteLine($"[SHAPE] callee={callee} td={typeDisplayName} mn={methodName} entries={_inlineDescriptors.Count}");
+
             foreach (var entry in _inlineDescriptors)
             {
                 if (!string.Equals(entry.MethodName, methodName, StringComparison.Ordinal))
@@ -222,6 +227,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                 var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                 var result = entry.Resolver(callee, paramTypes);
+                if (_dbg) System.Console.Error.WriteLine($"[SHAPE]   RESOLVER mn={entry.MethodName} prefix={entry.TypeDisplayNamePrefix} result={(result != null ? "OK:" + result[..Math.Min(50,result.Length)] : "NULL")}");
                 if (result != null)
                 {
                     cppExpression = result;
@@ -4351,8 +4357,8 @@ public sealed partial class NativeAotLoweringPlanner
                     if (allParamsAreVector)
                     {
                         if (paramTypes.Count >= 2)
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }
                 }
 
@@ -4362,15 +4368,15 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // VectorFixedBroadcast (get_Zero / AllBitsSet) — no vector params
                 if (templateFn == "VectorFixedBroadcast" && paramTypes.Count == 0)
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedBroadcast<{tc}>(0); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedBroadcast<{tc}>(0); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
                 // VectorFixedAbs / VectorFixedNegate need <TInputScalar, TOutputScalar, TCarrier>
                 if (templateFn == "VectorFixedAbs" || templateFn == "VectorFixedNegate")
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}{templateFn}<{cppType}, {cppType}, {carrier}>({Deref(0)}); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}{templateFn}<{cppType}, {cppType}, {carrier}>({Deref(0)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
                 // VectorFixedCreateScalar — scalar param, returns carrier
                 if (templateFn == "VectorFixedCreateScalar" && paramTypes.Count == 1)
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedCreateScalar<{tc}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedCreateScalar<{tc}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
                 // Binary ops: deref inputs (2 or 3), call function, heap-alloc result
                 if (paramTypes.Count >= 2 && paramTypes.Count <= 3)
@@ -4379,21 +4385,21 @@ public sealed partial class NativeAotLoweringPlanner
                     var fnCall = requiresScalar
                         ? $"{ns}{templateFn}<{TcForTemplateFn(templateFn)}>({argList})"
                         : $"{ns}{templateFn}<{carrier}>({argList})";
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }
                 if (paramTypes.Count >= 2)
                 {
                     var fnCall = requiresScalar
                         ? $"{ns}{templateFn}<{TcForTemplateFn(templateFn)}>({Arg(0)}, {Arg(1)})"
                         : $"{ns}{templateFn}<{carrier}>({Arg(0)}, {Arg(1)})";
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }
 
                 // Unary ops: deref input, call function, heap-alloc result
                 var unaryFnCall = requiresScalar
                     ? $"{ns}{templateFn}<{tc}>({Deref(0)})"
                     : $"{ns}{templateFn}<{carrier}>({Deref(0)})";
-                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {unaryFnCall}; auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {unaryFnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
             }
 
             // SIMD stub lookup: maps (templateFn, carrier, cppType) to the
@@ -4444,32 +4450,30 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 var fn = templateFn;
                 var rs = requiresScalar;
-                registry.RegisterInline(new InlineShapeDescriptor(
-                    TypeDisplayNamePrefix: "Vector128",
-                    MethodName: methodName,
-                    Resolver: (callee, paramTypes) =>
-                        MakeVectorInlineExpression(callee, paramTypes, fn, rs)));
-                registry.RegisterInline(new InlineShapeDescriptor(
-                    TypeDisplayNamePrefix: "Vector256",
-                    MethodName: methodName,
-                    Resolver: (callee, paramTypes) =>
-                        MakeVectorInlineExpression(callee, paramTypes, fn, rs)));
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
+                {
+                    var p = prefix;
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: p,
+                        MethodName: methodName,
+                        Resolver: (callee, paramTypes) =>
+                            MakeVectorInlineExpression(callee, paramTypes, fn, rs)));
+                }
             }
 
-            // Helper: register a unary vector op for both Vector128 and Vector256
+            // Helper: register a unary vector op for Vector64/128/256/512
             // Uses MakeVectorInlineExpression for correct pointer-based ABI.
             void RegisterVectorUnaryOp(string methodName, string templateFn)
             {
-                registry.RegisterInline(new InlineShapeDescriptor(
-                    TypeDisplayNamePrefix: "Vector128",
-                    MethodName: methodName,
-                    Resolver: (callee, paramTypes) =>
-                        MakeVectorInlineExpression(callee, paramTypes, templateFn, true)));
-                registry.RegisterInline(new InlineShapeDescriptor(
-                    TypeDisplayNamePrefix: "Vector256",
-                    MethodName: methodName,
-                    Resolver: (callee, paramTypes) =>
-                        MakeVectorInlineExpression(callee, paramTypes, templateFn, true)));
+                foreach (var prefix in new[] { "Vector64", "Vector128", "Vector256", "Vector512" })
+                {
+                    var p = prefix;
+                    registry.RegisterInline(new InlineShapeDescriptor(
+                        TypeDisplayNamePrefix: p,
+                        MethodName: methodName,
+                        Resolver: (callee, paramTypes) =>
+                            MakeVectorInlineExpression(callee, paramTypes, templateFn, true)));
+                }
             }
 
             // ── Arithmetic ──
@@ -4567,7 +4571,7 @@ public sealed partial class NativeAotLoweringPlanner
                             if (cppType == null) return null;
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }
@@ -4588,7 +4592,7 @@ public sealed partial class NativeAotLoweringPlanner
                             if (cppType == null) return null;
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(~static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(~static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }
@@ -4612,7 +4616,7 @@ public sealed partial class NativeAotLoweringPlanner
                                 if (cppType == null) return null;
                                 var carrier = InferVectorCarrierType(callee);
                                 if (carrier == null) return null;
-                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedCreateScalar<{cppType}, {carrier}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedCreateScalar<{cppType}, {carrier}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                             }));
                     }
                 }
@@ -4676,7 +4680,7 @@ public sealed partial class NativeAotLoweringPlanner
                             {
                                 var carrier = InferVectorCarrierType(callee);
                                 if (carrier == null) return null;
-                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = *reinterpret_cast<{carrier}*>({{0}}); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = *reinterpret_cast<{carrier}*>({{0}}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                             }));
                     }
                 }
@@ -4694,7 +4698,7 @@ public sealed partial class NativeAotLoweringPlanner
                     MethodName: "AsVector256",
                     Resolver: static (callee, paramTypes) =>
                     {
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
                 // Vector256<T>::AsVector128 → Vector128<T>
                 registry.RegisterInline(new InlineShapeDescriptor(
@@ -4702,7 +4706,7 @@ public sealed partial class NativeAotLoweringPlanner
                     MethodName: "AsVector128",
                     Resolver: static (callee, paramTypes) =>
                     {
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
             RegisterVectorCrossCast();
@@ -4749,7 +4753,7 @@ public sealed partial class NativeAotLoweringPlanner
                         if (cppType == null) return null;
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedIsZero<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedIsZero<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
 
@@ -4864,17 +4868,7 @@ public sealed partial class NativeAotLoweringPlanner
                                 _ => null
                             };
                             if (toType == null) return null;
-                            string convertFn = carrier.Contains("Vector128") ? "VectorFixedConvertToVector128"
-                                : carrier.Contains("Vector256") ? "VectorFixedConvertToVector256"
-                                : carrier.Contains("Vector512") ? "VectorFixedConvertToVector512"
-                                : "VectorFixedConvertToVector";
-                            // Wrappers use 3 template args: <FromScalar, ToScalar, Carrier>
-                            // Generic version uses 4: <FromScalar, ToScalar, FromCarrier, ToCarrier>
-                            bool useWrapper = convertFn != "VectorFixedConvertToVector";
-                            string convertTemplateArgs = useWrapper
-                                ? $"{fromType}, {toType}, {carrier}"
-                                : $"{fromType}, {toType}, {carrier}, {carrier}";
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::{convertFn}<{convertTemplateArgs}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedConvertToVector<{fromType}, {toType}, {carrier}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }
@@ -4896,7 +4890,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "GetLower",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // GetUpper: Vector256<T> → Vector128<T> (upper 128 bits)
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4904,7 +4898,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "GetUpper",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes + 16, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes + 16, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── ToVector128 / ToVector256 ──
@@ -4914,7 +4908,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector128",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // ToVector128Unsafe: same as ToVector128
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4922,7 +4916,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector128Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // ToVector256: Vector128<T> → Vector256<T> (extend)
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4930,14 +4924,14 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector256",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "Vector128",
                 MethodName: "ToVector256Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── CreateScalarUnsafe — same as CreateScalar but unchecked ──
@@ -4962,7 +4956,7 @@ public sealed partial class NativeAotLoweringPlanner
                             $"{carrier} __r{{}}; " +
                             $"auto* rl = reinterpret_cast<{cppType}*>(&__r); " +
                             $"for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) rl[i] = static_cast<{cppType}>({{0}}) + static_cast<{cppType}>(i * static_cast<{cppType}>({{1}})); " +
-                            $"auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            $"auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
 
@@ -5044,7 +5038,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
                         var ns = "chaos::il2cpp::vector_fixed::";
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedWithElement<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), static_cast<CHAOS_IL2CPP_INT32>({{1}}), static_cast<{cppType}>({{2}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedWithElement<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), static_cast<CHAOS_IL2CPP_INT32>({{1}}), static_cast<{cppType}>({{2}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
 
@@ -5053,7 +5047,7 @@ public sealed partial class NativeAotLoweringPlanner
                 TypeDisplayNamePrefix: "Vector256", MethodName: "WithLower",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithLower(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithLower(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── WithUpper (V256 only) ──
@@ -5061,7 +5055,7 @@ public sealed partial class NativeAotLoweringPlanner
                 TypeDisplayNamePrefix: "Vector256", MethodName: "WithUpper",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithUpper(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithUpper(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── Transcendental ──
@@ -5107,7 +5101,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
                         var ns = "chaos::il2cpp::vector_fixed::";
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedLoadUnsafe<{carrier}>({{0}}); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedLoadUnsafe<{carrier}>({{0}}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
 
@@ -5116,7 +5110,7 @@ public sealed partial class NativeAotLoweringPlanner
                 TypeDisplayNamePrefix: "Vector256", MethodName: "AsVector128Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)CHAOS_IL2CPP_MALLOC(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── None (boolean) ──
@@ -5595,14 +5589,14 @@ public sealed partial class NativeAotLoweringPlanner
             { IsInstanceMethod = true });
 
             // === List<T>::Remove — InlineShapeDescriptor (no function call) ===
-            // IILE lambda: linear scan + CHAOS_IL2CPP_MEMMOVE shift on inline field buffer.
+            // IILE lambda: linear scan + std::memmove shift on inline field buffer.
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Collections.Generic.List",
                 MethodName: "Remove",
                 Resolver: static (callee, paramTypes) =>
                 {
                     if (paramTypes.Count != 1) return null;
-                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) { auto _shift = static_cast<CHAOS_IL2CPP_SIZE>(_list->size - _i - 1); if (_shift > 0) CHAOS_IL2CPP_MEMMOVE(&_elems[_i], &_elems[_i + 1], _shift * sizeof(CHAOS_IL2CPP_INTPTR)); _list->size--; _list->version++; return 1; } } return 0; })()";
+                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) { auto _shift = static_cast<CHAOS_IL2CPP_SIZE>(_list->size - _i - 1); if (_shift > 0) std::memmove(&_elems[_i], &_elems[_i + 1], _shift * sizeof(CHAOS_IL2CPP_INTPTR)); _list->size--; _list->version++; return 1; } } return 0; })()";
                 })
             { IsInstanceMethod = true });
 
@@ -5649,7 +5643,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "        auto* new_elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(new_hdr + 1);",
                         "        if (hdr != nullptr && _list->size > 0) {",
                         "            auto* old_elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
-                        "            CHAOS_IL2CPP_MEMCPY(new_elems, old_elems, static_cast<CHAOS_IL2CPP_SIZE>(_list->size) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "            std::memcpy(new_elems, old_elems, static_cast<CHAOS_IL2CPP_SIZE>(_list->size) * sizeof(CHAOS_IL2CPP_INTPTR));",
                         "            CHAOS_IL2CPP_FREE(hdr);",
                         "        }",
                         "        _list->items_array = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new_hdr);",
@@ -5745,7 +5739,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "    for (CHAOS_IL2CPP_INT32 i = 0; i < _list->size; i++) {",
                         "        if (elems[i] == chaos_arg_1) {",
                         "            auto move_count = _list->size - i - 1;",
-                        "            if (move_count > 0) CHAOS_IL2CPP_MEMMOVE(&elems[i], &elems[i + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "            if (move_count > 0) std::memmove(&elems[i], &elems[i + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
                         "            _list->size--;",
                         "            _list->version++;",
                         "            return 1;",
@@ -5778,7 +5772,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "    if (hdr == nullptr || chaos_arg_1 < 0 || chaos_arg_1 >= _list->size) return;",
                         "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
                         "    auto move_count = _list->size - chaos_arg_1 - 1;",
-                        "    if (move_count > 0) CHAOS_IL2CPP_MEMMOVE(&elems[chaos_arg_1], &elems[chaos_arg_1 + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
+                        "    if (move_count > 0) std::memmove(&elems[chaos_arg_1], &elems[chaos_arg_1 + 1], static_cast<CHAOS_IL2CPP_SIZE>(move_count) * sizeof(CHAOS_IL2CPP_INTPTR));",
                         "    _list->size--;",
                         "    _list->version++;",
                     ]);
@@ -9154,7 +9148,7 @@ public sealed partial class NativeAotLoweringPlanner
                     return """
                         ([&]() -> CHAOS_IL2CPP_INTPTR {
                             CHAOS_IL2CPP_INT64 _v = 0;
-                            CHAOS_IL2CPP_MEMCPY(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
+                            std::memcpy(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
                             auto _cached = lookup_cached_enum_name(_v);
                             return _cached != 0 ? _cached : ChaosEnumToString({0});
                         })()
@@ -9176,8 +9170,8 @@ public sealed partial class NativeAotLoweringPlanner
                     return """
                         ([&]() -> CHAOS_IL2CPP_INT32 {
                             CHAOS_IL2CPP_INT64 _v = 0, _f = 0;
-                            CHAOS_IL2CPP_MEMCPY(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
-                            CHAOS_IL2CPP_MEMCPY(&_f, reinterpret_cast<const void*>({1} + 16), sizeof(_f));
+                            std::memcpy(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
+                            std::memcpy(&_f, reinterpret_cast<const void*>({1} + 16), sizeof(_f));
                             return (_v & _f) == _f ? 1 : 0;
                         })()
                         """.Replace("\r\n", "\n").Trim();
@@ -9614,14 +9608,14 @@ public sealed partial class NativeAotLoweringPlanner
 	                                else if (({0}) == 0 || ({1}) == 0) _cae_eq = false;
 	                                else {
 	                                    auto _cae_l0 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
-	                                        reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({0}) + 24);
+	                                        reinterpret_cast<const uint8_t*>({0}) + 24);
 	                                    auto _cae_l1 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
-	                                        reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({1}) + 24);
+	                                        reinterpret_cast<const uint8_t*>({1}) + 24);
 	                                    if (_cae_l0 != _cae_l1) _cae_eq = false;
 	                                    else {
-	                                        _cae_eq = CHAOS_IL2CPP_MEMCMP(
-	                                            reinterpret_cast<const void*>(reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({0}) + 32),
-	                                            reinterpret_cast<const void*>(reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({1}) + 32),
+	                                        _cae_eq = std::memcmp(
+	                                            reinterpret_cast<const void*>(reinterpret_cast<const uint8_t*>({0}) + 32),
+	                                            reinterpret_cast<const void*>(reinterpret_cast<const uint8_t*>({1}) + 32),
 	                                            static_cast<size_t>(_cae_l0)) == 0;
 	                                    }
 	                                }

@@ -48,9 +48,13 @@ public sealed class AotCoreIrLowering
         ArgumentNullException.ThrowIfNull(codeRegistration);
 
         var typedMethods = typedIl.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
-        var managedTypes = linkedWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal);
-        var managedFields = linkedWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal);
-        var managedMethods = linkedWorld.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        // Last-wins dedup: duplicate SubjectIds from cross-assembly loading (--assembly-dir)
+        var managedTypes = new Dictionary<string, ManagedTypeModel>(StringComparer.Ordinal);
+        foreach (var t in linkedWorld.Types) { if (!string.IsNullOrEmpty(t.SubjectId)) managedTypes[t.SubjectId] = t; }
+        var managedFields = new Dictionary<string, ManagedFieldModel>(StringComparer.Ordinal);
+        foreach (var f in linkedWorld.Fields) { if (!string.IsNullOrEmpty(f.SubjectId)) managedFields[f.SubjectId] = f; }
+        var managedMethods = new Dictionary<string, ManagedMethodModel>(StringComparer.Ordinal);
+        foreach (var m in linkedWorld.Methods) { if (!string.IsNullOrEmpty(m.SubjectId)) managedMethods[m.SubjectId] = m; }
         var genericDemandLookup = BuildGenericDemandLookup(linkedWorld.GenericInstantiationDemandGraph);
         var targetSymbols = codeRegistration.Modules
             .SelectMany(module => module.Registrations)

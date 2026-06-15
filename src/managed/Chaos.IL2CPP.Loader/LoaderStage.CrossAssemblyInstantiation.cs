@@ -13,26 +13,39 @@ public sealed partial class LoaderStage
         IReadOnlyList<string> assemblyPaths,
         IReadOnlyList<LoadedAssemblyModel> loadedAssemblies)
     {
-        var genericInstantiationDemandEntriesByAssembly = loadedAssemblies.ToDictionary(
-            assembly => assembly.Assembly.Name,
-            _ => new Dictionary<string, GenericInstantiationDemandModel>(StringComparer.Ordinal),
-            StringComparer.Ordinal);
-        var definitionMethodsByAssembly = loadedAssemblies.ToDictionary(
-            assembly => assembly.Assembly.Name,
+        // Use Last-wins dedup: when --assembly-dir provides the same assembly that
+        // closure analysis also discovers, prefer whichever was loaded.  ToDictionary
+        // would throw "An item with the same key has already been added."
+        static Dictionary<string, TValue> BuildAssemblyDict<TValue>(
+            IReadOnlyList<LoadedAssemblyModel> assemblies,
+            Func<LoadedAssemblyModel, TValue> valueSelector)
+        {
+            var dict = new Dictionary<string, TValue>(assemblies.Count, StringComparer.Ordinal);
+            foreach (var a in assemblies)
+            {
+                var name = a.Assembly.Name;
+                if (string.IsNullOrEmpty(name)) continue;
+                dict[name] = valueSelector(a);  // Last wins — harmless if identical
+            }
+            return dict;
+        }
+
+        var genericInstantiationDemandEntriesByAssembly = BuildAssemblyDict(
+            loadedAssemblies,
+            _ => new Dictionary<string, GenericInstantiationDemandModel>(StringComparer.Ordinal));
+        var definitionMethodsByAssembly = BuildAssemblyDict(
+            loadedAssemblies,
             assembly => (IReadOnlyDictionary<string, ManagedMethodModel>)assembly.Methods
-                .ToDictionary(method => method.SubjectId, StringComparer.Ordinal),
-            StringComparer.Ordinal);
-        var projectedMethodsByAssembly = loadedAssemblies.ToDictionary(
-            assembly => assembly.Assembly.Name,
-            assembly => assembly.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal),
-            StringComparer.Ordinal);
-        var valueTypeSubjectIdsByAssembly = loadedAssemblies.ToDictionary(
-            assembly => assembly.Assembly.Name,
+                .ToDictionary(method => method.SubjectId, StringComparer.Ordinal));
+        var projectedMethodsByAssembly = BuildAssemblyDict(
+            loadedAssemblies,
+            assembly => assembly.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal));
+        var valueTypeSubjectIdsByAssembly = BuildAssemblyDict(
+            loadedAssemblies,
             assembly => (IReadOnlySet<string>)assembly.Types
                 .Where(t => t.IsValueType && !string.IsNullOrEmpty(t.SubjectId))
                 .Select(t => t.SubjectId)
-                .ToHashSet(StringComparer.Ordinal),
-            StringComparer.Ordinal);
+                .ToHashSet(StringComparer.Ordinal));
 
         foreach (var assemblyPath in assemblyPaths)
         {

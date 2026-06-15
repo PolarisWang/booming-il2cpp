@@ -19,7 +19,6 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private int _linearScratchCounter;
 	private int _nextInlineId;
-	private int _dinvCounter;
 	private string? _pendingEnumBoxSubjectId;
 	private string? _pendingBoxSubjectId;
 	private bool _pendingBoxHasProvider;
@@ -921,7 +920,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 				builder.AppendLine($"{indentation}{{");
 				builder.AppendLine($"{indentation}    // Hotpatch-aware ldftn wrapper (slot {ftnSlot})");
-				builder.AppendLine($"{indentation}    auto chaos_ftn_thunk = +[]({ftnSig}) -> {ftnRet} {{");
+				builder.AppendLine($"{indentation}    static auto* chaos_ftn_thunk = +[]({ftnSig}) -> {ftnRet} {{");
 				builder.AppendLine($"{indentation}        auto& _d_entry = s_hotpatch_entries[{ftnSlot}];");
 				builder.AppendLine($"{indentation}        if (chaos_runtime_get_abi_v0()->hotpatch_is_active(&_d_entry)");
 				builder.AppendLine($"{indentation}            && !chaos_runtime_get_abi_v0()->hotpatch_should_keep_native(&_d_entry))");
@@ -2779,7 +2778,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		if (RequiresStructuredValueTypePayload(requiredTargetReference))
 		{
 			builder.AppendLine($"{indentation}    auto* chaos_value = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(requiredTargetReference.SubjectId)}>({ConsumeEvalStackValueExpression()});");
-			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_MEMSET(chaos_value, 0, sizeof(*chaos_value));");
+			builder.AppendLine($"{indentation}    std::memset(chaos_value, 0, sizeof(*chaos_value));");
 		}
 		else
 			{
@@ -2791,7 +2790,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				    IsStructuredValueTypeSubjectId(requiredTargetReference.SubjectId))
 				{
 					builder.AppendLine($"{indentation}    auto* chaos_value = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(requiredTargetReference.SubjectId)}>({initExpr});");
-					builder.AppendLine($"{indentation}    CHAOS_IL2CPP_MEMSET(chaos_value, 0, sizeof(*chaos_value));");
+					builder.AppendLine($"{indentation}    std::memset(chaos_value, 0, sizeof(*chaos_value));");
 				}
 				else
 				{
@@ -3608,9 +3607,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					// If chaos_arg_0 is an RCW handle, extract the identity_unknown.
 					// Otherwise treat it as a raw COM object pointer.
 					builder.AppendLine($"{indentation}    void* chaos_com_obj = nullptr;");
-					builder.AppendLine($"{indentation}    if (chaos::il2cpp::runtime_core::MarshalIsRcwHandle(chaos_arg_0))");
+					builder.AppendLine($"{indentation}    if (chaos_runtime_get_abi_v0()->marshal_is_rcw_handle(chaos_arg_0))");
 					builder.AppendLine($"{indentation}    {{");
-					builder.AppendLine($"{indentation}        auto chaos_rcw_ptr = chaos::il2cpp::runtime_core::MarshalGetRcwUnknown(chaos_arg_0);");
+					builder.AppendLine($"{indentation}        auto chaos_rcw_ptr = chaos_runtime_get_abi_v0()->marshal_get_rcw_unknown(chaos_arg_0);");
 					builder.AppendLine($"{indentation}        chaos_com_obj = reinterpret_cast<void*>(chaos_rcw_ptr);");
 					builder.AppendLine($"{indentation}    }}");
 					builder.AppendLine($"{indentation}    else");
@@ -3648,7 +3647,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					builder.AppendLine($"{indentation}    auto chaos_hr = chaos_com_fn({comArgs});");
 					builder.AppendLine($"{indentation}    if (CHAOS_IL2CPP_FAILED(chaos_hr))");
 					builder.AppendLine($"{indentation}    {{");
-					builder.AppendLine($"{indentation}        chaos::il2cpp::runtime_core::ChaosThrowComExceptionForHR(chaos_hr);");
+					builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->throw_com_exception_for_hr(chaos_hr);");
 					builder.AppendLine($"{indentation}    }}");
 					if (!string.Equals(comRetType, "void", StringComparison.Ordinal))
 					{
@@ -3679,7 +3678,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		string openFnType = parameterAbis.Count == 0 ? (returnType + "(*)()") : string.Concat(returnType, "(*)(", sigCache, ")");
 		string closedFnType = (parameterAbis.Count == 0 ? (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target)") : (returnType + "(*)(CHAOS_IL2CPP_INTPTR chaos_delegate_target, " + sigCache + ")"));
 
-		builder.AppendLine($"{indentation}    do {{");
+		builder.AppendLine($"{indentation}{{");
 		for (int i = parameterAbis.Count - 1; i >= 0; i--)
 		{
 			builder.AppendLine($"{indentation}    auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
@@ -3692,16 +3691,13 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 			builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(parameterAbis[i], $"chaos_raw_arg_{i}")};");
 		}
-		builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_delegate_value;");
-		builder.AppendLine($"{indentation}    chaos_delegate_value = {ConsumeEvalStackValueExpression()};");
+		builder.AppendLine($"{indentation}    const auto chaos_delegate_value = {ConsumeEvalStackValueExpression()};");
 		builder.AppendLine($"{indentation}    if (chaos_delegate_value == 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
-		int dinvId = _dinvCounter++;
-		builder.AppendLine($"{indentation}        break;");
+		builder.AppendLine($"{indentation}        goto chaos_dinv_end_{instruction.IlOffset};");
 		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    {GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}* chaos_delegate;");
-		builder.AppendLine($"{indentation}    chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
+		builder.AppendLine($"{indentation}    auto* chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(methodDeclaringTypeSubjectId)}*>(chaos_delegate_value);");
 		builder.AppendLine($"{indentation}    if (chaos_delegate->chaos_delegate_invocation_count > 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        const auto* chaos_invocation_list = reinterpret_cast<const CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR)*>(chaos_delegate->chaos_delegate_invocation_list);");
@@ -3786,7 +3782,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_UINT64 __chaos_ret_buf[2] = {{}};");
 		builder.AppendLine($"{indentation}        if (chaos_delegate->chaos_delegate_method_token != 0)");
 		builder.AppendLine($"{indentation}        {{");
-		builder.AppendLine($"{indentation}            __chaos_hotpatch_taken = chaos::il2cpp::runtime_core::DelegateHotpatchCheckpoint(");
+		builder.AppendLine($"{indentation}            __chaos_hotpatch_taken = chaos_runtime_get_abi_v0()->delegate_hotpatch_checkpoint(");
 		builder.AppendLine($"{indentation}                chaos_delegate->chaos_delegate_method_token,");
 		builder.AppendLine($"{indentation}                __chaos_args_buf, __chaos_ret_buf, {paramCount});");
 		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
@@ -3841,7 +3837,8 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		builder.AppendLine($"{indentation}        }}");
 		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    }} while(0);");
+		builder.AppendLine($"{indentation}    chaos_dinv_end_{instruction.IlOffset}: ;");
+		builder.AppendLine($"{indentation}}}");
 	}
 
 	private void EmitLinearNewObject(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
@@ -3960,7 +3957,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({ctorArgs2}{ctorCtxArg2});");
 				if (TypeHasFinalizer(requiredTargetReference.SubjectId))
 				{
-				    builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::chaos_gc_register_finalizable(chaos_object);");
+				    builder.AppendLine($"{indentation}    chaos_runtime_get_abi_v0()->gc_register_finalizable(chaos_object);");
 				}
 			EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)");
 			builder.AppendLine(indentation + "}");
@@ -3983,7 +3980,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}    chaos_object->header.type_info = {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 		if (TypeHasFinalizer(requiredTargetReference.SubjectId))
 		{
-		    builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::chaos_gc_register_finalizable(chaos_object);");
+		    builder.AppendLine($"{indentation}    chaos_runtime_get_abi_v0()->gc_register_finalizable(chaos_object);");
 		}
 		EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)");
 		builder.AppendLine(indentation + "}");
@@ -4176,9 +4173,18 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
 		
-			// File-scope extern "C" declarations (from BuildAbiExportDeclarations)
-			// are visible here; block-scope extern declarations are omitted to
-			// avoid C2116/C2733 conflicts with the extern "C" definitions.
+			// Emit extern declaration for chaos_external_runtime_* symbols at call site
+						Console.Error.WriteLine($"[CODEGEN-DEBUG-LINEAR] targetSymbol={targetSymbol} returnType={a}"); 
+if (targetSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+			{
+			    // Use CHAOS_IL2CPP_INTPTR for the extern declaration to match the
+			    // definition in interop_stubs.cpp / codegen-generated stubs which
+			    // always return CHAOS_IL2CPP_INTPTR regardless of the actual ABI
+			    // carrier.  Using the ABI-correct type (float/double) would cause
+			    // C2371 redefinition errors since the definition type differs.
+			    string _extRetType = string.Equals(a, "void", StringComparison.Ordinal) ? "void" : "CHAOS_IL2CPP_INTPTR";
+			    builder.AppendLine($"{indentation}    extern {_extRetType} {targetSymbol}() noexcept;");
+			}
 string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		if (string.Equals(a, "void", StringComparison.Ordinal))
 		{
@@ -4500,6 +4506,8 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		string nativeTarget = directNativeSymbol ?? targetSymbol;
 		// Collect chaos_external_runtime_* symbols for fallback declarations
 					Console.Error.WriteLine($"[CODEGEN-DEBUG-HOTPATCH] nativeTarget={nativeTarget}");
+if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
+			builder.AppendLine($"{indentation}    extern " + (hasReturn ? (returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float32 ? "float" : returnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Float64 ? "double" : "CHAOS_IL2CPP_INTPTR") : "void") + " {nativeTarget}() noexcept;");
 		// Append hidden chaos_generic_context for shared canonical targets.
 		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
 		string hpCtxArg = "";
@@ -4512,15 +4520,6 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
 		string callExpr = $"{nativeTarget}({hpArgList}{hpCtxArg})";
-		if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-		{
-		    int hpCommaCount = hpArgList.Count(c => c == ',');
-		    int hpParamCount = string.IsNullOrEmpty(hpArgList) ? 0 : hpCommaCount + 1;
-		    if (hpCtxArg.Length > 0) hpParamCount++;
-		    string hpDeclParams = string.Join(", ", Enumerable.Repeat("CHAOS_IL2CPP_INTPTR", hpParamCount));
-		    if (hpDeclParams.Length == 0) hpDeclParams = "void";
-		    builder.AppendLine($"{indentation}    extern {returnType} {nativeTarget}({hpDeclParams}) noexcept;");
-		}
 		if (hasReturn)
 		{
 			builder.AppendLine($"{indentation}        _d_hpresult = {callExpr};");
@@ -5173,11 +5172,11 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 				"System.Byte" or "System.Char" or "System.UInt16"
 					=> $"static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr})",
 				"System.SByte"
-					=> $"({rawValueExpr} < 0 ? (chaos::il2cpp::runtime_core::chaos_raise_exception(0), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
+					=> $"({rawValueExpr} < 0 ? (chaos_runtime_get_abi_v0()->raise_exception(0), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
 				"System.Int16" or "System.Int32" or "System.Int64" or "System.UInt32" or "System.UInt64"
-					=> $"(({rawValueExpr} < 0 || {rawValueExpr} > 0xFFFF) ? (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
+					=> $"(({rawValueExpr} < 0 || {rawValueExpr} > 0xFFFF) ? (chaos_runtime_get_abi_v0()->raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
 				"System.Boolean" or "System.DateTime"
-					=> $"(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0))",
+					=> $"(chaos_runtime_get_abi_v0()->raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0))",
 				_ => null
 			};
 

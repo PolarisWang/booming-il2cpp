@@ -9,7 +9,8 @@ public sealed partial class LinkerStage
         IReadOnlyList<ManagedTypeModel> reachableTypes,
         IReadOnlyList<ManagedMethodModel> orderedMethods)
     {
-        var typeMap = reachableTypes.ToDictionary(type => type.SubjectId, StringComparer.Ordinal);
+        var typeMap = new Dictionary<string, ManagedTypeModel>(StringComparer.Ordinal);
+        foreach (var t in reachableTypes) { if (!string.IsNullOrEmpty(t.SubjectId)) typeMap[t.SubjectId] = t; }
         var orderedTypeIds = new List<string>();
 
         foreach (var method in orderedMethods)

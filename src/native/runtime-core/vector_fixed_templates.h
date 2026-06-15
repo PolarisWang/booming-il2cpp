@@ -625,19 +625,6 @@ inline TOutputCarrier VectorFixedConvertToVector128Truncating(TInputCarrier valu
     return VectorFixedConvertToVectorTruncating<TOutputScalar, TInputScalar, TOutputCarrier, TInputCarrier>(value);
 }
 
-// ── VectorFixedConvertToVector{256,512} — same as Vector128 above ──
-template <typename TOutputScalar, typename TInputScalar, typename TOutputCarrier, typename TInputCarrier>
-inline TOutputCarrier VectorFixedConvertToVector256(TInputCarrier value) {
-    static_assert(sizeof(TOutputCarrier) == sizeof(chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector256Carrier), "output carrier must be 256-bit");
-    return VectorFixedConvertToVector<TOutputScalar, TInputScalar, TOutputCarrier, TInputCarrier>(value);
-}
-
-template <typename TOutputScalar, typename TInputScalar, typename TOutputCarrier, typename TInputCarrier>
-inline TOutputCarrier VectorFixedConvertToVector512(TInputCarrier value) {
-    static_assert(sizeof(TOutputCarrier) == sizeof(chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector512Carrier), "output carrier must be 512-bit");
-    return VectorFixedConvertToVector<TOutputScalar, TInputScalar, TOutputCarrier, TInputCarrier>(value);
-}
-
 template <typename TScalar, typename TCarrier>
 inline TCarrier VectorFixedGetExponent(TCarrier value) {
     return VectorFixedApplyUnary<TScalar, TCarrier>(

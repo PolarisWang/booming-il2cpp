@@ -11,7 +11,8 @@ public sealed partial class LinkerStage
         IReadOnlyList<ManagedFieldModel> orderedFields,
         IReadOnlyList<ManagedMethodModel> orderedMethods)
     {
-        var methodMap = orderedMethods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        var methodMap = new Dictionary<string, ManagedMethodModel>(StringComparer.Ordinal);
+        foreach (var m in orderedMethods) { if (!string.IsNullOrEmpty(m.SubjectId)) methodMap[m.SubjectId] = m; }
         var closedWorldSpecializations = orderedTypes
             .Select(type => new ClosedWorldSpecializationFact
             {

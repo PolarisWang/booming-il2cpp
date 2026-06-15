@@ -2019,9 +2019,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 // but handle gracefully for any remaining static helpers)
                 if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
                     signatureLine = signatureLine.Substring(7);
-                // Skip redundant 'extern' prefix to avoid 'extern extern "C"' C2159
-                if (!signatureLine.StartsWith("extern ", StringComparison.Ordinal))
-                    sb.Append("extern ");
+                sb.Append("extern ");
                 sb.Append(signatureLine);
                 sb.AppendLine(";");
             }
@@ -2055,9 +2053,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                     continue;
                 if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
                     signatureLine = signatureLine.Substring(7);
-                // Skip redundant 'extern' prefix to avoid 'extern extern "C"' C2159
-                if (!signatureLine.StartsWith("extern ", StringComparison.Ordinal))
-                    sb.Append("extern ");
+                sb.Append("extern ");
                 sb.Append(signatureLine);
                 sb.AppendLine(";");
             }
@@ -2101,10 +2097,12 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 // (from _externalRuntimeHelpers or BuildAbiExportDeclarations)
                 if (aotDeclaredSymbols.Contains(symbol))
                     continue;
-                // Skip: the full definition (with correct parameter types) is emitted
-                // in the entry stubs section later in the same translation unit.
-                // Emitting a parameter-less extern declaration here causes C2660
-                // when the function is later called with actual arguments.
+                // Generate extern "C" CHAOS_IL2CPP_INTPTR (same format as
+                // BuildAbiExportDeclarations) to avoid conflicting return type
+                // declarations at global scope.
+                fallbackSb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
+                fallbackSb.Append(symbol);
+                fallbackSb.AppendLine("() noexcept;");
                 fallbackCount++;
             }
             if (fallbackCount > 0)

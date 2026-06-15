@@ -48,10 +48,17 @@ public sealed class SemanticWorldStage
                 .ToList();
             var canonicalSubjects = BuildCanonicalSubjects(loadedWorld);
             var semanticShapes = BuildSemanticShapes(loadedWorld, canonicalMethods);
+            // Build dicts with last-wins dedup: cross-assembly duplicate SubjectIds from --assembly-dir
+            static IReadOnlyDictionary<string, T> ToDictSafe<T>(IEnumerable<T> items, Func<T, string> keySelector)
+            {
+                var d = new Dictionary<string, T>(StringComparer.Ordinal);
+                foreach (var item in items) { var k = keySelector(item); if (!string.IsNullOrEmpty(k)) d[k] = item; }
+                return d;
+            }
             var capabilityBundles = BuildCapabilityBundles(
                 loadedWorld.Assemblies.Select(assembly => assembly.Assembly.Name).ToHashSet(StringComparer.Ordinal),
-                loadedWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal),
-                loadedWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal),
+                ToDictSafe(loadedWorld.Types, t => t.SubjectId),
+                ToDictSafe(loadedWorld.Fields, f => f.SubjectId),
                 canonicalMethods);
 
             return PipelineResult<SemanticWorldModel>.Ok(new SemanticWorldModel

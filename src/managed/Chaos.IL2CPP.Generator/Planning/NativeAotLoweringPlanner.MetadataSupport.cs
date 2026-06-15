@@ -439,6 +439,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         foreach (var assemblyPath in _cachedClosureAssemblyPaths)
         {
+            try
+            {
             using var stream = File.OpenRead(assemblyPath);
             using var peReader = new PEReader(stream);
             if (!peReader.HasMetadata)
@@ -587,6 +589,11 @@ public sealed partial class NativeAotLoweringPlanner
                     parameterNames,
                     string.Equals(methodName, ".ctor", StringComparison.Ordinal),
                     MetadataTokens.GetToken(methodDefinitionHandle)));
+            }
+            }
+            catch (BadImageFormatException)
+            {
+                // Metadata handle from different assembly — skip this assembly's entries
             }
         }
 
