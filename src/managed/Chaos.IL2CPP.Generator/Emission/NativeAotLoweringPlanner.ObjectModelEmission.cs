@@ -984,7 +984,7 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		builder.AppendLine();
 		builder.AppendLine("    // StringId fast path: materialized value carries a heap pointer;");
 		builder.AppendLine("    // this line is reached only if caller skipped materialization.");
-		builder.AppendLine("    if (chaos_is_string_id(chaos_value))");
+		builder.AppendLine("    if (chaos_runtime_get_abi_v0()->is_string_id(chaos_value))");
 		builder.AppendLine("    {");
 		builder.Append("        return chaos_array->element_type_shape == chaos_type_shape_reference");
 		builder.Append("            && chaos_is_type_compatible(");
@@ -996,12 +996,12 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		builder.AppendLine("    auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);");
 		builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_interface)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        return chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);");
+		builder.AppendLine("        return chaos_does_type_implement_interface(chaos_runtime_get_abi_v0()->object_get_type_info(chaos_header), chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_reference)");
 		builder.AppendLine("    {");
-		builder.AppendLine("        return chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_array->element_type_info);");
+		builder.AppendLine("        return chaos_is_type_compatible(chaos_runtime_get_abi_v0()->object_get_type_info(chaos_header), chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();
 		builder.AppendLine("    return false;");

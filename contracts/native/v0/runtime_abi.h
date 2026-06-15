@@ -351,6 +351,11 @@ typedef struct RuntimeAbiV0 {
         const void* module);
     uintptr_t (CHAOS_RUNTIME_ABI_CALL* array_empty)(void);
 
+    /* Codegen-facing helpers (V1, added for P2 ABI migration). */
+    uintptr_t (CHAOS_RUNTIME_ABI_CALL* string_materialize)(uintptr_t value);
+    bool (CHAOS_RUNTIME_ABI_CALL* is_string_id)(uintptr_t value);
+    const void* (CHAOS_RUNTIME_ABI_CALL* object_get_type_info)(const void* object);
+
     } RuntimeAbiV0;
 
 /* RuntimeAbiV1/V2 — V1 adds GC/boxing/vtable/thread-static helpers;
