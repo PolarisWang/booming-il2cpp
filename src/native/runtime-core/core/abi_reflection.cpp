@@ -302,7 +302,13 @@ static GCHandle CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_new(RuntimeState*, void*,
 static void* CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_get(RuntimeState*, GCHandle) { return nullptr; }
 static void CHAOS_RUNTIME_ABI_CALL _gc_handle_noop_set(RuntimeState*, GCHandle, void*) {}
 
-const RuntimeAbiV0 kRuntimeAbiV0 = {
+
+{ /* balance */ }  // anonymous namespace
+
+const RuntimeAbiV0* GetRuntimeAbiV0() {
+    // Function-local static: initialized on first call to avoid static init
+    // order fiasco with generated code dynamic initializers.
+    static const RuntimeAbiV0 s_runtime_abi_v0 = 
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),
     &RuntimeInit,
@@ -378,12 +384,10 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &RegisterHotpatchModule,
     &ChaosArrayEmpty,
 };
-
-}  // anonymous namespace
-
-const RuntimeAbiV0* GetRuntimeAbiV0() {
-    return &kRuntimeAbiV0;
+    return &s_runtime_abi_v0;
 }
+
+
 
 const MarshalPlatformAbiRootV1* GetMarshalPlatformAbiRootV1() {
     return &kMarshalPlatformAbiRootV1;
