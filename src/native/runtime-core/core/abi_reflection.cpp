@@ -8,6 +8,11 @@
 // These are used to populate the RuntimeAbiV0 dispatch table below.
 // Declarations were previously in the generated runtime_abi.h but that
 // file is now part of the per-chunk SDK rather than the runtime library.
+//
+// NOTE: These must be inside namespace chaos::il2cpp::runtime_core to
+// match their definitions and avoid C2668 ambiguity in unity builds.
+
+namespace chaos::il2cpp::runtime_core {
 
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     const RuntimeInitParams* init_params,
@@ -31,6 +36,8 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ClassInit(
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL TypeQueryCapabilityImpl(
     TypeInfoHandle type, RuntimeTypeCapabilityInfoV0* out_capability_info);
 const struct RuntimeInstantiationBridgeV0* CHAOS_RUNTIME_ABI_CALL ChaosRuntimeInstantiationGetBridgeV0(void);
+
+}  // namespace chaos::il2cpp::runtime_core
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
