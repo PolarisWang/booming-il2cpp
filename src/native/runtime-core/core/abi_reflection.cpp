@@ -434,8 +434,10 @@ static void CHAOS_RUNTIME_ABI_CALL _v2_voidptr3(void*, void*, void*) {}
 static void* CHAOS_RUNTIME_ABI_CALL _v2_voidptr_cstr(void*, const char*) { return nullptr; }
 static int32_t CHAOS_RUNTIME_ABI_CALL _v2_int32() { return 0; }
 static void CHAOS_RUNTIME_ABI_CALL _v2_void() {}
-static void CHAOS_RUNTIME_ABI_CALL _v2_void_voidptr(void*) {}
-static void* CHAOS_RUNTIME_ABI_CALL _v2_void_ptr_ret() { return nullptr; }
+static void CHAOS_RUNTIME_ABI_CALL _abi_gc_register_finalizable(void* obj) { chaos_gc_register_finalizable(obj); }
+static void CHAOS_RUNTIME_ABI_CALL _abi_raise_exception(void*) { /* noop: exceptions go through raise_managed_exception */ }
+static void* CHAOS_RUNTIME_ABI_CALL _abi_get_current_runtime_state() { return reinterpret_cast<void*>(GetCurrentRuntimeState()); }
+static void* CHAOS_RUNTIME_ABI_CALL _abi_get_current_thread_state() { return reinterpret_cast<void*>(GetCurrentThreadState()); }
 
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
@@ -490,10 +492,10 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &_v2_void_int32,  // V2: set_last_pinvoke_error (void (*)(int32_t))
     &_v2_int32,  // V2: get_last_os_error (int32_t (*)(void))
     &_v2_void,  // V2: clear_last_os_error (void (*)(void))
-    &_v2_void_voidptr,  // V2: gc_register_finalizable (void (*)(void*))
-    &_v2_void_ptr_ret,  // V2: get_current_runtime_state (void* (*)(void))
-    &_v2_void_ptr_ret,  // V2: get_current_thread_state (void* (*)(void))
-    &_v2_void_voidptr,  // V2: raise_exception (void (*)(void*))
+    &_abi_gc_register_finalizable,  // V2: gc_register_finalizable
+    &_abi_get_current_runtime_state,  // V2: get_current_runtime_state
+    &_abi_get_current_thread_state,  // V2: get_current_thread_state
+    &_abi_raise_exception,  // V2: raise_exception
     &RegisterModuleWrapper,
     &HotpatchIsActiveWrapper,
     &HotpatchShouldKeepNativeWrapper,
