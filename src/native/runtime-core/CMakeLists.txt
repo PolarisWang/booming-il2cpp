@@ -199,7 +199,6 @@ add_library(chaos_runtime_core STATIC
     tier_manager.cpp
     profile_stats.h
     profile_stats.cpp
-    core/abi_reflection.cpp
     )
 # ── 执行引擎配置（编译时常量）─────────────────────────────────────
 # 选择 ExecutionConfig 平台配置，控制 JIT/AOT 引擎的激活状态。
