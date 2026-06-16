@@ -38,7 +38,7 @@ static SubjectFn GetSubjectDirect(int si) noexcept {
     return reinterpret_cast<SubjectFn>(entries[i].direct_ptr);
 }
 
-int64_t SubjectDispatchDirect(int si, int64_t arg0) noexcept {
+int64_t SubjectDispatchDirect(int si, int64_t arg0) {
     auto fn = GetSubjectDirect(si);
     if (CHAOS_IL2CPP_UNLIKELY(!fn)) return 0;
     try {
