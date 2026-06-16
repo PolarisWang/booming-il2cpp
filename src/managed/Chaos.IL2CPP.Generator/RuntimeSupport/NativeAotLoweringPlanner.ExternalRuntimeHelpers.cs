@@ -336,21 +336,12 @@ public sealed partial class NativeAotLoweringPlanner
 			: CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType);
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
 		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
-		string paramSig = InferParameterSignatureFromSubjectId(callee);
-		// Prepend implicit 'this' pointer
-		string paramSigWithThis = string.IsNullOrEmpty(paramSig)
-			? "CHAOS_IL2CPP_INTPTR"
-			: "CHAOS_IL2CPP_INTPTR, " + paramSig;
-		// Use the correct return type for the stub. The header declares
-		// the actual return type (e.g. void for Array::Sort), but the stub was
-		// hardcoded to CHAOS_IL2CPP_INTPTR causing C2371 redefinition.
-		string stubReturnType = string.Equals(failReturnType, "System.Void", StringComparison.Ordinal)
-		    ? "void"
-		    : "CHAOS_IL2CPP_INTPTR";
-		var src = RenderSimpleExternalRuntimeHelper(stubReturnType, failSymbol, paramSigWithThis,
+		// All catch-all fallback functions use () regardless of actual method params
+		// because call sites pass 0 args and the body uses hardcoded subject ID.
+		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
 			["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
-			Enumerable.Repeat(CreateNativeIntAbiSlot(), (paramSig.Length > 0 ? paramSig.Split(',').Length : 0) + 1).Cast<AotCoreIrAbiSlotArtifact>().ToArray(), failReturnAbi, EmptyRawArgumentIndices);
+			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
 		_externalRuntimeHelperCache[callee] = helperDefinition;
 		return true;
 
