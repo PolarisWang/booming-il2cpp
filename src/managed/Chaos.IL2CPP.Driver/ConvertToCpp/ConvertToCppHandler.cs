@@ -323,7 +323,7 @@ internal static class ConvertToCppHandler
                 version = "1.0.0",
                 features = new
                 {
-                    async_methods = false,
+                    async_methods = true,
                     vector_t_boxing = false,
                     generic_constraints = new[] { "unmanaged", "new" },
                     max_generic_params = 4,

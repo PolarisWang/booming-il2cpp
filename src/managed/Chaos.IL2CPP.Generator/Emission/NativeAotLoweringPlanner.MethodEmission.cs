@@ -214,6 +214,22 @@ public sealed partial class NativeAotLoweringPlanner
 			var hr = ak == AsyncMethodKind.AsyncTaskOfT || ak == AsyncMethodKind.AsyncValueTaskOfT;
 			builder.Append(GenPromise(uid, hr));
 			builder.Append(GenCoro(uid, hr, method.SubjectId ?? "", abody ?? new IRSequence(new List<StructuredIRNode>())));
+			// Emit forwarding function with NativeSymbol name so the hotpatch
+			// dispatch table's direct_ptr resolves correctly.  The coroutine entry
+			// point is Entry_<uid>; we emit a thin wrapper that calls it and
+			// returns the raw int64 result.
+			var nativeSym = method.NativeSymbol;
+			if (!string.IsNullOrEmpty(nativeSym))
+			{
+			    builder.Append("extern \"C\" CHAOS_IL2CPP_INT64 ");
+			    builder.Append(nativeSym);
+			    builder.AppendLine("(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept");
+			    builder.AppendLine("{");
+			    builder.Append("    return Entry_");
+			    builder.Append(uid);
+			    builder.AppendLine("();");
+			    builder.AppendLine("}");
+			}
 			return;
 		}
 		IReadOnlyList<AotCoreIrInstructionArtifact> instructions = method.Instructions;

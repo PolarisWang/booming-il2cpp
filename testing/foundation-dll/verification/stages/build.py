@@ -483,6 +483,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         if ctx.skip_probe:
             cmd.append("--skip-probe")
             print(f"  [build] Probe phase skipped (--skip-probe)")
+        # Pass capabilities.json if available (enables async methods etc.)
+        caps_path = ctx.chunk_dir / "native" / "codegen" / "generated" / "capabilities.json"
+        if caps_path.exists():
+            cmd.extend(["--capabilities", str(caps_path)])
+            print(f"  [build] Capabilities: {caps_path.name}")
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=1200)
 
         if result.returncode != 0:
