@@ -341,7 +341,13 @@ public sealed partial class NativeAotLoweringPlanner
 		string paramSigWithThis = string.IsNullOrEmpty(paramSig)
 			? "CHAOS_IL2CPP_INTPTR"
 			: "CHAOS_IL2CPP_INTPTR, " + paramSig;
-		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, paramSigWithThis,
+		// Use the correct return type for the stub. The header declares
+		// the actual return type (e.g. void for Array::Sort), but the stub was
+		// hardcoded to CHAOS_IL2CPP_INTPTR causing C2371 redefinition.
+		string stubReturnType = string.Equals(failReturnType, "System.Void", StringComparison.Ordinal)
+		    ? "void"
+		    : "CHAOS_IL2CPP_INTPTR";
+		var src = RenderSimpleExternalRuntimeHelper(stubReturnType, failSymbol, paramSigWithThis,
 			["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 			Enumerable.Repeat(CreateNativeIntAbiSlot(), (paramSig.Length > 0 ? paramSig.Split(',').Length : 0) + 1).Cast<AotCoreIrAbiSlotArtifact>().ToArray(), failReturnAbi, EmptyRawArgumentIndices);

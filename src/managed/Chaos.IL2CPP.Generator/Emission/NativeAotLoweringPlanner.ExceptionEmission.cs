@@ -587,6 +587,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitInstructionLookahead(StringBuilder builder, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, string indentation)
 	{
 		_lookaheadInstructionList = instructions;
+		int _lookaheadSkipCount = 0;
 		for (int i = 0; i < instructions.Count; i++)
 		{
 			_lookaheadInstructionIndex = i;
@@ -603,6 +604,8 @@ public sealed partial class NativeAotLoweringPlanner
 			    // pipe buffer and causing STATUS_HEAP_CORRUPTION (0xC000037D).
 			}
 		}
+	if (_lookaheadSkipCount > 0)
+	    Console.Error.WriteLine($"[codegen] INFO: {_lookaheadSkipCount} instruction(s) skipped in {_currentMethodArtifact?.SubjectId ?? "?"} (will fall back to stub)");
 		_lookaheadInstructionList = null;
 	}
 
