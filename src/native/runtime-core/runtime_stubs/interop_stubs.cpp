@@ -4,6 +4,7 @@
 // These stubs are compiled from source (not part of prebuilt lib)
 // to avoid stale-symbol issues with the SDK runtime library.
 #include <cstdlib>
+#include <chaos/unordered_dense.h>
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
@@ -12,6 +13,13 @@
 #include "engine_binding.h"
 #include "patch_loader.h"
 #include <chaos/pal/pal_eh.h>
+
+// ── External runtime dispatch hash table ─────────────────────────
+// O(1) hash lookup replaces the O(n) linear strcmp scan in Phase 2
+// of ChaosExternalRuntimeFallback.  Built once on first access.
+// Using the same hash map type as aot_direct_dispatch.cpp.
+static ankerl::unordered_dense::map<std::string, int32_t> s_ext_rt_hash;
+static bool s_ext_rt_hash_init = false;
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -795,33 +803,24 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
         return 0;
 
 
-    // ── Phase 2: Scan the external runtime dispatch table ───────────────
+    // ── Phase 2: Look up the external runtime dispatch table ───────────
+    // O(1) hash lookup replaces the O(n) linear strcmp + PalTryCallNoExcept scan.
     if (kChaosExternalRuntimeCount > 0) {
-        for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
-            if (kChaosExternalRuntimeSubjects[i] == nullptr)
-                continue;
-            uint64_t cmp_result = INT64_MAX;
-            bool fault = chaos::il2cpp::pal::PalTryCallNoExcept(
-                [](uint64_t a, uint64_t b, uint64_t, uint64_t, uint64_t,
-                   uint64_t, uint64_t, uint64_t) -> uint64_t {
-                    return static_cast<uint64_t>(std::strcmp(
-                        reinterpret_cast<const char*>(a),
-                        reinterpret_cast<const char*>(b)));
-                },
-                reinterpret_cast<uint64_t>(kChaosExternalRuntimeSubjects[i]),
-                reinterpret_cast<uint64_t>(subject_id),
-                0, 0, 0, 0, 0, 0, cmp_result);
-            if (fault)
-                continue;
-            if (static_cast<int32_t>(cmp_result) != 0)
-                continue;
-            if (_TryInvoke(kChaosExternalRuntimeSubjects[i]))
+        // Lazy-init: build hash map from the parallel arrays on first use.
+        if (!s_ext_rt_hash_init) {
+            s_ext_rt_hash.reserve(static_cast<size_t>(kChaosExternalRuntimeCount));
+            for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
+                if (kChaosExternalRuntimeSubjects[i] != nullptr) {
+                    s_ext_rt_hash[std::string(kChaosExternalRuntimeSubjects[i])] = i;
+                }
+            }
+            s_ext_rt_hash_init = true;
+        }
+        auto it = s_ext_rt_hash.find(std::string(subject_id));
+        if (it != s_ext_rt_hash.end()) {
+            if (_TryInvoke(kChaosExternalRuntimeSubjects[it->second]))
                 return 0;
-
-            // Found in dispatch table but unresolvable — codegen/metadata mismatch.
-            // Return sentinel 0 instead of crashing (safe for fact verification:
-            // the method body has its own sentinel return value, and the pipeline
-            // compares against it to detect value mismatches).
+            // Found but unresolvable — codegen/metadata mismatch.
             return 0;
         }
     }
