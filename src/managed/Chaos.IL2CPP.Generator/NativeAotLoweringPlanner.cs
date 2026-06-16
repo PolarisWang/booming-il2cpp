@@ -2220,6 +2220,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 // Float64->double (XMM0), others->CHAOS_IL2CPP_INTPTR (RAX).
                 string cppType = kvp.Value switch
                 {
+                    AotCoreIrAbiCarrierKind.Void => "void",
                     AotCoreIrAbiCarrierKind.Float32 => "float",
                     AotCoreIrAbiCarrierKind.Float64 => "double",
                     _ => "CHAOS_IL2CPP_INTPTR",
@@ -2228,7 +2229,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 sb.Append(cppType);
                 sb.Append(' ');
                 sb.Append(kvp.Key);
-                sb.AppendLine("() noexcept { return 0; }");
+                if (kvp.Value == AotCoreIrAbiCarrierKind.Void)
+                    sb.AppendLine("() noexcept {}");
+                else
+                    sb.AppendLine("() noexcept { return 0; }");
             }
             sb.AppendLine();
         }
