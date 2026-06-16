@@ -985,24 +985,9 @@ public sealed class NativeAotEmitter
 			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
 				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
 			while (callMatch.Success)
-			{
+t			{
 				int ls = text.LastIndexOf('
-', callMatch.Index);
-				if (ls < 0) ls = 0;
-				string lp = text.Substring(ls, callMatch.Index - ls).TrimStart();
-				if (!lp.StartsWith("extern") && !lp.StartsWith("static"))
-					break;
-				callMatch = callMatch.NextMatch();
-			}
-			if (callMatch.Success)
-			{
-				int pos = callMatch.Index + callMatch.Length;
-				int depth = 0;
-				bool inString = false;
-				for (int i = pos; i < text.Length; i++)
-				{
-					char c = text[i];
-					if (c == '"') inString = !inString;
+' inString = !inString;
 					else if (!inString)
 					{
 						if (c == '(') depth++;

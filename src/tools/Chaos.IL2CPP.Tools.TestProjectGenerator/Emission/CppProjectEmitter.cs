@@ -16,22 +16,6 @@ public sealed class CppProjectEmitter
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     };
 
-    private static readonly string[] AllTemplateNames =
-    [
-        "TestProject.RuntimeEntry.cpp.scriban",
-        "TestProject.Dispatch.cpp.scriban",
-        "TestProject.SubjectDispatch.cpp.scriban",
-        "TestProject.SubjectDispatch.h.scriban",
-        "TestProject.SubjectDispatch.cpp.scriban",
-        "TestProject.SubjectDispatch.h.scriban",
-        "TestProject.CMakeLists.txt.scriban",
-        "TestProject.CMakePresets.json.scriban",
-        "TestProject.RuntimePatchdata.cpp.scriban",
-        "TestProject.chaos-config.cmake.scriban",
-        "TestProject.chaos-targets.cmake.scriban",
-        "TestProject.metadata.json.scriban",
-    ];
-
     /// <summary>
     /// Emit only dispatch.cpp and metadata (no codegen required).
     /// Used by the verification pipeline to generate verification_dispatch.generated.cpp
