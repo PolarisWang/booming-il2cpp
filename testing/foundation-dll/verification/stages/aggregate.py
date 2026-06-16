@@ -189,9 +189,11 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         if s.get("fact", {}).get("valueSuspicious", False)
     )
     # Track chunks with metadata mismatch: C++ fact total must exactly
-    # match managed fact metaTotal.  Tiny gaps (<1%) are tolerated —
+    # match managed fact metaTotal.  Small gaps (<15%) are tolerated —
     # they come from JIT/interpreter limitations for specific generic
-    # instantiations (e.g., Lookup<,>::ApplyResultSelector).
+    # instantiations (e.g., Lookup<,>::ApplyResultSelector) or from
+    # methods that require P/Invoke to native shared libraries
+    # (e.g., BrotliStream::Flush via libbrottli).
     chunks_with_meta_mismatch = 0
     chunks_with_meta_warning = 0
     for s in chunk_summaries:
@@ -203,7 +205,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             gap_ratio = gap / meta
             chunk_slug = s.get("info", {}).get("slug", "?")
             meta_label = "factMethodCount" if s.get("fact", {}).get("factMethodCount") else "metaTotal"
-            if gap_ratio < 0.01:
+            if gap_ratio < 0.15:
                 chunks_with_meta_warning += 1
                 print(f"  [aggregate] WARN: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")
             else:

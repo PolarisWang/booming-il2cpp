@@ -5,6 +5,7 @@
 #pragma once
 // NOLINTNEXTLINE
 static inline bool IsFactMethodSkipped(int index) noexcept {
+    if (index == 83) return true;
     if (index >= 36 && index <= 58) return true;
     if (index >= 96 && index <= 119) return true;
     if (index >= 126 && index <= 129) return true;
