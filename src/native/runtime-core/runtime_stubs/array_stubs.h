@@ -9,6 +9,14 @@
 #include "gc_helpers.h"
 #include "cpu_features.h"
 
+// MSVC uses _alloca, GCC/Clang use CHAOS_IL2CPP_ALLOCA
+#if defined(_MSC_VER)
+#include <malloc.h>
+#define CHAOS_IL2CPP_ALLOCA(s) _alloca(s)
+#else
+#define CHAOS_IL2CPP_ALLOCA(s) CHAOS_IL2CPP_ALLOCA(s)
+#endif
+
 // MSVC doesn't have __builtin_memcpy — use std::memcpy instead.
 #if defined(_MSC_VER)
 #include <cstring>
@@ -363,22 +371,169 @@ CHAOS_IL2CPP_FORCEINLINE void ChaosArraySort_Inline(CHAOS_IL2CPP_INTPTR array) n
 {
     if (array == 0) return;
     auto* arr = get_managed_array_mut(array);
+    auto* e = accessor_get_elements(arr);
     CHAOS_IL2CPP_INT32 n = static_cast<CHAOS_IL2CPP_INT32>(arr->length);
-    for (CHAOS_IL2CPP_INT32 i = 1; i < n; ++i) {
-        CHAOS_IL2CPP_INTPTR key = accessor_get_elements(arr)[i];
-        CHAOS_IL2CPP_INT32 j = i - 1;
-        while (j >= 0 && accessor_get_elements(arr)[j] > key) {
-            accessor_get_elements(arr)[j + 1] = accessor_get_elements(arr)[j];
-            --j;
+    if (n < 2) return;
+
+    // Introsort: quicksort falling back to heapsort for pathological >2*log2(n) depth.
+    int max_depth = 0;
+    { int t = n; while (t >>= 1) max_depth++; max_depth <<= 1; }
+    // Manually-inlined insertion sort threshold
+    constexpr CHAOS_IL2CPP_INT32 kInsertSortThreshold = 16;
+
+    // Iterative quicksort using explicit stack
+    struct Range { CHAOS_IL2CPP_INT32 l, h; };
+    auto* stack = static_cast<Range*>(CHAOS_IL2CPP_ALLOCA(static_cast<CHAOS_IL2CPP_SIZE>(n) * sizeof(Range)));
+    int sp = 0; stack[sp++] = {0, n - 1};
+
+    while (sp > 0) {
+        Range r = stack[--sp];
+        CHAOS_IL2CPP_INT32 l = r.l, h = r.h;
+        while (l < h) {
+            if (h - l <= kInsertSortThreshold) {
+                for (CHAOS_IL2CPP_INT32 i = l + 1; i <= h; ++i) {
+                    CHAOS_IL2CPP_INTPTR key = e[i];
+                    CHAOS_IL2CPP_INT32 j = i - 1;
+                    while (j >= l && e[j] > key) { e[j + 1] = e[j]; j--; }
+                    e[j + 1] = key;
+                }
+                break;
+            }
+            if (max_depth-- <= 0) {
+                // Heapsort fallback for pathologically deep recursion
+                CHAOS_IL2CPP_INT32 nn = h - l + 1;
+                auto* base = e + l;
+                for (CHAOS_IL2CPP_INT32 i = nn / 2 - 1; i >= 0; i--) {
+                    CHAOS_IL2CPP_INT32 p = i;
+                    while (true) {
+                        CHAOS_IL2CPP_INT32 c = 2 * p + 1;
+                        if (c >= nn) break;
+                        if (c + 1 < nn && base[c + 1] > base[c]) c++;
+                        if (base[p] >= base[c]) break;
+                        CHAOS_IL2CPP_INTPTR t = base[p]; base[p] = base[c]; base[c] = t;
+                        p = c;
+                    }
+                }
+                for (CHAOS_IL2CPP_INT32 i = nn - 1; i > 0; i--) {
+                    CHAOS_IL2CPP_INTPTR t = base[0]; base[0] = base[i]; base[i] = t;
+                    CHAOS_IL2CPP_INT32 p = 0, sz = i;
+                    while (true) {
+                        CHAOS_IL2CPP_INT32 c = 2 * p + 1;
+                        if (c >= sz) break;
+                        if (c + 1 < sz && base[c + 1] > base[c]) c++;
+                        if (base[p] >= base[c]) break;
+                        t = base[p]; base[p] = base[c]; base[c] = t;
+                        p = c;
+                    }
+                }
+                break;
+            }
+            // Median-of-3 pivot
+            CHAOS_IL2CPP_INT32 m = l + (h - l) / 2;
+            if (e[l] > e[m]) { CHAOS_IL2CPP_INTPTR t = e[l]; e[l] = e[m]; e[m] = t; }
+            if (e[l] > e[h]) { CHAOS_IL2CPP_INTPTR t = e[l]; e[l] = e[h]; e[h] = t; }
+            if (e[m] > e[h]) { CHAOS_IL2CPP_INTPTR t = e[m]; e[m] = e[h]; e[h] = t; }
+            CHAOS_IL2CPP_INTPTR pivot = e[m];
+            CHAOS_IL2CPP_INT32 i = l - 1, j = h + 1;
+            while (true) {
+                do { i++; } while (e[i] < pivot);
+                do { j--; } while (e[j] > pivot);
+                if (i >= j) break;
+                CHAOS_IL2CPP_INTPTR t = e[i]; e[i] = e[j]; e[j] = t;
+            }
+            // Recurse into smaller partition, iterate on larger (stack depth = O(log n))
+            if (j - l < h - j) {
+                if (j < h) stack[sp++] = {j + 1, h};
+                h = j;
+            } else {
+                if (l < j) stack[sp++] = {l, j};
+                l = j + 1;
+            }
         }
-        accessor_get_elements(arr)[j + 1] = key;
     }
 }
 
+/// Sort using a managed IComparer (function pointer).
+using CompareFn = CHAOS_IL2CPP_INT32 (*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;
+
 CHAOS_IL2CPP_FORCEINLINE void ChaosArraySortWithComparer_Inline(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR comparer) noexcept
 {
-    (void)comparer;
-    ChaosArraySort_Inline(array);
+    if (array == 0 || comparer == 0) return;
+    auto* arr = get_managed_array_mut(array);
+    auto* e = accessor_get_elements(arr);
+    CHAOS_IL2CPP_INT32 n = static_cast<CHAOS_IL2CPP_INT32>(arr->length);
+    if (n < 2) return;
+    auto cmp = reinterpret_cast<CompareFn>(comparer);
+
+    int max_depth = 0;
+    { int t = n; while (t >>= 1) max_depth++; max_depth <<= 1; }
+    constexpr CHAOS_IL2CPP_INT32 kInsertSortThreshold = 16;
+    struct Range { CHAOS_IL2CPP_INT32 l, h; };
+    auto* stack = static_cast<Range*>(CHAOS_IL2CPP_ALLOCA(static_cast<CHAOS_IL2CPP_SIZE>(n) * sizeof(Range)));
+    int sp = 0; stack[sp++] = {0, n - 1};
+
+    while (sp > 0) {
+        Range r = stack[--sp];
+        CHAOS_IL2CPP_INT32 l = r.l, h = r.h;
+        while (l < h) {
+            if (h - l <= kInsertSortThreshold) {
+                for (CHAOS_IL2CPP_INT32 i = l + 1; i <= h; ++i) {
+                    CHAOS_IL2CPP_INTPTR key = e[i];
+                    CHAOS_IL2CPP_INT32 j = i - 1;
+                    while (j >= l && cmp(e[j], key) > 0) { e[j + 1] = e[j]; j--; }
+                    e[j + 1] = key;
+                }
+                break;
+            }
+            if (max_depth-- <= 0) {
+                CHAOS_IL2CPP_INT32 nn = h - l + 1;
+                auto* base = e + l;
+                for (CHAOS_IL2CPP_INT32 i = nn / 2 - 1; i >= 0; i--) {
+                    CHAOS_IL2CPP_INT32 p = i;
+                    while (true) {
+                        CHAOS_IL2CPP_INT32 c = 2 * p + 1;
+                        if (c >= nn) break;
+                        if (c + 1 < nn && cmp(base[c + 1], base[c]) > 0) c++;
+                        if (cmp(base[p], base[c]) >= 0) break;
+                        CHAOS_IL2CPP_INTPTR t = base[p]; base[p] = base[c]; base[c] = t;
+                        p = c;
+                    }
+                }
+                for (CHAOS_IL2CPP_INT32 i = nn - 1; i > 0; i--) {
+                    CHAOS_IL2CPP_INTPTR t = base[0]; base[0] = base[i]; base[i] = t;
+                    CHAOS_IL2CPP_INT32 p = 0, sz = i;
+                    while (true) {
+                        CHAOS_IL2CPP_INT32 c = 2 * p + 1;
+                        if (c >= sz) break;
+                        if (c + 1 < sz && cmp(base[c + 1], base[c]) > 0) c++;
+                        if (cmp(base[p], base[c]) >= 0) break;
+                        t = base[p]; base[p] = base[c]; base[c] = t;
+                        p = c;
+                    }
+                }
+                break;
+            }
+            CHAOS_IL2CPP_INT32 m = l + (h - l) / 2;
+            if (cmp(e[l], e[m]) > 0) { CHAOS_IL2CPP_INTPTR t = e[l]; e[l] = e[m]; e[m] = t; }
+            if (cmp(e[l], e[h]) > 0) { CHAOS_IL2CPP_INTPTR t = e[l]; e[l] = e[h]; e[h] = t; }
+            if (cmp(e[m], e[h]) > 0) { CHAOS_IL2CPP_INTPTR t = e[m]; e[m] = e[h]; e[h] = t; }
+            CHAOS_IL2CPP_INTPTR pivot = e[m];
+            CHAOS_IL2CPP_INT32 i = l - 1, j = h + 1;
+            while (true) {
+                do { i++; } while (cmp(e[i], pivot) < 0);
+                do { j--; } while (cmp(e[j], pivot) > 0);
+                if (i >= j) break;
+                CHAOS_IL2CPP_INTPTR t = e[i]; e[i] = e[j]; e[j] = t;
+            }
+            if (j - l < h - j) {
+                if (j < h) stack[sp++] = {j + 1, h};
+                h = j;
+            } else {
+                if (l < j) stack[sp++] = {l, j};
+                l = j + 1;
+            }
+        }
+    }
 }
 
 // ── AVX2-accelerated Reverse (P2) ──────────────────────────────
