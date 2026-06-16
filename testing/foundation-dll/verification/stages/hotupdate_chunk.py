@@ -243,46 +243,46 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                 patch_dll = ctx.chunk_dir / "managed" / "subjects" / "patch" / "PatchSubjects.dll"
                 patch_dll.parent.mkdir(parents=True, exist_ok=True)
                 if _build_patch_dll(patch_output, patch_dll, target_dll):
-                print(f"  [hotupdate] Patch DLL built: {patch_dll}")
-                # Extract patch data via TPG (IL2CPP codegen layer)
-                if ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
-                    tpg_dll = tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
-                    patch_data_path = ctx.chunk_dir / "native" / "patch.patchdata"
-                    patch_data_path.parent.mkdir(parents=True, exist_ok=True)
-                    extract_cmd = [
-                        "dotnet", "exec", str(tpg_dll),
-                        "extract-patch-data",
-                        "--dll", str(patch_dll),
-                        "--output", str(patch_data_path),
-                    ]
-                    # FP-8: Pass subject indices to align sentinel values with baseline.
-                    hu_indices = metadata.get("hotupdateMethodIndices")
-                    if hu_indices:
-                        extract_cmd.extend(["--subject-indices", ",".join(str(i) for i in hu_indices)])
-                        extract_cmd.extend(["--subject-only"])
-                    extract_result = subprocess.run(
-                        extract_cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
-                    if extract_result.returncode == 0:
-                        patch_data_size = patch_data_path.stat().st_size
-                        print(f"  [hotupdate] Patch data: {patch_data_path} ({patch_data_size} bytes)")
-                        if patch_data_size == 0:
-                            print(f"  [hotupdate] ERROR: patch data is empty")
-                            return StageResult(
-                                stage="hotupdate", status="error",
-                                summary="patch data is empty",
-                                duration_ms=int((time.perf_counter() - start) * 1000))
+                    print(f"  [hotupdate] Patch DLL built: {patch_dll}")
+                    # Extract patch data via TPG (IL2CPP codegen layer)
+                    if ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
+                        tpg_dll = tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
+                        patch_data_path = ctx.chunk_dir / "native" / "patch.patchdata"
+                        patch_data_path.parent.mkdir(parents=True, exist_ok=True)
+                        extract_cmd = [
+                            "dotnet", "exec", str(tpg_dll),
+                            "extract-patch-data",
+                            "--dll", str(patch_dll),
+                            "--output", str(patch_data_path),
+                        ]
+                        # FP-8: Pass subject indices to align sentinel values with baseline.
+                        hu_indices = metadata.get("hotupdateMethodIndices")
+                        if hu_indices:
+                            extract_cmd.extend(["--subject-indices", ",".join(str(i) for i in hu_indices)])
+                            extract_cmd.extend(["--subject-only"])
+                        extract_result = subprocess.run(
+                            extract_cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
+                        if extract_result.returncode == 0:
+                            patch_data_size = patch_data_path.stat().st_size
+                            print(f"  [hotupdate] Patch data: {patch_data_path} ({patch_data_size} bytes)")
+                            if patch_data_size == 0:
+                                print(f"  [hotupdate] ERROR: patch data is empty")
+                                return StageResult(
+                                    stage="hotupdate", status="error",
+                                    summary="patch data is empty",
+                                    duration_ms=int((time.perf_counter() - start) * 1000))
+                        else:
+                            print(f"  [hotupdate] TPG extract-patch-data failed, falling back to no-patch mode")
+                            for line in (extract_result.stderr.splitlines() + extract_result.stdout.splitlines())[-5:]:
+                                print(f"      {line}")
+                            patch_data_path = None
                     else:
-                        print(f"  [hotupdate] TPG extract-patch-data failed, falling back to no-patch mode")
-                        for line in (extract_result.stderr.splitlines() + extract_result.stdout.splitlines())[-5:]:
-                            print(f"      {line}")
+                        print(f"  [hotupdate] TPG build failed, falling back to no-patch mode")
                         patch_data_path = None
                 else:
-                    print(f"  [hotupdate] TPG build failed, falling back to no-patch mode")
-                    patch_data_path = None
-            else:
-                print(f"  [hotupdate] Patch DLL build failed, falling back to no-patch mode")
-                # Show ATG output diagnostics
-                if patch_output.exists():
+                    print(f"  [hotupdate] Patch DLL build failed, falling back to no-patch mode")
+                    # Show ATG output diagnostics
+                    if patch_output.exists():
                         import glob as _glob
                         cs_files = sorted(p for p in patch_output.rglob("*.cs") if p.suffix == ".cs" and "obj" not in p.parts)
                         total_lines = sum(len(p.read_text(encoding="utf-8", errors="replace").splitlines()) for p in cs_files)
@@ -292,7 +292,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         else:
             print(f"  [hotupdate] ATG --patch-mode failed, falling back to no-patch mode")
             for line in (atg_result.stderr.splitlines() + atg_result.stdout.splitlines())[-10:]:
-                print(f"      {line}")
+                    print(f"      {line}")
     else:
         print(f"  [hotupdate] ATG build failed, falling back to no-patch mode")
 
@@ -315,16 +315,9 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
 
     # When patch data is available, run benchmark before/after for performance comparison
     # Scale iterations by chunk size: 5 for small (<500), 2 for medium, 0 (disabled) for large
+    # NOTE: benchmark disabled for now — see DispatchDirectVoid+benchmark+patch-data crash
+    benchmark_iterations = 0
     method_count = len(hotupdate_indices)
-    if patch_data_path:
-        if method_count > 2000:
-            benchmark_iterations = 0  # skip benchmark for large chunks
-        elif method_count > 500:
-            benchmark_iterations = 2
-        else:
-            benchmark_iterations = 5
-    else:
-        benchmark_iterations = 0  # no patch data, no benchmark needed
 
     # Scale timeout by chunk size: 3s per method for 3 passes (baseline/patched/revert)
     hotupdate_timeout = max(120, 60 + method_count * 3)
