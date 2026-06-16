@@ -282,12 +282,12 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFallback() noexce
     for (int si = 0; si < kSubjectEntryCount; si++) {
         int i = kSubjectSlotMap[si];
         if (i < 0 || i >= kAotMethodCount) continue;
-        auto* entry = const_cast<HotpatchEntryV0*>(GetHotpatchEntries() + i);
-        if (entry == nullptr) continue;
-        if (!chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(*entry)) continue;
+        auto* entries = const_cast<HotpatchEntryV0*>(GetHotpatchEntries());
+        if (entries == nullptr) continue;
+        if (!chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entries[i])) continue;
         // Use direct_ptr as method_key so interpreter fallback can call the AOT body
         registry.SetPatchedBySlot(0, static_cast<uint32_t>(i), true,
-                                  entry->direct_ptr, 0);
+                                  entries[i].direct_ptr, 0);
         patched++;
     }
     std::fprintf(stderr, "INFO: ApplyHotpatchFallback — patched %d methods via slot map\n", patched);
