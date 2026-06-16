@@ -143,7 +143,8 @@ def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
 
 
 def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | None,
-                        meta_total: int | None, value_warnings: int) -> None:
+                        meta_total: int | None, fact_method_count: int | None,
+                        value_warnings: int) -> None:
     """Write fact.json to chunk results dir for aggregate stage to read."""
     chunk_results_dir = ctx.chunk_dir / "results"
     chunk_results_dir.mkdir(parents=True, exist_ok=True)
@@ -159,6 +160,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         "valueSuspicious": value_warnings > 0,
         "valueWarnings": value_warnings,
         "metaTotal": meta_total or total,
+        "factMethodCount": fact_method_count or total,
     }
     try:
         fact_path.write_text(json.dumps(fact_data, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -197,10 +199,13 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
 
     # Build metadata reference — None if unavailable (handled by callers)
     meta_total: int | None = None
+    meta_fact_count: int | None = None
     meta_path = ctx.chunk_dir / "managed" / "subjects" / "subjects.metadata.json"
     if meta_path.exists():
         try:
-            meta_total = json.loads(meta_path.read_text(encoding="utf-8")).get("totalMethods")
+            md = json.loads(meta_path.read_text(encoding="utf-8"))
+            meta_total = md.get("totalMethods")
+            meta_fact_count = md.get("factMethodCount")
         except (json.JSONDecodeError, OSError):
             print(f"  [fact] WARNING: corrupt or unreadable metadata at {meta_path}")
 
@@ -306,7 +311,7 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     _write_fact_history(ctx, aot_result, jit_result)
 
     # ── Also write fact.json to chunk results dir for aggregate consumption ──
-    _write_fact_results(ctx, aot_result, jit_result, meta_total, value_warnings)
+    _write_fact_results(ctx, aot_result, jit_result, meta_total, meta_fact_count, value_warnings)
 
     return StageResult(
         stage="fact", status=status,

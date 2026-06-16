@@ -169,6 +169,7 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
 
     # ── Step 1: Try to generate patch data (ATG --patch-mode + build) ──
     _patch_generation_attempted = False
+    _patch_skipped_no_methods = False
     # Full patch data generation pipeline: ATG --patch-mode → csc → PatchDataExtractor.
     # PatchDataExtractor reads the patch DLL's PE metadata and produces a self-contained
     # .patchdata binary (format "PADT" magic) that the runtime PatchLoader can apply.
@@ -226,10 +227,22 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
 
         atg_result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=1200)
         if atg_result.returncode == 0:
-            # Try to build the generated patch DLL
-            patch_dll = ctx.chunk_dir / "managed" / "subjects" / "patch" / "PatchSubjects.dll"
-            patch_dll.parent.mkdir(parents=True, exist_ok=True)
-            if _build_patch_dll(patch_output, patch_dll, target_dll):
+            # Check if ATG produced any .cs files (non-empty patch generation)
+            patch_cs_files = sorted(
+                p for p in patch_output.rglob("*.cs")
+                if "obj" not in p.parts and p.name != "CombinedPatchSubjects.cs"
+                and "AssemblyAttributes" not in p.name
+                and "AssemblyInfo" not in p.name
+                and "GlobalUsings" not in p.name
+            ) if patch_output.exists() else []
+            if not patch_cs_files:
+                print(f"  [hotupdate] ATG --patch-mode produced 0 .cs files (no methods to patch)")
+                _patch_skipped_no_methods = True
+            else:
+                # Try to build the generated patch DLL
+                patch_dll = ctx.chunk_dir / "managed" / "subjects" / "patch" / "PatchSubjects.dll"
+                patch_dll.parent.mkdir(parents=True, exist_ok=True)
+                if _build_patch_dll(patch_output, patch_dll, target_dll):
                 print(f"  [hotupdate] Patch DLL built: {patch_dll}")
                 # Extract patch data via TPG (IL2CPP codegen layer)
                 if ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
@@ -382,7 +395,8 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "revertPassed": revert_passed,
         "semanticChangedCount": semantic_changed,
         "patchDataUsed": patch_data_path is not None,
-        "patchFailed": patch_data_path is None and _patch_generation_attempted,
+        "patchFailed": patch_data_path is None and _patch_generation_attempted and not _patch_skipped_no_methods,
+        "patchSkippedNoMethods": _patch_skipped_no_methods,
         "truncated": json_truncated,
         "crash": hotupdate_data.get("_crash", False),
         "hasBaselineBenchmark": len(baseline_benchmark) > 0,
@@ -414,9 +428,14 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         if not errors:
             errors.append("hotupdate returned no data")
     elif result_data.get("patchFailed"):
+        # Genuine patch generation failure (ATG/build crashed, not just 0 methods)
         status = "error"
         if not errors:
             errors.append("patch data generation failed earlier")
+    elif result_data.get("patchSkippedNoMethods"):
+        # ATG produced 0 patchable methods — tests ran clean, nothing to patch
+        status = "passed" if (assert_failed == 0 and all_revert) else "failed"
+        print(f"  [hotupdate] No methods to patch — {passed} passed, revert={all_revert}")
     elif patch_data_path:
         status = "passed" if (assert_failed == 0 and all_revert) else "failed"
     else:

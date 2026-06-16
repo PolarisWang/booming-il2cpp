@@ -230,6 +230,10 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         1 for s in chunk_summaries
         if s.get("hotupdate", {}).get("patchFailed", False)
     )
+    chunks_with_patch_skipped_no_methods = sum(
+        1 for s in chunk_summaries
+        if s.get("hotupdate", {}).get("patchSkippedNoMethods", False)
+    )
     chunks_with_revert_failure = sum(
         1 for s in chunk_summaries
         if not s.get("hotupdate", {}).get("allRevert", True)
@@ -305,6 +309,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             "hotupdate": {
                 "chunksWithPatchData": chunks_with_patch_data,
                 "chunksPatchFailed": chunks_with_patch_failed,
+                "chunksPatchSkippedNoMethods": chunks_with_patch_skipped_no_methods,
                 "chunksWithRevertFailure": chunks_with_revert_failure,
                 "totalPassed": total_hu_passed,
                 "totalFailed": total_hu_failed,
