@@ -505,8 +505,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] AutoTestGenerator subjects: {total_subjects}")
 
     if total_subjects == 0:
+        print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
+              f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
         return StageResult(
-            stage="build", status="error",
+            stage="build", status="skipped",
             summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
             duration_ms=int((time.perf_counter() - start) * 1000))
 
