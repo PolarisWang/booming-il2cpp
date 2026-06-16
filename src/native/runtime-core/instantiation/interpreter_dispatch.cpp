@@ -63,8 +63,22 @@ interpreter::DispatchResult InterpreterDispatch(
     // argv[i] points to raw bytes of argument i.
     // raw_data stores inline values (small enough for uint64).
     // Struct arguments use the heap-allocated blob pointer directly.
-    CHAOS_IL2CPP_VECTOR(void*)     argv(param_count, nullptr);
-    CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UINT64) raw_data(param_count, 0);
+    //
+    // Small-buffer optimization: stack-allocate for ≤8 args (common case),
+    // heap-allocate only for methods with unusual parameter counts.
+    void* argv_stack[8];
+    CHAOS_IL2CPP_UINT64 raw_data_stack[8];
+    void** argv;
+    CHAOS_IL2CPP_UINT64* raw_data;
+    bool heap_allocated = false;
+    if (param_count <= 8) {
+        argv = argv_stack;
+        raw_data = raw_data_stack;
+    } else {
+        argv = new void*[param_count]();
+        raw_data = new CHAOS_IL2CPP_UINT64[param_count]();
+        heap_allocated = true;
+    }
 
     for (CHAOS_IL2CPP_UINT32 ai = 0u, si = (is_instance_call ? 1u : 0u);
          si < arg_count; ++ai, ++si) {
@@ -221,6 +235,12 @@ interpreter::DispatchResult InterpreterDispatch(
     }
 
     --ctx->recursion_depth;
+
+    // Cleanup heap-allocated arg arrays (SBO fallback)
+    if (heap_allocated) {
+        delete[] argv;
+        delete[] raw_data;
+    }
     return result;
 }
 
