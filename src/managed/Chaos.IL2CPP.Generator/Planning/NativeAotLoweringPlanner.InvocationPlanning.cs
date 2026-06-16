@@ -224,6 +224,7 @@ public sealed partial class NativeAotLoweringPlanner
                 // Canonicalize assembly prefix so dispatch table keys match
                 // the normalized SubjectIds used by TryCreateExternalRuntimeHelperDefinition
                 // and the downstream helperSymbolBySubjectId lookup.
+                string rawCallee = callee;
                 callee = NormalizeSubjectIdAssemblyCached(callee);
 
                 // P0: skip already-processed callees
@@ -239,7 +240,9 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
 
                 // Already in method dictionary with instructions -> direct AOT call, no table needed.
-                bool _isAot = _methodsBySubjectId.TryGetValue(callee, out var _e) && _e is { Instructions.Count: > 0 };
+                // Use rawCallee (with assembly prefix) because _methodsBySubjectId is keyed by
+                // full SubjectId (e.g. "System.Data.Common/...SqlBoolean::op_BitwiseAnd").
+                bool _isAot = _methodsBySubjectId.TryGetValue(rawCallee, out var _e) && _e is { Instructions.Count: > 0 };
                 if (_isAot)
                 {
                     // Try RHS for DirectNativeSymbol overrides, but don't add to dispatch table.
