@@ -448,6 +448,68 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsIsPow2Impl(CHAOS_IL2CPP_INTPTR 
     return (v != 0) && ((v & (v - 1)) == 0) ? 1 : 0;
 }
 
+// ── BitOperations::PopCount native implementation ──────────────────
+// Counts set bits in a 64-bit value. Uses compiler builtin when available.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsPopCount(CHAOS_IL2CPP_INTPTR value) noexcept {
+#if defined(__GNUC__) || defined(__clang__)
+    return static_cast<CHAOS_IL2CPP_INTPTR>(__builtin_popcountll(static_cast<unsigned long long>(value)));
+#elif defined(_MSC_VER)
+    return static_cast<CHAOS_IL2CPP_INTPTR>(__popcnt64(static_cast<unsigned __int64>(value)));
+#else
+    // Manual popcount: parallel bit reduction
+    auto v = static_cast<uint64_t>(static_cast<CHAOS_IL2CPP_UINT64>(value));
+    v = v - ((v >> 1) & 0x5555555555555555ULL);
+    v = (v & 0x3333333333333333ULL) + ((v >> 2) & 0x3333333333333333ULL);
+    v = (v + (v >> 4)) & 0x0F0F0F0F0F0F0F0FULL;
+    return static_cast<CHAOS_IL2CPP_INTPTR>((v * 0x0101010101010101ULL) >> 56);
+#endif
+}
+
+// ── BitOperations::LeadingZeroCount native implementation ──────────
+// Counts leading zero bits. Uses compiler builtin when available.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsLeadingZeroCount(CHAOS_IL2CPP_INTPTR value) noexcept {
+    auto v = static_cast<uint64_t>(static_cast<CHAOS_IL2CPP_UINT64>(value));
+    if (v == 0) return static_cast<CHAOS_IL2CPP_INTPTR>(64);
+#if defined(__GNUC__) || defined(__clang__)
+    return static_cast<CHAOS_IL2CPP_INTPTR>(__builtin_clzll(v));
+#elif defined(_MSC_VER)
+    return static_cast<CHAOS_IL2CPP_INTPTR>(__lzcnt64(v));
+#else
+    // Manual: binary search for leading zero count
+    uint64_t n = 64;
+    uint64_t mask = 0xFFFFFFFF00000000ULL;
+    // BSR-based fallback for non-LZCNT CPUs
+    unsigned long index;
+    if (_BitScanReverse64(&index, v)) n = 63 - index;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(n);
+#endif
+}
+
+// ── BitOperations::Log2 native implementation ──────────────────────
+// Floor(log2(x)).  For x=0, returns 0 (matches .NET behavior for 0 input).
+// Implemented as (63 - LeadingZeroCount(x)) for x>0, 0 for x=0.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsLog2(CHAOS_IL2CPP_INTPTR value) noexcept {
+    auto v = static_cast<uint64_t>(static_cast<CHAOS_IL2CPP_UINT64>(value));
+    if (v == 0) return 0;
+#if defined(__GNUC__) || defined(__clang__)
+    return static_cast<CHAOS_IL2CPP_INTPTR>(63 - __builtin_clzll(v));
+#elif defined(_MSC_VER)
+    unsigned long index;
+    _BitScanReverse64(&index, v);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(index);
+#else
+    // 63 - LeadingZeroCount
+    uint64_t n = 63;
+    uint64_t mask = 0xFFFFFFFF00000000ULL;
+    if (v & ~mask) { n -= 32; v >>= 32; }
+    mask >>= 16; if (v & ~mask) { n -= 16; v >>= 16; }
+    mask >>= 8;  if (v & ~mask) { n -= 8;  v >>= 8;  }
+    mask >>= 4;  if (v & ~mask) { n -= 4;  v >>= 4;  }
+    mask >>= 2;  if (v & ~mask) { n -= 2;  v >>= 2;  }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(n - (v >> 1));
+#endif
+}
+
 // ── External runtime fallback + dispatch ──────────────────────────
 // Called from generated chaos_external_runtime_*() stubs when the
 // kChaosExternalRuntimeFnTable entry is null.  Resolves the subject ID
