@@ -176,30 +176,29 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
         aot_code)
 
     if not type_entries or not method_entries:
-        print(f"  [hotupdate] Could not parse AOT entries")
+        print(f"  [hotupdate] Could not parse AOT entries ({len(type_entries)} types, {len(method_entries)} methods)")
         return
 
-    # Build type index: for each type entry, map its first_index + method_count
-    # to the type_name (WITHOUT the host_ns prefix, since ApplyPatchFromMemoryEx
-    # prepends lookup_ns from kPatchDataHostNamespace).
-    type_by_slot = {}
+    # Build method_name -> AOT_method_index mapping from method_entries
+    # method_entries[i] = (name, flags) at AOT method index i
+    method_name_to_idx = {}
+    for i, (mn, _) in enumerate(method_entries):
+        # Some methods may have duplicate names across types; keep first occurrence
+        if mn not in method_name_to_idx:
+            method_name_to_idx[mn] = i
+
+    # Build type index -> (type_name, first_idx, count)
+    type_info = []
     for tn, ns, first, count_str in type_entries:
         if ns != host_ns:
             continue
-        first_idx = int(first)
-        cnt = int(count_str)
-        for s in range(first_idx, first_idx + cnt):
-            type_by_slot[s] = tn
+        type_info.append((tn, int(first), int(count_str)))
 
-    # Build method name -> type_index mapping from method_entries
-    # (method_entries[i] = (name, flags) at AOT method index i)
-    # Also build method_name -> type name from type_by_slot
-    method_to_type = {}
-    for mi, (mn, flags) in enumerate(method_entries):
-        if mi in type_by_slot:
-            method_to_type[mn] = type_by_slot[mi]
+    if not type_info:
+        print(f"  [hotupdate] No type entries found for namespace {host_ns}")
+        return
 
-    # Map subject indices to correct AOT names using generatedMethodId
+    # For each hotupdate subject, find type name by method name
     idx_to_method = {m["index"]: m for m in methods}
     type_names = []
     method_names = []
@@ -212,12 +211,22 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
         if not method_name:
             continue
 
-        # Find type name by matching method name
-        type_name = method_to_type.get(method_name)
-        if type_name is None:
+        # Find AOT method index for this method name
+        aot_idx = method_name_to_idx.get(method_name)
+        if aot_idx is None:
             continue
 
-        type_names.append(type_name)
+        # Find type entry covering this AOT method index
+        found_type = None
+        for tn, first_idx, cnt in type_info:
+            if first_idx <= aot_idx < first_idx + cnt:
+                found_type = tn
+                break
+
+        if found_type is None:
+            continue
+
+        type_names.append(found_type)
         method_names.append(method_name)
 
     if not type_names:
