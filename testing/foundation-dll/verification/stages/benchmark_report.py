@@ -100,10 +100,15 @@ def _read_jsonl_technology_map(jsonl_path: Path) -> dict[str, dict[str, Any]]:
             if not msid or not tech:
                 continue
 
-            # Primary index: by methodSubjectId
+            # Primary index: by methodSubjectId — keep the MAX elapsedMs
+            # across rounds (ignores timer-floor 0.001ms values from very
+            # fast methods, while also ignoring unusually high outliers).
             existing = tech_map[msid].get(tech)
-            if existing and rec.get("timestamp", "") < existing.get("timestamp", ""):
-                continue
+            if existing:
+                existing_ms = (existing.get("metrics") or {}).get("elapsedMilliseconds", 0) or 0
+                new_ms = (rec.get("metrics") or {}).get("elapsedMilliseconds", 0) or 0
+                if new_ms <= existing_ms:
+                    continue
             tech_map[msid][tech] = rec
 
             # Secondary index: by (slug, methodIndex) for cross-format alignment
@@ -325,14 +330,22 @@ def _classify_bottleneck(
 
 
 def _get_elapsed(rec: dict | None) -> float | None:
-    """Extract elapsedMilliseconds from a record."""
+    """Extract elapsedMilliseconds per iteration from a record.
+
+    Normalizes by iteration count so records with different iteration
+    counts can be compared fairly. AOT benchmark uses calibrated
+    iterations (~50ms target), managed benchmark uses fixed 1000 iters.
+    """
     if rec is None:
         return None
     metrics = rec.get("metrics") or {}
     val = metrics.get("elapsedMilliseconds")
     if val is None:
         return None
-    return float(val)
+    iterations = rec.get("iterations", 1)
+    if iterations is None or iterations <= 0:
+        iterations = 1
+    return float(val) / max(iterations, 1)
 
 
 def _find_profile(profile_data: list[dict] | None, msid: str) -> dict | None:
