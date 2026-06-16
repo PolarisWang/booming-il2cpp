@@ -1,0 +1,15 @@
+// subject_dispatch.h — Auto-generated (Scriban template)
+// Direct dispatch API for fact verification.
+// Bypasses hotpatch dispatch to avoid MSVC SEH RAX clobbering.
+#pragma once
+#include <cstdint>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int64_t SubjectDispatchDirect(int si, int64_t arg0);
+
+#ifdef __cplusplus
+}
+#endif

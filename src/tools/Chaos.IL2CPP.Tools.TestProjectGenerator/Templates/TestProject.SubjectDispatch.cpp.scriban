@@ -1,0 +1,32 @@
+// subject_dispatch.cpp — Auto-generated (Scriban template)
+// Direct dispatch table for fact verification.
+// Bypasses hotpatch dispatch to avoid MSVC SEH RAX clobbering.
+
+#include <cstdint>
+#include "subject_dispatch.h"
+
+{{~ for subject in subjects ~}}
+{{~ if subject.kind == "fact" ~}}
+extern "C" int64_t {{ subject.function_symbol }}(int64_t);
+{{~ end ~}}
+{{~ end ~}}
+
+// Direct dispatch table — {{ fact_count }} entries indexed by subject slot (si)
+static constexpr int64_t (*kSubjectDirectTable[{{ fact_count }}])(int64_t) = {
+{{~ si = 0 ~}}
+{{~ for subject in subjects ~}}
+{{~ if subject.kind == "fact" ~}}
+    &{{ subject.function_symbol }},  // [{{ si }}]
+{{~ si = si + 1 ~}}
+{{~ end ~}}
+{{~ end ~}}
+};
+
+int64_t SubjectDispatchDirect(int si, int64_t arg0) {
+    if (si < 0 || si >= {{ fact_count }}) return 0;
+    try {
+        return kSubjectDirectTable[si](arg0);
+    } catch (...) {
+        return 0;
+    }
+}

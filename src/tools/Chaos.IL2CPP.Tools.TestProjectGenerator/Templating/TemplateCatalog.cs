@@ -17,6 +17,8 @@ internal static class TemplateCatalog
         "TestProject.CMakeLists.txt.scriban",
         "TestProject.CMakePresets.json.scriban",
         "TestProject.Dispatch.cpp.scriban",
+        "TestProject.SubjectDispatch.cpp.scriban",
+        "TestProject.SubjectDispatch.h.scriban",
         "TestProject.RuntimePatchdata.cpp.scriban",
         "TestProject.PatchHostArrays.cpp.scriban",
         "TestProject.chaos-config.cmake.scriban",
