@@ -4,14 +4,14 @@
   "generatedAt": "2026-06-04T10:30:44.855084+00:00",
   "partitionStrategy": "namespace",
   "maxMethodsPerChunk": 500,
-  "totalChunks": 2,
+  "totalChunks": 1,
   "chunks": [
     {
       "slug": "runtime-intrinsics",
       "namespaces": [
         "System.Runtime.Intrinsics"
       ],
-      "methodCount": 500,
+      "methodCount": 727,
       "methods": [
         {
           "methodSubjectId": "System.Runtime.Intrinsics/System.Runtime.Intrinsics.Vector128::AsPlane:System.Numerics.Plane(System.Runtime.Intrinsics.Vector128<System.Single>)",
@@ -2012,16 +2012,7 @@
         {
           "methodSubjectId": "System.Runtime.Intrinsics/System.Runtime.Intrinsics.Vector512::ShiftLeft:System.Runtime.Intrinsics.Vector512<System.UInt16>(System.Runtime.Intrinsics.Vector512<System.UInt16>,System.Int32)",
           "index": 499
-        }
-      ]
-    },
-    {
-      "slug": "runtime-intrinsics-2",
-      "namespaces": [
-        "System.Runtime.Intrinsics"
-      ],
-      "methodCount": 227,
-      "methods": [
+        },
         {
           "methodSubjectId": "System.Runtime.Intrinsics/System.Runtime.Intrinsics.Vector512::ShiftLeft:System.Runtime.Intrinsics.Vector512<System.UInt32>(System.Runtime.Intrinsics.Vector512<System.UInt32>,System.Int32)",
           "index": 500
