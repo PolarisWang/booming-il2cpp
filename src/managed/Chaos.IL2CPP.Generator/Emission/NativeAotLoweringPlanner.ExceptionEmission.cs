@@ -4457,11 +4457,9 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		builder.AppendLine($"{indent}    CHAOS_IL2CPP_INTPTR simd_ret[{(2)}] = {{}};");
 		builder.AppendLine($"#endif");
 
-		// Push result to eval stack
+		// Push result to eval stack (Vector128 = 2 intptr slots)
 		EmitEvalStackPush(builder, indent + "    ", "simd_ret[0]");
-		// Always push 2 slots for Vector128
-		EmitEvalStackPush(builder, indent + "    ", "simd_ret[1]") // WideValue
-			EmitEvalStackPush(builder, indent + "    ", "simd_ret[1]");
+		EmitEvalStackPush(builder, indent + "    ", "simd_ret[1]");
 
 		builder.AppendLine($"{indent}}}");
 		return true;

@@ -422,10 +422,9 @@ static int RunFactJsonMode() {
         });
 
         if (_setjmp(t_abort_jmp) == 0) {
-            __try {
-                result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
-                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            } __except(EXCEPTION_EXECUTE_HANDLER) {
+            try {
+                result = SubjectDispatchDirect(si, 0);
+            } catch (...) {
                 caught = true;
             }
         } else {
