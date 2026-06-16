@@ -147,7 +147,6 @@ static int g_benchmark_iterations = 0;
 
 {{ if is_jit }}
 extern "C" void ChaosJitRegisterAll();
-extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -207,6 +206,10 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
 }
 #endif
 {{ end }}
+
+// AOT hotpatch module — defined in native-aot.generated.cpp, used by both
+// AOT and JIT modes for hotpatch name registry lookup during patch application.
+extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     if (kPatchDataSize > 0u) {
@@ -858,11 +861,6 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     }
     // Post-patch: apply patch and capture per-method pass/fail + return value
     auto* patch_ctx = patchDataPath ? ApplyHotpatchFromFile(patchDataPath) : ApplyHotpatchIfAvailable();
-    // Fallback: if ApplyPatchFromMemoryEx returned 0 patches, use slot-map-based
-    // matching which doesn't require the host array name lookup to succeed.
-    if (patch_ctx == nullptr || patch_ctx->method_count == 0) {
-        ApplyHotpatchFallback();
-    }
     int semantic_passed = 0;
     int semantic_changed_count = 0;
     int patched_assert_failed = 0;
@@ -1227,11 +1225,15 @@ int main(int argc, char* argv[]) {
 #if defined(_WIN32)
     AddVectoredExceptionHandler(1, JitVehHandler);
 #endif
+    ChaosJitRegisterAll();
+{{ end }}
+    // Register the AOT hotpatch module in the HotpatchNameRegistry so that
+    // ApplyPatchFromMemoryEx can find AOT entries by name during hotupdate.
+    // This is called unconditionally (both AOT and JIT modes) — the module
+    // pointer is always available in generated code.
     if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
         chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
     }
-    ChaosJitRegisterAll();
-{{ end }}
 
     int ret = 0;
     if (argc < 2) { ret = RunFactMode(); goto shutdown; }

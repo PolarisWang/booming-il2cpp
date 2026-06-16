@@ -9,7 +9,6 @@ set(CMAKE_CXX_STANDARD 20)
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
   add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /wd4789 /MP)
-  add_compile_definitions(CHAOS_HOTPATCH_DEBUG)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()

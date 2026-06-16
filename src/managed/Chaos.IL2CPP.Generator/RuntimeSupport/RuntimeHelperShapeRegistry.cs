@@ -4293,7 +4293,7 @@ public sealed partial class NativeAotLoweringPlanner
                 return "RuntimeIntrinsicVector128Carrier"; // default for Vector128
             }
 
-                        static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
+            static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
                 string templateFn, bool requiresScalar)
             {
                 // DISABLED: AOT eval stack stores Vector128/256 as CHAOS_IL2CPP_INTPTR (pointer to
