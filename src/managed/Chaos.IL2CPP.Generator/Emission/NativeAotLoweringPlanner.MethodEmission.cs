@@ -290,6 +290,18 @@ public sealed partial class NativeAotLoweringPlanner
 		if (usesStructuredSlots && slotContext != null)
 		{
 			EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots + 2, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots + 2, slotContext.MaxWideSlots, "	");
+			// Pre-populate _s0 with 'this' for instance subject methods.
+			// Structured IR building can drop the initial ldarg.0 when the first
+			// basic block has no branches, leaving _s0 = 0 (the slot init value).
+			// Without this fix, instance method calls with null 'this' raise
+			// NullReferenceException inside the try/catch wrapper, returning 0.
+			if (!method.IsStatic && methodAbiParameterSlots.Count > 0 &&
+			    slotContext.MaxIntSlots > 0 &&
+			    method.SubjectId is not null &&
+			    method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+			{
+			    builder.AppendLine("\t_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_args[0]);");
+			}
 			if (slotContext.FloatLocalSlots is { Count: > 0 })
 			{
 				foreach (var (slot, type) in slotContext.FloatLocalSlots.OrderBy(kv => kv.Key))

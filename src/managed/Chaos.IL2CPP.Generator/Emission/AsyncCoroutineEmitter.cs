@@ -23,7 +23,6 @@ public sealed partial class NativeAotLoweringPlanner
             if (c.Contains("AsyncTaskMethodBuilder")) return c.Contains("`1") ? AsyncMethodKind.AsyncTaskOfT : AsyncMethodKind.AsyncTask;
             if (c.Contains("AsyncValueTaskMethodBuilder")) return c.Contains("`1") ? AsyncMethodKind.AsyncValueTaskOfT : AsyncMethodKind.AsyncValueTask;
             if (c.Contains("AsyncVoidMethodBuilder")) return AsyncMethodKind.AsyncVoid;
-            if (c.Contains("IAsyncEnumerable") || c.Contains("IAsyncEnumerator")) return AsyncMethodKind.Complex;
         }
         return AsyncMethodKind.AsyncTask;
     }
