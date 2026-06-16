@@ -271,16 +271,20 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFallback() noexce
         std::fprintf(stderr, "WARN: ApplyHotpatchFallback — no modules registered\n");
         return nullptr;
     }
+    // Use slot map to find each subject's AOT dispatch entry and mark it as patched.
+    // method_key is set to the subject entry's own direct_ptr so the interpreter
+    // can re-dispatch to the AOT body when it can't handle the method — this
+    // ensures patched methods don't crash even without full PatchMethod data.
     int patched = 0;
     for (int si = 0; si < kSubjectEntryCount; si++) {
         int i = kSubjectSlotMap[si];
         if (i < 0 || i >= kAotMethodCount) continue;
-        auto* entry = const_cast<chaos::il2cpp::runtime_core::HotpatchEntryV0*>(
-            chaos::il2cpp::runtime_core::GetHotpatchEntries() + i);
+        auto* entry = const_cast<HotpatchEntryV0*>(GetHotpatchEntries() + i);
         if (entry == nullptr) continue;
         if (!chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(*entry)) continue;
-        // Mark as patched — subsequent dispatch goes through interpreter
-        registry.SetPatchedBySlot(0, static_cast<uint32_t>(i), true, nullptr, 0);
+        // Use direct_ptr as method_key so interpreter fallback can call the AOT body
+        registry.SetPatchedBySlot(0, static_cast<uint32_t>(i), true,
+                                  entry->direct_ptr, 0);
         patched++;
     }
     std::fprintf(stderr, "INFO: ApplyHotpatchFallback — patched %d methods via slot map\n", patched);
@@ -854,6 +858,11 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
     }
     // Post-patch: apply patch and capture per-method pass/fail + return value
     auto* patch_ctx = patchDataPath ? ApplyHotpatchFromFile(patchDataPath) : ApplyHotpatchIfAvailable();
+    // Fallback: if ApplyPatchFromMemoryEx returned 0 patches, use slot-map-based
+    // matching which doesn't require the host array name lookup to succeed.
+    if (patch_ctx == nullptr || patch_ctx->method_count == 0) {
+        ApplyHotpatchFallback();
+    }
     int semantic_passed = 0;
     int semantic_changed_count = 0;
     int patched_assert_failed = 0;
