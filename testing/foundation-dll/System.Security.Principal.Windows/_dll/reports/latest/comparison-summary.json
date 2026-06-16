@@ -1,0 +1,991 @@
+{
+  "assemblyName": "System.Security.Principal.Windows",
+  "timestamp": "2026-06-16T18:03:51",
+  "totalMethods": 42,
+  "methodsWithNet8": 42,
+  "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": -86.69,
+      "median": -86.69,
+      "min": -86.69,
+      "max": -86.69,
+      "p25": -86.69,
+      "p75": -86.69
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": -55.18,
+      "median": -55.18,
+      "min": -55.18,
+      "max": -55.18,
+      "p25": -55.18,
+      "p75": -55.18
+    },
+    "net10VsNet8Pct": {
+      "mean": 0.36,
+      "median": 0.36,
+      "min": 0.36,
+      "max": 0.36,
+      "p25": 0.36,
+      "p75": 0.36
+    },
+    "highValueMethods_betterThanNet8": 11.9
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 42,
+      "methodsWithNet8": 42,
+      "aggregate": {
+        "methodsBetterThanNet8": 5,
+        "chaosAotVsNet8Pct": {
+          "mean": -86.69,
+          "median": -109.41,
+          "min": -259.0,
+          "max": 95.83,
+          "p25": -125.72,
+          "p75": -82.32
+        },
+        "highValueMethods_betterThanNet8": 13.9,
+        "chaosJitVsNet8Pct": {
+          "mean": -55.18,
+          "median": -78.88,
+          "min": -206.0,
+          "max": 95.83,
+          "p25": -94.28,
+          "p75": -52.48
+        },
+        "net10VsNet8Pct": {
+          "mean": 0.36,
+          "median": 0.0,
+          "min": -80.0,
+          "max": 30.43,
+          "p25": -6.16,
+          "p75": 9.82
+        },
+        "gcAllocComparison": {
+          "aotVsNet8Ratio": {
+            "mean": -100.0,
+            "median": -100.0,
+            "min": -100.0,
+            "max": -100.0,
+            "p25": -100.0,
+            "p75": -100.0
+          },
+          "methodsWithAllocData": 28
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+          "net8Ms": 0.026,
+          "net10Ms": 0.024,
+          "chaosAotMs": 0.0381,
+          "chaosJitMs": 0.0259,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 74480,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "net8Ms": 0.024,
+          "net10Ms": 0.024,
+          "chaosAotMs": 0.001,
+          "chaosJitMs": 0.001,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Add:System.Void(System.Security.Principal.IdentityReference)",
+          "net8Ms": 0.022,
+          "net10Ms": 0.024,
+          "chaosAotMs": 0.039,
+          "chaosJitMs": 0.0333,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73696,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Remove:System.Boolean(System.Security.Principal.IdentityReference)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.0359,
+          "chaosJitMs": 0.0306,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Clear:System.Void()",
+          "net8Ms": 0.02,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.039,
+          "chaosJitMs": 0.0319,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73664,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Contains:System.Boolean(System.Security.Principal.IdentityReference)",
+          "net8Ms": 0.021,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.0387,
+          "chaosJitMs": 0.0326,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator<System.Security.Principal.IdentityReference>()",
+          "net8Ms": 0.023,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.037,
+          "chaosJitMs": 0.0286,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type)",
+          "net8Ms": 0.022,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.001,
+          "chaosJitMs": 0.001,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73696,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type,System.Boolean)",
+          "net8Ms": 0.018,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.001,
+          "chaosJitMs": 0.001,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+          "net8Ms": 0.016,
+          "net10Ms": 0.019,
+          "chaosAotMs": 0.0403,
+          "chaosJitMs": 0.0324,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73632,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "net8Ms": 0.018,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.001,
+          "chaosJitMs": 0.001,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsValidTargetType:System.Boolean(System.Type)",
+          "net8Ms": 0.016,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.0366,
+          "chaosJitMs": 0.0302,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsAccountSid:System.Boolean()",
+          "net8Ms": 0.015,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.0388,
+          "chaosJitMs": 0.0336,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "net8Ms": 0.017,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.0359,
+          "chaosJitMs": 0.0329,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73664,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::CompareTo:System.Int32(System.Security.Principal.SecurityIdentifier)",
+          "net8Ms": 0.015,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.0361,
+          "chaosJitMs": 0.0318,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsWellKnown:System.Boolean(System.Security.Principal.WellKnownSidType)",
+          "net8Ms": 0.015,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.0379,
+          "chaosJitMs": 0.0316,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte[],System.Int32)",
+          "net8Ms": 0.018,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.04,
+          "chaosJitMs": 0.0315,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsEqualDomainSid:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "net8Ms": 0.021,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.0392,
+          "chaosJitMs": 0.0337,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73688,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()",
+          "net8Ms": 0.02,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.0368,
+          "chaosJitMs": 0.0349,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73624,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)",
+          "net8Ms": 0.021,
+          "net10Ms": 0.015,
+          "chaosAotMs": 0.0357,
+          "chaosJitMs": 0.0321,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73632,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)",
+          "net8Ms": 0.015,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.0376,
+          "chaosJitMs": 0.0335,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73664,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()",
+          "net8Ms": 0.018,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.0345,
+          "chaosJitMs": 0.0323,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73632,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)",
+          "net8Ms": 0.015,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.0353,
+          "chaosJitMs": 0.0328,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Int32(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Int32>)",
+          "net8Ms": 0.018,
+          "net10Ms": 0.02,
+          "chaosAotMs": 0.001,
+          "chaosJitMs": 0.001,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Threading.Tasks.Task>)",
+          "net8Ms": 0.018,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.0367,
+          "chaosJitMs": 0.0321,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task<System.Int32>(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func<System.Threading.Tasks.Task<System.Int32>>)",
+          "net8Ms": 0.018,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.0374,
+          "chaosJitMs": 0.0305,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73728,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()",
+          "net8Ms": 0.019,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.0401,
+          "chaosJitMs": 0.0318,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73624,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+          "net8Ms": 0.018,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.039,
+          "chaosJitMs": 0.001,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016,
+            "chaosAotGcPauseNs": 0,
+            "chaosAotAllocBytes": 0,
+            "chaosAotFastPathRate": 1.0,
+            "aotAllocVsNet8Pct": -100.0
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.String)",
+          "net8Ms": 0.017,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73640,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.WindowsBuiltInRole)",
+          "net8Ms": 0.017,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73664,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Int32)",
+          "net8Ms": 0.018,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73632,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "net8Ms": 0.016,
+          "net10Ms": 0.018,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73664,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::8",
+          "net8Ms": 0.018,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.0401,
+          "chaosJitMs": 0.0324,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::17",
+          "net8Ms": 0.017,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.0382,
+          "chaosJitMs": 0.0329,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::18",
+          "net8Ms": 0.017,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.036,
+          "chaosJitMs": 0.0329,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::19",
+          "net8Ms": 0.018,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.0368,
+          "chaosJitMs": 0.0333,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::23",
+          "net8Ms": 0.017,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.034,
+          "chaosJitMs": 0.032,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73632,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::28",
+          "net8Ms": 0.017,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.0381,
+          "chaosJitMs": 0.0333,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::30",
+          "net8Ms": 0.017,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.038,
+          "chaosJitMs": 0.0338,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::32",
+          "net8Ms": 0.016,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.038,
+          "chaosJitMs": 0.031,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73728,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::36",
+          "net8Ms": 0.02,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73640,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::39",
+          "net8Ms": 0.016,
+          "net10Ms": 0.016,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73632,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        }
+      ]
+    }
+  ]
+}

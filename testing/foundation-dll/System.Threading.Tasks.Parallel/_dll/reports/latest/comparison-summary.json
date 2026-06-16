@@ -1,0 +1,2217 @@
+{
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "timestamp": "2026-06-16T18:06:10",
+  "totalMethods": 113,
+  "methodsWithNet8": 113,
+  "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": -8405.54,
+      "median": -8405.54,
+      "min": -8405.54,
+      "max": -8405.54,
+      "p25": -8405.54,
+      "p75": -8405.54
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": -8660.3,
+      "median": -8660.3,
+      "min": -8660.3,
+      "max": -8660.3,
+      "p25": -8660.3,
+      "p75": -8660.3
+    },
+    "net10VsNet8Pct": {
+      "mean": -11.6,
+      "median": -11.6,
+      "min": -11.6,
+      "max": -11.6,
+      "p25": -11.6,
+      "p75": -11.6
+    },
+    "highValueMethods_betterThanNet8": 3.5
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 113,
+      "methodsWithNet8": 113,
+      "aggregate": {
+        "methodsBetterThanNet8": 4,
+        "chaosAotVsNet8Pct": {
+          "mean": -8405.54,
+          "median": -1668.0,
+          "min": -394690.0,
+          "max": 93.75,
+          "p25": -1815.0,
+          "p75": -1179.26
+        },
+        "highValueMethods_betterThanNet8": 3.6,
+        "chaosJitVsNet8Pct": {
+          "mean": -8660.3,
+          "median": -1545.56,
+          "min": -425511.11,
+          "max": 93.75,
+          "p25": -1642.78,
+          "p75": -972.86
+        },
+        "net10VsNet8Pct": {
+          "mean": -11.6,
+          "median": -11.11,
+          "min": -111.11,
+          "max": 52.38,
+          "p25": -20.0,
+          "p75": 0.0
+        }
+      },
+      "methods": [
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action<System.Int32>)",
+          "net8Ms": 0.049,
+          "net10Ms": 0.064,
+          "chaosAotMs": 0.169,
+          "chaosJitMs": 0.1517,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 361616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 364608
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action<System.Int64>)",
+          "net8Ms": 0.024,
+          "net10Ms": 0.023,
+          "chaosAotMs": 0.1787,
+          "chaosJitMs": 0.1525,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 361624,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 370080
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1702,
+          "chaosJitMs": 0.1539,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action<System.Int64>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.167,
+          "chaosJitMs": 0.1533,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73656,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState>)",
+          "net8Ms": 0.05,
+          "net10Ms": 0.053,
+          "chaosAotMs": 0.1538,
+          "chaosJitMs": 0.1563,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 361648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 364608
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action<System.Int64,System.Threading.Tasks.ParallelLoopState>)",
+          "net8Ms": 0.024,
+          "net10Ms": 0.022,
+          "chaosAotMs": 0.1758,
+          "chaosJitMs": 0.1577,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 361656,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 370080
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState>)",
+          "net8Ms": 0.019,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.1794,
+          "chaosJitMs": 0.1696,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action<System.Int64,System.Threading.Tasks.ParallelLoopState>)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1753,
+          "chaosJitMs": 0.1507,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73688,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.057,
+          "net10Ms": 0.048,
+          "chaosAotMs": 0.1504,
+          "chaosJitMs": 0.1503,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 361720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 364608
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func<System.Int32>,System.Func<System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.025,
+          "net10Ms": 0.025,
+          "chaosAotMs": 0.1687,
+          "chaosJitMs": 0.144,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 361728,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 370080
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1686,
+          "chaosJitMs": 0.1604,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73760,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func<System.Int32>,System.Func<System.Int64,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1691,
+          "chaosJitMs": 0.1361,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73760,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.093,
+          "net10Ms": 0.082,
+          "chaosAotMs": 0.1474,
+          "chaosJitMs": 0.1482,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 745640,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 749600
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.167,
+          "chaosJitMs": 0.1459,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState>)",
+          "net8Ms": 0.084,
+          "net10Ms": 0.077,
+          "chaosAotMs": 0.1463,
+          "chaosJitMs": 0.162,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 745672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 749600
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1564,
+          "chaosJitMs": 0.1601,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64>)",
+          "net8Ms": 0.079,
+          "net10Ms": 0.077,
+          "chaosAotMs": 0.161,
+          "chaosJitMs": 0.167,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 745680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 749600
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1738,
+          "chaosJitMs": 0.1481,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.116,
+          "net10Ms": 0.098,
+          "chaosAotMs": 0.1729,
+          "chaosJitMs": 0.157,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 745744,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 749568
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.012,
+          "chaosAotMs": 0.1683,
+          "chaosJitMs": 0.1595,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73776,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.114,
+          "net10Ms": 0.096,
+          "chaosAotMs": 0.1531,
+          "chaosJitMs": 0.1782,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 745752,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 749568
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.012,
+          "chaosAotMs": 0.1714,
+          "chaosJitMs": 0.1618,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73784,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner<System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1646,
+          "chaosJitMs": 0.1549,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73640,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner<System.Int32>,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1667,
+          "chaosJitMs": 0.1624,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner<System.Int32>,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1607,
+          "chaosJitMs": 0.1338,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner<System.Int32>,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.161,
+          "chaosJitMs": 0.1655,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73744,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner<System.Int32>,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1799,
+          "chaosJitMs": 0.1588,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73776,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1867,
+          "chaosJitMs": 0.1493,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1483,
+          "chaosJitMs": 0.157,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Action<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64>)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1768,
+          "chaosJitMs": 0.1603,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73736,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1812,
+          "chaosJitMs": 0.1578,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73776,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Func<System.Int32>,System.Func<System.Int32,System.Threading.Tasks.ParallelLoopState,System.Int64,System.Int32,System.Int32>,System.Action<System.Int32>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.176,
+          "chaosJitMs": 0.1642,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73808,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82240
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Func<System.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 0.022,
+          "net10Ms": 0.024,
+          "chaosAotMs": 0.1763,
+          "chaosJitMs": 0.1535,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.CancellationToken,System.Func<System.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 0.043,
+          "net10Ms": 0.024,
+          "chaosAotMs": 0.1621,
+          "chaosJitMs": 0.1629,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync:System.Threading.Tasks.Task(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func<System.Int64,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1571,
+          "chaosJitMs": 0.1469,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 1.464,
+          "net10Ms": 1.166,
+          "chaosAotMs": 0.1811,
+          "chaosJitMs": 0.1647,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1034384,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 1093504
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable<System.Int32>,System.Threading.CancellationToken,System.Func<System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 1.351,
+          "net10Ms": 1.094,
+          "chaosAotMs": 0.1756,
+          "chaosJitMs": 0.1474,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 1033864,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 1052792
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Func<System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1767,
+          "chaosJitMs": 0.1568,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73728,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82200
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Int32>,System.Func<System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.178,
+          "chaosJitMs": 0.1554,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82208
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Int32>,System.Threading.CancellationToken,System.Func<System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1627,
+          "chaosJitMs": 0.1704,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73744,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82216
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable<System.Int32>,System.Threading.Tasks.ParallelOptions,System.Func<System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask>)",
+          "net8Ms": 0.01,
+          "net10Ms": 0.019,
+          "chaosAotMs": 0.1678,
+          "chaosJitMs": 0.1636,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73744,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82216
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82208
+          }
+        },
+        {
+          "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+          "net8Ms": 0.01,
+          "net10Ms": 0.02,
+          "chaosAotMs": null,
+          "chaosJitMs": null,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82208
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::0",
+          "net8Ms": 0.014,
+          "net10Ms": 0.021,
+          "chaosAotMs": 0.1777,
+          "chaosJitMs": 0.1448,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 74432,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82240
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::1",
+          "net8Ms": 0.014,
+          "net10Ms": 0.015,
+          "chaosAotMs": 0.1768,
+          "chaosJitMs": 0.1498,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::2",
+          "net8Ms": 0.014,
+          "net10Ms": 0.015,
+          "chaosAotMs": 0.1605,
+          "chaosJitMs": 0.1506,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73616,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::4",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1766,
+          "chaosJitMs": 0.1638,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73624,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::5",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1839,
+          "chaosJitMs": 0.1561,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73624,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::6",
+          "net8Ms": 0.016,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.001,
+          "chaosJitMs": 0.001,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73624,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 77792
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::8",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1724,
+          "chaosJitMs": 0.1631,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::9",
+          "net8Ms": 0.017,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1731,
+          "chaosJitMs": 0.1516,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::10",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1749,
+          "chaosJitMs": 0.1448,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::12",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1606,
+          "chaosJitMs": 0.1586,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73656,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::13",
+          "net8Ms": 0.016,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1673,
+          "chaosJitMs": 0.1546,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73656,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::14",
+          "net8Ms": 0.013,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1676,
+          "chaosJitMs": 0.1273,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73656,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::16",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1648,
+          "chaosJitMs": 0.1501,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::17",
+          "net8Ms": 0.009,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.1723,
+          "chaosJitMs": 0.1507,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::18",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1315,
+          "chaosJitMs": 0.1564,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73648,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::20",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1795,
+          "chaosJitMs": 0.1502,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73656,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::21",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1789,
+          "chaosJitMs": 0.1487,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73656,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::22",
+          "net8Ms": 0.01,
+          "net10Ms": 0.012,
+          "chaosAotMs": 0.001,
+          "chaosJitMs": 0.001,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "",
+          "gcComparison": {
+            "net8AllocBytes": 73656,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::24",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1792,
+          "chaosJitMs": 0.1509,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::25",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1711,
+          "chaosJitMs": 0.1625,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::26",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1793,
+          "chaosJitMs": 0.1582,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::28",
+          "net8Ms": 0.009,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.1713,
+          "chaosJitMs": 0.1449,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73688,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::29",
+          "net8Ms": 0.009,
+          "net10Ms": 0.019,
+          "chaosAotMs": 0.1797,
+          "chaosJitMs": 0.1473,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73688,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::30",
+          "net8Ms": 0.009,
+          "net10Ms": 0.012,
+          "chaosAotMs": 0.1749,
+          "chaosJitMs": 0.1386,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73688,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::32",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1604,
+          "chaosJitMs": 0.1495,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::33",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.172,
+          "chaosJitMs": 0.1491,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::34",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.153,
+          "chaosJitMs": 0.1481,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::36",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1544,
+          "chaosJitMs": 0.1579,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73728,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::37",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1587,
+          "chaosJitMs": 0.1582,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73728,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::38",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1548,
+          "chaosJitMs": 0.1577,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73728,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::40",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.169,
+          "chaosJitMs": 0.1508,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73760,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::41",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1609,
+          "chaosJitMs": 0.1606,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73760,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::42",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1745,
+          "chaosJitMs": 0.1702,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73760,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::44",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.17,
+          "chaosJitMs": 0.1576,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73760,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::45",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1704,
+          "chaosJitMs": 0.1567,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73760,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::46",
+          "net8Ms": 0.009,
+          "net10Ms": 0.017,
+          "chaosAotMs": 0.1791,
+          "chaosJitMs": 0.1454,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73760,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::48",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1347,
+          "chaosJitMs": 0.1397,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73640,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::50",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1552,
+          "chaosJitMs": 0.1489,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::52",
+          "net8Ms": 0.009,
+          "net10Ms": 0.012,
+          "chaosAotMs": 0.1503,
+          "chaosJitMs": 0.1642,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::54",
+          "net8Ms": 0.009,
+          "net10Ms": 0.012,
+          "chaosAotMs": 0.1623,
+          "chaosJitMs": 0.1673,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::56",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1532,
+          "chaosJitMs": 0.1645,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::58",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1695,
+          "chaosJitMs": 0.1554,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::60",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1576,
+          "chaosJitMs": 0.1602,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73744,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::62",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1685,
+          "chaosJitMs": 0.1549,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73776,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::64",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1605,
+          "chaosJitMs": 0.1704,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73752,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::66",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1706,
+          "chaosJitMs": 0.1665,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73784,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::68",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1636,
+          "chaosJitMs": 0.1639,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73640,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::70",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1799,
+          "chaosJitMs": 0.1559,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::72",
+          "net8Ms": 0.018,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1764,
+          "chaosJitMs": 0.1559,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::74",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.169,
+          "chaosJitMs": 0.1455,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73744,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::76",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1723,
+          "chaosJitMs": 0.1541,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73776,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::78",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1748,
+          "chaosJitMs": 0.1611,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73672,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::80",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.155,
+          "chaosJitMs": 0.1594,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73704,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::82",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1651,
+          "chaosJitMs": 0.1505,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73736,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::84",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1768,
+          "chaosJitMs": 0.1514,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73776,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::86",
+          "net8Ms": 0.018,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.176,
+          "chaosJitMs": 0.163,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73808,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82240
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::88",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1892,
+          "chaosJitMs": 0.1491,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::89",
+          "net8Ms": 0.009,
+          "net10Ms": 0.016,
+          "chaosAotMs": 0.1783,
+          "chaosJitMs": 0.1441,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::90",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 35.5311,
+          "chaosJitMs": 38.305,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73680,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::92",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1784,
+          "chaosJitMs": 0.1535,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::93",
+          "net8Ms": 0.009,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1636,
+          "chaosJitMs": 0.1612,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::94",
+          "net8Ms": 0.01,
+          "net10Ms": 0.011,
+          "chaosAotMs": 38.4619,
+          "chaosJitMs": 39.5375,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73720,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::96",
+          "net8Ms": 0.021,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1843,
+          "chaosJitMs": 0.1524,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::97",
+          "net8Ms": 0.015,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1861,
+          "chaosJitMs": 0.1549,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::98",
+          "net8Ms": 0.01,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1661,
+          "chaosJitMs": 0.152,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::100",
+          "net8Ms": 0.01,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1535,
+          "chaosJitMs": 0.1681,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73696,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 74016
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::102",
+          "net8Ms": 0.017,
+          "net10Ms": 0.01,
+          "chaosAotMs": 0.1639,
+          "chaosJitMs": 0.159,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73736,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82208
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::104",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1724,
+          "chaosJitMs": 0.1566,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73728,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82200
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::106",
+          "net8Ms": 0.009,
+          "net10Ms": 0.018,
+          "chaosAotMs": 0.1681,
+          "chaosJitMs": 0.1591,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73712,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82208
+          }
+        },
+        {
+          "methodSubjectId": "global-ns::108",
+          "net8Ms": 0.009,
+          "net10Ms": 0.011,
+          "chaosAotMs": 0.1743,
+          "chaosJitMs": 0.1449,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "net8_error",
+          "bottleneck": "dispatch_overhead",
+          "gcComparison": {
+            "net8AllocBytes": 73744,
+            "net8CollectionCount0": 0,
+            "net8HeapDelta": 82216
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "date": "2026-06-16",
+  "assemblyName": "System.ComponentModel.TypeConverter",
+  "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": -574.25,
+      "median": -574.25,
+      "min": -961.2,
+      "max": -187.29,
+      "p25": -767.72,
+      "p75": -380.77
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": -123.62,
+      "median": -123.62,
+      "min": -191.47,
+      "max": -55.77,
+      "p25": -157.54,
+      "p75": -89.69
+    },
+    "net10VsNet8Pct": {
+      "mean": -12.55,
+      "median": -12.55,
+      "min": -14.53,
+      "max": -10.57,
+      "p25": -13.54,
+      "p75": -11.56
+    },
+    "highValueMethods_betterThanNet8": 13.6
+  },
+  "perChunk": [
+    {
+      "slug": "component-model",
+      "methodCount": 568,
+      "methodsWithNet8": 0,
+      "aggregate": {
+        "methodsBetterThanNet8": 0
+      }
+    },
+    {
+      "slug": "global-ns",
+      "methodCount": 80,
+      "methodsWithNet8": 80,
+      "aggregate": {
+        "methodsBetterThanNet8": 10,
+        "chaosAotVsNet8Pct": {
+          "mean": -187.29,
+          "median": -238.33,
+          "min": -292.22,
+          "max": 94.74,
+          "p25": -254.45,
+          "p75": -205.3
+        },
+        "highValueMethods_betterThanNet8": 13.5,
+        "chaosJitVsNet8Pct": {
+          "mean": -191.47,
+          "median": -242.5,
+          "min": -296.67,
+          "max": 94.74,
+          "p25": -261.67,
+          "p75": -214.0
+        },
+        "net10VsNet8Pct": {
+          "mean": -10.57,
+          "median": -11.11,
+          "min": -200.0,
+          "max": 47.37,
+          "p25": -11.11,
+          "p75": -10.12
+        },
+        "gcAllocComparison": {
+          "aotVsNet8Ratio": {
+            "mean": -100.0,
+            "median": -100.0,
+            "min": -100.0,
+            "max": -100.0,
+            "p25": -100.0,
+            "p75": -100.0
+          },
+          "methodsWithAllocData": 58
+        }
+      }
+    },
+    {
+      "slug": "system-componentmodel-design",
+      "methodCount": 38,
+      "methodsWithNet8": 38,
+      "aggregate": {
+        "methodsBetterThanNet8": 6,
+        "chaosAotVsNet8Pct": {
+          "mean": -961.2,
+          "median": -1250.0,
+          "min": -1375.71,
+          "max": 95.65,
+          "p25": -1316.34,
+          "p75": -763.3
+        },
+        "highValueMethods_betterThanNet8": 19.4,
+        "chaosJitVsNet8Pct": {
+          "mean": -55.77,
+          "median": -104.0,
+          "min": -136.67,
+          "max": 95.65,
+          "p25": -112.0,
+          "p75": -28.75
+        },
+        "net10VsNet8Pct": {
+          "mean": -14.53,
+          "median": -18.75,
+          "min": -33.33,
+          "max": 38.89,
+          "p25": -26.25,
+          "p75": -6.86
+        },
+        "gcAllocComparison": {
+          "aotVsNet8Ratio": {
+            "mean": -100.0,
+            "median": -100.0,
+            "min": -100.0,
+            "max": -100.0,
+            "p25": -100.0,
+            "p75": -100.0
+          },
+          "methodsWithAllocData": 22
+        }
+      }
+    }
+  ]
+}
