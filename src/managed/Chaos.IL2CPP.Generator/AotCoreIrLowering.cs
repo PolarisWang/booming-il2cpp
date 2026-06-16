@@ -1148,7 +1148,10 @@ public sealed class AotCoreIrLowering
         if (targetSymbols.TryGetValue(subjectId, out var targetSymbol) &&
             !string.IsNullOrWhiteSpace(targetSymbol))
         {
-            return targetSymbol;
+            // Sanitize symbols matching SubjectDispatch sanitization (ProjectModel.cs)
+            return targetSymbol
+                .Replace('<', '_')
+                .Replace('>', '_');
         }
 
         // For cross-assembly methods without a registration entry,
