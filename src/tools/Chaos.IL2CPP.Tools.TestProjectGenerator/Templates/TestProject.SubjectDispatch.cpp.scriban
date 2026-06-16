@@ -7,12 +7,8 @@
 
 {{~ for subject in subjects ~}}
 {{~ if subject.kind == "fact" ~}}
-extern "C" int64_t {{ subject.function_symbol }}(int64_t);
-{{~ end ~}}
-{{~ end ~}}
-
 // Direct dispatch table — {{ fact_count }} entries indexed by subject slot (si)
-static constexpr int64_t (*kSubjectDirectTable[{{ fact_count }}])(int64_t) = {
+static int64_t (*kSubjectDirectTable[{{ fact_count }}])(int64_t) = {
 {{~ si = 0 ~}}
 {{~ for subject in subjects ~}}
 {{~ if subject.kind == "fact" ~}}

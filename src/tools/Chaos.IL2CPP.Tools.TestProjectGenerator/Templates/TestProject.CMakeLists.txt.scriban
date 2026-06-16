@@ -230,10 +230,5 @@ if(NOT MSVC)
   target_link_libraries({{ project_name }} PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 endif()
 target_link_options({{ project_name }} PRIVATE ${CHAOS_FORCE_MULTIPLE})
-# /FORCE:UNRESOLVED — resolves subject-miss methods (codegen gaps) as zero
-# at link time, allowing subject_dispatch.cpp with unmatched extern "C"
-# declarations to link successfully. The unresolved symbol is never reached
-# at runtime because subject-miss methods are excluded from the dispatch table.
-if(MSVC)
-  target_link_options({{ project_name }} PRIVATE /FORCE:UNRESOLVED)
-endif()
+# Weak default stubs in subject_dispatch.cpp provide fallback symbols for
+# subject-miss methods, eliminating the need for /FORCE:UNRESOLVED.
