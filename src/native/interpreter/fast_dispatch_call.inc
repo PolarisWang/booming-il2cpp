@@ -216,7 +216,7 @@ static void Handle_Call_DirectInline(FastFrame& frame, const interpreter::IRInst
 }
 
 
-static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+CHAOS_IL2CPP_FORCEINLINE static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     if (frame.sp < instr.arg_count) {
         frame.threw_exception = true; frame.pc = 9999; return;
     }
@@ -330,7 +330,7 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
     Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, cache_info);
 }
 
-static void Handle_Ret(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+CHAOS_IL2CPP_FORCEINLINE static void Handle_Ret(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Ret");
     if (frame.sp > 0) {
         frame.has_ret = true;

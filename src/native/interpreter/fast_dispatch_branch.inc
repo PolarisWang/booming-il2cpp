@@ -8,7 +8,7 @@ static void RecordBranch(FastFrame& frame, bool taken) noexcept {
     (void)taken;
 }
 
-static void Handle_Br(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+CHAOS_IL2CPP_FORCEINLINE static void Handle_Br(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Br");
     frame.pc = static_cast<uint32_t>(instr.branch_target);
 }

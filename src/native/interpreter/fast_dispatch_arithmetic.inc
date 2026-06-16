@@ -15,7 +15,7 @@ static void AssertInt32Tag(const FastFrame& frame, uint32_t stack_idx) noexcept 
         && "Handle_Add/Sub/Mul/etc: expected Int32/Int64 tag, got Float32/Float64");
 }
 
-static void Handle_Add(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+CHAOS_IL2CPP_FORCEINLINE static void Handle_Add(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Add");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
     AssertInt32Tag(frame, frame.sp - 1);
@@ -374,7 +374,7 @@ static void Handle_LdLen(FastFrame& frame, const interpreter::IRInstruction&) no
     ++frame.pc;
 }
 
-static void Handle_LdFld(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+CHAOS_IL2CPP_FORCEINLINE static void Handle_LdFld(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdFld");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     void* obj = frame.PopObj();
@@ -392,7 +392,7 @@ static void Handle_LdFld(FastFrame& frame, const interpreter::IRInstruction& ins
     ++frame.pc;
 }
 
-static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+CHAOS_IL2CPP_FORCEINLINE static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_StFld");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
     auto val = frame.PopIV();

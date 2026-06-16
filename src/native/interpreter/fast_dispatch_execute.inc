@@ -175,7 +175,8 @@ bool FastExecute(FastFrame& frame,
 
     while (frame.pc < instr_count) {
         uint32_t op_val = static_cast<uint32_t>(instrs[frame.pc].op_code);
-        if (op_val > 127) {
+        if (CHAOS_IL2CPP_UNLIKELY(op_val > 127)) {
+	    CHAOS_IL2CPP_ASSUME(op_val <= 127);
             frame.threw_exception = true;
             return false;
         }
@@ -228,6 +229,235 @@ bool FastExecute(FastFrame& frame,
             }
         }
 
+#if CHAOS_IL2CPP_COMPUTED_GOTO
+        {
+static const void* const kFastDispatchTable[] = {
+    [  0] = &&L_LdcI4,
+    [  1] = &&L_LdcI8,
+    [  2] = &&L_LdcR4,
+    [  3] = &&L_LdcR8,
+    [  4] = &&L_LdStr,
+    [  5] = &&L_LdNull,
+    [  6] = &&L_LdArg,
+    [  7] = &&L_LdLoc,
+    [  8] = &&L_StLoc,
+    [  9] = &&L_StArg,
+    [ 10] = &&L_LdFld,
+    [ 11] = &&L_StFld,
+    [ 12] = &&L_LdSFld,
+    [ 13] = &&L_StSFld,
+    [ 14] = &&L_Call,
+    [ 15] = &&L_CallVirt,
+    [ 16] = &&L_CallBridge,
+    [ 17] = &&L_Br,
+    [ 18] = &&L_BrTrue,
+    [ 19] = &&L_BrFalse,
+    [ 20] = &&L_Beq,
+    [ 21] = &&L_Blt,
+    [ 22] = &&L_Bgt,
+    [ 23] = &&L_Ble,
+    [ 24] = &&L_Bge,
+    [ 25] = &&L_Add,
+    [ 26] = &&L_Sub,
+    [ 27] = &&L_Mul,
+    [ 28] = &&L_Div,
+    [ 29] = &&L_Rem,
+    [ 30] = &&L_Neg,
+    [ 31] = &&L_Ceq,
+    [ 32] = &&L_Clt,
+    [ 33] = &&L_Cgt,
+    [ 34] = &&L_NewObj,
+    [ 35] = &&L_Box,
+    [ 36] = &&L_Unbox,
+    [ 37] = &&L_CastClass,
+    [ 38] = &&L_IsInst,
+    [ 39] = &&L_Conv_I4,
+    [ 40] = &&L_Conv_I8,
+    [ 41] = &&L_Conv_R4,
+    [ 42] = &&L_Conv_R8,
+    [ 43] = &&L_NewArr,
+    [ 44] = &&L_LdElem,
+    [ 45] = &&L_StElem,
+    [ 46] = &&L_LdLen,
+    [ 47] = &&L_Pop,
+    [ 48] = &&L_Throw,
+    [ 49] = &&L_Rethrow,
+    [ 50] = &&L_Leave,
+    [ 51] = &&L_EndFinally,
+    [ 52] = &&L_EndFilter,
+    [ 53] = &&L_Ret,
+    [ 54] = &&L_Dup,
+    [ 55] = &&L_DivUn,
+    [ 56] = &&L_RemUn,
+    [ 57] = &&L_And,
+    [ 58] = &&L_Or,
+    [ 59] = &&L_Xor,
+    [ 60] = &&L_Not,
+    [ 61] = &&L_Shl,
+    [ 62] = &&L_Shr,
+    [ 63] = &&L_ShrUn,
+    [ 64] = &&L_ConvRUn,
+    [ 65] = &&L_ConvI,
+    [ 66] = &&L_ConvU,
+    [ 67] = &&L_LdInd,
+    [ 68] = &&L_StInd,
+    [ 69] = &&L_Switch,
+    [ 70] = &&L_LdToken,
+    [ 71] = &&L_InitObj,
+    [ 72] = &&L_SizeOf,
+    [ 73] = &&L_LdFtn,
+    [ 74] = &&L_LdVirtFtn,
+    [ 75] = &&L_LdArgA,
+    [ 76] = &&L_LdLocA,
+    [ 77] = &&L_LocAlloc,
+    [ 78] = &&L_Break,
+    [ 79] = &&L_BneUn,
+    [ 80] = &&L_BgeUn,
+    [ 81] = &&L_BgtUn,
+    [ 82] = &&L_BleUn,
+    [ 83] = &&L_BltUn,
+    [ 84] = &&L_AddOvf,
+    [ 85] = &&L_SubOvf,
+    [ 86] = &&L_MulOvf,
+    [ 87] = &&L_ConvOvfI,
+    [ 88] = &&L_ConvOvfI4,
+    [ 89] = &&L_ConvOvfI8,
+    [ 90] = &&L_ConvOvfU,
+    [ 91] = &&L_ConvOvfU4,
+    [ 92] = &&L_ConvOvfU8,
+    [ 93] = &&L_LdObj,
+    [ 94] = &&L_StObj,
+    [ 95] = &&L_LdElemA,
+    [ 96] = &&L_Cpblk,
+    [ 97] = &&L_InitBlk,
+    [ 98] = &&L_CallVirtConstrained,
+    [ 99] = &&L_Calli,
+    [104] = &&L_LdElemNoChk,
+    [105] = &&L_StElemNoChk,
+    [106] = &&L_LdElemANoChk,
+    [100] = &&L_Unsupported,
+    [101] = &&L_Unsupported,
+    [102] = &&L_Unsupported,
+    [103] = &&L_StFldBarrier,
+    [107] = &&L_Unsupported,
+    [108] = &&L_Unsupported,
+    [109] = &&L_Unsupported,
+    [110] = &&L_Unsupported,
+};
+
+L_LdcI4: { Handle_LdcI4(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdcI8: { Handle_LdcI8(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdcR4: { Handle_LdcR4(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdcR8: { Handle_LdcR8(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdStr: { Handle_LdStr(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdNull: { Handle_LdNull(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdArg: { Handle_LdArg(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdLoc: { Handle_LdLoc(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StLoc: { Handle_StLoc(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StArg: { Handle_StArg(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdFld: { Handle_LdFld(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StFld: { Handle_StFld(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdSFld: { Handle_LdSFld(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StSFld: { Handle_StSFld(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Call: { Handle_Call(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_CallVirt: { Handle_CallVirt(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_CallBridge: { Handle_CallBridge(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Br: { Handle_Br(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_BrTrue: { Handle_BrTrue(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_BrFalse: { Handle_BrFalse(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Beq: { Handle_Beq(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Blt: { Handle_Blt(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Bgt: { Handle_Bgt(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Ble: { Handle_Ble(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Bge: { Handle_Bge(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Add: { Handle_Add(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Sub: { Handle_Sub(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Mul: { Handle_Mul(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Div: { Handle_Div(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Rem: { Handle_Rem(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Neg: { Handle_Neg(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Ceq: { Handle_Ceq(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Clt: { Handle_Clt(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Cgt: { Handle_Cgt(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_NewObj: { Handle_NewObj(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Box: { Handle_Box(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Unbox: { Handle_Unbox(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_CastClass: { Handle_CastClass(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_IsInst: { Handle_IsInst(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Conv_I4: { Handle_Conv_I4(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Conv_I8: { Handle_Conv_I8(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Conv_R4: { Handle_Conv_R4(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Conv_R8: { Handle_Conv_R8(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_NewArr: { Handle_NewArr(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdElem: { Handle_LdElem(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StElem: { Handle_StElem(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdLen: { Handle_LdLen(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Pop: { Handle_Pop(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Throw: { Handle_Throw(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Rethrow: { Handle_Rethrow(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Leave: { Handle_Leave(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_EndFinally: { Handle_EndFinally(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_EndFilter: { Handle_EndFilter(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Ret: { Handle_Ret(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Dup: { Handle_Dup(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_DivUn: { Handle_DivUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_RemUn: { Handle_RemUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_And: { Handle_And(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Or: { Handle_Or(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Xor: { Handle_Xor(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Not: { Handle_Not(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Shl: { Handle_Shl(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Shr: { Handle_Shr(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ShrUn: { Handle_ShrUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvRUn: { Handle_ConvRUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvI: { Handle_ConvI(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvU: { Handle_ConvU(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdInd: { Handle_LdInd(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StInd: { Handle_StInd(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Switch: { Handle_Switch(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdToken: { Handle_LdToken(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_InitObj: { Handle_InitObj(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_SizeOf: { Handle_SizeOf(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdFtn: { Handle_LdFtn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdVirtFtn: { Handle_LdVirtFtn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdArgA: { Handle_LdArgA(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdLocA: { Handle_LdLocA(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LocAlloc: { Handle_LocAlloc(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Break: { Handle_Break(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_BneUn: { Handle_BneUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_BgeUn: { Handle_BgeUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_BgtUn: { Handle_BgtUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_BleUn: { Handle_BleUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_BltUn: { Handle_BltUn(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_AddOvf: { Handle_AddOvf(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_SubOvf: { Handle_SubOvf(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_MulOvf: { Handle_MulOvf(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvOvfI: { Handle_ConvOvfI(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvOvfI4: { Handle_ConvOvfI4(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvOvfI8: { Handle_ConvOvfI8(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvOvfU: { Handle_ConvOvfU(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvOvfU4: { Handle_ConvOvfU4(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_ConvOvfU8: { Handle_ConvOvfU8(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdObj: { Handle_LdObj(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StObj: { Handle_StObj(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdElemA: { Handle_LdElemA(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Cpblk: { Handle_Cpblk(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_InitBlk: { Handle_InitBlk(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_CallVirtConstrained: { Handle_CallVirtConstrained(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Calli: { Handle_Calli(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdElemNoChk: { Handle_LdElemNoChk(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StElemNoChk: { Handle_StElemNoChk(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_LdElemANoChk: { Handle_LdElemANoChk(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Unsupported: { Handle_Unsupported(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Unsupported: { Handle_Unsupported(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Unsupported: { Handle_Unsupported(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_StFldBarrier: { Handle_StFldBarrier(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Unsupported: { Handle_Unsupported(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Unsupported: { Handle_Unsupported(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Unsupported: { Handle_Unsupported(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+L_Unsupported: { Handle_Unsupported(frame, instrs[frame.pc]); op_val = static_cast<uint32_t>(instrs[frame.pc].op_code); CHAOS_IL2CPP_ASSUME(op_val <= 110); goto *kFastDispatchTable[op_val]; }
+        }
+#else
         switch (op_val) {
             DISPATCH_CASE( 0, LdcI4);
             DISPATCH_CASE( 1, LdcI8);
@@ -345,6 +575,7 @@ bool FastExecute(FastFrame& frame,
                 Handle_Unsupported(frame, instrs[frame.pc]);
                 break;
         }
+#endif
 
         // OSR: Detect hot-loop backward branch — if the handler took a branch
         // and the target is an earlier instruction, it's a loop backedge.
