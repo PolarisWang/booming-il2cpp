@@ -433,6 +433,21 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
 //   System.Void    -> 0
 //   other          -> 0 (nullptr for objects)
 
+// ── BitOperations::IsPow2 native stub ─────────────────────────────
+// Called from ChaosExternalRuntimeFallback when the external runtime
+// table lookup finds IsPow2.  Uses the classic (v & (v-1)) == 0 check.
+// Handles both uint32 and uint64 overloads via the uniform intptr ABI.
+// ── BitOperations::IsPow2 native implementation ────────────────────
+// Registered in hotpatch_resolve.cpp as the native function pointer
+// for kChaosExternalRuntimeFnTable[idx].  The managed call signature
+// is bool IsPow2(uint) / bool IsPow2(ulong); the AOT dispatch passes
+// args via the uniform CHAOS_IL2CPP_INTPTR ABI.
+// Uses the classic bit trick: (v & (v - 1)) == 0 for power-of-2 check.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsIsPow2Impl(CHAOS_IL2CPP_INTPTR value) noexcept {
+    auto v = static_cast<uint64_t>(static_cast<CHAOS_IL2CPP_UINT64>(value));
+    return (v != 0) && ((v & (v - 1)) == 0) ? 1 : 0;
+}
+
 // ── External runtime fallback + dispatch ──────────────────────────
 // Called from generated chaos_external_runtime_*() stubs when the
 // kChaosExternalRuntimeFnTable entry is null.  Resolves the subject ID

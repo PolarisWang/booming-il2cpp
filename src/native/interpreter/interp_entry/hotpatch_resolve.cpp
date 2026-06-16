@@ -76,6 +76,7 @@ static void ParseSubjectIdForHotpatchLookup(
 // ── Interop stub declarations (extern "C" must be at namespace scope) ──
 extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;
 extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsIsPow2Impl(CHAOS_IL2CPP_INTPTR value) noexcept;
 extern "C" const char* const kChaosExternalRuntimeSubjects[];
 
 extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
@@ -188,6 +189,14 @@ extern "C" void ChaosResolveExternalRuntimeFnTable() noexcept
             BCROUTE(BCryptIsAvailable);
 
             #undef BCROUTE
+        }
+
+        // ── BitOperations stubs ─────────────────────────────────────────
+        // IsPow2 uses popcount/LZCNT in .NET JIT; our AOT falls through to
+        // the interpreter.  Provide a native stub for ~270x faster execution.
+        if (std::strstr(sid, "BitOperations::IsPow2:") != nullptr) {
+            kChaosExternalRuntimeFnTable[i] =
+                reinterpret_cast<void*>(ChaosBitOperationsIsPow2Impl);
         }
     }
 }
