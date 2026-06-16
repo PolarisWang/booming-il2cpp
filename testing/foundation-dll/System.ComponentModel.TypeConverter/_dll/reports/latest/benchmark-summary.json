@@ -1,23 +1,59 @@
 {
   "assemblyName": "System.ComponentModel.TypeConverter",
-  "timestamp": "2026-06-14T15:47:46",
+  "timestamp": "2026-06-16T01:41:58",
   "totalChunks": 3,
-  "totalBenchmarkedMethods": 0,
-  "aggregatePerformance": {},
+  "totalBenchmarkedMethods": 644,
+  "aggregatePerformance": {
+    "meanDurationMs": 0.14767499974389375,
+    "meanOpsPerSecond": 323020755.6059529,
+    "aggregateMeanCv": 0.13235546868392556,
+    "totalOutliers": 771
+  },
   "chunkSummaries": [
     {
       "slug": "component-model",
       "fact": {
-        "status": "no_results"
+        "passed": 539,
+        "total": 539,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 568,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 539,
+        "iterations": 23809,
+        "meanDurationMs": 0.3824148423005566,
+        "meanOpsPerSecond": 315596262.1483271,
+        "minDurationMs": 0,
+        "maxDurationMs": 56.3888,
+        "totalDurationMs": 206.1216,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 8.8,
+        "totalOutliers": 611,
+        "meanCv": 0.14822207992565054,
+        "maxCv": 0.700575
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 538,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 5302272,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,
@@ -27,31 +63,101 @@
     {
       "slug": "global-ns",
       "fact": {
-        "status": "no_results"
+        "passed": 74,
+        "total": 74,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 80,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 74,
+        "iterations": 10000,
+        "meanDurationMs": 0.029739189189189188,
+        "meanOpsPerSecond": 338815040.5648649,
+        "minDurationMs": 0.025,
+        "maxDurationMs": 0.038,
+        "totalDurationMs": 2.2007,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 8.4,
+        "totalOutliers": 121,
+        "meanCv": 0.10380545945945946,
+        "maxCv": 0.197478
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 74,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
-        "status": "failed"
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2859520,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     },
     {
       "slug": "system-componentmodel-design",
       "fact": {
-        "status": "no_results"
+        "passed": 31,
+        "total": 31,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 39,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 31,
+        "iterations": 10000,
+        "meanDurationMs": 0.03087096774193548,
+        "meanOpsPerSecond": 314650964.10466665,
+        "minDurationMs": 0,
+        "maxDurationMs": 0.0391,
+        "totalDurationMs": 0.957,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 6.5,
+        "totalOutliers": 39,
+        "meanCv": 0.14503886666666668,
+        "maxCv": 0.413523
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 30,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
-        "status": "failed"
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2830848,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     }
   ]

@@ -1,49 +1,82 @@
 {
   "assemblyName": "System.Collections.Immutable",
-  "timestamp": "2026-06-14T23:08:15",
-  "totalMethods": 4,
+  "timestamp": "2026-06-16T01:21:42",
+  "totalMethods": 5,
   "methodsWithNet8": 4,
   "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": -230.75,
+      "median": -230.75,
+      "min": -230.75,
+      "max": -230.75,
+      "p25": -230.75,
+      "p75": -230.75
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": 55.04,
+      "median": 55.04,
+      "min": 55.04,
+      "max": 55.04,
+      "p25": 55.04,
+      "p75": 55.04
+    },
     "net10VsNet8Pct": {
-      "mean": -6.46,
-      "median": -6.46,
-      "min": -6.46,
-      "max": -6.46,
-      "p25": -6.46,
-      "p75": -6.46
+      "mean": -4.33,
+      "median": -4.33,
+      "min": -4.33,
+      "max": -4.33,
+      "p25": -4.33,
+      "p75": -4.33
     },
     "highValueMethods_betterThanNet8": 0.0
   },
   "perChunk": [
     {
       "slug": "global-ns",
-      "methodCount": 4,
+      "methodCount": 5,
       "methodsWithNet8": 4,
       "aggregate": {
         "methodsBetterThanNet8": 0,
+        "chaosAotVsNet8Pct": {
+          "mean": -230.75,
+          "median": -189.03,
+          "min": -455.82,
+          "max": -89.13,
+          "p25": -275.93,
+          "p75": -143.84
+        },
+        "highValueMethods_betterThanNet8": 0.0,
+        "chaosJitVsNet8Pct": {
+          "mean": 55.04,
+          "median": 56.3,
+          "min": 36.91,
+          "max": 70.65,
+          "p25": 50.98,
+          "p75": 60.37
+        },
         "net10VsNet8Pct": {
-          "mean": -6.46,
-          "median": -10.44,
-          "min": -27.03,
-          "max": 22.06,
-          "p25": -20.39,
-          "p75": 3.49
+          "mean": -4.33,
+          "median": -1.69,
+          "min": -19.4,
+          "max": 5.45,
+          "p25": -9.02,
+          "p75": 2.99
         }
       },
       "methods": [
         {
           "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Int32,System.Int32>>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
-          "net8Ms": 0.044,
-          "net10Ms": 0.052,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
+          "net8Ms": 0.067,
+          "net10Ms": 0.08,
+          "chaosAotMs": 0.2117,
+          "chaosJitMs": 0.0297,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
           "chaosJitVsNet8Pct": null,
           "status": "net8_error",
-          "bottleneck": "",
+          "bottleneck": "dispatch_overhead",
           "gcComparison": {
             "net8AllocBytes": 241648,
             "net8CollectionCount0": 0,
@@ -52,17 +85,17 @@
         },
         {
           "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
-          "net8Ms": 0.037,
-          "net10Ms": 0.038,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
+          "net8Ms": 0.055,
+          "net10Ms": 0.052,
+          "chaosAotMs": 0.3057,
+          "chaosJitMs": 0.0347,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
           "chaosJitVsNet8Pct": null,
           "status": "net8_error",
-          "bottleneck": "",
+          "bottleneck": "dispatch_overhead",
           "gcComparison": {
             "net8AllocBytes": 193568,
             "net8CollectionCount0": 0,
@@ -70,11 +103,24 @@
           }
         },
         {
+          "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary<System.Int32,System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
+          "net8Ms": null,
+          "net10Ms": null,
+          "chaosAotMs": 0.2087,
+          "chaosJitMs": 0.0303,
+          "net8Error": false,
+          "highVariance": false,
+          "net10VsNet8Pct": null,
+          "chaosAotVsNet8Pct": null,
+          "chaosJitVsNet8Pct": null,
+          "status": "missing_net8"
+        },
+        {
           "methodSubjectId": "global-ns::0",
-          "net8Ms": 0.074,
-          "net10Ms": 0.094,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
+          "net8Ms": 0.092,
+          "net10Ms": 0.09,
+          "chaosAotMs": 0.174,
+          "chaosJitMs": 0.027,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -90,17 +136,17 @@
         },
         {
           "methodSubjectId": "global-ns::2",
-          "net8Ms": 0.068,
-          "net10Ms": 0.053,
-          "chaosAotMs": null,
-          "chaosJitMs": null,
+          "net8Ms": 0.072,
+          "net10Ms": 0.076,
+          "chaosAotMs": 0.1887,
+          "chaosJitMs": 0.031,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
           "chaosAotVsNet8Pct": null,
           "chaosJitVsNet8Pct": null,
           "status": "net8_error",
-          "bottleneck": "",
+          "bottleneck": "dispatch_overhead",
           "gcComparison": {
             "net8AllocBytes": 241688,
             "net8CollectionCount0": 0,

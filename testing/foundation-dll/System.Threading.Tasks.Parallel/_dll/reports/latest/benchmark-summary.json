@@ -1,23 +1,58 @@
 {
   "assemblyName": "System.Threading.Tasks.Parallel",
-  "timestamp": "2026-06-14T15:47:47",
+  "timestamp": "2026-06-16T01:41:58",
   "totalChunks": 1,
-  "totalBenchmarkedMethods": 0,
-  "aggregatePerformance": {},
+  "totalBenchmarkedMethods": 111,
+  "aggregatePerformance": {
+    "meanDurationMs": 1.2739954954954955,
+    "meanOpsPerSecond": 327133620.25234234,
+    "aggregateMeanCv": 0.10506085585585585,
+    "totalOutliers": 95
+  },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "status": "no_results"
+        "passed": 113,
+        "total": 113,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 114,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 111,
+        "iterations": 26315,
+        "meanDurationMs": 1.2739954954954955,
+        "meanOpsPerSecond": 327133620.25234234,
+        "minDurationMs": 0.0648,
+        "maxDurationMs": 52.8297,
+        "totalDurationMs": 141.4135,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 5.1,
+        "totalOutliers": 95,
+        "meanCv": 0.10506085585585585,
+        "maxCv": 0.426297
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": 3221225477,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
-        "status": "not_run"
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     }
   ]

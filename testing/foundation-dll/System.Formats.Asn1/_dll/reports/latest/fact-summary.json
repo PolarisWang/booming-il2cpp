@@ -1,25 +1,56 @@
 {
   "assemblyName": "System.Formats.Asn1",
-  "timestamp": "2026-06-14T15:47:47",
+  "timestamp": "2026-06-16T01:41:58",
   "totalChunks": 1,
-  "chunksWithFacts": 0,
+  "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 0,
-  "totalFactMethods": 0,
+  "totalPassed": 69,
+  "totalFactMethods": 69,
   "chunkSummaries": [
     {
       "slug": "system-formats-asn1",
       "fact": {
-        "status": "no_results"
+        "passed": 69,
+        "total": 69,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 77,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 69,
+        "iterations": 50000,
+        "meanDurationMs": 0.30738260869565215,
+        "meanOpsPerSecond": 329883361.24,
+        "minDurationMs": 0,
+        "maxDurationMs": 11.1083,
+        "totalDurationMs": 21.2094,
+        "totalAllocatedBytes": 800000.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.04230966176470589,
+        "maxCv": 0.318814
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 68,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2868224,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,

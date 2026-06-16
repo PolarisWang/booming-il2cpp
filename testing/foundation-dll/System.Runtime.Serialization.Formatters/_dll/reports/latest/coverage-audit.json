@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Runtime.Serialization.Formatters",
-  "timestamp": "2026-06-14T15:47:47",
+  "timestamp": "2026-06-16T01:41:58",
   "totalChunks": 1,
-  "chunksWithResults": 0,
+  "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 0
+  "chunksWithMetaMismatch": 1,
+  "totalDeclaredMethods": 76
 }

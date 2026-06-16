@@ -157,43 +157,6 @@ set(CHAOS_ENTRY_STUBS
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
-# hotpatch_table.cpp — compiled locally so the entry has the latest
-# SetPatchedBySlot (the prebuilt chaos_runtime_core.lib may be stale).
-set(CHAOS_HOTPATCH_TABLE
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/hotpatch_table.cpp"
-)
-# eager_compile.cpp — required by patch_loader.obj in chaos_runtime_core.lib
-# but defined in the interpreter project.  Compile locally since the prebuilt
-# chaos_interpreter.lib may be stale (EagerCompilePatchMethods).
-# Skipped in profile build (JIT header dependency chain).
-if(NOT CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
-  set(CHAOS_EAGER_COMPILE
-      "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
-  )
-endif()
-# method_replacement.cpp — the prebuilt chaos_hot_update.lib may be stale
-# (SetPatchedBySlot signature changed — domain_id parameter added).
-set(CHAOS_METHOD_REPLACEMENT
-    "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
-)
-# jit_data_loader.cpp — the prebuilt chaos_runtime_core.lib may be stale,
-# missing ChaosJitDataLoad symbol needed by JIT build's native-aot.generated.obj.
-set(CHAOS_JIT_DATA_LOADER
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/jit_data_loader.cpp"
-)
-# abi_reflection.cpp — the prebuilt chaos_runtime_core.lib may have nullptr
-# ABI entries.  Compile locally so runtime fixes take effect.  /FORCE:MULTIPLE
-# allows the linker to pick the local definition over the prebuilt one.
-set(CHAOS_ABI_REFLECTION
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/abi_reflection.cpp"
-)
-# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
-# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
-# symbols added after the SDK was last rebuilt.  Compile locally.
-set(CHAOS_PROFILE_STATS
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
-)
-
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
@@ -211,12 +174,6 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
-    ${CHAOS_HOTPATCH_TABLE}
-    ${CHAOS_EAGER_COMPILE}
-    ${CHAOS_METHOD_REPLACEMENT}
-    ${CHAOS_JIT_DATA_LOADER}
-    ${CHAOS_ABI_REFLECTION}
-    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -238,8 +195,6 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_CODEGEN_DIR}/codegen/generated"
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    # JIT headers needed by eager_compile.cpp (compiled for all builds
-    # since the prebuilt chaos_interpreter.lib may be stale).
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
@@ -257,12 +212,12 @@ target_link_libraries(chaos_entry PRIVATE chaos::runtime
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:${CHAOS_SDK_DIR}/lib/libchaos_pal.a>"
 )
 # MSVC: chaos_hot_update.lib references SetPatchedBySlot from
-# chaos_runtime_core.lib. /WHOLEARCHIVE forces MSVC to include ALL
-# objects from the runtime core lib, not just those needed by the
-# first pass (MSVC processes static libs left-to-right without rescan).
+# chaos_runtime_core.lib. Use targeted /INCLUDE instead of
+# /WHOLEARCHIVE (which would force ALL objects including the
+# old abi_reflection.obj with nullptr ABI entries, overriding
+# the locally-compiled fix).
 if(MSVC)
   target_link_libraries(chaos_entry PRIVATE bcrypt)
-  target_link_options(chaos_entry PRIVATE "/WHOLEARCHIVE:${CHAOS_SDK_DIR}/lib/chaos_runtime_core.lib")
 
 endif()
 # OpenSSL: needed by crypto_stubs.cpp on Linux (SHA/HMAC via libcrypto).

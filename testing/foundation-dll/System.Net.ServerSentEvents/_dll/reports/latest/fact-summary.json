@@ -1,16 +1,21 @@
 {
   "assemblyName": "System.Net.ServerSentEvents",
-  "timestamp": "2026-06-14T15:47:47",
+  "timestamp": "2026-06-16T01:41:58",
   "totalChunks": 1,
-  "chunksWithFacts": 0,
+  "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 0,
-  "totalFactMethods": 0,
+  "totalPassed": 2,
+  "totalFactMethods": 4,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "status": "no_results"
+        "passed": 2,
+        "total": 4,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 6,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
         "status": "no_results"
@@ -19,7 +24,7 @@
         "status": "no_results"
       },
       "build": {
-        "status": "failed"
+        "status": "passed"
       }
     }
   ]

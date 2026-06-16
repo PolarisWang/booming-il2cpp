@@ -157,37 +157,6 @@ set(CHAOS_ENTRY_STUBS
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
-# hotpatch_table.cpp — compiled locally so the entry has the latest
-# SetPatchedBySlot (the prebuilt chaos_runtime_core.lib may be stale).
-set(CHAOS_HOTPATCH_TABLE
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/hotpatch_table.cpp"
-)
-# eager_compile.cpp — required by patch_loader.obj in chaos_runtime_core.lib
-# but defined in the interpreter project.  Compile locally since the prebuilt
-# chaos_interpreter.lib may be stale (EagerCompilePatchMethods).
-# Skipped in profile build (JIT header dependency chain).
-if(NOT CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
-  set(CHAOS_EAGER_COMPILE
-      "${CHAOS_PROJECT_ROOT}/src/native/interpreter/interp_entry/eager_compile.cpp"
-  )
-endif()
-# method_replacement.cpp — the prebuilt chaos_hot_update.lib may be stale
-# (SetPatchedBySlot signature changed — domain_id parameter added).
-set(CHAOS_METHOD_REPLACEMENT
-    "${CHAOS_PROJECT_ROOT}/src/native/hot-update/method_replacement.cpp"
-)
-# jit_data_loader.cpp — the prebuilt chaos_runtime_core.lib may be stale,
-# missing ChaosJitDataLoad symbol needed by JIT build's native-aot.generated.obj.
-set(CHAOS_JIT_DATA_LOADER
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/jit_data_loader.cpp"
-)
-# profile_stats.cpp — the prebuilt chaos_runtime_core.lib may be stale,
-# missing GetThreadProfileData/FlushThreadProfileData/ProfileStore*
-# symbols added after the SDK was last rebuilt.  Compile locally.
-set(CHAOS_PROFILE_STATS
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
-)
-
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
@@ -205,11 +174,6 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
-    ${CHAOS_HOTPATCH_TABLE}
-    ${CHAOS_EAGER_COMPILE}
-    ${CHAOS_METHOD_REPLACEMENT}
-    ${CHAOS_JIT_DATA_LOADER}
-    ${CHAOS_PROFILE_STATS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -231,8 +195,6 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_CODEGEN_DIR}/codegen/generated"
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    # JIT headers needed by eager_compile.cpp (compiled for all builds
-    # since the prebuilt chaos_interpreter.lib may be stale).
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.

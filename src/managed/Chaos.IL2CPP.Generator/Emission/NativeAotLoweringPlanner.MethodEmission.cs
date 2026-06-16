@@ -353,7 +353,7 @@ public sealed partial class NativeAotLoweringPlanner
 		bool _isSubjectMethod = method.SubjectId is not null &&
 			(method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) ||
 			 method.SubjectId.StartsWith("Chaos.TestFramework.Sdk/", StringComparison.Ordinal));
-		bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0;
+		bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0 && (method.Instructions?.Any(i => i.Callee != null) == true);
 		if (_wrapInTryCatch)
 			builder.AppendLine("	try {");
 
@@ -378,7 +378,7 @@ public sealed partial class NativeAotLoweringPlanner
 	    }
 	if (_wrapInTryCatch)
 	{
-	    builder.AppendLine("} catch (...) {");
+	    builder.AppendLine("} catch (const chaos_managed_exception&) {");
 	    if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
 	        builder.AppendLine("    return {};");
 	    builder.AppendLine("}");

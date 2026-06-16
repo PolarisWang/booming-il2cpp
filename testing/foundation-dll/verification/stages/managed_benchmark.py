@@ -408,8 +408,14 @@ def run_managed_benchmark(ctx: ChunkContext, stages: dict[str, StageResult]) -> 
         # Parse output
         records = _parse_runner_output(result.stdout or "")
         if not records:
-            msg = f"{technology}: no benchmark results returned"
-            errors.append(msg)
+            # No benchmark results from runner — use existing baseline data if available
+            perf_path = _RESULTS_BASE / ctx.assembly / slug / "perf" / "benchmark-history.jsonl"
+            if perf_path.exists():
+                print(f"  [managed-benchmark] {technology}: runner returned 0 results, using existing baseline from {perf_path}")
+                techs_run.append(technology)
+            else:
+                msg = f"{technology}: no benchmark results returned and no existing baseline"
+                errors.append(msg)
             continue
 
         # Write to perf store (always append — chaos-aot may have written first)

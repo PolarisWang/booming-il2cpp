@@ -1,25 +1,56 @@
 {
   "assemblyName": "System.Security.Cryptography",
-  "timestamp": "2026-06-14T15:47:47",
+  "timestamp": "2026-06-16T01:41:58",
   "totalChunks": 3,
-  "chunksWithFacts": 0,
+  "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 0,
-  "totalFactMethods": 0,
+  "totalPassed": 2681,
+  "totalFactMethods": 2681,
   "chunkSummaries": [
     {
       "slug": "security-cryptography",
       "fact": {
-        "status": "no_results"
+        "passed": 1222,
+        "total": 1222,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1307,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 1222,
+        "iterations": 19230,
+        "meanDurationMs": 7.5914728314238955,
+        "meanOpsPerSecond": 276200072.8513748,
+        "minDurationMs": 0.0507,
+        "maxDurationMs": 647.1973,
+        "totalDurationMs": 9276.7798,
+        "totalAllocatedBytes": 234452160.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.07481610065466449,
+        "maxCv": 0.690624
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": 3221225477,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 10315776,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,
@@ -29,16 +60,47 @@
     {
       "slug": "security-cryptography-2",
       "fact": {
-        "status": "no_results"
+        "passed": 1222,
+        "total": 1222,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1307,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 1222,
+        "iterations": 17857,
+        "meanDurationMs": 6.80552651391162,
+        "meanOpsPerSecond": 275234678.4031587,
+        "minDurationMs": 0.0453,
+        "maxDurationMs": 562.049,
+        "totalDurationMs": 8316.3534,
+        "totalAllocatedBytes": 217712544.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.0716347929623568,
+        "maxCv": 0.484413
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": 3221225477,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 10315776,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,
@@ -48,16 +110,51 @@
     {
       "slug": "system-security-cryptography-x509certificates",
       "fact": {
-        "status": "no_results"
+        "passed": 237,
+        "total": 237,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 276,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 237,
+        "iterations": 25000,
+        "meanDurationMs": 0.7508481012658228,
+        "meanOpsPerSecond": 322464279.35449153,
+        "minDurationMs": 0,
+        "maxDurationMs": 58.212,
+        "totalDurationMs": 177.951,
+        "totalAllocatedBytes": 800000.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.04377233898305085,
+        "maxCv": 0.357556
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 236,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
-        "status": "not_run"
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 5059072,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     }
   ]

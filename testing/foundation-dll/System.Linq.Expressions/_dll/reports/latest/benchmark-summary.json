@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Linq.Expressions",
-  "timestamp": "2026-06-14T15:47:47",
+  "timestamp": "2026-06-16T01:41:58",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 0,
   "aggregatePerformance": {},
@@ -8,7 +8,12 @@
     {
       "slug": "global-ns",
       "fact": {
-        "status": "no_results"
+        "passed": 623,
+        "total": 737,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 752,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
         "status": "no_results"
@@ -18,10 +23,6 @@
       },
       "build": {
         "status": "passed"
-      },
-      "benchmarkReport": {
-        "totalMethods": 0,
-        "methodsWithNet8": 0
       }
     }
   ]

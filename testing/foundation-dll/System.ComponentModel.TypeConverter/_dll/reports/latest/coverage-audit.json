@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.ComponentModel.TypeConverter",
-  "timestamp": "2026-06-14T15:47:46",
+  "timestamp": "2026-06-16T01:41:58",
   "totalChunks": 3,
-  "chunksWithResults": 0,
+  "chunksWithResults": 3,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 0
+  "chunksWithMetaMismatch": 3,
+  "totalDeclaredMethods": 644
 }

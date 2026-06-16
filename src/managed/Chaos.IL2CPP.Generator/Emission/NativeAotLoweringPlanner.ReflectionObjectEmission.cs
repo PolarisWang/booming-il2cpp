@@ -141,7 +141,7 @@ public sealed partial class NativeAotLoweringPlanner
 		if (_stringIdMapping is { Count: > 0 })
 		{
 			builder.AppendLine();
-			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_runtime_get_abi_v0()->string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept");
+			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept");
 			builder.AppendLine("{");
 			builder.AppendLine("    if (chaos_value == 0)");
 			builder.AppendLine("    {");
