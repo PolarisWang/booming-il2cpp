@@ -160,6 +160,7 @@ set(CHAOS_CRYPTO_STUBS
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
+    "patch-host-arrays.cpp"
     "verification_dispatch.generated.cpp"
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_PROFILE_GLOBALS}
