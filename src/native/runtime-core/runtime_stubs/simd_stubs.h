@@ -1,60 +1,125 @@
-// ── SIMD stubs declarations ─────────────────────────────────────
-// ABI exports: extern "C" linkage for managed/NativeAOT callability.
-// Uses SSE/AVX hardware intrinsics (x86-64) for Vector128/256
-// operations that were previously lane-by-lane scalar fallbacks.
+// simd_stubs.h — Native SIMD stub implementations for AOT codegen
 #pragma once
+#include <cstdint>
+#include <chaos/native_types.h>
 
-#include "numerics_carriers.h"
+#if defined(_MSC_VER)
+#include <intrin.h>
+#elif defined(__GNUC__) || defined(__clang__)
+#include <x86intrin.h>
+#endif
 
-using ChaosSimdV128 = chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector128Carrier;
-using ChaosSimdV256 = chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector256Carrier;
+namespace chaos::il2cpp::simd {
 
-extern "C" {
+// ── Helper: reinterpret intptr ABI pairs as __m128i ────────────────
+inline __m128i Load128(const CHAOS_IL2CPP_INTPTR* ptr) noexcept {
+    alignas(16) uint64_t tmp[2] = {static_cast<uint64_t>(ptr[0]), static_cast<uint64_t>(ptr[1])};
+    return _mm_loadu_si128(reinterpret_cast<const __m128i*>(tmp));
+}
 
-// ── Vector128 arithmetic ──
-ChaosSimdV128 ChaosSimd_V128_Add_I32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Sub_I32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Mul_I32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Add_F32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Sub_F32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Mul_F32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Add_F64(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Sub_F64(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Mul_F64(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
+inline void Store128(CHAOS_IL2CPP_INTPTR* ptr, __m128i val) noexcept {
+    alignas(16) uint64_t tmp[2];
+    _mm_storeu_si128(reinterpret_cast<__m128i*>(tmp), val);
+    ptr[0] = static_cast<CHAOS_IL2CPP_INTPTR>(tmp[0]);
+    ptr[1] = static_cast<CHAOS_IL2CPP_INTPTR>(tmp[1]);
+}
 
-// ── Vector128 bitwise (type-agnostic) ──
-ChaosSimdV128 ChaosSimd_V128_And(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Or(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_Xor(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
+// ── Vector128.Add ─────────────────────────────────────────────────
+inline CHAOS_IL2CPP_INTPTR Vector128Add(
+    CHAOS_IL2CPP_INTPTR a_low, CHAOS_IL2CPP_INTPTR a_high,
+    CHAOS_IL2CPP_INTPTR b_low, CHAOS_IL2CPP_INTPTR b_high,
+    uint8_t elem_type) noexcept
+{
+    alignas(16) CHAOS_IL2CPP_INTPTR args_a[2] = {a_low, a_high};
+    alignas(16) CHAOS_IL2CPP_INTPTR args_b[2] = {b_low, b_high};
+    __m128i va = Load128(args_a), vb = Load128(args_b);
+    __m128i vr;
+    switch (elem_type) {
+    case 0:  vr = _mm_add_epi8(va, vb);  break;
+    case 1:  vr = _mm_add_epi16(va, vb); break;
+    case 2:  vr = _mm_add_epi32(va, vb); break;
+    case 3:  vr = _mm_add_epi64(va, vb); break;
+    case 4:  vr = _mm_castps_si128(_mm_add_ps(_mm_castsi128_ps(va), _mm_castsi128_ps(vb))); break;
+    case 5:  vr = _mm_castpd_si128(_mm_add_pd(_mm_castsi128_pd(va), _mm_castsi128_pd(vb))); break;
+    default: return 0;
+    }
+    alignas(16) CHAOS_IL2CPP_INTPTR result[2];
+    Store128(result, vr);
+    return result[0];
+}
 
-// ── Vector128 comparison ──
-ChaosSimdV128 ChaosSimd_V128_CmpEq_I32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
-ChaosSimdV128 ChaosSimd_V128_CmpEq_F32(ChaosSimdV128 a, ChaosSimdV128 b) noexcept;
+// ── Vector128.Sub / Mul / And / Or / Xor ─────────────────────────
+inline CHAOS_IL2CPP_INTPTR Vector128Sub(
+    CHAOS_IL2CPP_INTPTR a_low, CHAOS_IL2CPP_INTPTR a_high,
+    CHAOS_IL2CPP_INTPTR b_low, CHAOS_IL2CPP_INTPTR b_high,
+    uint8_t elem_type) noexcept
+{
+    alignas(16) CHAOS_IL2CPP_INTPTR args_a[2] = {a_low, a_high}, args_b[2] = {b_low, b_high};
+    __m128i va = Load128(args_a), vb = Load128(args_b), vr;
+    switch (elem_type) {
+    case 0:  vr = _mm_sub_epi8(va, vb);  break;
+    case 1:  vr = _mm_sub_epi16(va, vb); break;
+    case 2:  vr = _mm_sub_epi32(va, vb); break;
+    case 3:  vr = _mm_sub_epi64(va, vb); break;
+    case 4:  vr = _mm_castps_si128(_mm_sub_ps(_mm_castsi128_ps(va), _mm_castsi128_ps(vb))); break;
+    case 5:  vr = _mm_castpd_si128(_mm_sub_pd(_mm_castsi128_pd(va), _mm_castsi128_pd(vb))); break;
+    default: return 0;
+    }
+    alignas(16) CHAOS_IL2CPP_INTPTR result[2];
+    Store128(result, vr);
+    return result[0];
+}
 
-// ── Vector128 shift ──
-ChaosSimdV128 ChaosSimd_V128_Shl_I32(ChaosSimdV128 a, CHAOS_IL2CPP_INT32 b) noexcept;
+inline CHAOS_IL2CPP_INTPTR Vector128Mul(
+    CHAOS_IL2CPP_INTPTR a_low, CHAOS_IL2CPP_INTPTR a_high,
+    CHAOS_IL2CPP_INTPTR b_low, CHAOS_IL2CPP_INTPTR b_high,
+    uint8_t elem_type) noexcept
+{
+    alignas(16) CHAOS_IL2CPP_INTPTR args_a[2] = {a_low, a_high}, args_b[2] = {b_low, b_high};
+    __m128i va = Load128(args_a), vb = Load128(args_b), vr;
+    switch (elem_type) {
+    case 1:  vr = _mm_mullo_epi16(va, vb); break;
+    case 2:  vr = _mm_mullo_epi32(va, vb); break;
+    case 4:  vr = _mm_castps_si128(_mm_mul_ps(_mm_castsi128_ps(va), _mm_castsi128_ps(vb))); break;
+    case 5:  vr = _mm_castpd_si128(_mm_mul_pd(_mm_castsi128_pd(va), _mm_castsi128_pd(vb))); break;
+    default: return 0;
+    }
+    alignas(16) CHAOS_IL2CPP_INTPTR result[2];
+    Store128(result, vr);
+    return result[0];
+}
 
-// ── Vector256 arithmetic ──
-ChaosSimdV256 ChaosSimd_V256_Add_I32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Sub_I32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Mul_I32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Add_F32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Sub_F32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Mul_F32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Add_F64(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Sub_F64(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Mul_F64(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
+inline CHAOS_IL2CPP_INTPTR Vector128And(
+    CHAOS_IL2CPP_INTPTR a_low, CHAOS_IL2CPP_INTPTR a_high,
+    CHAOS_IL2CPP_INTPTR b_low, CHAOS_IL2CPP_INTPTR b_high) noexcept
+{
+    alignas(16) CHAOS_IL2CPP_INTPTR args_a[2] = {a_low, a_high}, args_b[2] = {b_low, b_high};
+    __m128i vr = _mm_and_si128(Load128(args_a), Load128(args_b));
+    alignas(16) CHAOS_IL2CPP_INTPTR result[2];
+    Store128(result, vr);
+    return result[0];
+}
 
-// ── Vector256 bitwise (type-agnostic) ──
-ChaosSimdV256 ChaosSimd_V256_And(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Or(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_Xor(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
+inline CHAOS_IL2CPP_INTPTR Vector128Or(
+    CHAOS_IL2CPP_INTPTR a_low, CHAOS_IL2CPP_INTPTR a_high,
+    CHAOS_IL2CPP_INTPTR b_low, CHAOS_IL2CPP_INTPTR b_high) noexcept
+{
+    alignas(16) CHAOS_IL2CPP_INTPTR args_a[2] = {a_low, a_high}, args_b[2] = {b_low, b_high};
+    __m128i vr = _mm_or_si128(Load128(args_a), Load128(args_b));
+    alignas(16) CHAOS_IL2CPP_INTPTR result[2];
+    Store128(result, vr);
+    return result[0];
+}
 
-// ── Vector256 comparison ──
-ChaosSimdV256 ChaosSimd_V256_CmpEq_I32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
-ChaosSimdV256 ChaosSimd_V256_CmpEq_F32(ChaosSimdV256 a, ChaosSimdV256 b) noexcept;
+inline CHAOS_IL2CPP_INTPTR Vector128Xor(
+    CHAOS_IL2CPP_INTPTR a_low, CHAOS_IL2CPP_INTPTR a_high,
+    CHAOS_IL2CPP_INTPTR b_low, CHAOS_IL2CPP_INTPTR b_high) noexcept
+{
+    alignas(16) CHAOS_IL2CPP_INTPTR args_a[2] = {a_low, a_high}, args_b[2] = {b_low, b_high};
+    __m128i vr = _mm_xor_si128(Load128(args_a), Load128(args_b));
+    alignas(16) CHAOS_IL2CPP_INTPTR result[2];
+    Store128(result, vr);
+    return result[0];
+}
 
-// ── Vector256 shift ──
-ChaosSimdV256 ChaosSimd_V256_Shl_I32(ChaosSimdV256 a, CHAOS_IL2CPP_INT32 b) noexcept;
-
-}  // extern "C"
+}  // namespace chaos::il2cpp::simd
