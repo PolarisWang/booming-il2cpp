@@ -669,6 +669,15 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
     }
 
     result.max_regs = next_vreg;
+
+    // If register pressure exceeds available GP registers, return empty
+    // instructions so the caller falls back to FastExecute (stack-based
+    // interpreter).  The register file has kGPRegisters=64 slots; methods
+    // with deeper eval stacks are rare and execute correctly via FastExecute.
+    if (next_vreg > kGPRegisters) {
+        result.instructions.clear();
+    }
+
     return result;
 }
 
