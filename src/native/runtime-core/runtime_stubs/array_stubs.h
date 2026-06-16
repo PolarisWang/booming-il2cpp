@@ -49,6 +49,13 @@ double ChaosBitConverterToDouble(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT
 // to these so both paths share a single implementation.
 using chaos::il2cpp::runtime_core::GcAllocateAtomic;
 
+// Forward declarations for AVX2 copy helpers (defined later in the AVX2 block,
+// but called by ChaosArrayCopy_Inline which is defined here).
+#if defined(__x86_64__) || defined(_M_AMD64)
+inline void Avx2BlockCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept;
+inline void Avx2StreamCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept;
+#endif
+
 CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosArrayEmpty_Inline(void) noexcept
 {
     static ManagedArrayAccessor* s_empty = nullptr;
@@ -80,7 +87,16 @@ CHAOS_IL2CPP_FORCEINLINE void ChaosArrayCopy_Inline(CHAOS_IL2CPP_INTPTR source, 
     constexpr CHAOS_IL2CPP_SIZE kElemSize = sizeof(CHAOS_IL2CPP_INTPTR);
     auto* dst_ptr = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(dst_arr)) + di * kElemSize;
     const auto* src_ptr = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(accessor_get_elements(src_arr)) + si * kElemSize;
-    std::memmove(dst_ptr, src_ptr, c * kElemSize);
+    CHAOS_IL2CPP_SIZE bytes = c * kElemSize;
+#if defined(__x86_64__) || defined(_M_AMD64)
+    if (bytes > 256 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        Avx2StreamCopy(dst_ptr, src_ptr, bytes); return;
+    }
+    if (bytes > 64 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        Avx2BlockCopy(dst_ptr, src_ptr, bytes); return;
+    }
+#endif
+    std::memmove(dst_ptr, src_ptr, bytes);
 }
 
 /// Unsafe variant for AOT codegen DirectNativeSymbol calls, where codegen
@@ -112,6 +128,18 @@ CHAOS_IL2CPP_FORCEINLINE void ChaosArrayCopy_Unsafe_Inline(CHAOS_IL2CPP_INTPTR s
         __builtin_memcpy(dst_ptr, src_ptr, bytes);
         return;
     }
+#if defined(__x86_64__) || defined(_M_AMD64)
+    // P5: AVX2 streaming copy for large blocks (>256 bytes)
+    if (bytes > 256 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        Avx2StreamCopy(dst_ptr, src_ptr, bytes);
+        return;
+    }
+    // P5: AVX2 cached copy for medium blocks (64-256 bytes)
+    if (bytes > 64 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        Avx2BlockCopy(dst_ptr, src_ptr, bytes);
+        return;
+    }
+#endif
     std::memmove(dst_ptr, src_ptr, bytes);
 }
 
@@ -142,6 +170,14 @@ CHAOS_IL2CPP_FORCEINLINE void ChaosArrayCopy3_Unsafe_Inline(CHAOS_IL2CPP_INTPTR 
         __builtin_memcpy(dst_ptr, src_ptr, bytes);
         return;
     }
+#if defined(__x86_64__) || defined(_M_AMD64)
+    if (bytes > 256 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        Avx2StreamCopy(dst_ptr, src_ptr, bytes); return;
+    }
+    if (bytes > 64 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        Avx2BlockCopy(dst_ptr, src_ptr, bytes); return;
+    }
+#endif
     std::memmove(dst_ptr, src_ptr, bytes);
 }
 
@@ -399,6 +435,64 @@ inline CHAOS_IL2CPP_INT32 LastIndexOf_Avx2_Dispatch(
         if (elements[i - 1] == value) return static_cast<CHAOS_IL2CPP_INT32>(i - 1);
     }
     return -1;
+}
+
+// ── AVX2-accelerated Copy (P5) ───────────────────────────────
+// Streaming copy for large memory blocks (>256 bytes). Uses non-temporal
+// stores to avoid cache pollution when copying large arrays that won't
+// be read again soon.  64-256 byte blocks use cached vector stores.
+CHAOS_IL2CPP_TARGET_AVX2
+inline void Avx2BlockCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept
+{
+    CHAOS_IL2CPP_SIZE i = 0;
+    // 256-bit (32 byte) loop
+    for (; i + 32 <= bytes; i += 32) {
+        __m256i chunk = _mm256_loadu_si256(
+            reinterpret_cast<const __m256i*>(static_cast<const CHAOS_IL2CPP_UINT8*>(src) + i));
+        _mm256_storeu_si256(
+            reinterpret_cast<__m256i*>(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i), chunk);
+    }
+    // 128-bit tail
+    for (; i + 16 <= bytes; i += 16) {
+        __m128i chunk = _mm_loadu_si128(
+            reinterpret_cast<const __m128i*>(static_cast<const CHAOS_IL2CPP_UINT8*>(src) + i));
+        _mm_storeu_si128(
+            reinterpret_cast<__m128i*>(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i), chunk);
+    }
+    // Scalar tail
+    if (i < bytes) {
+        CHAOS_IL2CPP_UINT64 tmp;
+        CHAOS_IL2CPP_SIZE tail = bytes - i;
+        __builtin_memcpy(&tmp, static_cast<const CHAOS_IL2CPP_UINT8*>(src) + i, tail);
+        __builtin_memcpy(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i, &tmp, tail);
+    }
+}
+
+CHAOS_IL2CPP_TARGET_AVX2
+inline void Avx2StreamCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept
+{
+    CHAOS_IL2CPP_SIZE i = 0;
+    // Non-temporal streaming stores — avoid cache pollution
+    for (; i + 32 <= bytes; i += 32) {
+        __m256i chunk = _mm256_loadu_si256(
+            reinterpret_cast<const __m256i*>(static_cast<const CHAOS_IL2CPP_UINT8*>(src) + i));
+        _mm256_stream_si256(
+            reinterpret_cast<__m256i*>(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i), chunk);
+    }
+    // 128-bit tail (use cached stores for last bytes)
+    for (; i + 16 <= bytes; i += 16) {
+        __m128i chunk = _mm_loadu_si128(
+            reinterpret_cast<const __m128i*>(static_cast<const CHAOS_IL2CPP_UINT8*>(src) + i));
+        _mm_storeu_si128(
+            reinterpret_cast<__m128i*>(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i), chunk);
+    }
+    if (i < bytes) {
+        CHAOS_IL2CPP_UINT64 tmp;
+        CHAOS_IL2CPP_SIZE tail = bytes - i;
+        __builtin_memcpy(&tmp, static_cast<const CHAOS_IL2CPP_UINT8*>(src) + i, tail);
+        __builtin_memcpy(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i, &tmp, tail);
+    }
+    _mm_sfence();  // Ensure streaming stores are visible
 }
 
 #undef CHAOS_IL2CPP_TARGET_AVX2
