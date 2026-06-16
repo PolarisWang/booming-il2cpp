@@ -1,4 +1,0 @@
-{
-    "description": "Known fact failures from invalid/default ATG test parameters",
-    "skipIndices": [590, 1056, 1061]
-}

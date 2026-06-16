@@ -38,26 +38,6 @@ def _is_jit_enabled(chunk_dir: Path) -> bool:
     return config.get("jitEnabled", False)
 
 
-def _load_fact_skips(native_dir: Path) -> set[int]:
-    """Load Python-level fact skip indices from fact_skip.json in native_dir.
-
-    Returns a set of method indices to treat as passed regardless of
-    the C++ binary's actual result. This avoids modifying runtime-entry.cpp.
-    """
-    skip_path = native_dir / "fact_skip.json"
-    if not skip_path.exists():
-        return set()
-    try:
-        data = json.loads(skip_path.read_text(encoding="utf-8"))
-        indices = data.get("skipIndices", [])
-        if indices:
-            print(f"  [fact] Python skip: {len(indices)} method(s) masked via fact_skip.json")
-        return set(indices)
-    except (json.JSONDecodeError, OSError):
-        print(f"  [fact] WARNING: corrupt fact_skip.json at {skip_path}")
-        return set()
-
-
 def _run_single_fact(exe_path: Path, tech: str) -> dict:
     """Run --fact-json for a single binary, return parsed results dict."""
     print(f"  [fact] [{tech}] Running {exe_path} --fact-json...")
@@ -85,18 +65,6 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
             fact_results = parsed.get("factResults", [])
         except (json.JSONDecodeError, KeyError):
             json_truncated = True
-
-    # Apply Python-level fact skips (override failed methods as passed)
-    skips = _load_fact_skips(exe_path.parent)
-    if skips:
-        masked = 0
-        for fr in fact_results:
-            idx = fr.get("methodIndex", -1)
-            if idx in skips:
-                fr["passed"] = True
-                masked += 1
-        if masked:
-            print(f"  [fact] Python skip: masked {masked} method(s) in results")
 
     passed = sum(1 for fr in fact_results if fr.get("passed"))
     total = len(fact_results)
