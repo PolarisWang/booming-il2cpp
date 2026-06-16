@@ -12,11 +12,14 @@ internal static class BenchmarkRunner
 
         foreach (var type in assembly.GetTypes())
         {
-            foreach (var method in type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+            foreach (var method in type.GetMethods(
+                BindingFlags.Static | BindingFlags.Instance |
+                BindingFlags.Public | BindingFlags.NonPublic))
             {
-                if (method.GetCustomAttribute<BenchmarkAttribute>() is null)
-                    continue;
                 if (method.GetParameters().Length != 0)
+                    continue;
+                if (method.GetCustomAttribute<FactAttribute>() is null &&
+                    method.GetCustomAttribute<HotUpdateAttribute>() is null)
                     continue;
                 methods.Add((type, method));
             }
@@ -26,25 +29,28 @@ internal static class BenchmarkRunner
         foreach (var (type, method) in methods)
         {
             var label = $"{type.Name}.{method.Name}";
-            var result = BenchmarkOne(method, label, iterations);
+            var result = BenchmarkOne(type, method, label, iterations);
             results.Add(result);
         }
 
         Console.WriteLine(JsonSerializer.Serialize(new { results }));
     }
 
-    private static object BenchmarkOne(MethodInfo method, string label, int iterations)
+    private static object BenchmarkOne(Type type, MethodInfo method, string label, int iterations)
     {
-        // Warmup — invoke once to trigger JIT
-        try { method.Invoke(null, null); }
-        catch { }
+        object? instance = null;
+        if (!method.IsStatic)
+        {
+            try { instance = Activator.CreateInstance(type); }
+            catch { return new { label, elapsedMs = 0.0, opsPerSecond = 0.0, iterations, threw = true, gcInfo = new { } }; }
+        }
 
-        // Clean GC state before timing
+        try { method.Invoke(instance, null); } catch { }
+
         GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        // ── Record GC stats before benchmark ──
         long allocBefore = GC.GetAllocatedBytesForCurrentThread();
         long heapBefore = GC.GetTotalMemory(false);
         int gcCount0Before = GC.CollectionCount(0);
@@ -60,19 +66,13 @@ internal static class BenchmarkRunner
             try
             {
                 for (int i = 0; i < iterations; i++)
-                    method.Invoke(null, null);
+                    method.Invoke(instance, null);
             }
-            catch
-            {
-                threw = true;
-                break;
-            }
+            catch { threw = true; break; }
             long elapsed = DateTime.UtcNow.Ticks - start;
-            if (elapsed < bestTicks)
-                bestTicks = elapsed;
+            if (elapsed < bestTicks) bestTicks = elapsed;
         }
 
-        // ── Record GC stats after benchmark ──
         long allocAfter = GC.GetAllocatedBytesForCurrentThread();
         long heapAfter = GC.GetTotalMemory(false);
         int gcCount0After = GC.CollectionCount(0);
@@ -80,27 +80,16 @@ internal static class BenchmarkRunner
         int gcCount2After = GC.CollectionCount(2);
 
         double ms = bestTicks / 10000.0;
-        // Clamp zero elapsed to avoid division-by-zero producing Infinity
         double safeMs = ms > 0 ? ms : 0.001;
         double opsPerSec = iterations / (safeMs / 1000.0);
 
         return new
         {
-            label,
-            elapsedMs = Math.Round(ms, 3),
-            opsPerSecond = Math.Round(opsPerSec, 0),
-            iterations,
-            threw,
-            gcInfo = new
-            {
-                totalAllocatedBytes = allocAfter - allocBefore,
-                heapBefore,
-                heapAfter,
-                heapDelta = heapAfter - heapBefore,
-                collectionCount0 = gcCount0After - gcCount0Before,
-                collectionCount1 = gcCount1After - gcCount1Before,
-                collectionCount2 = gcCount2After - gcCount2Before,
-            }
+            label, elapsedMs = Math.Round(ms, 3), opsPerSecond = Math.Round(opsPerSec, 0),
+            iterations, threw,
+            gcInfo = new { totalAllocatedBytes = allocAfter - allocBefore, heapBefore, heapAfter,
+                heapDelta = heapAfter - heapBefore, collectionCount0 = gcCount0After - gcCount0Before,
+                collectionCount1 = gcCount1After - gcCount1Before, collectionCount2 = gcCount2After - gcCount2Before }
         };
     }
 }

@@ -12,15 +12,30 @@ extern "C" {
 // ═══════════════════════════════════════════════════════════════
 // UnicodeCategory lookup from generated range table
 // ═══════════════════════════════════════════════════════════════
+// Lazily-initialized flat BMP lookup table for O(1) access.
+// Built from the range-compressed constexpr tables on first call.
+static alignas(64) CHAOS_IL2CPP_UINT8 s_bmp_category[65536] = {};
+static bool s_bmp_category_init = false;
+
+static inline void InitBmpCategory() noexcept {
+    if (s_bmp_category_init) return;
+    // Expand range-compressed tables into flat BMP lookup
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeCategoryRangeCount; i++) {
+        auto start = static_cast<CHAOS_IL2CPP_UINT16>(kUnicodeCategoryRanges[i].start);
+        auto end   = static_cast<CHAOS_IL2CPP_UINT16>(kUnicodeCategoryRanges[i].end);
+        auto cat   = static_cast<CHAOS_IL2CPP_UINT8>(kUnicodeCategoryRanges[i].category);
+        for (CHAOS_IL2CPP_UINT16 cp = start; cp <= end; cp++) {
+            s_bmp_category[cp] = cat;
+        }
+    }
+    s_bmp_category_init = true;
+}
+
 static inline CHAOS_IL2CPP_INT32 LookupCategory(CHAOS_IL2CPP_INT32 c) noexcept
 {
-    if (c < 0 || c > 0xFFFF) return -1;  // Only BMP supported
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(c);
-    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeCategoryRangeCount; i++) {
-        if (cp >= kUnicodeCategoryRanges[i].start && cp <= kUnicodeCategoryRanges[i].end)
-            return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeCategoryRanges[i].category);
-    }
-    return -1;
+    if (c < 0 || c > 0xFFFF) return -1;
+    InitBmpCategory();
+    return static_cast<CHAOS_IL2CPP_INT32>(s_bmp_category[static_cast<CHAOS_IL2CPP_UINT16>(c)]);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -94,41 +109,57 @@ static inline CHAOS_IL2CPP_INT32 LookupEntryBinary(const TEntry* table, CHAOS_IL
 
 extern "C" {
 // ═══════════════════════════════════════════════════════════════
-// CharUnicodeInfo.GetNumericValue(char) — returns double as bits
+// CharUnicodeInfo.GetNumericValue(char) — O(1) via BMP flat table
 // ═══════════════════════════════════════════════════════════════
+// Lazily-initialized flat arrays for digit/numeric values.
+static float s_bmp_decimal_digit[65536] = {};
+static float s_bmp_numeric_value[65536] = {};
+static bool s_bmp_digit_init = false;
+
+static inline void InitBmpDigitTables() noexcept {
+    if (s_bmp_digit_init) return;
+    // Fill default: -1.0 for non-digit codepoints
+    for (CHAOS_IL2CPP_INT32 i = 0; i < 65536; i++) {
+        s_bmp_decimal_digit[i] = -1.0f;
+        s_bmp_numeric_value[i] = -1.0f;
+    }
+    // Expand decimal digit table
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeDecimalDigitCount; i++) {
+        auto cp = static_cast<CHAOS_IL2CPP_UINT16>(kUnicodeDecimalDigitTable[i].codepoint);
+        s_bmp_decimal_digit[cp] = kUnicodeDecimalDigitTable[i].value;
+        s_bmp_numeric_value[cp] = kUnicodeDecimalDigitTable[i].value;
+    }
+    // Expand numeric value table (only for entries NOT already covered by decimal digit)
+    for (CHAOS_IL2CPP_INT32 i = 0; i < kUnicodeNumericCount; i++) {
+        auto cp = static_cast<CHAOS_IL2CPP_UINT16>(kUnicodeNumericTable[i].codepoint);
+        if (s_bmp_numeric_value[cp] < 0.0f) {
+            s_bmp_numeric_value[cp] = kUnicodeNumericTable[i].value;
+        }
+    }
+    s_bmp_digit_init = true;
+}
+
 CHAOS_IL2CPP_FLOAT64 ChaosCharUnicodeInfoGetNumericValue(CHAOS_IL2CPP_INT32 c) noexcept
 {
     if (c < 0 || c > 0xFFFF) return -1.0;
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(c);
-
-    float val;
-    if (LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val))
-        return static_cast<CHAOS_IL2CPP_FLOAT64>(val);
-    if (LookupEntryBinary(kUnicodeNumericTable, kUnicodeNumericCount, cp, val))
-        return static_cast<CHAOS_IL2CPP_FLOAT64>(val);
-    return -1.0;
+    InitBmpDigitTables();
+    return static_cast<CHAOS_IL2CPP_FLOAT64>(s_bmp_numeric_value[static_cast<CHAOS_IL2CPP_UINT16>(c)]);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// CharUnicodeInfo.GetDigitValue(char) — binary search
-// ═══════════════════════════════════════════════════════════════
 CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDigitValue(CHAOS_IL2CPP_INT32 c) noexcept
 {
     if (c < 0 || c > 0xFFFF) return -1;
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(c);
-    float val;
-    return LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val) ? static_cast<CHAOS_IL2CPP_INT32>(val) : -1;
+    InitBmpDigitTables();
+    float val = s_bmp_decimal_digit[static_cast<CHAOS_IL2CPP_UINT16>(c)];
+    return val < 0.0f ? -1 : static_cast<CHAOS_IL2CPP_INT32>(val);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// CharUnicodeInfo.GetDecimalDigitValue(char) — binary search
-// ═══════════════════════════════════════════════════════════════
 CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDecimalDigitValue(CHAOS_IL2CPP_INT32 c) noexcept
 {
     if (c < 0 || c > 0xFFFF) return -1;
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(c);
-    float val;
-    return LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val) ? static_cast<CHAOS_IL2CPP_INT32>(val) : -1;
+    InitBmpDigitTables();
+    float val = s_bmp_decimal_digit[static_cast<CHAOS_IL2CPP_UINT16>(c)];
+    return val < 0.0f ? -1 : static_cast<CHAOS_IL2CPP_INT32>(val);
 }
 
 // ═══════════════════════════════════════════════════════════════
