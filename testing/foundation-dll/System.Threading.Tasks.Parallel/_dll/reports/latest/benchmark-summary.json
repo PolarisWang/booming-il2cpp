@@ -1,19 +1,19 @@
 {
   "assemblyName": "System.Threading.Tasks.Parallel",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-16T12:15:47",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 111,
   "aggregatePerformance": {
-    "meanDurationMs": 1.2739954954954955,
-    "meanOpsPerSecond": 327133620.25234234,
-    "aggregateMeanCv": 0.10506085585585585,
-    "totalOutliers": 95
+    "meanDurationMs": 0.8287972972972972,
+    "meanOpsPerSecond": 296805026.77614677,
+    "aggregateMeanCv": 0.16282129357798164,
+    "totalOutliers": 37
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 113,
+        "passed": 111,
         "total": 113,
         "valueSuspicious": false,
         "valueWarnings": 0,
@@ -22,27 +22,27 @@
       },
       "benchmark": {
         "methodCount": 111,
-        "iterations": 26315,
-        "meanDurationMs": 1.2739954954954955,
-        "meanOpsPerSecond": 327133620.25234234,
-        "minDurationMs": 0.0648,
-        "maxDurationMs": 52.8297,
-        "totalDurationMs": 141.4135,
+        "iterations": 50000,
+        "meanDurationMs": 0.8287972972972972,
+        "meanOpsPerSecond": 296805026.77614677,
+        "minDurationMs": 0,
+        "maxDurationMs": 38.4619,
+        "totalDurationMs": 91.9965,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 5.1,
-        "totalOutliers": 95,
-        "meanCv": 0.10506085585585585,
-        "maxCv": 0.426297
+        "meanSampleCount": 9.5,
+        "totalOutliers": 37,
+        "meanCv": 0.16282129357798164,
+        "maxCv": 0.513625
       },
       "hotupdate": {
-        "passed": 0,
+        "passed": 109,
         "failed": 0,
         "allSemantic": false,
-        "allRevert": false,
-        "exitCode": 3221225477,
+        "allRevert": true,
+        "exitCode": 0,
         "patchDataUsed": true,
         "patchFailed": false,
-        "truncated": true,
+        "truncated": false,
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0

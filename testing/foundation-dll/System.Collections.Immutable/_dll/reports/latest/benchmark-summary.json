@@ -1,12 +1,13 @@
 {
   "assemblyName": "System.Collections.Immutable",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-16T12:15:21",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 5,
   "aggregatePerformance": {
-    "meanDurationMs": 0.21776,
-    "meanOpsPerSecond": 242340547.398,
-    "aggregateMeanCv": 0.0995848
+    "meanDurationMs": 0.03188,
+    "meanOpsPerSecond": 319805536.57,
+    "aggregateMeanCv": 0.1740032,
+    "totalOutliers": 2
   },
   "chunkSummaries": [
     {
@@ -21,27 +22,27 @@
       },
       "benchmark": {
         "methodCount": 5,
-        "iterations": 50000,
-        "meanDurationMs": 0.21776,
-        "meanOpsPerSecond": 242340547.398,
-        "minDurationMs": 0.174,
-        "maxDurationMs": 0.3057,
-        "totalDurationMs": 1.0888,
+        "iterations": 10000,
+        "meanDurationMs": 0.03188,
+        "meanOpsPerSecond": 319805536.57,
+        "minDurationMs": 0.0272,
+        "maxDurationMs": 0.036,
+        "totalDurationMs": 0.1594,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.0995848,
-        "maxCv": 0.353733
+        "meanSampleCount": 6.6,
+        "totalOutliers": 2,
+        "meanCv": 0.1740032,
+        "maxCv": 0.224473
       },
       "hotupdate": {
-        "passed": 0,
+        "passed": 33,
         "failed": 0,
         "allSemantic": false,
-        "allRevert": false,
-        "exitCode": 3221225477,
+        "allRevert": true,
+        "exitCode": 0,
         "patchDataUsed": true,
         "patchFailed": false,
-        "truncated": true,
+        "truncated": false,
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0

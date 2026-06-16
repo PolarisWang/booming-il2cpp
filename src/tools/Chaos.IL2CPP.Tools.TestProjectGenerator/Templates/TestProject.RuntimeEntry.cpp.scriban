@@ -18,6 +18,7 @@
 #include <cinttypes>
 #include <csignal>
 #include <chaos/pal/pal_eh.h>
+#include "subjects/subject_dispatch.h"
 #include <csetjmp>
 
 #if defined(_WIN32)

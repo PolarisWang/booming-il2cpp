@@ -22,6 +22,8 @@ public sealed class CppProjectEmitter
         "TestProject.Dispatch.cpp.scriban",
         "TestProject.SubjectDispatch.cpp.scriban",
         "TestProject.SubjectDispatch.h.scriban",
+        "TestProject.SubjectDispatch.cpp.scriban",
+        "TestProject.SubjectDispatch.h.scriban",
         "TestProject.CMakeLists.txt.scriban",
         "TestProject.CMakePresets.json.scriban",
         "TestProject.RuntimePatchdata.cpp.scriban",
@@ -221,6 +223,12 @@ public sealed class CppProjectEmitter
             File.WriteAllText(repatchPath, repatchCode);
         }
         RenderToFile("TestProject.Dispatch.cpp.scriban", model, outputDir, "verification_dispatch.generated.cpp");
+        RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
+        RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
+        RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
+        RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
+        RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
+        RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
         RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
         RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
 

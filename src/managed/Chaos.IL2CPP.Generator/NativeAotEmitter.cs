@@ -305,7 +305,7 @@ public sealed class NativeAotEmitter
         };
         var _rendered = ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
         var _sb = new StringBuilder(_rendered);
-        AddExternalRuntimeStubs(_sb);
+        AddExternalRuntimeStubs(_sb, templateModel?.TypeDeclarationsCode);
         FixFallbackZeroArgCalls(_sb);
         return _sb.ToString();
     }
@@ -455,7 +455,7 @@ public sealed class NativeAotEmitter
             sb.Append(templateModel.EntryFunctionCode);
         }
 
-	AddExternalRuntimeStubs(sb);
+	AddExternalRuntimeStubs(sb, templateModel?.TypeDeclarationsCode);
 	FixFallbackZeroArgCalls(sb);
         return sb;
     }
@@ -883,7 +883,7 @@ public sealed class NativeAotEmitter
 			"extern \"C\" CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;\n");
 	}
 
-	private static void AddExternalRuntimeStubs(StringBuilder sb)
+	private static void AddExternalRuntimeStubs(StringBuilder sb, string? headerContent = null)
 	{
 		string text = sb.ToString();
 		var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
@@ -893,6 +893,19 @@ public sealed class NativeAotEmitter
 		if (calls.Count == 0) return;
 		var missing = new HashSet<string>();
 		foreach (Match m in calls) missing.Add(m.Groups[1].Value);
+		// Also scan the shared header for existing declarations (the header is included
+		// via #include but its content is not expanded by the regex on the current file).
+		if (!string.IsNullOrEmpty(headerContent))
+		{
+		    foreach (Match m in declRx.Matches(headerContent))
+		    {
+		        string sv = m.Value;
+		        int nextIdx = m.Index + m.Length;
+		        if (nextIdx < headerContent.Length && headerContent[nextIdx] == ')') continue;
+		        foreach (var s in missing.ToList())
+		            if (sv.Contains(s)) missing.Remove(s);
+		    }
+		}
 		foreach (Match m in declRx.Matches(text))
 		{
 			string sv = m.Value;
