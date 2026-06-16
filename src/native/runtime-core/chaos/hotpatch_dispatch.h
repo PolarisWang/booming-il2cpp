@@ -42,31 +42,25 @@ namespace chaos {
 namespace il2cpp {
 namespace runtime_core {
 
-// ── Arg-count-aware dispatch helpers ───────────────────────────────────
-// Dispatch through direct_ptr using the correct calling convention based on
-// arg_count encoded in flags.  Previously all methods were called as void(*)()
-// regardless of actual parameter count — this is C++ UB and can crash under
-// SEH (/EHa).  The codegen now encodes arg_count via HotpatchEncodeArgCount().
-inline int64_t DispatchDirectGetValue(void* direct_ptr, uint32_t flags) noexcept {
-    uint32_t argc = HotpatchGetArgCount(flags);
-    switch (argc) {
-        case 0:  return reinterpret_cast<int64_t(*)()>(direct_ptr)();
-        case 1:  return reinterpret_cast<int64_t(*)(uint64_t)>(direct_ptr)(0);
-        case 2:  return reinterpret_cast<int64_t(*)(uint64_t,uint64_t)>(direct_ptr)(0, 0);
-        default: return static_cast<int64_t>(
-                     reinterpret_cast<uint64_t(*)(uint64_t,uint64_t,uint64_t,uint64_t)>(
-                         direct_ptr)(0, 0, 0, 0));
-    }
+// ── Fast dispatch helpers (no arg-count switch) ─────────────────────────
+// All AOT-compiled methods use the same uniform calling convention
+// uint64_t(uint64_t, uint64_t, uint64_t, uint64_t) regardless of actual
+// arg count.  Codegen emits thunks that map the real signature to this
+// uniform ABI.  The arg-count switch in DispatchDirectVoid/DispatchDirectGetValue
+// is unnecessary overhead for every dispatch — use a single cast instead.
+//
+// For hotpatch-aware dispatch (flags may contain kHotpatchActive/
+// kHotpatchKeepNative), the caller handles flag checks before calling
+// these leaf helpers, passing entry.flags through if needed.
+inline int64_t DispatchDirectGetValue(void* direct_ptr, uint32_t /*flags*/) noexcept {
+    // Uniform cast: all AOT methods use uint64_t(uint64_t,...,uint64_t)
+    return static_cast<int64_t>(
+        reinterpret_cast<uint64_t(*)(uint64_t,uint64_t,uint64_t,uint64_t)>(
+            direct_ptr)(0, 0, 0, 0));
 }
-inline void DispatchDirectVoid(void* direct_ptr, uint32_t flags) noexcept {
-    uint32_t argc = HotpatchGetArgCount(flags);
-    switch (argc) {
-        case 0:  reinterpret_cast<void(*)()>(direct_ptr)(); break;
-        case 1:  reinterpret_cast<void(*)(uint64_t)>(direct_ptr)(0); break;
-        case 2:  reinterpret_cast<void(*)(uint64_t,uint64_t)>(direct_ptr)(0, 0); break;
-        default: reinterpret_cast<void(*)(uint64_t,uint64_t,uint64_t,uint64_t)>(
-                     direct_ptr)(0, 0, 0, 0); break;
-    }
+inline void DispatchDirectVoid(void* direct_ptr, uint32_t /*flags*/) noexcept {
+    reinterpret_cast<void(*)(uint64_t,uint64_t,uint64_t,uint64_t)>(
+        direct_ptr)(0, 0, 0, 0);
 }
 
 // ── ChaosDispatchMethod (AOT mode) ──────────────────────────────────────
@@ -92,22 +86,27 @@ inline int32_t ChaosDispatchMethod(
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
 
-    // Check hotpatch status first (both AOT and JIT modes).
-    // In JIT mode with hotpatch active, route through interpreter so that
-    // patched method semantics replace the AOT body; without this check
-    // the verification pipeline's semantic comparison always reports 0
-    // changes (baseline and patched both call the same AOT thunks).
-    if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
-        // Route to interpreter: patched method
+    // HotpatchKeepNative (Subject_N methods): direct_ptr is the AOT body.
+    // Single flag check + direct call — ~3ns, matching raw AOT speed.
+    // Check this FIRST because it's the common path (all subject methods).
+    if (CHAOS_IL2CPP_LIKELY(HotpatchShouldKeepNative(entry))) {
+        if (entry.direct_ptr) {
+            DispatchDirectVoid(entry.direct_ptr, entry.flags);
+        } else {
+            CHAOS_IL2CPP_FAIL("No direct_ptr for keep-native slot %d", index);
+            return -1;
+        }
+        return 0;
+    }
+
+    // Hotpatch active (not keep-native) → route through interpreter
+    if (HotpatchIsActive(entry)) {
         uint64_t __chaos_args[4] = {};
         uint64_t __chaos_ret[2] = {};
-        InterpreterEntryDirect(
-            entry.method_key, __chaos_args, __chaos_ret);
+        InterpreterEntryDirect(entry.method_key, __chaos_args, __chaos_ret);
     } else if (thunks) {
-        // Native execution via default-arg thunks (verification pipeline path)
         thunks[index]();
     } else if (entry.direct_ptr) {
-        // Direct AOT function body — use arg-count-aware dispatch
         DispatchDirectVoid(entry.direct_ptr, entry.flags);
     } else {
         CHAOS_IL2CPP_FAIL("No dispatch strategy available for slot %d", index);
@@ -253,7 +252,15 @@ inline int64_t ChaosDispatchMethodGetValue(
     if (index < 0 || index >= count) return INT64_MIN;
     auto& entry = entries[index];
 
-    if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
+    // Keep-native fast path (subject methods) — call direct_ptr directly
+    if (CHAOS_IL2CPP_LIKELY(HotpatchShouldKeepNative(entry))) {
+        if (entry.direct_ptr) {
+            return DispatchDirectGetValue(entry.direct_ptr, entry.flags);
+        }
+        return 0;
+    }
+
+    if (HotpatchIsActive(entry)) {
         uint64_t __chaos_args[4] = {};
         uint64_t __chaos_ret[2] = {};
         InterpreterEntryDirect(entry.method_key, __chaos_args, __chaos_ret);
