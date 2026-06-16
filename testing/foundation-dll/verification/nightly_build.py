@@ -2,8 +2,8 @@
 
 Orchestrates:
   1. Discover all assemblies + chunks under testing/foundation-dll/
-  2. Run build + fact for all chunks in parallel (high concurrency)
-  3. Run benchmark for all chunks with limited concurrency (benchmark isolation)
+  2. Run build + fact + benchmark + hotupdate for all chunks (check config)
+  3. [Optional] Rebuild with profile preset and collect profile data
   4. Aggregate per-assembly (serial)
   5. Reporting (cross-dll-dashboard, pipeline-runs)
   6. Nightly delta (cross-day comparison)
@@ -11,14 +11,17 @@ Orchestrates:
 
 Usage:
     python -m verification.nightly_build [--max-workers 8] [--bench-workers 1]
+    python -m verification.nightly_build --run-profile  # includes profile pass
 """
 
 from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime, timezone
@@ -48,6 +51,7 @@ except RuntimeError as e:
 
 from verification.orchestration.context import ChunkContext, StageResult
 from verification.orchestration.discovery import discover_chunks
+from verification.stages.hephaestus_cache import HephaestusCache, compute_input_hash
 from verification.stages.build import run_build
 from verification.stages.fact_chunk import run_fact_chunk
 from verification.stages.profile import run_profile
@@ -96,6 +100,56 @@ def _load_pipeline_config(foundation_dll: Path) -> dict:
     return {}
 
 
+def _restore_profile_cache_for(ctx: ChunkContext) -> StageResult:
+    """Restore profile-tier entry.exe from hephaestus cache to native/.
+
+    Uses temp dir + copy to avoid ETXTBUSY. Returns "passed" on success,
+    "skipped" if no cache entry exists.  Interface matches the stage
+    pipeline (ctx, stages) but stages is unused.
+
+    On cache miss, falls back to a full profile-tier build so that
+    --run-profile works on first run (no pre-seeded cache needed).
+    """
+    subjects_dll = ctx.subjects_dll_path
+    metadata_path = ctx.subjects_metadata_path
+    if not subjects_dll.exists() or not metadata_path.exists():
+        return StageResult(stage="build", status="skipped",
+                           summary="subjects DLL/metadata not found")
+
+    input_hash = compute_input_hash(subjects_dll, metadata_path, ctx.assembly)
+    cache_obj = HephaestusCache(ctx.foundation_dir, verbose=ctx.verbose)
+    cache_key = cache_obj.compute_key(input_hash, ctx.assembly, ctx.slug)
+    cache_key = f"{cache_key}/profile"
+
+    if not cache_obj.is_cache_hit(cache_key):
+        print(f"  [nightly] [{ctx.assembly}/{ctx.slug}] profile cache MISS — "
+              f"falling back to full profile build")
+        return run_build(ctx, {})
+
+    exe = ctx.entry_exe_path
+    if exe.exists():
+        exe.unlink()
+        if ctx.verbose:
+            print(f"  [nightly] [{ctx.assembly}/{ctx.slug}] removed old entry.exe")
+
+    with tempfile.TemporaryDirectory(prefix="profile-restore-") as tmp:
+        tmp_path = Path(tmp)
+        if not cache_obj.restore_to(cache_key, tmp_path):
+            return StageResult(stage="build", status="error",
+                               summary="profile cache restore failed")
+        tmp_exe = tmp_path / "entry.exe"
+        if not tmp_exe.exists():
+            return StageResult(stage="build", status="error",
+                               summary="entry.exe missing from profile cache")
+        shutil.copy2(tmp_exe, exe)
+        exe_size = exe.stat().st_size
+        if ctx.verbose:
+            print(f"  [nightly] [{ctx.assembly}/{ctx.slug}] restored profile entry.exe ({exe_size} bytes)")
+
+    return StageResult(stage="build", status="passed",
+                       summary=f"profile entry.exe restored ({exe_size} bytes)")
+
+
 def _run_chunk_stages(
     assembly: str,
     slug: str,
@@ -105,10 +159,13 @@ def _run_chunk_stages(
     native_config: str = "check",
     verbose: bool = False,
     stage_timeout: int = 0,
+    profile_pass: bool = False,
 ) -> tuple[str, dict[str, StageResult]]:
     """Run all stages for a single chunk returning (assembly/slug, {stage: result}).
 
-    Stages: build → fact → benchmark → hotupdate.
+    Normal pass (profile_pass=False): build → fact → profile → benchmark → hotupdate
+    Profile pass (profile_pass=True): build → profile only (profile-tier rebuild)
+
     Build failure stops further stages for this chunk.
     Benchmark is serialized via bench_lock to prevent CPU interference.
     """
@@ -150,17 +207,33 @@ def _run_chunk_stages(
             platform=sys.platform,
         )
 
+        # Profile pass: restore entry.exe from profile cache via temp dir
+        # to avoid ETXTBUSY from overwriting a still-mapped executable.
+        if profile_pass:
+            exe = ctx.entry_exe_path
+            if exe.exists():
+                exe.unlink()
+                if verbose:
+                    print(f"  [nightly] [{assembly}/{slug}] removed {exe} for profile restore")
+
         stages: dict[str, StageResult] = {}
-        stage_order = [
-            ("build", run_build),
-            ("fact", run_fact_chunk),
-            ("profile", run_profile),
-            ("benchmark", run_benchmark_chunk),
-            ("managed_benchmark", run_managed_benchmark),
-            ("hotupdate", run_hotupdate_chunk),
-            ("benchmark_report", run_benchmark_report),
-            ("coverage_audit", run_coverage_audit),
-        ]
+        if profile_pass:
+            # Profile pass: restore profile cache + profile stage only
+            stage_order = [
+                ("build", lambda ctx, _stages: _restore_profile_cache_for(ctx)),
+                ("profile", run_profile),
+            ]
+        else:
+            stage_order = [
+                ("build", run_build),
+                ("fact", run_fact_chunk),
+                ("profile", run_profile),
+                ("benchmark", run_benchmark_chunk),
+                ("managed_benchmark", run_managed_benchmark),
+                ("hotupdate", run_hotupdate_chunk),
+                ("benchmark_report", run_benchmark_report),
+                ("coverage_audit", run_coverage_audit),
+            ]
 
         serialized_stages = {"benchmark", "managed_benchmark"}
 
@@ -251,6 +324,8 @@ def main() -> int:
                         help="Per-stage timeout in seconds (default: no timeout)")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Verbose output")
+    parser.add_argument("--run-profile", action="store_true",
+                        help="After Phase 1, rebuild entry.exe with profile preset and collect profile data")
     parser.add_argument("--skip-nightly-report", action="store_true",
                         help="Skip delta and summary generation at the end")
     parser.add_argument("--output-dir", default=None,
@@ -318,6 +393,38 @@ def main() -> int:
         if r.get("build", StageResult(stage="build", status="?")).status in ("passed", "skipped")
     )
     print(f"\n  Build: {build_ok}/{len(all_results)} passed")
+
+    # ── Phase 2 (optional): Profile pass with profile-tier build ──
+    if args.run_profile:
+        print(f"\n{'='*60}")
+        print(f"  Phase 2: Profile pass (native_config=profile)...")
+        print(f"{'='*60}")
+        # Profile pass: rebuild entry.exe with PROFILE tier, then collect profile data.
+        # Uses lower concurrency since rebuild is expensive.
+        profile_workers = max(1, args.max_workers // 2)
+        print(f"  Profile workers: {profile_workers}")
+        profile_futures = []
+        with ProcessPoolExecutor(max_workers=profile_workers) as executor:
+            for asm, slug, fdir in all_chunks:
+                future = executor.submit(
+                    _run_chunk_stages,
+                    assembly=asm, slug=slug, foundation_dir=fdir,
+                    pipeline_config=pipeline_config,
+                    bench_lock=bench_lock,
+                    native_config="profile",
+                    verbose=args.verbose,
+                    stage_timeout=args.stage_timeout,
+                    profile_pass=True,
+                )
+                profile_futures.append(future)
+
+        profile_results = _collect_chunk_results(profile_futures, len(all_chunks), verbose=args.verbose)
+
+        profile_ok = sum(
+            1 for r in profile_results.values()
+            if r.get("profile", StageResult(stage="profile", status="?")).status == "passed"
+        )
+        print(f"\n  Profile: {profile_ok}/{len(profile_results)} chunks profiled")
 
     # ── Step 3: Aggregate per-assembly ──
     print(f"\n  Phase 3: Aggregating per-assembly...")
