@@ -49,11 +49,56 @@ double ChaosBitConverterToDouble(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT
 // to these so both paths share a single implementation.
 using chaos::il2cpp::runtime_core::GcAllocateAtomic;
 
+// ── SSE2-accelerated IndexOf for byte arrays (P6) ──────────────
+// Processes 16 bytes per SSE2 iteration.  Called directly from codegen
+// as DirectNativeSymbol when element type is byte, avoiding the generic
+// 8-byte-element path that is 8x slower per element.
+#if defined(__x86_64__) || defined(_M_AMD64)
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Byte_Sse2(
+    const CHAOS_IL2CPP_UINT8* elements, CHAOS_IL2CPP_INTPTR len,
+    CHAOS_IL2CPP_UINT8 value) noexcept
+{
+    const __m128i val = _mm_set1_epi8(static_cast<char>(value));
+    CHAOS_IL2CPP_INTPTR i = 0;
+    for (; i + 15 < len; i += 16) {
+        const __m128i chunk = _mm_loadu_si128(
+            reinterpret_cast<const __m128i*>(elements + i));
+        const __m128i cmp = _mm_cmpeq_epi8(chunk, val);
+        const int mask = _mm_movemask_epi8(cmp);
+        if (mask != 0) {
+            // Find first set bit in 16-bit mask (faster than scalar tail for short arrays)
+#if defined(_MSC_VER)
+            unsigned long idx;
+            _BitScanForward(&idx, static_cast<unsigned long>(mask));
+            return static_cast<CHAOS_IL2CPP_INT32>(i + static_cast<CHAOS_IL2CPP_INTPTR>(idx));
+#else
+            return static_cast<CHAOS_IL2CPP_INT32>(i + __builtin_ctz(static_cast<unsigned>(mask)));
+#endif
+        }
+    }
+    // Scalar tail
+    for (; i < len; ++i) {
+        if (elements[i] == value) return static_cast<CHAOS_IL2CPP_INT32>(i);
+    }
+    return -1;
+}
+
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosArrayIndexOf_Byte_Inline(
+    CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_UINT8 value) noexcept
+{
+    if (array == 0) return -1;
+    const auto* arr = get_managed_array(array);
+    const auto* elements = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(accessor_get_elements(arr));
+    return ChaosArrayIndexOf_Byte_Sse2(elements, arr->length, value);
+}
+#endif
+
 // Forward declarations for AVX2 copy helpers (defined later in the AVX2 block,
 // but called by ChaosArrayCopy_Inline which is defined here).
 #if defined(__x86_64__) || defined(_M_AMD64)
 inline void Avx2BlockCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept;
 inline void Avx2StreamCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) noexcept;
+inline void Avx2StreamZero(void* dst, CHAOS_IL2CPP_SIZE bytes) noexcept;
 #endif
 
 CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosArrayEmpty_Inline(void) noexcept
@@ -191,13 +236,11 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosArrayBinarySearch_Inline(CHAOS_
     CHAOS_IL2CPP_INT32 hi = len - 1;
     while (lo <= hi) {
         CHAOS_IL2CPP_INT32 mid = lo + (hi - lo) / 2;
-        if (elements[mid] < value) {
-            lo = mid + 1;
-        } else if (elements[mid] > value) {
-            hi = mid - 1;
-        } else {
-            return mid;
-        }
+        CHAOS_IL2CPP_INTPTR elem = elements[mid];  // single load
+        // Branchless bounds update — avoids branch mispredictions on comparison result
+        lo = (elem < value) ? (mid + 1) : lo;
+        hi = (elem > value) ? (mid - 1) : hi;
+        if (elem == value) return mid;
     }
     return ~lo;
 }
@@ -213,13 +256,10 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosArrayBinarySearchRange_Inline(C
     CHAOS_IL2CPP_INT32 hi = index + length - 1;
     while (lo <= hi) {
         CHAOS_IL2CPP_INT32 mid = lo + (hi - lo) / 2;
-        if (elements[mid] < value) {
-            lo = mid + 1;
-        } else if (elements[mid] > value) {
-            hi = mid - 1;
-        } else {
-            return mid;
-        }
+        CHAOS_IL2CPP_INTPTR elem = elements[mid];
+        lo = (elem < value) ? (mid + 1) : lo;
+        hi = (elem > value) ? (mid - 1) : hi;
+        if (elem == value) return mid;
     }
     return ~lo;
 }
@@ -495,6 +535,29 @@ inline void Avx2StreamCopy(void* dst, const void* src, CHAOS_IL2CPP_SIZE bytes) 
     _mm_sfence();  // Ensure streaming stores are visible
 }
 
+// AVX2 streaming zero — non-temporal stores for large clears (>256 bytes).
+// Uses _mm256_setzero_si256 to avoid cache pollution when clearing large arrays.
+CHAOS_IL2CPP_TARGET_AVX2
+inline void Avx2StreamZero(void* dst, CHAOS_IL2CPP_SIZE bytes) noexcept
+{
+    const __m256i zero = _mm256_setzero_si256();
+    CHAOS_IL2CPP_SIZE i = 0;
+    for (; i + 32 <= bytes; i += 32) {
+        _mm256_stream_si256(
+            reinterpret_cast<__m256i*>(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i), zero);
+    }
+    for (; i + 16 <= bytes; i += 16) {
+        _mm_storeu_si128(
+            reinterpret_cast<__m128i*>(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i), _mm_setzero_si128());
+    }
+    if (i < bytes) {
+        CHAOS_IL2CPP_UINT64 tmp = 0;
+        CHAOS_IL2CPP_SIZE tail = bytes - i;
+        __builtin_memcpy(static_cast<CHAOS_IL2CPP_UINT8*>(dst) + i, &tmp, tail);
+    }
+    _mm_sfence();
+}
+
 #undef CHAOS_IL2CPP_TARGET_AVX2
 #endif
 
@@ -563,6 +626,13 @@ CHAOS_IL2CPP_FORCEINLINE void ChaosArrayClear_Inline(CHAOS_IL2CPP_INTPTR array, 
         memset(dst, 0, bytes);
         return;
     }
+#if defined(__x86_64__) || defined(_M_AMD64)
+    // P6: AVX2 streaming zero for large clears (>256 bytes)
+    if (bytes > 256 && chaos::il2cpp::runtime_core::HasAvx2()) {
+        Avx2StreamZero(dst, bytes);
+        return;
+    }
+#endif
     std::memset(dst, 0, bytes);
 }
 
