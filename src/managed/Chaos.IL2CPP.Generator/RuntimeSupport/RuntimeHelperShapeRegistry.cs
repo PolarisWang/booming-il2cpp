@@ -1866,11 +1866,17 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("void", symbol, "",
-                        ["    CHAOS_IL2CPP_FAIL();"]);
+                    // Unsafe.SkipInit<T>(ref T value) is a no-op — the ref parameter
+                    // is intentionally left uninitialized per the method's contract.
+                    // Empty param list () avoids C2733 extern "C" linkage conflict
+                    // with AddExternalRuntimeStubs' extern CHAOS_IL2CPP_INTPTR decl.
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
+                        ["    return 0;"]);
                     return new GenericShapeResolution(src, symbol,
-                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                        CreateVoidAbiSlot(), EmptyRawArgumentIndices);
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType),
+                        new HashSet<int> { 0 });
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.ArgumentNullException",

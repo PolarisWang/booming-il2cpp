@@ -8,7 +8,8 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /wd4789 /MP)
+  add_compile_definitions(CHAOS_HOTPATCH_DEBUG)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
@@ -204,7 +205,7 @@ set(CHAOS_ENTRY_INCLUDES
 
 add_executable(chaos_entry ${CHAOS_ENTRY_SOURCES})
 if(MSVC)
-  target_compile_options(chaos_entry PRIVATE /GS-)
+  target_compile_options(chaos_entry PRIVATE /GS- /wd4789)
 endif()
 target_include_directories(chaos_entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options(chaos_entry PRIVATE ${CHAOS_EHA_FLAG})

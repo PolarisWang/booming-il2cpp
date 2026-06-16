@@ -262,6 +262,31 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
     return ctx;
 }
 
+// Fallback patch application using slot map when ApplyPatchFromMemoryEx
+// cannot match via name lookup.  Finds each subject's AOT dispatch entry
+// via kSubjectSlotMap and marks it as patched so the interpreter handles it.
+static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFallback() noexcept {
+    auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+    if (registry.ModuleCount() == 0) {
+        std::fprintf(stderr, "WARN: ApplyHotpatchFallback — no modules registered\n");
+        return nullptr;
+    }
+    int patched = 0;
+    for (int si = 0; si < kSubjectEntryCount; si++) {
+        int i = kSubjectSlotMap[si];
+        if (i < 0 || i >= kAotMethodCount) continue;
+        auto* entry = const_cast<chaos::il2cpp::runtime_core::HotpatchEntryV0*>(
+            chaos::il2cpp::runtime_core::GetHotpatchEntries() + i);
+        if (entry == nullptr) continue;
+        if (!chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(*entry)) continue;
+        // Mark as patched — subsequent dispatch goes through interpreter
+        registry.SetPatchedBySlot(0, static_cast<uint32_t>(i), true, nullptr, 0);
+        patched++;
+    }
+    std::fprintf(stderr, "INFO: ApplyHotpatchFallback — patched %d methods via slot map\n", patched);
+    return nullptr;
+}
+
 // Forward declaration for FactAbortHandler (defined below).
 // Used by RunFactMode and the JIT dispatch worker thread.
 static void FactAbortHandler(int);
