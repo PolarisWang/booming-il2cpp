@@ -229,7 +229,15 @@ public sealed class CSharpExpressionBuilder
                 var gaPart = qualified.Contains('<') ? qualified[qualified.IndexOf('<')..] : "";
                 return $"global::{baseName}{gaPart}{sharedSuffix}";
             }
-            return $"default(global::{qualified.Replace('+', '.')})!";
+            // Use SubjectInstanceFactory for valid instances. Ref structs and
+            // unresolvable types fall back to default(T)! (ref structs can't be
+            // generic type params; unresolved types may be in unreferenced assemblies).
+            try {
+                var t = Type.GetType(typeFullName, false);
+                if (t == null || (t.IsValueType && t.IsByRefLike))
+                    return $"default(global::{qualified.Replace('+', '.')})!";
+            } catch { return $"default(global::{qualified.Replace('+', '.')})!"; }
+            return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
         }
 
         // Try to find a parameterless constructor via runtime reflection

@@ -343,6 +343,11 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
                 break;
             }
         }
+        // Restore direct_ptr (revert Gap2 JIT redirect)
+        if (auto* cb = GetOriginalAotPtrCallback()) {
+            if (void* orig_ptr = cb(entry); orig_ptr && orig_ptr != entry->direct_ptr)
+                entry->direct_ptr = orig_ptr;
+        }
     }
 
     // Version bump: signals to JIT-compiled callers that the target may have changed.

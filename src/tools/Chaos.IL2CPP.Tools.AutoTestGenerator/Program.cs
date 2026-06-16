@@ -759,6 +759,22 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     // Assembly-specific using directives (resolves types not in standard .NET)
     if (string.Equals(assemblyName, "System.Net.ServerSentEvents", StringComparison.Ordinal))
         sb.AppendLine("using System.Net.ServerSentEvents;");
+    if (string.Equals(assemblyName, "System.Text.Json", StringComparison.Ordinal))
+    {
+        sb.AppendLine("using System.Text.Json.Nodes;");
+        sb.AppendLine("using System.Text.Json.Schema;");
+    }
+    if (string.Equals(assemblyName, "System.Private.Xml", StringComparison.Ordinal))
+    {
+        sb.AppendLine("using System.Xml;");
+        sb.AppendLine("using System.Xml.Schema;");
+        sb.AppendLine("using System.Xml.Serialization;");
+        sb.AppendLine("using System.Xml.Xsl;");
+        sb.AppendLine("using System.Xml.XPath;");
+        sb.AppendLine("using System.Xml.Linq;");
+    }
+    if (string.Equals(assemblyName, "System.Security.Cryptography", StringComparison.Ordinal))
+        sb.AppendLine("using System.Security.Cryptography;");
     sb.AppendLine();
 
     var patchClassName = SanitizePath(assemblyName) + "PatchSubjects";
