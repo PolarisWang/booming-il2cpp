@@ -447,7 +447,11 @@ static void CHAOS_RUNTIME_ABI_CALL _abi_raise_exception(void*) { /* noop: except
 static void* CHAOS_RUNTIME_ABI_CALL _abi_get_current_runtime_state() { return reinterpret_cast<void*>(GetCurrentRuntimeState()); }
 static void* CHAOS_RUNTIME_ABI_CALL _abi_get_current_thread_state() { return reinterpret_cast<void*>(GetCurrentThreadState()); }
 
-static const void* CHAOS_RUNTIME_ABI_CALL _abi_object_get_type_info(const void* obj) noexcept { return obj; }
+static const void* CHAOS_RUNTIME_ABI_CALL _abi_object_get_type_info(const void* obj) noexcept {
+    // All managed objects store TypeInfoHot* at offset [0] (ThinLockableHeader / PureTypeHeader).
+    // Dereference to return the TypeInfo pointer, matching chaos_object_get_type_info().
+    return obj ? *static_cast<const void* const*>(obj) : nullptr;
+}
 static bool CHAOS_RUNTIME_ABI_CALL _abi_is_string_id(uintptr_t value) noexcept { return false; }
 static uintptr_t CHAOS_RUNTIME_ABI_CALL _abi_string_materialize(uintptr_t value) noexcept { return value; }
 const RuntimeAbiV0 kRuntimeAbiV0 = {

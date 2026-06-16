@@ -179,7 +179,7 @@ inline int32_t ChaosDispatchMethodBench(
     } else if (thunks) {
         thunks[index]();
     } else if (entry.direct_ptr) {
-        void DispatchDirectVoid(entry.direct_ptr, entry.flags);
+        DispatchDirectVoid(entry.direct_ptr, entry.flags);
     }
     return 0;
 }
@@ -210,7 +210,7 @@ inline int32_t ChaosDispatchMethodBenchDirect(
     // AOT body.  Single flag check + direct call — ~3ns, matching AOT mode.
     if (CHAOS_IL2CPP_LIKELY(HotpatchShouldKeepNative(entry))) {
         if (entry.direct_ptr) {
-            void DispatchDirectVoid(entry.direct_ptr, entry.flags);
+            DispatchDirectVoid(entry.direct_ptr, entry.flags);
         } else {
             CHAOS_IL2CPP_FAIL("Benchmark dispatch: direct_ptr is null for slot %d", index);
             return -1;
@@ -227,7 +227,7 @@ inline int32_t ChaosDispatchMethodBenchDirect(
     // in JIT mode this may be the JIT-trampoline (for the first call) or
     // JIT-compiled code (after compilation).  This is what benchmarks want.
     if (entry.direct_ptr) {
-        void DispatchDirectVoid(entry.direct_ptr, entry.flags);
+        DispatchDirectVoid(entry.direct_ptr, entry.flags);
     }
     return 0;
 }
