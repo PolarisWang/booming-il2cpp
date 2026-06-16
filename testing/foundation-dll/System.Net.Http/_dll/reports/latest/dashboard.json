@@ -1,19 +1,24 @@
 {
   "assemblyName": "System.Net.Http",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-16T12:18:53",
   "summary": {
     "chunks": 2,
     "chunksVerified": 2,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 2,
     "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 0,
-    "aggregatePerformance": {},
+    "totalBenchmarkedMethods": 209,
+    "aggregatePerformance": {
+      "meanDurationMs": 0.5429234969663541,
+      "meanOpsPerSecond": 324884224.66770035,
+      "aggregateMeanCv": 0.05152358241758241
+    },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 2,
       "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 0,
+      "totalPassed": 180,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

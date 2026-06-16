@@ -1,30 +1,60 @@
 {
   "assemblyName": "System.Net.Http",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-16T12:18:53",
   "totalChunks": 2,
   "chunksWithFacts": 2,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 187,
-  "totalFactMethods": 187,
+  "totalPassed": 209,
+  "totalFactMethods": 209,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 89,
-        "total": 89,
+        "passed": 111,
+        "total": 111,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 119,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 111,
+        "iterations": 23809,
+        "meanDurationMs": 1.056791891891892,
+        "meanOpsPerSecond": 321664876.7757304,
+        "minDurationMs": 0,
+        "maxDurationMs": 52.127,
+        "totalDurationMs": 117.3039,
+        "totalAllocatedBytes": 1523776.0,
+        "meanSampleCount": 2.4,
+        "totalOutliers": 0,
+        "meanCv": 0.047618999999999995,
+        "maxCv": 0.419197
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 89,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 3682304,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     },
     {
@@ -38,13 +68,43 @@
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 98,
+        "iterations": 10000,
+        "meanDurationMs": 0.029055102040816325,
+        "meanOpsPerSecond": 328103572.5596703,
+        "minDurationMs": 0,
+        "maxDurationMs": 0.0737,
+        "totalDurationMs": 2.8474,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 2.8,
+        "totalOutliers": 0,
+        "meanCv": 0.055428164835164835,
+        "maxCv": 0.867245
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 91,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2851328,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     }
   ]

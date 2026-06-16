@@ -1867,7 +1867,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol, "",
-                        ["    CHAOS_IL2CPP_FAIL();", "    return 0;"]);
+                        ["    CHAOS_IL2CPP_FAIL();"]);
                     return new GenericShapeResolution(src, symbol,
                         Array.Empty<AotCoreIrAbiSlotArtifact>(),
                         CreateVoidAbiSlot(), EmptyRawArgumentIndices);

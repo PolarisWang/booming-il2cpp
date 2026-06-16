@@ -227,3 +227,5 @@ if(NOT MSVC)
   target_link_libraries(chaos_entry PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})
+# Weak default stubs in subject_dispatch.cpp provide fallback symbols for
+# subject-miss methods, eliminating the need for /FORCE:UNRESOLVED.

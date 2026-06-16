@@ -1,16 +1,16 @@
 {
   "assemblyName": "System.IO.Pipelines",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-16T12:19:18",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 16,
+  "totalPassed": 26,
   "totalFactMethods": 26,
   "chunkSummaries": [
     {
       "slug": "system-io-pipelines",
       "fact": {
-        "passed": 16,
+        "passed": 26,
         "total": 26,
         "valueSuspicious": false,
         "valueWarnings": 0,
@@ -21,10 +21,24 @@
         "status": "no_results"
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 15,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     }
   ]

@@ -1,0 +1,51 @@
+{
+  "date": "2026-06-16",
+  "assemblyName": "System.Linq",
+  "chunks": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 327,
+        "total": 337,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 339,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 332,
+        "iterations": 10000,
+        "meanDurationMs": 0.028288855421686746,
+        "meanOpsPerSecond": 345011906.6540373,
+        "minDurationMs": 0,
+        "maxDurationMs": 0.0337,
+        "totalDurationMs": 9.3919,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 9.0,
+        "totalOutliers": 237,
+        "meanCv": 0.14578305279503107,
+        "maxCv": 0.714774
+      },
+      "hotupdate": {
+        "passed": 326,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}
