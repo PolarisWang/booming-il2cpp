@@ -77,6 +77,8 @@ static void ParseSubjectIdForHotpatchLookup(
 extern "C" int ChaosMarshalGetHRForLastWin32Error() noexcept;
 extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;
 extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsIsPow2Impl(CHAOS_IL2CPP_INTPTR value) noexcept;
+// SIMD stubs for Vector128/256 methods (defined in simd_stubs.cpp)
+#include "runtime_stubs/simd_stubs.h"
 extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsPopCount(CHAOS_IL2CPP_INTPTR value) noexcept;
 extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsLeadingZeroCount(CHAOS_IL2CPP_INTPTR value) noexcept;
 extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsLog2(CHAOS_IL2CPP_INTPTR value) noexcept;
