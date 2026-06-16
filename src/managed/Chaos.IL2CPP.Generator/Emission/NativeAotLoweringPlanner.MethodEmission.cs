@@ -33,7 +33,7 @@ public sealed partial class NativeAotLoweringPlanner
         // When there are no ABI slots but a generic context is needed, drop 'void' entirely.
         if (needsGenericContext)
         {
-            paramSig = string.IsNullOrEmpty(paramSig) || paramSig == "void" || paramSig == "void"
+            paramSig = string.IsNullOrEmpty(paramSig) || paramSig == "void"
                 ? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
                 : paramSig + ", CHAOS_IL2CPP_INTPTR chaos_generic_context";
         }
@@ -207,7 +207,15 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			AsyncMethodCount++;
 			var ak = ClassifyAsyncMethod(method);
-			if (ak == AsyncMethodKind.Complex) { AsyncInterpreterFallbackCount++; builder.AppendLine("// Complex async"); var fd = FormatMethodDeclaration(method, _sharedContextSymbols); builder.AppendLine(fd.Length > 0 && fd[^1] == ";"[0] ? fd[..^1] : fd); builder.AppendLine("{ CHAOS_IL2CPP_FAIL(); }"); return; }
+			if (ak == AsyncMethodKind.Complex)
+			{
+			    AsyncInterpreterFallbackCount++;
+			    builder.AppendLine("// Complex async");
+			    var fd = FormatMethodDeclaration(method, _sharedContextSymbols);
+			    builder.AppendLine(fd.Length > 0 && fd[^1] == ';' ? fd[..^1] : fd);
+			    builder.AppendLine("{ CHAOS_IL2CPP_FAIL(); }");
+			    return;
+			}
 			AsyncCoroutineMethodCount++;
 			var abody = BuildAsyncStructuredBody(method);
 			var uid = GetAsyncUid(method);
