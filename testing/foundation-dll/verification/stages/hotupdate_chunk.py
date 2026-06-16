@@ -250,20 +250,31 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> None:
 
 
 def _incremental_rebuild(ctx) -> None:
-    """Incremental MSBuild rebuild of entry.exe (no cmake reconfigure).
+    """Incremental cmake rebuild of entry.exe (no cmake re-configure).
 
-    Recompiles only patch-host-arrays.cpp and re-links.  Avoids cmake
-    auto-regeneration which would lose the CHAOS_SDK_DIR paths.
+    Deletes the stale patch-host-arrays.obj first to force recompilation,
+    then runs cmake --build for proper dependency tracking.
     """
     build_dir = ctx.chunk_dir / "native" / "build"
-    vcxproj = build_dir / "chaos_entry.vcxproj"
-    if not vcxproj.exists():
-        print(f"  [hotupdate] Cannot rebuild: {vcxproj} not found")
+    src_file = ctx.chunk_dir / "native" / "patch-host-arrays.cpp"
+    if not build_dir.exists() or not src_file.exists():
+        print(f"  [hotupdate] Cannot rebuild: build dir or source not found")
         return
 
-    import subprocess
-    msbuild = r"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe"
-    cmd = [msbuild, str(vcxproj), "/p:Configuration=RelWithDebInfo", "/p:Platform=x64", "/t:Build", "/nologo"]
+    import subprocess, shutil, glob as _glob
+
+    # Delete stale .obj to force MSBuild recompilation
+    obj_pattern = str(build_dir / "chaos_entry.dir" / "RelWithDebInfo" / "patch-host-arra*")
+    stale_objs = _glob.glob(obj_pattern)
+    for o in stale_objs:
+        os.remove(o)
+        print(f"  [hotupdate] Removed stale .obj: {os.path.basename(o)}")
+
+    # Touch source to ensure timestamp changes
+    os.utime(str(src_file), None)
+
+    cmake = r"C:\Program Files\CMake\bin\cmake.exe"
+    cmd = [cmake, "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "chaos_entry"]
     print(f"  [hotupdate] Incremental rebuild...")
     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=300)
     if result.returncode != 0:
@@ -272,13 +283,11 @@ def _incremental_rebuild(ctx) -> None:
         print(f"  [hotupdate] Rebuild FAILED (rc={result.returncode})")
         return
 
-    # Copy rebuilt entry.exe to native directory
-    import shutil
     src = build_dir / "RelWithDebInfo" / "chaos_entry.exe"
     dst = ctx.chunk_dir / "native" / "entry.exe"
     if src.exists():
         shutil.copy2(src, dst)
-        print(f"  [hotupdate] Rebuilt entry.exe: {dst.name}")
+        print(f"  [hotupdate] Rebuilt entry.exe: {dst.name} ({src.stat().st_size} bytes)")
 
 
 def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
