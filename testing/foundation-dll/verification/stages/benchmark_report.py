@@ -67,7 +67,8 @@ def _compute_pct(net8_ms: float, tech_ms: float | None) -> float | None:
         return None
     return round((net8_ms - tech_ms) / net8_ms * 100, 2)
 
-def _read_jsonl_technology_map(jsonl_path: Path) -> dict[str, dict[str, Any]]:
+
+def _read_jsonl_technology_map(jsonl_path: Path) -> dict[str, dict[str, Any]]:
     """Read JSONL and build {methodSubjectId: {technology: latest_record}}.
 
     For each methodSubjectId, keeps only the latest timestamp per technology.
@@ -170,6 +171,11 @@ def _build_method_comparison(
 
     for msid, techs in tech_map.items():
         net8_rec = techs.get("net8-jit")
+        # Fall back to net10-jit when net8-jit is unavailable (e.g. CombinedSubjects
+        # can't compile for net8.0 due to newer API dependencies). This allows
+        # assemblies with net10-only benchmark data to still get comparison results.
+        if net8_rec is None:
+            net8_rec = techs.get("net10-jit")
         net8_ms = _get_elapsed(net8_rec)
         net8_error = net8_rec is not None and (net8_rec.get("status") == "error" or (net8_ms is not None and net8_ms < 0))
         net8_high_var = _is_high_variance(net8_rec)
