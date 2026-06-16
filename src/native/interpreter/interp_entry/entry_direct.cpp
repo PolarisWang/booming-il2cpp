@@ -1047,6 +1047,9 @@ void InterpreterEntryDirect(
         for (CHAOS_IL2CPP_UINT32 i = 0; i < arg_count; ++i)
             frame.arguments.push_back(interpreter::InterpreterValue::from_obj(arg_reader.ReadPtr()));
     }
+    // Pre-reserve evaluation stack and locals to avoid reallocation during execution.
+    // Stack depth varies by method; 64 is a reasonable default that covers >90% of methods.
+    frame.stack.reserve(64);
     frame.locals.reserve(8);
     auto* runtime_state = GetCurrentRuntimeState();
     auto* thread_state  = GetCurrentThreadState();
