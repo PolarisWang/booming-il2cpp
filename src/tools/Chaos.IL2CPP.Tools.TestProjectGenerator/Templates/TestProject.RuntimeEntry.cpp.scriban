@@ -432,6 +432,7 @@ static int RunFactJsonMode() {
         // Returns 0 on initial entry, non-zero after longjmp from fail hook.
         if (setjmp(t_abort_jmp) == 0) {
             try {
+                {{ if !is_jit }}
                 chaos::il2cpp::pal::PalTryResetState();
                 uint64_t _pal_result = 0;
                 bool _pal_caught = chaos::il2cpp::pal::PalTryCallNoExcept(
@@ -447,6 +448,13 @@ static int RunFactJsonMode() {
                 } else {
                     result = static_cast<int64_t>(_pal_result);
                 }
+                {{ else }}
+                // JIT mode: PalDispatchWrapper is not defined (AOT-only).
+                // Call ChaosDispatchMethodGetValue directly — JIT precode
+                // stubs handle dispatch and exceptions separately.
+                result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+                    GetHotpatchEntries(), kAotMethodCount, v_i, CHAOS_USE_DEFAULT_THUNKS);
+                {{ end }}
             } catch (...) {
                 caught = true;
             }
