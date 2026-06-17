@@ -4178,6 +4178,11 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				? (callerIsShared ? "chaos_generic_context" : "0")
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
+		else if (targetSymbol.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal))
+		{
+			// Cross-module stub: non-shared callers pass 0 as context.
+			genericCtxArg = string.IsNullOrEmpty(argList) ? "0" : ", 0";
+		}
 		
 string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		if (string.Equals(a, "void", StringComparison.Ordinal))
@@ -4340,6 +4345,8 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_ret", indentation + "        ");
 		builder.AppendLine($"{indentation}        return;");
 		builder.AppendLine($"{indentation}    }}");
+		// chaos_extext_end BEFORE const auto chaos_result — avoids C2362
+		builder.AppendLine($"{indentation}    chaos_extext_end: ;");
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			builder.AppendLine($"{indentation}    reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
@@ -4349,7 +4356,6 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 			builder.AppendLine($"{indentation}    const auto chaos_result = reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
 			EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", indentation + "    ");
 		}
-		builder.AppendLine($"{indentation}    chaos_extext_end: ;");
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -4531,6 +4537,11 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 				? (callerIsShared ? "chaos_generic_context" : "0")
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
+			else if (nativeTarget.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal))
+			{
+				// Cross-module stub: non-shared callers pass 0 as context.
+				hpCtxArg = string.IsNullOrEmpty(hpArgList) ? "0" : ", 0";
+			}
 		string callExpr = $"{nativeTarget}({hpArgList}{hpCtxArg})";
 		if (hasReturn)
 		{
