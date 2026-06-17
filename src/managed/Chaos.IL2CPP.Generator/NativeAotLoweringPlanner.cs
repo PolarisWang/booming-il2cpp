@@ -2172,7 +2172,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // ── ChaosReflectionSetExceptionMetadata_2params (global scope) ──
         // Called from ArgumentOutOfRangeException..ctor(string,string) in page
         // files.  Declared in exception_api.cpp in the runtime — at global scope.
-        sb.AppendLine("void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);");
+        sb.AppendLine("extern \"C\" void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);");
         sb.AppendLine();
 
         // ── Post-scan: emit extern "C" declarations for ALL chaos_external_runtime_*
