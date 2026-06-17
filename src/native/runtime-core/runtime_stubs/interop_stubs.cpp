@@ -4,7 +4,6 @@
 // These stubs are compiled from source (not part of prebuilt lib)
 // to avoid stale-symbol issues with the SDK runtime library.
 #include <cstdlib>
-#include <chaos/unordered_dense.h>
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
@@ -13,13 +12,6 @@
 #include "engine_binding.h"
 #include "patch_loader.h"
 #include <chaos/pal/pal_eh.h>
-
-// ── External runtime dispatch hash table ─────────────────────────
-// O(1) hash lookup replaces the O(n) linear strcmp scan in Phase 2
-// of ChaosExternalRuntimeFallback.  Built once on first access.
-// Using the same hash map type as aot_direct_dispatch.cpp.
-static ankerl::unordered_dense::map<std::string, int32_t> s_ext_rt_hash;
-static bool s_ext_rt_hash_init = false;
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -433,83 +425,6 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept
 //   System.Void    -> 0
 //   other          -> 0 (nullptr for objects)
 
-// ── BitOperations::IsPow2 native stub ─────────────────────────────
-// Called from ChaosExternalRuntimeFallback when the external runtime
-// table lookup finds IsPow2.  Uses the classic (v & (v-1)) == 0 check.
-// Handles both uint32 and uint64 overloads via the uniform intptr ABI.
-// ── BitOperations::IsPow2 native implementation ────────────────────
-// Registered in hotpatch_resolve.cpp as the native function pointer
-// for kChaosExternalRuntimeFnTable[idx].  The managed call signature
-// is bool IsPow2(uint) / bool IsPow2(ulong); the AOT dispatch passes
-// args via the uniform CHAOS_IL2CPP_INTPTR ABI.
-// Uses the classic bit trick: (v & (v - 1)) == 0 for power-of-2 check.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsIsPow2Impl(CHAOS_IL2CPP_INTPTR value) noexcept {
-    auto v = static_cast<uint64_t>(static_cast<CHAOS_IL2CPP_UINT64>(value));
-    return (v != 0) && ((v & (v - 1)) == 0) ? 1 : 0;
-}
-
-// ── BitOperations::PopCount native implementation ──────────────────
-// Counts set bits in a 64-bit value. Uses compiler builtin when available.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsPopCount(CHAOS_IL2CPP_INTPTR value) noexcept {
-#if defined(__GNUC__) || defined(__clang__)
-    return static_cast<CHAOS_IL2CPP_INTPTR>(__builtin_popcountll(static_cast<unsigned long long>(value)));
-#elif defined(_MSC_VER)
-    return static_cast<CHAOS_IL2CPP_INTPTR>(__popcnt64(static_cast<unsigned __int64>(value)));
-#else
-    // Manual popcount: parallel bit reduction
-    auto v = static_cast<uint64_t>(static_cast<CHAOS_IL2CPP_UINT64>(value));
-    v = v - ((v >> 1) & 0x5555555555555555ULL);
-    v = (v & 0x3333333333333333ULL) + ((v >> 2) & 0x3333333333333333ULL);
-    v = (v + (v >> 4)) & 0x0F0F0F0F0F0F0F0FULL;
-    return static_cast<CHAOS_IL2CPP_INTPTR>((v * 0x0101010101010101ULL) >> 56);
-#endif
-}
-
-// ── BitOperations::LeadingZeroCount native implementation ──────────
-// Counts leading zero bits. Uses compiler builtin when available.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsLeadingZeroCount(CHAOS_IL2CPP_INTPTR value) noexcept {
-    auto v = static_cast<uint64_t>(static_cast<CHAOS_IL2CPP_UINT64>(value));
-    if (v == 0) return static_cast<CHAOS_IL2CPP_INTPTR>(64);
-#if defined(__GNUC__) || defined(__clang__)
-    return static_cast<CHAOS_IL2CPP_INTPTR>(__builtin_clzll(v));
-#elif defined(_MSC_VER)
-    return static_cast<CHAOS_IL2CPP_INTPTR>(__lzcnt64(v));
-#else
-    // Manual: binary search for leading zero count
-    uint64_t n = 64;
-    uint64_t mask = 0xFFFFFFFF00000000ULL;
-    // BSR-based fallback for non-LZCNT CPUs
-    unsigned long index;
-    if (_BitScanReverse64(&index, v)) n = 63 - index;
-    return static_cast<CHAOS_IL2CPP_INTPTR>(n);
-#endif
-}
-
-// ── BitOperations::Log2 native implementation ──────────────────────
-// Floor(log2(x)).  For x=0, returns 0 (matches .NET behavior for 0 input).
-// Implemented as (63 - LeadingZeroCount(x)) for x>0, 0 for x=0.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosBitOperationsLog2(CHAOS_IL2CPP_INTPTR value) noexcept {
-    auto v = static_cast<uint64_t>(static_cast<CHAOS_IL2CPP_UINT64>(value));
-    if (v == 0) return 0;
-#if defined(__GNUC__) || defined(__clang__)
-    return static_cast<CHAOS_IL2CPP_INTPTR>(63 - __builtin_clzll(v));
-#elif defined(_MSC_VER)
-    unsigned long index;
-    _BitScanReverse64(&index, v);
-    return static_cast<CHAOS_IL2CPP_INTPTR>(index);
-#else
-    // 63 - LeadingZeroCount
-    uint64_t n = 63;
-    uint64_t mask = 0xFFFFFFFF00000000ULL;
-    if (v & ~mask) { n -= 32; v >>= 32; }
-    mask >>= 16; if (v & ~mask) { n -= 16; v >>= 16; }
-    mask >>= 8;  if (v & ~mask) { n -= 8;  v >>= 8;  }
-    mask >>= 4;  if (v & ~mask) { n -= 4;  v >>= 4;  }
-    mask >>= 2;  if (v & ~mask) { n -= 2;  v >>= 2;  }
-    return static_cast<CHAOS_IL2CPP_INTPTR>(n - (v >> 1));
-#endif
-}
-
 // ── External runtime fallback + dispatch ──────────────────────────
 // Called from generated chaos_external_runtime_*() stubs when the
 // kChaosExternalRuntimeFnTable entry is null.  Resolves the subject ID
@@ -880,24 +795,33 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
         return 0;
 
 
-    // ── Phase 2: Look up the external runtime dispatch table ───────────
-    // O(1) hash lookup replaces the O(n) linear strcmp + PalTryCallNoExcept scan.
+    // ── Phase 2: Scan the external runtime dispatch table ───────────────
     if (kChaosExternalRuntimeCount > 0) {
-        // Lazy-init: build hash map from the parallel arrays on first use.
-        if (!s_ext_rt_hash_init) {
-            s_ext_rt_hash.reserve(static_cast<size_t>(kChaosExternalRuntimeCount));
-            for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
-                if (kChaosExternalRuntimeSubjects[i] != nullptr) {
-                    s_ext_rt_hash[std::string(kChaosExternalRuntimeSubjects[i])] = i;
-                }
-            }
-            s_ext_rt_hash_init = true;
-        }
-        auto it = s_ext_rt_hash.find(std::string(subject_id));
-        if (it != s_ext_rt_hash.end()) {
-            if (_TryInvoke(kChaosExternalRuntimeSubjects[it->second]))
+        for (int32_t i = 0; i < kChaosExternalRuntimeCount; ++i) {
+            if (kChaosExternalRuntimeSubjects[i] == nullptr)
+                continue;
+            uint64_t cmp_result = INT64_MAX;
+            bool fault = chaos::il2cpp::pal::PalTryCallNoExcept(
+                [](uint64_t a, uint64_t b, uint64_t, uint64_t, uint64_t,
+                   uint64_t, uint64_t, uint64_t) -> uint64_t {
+                    return static_cast<uint64_t>(std::strcmp(
+                        reinterpret_cast<const char*>(a),
+                        reinterpret_cast<const char*>(b)));
+                },
+                reinterpret_cast<uint64_t>(kChaosExternalRuntimeSubjects[i]),
+                reinterpret_cast<uint64_t>(subject_id),
+                0, 0, 0, 0, 0, 0, cmp_result);
+            if (fault)
+                continue;
+            if (static_cast<int32_t>(cmp_result) != 0)
+                continue;
+            if (_TryInvoke(kChaosExternalRuntimeSubjects[i]))
                 return 0;
-            // Found but unresolvable — codegen/metadata mismatch.
+
+            // Found in dispatch table but unresolvable — codegen/metadata mismatch.
+            // Return sentinel 0 instead of crashing (safe for fact verification:
+            // the method body has its own sentinel return value, and the pipeline
+            // compares against it to detect value mismatches).
             return 0;
         }
     }

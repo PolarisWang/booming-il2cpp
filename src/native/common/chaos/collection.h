@@ -8,7 +8,6 @@
 #include <vector>
 
 #include <chaos/native_types.h>
-#include <chaos/unordered_dense.h>
 
 namespace chaos::il2cpp::common {
 
@@ -24,11 +23,11 @@ inline constexpr CHAOS_IL2CPP_SIZE kNativeStorageSlotOffset = 16;
 // ListRuntimeStorage and require_list_runtime_storage have been
 // removed — List<T> operations are emitted as inline C++ code.
 
-// ── Dictionary<K,V> — O(1) hash table via unordered_dense ───────
+// ── Dictionary<K,V> ─────────────────────────────────────────────
 template <typename TKey, typename TValue>
 struct DictionaryRuntimeStorage
 {
-    CHAOS_IL2CPP_UNORDERED_DENSE_MAP(TKey, TValue) entries;
+    CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_PAIR(TKey, TValue)) entries;
 };
 
 template <typename TKey, typename TValue>

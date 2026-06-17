@@ -14,7 +14,7 @@ extern "C" {
 // ═══════════════════════════════════════════════════════════════
 // Lazily-initialized flat BMP lookup table for O(1) access.
 // Built from the range-compressed constexpr tables on first call.
-static alignas(64) CHAOS_IL2CPP_UINT8 s_bmp_category[65536] = {};
+alignas(64) static CHAOS_IL2CPP_UINT8 s_bmp_category[65536] = {};
 static bool s_bmp_category_init = false;
 
 static inline void InitBmpCategory() noexcept {

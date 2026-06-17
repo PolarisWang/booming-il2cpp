@@ -106,23 +106,29 @@ CHAOS_IL2CPP_INTPTR CollectionDictionaryGetItem(CHAOS_IL2CPP_INTPTR handle, CHAO
 {
     if (handle == 0) return 0;
     auto* storage = chaos::il2cpp::common::require_dictionary_runtime_storage<CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR>(handle);
-    auto it = storage->entries.find(key);
-    return it != storage->entries.end() ? it->second : 0;
+    for (auto& entry : storage->entries) {
+        if (entry.first == key) return entry.second;
+    }
+    return 0;
 }
 
 void CollectionDictionarySetItem(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (handle == 0) return;
     auto* storage = chaos::il2cpp::common::require_dictionary_runtime_storage<CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR>(handle);
-    storage->entries[key] = value;
+    for (auto& entry : storage->entries) {
+        if (entry.first == key) { entry.second = value; return; }
+    }
+    storage->entries.push_back({key, value});
 }
 
 CHAOS_IL2CPP_INT32 CollectionDictionaryTryGetValue(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR* out_value) noexcept
 {
     if (handle == 0 || out_value == nullptr) return 0;
     auto* storage = chaos::il2cpp::common::require_dictionary_runtime_storage<CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR>(handle);
-    auto it = storage->entries.find(key);
-    if (it != storage->entries.end()) { *out_value = it->second; return 1; }
+    for (auto& entry : storage->entries) {
+        if (entry.first == key) { *out_value = entry.second; return 1; }
+    }
     return 0;
 }
 
@@ -130,21 +136,31 @@ CHAOS_IL2CPP_INT32 CollectionDictionaryContainsKey(CHAOS_IL2CPP_INTPTR handle, C
 {
     if (handle == 0) return 0;
     auto* storage = chaos::il2cpp::common::require_dictionary_runtime_storage<CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR>(handle);
-    return storage->entries.contains(key) ? 1 : 0;
+    for (auto& entry : storage->entries) {
+        if (entry.first == key) return 1;
+    }
+    return 0;
 }
 
 CHAOS_IL2CPP_INT32 CollectionDictionaryRemove(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR key) noexcept
 {
     if (handle == 0) return 0;
     auto* storage = chaos::il2cpp::common::require_dictionary_runtime_storage<CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR>(handle);
-    return storage->entries.erase(key) > 0 ? 1 : 0;
+    auto& entries = storage->entries;
+    for (auto it = entries.begin(); it != entries.end(); ++it) {
+        if (it->first == key) {
+            entries.erase(it);
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void CollectionDictionaryAdd(CHAOS_IL2CPP_INTPTR handle, CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (handle == 0) return;
     auto* storage = chaos::il2cpp::common::require_dictionary_runtime_storage<CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR>(handle);
-    storage->entries.try_emplace(key, value);
+    storage->entries.push_back({key, value});
 }
 
 // ═══════════════════════════════════════════════════════════════

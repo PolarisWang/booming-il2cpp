@@ -300,13 +300,13 @@ static bool DispatchExceptionToHandler(FastFrame& frame,
 // ── Op Handlers ────────────────────────────────────────────────────────
 // Each handler is a small function. Naming: Handle_<IROpCode>.
 
-CHAOS_IL2CPP_FORCEINLINE static void Handle_LdcI4(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+static void Handle_LdcI4(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdcI4");
     frame.PushI32_NC(instr.immediate_i4);
     ++frame.pc;
 }
 
-CHAOS_IL2CPP_FORCEINLINE static void Handle_LdcI8(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+static void Handle_LdcI8(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdcI8");
     frame.PushI64_NC(instr.immediate_i8);
     ++frame.pc;
@@ -334,13 +334,13 @@ static void Handle_LdStr(FastFrame& frame, const interpreter::IRInstruction& ins
     ++frame.pc;
 }
 
-CHAOS_IL2CPP_FORCEINLINE static void Handle_LdNull(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+static void Handle_LdNull(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdNull");
     frame.PushNull_NC();
     ++frame.pc;
 }
 
-CHAOS_IL2CPP_FORCEINLINE static void Handle_LdArg(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+static void Handle_LdArg(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdArg");
     // Inlined LdArg: secondary_index > 0 indicates the callee's arg count.
     // The args are already on the FastFrame stack (pushed by the caller before the
@@ -390,7 +390,7 @@ CHAOS_IL2CPP_FORCEINLINE static void Handle_LdArg(FastFrame& frame, const interp
     ++frame.pc;
 }
 
-CHAOS_IL2CPP_FORCEINLINE static void Handle_LdLoc(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+static void Handle_LdLoc(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdLoc");
     uint32_t idx = static_cast<uint32_t>(instr.operand_index);
     if (idx >= frame.local_count) {
@@ -405,7 +405,7 @@ CHAOS_IL2CPP_FORCEINLINE static void Handle_LdLoc(FastFrame& frame, const interp
     ++frame.pc;
 }
 
-CHAOS_IL2CPP_FORCEINLINE static void Handle_StLoc(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+static void Handle_StLoc(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_StLoc");
     uint32_t idx = static_cast<uint32_t>(instr.operand_index);
     if (frame.sp == 0) { frame.threw_exception = true; frame.pc = 9999; return; }

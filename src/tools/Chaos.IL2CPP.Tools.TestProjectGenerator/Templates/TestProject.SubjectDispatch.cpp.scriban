@@ -3,47 +3,33 @@
 // Bypasses hotpatch dispatch to avoid MSVC SEH RAX clobbering.
 
 #include <cstdint>
-#include <cstddef>
-#include <chaos/compiler_hints.h>
 #include "subject_dispatch.h"
 
-// Direct dispatch table — {{ fact_count }} entries
-// Function pointers cast from the hotpatch entries to avoid name mismatch.
+{{~ for subject in subjects ~}}
+{{~ if subject.kind == "fact" ~}}
+{{~ if subject.has_generated_method_id ~}}
+extern "C" int64_t {{ subject.function_symbol }}(int64_t);
+{{~ end ~}}
+{{~ end ~}}
+{{~ end ~}}
 
-// Minimal HotpatchEntryV0 definition (stable ABI from codegen_bridge.h).
-// Avoids pulling in <chaos/hotpatch_dispatch.h> which has transitive include
-// dependencies (CHAOS_IL2CPP_LIKELY from compiler_hints.h, etc.).
-struct HotpatchEntryV0 {
-    void*       direct_ptr;
-    void*       interrupt_ptr;
-    uintptr_t   method_key;
-    uint32_t    flags;
-    uint32_t    version;
+// Direct dispatch table — {{ fact_count }} entries indexed by subject slot (si)
+static constexpr int64_t (*kSubjectDirectTable[{{ fact_count }}])(int64_t) = {
+{{~ si = 0 ~}}
+{{~ for subject in subjects ~}}
+{{~ if subject.kind == "fact" ~}}
+{{~ if subject.has_generated_method_id ~}}
+    &{{ subject.function_symbol }},  // [{{ si }}]
+{{~ si = si + 1 ~}}
+{{~ end ~}}
+{{~ end ~}}
+{{~ end ~}}
 };
 
-extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
-extern "C" const int kSubjectSlotMap[];
-extern "C" const int kSubjectEntryCount;
-
-using SubjectFn = int64_t(*)(int64_t);
-
-static SubjectFn GetSubjectDirect(int si) noexcept {
-    // Bounds check: the Scriban-rendered count must not exceed the array.
-    // kSubjectEntryCount is the runtime-verified authoritative count.
-    if (si < 0 || si >= {{ fact_count }})
-        return nullptr;
-    int i = kSubjectSlotMap[si];
-    auto* entries = GetHotpatchEntries();
-    if (!entries[i].direct_ptr)
-        return nullptr;
-    return reinterpret_cast<SubjectFn>(entries[i].direct_ptr);
-}
-
 int64_t SubjectDispatchDirect(int si, int64_t arg0) {
-    auto fn = GetSubjectDirect(si);
-    if (CHAOS_IL2CPP_UNLIKELY(!fn)) return 0;
+    if (si < 0 || si >= {{ fact_count }}) return 0;
     try {
-        return fn(arg0);
+        return kSubjectDirectTable[si](arg0);
     } catch (...) {
         return 0;
     }

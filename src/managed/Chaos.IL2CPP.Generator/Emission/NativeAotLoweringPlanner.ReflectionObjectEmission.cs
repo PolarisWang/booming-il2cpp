@@ -172,6 +172,17 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("}");
 			builder.AppendLine();
 		}
+		else
+		{
+			// No string IDs -> identity fallback so the declaration in the
+			// shared header always has a matching definition.
+			builder.AppendLine();
+			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept");
+			builder.AppendLine("{");
+			builder.AppendLine("    return chaos_value;");
+			builder.AppendLine("}");
+			builder.AppendLine();
+		}
 		if (flag6)
 		{
 			builder.AppendLine("// GC string object layout for raw string data access");

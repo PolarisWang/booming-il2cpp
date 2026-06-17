@@ -156,6 +156,7 @@ public static class WrapperEmitter
             "    <Nullable>enable</Nullable>\n" +
             "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n" +
             "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n" +
+            "    <NoWarn>$(NoWarn);SYSLIB5006</NoWarn>\n" +
             "  </PropertyGroup>\n" +
             "  <ItemGroup>\n" +
             $"    <Compile Include=\"{Path.GetFileName(combinedCsPath)}\" />\n" +

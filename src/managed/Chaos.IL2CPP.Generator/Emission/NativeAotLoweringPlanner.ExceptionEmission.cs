@@ -4213,10 +4213,6 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 
 	private void EmitExternalRuntimeTableDispatch(StringBuilder builder, InvocationTarget invocationTarget, string indentation, bool enforceInstanceNullCheck, AotCoreIrInstructionArtifact? instruction = null)
 	{
-
-		// SIMD intrinsic path: detect and emit inline SSE/AVX for Vector128/256 methods.
-		if (instruction?.Callee is { } callee && TryEmitSimdIntrinsic(builder, callee, invocationTarget, indentation))
-			return;
 		string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
 
@@ -4229,7 +4225,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		{
 		    // Collect chaos_external_runtime_* symbols for fallback declaration emission
 		    if (nativeSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-		        _emittedExternalRuntimeSymbols[nativeSymbol] = (invocationTarget.ReturnAbi.CarrierKindCode, invocationTarget.ParameterAbis.Count);
+		        _emittedExternalRuntimeSymbols[nativeSymbol] = invocationTarget.ReturnAbi.CarrierKindCode;
 			builder.AppendLine($"{indentation}{{");
 			for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
 			{
@@ -4355,114 +4351,6 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		}
 		builder.AppendLine($"{indentation}    chaos_extext_end: ;");
 		builder.AppendLine($"{indentation}}}");
-	}
-
-	// ── SIMD intrinsic emission ────────────────────────────────────────────
-	// Recognizes Vector128/256 methods and emits inline C++ SSE/AVX intrinsics.
-	// SubjectId format: "System.Numerics.Vectors/System.Numerics.Vector128<float>::op_Addition"
-	private bool TryEmitSimdIntrinsic(StringBuilder builder, string callee, InvocationTarget target, string indent)
-	{
-		if (!callee.StartsWith("System.Numerics.Vectors/System.Numerics.", StringComparison.Ordinal))
-			return false;
-
-		int methodSep = callee.LastIndexOf("::", StringComparison.Ordinal);
-		if (methodSep < 0) return false;
-		string methodName = callee.Substring(methodSep + 2);
-
-		// Parse type part: "Vector128<float>" → width=128, elem=float
-		int typeStart = callee.IndexOf("::", "System.Numerics.Vectors/System.Numerics.".Length, StringComparison.Ordinal);
-		// Actually parse from the subject ID properly
-		int prefixLen = "System.Numerics.Vectors/System.Numerics.".Length;
-		int typeEnd = callee.LastIndexOf("::");
-		string typePart = typeEnd > prefixLen ? callee.Substring(prefixLen, typeEnd - prefixLen) : "";
-		if (string.IsNullOrEmpty(typePart)) return false;
-
-		int width;
-		string elemType;
-		if (typePart.Contains("Vector256<"))
-		{
-			width = 256;
-			int es = typePart.IndexOf('<') + 1;
-			int ee = typePart.LastIndexOf('>');
-			elemType = es > 0 && ee > es ? typePart.Substring(es, ee - es) : "";
-		}
-		else if (typePart.Contains("Vector128<"))
-		{
-			width = 128;
-			int es = typePart.IndexOf('<') + 1;
-			int ee = typePart.LastIndexOf('>');
-			elemType = es > 0 && ee > es ? typePart.Substring(es, ee - es) : "";
-		}
-		else return false;
-
-		// Map element → SSE suffix
-		string sseSuf;
-		bool isFp;
-		switch (elemType)
-		{
-			case "System.Single":  sseSuf = "ps";    isFp = true;  break;
-			case "System.Double":  sseSuf = "pd";    isFp = true;  break;
-			case "System.Int32":
-			case "System.UInt32":  sseSuf = "epi32"; isFp = false; break;
-			case "System.Int64":
-			case "System.UInt64":  sseSuf = "epi64"; isFp = false; break;
-			case "System.Int16":   sseSuf = "epi16"; isFp = false; break;
-			case "System.Byte":
-			case "System.SByte":   sseSuf = "epi8";  isFp = false; break;
-			default: return false;
-		}
-
-		// Map method → SSE intrinsic
-		string intrinsic;
-		switch (methodName)
-		{
-			case "op_Addition":    intrinsic = $"_mm_add_{sseSuf}";   break;
-			case "op_Subtraction": intrinsic = $"_mm_sub_{sseSuf}";   break;
-			case "op_Multiply":    intrinsic = isFp ? $"_mm_mul_{sseSuf}" : $"_mm_mullo_{sseSuf}"; break;
-			case "op_BitwiseAnd":  intrinsic = "_mm_and_si128"; break;
-			case "op_BitwiseOr":   intrinsic = "_mm_or_si128";  break;
-			case "op_ExclusiveOr": intrinsic = "_mm_xor_si128"; break;
-			default: return false;
-		}
-
-		// Consume eval stack expressions for arguments
-		int paramCount = target.ParameterAbis.Count;
-		var argExprs = new System.Collections.Generic.List<string>();
-		for (int i = 0; i < paramCount; i++)
-			argExprs.Add(ConsumeEvalStackValueExpression());
-
-		// Emit SSE intrinsic code
-		string loadIntrin = isFp ? $"_mm_loadu_{sseSuf}" : "_mm_loadu_si128";
-		string castType = isFp ? $"const float*" : "const __m128i*";
-		string sseReg = isFp ? "__m128" : "__m128i";
-
-		builder.AppendLine($"{indent}{{");
-		builder.AppendLine($"#if defined(__SSE__) || defined(_M_X64)");
-		builder.AppendLine($"{indent}    // SIMD: {callee}");
-
-		// Load from original expression address (WideValue = 2 adjacent intptr slots)
-		builder.AppendLine($"{indent}    {sseReg} simd_a = {loadIntrin}(reinterpret_cast<{castType}>(&{argExprs[0]}));");
-		if (paramCount > 1)
-			builder.AppendLine($"{indent}    {sseReg} simd_b = {loadIntrin}(reinterpret_cast<{castType}>(&{argExprs[1]}));");
-
-		builder.AppendLine($"{indent}    {sseReg} simd_r = {intrinsic}(simd_a, simd_b);");
-
-		// Store result to a temp and push onto eval stack via EmitEvalStackPush
-		// Use a temporary storage and push the address as a CHAOS_IL2CPP_INTPTR
-		// The return type's CarrierKindCode tells us if it's Wide (2 slots) or single
-		builder.AppendLine($"{indent}    CHAOS_IL2CPP_INTPTR simd_ret[{(2)}];");
-		builder.AppendLine($"{indent}    _mm_storeu_si128(reinterpret_cast<__m128i*>(simd_ret), simd_r);");
-		builder.AppendLine($"#else");
-		builder.AppendLine($"{indent}    // No SSE: fallback to zero");
-		builder.AppendLine($"{indent}    CHAOS_IL2CPP_INTPTR simd_ret[{(2)}] = {{}};");
-		builder.AppendLine($"#endif");
-
-		// Push result to eval stack (Vector128 = 2 intptr slots)
-		EmitEvalStackPush(builder, indent + "    ", "simd_ret[0]");
-		EmitEvalStackPush(builder, indent + "    ", "simd_ret[1]");
-
-		builder.AppendLine($"{indent}}}");
-		return true;
 	}
 
 	private void EmitLinearVirtualDispatchCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
@@ -4629,7 +4517,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		// file-scope extern "C" declaration that has the correct parameter list,
 		// causing C2733 (cannot overload extern "C" with mismatched params).
 		if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-			_emittedExternalRuntimeSymbols[nativeTarget] = (returnAbi.CarrierKindCode, parameterAbis.Count);
+			_emittedExternalRuntimeSymbols[nativeTarget] = returnAbi.CarrierKindCode;
 		// Append hidden chaos_generic_context for shared canonical targets.
 		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
 		string hpCtxArg = "";

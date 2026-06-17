@@ -40,6 +40,9 @@
 #include "runtime_stubs/misc_stubs.h"
 #include "runtime_stubs/array_stubs.h"
 
+// For HotpatchNameRegistry lookup in OverrideUnresolvedExternalRuntimeEntries
+#include <hotpatch_table.h>
+
 // ── kChaosExternalRuntimeFnTable forward declarations ──────────────────────
 // Generated code defines these; the host fills unresolved entries with safe
 // stubs during Initialize().  Declared here so the host can reference them.
@@ -221,6 +224,12 @@ public:
     /// but BEFORE any test dispatch.
     void OverrideUnresolvedExternalRuntimeEntries() noexcept {
         if (kChaosExternalRuntimeCount <= 0) return;
+        // Track overridden entries for hotpatch fixup below.
+        // Heap allocation is unavailable in this noexcept context (no throw),
+        // and kChaosExternalRuntimeCount is typically <100.
+        const int kMaxOverrides = 1024;
+        const char* overridden_subjects[kMaxOverrides];
+        int32_t overridden_indices[kMaxOverrides];
         int overridden = 0;
         for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
             void* fn = kChaosExternalRuntimeFnTable[i];
@@ -253,10 +262,103 @@ public:
             // This entry is from an untrusted assembly — replace with nullptr
             // so FillExternalRuntimeStubs installs a safe return-0 stub.
             kChaosExternalRuntimeFnTable[i] = nullptr;
+            if (overridden < kMaxOverrides) {
+                overridden_subjects[overridden] = sid;
+                overridden_indices[overridden] = i;
+            }
             ++overridden;
         }
         // Re-fill null entries with safe stubs
         FillExternalRuntimeStubs();
+
+        // ── Patch hotpatch entries for overridden methods ─────────────
+        // FillExternalRuntimeStubs() filled kChaosExternalRuntimeFnTable[i]
+        // with safe return-0 stubs, but the AOT dispatch
+        // (ChaosDispatchMethodGetValue/ChaosDispatchMethod) uses
+        // s_hotpatch_entries[].direct_ptr — NOT kChaosExternalRuntimeFnTable.
+        //
+        // When a CombinedSubjects wrapper (AOT-compiled test method) calls a
+        // method from an external assembly, the interpreter resolves the call
+        // through the HotpatchNameRegistry and calls the hotpatch entry's
+        // direct_ptr.  If that direct_ptr is a CHAOS_IL2CPP_FAIL stub (codegen
+        // couldn't compile the method), the process aborts — bypassing the
+        // CombinedSubjects wrapper's managed try-catch.
+        //
+        // Fix: look up each overridden subject in HotpatchNameRegistry and
+        // replace its direct_ptr with the safe stub from the fn table.
+        if (overridden > 0) {
+            auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+            int patched = 0;
+            for (int32_t oi = 0; oi < overridden; oi++) {
+                auto* safe_fn = kChaosExternalRuntimeFnTable[overridden_indices[oi]];
+                if (safe_fn == nullptr) continue;
+
+                auto* sid = overridden_subjects[oi];
+                if (sid == nullptr || sid[0] == '\0') continue;
+
+                // Parse subject ID: "Assembly/Namespace.Type::Method:ReturnType(Params)"
+                const char* p = sid;
+
+                // Skip assembly prefix (everything up to and including '/')
+                const char* slash = std::strchr(p, '/');
+                if (slash == nullptr) continue;
+                p = slash + 1;
+
+                // Find "::" to split type from method
+                const char* colon2 = std::strstr(p, "::");
+                if (colon2 == nullptr) continue;
+
+                // Type part: find the last '.' before "::" for type name
+                const char* type_start = p;
+                const char* type_end = colon2;
+                for (const char* cp = p; cp < colon2; ++cp) {
+                    if (*cp == '.') type_start = cp + 1;
+                }
+
+                // Build ns string (everything before type_start, minus trailing dot)
+                std::string ns;
+                if (type_start > p) {
+                    ns.assign(p, type_start - p - 1);
+                }
+                std::string type_name(type_start, type_end - type_start);
+
+                // Method part: after "::" up to '(' or ':'
+                p = colon2 + 2;
+                const char* method_end = std::strchr(p, '(');
+                if (method_end == nullptr)
+                    method_end = std::strchr(p, ':');
+                if (method_end == nullptr) continue;
+                std::string method_name(p, method_end - p);
+
+                // Strip generic suffix: "MethodName<...>" → "MethodName"
+                auto gt = method_name.find('<');
+                if (gt != std::string::npos) method_name.resize(gt);
+
+                if (type_name.empty() || method_name.empty()) continue;
+
+                // Look up in HotpatchNameRegistry: composite key = (module_id<<32 | token)
+                uint64_t composite = registry.LookupMethod(
+                    ns.empty() ? nullptr : ns.c_str(),
+                    type_name.c_str(),
+                    method_name.c_str());
+                if (composite == 0) continue;
+
+                uint32_t mod = chaos::il2cpp::runtime_core::ExtractModuleId(composite);
+                uint32_t tok = chaos::il2cpp::runtime_core::ExtractToken(composite);
+                uint32_t slot = registry.TokenToSlot(mod, tok);
+                if (slot == ~0u) continue;
+
+                auto* entry = registry.GetDispatchEntryBySlot(mod, slot);
+                if (entry != nullptr && entry->direct_ptr != safe_fn) {
+                    entry->direct_ptr = safe_fn;
+                    ++patched;
+                }
+            }
+            if (patched > 0) {
+                std::printf("  [aggregate] Patched %d/%d hotpatch entries -> safe stubs\n",
+                            patched, overridden);
+            }
+        }
     }
 
     /// Returns true if the runtime has been successfully initialized.

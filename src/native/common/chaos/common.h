@@ -20,7 +20,6 @@
 #include "ptr_tag.h"
 #include "compiler_hints.h"
 #include "status.h"
-#include <chaos/tls_carrier_pool.h>  // Thread-local carrier pool for SIMD inline shapes
 #include "static_init.h"
 #include "span.h"
 #include "collection.h"

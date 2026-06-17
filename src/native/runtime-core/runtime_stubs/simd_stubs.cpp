@@ -62,7 +62,7 @@ V128 ChaosSimd_V128_CmpEq_I32(V128 a, V128 b) noexcept {
     return result;
 }
 
-V128 ChaosSimd_V128_Shl_I32(V128 a, CHAOS_IL2CPP_INT32 b) noexcept {
+V128 ChaosSimd_V128_Shl_I32(ChaosSimdV128 a, CHAOS_IL2CPP_INT32 b) noexcept {
     __m128i va = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&a));
     __m128i vr = _mm_slli_epi32(va, b);
     V128 result;
@@ -212,7 +212,7 @@ V256 ChaosSimd_V256_CmpEq_I32(V256 a, V256 b) noexcept {
     return result;
 }
 
-V256 ChaosSimd_V256_Shl_I32(V256 a, CHAOS_IL2CPP_INT32 b) noexcept {
+V256 ChaosSimd_V256_Shl_I32(ChaosSimdV256 a, CHAOS_IL2CPP_INT32 b) noexcept {
     __m256i va = _mm256_loadu_si256(reinterpret_cast<const __m256i*>(&a));
     __m256i vr = _mm256_slli_epi32(va, b);
     V256 result;

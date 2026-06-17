@@ -18,7 +18,6 @@
 #include <cinttypes>
 #include <csignal>
 #include <chaos/pal/pal_eh.h>
-#include "subjects/subject_dispatch.h"
 #include <csetjmp>
 
 #if defined(_WIN32)
@@ -147,6 +146,7 @@ static int g_benchmark_iterations = 0;
 
 {{ if is_jit }}
 extern "C" void ChaosJitRegisterAll();
+extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -207,10 +207,6 @@ static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
 #endif
 {{ end }}
 
-// AOT hotpatch module — defined in native-aot.generated.cpp, used by both
-// AOT and JIT modes for hotpatch name registry lookup during patch application.
-extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
-
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
     if (kPatchDataSize > 0u) {
         // Use ApplyPatchFromMemoryEx with per-method host arrays from
@@ -263,35 +259,6 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
                      static_cast<unsigned>(ctx->method_count), path);
     }
     return ctx;
-}
-
-// Fallback patch application using slot map when ApplyPatchFromMemoryEx
-// cannot match via name lookup.  Finds each subject's AOT dispatch entry
-// via kSubjectSlotMap and marks it as patched so the interpreter handles it.
-static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFallback() noexcept {
-    auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
-    if (registry.ModuleCount() == 0) {
-        std::fprintf(stderr, "WARN: ApplyHotpatchFallback — no modules registered\n");
-        return nullptr;
-    }
-    // Use slot map to find each subject's AOT dispatch entry and mark it as patched.
-    // method_key is set to the subject entry's own direct_ptr so the interpreter
-    // can re-dispatch to the AOT body when it can't handle the method — this
-    // ensures patched methods don't crash even without full PatchMethod data.
-    int patched = 0;
-    for (int si = 0; si < kSubjectEntryCount; si++) {
-        int i = kSubjectSlotMap[si];
-        if (i < 0 || i >= kAotMethodCount) continue;
-        auto* entries = const_cast<HotpatchEntryV0*>(GetHotpatchEntries());
-        if (entries == nullptr) continue;
-        if (!chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entries[i])) continue;
-        // Use direct_ptr as method_key so interpreter fallback can call the AOT body
-        registry.SetPatchedBySlot(0, static_cast<uint32_t>(i), true,
-                                  entries[i].direct_ptr, 0);
-        patched++;
-    }
-    std::fprintf(stderr, "INFO: ApplyHotpatchFallback — patched %d methods via slot map\n", patched);
-    return nullptr;
 }
 
 // Forward declaration for FactAbortHandler (defined below).
@@ -422,9 +389,10 @@ static int RunFactJsonMode() {
         });
 
         if (_setjmp(t_abort_jmp) == 0) {
-            try {
-                result = SubjectDispatchDirect(si, 0);
-            } catch (...) {
+            __try {
+                result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            } __except(EXCEPTION_EXECUTE_HANDLER) {
                 caught = true;
             }
         } else {
@@ -1113,6 +1081,14 @@ int main(int argc, char* argv[]) {
     }
     ChaosRegisterGcLayouts();
 
+    // ── Override unresolved external runtime entries ──────────────
+    // After module registration, entries from non-whitelisted external
+    // assemblies still point to CHAOS_IL2CPP_FAIL stubs that would abort
+    // the process.  Replace them with safe return-0 stubs and also patch
+    // the corresponding hotpatch entries so the interpreter doesn't route
+    // through the fail stubs either.
+    chaos_host->OverrideUnresolvedExternalRuntimeEntries();
+
     // ── Register interop stub fallbacks in kChaosExternalRuntimeFnTable ──
     // The codegen may not produce AOT stubs for all managed methods, leaving
     // their external function table entries as nullptr.  Bridge thunks that
@@ -1224,15 +1200,11 @@ int main(int argc, char* argv[]) {
 #if defined(_WIN32)
     AddVectoredExceptionHandler(1, JitVehHandler);
 #endif
-    ChaosJitRegisterAll();
-{{ end }}
-    // Register the AOT hotpatch module in the HotpatchNameRegistry so that
-    // ApplyPatchFromMemoryEx can find AOT entries by name during hotupdate.
-    // This is called unconditionally (both AOT and JIT modes) — the module
-    // pointer is always available in generated code.
     if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
         chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
     }
+    ChaosJitRegisterAll();
+{{ end }}
 
     int ret = 0;
     if (argc < 2) { ret = RunFactMode(); goto shutdown; }

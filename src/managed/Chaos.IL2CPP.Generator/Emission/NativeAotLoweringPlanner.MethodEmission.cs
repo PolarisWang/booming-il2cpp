@@ -33,7 +33,7 @@ public sealed partial class NativeAotLoweringPlanner
         // When there are no ABI slots but a generic context is needed, drop 'void' entirely.
         if (needsGenericContext)
         {
-            paramSig = string.IsNullOrEmpty(paramSig) || paramSig == "void"
+            paramSig = string.IsNullOrEmpty(paramSig) || paramSig == "void" || paramSig == "void"
                 ? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
                 : paramSig + ", CHAOS_IL2CPP_INTPTR chaos_generic_context";
         }
@@ -207,15 +207,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			AsyncMethodCount++;
 			var ak = ClassifyAsyncMethod(method);
-			if (ak == AsyncMethodKind.Complex)
-			{
-			    AsyncInterpreterFallbackCount++;
-			    builder.AppendLine("// Complex async");
-			    var fd = FormatMethodDeclaration(method, _sharedContextSymbols);
-			    builder.AppendLine(fd.Length > 0 && fd[^1] == ';' ? fd[..^1] : fd);
-			    builder.AppendLine("{ CHAOS_IL2CPP_FAIL(); }");
-			    return;
-			}
+			if (ak == AsyncMethodKind.Complex) { AsyncInterpreterFallbackCount++; builder.AppendLine("// Complex async"); var fd = FormatMethodDeclaration(method, _sharedContextSymbols); builder.AppendLine(fd.Length > 0 && fd[^1] == ";"[0] ? fd[..^1] : fd); builder.AppendLine("{ CHAOS_IL2CPP_FAIL(); }"); return; }
 			AsyncCoroutineMethodCount++;
 			var abody = BuildAsyncStructuredBody(method);
 			var uid = GetAsyncUid(method);
@@ -374,7 +366,9 @@ public sealed partial class NativeAotLoweringPlanner
 		// the fallback throws a C++ exception — caught here, returning default.
 		// Wrap subject methods w/o EH regions in try/catch to prevent
 		// C++ exceptions from propagating to the fact-json __except handler.
-		bool _isSubjectMethod = method.SubjectId is not null && IsSubjectMethod(method.SubjectId);
+		bool _isSubjectMethod = method.SubjectId is not null &&
+			(method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) ||
+			 method.SubjectId.StartsWith("Chaos.TestFramework.Sdk/", StringComparison.Ordinal));
 		bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0 && (method.Instructions?.Any(i => i.Callee != null) == true);
 		if (_wrapInTryCatch)
 			builder.AppendLine("	try {");

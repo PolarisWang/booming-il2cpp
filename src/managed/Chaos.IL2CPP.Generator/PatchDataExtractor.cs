@@ -601,11 +601,7 @@ public sealed class PatchDataExtractor
     {
         if (name.StartsWith("Subject_", StringComparison.Ordinal))
         {
-            // name = "Subject_0_ToFrozenDictionary_0_..."
-            // The index is between the first "_" and the second "_"
-            var span = name.AsSpan(8);  // "0_ToFrozenDictionary_0_..."
-            int underscoreIdx = span.IndexOf('_');
-            if (underscoreIdx > 0 && int.TryParse(span[..underscoreIdx], out var idx))
+            if (int.TryParse(name.AsSpan(8), out var idx))
                 return idx;
         }
         else if (name.StartsWith("CustomEntrySubject_", StringComparison.Ordinal))

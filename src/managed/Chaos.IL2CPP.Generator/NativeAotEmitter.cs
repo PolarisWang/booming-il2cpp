@@ -305,7 +305,7 @@ public sealed class NativeAotEmitter
         };
         var _rendered = ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
         var _sb = new StringBuilder(_rendered);
-        AddExternalRuntimeStubs(_sb, templateModel?.TypeDeclarationsCode);
+        AddExternalRuntimeStubs(_sb);
         FixFallbackZeroArgCalls(_sb);
         return _sb.ToString();
     }
@@ -455,7 +455,7 @@ public sealed class NativeAotEmitter
             sb.Append(templateModel.EntryFunctionCode);
         }
 
-	AddExternalRuntimeStubs(sb, templateModel?.TypeDeclarationsCode);
+	AddExternalRuntimeStubs(sb);
 	FixFallbackZeroArgCalls(sb);
         return sb;
     }
@@ -883,31 +883,16 @@ public sealed class NativeAotEmitter
 			"extern \"C\" CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;\n");
 	}
 
-	private static readonly Regex _extCallRx = new(@"\b(chaos_external_runtime_\w+)\(", RegexOptions.Compiled);
-	private static readonly Regex _extDeclRx = new(@"(?:extern|static inline|\bvoid)\b.*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Compiled | RegexOptions.Multiline);
-
-	private static void AddExternalRuntimeStubs(StringBuilder sb, string? headerContent = null)
+	private static void AddExternalRuntimeStubs(StringBuilder sb)
 	{
 		string text = sb.ToString();
-		var callRx = _extCallRx;
-		var declRx = _extDeclRx;
+		var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
+		// Match declarations/definitions: extern "C" / static inline / void return-type
+		var declRx = new Regex(@"(?:extern|static inline|\bvoid)\b.*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Multiline);
 		var calls = callRx.Matches(text);
 		if (calls.Count == 0) return;
 		var missing = new HashSet<string>();
 		foreach (Match m in calls) missing.Add(m.Groups[1].Value);
-		// Also scan the shared header for existing declarations (the header is included
-		// via #include but its content is not expanded by the regex on the current file).
-		if (!string.IsNullOrEmpty(headerContent))
-		{
-		    foreach (Match m in declRx.Matches(headerContent))
-		    {
-		        string sv = m.Value;
-		        int nextIdx = m.Index + m.Length;
-		        if (nextIdx < headerContent.Length && headerContent[nextIdx] == ')') continue;
-		        foreach (var s in missing.ToList())
-		            if (sv.Contains(s)) missing.Remove(s);
-		    }
-		}
 		foreach (Match m in declRx.Matches(text))
 		{
 			string sv = m.Value;
@@ -961,7 +946,13 @@ public sealed class NativeAotEmitter
 			}
 			stub.Append("extern CHAOS_IL2CPP_INTPTR ");
 			stub.Append(sym);
-			stub.AppendLine("() noexcept;");
+			stub.Append('(');
+			for (int i = 0; i < argCount; i++)
+			{
+				if (i > 0) stub.Append(", ");
+				stub.Append("CHAOS_IL2CPP_INTPTR");
+			}
+			stub.AppendLine(") noexcept;");
 		}
 		stub.AppendLine();
 		string genSrc = sb.ToString();
@@ -1012,7 +1003,7 @@ public sealed class NativeAotEmitter
 				argCount++;
 			}
 			string wrongDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
-			string wrongDeclC = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
+			string wrongDeclC = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
 			string correctDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "(";
 			for (int i = 0; i < argCount; i++)
 			{

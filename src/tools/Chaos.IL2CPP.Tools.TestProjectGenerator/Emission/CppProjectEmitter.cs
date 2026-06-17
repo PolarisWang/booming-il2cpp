@@ -16,6 +16,20 @@ public sealed class CppProjectEmitter
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     };
 
+    private static readonly string[] AllTemplateNames =
+    [
+        "TestProject.RuntimeEntry.cpp.scriban",
+        "TestProject.Dispatch.cpp.scriban",
+        "TestProject.SubjectDispatch.cpp.scriban",
+        "TestProject.SubjectDispatch.h.scriban",
+        "TestProject.CMakeLists.txt.scriban",
+        "TestProject.CMakePresets.json.scriban",
+        "TestProject.RuntimePatchdata.cpp.scriban",
+        "TestProject.chaos-config.cmake.scriban",
+        "TestProject.chaos-targets.cmake.scriban",
+        "TestProject.metadata.json.scriban",
+    ];
+
     /// <summary>
     /// Emit only dispatch.cpp and metadata (no codegen required).
     /// Used by the verification pipeline to generate verification_dispatch.generated.cpp
@@ -207,14 +221,14 @@ public sealed class CppProjectEmitter
             File.WriteAllText(repatchPath, repatchCode);
         }
         RenderToFile("TestProject.Dispatch.cpp.scriban", model, outputDir, "verification_dispatch.generated.cpp");
-        RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
-        RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
-        RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
-        RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
-        RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
-        RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
-        RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
-        RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
+        // SubjectDispatch is disabled — the template references functions that
+        // codegen may not generate (e.g. metadata subjects without generated
+        // wrappers), causing linker errors. Hotpatch dispatch handles MSVC SEH
+        // RAX clobbering via direct_ptr patching in OverrideUnresolvedExternalRuntimeEntries.
+        // Re-enable only when the dispatch table is built from codegen output,
+        // not from metadata subjects.
+        // RenderToFile("TestProject.SubjectDispatch.h.scriban", model, outputDir, "subjects/subject_dispatch.h");
+        // RenderToFile("TestProject.SubjectDispatch.cpp.scriban", model, outputDir, "subjects/subject_dispatch.cpp");
 
         RenderToFile("TestProject.CMakeLists.txt.scriban", model, outputDir, "CMakeLists.txt");
         RenderToFile("TestProject.CMakePresets.json.scriban", model, outputDir, "CMakePresets.json");
@@ -731,7 +745,7 @@ public sealed class CppProjectEmitter
             summary = new
             {
                 totalSubjects = subjects.Count,
-                factCount = subjects.Count(s => s.Kind == SubjectKind.Fact),
+                factCount = subjects.Count(s => s.Kind == SubjectKind.Fact && s.GeneratedMethodId is not null),
                 benchmarkCount = subjects.Count(s => s.Kind == SubjectKind.Benchmark),
                 hotUpdateCount = subjects.Count(s => s.Kind == SubjectKind.HotUpdate),
             },

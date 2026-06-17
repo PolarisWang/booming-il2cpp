@@ -533,7 +533,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// fallback static inline declarations for symbols the normal post-scan misses.
     /// Value is the return type's ABI carrier kind (needed to emit correct C++ return type).
     /// </summary>
-    private readonly Dictionary<string, (AotCoreIrAbiCarrierKind ReturnKind, int ParamCount)> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
 
     /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
@@ -1937,16 +1937,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // namespace to avoid LNK2019 from namespace-scoped vs global-scope mismatch.
         // Unused declarations are harmless — the linker only resolves referenced symbols.
 
-        // chaos_string_materialize: always define (declaration + identity definition when
-        // no string IDs exist) to satisfy calls from generated code.  When string IDs
-        // are present, the definition is emitted in the string helper section.
-        // Must be 'inline' because this definition is emitted in the shared header
-        // that is included by both the main file and all page files (ODR-safe).
+        // chaos_string_materialize: declaration only in the shared header.
+        // The definition (inline identity or real) is emitted in the main file
+        // to avoid ODR conflicts when _stringIdMapping changes between phases.
         sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
-        if (_stringIdMapping is not { Count: > 0 })
-        {
-            sb.AppendLine("inline CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept { return chaos_value; }");
-        }
         sb.AppendLine();
 
         // chaos_is_array_store_compatible: always emitted in object model
@@ -2202,23 +2196,43 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             sb.AppendLine();
         }
 
-        // ──         // ── Emit stub declarations for all chaos_external_runtime_* symbols
+        // ── Emit stub declarations for all chaos_external_runtime_* symbols
         // collected during method body emission (EmitInvocation path) that were
         // not already declared by the post-scan above.  These are symbols whose
         // DirectNativeSymbol was set after IR instruction processing, so the
         // post-scan (which reads IR instructions) could not detect them.
         //
-        // ALL emitted symbols get static inline stubs — internal linkage avoids
-        // conflicts with real definitions in the first TU.  Previously the else
-        // branch emitted extern "C" declarations for symbols in alreadyDeclared,
-        // which conflicted with static inline stubs (C2732 linkage contradiction).
+        // Skip symbols that already have extern declarations from helpers or
+        // fallback paths to avoid C2732 linkage contradiction (extern vs static).
         if (_emittedExternalRuntimeSymbols is { Count: > 0 })
         {
+            // Build set of symbols that already have extern declarations.
+            var alreadyDeclaredExtSyms = new HashSet<string>(StringComparer.Ordinal);
+            if (_externalRuntimeHelpers is { Count: > 0 })
+            {
+                foreach (var h in _externalRuntimeHelpers)
+                    if (!string.IsNullOrEmpty(h.TargetSymbol))
+                        alreadyDeclaredExtSyms.Add(h.TargetSymbol);
+            }
+            if (_externalRuntimeSubjects is { Count: > 0 })
+            {
+                var helpersWithSource = _externalRuntimeHelpers?
+                    .Where(h => !string.IsNullOrEmpty(h.Source))
+                    .Select(h => h.SubjectId)
+                    .ToHashSet(StringComparer.Ordinal) ?? new HashSet<string>();
+                foreach (var kvp in _externalRuntimeSubjects)
+                {
+                    if (helpersWithSource.Contains(kvp.Key)) continue;
+                    var sym = GetExternalRuntimeHelperSymbol(kvp.Key);
+                    alreadyDeclaredExtSyms.Add(sym);
+                }
+            }
             foreach (var kvp in _emittedExternalRuntimeSymbols.OrderBy(kv => kv.Key))
             {
+                if (alreadyDeclaredExtSyms.Contains(kvp.Key)) continue;
                 // Use correct C++ return type matching ABI carrier: Float32->float (XMM0),
                 // Float64->double (XMM0), others->CHAOS_IL2CPP_INTPTR (RAX).
-                string cppType = kvp.Value.ReturnKind switch
+                string cppType = kvp.Value switch
                 {
                     AotCoreIrAbiCarrierKind.Void => "void",
                     AotCoreIrAbiCarrierKind.Float32 => "float",
@@ -2229,21 +2243,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 sb.Append(cppType);
                 sb.Append(' ');
                 sb.Append(kvp.Key);
-                int paramCount = kvp.Value.ParamCount;
-                if (paramCount > 0)
-                {
-                    sb.Append("(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0");
-                    for (int pi = 1; pi < paramCount; pi++)
-                    {
-                        sb.Append($", CHAOS_IL2CPP_INTPTR chaos_fn_arg_{pi}");
-                    }
-                    sb.Append(") noexcept");
-                    if (kvp.Value.ReturnKind == AotCoreIrAbiCarrierKind.Void)
-                        sb.AppendLine(" {}");
-                    else
-                        sb.AppendLine(" { return 0; }");
-                }
-                else if (kvp.Value.ReturnKind == AotCoreIrAbiCarrierKind.Void)
+                if (kvp.Value == AotCoreIrAbiCarrierKind.Void)
                     sb.AppendLine("() noexcept {}");
                 else
                     sb.AppendLine("() noexcept { return 0; }");
@@ -2889,7 +2889,9 @@ return sb.ToString();
         if (string.IsNullOrEmpty(entrySubjectId))
             return reachable;
 
-        var bySubjectId = methods.ToLookup(m => m.SubjectId, StringComparer.Ordinal);
+        var bySubjectId = methods
+            .GroupBy(m => m.SubjectId, StringComparer.Ordinal)
+            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
 
         var queue = new Queue<string>();
         queue.Enqueue(entrySubjectId);
@@ -2898,10 +2900,10 @@ return sb.ToString();
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
-            if (!bySubjectId.Contains(current))
+            if (!bySubjectId.TryGetValue(current, out var methodVariants))
                 continue;
 
-            foreach (var method in bySubjectId[current])
+            foreach (var method in methodVariants)
             {
                 if (method.Instructions == null)
                     continue;

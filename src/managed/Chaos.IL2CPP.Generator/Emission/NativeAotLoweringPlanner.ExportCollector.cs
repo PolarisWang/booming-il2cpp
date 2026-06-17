@@ -33,17 +33,10 @@ public sealed partial class NativeAotLoweringPlanner
     /// <summary>Convenience overload accepting a plain string.</summary>
     private static string BuildAbiExportDeclarations(string text)
     {
-        // 1. Collect ALL existing declarations/definitions with their argument counts.
-        var declared = new Dictionary<string, int>(StringComparer.Ordinal);
+        // 1. Collect ALL existing declaration forms.
+        var declared = new HashSet<string>();
         foreach (Match m in s_declRx.Matches(text))
-        {
-            string sym = m.Groups[1].Value;
-            int argCount = CountDeclArgs(text, m.Index, m.Length);
-            // Keep the highest arg count seen for this symbol (prevents
-            // overwriting a multi-arg declaration with a 0-arg definition).
-            if (!declared.ContainsKey(sym) || argCount > declared[sym])
-                declared[sym] = argCount;
-        }
+            declared.Add(m.Groups[1].Value);
 
         // 2. Collect function-call references with argument counts.
         //    Map symbol → max argument count seen at call sites.
@@ -56,15 +49,9 @@ public sealed partial class NativeAotLoweringPlanner
             referenced[sym] = Math.Max(referenced.GetValueOrDefault(sym, 0), argCount);
         }
 
-        // 3. Difference — referenced but not declared (or declared with fewer args than needed).
+        // 3. Difference — referenced but not declared.
         var missing = referenced.Keys
-            .Where(k =>
-            {
-                int maxDeclared = declared.GetValueOrDefault(k, -1);
-                int required = referenced[k];
-                // If not declared at all, or declared with fewer args than referenced: missing.
-                return maxDeclared < 0 || maxDeclared < required;
-            })
+            .Where(k => !declared.Contains(k))
             .OrderBy(k => k)
             .ToList();
         if (missing.Count == 0) return string.Empty;
@@ -87,19 +74,6 @@ public sealed partial class NativeAotLoweringPlanner
         }
         stub.AppendLine();
         return stub.ToString();
-    }
-
-    /// <summary>Count comma-separated arguments in a function declaration starting at pos in text.</summary>
-    private static int CountDeclArgs(string text, int startPos, int matchLen)
-    {
-        int open = startPos + matchLen; // matchLen is the end of the symbol name (before \s*(?=...))
-        while (open < text.Length && text[open] == ' ') open++;
-        if (open >= text.Length || text[open] != '(') return -1;
-        int close = text.IndexOf(')', open + 1);
-        if (close < 0 || close <= open + 1) return 0;
-        string args = text.Substring(open + 1, close - open - 1);
-        if (string.IsNullOrWhiteSpace(args)) return 0;
-        return args.Split(',').Length;
     }
 
     /// <summary>Count comma-separated arguments in a function call starting at pos in text.</summary>
