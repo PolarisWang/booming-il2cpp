@@ -4230,6 +4230,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		//   1. Compiler inlining (the call is a known symbol at compile time)
 		//   2. No function pointer dereference overhead
 		//   3. Better code generation (the compiler sees the full call graph)
+		builder.AppendLine(indentation + "    chaos_extext_end_" + extLabelSeq + ": ;");
 		if (invocationTarget.DirectNativeSymbol is { } nativeSymbol)
 		{
 		    // Collect chaos_external_runtime_* symbols for fallback declaration emission
@@ -4358,8 +4359,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		else
 		    builder.AppendLine($"{indentation}        return {{}};");
 		builder.AppendLine($"{indentation}    }}");
-		// chaos_extext_end BEFORE const auto chaos_result — avoids C2362
-		builder.AppendLine($"{indentation}    chaos_extext_end_" + extLabelSeq + ": ;");
+		// chaos_extext_end emitted before DirectNativeSymbol section above — avoids C2362
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			builder.AppendLine($"{indentation}    reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
