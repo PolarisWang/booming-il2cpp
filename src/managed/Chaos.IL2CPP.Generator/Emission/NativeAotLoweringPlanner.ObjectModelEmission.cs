@@ -532,6 +532,8 @@ public sealed partial class NativeAotLoweringPlanner
 			ulong ifaceStableId = ComputeStableTypeId(ifaceId);
 
 		}
+		var emittedMethodTableSymbols = new HashSet<string>(StringComparer.Ordinal);
+
 		// ── Value type MethodTable definitions (must precede reference types,
 		// because reference types may reference value type MethodTable symbols
 		// as their parent, e.g., AssertionException → System_Exception) ──
@@ -549,12 +551,20 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
+			// Skip interface types - their MethodTable is in ref type section
+			if (interfaceTypeSubjectIds.Contains(item3))
+				continue;
+			// Deduplicate: skip if MethodTable symbol was already emitted
+			// (can happen when multiple assemblies define the same type).
+			var mtSym = GetNativeMethodTableSymbol(item3);
+			if (!emittedMethodTableSymbols.Add(mtSym))
+				continue;
 			ulong stableId = ComputeStableTypeId(item3);
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("MethodTable ");
-				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
+				handler.AppendFormatted(mtSym);
 				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};");
@@ -693,9 +703,13 @@ public sealed partial class NativeAotLoweringPlanner
 					if (TypeHasFinalizer(item))
 					    flags |= 0x04; // kTypeInfoHasFinalizer
 				_vtableLengths.TryGetValue(item, out int vtLen);
-				// MethodTable = hot(32B) + warm(32B) flat initializer
-				handler.AppendLiteral("MethodTable ");
-				handler.AppendFormatted(GetNativeMethodTableSymbol(item));
+			// Deduplicate: skip if MethodTable symbol was already emitted
+			var mtSym2 = GetNativeMethodTableSymbol(item);
+			if (!emittedMethodTableSymbols.Add(mtSym2))
+				continue;
+			// MethodTable = hot(32B) + warm(32B) flat initializer
+			handler.AppendLiteral("MethodTable ");
+			handler.AppendFormatted(mtSym2);
 				handler.AppendLiteral(" = {");
 				handler.AppendFormatted(parentExpr);
 				handler.AppendLiteral(", ");
@@ -819,7 +833,7 @@ public sealed partial class NativeAotLoweringPlanner
 				ifaceMapExpr = "nullptr";
 				ifaceCountExpr = "0";
 			}
-			if (!valueTypeSubjectIds.Contains(item3) && !referenceTypeSubjectIds.Contains(item3))
+			if (!valueTypeSubjectIds.Contains(item3) && !referenceTypeSubjectIds.Contains(item3) && !interfaceTypeSubjectIds.Contains(item3))
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);

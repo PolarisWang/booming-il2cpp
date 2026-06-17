@@ -1899,9 +1899,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             foreach (string ifaceId in allInterfaceTypeIds.OrderBy(id => id, StringComparer.Ordinal))
             {
                 ulong ifaceStableId = ComputeStableTypeId(ifaceId);
-                sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
+                sb.Append("inline constexpr CHAOS_IL2CPP_INTPTR ");
                 sb.Append(GetNativeTypeIdSymbol(ifaceId));
-                sb.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
+                sb.Append(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
                 sb.Append(ifaceStableId.ToString());
                 sb.AppendLine("ULL);");
             }
