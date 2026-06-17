@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-17",
+  "assemblyName": "System.Collections",
+  "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": 73.66,
+      "median": 73.66,
+      "min": 73.66,
+      "max": 73.66,
+      "p25": 73.66,
+      "p75": 73.66
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": 73.1,
+      "median": 73.1,
+      "min": 73.1,
+      "max": 73.1,
+      "p25": 73.1,
+      "p75": 73.1
+    },
+    "net10VsNet8Pct": {
+      "mean": -101.45,
+      "median": -101.45,
+      "min": -101.45,
+      "max": -101.45,
+      "p25": -101.45,
+      "p75": -101.45
+    },
+    "highValueMethods_betterThanNet8": 71.4
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 14,
+      "methodsWithNet8": 14,
+      "aggregate": {
+        "methodsBetterThanNet8": 10,
+        "chaosAotVsNet8Pct": {
+          "mean": 73.66,
+          "median": 73.34,
+          "min": 63.67,
+          "max": 83.33,
+          "p25": 66.67,
+          "p75": 81.63
+        },
+        "highValueMethods_betterThanNet8": 100.0,
+        "chaosJitVsNet8Pct": {
+          "mean": 73.1,
+          "median": 78.88,
+          "min": 55.89,
+          "max": 98.89,
+          "p25": 57.84,
+          "p75": 80.39
+        },
+        "net10VsNet8Pct": {
+          "mean": -101.45,
+          "median": -122.22,
+          "min": -166.67,
+          "max": 5.88,
+          "p25": -141.66,
+          "p75": -63.34
+        },
+        "gcAllocComparison": {
+          "aotVsNet8Ratio": {
+            "mean": -100.0,
+            "median": -100.0,
+            "min": -100.0,
+            "max": -100.0,
+            "p25": -100.0,
+            "p75": -100.0
+          },
+          "methodsWithAllocData": 10
+        }
+      }
+    }
+  ]
+}

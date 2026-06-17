@@ -1,0 +1,66 @@
+{
+  "date": "2026-06-17",
+  "assemblyName": "System.Collections.Immutable",
+  "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": -602.75,
+      "median": -602.75,
+      "min": -602.75,
+      "max": -602.75,
+      "p25": -602.75,
+      "p75": -602.75
+    },
+    "chaosJitVsNet8Pct": {
+      "mean": -698.26,
+      "median": -698.26,
+      "min": -698.26,
+      "max": -698.26,
+      "p25": -698.26,
+      "p75": -698.26
+    },
+    "net10VsNet8Pct": {
+      "mean": -3.49,
+      "median": -3.49,
+      "min": -3.49,
+      "max": -3.49,
+      "p25": -3.49,
+      "p75": -3.49
+    },
+    "highValueMethods_betterThanNet8": 0.0
+  },
+  "perChunk": [
+    {
+      "slug": "global-ns",
+      "methodCount": 21,
+      "methodsWithNet8": 21,
+      "aggregate": {
+        "methodsBetterThanNet8": 0,
+        "chaosAotVsNet8Pct": {
+          "mean": -602.75,
+          "median": -529.61,
+          "min": -777.69,
+          "max": -500.94,
+          "p25": -653.65,
+          "p75": -515.27
+        },
+        "highValueMethods_betterThanNet8": 0.0,
+        "chaosJitVsNet8Pct": {
+          "mean": -698.26,
+          "median": -610.23,
+          "min": -907.87,
+          "max": -576.69,
+          "p25": -759.05,
+          "p75": -593.46
+        },
+        "net10VsNet8Pct": {
+          "mean": -3.49,
+          "median": 0.0,
+          "min": -31.25,
+          "max": 11.11,
+          "p25": -11.11,
+          "p75": 1.59
+        }
+      }
+    }
+  ]
+}
