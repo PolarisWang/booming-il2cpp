@@ -230,6 +230,27 @@ public sealed partial class NativeAotLoweringPlanner
                 ["method_name"] = entry.MethodName,
                 ["flags"] = flags,
             };
+            // Check if this method has an external runtime helper (GenericShapeDescriptor).
+            // If so, use the helper's native function as direct_ptr instead of the AOT
+            // fallback stub, enabling native dispatch for methods like Interlocked/IsPow2
+            // that don't have real AOT compiled bodies.
+            if (_externalRuntimeHelpers is { } helpers)
+            {
+                var normalizedId = ManagedNaming.NormalizeSubjectIdAssembly(entry.SubjectId);
+                foreach (var h in helpers)
+                {
+                    if (string.Equals(h.SubjectId, normalizedId, StringComparison.Ordinal) ||
+                        string.Equals(h.SubjectId, entry.SubjectId, StringComparison.Ordinal))
+                    {
+                        var overrideSymbol = h.DirectNativeSymbol ?? h.TargetSymbol;
+                        if (overrideSymbol != null)
+                        {
+                            entryModels[i]["native_symbol"] = overrideSymbol;
+                        }
+                        break;
+                    }
+                }
+            }
         }
 
         // Token->Slot models
