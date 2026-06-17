@@ -2875,9 +2875,7 @@ return sb.ToString();
         if (string.IsNullOrEmpty(entrySubjectId))
             return reachable;
 
-        var bySubjectId = methods
-            .GroupBy(m => m.SubjectId, StringComparer.Ordinal)
-            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
+        var bySubjectId = methods.ToLookup(m => m.SubjectId, StringComparer.Ordinal);
 
         var queue = new Queue<string>();
         queue.Enqueue(entrySubjectId);
@@ -2886,10 +2884,10 @@ return sb.ToString();
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
-            if (!bySubjectId.TryGetValue(current, out var methodVariants))
+            if (!bySubjectId.Contains(current))
                 continue;
 
-            foreach (var method in methodVariants)
+            foreach (var method in bySubjectId[current])
             {
                 if (method.Instructions == null)
                     continue;
