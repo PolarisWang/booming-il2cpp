@@ -1382,6 +1382,14 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			// handled indirectly via callee-based type discovery above.
 		}
 
+		// Re-capture hashSet3 additions made during the post-scan above.
+		// The initial UnionWith at line 1303 ran before the post-scan added
+		// cross-assembly type references to hashSet3; without this second
+		// merge, types from non-primary assemblies (Chaos.TestFramework.Sdk,
+		// System.Collections) would be missing from _allEmittedTypeSubjectIds,
+		// causing their chaos_boxed_type_id_* constants to be undeclared (C2065).
+		_allEmittedTypeSubjectIds.UnionWith(hashSet3);
+
 		foreach (var m in _methodsBySubjectId.Values)
 		{
 			if (!m.IsStatic &&

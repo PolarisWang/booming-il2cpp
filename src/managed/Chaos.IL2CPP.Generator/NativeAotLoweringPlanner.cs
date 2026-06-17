@@ -1912,10 +1912,33 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
             {
                 if (allInterfaceTypeIds.Count > 0 && allInterfaceTypeIds.Contains(typeId))
-                    continue; // already declared as inline constexpr above
-                sb.Append("extern const CHAOS_IL2CPP_UINT64 ");
+                    continue; // already emitted as inline constexpr above
+                ulong sid = ComputeStableTypeId(typeId);
+                sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
                 sb.Append(GetNativeTypeIdSymbol(typeId));
-                sb.AppendLine(";");
+                sb.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
+                sb.Append(sid.ToString());
+                sb.AppendLine("ULL);");
+            }
+            sb.AppendLine();
+        }
+
+        // ── Boxed type ID extern declarations ──
+        // Page files reference chaos_boxed_type_id_* constants in switch/case
+        // blocks (ReflectionObjectEmission, ObjectEqualityEmission Scriban templates).
+        // These constants are NOT defined on page 0, so emit as inline constexpr
+        // (not extern const) so switch/case can evaluate them at compile time.
+        // No C2374 risk since there's no duplicate on page 0.
+        if (_boxedTypeSubjectIds is { Count: > 0 })
+        {
+            foreach (var typeId in _boxedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+            {
+                ulong stableId = ComputeStableTypeId(typeId);
+                sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
+                sb.Append(GetNativeBoxTypeIdSymbol(typeId));
+                sb.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
+                sb.Append(stableId.ToString());
+                sb.AppendLine("ULL);");
             }
             sb.AppendLine();
         }
