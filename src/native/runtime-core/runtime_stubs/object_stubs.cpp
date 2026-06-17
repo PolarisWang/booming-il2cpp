@@ -88,5 +88,12 @@ CHAOS_IL2CPP_INTPTR ChaosObjectMemberwiseClone(CHAOS_IL2CPP_INTPTR obj) noexcept
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(clone);
 }
 
+// ── Object::ReferenceEquals ───────────────────────────────────────────
+extern "C" CHAOS_IL2CPP_INTPTR chaos_object_reference_equals(
+    CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept
+{
+    return a == b ? 1 : 0;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

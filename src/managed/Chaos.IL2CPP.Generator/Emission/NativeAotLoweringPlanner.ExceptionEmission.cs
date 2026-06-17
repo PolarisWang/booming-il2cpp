@@ -3226,7 +3226,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		if (calleeHasReturn)
 			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_retval{inlineId}{{}};");
 		for (int _di = 0; _di < paramCount; _di++)
-			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_arg_{_di}{{}};");
+			builder.AppendLine(indentation + "    CHAOS_IL2CPP_INTPTR chaos_inline_arg_" + _di + "{};");
 
 		// Consume arguments from eval stack into local C++ variables
 		for (int i = paramCount - 1; i >= 0; i--)
