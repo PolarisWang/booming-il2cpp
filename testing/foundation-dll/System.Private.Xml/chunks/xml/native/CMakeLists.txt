@@ -157,6 +157,9 @@ set(CHAOS_ENTRY_STUBS
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
 )
+set(CHAOS_REFLECTION_STUBS
+    "${CHAOS_SDK_DIR}/runtime_stubs/reflection_stubs.cpp"
+)
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
@@ -174,6 +177,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
+    ${CHAOS_REFLECTION_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
