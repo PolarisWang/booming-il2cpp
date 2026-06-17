@@ -119,20 +119,12 @@ public sealed partial class NativeAotLoweringPlanner
 			for (int i = 0; i < methodAbiParameterSlots.Count; i++)
 				argNames[i] = "chaos_fn_arg_" + i.ToString();
 			string text2 = string.Join(", ", argNames);
-		// Build forwarding argument list, appending chaos_generic_context if needed.
-		// The stub emits context when _stubNeedsContext says so.  But the TARGET
-		// function might not need context even if the stub does (or vice versa).
-		// Check both to match the target's actual parameter list and avoid C2660
-		// ("function does not take N arguments").
-		bool targetNeedsContext = _sharedContextSymbols?.Contains(targetSymbol) == true;
-		bool forwardNeedsContext = needsContext && targetNeedsContext;
+		// Build forwarding argument list — do NOT append chaos_generic_context.
+		// The target function independently manages its own context parameter.
+		// Forwarding context creates an extra argument (C2660) when the target
+		// has no context — especially for method-level generic stubs where
+		// _stubNeedsContext uses union semantics.
 		string forwardedArgs = text2;
-		if (forwardNeedsContext)
-		{
-			forwardedArgs = string.IsNullOrEmpty(text2)
-				? "chaos_generic_context"
-				: text2 + ", chaos_generic_context";
-		}
 		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
 		{
 			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
