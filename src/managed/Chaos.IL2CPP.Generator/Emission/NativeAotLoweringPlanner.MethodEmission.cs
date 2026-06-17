@@ -374,9 +374,7 @@ public sealed partial class NativeAotLoweringPlanner
 		// the fallback throws a C++ exception — caught here, returning default.
 		// Wrap subject methods w/o EH regions in try/catch to prevent
 		// C++ exceptions from propagating to the fact-json __except handler.
-		bool _isSubjectMethod = method.SubjectId is not null &&
-			(method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) ||
-			 method.SubjectId.StartsWith("Chaos.TestFramework.Sdk/", StringComparison.Ordinal));
+		bool _isSubjectMethod = method.SubjectId is not null && IsSubjectMethod(method.SubjectId);
 		bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0 && (method.Instructions?.Any(i => i.Callee != null) == true);
 		if (_wrapInTryCatch)
 			builder.AppendLine("	try {");
