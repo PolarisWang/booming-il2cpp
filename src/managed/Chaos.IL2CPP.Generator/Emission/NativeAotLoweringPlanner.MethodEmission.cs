@@ -138,10 +138,13 @@ public sealed partial class NativeAotLoweringPlanner
 			// Generic instantiation stub: when T resolves to an empty value type
 			// (e.g. Marker struct), the canonical body returns a struct but the
 			// stub declares int32_t (the ABI carrier).  Direct return forwarding
-			// would cause C2440 — return 0 instead (empty value types are always 0).
+			// would cause C2440 — call the target for side effects, then return 0.
 			if (method.InstantiationStubId != null &&
 			    method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Int32)
 			{
+			    builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
+			        ? $"    {targetSymbol}();"
+			        : $"    {targetSymbol}({forwardedArgs});");
 			    builder.AppendLine($"    return 0;");
 			}
 			else

@@ -29,6 +29,7 @@ def ensure_tool_built(tool_name: str) -> bool:
     """Rebuild the tool DLL if the source has changed since last build.
 
     Uses source timestamp comparison for incremental builds.
+    Also checks transitive dependency DLLs (e.g. Generator -> Driver -> TPG).
     """
     proj = _tool_dir(tool_name) / f"{tool_name}.csproj"
     dll = tool_dll(tool_name)
@@ -39,9 +40,35 @@ def ensure_tool_built(tool_name: str) -> bool:
             src_time = max(p.stat().st_mtime for p in src_files if p.is_file())
         else:
             src_time = proj.stat().st_mtime
-        if src_time <= dll.stat().st_mtime:
+
+        # Also check transitive dependency DLLs (Generator -> Driver -> TPG).
+        # The TPG references Chaos.IL2CPP.Driver which references Generator.
+        # If the Generator DLL is newer, the TPG must be rebuilt.
+        repo = _repo_root()
+        dep_dlls = [
+            repo / "src" / "managed" / "Chaos.IL2CPP.Generator" / "bin" / "Debug" / "net8.0" / "Chaos.IL2CPP.Generator.dll",
+            repo / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Debug" / "net8.0" / "Chaos.IL2CPP.Driver.dll",
+        ]
+        max_dep_time = src_time
+        for dep in dep_dlls:
+            if dep.exists():
+                max_dep_time = max(max_dep_time, dep.stat().st_mtime)
+
+        if max_dep_time <= dll.stat().st_mtime:
             return True
-    # Rebuild
+
+    # Force rebuild: delete obj/ directories for tool AND its transitive
+    # dependencies (Generator -> Driver -> TPG) so MSBuild cannot use stale
+    # cached assemblies and must rebuild the full chain.
+    import shutil
+    for dep_dir in [
+        proj.parent / "obj",
+        _repo_root() / "src" / "managed" / "Chaos.IL2CPP.Generator" / "obj",
+        _repo_root() / "src" / "managed" / "Chaos.IL2CPP.Driver" / "obj",
+    ]:
+        if dep_dir.exists():
+            shutil.rmtree(dep_dir, ignore_errors=True)
+
     result = subprocess.run(
         ["dotnet", "build", str(proj), "-nologo"],
         capture_output=True, text=True, timeout=120)
