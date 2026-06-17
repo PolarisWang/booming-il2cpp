@@ -3,62 +3,62 @@
   "assemblyName": "System.Runtime.Serialization.Formatters",
   "aggregate": {
     "chaosAotVsNet8Pct": {
-      "mean": 73.01,
-      "median": 73.01,
-      "min": 73.01,
-      "max": 73.01,
-      "p25": 73.01,
-      "p75": 73.01
+      "mean": 71.35,
+      "median": 71.35,
+      "min": 71.35,
+      "max": 71.35,
+      "p25": 71.35,
+      "p75": 71.35
     },
     "chaosJitVsNet8Pct": {
-      "mean": 72.2,
-      "median": 72.2,
-      "min": 72.2,
-      "max": 72.2,
-      "p25": 72.2,
-      "p75": 72.2
+      "mean": 70.86,
+      "median": 70.86,
+      "min": 70.86,
+      "max": 70.86,
+      "p25": 70.86,
+      "p75": 70.86
     },
     "net10VsNet8Pct": {
-      "mean": -9.39,
-      "median": -9.39,
-      "min": -9.39,
-      "max": -9.39,
-      "p25": -9.39,
-      "p75": -9.39
+      "mean": -13.04,
+      "median": -13.04,
+      "min": -13.04,
+      "max": -13.04,
+      "p25": -13.04,
+      "p75": -13.04
     },
-    "highValueMethods_betterThanNet8": 91.3
+    "highValueMethods_betterThanNet8": 93.3
   },
   "perChunk": [
     {
       "slug": "global-ns",
-      "methodCount": 58,
-      "methodsWithNet8": 46,
+      "methodCount": 56,
+      "methodsWithNet8": 45,
       "aggregate": {
         "methodsBetterThanNet8": 42,
         "chaosAotVsNet8Pct": {
-          "mean": 73.01,
-          "median": 70.26,
-          "min": 58.73,
+          "mean": 71.35,
+          "median": 69.47,
+          "min": 55.78,
           "max": 99.0,
-          "p25": 67.18,
-          "p75": 72.93
+          "p25": 66.23,
+          "p75": 73.24
         },
         "highValueMethods_betterThanNet8": 100.0,
         "chaosJitVsNet8Pct": {
-          "mean": 72.2,
-          "median": 70.1,
-          "min": 56.22,
+          "mean": 70.86,
+          "median": 69.33,
+          "min": 45.49,
           "max": 99.0,
-          "p25": 67.11,
-          "p75": 72.41
+          "p25": 66.41,
+          "p75": 72.55
         },
         "net10VsNet8Pct": {
-          "mean": -9.39,
-          "median": -10.0,
-          "min": -50.0,
+          "mean": -13.04,
+          "median": -11.11,
+          "min": -80.0,
           "max": 28.57,
-          "p25": -11.11,
-          "p75": -1.78
+          "p25": -22.22,
+          "p75": -10.0
         },
         "gcAllocComparison": {
           "aotVsNet8Ratio": {
