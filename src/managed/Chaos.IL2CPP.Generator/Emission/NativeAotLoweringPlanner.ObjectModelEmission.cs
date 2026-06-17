@@ -792,6 +792,13 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		}
 		var _emittedMT = new HashSet<string>(StringComparer.Ordinal);
+		// Pre-populate with MethodTable symbols from the Scriban TypeInfo template
+		// (already emitted before this loop, contains all _referenceTypeBaseSubjectIds types).
+		if (_referenceTypeBaseSubjectIds != null)
+		{
+			foreach (var kv in _referenceTypeBaseSubjectIds)
+				emittedMethodTableSymbols.Add(GetNativeMethodTableSymbol(kv.Key));
+		}
 		foreach (string item3 in sortedHashSet3)
 		{
 			ulong stableId = ComputeStableTypeId(item3);
