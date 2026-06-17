@@ -3222,17 +3222,17 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    // Inlined: {calleeMethod.SubjectId}");
 
+		// Pre-declare ALL inline vars at block top (before labels) to avoid C2362
+		if (calleeHasReturn)
+			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_retval{inlineId}{{}};");
+		for (int _di = 0; _di < paramCount; _di++)
+			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_arg_{_di}{{};");
+
 		// Consume arguments from eval stack into local C++ variables
 		for (int i = paramCount - 1; i >= 0; i--)
 		{
 			string argExpr = ConsumeEvalStackValueExpression();
-			builder.AppendLine($"{indentation}    auto chaos_inline_arg_{i} = {argExpr};");
-		}
-
-		// For non-void callees, capture return value at each ret and push at unified exit
-		if (calleeHasReturn)
-		{
-			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_retval{inlineId}{{}};");
+			builder.AppendLine($"{indentation}    chaos_inline_arg_{i} = {argExpr};");
 		}
 
 		int localOffset = _currentMethodArtifact.LocalCount;
