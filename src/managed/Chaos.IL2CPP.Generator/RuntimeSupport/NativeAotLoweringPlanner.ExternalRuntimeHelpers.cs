@@ -336,11 +336,9 @@ public sealed partial class NativeAotLoweringPlanner
 			: CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType);
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
 		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
-		// All catch-all fallback functions use CHAOS_IL2CPP_INTPTR parameter to match
-		// the extern "C" declaration format and avoid C2733 overload conflict.
-		int inferredArgCount = InferParameterCountFromSubjectId(callee);
-		var paramSig = string.Join(", ", Enumerable.Repeat("CHAOS_IL2CPP_INTPTR", inferredArgCount > 0 ? inferredArgCount : 1));
-		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, paramSig,
+		// All catch-all fallback functions use () regardless of actual method params
+		// because call sites pass 0 args and the body uses hardcoded subject ID.
+		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
 			["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);

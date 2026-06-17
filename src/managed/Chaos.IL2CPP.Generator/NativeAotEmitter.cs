@@ -959,15 +959,9 @@ public sealed class NativeAotEmitter
 				}
 				argCount++;
 			}
-			stub.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
+			stub.Append("extern CHAOS_IL2CPP_INTPTR ");
 			stub.Append(sym);
-			stub.Append('(');
-			for (int i = 0; i < argCount; i++)
-			{
-				if (i > 0) stub.Append(", ");
-				stub.Append("CHAOS_IL2CPP_INTPTR");
-			}
-			stub.AppendLine(") noexcept;");
+			stub.AppendLine("() noexcept;");
 		}
 		stub.AppendLine();
 		string genSrc = sb.ToString();
@@ -1018,7 +1012,7 @@ public sealed class NativeAotEmitter
 				argCount++;
 			}
 			string wrongDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
-			string wrongDeclC = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
+			string wrongDeclC = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
 			string correctDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "(";
 			for (int i = 0; i < argCount; i++)
 			{
