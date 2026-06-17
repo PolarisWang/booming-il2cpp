@@ -3036,7 +3036,7 @@ return sb.ToString();
             Console.Error.WriteLine($"[STUB] Non-subject method '{method.SubjectId}' emitted as unreachable stub ({method.Instructions.Count} IL instructions)");
         }
 
-        var builder = new StringBuilder();
+        var builder = StringBuilderPool.Rent();
         builder.AppendLine($"// AOT-unreachable stub: {method.SubjectId}");
         builder.AppendLine($"extern \"C\" {returnType} {symbol}({paramList})");
         builder.AppendLine("{");
@@ -3070,7 +3070,9 @@ return sb.ToString();
             builder.AppendLine("}");
         }
 
-        return builder.ToString();
+        var result = builder.ToString();
+        StringBuilderPool.Return(builder);
+        return result;
     }
 
     private string BuildMethodSourceSafe(AotCoreIrMethodArtifact method)
@@ -3124,7 +3126,7 @@ return sb.ToString();
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
     {
-        var builder = new StringBuilder(4096);
+        var builder = StringBuilderPool.Rent(4096);
         if (!string.IsNullOrWhiteSpace(method.OpenDefinitionSubjectId) ||
             method.SharedGenericBodyId is not null ||
             method.InstantiationStubId is not null ||
@@ -3139,10 +3141,10 @@ return sb.ToString();
 
         EmitManagedMethod(builder, method);
         EmitGenericInstantiationStub(builder, method);
-        return builder.ToString().TrimEnd();
+        var result = builder.ToString().TrimEnd();
+        StringBuilderPool.Return(builder);
+        return result;
     }
-
-    private static void EmitExternalRuntimeHelperDefinitions(
         StringBuilder builder,
         IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers)
     {
