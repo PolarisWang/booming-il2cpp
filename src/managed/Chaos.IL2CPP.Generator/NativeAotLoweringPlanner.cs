@@ -2860,9 +2860,15 @@ return sb.ToString();
             callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
             if (_moduleSymbolTable.TryGetValue(callee, out nativeSymbol))
             {
-                // Only use the local symbol when the invocation target doesn't already
-                // have a DirectNativeSymbol (which is already optimized) and isn't
-                // going through the hotpatch path (handled earlier).
+                // When the invocation target is a stub_definition (has InstantiationStubId),
+                // use the STUB symbol instead of the method's own symbol so that
+                // EmitLinearResolvedInvocation can check _sharedContextSymbols for the
+                // correct symbol and append chaos_generic_context when needed.
+                if (invocationTarget.TargetSymbol != null &&
+                    invocationTarget.TargetSymbol.StartsWith("chaos_stub_definition_", StringComparison.Ordinal))
+                {
+                    nativeSymbol = invocationTarget.TargetSymbol;
+                }
                 if (invocationTarget.DirectNativeSymbol == null)
                     return true;
             }
