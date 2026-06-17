@@ -4,6 +4,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <chaos/compiler_hints.h>
 #include "subject_dispatch.h"
 
 // Direct dispatch table — {{ fact_count }} entries
