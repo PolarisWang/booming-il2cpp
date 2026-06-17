@@ -124,7 +124,15 @@ public sealed partial class NativeAotLoweringPlanner
 		// Forwarding context creates an extra argument (C2660) when the target
 		// has no context — especially for method-level generic stubs where
 		// _stubNeedsContext uses union semantics.
+		// The stub declaration includes chaos_generic_context when needsContext is true.
+		// Forward it to the target so calls from stub definitions match their targets.
 		string forwardedArgs = text2;
+		if (needsContext)
+		{
+			forwardedArgs = string.IsNullOrEmpty(forwardedArgs)
+				? "chaos_generic_context"
+				: forwardedArgs + ", chaos_generic_context";
+		}
 		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
 		{
 			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
