@@ -740,12 +740,16 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		foreach (string item2 in interfaceTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
+			// Deduplicate: skip if MethodTable symbol was already emitted
+			var mtSym3 = GetNativeMethodTableSymbol(item2);
+			if (!emittedMethodTableSymbols.Add(mtSym3))
+				continue;
 			ulong stableId = ComputeStableTypeId(item2);
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("MethodTable ");
-				handler.AppendFormatted(GetNativeMethodTableSymbol(item2));
+				handler.AppendFormatted(mtSym3);
 				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", 0u, 32, 3, 0, nullptr, nullptr, 0, 0, 0, 0};");
@@ -787,6 +791,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 			}
 		}
+		var _emittedMT = new HashSet<string>(StringComparer.Ordinal);
 		foreach (string item3 in sortedHashSet3)
 		{
 			ulong stableId = ComputeStableTypeId(item3);
@@ -835,6 +840,8 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			if (!valueTypeSubjectIds.Contains(item3) && !referenceTypeSubjectIds.Contains(item3) && !interfaceTypeSubjectIds.Contains(item3))
 			{
+				var mtSym = GetNativeMethodTableSymbol(item3);
+				if (!emittedMethodTableSymbols.Add(mtSym)) continue;
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("MethodTable ");

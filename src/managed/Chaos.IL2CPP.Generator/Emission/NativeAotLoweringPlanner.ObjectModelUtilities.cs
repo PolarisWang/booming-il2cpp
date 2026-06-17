@@ -485,6 +485,33 @@ public sealed partial class NativeAotLoweringPlanner
 	/// Compute FNV-1a 64-bit stable type ID from a subject ID.
 	/// Must match chaos_compute_type_stable_id() in type_info.h.
 	/// </summary>
+	/// <summary>
+	/// Normalize a subject ID to a canonical type identity by stripping
+	/// the assembly prefix and normalizing generic parameter notation.
+	/// Two types that are the same logical type from different assemblies
+	/// will produce the same canonical identity, enabling deduplication.
+	/// Example:
+	///   "CombinedSubjects/System.Linq.IGrouping&lt;!!0,!!1&gt;"
+	///   → "System.Linq.IGrouping&lt;!0,!1&gt;"
+	///   "System.Linq/System.Linq.IGrouping&lt;!0,!1&gt;"
+	///   → "System.Linq.IGrouping&lt;!0,!1&gt;"
+	/// </summary>
+	private static string NormalizeTypeIdentity(string subjectId)
+	{
+		// Strip assembly prefix (everything before and including first '/')
+		int slash = subjectId.IndexOf('/');
+		var identity = slash >= 0 ? subjectId.Substring(slash + 1) : subjectId;
+
+		// Normalize generic parameter notation: shared (!N) and owned (!!N) → !N
+		// Owned generic params (!!N) come from the defining assembly,
+		// shared params (!N) from the referencing assembly.
+		if (identity.Contains("!!"))
+		{
+			identity = identity.Replace("!!", "!");
+		}
+		return identity;
+	}
+
 	private static ulong ComputeStableTypeId(string subjectId)
 	{
 		const ulong fnvOffsetBasis64 = 14695981039346656037;
