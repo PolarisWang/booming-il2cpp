@@ -4229,7 +4229,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		{
 		    // Collect chaos_external_runtime_* symbols for fallback declaration emission
 		    if (nativeSymbol.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-		        _emittedExternalRuntimeSymbols[nativeSymbol] = invocationTarget.ReturnAbi.CarrierKindCode;
+		        _emittedExternalRuntimeSymbols[nativeSymbol] = (invocationTarget.ReturnAbi.CarrierKindCode, invocationTarget.ParameterAbis.Count);
 			builder.AppendLine($"{indentation}{{");
 			for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
 			{
@@ -4629,7 +4629,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		// file-scope extern "C" declaration that has the correct parameter list,
 		// causing C2733 (cannot overload extern "C" with mismatched params).
 		if (nativeTarget.StartsWith("chaos_external_runtime_", StringComparison.Ordinal))
-			_emittedExternalRuntimeSymbols[nativeTarget] = returnAbi.CarrierKindCode;
+			_emittedExternalRuntimeSymbols[nativeTarget] = (returnAbi.CarrierKindCode, parameterAbis.Count);
 		// Append hidden chaos_generic_context for shared canonical targets.
 		string hpArgList = FormatAbiInvocationArgumentList(parameterAbis);
 		string hpCtxArg = "";

@@ -533,7 +533,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// fallback static inline declarations for symbols the normal post-scan misses.
     /// Value is the return type's ABI carrier kind (needed to emit correct C++ return type).
     /// </summary>
-    private readonly Dictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, (AotCoreIrAbiCarrierKind ReturnKind, int ParamCount)> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
 
     /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
@@ -2218,7 +2218,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             {
                 // Use correct C++ return type matching ABI carrier: Float32->float (XMM0),
                 // Float64->double (XMM0), others->CHAOS_IL2CPP_INTPTR (RAX).
-                string cppType = kvp.Value switch
+                string cppType = kvp.Value.ReturnKind switch
                 {
                     AotCoreIrAbiCarrierKind.Void => "void",
                     AotCoreIrAbiCarrierKind.Float32 => "float",
@@ -2229,7 +2229,21 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 sb.Append(cppType);
                 sb.Append(' ');
                 sb.Append(kvp.Key);
-                if (kvp.Value == AotCoreIrAbiCarrierKind.Void)
+                int paramCount = kvp.Value.ParamCount;
+                if (paramCount > 0)
+                {
+                    sb.Append("(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0");
+                    for (int pi = 1; pi < paramCount; pi++)
+                    {
+                        sb.Append($", CHAOS_IL2CPP_INTPTR chaos_fn_arg_{pi}");
+                    }
+                    sb.Append(") noexcept");
+                    if (kvp.Value.ReturnKind == AotCoreIrAbiCarrierKind.Void)
+                        sb.AppendLine(" {}");
+                    else
+                        sb.AppendLine(" { return 0; }");
+                }
+                else if (kvp.Value.ReturnKind == AotCoreIrAbiCarrierKind.Void)
                     sb.AppendLine("() noexcept {}");
                 else
                     sb.AppendLine("() noexcept { return 0; }");
