@@ -68,9 +68,13 @@ public sealed partial class NativeAotLoweringPlanner
 			string? text = TryGetInstantiationStubSymbol(reachableMethod);
 			if (!string.IsNullOrEmpty(text) && emittedStubSymbols.Add(text))
 			{
-				bool needsContext = stubNeedsContext is not null
-		    ? stubNeedsContext.TryGetValue(text, out bool nc) && nc
-		    : sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true;
+				bool needsContext;
+				if (stubNeedsContext is not null)
+				    needsContext = (stubNeedsContext.TryGetValue(text, out bool nc) && nc)
+				        || text.StartsWith("chaos_stub_definition_", StringComparison.Ordinal);
+				else
+				    needsContext = (sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true)
+				        || text.StartsWith("chaos_stub_definition_", StringComparison.Ordinal);
 				declarations.Add(FormatMethodDeclaration(text, reachableMethod.ReturnAbi,
                     GetMethodAbiParameterSlots(reachableMethod),
                     needsContext));
@@ -126,9 +130,13 @@ public sealed partial class NativeAotLoweringPlanner
 		// has no context — especially for method-level generic stubs where
 		// _stubNeedsContext uses union semantics.
 		// The stub declaration includes chaos_generic_context when needsContext is true.
-		// Forward it to the target so calls from stub definitions match their targets.
+		// Forward it to the target when the target also needs context (checked via
+		// _sharedContextSymbols).  Without this check, stubs forward context to targets
+		// that don't need it, causing C2660.
+		bool targetAlsoNeedsContext = _sharedContextSymbols?.Contains(targetSymbol) == true;
+		bool forwardContext = needsContext && (targetSymbol == text || targetAlsoNeedsContext);
 		string forwardedArgs = text2;
-		if (needsContext)
+		if (forwardContext)
 		{
 			forwardedArgs = string.IsNullOrEmpty(forwardedArgs)
 				? "chaos_generic_context"

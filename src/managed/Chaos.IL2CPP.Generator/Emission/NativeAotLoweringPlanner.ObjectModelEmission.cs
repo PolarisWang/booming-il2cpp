@@ -616,7 +616,8 @@ public sealed partial class NativeAotLoweringPlanner
 					var stub = TryGetInstantiationStubSymbol(entry);
 					if (stub != null && externDeclared.Add(stub))
 					{
-						bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
+						bool stubNeedsCtx = (_stubNeedsContext.TryGetValue(stub, out bool nc) && nc)
+							|| stub.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal);
 						builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
 					}
 				}

@@ -3055,7 +3055,13 @@ return sb.ToString();
             var stubSymbol = ManagedNaming.CreateInstantiationStubSymbol(method.InstantiationStubId);
             builder.AppendLine();
             builder.AppendLine($"// AOT-unreachable generic instantiation stub: {method.SubjectId}");
-            builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({paramList})");
+            // Append chaos_generic_context for stub_definition symbols to match declaration
+            string stubParamList = stubSymbol.StartsWith("chaos_stub_definition_", StringComparison.Ordinal)
+            	? (string.IsNullOrEmpty(paramList) || paramList == "void"
+            		? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
+            		: paramList + ", CHAOS_IL2CPP_INTPTR chaos_generic_context")
+            	: paramList;
+            builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({stubParamList})");
             builder.AppendLine("{");
             if (!string.IsNullOrEmpty(returnType) && returnType != "void")
             {

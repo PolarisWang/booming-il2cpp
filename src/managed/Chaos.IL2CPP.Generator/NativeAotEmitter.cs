@@ -915,6 +915,12 @@ public sealed class NativeAotEmitter
 		stub.AppendLine("// ── External runtime stubs (post-emission) ──");
 		foreach (var sym in missing.OrderBy(s => s))
 		{
+			// Skip chaos_stub_definition_* symbols — they are declared in the
+			// shared header by BuildMethodDeclarations (native-aot.generated.header.h),
+			// not visible in the .cpp text scanned by this post-emission pass.
+			// Generating a second declaration here would cause C2733.
+			if (sym.StartsWith("chaos_stub_definition_", StringComparison.Ordinal))
+			    continue;
 			int argCount = 1;
 			// Count arguments from first call site
 			var callMatch = System.Text.RegularExpressions.Regex.Match(text,

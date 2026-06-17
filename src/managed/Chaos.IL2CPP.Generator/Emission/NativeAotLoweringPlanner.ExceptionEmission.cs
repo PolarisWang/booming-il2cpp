@@ -19,6 +19,7 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private int _linearScratchCounter;
 	private int _nextInlineId;
+	private static int s_extDispatchLabelSeq;
 	private int _dispatchLabelSeq;
 	private string? _pendingEnumBoxSubjectId;
 	private string? _pendingBoxSubjectId;
@@ -4222,7 +4223,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
 		// Unique label per dispatch call (avoids C2362/C2094 when multiple
 		// external dispatch calls exist in the same function body).
-		int extLabelSeq = _dispatchLabelSeq++;
+		int extLabelSeq = s_extDispatchLabelSeq++;
 
 		// When a DirectNativeSymbol is available, emit a direct function call
 		// instead of an indirect dispatch table call. This enables:
