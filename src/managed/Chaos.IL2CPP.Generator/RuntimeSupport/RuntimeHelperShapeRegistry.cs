@@ -265,12 +265,17 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!string.Equals(entry.MethodName, methodName, StringComparison.Ordinal))
                 {
                     // Try method-level generic args: methodName = "Equal[[System.Int32]]", entry.MethodName = "Equal"
-                    var genericMarkerStart = entry.MethodName + "[[";
-                    if (methodName.StartsWith(genericMarkerStart, StringComparison.Ordinal))
+                    string? genericMarkerStart = null;
+                    string? bracketClose = null;
+                    string bc1 = entry.MethodName + "[[";
+                    string bc2 = entry.MethodName + "<";
+                    if (methodName.StartsWith(bc1, StringComparison.Ordinal)) { genericMarkerStart = bc1; bracketClose = "]]"; }
+                    else if (methodName.StartsWith(bc2, StringComparison.Ordinal)) { genericMarkerStart = bc2; bracketClose = ">"; }
+                    if (genericMarkerStart != null && bracketClose != null)
                     {
-                        // Extract type args from between [[...]]
+                        // Extract type args from between [[...]] or <...>
                         var afterMarker = methodName.Substring(genericMarkerStart.Length);
-                        var closeBracket = afterMarker.LastIndexOf("]]", StringComparison.Ordinal);
+                        var closeBracket = afterMarker.LastIndexOf(bracketClose, StringComparison.Ordinal);
                         if (closeBracket < 0) continue;
                         var argsPart = afterMarker.Substring(0, closeBracket);
                         typeArgs = argsPart.Split(new[] { "],[", "," }, StringSplitOptions.None);

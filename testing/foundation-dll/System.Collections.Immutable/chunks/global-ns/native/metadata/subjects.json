@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-17T11:28:54.5351875Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary",
+      "methodName": "ToFrozenDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary",
+      "methodName": "ToFrozenDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary",
+      "methodName": "ToFrozenDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary",
+      "methodName": "ToFrozenDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary",
+      "methodName": "ToFrozenDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary",
+      "methodName": "ToFrozenDictionary",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::CopyTo:System.Void(System.Collections.Generic.KeyValuePair\u003CSystem.Int32,System.Int32\u003E[],System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::GetValueRefOrNullRef:System.Int32(System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "GetValueRefOrNullRef",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::GetValueRefOrNullRef:System.Int32(System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "GetValueRefOrNullRef",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "ContainsKey",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::ContainsKey:System.Boolean(System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "ContainsKey",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenDictionary\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet",
+      "methodName": "ToFrozenSet",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet",
+      "methodName": "ToFrozenSet",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "IsProperSubsetOf",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "IsProperSubsetOf",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "IsProperSupersetOf",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsProperSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "IsProperSupersetOf",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "IsSubsetOf",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSubsetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "IsSubsetOf",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "IsSupersetOf",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::IsSupersetOf:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "IsSupersetOf",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Overlaps:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "Overlaps",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::Overlaps:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "Overlaps",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::SetEquals:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "SetEquals",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E::SetEquals:System.Boolean(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+      "assemblyName": "System.Collections.Immutable",
+      "typeName": "System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E",
+      "methodName": "SetEquals",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 36,
+    "factCount": 36,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}
