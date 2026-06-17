@@ -3,10 +3,6 @@
 // Edit fast_dispatch.cpp and re-run split_fast_dispatch.py to regenerate.
 
 // REMOVED: branch_profiles and BranchProfile were removed from PatchMethod.
-static void RecordBranch(FastFrame& frame, bool taken) noexcept {
-    (void)frame;
-    (void)taken;
-}
 
 static void Handle_Br(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Br");
@@ -19,7 +15,6 @@ static void Handle_BrTrue(FastFrame& frame, const interpreter::IRInstruction& in
     int32_t val = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     --frame.sp;
     bool taken = (val != 0);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -33,7 +28,6 @@ static void Handle_BrFalse(FastFrame& frame, const interpreter::IRInstruction& i
     int32_t val = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     --frame.sp;
     bool taken = (val == 0);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -48,7 +42,6 @@ static void Handle_Beq(FastFrame& frame, const interpreter::IRInstruction& instr
     uint64_t l = frame.stack[frame.sp - 2];
     frame.sp -= 2;
     bool taken = (l == r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -63,7 +56,6 @@ static void Handle_Blt(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l < r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -78,7 +70,6 @@ static void Handle_Bgt(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l > r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -93,7 +84,6 @@ static void Handle_Ble(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l <= r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -108,7 +98,6 @@ static void Handle_Bge(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l >= r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -123,7 +112,6 @@ static void Handle_BneUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l != r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -138,7 +126,6 @@ static void Handle_BgeUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l >= r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -153,7 +140,6 @@ static void Handle_BgtUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l > r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -168,7 +154,6 @@ static void Handle_BleUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l <= r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -183,7 +168,6 @@ static void Handle_BltUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l < r);
-    RecordBranch(frame, taken);
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {

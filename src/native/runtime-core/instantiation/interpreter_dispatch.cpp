@@ -151,7 +151,7 @@ interpreter::DispatchResult InterpreterDispatch(
     const RuntimeStatus status = abi->method_invoke(
         ctx->runtime_state, ctx->thread_state,
         method, this_ptr,
-        argv.data(), param_count,
+        argv, param_count,
         ret_buf, ret_size, &ex);
 
     // ── Handle exception ──
