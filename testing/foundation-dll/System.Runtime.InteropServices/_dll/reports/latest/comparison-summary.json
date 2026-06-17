@@ -1,44 +1,44 @@
 {
   "assemblyName": "System.Runtime.InteropServices",
-  "timestamp": "2026-06-17T06:25:03",
-  "totalMethods": 27,
+  "timestamp": "2026-06-16T23:27:57",
+  "totalMethods": 26,
   "methodsWithNet8": 26,
   "aggregate": {
     "chaosAotVsNet8Pct": {
-      "mean": -874.54,
-      "median": -874.54,
-      "min": -874.54,
-      "max": -874.54,
-      "p25": -874.54,
-      "p75": -874.54
+      "mean": -874.76,
+      "median": -874.76,
+      "min": -874.76,
+      "max": -874.76,
+      "p25": -874.76,
+      "p75": -874.76
     },
     "chaosJitVsNet8Pct": {
-      "mean": -949.7,
-      "median": -949.7,
-      "min": -949.7,
-      "max": -949.7,
-      "p25": -949.7,
-      "p75": -949.7
+      "mean": -949.82,
+      "median": -949.82,
+      "min": -949.82,
+      "max": -949.82,
+      "p25": -949.82,
+      "p75": -949.82
     },
     "net10VsNet8Pct": {
-      "mean": -10.09,
-      "median": -10.09,
-      "min": -10.09,
-      "max": -10.09,
-      "p25": -10.09,
-      "p75": -10.09
+      "mean": -5.54,
+      "median": -5.54,
+      "min": -5.54,
+      "max": -5.54,
+      "p25": -5.54,
+      "p75": -5.54
     },
     "highValueMethods_betterThanNet8": 69.2
   },
   "perChunk": [
     {
       "slug": "global-ns",
-      "methodCount": 27,
+      "methodCount": 26,
       "methodsWithNet8": 26,
       "aggregate": {
         "methodsBetterThanNet8": 18,
         "chaosAotVsNet8Pct": {
-          "mean": -874.54,
+          "mean": -874.76,
           "median": 79.32,
           "min": -16526.0,
           "max": 99.55,
@@ -47,19 +47,19 @@
         },
         "highValueMethods_betterThanNet8": 81.8,
         "chaosJitVsNet8Pct": {
-          "mean": -949.7,
+          "mean": -949.82,
           "median": 75.09,
           "min": -17101.5,
           "max": 99.55,
-          "p25": 66.69,
+          "p25": 66.62,
           "p75": 99.0
         },
         "net10VsNet8Pct": {
-          "mean": -10.09,
+          "mean": -5.54,
           "median": -10.0,
           "min": -77.78,
           "max": 97.63,
-          "p25": -22.22,
+          "p25": -17.21,
           "p75": 0.0
         },
         "gcAllocComparison": {
@@ -79,8 +79,8 @@
           "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::AddEventHandler:System.Void(System.Object,System.Delegate)",
           "net8Ms": 1.4e-05,
           "net10Ms": 1.6e-05,
-          "chaosAotMs": 2.594e-06,
-          "chaosJitMs": 2.8139999999999997e-06,
+          "chaosAotMs": 2.44e-06,
+          "chaosJitMs": 2.554e-06,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -125,8 +125,8 @@
           "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetAddMethod:System.Reflection.MethodInfo(System.Boolean)",
           "net8Ms": 2.2e-05,
           "net10Ms": 2.2e-05,
-          "chaosAotMs": 2.9260000000000004e-06,
-          "chaosJitMs": 3.754e-06,
+          "chaosAotMs": 2.626e-06,
+          "chaosJitMs": 3e-06,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -169,9 +169,9 @@
         },
         {
           "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetRaiseMethod:System.Reflection.MethodInfo(System.Boolean)",
-          "net8Ms": 1.1e-05,
-          "net10Ms": 1.6e-05,
-          "chaosAotMs": 3.08e-06,
+          "net8Ms": 1e-05,
+          "net10Ms": 1e-05,
+          "chaosAotMs": 3.034e-06,
           "chaosJitMs": 3.02e-06,
           "net8Error": false,
           "highVariance": false,
@@ -218,7 +218,7 @@
           "net8Ms": 8.999999999999999e-06,
           "net10Ms": 1e-05,
           "chaosAotMs": 3.3e-06,
-          "chaosJitMs": 2.98e-06,
+          "chaosJitMs": 2.8860000000000004e-06,
           "net8Error": false,
           "highVariance": false,
           "net10VsNet8Pct": null,
@@ -239,7 +239,7 @@
         {
           "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::GetCustomAttributes:System.Object[](System.Boolean)",
           "net8Ms": 8.999999999999999e-06,
-          "net10Ms": 1.6e-05,
+          "net10Ms": 1e-05,
           "chaosAotMs": 3.5539999999999998e-06,
           "chaosJitMs": 2.994e-06,
           "net8Error": false,
@@ -284,9 +284,9 @@
         },
         {
           "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ComAwareEventInfo::IsDefined:System.Boolean(System.Type,System.Boolean)",
-          "net8Ms": 1.1e-05,
-          "net10Ms": 1.1e-05,
-          "chaosAotMs": 3.106e-06,
+          "net8Ms": 8.999999999999999e-06,
+          "net10Ms": 1e-05,
+          "chaosAotMs": 3e-06,
           "chaosJitMs": 3.014e-06,
           "net8Error": false,
           "highVariance": false,
@@ -308,7 +308,7 @@
         {
           "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.HandleCollector::Add:System.Void()",
           "net8Ms": 1.4e-05,
-          "net10Ms": 1.1e-05,
+          "net10Ms": 1e-05,
           "chaosAotMs": 0.00023748,
           "chaosJitMs": 0.000290754,
           "net8Error": false,
@@ -331,7 +331,7 @@
         {
           "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.HandleCollector::Remove:System.Void()",
           "net8Ms": 1e-05,
-          "net10Ms": 1.1e-05,
+          "net10Ms": 1e-05,
           "chaosAotMs": 1e-07,
           "chaosJitMs": 1e-07,
           "net8Error": false,
@@ -656,19 +656,6 @@
             "net8CollectionCount0": 0,
             "net8HeapDelta": 3116896
           }
-        },
-        {
-          "methodSubjectId": "global-ns::3",
-          "net8Ms": null,
-          "net10Ms": null,
-          "chaosAotMs": 2.78e-06,
-          "chaosJitMs": 3e-06,
-          "net8Error": false,
-          "highVariance": false,
-          "net10VsNet8Pct": null,
-          "chaosAotVsNet8Pct": null,
-          "chaosJitVsNet8Pct": null,
-          "status": "missing_net8"
         }
       ]
     }

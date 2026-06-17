@@ -883,14 +883,12 @@ public sealed class NativeAotEmitter
 			"extern \"C\" CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;\n");
 	}
 
-	private static readonly Regex _extCallRx = new(@"\b(chaos_external_runtime_\w+)\(", RegexOptions.Compiled);
-	private static readonly Regex _extDeclRx = new(@"(?:extern|static inline|\bvoid)\b.*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Compiled | RegexOptions.Multiline);
-
 	private static void AddExternalRuntimeStubs(StringBuilder sb, string? headerContent = null)
 	{
 		string text = sb.ToString();
-		var callRx = _extCallRx;
-		var declRx = _extDeclRx;
+		var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
+		// Match declarations/definitions: extern "C" / static inline / void return-type
+		var declRx = new Regex(@"(?:extern|static inline|\bvoid)\b.*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Multiline);
 		var calls = callRx.Matches(text);
 		if (calls.Count == 0) return;
 		var missing = new HashSet<string>();
