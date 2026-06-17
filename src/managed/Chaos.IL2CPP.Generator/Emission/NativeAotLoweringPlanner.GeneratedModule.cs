@@ -161,6 +161,13 @@ public sealed partial class NativeAotLoweringPlanner
             };
         }
 
+        // Compute total method count AFTER per-group dedup (below).
+        // Pre-computing from methodsForLowering gives wrong counts when
+        // methods cross type groups or are filtered by dedup.
+        totalDedupedCount = 0;
+        foreach (var tg in typeGroupModels)
+            totalDedupedCount += (int)tg["method_count"];
+
         // Detect duplicate safe_names across type groups and uniquify by
         // appending the assembly prefix.  The converter may emit methods for
         // the same C# type from different assemblies, and GetTypeDisplayName()

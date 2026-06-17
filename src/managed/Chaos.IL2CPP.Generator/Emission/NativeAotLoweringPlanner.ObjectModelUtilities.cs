@@ -88,6 +88,17 @@ public sealed partial class NativeAotLoweringPlanner
 			"System.Private.CoreLib/System.IntPtr",
 			"System.Private.CoreLib/System.UIntPtr",
 		};
+		// Also add common subject ID formats without assembly prefix
+		string[] primitivesShort = {
+			"System.Int32", "System.Int64", "System.Int16",
+			"System.Byte", "System.SByte",
+			"System.UInt32", "System.UInt64", "System.UInt16",
+			"System.Char", "System.Boolean",
+			"System.Single", "System.Double",
+			"System.IntPtr", "System.UIntPtr",
+		};
+		foreach (var p in primitivesShort)
+			hashSet.Add(p);
 		foreach (var p in primitives)
 			hashSet.Add(p);
 		return hashSet;
@@ -315,6 +326,17 @@ public sealed partial class NativeAotLoweringPlanner
 			"System.Private.CoreLib/System.IntPtr",
 			"System.Private.CoreLib/System.UIntPtr",
 		};
+		// Also add common subject ID formats without assembly prefix
+		string[] primitivesShort = {
+			"System.Int32", "System.Int64", "System.Int16",
+			"System.Byte", "System.SByte",
+			"System.UInt32", "System.UInt64", "System.UInt16",
+			"System.Char", "System.Boolean",
+			"System.Single", "System.Double",
+			"System.IntPtr", "System.UIntPtr",
+		};
+		foreach (var p in primitivesShort)
+			hashSet.Add(p);
 		foreach (var p in primitives)
 			hashSet.Add(p);
 		return hashSet;
