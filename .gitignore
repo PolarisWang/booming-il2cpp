@@ -485,3 +485,10 @@ skills/lifecycle/learning/signals/
 
 # Native SDK (CI-built, not tracked in git)
 testing/foundation-dll/sdk/
+chaos_generated_module.cpp
+
+# Auto-generated codegen output
+testing/project-test/*/codegen/*/generated/
+testing/project-test/*/native/*/generated/
+tests/fixtures/subjects/SolutionCorePack/codegen/include/chaos_generated_module.cpp
+testing/il2cpp-translation-test/il2cpp-output/generated/
