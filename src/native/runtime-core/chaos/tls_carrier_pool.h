@@ -25,8 +25,8 @@
 #define CHAOS_IL2CPP_TLS_CARRIER_POOL_H_
 
 #include <cstddef>
+#include <cstdlib>
 #include <new>  // std::max_align_t, placement new
-#include <chaos/native_types.h>  // CHAOS_IL2CPP_MALLOC
 
 namespace chaos {
 namespace il2cpp {
@@ -67,7 +67,7 @@ inline void* chaos_tls_carrier_pool_alloc(std::size_t size) noexcept {
     // when SIMD expression nesting depth exceeds 256 operations, which
     // does not occur in practice (typical depth is 1–5), but exists as
     // a correctness guarantee.
-    return CHAOS_IL2CPP_MALLOC(size);
+    return std::malloc(size);
 }
 
 }  // namespace runtime_core

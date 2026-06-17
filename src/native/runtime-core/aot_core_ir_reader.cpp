@@ -523,6 +523,13 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                             if (!ret_type.empty()) {
                                 instr.direct_ret_tag = InferValueTagFromReturnTypeName(ret_type.c_str());
                             }
+                            // Safe-to-direct-call: static methods (no `this`) with
+                            // pre-resolved AOT direct_fn can skip PalTryCallNoExcept.
+                            // The AOT code is the same as what Step A0 native dispatch
+                            // calls without any EH wrapper.
+                            instr.safe_to_direct_call = (
+                                instr.op_code == interpreter::IROpCode::Call &&
+                                !instr.is_instance_call);
                         }
                     }
                 }

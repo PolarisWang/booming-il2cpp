@@ -84,6 +84,15 @@ struct IRInstruction {
     void* direct_fn = nullptr;
     uint8_t direct_ret_tag = 0xFF;  // return ValueTag for direct_fn (0xFF = uninitialized)
 
+    // ── Safe direct call ─────────────────────────────────────────────────
+    // Set during IR lowering when the target method is known to be safe for
+    // direct native dispatch without PalTryCallNoExcept EH wrapper.
+    // true  = static AOT method with resolved direct_fn: no `this` receiver,
+    //         no hardware exception risk (SIGSEGV/SIGFPE) under normal conditions.
+    //         Caller may invoke fn() directly, saving ~30-50ns sigsetjmp overhead.
+    // false = default: use PalTryCallNoExcept for EH protection.
+    bool safe_to_direct_call = false;
+
     // Switch instruction: branch targets for each case, populated by the IR builder.
     // The default target is stored in branch_target (or -1 if absent).
     // secondary_index stores the number of case targets (when used for Switch).

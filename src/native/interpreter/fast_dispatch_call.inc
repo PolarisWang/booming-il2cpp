@@ -30,11 +30,15 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
     uint64_t a7 = (ac > 7) ? raw_args[7] : 0;
 
     uint64_t result = 0;
-    bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
-    if (caught) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
+    if (CHAOS_IL2CPP_UNLIKELY(instr.safe_to_direct_call)) {
+        result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+    } else {
+        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+        if (caught) {
+            frame.threw_exception = true;
+            frame.pc = 9999;
+            return;
+        }
     }
 
     // Read ret_tag from CachedCallInfo.
@@ -134,6 +138,26 @@ static void Handle_Call_DoRaw(FastFrame& frame,
 // ── PopCallArgs: RAII helper for popping call arguments from FastFrame ──
 // Shared by Handle_Call and Handle_CallVirt to eliminate duplicated
 // small-buffer / malloc arg-pop logic.
+//
+// TLS bump pool for >8 args: avoids malloc/free per call-site setup.
+// The pool is a simple thread_local bump allocator with a 4KB buffer.
+// No per-slot free needed — the cursor advances through the buffer
+// and the entire region is thread-local. Overflows fall back to malloc
+// (correctness guarantee for extremely deep or large argument setups).
+static constexpr std::size_t kPopCallPoolSize = 4096;
+
+static void* PopCallTlsAlloc(std::size_t size) noexcept {
+    std::size_t aligned = (size + 7) & ~std::size_t(7);
+    if (aligned == 0) aligned = 8;
+    thread_local struct { unsigned char buf[kPopCallPoolSize]; std::size_t cursor; } s_pool{};
+    if (s_pool.cursor + aligned <= kPopCallPoolSize) {
+        void* ptr = &s_pool.buf[s_pool.cursor];
+        s_pool.cursor += aligned;
+        return ptr;
+    }
+    return nullptr;  // fall back to malloc
+}
+
 struct PopCallArgs {
     uint64_t* args;
     uint8_t*  tags;
@@ -141,18 +165,25 @@ struct PopCallArgs {
     bool      heap_allocated;
 
     PopCallArgs(FastFrame& frame, uint32_t ac) noexcept
-        : count(ac), heap_allocated(ac > 8) {
+        : count(ac), heap_allocated(false) {
         if (ac <= 8) {
             args = stack_buf;
             tags = tags_buf;
         } else {
-            args = static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
-            tags = static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
+            // Allocate args + tags as one contiguous block from TLS pool.
+            void* blk = PopCallTlsAlloc((sizeof(uint64_t) + sizeof(uint8_t)) * ac);
+            if (blk != nullptr) {
+                args = static_cast<uint64_t*>(blk);
+                tags = static_cast<uint8_t*>(blk) + sizeof(uint64_t) * ac;
+            } else {
+                args = static_cast<uint64_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint64_t) * ac));
+                tags = static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(sizeof(uint8_t) * ac));
+                heap_allocated = true;
+            }
         }
         if (args == nullptr || tags == nullptr) {
             if (heap_allocated) { CHAOS_IL2CPP_FREE(args); CHAOS_IL2CPP_FREE(tags); }
-            args = nullptr;
-            tags = nullptr;
+            args = nullptr; tags = nullptr; count = 0;
             return;
         }
         for (uint32_t i = ac; i > 0; --i) {
@@ -198,11 +229,15 @@ static void Handle_Call_DirectInline(FastFrame& frame, const interpreter::IRInst
     uint64_t a6 = (ac > 6) ? pop_buf[6] : 0;
     uint64_t a7 = (ac > 7) ? pop_buf[7] : 0;
     uint64_t result = 0;
-    bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
-    if (caught) {
-        frame.threw_exception = true;
-        frame.pc = 9999;
-        return;
+    if (CHAOS_IL2CPP_UNLIKELY(instr.safe_to_direct_call)) {
+        result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+    } else {
+        bool caught = PalTryCallNoExcept(fn, a0, a1, a2, a3, a4, a5, a6, a7, result);
+        if (caught) {
+            frame.threw_exception = true;
+            frame.pc = 9999;
+            return;
+        }
     }
     uint8_t ret_tag = (instr.direct_ret_tag != 0xFF)
         ? instr.direct_ret_tag
@@ -232,11 +267,16 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
                                       uint64_t, uint64_t, uint64_t, uint64_t);
         auto fn = reinterpret_cast<DirectFn>(instr.direct_fn);
         uint64_t result = 0;
-        bool caught = PalTryCallNoExcept(fn, 0, 0, 0, 0, 0, 0, 0, 0, result);
-        if (caught) {
-            frame.threw_exception = true;
-            frame.pc = 9999;
-            return;
+        // 0-arg calls are always safe for direct dispatch (no receiver to fault on).
+        if (CHAOS_IL2CPP_UNLIKELY(instr.safe_to_direct_call)) {
+            result = fn(0, 0, 0, 0, 0, 0, 0, 0);
+        } else {
+            bool caught = PalTryCallNoExcept(fn, 0, 0, 0, 0, 0, 0, 0, 0, result);
+            if (caught) {
+                frame.threw_exception = true;
+                frame.pc = 9999;
+                return;
+            }
         }
         uint8_t ret_tag = (instr.direct_ret_tag != 0xFF)
             ? instr.direct_ret_tag
