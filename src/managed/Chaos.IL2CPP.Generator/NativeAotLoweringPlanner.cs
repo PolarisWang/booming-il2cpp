@@ -809,8 +809,11 @@ public sealed partial class NativeAotLoweringPlanner
         _nativeSymbolToDispatchSlot = BuildDispatchSlotMap(methodsForLowering, metadataRegistration);
         var stringLiterals = CollectStringLiterals(methodsForLowering);
 
-        // Compute hotpatch coverage statistics — eligible methods with IL bodies or P/Invoke,
-        // deduplicated by NativeSymbol (matching GetHotpatchableMethods() logic).
+        // Compute hotpatch coverage statistics — number of unique NativeSymbols
+        // eligible for hotpatch (deduplicated).  GetHotpatchableMethods() no longer
+        // deduplicates (to keep s_hotpatch_entries aligned with kMethodTable), so
+        // HotpatchEntryCount may exceed HotpatchEligibleMethodCount when methods
+        // share NativeSymbols (shared generic instantiations).
         var hotpatchEligibleSymbols = new HashSet<string>(StringComparer.Ordinal);
         HotpatchEligibleMethodCount = _methodsBySubjectId.Values
             .Where(m => m.Instructions.Count > 0 || m.IsPInvoke)
@@ -1702,11 +1705,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
 
         // Track seen chaos_type_ symbols to prevent duplicate definitions from
         // FSharp.Core type forwarding in the inline loop below.
-        // Always reset for the current chunk's struct code — the ??= pattern would
-        // retain symbols from a previous chunk (same Generator process lifetime),
-        // causing cross-chunk cache poisoning (e.g., TypeConverter delegate types
-        // would not be found in a set seeded by a prior chunk's symbols).
-        _seenStructSymbols = CollectStructSymbols(_referenceTypeStructCode);
+        _seenStructSymbols ??= CollectStructSymbols(_referenceTypeStructCode);
 
         // ── Struct forward declarations ──
         // Page files use reinterpret_cast<chaos_type_<id>*>(ptr),
@@ -1723,40 +1722,23 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             // delegate members (chaos_delegate_invocation_count, etc.) via reinterpret_cast.
             // The root Delegate/MulticastDelegate types keep forward declarations — their
             // full inherited definitions are only on page 0 (object model section).
-            //
-            // Skip types that already have a struct definition from _referenceTypeStructCode
-            // (emitted above at line 1698-1700 via DeduplicateStructDefs).  These types get
-            // their definition from the object model (with real field layout), and redefining
-            // them here as flat delegate structs causes C2027/C2011.
             bool isConcreteDelegate = IsDelegateTypeSubjectId(typeId, _referenceTypeBaseSubjectIds)
                 && !string.Equals(typeId, DelegateTypeSubjectId, StringComparison.Ordinal)
                 && !string.Equals(typeId, MulticastDelegateTypeSubjectId, StringComparison.Ordinal);
 
             if (isConcreteDelegate)
             {
-                // Skip if this delegate type already has a struct definition from
-                // _referenceTypeStructCode (e.g., ElapsedEventHandler in TypeConverter).
-                // _seenStructSymbols stores names WITHOUT the "chaos_type_" prefix,
-                // while GetNativeTypeSymbol returns the full "chaos_type_Xxx" symbol.
-                // Strip the prefix before checking for a match.
-                var nativeSym = GetNativeTypeSymbol(typeId);
-                var symNoPrefix = nativeSym.StartsWith("chaos_type_", StringComparison.Ordinal)
-                    ? nativeSym["chaos_type_".Length..]
-                    : nativeSym;
-                if (_seenStructSymbols is null || !_seenStructSymbols.Contains(symNoPrefix))
-                {
-                    sb.Append("struct ");
-                    sb.Append(nativeSym);
-                    sb.AppendLine(" {");
-                    sb.AppendLine("    PureTypeHeader header{};");
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
-                    sb.AppendLine("};");
-                }
+                sb.Append("struct ");
+                sb.Append(GetNativeTypeSymbol(typeId));
+                sb.AppendLine(" {");
+                sb.AppendLine("    PureTypeHeader header{};");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
+                sb.AppendLine("};");
             }
             else
             {
@@ -2712,15 +2694,21 @@ return sb.ToString();
     /// all non-abstract methods with IL bodies, deduplicated by NativeSymbol
     /// (shared generics share the same native symbol), sorted for deterministic
     /// slot assignment.
+    /// NOTE: We intentionally do NOT deduplicate by NativeSymbol here so that
+    /// s_hotpatch_entries[] has the same count and ordering as kMethodTable[]
+    /// (which is built from methodsForLowering with the same sort).  Without
+    /// this, the subject slot map (kSubjectSlotMap → kMethodTable index) would
+    /// be misaligned when used against s_hotpatch_entries at dispatch time,
+    /// causing the wrong method to be called for all entries past the first
+    /// duplicate NativeSymbol.  Method body deduplication is handled separately
+    /// at the emission level (NativeSymbol → function definition).
     /// </summary>
     private IReadOnlyList<AotCoreIrMethodArtifact> GetHotpatchableMethods()
     {
-        var seenSymbols = new HashSet<string>(StringComparer.Ordinal);
         return _methodsBySubjectId.Values
             .Where(m => m.Instructions.Count > 0 || m.IsPInvoke) // has IL body or P/Invoke with wrapper — excludes abstract/interface stubs
             .OrderBy(m => ExtractNumericSortKey(m.SubjectId))
             .ThenBy(m => m.SubjectId, StringComparer.Ordinal)
-            .Where(m => seenSymbols.Add(m.NativeSymbol)) // deduplicate by NativeSymbol
             .ToList();
     }
 
@@ -4510,13 +4498,15 @@ public sealed partial class NativeAotLoweringPlanner
         }
         // Build set of SubjectIds that have a _0 variant (fact wrapper).
         // Used to skip _1/_2 variants when _0 covers the fact test.
+        // Normalize the variant suffix _N before the return type (e.g., "_0:System.Int64()"
+        // → ":System.Int64()") so that _0 and _1 variants of the same method match.
         var subjectIdsWithZero = new HashSet<string>(StringComparer.Ordinal);
         for (int vi = 0; vi < methods.Count; vi++)
         {
             var vm = methods[vi];
             if (IsSubjectMethod(vm.SubjectId) && vm.NativeSymbol != null
                 && vm.NativeSymbol.EndsWith("_0", StringComparison.Ordinal))
-                subjectIdsWithZero.Add(vm.SubjectId ?? string.Empty);
+                subjectIdsWithZero.Add(StripSubjectVariantSuffix(vm.SubjectId ?? string.Empty));
         }
         int skippedSubjectVariants = 0;
         for (int i = 0; i < methods.Count; i++)
@@ -4566,7 +4556,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (method.NativeSymbol != null
                 && (method.NativeSymbol.EndsWith("_1", StringComparison.Ordinal)
                     || method.NativeSymbol.EndsWith("_2", StringComparison.Ordinal))
-                && subjectIdsWithZero.Contains(method.SubjectId ?? string.Empty))
+                && subjectIdsWithZero.Contains(StripSubjectVariantSuffix(method.SubjectId ?? string.Empty)))
             {
                 bool extCall = false;
                 foreach (var instr in method.Instructions)
@@ -4582,7 +4572,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (method.NativeSymbol != null
                 && (method.NativeSymbol.EndsWith("_1", StringComparison.Ordinal)
                     || method.NativeSymbol.EndsWith("_2", StringComparison.Ordinal))
-                && subjectIdsWithZero.Contains(method.SubjectId ?? string.Empty))
+                && subjectIdsWithZero.Contains(StripSubjectVariantSuffix(method.SubjectId ?? string.Empty)))
             {
                 bool extCall = false;
                 foreach (var instr in method.Instructions)
@@ -4632,14 +4622,14 @@ public sealed partial class NativeAotLoweringPlanner
             subjectEntries = deduped;
         }
 
-        // Filter subject entries to only reference method indices that have
-        // corresponding dispatch entries in kMethodTable[] (which has methods.Count
-        // entries from the methodsForLowering list).  HotpatchEntryCount reflects
-        // the hotpatch table which may have fewer entries when methods without IL
-        // bodies or NativeSymbol-duplicated methods are excluded — using it as the
-        // bound would allow OOB entries past the filter when methodsForLowering
-        // contains more entries than hotpatch table.  Using methods.Count ensures
-        // the slot map never references past the kMethodTable[]/kAotMethodCount.
+        // Use methods.Count as the upper bound for kSubjectSlotMap entries since
+        // it matches the kMethodTable[] dimension (kAotMethodCount at link time).
+        // HotpatchEntryCount is now equal to methods.Count after removing the
+        // NativeSymbol dedup from GetHotpatchableMethods(), but methods.Count
+        // is the authoritative bound: kSubjectSlotMap stores kMethodTable indices,
+        // and the dispatch loop passes them to ChaosDispatchMethodGetValue which
+        // indexes into both kMethodTable (via default-arg thunks) and
+        // s_hotpatch_entries (which is now the same length).
         int actualEntryCount = methods.Count;
         if (actualEntryCount > 0 && subjectEntries.Count > 0)
         {
@@ -4905,6 +4895,23 @@ public sealed partial class NativeAotLoweringPlanner
             end++;
         if (end == start) return -1;
         return int.Parse(subjectId.Substring(start, end - start), CultureInfo.InvariantCulture);
+    }
+
+    /// <summary>
+    /// Strip the trailing _N variant suffix from a SubjectId before the return type.
+    /// CombinedSubjects AutoGenerated methods and ::Subject_N methods both have
+    /// _0/_1/_2 variant suffixes (e.g., "ForEachAsync_40_..._0:System.Int64()").
+    /// Normalizing to ":System.Int64()" lets _0 and _1 variants of the same subject
+    /// match in the subjectIdsWithZero dedup set.
+    /// </summary>
+    private static string StripSubjectVariantSuffix(string subjectId)
+    {
+        int lastColon = subjectId.LastIndexOf(':');
+        if (lastColon > 1 && subjectId[lastColon - 2] == '_' && char.IsAsciiDigit(subjectId[lastColon - 1]))
+        {
+            return subjectId.Substring(0, lastColon - 2) + subjectId.Substring(lastColon);
+        }
+        return subjectId;
     }
 
     // ── Step 2: CodeRegistrationV0 + MetadataRegistrationV0 + CodegenRegistrationOptionsV0 ──
