@@ -73,12 +73,66 @@ extern "C" void* NativeDfnThunkArity4(RuntimeState* rs, ThreadState* ts, void* n
         reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a3)));
 }
 
-static void* const kNativeDfnThunks[5] = {
+extern "C" void* NativeDfnThunkArity5(RuntimeState* rs, ThreadState* ts, void* native_fn_ptr, void* a0, void* a1, void* a2, void* a3, void* a4) {
+    (void)rs; (void)ts;
+    using Fn = CHAOS_IL2CPP_INTPTR(CHAOS_RUNTIME_ABI_CALL*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR);
+    return reinterpret_cast<void*>(reinterpret_cast<Fn>(native_fn_ptr)(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a0),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a1),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a2),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a3),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a4)));
+}
+
+extern "C" void* NativeDfnThunkArity6(RuntimeState* rs, ThreadState* ts, void* native_fn_ptr, void* a0, void* a1, void* a2, void* a3, void* a4, void* a5) {
+    (void)rs; (void)ts;
+    using Fn = CHAOS_IL2CPP_INTPTR(CHAOS_RUNTIME_ABI_CALL*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR);
+    return reinterpret_cast<void*>(reinterpret_cast<Fn>(native_fn_ptr)(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a0),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a1),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a2),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a3),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a4),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a5)));
+}
+
+extern "C" void* NativeDfnThunkArity7(RuntimeState* rs, ThreadState* ts, void* native_fn_ptr, void* a0, void* a1, void* a2, void* a3, void* a4, void* a5, void* a6) {
+    (void)rs; (void)ts;
+    using Fn = CHAOS_IL2CPP_INTPTR(CHAOS_RUNTIME_ABI_CALL*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR);
+    return reinterpret_cast<void*>(reinterpret_cast<Fn>(native_fn_ptr)(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a0),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a1),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a2),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a3),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a4),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a5),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a6)));
+}
+
+extern "C" void* NativeDfnThunkArity8(RuntimeState* rs, ThreadState* ts, void* native_fn_ptr, void* a0, void* a1, void* a2, void* a3, void* a4, void* a5, void* a6, void* a7) {
+    (void)rs; (void)ts;
+    using Fn = CHAOS_IL2CPP_INTPTR(CHAOS_RUNTIME_ABI_CALL*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR);
+    return reinterpret_cast<void*>(reinterpret_cast<Fn>(native_fn_ptr)(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a0),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a1),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a2),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a3),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a4),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a5),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a6),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(a7)));
+}
+
+static void* const kNativeDfnThunks[9] = {
     reinterpret_cast<void*>(&NativeDfnThunkArity0),
     reinterpret_cast<void*>(&NativeDfnThunkArity1),
     reinterpret_cast<void*>(&NativeDfnThunkArity2),
     reinterpret_cast<void*>(&NativeDfnThunkArity3),
     reinterpret_cast<void*>(&NativeDfnThunkArity4),
+    reinterpret_cast<void*>(&NativeDfnThunkArity5),
+    reinterpret_cast<void*>(&NativeDfnThunkArity6),
+    reinterpret_cast<void*>(&NativeDfnThunkArity7),
+    reinterpret_cast<void*>(&NativeDfnThunkArity8),
 };
 
 namespace {  // reopen anonymous for NativeFunctionDelegate
@@ -164,7 +218,7 @@ void* MarshalGetDelegateForFunctionPointerImpl(
     if (thunk_idx == ~size_t(0))
         return nullptr;  // Unknown delegate type
 
-    if (param_count > 4) param_count = 4;  // Cap at arity 4 (DelegateInvoke limit)
+    if (param_count > 8) param_count = 8;  // Cap at arity 8 (DelegateInvoke limit)
 
     void* dispatch_thunk = kNativeDfnThunks[param_count];
 
