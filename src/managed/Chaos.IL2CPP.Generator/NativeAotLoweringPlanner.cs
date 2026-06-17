@@ -1732,7 +1732,11 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 // (object model section on non-page-0 pages). Duplicate definitions cause
                 // C2027/C2011 redefinition errors across page files.
                 string sym = GetNativeTypeSymbol(typeId);
-                if (_seenStructSymbols?.Contains(sym) == true)
+                // _seenStructSymbols stores names WITHOUT the "chaos_type_" prefix
+                string symNoPrefix = sym.StartsWith("chaos_type_", StringComparison.Ordinal)
+                    ? sym["chaos_type_".Length..]
+                    : sym;
+                if (_seenStructSymbols?.Contains(symNoPrefix) == true)
                 {
                     sb.Append("struct ");
                     sb.Append(sym);
