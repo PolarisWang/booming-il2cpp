@@ -113,6 +113,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/entry_stubs.cpp"
 )
 
 # Runtime stubs are provided by libchaos_runtime_core.a (built from source
