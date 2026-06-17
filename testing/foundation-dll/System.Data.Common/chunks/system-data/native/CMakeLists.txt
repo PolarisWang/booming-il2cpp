@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /wd4789 /MP)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
@@ -111,6 +111,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/entry_stubs.cpp"
 )
 
 # Runtime stubs are provided by libchaos_runtime_core.a (built from source
@@ -160,7 +161,6 @@ set(CHAOS_CRYPTO_STUBS
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
-    "patch-host-arrays.cpp"
     "verification_dispatch.generated.cpp"
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_PROFILE_GLOBALS}
@@ -204,7 +204,7 @@ set(CHAOS_ENTRY_INCLUDES
 
 add_executable(chaos_entry ${CHAOS_ENTRY_SOURCES})
 if(MSVC)
-  target_compile_options(chaos_entry PRIVATE /GS- /wd4789)
+  target_compile_options(chaos_entry PRIVATE /GS-)
 endif()
 target_include_directories(chaos_entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options(chaos_entry PRIVATE ${CHAOS_EHA_FLAG})
@@ -228,5 +228,3 @@ if(NOT MSVC)
   target_link_libraries(chaos_entry PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})
-# Weak default stubs in subject_dispatch.cpp provide fallback symbols for
-# subject-miss methods, eliminating the need for /FORCE:UNRESOLVED.
