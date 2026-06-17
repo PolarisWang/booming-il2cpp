@@ -96,7 +96,8 @@ public sealed partial class NativeAotLoweringPlanner
 		// Determine if this stub needs the chaos_generic_context parameter.
 		// Uses the pre-computed _stubNeedsContext map (union semantics) to
 		// match the header declaration and avoid C2733.
-		bool needsContext = _stubNeedsContext.TryGetValue(text, out bool nc) && nc;
+		bool needsContext = (_stubNeedsContext.TryGetValue(text, out bool nc) && nc)
+		|| text.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal);
 
 		string paramSig = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
 		if (needsContext)

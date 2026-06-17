@@ -4220,6 +4220,9 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 	{
 		string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
+		// Unique label per dispatch call (avoids C2362/C2094 when multiple
+		// external dispatch calls exist in the same function body).
+		int extLabelSeq = _dispatchLabelSeq++;
 
 		// When a DirectNativeSymbol is available, emit a direct function call
 		// instead of an indirect dispatch table call. This enables:
@@ -4265,7 +4268,8 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 				}
 				string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 			string nativeCtxArg = "";
-			if (_sharedContextSymbols.Contains(nativeSymbol))
+			if (_sharedContextSymbols.Contains(nativeSymbol) ||
+			    nativeSymbol.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal))
 			{
 				bool callerIsShared = _currentMethodNativeSymbol != null &&
 				                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
@@ -4319,7 +4323,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 		    builder.AppendLine(indentation + "    {");
 		    builder.AppendLine(indentation + "        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
-		    builder.AppendLine(indentation + "        goto chaos_extext_end;");
+		    builder.AppendLine(indentation + "        goto chaos_extext_end_" + extLabelSeq + ";");
 		    builder.AppendLine(indentation + "    }");
 		}
 		else if (enforceInstanceNullCheck && (string.Equals(instruction?.Op, "callvirt", StringComparison.Ordinal) || string.Equals(instruction?.Op, "call", StringComparison.Ordinal) || string.Equals(instruction?.Op, "calli", StringComparison.Ordinal)))
@@ -4334,6 +4338,11 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		    builder.AppendLine(indentation + "    }");
 		}
 		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
+		// A2: stub_definition calls always need generic_context (pass 0 as fallback)
+		if (invocationTarget.TargetSymbol?.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal) == true)
+		{
+		    args = string.IsNullOrEmpty(args) ? "0" : args + ", 0";
+		}
 		// BS-5: Validate external runtime table index before dispatch.
 		builder.AppendLine($"{indentation}    if ({idx} < 0 || {idx} >= kChaosExternalRuntimeCount) {{");
 		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL(); // external runtime table index {idx} out of range");
@@ -4343,10 +4352,13 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		string escapedSubjectId = EscapeCppStringLiteral(invocationTarget.TargetSymbol);
 		builder.AppendLine($"{indentation}        const auto chaos_ret = ChaosExternalRuntimeFallback(\"" + escapedSubjectId + "\");");
 		EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_ret", indentation + "        ");
-		builder.AppendLine($"{indentation}        return;");
+		if (_currentMethodArtifact?.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
+		    builder.AppendLine($"{indentation}        return;");
+		else
+		    builder.AppendLine($"{indentation}        return {{}};");
 		builder.AppendLine($"{indentation}    }}");
 		// chaos_extext_end BEFORE const auto chaos_result — avoids C2362
-		builder.AppendLine($"{indentation}    chaos_extext_end: ;");
+		builder.AppendLine($"{indentation}    chaos_extext_end_" + extLabelSeq + ": ;");
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			builder.AppendLine($"{indentation}    reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
