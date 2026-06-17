@@ -108,7 +108,7 @@ public sealed class CodegenOrchestrator
                         }
                     }
                 }
-                catch { /* BCL resolution is best-effort */ }
+                catch (Exception ex) { Console.Error.WriteLine($"[CodegenOrchestrator] BCL resolution error: {ex.Message}"); }
             }
 
             args.Add("--sdk-out");
@@ -221,16 +221,29 @@ public sealed class CodegenOrchestrator
             if (runtimeDir != null && Directory.Exists(runtimeDir))
                 return runtimeDir;
         }
-        catch { }
+        catch (Exception _ex)
+        {
+            Console.Error.WriteLine($"[CodegenOrchestrator] RuntimeEnvironment.GetRuntimeDirectory failed: {_ex.Message}");
+        }
 
-        // Fallback: search common install locations
+        // Fallback: search common install locations (cross-platform)
+        string dotnetRoot = Environment.GetEnvironmentVariable("DOTNET_ROOT") ?? "";
         var candidates = new[]
         {
+            // Windows (ProgramFiles)
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
                 "dotnet", "shared", "Microsoft.NETCore.App"),
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
                 "dotnet", "shared", "Microsoft.NETCore.App"),
+            // Linux default
+            "/usr/share/dotnet/shared/Microsoft.NETCore.App",
+            "/usr/lib/dotnet/shared/Microsoft.NETCore.App",
+            // macOS (Homebrew)
+            "/usr/local/share/dotnet/shared/Microsoft.NETCore.App",
         };
+        if (!string.IsNullOrEmpty(dotnetRoot))
+            candidates = new[] { Path.Combine(dotnetRoot, "shared", "Microsoft.NETCore.App") }
+                .Concat(candidates).ToArray();
 
         foreach (var baseDir in candidates)
         {

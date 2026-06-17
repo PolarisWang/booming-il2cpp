@@ -1728,17 +1728,30 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
 
             if (isConcreteDelegate)
             {
-                sb.Append("struct ");
-                sb.Append(GetNativeTypeSymbol(typeId));
-                sb.AppendLine(" {");
-                sb.AppendLine("    PureTypeHeader header{};");
-                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
-                sb.AppendLine("};");
+                // Skip delegate struct if already defined via _referenceTypeStructCode
+                // (object model section on non-page-0 pages). Duplicate definitions cause
+                // C2027/C2011 redefinition errors across page files.
+                string sym = GetNativeTypeSymbol(typeId);
+                if (_seenStructSymbols?.Contains(sym) == true)
+                {
+                    sb.Append("struct ");
+                    sb.Append(sym);
+                    sb.AppendLine(";");
+                }
+                else
+                {
+                    sb.Append("struct ");
+                    sb.Append(sym);
+                    sb.AppendLine(" {");
+                    sb.AppendLine("    PureTypeHeader header{};");
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
+                    sb.AppendLine("};");
+                }
             }
             else
             {

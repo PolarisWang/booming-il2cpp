@@ -4382,17 +4382,19 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 			builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(paramAbis[i], $"chaos_raw_arg_{i}")};");
 		}
 		// Null check
+		// Declare result before null check to avoid MSVC C2362 (goto over init)
+		string _callvirtDecl = !string.Equals(returnType, "void", StringComparison.Ordinal)
+			? $"{indentation}    {returnType} chaos_callvirt_result{{}};"
+			: null;
+		if (_callvirtDecl != null)
+			builder.AppendLine(_callvirtDecl);
 		builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
 		builder.AppendLine($"{indentation}        goto chaos_vcall_end_{instruction.IlOffset};");
 		builder.AppendLine($"{indentation}    }}");
-		// VTable resolve ¡ª always through type_info->vtable_array (unified ThinLockableHeader)
+		// VTable resolve - always through type_info->vtable_array
 		string vtableSource = $"chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array";
-		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
-		{
-			builder.AppendLine($"{indentation}    {returnType} chaos_callvirt_result{{}};");
-		}
 		// VTable dispatch
 		if (_vtableSlotMap != null && _vtableSlotMap.TryGetValue(vtableSlotSig, out int vtableSlot))
 		{
