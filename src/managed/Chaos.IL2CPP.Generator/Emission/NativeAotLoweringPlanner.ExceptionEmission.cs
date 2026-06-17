@@ -9,6 +9,7 @@ using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
@@ -17,17 +18,27 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeAotLoweringPlanner
 {
-	private int _linearScratchCounter;
-	private int _nextInlineId;
+	[ThreadStatic]
+	private static int _linearScratchCounter;
+	[ThreadStatic]
+	private static int _nextInlineId;
 	private static int s_extDispatchLabelSeq;
-	private int _dispatchLabelSeq;
-	private string? _pendingEnumBoxSubjectId;
-	private string? _pendingBoxSubjectId;
-	private bool _pendingBoxHasProvider;
-	private IReadOnlyList<AotCoreIrInstructionArtifact>? _lookaheadInstructionList;
-	private int _lookaheadInstructionIndex;
-	private IReadOnlyList<AotCoreIrInstructionArtifact>? _linearInstructionList;
-	private int _linearInstructionIndex;
+	[ThreadStatic]
+	private static int _dispatchLabelSeq;
+	[ThreadStatic]
+	private static string? _pendingEnumBoxSubjectId;
+	[ThreadStatic]
+	private static string? _pendingBoxSubjectId;
+	[ThreadStatic]
+	private static bool _pendingBoxHasProvider;
+	[ThreadStatic]
+	private static IReadOnlyList<AotCoreIrInstructionArtifact>? _lookaheadInstructionList;
+	[ThreadStatic]
+	private static int _lookaheadInstructionIndex;
+	[ThreadStatic]
+	private static IReadOnlyList<AotCoreIrInstructionArtifact>? _linearInstructionList;
+	[ThreadStatic]
+	private static int _linearInstructionIndex;
 
 	private static readonly HashSet<string> ToCharEligiblePrimitives = new()
 	{
@@ -43,35 +54,43 @@ public sealed partial class NativeAotLoweringPlanner
 	// Only active in structured mode (_activeStructuredSlotContext != null)
 	// since flat linear mode uses opaque eval-stack indices that are always
 	// the same expression string regardless of actual values.
-	private string? _lastCheckedArrayExpr;
-	private string? _lastCheckedIndexExpr;
+	[ThreadStatic]
+	private static string? _lastCheckedArrayExpr;
+	[ThreadStatic]
+	private static string? _lastCheckedIndexExpr;
 
 	// Array access instruction IL offsets to skip bounds checks for,
 	// populated by PreScanLoopArraySkips when a loop induction variable
 	// pattern is detected (e.g., for (int i = 0; i < arr.Length; i++) { arr[i]; }).
-	private HashSet<int>? _loopArrayAccessSkipOffsets;
+	[ThreadStatic]
+	private static HashSet<int>? _loopArrayAccessSkipOffsets;
 
 	// Hoisted loop induction variables: maps chaos_locals slot → C++ local variable name.
 	// When set, ldloc/stloc for these slots emit direct C++ local access instead of
 	// chaos_locals[] traffic, keeping the IV in a register across loop iterations.
-	private Dictionary<int, string>? _hoistedIVs;
+	[ThreadStatic]
+	private static Dictionary<int, string>? _hoistedIVs;
 
 	// Hoisted invariant locals for do-while loops: maps chaos_locals slot → C++ local variable name.
 	// These locals are ldloc'd but never stloc'd inside the loop, so the load is hoisted
 	// before the loop, eliminating per-iteration chaos_locals[] read traffic.
-	private Dictionary<int, (string VarName, SlotType SlotType)>? _hoistedInvariantLocals;
+	[ThreadStatic]
+	private static Dictionary<int, (string VarName, SlotType SlotType)>? _hoistedInvariantLocals;
 
 	// Hoisted array base pointers for do-while loops: maps chaos_locals slot → C++ base pointer variable name.
 	// When set, array load/store for these slots use direct base pointer access instead of
 	// calling chaos_array_get_elements(reinterpret_cast<chaos_managed_array*>(...)) every iteration.
-	private Dictionary<int, string>? _hoistedArrayBaseSlots;
+	[ThreadStatic]
+	private static Dictionary<int, string>? _hoistedArrayBaseSlots;
 	// Tracks slot variable names (_sN) to their chaos_locals source slot index.
 	// Used by EmitLinearArrayLoad/Store to resolve hoisted array base pointers.
-	private Dictionary<string, int>? _slotVarToLocalSlot;
+	[ThreadStatic]
+	private static Dictionary<string, int>? _slotVarToLocalSlot;
 
 	// Accumulator variables for do-while loops: maps chaos_locals slot → C++ local variable name.
 	// These are loop-carried dependency chains (ldloc->add/sub->stloc) promoted to C++ locals.
-	private Dictionary<int, string>? _accumulatorSlots;
+	[ThreadStatic]
+	private static Dictionary<int, string>? _accumulatorSlots;
 
 	private void ResetArrayCheckCache()
 	{
@@ -96,12 +115,13 @@ public sealed partial class NativeAotLoweringPlanner
 	// NativeInt (plain integer-as-pointer).  Consumers (conv.i4,
 	// ceq, etc.) use this to emit ChaosLoadFloat32/ChaosLoadFloat64
 	// before operating on the value.
-	private enum SlotType : byte { NativeInt, Int64, Float32, Float64, WideValue }
+	public enum SlotType : byte { NativeInt, Int64, Float32, Float64, WideValue }
 
 	/// <summary>Number of CHAOS_IL2CPP_INTPTR slots consumed by one WideValue.</summary>
 	private const int WideValueSlotCount = 2;
 
-	private readonly Stack<SlotType> _structuredSlotTypes = new();
+	[ThreadStatic]
+	private static Stack<SlotType>? _structuredSlotTypes;
 
 	/// <summary>
 	/// Local slots that are struct value types. Populated per-method in
@@ -110,7 +130,8 @@ public sealed partial class NativeAotLoweringPlanner
 	/// because struct data is inline in CHAOS_IL2CPP_INTPTR slots and downstream
 	/// consumers (ldfld) expect a pointer via chaos_resolve_managed_value_pointer.
 	/// </summary>
-	private HashSet<int>? _structLocalSlots;
+	[ThreadStatic]
+	private static HashSet<int>? _structLocalSlots;
 
 	/// <summary>
 	/// Local slots that hold Float32/Float64 values. Populated per-method
@@ -119,7 +140,8 @@ public sealed partial class NativeAotLoweringPlanner
 	/// ChaosLoadFloat32/ChaosLoadFloat64(chaos_locals[N]) and pushes the
 	/// corresponding SlotType, enabling direct _dN/_fN slot allocation.
 	/// </summary>
-	private Dictionary<int, SlotType>? _floatLocalSlots;
+	[ThreadStatic]
+	private static Dictionary<int, SlotType>? _floatLocalSlots;
 
 	/// <summary>
 	/// Local slots that hold Int64 values (packed via ChaosStoreInt64 into
@@ -129,7 +151,8 @@ public sealed partial class NativeAotLoweringPlanner
 	/// enabling EmitLinearBinaryArithmetic to emit 64-bit arithmetic instead
 	/// of int32 truncation.
 	/// </summary>
-	private HashSet<int>? _int64LocalSlots;
+	[ThreadStatic]
+	private static HashSet<int>? _int64LocalSlots;
 
 	private static HashSet<int> IdentifyStructLocalSlots(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
 	{
@@ -4223,7 +4246,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
 		// Unique label per dispatch call (avoids C2362/C2094 when multiple
 		// external dispatch calls exist in the same function body).
-		int extLabelSeq = s_extDispatchLabelSeq++;
+		int extLabelSeq = Interlocked.Increment(ref s_extDispatchLabelSeq);
 
 		// When a DirectNativeSymbol is available, emit a direct function call
 		// instead of an indirect dispatch table call. This enables:

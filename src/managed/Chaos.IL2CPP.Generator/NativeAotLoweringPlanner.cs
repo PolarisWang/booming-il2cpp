@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
@@ -11,6 +12,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.ExceptionServices;
 using System.Text;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Chaos.IL2CPP.Contracts;
@@ -162,7 +164,8 @@ public sealed partial class NativeAotLoweringPlanner
 
     // Pre-try TypeInfo* fold initializers: emitted BEFORE CHAOS_EH_TRY so the
     // *Ptr call avoids SEH frame setup/teardown overhead.
-    private List<(string VarName, string Expression)>? _preTryFoldInitializers;
+    [ThreadStatic]
+    private static List<(string VarName, string Expression)>? _preTryFoldInitializers;
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
     private List<string>? _subjectMethodSubjectIds;
@@ -464,10 +467,12 @@ public sealed partial class NativeAotLoweringPlanner
     /// infinite recursion (the codegen may collapse an unloverable IL body to
     /// a single "call self; ret" sequence).
     /// </summary>
-    private string? _currentMethodNativeSymbol;
+        [ThreadStatic]
+    private static string? _currentMethodNativeSymbol;
 
     /// <summary>Current method artifact, used by inlining budget checks.</summary>
-    private AotCoreIrMethodArtifact? _currentMethodArtifact;
+        [ThreadStatic]
+    private static AotCoreIrMethodArtifact? _currentMethodArtifact;
 
     /// <summary>
     /// Module-local symbol table: subjectId → nativeSymbol for all methods in the
@@ -533,7 +538,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// fallback static inline declarations for symbols the normal post-scan misses.
     /// Value is the return type's ABI carrier kind (needed to emit correct C++ return type).
     /// </summary>
-    private readonly Dictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
+    private readonly ConcurrentDictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
 
     /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
@@ -1091,10 +1096,14 @@ public sealed partial class NativeAotLoweringPlanner
                 emitMethods = cryptoFiltered;
             }
         }
-        var allMethods = new List<NativeAotMethodTemplateModel>(emitMethods.Count);
-        for (int i = 0; i < emitMethods.Count; i++)
-            allMethods.Add(EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
-        List<NativeAotMethodTemplateModel> methods = allMethods;
+        var allMethods = new NativeAotMethodTemplateModel[emitMethods.Count];
+        // Parallel method body emission. Each thread gets its own [ThreadStatic]
+        // per-method state (linearScratchCounter, dispatchLabelSeq, etc.) reset
+        // at the start of each EmitManagedMethod call.
+        Parallel.For(0, emitMethods.Count,
+            new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
+            i => allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
+        List<NativeAotMethodTemplateModel> methods = [.. allMethods];
 
         _tPhase4 = _sw.ElapsedMilliseconds;
 
@@ -3112,7 +3121,7 @@ return sb.ToString();
         HashSet<string> aotReachableSubjectIds)
     {
         if (method.IsUnmanagedCallersOnly)
-            _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
+            lock (_reversePInvokeEntries) _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
 
         return new NativeAotMethodTemplateModel
         {
@@ -3145,6 +3154,8 @@ return sb.ToString();
         StringBuilderPool.Return(builder);
         return result;
     }
+
+    private static void EmitExternalRuntimeHelperDefinitions(
         StringBuilder builder,
         IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers)
     {

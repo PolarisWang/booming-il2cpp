@@ -265,12 +265,13 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         // Reverse P/Invoke entry models
-        var reversePInvokeModels = new ScriptObject[_reversePInvokeEntries.Count];
-        for (int i = 0; i < _reversePInvokeEntries.Count; i++)
+        var revPinArr = _reversePInvokeEntries.ToArray();
+        var reversePInvokeModels = new ScriptObject[revPinArr.Length];
+        for (int i = 0; i < revPinArr.Length; i++)
         {
             reversePInvokeModels[i] = new ScriptObject
             {
-                ["native_symbol"] = _reversePInvokeEntries[i].NativeSymbol,
+                ["native_symbol"] = revPinArr[i].NativeSymbol,
             };
         }
 

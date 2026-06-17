@@ -179,6 +179,7 @@ public sealed partial class NativeAotLoweringPlanner
 		_nextInlineId = 0;
 		_dispatchLabelSeq = 0;
 		_preTryFoldInitializers = null;  // reset per-method
+			_structuredSlotTypes = new Stack<SlotType>();
 
 		// P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
 		if (method.IsPInvoke)

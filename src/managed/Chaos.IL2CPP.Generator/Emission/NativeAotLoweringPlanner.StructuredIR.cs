@@ -123,7 +123,8 @@ public sealed partial class NativeAotLoweringPlanner
     // the name at the current top and discards it.
     // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
-    private StructuredSlotEmissionContext? _activeStructuredSlotContext;
+        [ThreadStatic]
+    private static StructuredSlotEmissionContext? _activeStructuredSlotContext;
 
     /// <summary>
     /// Maximum recursion depth for EmitStructuredIRNode. When the structured IR
