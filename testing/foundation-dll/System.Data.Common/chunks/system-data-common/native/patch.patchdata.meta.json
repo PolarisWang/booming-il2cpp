@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"direction":"forward","sourceDll":"PatchSubjects.dll","patchdataSize":43196}
+=======
+{"direction":"forward","sourceDll":"PatchSubjects.dll","patchdataSize":24024}
+>>>>>>> e965cb58b (fix: SIMD stub header unblocks 9 foundation-dlls)
