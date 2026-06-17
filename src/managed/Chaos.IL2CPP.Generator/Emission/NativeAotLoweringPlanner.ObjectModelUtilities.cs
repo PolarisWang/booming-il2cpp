@@ -69,6 +69,27 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 			}
 		}
+		// Fallback: ensure core primitive value types are always classified as value types.
+		// These may be missed by instruction scanning in multi-assembly closures where
+		// the primary assembly doesn't directly reference them as TargetReferences.
+		string[] primitives = {
+			"System.Private.CoreLib/System.Int32",
+			"System.Private.CoreLib/System.Int64",
+			"System.Private.CoreLib/System.Int16",
+			"System.Private.CoreLib/System.Byte",
+			"System.Private.CoreLib/System.SByte",
+			"System.Private.CoreLib/System.UInt32",
+			"System.Private.CoreLib/System.UInt64",
+			"System.Private.CoreLib/System.UInt16",
+			"System.Private.CoreLib/System.Char",
+			"System.Private.CoreLib/System.Boolean",
+			"System.Private.CoreLib/System.Single",
+			"System.Private.CoreLib/System.Double",
+			"System.Private.CoreLib/System.IntPtr",
+			"System.Private.CoreLib/System.UIntPtr",
+		};
+		foreach (var p in primitives)
+			hashSet.Add(p);
 		return hashSet;
 	}
 
@@ -275,6 +296,27 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 			}
 		}
+		// Fallback: ensure core primitive value types are always classified as value types.
+		// These may be missed by instruction scanning in multi-assembly closures where
+		// the primary assembly doesn't directly reference them as TargetReferences.
+		string[] primitives = {
+			"System.Private.CoreLib/System.Int32",
+			"System.Private.CoreLib/System.Int64",
+			"System.Private.CoreLib/System.Int16",
+			"System.Private.CoreLib/System.Byte",
+			"System.Private.CoreLib/System.SByte",
+			"System.Private.CoreLib/System.UInt32",
+			"System.Private.CoreLib/System.UInt64",
+			"System.Private.CoreLib/System.UInt16",
+			"System.Private.CoreLib/System.Char",
+			"System.Private.CoreLib/System.Boolean",
+			"System.Private.CoreLib/System.Single",
+			"System.Private.CoreLib/System.Double",
+			"System.Private.CoreLib/System.IntPtr",
+			"System.Private.CoreLib/System.UIntPtr",
+		};
+		foreach (var p in primitives)
+			hashSet.Add(p);
 		return hashSet;
 	}
 
