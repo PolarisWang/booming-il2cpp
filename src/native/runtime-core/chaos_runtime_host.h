@@ -259,9 +259,16 @@ public:
             if (asm_len == 23 && std::strncmp(sid, "System.Private.CoreLib", 23) == 0) continue;
             if (asm_len == 24 && std::strncmp(sid, "Chaos.TestFramework.Sdk", 24) == 0) continue;
 
-            // This entry is from an untrusted assembly — replace with nullptr
+            // This entry is from an untrusted assembly - replace with nullptr
             // so FillExternalRuntimeStubs installs a safe return-0 stub.
+            // kChaosExternalRuntimeFnTable may be in a read-only section (.rdata).
+            // Use VirtualProtect to make the page writable before writing.
+            DWORD _cp_old = 0;
+            ::VirtualProtect(&kChaosExternalRuntimeFnTable[i], sizeof(void*),
+                             PAGE_READWRITE, &_cp_old);
             kChaosExternalRuntimeFnTable[i] = nullptr;
+            ::VirtualProtect(&kChaosExternalRuntimeFnTable[i], sizeof(void*),
+                             _cp_old, &_cp_old);
             if (overridden < kMaxOverrides) {
                 overridden_subjects[overridden] = sid;
                 overridden_indices[overridden] = i;
@@ -379,6 +386,11 @@ private:
     /// Fill remaining null external runtime table entries with safe stubs
     /// so generated code does not crash on null pointers.
     static void FillExternalRuntimeStubs() {
+        // Ensure table page is writable (may be in .rdata section).
+        DWORD _frs_old = 0;
+        ::VirtualProtect(kChaosExternalRuntimeFnTable,
+            static_cast<CHAOS_IL2CPP_SIZE>(kChaosExternalRuntimeCount) * sizeof(void*),
+            PAGE_READWRITE, &_frs_old);
         for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
             if (kChaosExternalRuntimeFnTable[i] != nullptr) continue;
             const char* sub = kChaosExternalRuntimeSubjects[i];
