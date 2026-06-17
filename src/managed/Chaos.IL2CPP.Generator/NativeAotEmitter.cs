@@ -896,20 +896,17 @@ public sealed class NativeAotEmitter
 		foreach (Match m in declRx.Matches(text))
 		{
 			string sv = m.Value;
-			// Skip declarations with empty parens "()" — they are stubs with
-			// wrong arg count and need to be replaced by corrected declarations.
 			int nextIdx = m.Index + m.Length;
-			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
-			// Also count params in declaration — if they differ from call site, skip it
-			int closeParen = text.IndexOf(')', nextIdx);
-			if (closeParen > nextIdx)
+			// Skip declarations with empty parens unless they are DEFINITIONS
+			// (i.e., have a function body).  Shape-registry definitions with
+			// empty parens are legitimate  only stub declarations need fixing.
+			if (nextIdx < text.Length && text[nextIdx] == ')')
 			{
-				string declArgs = text.Substring(nextIdx, closeParen - nextIdx);
-				int declParamCount = declArgs.Length > 0 ? declArgs.Split(',').Length : 0;
-				// Count args at call site (first non-declaration call)
-				// If declaration param count != call site arg count, skip it
+				// Peek past the () to distinguish definition {...} from declaration ;
+				int afterParen = text.IndexOfAny(new[] { ';', '{' }, nextIdx);
+				if (afterParen < 0 || text[afterParen] == ';')
+					continue;  // declaration stub  skip, will be replaced below
 			}
-			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
 			foreach (var s in missing.ToList())
 				if (sv.Contains(s)) missing.Remove(s);
 		}
@@ -918,7 +915,7 @@ public sealed class NativeAotEmitter
 		stub.AppendLine("// ── External runtime stubs (post-emission) ──");
 		foreach (var sym in missing.OrderBy(s => s))
 		{
-			int argCount = 0;
+			int argCount = 1;
 			// Count arguments from first call site
 			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
 				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
@@ -942,7 +939,6 @@ public sealed class NativeAotEmitter
 						else if (c == ',' && depth == 0) argCount++;
 					}
 				}
-				argCount++;
 			}
 			stub.Append("extern CHAOS_IL2CPP_INTPTR ");
 			stub.Append(sym);
@@ -968,7 +964,7 @@ public sealed class NativeAotEmitter
 		string postText = sb.ToString();
 		foreach (var sym in missing.OrderBy(s => s))
 		{
-			int argCount = 0;
+			int argCount = 1;
 			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
 				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
 			while (callMatch.Success)
@@ -1000,7 +996,6 @@ public sealed class NativeAotEmitter
 						else if (c == ',' && depth == 0) argCount++;
 					}
 				}
-				argCount++;
 			}
 			string wrongDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
 			string wrongDeclC = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
