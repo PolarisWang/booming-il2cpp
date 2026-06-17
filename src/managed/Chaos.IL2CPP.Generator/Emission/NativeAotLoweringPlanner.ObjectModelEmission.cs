@@ -530,11 +530,7 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string ifaceId in interfaceTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
 		{
 			ulong ifaceStableId = ComputeStableTypeId(ifaceId);
-			builder.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
-			builder.Append(GetNativeTypeIdSymbol(ifaceId));
-			builder.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
-			builder.Append(ifaceStableId.ToString());
-			builder.AppendLine("ULL);");
+
 		}
 		// ── Value type MethodTable definitions (must precede reference types,
 		// because reference types may reference value type MethodTable symbols
@@ -567,11 +563,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_UINT64 ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol(item3));
-				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_UINT64>(");
-				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(");");
+
 				stringBuilder.AppendLine(ref handler);
 			}
 			num++;
@@ -727,11 +719,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_UINT64 ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol(item));
-				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_UINT64>(");
-				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(");");
+
 				stringBuilder.AppendLine(ref handler);
 			}
 			num++;
@@ -782,11 +770,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				ulong sid = ComputeStableTypeId(iface);
 				StringBuilder sb = builder;
-				sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
-				sb.Append(GetNativeTypeIdSymbol(iface));
-				sb.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
-				sb.Append(sid.ToString());
-				sb.AppendLine("ULL);");
+
 			}
 		}
 		foreach (string item3 in sortedHashSet3)
@@ -856,11 +840,7 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_UINT64 ");
-				handler.AppendFormatted(GetNativeBoxTypeIdSymbol(item3));
-				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_UINT64>(");
-				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(");");
+
 				stringBuilder.AppendLine(ref handler);
 			}
 			num++;

@@ -113,7 +113,7 @@ internal static class ConvertToCppHandler
                 config.AssemblyPaths[0],
                 outputRoot,
                 EntryPointSubjectIdOverride: config.EntryPoint,
-                AdditionalAssemblyPaths: additionalPaths,
+                AdditionalAssemblyPaths: CombineAdditionalPaths(additionalPaths, config.AdditionalAssemblies),
                 FullAssemblyClosure: config.FullClosure)
             {
                 SubjectMethodIds = subjectMethods?.ToHashSet(StringComparer.Ordinal),
@@ -290,6 +290,18 @@ internal static class ConvertToCppHandler
         {
             Console.WriteLine($"    SDK validation: OK ({genCpp.Length} generated TU(s))");
         }
+    }
+
+    /// <summary>Combine --assembly-dir paths with --additional-assembly paths into a single list.</summary>
+    private static List<string> CombineAdditionalPaths(List<string> dirPaths, IReadOnlyList<string> assemblyPaths)
+    {
+        var combined = new List<string>(dirPaths);
+        foreach (var p in assemblyPaths)
+        {
+            if (!combined.Contains(p, StringComparer.OrdinalIgnoreCase))
+                combined.Add(p);
+        }
+        return combined;
     }
 
     private static void WriteArtifacts(string root, ManagedClosureResult result)

@@ -21,6 +21,13 @@ internal sealed class ConvertToCppConfig
     /// <summary>Additional directories to search for dependency assemblies</summary>
     public IReadOnlyList<string> AssemblyDirs { get; init; } = [];
 
+    /// <summary>Additional assembly paths to include in compilation closure.
+    /// Unlike --assembly-dir, these are specific DLL paths (not directories) that
+    /// are added directly to the Loader's assembly list without directory scanning.
+    /// Used for adding individual BCL assemblies (System.Linq.dll, etc.) to the
+    /// AOT closure without pulling in all 182 runtime DLLs.</summary>
+    public IReadOnlyList<string> AdditionalAssemblies { get; init; } = [];
+
     /// <summary>Enable verbose diagnostics</summary>
     public bool Verbose { get; init; } = false;
 
@@ -52,6 +59,7 @@ internal sealed class ConvertToCppConfig
         var assemblyPaths = new List<string>();
         string outputDir = "il2cpp_dist";
         var assemblyDirs = new List<string>();
+        var additionalAssemblies = new List<string>();
         bool verbose = false;
         bool fullClosure = true;  // convert-to-cpp defaults to full assembly translation
         string? entryPoint = null;
@@ -76,6 +84,9 @@ internal sealed class ConvertToCppConfig
                     break;
                 case "--assembly-dir" when i + 1 < args.Length:
                     assemblyDirs.Add(args[++i]);
+                    break;
+                case "--additional-assembly" when i + 1 < args.Length:
+                    additionalAssemblies.Add(Path.GetFullPath(args[++i]));
                     break;
                 case "--entry-point" when i + 1 < args.Length:
                     entryPoint = args[++i];
@@ -123,6 +134,7 @@ internal sealed class ConvertToCppConfig
             AssemblyPaths = assemblyPaths,
             OutputDir = outputDir,
             AssemblyDirs = assemblyDirs,
+            AdditionalAssemblies = additionalAssemblies,
             Verbose = verbose,
             FullClosure = fullClosure,
             EntryPoint = entryPoint,

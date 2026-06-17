@@ -1702,7 +1702,11 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
 
         // Track seen chaos_type_ symbols to prevent duplicate definitions from
         // FSharp.Core type forwarding in the inline loop below.
-        _seenStructSymbols ??= CollectStructSymbols(_referenceTypeStructCode);
+        // Always reset for the current chunk's struct code — the ??= pattern would
+        // retain symbols from a previous chunk (same Generator process lifetime),
+        // causing cross-chunk cache poisoning (e.g., TypeConverter delegate types
+        // would not be found in a set seeded by a prior chunk's symbols).
+        _seenStructSymbols = CollectStructSymbols(_referenceTypeStructCode);
 
         // ── Struct forward declarations ──
         // Page files use reinterpret_cast<chaos_type_<id>*>(ptr),
@@ -1719,23 +1723,40 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             // delegate members (chaos_delegate_invocation_count, etc.) via reinterpret_cast.
             // The root Delegate/MulticastDelegate types keep forward declarations — their
             // full inherited definitions are only on page 0 (object model section).
+            //
+            // Skip types that already have a struct definition from _referenceTypeStructCode
+            // (emitted above at line 1698-1700 via DeduplicateStructDefs).  These types get
+            // their definition from the object model (with real field layout), and redefining
+            // them here as flat delegate structs causes C2027/C2011.
             bool isConcreteDelegate = IsDelegateTypeSubjectId(typeId, _referenceTypeBaseSubjectIds)
                 && !string.Equals(typeId, DelegateTypeSubjectId, StringComparison.Ordinal)
                 && !string.Equals(typeId, MulticastDelegateTypeSubjectId, StringComparison.Ordinal);
 
             if (isConcreteDelegate)
             {
-                sb.Append("struct ");
-                sb.Append(GetNativeTypeSymbol(typeId));
-                sb.AppendLine(" {");
-                sb.AppendLine("    PureTypeHeader header{};");
-                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
-                sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
-                sb.AppendLine("};");
+                // Skip if this delegate type already has a struct definition from
+                // _referenceTypeStructCode (e.g., ElapsedEventHandler in TypeConverter).
+                // _seenStructSymbols stores names WITHOUT the "chaos_type_" prefix,
+                // while GetNativeTypeSymbol returns the full "chaos_type_Xxx" symbol.
+                // Strip the prefix before checking for a match.
+                var nativeSym = GetNativeTypeSymbol(typeId);
+                var symNoPrefix = nativeSym.StartsWith("chaos_type_", StringComparison.Ordinal)
+                    ? nativeSym["chaos_type_".Length..]
+                    : nativeSym;
+                if (_seenStructSymbols is null || !_seenStructSymbols.Contains(symNoPrefix))
+                {
+                    sb.Append("struct ");
+                    sb.Append(nativeSym);
+                    sb.AppendLine(" {");
+                    sb.AppendLine("    PureTypeHeader header{};");
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
+                    sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
+                    sb.AppendLine("};");
+                }
             }
             else
             {
@@ -1878,9 +1899,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             foreach (string ifaceId in allInterfaceTypeIds.OrderBy(id => id, StringComparer.Ordinal))
             {
                 ulong ifaceStableId = ComputeStableTypeId(ifaceId);
-                sb.Append("inline constexpr CHAOS_IL2CPP_INTPTR ");
+                sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
                 sb.Append(GetNativeTypeIdSymbol(ifaceId));
-                sb.Append(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+                sb.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
                 sb.Append(ifaceStableId.ToString());
                 sb.AppendLine("ULL);");
             }
