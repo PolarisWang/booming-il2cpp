@@ -1,0 +1,707 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-17T01:31:13.7278338Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.Asn1Tag",
+      "methodName": "AsConstructed",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.Asn1Tag",
+      "methodName": "AsPrimitive",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.Asn1Tag",
+      "methodName": "CalculateEncodedSize",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.Asn1Tag",
+      "methodName": "HasSameClassAndValue",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ThrowIfNotEmpty:System.Void()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ThrowIfNotEmpty",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekTag:System.Formats.Asn1.Asn1Tag()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "PeekTag",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekEncodedValue:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "PeekEncodedValue",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekContentBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "PeekContentBytes",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory\u003CSystem.Byte\u003E()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadEncodedValue",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Clone:System.Formats.Asn1.AsnReader()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "Clone",
+      "isStatic": true
+    },
+    {
+      "index": 10,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadPrimitiveBitString",
+      "isStatic": true
+    },
+    {
+      "index": 11,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32,System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadPrimitiveBitString",
+      "isStatic": true
+    },
+    {
+      "index": 12,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadBitString",
+      "isStatic": true
+    },
+    {
+      "index": 13,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte[](System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadBitString",
+      "isStatic": true
+    },
+    {
+      "index": 14,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBoolean:System.Boolean(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadBoolean",
+      "isStatic": true
+    },
+    {
+      "index": 15,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadEnumeratedBytes",
+      "isStatic": true
+    },
+    {
+      "index": 16,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.DayOfWeek(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadEnumeratedValue",
+      "isStatic": true
+    },
+    {
+      "index": 17,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadEnumeratedValue",
+      "isStatic": true
+    },
+    {
+      "index": 18,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadGeneralizedTime",
+      "isStatic": true
+    },
+    {
+      "index": 19,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadIntegerBytes:System.ReadOnlyMemory\u003CSystem.Byte\u003E(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadIntegerBytes",
+      "isStatic": true
+    },
+    {
+      "index": 20,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadInteger",
+      "isStatic": true
+    },
+    {
+      "index": 21,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadInt32",
+      "isStatic": true
+    },
+    {
+      "index": 22,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadInt32",
+      "isStatic": true
+    },
+    {
+      "index": 23,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadUInt32",
+      "isStatic": true
+    },
+    {
+      "index": 24,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadUInt32",
+      "isStatic": true
+    },
+    {
+      "index": 25,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadInt64",
+      "isStatic": true
+    },
+    {
+      "index": 26,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadInt64",
+      "isStatic": true
+    },
+    {
+      "index": 27,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadUInt64",
+      "isStatic": true
+    },
+    {
+      "index": 28,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadUInt64",
+      "isStatic": true
+    },
+    {
+      "index": 29,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.DayOfWeek(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadNamedBitListValue",
+      "isStatic": true
+    },
+    {
+      "index": 30,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadNamedBitListValue",
+      "isStatic": true
+    },
+    {
+      "index": 31,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitList:System.Collections.BitArray(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadNamedBitList",
+      "isStatic": true
+    },
+    {
+      "index": 32,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNull:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadNull",
+      "isStatic": true
+    },
+    {
+      "index": 33,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadOctetString:System.Byte[](System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadOctetString",
+      "isStatic": true
+    },
+    {
+      "index": 34,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory\u003CSystem.Byte\u003E,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadPrimitiveOctetString",
+      "isStatic": true
+    },
+    {
+      "index": 35,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadObjectIdentifier:System.String(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadObjectIdentifier",
+      "isStatic": true
+    },
+    {
+      "index": 36,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSequence:System.Formats.Asn1.AsnReader(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadSequence",
+      "isStatic": true
+    },
+    {
+      "index": 37,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadSetOf",
+      "isStatic": true
+    },
+    {
+      "index": 38,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadSetOf",
+      "isStatic": true
+    },
+    {
+      "index": 39,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadSetOf",
+      "isStatic": true
+    },
+    {
+      "index": 40,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.Formats.Asn1.Asn1Tag,System.ReadOnlyMemory\u003CSystem.Byte\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "TryReadPrimitiveCharacterStringBytes",
+      "isStatic": true
+    },
+    {
+      "index": 41,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadCharacterString:System.String(System.Formats.Asn1.UniversalTagNumber,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadCharacterString",
+      "isStatic": true
+    },
+    {
+      "index": 42,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadUtcTime",
+      "isStatic": true
+    },
+    {
+      "index": 43,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadUtcTime",
+      "isStatic": true
+    },
+    {
+      "index": 44,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnReader",
+      "methodName": "ReadUtcTime",
+      "isStatic": true
+    },
+    {
+      "index": 45,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::GetEncodedLength:System.Int32()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "GetEncodedLength",
+      "isStatic": true
+    },
+    {
+      "index": 46,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.Formats.Asn1.AsnWriter)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "EncodedValueEquals",
+      "isStatic": true
+    },
+    {
+      "index": 47,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::CopyTo:System.Void(System.Formats.Asn1.AsnWriter)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "CopyTo",
+      "isStatic": true
+    },
+    {
+      "index": 48,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteBoolean",
+      "isStatic": true
+    },
+    {
+      "index": 49,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteBoolean",
+      "isStatic": true
+    },
+    {
+      "index": 50,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteEnumeratedValue",
+      "isStatic": true
+    },
+    {
+      "index": 51,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteEnumeratedValue",
+      "isStatic": true
+    },
+    {
+      "index": 52,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteEnumeratedValue",
+      "isStatic": true
+    },
+    {
+      "index": 53,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteGeneralizedTime",
+      "isStatic": true
+    },
+    {
+      "index": 54,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteGeneralizedTime",
+      "isStatic": true
+    },
+    {
+      "index": 55,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteInteger",
+      "isStatic": true
+    },
+    {
+      "index": 56,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteInteger",
+      "isStatic": true
+    },
+    {
+      "index": 57,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteInteger",
+      "isStatic": true
+    },
+    {
+      "index": 58,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteInteger",
+      "isStatic": true
+    },
+    {
+      "index": 59,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteInteger",
+      "isStatic": true
+    },
+    {
+      "index": 60,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteInteger",
+      "isStatic": true
+    },
+    {
+      "index": 61,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteNamedBitList",
+      "isStatic": true
+    },
+    {
+      "index": 62,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteNamedBitList",
+      "isStatic": true
+    },
+    {
+      "index": 63,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.DayOfWeek,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteNamedBitList",
+      "isStatic": true
+    },
+    {
+      "index": 64,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Collections.BitArray,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteNamedBitList",
+      "isStatic": true
+    },
+    {
+      "index": 65,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNull:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteNull",
+      "isStatic": true
+    },
+    {
+      "index": 66,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopOctetString:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "PopOctetString",
+      "isStatic": true
+    },
+    {
+      "index": 67,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteObjectIdentifier",
+      "isStatic": true
+    },
+    {
+      "index": 68,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteObjectIdentifier",
+      "isStatic": true
+    },
+    {
+      "index": 69,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSequence:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "PopSequence",
+      "isStatic": true
+    },
+    {
+      "index": 70,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSetOf:System.Void(System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "PopSetOf",
+      "isStatic": true
+    },
+    {
+      "index": 71,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteCharacterString",
+      "isStatic": true
+    },
+    {
+      "index": 72,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteCharacterString",
+      "isStatic": true
+    },
+    {
+      "index": 73,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteUtcTime",
+      "isStatic": true
+    },
+    {
+      "index": 74,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteUtcTime",
+      "isStatic": true
+    },
+    {
+      "index": 75,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable\u003CSystem.Formats.Asn1.Asn1Tag\u003E)",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "System.Formats.Asn1.AsnWriter",
+      "methodName": "WriteUtcTime",
+      "isStatic": true
+    },
+    {
+      "index": 76,
+      "kind": "fact",
+      "subjectId": "System.Formats.Asn1/AsnWriter.Scope::Dispose:System.Void()",
+      "assemblyName": "System.Formats.Asn1",
+      "typeName": "AsnWriter.Scope",
+      "methodName": "Dispose",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 77,
+    "factCount": 77,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}

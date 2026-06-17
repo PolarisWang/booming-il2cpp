@@ -148,7 +148,7 @@ interpreter::DispatchResult InterpreterDispatch(
         return result;
     }
     ExceptionHandle ex = nullptr;
-    const RuntimeStatus status = abi->method_invoke(
+    CHAOS_IL2CPP_INT32 status = abi->method_invoke(
         ctx->runtime_state, ctx->thread_state,
         method, this_ptr,
         argv.data(), param_count,

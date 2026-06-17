@@ -4399,8 +4399,8 @@ public sealed partial class NativeAotLoweringPlanner
                     if (allParamsAreVector)
                     {
                         if (paramTypes.Count >= 2)
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}, {Deref(1)}); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {simdStub}({Deref(0)}); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }
                 }
 
@@ -4410,15 +4410,15 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // VectorFixedBroadcast (get_Zero / AllBitsSet) — no vector params
                 if (templateFn == "VectorFixedBroadcast" && paramTypes.Count == 0)
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedBroadcast<{tc}>(0); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedBroadcast<{tc}>(0); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
                 // VectorFixedAbs / VectorFixedNegate need <TInputScalar, TOutputScalar, TCarrier>
                 if (templateFn == "VectorFixedAbs" || templateFn == "VectorFixedNegate")
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}{templateFn}<{cppType}, {cppType}, {carrier}>({Deref(0)}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}{templateFn}<{cppType}, {cppType}, {carrier}>({Deref(0)}); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
                 // VectorFixedCreateScalar — scalar param, returns carrier
                 if (templateFn == "VectorFixedCreateScalar" && paramTypes.Count == 1)
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedCreateScalar<{tc}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedCreateScalar<{tc}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
 
                 // Binary ops: deref inputs (2 or 3), call function, heap-alloc result
                 if (paramTypes.Count >= 2 && paramTypes.Count <= 3)
@@ -4427,21 +4427,21 @@ public sealed partial class NativeAotLoweringPlanner
                     var fnCall = requiresScalar
                         ? $"{ns}{templateFn}<{TcForTemplateFn(templateFn)}>({argList})"
                         : $"{ns}{templateFn}<{carrier}>({argList})";
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }
                 if (paramTypes.Count >= 2)
                 {
                     var fnCall = requiresScalar
                         ? $"{ns}{templateFn}<{TcForTemplateFn(templateFn)}>({Arg(0)}, {Arg(1)})"
                         : $"{ns}{templateFn}<{carrier}>({Arg(0)}, {Arg(1)})";
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {fnCall}; auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }
 
                 // Unary ops: deref input, call function, heap-alloc result
                 var unaryFnCall = requiresScalar
                     ? $"{ns}{templateFn}<{tc}>({Deref(0)})"
                     : $"{ns}{templateFn}<{carrier}>({Deref(0)})";
-                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {unaryFnCall}; auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {unaryFnCall}; auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
             }
 
             // SIMD stub lookup: maps (templateFn, carrier, cppType) to the
@@ -4613,7 +4613,7 @@ public sealed partial class NativeAotLoweringPlanner
                             if (cppType == null) return null;
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }
@@ -4634,7 +4634,7 @@ public sealed partial class NativeAotLoweringPlanner
                             if (cppType == null) return null;
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(~static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedBroadcast<{cppType}, {carrier}>(~static_cast<{cppType}>(0)); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }
@@ -4658,7 +4658,7 @@ public sealed partial class NativeAotLoweringPlanner
                                 if (cppType == null) return null;
                                 var carrier = InferVectorCarrierType(callee);
                                 if (carrier == null) return null;
-                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedCreateScalar<{cppType}, {carrier}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedCreateScalar<{cppType}, {carrier}>(static_cast<{cppType}>({{0}})); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                             }));
                     }
                 }
@@ -4722,7 +4722,7 @@ public sealed partial class NativeAotLoweringPlanner
                             {
                                 var carrier = InferVectorCarrierType(callee);
                                 if (carrier == null) return null;
-                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = *reinterpret_cast<{carrier}*>({{0}}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                                return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = *reinterpret_cast<{carrier}*>({{0}}); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                             }));
                     }
                 }
@@ -4740,7 +4740,7 @@ public sealed partial class NativeAotLoweringPlanner
                     MethodName: "AsVector256",
                     Resolver: static (callee, paramTypes) =>
                     {
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
                 // Vector256<T>::AsVector128 → Vector128<T>
                 registry.RegisterInline(new InlineShapeDescriptor(
@@ -4748,7 +4748,7 @@ public sealed partial class NativeAotLoweringPlanner
                     MethodName: "AsVector128",
                     Resolver: static (callee, paramTypes) =>
                     {
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
             RegisterVectorCrossCast();
@@ -4795,7 +4795,7 @@ public sealed partial class NativeAotLoweringPlanner
                         if (cppType == null) return null;
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedIsZero<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedIsZero<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
 
@@ -4911,7 +4911,7 @@ public sealed partial class NativeAotLoweringPlanner
                             };
                             if (toType == null) return null;
                             // Original template uses <TOutputScalar, TInputScalar, ...> ordering
-                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedConvertToVector<{toType}, {fromType}, {carrier}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedConvertToVector<{toType}, {fromType}, {carrier}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}})); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                         }));
                 }
             }
@@ -4933,7 +4933,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "GetLower",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // GetUpper: Vector256<T> → Vector128<T> (upper 128 bits)
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4941,7 +4941,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "GetUpper",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes + 16, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes + 16, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── ToVector128 / ToVector256 ──
@@ -4951,7 +4951,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector128",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // ToVector128Unsafe: same as ToVector128
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4959,7 +4959,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector128Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // ToVector256: Vector128<T> → Vector256<T> (extend)
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4967,14 +4967,14 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector256",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "Vector128",
                 MethodName: "ToVector256Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── CreateScalarUnsafe — same as CreateScalar but unchecked ──
@@ -4999,7 +4999,7 @@ public sealed partial class NativeAotLoweringPlanner
                             $"{carrier} __r{{}}; " +
                             $"auto* rl = reinterpret_cast<{cppType}*>(&__r); " +
                             $"for (CHAOS_IL2CPP_SIZE i = 0; i < N; ++i) rl[i] = static_cast<{cppType}>({{0}}) + static_cast<{cppType}>(i * static_cast<{cppType}>({{1}})); " +
-                            $"auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                            $"auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
 
@@ -5081,7 +5081,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
                         var ns = "chaos::il2cpp::vector_fixed::";
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedWithElement<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), static_cast<CHAOS_IL2CPP_INT32>({{1}}), static_cast<{cppType}>({{2}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedWithElement<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), static_cast<CHAOS_IL2CPP_INT32>({{1}}), static_cast<{cppType}>({{2}})); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
 
@@ -5090,7 +5090,7 @@ public sealed partial class NativeAotLoweringPlanner
                 TypeDisplayNamePrefix: "Vector256", MethodName: "WithLower",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithLower(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithLower(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── WithUpper (V256 only) ──
@@ -5098,7 +5098,7 @@ public sealed partial class NativeAotLoweringPlanner
                 TypeDisplayNamePrefix: "Vector256", MethodName: "WithUpper",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithUpper(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = chaos::il2cpp::vector_fixed::VectorFixedWithUpper(*reinterpret_cast<RuntimeIntrinsicVector256Carrier*>({{0}}), *reinterpret_cast<RuntimeIntrinsicVector128Carrier*>({{1}})); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── Transcendental ──
@@ -5144,7 +5144,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
                         var ns = "chaos::il2cpp::vector_fixed::";
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedLoadUnsafe<{carrier}>({{0}}); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto __r = {ns}VectorFixedLoadUnsafe<{carrier}>({{0}}); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
 
@@ -5153,7 +5153,7 @@ public sealed partial class NativeAotLoweringPlanner
                 TypeDisplayNamePrefix: "Vector256", MethodName: "AsVector128Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)chaos::il2cpp::runtime_core::chaos_tls_carrier_pool_alloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── None (boolean) ──
@@ -6932,7 +6932,8 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
 
             // === Interlocked::Add (GenericShapeDescriptor — checked before _methodsBySubjectId) ===
-            // Dispatches to native ChaosInterlockedAddInt32/Int64 based on parameter type.
+            // Uses MSVC intrinsics (_InterlockedExchangeAdd / _InterlockedExchangeAdd64)
+            // to avoid external library dependency.
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Interlocked",
                 MethodName: "Add",
@@ -6942,7 +6943,8 @@ public sealed partial class NativeAotLoweringPlanner
                     if (paramTypes.Count != 2) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     bool is64Bit = paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64");
-                    var valueType = is64Bit ? "CHAOS_IL2CPP_INT64" : "CHAOS_IL2CPP_INT32";
+                    var intrin = is64Bit ? "_InterlockedExchangeAdd64" : "_InterlockedExchangeAdd";
+                    var cppType = is64Bit ? "__int64" : "long";
                     var abiSlots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                         new AotCoreIrAbiSlotArtifact[2]
                         {
@@ -6954,10 +6956,8 @@ public sealed partial class NativeAotLoweringPlanner
                             }
                         });
                     AotCoreIrAbiSlotArtifact retAbi;
-                    string nativeFn;
                     if (is64Bit)
                     {
-                        nativeFn = "ChaosInterlockedAddInt64";
                         retAbi = new AotCoreIrAbiSlotArtifact
                         {
                             CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
@@ -6966,17 +6966,21 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     else
                     {
-                        nativeFn = "ChaosInterlockedAddInt32";
                         retAbi = CreateInt32AbiSlot();
                     }
+                    var lines = new[]
+                    {
+                        $"    auto* loc = reinterpret_cast<volatile {cppType}*>(location);",
+                        $"    auto val = static_cast<{cppType}>(value);",
+                        $"    return {intrin}(loc, val) + val;",
+                    };
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        $"CHAOS_IL2CPP_INTPTR location, {valueType} value",
-                        new[] { $"    return {nativeFn}(location, value);" });
+                        "CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INTPTR value", lines);
                     return new GenericShapeResolution(src, symbol, abiSlots, retAbi,
-                        new HashSet<int> { 0, 1 }, DirectNativeSymbol: nativeFn);
+                        new HashSet<int> { 0, 1 });
                 }));
 
-            // === Interlocked::Or (GenericShapeDescriptor — checked before _methodsBySubjectId) ===
+            // === Interlocked::Or (GenericShapeDescriptor — MSVC intrinsic) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Interlocked",
                 MethodName: "Or",
@@ -6986,7 +6990,8 @@ public sealed partial class NativeAotLoweringPlanner
                     if (paramTypes.Count != 2) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     bool is64Bit = paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64");
-                    var valueType = is64Bit ? "CHAOS_IL2CPP_INT64" : "CHAOS_IL2CPP_INT32";
+                    var intrin = is64Bit ? "_InterlockedOr64" : "_InterlockedOr";
+                    var cppType = is64Bit ? "__int64" : "long";
                     var abiSlots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                         new AotCoreIrAbiSlotArtifact[2]
                         {
@@ -7000,9 +7005,6 @@ public sealed partial class NativeAotLoweringPlanner
                     AotCoreIrAbiSlotArtifact retAbi;
                     if (is64Bit)
                     {
-                        // Note: only ChaosInterlockedOrUInt32 exists; 64-bit Or still goes through
-                        // the UInt32 stub which will be called incorrectly for Int64. Future work:
-                        // add ChaosInterlockedOrInt64 native stub.
                         retAbi = new AotCoreIrAbiSlotArtifact
                         {
                             CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
@@ -7014,14 +7016,18 @@ public sealed partial class NativeAotLoweringPlanner
                         retAbi = CreateInt32AbiSlot();
                     }
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        $"CHAOS_IL2CPP_INTPTR location, {valueType} value",
-                        new[] { $"    return ChaosInterlockedOrUInt32(location, static_cast<CHAOS_IL2CPP_UINT32>(value));" });
+                        "CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INTPTR value",
+                        new[]
+                        {
+                            $"    auto* loc = reinterpret_cast<volatile {cppType}*>(location);",
+                            $"    auto val = static_cast<{cppType}>(value);",
+                            $"    return {intrin}(loc, val);",
+                        });
                     return new GenericShapeResolution(src, symbol, abiSlots, retAbi,
-                        new HashSet<int> { 0, 1 }, DirectNativeSymbol: "ChaosInterlockedOrUInt32");
+                        new HashSet<int> { 0, 1 });
                 }));
 
-            // === Interlocked::Increment — Int32 overload (GenericShapeDescriptor) ===
-            // Int64& overload is handled by SimpleForward above.
+            // === Interlocked::Increment (GenericShapeDescriptor, MSVC intrinsic) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Interlocked",
                 MethodName: "Increment",
@@ -7030,11 +7036,12 @@ public sealed partial class NativeAotLoweringPlanner
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 1) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    bool is64Bit = paramTypes[0].Contains("Int64") || paramTypes[0].Contains("UInt64");
+                    var intrin = is64Bit ? "_InterlockedIncrement64" : "_InterlockedIncrement";
+                    var cppType = is64Bit ? "__int64" : "long";
                     AotCoreIrAbiSlotArtifact retAbi;
-                    string nativeFn;
-                    if (paramTypes[0].Contains("Int64") || paramTypes[0].Contains("UInt64"))
+                    if (is64Bit)
                     {
-                        nativeFn = "ChaosInterlockedIncrementInt64";
                         retAbi = new AotCoreIrAbiSlotArtifact
                         {
                             CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
@@ -7043,19 +7050,22 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     else
                     {
-                        nativeFn = "ChaosInterlockedIncrementInt32";
                         retAbi = CreateInt32AbiSlot();
                     }
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR location",
-                        new[] { $"    return {nativeFn}(location);" });
+                        new[]
+                        {
+                            $"    auto* loc = reinterpret_cast<volatile {cppType}*>(location);",
+                            $"    return {intrin}(loc);",
+                        });
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        retAbi, new HashSet<int> { 0 }, DirectNativeSymbol: nativeFn);
+                        retAbi, new HashSet<int> { 0 });
                 }));
 
-            // === Interlocked::Decrement — Int32 overload (GenericShapeDescriptor) ===
+            // === Interlocked::Decrement (GenericShapeDescriptor, MSVC intrinsic) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Interlocked",
                 MethodName: "Decrement",
@@ -7064,11 +7074,12 @@ public sealed partial class NativeAotLoweringPlanner
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 1) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    bool is64Bit = paramTypes[0].Contains("Int64") || paramTypes[0].Contains("UInt64");
+                    var intrin = is64Bit ? "_InterlockedDecrement64" : "_InterlockedDecrement";
+                    var cppType = is64Bit ? "__int64" : "long";
                     AotCoreIrAbiSlotArtifact retAbi;
-                    string nativeFn;
-                    if (paramTypes[0].Contains("Int64") || paramTypes[0].Contains("UInt64"))
+                    if (is64Bit)
                     {
-                        nativeFn = "ChaosInterlockedDecrementInt64";
                         retAbi = new AotCoreIrAbiSlotArtifact
                         {
                             CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
@@ -7077,19 +7088,22 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     else
                     {
-                        nativeFn = "ChaosInterlockedDecrementInt32";
                         retAbi = CreateInt32AbiSlot();
                     }
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR location",
-                        new[] { $"    return {nativeFn}(location);" });
+                        new[]
+                        {
+                            $"    auto* loc = reinterpret_cast<volatile {cppType}*>(location);",
+                            $"    return {intrin}(loc);",
+                        });
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        retAbi, new HashSet<int> { 0 }, DirectNativeSymbol: nativeFn);
+                        retAbi, new HashSet<int> { 0 });
                 }));
 
-            // === Interlocked::Exchange — Int32 overload (GenericShapeDescriptor) ===
+            // === Interlocked::Exchange (GenericShapeDescriptor, MSVC intrinsic) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "Interlocked",
                 MethodName: "Exchange",
@@ -7098,23 +7112,22 @@ public sealed partial class NativeAotLoweringPlanner
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 2) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    bool is64Bit = paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64");
+                    var intrin = is64Bit ? "_InterlockedExchange64" : "_InterlockedExchange";
+                    var cppType = is64Bit ? "__int64" : "long";
                     var abiSlots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                         new AotCoreIrAbiSlotArtifact[2]
                         {
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             new AotCoreIrAbiSlotArtifact
                             {
-                                CarrierKindCode = paramTypes[1].Contains("Int64")
-                                    ? AotCoreIrAbiCarrierKind.Int64
-                                    : AotCoreIrAbiCarrierKind.Int32,
+                                CarrierKindCode = is64Bit ? AotCoreIrAbiCarrierKind.Int64 : AotCoreIrAbiCarrierKind.Int32,
                                 TypeShape = AotCoreIrTypeShapeKind.ValueType
                             }
                         });
                     AotCoreIrAbiSlotArtifact retAbi;
-                    string nativeFn;
-                    if (paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64"))
+                    if (is64Bit)
                     {
-                        nativeFn = "ChaosInterlockedExchangeInt64";
                         retAbi = new AotCoreIrAbiSlotArtifact
                         {
                             CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
@@ -7123,14 +7136,18 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     else
                     {
-                        nativeFn = "ChaosInterlockedExchangeInt32";
                         retAbi = CreateInt32AbiSlot();
                     }
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INTPTR value",
-                        new[] { $"    return {nativeFn}(location, value);" });
+                        new[]
+                        {
+                            $"    auto* loc = reinterpret_cast<volatile {cppType}*>(location);",
+                            $"    auto val = static_cast<{cppType}>(value);",
+                            $"    return {intrin}(loc, val);",
+                        });
                     return new GenericShapeResolution(src, symbol, abiSlots, retAbi,
-                        new HashSet<int> { 0, 1 }, DirectNativeSymbol: nativeFn);
+                        new HashSet<int> { 0, 1 });
                 }));
         }
 

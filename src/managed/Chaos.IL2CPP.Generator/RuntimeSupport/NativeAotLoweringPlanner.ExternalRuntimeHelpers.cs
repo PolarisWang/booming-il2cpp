@@ -275,13 +275,7 @@ public sealed partial class NativeAotLoweringPlanner
 		if (crCryptoJson != null)
 			_cryptoAotIrEntries.Add((callee, crCryptoJson));
 
-		if (_methodsBySubjectId.TryGetValue(callee, out var aotMethod) && aotMethod.Instructions.Count > 0)
-		{
-			helperDefinition = null;
-			_externalRuntimeHelperCache[callee] = null;
-			return false;
-		}
-		if (_methodsBySubjectId.TryGetValue(originalCallee, out var aotMethod2) && aotMethod2.Instructions.Count > 0)
+		if (_methodsBySubjectId.ContainsKey(callee) || _methodsBySubjectId.ContainsKey(originalCallee))
 		{
 			helperDefinition = null;
 			_externalRuntimeHelperCache[callee] = null;
@@ -342,9 +336,11 @@ public sealed partial class NativeAotLoweringPlanner
 			: CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType);
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
 		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
-		// All catch-all fallback functions use () regardless of actual method params
-		// because call sites pass 0 args and the body uses hardcoded subject ID.
-		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
+		// All catch-all fallback functions use CHAOS_IL2CPP_INTPTR parameter to match
+		// the extern "C" declaration format and avoid C2733 overload conflict.
+		int inferredArgCount = InferParameterCountFromSubjectId(callee);
+		var paramSig = string.Join(", ", Enumerable.Repeat("CHAOS_IL2CPP_INTPTR", inferredArgCount > 0 ? inferredArgCount : 1));
+		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, paramSig,
 			["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
