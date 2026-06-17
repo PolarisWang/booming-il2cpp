@@ -375,6 +375,8 @@ static LONG WINAPI JitVectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept;
 #endif
 
 void WinSehHandler::Initialize() noexcept {
+    if (initialized_) return;
+    initialized_ = true;
     pending_free_.reserve(256);
     entries_.reserve(4096);
 

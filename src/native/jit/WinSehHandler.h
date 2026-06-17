@@ -42,6 +42,8 @@ public:
     void Initialize() noexcept override;
 
 private:
+    bool initialized_ = false;  // guard against double init (bootstrap + RuntimeInit)
+
     // ── T4 Code Registry ──────────────────────────────────────────────────
     // Maps code address ranges back to JitMethod for VEH lookup.
     // Dynamic vector (no fixed cap; reserve 4096 at init).
