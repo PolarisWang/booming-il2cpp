@@ -1483,6 +1483,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             "\"runtime_stubs/crypto_stubs.h\"",
             // Vector<T> comparison stubs (chaos_vector_greater_than_any, etc.)
             "\"runtime_stubs/vector_stubs.h\"",
+            // Interlocked/Volatile stubs (ChaosInterlockedAddInt32, etc.) for
+            // System.Threading.Interlocked SimpleForward and GenericShape helpers.
+            "\"runtime_stubs/interlocked_stubs.h\"",
         };
         // com_ccw.h — only needed when COM interface vtable data is present.
         if (_comInterfaceVtableData is { Count: > 0 })

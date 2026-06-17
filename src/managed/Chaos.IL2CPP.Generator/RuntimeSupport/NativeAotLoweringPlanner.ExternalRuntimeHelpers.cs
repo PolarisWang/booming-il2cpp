@@ -275,7 +275,13 @@ public sealed partial class NativeAotLoweringPlanner
 		if (crCryptoJson != null)
 			_cryptoAotIrEntries.Add((callee, crCryptoJson));
 
-		if (_methodsBySubjectId.ContainsKey(callee) || _methodsBySubjectId.ContainsKey(originalCallee))
+		if (_methodsBySubjectId.TryGetValue(callee, out var aotMethod) && aotMethod.Instructions.Count > 0)
+		{
+			helperDefinition = null;
+			_externalRuntimeHelperCache[callee] = null;
+			return false;
+		}
+		if (_methodsBySubjectId.TryGetValue(originalCallee, out var aotMethod2) && aotMethod2.Instructions.Count > 0)
 		{
 			helperDefinition = null;
 			_externalRuntimeHelperCache[callee] = null;

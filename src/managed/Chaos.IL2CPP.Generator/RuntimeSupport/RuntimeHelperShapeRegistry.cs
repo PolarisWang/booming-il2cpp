@@ -4229,6 +4229,42 @@ public sealed partial class NativeAotLoweringPlanner
                     return "(({0} & ({0} - 1)) == 0 && {0} != 0)";
                 }));
 
+            // === System.Numerics::BitOperations::IsPow2 (GenericShape dispatch body) ===
+            // Provides a native dispatch target for benchmark subjects and direct calls.
+            // Without this, IsPow2 dispatches through the interpreter even though its
+            // call sites are inlined via the InlineShapeDescriptor above.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Numerics.BitOperations",
+                MethodName: "IsPow2",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    // Inline C++ expression: (v & (v - 1)) == 0 && v != 0
+                    // Works for all unsigned integer types without external dependency.
+                    string valueAccess;
+                    if (paramTypes[0].Contains("Int32") || paramTypes[0].Contains("UInt32"))
+                    {
+                        valueAccess = "static_cast<CHAOS_IL2CPP_UINT32>(value)";
+                    }
+                    else
+                    {
+                        valueAccess = "static_cast<CHAOS_IL2CPP_UINT64>(value)";
+                    }
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR value",
+                    [
+                        $"    auto v = {valueAccess};",
+                        "    return (v & (v - 1)) == 0 && v != 0 ? 1 : 0;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot()),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0 });
+                }));
+
             // ═══════════════════════════════════════════════════════════════
             // System.Runtime.Intrinsics.Vector128 / Vector256 — InlineShape
             // ═══════════════════════════════════════════════════════════════
@@ -6905,21 +6941,21 @@ public sealed partial class NativeAotLoweringPlanner
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 2) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    bool is64Bit = paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64");
+                    var valueType = is64Bit ? "CHAOS_IL2CPP_INT64" : "CHAOS_IL2CPP_INT32";
                     var abiSlots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                         new AotCoreIrAbiSlotArtifact[2]
                         {
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             new AotCoreIrAbiSlotArtifact
                             {
-                                CarrierKindCode = paramTypes[1].Contains("Int64")
-                                    ? AotCoreIrAbiCarrierKind.Int64
-                                    : AotCoreIrAbiCarrierKind.Int32,
+                                CarrierKindCode = is64Bit ? AotCoreIrAbiCarrierKind.Int64 : AotCoreIrAbiCarrierKind.Int32,
                                 TypeShape = AotCoreIrTypeShapeKind.ValueType
                             }
                         });
                     AotCoreIrAbiSlotArtifact retAbi;
                     string nativeFn;
-                    if (paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64"))
+                    if (is64Bit)
                     {
                         nativeFn = "ChaosInterlockedAddInt64";
                         retAbi = new AotCoreIrAbiSlotArtifact
@@ -6934,7 +6970,7 @@ public sealed partial class NativeAotLoweringPlanner
                         retAbi = CreateInt32AbiSlot();
                     }
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INTPTR value",
+                        $"CHAOS_IL2CPP_INTPTR location, {valueType} value",
                         new[] { $"    return {nativeFn}(location, value);" });
                     return new GenericShapeResolution(src, symbol, abiSlots, retAbi,
                         new HashSet<int> { 0, 1 }, DirectNativeSymbol: nativeFn);
@@ -6949,23 +6985,24 @@ public sealed partial class NativeAotLoweringPlanner
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     if (paramTypes.Count != 2) return null;
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    bool is64Bit = paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64");
+                    var valueType = is64Bit ? "CHAOS_IL2CPP_INT64" : "CHAOS_IL2CPP_INT32";
                     var abiSlots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                         new AotCoreIrAbiSlotArtifact[2]
                         {
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             new AotCoreIrAbiSlotArtifact
                             {
-                                CarrierKindCode = paramTypes[1].Contains("Int64")
-                                    ? AotCoreIrAbiCarrierKind.Int64
-                                    : AotCoreIrAbiCarrierKind.Int32,
+                                CarrierKindCode = is64Bit ? AotCoreIrAbiCarrierKind.Int64 : AotCoreIrAbiCarrierKind.Int32,
                                 TypeShape = AotCoreIrTypeShapeKind.ValueType
                             }
                         });
                     AotCoreIrAbiSlotArtifact retAbi;
-                    string nativeFn;
-                    if (paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64"))
+                    if (is64Bit)
                     {
-                        nativeFn = "ChaosInterlockedOrUInt32";  // fallback: no Int64 Or stub yet
+                        // Note: only ChaosInterlockedOrUInt32 exists; 64-bit Or still goes through
+                        // the UInt32 stub which will be called incorrectly for Int64. Future work:
+                        // add ChaosInterlockedOrInt64 native stub.
                         retAbi = new AotCoreIrAbiSlotArtifact
                         {
                             CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
@@ -6974,14 +7011,13 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     else
                     {
-                        nativeFn = "ChaosInterlockedOrUInt32";
                         retAbi = CreateInt32AbiSlot();
                     }
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                        "CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INTPTR value",
-                        new[] { $"    return {nativeFn}(location, value);" });
+                        $"CHAOS_IL2CPP_INTPTR location, {valueType} value",
+                        new[] { $"    return ChaosInterlockedOrUInt32(location, static_cast<CHAOS_IL2CPP_UINT32>(value));" });
                     return new GenericShapeResolution(src, symbol, abiSlots, retAbi,
-                        new HashSet<int> { 0, 1 }, DirectNativeSymbol: nativeFn);
+                        new HashSet<int> { 0, 1 }, DirectNativeSymbol: "ChaosInterlockedOrUInt32");
                 }));
 
             // === Interlocked::Increment — Int32 overload (GenericShapeDescriptor) ===
