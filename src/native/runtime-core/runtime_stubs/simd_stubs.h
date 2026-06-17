@@ -123,3 +123,32 @@ inline CHAOS_IL2CPP_INTPTR Vector128Xor(
 }
 
 }  // namespace chaos::il2cpp::simd
+
+// ── Codegen-facing SIMD stubs (carrier-typed API) ────────────────
+// These are called by inline shapes emitted by the AOT codegen
+// (System.Runtime.Intrinsics.Vector128/256 operations).
+// Types aliases match the .cpp implementations in simd_stubs.cpp.
+#include "numerics_carriers.h"
+
+extern "C" {
+using V128 = chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector128Carrier;
+using V256 = chaos::il2cpp::numerics_carriers::RuntimeIntrinsicVector256Carrier;
+using ChaosSimdV128 = V128;  // backward compat (some SDK copies use this name)
+using ChaosSimdV256 = V256;  // backward compat
+
+// Vector128
+V128 ChaosSimd_V128_Add_I32(V128 a, V128 b) noexcept;
+V128 ChaosSimd_V128_Sub_I32(V128 a, V128 b) noexcept;
+V128 ChaosSimd_V128_Mul_I32(V128 a, V128 b) noexcept;
+V128 ChaosSimd_V128_And(V128 a, V128 b) noexcept;
+V128 ChaosSimd_V128_Or(V128 a, V128 b) noexcept;
+V128 ChaosSimd_V128_Xor(V128 a, V128 b) noexcept;
+
+// Vector256
+V256 ChaosSimd_V256_Add_I32(V256 a, V256 b) noexcept;
+V256 ChaosSimd_V256_Sub_I32(V256 a, V256 b) noexcept;
+V256 ChaosSimd_V256_Mul_I32(V256 a, V256 b) noexcept;
+V256 ChaosSimd_V256_And(V256 a, V256 b) noexcept;
+V256 ChaosSimd_V256_Or(V256 a, V256 b) noexcept;
+V256 ChaosSimd_V256_Xor(V256 a, V256 b) noexcept;
+}  // extern "C"
