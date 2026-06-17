@@ -6894,6 +6894,208 @@ public sealed partial class NativeAotLoweringPlanner
                     TypeShape = AotCoreIrTypeShapeKind.ValueType
                 },
                 new HashSet<int> { 0 });
+
+            // === Interlocked::Add (GenericShapeDescriptor — checked before _methodsBySubjectId) ===
+            // Dispatches to native ChaosInterlockedAddInt32/Int64 based on parameter type.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "Interlocked",
+                MethodName: "Add",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 2) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var abiSlots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                        new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new AotCoreIrAbiSlotArtifact
+                            {
+                                CarrierKindCode = paramTypes[1].Contains("Int64")
+                                    ? AotCoreIrAbiCarrierKind.Int64
+                                    : AotCoreIrAbiCarrierKind.Int32,
+                                TypeShape = AotCoreIrTypeShapeKind.ValueType
+                            }
+                        });
+                    AotCoreIrAbiSlotArtifact retAbi;
+                    string nativeFn;
+                    if (paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64"))
+                    {
+                        nativeFn = "ChaosInterlockedAddInt64";
+                        retAbi = new AotCoreIrAbiSlotArtifact
+                        {
+                            CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                            TypeShape = AotCoreIrTypeShapeKind.ValueType
+                        };
+                    }
+                    else
+                    {
+                        nativeFn = "ChaosInterlockedAddInt32";
+                        retAbi = CreateInt32AbiSlot();
+                    }
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INTPTR value",
+                        new[] { $"    return {nativeFn}(location, value);" });
+                    return new GenericShapeResolution(src, symbol, abiSlots, retAbi,
+                        new HashSet<int> { 0, 1 }, DirectNativeSymbol: nativeFn);
+                }));
+
+            // === Interlocked::Or (GenericShapeDescriptor — checked before _methodsBySubjectId) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "Interlocked",
+                MethodName: "Or",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 2) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var abiSlots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                        new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new AotCoreIrAbiSlotArtifact
+                            {
+                                CarrierKindCode = paramTypes[1].Contains("Int64")
+                                    ? AotCoreIrAbiCarrierKind.Int64
+                                    : AotCoreIrAbiCarrierKind.Int32,
+                                TypeShape = AotCoreIrTypeShapeKind.ValueType
+                            }
+                        });
+                    AotCoreIrAbiSlotArtifact retAbi;
+                    string nativeFn;
+                    if (paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64"))
+                    {
+                        nativeFn = "ChaosInterlockedOrUInt32";  // fallback: no Int64 Or stub yet
+                        retAbi = new AotCoreIrAbiSlotArtifact
+                        {
+                            CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                            TypeShape = AotCoreIrTypeShapeKind.ValueType
+                        };
+                    }
+                    else
+                    {
+                        nativeFn = "ChaosInterlockedOrUInt32";
+                        retAbi = CreateInt32AbiSlot();
+                    }
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INTPTR value",
+                        new[] { $"    return {nativeFn}(location, value);" });
+                    return new GenericShapeResolution(src, symbol, abiSlots, retAbi,
+                        new HashSet<int> { 0, 1 }, DirectNativeSymbol: nativeFn);
+                }));
+
+            // === Interlocked::Increment — Int32 overload (GenericShapeDescriptor) ===
+            // Int64& overload is handled by SimpleForward above.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "Interlocked",
+                MethodName: "Increment",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    AotCoreIrAbiSlotArtifact retAbi;
+                    string nativeFn;
+                    if (paramTypes[0].Contains("Int64") || paramTypes[0].Contains("UInt64"))
+                    {
+                        nativeFn = "ChaosInterlockedIncrementInt64";
+                        retAbi = new AotCoreIrAbiSlotArtifact
+                        {
+                            CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                            TypeShape = AotCoreIrTypeShapeKind.ValueType
+                        };
+                    }
+                    else
+                    {
+                        nativeFn = "ChaosInterlockedIncrementInt32";
+                        retAbi = CreateInt32AbiSlot();
+                    }
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR location",
+                        new[] { $"    return {nativeFn}(location);" });
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                        retAbi, new HashSet<int> { 0 }, DirectNativeSymbol: nativeFn);
+                }));
+
+            // === Interlocked::Decrement — Int32 overload (GenericShapeDescriptor) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "Interlocked",
+                MethodName: "Decrement",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    AotCoreIrAbiSlotArtifact retAbi;
+                    string nativeFn;
+                    if (paramTypes[0].Contains("Int64") || paramTypes[0].Contains("UInt64"))
+                    {
+                        nativeFn = "ChaosInterlockedDecrementInt64";
+                        retAbi = new AotCoreIrAbiSlotArtifact
+                        {
+                            CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                            TypeShape = AotCoreIrTypeShapeKind.ValueType
+                        };
+                    }
+                    else
+                    {
+                        nativeFn = "ChaosInterlockedDecrementInt32";
+                        retAbi = CreateInt32AbiSlot();
+                    }
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR location",
+                        new[] { $"    return {nativeFn}(location);" });
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                        retAbi, new HashSet<int> { 0 }, DirectNativeSymbol: nativeFn);
+                }));
+
+            // === Interlocked::Exchange — Int32 overload (GenericShapeDescriptor) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "Interlocked",
+                MethodName: "Exchange",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 2) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var abiSlots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                        new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new AotCoreIrAbiSlotArtifact
+                            {
+                                CarrierKindCode = paramTypes[1].Contains("Int64")
+                                    ? AotCoreIrAbiCarrierKind.Int64
+                                    : AotCoreIrAbiCarrierKind.Int32,
+                                TypeShape = AotCoreIrTypeShapeKind.ValueType
+                            }
+                        });
+                    AotCoreIrAbiSlotArtifact retAbi;
+                    string nativeFn;
+                    if (paramTypes[1].Contains("Int64") || paramTypes[1].Contains("UInt64"))
+                    {
+                        nativeFn = "ChaosInterlockedExchangeInt64";
+                        retAbi = new AotCoreIrAbiSlotArtifact
+                        {
+                            CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                            TypeShape = AotCoreIrTypeShapeKind.ValueType
+                        };
+                    }
+                    else
+                    {
+                        nativeFn = "ChaosInterlockedExchangeInt32";
+                        retAbi = CreateInt32AbiSlot();
+                    }
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INTPTR value",
+                        new[] { $"    return {nativeFn}(location, value);" });
+                    return new GenericShapeResolution(src, symbol, abiSlots, retAbi,
+                        new HashSet<int> { 0, 1 }, DirectNativeSymbol: nativeFn);
+                }));
         }
 
         private static void RegisterCoreStubs_Part3(RuntimeHelperShapeRegistry registry)

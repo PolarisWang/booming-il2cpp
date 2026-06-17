@@ -258,12 +258,18 @@ def _build_method_comparison(
                     all_alloc_ratios.append(alloc_pct)
                     methods_with_alloc_data += 1
             method_entry["gcComparison"] = gc_comp
-            method_entry.update({
-                "net10VsNet8Pct": None,
-                "chaosAotVsNet8Pct": None,
-                "chaosJitVsNet8Pct": None,
-                "status": "missing_net8" if net8_rec is None else "net8_error",
-            })
+            # Only overwrite status/pcts if not already set by the completed path above.
+            # The completed path (line 206) sets status, pcts, and increments counters;
+            # we must not null them out here. For methods without valid net8 data,
+            # the status was set in the else block (line 234) — preserve that status
+            # rather than unconditionally overwriting it to "net8_error".
+            if method_entry.get("status") != "completed":
+                method_entry.update({
+                    "net10VsNet8Pct": None,
+                    "chaosAotVsNet8Pct": None,
+                    "chaosJitVsNet8Pct": None,
+                    "status": "missing_net8" if net8_rec is None else "net8_error",
+                })
 
         methods_list.append(method_entry)
 
