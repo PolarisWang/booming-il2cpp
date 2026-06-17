@@ -61,6 +61,13 @@ internal sealed class AssemblyExportHeaderGenerator
                 ? _symbolRegistry.GetUniqueSymbol(_assemblyName, SanitizeSubjectId(subjectId))
                 : "chaos_external_runtime_" + SanitizeSubjectId(subjectId);
 
+            // Append parameter count to differentiate overloaded extern "C" functions.
+            // C++ does not allow overloading extern "C" functions with different parameter
+            // lists, so we must generate unique symbol names.
+            var paramCount = CountMethodParameters(subjectId);
+            if (paramCount >= 0)
+                symbol += "_" + paramCount;
+
             if (!methodDeclarations.TryGetValue(typeName ?? "", out var symbols))
             {
                 symbols = new HashSet<string>(StringComparer.Ordinal);
@@ -147,5 +154,36 @@ internal sealed class AssemblyExportHeaderGenerator
             sb.Append(char.IsLetterOrDigit(ch) ? ch : '_');
         }
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// Count the number of parameters in a subjectId method signature.
+    /// SubjectId format: "Assembly/Namespace.Type::MethodName:ReturnType(Param1,Param2,...)"
+    /// Returns -1 if the signature cannot be parsed.
+    /// </summary>
+    private static int CountMethodParameters(string subjectId)
+    {
+        if (string.IsNullOrEmpty(subjectId))
+            return -1;
+        // Find the opening paren in the signature part (after "::Method:")
+        var methodSep = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (methodSep < 0) return -1;
+        var afterReturnType = subjectId.IndexOf(':', methodSep + 2);
+        if (afterReturnType < 0) return -1;
+        var parenOpen = subjectId.IndexOf('(', afterReturnType + 1);
+        if (parenOpen < 0) return -1;
+        var parenClose = subjectId.IndexOf(')', parenOpen + 1);
+        if (parenClose < 0) return -1;
+        // Extract the parameter list
+        var paramList = subjectId.Substring(parenOpen + 1, parenClose - parenOpen - 1);
+        if (string.IsNullOrEmpty(paramList))
+            return 0;
+        // Count commas + 1
+        int count = 1;
+        foreach (var ch in paramList)
+        {
+            if (ch == ',') count++;
+        }
+        return count;
     }
 }
