@@ -150,6 +150,7 @@ set(CHAOS_INTEROP_STUBS
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
 )
 set(CHAOS_ENTRY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"

@@ -770,7 +770,7 @@ public sealed partial class NativeAotLoweringPlanner
         // chaos_generic_context when calling stub definitions.
         foreach (var kvp in _stubNeedsContext)
         {
-            if (kvp.Value)
+            // All stubs added
                 _sharedContextSymbols.Add(kvp.Key);
         }
 
@@ -1148,6 +1148,19 @@ public sealed partial class NativeAotLoweringPlanner
         // Dispatch routing (hotpatch check, interpreter fallback) lives in
         // <chaos/hotpatch_dispatch.h> (runtime library), not in generated code.
         var dispatchEntryCode = BuildDispatchEntryCode(methodsForLowering);
+
+        // A2: Add cross-assembly stub_definition symbols to _sharedContextSymbols
+        // so that EmitHotpatchResolvedInvocation / EmitLinearResolvedInvocation
+        // correctly append chaos_generic_context when calling these stubs.
+        // These stubs are generated in their own module's compilation but
+        // referenced from the current module's dispatch table.  Without this,
+        // callers pass 1 arg (fn_arg_0) while the stub declaration has 2 params
+        // (fn_arg_0 + chaos_generic_context) → C2660.
+        foreach (var (idx, sym) in _methodTableEntries)
+        {
+            if (sym.StartsWith("chaos_stub_definition_", StringComparison.Ordinal))
+                _sharedContextSymbols.Add(sym);
+        }
         if (!string.IsNullOrEmpty(dispatchEntryCode))
         {
             moduleRegSb.Append(Environment.NewLine);
