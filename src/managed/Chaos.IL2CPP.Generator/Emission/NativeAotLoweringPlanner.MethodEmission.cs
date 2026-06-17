@@ -135,26 +135,20 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else
 		{
-			// The stub's return type (from the method's ABI carrier) may differ
-			// from the target function's actual return type when generic type
-			// parameters resolve to empty value types (e.g., T→Marker struct
-			// where the ABI expects int32_t).  Detect this mismatch and add an
-			// explicit cast to avoid C2440.
-			var retType = MapAbiSlotReturnType(method.ReturnAbi);
-			var targetRetType = MapAbiSlotReturnType(ResolveStubTargetReturnAbi(method));
-			string returnPrefix = string.IsNullOrEmpty(forwardedArgs)
-			    ? $"    return {targetSymbol}();"
-			    : $"    return {targetSymbol}({forwardedArgs});";
-			if (!string.Equals(retType, targetRetType, StringComparison.Ordinal) &&
+			// Generic instantiation stub: when T resolves to an empty value type
+			// (e.g. Marker struct), the canonical body returns a struct but the
+			// stub declares int32_t (the ABI carrier).  Direct return forwarding
+			// would cause C2440 — return 0 instead (empty value types are always 0).
+			if (method.InstantiationStubId != null &&
 			    method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Int32)
 			{
-			    // Target returns a struct but stub expects int32_t (empty value type).
-			    // Use a direct 0 return — the struct is empty so its value is always 0.
 			    builder.AppendLine($"    return 0;");
 			}
 			else
 			{
-			    builder.AppendLine(returnPrefix);
+			    builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
+			        ? $"    return {targetSymbol}();"
+			        : $"    return {targetSymbol}({forwardedArgs});");
 			}
 		}
 		builder.AppendLine("}");
