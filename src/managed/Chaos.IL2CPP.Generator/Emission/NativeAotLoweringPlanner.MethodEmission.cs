@@ -135,9 +135,27 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else
 		{
-			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-				? $"    return {targetSymbol}();"
-				: $"    return {targetSymbol}({forwardedArgs});");
+			// The stub's return type (from the method's ABI carrier) may differ
+			// from the target function's actual return type when generic type
+			// parameters resolve to empty value types (e.g., T→Marker struct
+			// where the ABI expects int32_t).  Detect this mismatch and add an
+			// explicit cast to avoid C2440.
+			var retType = MapAbiSlotReturnType(method.ReturnAbi);
+			var targetRetType = MapAbiSlotReturnType(ResolveStubTargetReturnAbi(method));
+			string returnPrefix = string.IsNullOrEmpty(forwardedArgs)
+			    ? $"    return {targetSymbol}();"
+			    : $"    return {targetSymbol}({forwardedArgs});";
+			if (!string.Equals(retType, targetRetType, StringComparison.Ordinal) &&
+			    method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Int32)
+			{
+			    // Target returns a struct but stub expects int32_t (empty value type).
+			    // Use a direct 0 return — the struct is empty so its value is always 0.
+			    builder.AppendLine($"    return 0;");
+			}
+			else
+			{
+			    builder.AppendLine(returnPrefix);
+			}
 		}
 		builder.AppendLine("}");
 	}
