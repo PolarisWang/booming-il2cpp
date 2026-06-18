@@ -1,25 +1,25 @@
 {
   "assemblyName": "System.Text.Json",
-  "timestamp": "2026-06-18T05:20:02",
+  "timestamp": "2026-06-18T07:40:14",
   "summary": {
     "chunks": 3,
     "chunksVerified": 3,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 3,
-    "factPassRate": 98.4,
-    "totalBenchmarkedMethods": 282,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 383,
     "aggregatePerformance": {
-      "meanDurationMs": 5.099608203080227,
-      "meanOpsPerSecond": 30089035.57706758,
-      "aggregateMeanCv": 0.18915695222310028,
-      "totalOutliers": 4
+      "meanDurationMs": 0.10238466893152144,
+      "meanOpsPerSecond": 266818867.97414127,
+      "aggregateMeanCv": 0.1430349849169026,
+      "totalOutliers": 377
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 3,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
-      "chunksWithRevertFailure": 2,
-      "totalPassed": 199,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 361,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

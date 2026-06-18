@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Linq.Expressions",
-  "timestamp": "2026-06-18T05:52:38",
+  "timestamp": "2026-06-18T07:40:14",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 1,
-  "totalDeclaredMethods": 737
+  "totalDeclaredMethods": 659
 }

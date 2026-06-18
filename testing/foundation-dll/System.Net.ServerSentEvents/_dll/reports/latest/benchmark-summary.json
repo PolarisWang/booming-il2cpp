@@ -1,45 +1,46 @@
 {
   "assemblyName": "System.Net.ServerSentEvents",
-  "timestamp": "2026-06-18T06:17:00",
+  "timestamp": "2026-06-18T07:40:14",
   "totalChunks": 1,
-  "totalBenchmarkedMethods": 3,
+  "totalBenchmarkedMethods": 4,
   "aggregatePerformance": {
-    "meanDurationMs": 1.7619999999999998,
-    "meanOpsPerSecond": 63053.22,
-    "aggregateMeanCv": 0.013268333333333333
+    "meanDurationMs": 9.43115,
+    "meanOpsPerSecond": 133985245.6,
+    "aggregateMeanCv": 0.260265,
+    "totalOutliers": 6
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 5,
-        "total": 5,
+        "passed": 4,
+        "total": 4,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 6,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 3,
-        "iterations": 111,
-        "meanDurationMs": 1.7619999999999998,
-        "meanOpsPerSecond": 63053.22,
-        "minDurationMs": 1.6943,
-        "maxDurationMs": 1.7967,
-        "totalDurationMs": 5.286,
+        "methodCount": 4,
+        "iterations": 10000,
+        "meanDurationMs": 9.43115,
+        "meanOpsPerSecond": 133985245.6,
+        "minDurationMs": 0.037,
+        "maxDurationMs": 19.9791,
+        "totalDurationMs": 37.7246,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.013268333333333333,
-        "maxCv": 0.015985
+        "meanSampleCount": 8.5,
+        "totalOutliers": 6,
+        "meanCv": 0.260265,
+        "maxCv": 0.340417
       },
       "hotupdate": {
-        "passed": 0,
+        "passed": 4,
         "failed": 0,
         "allSemantic": false,
-        "allRevert": false,
-        "exitCode": -11,
-        "patchDataUsed": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -48,6 +49,11 @@
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2819584,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,

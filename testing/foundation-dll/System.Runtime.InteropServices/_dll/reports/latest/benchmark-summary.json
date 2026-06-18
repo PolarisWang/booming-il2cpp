@@ -1,46 +1,46 @@
 {
   "assemblyName": "System.Runtime.InteropServices",
-  "timestamp": "2026-06-18T07:06:20",
+  "timestamp": "2026-06-18T07:40:14",
   "totalChunks": 1,
-  "totalBenchmarkedMethods": 31,
+  "totalBenchmarkedMethods": 29,
   "aggregatePerformance": {
-    "meanDurationMs": 20.60996129032258,
-    "meanOpsPerSecond": 17692544.241935484,
-    "aggregateMeanCv": 0.4879306451612903,
-    "totalOutliers": 21
+    "meanDurationMs": 2.3730344827586207,
+    "meanOpsPerSecond": 173443107.68896553,
+    "aggregateMeanCv": 0.13839024137931033,
+    "totalOutliers": 15
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 31,
-        "total": 31,
+        "passed": 29,
+        "total": 29,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 38,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 31,
+        "methodCount": 29,
         "iterations": 10000,
-        "meanDurationMs": 20.60996129032258,
-        "meanOpsPerSecond": 17692544.241935484,
-        "minDurationMs": 0.207,
-        "maxDurationMs": 107.586,
-        "totalDurationMs": 638.9088,
+        "meanDurationMs": 2.3730344827586207,
+        "meanOpsPerSecond": 173443107.68896553,
+        "minDurationMs": 0.0373,
+        "maxDurationMs": 12.0127,
+        "totalDurationMs": 68.818,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.3,
-        "totalOutliers": 21,
-        "meanCv": 0.4879306451612903,
-        "maxCv": 0.937304
+        "meanSampleCount": 5.5,
+        "totalOutliers": 15,
+        "meanCv": 0.13839024137931033,
+        "maxCv": 0.50927
       },
       "hotupdate": {
-        "passed": 31,
+        "passed": 29,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": false,
+        "patchDataUsed": true,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -52,7 +52,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 7077496,
+        "totalSize": 2891264,
         "source": "none"
       },
       "benchmarkReport": {

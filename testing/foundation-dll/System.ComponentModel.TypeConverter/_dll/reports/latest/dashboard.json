@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.ComponentModel.TypeConverter",
-  "timestamp": "2026-06-18T05:48:04",
+  "timestamp": "2026-06-18T07:40:14",
   "summary": {
     "chunks": 3,
     "chunksVerified": 3,
@@ -9,12 +9,13 @@
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 620,
     "aggregatePerformance": {
-      "meanDurationMs": 2.378487792157958,
-      "meanOpsPerSecond": 33565256.74623701,
-      "aggregateMeanCv": 0.24430945108782443
+      "meanDurationMs": 0.23421441633302578,
+      "meanOpsPerSecond": 297169938.7084166,
+      "aggregateMeanCv": 0.08892626179424022,
+      "totalOutliers": 825
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 3,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,

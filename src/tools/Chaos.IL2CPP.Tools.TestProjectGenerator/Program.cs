@@ -422,8 +422,6 @@ public static class Program
         var allAssemblyPaths = new List<string>(additionalAssemblyPaths.Count + 1) { dllPath };
         allAssemblyPaths.AddRange(additionalAssemblyPaths);
         // Build assembly path list: subjects DLL + auto-detected target assemblies
-        var allAssemblyPaths = new List<string>(additionalAssemblyPaths.Count + 1) { dllPath };
-        allAssemblyPaths.AddRange(additionalAssemblyPaths);
 
         // Step 2: Run IL2CPP codegen
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");

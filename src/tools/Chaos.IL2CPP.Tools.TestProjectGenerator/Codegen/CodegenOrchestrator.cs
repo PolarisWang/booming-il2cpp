@@ -1,5 +1,6 @@
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Reflection;
 using System.Text.Json;
 using Chaos.IL2CPP.Driver;
 
@@ -209,7 +210,10 @@ public sealed class CodegenOrchestrator
                 OutputDir = outputDir,
                 Error = ex.Message,
             };
-        /// <summary>
+        }
+    }
+
+    /// <summary>
         /// Try to resolve an assembly by name in the given directory.
         /// Returns true and the full path if found.
         /// </summary>
@@ -228,4 +232,3 @@ public sealed class CodegenOrchestrator
             return false;
         }
     }
-}

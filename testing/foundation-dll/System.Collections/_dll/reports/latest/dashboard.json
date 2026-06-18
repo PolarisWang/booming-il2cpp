@@ -1,25 +1,25 @@
 {
   "assemblyName": "System.Collections",
-  "timestamp": "2026-06-18T05:47:44",
+  "timestamp": "2026-06-18T07:40:14",
   "summary": {
     "chunks": 1,
-    "chunksVerified": 1,
+    "chunksVerified": 0,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
-    "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 65,
+    "factPassRate": 0,
+    "totalBenchmarkedMethods": 17,
     "aggregatePerformance": {
-      "meanDurationMs": 4.464116923076923,
-      "meanOpsPerSecond": 35599375.99538461,
-      "aggregateMeanCv": 0.6829098615384616,
-      "totalOutliers": 52
+      "meanDurationMs": 0.029723529411764704,
+      "meanOpsPerSecond": 344279011.2352941,
+      "aggregateMeanCv": 0.073541,
+      "totalOutliers": 12
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 65,
+      "totalPassed": 0,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

@@ -1,16 +1,16 @@
 {
   "assemblyName": "System.Security.Claims",
-  "timestamp": "2026-06-18T04:54:51",
+  "timestamp": "2026-06-18T07:40:14",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 44,
+  "totalPassed": 45,
   "totalFactMethods": 45,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 44,
+        "passed": 45,
         "total": 45,
         "valueSuspicious": false,
         "valueWarnings": 0,
@@ -18,34 +18,39 @@
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 44,
+        "methodCount": 45,
         "iterations": 10000,
-        "meanDurationMs": 6.264343181818182,
-        "meanOpsPerSecond": 13345714.31590909,
-        "minDurationMs": 0.2418,
-        "maxDurationMs": 92.168,
-        "totalDurationMs": 275.6311,
+        "meanDurationMs": 0.03036,
+        "meanOpsPerSecond": 329030254.12222224,
+        "minDurationMs": 0.027,
+        "maxDurationMs": 0.0354,
+        "totalDurationMs": 1.3662,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.5,
-        "totalOutliers": 22,
-        "meanCv": 0.3591775909090909,
-        "maxCv": 0.568881
+        "meanSampleCount": 8.8,
+        "totalOutliers": 52,
+        "meanCv": 0.1651474,
+        "maxCv": 0.834354
       },
       "hotupdate": {
-        "passed": 0,
+        "passed": 45,
         "failed": 0,
         "allSemantic": false,
-        "allRevert": false,
-        "exitCode": -11,
-        "patchDataUsed": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
         "patchFailed": false,
-        "truncated": true,
+        "truncated": false,
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2830848,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,

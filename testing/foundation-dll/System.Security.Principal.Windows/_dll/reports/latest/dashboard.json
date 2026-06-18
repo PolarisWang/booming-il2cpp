@@ -1,25 +1,25 @@
 {
   "assemblyName": "System.Security.Principal.Windows",
-  "timestamp": "2026-06-18T04:55:31",
+  "timestamp": "2026-06-18T07:40:14",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
     "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 8,
+    "totalBenchmarkedMethods": 36,
     "aggregatePerformance": {
-      "meanDurationMs": 28.9737875,
-      "meanOpsPerSecond": 9894133.7875,
-      "aggregateMeanCv": 0.4376365,
-      "totalOutliers": 2
+      "meanDurationMs": 0.030772222222222218,
+      "meanOpsPerSecond": 326351447.85833335,
+      "aggregateMeanCv": 0.17452994444444445,
+      "totalOutliers": 47
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 8,
+      "totalPassed": 36,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
