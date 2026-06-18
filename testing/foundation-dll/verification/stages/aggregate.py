@@ -189,9 +189,9 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         if s.get("fact", {}).get("valueSuspicious", False)
     )
     # Track chunks with metadata mismatch: C++ fact total must exactly
-    # match managed fact metaTotal/factMethodCount.  Small gaps (<1%) are
-    # tolerated — they come from JIT/interpreter limitations for specific
-    # generic instantiations (e.g., Lookup<,>::ApplyResultSelector).
+    # match managed fact metaTotal.  Small gaps (<1%) are tolerated —
+    # they come from JIT/interpreter limitations for specific generic
+    # instantiations (e.g., Lookup<,>::ApplyResultSelector).
     chunks_with_meta_mismatch = 0
     chunks_with_meta_warning = 0
     for s in chunk_summaries:
@@ -361,10 +361,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     print(f"  [aggregate] Benchmark: {total_benchmarked} methods")
     print(f"  [aggregate] Done ({duration_ms}ms)")
 
-    # Metadata mismatch: C++ fact didn't cover all managed methods.
-    # Gaps < 25% are tolerated (codegen cannot lower some closure/helper
-    # subjects). Larger gaps are hard errors.
-    # Value warnings = methods returned negative values — hard error.
+    # Metadata mismatch = C++ fact didn't cover all managed methods — hard error.
+    # Value warnings = methods returned negative values — also a hard error.
     aggregate_errors = []
     if chunks_with_meta_mismatch > 0:
         aggregate_errors.append(f"{chunks_with_meta_mismatch} meta-mismatch")

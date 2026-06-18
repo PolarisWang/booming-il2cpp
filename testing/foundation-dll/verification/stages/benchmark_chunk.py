@@ -25,13 +25,13 @@ from verification.orchestration.context import ChunkContext, StageResult
 _RESULTS_BASE = Path(__file__).resolve().parent.parent / "results" / "foundation-dll"
 
 # Benchmark calibration defaults
-_CALIB_TARGET_MS = 50.0          # target duration per method for iteration scaling
-_CALIB_MIN_ITERATIONS = 100      # minimum iterations regardless of method speed
+_CALIB_TARGET_MS = 10.0          # target duration per method for iteration scaling
+_CALIB_MIN_ITERATIONS = 50      # minimum iterations regardless of method speed
 _CALIB_FALLBACK_PROBE_FAIL = 1000    # fallback when probe yields no data
 _CALIB_FALLBACK_ALL_FAST = 10000     # fallback when all methods are very fast
 _CALIB_CAP_LARGE_CHUNK = 10000       # iteration cap for chunks with >5000 entries
 _CALIB_CAP_DEFAULT = 50000           # iteration cap for normal chunks
-_CALIB_LARGE_THRESHOLD = 5000        # entry count threshold for large chunk cap
+_CALIB_LARGE_THRESHOLD = 3000        # entry count threshold for large chunk cap
 _MIN_ELAPSED_FLOOR = 0.001           # minimum elapsed ms for perf store (avoid zero)
 
 
@@ -370,12 +370,7 @@ def _write_perf_store(
     # Always overwrite: each pipeline run produces a self-contained file.
     # Append mode caused stale data accumulation across partial runs,
     # mixing old net8-jit baselines with fresh chaos-aot results.
-    # Use "a" mode for individual writes so multiple technologies within
-    # the same benchmark stage (chaos-aot, chaos-jit) don't clobber each other.
-    # The file is cleared at the start of the benchmark stage (caller
-    # responsibility), not here.
-    append = perf_path.exists()
-    with open(perf_path, "a" if append else "w", encoding="utf-8") as f:
+    with open(perf_path, "w", encoding="utf-8") as f:
         for i, s in enumerate(per_method_stats):
             elapsed_ms = s.get("meanDurationMs", 0)
             ops = s.get("meanOpsPerSecond", 0)
@@ -566,12 +561,6 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     start = time.perf_counter()
     timeout = max(ctx.stage_timeout_seconds or 300, 30)
     metadata_methods = _read_benchmark_metadata(ctx)
-
-    # Clear previous benchmark-history.jsonl so each pipeline run starts fresh.
-    _perf_path = _RESULTS_BASE / ctx.assembly / ctx.slug / "perf" / "benchmark-history.jsonl"
-    if _perf_path.exists():
-        _perf_path.unlink()
-        print(f"  [benchmark] Cleared previous benchmark history")
 
     # Read technologies to benchmark
     technologies: list[tuple[Path, str]] = []

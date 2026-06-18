@@ -1,25 +1,24 @@
 {
   "assemblyName": "System.Collections.Immutable",
-  "timestamp": "2026-06-16T12:15:21",
+  "timestamp": "2026-06-18T03:00:08",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
-    "chunksWithMetaMismatch": 0,
+    "chunksWithMetaMismatch": 1,
     "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 5,
+    "totalBenchmarkedMethods": 32,
     "aggregatePerformance": {
-      "meanDurationMs": 0.03188,
-      "meanOpsPerSecond": 319805536.57,
-      "aggregateMeanCv": 0.1740032,
-      "totalOutliers": 2
+      "meanDurationMs": 0.218725,
+      "meanOpsPerSecond": 46042400.3125,
+      "aggregateMeanCv": 0.04966884375
     },
     "hotupdate": {
-      "chunksWithPatchData": 1,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 33,
+      "totalPassed": 32,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

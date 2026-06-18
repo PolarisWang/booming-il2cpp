@@ -1,24 +1,24 @@
 {
   "assemblyName": "System.Data.Common",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T03:02:19",
   "summary": {
     "chunks": 4,
     "chunksVerified": 4,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 3,
-    "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 1199,
+    "factPassRate": 99.9,
+    "totalBenchmarkedMethods": 1177,
     "aggregatePerformance": {
-      "meanDurationMs": 2.1999518823944757,
-      "meanOpsPerSecond": 305219126.5478959,
-      "aggregateMeanCv": 0.11679379929802647,
-      "totalOutliers": 172
+      "meanDurationMs": 3.284043618587256,
+      "meanOpsPerSecond": 44762060.45848956,
+      "aggregateMeanCv": 0.019041705224931135
     },
     "hotupdate": {
-      "chunksWithPatchData": 4,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 1195,
+      "totalPassed": 1177,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

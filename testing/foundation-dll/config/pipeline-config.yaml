@@ -33,7 +33,7 @@ pipeline:
   timeouts:
     codegen_aot: 600
     fact_aot: 600
-    benchmark: 600
+    benchmark: 300
 
   # Cache configuration
   cache:

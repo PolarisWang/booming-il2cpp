@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.ObjectModel",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T03:34:55",
   "totalChunks": 1,
-  "chunksWithResults": 0,
+  "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 0
+  "totalDeclaredMethods": 10
 }

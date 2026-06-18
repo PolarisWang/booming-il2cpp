@@ -185,7 +185,7 @@ def run_profile(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResul
     try:
         r = subprocess.run(
             [str(exe_path), "--profile"],
-            capture_output=True, timeout=600, env=env,
+            capture_output=True, timeout=300, env=env,
         )
     except subprocess.TimeoutExpired:
         return StageResult(

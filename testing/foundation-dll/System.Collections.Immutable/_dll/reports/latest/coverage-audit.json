@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Collections.Immutable",
-  "timestamp": "2026-06-16T12:15:21",
+  "timestamp": "2026-06-18T03:00:08",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 36
+  "chunksWithMetaMismatch": 1,
+  "totalDeclaredMethods": 32
 }

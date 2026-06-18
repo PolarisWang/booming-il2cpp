@@ -1,21 +1,34 @@
 {
   "assemblyName": "System.ObjectModel",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T03:34:55",
   "summary": {
     "chunks": 1,
-    "chunksVerified": 0,
+    "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 0,
-    "factPassRate": 0,
-    "totalBenchmarkedMethods": 0,
-    "aggregatePerformance": {},
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 9,
+    "aggregatePerformance": {
+      "meanDurationMs": 1.1580777777777778,
+      "meanOpsPerSecond": 41532068.55444445,
+      "aggregateMeanCv": 0.019453555555555554
+    },
     "hotupdate": {
       "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
-      "chunksWithRevertFailure": 0,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 1,
       "totalPassed": 0,
       "totalFailed": 0,
       "skipBreakdown": {}
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 9,
+      "methodsWithNet8": 0,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
+      "net10VsNet8": {},
+      "highValueMethods_betterThanNet8": 0
     }
   }
 }

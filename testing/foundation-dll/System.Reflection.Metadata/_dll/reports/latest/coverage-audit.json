@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Reflection.Metadata",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T04:28:19",
   "totalChunks": 3,
   "chunksWithResults": 3,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 3,
-  "totalDeclaredMethods": 720
+  "totalDeclaredMethods": 716
 }

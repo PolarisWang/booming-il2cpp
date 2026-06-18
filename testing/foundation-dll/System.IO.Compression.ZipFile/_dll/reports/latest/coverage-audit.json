@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.IO.Compression.ZipFile",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T03:04:11",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 66
+  "chunksWithMetaMismatch": 1,
+  "totalDeclaredMethods": 30
 }

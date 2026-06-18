@@ -1,20 +1,24 @@
 {
   "assemblyName": "System.IO.Pipelines",
-  "timestamp": "2026-06-16T12:19:18",
+  "timestamp": "2026-06-18T03:04:14",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
     "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 0,
-    "aggregatePerformance": {},
+    "totalBenchmarkedMethods": 23,
+    "aggregatePerformance": {
+      "meanDurationMs": 11.844952173913043,
+      "meanOpsPerSecond": 33965378.65173913,
+      "aggregateMeanCv": 0.023789347826086955
+    },
     "hotupdate": {
-      "chunksWithPatchData": 1,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 15,
+      "totalPassed": 23,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

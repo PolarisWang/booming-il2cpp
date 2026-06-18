@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Linq",
-  "timestamp": "2026-06-16T12:16:24",
+  "timestamp": "2026-06-18T03:05:10",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 337
+  "chunksWithMetaMismatch": 1,
+  "totalDeclaredMethods": 192
 }

@@ -319,6 +319,7 @@ def _build_jit_entry(
     metadata_path: Path,
     native_dir: Path,
     native_config: str = "check",
+    assembly_dirs: list[str] | None = None,
 ) -> bool:
     """Build JIT entry-jit.exe via TPG generate-dll --jit.
 
@@ -339,6 +340,9 @@ def _build_jit_entry(
         "--config-tier", native_config,
         "--clean",
     ]
+    if assembly_dirs:
+        for ad in assembly_dirs:
+            cmd.extend(["--assembly-dir", ad])
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=7200)
     except subprocess.TimeoutExpired:
@@ -448,6 +452,31 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     method_count = chunk_def.get("methodCount", 0)
     print(f"  [build] Chunk methods: {method_count}")
+
+    # Use partition's assemblyName for DLL resolution when it differs from
+    # ctx.assembly (e.g. System.Collections → System.Collections.NonGeneric).
+    # The directory/context assembly name is kept for reporting/organization.
+    partition_assembly = partition.get("assemblyName", "")
+    dll_assembly = partition_assembly if partition_assembly else ctx.assembly
+    if dll_assembly != ctx.assembly:
+        print(f"  [build] Partition assembly: {dll_assembly} (ctx.assembly={ctx.assembly})")
+        dll_candidates = [
+            ctx.foundation_dir / f"{dll_assembly}.dll",
+        ]
+        if dotnet_root:
+            dll_candidates.append(Path(dotnet_root) / f"{dll_assembly}.dll")
+        if runtime_base:
+            for runtime_dir in sorted(runtime_base.rglob(f"**/{dll_assembly}.dll")):
+                dll_candidates.insert(0, runtime_dir)
+        target_dll = None
+        for c in dll_candidates:
+            if c.exists():
+                target_dll = c
+                break
+        if target_dll:
+            print(f"  [build] Re-resolved target DLL: {target_dll}")
+        else:
+            print(f"  [build] WARNING: could not find {dll_assembly}.dll, falling back to {ctx.assembly}")
 
     # -- 4. Generate subjects metadata (AutoTestGenerator or restore from cache) --
     print(f"  [build] Generating subjects...")
@@ -664,7 +693,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 print(f"  [build] [hephaestus] Restored entry.exe ({exe_size} bytes)")
                 duration_ms = int((time.perf_counter() - start) * 1000)
                 # Also build JIT entry (non-blocking, not cached separately)
-                _build_jit_entry(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"), subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
+                _build_jit_entry(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"), subjects_dll, metadata_path, ctx.native_dir, ctx.native_config, ctx.assembly_dirs)
                 return StageResult(
                     stage="build", status="passed",
                     summary=f"[CACHE HIT] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",
@@ -774,7 +803,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     print(f"  [build] [hephaestus] Cached build output ({cache_key[:48]}...)")
 
     # -- 9. Build JIT entry (non-blocking) --
-    jit_built = _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config)
+    jit_built = _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config, ctx.assembly_dirs)
 
     print(f"  [build] Done ({duration_ms}ms)")
 

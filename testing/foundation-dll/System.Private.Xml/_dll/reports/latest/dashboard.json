@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Private.Xml",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T03:37:14",
   "summary": {
     "chunks": 5,
     "chunksVerified": 4,
@@ -9,16 +9,16 @@
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 1404,
     "aggregatePerformance": {
-      "meanDurationMs": 5.770723095709851,
-      "meanOpsPerSecond": 288600790.1195181,
-      "aggregateMeanCv": 0.07652827640521084,
-      "totalOutliers": 176
+      "meanDurationMs": 2.229300990578975,
+      "meanOpsPerSecond": 38503316.88322593,
+      "aggregateMeanCv": 0.017655252280972276
     },
     "hotupdate": {
-      "chunksWithPatchData": 2,
-      "chunksPatchFailed": 2,
+      "chunksWithPatchData": 0,
+      "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 1400,
+      "totalPassed": 1404,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

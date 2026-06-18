@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Net.Sockets",
-  "timestamp": "2026-06-16T12:18:03",
+  "timestamp": "2026-06-18T03:34:53",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
@@ -9,12 +9,12 @@
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 500,
     "aggregatePerformance": {
-      "meanDurationMs": 0.041294000000000004,
-      "meanOpsPerSecond": 245503570.1914,
-      "aggregateMeanCv": 0.045633116
+      "meanDurationMs": 0.2184544,
+      "meanOpsPerSecond": 46982073.9717,
+      "aggregateMeanCv": 0.014104722
     },
     "hotupdate": {
-      "chunksWithPatchData": 1,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,

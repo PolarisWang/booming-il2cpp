@@ -1,24 +1,24 @@
 {
   "assemblyName": "System.Linq.Expressions",
-  "timestamp": "2026-06-16T12:17:04",
+  "timestamp": "2026-06-18T03:04:56",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
-    "factPassRate": 83.0,
-    "totalBenchmarkedMethods": 737,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 659,
     "aggregatePerformance": {
-      "meanDurationMs": 0.024293351424694708,
-      "meanOpsPerSecond": 331572253.937691,
-      "aggregateMeanCv": 0.06741413541666667
+      "meanDurationMs": 4.643060546282245,
+      "meanOpsPerSecond": 43136539.05163884,
+      "aggregateMeanCv": 0.022869050075872532
     },
     "hotupdate": {
-      "chunksWithPatchData": 1,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 576,
+      "totalPassed": 659,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

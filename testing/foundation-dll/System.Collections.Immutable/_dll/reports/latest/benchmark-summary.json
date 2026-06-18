@@ -1,46 +1,45 @@
 {
   "assemblyName": "System.Collections.Immutable",
-  "timestamp": "2026-06-16T12:15:21",
+  "timestamp": "2026-06-18T03:00:08",
   "totalChunks": 1,
-  "totalBenchmarkedMethods": 5,
+  "totalBenchmarkedMethods": 32,
   "aggregatePerformance": {
-    "meanDurationMs": 0.03188,
-    "meanOpsPerSecond": 319805536.57,
-    "aggregateMeanCv": 0.1740032,
-    "totalOutliers": 2
+    "meanDurationMs": 0.218725,
+    "meanOpsPerSecond": 46042400.3125,
+    "aggregateMeanCv": 0.04966884375
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 36,
-        "total": 36,
+        "passed": 32,
+        "total": 32,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 36,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 5,
+        "methodCount": 32,
         "iterations": 10000,
-        "meanDurationMs": 0.03188,
-        "meanOpsPerSecond": 319805536.57,
-        "minDurationMs": 0.0272,
-        "maxDurationMs": 0.036,
-        "totalDurationMs": 0.1594,
+        "meanDurationMs": 0.218725,
+        "meanOpsPerSecond": 46042400.3125,
+        "minDurationMs": 0.2063,
+        "maxDurationMs": 0.2503,
+        "totalDurationMs": 6.9992,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 6.6,
-        "totalOutliers": 2,
-        "meanCv": 0.1740032,
-        "maxCv": 0.224473
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.04966884375,
+        "maxCv": 0.192317
       },
       "hotupdate": {
-        "passed": 33,
+        "passed": 32,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": true,
+        "patchDataUsed": false,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -49,6 +48,11 @@
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 7513368,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,

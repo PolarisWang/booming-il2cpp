@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.IO.Pipelines",
-  "timestamp": "2026-06-16T12:19:18",
+  "timestamp": "2026-06-18T03:04:14",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 1,
-  "totalDeclaredMethods": 26
+  "totalDeclaredMethods": 23
 }

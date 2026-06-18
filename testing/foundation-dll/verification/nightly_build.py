@@ -10,7 +10,7 @@ Orchestrates:
   7. Nightly summary (Markdown)
 
 Usage:
-    python -m verification.nightly_build [--max-workers 8] [--bench-workers 1]
+    python -m verification.nightly_build [--max-workers 8] [--bench-workers auto]
     python -m verification.nightly_build --run-profile  # includes profile pass
 """
 
@@ -65,7 +65,25 @@ from verification.stages.reporting import run_reporting
 
 
 _DEFAULT_BUILD_WORKERS = 4
-_DEFAULT_BENCH_WORKERS = 1
+
+
+def _detect_bench_workers() -> int:
+    """Auto-detect benchmark concurrency based on available CPU cores.
+
+    Formula: max(1, min(4, (cpu_count - 2) // 2))
+    - Reserves 2 cores for OS + other build stages
+    - Each benchmark worker needs ~2 cores (cache/memory sensitive)
+    - Capped at 4 workers max to avoid excessive contention
+    Falls back to 1 (serial) if detection fails.
+    """
+    try:
+        cpus = os.cpu_count() or 4
+        return max(1, min(4, (cpus - 2) // 2))
+    except Exception:
+        return 1
+
+
+_DEFAULT_BENCH_WORKERS = _detect_bench_workers()
 
 
 def _discover_assemblies(foundation_dll: Path) -> list[str]:
@@ -155,7 +173,7 @@ def _run_chunk_stages(
     slug: str,
     foundation_dir: Path,
     pipeline_config: dict,
-    bench_lock: Any,
+    bench_semaphore: Any,
     native_config: str = "check",
     verbose: bool = False,
     stage_timeout: int = 0,
@@ -167,7 +185,7 @@ def _run_chunk_stages(
     Profile pass (profile_pass=True): build → profile only (profile-tier rebuild)
 
     Build failure stops further stages for this chunk.
-    Benchmark is serialized via bench_lock to prevent CPU interference.
+    Benchmark concurrency is controlled via bench_semaphore (default: 2).
     """
     try:
         chunk_dir = foundation_dir / "chunks" / slug
@@ -235,17 +253,14 @@ def _run_chunk_stages(
                 ("coverage_audit", run_coverage_audit),
             ]
 
-        serialized_stages = {"benchmark", "managed_benchmark"}
-
         for stage_name, stage_fn in stage_order:
             if verbose:
                 print(f"\n  [nightly] [{assembly}/{slug}] {stage_name}...")
             try:
-                if stage_name in serialized_stages:
-                # Benchmark must be serialized — acquire lock
+                if stage_name in ("benchmark", "managed_benchmark"):
                     if verbose:
-                        print(f"  [nightly] [{assembly}/{slug}] waiting for benchmark lock...")
-                    with bench_lock:
+                        print(f"  [nightly] [{assembly}/{slug}] waiting for benchmark semaphore...")
+                    with bench_semaphore:
                         result = stage_fn(ctx, stages)
                 else:
                     result = stage_fn(ctx, stages)
@@ -316,7 +331,7 @@ def main() -> int:
     parser.add_argument("--max-workers", type=int, default=_DEFAULT_BUILD_WORKERS,
                         help=f"Max parallel build/fact workers (default: {_DEFAULT_BUILD_WORKERS})")
     parser.add_argument("--bench-workers", type=int, default=_DEFAULT_BENCH_WORKERS,
-                        help=f"Max parallel benchmark workers (default: {_DEFAULT_BENCH_WORKERS})")
+                        help=f"Max parallel benchmark workers (default: auto={_DEFAULT_BENCH_WORKERS}, formula: max(1, min(4, (cpu_count-2)//2)))")
     parser.add_argument("--native-config", default="check",
                         choices=["check", "profile", "ship"],
                         help="Native build config (default: check)")
@@ -364,9 +379,9 @@ def main() -> int:
 
     # ── Step 2: Run build + fact + benchmark + hotupdate in parallel ──
     print(f"\n  Phase 1-2: Running chunks (build={args.max_workers} workers, "
-          f"bench={args.bench_workers} workers)...")
+          f"bench_concurrency={args.bench_workers})...")
 
-    bench_lock = Manager().Lock()
+    bench_semaphore = Manager().Semaphore(args.bench_workers or 1)
     all_results: dict[str, dict[str, StageResult]] = {}
     futures = []
 
@@ -378,7 +393,7 @@ def main() -> int:
                 slug=slug,
                 foundation_dir=fdir,
                 pipeline_config=pipeline_config,
-                bench_lock=bench_lock,
+                bench_semaphore=bench_semaphore,
                 native_config=args.native_config,
                 verbose=args.verbose,
                 stage_timeout=args.stage_timeout,
@@ -410,7 +425,7 @@ def main() -> int:
                     _run_chunk_stages,
                     assembly=asm, slug=slug, foundation_dir=fdir,
                     pipeline_config=pipeline_config,
-                    bench_lock=bench_lock,
+                    bench_semaphore=bench_semaphore,
                     native_config="profile",
                     verbose=args.verbose,
                     stage_timeout=args.stage_timeout,

@@ -569,7 +569,7 @@ public sealed class DllScanner
 
             // Skip methods on unprobable declaring types (e.g. ComVariantMarshaller
             // or its nested types like ComVariantMarshaller+RefPropagate).
-            if (IsUnprobableType(method.DeclaringType))
+            if (IsUnprobableType(method.DeclaringType!))
             {
                 skippedMethods.Add($"{method.Name} (unprobable declaring type: {method.DeclaringType?.FullName ?? "?"})");
                 continue;

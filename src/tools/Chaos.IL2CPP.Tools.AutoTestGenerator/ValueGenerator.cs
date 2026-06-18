@@ -160,7 +160,7 @@ public sealed class ValueGenerator
     public IReadOnlyList<ValueSet> Generate(MethodSignature method, int methodIndex)
     {
         if (method.Parameters.Count == 0)
-            return new[] { new ValueSet(methodIndex, Array.Empty<string>()) };
+            return new[] { new ValueSet(0, Array.Empty<string>()) };
 
         var paramTypes = method.Parameters.Select(p => p.TypeName).ToArray();
         var isRefStructParam = method.Parameters.Select(p => p.IsRefStruct).ToArray();
@@ -393,7 +393,7 @@ public sealed class ValueGenerator
             "EventHandler" when csTypeArgs.Length >= 1
                 => $"(object? sender, {csTypeArgs[0]} e) => {{ }}",
 
-            _ => null
+            _ => null!
         };
 
         return expr is not null;
@@ -460,7 +460,7 @@ public sealed class ValueGenerator
                 => $"System.Collections.Generic.EqualityComparer<{csTypeArgs[0]}>.Default",
             "IEqualityComparer" => "System.Collections.EqualityComparer.Default",
 
-            _ => null
+            _ => null!
         };
 
         return expr is not null;

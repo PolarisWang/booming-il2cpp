@@ -1,16 +1,16 @@
 {
   "assemblyName": "System.Reflection.Metadata",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T04:28:19",
   "totalChunks": 3,
   "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 720,
-  "totalFactMethods": 720,
+  "totalPassed": 714,
+  "totalFactMethods": 716,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 43,
+        "passed": 42,
         "total": 43,
         "valueSuspicious": false,
         "valueWarnings": 0,
@@ -18,26 +18,26 @@
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 43,
-        "iterations": 26315,
-        "meanDurationMs": 2.4726162790697677,
-        "meanOpsPerSecond": 319006711.5390476,
-        "minDurationMs": 0,
-        "maxDurationMs": 51.5813,
-        "totalDurationMs": 106.3225,
+        "methodCount": 41,
+        "iterations": 3571,
+        "meanDurationMs": 3.4746560975609757,
+        "meanOpsPerSecond": 32596758.12195122,
+        "minDurationMs": 0.074,
+        "maxDurationMs": 43.8877,
+        "totalDurationMs": 142.4609,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 2.9,
-        "totalOutliers": 0,
-        "meanCv": 0.022627666666666667,
-        "maxCv": 0.105045
+        "meanSampleCount": 3.4,
+        "totalOutliers": 26,
+        "meanCv": 0.12871126829268292,
+        "maxCv": 0.286706
       },
       "hotupdate": {
-        "passed": 42,
+        "passed": 40,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": true,
+        "patchDataUsed": false,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -46,11 +46,6 @@
       },
       "build": {
         "status": "passed"
-      },
-      "profile": {
-        "methodCount": 0,
-        "totalSize": 3076096,
-        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,
@@ -60,34 +55,34 @@
     {
       "slug": "system-reflection-metadata",
       "fact": {
-        "passed": 325,
-        "total": 325,
+        "passed": 321,
+        "total": 321,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 408,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 325,
-        "iterations": 50000,
-        "meanDurationMs": 4.862335692307692,
-        "meanOpsPerSecond": 295421883.28215384,
-        "minDurationMs": 0.132,
-        "maxDurationMs": 101.1717,
-        "totalDurationMs": 1580.2591,
-        "totalAllocatedBytes": 5600000.0,
+        "methodCount": 321,
+        "iterations": 1785,
+        "meanDurationMs": 1.5322271028037382,
+        "meanOpsPerSecond": 38440278.127819315,
+        "minDurationMs": 0.0373,
+        "maxDurationMs": 15.7343,
+        "totalDurationMs": 491.8449,
+        "totalAllocatedBytes": 199920.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.04670062153846154,
-        "maxCv": 0.419605
+        "meanCv": 0.030952504672897195,
+        "maxCv": 0.223553
       },
       "hotupdate": {
-        "passed": 325,
+        "passed": 321,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": true,
+        "patchDataUsed": false,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -99,7 +94,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 5968896,
+        "totalSize": 9936608,
         "source": "none"
       },
       "benchmarkReport": {
@@ -110,7 +105,7 @@
     {
       "slug": "system-reflection-metadata-ecma335",
       "fact": {
-        "passed": 352,
+        "passed": 351,
         "total": 352,
         "valueSuspicious": false,
         "valueWarnings": 0,
@@ -119,27 +114,27 @@
       },
       "benchmark": {
         "methodCount": 109,
-        "iterations": 50000,
-        "meanDurationMs": 7.079476146788991,
-        "meanOpsPerSecond": 257069761.85899085,
-        "minDurationMs": 0.1333,
-        "maxDurationMs": 102.4837,
-        "totalDurationMs": 771.6629,
-        "totalAllocatedBytes": 12800000.0,
+        "iterations": 1612,
+        "meanDurationMs": 3.3918963302752294,
+        "meanOpsPerSecond": 30915081.4953211,
+        "minDurationMs": 0.0337,
+        "maxDurationMs": 15.1133,
+        "totalDurationMs": 369.7167,
+        "totalAllocatedBytes": 412672.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.040753513761467894,
-        "maxCv": 0.328518
+        "meanCv": 0.09759886238532109,
+        "maxCv": 0.383199
       },
       "hotupdate": {
-        "passed": 0,
+        "passed": 351,
         "failed": 0,
         "allSemantic": false,
-        "allRevert": false,
-        "exitCode": 3221225477,
-        "patchDataUsed": true,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
         "patchFailed": false,
-        "truncated": true,
+        "truncated": false,
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
