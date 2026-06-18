@@ -6,12 +6,12 @@ using namespace ::chaos::il2cpp::runtime_instantiation;
 // After IR deserialization, replace eligible Call instructions with the callee's
 // IR body so that method_invoke (~1500ns) is skipped entirely.
 //
-// Safety conditions (Phase 2 — extended):
+// Safety conditions (Phase 4 — extended):
 //   - callee cached_ir exists and is not the caller itself
 //   - callee has zero Call/CallVirt/CallBridge instructions (leaf)
-//   - callee IR ≤ 16 instructions (up from 8 in Phase 1)
-//   - callee has NO branch instructions (Br, BrTrue, ...) — no branch_target fixup
-//   - callee has NO LdLoc/StLoc — no local slot remapping
+//   - callee IR ≤ 32 instructions (up from 16 in Phase 2)
+//   - callee branches are forward-only (null-check pattern); branch_target is remapped
+//   - callee LdLoc/StLoc are allowed with local slot remapping
 //   - callee has NO LdSFld/StSFld — no static field complexity
 //   - callee has NO SEH clauses — no SEH region merging
 //   - callee return is NOT a struct — no struct buf mapping
@@ -24,6 +24,7 @@ static bool IsCalleeEligibleForInline(
     // Must have IR, no calls, no branches, no Loc, no SFld.
     uint32_t max_sp = 0;
     uint32_t cur_sp = 0;
+    uint32_t idx = 0;
     for (const auto& instr : callee_ir.instructions) {
         switch (instr.op_code) {
         case interpreter::IROpCode::Call:
@@ -45,12 +46,15 @@ static bool IsCalleeEligibleForInline(
         case interpreter::IROpCode::BleUn:
         case interpreter::IROpCode::BltUn:
         case interpreter::IROpCode::Leave:
+            // Allow forward-only branches (null-check pattern).
+            // branch_target will be remapped during splicing.
+            if (static_cast<uint32_t>(instr.branch_target) <= idx ||
+                static_cast<uint32_t>(instr.branch_target) >= static_cast<uint32_t>(callee_ir.instructions.size())) {
+                return false;  // backward or out-of-range
+            }
+            break;
         case interpreter::IROpCode::Switch:
-            return false;  // has branches
-        case interpreter::IROpCode::LdLoc:
-        case interpreter::IROpCode::StLoc:
-        case interpreter::IROpCode::LdLocA:
-            return false;  // has local variable access
+            return false;  // Switch is too complex for inlining
         case interpreter::IROpCode::LdSFld:
         case interpreter::IROpCode::StSFld:
             return false;  // has static field access
@@ -91,9 +95,13 @@ static bool IsCalleeEligibleForInline(
                 instr.op_code == interpreter::IROpCode::LdcR4 ||
                 instr.op_code == interpreter::IROpCode::LdcR8 ||
                 instr.op_code == interpreter::IROpCode::LdFld ||
+                instr.op_code == interpreter::IROpCode::LdLoc ||
+                instr.op_code == interpreter::IROpCode::LdLocA ||
                 instr.op_code == interpreter::IROpCode::LdLen) {
                 ++cur_sp;
                 if (cur_sp > max_sp) max_sp = cur_sp;
+            } else if (instr.op_code == interpreter::IROpCode::StLoc) {
+                if (cur_sp > 0) --cur_sp;
             } else if (instr.op_code == interpreter::IROpCode::StFld ||
                        instr.op_code == interpreter::IROpCode::StArg) {
                 if (cur_sp >= 2) cur_sp -= 2;
@@ -118,6 +126,7 @@ static bool IsCalleeEligibleForInline(
             }
             break;
         }
+        ++idx;
     }
 
     // Must have SEH-free callee.
@@ -128,9 +137,9 @@ static bool IsCalleeEligibleForInline(
     if (call_info.is_struct_ret)
         return false;
 
-    // Instruction count bound (Phase 2: extended from 8 → 16).
+    // Instruction count bound (Phase 4: extended from 16 → 32).
     uint32_t instr_count = static_cast<uint32_t>(callee_ir.instructions.size());
-    if (instr_count > 16)
+    if (instr_count > 32)
         return false;
 
     return true;
@@ -156,6 +165,18 @@ static void InlineLeafCallees(
     // replacing eligible Call instructions with callee's IR body.
     std::vector<interpreter::IRInstruction> new_instrs;
     new_instrs.reserve(instr_count * 2);  // conservative pre-alloc
+
+    // Compute caller's max local slot index for local remapping during inline.
+    uint32_t caller_local_count = 0;
+    for (uint32_t i = 0; i < instr_count; ++i) {
+        const auto& instr = ir.instructions[i];
+        if (instr.op_code == interpreter::IROpCode::LdLoc ||
+            instr.op_code == interpreter::IROpCode::StLoc ||
+            instr.op_code == interpreter::IROpCode::LdLocA) {
+            uint32_t idx = static_cast<uint32_t>(instr.operand_index);
+            if (idx >= caller_local_count) caller_local_count = idx + 1;
+        }
+    }
 
     for (uint32_t i = 0; i < instr_count; ++i) {
         const auto& instr = ir.instructions[i];
@@ -285,8 +306,27 @@ static void InlineLeafCallees(
         uint32_t callee_arg_count = (cc.ret_tag != 0xFF)
             ? static_cast<uint32_t>(instr.arg_count)
             : 0u;
+        uint32_t callee_start_pos = static_cast<uint32_t>(new_instrs.size());
 
+        // Compute callee's max local slot index for remapping.
+        uint32_t callee_local_count = 0;
         for (const auto& ci : callee_ir.instructions) {
+            if (ci.op_code == interpreter::IROpCode::LdLoc ||
+                ci.op_code == interpreter::IROpCode::StLoc ||
+                ci.op_code == interpreter::IROpCode::LdLocA) {
+                uint32_t idx = static_cast<uint32_t>(ci.operand_index);
+                if (idx >= callee_local_count) callee_local_count = idx + 1;
+            }
+        }
+        // Reject if remapped locals would overflow FastFrame capacity.
+        if (caller_local_count + callee_local_count > FastFrame::kMaxLocals) {
+            new_instrs.push_back(instr);
+            continue;
+        }
+        uint32_t local_offset = caller_local_count;
+
+        for (uint32_t ci_idx = 0; ci_idx < callee_ir.instructions.size(); ++ci_idx) {
+            const auto& ci = callee_ir.instructions[ci_idx];
             if (ci.op_code == interpreter::IROpCode::Ret) {
                 // Skip Ret — return value is already on stack.
                 continue;
@@ -297,6 +337,29 @@ static void InlineLeafCallees(
                 // secondary_index = callee arg count (for stack peek).
                 // Runtime will read from frame.stack[sp - callee_arg_count + operand_index].
                 inlined.secondary_index = callee_arg_count;
+            }
+            // Remap local slots so callee locals don't collide with caller locals.
+            if (inlined.op_code == interpreter::IROpCode::LdLoc ||
+                inlined.op_code == interpreter::IROpCode::StLoc ||
+                inlined.op_code == interpreter::IROpCode::LdLocA) {
+                inlined.operand_index += static_cast<int32_t>(local_offset);
+            }
+            // Remap forward branch targets to their absolute positions.
+            if (inlined.op_code == interpreter::IROpCode::Br ||
+                inlined.op_code == interpreter::IROpCode::BrTrue ||
+                inlined.op_code == interpreter::IROpCode::BrFalse ||
+                inlined.op_code == interpreter::IROpCode::Beq ||
+                inlined.op_code == interpreter::IROpCode::Blt ||
+                inlined.op_code == interpreter::IROpCode::Bgt ||
+                inlined.op_code == interpreter::IROpCode::Ble ||
+                inlined.op_code == interpreter::IROpCode::Bge ||
+                inlined.op_code == interpreter::IROpCode::BneUn ||
+                inlined.op_code == interpreter::IROpCode::BgeUn ||
+                inlined.op_code == interpreter::IROpCode::BgtUn ||
+                inlined.op_code == interpreter::IROpCode::BleUn ||
+                inlined.op_code == interpreter::IROpCode::BltUn ||
+                inlined.op_code == interpreter::IROpCode::Leave) {
+                inlined.branch_target += callee_start_pos;
             }
             new_instrs.push_back(inlined);
         }

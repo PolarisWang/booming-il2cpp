@@ -61,7 +61,8 @@ using chaos::il2cpp::pal::PalTryCallNoExcept;
 // Avoids per-call malloc/free for Box/NewObj by reusing InterpreterObjects.
 // Each object's vector is pre-sized with capacity 1 so fields.resize(1)
 // in Handle_Box avoids a second heap allocation.
-static constexpr uint32_t kBoxPoolSize = 8;
+// Pool size covers both Box and NewObj traffic (common in interpreters).
+static constexpr uint32_t kBoxPoolSize = 16;
 static thread_local interpreter::InterpreterObject* tls_box_pool[kBoxPoolSize] = {};
 static thread_local uint32_t tls_box_pool_count = 0;
 
@@ -160,6 +161,12 @@ interpreter::InterpreterValue FastFrame::PopIV() noexcept {
     }
     case interpreter::ValueTag::Null:
         result = interpreter::InterpreterValue::null_val();
+        break;
+    case interpreter::ValueTag::LazyBoxInt32:
+        result = interpreter::InterpreterValue::from_i32(static_cast<int32_t>(stack[sp]));
+        break;
+    case interpreter::ValueTag::LazyBoxInt64:
+        result = interpreter::InterpreterValue::from_i64(static_cast<int64_t>(stack[sp]));
         break;
     default:
         result = interpreter::InterpreterValue::from_obj(reinterpret_cast<void*>(stack[sp]));

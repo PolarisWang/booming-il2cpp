@@ -255,11 +255,16 @@ static void Handle_CallVirtConstrained(FastFrame& frame, const interpreter::IRIn
             uint32_t receiver_token = static_cast<interpreter::InterpreterObject*>(
                 reinterpret_cast<void*>(pa.args[0]))->type_token;
 
-            // MIC read: acquire load (synchronizes with generation release).
-            if (mic.mic_type_token.load(std::memory_order_acquire) == receiver_token &&
-                mic.mic_dispatch_ptr.load(std::memory_order_acquire) != nullptr &&
-                mic.mic_generation.load(std::memory_order_acquire) ==
-                    g_patch_generation.load(std::memory_order_acquire)) {
+            // MIC read: single acquire fence + 3 relaxed loads.
+            // On x86-64 TSO the fence is a compiler barrier only; on ARM
+            // it avoids 3 sequential acquire loads (each with a full barrier).
+            std::atomic_thread_fence(std::memory_order_acquire);
+            auto mic_type = mic.mic_type_token.load(std::memory_order_relaxed);
+            auto mic_ptr  = mic.mic_dispatch_ptr.load(std::memory_order_relaxed);
+            auto mic_gen  = mic.mic_generation.load(std::memory_order_relaxed);
+            if (mic_type == receiver_token &&
+                mic_ptr != nullptr &&
+                mic_gen == g_patch_generation.load(std::memory_order_relaxed)) {
                 // MIC hit — call cached vtable entry directly with EH protection.
                 CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirtConstrained_MicHit");
                 using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,

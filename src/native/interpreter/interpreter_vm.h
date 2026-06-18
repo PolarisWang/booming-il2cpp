@@ -27,6 +27,12 @@ enum class ValueTag : uint8_t {
     Null = 6,
     Struct = 7,   // Value type (struct) — data stored via heap pointer
     ManagedPtr = 8, // Managed pointer (address of arg/local slot) — obj points to InterpreterValue
+    // Lazy-boxed primitive values: uint64_t stack slot holds the raw value.
+    // Materialized to a real InterpreterObject when crossing a call boundary
+    // (in PopCallArgs) or field store. Handle_Unbox reads directly without
+    // materialization, making Box→Unbox round-trips allocation-free.
+    LazyBoxInt32 = 9,
+    LazyBoxInt64 = 10,
 };
 
 struct InterpreterValue {

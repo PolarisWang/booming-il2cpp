@@ -10,6 +10,8 @@ static void AssertInt32Tag(const FastFrame& frame, uint32_t stack_idx) noexcept 
     CHAOS_IL2CPP_ASSERT(
         frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::Int32) ||
         frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::Int64) ||
+        frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::LazyBoxInt32) ||
+        frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::LazyBoxInt64) ||
         frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::ObjectRef) ||
         frame.stack_tags[stack_idx] == static_cast<uint8_t>(interpreter::ValueTag::Null)
         && "Handle_Add/Sub/Mul/etc: expected Int32/Int64 tag, got Float32/Float64");
@@ -242,28 +244,47 @@ static void Handle_Conv_R8(FastFrame& frame, const interpreter::IRInstruction&) 
 static void Handle_Box(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Box");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
-    // Box: wrap the top-of-stack value into a heap-allocated InterpreterObject.
-    // Uses TLS pool to avoid malloc per call; vector is pre-sized with capacity 1.
-    auto* boxed = AcquireBoxedObject();
-    if (boxed == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
-    frame.TrackPool(boxed, ReturnBoxToPool);
-    boxed->fields.resize(1);
-    boxed->fields[0] = frame.PopIV();
-    boxed->type_token = static_cast<uint32_t>(instr.immediate_i4);
-    frame.PushObj_NC(boxed);
+    // Lazy box: for int32/int64, store the raw value directly with a LazyBox
+    // tag instead of heap-allocating an InterpreterObject.  Materialization
+    // (to real InterpreterObject) happens lazily at call boundaries or field
+    // stores via PopCallArgs / StFld materialization.
+    auto tag = static_cast<interpreter::ValueTag>(frame.stack_tags[frame.sp - 1]);
+    if (tag == interpreter::ValueTag::Int32) {
+        // Value already in stack slot as int32 — just change the tag.
+        frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::LazyBoxInt32);
+    } else if (tag == interpreter::ValueTag::Int64) {
+        frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::LazyBoxInt64);
+    } else {
+        // Non-primitive: heap-allocate via TLS pool (existing behavior).
+        auto* boxed = AcquireBoxedObject();
+        if (boxed == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
+        frame.TrackPool(boxed, ReturnBoxToPool);
+        boxed->fields.resize(1);
+        boxed->fields[0] = frame.PopIV();
+        boxed->type_token = static_cast<uint32_t>(instr.immediate_i4);
+        frame.PushObj_NC(boxed);
+    }
     ++frame.pc;
 }
 
 static void Handle_Unbox(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Unbox");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
-    void* obj = frame.PopObj();
-    if (obj == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
-    auto* boxed = static_cast<interpreter::InterpreterObject*>(obj);
-    if (!boxed->fields.empty()) {
-        frame.PushIV(boxed->fields[0]);
+    auto tag = static_cast<interpreter::ValueTag>(frame.stack_tags[frame.sp - 1]);
+    if (tag == interpreter::ValueTag::LazyBoxInt32) {
+        // Lazy box: raw int32 value is already in the stack slot.
+        frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::Int32);
+    } else if (tag == interpreter::ValueTag::LazyBoxInt64) {
+        frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::Int64);
     } else {
-        frame.PushNull_NC();
+        void* obj = frame.PopObj();
+        if (obj == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
+        auto* boxed = static_cast<interpreter::InterpreterObject*>(obj);
+        if (!boxed->fields.empty()) {
+            frame.PushIV(boxed->fields[0]);
+        } else {
+            frame.PushNull_NC();
+        }
     }
     ++frame.pc;
 }
@@ -295,11 +316,10 @@ static void Handle_StSFld(FastFrame& frame, const interpreter::IRInstruction& in
 
 static void Handle_NewObj(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_NewObj");
-    auto* storage = static_cast<interpreter::InterpreterObject*>(
-        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(interpreter::InterpreterObject)));
+    // Use TLS object pool (shared with Handle_Box) to avoid per-call malloc/free.
+    auto* storage = AcquireBoxedObject();
     if (storage == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
-    ::new (storage) interpreter::InterpreterObject();
-    frame.TrackPool(storage, DomainFreeInterpreterObject);
+    frame.TrackPool(storage, ReturnBoxToPool);
     uint32_t field_count = static_cast<uint32_t>(
         instr.secondary_index == 0u ? 1u : instr.secondary_index);
     storage->fields.resize(field_count);
@@ -395,6 +415,26 @@ static void Handle_LdFld(FastFrame& frame, const interpreter::IRInstruction& ins
 static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_StFld");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    // Materialize lazy box before field store (field needs a real InterpreterObject).
+    auto val_tag = static_cast<interpreter::ValueTag>(frame.stack_tags[frame.sp - 1]);
+    if (val_tag == interpreter::ValueTag::LazyBoxInt32 ||
+        val_tag == interpreter::ValueTag::LazyBoxInt64) {
+        auto* obj = AcquireBoxedObject();
+        if (obj == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
+        frame.TrackPool(obj, ReturnBoxToPool);
+        obj->fields.resize(1);
+        obj->type_token = 0;
+        if (val_tag == interpreter::ValueTag::LazyBoxInt32) {
+            obj->fields[0] = interpreter::InterpreterValue::from_i32(
+                static_cast<int32_t>(frame.stack[frame.sp - 1]));
+        } else {
+            obj->fields[0] = interpreter::InterpreterValue::from_i64(
+                static_cast<int64_t>(frame.stack[frame.sp - 1]));
+        }
+        --frame.sp;
+        frame.stack[frame.sp] = reinterpret_cast<uint64_t>(obj);
+        frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+    }
     auto val = frame.PopIV();
     void* obj = frame.PopObj();
     if (obj == nullptr) { ++frame.pc; return; }

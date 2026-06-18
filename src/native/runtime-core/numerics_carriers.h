@@ -3,6 +3,10 @@
 
 #include <chaos/native_types.h>
 
+#if defined(__x86_64__) || defined(_M_AMD64)
+#include <immintrin.h>
+#endif
+
 namespace chaos::il2cpp::numerics_carriers {
 
 struct RuntimeNumericsVector2Carrier {
@@ -60,15 +64,43 @@ struct RuntimeNumericsQuaternionCarrier {
 
 struct RuntimeIntrinsicVector64Carrier {
     CHAOS_IL2CPP_UINT8 bytes[8];
+    CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) noexcept { return bytes[i]; }
+    const CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) const noexcept { return bytes[i]; }
 };
 
-struct RuntimeIntrinsicVector128Carrier {
+#if defined(__x86_64__) || defined(_M_AMD64)
+struct alignas(16) RuntimeIntrinsicVector128Carrier {
+    __m128i value;
+    CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) noexcept {
+        return reinterpret_cast<CHAOS_IL2CPP_UINT8*>(&value)[i];
+    }
+    const CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) const noexcept {
+        return reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(&value)[i];
+    }
+};
+
+struct alignas(32) RuntimeIntrinsicVector256Carrier {
+    __m256i value;
+    CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) noexcept {
+        return reinterpret_cast<CHAOS_IL2CPP_UINT8*>(&value)[i];
+    }
+    const CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) const noexcept {
+        return reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(&value)[i];
+    }
+};
+#else
+struct alignas(16) RuntimeIntrinsicVector128Carrier {
     CHAOS_IL2CPP_UINT8 bytes[16];
+    CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) noexcept { return bytes[i]; }
+    const CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) const noexcept { return bytes[i]; }
 };
 
-struct RuntimeIntrinsicVector256Carrier {
+struct alignas(32) RuntimeIntrinsicVector256Carrier {
     CHAOS_IL2CPP_UINT8 bytes[32];
+    CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) noexcept { return bytes[i]; }
+    const CHAOS_IL2CPP_UINT8& operator[](CHAOS_IL2CPP_SIZE i) const noexcept { return bytes[i]; }
 };
+#endif
 
 struct RuntimeIntrinsicVector512Carrier {
     CHAOS_IL2CPP_UINT8 bytes[64];

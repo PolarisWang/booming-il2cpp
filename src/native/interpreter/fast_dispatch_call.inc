@@ -188,8 +188,28 @@ struct PopCallArgs {
         }
         for (uint32_t i = ac; i > 0; --i) {
             --frame.sp;
-            args[i - 1] = frame.stack[frame.sp];
-            tags[i - 1] = frame.stack_tags[frame.sp];
+            auto tag = static_cast<interpreter::ValueTag>(frame.stack_tags[frame.sp]);
+            if (tag == interpreter::ValueTag::LazyBoxInt32 ||
+                tag == interpreter::ValueTag::LazyBoxInt64) {
+                // Materialize lazy box to real InterpreterObject.
+                auto* obj = AcquireBoxedObject();
+                if (obj == nullptr) { args = nullptr; tags = nullptr; count = 0; return; }
+                frame.TrackPool(obj, ReturnBoxToPool);
+                obj->fields.resize(1);
+                obj->type_token = 0;
+                if (tag == interpreter::ValueTag::LazyBoxInt32) {
+                    obj->fields[0] = interpreter::InterpreterValue::from_i32(
+                        static_cast<int32_t>(frame.stack[frame.sp]));
+                } else {
+                    obj->fields[0] = interpreter::InterpreterValue::from_i64(
+                        static_cast<int64_t>(frame.stack[frame.sp]));
+                }
+                args[i - 1] = reinterpret_cast<uint64_t>(obj);
+                tags[i - 1] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+            } else {
+                args[i - 1] = frame.stack[frame.sp];
+                tags[i - 1] = frame.stack_tags[frame.sp];
+            }
         }
     }
 
@@ -373,6 +393,26 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
 static void Handle_Ret(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Ret");
     if (frame.sp > 0) {
+        // Materialize lazy box before return (caller expects real InterpreterObject).
+        auto tag = static_cast<interpreter::ValueTag>(frame.stack_tags[frame.sp - 1]);
+        if (tag == interpreter::ValueTag::LazyBoxInt32 ||
+            tag == interpreter::ValueTag::LazyBoxInt64) {
+            auto* obj = AcquireBoxedObject();
+            if (obj != nullptr) {
+                frame.TrackPool(obj, ReturnBoxToPool);
+                obj->fields.resize(1);
+                obj->type_token = 0;
+                if (tag == interpreter::ValueTag::LazyBoxInt32) {
+                    obj->fields[0] = interpreter::InterpreterValue::from_i32(
+                        static_cast<int32_t>(frame.stack[frame.sp - 1]));
+                } else {
+                    obj->fields[0] = interpreter::InterpreterValue::from_i64(
+                        static_cast<int64_t>(frame.stack[frame.sp - 1]));
+                }
+                frame.stack[frame.sp - 1] = reinterpret_cast<uint64_t>(obj);
+                frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+            }
+        }
         frame.has_ret = true;
         frame.ret_val = frame.stack[frame.sp - 1];
         frame.ret_tag = frame.stack_tags[frame.sp - 1];
@@ -450,11 +490,16 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
             uint32_t receiver_token = static_cast<interpreter::InterpreterObject*>(
                 reinterpret_cast<void*>(pa.args[0]))->type_token;
 
-            // MIC read: acquire load (synchronizes with generation release).
-            if (mic.mic_type_token.load(std::memory_order_acquire) == receiver_token &&
-                mic.mic_dispatch_ptr.load(std::memory_order_acquire) != nullptr &&
-                mic.mic_generation.load(std::memory_order_acquire) ==
-                    g_patch_generation.load(std::memory_order_acquire)) {
+            // MIC read: single acquire fence + 3 relaxed loads.
+            // On x86-64 TSO the fence is a compiler barrier only; on ARM
+            // it avoids 3 sequential acquire loads (each with a full barrier).
+            std::atomic_thread_fence(std::memory_order_acquire);
+            auto mic_type = mic.mic_type_token.load(std::memory_order_relaxed);
+            auto mic_ptr  = mic.mic_dispatch_ptr.load(std::memory_order_relaxed);
+            auto mic_gen  = mic.mic_generation.load(std::memory_order_relaxed);
+            if (mic_type == receiver_token &&
+                mic_ptr != nullptr &&
+                mic_gen == g_patch_generation.load(std::memory_order_relaxed)) {
                 // MIC hit — call cached vtable entry directly with EH protection.
                 CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt_MicHit");
                 using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,

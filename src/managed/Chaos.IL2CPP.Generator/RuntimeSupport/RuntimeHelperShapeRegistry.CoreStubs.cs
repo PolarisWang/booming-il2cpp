@@ -77,13 +77,14 @@ public sealed partial class NativeAotLoweringPlanner
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                         [
-                            "    return ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);",
+                            "    return ChaosStringConcat2(chaos_arg_0, chaos_arg_1);",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                             {
                                 stringRefAbi, stringRefAbi,
-                            }), stringRetAbi, new HashSet<int> { 0, 1 });
+                            }), stringRetAbi, new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "ChaosStringConcat2");
                     }
 
                     if (paramTypes.Count == 3)

@@ -1,11 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-<<<<<<< Updated upstream
     <TargetFramework>net10.0</TargetFramework>
-=======
-    <TargetFramework>net9.0</TargetFramework>
->>>>>>> Stashed changes
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DefineConstants>VERIFY</DefineConstants>

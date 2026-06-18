@@ -1015,7 +1015,7 @@ template <typename TCarrier>
 inline TCarrier VectorFixedBitwiseAnd(TCarrier left_value, TCarrier right_value) {
     TCarrier result = {};
     for (CHAOS_IL2CPP_SIZE byte_index = 0; byte_index < sizeof(TCarrier); ++byte_index) {
-        result.bytes[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(left_value.bytes[byte_index] & right_value.bytes[byte_index]);
+        result[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(left_value[byte_index] & right_value[byte_index]);
     }
 
     return result;
@@ -1025,7 +1025,7 @@ template <typename TCarrier>
 inline TCarrier VectorFixedBitwiseOr(TCarrier left_value, TCarrier right_value) {
     TCarrier result = {};
     for (CHAOS_IL2CPP_SIZE byte_index = 0; byte_index < sizeof(TCarrier); ++byte_index) {
-        result.bytes[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(left_value.bytes[byte_index] | right_value.bytes[byte_index]);
+        result[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(left_value[byte_index] | right_value[byte_index]);
     }
 
     return result;
@@ -1035,7 +1035,7 @@ template <typename TCarrier>
 inline TCarrier VectorFixedBitwiseXor(TCarrier left_value, TCarrier right_value) {
     TCarrier result = {};
     for (CHAOS_IL2CPP_SIZE byte_index = 0; byte_index < sizeof(TCarrier); ++byte_index) {
-        result.bytes[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(left_value.bytes[byte_index] ^ right_value.bytes[byte_index]);
+        result[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(left_value[byte_index] ^ right_value[byte_index]);
     }
 
     return result;
@@ -1045,7 +1045,7 @@ template <typename TCarrier>
 inline TCarrier VectorFixedBitwiseAndNot(TCarrier left_value, TCarrier right_value) {
     TCarrier result = {};
     for (CHAOS_IL2CPP_SIZE byte_index = 0; byte_index < sizeof(TCarrier); ++byte_index) {
-        result.bytes[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(~left_value.bytes[byte_index] & right_value.bytes[byte_index]);
+        result[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(~left_value[byte_index] & right_value[byte_index]);
     }
 
     return result;
@@ -1055,9 +1055,9 @@ template <typename TCarrier>
 inline TCarrier VectorFixedBitwiseSelect(TCarrier mask_value, TCarrier left_value, TCarrier right_value) {
     TCarrier result = {};
     for (CHAOS_IL2CPP_SIZE byte_index = 0; byte_index < sizeof(TCarrier); ++byte_index) {
-        result.bytes[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(
-            (mask_value.bytes[byte_index] & left_value.bytes[byte_index]) |
-            (static_cast<CHAOS_IL2CPP_UINT8>(~mask_value.bytes[byte_index]) & right_value.bytes[byte_index]));
+        result[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(
+            (mask_value[byte_index] & left_value[byte_index]) |
+            (static_cast<CHAOS_IL2CPP_UINT8>(~mask_value[byte_index]) & right_value[byte_index]));
     }
 
     return result;
@@ -1073,15 +1073,15 @@ inline TCarrier VectorFixedTernaryLogic(
     for (CHAOS_IL2CPP_SIZE byte_index = 0; byte_index < sizeof(TCarrier); ++byte_index) {
         CHAOS_IL2CPP_UINT8 byte_value = 0u;
         for (CHAOS_IL2CPP_UINT32 bit_index = 0; bit_index < 8u; ++bit_index) {
-            const auto first_bit = static_cast<CHAOS_IL2CPP_UINT8>((first_value.bytes[byte_index] >> bit_index) & 0x1u);
-            const auto second_bit = static_cast<CHAOS_IL2CPP_UINT8>((second_value.bytes[byte_index] >> bit_index) & 0x1u);
-            const auto third_bit = static_cast<CHAOS_IL2CPP_UINT8>((third_value.bytes[byte_index] >> bit_index) & 0x1u);
+            const auto first_bit = static_cast<CHAOS_IL2CPP_UINT8>((first_value[byte_index] >> bit_index) & 0x1u);
+            const auto second_bit = static_cast<CHAOS_IL2CPP_UINT8>((second_value[byte_index] >> bit_index) & 0x1u);
+            const auto third_bit = static_cast<CHAOS_IL2CPP_UINT8>((third_value[byte_index] >> bit_index) & 0x1u);
             const auto control_index = static_cast<CHAOS_IL2CPP_UINT8>((first_bit << 2u) | (second_bit << 1u) | third_bit);
             const auto result_bit = static_cast<CHAOS_IL2CPP_UINT8>((control >> control_index) & 0x1u);
             byte_value = static_cast<CHAOS_IL2CPP_UINT8>(byte_value | static_cast<CHAOS_IL2CPP_UINT8>(result_bit << bit_index));
         }
 
-        result.bytes[byte_index] = byte_value;
+        result[byte_index] = byte_value;
     }
 
     return result;
@@ -1091,7 +1091,7 @@ template <typename TCarrier>
 inline TCarrier VectorFixedOnesComplement(TCarrier value) {
     TCarrier result = {};
     for (CHAOS_IL2CPP_SIZE byte_index = 0; byte_index < sizeof(TCarrier); ++byte_index) {
-        result.bytes[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(~value.bytes[byte_index]);
+        result[byte_index] = static_cast<CHAOS_IL2CPP_UINT8>(~value[byte_index]);
     }
 
     return result;
@@ -1776,14 +1776,14 @@ inline TCarrier VectorFixedWithElement(const TCarrier& value, CHAOS_IL2CPP_INT32
 template <typename TCarrier>
 inline TCarrier VectorFixedWithLower(const TCarrier& upper, const RuntimeIntrinsicVector128Carrier& lower) {
     TCarrier result = upper;
-    std::memcpy(reinterpret_cast<CHAOS_IL2CPP_UINT8*>(&result), lower.bytes, 16);
+    std::memcpy(reinterpret_cast<CHAOS_IL2CPP_UINT8*>(&result), &lower, 16);
     return result;
 }
 
 template <typename TCarrier>
 inline TCarrier VectorFixedWithUpper(const TCarrier& lower, const RuntimeIntrinsicVector128Carrier& upper) {
     TCarrier result = lower;
-    std::memcpy(reinterpret_cast<CHAOS_IL2CPP_UINT8*>(&result) + 16, upper.bytes, 16);
+    std::memcpy(reinterpret_cast<CHAOS_IL2CPP_UINT8*>(&result) + 16, &upper, 16);
     return result;
 }
 
