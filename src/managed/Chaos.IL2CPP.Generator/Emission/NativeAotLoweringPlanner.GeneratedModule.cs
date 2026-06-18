@@ -203,23 +203,29 @@ public sealed partial class NativeAotLoweringPlanner
         var valueTypeTypedefs = "";
         if (_emittedValueTypeSubjectIds is { Count: > 0 })
         {
-            // Post-scan _methodsBySubjectId for ValueTypeByValue ABI slots from closure
+            // Post-scan _methodsBySubjectId for value type ABI slots from closure
             // assembly methods.  The ObjectModelEmission phase only scans types in the
             // AOT IR's type metadata, which may not include value types from closure
             // assemblies (e.g., System.Data.ConnectionState, System.Data.IsolationLevel).
             // Without these, the generated header lacks chaos_valuetype_* typedefs,
             // causing C2061 when the subjects codegen uses them in function declarations.
+            //
+            // Use TypeShape (not CarrierKindCode) for detection because the AOT IR JSON
+            // stores value type params with CarrierKindCode=NativeInt/Int64 and
+            // TypeShape=ValueType.  The CarrierKindCode is only upgraded to ValueTypeByValue
+            // during the lowering phase that produces method artifacts — _methodsBySubjectId
+            // still has the original JSON values.
             foreach (var kvp in _methodsBySubjectId)
             {
                 var m = kvp.Value;
-                if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
+                if (m.ReturnAbi.TypeShape == AotCoreIrTypeShapeKind.ValueType &&
                     !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
                     _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
                 if (m.ParameterAbis != null)
                 {
                     foreach (var abi in m.ParameterAbis)
                     {
-                        if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
+                        if (abi.TypeShape == AotCoreIrTypeShapeKind.ValueType &&
                             !string.IsNullOrEmpty(abi.TypeSubjectId))
                             _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
                     }
