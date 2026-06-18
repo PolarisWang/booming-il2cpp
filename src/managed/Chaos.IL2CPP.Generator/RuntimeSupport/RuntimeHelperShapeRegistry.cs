@@ -265,17 +265,12 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!string.Equals(entry.MethodName, methodName, StringComparison.Ordinal))
                 {
                     // Try method-level generic args: methodName = "Equal[[System.Int32]]", entry.MethodName = "Equal"
-                    string? genericMarkerStart = null;
-                    string? bracketClose = null;
-                    string bc1 = entry.MethodName + "[[";
-                    string bc2 = entry.MethodName + "<";
-                    if (methodName.StartsWith(bc1, StringComparison.Ordinal)) { genericMarkerStart = bc1; bracketClose = "]]"; }
-                    else if (methodName.StartsWith(bc2, StringComparison.Ordinal)) { genericMarkerStart = bc2; bracketClose = ">"; }
-                    if (genericMarkerStart != null && bracketClose != null)
+                    var genericMarkerStart = entry.MethodName + "[[";
+                    if (methodName.StartsWith(genericMarkerStart, StringComparison.Ordinal))
                     {
-                        // Extract type args from between [[...]] or <...>
+                        // Extract type args from between [[...]]
                         var afterMarker = methodName.Substring(genericMarkerStart.Length);
-                        var closeBracket = afterMarker.LastIndexOf(bracketClose, StringComparison.Ordinal);
+                        var closeBracket = afterMarker.LastIndexOf("]]", StringComparison.Ordinal);
                         if (closeBracket < 0) continue;
                         var argsPart = afterMarker.Substring(0, closeBracket);
                         typeArgs = argsPart.Split(new[] { "],[", "," }, StringSplitOptions.None);
@@ -1871,16 +1866,11 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: (planner, callee, typeArgs) =>
                 {
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    // Unsafe.SkipInit<T>(ref T value) — no-op: leave ref uninitialized.
-                    // CHAOS_IL2CPP_INTPTR return + () params avoids C2733 with
-                    // AddExternalRuntimeStubs' separate extern declaration.
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
-                        ["    return 0;"]);
+                    var src = RenderSimpleExternalRuntimeHelper("void", symbol, "",
+                        ["    CHAOS_IL2CPP_FAIL();", "    return 0;"]);
                     return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType),
-                        new HashSet<int> { 0 });
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateVoidAbiSlot(), EmptyRawArgumentIndices);
                 }));
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.ArgumentNullException",
@@ -5031,7 +5021,7 @@ public sealed partial class NativeAotLoweringPlanner
                         if (cppType == null) return null;
                         var carrier = InferVectorCarrierType(callee);
                         if (carrier == null) return null;
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto cmp = chaos::il2cpp::vector_fixed::VectorFixedCompareEqual<{cppType}, {cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), *reinterpret_cast<{carrier}*>({{1}})); return static_cast<CHAOS_IL2CPP_INTPTR>(!chaos::il2cpp::vector_fixed::VectorFixedIsAllZeros(cmp) ? 1 : 0); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ auto cmp = chaos::il2cpp::vector_fixed::VectorFixedCompareEqual<{cppType}, {carrier}>(*reinterpret_cast<{carrier}*>({{0}}), *reinterpret_cast<{carrier}*>({{1}})); return static_cast<CHAOS_IL2CPP_INTPTR>(!chaos::il2cpp::vector_fixed::VectorFixedIsAllZeros(cmp) ? 1 : 0); }}()";
                     }));
             }
 

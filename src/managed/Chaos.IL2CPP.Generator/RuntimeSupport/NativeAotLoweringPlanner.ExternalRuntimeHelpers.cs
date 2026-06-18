@@ -275,32 +275,11 @@ public sealed partial class NativeAotLoweringPlanner
 		if (crCryptoJson != null)
 			_cryptoAotIrEntries.Add((callee, crCryptoJson));
 
-		if (_methodsBySubjectId.TryGetValue(callee, out var aotMethod) && aotMethod.Instructions.Count > 0)
-		{
-			helperDefinition = null;
-			_externalRuntimeHelperCache[callee] = null;
-			return false;
-		}
-		if (_methodsBySubjectId.TryGetValue(originalCallee, out var aotMethod2) && aotMethod2.Instructions.Count > 0)
-		{
-			helperDefinition = null;
-			_externalRuntimeHelperCache[callee] = null;
-			return false;
-		}
 		if (_methodsBySubjectId.ContainsKey(callee) || _methodsBySubjectId.ContainsKey(originalCallee))
 		{
-			// Method is in _methodsBySubjectId but has 0 instructions — cannot be
-			// AOT-compiled. Check ShapeRegistry for a native stub before falling
-			// through to the catch-all (which generates ExternalRuntimeFallback).
-			// This allows Interlocked-like patterns where the AOT IR has the method
-			// registered but the emitter can't translate its IL.
-			if (_shapeRegistry.TryMatchShape(callee, out var shapeEntry2) &&
-				shapeEntry2.Kind == RuntimeHelperShapeRegistry.ShapeKind.SimpleForward)
-			{
-				helperDefinition = CreateDefinitionFromShapeEntry(callee, shapeEntry2);
-				_externalRuntimeHelperCache[callee] = helperDefinition;
-				return true;
-			}
+			helperDefinition = null;
+			_externalRuntimeHelperCache[callee] = null;
+			return false;
 		}
 		if (_externalRuntimeHelperCache.TryGetValue(callee, out var cached))
 		{

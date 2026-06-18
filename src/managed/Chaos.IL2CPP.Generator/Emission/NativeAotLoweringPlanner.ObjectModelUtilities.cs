@@ -46,23 +46,6 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 	}
 
-	private static readonly string[] s_primitiveValueTypes = [
-		"System.Private.CoreLib/System.Int32", "System.Private.CoreLib/System.Int64", "System.Private.CoreLib/System.Int16",
-		"System.Private.CoreLib/System.Byte", "System.Private.CoreLib/System.SByte",
-		"System.Private.CoreLib/System.UInt32", "System.Private.CoreLib/System.UInt64", "System.Private.CoreLib/System.UInt16",
-		"System.Private.CoreLib/System.Char", "System.Private.CoreLib/System.Boolean",
-		"System.Private.CoreLib/System.Single", "System.Private.CoreLib/System.Double",
-		"System.Private.CoreLib/System.IntPtr", "System.Private.CoreLib/System.UIntPtr",
-	];
-	private static readonly string[] s_primitiveValueTypesShort = [
-		"System.Int32", "System.Int64", "System.Int16",
-		"System.Byte", "System.SByte",
-		"System.UInt32", "System.UInt64", "System.UInt16",
-		"System.Char", "System.Boolean",
-		"System.Single", "System.Double",
-		"System.IntPtr", "System.UIntPtr",
-	];
-
 	private static IReadOnlySet<string> CollectValueTypeSubjectIds(AotCoreIrArtifact aotCoreIr)
 	{
 		HashSet<string> hashSet = new HashSet<string>(StringComparer.Ordinal);
@@ -86,14 +69,6 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 			}
 		}
-		// Fallback: ensure core primitive value types are always classified as value types.
-		// These may be missed by instruction scanning in multi-assembly closures where
-		// the primary assembly doesn't directly reference them as TargetReferences.
-		foreach (var p in s_primitiveValueTypes)
-			hashSet.Add(p);
-		// Also add common subject ID formats without assembly prefix
-		foreach (var p in s_primitiveValueTypesShort)
-			hashSet.Add(p);
 		return hashSet;
 	}
 
@@ -510,33 +485,6 @@ public sealed partial class NativeAotLoweringPlanner
 	/// Compute FNV-1a 64-bit stable type ID from a subject ID.
 	/// Must match chaos_compute_type_stable_id() in type_info.h.
 	/// </summary>
-	/// <summary>
-	/// Normalize a subject ID to a canonical type identity by stripping
-	/// the assembly prefix and normalizing generic parameter notation.
-	/// Two types that are the same logical type from different assemblies
-	/// will produce the same canonical identity, enabling deduplication.
-	/// Example:
-	///   "CombinedSubjects/System.Linq.IGrouping&lt;!!0,!!1&gt;"
-	///   → "System.Linq.IGrouping&lt;!0,!1&gt;"
-	///   "System.Linq/System.Linq.IGrouping&lt;!0,!1&gt;"
-	///   → "System.Linq.IGrouping&lt;!0,!1&gt;"
-	/// </summary>
-	private static string NormalizeTypeIdentity(string subjectId)
-	{
-		// Strip assembly prefix (everything before and including first '/')
-		int slash = subjectId.IndexOf('/');
-		var identity = slash >= 0 ? subjectId.Substring(slash + 1) : subjectId;
-
-		// Normalize generic parameter notation: shared (!N) and owned (!!N) → !N
-		// Owned generic params (!!N) come from the defining assembly,
-		// shared params (!N) from the referencing assembly.
-		if (identity.Contains("!!"))
-		{
-			identity = identity.Replace("!!", "!");
-		}
-		return identity;
-	}
-
 	private static ulong ComputeStableTypeId(string subjectId)
 	{
 		const ulong fnvOffsetBasis64 = 14695981039346656037;

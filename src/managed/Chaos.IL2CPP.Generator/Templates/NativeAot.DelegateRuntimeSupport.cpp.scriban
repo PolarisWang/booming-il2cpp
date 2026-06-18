@@ -33,7 +33,3 @@ extern "C" void* NativeDfnThunkArity1(void*, void*, void*, void*);
 extern "C" void* NativeDfnThunkArity2(void*, void*, void*, void*, void*);
 extern "C" void* NativeDfnThunkArity3(void*, void*, void*, void*, void*, void*);
 extern "C" void* NativeDfnThunkArity4(void*, void*, void*, void*, void*, void*, void*);
-extern "C" void* NativeDfnThunkArity5(void*, void*, void*, void*, void*, void*, void*, void*);
-extern "C" void* NativeDfnThunkArity6(void*, void*, void*, void*, void*, void*, void*, void*, void*);
-extern "C" void* NativeDfnThunkArity7(void*, void*, void*, void*, void*, void*, void*, void*, void*, void*);
-extern "C" void* NativeDfnThunkArity8(void*, void*, void*, void*, void*, void*, void*, void*, void*, void*, void*);

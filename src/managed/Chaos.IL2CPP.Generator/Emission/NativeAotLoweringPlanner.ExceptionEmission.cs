@@ -9,7 +9,6 @@ using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
@@ -18,27 +17,16 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeAotLoweringPlanner
 {
-	[ThreadStatic]
-	private static int _linearScratchCounter;
-	[ThreadStatic]
-	private static int _nextInlineId;
-	private static int s_extDispatchLabelSeq;
-	[ThreadStatic]
-	private static int _dispatchLabelSeq;
-	[ThreadStatic]
-	private static string? _pendingEnumBoxSubjectId;
-	[ThreadStatic]
-	private static string? _pendingBoxSubjectId;
-	[ThreadStatic]
-	private static bool _pendingBoxHasProvider;
-	[ThreadStatic]
-	private static IReadOnlyList<AotCoreIrInstructionArtifact>? _lookaheadInstructionList;
-	[ThreadStatic]
-	private static int _lookaheadInstructionIndex;
-	[ThreadStatic]
-	private static IReadOnlyList<AotCoreIrInstructionArtifact>? _linearInstructionList;
-	[ThreadStatic]
-	private static int _linearInstructionIndex;
+	private int _linearScratchCounter;
+	private int _nextInlineId;
+	private int _dispatchLabelSeq;
+	private string? _pendingEnumBoxSubjectId;
+	private string? _pendingBoxSubjectId;
+	private bool _pendingBoxHasProvider;
+	private IReadOnlyList<AotCoreIrInstructionArtifact>? _lookaheadInstructionList;
+	private int _lookaheadInstructionIndex;
+	private IReadOnlyList<AotCoreIrInstructionArtifact>? _linearInstructionList;
+	private int _linearInstructionIndex;
 
 	private static readonly HashSet<string> ToCharEligiblePrimitives = new()
 	{
@@ -54,43 +42,35 @@ public sealed partial class NativeAotLoweringPlanner
 	// Only active in structured mode (_activeStructuredSlotContext != null)
 	// since flat linear mode uses opaque eval-stack indices that are always
 	// the same expression string regardless of actual values.
-	[ThreadStatic]
-	private static string? _lastCheckedArrayExpr;
-	[ThreadStatic]
-	private static string? _lastCheckedIndexExpr;
+	private string? _lastCheckedArrayExpr;
+	private string? _lastCheckedIndexExpr;
 
 	// Array access instruction IL offsets to skip bounds checks for,
 	// populated by PreScanLoopArraySkips when a loop induction variable
 	// pattern is detected (e.g., for (int i = 0; i < arr.Length; i++) { arr[i]; }).
-	[ThreadStatic]
-	private static HashSet<int>? _loopArrayAccessSkipOffsets;
+	private HashSet<int>? _loopArrayAccessSkipOffsets;
 
 	// Hoisted loop induction variables: maps chaos_locals slot → C++ local variable name.
 	// When set, ldloc/stloc for these slots emit direct C++ local access instead of
 	// chaos_locals[] traffic, keeping the IV in a register across loop iterations.
-	[ThreadStatic]
-	private static Dictionary<int, string>? _hoistedIVs;
+	private Dictionary<int, string>? _hoistedIVs;
 
 	// Hoisted invariant locals for do-while loops: maps chaos_locals slot → C++ local variable name.
 	// These locals are ldloc'd but never stloc'd inside the loop, so the load is hoisted
 	// before the loop, eliminating per-iteration chaos_locals[] read traffic.
-	[ThreadStatic]
-	private static Dictionary<int, (string VarName, SlotType SlotType)>? _hoistedInvariantLocals;
+	private Dictionary<int, (string VarName, SlotType SlotType)>? _hoistedInvariantLocals;
 
 	// Hoisted array base pointers for do-while loops: maps chaos_locals slot → C++ base pointer variable name.
 	// When set, array load/store for these slots use direct base pointer access instead of
 	// calling chaos_array_get_elements(reinterpret_cast<chaos_managed_array*>(...)) every iteration.
-	[ThreadStatic]
-	private static Dictionary<int, string>? _hoistedArrayBaseSlots;
+	private Dictionary<int, string>? _hoistedArrayBaseSlots;
 	// Tracks slot variable names (_sN) to their chaos_locals source slot index.
 	// Used by EmitLinearArrayLoad/Store to resolve hoisted array base pointers.
-	[ThreadStatic]
-	private static Dictionary<string, int>? _slotVarToLocalSlot;
+	private Dictionary<string, int>? _slotVarToLocalSlot;
 
 	// Accumulator variables for do-while loops: maps chaos_locals slot → C++ local variable name.
 	// These are loop-carried dependency chains (ldloc->add/sub->stloc) promoted to C++ locals.
-	[ThreadStatic]
-	private static Dictionary<int, string>? _accumulatorSlots;
+	private Dictionary<int, string>? _accumulatorSlots;
 
 	private void ResetArrayCheckCache()
 	{
@@ -115,13 +95,12 @@ public sealed partial class NativeAotLoweringPlanner
 	// NativeInt (plain integer-as-pointer).  Consumers (conv.i4,
 	// ceq, etc.) use this to emit ChaosLoadFloat32/ChaosLoadFloat64
 	// before operating on the value.
-	public enum SlotType : byte { NativeInt, Int64, Float32, Float64, WideValue }
+	private enum SlotType : byte { NativeInt, Int64, Float32, Float64, WideValue }
 
 	/// <summary>Number of CHAOS_IL2CPP_INTPTR slots consumed by one WideValue.</summary>
 	private const int WideValueSlotCount = 2;
 
-	[ThreadStatic]
-	private static Stack<SlotType>? _structuredSlotTypes;
+	private readonly Stack<SlotType> _structuredSlotTypes = new();
 
 	/// <summary>
 	/// Local slots that are struct value types. Populated per-method in
@@ -130,8 +109,7 @@ public sealed partial class NativeAotLoweringPlanner
 	/// because struct data is inline in CHAOS_IL2CPP_INTPTR slots and downstream
 	/// consumers (ldfld) expect a pointer via chaos_resolve_managed_value_pointer.
 	/// </summary>
-	[ThreadStatic]
-	private static HashSet<int>? _structLocalSlots;
+	private HashSet<int>? _structLocalSlots;
 
 	/// <summary>
 	/// Local slots that hold Float32/Float64 values. Populated per-method
@@ -140,8 +118,7 @@ public sealed partial class NativeAotLoweringPlanner
 	/// ChaosLoadFloat32/ChaosLoadFloat64(chaos_locals[N]) and pushes the
 	/// corresponding SlotType, enabling direct _dN/_fN slot allocation.
 	/// </summary>
-	[ThreadStatic]
-	private static Dictionary<int, SlotType>? _floatLocalSlots;
+	private Dictionary<int, SlotType>? _floatLocalSlots;
 
 	/// <summary>
 	/// Local slots that hold Int64 values (packed via ChaosStoreInt64 into
@@ -151,8 +128,7 @@ public sealed partial class NativeAotLoweringPlanner
 	/// enabling EmitLinearBinaryArithmetic to emit 64-bit arithmetic instead
 	/// of int32 truncation.
 	/// </summary>
-	[ThreadStatic]
-	private static HashSet<int>? _int64LocalSlots;
+	private HashSet<int>? _int64LocalSlots;
 
 	private static HashSet<int> IdentifyStructLocalSlots(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
 	{
@@ -638,7 +614,7 @@ public sealed partial class NativeAotLoweringPlanner
 	/// When <paramref name="nextInstruction"/> is provided (linear path), use it directly.
 	/// When null (structured IR path), fall back to the lookahead context fields.
 	/// </summary>
-	private bool TryGetLookaheadInstruction(AotCoreIrInstructionArtifact? nextInstruction, out AotCoreIrInstructionArtifact? result)
+	private bool TryGetLookaheadInstruction(AotCoreIrInstructionArtifact? nextInstruction, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out AotCoreIrInstructionArtifact? result)
 	{
 		if (nextInstruction != null) { result = nextInstruction; return true; }
 		if (_lookaheadInstructionList != null)
@@ -658,7 +634,7 @@ public sealed partial class NativeAotLoweringPlanner
 		/// Two-step lookahead for patterns spanning 3 instructions (box + ldnull + call).
 		/// Only used in structured IR path; linear path uses nextInstruction directly.
 		/// </summary>
-		private bool TryGetSecondLookaheadInstruction(AotCoreIrInstructionArtifact? nextInstruction, [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out AotCoreIrInstructionArtifact? result)
+		private bool TryGetSecondLookaheadInstruction(AotCoreIrInstructionArtifact? nextInstruction, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out AotCoreIrInstructionArtifact? result)
 		{
 			// Linear path: use _linearInstructionList with _linearInstructionIndex
 			if (nextInstruction != null && _linearInstructionList != null)
@@ -2007,10 +1983,6 @@ public sealed partial class NativeAotLoweringPlanner
 		case "localloc":
 			EmitLinearLocalAlloc(builder, indentation);
 			break;
-		{
-			builder.AppendLine($"{indentation}// {instruction.Op} (structured EH branch)");
-			break;
-		}
 		case "initblk":
 		{
 			builder.AppendLine($"{indentation}{{");
@@ -2975,7 +2947,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 
 
-		if (_nativeSymbolToDispatchSlot?.TryGetValue(invocationTarget.TargetSymbol, out int slotIndex) == true)
+		if (_nativeSymbolToDispatchSlot?.TryGetValue(invocationTarget.TargetSymbol!, out int slotIndex) == true)
 		{
 			// Self-call detection: the codegen frontend could not lower this
 			// method's IL body and collapsed it to "call self; ret".  Emit
@@ -3002,7 +2974,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		else
 		{
-			EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck);
+			EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol!, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck);
 		}
 	}
 
@@ -3246,17 +3218,17 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    // Inlined: {calleeMethod.SubjectId}");
 
-		// Pre-declare ALL inline vars at block top (before labels) to avoid C2362
-		if (calleeHasReturn)
-			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_retval{inlineId}{{}};");
-		for (int _di = 0; _di < paramCount; _di++)
-			builder.AppendLine(indentation + "    CHAOS_IL2CPP_INTPTR chaos_inline_arg_" + _di + "{};");
-
 		// Consume arguments from eval stack into local C++ variables
 		for (int i = paramCount - 1; i >= 0; i--)
 		{
 			string argExpr = ConsumeEvalStackValueExpression();
-			builder.AppendLine($"{indentation}    chaos_inline_arg_{i} = {argExpr};");
+			builder.AppendLine($"{indentation}    auto chaos_inline_arg_{i} = {argExpr};");
+		}
+
+		// For non-void callees, capture return value at each ret and push at unified exit
+		if (calleeHasReturn)
+		{
+			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_retval{inlineId}{{}};");
 		}
 
 		int localOffset = _currentMethodArtifact.LocalCount;
@@ -3443,6 +3415,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				calleeSubjectId = resolvedId;
 			}
 		}
+		if (calleeSubjectId == null) return false;
 		return TryInlineResolvedMethod(builder, instruction, calleeSubjectId, invocationTarget.ParameterAbis.Count, indentation);
 	}
 	private void EmitLinearCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
@@ -4202,11 +4175,6 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				? (callerIsShared ? "chaos_generic_context" : "0")
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
-		else if (targetSymbol.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal))
-		{
-			// Cross-module stub: non-shared callers pass 0 as context.
-			genericCtxArg = string.IsNullOrEmpty(argList) ? "0" : ", 0";
-		}
 		
 string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		if (string.Equals(a, "void", StringComparison.Ordinal))
@@ -4244,16 +4212,12 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 	{
 		string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
 		string paramTypes = FormatAbiSlotParameterTypes(invocationTarget.ParameterAbis);
-		// Unique label per dispatch call (avoids C2362/C2094 when multiple
-		// external dispatch calls exist in the same function body).
-		int extLabelSeq = Interlocked.Increment(ref s_extDispatchLabelSeq);
 
 		// When a DirectNativeSymbol is available, emit a direct function call
 		// instead of an indirect dispatch table call. This enables:
 		//   1. Compiler inlining (the call is a known symbol at compile time)
 		//   2. No function pointer dereference overhead
 		//   3. Better code generation (the compiler sees the full call graph)
-		builder.AppendLine(indentation + "    chaos_extext_end_" + extLabelSeq + ": ;");
 		if (invocationTarget.DirectNativeSymbol is { } nativeSymbol)
 		{
 		    // Collect chaos_external_runtime_* symbols for fallback declaration emission
@@ -4293,8 +4257,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 				}
 				string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 			string nativeCtxArg = "";
-			if (_sharedContextSymbols.Contains(nativeSymbol) ||
-			    nativeSymbol.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal))
+			if (_sharedContextSymbols.Contains(nativeSymbol))
 			{
 				bool callerIsShared = _currentMethodNativeSymbol != null &&
 				                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
@@ -4348,7 +4311,15 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		    builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
 		    builder.AppendLine(indentation + "    {");
 		    builder.AppendLine(indentation + "        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
-		    builder.AppendLine(indentation + "        goto chaos_extext_end_" + extLabelSeq + ";");
+		    // Guard against infinite loop if chaos_extext_end label is at function top
+		    // (DirectNativeSymbol section precedes the null check in the generated code).
+		    // raise_null_reference_exception should not return, but the goto + return
+		    // pair ensures no fall-through re-enters the null check.
+		    builder.AppendLine(indentation + "        goto chaos_extext_end;");
+		    if (string.Equals(returnType, "void", StringComparison.Ordinal))
+		        builder.AppendLine(indentation + "        return;");
+		    else
+		        builder.AppendLine(indentation + "        return {};");
 		    builder.AppendLine(indentation + "    }");
 		}
 		else if (enforceInstanceNullCheck && (string.Equals(instruction?.Op, "callvirt", StringComparison.Ordinal) || string.Equals(instruction?.Op, "call", StringComparison.Ordinal) || string.Equals(instruction?.Op, "calli", StringComparison.Ordinal)))
@@ -4363,11 +4334,6 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		    builder.AppendLine(indentation + "    }");
 		}
 		string args = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
-		// A2: stub_definition calls always need generic_context (pass 0 as fallback)
-		if (invocationTarget.TargetSymbol?.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal) == true)
-		{
-		    args = string.IsNullOrEmpty(args) ? "0" : args + ", 0";
-		}
 		// BS-5: Validate external runtime table index before dispatch.
 		builder.AppendLine($"{indentation}    if ({idx} < 0 || {idx} >= kChaosExternalRuntimeCount) {{");
 		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL(); // external runtime table index {idx} out of range");
@@ -4377,12 +4343,11 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 		string escapedSubjectId = EscapeCppStringLiteral(invocationTarget.TargetSymbol);
 		builder.AppendLine($"{indentation}        const auto chaos_ret = ChaosExternalRuntimeFallback(\"" + escapedSubjectId + "\");");
 		EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_ret", indentation + "        ");
-		if (_currentMethodArtifact?.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
+		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		    builder.AppendLine($"{indentation}        return;");
 		else
 		    builder.AppendLine($"{indentation}        return {{}};");
 		builder.AppendLine($"{indentation}    }}");
-		// chaos_extext_end emitted before DirectNativeSymbol section above — avoids C2362
 		if (string.Equals(returnType, "void", StringComparison.Ordinal))
 		{
 			builder.AppendLine($"{indentation}    reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
@@ -4392,6 +4357,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 			builder.AppendLine($"{indentation}    const auto chaos_result = reinterpret_cast<{fnType}>(kChaosExternalRuntimeFnTable[{idx}])({args});");
 			EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_result", indentation + "    ");
 		}
+		builder.AppendLine($"{indentation}    chaos_extext_end: ;");
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -4424,19 +4390,17 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 			builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(paramAbis[i], $"chaos_raw_arg_{i}")};");
 		}
 		// Null check
-		// Declare result before null check to avoid MSVC C2362 (goto over init)
-		string _callvirtDecl = !string.Equals(returnType, "void", StringComparison.Ordinal)
-			? $"{indentation}    {returnType} chaos_callvirt_result{{}};"
-			: null;
-		if (_callvirtDecl != null)
-			builder.AppendLine(_callvirtDecl);
 		builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
 		builder.AppendLine($"{indentation}        goto chaos_vcall_end_{instruction.IlOffset};");
 		builder.AppendLine($"{indentation}    }}");
-		// VTable resolve - always through type_info->vtable_array
+		// VTable resolve ¡ª always through type_info->vtable_array (unified ThinLockableHeader)
 		string vtableSource = $"chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array";
+		if (!string.Equals(returnType, "void", StringComparison.Ordinal))
+		{
+			builder.AppendLine($"{indentation}    {returnType} chaos_callvirt_result{{}};");
+		}
 		// VTable dispatch
 		if (_vtableSlotMap != null && _vtableSlotMap.TryGetValue(vtableSlotSig, out int vtableSlot))
 		{
@@ -4573,11 +4537,6 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 				? (callerIsShared ? "chaos_generic_context" : "0")
 				: (callerIsShared ? ", chaos_generic_context" : ", 0");
 		}
-			else if (nativeTarget.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal))
-			{
-				// Cross-module stub: non-shared callers pass 0 as context.
-				hpCtxArg = string.IsNullOrEmpty(hpArgList) ? "0" : ", 0";
-			}
 		string callExpr = $"{nativeTarget}({hpArgList}{hpCtxArg})";
 		if (hasReturn)
 		{
@@ -4648,6 +4607,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 					"ChaosWrapMul" => $"({_lLoad} * {_rLoad})",
 					"ChaosDiv"     => $"({_lLoad} / {_rLoad})",
 					"ChaosRem"     => $"fmod({_lLoad}, {_rLoad})",
+				_                => throw new NotSupportedException()
 				};
 				EmitEvalStackPush(builder, indentation, floatExpr, SlotType.Float64);
 			}
@@ -5236,7 +5196,7 @@ string value = targetSymbol + "(" + argList + genericCtxArg + ")";
 					=> $"(({rawValueExpr} < 0 || {rawValueExpr} > 0xFFFF) ? (chaos_runtime_get_abi_v0()->raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
 				"System.Boolean" or "System.DateTime"
 					=> $"(chaos_runtime_get_abi_v0()->raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0))",
-				_ => null
+				_ => null!
 			};
 
 			if (inlineExpr != null)

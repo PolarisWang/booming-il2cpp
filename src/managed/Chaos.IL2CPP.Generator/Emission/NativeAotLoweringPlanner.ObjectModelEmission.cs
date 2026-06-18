@@ -530,10 +530,12 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string ifaceId in interfaceTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
 		{
 			ulong ifaceStableId = ComputeStableTypeId(ifaceId);
-
+			builder.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
+			builder.Append(GetNativeTypeIdSymbol(ifaceId));
+			builder.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
+			builder.Append(ifaceStableId.ToString());
+			builder.AppendLine("ULL);");
 		}
-		var emittedMethodTableSymbols = new HashSet<string>(StringComparer.Ordinal);
-
 		// ── Value type MethodTable definitions (must precede reference types,
 		// because reference types may reference value type MethodTable symbols
 		// as their parent, e.g., AssertionException → System_Exception) ──
@@ -551,20 +553,12 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
-			// Skip interface types - their MethodTable is in ref type section
-			if (interfaceTypeSubjectIds.Contains(item3))
-				continue;
-			// Deduplicate: skip if MethodTable symbol was already emitted
-			// (can happen when multiple assemblies define the same type).
-			var mtSym = GetNativeMethodTableSymbol(item3);
-			if (!emittedMethodTableSymbols.Add(mtSym))
-				continue;
 			ulong stableId = ComputeStableTypeId(item3);
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("MethodTable ");
-				handler.AppendFormatted(mtSym);
+				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
 				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};");
@@ -573,7 +567,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-
+				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_UINT64 ");
+				handler.AppendFormatted(GetNativeTypeIdSymbol(item3));
+				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_UINT64>(");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(");");
 				stringBuilder.AppendLine(ref handler);
 			}
 			num++;
@@ -616,8 +614,7 @@ public sealed partial class NativeAotLoweringPlanner
 					var stub = TryGetInstantiationStubSymbol(entry);
 					if (stub != null && externDeclared.Add(stub))
 					{
-						bool stubNeedsCtx = (_stubNeedsContext.TryGetValue(stub, out bool nc) && nc)
-							|| stub.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal);
+						bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
 						builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
 					}
 				}
@@ -704,13 +701,9 @@ public sealed partial class NativeAotLoweringPlanner
 					if (TypeHasFinalizer(item))
 					    flags |= 0x04; // kTypeInfoHasFinalizer
 				_vtableLengths.TryGetValue(item, out int vtLen);
-			// Deduplicate: skip if MethodTable symbol was already emitted
-			var mtSym2 = GetNativeMethodTableSymbol(item);
-			if (!emittedMethodTableSymbols.Add(mtSym2))
-				continue;
-			// MethodTable = hot(32B) + warm(32B) flat initializer
-			handler.AppendLiteral("MethodTable ");
-			handler.AppendFormatted(mtSym2);
+				// MethodTable = hot(32B) + warm(32B) flat initializer
+				handler.AppendLiteral("MethodTable ");
+				handler.AppendFormatted(GetNativeMethodTableSymbol(item));
 				handler.AppendLiteral(" = {");
 				handler.AppendFormatted(parentExpr);
 				handler.AppendLiteral(", ");
@@ -734,23 +727,23 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-
+				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_UINT64 ");
+				handler.AppendFormatted(GetNativeTypeIdSymbol(item));
+				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_UINT64>(");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(");");
 				stringBuilder.AppendLine(ref handler);
 			}
 			num++;
 		}
 		foreach (string item2 in interfaceTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
-			// Deduplicate: skip if MethodTable symbol was already emitted
-			var mtSym3 = GetNativeMethodTableSymbol(item2);
-			if (!emittedMethodTableSymbols.Add(mtSym3))
-				continue;
 			ulong stableId = ComputeStableTypeId(item2);
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("MethodTable ");
-				handler.AppendFormatted(mtSym3);
+				handler.AppendFormatted(GetNativeMethodTableSymbol(item2));
 				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
 				handler.AppendLiteral(", 0u, 32, 3, 0, nullptr, nullptr, 0, 0, 0, 0};");
@@ -789,16 +782,12 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				ulong sid = ComputeStableTypeId(iface);
 				StringBuilder sb = builder;
-
+				sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
+				sb.Append(GetNativeTypeIdSymbol(iface));
+				sb.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
+				sb.Append(sid.ToString());
+				sb.AppendLine("ULL);");
 			}
-		}
-		var _emittedMT = new HashSet<string>(StringComparer.Ordinal);
-		// Pre-populate with MethodTable symbols from the Scriban TypeInfo template
-		// (already emitted before this loop, contains all _referenceTypeBaseSubjectIds types).
-		if (_referenceTypeBaseSubjectIds != null)
-		{
-			foreach (var kv in _referenceTypeBaseSubjectIds)
-				emittedMethodTableSymbols.Add(GetNativeMethodTableSymbol(kv.Key));
 		}
 		foreach (string item3 in sortedHashSet3)
 		{
@@ -846,10 +835,8 @@ public sealed partial class NativeAotLoweringPlanner
 				ifaceMapExpr = "nullptr";
 				ifaceCountExpr = "0";
 			}
-			if (!valueTypeSubjectIds.Contains(item3) && !referenceTypeSubjectIds.Contains(item3) && !interfaceTypeSubjectIds.Contains(item3))
+			if (!valueTypeSubjectIds.Contains(item3) && !referenceTypeSubjectIds.Contains(item3))
 			{
-				var mtSym = GetNativeMethodTableSymbol(item3);
-				if (!emittedMethodTableSymbols.Add(mtSym)) continue;
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
 				handler.AppendLiteral("MethodTable ");
@@ -869,7 +856,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-
+				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_UINT64 ");
+				handler.AppendFormatted(GetNativeBoxTypeIdSymbol(item3));
+				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_UINT64>(");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(");");
 				stringBuilder.AppendLine(ref handler);
 			}
 			num++;
@@ -1382,14 +1373,6 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			// ExceptionHandlers not directly on AotCoreIrMethodArtifact;
 			// handled indirectly via callee-based type discovery above.
 		}
-
-		// Re-capture hashSet3 additions made during the post-scan above.
-		// The initial UnionWith at line 1303 ran before the post-scan added
-		// cross-assembly type references to hashSet3; without this second
-		// merge, types from non-primary assemblies (Chaos.TestFramework.Sdk,
-		// System.Collections) would be missing from _allEmittedTypeSubjectIds,
-		// causing their chaos_boxed_type_id_* constants to be undeclared (C2065).
-		_allEmittedTypeSubjectIds.UnionWith(hashSet3);
 
 		foreach (var m in _methodsBySubjectId.Values)
 		{

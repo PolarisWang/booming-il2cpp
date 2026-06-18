@@ -360,7 +360,7 @@ public sealed class NativeAotEmitter
         sb.Append("    void*     args_buf,\n");
         sb.Append("    void*     ret_buf) noexcept;\n");
         sb.Append("\n#pragma warning(push)\n");
-        sb.Append("#pragma warning(disable: 4065 4244 2370 2371 2374)\n");
+        sb.Append("#pragma warning(disable: 4065 4244)\n");
         sb.Append("#ifdef __GNUC__\n");
         sb.Append("#pragma GCC diagnostic push\n");
         sb.Append("#pragma GCC diagnostic ignored \"-Wunused-variable\"\n");
@@ -896,17 +896,20 @@ public sealed class NativeAotEmitter
 		foreach (Match m in declRx.Matches(text))
 		{
 			string sv = m.Value;
+			// Skip declarations with empty parens "()" — they are stubs with
+			// wrong arg count and need to be replaced by corrected declarations.
 			int nextIdx = m.Index + m.Length;
-			// Skip declarations with empty parens unless they are DEFINITIONS
-			// (i.e., have a function body).  Shape-registry definitions with
-			// empty parens are legitimate  only stub declarations need fixing.
-			if (nextIdx < text.Length && text[nextIdx] == ')')
+			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
+			// Also count params in declaration — if they differ from call site, skip it
+			int closeParen = text.IndexOf(')', nextIdx);
+			if (closeParen > nextIdx)
 			{
-				// Peek past the () to distinguish definition {...} from declaration ;
-				int afterParen = text.IndexOfAny(new[] { ';', '{' }, nextIdx);
-				if (afterParen < 0 || text[afterParen] == ';')
-					continue;  // declaration stub  skip, will be replaced below
+				string declArgs = text.Substring(nextIdx, closeParen - nextIdx);
+				int declParamCount = declArgs.Length > 0 ? declArgs.Split(',').Length : 0;
+				// Count args at call site (first non-declaration call)
+				// If declaration param count != call site arg count, skip it
 			}
+			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
 			foreach (var s in missing.ToList())
 				if (sv.Contains(s)) missing.Remove(s);
 		}
@@ -915,13 +918,7 @@ public sealed class NativeAotEmitter
 		stub.AppendLine("// ── External runtime stubs (post-emission) ──");
 		foreach (var sym in missing.OrderBy(s => s))
 		{
-			// Skip chaos_stub_definition_* symbols — they are declared in the
-			// shared header by BuildMethodDeclarations (native-aot.generated.header.h),
-			// not visible in the .cpp text scanned by this post-emission pass.
-			// Generating a second declaration here would cause C2733.
-			if (sym.StartsWith("chaos_stub_definition_", StringComparison.Ordinal))
-			    continue;
-			int argCount = 1;
+			int argCount = 0;
 			// Count arguments from first call site
 			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
 				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
@@ -945,6 +942,7 @@ public sealed class NativeAotEmitter
 						else if (c == ',' && depth == 0) argCount++;
 					}
 				}
+				argCount++;
 			}
 			stub.Append("extern CHAOS_IL2CPP_INTPTR ");
 			stub.Append(sym);
@@ -970,7 +968,7 @@ public sealed class NativeAotEmitter
 		string postText = sb.ToString();
 		foreach (var sym in missing.OrderBy(s => s))
 		{
-			int argCount = 1;
+			int argCount = 0;
 			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
 				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
 			while (callMatch.Success)
@@ -1002,6 +1000,7 @@ public sealed class NativeAotEmitter
 						else if (c == ',' && depth == 0) argCount++;
 					}
 				}
+				argCount++;
 			}
 			string wrongDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
 			string wrongDeclC = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";

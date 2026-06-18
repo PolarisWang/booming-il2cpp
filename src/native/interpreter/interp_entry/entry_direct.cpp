@@ -174,6 +174,7 @@ bool OptimizeToTier2(PatchMethod* pm) noexcept {
     if (pm == nullptr) return false;
     auto* orig_ir = static_cast<interpreter::IRMethod*>(pm->cached_ir);
     if (orig_ir == nullptr) return false;
+    if (!orig_ir->seh_clauses.empty()) return false;
     if (orig_ir->instructions.size() <= 2) return false;
 
     auto cloned_ir = CloneIRMethod(*orig_ir);

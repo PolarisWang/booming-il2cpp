@@ -1,3 +1,4 @@
+// ABI exports: extern "C" linkage for managed/NativeAOT callability.
 #ifndef CHAOS_IL2CPP_CHAOS_RUNTIME_HOST_H_
 #define CHAOS_IL2CPP_CHAOS_RUNTIME_HOST_H_
 
@@ -39,6 +40,7 @@
 #include "gc_helpers.h"
 #include "runtime_stubs/misc_stubs.h"
 #include "runtime_stubs/array_stubs.h"
+#include "runtime_stubs/string_stubs.h"
 
 // For HotpatchNameRegistry lookup in OverrideUnresolvedExternalRuntimeEntries
 #include <hotpatch_table.h>
@@ -64,8 +66,7 @@ extern "C" void ChaosRegisterGcLayouts();
 // ── ChaosResolveExternalRuntimeFnTable forward declaration ─────────────────
 // Defined in the bootstrap library.  Resolves external runtime table entries
 // by subject ID through the HotpatchNameRegistry.
-extern "C" void ChaosResolveExternalRuntimeFnTable(
-    void* table, const char** subjects, int32_t count);
+extern "C" void ChaosResolveExternalRuntimeFnTable(void* table, const char** subjects, int32_t count);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // ChaosRuntimeHost
@@ -79,9 +80,7 @@ public:
     ChaosRuntimeHost(const ChaosRuntimeHost&) = delete;
     ChaosRuntimeHost& operator=(const ChaosRuntimeHost&) = delete;
 
-    ~ChaosRuntimeHost() noexcept {
-        Shutdown();
-    }
+    ~ChaosRuntimeHost() noexcept { Shutdown(); }
 
     /// Initialize the full C# execution environment:
     ///   1. Get codegen bridge
@@ -95,11 +94,8 @@ public:
     ///
     /// @param host_name    Optional diagnostic name for this host instance.
     /// @return true on success, false on failure (details printed to stderr).
-    bool Initialize(
-        const char* host_name = "chaos-runtime-host",
-        RuntimeState** out_runtime_state = nullptr,
-        ThreadState** out_thread_state = nullptr) noexcept
-    {
+    bool Initialize(const char* host_name = "chaos-runtime-host", RuntimeState** out_runtime_state = nullptr,
+                    ThreadState** out_thread_state = nullptr) noexcept {
         // Step 1: Get codegen bridge.
         auto* bridge = chaos_codegen_get_bridge_v0();
         if (!bridge) {
@@ -127,8 +123,7 @@ public:
         RuntimeState* rs = nullptr;
         RuntimeStatus status = abi->runtime_init(&init_params, &config, &rs);
         if (status != CHAOS_RUNTIME_STATUS_OK || rs == nullptr) {
-            std::fprintf(stderr, "[ChaosRuntimeHost] runtime_init failed (status=%d)\n",
-                         static_cast<int>(status));
+            std::fprintf(stderr, "[ChaosRuntimeHost] runtime_init failed (status=%d)\n", static_cast<int>(status));
             return false;
         }
         r_ = rs;
@@ -138,8 +133,7 @@ public:
         ThreadState* ts = nullptr;
         status = abi->thread_attach(r_, &ts);
         if (status != CHAOS_RUNTIME_STATUS_OK || ts == nullptr) {
-            std::fprintf(stderr, "[ChaosRuntimeHost] thread_attach failed (status=%d)\n",
-                         static_cast<int>(status));
+            std::fprintf(stderr, "[ChaosRuntimeHost] thread_attach failed (status=%d)\n", static_cast<int>(status));
             Shutdown();
             return false;
         }
@@ -151,8 +145,10 @@ public:
         // Step 5: Register JIT methods (no-op in AOT mode).
         ChaosJitRegisterAll();
 
-        if (out_runtime_state) *out_runtime_state = r_;
-        if (out_thread_state) *out_thread_state = t_;
+        if (out_runtime_state)
+            *out_runtime_state = r_;
+        if (out_thread_state)
+            *out_thread_state = t_;
 
         return true;
     }
@@ -160,29 +156,25 @@ public:
     /// Register a codegen module by calling register_codegen + bootstrap_runtime.
     /// Must be called AFTER Initialize() but BEFORE invoking any generated methods.
     /// @return true on success.
-    bool RegisterModule(
-        const CodeRegistrationV0* code_reg,
-        const MetadataRegistrationV0* metadata_reg,
-        const CodegenRegistrationOptionsV0* options) noexcept
-    {
+    bool RegisterModule(const CodeRegistrationV0* code_reg, const MetadataRegistrationV0* metadata_reg,
+                        const CodegenRegistrationOptionsV0* options) noexcept {
         if (!r_) {
             std::fprintf(stderr, "[ChaosRuntimeHost] RegisterModule called before Initialize\n");
             return false;
         }
         auto* bridge = chaos_codegen_get_bridge_v0();
-        if (!bridge) return false;
+        if (!bridge)
+            return false;
 
         BridgeStatus bs = bridge->register_codegen(code_reg, metadata_reg, options);
         if (bs != CHAOS_BRIDGE_STATUS_OK) {
-            std::fprintf(stderr, "[ChaosRuntimeHost] register_codegen failed (status=%d)\n",
-                         static_cast<int>(bs));
+            std::fprintf(stderr, "[ChaosRuntimeHost] register_codegen failed (status=%d)\n", static_cast<int>(bs));
             return false;
         }
 
         bs = bridge->bootstrap_runtime();
         if (bs != CHAOS_BRIDGE_STATUS_OK) {
-            std::fprintf(stderr, "[ChaosRuntimeHost] bootstrap_runtime failed (status=%d)\n",
-                         static_cast<int>(bs));
+            std::fprintf(stderr, "[ChaosRuntimeHost] bootstrap_runtime failed (status=%d)\n", static_cast<int>(bs));
             return false;
         }
 
@@ -223,7 +215,8 @@ public:
     /// Call this AFTER RegisterModule() and any manual interop stub registration,
     /// but BEFORE any test dispatch.
     void OverrideUnresolvedExternalRuntimeEntries() noexcept {
-        if (kChaosExternalRuntimeCount <= 0) return;
+        if (kChaosExternalRuntimeCount <= 0)
+            return;
         // Track overridden entries for hotpatch fixup below.
         // Heap allocation is unavailable in this noexcept context (no throw),
         // and kChaosExternalRuntimeCount is typically <100.
@@ -233,9 +226,11 @@ public:
         int overridden = 0;
         for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
             void* fn = kChaosExternalRuntimeFnTable[i];
-            if (fn == nullptr) continue;
+            if (fn == nullptr)
+                continue;
             const char* sid = kChaosExternalRuntimeSubjects[i];
-            if (sid == nullptr || sid[0] == '\0') continue;
+            if (sid == nullptr || sid[0] == '\0')
+                continue;
 
             // Check the assembly prefix (everything before '/').
             // Entries from assemblies that the AOT codegen cannot fully compile
@@ -253,22 +248,30 @@ public:
             // Everything else (System.Linq/, System.Collections.Generic/, etc.)
             // is a codegen external-runtime stub that will crash on call.
             const char* slash = std::strchr(sid, '/');
-            if (slash == nullptr) continue;
+            if (slash == nullptr)
+                continue;
             ptrdiff_t asm_len = slash - sid;
-            if (asm_len == 15 && std::strncmp(sid, "CombinedSubjects", 15) == 0) continue;
-            if (asm_len == 23 && std::strncmp(sid, "System.Private.CoreLib", 23) == 0) continue;
-            if (asm_len == 24 && std::strncmp(sid, "Chaos.TestFramework.Sdk", 24) == 0) continue;
+            if (asm_len == 15 && std::strncmp(sid, "CombinedSubjects", 15) == 0)
+                continue;
+            if (asm_len == 23 && std::strncmp(sid, "System.Private.CoreLib", 23) == 0)
+                continue;
+            if (asm_len == 24 && std::strncmp(sid, "Chaos.TestFramework.Sdk", 24) == 0)
+                continue;
 
-            // This entry is from an untrusted assembly - replace with nullptr
+            // This entry is from an untrusted assembly — replace with nullptr
             // so FillExternalRuntimeStubs installs a safe return-0 stub.
-            // kChaosExternalRuntimeFnTable may be in a read-only section (.rdata).
-            // Use VirtualProtect to make the page writable before writing.
+            // kChaosExternalRuntimeFnTable may be in a read-only section (.rdata)
+            // on Windows.  On Linux/macOS the non-const array lives in .data (writable).
+#if defined(_WIN32)
             DWORD _cp_old = 0;
             ::VirtualProtect(&kChaosExternalRuntimeFnTable[i], sizeof(void*),
                              PAGE_READWRITE, &_cp_old);
+#endif
             kChaosExternalRuntimeFnTable[i] = nullptr;
+#if defined(_WIN32)
             ::VirtualProtect(&kChaosExternalRuntimeFnTable[i], sizeof(void*),
                              _cp_old, &_cp_old);
+#endif
             if (overridden < kMaxOverrides) {
                 overridden_subjects[overridden] = sid;
                 overridden_indices[overridden] = i;
@@ -298,28 +301,33 @@ public:
             int patched = 0;
             for (int32_t oi = 0; oi < overridden; oi++) {
                 auto* safe_fn = kChaosExternalRuntimeFnTable[overridden_indices[oi]];
-                if (safe_fn == nullptr) continue;
+                if (safe_fn == nullptr)
+                    continue;
 
                 auto* sid = overridden_subjects[oi];
-                if (sid == nullptr || sid[0] == '\0') continue;
+                if (sid == nullptr || sid[0] == '\0')
+                    continue;
 
                 // Parse subject ID: "Assembly/Namespace.Type::Method:ReturnType(Params)"
                 const char* p = sid;
 
                 // Skip assembly prefix (everything up to and including '/')
                 const char* slash = std::strchr(p, '/');
-                if (slash == nullptr) continue;
+                if (slash == nullptr)
+                    continue;
                 p = slash + 1;
 
                 // Find "::" to split type from method
                 const char* colon2 = std::strstr(p, "::");
-                if (colon2 == nullptr) continue;
+                if (colon2 == nullptr)
+                    continue;
 
                 // Type part: find the last '.' before "::" for type name
                 const char* type_start = p;
                 const char* type_end = colon2;
                 for (const char* cp = p; cp < colon2; ++cp) {
-                    if (*cp == '.') type_start = cp + 1;
+                    if (*cp == '.')
+                        type_start = cp + 1;
                 }
 
                 // Build ns string (everything before type_start, minus trailing dot)
@@ -334,26 +342,29 @@ public:
                 const char* method_end = std::strchr(p, '(');
                 if (method_end == nullptr)
                     method_end = std::strchr(p, ':');
-                if (method_end == nullptr) continue;
+                if (method_end == nullptr)
+                    continue;
                 std::string method_name(p, method_end - p);
 
                 // Strip generic suffix: "MethodName<...>" → "MethodName"
                 auto gt = method_name.find('<');
-                if (gt != std::string::npos) method_name.resize(gt);
+                if (gt != std::string::npos)
+                    method_name.resize(gt);
 
-                if (type_name.empty() || method_name.empty()) continue;
+                if (type_name.empty() || method_name.empty())
+                    continue;
 
                 // Look up in HotpatchNameRegistry: composite key = (module_id<<32 | token)
-                uint64_t composite = registry.LookupMethod(
-                    ns.empty() ? nullptr : ns.c_str(),
-                    type_name.c_str(),
-                    method_name.c_str());
-                if (composite == 0) continue;
+                uint64_t composite =
+                    registry.LookupMethod(ns.empty() ? nullptr : ns.c_str(), type_name.c_str(), method_name.c_str());
+                if (composite == 0)
+                    continue;
 
                 uint32_t mod = chaos::il2cpp::runtime_core::ExtractModuleId(composite);
                 uint32_t tok = chaos::il2cpp::runtime_core::ExtractToken(composite);
                 uint32_t slot = registry.TokenToSlot(mod, tok);
-                if (slot == ~0u) continue;
+                if (slot == ~0u)
+                    continue;
 
                 auto* entry = registry.GetDispatchEntryBySlot(mod, slot);
                 if (entry != nullptr && entry->direct_ptr != safe_fn) {
@@ -362,8 +373,7 @@ public:
                 }
             }
             if (patched > 0) {
-                std::printf("  [aggregate] Patched %d/%d hotpatch entries -> safe stubs\n",
-                            patched, overridden);
+                std::printf("  [aggregate] Patched %d/%d hotpatch entries -> safe stubs\n", patched, overridden);
             }
         }
     }
@@ -386,42 +396,61 @@ private:
     /// Fill remaining null external runtime table entries with safe stubs
     /// so generated code does not crash on null pointers.
     static void FillExternalRuntimeStubs() {
-        // Ensure table page is writable (may be in .rdata section).
+        // kChaosExternalRuntimeFnTable may be in a read-only section (.rdata)
+        // on Windows.  Make the entire table writable before writing.
+#if defined(_WIN32)
         DWORD _frs_old = 0;
         ::VirtualProtect(kChaosExternalRuntimeFnTable,
             static_cast<CHAOS_IL2CPP_SIZE>(kChaosExternalRuntimeCount) * sizeof(void*),
             PAGE_READWRITE, &_frs_old);
+#endif
         for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
-            if (kChaosExternalRuntimeFnTable[i] != nullptr) continue;
+            if (kChaosExternalRuntimeFnTable[i] != nullptr)
+                continue;
             const char* sub = kChaosExternalRuntimeSubjects[i];
-            if (sub == nullptr || sub[0] == '\0') continue;
+            if (sub == nullptr || sub[0] == '\0')
+                continue;
 
             // Types (no "::" — just a type name like System.Int32) are not callable.
-            if (std::strstr(sub, "::") == nullptr) continue;
+            if (std::strstr(sub, "::") == nullptr)
+                continue;
 
             // Known managed GC methods — wire real runtime implementations.
             if (std::strstr(sub, "System.GC::Collect:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){ chaos_gc_collect(); });
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() {
+                    chaos_gc_collect();
+                });
                 continue;
             }
             if (std::strstr(sub, "System.GC::WaitForPendingFinalizers:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](){ chaos_gc_wait_for_pending_finalizers(); });
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() {
+                    chaos_gc_wait_for_pending_finalizers();
+                });
                 continue;
             }
             if (std::strstr(sub, "System.GC::GetGeneration:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR obj) -> CHAOS_IL2CPP_INT32 { return ChaosGcGetGeneration(obj); });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR obj) -> CHAOS_IL2CPP_INT32 {
+                        return ChaosGcGetGeneration(obj);
+                    });
                 continue;
             }
             if (std::strstr(sub, "System.GC::CollectionCount:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INT32 generation) -> CHAOS_IL2CPP_INT32 { return chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(generation); });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INT32 generation) -> CHAOS_IL2CPP_INT32 {
+                        return chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(generation);
+                    });
                 continue;
             }
 
             // Array.CreateInstance 2D — return pseudo-pointer with hash 56793269.
             if (std::strstr(sub, "System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1, CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {
-                    return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1), static_cast<CHAOS_IL2CPP_INT32>(len2));
-                });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1,
+                                                CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {
+                        return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1),
+                                                          static_cast<CHAOS_IL2CPP_INT32>(len2));
+                    });
                 continue;
             }
 
@@ -430,8 +459,7 @@ private:
             if (std::strstr(sub, "Unsafe::CopyBlock:")) {
                 kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(
                     +[](CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INTPTR src, CHAOS_IL2CPP_INTPTR count) {
-                        std::memcpy(reinterpret_cast<void*>(dest),
-                                    reinterpret_cast<const void*>(src),
+                        std::memcpy(reinterpret_cast<void*>(dest), reinterpret_cast<const void*>(src),
                                     static_cast<size_t>(count));
                     });
                 continue;
@@ -471,7 +499,10 @@ private:
             // ── Commonly-used framework stubs ──
             // String comparison operators — return false
             if (std::strstr(sub, "::op_Inequality:System.Boolean(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 {
+                        return 0;
+                    });
                 continue;
             }
             // IEnumerable::GetEnumerator — return null sentinel
@@ -484,17 +515,23 @@ private:
             }
             // IEnumerator::MoveNext — return false (stop iteration)
             if (std::strstr(sub, "::MoveNext:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 {
+                        return 0;
+                    });
                 continue;
             }
             // IEnumerator::get_Current — return null
             if (std::strstr(sub, "IEnumerator::get_Current:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
+                        return 0;
+                    });
                 continue;
             }
             // IDisposable::Dispose — no-op
             if (std::strstr(sub, "IDisposable::Dispose:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]{});
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[] {});
                 continue;
             }
             // EqualityComparer<T>::get_Default — return shared sentinel
@@ -507,53 +544,111 @@ private:
             }
             // EqualityComparer<T>::Equals — return false
             if (std::strstr(sub, "EqualityComparer<") && std::strstr(sub, "::Equals:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 {
+                        return 0;
+                    });
                 continue;
             }
             // Action::Invoke — no-op
             if (std::strstr(sub, "Action::Invoke:")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]{});
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[] {});
                 continue;
             }
             // Func/Action/Action<T>/Comparison/Predicate .ctor — no-op (ctor)
             if (std::strstr(sub, "::.ctor:") && std::strstr(sub, "::.ctor:System.Void(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR){});
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) {});
                 continue;
             }
             // Assert::s_exitCode — return 0
             if (std::strstr(sub, "Assert::s_exitCode")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INT32 { return 0; });
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INT32 {
+                    return 0;
+                });
                 continue;
             }
-            // Console::get_Error, TextWriter::WriteLine, String::Concat — already have
+            // ── String direct-call stubs (P4b) ──
+            // Real implementations instead of generic zero-return fallbacks.
+            // These use chaos_managed_string layout matching AOT codegen expectations.
+            // String::get_Length → Int32
+            if (std::strstr(sub, "String::get_Length:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+ChaosStringGetLength);
+                continue;
+            }
+            // String::get_Chars → Char(Int32)
+            if (std::strstr(sub, "String::get_Chars:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+ChaosStringGetChars);
+                continue;
+            }
+            // String::IsNullOrEmpty → Boolean(String)
+            if (std::strstr(sub, "String::IsNullOrEmpty:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+ChaosStringIsNullOrEmpty);
+                continue;
+            }
+            // String::Concat(System.String,System.String) — exactly 2-string overload
+            if (std::strstr(sub, "String::Concat:System.String(System.String,System.String)")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+ChaosStringConcat2);
+                continue;
+            }
+
+            // Console::get_Error, TextWriter::WriteLine — already have
             // compile-time entries in kChaosExternalRuntimeFnTable, skip.
 
             // Parse return type from subject ID pattern:
             //   "Namespace.Type::Method:ReturnType(Params)"
             if (std::strstr(sub, ":System.Void(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]{});
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[] {});
             } else if (std::strstr(sub, ":System.Int32(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 {
+                        return 0;
+                    });
             } else if (std::strstr(sub, ":System.Int64(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT64 { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT64 {
+                        return 0;
+                    });
             } else if (std::strstr(sub, ":System.Boolean(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 {
+                        return 0;
+                    });
             } else if (std::strstr(sub, ":System.String(")) {
                 // String-returning methods — return null (0 is a valid null string ref)
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
+                        return 0;
+                    });
             } else if (std::strstr(sub, ":System.Object(")) {
                 // Object-returning methods — return null
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
+                        return 0;
+                    });
             } else if (std::strstr(sub, ":System.Byte(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 {
+                        return 0;
+                    });
             } else if (std::strstr(sub, ":System.Char(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INT32 {
+                        return 0;
+                    });
             } else if (std::strstr(sub, ":System.Single(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> double { return 0.0; });
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> double {
+                    return 0.0;
+                });
             } else if (std::strstr(sub, ":System.Double(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> double { return 0.0; });
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> double {
+                    return 0.0;
+                });
             } else if (std::strstr(sub, ":System.Decimal(")) {
-                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR {
+                        return 0;
+                    });
             } else if (std::strstr(sub, "::get_Default:")) {
                 // Generic get_Default (for types like EqualityComparer<T>, etc.)
                 kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[]() -> CHAOS_IL2CPP_INTPTR {
@@ -569,6 +664,12 @@ private:
             }
         }
     }
+#if defined(_WIN32)
+    // Restore original page protection after writing.
+    ::VirtualProtect(kChaosExternalRuntimeFnTable,
+        static_cast<CHAOS_IL2CPP_SIZE>(kChaosExternalRuntimeCount) * sizeof(void*),
+        _frs_old, &_frs_old);
+#endif
 };
 
-#endif  // CHAOS_IL2CPP_CHAOS_RUNTIME_HOST_H_
+#endif // CHAOS_IL2CPP_CHAOS_RUNTIME_HOST_H_

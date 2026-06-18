@@ -1454,7 +1454,6 @@ public sealed partial class NativeAotLoweringPlanner
 							["type_id_symbol"] = GetNativeTypeIdSymbol(entry.DeclaringTypeSubjectId),
 							["type_info_symbol"] = GetNativeTypeInfoSymbol(entry.DeclaringTypeSubjectId),
 							["ctor_symbol"] = resolvedCtorTarget.TargetSymbol,
-							["is_stub"] = resolvedCtorTarget.TargetSymbol?.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal) == true,
 						};
 					})
 					.Where(model => model is not null)

@@ -1,6 +1,3 @@
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using Chaos.IL2CPP.Driver;
 
@@ -81,34 +78,6 @@ public sealed class CodegenOrchestrator
                         args.Add(fullPath);
                     }
                 }
-            }
-
-            // ── BCL assembly auto-resolution ──
-            // Scan the subjects DLL for references to BCL assemblies and add
-            // their specific DLLs as --additional-assembly. This ensures BCL
-            // methods (System.Linq, etc.) are AOT-compiled instead of routed
-            // through ChaosExternalRuntimeFallback, without adding the entire
-            // .NET runtime dir (182 DLLs / ~910K methods).
-            if (assemblyPaths.Count > 0)
-            {
-                try
-                {
-                    var subjectsPath = Path.GetFullPath(assemblyPaths[0]);
-                    var runtimeDir = FindNetCoreRuntimeDirectory();
-                    if (runtimeDir != null)
-                    {
-                        foreach (var bclName in ScanAssemblyReferences(subjectsPath))
-                        {
-                            var bclPath = Path.Combine(runtimeDir, bclName + ".dll");
-                            if (File.Exists(bclPath))
-                            {
-                                args.Add("--additional-assembly");
-                                args.Add(bclPath);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex) { Console.Error.WriteLine($"[CodegenOrchestrator] BCL resolution error: {ex.Message}"); }
             }
 
             args.Add("--sdk-out");
@@ -206,106 +175,5 @@ public sealed class CodegenOrchestrator
                 Error = ex.Message,
             };
         }
-    }
-
-    /// <summary>
-    /// Find the .NET Core runtime directory containing BCL assemblies.
-    /// Resolves from the currently running .NET runtime.
-    /// </summary>
-    private static string? FindNetCoreRuntimeDirectory()
-    {
-        try
-        {
-            // Use System.Runtime.InteropServices to find the runtime path
-            var runtimeDir = System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
-            if (runtimeDir != null && Directory.Exists(runtimeDir))
-                return runtimeDir;
-        }
-        catch (Exception _ex)
-        {
-            Console.Error.WriteLine($"[CodegenOrchestrator] RuntimeEnvironment.GetRuntimeDirectory failed: {_ex.Message}");
-        }
-
-        // Fallback: search common install locations (cross-platform)
-        string dotnetRoot = Environment.GetEnvironmentVariable("DOTNET_ROOT") ?? "";
-        var candidates = new[]
-        {
-            // Windows (ProgramFiles)
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
-                "dotnet", "shared", "Microsoft.NETCore.App"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
-                "dotnet", "shared", "Microsoft.NETCore.App"),
-            // Linux default
-            "/usr/share/dotnet/shared/Microsoft.NETCore.App",
-            "/usr/lib/dotnet/shared/Microsoft.NETCore.App",
-            // macOS (Homebrew)
-            "/usr/local/share/dotnet/shared/Microsoft.NETCore.App",
-        };
-        if (!string.IsNullOrEmpty(dotnetRoot))
-            candidates = new[] { Path.Combine(dotnetRoot, "shared", "Microsoft.NETCore.App") }
-                .Concat(candidates).ToArray();
-
-        foreach (var baseDir in candidates)
-        {
-            if (!Directory.Exists(baseDir)) continue;
-            // Pick the highest version directory
-            var version = Directory.GetDirectories(baseDir)
-                .Select(Path.GetFileName)
-                .Where(v => Version.TryParse(v, out _))
-                .OrderByDescending(v => Version.Parse(v))
-                .FirstOrDefault();
-            if (version != null)
-                return Path.Combine(baseDir, version);
-        }
-        return null;
-    }
-
-    /// <summary>
-    /// Scan a managed assembly's metadata for references to BCL assemblies.
-    /// Returns assembly names (without .dll extension) that are known BCL assemblies.
-    /// </summary>
-    private static IEnumerable<string> ScanAssemblyReferences(string assemblyPath)
-    {
-        if (!File.Exists(assemblyPath)) yield break;
-
-        using var stream = File.OpenRead(assemblyPath);
-        using var peReader = new PEReader(stream);
-        if (!peReader.HasMetadata) yield break;
-
-        var metadataReader = peReader.GetMetadataReader();
-
-        foreach (var assemblyRefHandle in metadataReader.AssemblyReferences)
-        {
-            var assemblyRef = metadataReader.GetAssemblyReference(assemblyRefHandle);
-            var name = metadataReader.GetString(assemblyRef.Name);
-
-            // Filter to known BCL assemblies that should be AOT-compiled.
-            // This list covers assemblies commonly referenced by foundation tests.
-            if (IsBclAssembly(name))
-                yield return name;
-        }
-    }
-
-    /// <summary>Check if an assembly name is a known BCL assembly.</summary>
-    private static bool IsBclAssembly(string name)
-    {
-        return name switch
-        {
-            "System.Linq" or "System.Linq.Expressions" or "System.Collections" or
-            "System.Collections.Immutable" or "System.Collections.Concurrent" or
-            "System.ComponentModel" or "System.ComponentModel.TypeConverter" or
-            "System.Data.Common" or "System.Diagnostics.DiagnosticSource" or
-            "System.Formats.Asn1" or "System.IO.Compression" or "System.IO.Compression.Brotli" or
-            "System.IO.Pipelines" or "System.Net.Http" or "System.Net.Sockets" or
-            "System.ObjectModel" or "System.Reflection.Metadata" or
-            "System.Runtime.InteropServices" or "System.Runtime.Serialization.Formatters" or
-            "System.Security.Claims" or "System.Security.Cryptography" or
-            "System.Security.Principal.Windows" or "System.Text.Json" or
-            "System.Threading.Tasks.Parallel" or "System.Xml.ReaderWriter" or
-            "System.Private.Xml" or "System.Runtime.Intrinsics" or
-            "System.ComponentModel.Primitives" or "System.ComponentModel.DataAnnotations"
-                => true,
-            _ => false,
-        };
     }
 }

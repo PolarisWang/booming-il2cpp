@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
@@ -12,7 +11,6 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.ExceptionServices;
 using System.Text;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Chaos.IL2CPP.Contracts;
@@ -164,8 +162,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     // Pre-try TypeInfo* fold initializers: emitted BEFORE CHAOS_EH_TRY so the
     // *Ptr call avoids SEH frame setup/teardown overhead.
-    [ThreadStatic]
-    private static List<(string VarName, string Expression)>? _preTryFoldInitializers;
+    private List<(string VarName, string Expression)>? _preTryFoldInitializers;
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
     private List<string>? _subjectMethodSubjectIds;
@@ -467,12 +464,10 @@ public sealed partial class NativeAotLoweringPlanner
     /// infinite recursion (the codegen may collapse an unloverable IL body to
     /// a single "call self; ret" sequence).
     /// </summary>
-        [ThreadStatic]
-    private static string? _currentMethodNativeSymbol;
+    private string? _currentMethodNativeSymbol;
 
     /// <summary>Current method artifact, used by inlining budget checks.</summary>
-        [ThreadStatic]
-    private static AotCoreIrMethodArtifact? _currentMethodArtifact;
+    private AotCoreIrMethodArtifact? _currentMethodArtifact;
 
     /// <summary>
     /// Module-local symbol table: subjectId → nativeSymbol for all methods in the
@@ -538,7 +533,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// fallback static inline declarations for symbols the normal post-scan misses.
     /// Value is the return type's ABI carrier kind (needed to emit correct C++ return type).
     /// </summary>
-    private readonly ConcurrentDictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
 
     /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
@@ -775,7 +770,7 @@ public sealed partial class NativeAotLoweringPlanner
         // chaos_generic_context when calling stub definitions.
         foreach (var kvp in _stubNeedsContext)
         {
-            // All stubs added
+            if (kvp.Value)
                 _sharedContextSymbols.Add(kvp.Key);
         }
 
@@ -1096,14 +1091,10 @@ public sealed partial class NativeAotLoweringPlanner
                 emitMethods = cryptoFiltered;
             }
         }
-        var allMethods = new NativeAotMethodTemplateModel[emitMethods.Count];
-        // Parallel method body emission. Each thread gets its own [ThreadStatic]
-        // per-method state (linearScratchCounter, dispatchLabelSeq, etc.) reset
-        // at the start of each EmitManagedMethod call.
-        Parallel.For(0, emitMethods.Count,
-            new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
-            i => allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
-        List<NativeAotMethodTemplateModel> methods = [.. allMethods];
+        var allMethods = new List<NativeAotMethodTemplateModel>(emitMethods.Count);
+        for (int i = 0; i < emitMethods.Count; i++)
+            allMethods.Add(EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
+        List<NativeAotMethodTemplateModel> methods = allMethods;
 
         _tPhase4 = _sw.ElapsedMilliseconds;
 
@@ -1157,19 +1148,6 @@ public sealed partial class NativeAotLoweringPlanner
         // Dispatch routing (hotpatch check, interpreter fallback) lives in
         // <chaos/hotpatch_dispatch.h> (runtime library), not in generated code.
         var dispatchEntryCode = BuildDispatchEntryCode(methodsForLowering);
-
-        // A2: Add cross-assembly stub_definition symbols to _sharedContextSymbols
-        // so that EmitHotpatchResolvedInvocation / EmitLinearResolvedInvocation
-        // correctly append chaos_generic_context when calling these stubs.
-        // These stubs are generated in their own module's compilation but
-        // referenced from the current module's dispatch table.  Without this,
-        // callers pass 1 arg (fn_arg_0) while the stub declaration has 2 params
-        // (fn_arg_0 + chaos_generic_context) → C2660.
-        foreach (var (idx, sym) in _methodTableEntries)
-        {
-            if (sym.StartsWith("chaos_stub_definition_", StringComparison.Ordinal))
-                _sharedContextSymbols.Add(sym);
-        }
         if (!string.IsNullOrEmpty(dispatchEntryCode))
         {
             moduleRegSb.Append(Environment.NewLine);
@@ -1750,34 +1728,17 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
 
             if (isConcreteDelegate)
             {
-                // Skip delegate struct if already defined via _referenceTypeStructCode
-                // (object model section on non-page-0 pages). Duplicate definitions cause
-                // C2027/C2011 redefinition errors across page files.
-                string sym = GetNativeTypeSymbol(typeId);
-                // _seenStructSymbols stores names WITHOUT the "chaos_type_" prefix
-                string symNoPrefix = sym.StartsWith("chaos_type_", StringComparison.Ordinal)
-                    ? sym["chaos_type_".Length..]
-                    : sym;
-                if (_seenStructSymbols?.Contains(symNoPrefix) == true)
-                {
-                    sb.Append("struct ");
-                    sb.Append(sym);
-                    sb.AppendLine(";");
-                }
-                else
-                {
-                    sb.Append("struct ");
-                    sb.Append(sym);
-                    sb.AppendLine(" {");
-                    sb.AppendLine("    PureTypeHeader header{};");
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
-                    sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
-                    sb.AppendLine("};");
-                }
+                sb.Append("struct ");
+                sb.Append(GetNativeTypeSymbol(typeId));
+                sb.AppendLine(" {");
+                sb.AppendLine("    PureTypeHeader header{};");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
+                sb.AppendLine("};");
             }
             else
             {
@@ -1938,33 +1899,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
             {
                 if (allInterfaceTypeIds.Count > 0 && allInterfaceTypeIds.Contains(typeId))
-                    continue; // already emitted as inline constexpr above
-                ulong sid = ComputeStableTypeId(typeId);
-                sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
+                    continue; // already declared as inline constexpr above
+                sb.Append("extern const CHAOS_IL2CPP_UINT64 ");
                 sb.Append(GetNativeTypeIdSymbol(typeId));
-                sb.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
-                sb.Append(sid.ToString());
-                sb.AppendLine("ULL);");
-            }
-            sb.AppendLine();
-        }
-
-        // ── Boxed type ID extern declarations ──
-        // Page files reference chaos_boxed_type_id_* constants in switch/case
-        // blocks (ReflectionObjectEmission, ObjectEqualityEmission Scriban templates).
-        // These constants are NOT defined on page 0, so emit as inline constexpr
-        // (not extern const) so switch/case can evaluate them at compile time.
-        // No C2374 risk since there's no duplicate on page 0.
-        if (_boxedTypeSubjectIds is { Count: > 0 })
-        {
-            foreach (var typeId in _boxedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
-            {
-                ulong stableId = ComputeStableTypeId(typeId);
-                sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ");
-                sb.Append(GetNativeBoxTypeIdSymbol(typeId));
-                sb.Append(" = static_cast<CHAOS_IL2CPP_UINT64>(");
-                sb.Append(stableId.ToString());
-                sb.AppendLine("ULL);");
+                sb.AppendLine(";");
             }
             sb.AppendLine();
         }
@@ -2194,9 +2132,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // ── ChaosReflectionSetExceptionMetadata_2params (global scope) ──
         // Called from ArgumentOutOfRangeException..ctor(string,string) in page
         // files.  Declared in exception_api.cpp in the runtime — at global scope.
-        sb.AppendLine("extern \"C\" void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);");
-        // Object::ReferenceEquals is forwarded to this helper (not in external_runtime dispatch table).
-        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_object_reference_equals(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept;");
+        sb.AppendLine("void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);");
         sb.AppendLine();
 
         // ── Post-scan: emit extern "C" declarations for ALL chaos_external_runtime_*
@@ -2869,15 +2805,9 @@ return sb.ToString();
             callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
             if (_moduleSymbolTable.TryGetValue(callee, out nativeSymbol))
             {
-                // When the invocation target is a stub_definition (has InstantiationStubId),
-                // use the STUB symbol instead of the method's own symbol so that
-                // EmitLinearResolvedInvocation can check _sharedContextSymbols for the
-                // correct symbol and append chaos_generic_context when needed.
-                if (invocationTarget.TargetSymbol != null &&
-                    invocationTarget.TargetSymbol.StartsWith("chaos_stub_definition_", StringComparison.Ordinal))
-                {
-                    nativeSymbol = invocationTarget.TargetSymbol;
-                }
+                // Only use the local symbol when the invocation target doesn't already
+                // have a DirectNativeSymbol (which is already optimized) and isn't
+                // going through the hotpatch path (handled earlier).
                 if (invocationTarget.DirectNativeSymbol == null)
                     return true;
             }
@@ -3045,7 +2975,7 @@ return sb.ToString();
             Console.Error.WriteLine($"[STUB] Non-subject method '{method.SubjectId}' emitted as unreachable stub ({method.Instructions.Count} IL instructions)");
         }
 
-        var builder = StringBuilderPool.Rent();
+        var builder = new StringBuilder();
         builder.AppendLine($"// AOT-unreachable stub: {method.SubjectId}");
         builder.AppendLine($"extern \"C\" {returnType} {symbol}({paramList})");
         builder.AppendLine("{");
@@ -3064,13 +2994,7 @@ return sb.ToString();
             var stubSymbol = ManagedNaming.CreateInstantiationStubSymbol(method.InstantiationStubId);
             builder.AppendLine();
             builder.AppendLine($"// AOT-unreachable generic instantiation stub: {method.SubjectId}");
-            // Append chaos_generic_context for stub_definition symbols to match declaration
-            string stubParamList = stubSymbol.StartsWith("chaos_stub_definition_", StringComparison.Ordinal)
-            	? (string.IsNullOrEmpty(paramList) || paramList == "void"
-            		? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
-            		: paramList + ", CHAOS_IL2CPP_INTPTR chaos_generic_context")
-            	: paramList;
-            builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({stubParamList})");
+            builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({paramList})");
             builder.AppendLine("{");
             if (!string.IsNullOrEmpty(returnType) && returnType != "void")
             {
@@ -3079,9 +3003,7 @@ return sb.ToString();
             builder.AppendLine("}");
         }
 
-        var result = builder.ToString();
-        StringBuilderPool.Return(builder);
-        return result;
+        return builder.ToString();
     }
 
     private string BuildMethodSourceSafe(AotCoreIrMethodArtifact method)
@@ -3121,7 +3043,7 @@ return sb.ToString();
         HashSet<string> aotReachableSubjectIds)
     {
         if (method.IsUnmanagedCallersOnly)
-            lock (_reversePInvokeEntries) _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
+            _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
 
         return new NativeAotMethodTemplateModel
         {
@@ -3135,7 +3057,7 @@ return sb.ToString();
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
     {
-        var builder = StringBuilderPool.Rent(4096);
+        var builder = new StringBuilder(4096);
         if (!string.IsNullOrWhiteSpace(method.OpenDefinitionSubjectId) ||
             method.SharedGenericBodyId is not null ||
             method.InstantiationStubId is not null ||
@@ -3150,9 +3072,7 @@ return sb.ToString();
 
         EmitManagedMethod(builder, method);
         EmitGenericInstantiationStub(builder, method);
-        var result = builder.ToString().TrimEnd();
-        StringBuilderPool.Return(builder);
-        return result;
+        return builder.ToString().TrimEnd();
     }
 
     private static void EmitExternalRuntimeHelperDefinitions(

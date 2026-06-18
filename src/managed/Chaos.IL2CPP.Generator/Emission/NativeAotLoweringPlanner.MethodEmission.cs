@@ -68,13 +68,9 @@ public sealed partial class NativeAotLoweringPlanner
 			string? text = TryGetInstantiationStubSymbol(reachableMethod);
 			if (!string.IsNullOrEmpty(text) && emittedStubSymbols.Add(text))
 			{
-				bool needsContext;
-				if (stubNeedsContext is not null)
-				    needsContext = (stubNeedsContext.TryGetValue(text, out bool nc) && nc)
-				        || text.StartsWith("chaos_stub_definition_", StringComparison.Ordinal);
-				else
-				    needsContext = (sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true)
-				        || text.StartsWith("chaos_stub_definition_", StringComparison.Ordinal);
+				bool needsContext = stubNeedsContext is not null
+		    ? stubNeedsContext.TryGetValue(text, out bool nc) && nc
+		    : sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true;
 				declarations.Add(FormatMethodDeclaration(text, reachableMethod.ReturnAbi,
                     GetMethodAbiParameterSlots(reachableMethod),
                     needsContext));
@@ -100,8 +96,7 @@ public sealed partial class NativeAotLoweringPlanner
 		// Determine if this stub needs the chaos_generic_context parameter.
 		// Uses the pre-computed _stubNeedsContext map (union semantics) to
 		// match the header declaration and avoid C2733.
-		bool needsContext = (_stubNeedsContext.TryGetValue(text, out bool nc) && nc)
-		|| text.StartsWith("chaos_stub_definition_", System.StringComparison.Ordinal);
+		bool needsContext = _stubNeedsContext.TryGetValue(text, out bool nc) && nc;
 
 		string paramSig = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
 		if (needsContext)
@@ -124,23 +119,13 @@ public sealed partial class NativeAotLoweringPlanner
 			for (int i = 0; i < methodAbiParameterSlots.Count; i++)
 				argNames[i] = "chaos_fn_arg_" + i.ToString();
 			string text2 = string.Join(", ", argNames);
-		// Build forwarding argument list — do NOT append chaos_generic_context.
-		// The target function independently manages its own context parameter.
-		// Forwarding context creates an extra argument (C2660) when the target
-		// has no context — especially for method-level generic stubs where
-		// _stubNeedsContext uses union semantics.
-		// The stub declaration includes chaos_generic_context when needsContext is true.
-		// Forward it to the target when the target also needs context (checked via
-		// _sharedContextSymbols).  Without this check, stubs forward context to targets
-		// that don't need it, causing C2660.
-		bool targetAlsoNeedsContext = _sharedContextSymbols?.Contains(targetSymbol) == true;
-		bool forwardContext = needsContext && (targetSymbol == text || targetAlsoNeedsContext);
+		// Build forwarding argument list, appending chaos_generic_context if needed.
 		string forwardedArgs = text2;
-		if (forwardContext)
+		if (needsContext)
 		{
-			forwardedArgs = string.IsNullOrEmpty(forwardedArgs)
+			forwardedArgs = string.IsNullOrEmpty(text2)
 				? "chaos_generic_context"
-				: forwardedArgs + ", chaos_generic_context";
+				: text2 + ", chaos_generic_context";
 		}
 		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
 		{
@@ -150,24 +135,9 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else
 		{
-			// Generic instantiation stub: when T resolves to an empty value type
-			// (e.g. Marker struct), the canonical body returns a struct but the
-			// stub declares int32_t (the ABI carrier).  Direct return forwarding
-			// would cause C2440 — call the target for side effects, then return 0.
-			if (method.InstantiationStubId != null &&
-			    method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Int32)
-			{
-			    builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-			        ? $"    {targetSymbol}();"
-			        : $"    {targetSymbol}({forwardedArgs});");
-			    builder.AppendLine($"    return 0;");
-			}
-			else
-			{
-			    builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-			        ? $"    return {targetSymbol}();"
-			        : $"    return {targetSymbol}({forwardedArgs});");
-			}
+			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
+				? $"    return {targetSymbol}();"
+				: $"    return {targetSymbol}({forwardedArgs});");
 		}
 		builder.AppendLine("}");
 	}
@@ -179,7 +149,6 @@ public sealed partial class NativeAotLoweringPlanner
 		_nextInlineId = 0;
 		_dispatchLabelSeq = 0;
 		_preTryFoldInitializers = null;  // reset per-method
-			_structuredSlotTypes = new Stack<SlotType>();
 
 		// P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
 		if (method.IsPInvoke)
