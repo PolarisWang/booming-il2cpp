@@ -1,6 +1,10 @@
 {
   "schemaVersion": 1,
+<<<<<<< Updated upstream:testing/foundation-dll/System.Linq/chunks/global-ns/native_profile/metadata/subjects.json
   "generatedAt": "2026-06-15T21:30:23.4527895Z",
+=======
+  "generatedAt": "2026-06-18T05:22:53.6777348Z",
+>>>>>>> Stashed changes:testing/foundation-dll/System.Linq/chunks/global-ns/native/metadata/subjects.json
   "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
   "entryExecutable": "entry",
   "subjects": [
