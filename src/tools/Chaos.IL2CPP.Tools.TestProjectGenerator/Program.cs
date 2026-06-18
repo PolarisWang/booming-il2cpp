@@ -399,22 +399,38 @@ public static class Program
         // Auto-detect additional assemblies: scan subjects for target assembly names
         // and add their DLLs to the codegen assembly list. This ensures non-BCL target
         // assembly methods (e.g. System.Collections.Immutable) get native AOT codegen.
-        // Skip when a namespace filter is active to avoid duplicate key errors from
-        // compiling full assemblies alongside the entry assembly.
-        List<string> additionalAssemblyPaths = new List<string>();
-        if (assemblyDirs is { Count: > 0 })
+        // Works in tandem with NativeSymbol dedup in NativeAotLoweringPlanner.cs
+        // (TryAdd-style dictionaries handle duplicate NativeSymbols gracefully).
+        var additionalAssemblyPaths = new List<string>();
+        var targetAssemblyNames = subjects
+            .Select(s => s.AssemblyName)
+            .Distinct(StringComparer.Ordinal)
+            .Where(n => !string.Equals(n, "CombinedSubjects", StringComparison.Ordinal)
+                     && !string.Equals(n, "Chaos.TestFramework.Sdk", StringComparison.Ordinal))
+            .ToList();
+        var searchDirs = new List<string>(assemblyDirs);
+        var dllDir = Path.GetDirectoryName(dllPath);
+        if (dllDir != null && !searchDirs.Contains(dllDir))
+            searchDirs.Add(dllDir);
+        var runtimeDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+        if (runtimeDir != null && !searchDirs.Contains(runtimeDir))
+            searchDirs.Add(runtimeDir);
+        foreach (var asmName in targetAssemblyNames)
         {
-            foreach (var dir in assemblyDirs)
+            foreach (var dir in searchDirs)
             {
-                if (!string.IsNullOrWhiteSpace(dir))
-                    additionalAssemblyPaths.Add(Path.GetFullPath(dir));
+                var candidate = Path.Combine(dir, asmName + ".dll");
+                if (File.Exists(candidate))
+                {
+                    additionalAssemblyPaths.Add(candidate);
+                    Console.WriteLine($"  [codegen] auto-added target assembly: {asmName} ({candidate})");
+                    break;
+                }
             }
         }
-
         // Build assembly path list: subjects DLL + auto-detected target assemblies
         var allAssemblyPaths = new List<string>(additionalAssemblyPaths.Count + 1) { dllPath };
         allAssemblyPaths.AddRange(additionalAssemblyPaths);
-        // Build assembly path list: subjects DLL + auto-detected target assemblies
 
         // Step 2: Run IL2CPP codegen
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");
