@@ -561,5 +561,54 @@ CHAOS_IL2CPP_INTPTR ChaosFormattablestringFactoryCreate(CHAOS_IL2CPP_INTPTR form
     return resolve_string_arg(format);
 }
 
+CHAOS_IL2CPP_INT32 ChaosStringGetLength(CHAOS_IL2CPP_INTPTR str) noexcept
+{
+    str = resolve_string_arg(str);
+    if (str == 0) return 0;
+    auto* sh = reinterpret_cast<const StubStringHeader*>(str);
+    // Return byte_count as Int32 — for ASCII strings this equals Length.
+    return static_cast<CHAOS_IL2CPP_INT32>(sh->byte_count);
+}
+
+CHAOS_IL2CPP_UINT16 ChaosStringGetChars(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 index) noexcept
+{
+    str = resolve_string_arg(str);
+    if (str == 0) return 0;
+    auto* sh = reinterpret_cast<const StubStringHeader*>(str);
+    if (index < 0 || static_cast<CHAOS_IL2CPP_UINTPTR>(index) >= sh->byte_count) return 0;
+    const auto* data = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(stub_string_data(reinterpret_cast<const void*>(str)));
+    return static_cast<CHAOS_IL2CPP_UINT16>(data[index]);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosStringIsNullOrEmpty(CHAOS_IL2CPP_INTPTR str) noexcept
+{
+    if (str == 0) return 1;
+    str = resolve_string_arg(str);
+    if (str == 0) return 1;
+    auto* sh = reinterpret_cast<const StubStringHeader*>(str);
+    return sh->byte_count == 0 ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosStringConcat2(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept
+{
+    a = resolve_string_arg(a);
+    b = resolve_string_arg(b);
+    if (a == 0 && b == 0) return 0;
+    if (a == 0) return b;
+    if (b == 0) return a;
+    auto* ah = reinterpret_cast<const StubStringHeader*>(a);
+    auto* bh = reinterpret_cast<const StubStringHeader*>(b);
+    CHAOS_IL2CPP_UINTPTR total = ah->byte_count + bh->byte_count;
+    auto* result = static_cast<StubStringHeader*>(GcAllocateAtomic(sizeof(StubStringHeader) + total + 1));
+    if (result == nullptr) return 0;
+    result->type = ah->type;  // inherit type info from first argument
+    result->byte_count = total;
+    char* dst = reinterpret_cast<char*>(result + 1);
+    std::memcpy(dst, stub_string_data(reinterpret_cast<const void*>(a)), ah->byte_count);
+    std::memcpy(dst + ah->byte_count, stub_string_data(reinterpret_cast<const void*>(b)), bh->byte_count);
+    dst[total] = '\0';
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

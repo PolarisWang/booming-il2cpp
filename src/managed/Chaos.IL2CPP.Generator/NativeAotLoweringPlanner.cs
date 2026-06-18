@@ -4460,21 +4460,30 @@ public sealed partial class NativeAotLoweringPlanner
         var methodEntries = new List<ScriptObject>(methods.Count);
         var subjectEntries = new List<ScriptObject>();
 
-        // ── Phase 1 diagnostic: SubjectId match rate ──
+        // ── Phase 1 diagnostic: SubjectId match rate (fact-only, excluding Benchmark_) ──
         if (_subjectMethodSubjectIds is { Count: > 0 })
         {
             var subjectIdsInMethods = new HashSet<string>(methods.Select(m => m.SubjectId!),
                 StringComparer.Ordinal);
-            int matched = 0, missed = 0;
+            int matched = 0, missed = 0, benchmarkSkipped = 0;
             foreach (var sid in _subjectMethodSubjectIds)
             {
+                // Skip Benchmark_ entries — they are excluded from subject entries
+                // by IsSubjectMethod() at line 4837, so counting them as "missed" is
+                // misleading. The diagnostic focuses on fact-wrapper match rate.
+                if (sid.Contains("::Benchmark_", StringComparison.Ordinal))
+                {
+                    benchmarkSkipped++;
+                    continue;
+                }
                 if (subjectIdsInMethods.Contains(sid))
                     matched++;
                 else
                     missed++;
             }
+            int totalConsidered = matched + missed;
             Console.Error.WriteLine($"[SUBJECT-MATCH] {matched} matched, {missed} missed " +
-                $"(out of {_subjectMethodSubjectIds.Count} subject-methods, " +
+                $"(out of {totalConsidered} fact subject-methods + {benchmarkSkipped} benchmark skipped, " +
                 $"{methods.Count} methods in dispatch)");
             if (missed > 0)
             {
@@ -4482,6 +4491,8 @@ public sealed partial class NativeAotLoweringPlanner
                 int sampleCount = 0;
                 foreach (var sid in _subjectMethodSubjectIds)
                 {
+                    if (sid.Contains("::Benchmark_", StringComparison.Ordinal))
+                        continue;
                     if (!subjectIdsInMethods.Contains(sid))
                     {
                         if (sampleCount < 10)
@@ -4568,22 +4579,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 if (extCall) { skippedSubjectVariants++; continue; }
             }
-            // Skip _1/_2 variants when _0 exists with same SubjectId AND calls external
-            if (method.NativeSymbol != null
-                && (method.NativeSymbol.EndsWith("_1", StringComparison.Ordinal)
-                    || method.NativeSymbol.EndsWith("_2", StringComparison.Ordinal))
-                && subjectIdsWithZero.Contains(StripSubjectVariantSuffix(method.SubjectId ?? string.Empty)))
-            {
-                bool extCall = false;
-                foreach (var instr in method.Instructions)
-                {
-                    string callee = instr.Callee ?? string.Empty;
-                    if (callee.Length > 0 && _externalRuntimeSubjects.ContainsKey(
-                            ManagedNaming.NormalizeSubjectIdAssembly(callee)))
-                    { extCall = true; break; }
-                }
-                if (extCall) { skippedSubjectVariants++; continue; }
-            }
+
             int subjectIdx = ExtractSubjectIndex(method.SubjectId);
                 if (subjectIdx < 0)
                     // Assign temporary unique index — will be sorted by subject_index
@@ -4685,9 +4681,15 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 return int.MaxValue; // Unknown methods go to the end
             })];
-            // Reassign sequential subject_index after sorting
+            // Reassign sequential subject_index and contract_index after sorting.
+            // contract_index maps to the position in the filtered metadata order
+            // (0-based after excluding Benchmark_ entries), NOT the Subject_N number
+            // from ExtractSubjectIndex which can have gaps due to dedup/filtering.
             for (int sei = 0; sei < subjectEntries.Count; sei++)
+            {
                 subjectEntries[sei]["subject_index"] = sei;
+                subjectEntries[sei]["contract_index"] = sei;
+            }
         }
 
         Console.Error.WriteLine($"[DISPATCH-DIAG] total methods: {methods.Count}, subject entries: {subjectEntries.Count}");

@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Collections",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T02:21:23",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 1,
+  "chunksWithMetaMismatch": 0,
   "totalDeclaredMethods": 17
 }

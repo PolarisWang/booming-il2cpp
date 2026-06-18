@@ -1,14 +1,7 @@
 {
+  "date": "2026-06-18",
   "assemblyName": "System.Collections",
-  "timestamp": "2026-06-18T02:21:23",
-  "totalChunks": 1,
-  "totalBenchmarkedMethods": 17,
-  "aggregatePerformance": {
-    "meanDurationMs": 0.030429411764705882,
-    "meanOpsPerSecond": 331061451.1964706,
-    "aggregateMeanCv": 0.029989941176470587
-  },
-  "chunkSummaries": [
+  "chunks": [
     {
       "slug": "global-ns",
       "fact": {
