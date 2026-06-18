@@ -367,10 +367,10 @@ def _write_perf_store(
     perf_path = _RESULTS_BASE / ctx.assembly / ctx.slug / "perf" / "benchmark-history.jsonl"
     perf_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Determine append mode: check if AOT already wrote (JIT appends)
-    append = perf_path.exists()
-
-    with open(perf_path, "a" if append else "w", encoding="utf-8") as f:
+    # Always overwrite: each pipeline run produces a self-contained file.
+    # Append mode caused stale data accumulation across partial runs,
+    # mixing old net8-jit baselines with fresh chaos-aot results.
+    with open(perf_path, "w", encoding="utf-8") as f:
         for i, s in enumerate(per_method_stats):
             elapsed_ms = s.get("meanDurationMs", 0)
             ops = s.get("meanOpsPerSecond", 0)

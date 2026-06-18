@@ -624,9 +624,19 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
           f"assert_failed={assert_failed}, semantic_changed={semantic_changed}, revert={revert_passed}/{len(reverted_fact) or '?'}"
           f"{benchmark_note} ({duration_ms}ms)")
 
+    # Build a richer summary: include stderr tail and exit code on error/crash
+    error_detail = ""
+    if status in ("error", "failed") and stderr:
+        stderr_lines = [l for l in stderr.splitlines() if l.strip()
+                       and "DEBUG" not in l and "INFO" not in l and "Gc" not in l]
+        if stderr_lines:
+            error_detail = " | " + "; ".join(stderr_lines[-3:])
+    elif status == "error" and not hotupdate_data and r is not None:
+        error_detail = f" | exit_code={r.returncode}"
+
     return StageResult(
         stage="hotupdate", status=status,
-        summary=f"{status}: {passed} passed, assert_failed={assert_failed}, semantic_changed={semantic_changed}",
+        summary=f"{status}: {passed} passed, assert_failed={assert_failed}, semantic_changed={semantic_changed}{error_detail}",
         details=result_data,
         duration_ms=duration_ms,
     )

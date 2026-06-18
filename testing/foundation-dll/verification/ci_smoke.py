@@ -95,7 +95,7 @@ def main() -> int:
         print(f"CI Smoke mode: {len(families)} core family(ies), stages=[{stages}]")
     elif args.mode == "full":
         families = CORE_FAMILIES + STANDARD_FAMILIES
-        stages = "build,fact,hotupdate,coverage-audit,benchmark,benchmark_report"
+        stages = "build,fact,hotupdate,coverage-audit,benchmark,managed_benchmark,benchmark_report,aggregate,reporting"
         print(f"CI Full mode: {len(families)} families (core+standard), stages=[{stages}]")
     elif args.mode == "extended":
         families = ALL_FAMILIES

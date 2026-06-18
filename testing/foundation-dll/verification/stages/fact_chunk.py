@@ -92,7 +92,12 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
 
 
 def _tech_status(tech_result: dict, meta_total: int | None) -> str:
-    """Determine status for a single technology result."""
+    """Determine status for a single technology result.
+
+    Returns "error" when total==0 so silent failures (e.g. missing
+    kHotpatchKeepNative flag on all subjects) are exposed rather than
+    silently skipped.
+    """
     passed = tech_result["passed"]
     total = tech_result["total"]
     rc = tech_result["returncode"]
@@ -100,7 +105,7 @@ def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     if is_clean and passed == total and total > 0:
         return "passed"
     if total == 0:
-        return "skipped"
+        return "error"
     if rc != 0 and passed < total:
         return "partial" if passed > 0 else "error"
     if rc != 0 and passed == total:
@@ -256,37 +261,42 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
                 print(f"  [fact] Demoting status to partial: {len(cross_tech_diffs)} cross-tech diff(s)")
 
     # Combined status: JIT-as-sufficient if JIT passes, else fall back to AOT status.
-    # UPGRADE: When JIT passes but AOT is completely broken, promote to "partial".
+    # NOTE: "error" status from _tech_status (total==0) is NEVER promoted — it
+    # indicates severe misconfiguration (e.g. missing kHotpatchKeepNative flag)
+    # that must be surfaced regardless of JIT results.
     if jit_status == "passed":
         if aot_status in ("error", "failed"):
-            status = "partial"
-            print(f"  [fact] JIT passes, promoting to partial (AOT was {aot_status})")
+            status = aot_status  # keep error/failed — don't silently promote
+            print(f"  [fact] AOT is {aot_status} (NOT promoting to partial — zero results is severe)")
         else:
             status = "passed"
             if aot_status != "passed":
                 print(f"  [fact] JIT passes, promoting overall status to passed (AOT was {aot_status})")
     else:
-        if aot_status == "passed" and jit_status is not None and jit_status != "passed":
+        if aot_status == "passed" and jit_status is not None and jit_status != "skipped":
             status = "passed"  # AOT passing is sufficient for pipeline success
 
     # Cross-check: detect silent method drops from metadata.
-    # Small gaps are expected (void "no crash" assertions don't produce results).
-    # Drops >10% partial the status; >50% is severe and fails the stage.
-    aot_dropped = (meta_total or 0) - aot_result['total'] if meta_total else 0
-    if aot_dropped > 0 and meta_total and meta_total > 0:
-        drop_ratio = aot_dropped / meta_total
-        if drop_ratio > 0.5:
+    # Use factMethodCount (actual fact subjects) rather than totalMethods
+    # (which includes helper/benchmark-only subjects that don't need fact dispatch).
+    # This avoids false SEVERE failures when non-fact subjects (closures, compiler-
+    # generated helpers, hotupdate-only entries) aren't dispatched by the codegen.
+    expected = meta_fact_count if meta_fact_count is not None else (meta_total or 0)
+    aot_dropped = max(0, (expected or 0) - aot_result['total']) if expected else 0
+    if aot_dropped > 0 and expected and expected > 0:
+        drop_ratio = aot_dropped / expected
+        if drop_ratio > 0.1:
             status = "failed"
-            errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({meta_total}) — SEVERE ({drop_ratio:.0%})")
-        elif drop_ratio > 0.1:
-            if status == "passed":
-                status = "partial"
-            errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({meta_total})")
+            errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({expected}) — SEVERE ({drop_ratio:.0%})")
         else:
-            errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({meta_total})")
-    jit_dropped = (meta_total or 0) - jit_result['total'] if jit_result and meta_total else 0
+            errors.append(f"aot: {aot_dropped} methods dropped vs metadata ({expected})")
+    jit_dropped = max(0, (expected or 0) - (jit_result['total'] if jit_result else 0)) if expected else 0
     if jit_dropped > 0:
-        errors.append(f"jit: {jit_dropped} methods dropped vs metadata ({meta_total})")
+        jit_drop_ratio = jit_dropped / expected if expected else 1
+        if jit_drop_ratio > 0.1:
+            errors.append(f"jit: {jit_dropped} methods dropped vs metadata ({expected}) — SEVERE ({jit_drop_ratio:.0%})")
+        else:
+            errors.append(f"jit: {jit_dropped} methods dropped vs metadata ({expected})")
     # Summary
     summary_parts = [f"aot: {aot_result['passed']}/{aot_result['total']} passed ({aot_status})"]
     if has_jit and jit_result:
