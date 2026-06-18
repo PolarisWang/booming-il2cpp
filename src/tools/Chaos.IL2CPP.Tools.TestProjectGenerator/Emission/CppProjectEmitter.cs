@@ -515,8 +515,6 @@ public sealed class CppProjectEmitter
             }
         }
 
-        // ── Fixup: remove conflicting extern CHAOS_IL2CPP_INTPTR decls ──
-        string hdrText2 = File.ReadAllText(vtHeaderPath);
         // ── Step 2: CMake2: CMake incremental build (3 retries) ──
         Console.Error.WriteLine($"  [build] cmake build (incremental)...");
         var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 1_800_000);
