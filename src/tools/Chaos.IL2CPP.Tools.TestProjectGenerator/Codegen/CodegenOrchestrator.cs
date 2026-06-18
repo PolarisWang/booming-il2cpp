@@ -1,3 +1,5 @@
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using Chaos.IL2CPP.Driver;
 
@@ -100,6 +102,39 @@ public sealed class CodegenOrchestrator
                         args.Add("--assembly-dir");
                         args.Add(targetDir);
                     }
+
+                    // Auto-detect closure assemblies: scan subjects DLL references
+                    string subjectsDll = Path.GetFullPath(assemblyPaths[0]);
+                    if (File.Exists(subjectsDll))
+                    {
+                        var addedAsms = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                        var subjectsAsmName = AssemblyName.GetAssemblyName(subjectsDll);
+                        addedAsms.Add(subjectsAsmName.Name ?? "");
+
+                        using var subjectsStream = File.OpenRead(subjectsDll);
+                        using var subjectsPe = new PEReader(subjectsStream);
+                        var subjectsMr = subjectsPe.GetMetadataReader();
+                        string? runtimeDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+
+                        foreach (var refHandle in subjectsMr.AssemblyReferences)
+                        {
+                            var refAsm = subjectsMr.GetAssemblyReference(refHandle);
+                            var refName = subjectsMr.GetString(refAsm.Name);
+                            if (string.IsNullOrEmpty(refName)) continue;
+                            if (runtimeDir != null)
+                            {
+                                string bclPath = Path.Combine(runtimeDir, refName + ".dll");
+                                if (File.Exists(bclPath)) continue;
+                            }
+                            if (string.Equals(refName, "Chaos.TestFramework.Sdk", StringComparison.Ordinal)) continue;
+                            if (addedAsms.Add(refName) && TryResolveAssembly(refName, targetDir, out var resolvedPath))
+                            {
+                                args.Add("--assembly");
+                                args.Add(resolvedPath);
+                                Console.WriteLine($"[codegen-orch] auto-added assembly: {refName} ({resolvedPath})");
+                            }
+                        }
+                    }
                 }
                 catch { }
             }
@@ -174,6 +209,23 @@ public sealed class CodegenOrchestrator
                 OutputDir = outputDir,
                 Error = ex.Message,
             };
+        /// <summary>
+        /// Try to resolve an assembly by name in the given directory.
+        /// Returns true and the full path if found.
+        /// </summary>
+        private static bool TryResolveAssembly(string name, string? searchDir, out string path)
+        {
+            if (searchDir != null)
+            {
+                var candidate = Path.Combine(searchDir, name + ".dll");
+                if (File.Exists(candidate))
+                {
+                    path = Path.GetFullPath(candidate);
+                    return true;
+                }
+            }
+            path = "";
+            return false;
         }
     }
 }
