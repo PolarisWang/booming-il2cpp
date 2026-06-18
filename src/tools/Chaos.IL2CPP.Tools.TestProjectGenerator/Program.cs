@@ -275,6 +275,7 @@ public static class Program
         var sourceOnly = false;
         var clean = false;
         var isJit = false;
+        string? namespaceFilter = null;
         var assemblyDirs = new List<string>();
 
         for (int i = 0; i < args.Length; i++)
@@ -301,6 +302,9 @@ public static class Program
                     break;
                 case "--jit":
                     isJit = true;
+                    break;
+                case "--namespace-filter" when i + 1 < args.Length:
+                    namespaceFilter = args[++i];
                     break;
                 case "--assembly-dir" when i + 1 < args.Length:
                     assemblyDirs.Add(Path.GetFullPath(args[++i]));
@@ -399,7 +403,7 @@ public static class Program
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");
         var codegenBase = Path.Combine(outputDir, "codegen");
         var orchestrator = new Codegen.CodegenOrchestrator();
-        var codegenResult = orchestrator.Run([dllPath], codegenBase, isJit ? "jit" : "aot", subjectMethodIds, assemblyDirs);
+        var codegenResult = orchestrator.Run([dllPath], codegenBase, isJit ? "jit" : "aot", subjectMethodIds, assemblyDirs, namespaceFilter);
 
         if (!codegenResult.Success)
             return Error($"Codegen failed: {codegenResult.Error}");
