@@ -707,6 +707,18 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 break;
 
+            case "switch":
+                // Fallback: emit a flat switch when IR recovery fails to wrap the
+                // switch terminator in IRSwitch (complex irreducible CFG).
+                {
+                    string switchExpr = ConsumeEvalStackValueExpression();
+                    builder.AppendLine(indentation + $"switch ({switchExpr})");
+                    builder.AppendLine(indentation + "{");
+                    builder.AppendLine(indentation + "    default: break;");
+                    builder.AppendLine(indentation + "}");
+                }
+                break;
+
             default:
                 throw new NotSupportedException(
                     "StructuredIR: unsupported block terminator '" + terminator.Op + "'");
