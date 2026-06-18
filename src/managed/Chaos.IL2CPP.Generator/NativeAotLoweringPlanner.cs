@@ -27,8 +27,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     public string? NamespaceFilter { get; set; }
 
-    private IReadOnlyDictionary<string, AotCoreIrMethodArtifact> _methodsBySubjectId =
-        new Dictionary<string, AotCoreIrMethodArtifact>(StringComparer.Ordinal);
+    private IReadOnlyDictionary<string, AotCoreIrMethodArtifact> _methodsBySubjectId = null!;
 
     private Dictionary<string, string> _attributeStorageFieldIndex =
         new Dictionary<string, string>(StringComparer.Ordinal);
@@ -696,9 +695,10 @@ public sealed partial class NativeAotLoweringPlanner
                 $"native-aot entry symbol '{loweringPlan.EntrySymbol}' does not match aot-core-ir symbol '{entryMethod.NativeSymbol}'");
         }
 
-        _methodsBySubjectId = filteredMethods
-            .GroupBy(method => method.SubjectId, StringComparer.Ordinal)
-            .ToDictionary(g => g.Key, g => g.First(), StringComparer.Ordinal);
+        var methodsDict = new Dictionary<string, AotCoreIrMethodArtifact>(filteredMethods.Count, StringComparer.Ordinal);
+            foreach (var m in filteredMethods)
+                methodsDict.TryAdd(m.SubjectId, m);
+            _methodsBySubjectId = methodsDict;
         // Build index of types with at least one instance method (O(m) once, then O(1) per type lookup).
         foreach (var method in filteredMethods)
         {

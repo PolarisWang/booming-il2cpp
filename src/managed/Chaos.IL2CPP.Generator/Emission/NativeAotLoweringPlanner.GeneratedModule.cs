@@ -209,6 +209,16 @@ public sealed partial class NativeAotLoweringPlanner
             // System.Data.IsolationLevel).  Without these, the generated header
             // lacks chaos_valuetype_* typedefs, causing C2061.
             //
+            // THREE SCAN LAYERS (each catches types missed by the previous):
+            //   1. ABI slot scan (below): iterates methodsForLowering ReturnAbi +
+            //      ParameterAbis for ValueTypeByValue carrier or ValueType shape.
+            //      Catches most value types used in method signatures.
+            //   2. Declaration-string regex scan (lines 240-253): parses extern "C"
+            //      declaration strings for 'chaos_valuetype_' identifiers. Catches
+            //      value types embedded in C++ type names (generics, by-ref).
+            //   3. Object-model text scan (lines 284-305): scans emitted object model
+            //      builder text. Catches value types from struct fields and generic args.
+            //
             // Use methodsForLowering (parameter, lowered artifacts with proper
             // CarrierKindCode=ValueTypeByValue and TypeSubjectId set) rather than
             // _methodsBySubjectId (original AOT IR JSON with no TypeSubjectId for

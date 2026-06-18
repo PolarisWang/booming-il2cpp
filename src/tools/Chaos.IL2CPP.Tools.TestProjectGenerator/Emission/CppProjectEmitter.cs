@@ -517,38 +517,6 @@ public sealed class CppProjectEmitter
 
         // ── Fixup: remove conflicting extern CHAOS_IL2CPP_INTPTR decls ──
         string hdrText2 = File.ReadAllText(vtHeaderPath);
-        foreach (string fixCppFile in Directory.GetFiles(Path.Combine(projectDir, "subjects"), "native-aot.generated*.cpp"))
-        {
-            string fixCppText = File.ReadAllText(fixCppFile);
-            bool fixChanged = false;
-            var fixPattern = "extern CHAOS_IL2CPP_INTPTR chaos_external_runtime_";
-            for (int fixIdx = 0; (fixIdx = fixCppText.IndexOf(fixPattern, fixIdx, StringComparison.Ordinal)) >= 0; )
-            {
-                int fixLineEnd = fixCppText.IndexOf('
-', fixIdx);
-                if (fixLineEnd < 0) fixLineEnd = fixCppText.Length;
-                string fixLine = fixCppText.Substring(fixIdx, fixLineEnd - fixIdx).TrimEnd('');
-                int fixSymStart = fixLine.IndexOf("chaos_external_runtime_", StringComparison.Ordinal);
-                if (fixSymStart >= 0)
-                {
-                    int fixSymEnd = fixLine.IndexOf('(', fixSymStart);
-                    if (fixSymEnd > fixSymStart)
-                    {
-                        string fixSym = fixLine.Substring(fixSymStart, fixSymEnd - fixSymStart).TrimEnd();
-                        if (hdrText2.Contains("extern "C" void " + fixSym + "(", StringComparison.Ordinal))
-                        {
-                            fixCppText = fixCppText.Remove(fixIdx, fixLineEnd - fixIdx + 1);
-                            fixChanged = true;
-                            continue;
-                        }
-                    }
-                }
-                fixIdx = fixLineEnd + 1;
-            }
-            if (fixChanged)
-                File.WriteAllText(fixCppFile, fixCppText);
-        }
-
         // ── Step 2: CMake2: CMake incremental build (3 retries) ──
         Console.Error.WriteLine($"  [build] cmake build (incremental)...");
         var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 1_800_000);

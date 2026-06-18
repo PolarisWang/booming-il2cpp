@@ -102,7 +102,7 @@ public sealed class CodegenOrchestrator
                         args.Add(targetDir);
                     }
                 }
-                catch { }
+                catch (System.IO.IOException) { }
             }
 
             if (codegenMode == "jit")
@@ -174,7 +174,7 @@ public sealed class CodegenOrchestrator
                 GeneratedDirs = generatedDirs,
             };
         }
-        catch (Exception ex)
+        catch (System.Exception ex)
         {
             return new CodegenResult
             {
