@@ -1,5 +1,14 @@
-"""Post-process generated C++ code to add missing chaos_valuetype_* typedefs.
+"""DIAGNOSTIC: check for missing chaos_valuetype_* typedefs in generated header.
 
+Scans all generated .cpp page files for chaos_valuetype_* references that lack
+a corresponding typedef in the generated header. Reports missing typedefs as
+warnings — does NOT modify any files (layer boundary: verification layer must
+not write .cpp/.h files).
+
+The Generator layer (NativeAotLoweringPlanner.GeneratedModule.cs +
+ObjectModelEmission.cs) is responsible for emitting all chaos_valuetype_*
+typedefs during codegen.
+"""
 Scans all generated .cpp page files for chaos_valuetype_* references that lack
 a corresponding typedef in the generated header, and appends the missing typedefs.
 This is a robust fallback for types referenced in cross-assembly stub declarations
