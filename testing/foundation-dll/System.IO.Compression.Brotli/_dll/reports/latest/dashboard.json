@@ -1,24 +1,25 @@
 {
   "assemblyName": "System.IO.Compression.Brotli",
-  "timestamp": "2026-06-18T03:04:09",
+  "timestamp": "2026-06-18T06:03:23",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
-    "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 45,
+    "factPassRate": 86.4,
+    "totalBenchmarkedMethods": 34,
     "aggregatePerformance": {
-      "meanDurationMs": 3.893582222222222,
-      "meanOpsPerSecond": 44818864.92577778,
-      "aggregateMeanCv": 0.011226444444444445
+      "meanDurationMs": 0.013082352941176472,
+      "meanOpsPerSecond": 362927968.1,
+      "aggregateMeanCv": 0.076063375,
+      "totalOutliers": 19
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 45,
+      "totalPassed": 28,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

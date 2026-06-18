@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.IO.Pipelines",
-  "timestamp": "2026-06-18T03:04:14",
+  "timestamp": "2026-06-18T06:03:23",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
@@ -9,12 +9,13 @@
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 23,
     "aggregatePerformance": {
-      "meanDurationMs": 11.844952173913043,
-      "meanOpsPerSecond": 33965378.65173913,
-      "aggregateMeanCv": 0.023789347826086955
+      "meanDurationMs": 1.3277869565217393,
+      "meanOpsPerSecond": 232781195.40869567,
+      "aggregateMeanCv": 0.24340204347826086,
+      "totalOutliers": 31
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
@@ -23,10 +24,17 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 17,
-      "methodsWithNet8": 17,
+      "methodsAnalyzed": 22,
+      "methodsWithNet8": 14,
       "chaosAotVsNet8": {},
-      "chaosJitVsNet8": {},
+      "chaosJitVsNet8": {
+        "mean": 76.28,
+        "median": 76.28,
+        "min": 76.28,
+        "max": 76.28,
+        "p25": 76.28,
+        "p75": 76.28
+      },
       "net10VsNet8": {
         "mean": 0.0,
         "median": 0.0,
