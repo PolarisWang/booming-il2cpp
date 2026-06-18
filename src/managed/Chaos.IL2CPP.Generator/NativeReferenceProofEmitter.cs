@@ -91,12 +91,6 @@ public sealed partial class NativeReferenceProofEmitter
         uint TypeToken,
         uint MethodToken);
 
-    private enum RuntimeSkeletonFamilyHandlerMatchKind
-    {
-        NoMatch,
-        Unsupported,
-        Match,
-    }
 
     private sealed record RuntimeSkeletonFamilyHandlerResult(
         RuntimeSkeletonFamilyHandlerMatchKind MatchKind,
