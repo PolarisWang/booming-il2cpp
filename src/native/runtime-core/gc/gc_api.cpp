@@ -622,9 +622,16 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_total_pause_du
 /// PohAllocate, and fallback paths to old gen / LOH.
 thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
 
+// Fast-path TLS counter from gc_alloc_stubs.h.  We sum it here so that
+// allocations done via GcAllocateFast (inline TLAB bump) are visible to
+// chaos_gc_get_allocated_bytes_for_current_thread() even when no GC has
+// occurred to flush tls_alloc_fast_bytes into tls_total_allocated_bytes.
+extern thread_local CHAOS_IL2CPP_SIZE chaos::il2cpp::runtime_core::tls_alloc_fast_bytes;
+
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept
 {
-    return tls_total_allocated_bytes;
+    return tls_total_allocated_bytes
+         + static_cast<CHAOS_IL2CPP_INT64>(chaos::il2cpp::runtime_core::tls_alloc_fast_bytes);
 }
 
 // ======================================================================
