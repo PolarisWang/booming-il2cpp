@@ -107,39 +107,23 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		builder.AppendLine();
-		builder.AppendLine("// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
-		builder.AppendLine(FormatGenericExecutionAuthorityComment(
-			method.OpenDefinitionSubjectId,
-			method.SharedGenericBodyId,
-			method.InstantiationStubId,
-			method.RuntimeGenericContext));
-		builder.AppendLine($"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {text}({paramSig})");
-		builder.AppendLine("{");
-		var argNames = new string[methodAbiParameterSlots.Count];
-			for (int i = 0; i < methodAbiParameterSlots.Count; i++)
-				argNames[i] = "chaos_fn_arg_" + i.ToString();
-			string text2 = string.Join(", ", argNames);
-		// Build forwarding argument list, appending chaos_generic_context if needed.
-		string forwardedArgs = text2;
-		if (needsContext)
+		// Migrated to Scriban template: GenericInstantiationStub.cpp.scriban
+		var _stubM = new Scriban.Runtime.ScriptObject
 		{
-			forwardedArgs = string.IsNullOrEmpty(text2)
-				? "chaos_generic_context"
-				: text2 + ", chaos_generic_context";
-		}
-		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
-		{
-			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-				? $"    {targetSymbol}();"
-				: $"    {targetSymbol}({forwardedArgs});");
-		}
-		else
-		{
-			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-				? $"    return {targetSymbol}();"
-				: $"    return {targetSymbol}({forwardedArgs});");
-		}
-		builder.AppendLine("}");
+			["comment"] = "// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId),
+			["authority_comment"] = FormatGenericExecutionAuthorityComment(
+				method.OpenDefinitionSubjectId, method.SharedGenericBodyId,
+				method.InstantiationStubId, method.RuntimeGenericContext),
+			["return_type"] = MapAbiSlotReturnType(method.ReturnAbi),
+			["function_name"] = text,
+			["param_sig"] = paramSig,
+			["target_symbol"] = targetSymbol,
+			["forwarded_args"] = forwardedArgs,
+			["is_void"] = method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void,
+		};
+		builder.Append(
+			ScribanTemplateRenderer.RenderTemplate(
+				NativeAotTemplateCatalog.GetGenericInstantiationStubTemplate(), _stubM));
 	}
 
 	private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)

@@ -944,6 +944,15 @@ public sealed partial class NativeAotLoweringPlanner
             or "stind.i4" or "stind.i1" or "stind.i2" or "stind.i8"
             or "stind.r4" or "stind.r8" or "stind.ref" or "stind.i"
             or "cpblk" or "initblk" or "throw" => 2,
+        // Comparison opcodes: pop 2 operands, push 1 result (ceq, cgt, clt, cgt.un)
+        "ceq" or "cgt" or "cgt.un" or "clt" => 2,
+        // Binary arithmetic: pop 2 operands, push 1 result
+        "add" or "sub" or "mul" or "div" or "div.un" or "rem" or "rem.un"
+            or "shl" or "shr" or "shr.un"
+            or "and" or "or" or "xor"
+            or "add.ovf" or "sub.ovf" or "mul.ovf" => 2,
+        // Unary arithmetic: pop 1 operand, push 1 result
+        "not" or "neg" => 1,
         _ => 0,
     };
 

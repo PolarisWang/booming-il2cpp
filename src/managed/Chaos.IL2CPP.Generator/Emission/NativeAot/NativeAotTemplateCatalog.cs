@@ -31,6 +31,7 @@ internal static class NativeAotTemplateCatalog
     public const string GenericRegistrationTemplateRelativePath = "Templates/NativeAot.GenericRegistration.cpp.scriban";
     public const string GenericAotRegistrationTemplateRelativePath = "Templates/NativeAot.GenericAotRegistration.cpp.scriban";
     public const string GenericRegistrationHelperTemplateRelativePath = "Templates/NativeAot.GenericRegistrationHelper.cpp.scriban";
+    public const string GenericInstantiationStubTemplateRelativePath = "Templates/NativeAot.GenericInstantiationStub.cpp.scriban";
     public const string InterfaceTypeIdTemplateRelativePath = "Templates/NativeAot.InterfaceTypeId.cpp.scriban";
     public const string IfaceMapArrayTemplateRelativePath = "Templates/NativeAot.IfaceMapArray.cpp.scriban";
     public const string TypeInfoTemplateRelativePath = "Templates/NativeAot.TypeInfo.cpp.scriban";
@@ -163,6 +164,11 @@ internal static class NativeAotTemplateCatalog
     public static Template GetGenericRegistrationHelperTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(GenericRegistrationHelperTemplateRelativePath);
+    }
+
+    public static Template GetGenericInstantiationStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(GenericInstantiationStubTemplateRelativePath);
     }
 
     public static Template GetModuleRegistrationTemplate()
