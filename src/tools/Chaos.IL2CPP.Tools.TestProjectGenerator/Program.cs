@@ -401,40 +401,14 @@ public static class Program
         // assembly methods (e.g. System.Collections.Immutable) get native AOT codegen.
         // Skip when a namespace filter is active to avoid duplicate key errors from
         // compiling full assemblies alongside the entry assembly.
-        if (namespaceFilter != null)
+        List<string> additionalAssemblyPaths = new List<string>();
+        if (assemblyDirs is { Count: > 0 })
         {
-            Console.WriteLine($"  [codegen] skipping auto-detect (namespace filter: {namespaceFilter})");
-        }
-        else
-        {
-        var additionalAssemblyPaths = new List<string>();
-        var targetAssemblyNames = subjects
-            .Select(s => s.AssemblyName)
-            .Distinct(StringComparer.Ordinal)
-            .Where(n => !string.Equals(n, "CombinedSubjects", StringComparison.Ordinal)
-                     && !string.Equals(n, "Chaos.TestFramework.Sdk", StringComparison.Ordinal))
-            .ToList();
-        var searchDirs = new List<string>(assemblyDirs);
-        var dllDir = Path.GetDirectoryName(dllPath);
-        if (dllDir != null && !searchDirs.Contains(dllDir))
-            searchDirs.Add(dllDir);
-        // Also scan the .NET runtime directory where BCL assemblies live
-        var runtimeDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
-        if (runtimeDir != null && !searchDirs.Contains(runtimeDir))
-            searchDirs.Add(runtimeDir);
-        foreach (var asmName in targetAssemblyNames)
-        {
-            foreach (var dir in searchDirs)
+            foreach (var dir in assemblyDirs)
             {
-                var candidate = Path.Combine(dir, asmName + ".dll");
-                if (File.Exists(candidate))
-                {
-                    additionalAssemblyPaths.Add(candidate);
-                    Console.WriteLine($"  [codegen] auto-added target assembly: {asmName} ({candidate})");
-                    break;
-                }
+                if (!string.IsNullOrWhiteSpace(dir))
+                    additionalAssemblyPaths.Add(Path.GetFullPath(dir));
             }
-        }
         }
 
         // Build assembly path list: subjects DLL + auto-detected target assemblies

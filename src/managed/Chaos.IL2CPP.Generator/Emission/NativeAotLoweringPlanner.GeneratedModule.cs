@@ -229,6 +229,30 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                 }
             }
+            // Also scan _methodsBySubjectId for value type ABI slots from
+            // cross-assembly stub methods (e.g., System.Linq) that may have 0
+            // instructions and thus be excluded from methodsForLowering by
+            // CollectAllMethods/CollectReachableMethods.  These methods still
+            // generate extern "C" declarations referencing chaos_valuetype_* types
+            // through the combined-subjects pipeline, and the header must provide
+            // the corresponding typedefs to avoid C4430/C2146 at the call site.
+            // The !string.IsNullOrEmpty guard safely skips entries from the
+            // original AOT IR JSON that lack TypeSubjectId metadata.
+            foreach (var m in _methodsBySubjectId.Values)
+            {
+                if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
+                    !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
+                    _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
+                if (m.ParameterAbis != null)
+                {
+                    foreach (var abi in m.ParameterAbis)
+                    {
+                        if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
+                            !string.IsNullOrEmpty(abi.TypeSubjectId))
+                            _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
+                    }
+                }
+            }
 
             var vtBuilder = new System.Text.StringBuilder();
             vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");

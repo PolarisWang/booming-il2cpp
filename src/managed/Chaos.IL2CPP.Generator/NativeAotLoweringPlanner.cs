@@ -660,7 +660,9 @@ public sealed partial class NativeAotLoweringPlanner
                 $"native-aot entry symbol '{loweringPlan.EntrySymbol}' does not match aot-core-ir symbol '{entryMethod.NativeSymbol}'");
         }
 
-        _methodsBySubjectId = aotCoreIr.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        _methodsBySubjectId = aotCoreIr.Methods
+            .GroupBy(method => method.SubjectId, StringComparer.Ordinal)
+            .ToDictionary(g => g.Key, g => g.First(), StringComparer.Ordinal);
         // Build index of types with at least one instance method (O(m) once, then O(1) per type lookup).
         foreach (var method in aotCoreIr.Methods)
         {
