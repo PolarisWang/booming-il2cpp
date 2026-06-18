@@ -695,8 +695,15 @@ public sealed partial class NativeAotLoweringPlanner
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.NativeSymbol, StringComparer.Ordinal);
 
         // Build reverse symbol table for inlining SubjectId resolution.
-        _nativeSymbolToSubjectId = _moduleSymbolTable
-            .ToDictionary(kvp => kvp.Value, kvp => kvp.Key, StringComparer.Ordinal);
+        // Use safe-dedup: when multiple methods produce the same NativeSymbol
+        // (e.g., from closure assemblies loaded alongside the entry assembly),
+        // keep the first occurrence rather than crashing.
+        _nativeSymbolToSubjectId = new Dictionary<string, string>(_moduleSymbolTable.Count, StringComparer.Ordinal);
+        foreach (var kvp in _moduleSymbolTable)
+        {
+            if (!_nativeSymbolToSubjectId.ContainsKey(kvp.Value))
+                _nativeSymbolToSubjectId[kvp.Value] = kvp.Key;
+        }
 
         _attributeStorageFieldIndex = BuildAttributeStorageFieldIndex(_methodsBySubjectId);
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);

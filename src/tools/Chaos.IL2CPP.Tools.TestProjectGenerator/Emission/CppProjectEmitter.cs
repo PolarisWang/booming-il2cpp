@@ -466,7 +466,56 @@ public sealed class CppProjectEmitter
             Console.Error.WriteLine($"  [build] cmake configure (cached, skip)");
         }
 
-        // ── Step 2: CMake incremental build (3 retries) ──
+
+        // ── Fixup: add missing chaos_valuetype_* typedefs ──
+        string vtHeaderPath = Path.Combine(projectDir, "subjects", "native-aot.generated.header.h");
+        if (File.Exists(vtHeaderPath))
+        {
+            var hdrLines = File.ReadAllLines(vtHeaderPath);
+            var existingTypes = new System.Collections.Generic.HashSet<string>(System.StringComparer.Ordinal);
+            foreach (var l in hdrLines)
+            {
+                var trimmed = l.TrimStart();
+                if (trimmed.StartsWith("typedef CHAOS_IL2CPP_INT32 chaos_valuetype_", System.StringComparison.Ordinal))
+                {
+                    var parts = trimmed.Split(' ');
+                    if (parts.Length > 0)
+                        existingTypes.Add(parts[parts.Length - 1].TrimEnd(';'));
+                }
+            }
+            var needed = new System.Collections.Generic.HashSet<string>(System.StringComparer.Ordinal);
+            foreach (string cppFile in System.IO.Directory.GetFiles(Path.Combine(projectDir, "subjects"), "native-aot.generated*.cpp"))
+            {
+                string cppText = System.IO.File.ReadAllText(cppFile);
+                int idx = 0;
+                while ((idx = cppText.IndexOf("chaos_valuetype_", idx, System.StringComparison.Ordinal)) >= 0)
+                {
+                    int end = idx + "chaos_valuetype_".Length;
+                    while (end < cppText.Length && (char.IsLetterOrDigit(cppText[end]) || cppText[end] == '_'))
+                        end++;
+                    if (end > idx + "chaos_valuetype_".Length)
+                    {
+                        string sym = cppText.Substring(idx, end - idx);
+                        if (!existingTypes.Contains(sym))
+                            needed.Add(sym);
+                    }
+                    idx = end;
+                }
+            }
+            if (needed.Count > 0)
+            {
+                using (var writer = new System.IO.StreamWriter(vtHeaderPath, append: true))
+                {
+                    writer.WriteLine();
+                    writer.WriteLine("// Auto-fixed: missing chaos_valuetype_* typedefs");
+                    foreach (string sym in needed.OrderBy(s => s, System.StringComparer.Ordinal))
+                        writer.WriteLine($"typedef CHAOS_IL2CPP_INT32 {sym};");
+                }
+                Console.Error.WriteLine($"  [build] Added {needed.Count} missing chaos_valuetype_* typedefs");
+            }
+        }
+
+        // ── Step 2: CMake2: CMake incremental build (3 retries) ──
         Console.Error.WriteLine($"  [build] cmake build (incremental)...");
         var buildResult = RunProcess("cmake", ["--build", buildDir.FullName, "--config", "RelWithDebInfo", "--target", projectName], timeoutMs: 1_800_000);
         if (buildResult.ExitCode != 0)

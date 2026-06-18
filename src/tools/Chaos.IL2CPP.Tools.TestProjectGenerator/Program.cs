@@ -391,6 +391,10 @@ public static class Program
         var subjectMethodIds = aotSubjectIds.Distinct(StringComparer.Ordinal).ToList();
         Console.WriteLine($"        {subjectMethodIds.Count} AOT SubjectIds for codegen (from {subjects.Count} subjects)");
 
+        // Build assembly path list (subjects DLL only — namespace-filtered chunks
+        // skip auto-detect to avoid loading duplicate methods from closure assemblies)
+        var allAssemblyPaths = new List<string> { dllPath };
+
         // Step 2: Run IL2CPP codegen
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");
         var codegenBase = Path.Combine(outputDir, "codegen");
