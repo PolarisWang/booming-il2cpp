@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <DefineConstants>VERIFY</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>
+    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB5006</NoWarn>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CombinedSubjects.cs" />
-    <ProjectReference Include="D:\agent\chaos-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="/home/debian/agent/booming-il2cpp/src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
 </Project>

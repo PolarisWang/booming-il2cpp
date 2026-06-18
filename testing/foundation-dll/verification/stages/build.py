@@ -607,7 +607,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
         "  <PropertyGroup>\n"
         "    <OutputType>Library</OutputType>\n"
-        f"    <TargetFramework>{tfm}</TargetFramework>\n"
+        "    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>\n"
         "    <ImplicitUsings>enable</ImplicitUsings>\n"
         "    <Nullable>enable</Nullable>\n"
         "    <DefineConstants>VERIFY</DefineConstants>\n"
@@ -626,6 +626,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     print(f"  [build] Building combined project ({tfm})...")
     build_result = subprocess.run(
         ["dotnet", "build", str(combined_csproj),
+         "-f", tfm,
          f"-p:OutDir={subjects_dll.parent}",
          "-p:ImportDirectoryBuildProps=false",
          "--nologo", "-v", "quiet"],
