@@ -1,4 +1,7 @@
 // ABI exports: extern "C" linkage for managed/NativeAOT callability.
+#ifndef NOMINMAX
+#define NOMINMAX 1
+#endif
 #include "jit_engine.h"
 #include "x64_encoder.h"
 #include "code_buffer.h"
@@ -4736,9 +4739,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     // Emit instructions
     {
-        char dbg_buf[128];
-        int len = snprintf(dbg_buf, sizeof(dbg_buf), "[DBG] Starting emit loop: n_instrs=%u\n", n_instrs);
-        write(2, dbg_buf, len > 0 ? (size_t)len : 0);
+        fprintf(stderr, "[DBG] Starting emit loop: n_instrs=%u\n", n_instrs);
     }
     for (uint32_t i = 0; i < n_instrs; ++i) {
         instr_offsets_[i] = buf_.pos();
