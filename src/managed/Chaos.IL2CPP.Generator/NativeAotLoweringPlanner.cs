@@ -4465,22 +4465,12 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var subjectIdsInMethods = new HashSet<string>(methods.Select(m => m.SubjectId!),
                 StringComparer.Ordinal);
-            // Build fallback lookup: base method name -> subject IDs for fuzzy matching
-            // when ATG-generated method index (e.g. __0) differs from AOT lowering index (e.g. __52).
-            var strippedNameToSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var sid in subjectIdsInMethods)
-            {
-                var nameEnd = sid.IndexOf(':', sid.IndexOf("::", StringComparison.Ordinal) + 2);
-                if (nameEnd > 0)
-                {
-                    var baseName = sid.Substring(0, nameEnd);
-                    var dduscore = baseName.LastIndexOf("__", StringComparison.Ordinal);
-                    strippedNameToSubjectIds.Add(dduscore > 0 ? baseName.Substring(0, dduscore) : baseName);
-                }
-            }
-            int matched = 0, missed = 0, benchmarkSkipped = 0, fuzzyMatched = 0;
+            int matched = 0, missed = 0, benchmarkSkipped = 0;
             foreach (var sid in _subjectMethodSubjectIds)
             {
+                // Skip Benchmark_ entries — they are excluded from subject entries
+                // by IsSubjectMethod() at line 4837, so counting them as "missed" is
+                // misleading. The diagnostic focuses on fact-wrapper match rate.
                 if (sid.Contains("::Benchmark_", StringComparison.Ordinal))
                 {
                     benchmarkSkipped++;
@@ -4489,29 +4479,15 @@ public sealed partial class NativeAotLoweringPlanner
                 if (subjectIdsInMethods.Contains(sid))
                     matched++;
                 else
-                {
-                    var nameStart = sid.IndexOf("::", StringComparison.Ordinal);
-                    var nameEnd = sid.IndexOf(':', nameStart + 2);
-                    if (nameStart > 0 && nameEnd > nameStart)
-                    {
-                        var baseName = sid.Substring(0, nameEnd);
-                        var dduscore = baseName.LastIndexOf("__", StringComparison.Ordinal);
-                        var stripped = dduscore > 0 ? baseName.Substring(0, dduscore) : baseName;
-                        if (strippedNameToSubjectIds.Contains(stripped))
-                        {
-                            fuzzyMatched++;
-                            continue;
-                        }
-                    }
                     missed++;
-                }
             }
-            int totalConsidered = matched + missed + fuzzyMatched;
-            Console.Error.WriteLine($"[SUBJECT-MATCH] {matched} matched, {fuzzyMatched} fuzzy-matched, {missed} missed " +
+            int totalConsidered = matched + missed;
+            Console.Error.WriteLine($"[SUBJECT-MATCH] {matched} matched, {missed} missed " +
                 $"(out of {totalConsidered} fact subject-methods + {benchmarkSkipped} benchmark skipped, " +
                 $"{methods.Count} methods in dispatch)");
-            if (missed > 0 || fuzzyMatched > 0)
+            if (missed > 0)
             {
+                // Log first 10 missed SubjectIds as samples
                 int sampleCount = 0;
                 foreach (var sid in _subjectMethodSubjectIds)
                 {
@@ -4519,28 +4495,19 @@ public sealed partial class NativeAotLoweringPlanner
                         continue;
                     if (!subjectIdsInMethods.Contains(sid))
                     {
-                        bool isFuzzy = false;
-                        var nameStart = sid.IndexOf("::", StringComparison.Ordinal);
-                        var nameEnd = sid.IndexOf(':', nameStart + 2);
-                        if (nameStart > 0 && nameEnd > nameStart)
-                        {
-                            var baseName = sid.Substring(0, nameEnd);
-                            var dduscore = baseName.LastIndexOf("__", StringComparison.Ordinal);
-                            var stripped = dduscore > 0 ? baseName.Substring(0, dduscore) : baseName;
-                            isFuzzy = strippedNameToSubjectIds.Contains(stripped);
-                        }
                         if (sampleCount < 10)
-                            Console.Error.WriteLine($"  [SUBJECT-{(isFuzzy ? "FUZZY-MATCH" : "MISS")}] {sid}");
+                            Console.Error.WriteLine($"  [SUBJECT-MISS] {sid}");
                         sampleCount++;
                         if (sampleCount == 10)
                         {
-                            Console.Error.WriteLine($"  [SUBJECT-...] ... and {missed + fuzzyMatched - 10} more");
+                            Console.Error.WriteLine($"  [SUBJECT-MISS] ... and {missed - 10} more");
                             break;
                         }
                     }
                 }
             }
-        }        // Build set of SubjectIds that have a _0 variant (fact wrapper).
+        }
+        // Build set of SubjectIds that have a _0 variant (fact wrapper).
         // Used to skip _1/_2 variants when _0 covers the fact test.
         // Normalize the variant suffix _N before the return type (e.g., "_0:System.Int64()"
         // → ":System.Int64()") so that _0 and _1 variants of the same method match.

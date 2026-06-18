@@ -1,53 +1,147 @@
 {
   "assemblyName": "System.Xml.ReaderWriter",
-  "timestamp": "2026-06-18T07:40:14",
+  "timestamp": "2026-06-18T05:20:19",
   "totalChunks": 3,
-  "totalBenchmarkedMethods": 0,
-  "aggregatePerformance": {},
+  "totalBenchmarkedMethods": 155,
+  "aggregatePerformance": {
+    "meanDurationMs": 1.0080433039951169,
+    "meanOpsPerSecond": 9924531.805610137,
+    "aggregateMeanCv": 0.009424993151790812
+  },
   "chunkSummaries": [
     {
       "slug": "system-xml-schema",
       "fact": {
-        "status": "no_results"
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 0,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 81,
+        "iterations": 10000,
+        "meanDurationMs": 1.0106802469135803,
+        "meanOpsPerSecond": 9901984.777777778,
+        "minDurationMs": 0.9973,
+        "maxDurationMs": 1.0847,
+        "totalDurationMs": 81.8651,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.012499308641975307,
+        "maxCv": 0.101916
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": -11,
+        "patchDataUsed": false,
+        "patchFailed": false,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
-        "status": "not_run"
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     },
     {
       "slug": "system-xml-xsl",
       "fact": {
-        "status": "no_results"
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 0,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 19,
+        "iterations": 10000,
+        "meanDurationMs": 1.0044842105263159,
+        "meanOpsPerSecond": 9956295.561052632,
+        "minDurationMs": 0.9983,
+        "maxDurationMs": 1.0177,
+        "totalDurationMs": 19.0852,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.006683052631578948,
+        "maxCv": 0.024551
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": -11,
+        "patchDataUsed": false,
+        "patchFailed": false,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
-        "status": "not_run"
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     },
     {
       "slug": "xml",
       "fact": {
-        "status": "no_results"
+        "passed": 0,
+        "total": 0,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 0,
+        "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "status": "no_results"
+        "methodCount": 55,
+        "iterations": 10000,
+        "meanDurationMs": 1.0089654545454545,
+        "meanOpsPerSecond": 9915315.078,
+        "minDurationMs": 0.9973,
+        "maxDurationMs": 1.053,
+        "totalDurationMs": 55.4931,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.009092618181818182,
+        "maxCv": 0.065878
       },
       "hotupdate": {
-        "status": "no_results"
+        "passed": 0,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": false,
+        "exitCode": -11,
+        "patchDataUsed": false,
+        "patchFailed": false,
+        "truncated": true,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
       },
       "build": {
-        "status": "not_run"
+        "status": "passed"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
       }
     }
   ]

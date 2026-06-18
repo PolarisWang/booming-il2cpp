@@ -1,51 +1,56 @@
 {
   "assemblyName": "System.Linq",
-  "timestamp": "2026-06-18T07:40:14",
+  "timestamp": "2026-06-18T05:52:47",
   "totalChunks": 1,
-  "chunksWithFacts": 0,
+  "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 0,
-  "totalFactMethods": 0,
+  "totalPassed": 192,
+  "totalFactMethods": 192,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 0,
-        "total": 0,
+        "passed": 192,
+        "total": 192,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 339,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 332,
+        "methodCount": 125,
         "iterations": 10000,
-        "meanDurationMs": 0.028288855421686746,
-        "meanOpsPerSecond": 345011906.6540373,
-        "minDurationMs": 0,
-        "maxDurationMs": 0.0337,
-        "totalDurationMs": 9.3919,
+        "meanDurationMs": 1.9580896,
+        "meanOpsPerSecond": 30819292.9616,
+        "minDurationMs": 0.3209,
+        "maxDurationMs": 184.0415,
+        "totalDurationMs": 244.7612,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.0,
-        "totalOutliers": 237,
-        "meanCv": 0.14578305279503107,
-        "maxCv": 0.714774
+        "meanSampleCount": 9.9,
+        "totalOutliers": 7,
+        "meanCv": 0.604250536,
+        "maxCv": 0.834397
       },
       "hotupdate": {
-        "passed": 336,
+        "passed": 125,
         "failed": 0,
-        "allSemantic": true,
+        "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": true,
+        "patchDataUsed": false,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
         "assertFailed": 0,
-        "semanticChangedCount": 199
+        "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 11618792,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,
