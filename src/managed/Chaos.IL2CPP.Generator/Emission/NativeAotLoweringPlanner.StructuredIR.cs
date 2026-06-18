@@ -1690,7 +1690,7 @@ public sealed partial class NativeAotLoweringPlanner
                     pushes = 1; pops = 0; break;
 
                 // Pure pops (-1)
-                case "pop": case "stloc": case "starg": case "initobj":
+                case "pop": case "stloc": case "stloc.s": case "starg": case "initobj":
                 case "throw":
                 case "brfalse": case "brtrue":
                     pushes = 0; pops = 1; break;
