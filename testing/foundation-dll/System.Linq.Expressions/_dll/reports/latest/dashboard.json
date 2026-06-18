@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Linq.Expressions",
-  "timestamp": "2026-06-18T05:52:38",
+  "timestamp": "2026-06-18T10:44:22",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
@@ -9,12 +9,13 @@
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 659,
     "aggregatePerformance": {
-      "meanDurationMs": 7.352456752655539,
-      "meanOpsPerSecond": 42970489.76764795,
-      "aggregateMeanCv": 0.02374023368740516
+      "meanDurationMs": 0.4581675265553869,
+      "meanOpsPerSecond": 296697032.84522,
+      "aggregateMeanCv": 0.24512630804248864,
+      "totalOutliers": 807
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
@@ -23,17 +24,24 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 11,
-      "methodsWithNet8": 11,
+      "methodsAnalyzed": 515,
+      "methodsWithNet8": 418,
       "chaosAotVsNet8": {},
-      "chaosJitVsNet8": {},
+      "chaosJitVsNet8": {
+        "mean": -45.62,
+        "median": -45.62,
+        "min": -45.62,
+        "max": -45.62,
+        "p25": -45.62,
+        "p75": -45.62
+      },
       "net10VsNet8": {
-        "mean": -4.45,
-        "median": -4.45,
-        "min": -4.45,
-        "max": -4.45,
-        "p25": -4.45,
-        "p75": -4.45
+        "mean": 2.67,
+        "median": 2.67,
+        "min": 2.67,
+        "max": 2.67,
+        "p25": 2.67,
+        "p75": 2.67
       },
       "highValueMethods_betterThanNet8": 0.0
     }

@@ -1,19 +1,20 @@
 {
   "assemblyName": "System.Reflection.Metadata",
-  "timestamp": "2026-06-18T07:06:15",
+  "timestamp": "2026-06-18T10:44:22",
   "totalChunks": 3,
-  "totalBenchmarkedMethods": 471,
+  "totalBenchmarkedMethods": 475,
   "aggregatePerformance": {
-    "meanDurationMs": 4.65655830357369,
-    "meanOpsPerSecond": 34854809.53163067,
-    "aggregateMeanCv": 0.04998969774054424
+    "meanDurationMs": 4.4001314618196,
+    "meanOpsPerSecond": 265294636.27753535,
+    "aggregateMeanCv": 0.32594306726393335,
+    "totalOutliers": 293
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 42,
-        "total": 43,
+        "passed": 41,
+        "total": 41,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 49,
@@ -21,70 +22,25 @@
       },
       "benchmark": {
         "methodCount": 41,
-        "iterations": 10000,
-        "meanDurationMs": 8.565821951219514,
-        "meanOpsPerSecond": 35637422.284146346,
-        "minDurationMs": 0.2063,
-        "maxDurationMs": 86.087,
-        "totalDurationMs": 351.19870000000003,
+        "iterations": 4000,
+        "meanDurationMs": 0.29210487804878044,
+        "meanOpsPerSecond": 289242013.13902444,
+        "minDurationMs": 0.012,
+        "maxDurationMs": 9.6337,
+        "totalDurationMs": 11.976299999999998,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.07341917073170731,
-        "maxCv": 0.241049
+        "meanSampleCount": 9.2,
+        "totalOutliers": 34,
+        "meanCv": 0.1966801463414634,
+        "maxCv": 1.040631
       },
       "hotupdate": {
-        "passed": 40,
+        "passed": 41,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": false,
-        "patchFailed": false,
-        "truncated": false,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
-      },
-      "build": {
-        "status": "passed"
-      },
-      "benchmarkReport": {
-        "totalMethods": 0,
-        "methodsWithNet8": 0
-      }
-    },
-    {
-      "slug": "system-reflection-metadata",
-      "fact": {
-        "passed": 321,
-        "total": 321,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 408,
-        "metaBenchmarkCount": 0
-      },
-      "benchmark": {
-        "methodCount": 321,
-        "iterations": 1818,
-        "meanDurationMs": 1.8842529595015576,
-        "meanOpsPerSecond": 36695421.1423053,
-        "minDurationMs": 0.0377,
-        "maxDurationMs": 23.2533,
-        "totalDurationMs": 604.8452,
-        "totalAllocatedBytes": 203616.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.02636277570093458,
-        "maxCv": 0.209851
-      },
-      "hotupdate": {
-        "passed": 321,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": false,
+        "patchDataUsed": true,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -96,7 +52,57 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 9936608,
+        "totalSize": 3096064,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-reflection-metadata",
+      "fact": {
+        "passed": 325,
+        "total": 325,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 408,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 325,
+        "iterations": 50000,
+        "meanDurationMs": 7.321834461538462,
+        "meanOpsPerSecond": 272881929.61649835,
+        "minDurationMs": 0,
+        "maxDurationMs": 160.1202,
+        "totalDurationMs": 2379.5962,
+        "totalAllocatedBytes": 5600000.0,
+        "meanSampleCount": 8.5,
+        "totalOutliers": 198,
+        "meanCv": 0.47529200336700334,
+        "maxCv": 2.650401
+      },
+      "hotupdate": {
+        "passed": 325,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 5968896,
         "source": "none"
       },
       "benchmarkReport": {
@@ -107,7 +113,7 @@
     {
       "slug": "system-reflection-metadata-ecma335",
       "fact": {
-        "passed": 351,
+        "passed": 352,
         "total": 352,
         "valueSuspicious": false,
         "valueWarnings": 0,
@@ -116,25 +122,25 @@
       },
       "benchmark": {
         "methodCount": 109,
-        "iterations": 1562,
-        "meanDurationMs": 3.5195999999999996,
-        "meanOpsPerSecond": 32231585.168440368,
-        "minDurationMs": 0.0327,
-        "maxDurationMs": 16.7037,
-        "totalDurationMs": 383.6364,
-        "totalAllocatedBytes": 399872.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.05018714678899082,
-        "maxCv": 0.337236
+        "iterations": 50000,
+        "meanDurationMs": 5.586455045871559,
+        "meanOpsPerSecond": 233759966.07708335,
+        "minDurationMs": 0,
+        "maxDurationMs": 38.0803,
+        "totalDurationMs": 608.9236,
+        "totalAllocatedBytes": 12800000.0,
+        "meanSampleCount": 8.2,
+        "totalOutliers": 61,
+        "meanCv": 0.3058570520833333,
+        "maxCv": 0.93871
       },
       "hotupdate": {
-        "passed": 351,
+        "passed": 312,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": false,
+        "patchDataUsed": true,
         "patchFailed": false,
         "truncated": false,
         "crash": false,

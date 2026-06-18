@@ -20,6 +20,7 @@
 #include "thread_state.h"
 #include "runtime_stubs/array_stubs.h"
 #include "runtime_stubs/unicode_tables.generated.h"
+#include "runtime_stubs/char_stubs.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -134,41 +135,9 @@ CHAOS_IL2CPP_INTPTR ChaosCultureGetTextInfo(CHAOS_IL2CPP_INTPTR /*culture*/) noe
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_stub_subsystem);
 }
 
-CHAOS_IL2CPP_INTPTR ChaosTextInfoToLower(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 c) noexcept
-{
-    if (c < 0 || c > 0xFFFF) return static_cast<CHAOS_IL2CPP_INTPTR>(c);
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(c);
-    // ASCII fast path: A-Z → a-z
-    if (cp >= 0x41 && cp <= 0x5A)
-        return static_cast<CHAOS_IL2CPP_INTPTR>(cp + 32);
-    // Binary search on uppercase case table
-    CHAOS_IL2CPP_INT32 lo = 0, hi = kUnicodeUppercaseRangeCount;
-    while (lo < hi) {
-        CHAOS_IL2CPP_INT32 mid = (lo + hi) >> 1;
-        if (cp < kUnicodeUppercaseRanges[mid].start) { hi = mid; continue; }
-        if (cp > kUnicodeUppercaseRanges[mid].end) { lo = mid + 1; continue; }
-        return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(cp) + kUnicodeUppercaseRanges[mid].delta);
-    }
-    return static_cast<CHAOS_IL2CPP_INTPTR>(c);
-}
 
-CHAOS_IL2CPP_INTPTR ChaosTextInfoToUpper(CHAOS_IL2CPP_INTPTR /*text_info*/, CHAOS_IL2CPP_INT32 c) noexcept
-{
-    if (c < 0 || c > 0xFFFF) return static_cast<CHAOS_IL2CPP_INTPTR>(c);
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(c);
-    // ASCII fast path: a-z → A-Z
-    if (cp >= 0x61 && cp <= 0x7A)
-        return static_cast<CHAOS_IL2CPP_INTPTR>(cp - 32);
-    // Binary search on lowercase case table
-    CHAOS_IL2CPP_INT32 lo = 0, hi = kUnicodeLowercaseRangeCount;
-    while (lo < hi) {
-        CHAOS_IL2CPP_INT32 mid = (lo + hi) >> 1;
-        if (cp < kUnicodeLowercaseRanges[mid].start) { hi = mid; continue; }
-        if (cp > kUnicodeLowercaseRanges[mid].end) { lo = mid + 1; continue; }
-        return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(cp) - kUnicodeLowercaseRanges[mid].delta);
-    }
-    return static_cast<CHAOS_IL2CPP_INTPTR>(c);
-}
+
+
 
 CHAOS_IL2CPP_INTPTR ChaosTextInfoGetCultureName(CHAOS_IL2CPP_INTPTR /*text_info*/) noexcept
 {
@@ -212,48 +181,13 @@ static inline CHAOS_IL2CPP_INT32 LookupEntryBinary(const TEntry* table, CHAOS_IL
 // Reopen extern "C" for function implementations using the template above.
 extern "C" {
 
-CHAOS_IL2CPP_FLOAT64 ChaosCharUnicodeInfoGetNumericValue(CHAOS_IL2CPP_INT32 ch) noexcept
-{
-    if (ch < 0 || ch > 0xFFFF) return -1.0;
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
-    float val;
-    if (LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val))
-        return static_cast<CHAOS_IL2CPP_FLOAT64>(val);
-    if (LookupEntryBinary(kUnicodeNumericTable, kUnicodeNumericCount, cp, val))
-        return static_cast<CHAOS_IL2CPP_FLOAT64>(val);
-    return -1.0;
-}
 
-CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept
-{
-    if (ch < 0 || ch > 0xFFFF) return -1;
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
-    float val;
-    return LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val) ? static_cast<CHAOS_IL2CPP_INT32>(val) : -1;
-}
 
-CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetDecimalDigitValue(CHAOS_IL2CPP_INT32 ch) noexcept
-{
-    if (ch < 0 || ch > 0xFFFF) return -1;
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
-    float val;
-    return LookupEntryBinary(kUnicodeDecimalDigitTable, kUnicodeDecimalDigitCount, cp, val) ? static_cast<CHAOS_IL2CPP_INT32>(val) : -1;
-}
 
-CHAOS_IL2CPP_INT32 ChaosCharUnicodeInfoGetUnicodeCategory(CHAOS_IL2CPP_INT32 ch) noexcept
-{
-    if (ch < 0 || ch > 0xFFFF) return 29;  // UnicodeCategory.OtherNotAssigned
-    auto cp = static_cast<CHAOS_IL2CPP_UINT16>(ch);
-    // Binary search on sorted range table
-    CHAOS_IL2CPP_INT32 lo = 0, hi = kUnicodeCategoryRangeCount;
-    while (lo < hi) {
-        CHAOS_IL2CPP_INT32 mid = (lo + hi) >> 1;
-        if (cp < kUnicodeCategoryRanges[mid].start) { hi = mid; continue; }
-        if (cp > kUnicodeCategoryRanges[mid].end) { lo = mid + 1; continue; }
-        return static_cast<CHAOS_IL2CPP_INT32>(kUnicodeCategoryRanges[mid].category);
-    }
-    return 29;
-}
+
+
+
+
 
 CHAOS_IL2CPP_INT32 ChaosCompareInfoIsSortableString(CHAOS_IL2CPP_INTPTR str) noexcept
 {

@@ -1,53 +1,59 @@
 {
   "assemblyName": "System.Runtime.Serialization.Formatters",
-  "timestamp": "2026-06-18T04:54:44",
+  "timestamp": "2026-06-18T10:44:22",
   "totalChunks": 1,
-  "totalBenchmarkedMethods": 75,
+  "totalBenchmarkedMethods": 74,
   "aggregatePerformance": {
-    "meanDurationMs": 5.238898666666667,
-    "meanOpsPerSecond": 34984216.55106667,
-    "aggregateMeanCv": 0.006549026666666667
+    "meanDurationMs": 0.27792702702702704,
+    "meanOpsPerSecond": 231230031.82702702,
+    "aggregateMeanCv": 0.21773117567567565,
+    "totalOutliers": 75
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
         "passed": 75,
-        "total": 76,
+        "total": 75,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 84,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 75,
+        "methodCount": 74,
         "iterations": 10000,
-        "meanDurationMs": 5.238898666666667,
-        "meanOpsPerSecond": 34984216.55106667,
-        "minDurationMs": 0.206,
-        "maxDurationMs": 103.4067,
-        "totalDurationMs": 392.9174,
+        "meanDurationMs": 0.27792702702702704,
+        "meanOpsPerSecond": 231230031.82702702,
+        "minDurationMs": 0.039,
+        "maxDurationMs": 6.3227,
+        "totalDurationMs": 20.5666,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.006549026666666667,
-        "maxCv": 0.1105
+        "meanSampleCount": 9.0,
+        "totalOutliers": 75,
+        "meanCv": 0.21773117567567565,
+        "maxCv": 1.763325
       },
       "hotupdate": {
-        "passed": 0,
+        "passed": 74,
         "failed": 0,
         "allSemantic": false,
-        "allRevert": false,
-        "exitCode": -15,
-        "patchDataUsed": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
         "patchFailed": false,
-        "truncated": true,
+        "truncated": false,
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2906112,
+        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,

@@ -1,55 +1,49 @@
 {
   "assemblyName": "System.Runtime.Serialization.Formatters",
-  "timestamp": "2026-06-18T04:54:44",
+  "timestamp": "2026-06-18T10:44:22",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
-    "factPassRate": 98.7,
-    "totalBenchmarkedMethods": 75,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 74,
     "aggregatePerformance": {
-      "meanDurationMs": 5.238898666666667,
-      "meanOpsPerSecond": 34984216.55106667,
-      "aggregateMeanCv": 0.006549026666666667
+      "meanDurationMs": 0.27792702702702704,
+      "meanOpsPerSecond": 231230031.82702702,
+      "aggregateMeanCv": 0.21773117567567565,
+      "totalOutliers": 75
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
-      "chunksWithRevertFailure": 1,
-      "totalPassed": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 74,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 79,
-      "methodsWithNet8": 75,
-      "chaosAotVsNet8": {
-        "mean": -184.72,
-        "median": -184.72,
-        "min": -184.72,
-        "max": -184.72,
-        "p25": -184.72,
-        "p75": -184.72
-      },
+      "methodsAnalyzed": 49,
+      "methodsWithNet8": 44,
+      "chaosAotVsNet8": {},
       "chaosJitVsNet8": {
-        "mean": -171.66,
-        "median": -171.66,
-        "min": -171.66,
-        "max": -171.66,
-        "p25": -171.66,
-        "p75": -171.66
+        "mean": 61.75,
+        "median": 61.75,
+        "min": 61.75,
+        "max": 61.75,
+        "p25": 61.75,
+        "p75": 61.75
       },
       "net10VsNet8": {
-        "mean": -10.63,
-        "median": -10.63,
-        "min": -10.63,
-        "max": -10.63,
-        "p25": -10.63,
-        "p75": -10.63
+        "mean": -15.49,
+        "median": -15.49,
+        "min": -15.49,
+        "max": -15.49,
+        "p25": -15.49,
+        "p75": -15.49
       },
-      "highValueMethods_betterThanNet8": 8.0
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

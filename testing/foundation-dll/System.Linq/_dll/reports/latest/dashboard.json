@@ -1,47 +1,40 @@
 {
   "assemblyName": "System.Linq",
-  "timestamp": "2026-06-18T05:52:47",
+  "timestamp": "2026-06-18T10:44:22",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
     "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 125,
+    "totalBenchmarkedMethods": 206,
     "aggregatePerformance": {
-      "meanDurationMs": 1.9580896,
-      "meanOpsPerSecond": 30819292.9616,
-      "aggregateMeanCv": 0.604250536,
-      "totalOutliers": 7
+      "meanDurationMs": 0.15176601941747572,
+      "meanOpsPerSecond": 319115966.9106796,
+      "aggregateMeanCv": 0.17628974757281554,
+      "totalOutliers": 209
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 125,
+      "totalPassed": 206,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 339,
-      "methodsWithNet8": 339,
+      "methodsAnalyzed": 256,
+      "methodsWithNet8": 254,
       "chaosAotVsNet8": {
-        "mean": -112.54,
-        "median": -112.54,
-        "min": -112.54,
-        "max": -112.54,
-        "p25": -112.54,
-        "p75": -112.54
+        "mean": -61.19,
+        "median": -61.19,
+        "min": -61.19,
+        "max": -61.19,
+        "p25": -61.19,
+        "p75": -61.19
       },
-      "chaosJitVsNet8": {
-        "mean": -123.08,
-        "median": -123.08,
-        "min": -123.08,
-        "max": -123.08,
-        "p25": -123.08,
-        "p75": -123.08
-      },
+      "chaosJitVsNet8": {},
       "net10VsNet8": {
         "mean": 0.0,
         "median": 0.0,
@@ -50,7 +43,7 @@
         "p25": 0.0,
         "p75": 0.0
       },
-      "highValueMethods_betterThanNet8": 15.0
+      "highValueMethods_betterThanNet8": 49.2
     }
   }
 }

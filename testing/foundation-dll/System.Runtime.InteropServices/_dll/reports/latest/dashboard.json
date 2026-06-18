@@ -1,56 +1,48 @@
 {
   "assemblyName": "System.Runtime.InteropServices",
-  "timestamp": "2026-06-18T07:06:20",
+  "timestamp": "2026-06-18T10:44:22",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
     "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 31,
+    "totalBenchmarkedMethods": 29,
     "aggregatePerformance": {
-      "meanDurationMs": 20.60996129032258,
-      "meanOpsPerSecond": 17692544.241935484,
-      "aggregateMeanCv": 0.4879306451612903,
-      "totalOutliers": 21
+      "meanDurationMs": 1.0479068965517242,
+      "meanOpsPerSecond": 248689302.74724138,
+      "aggregateMeanCv": 0.055691379310344825
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 31,
+      "totalPassed": 29,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
       "methodsAnalyzed": 26,
       "methodsWithNet8": 26,
-      "chaosAotVsNet8": {
-        "mean": -874.76,
-        "median": -874.76,
-        "min": -874.76,
-        "max": -874.76,
-        "p25": -874.76,
-        "p75": -874.76
-      },
+      "chaosAotVsNet8": {},
       "chaosJitVsNet8": {
-        "mean": -949.82,
-        "median": -949.82,
-        "min": -949.82,
-        "max": -949.82,
-        "p25": -949.82,
-        "p75": -949.82
+        "mean": 83.96,
+        "median": 83.96,
+        "min": 83.96,
+        "max": 83.96,
+        "p25": 83.96,
+        "p75": 83.96
       },
       "net10VsNet8": {
-        "mean": -5.54,
-        "median": -5.54,
-        "min": -5.54,
-        "max": -5.54,
-        "p25": -5.54,
-        "p75": -5.54
+        "mean": -2.53,
+        "median": -2.53,
+        "min": -2.53,
+        "max": -2.53,
+        "p25": -2.53,
+        "p75": -2.53
       },
-      "highValueMethods_betterThanNet8": 69.2
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

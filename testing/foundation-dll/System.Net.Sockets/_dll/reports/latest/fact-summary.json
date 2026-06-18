@@ -1,12 +1,27 @@
 {
   "assemblyName": "System.Net.Sockets",
-  "timestamp": "2026-06-18T06:17:34",
-  "totalChunks": 1,
+  "timestamp": "2026-06-18T10:44:22",
+  "totalChunks": 2,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
   "totalPassed": 500,
   "totalFactMethods": 500,
   "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "status": "no_results"
+      },
+      "benchmark": {
+        "status": "no_results"
+      },
+      "hotupdate": {
+        "status": "no_results"
+      },
+      "build": {
+        "status": "not_run"
+      }
+    },
     {
       "slug": "system-net-sockets",
       "fact": {
@@ -19,17 +34,17 @@
       },
       "benchmark": {
         "methodCount": 500,
-        "iterations": 4761,
-        "meanDurationMs": 0.2786926,
-        "meanOpsPerSecond": 34006434.6458,
-        "minDurationMs": 0.1246,
-        "maxDurationMs": 14.833,
-        "totalDurationMs": 139.3463,
+        "iterations": 10000,
+        "meanDurationMs": 0.0325224,
+        "meanOpsPerSecond": 307514654.8374,
+        "minDurationMs": 0.0279,
+        "maxDurationMs": 0.038,
+        "totalDurationMs": 16.2612,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.5,
-        "totalOutliers": 273,
-        "meanCv": 0.5728820520000001,
-        "maxCv": 0.827128
+        "meanSampleCount": 8.8,
+        "totalOutliers": 602,
+        "meanCv": 0.229907864,
+        "maxCv": 2.699568
       },
       "hotupdate": {
         "passed": 500,
@@ -37,7 +52,7 @@
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": false,
+        "patchDataUsed": true,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -49,7 +64,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 9493832,
+        "totalSize": 5236736,
         "source": "none"
       },
       "benchmarkReport": {

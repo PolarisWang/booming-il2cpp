@@ -1,12 +1,13 @@
 {
   "assemblyName": "System.ComponentModel.TypeConverter",
-  "timestamp": "2026-06-18T05:48:04",
+  "timestamp": "2026-06-18T10:44:22",
   "totalChunks": 3,
   "totalBenchmarkedMethods": 620,
   "aggregatePerformance": {
-    "meanDurationMs": 2.378487792157958,
-    "meanOpsPerSecond": 33565256.74623701,
-    "aggregateMeanCv": 0.24430945108782443
+    "meanDurationMs": 0.23056651989289637,
+    "meanOpsPerSecond": 297377943.2288373,
+    "aggregateMeanCv": 0.08364698606608488,
+    "totalOutliers": 769
   },
   "chunkSummaries": [
     {
@@ -22,16 +23,16 @@
       "benchmark": {
         "methodCount": 515,
         "iterations": 10000,
-        "meanDurationMs": 6.030458058252427,
-        "meanOpsPerSecond": 37414299.98561165,
-        "minDurationMs": 0.2083,
-        "maxDurationMs": 99.8643,
-        "totalDurationMs": 3105.6859,
+        "meanDurationMs": 0.6190110679611651,
+        "meanOpsPerSecond": 314934964.85815537,
+        "minDurationMs": 0.025,
+        "maxDurationMs": 22.3126,
+        "totalDurationMs": 318.7907,
         "totalAllocatedBytes": 960000.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.2476677495145631,
-        "maxCv": 0.925759
+        "meanSampleCount": 6.6,
+        "totalOutliers": 710,
+        "meanCv": 0.09772682524271845,
+        "maxCv": 1.304019
       },
       "hotupdate": {
         "passed": 515,
@@ -39,7 +40,7 @@
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": false,
+        "patchDataUsed": true,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -51,7 +52,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 9861328,
+        "totalSize": 5286400,
         "source": "none"
       },
       "benchmarkReport": {
@@ -72,16 +73,16 @@
       "benchmark": {
         "methodCount": 74,
         "iterations": 10000,
-        "meanDurationMs": 0.2124891891891892,
-        "meanOpsPerSecond": 47082408.801486485,
-        "minDurationMs": 0.2103,
-        "maxDurationMs": 0.2287,
-        "totalDurationMs": 15.7242,
+        "meanDurationMs": 0.030459459459459458,
+        "meanOpsPerSecond": 336932889.6993243,
+        "minDurationMs": 0.025,
+        "maxDurationMs": 0.0338,
+        "totalDurationMs": 2.254,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.009257797297297298,
-        "maxCv": 0.109261
+        "meanSampleCount": 3.3,
+        "totalOutliers": 49,
+        "meanCv": 0.06267022972972973,
+        "maxCv": 0.171645
       },
       "hotupdate": {
         "passed": 74,
@@ -89,7 +90,7 @@
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": false,
+        "patchDataUsed": true,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -101,7 +102,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 7515096,
+        "totalSize": 2859008,
         "source": "none"
       },
       "benchmarkReport": {
@@ -122,16 +123,16 @@
       "benchmark": {
         "methodCount": 31,
         "iterations": 10000,
-        "meanDurationMs": 0.8925161290322581,
-        "meanOpsPerSecond": 16199061.451612903,
-        "minDurationMs": 0.8592,
-        "maxDurationMs": 0.9276,
-        "totalDurationMs": 27.668,
+        "meanDurationMs": 0.042229032258064514,
+        "meanOpsPerSecond": 240265975.12903225,
+        "minDurationMs": 0.038,
+        "maxDurationMs": 0.0473,
+        "totalDurationMs": 1.3091,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 5.0,
-        "totalOutliers": 0,
-        "meanCv": 0.47600280645161286,
-        "maxCv": 0.541125
+        "meanSampleCount": 3.7,
+        "totalOutliers": 10,
+        "meanCv": 0.09054390322580645,
+        "maxCv": 0.339227
       },
       "hotupdate": {
         "passed": 31,
@@ -139,7 +140,7 @@
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": false,
+        "patchDataUsed": true,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -151,7 +152,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 7441744,
+        "totalSize": 2834432,
         "source": "none"
       },
       "benchmarkReport": {

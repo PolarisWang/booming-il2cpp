@@ -1,138 +1,38 @@
 {
   "assemblyName": "System.Security.Cryptography",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T10:44:22",
   "totalChunks": 3,
   "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 2681,
-  "totalFactMethods": 2681,
+  "totalPassed": 2425,
+  "totalFactMethods": 2425,
   "chunkSummaries": [
     {
       "slug": "security-cryptography",
       "fact": {
-        "passed": 1222,
-        "total": 1222,
+        "passed": 1096,
+        "total": 1096,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 1307,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 1222,
-        "iterations": 19230,
-        "meanDurationMs": 7.5914728314238955,
-        "meanOpsPerSecond": 276200072.8513748,
-        "minDurationMs": 0.0507,
-        "maxDurationMs": 647.1973,
-        "totalDurationMs": 9276.7798,
-        "totalAllocatedBytes": 234452160.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.07481610065466449,
-        "maxCv": 0.690624
+        "methodCount": 1096,
+        "iterations": 3846,
+        "meanDurationMs": 0.2587187956204379,
+        "meanOpsPerSecond": 285581854.30830294,
+        "minDurationMs": 0.011,
+        "maxDurationMs": 20.2476,
+        "totalDurationMs": 283.5558,
+        "totalAllocatedBytes": 2707584.0,
+        "meanSampleCount": 9.5,
+        "totalOutliers": 529,
+        "meanCv": 0.27735460857664235,
+        "maxCv": 2.464162
       },
       "hotupdate": {
-        "passed": 0,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": false,
-        "exitCode": 3221225477,
-        "patchDataUsed": false,
-        "patchFailed": true,
-        "truncated": true,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
-      },
-      "build": {
-        "status": "passed"
-      },
-      "profile": {
-        "methodCount": 0,
-        "totalSize": 10315776,
-        "source": "none"
-      },
-      "benchmarkReport": {
-        "totalMethods": 0,
-        "methodsWithNet8": 0
-      }
-    },
-    {
-      "slug": "security-cryptography-2",
-      "fact": {
-        "passed": 1222,
-        "total": 1222,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 1307,
-        "metaBenchmarkCount": 0
-      },
-      "benchmark": {
-        "methodCount": 1222,
-        "iterations": 17857,
-        "meanDurationMs": 6.80552651391162,
-        "meanOpsPerSecond": 275234678.4031587,
-        "minDurationMs": 0.0453,
-        "maxDurationMs": 562.049,
-        "totalDurationMs": 8316.3534,
-        "totalAllocatedBytes": 217712544.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.0716347929623568,
-        "maxCv": 0.484413
-      },
-      "hotupdate": {
-        "passed": 0,
-        "failed": 0,
-        "allSemantic": false,
-        "allRevert": false,
-        "exitCode": 3221225477,
-        "patchDataUsed": false,
-        "patchFailed": true,
-        "truncated": true,
-        "crash": false,
-        "assertFailed": 0,
-        "semanticChangedCount": 0
-      },
-      "build": {
-        "status": "passed"
-      },
-      "profile": {
-        "methodCount": 0,
-        "totalSize": 10315776,
-        "source": "none"
-      },
-      "benchmarkReport": {
-        "totalMethods": 0,
-        "methodsWithNet8": 0
-      }
-    },
-    {
-      "slug": "system-security-cryptography-x509certificates",
-      "fact": {
-        "passed": 237,
-        "total": 237,
-        "valueSuspicious": false,
-        "valueWarnings": 0,
-        "metaTotal": 276,
-        "metaBenchmarkCount": 0
-      },
-      "benchmark": {
-        "methodCount": 237,
-        "iterations": 25000,
-        "meanDurationMs": 0.7508481012658228,
-        "meanOpsPerSecond": 322464279.35449153,
-        "minDurationMs": 0,
-        "maxDurationMs": 58.212,
-        "totalDurationMs": 177.951,
-        "totalAllocatedBytes": 800000.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.04377233898305085,
-        "maxCv": 0.357556
-      },
-      "hotupdate": {
-        "passed": 236,
+        "passed": 1096,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
@@ -149,7 +49,107 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 5059072,
+        "totalSize": 11238400,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "security-cryptography-2",
+      "fact": {
+        "passed": 1096,
+        "total": 1096,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 1307,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 1096,
+        "iterations": 2941,
+        "meanDurationMs": 0.15734662408759123,
+        "meanOpsPerSecond": 306883374.3551095,
+        "minDurationMs": 0.0078,
+        "maxDurationMs": 11.7772,
+        "totalDurationMs": 172.4519,
+        "totalAllocatedBytes": 2070464.0,
+        "meanSampleCount": 8.8,
+        "totalOutliers": 1302,
+        "meanCv": 0.2411268813868613,
+        "maxCv": 2.816988
+      },
+      "hotupdate": {
+        "passed": 1096,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 11238400,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-security-cryptography-x509certificates",
+      "fact": {
+        "passed": 233,
+        "total": 233,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 276,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 233,
+        "iterations": 10000,
+        "meanDurationMs": 0.11441330472103005,
+        "meanOpsPerSecond": 322408648.5502146,
+        "minDurationMs": 0.0255,
+        "maxDurationMs": 4.5281,
+        "totalDurationMs": 26.6583,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 9.2,
+        "totalOutliers": 197,
+        "meanCv": 0.18654915021459229,
+        "maxCv": 1.31732
+      },
+      "hotupdate": {
+        "passed": 233,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": false,
+        "patchFailed": true,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 5038592,
         "source": "none"
       },
       "benchmarkReport": {

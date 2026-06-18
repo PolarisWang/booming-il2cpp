@@ -154,7 +154,9 @@ set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
 )
 set(CHAOS_ENTRY_STUBS
-    "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
+    # entry_stubs.cpp removed — the functions (Assert_Reset, Assert_Complete)
+    # are defined in runtime-entry.cpp (Scriban template).  Including both
+    # causes LNK4006 duplicate symbol warnings.
 )
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"

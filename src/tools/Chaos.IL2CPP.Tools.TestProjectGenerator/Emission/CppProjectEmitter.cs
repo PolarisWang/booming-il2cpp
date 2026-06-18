@@ -288,26 +288,11 @@ public sealed class CppProjectEmitter
                 + "} } }\n");
         }
 
-        // Async yield stubs — async_stubs.cpp is in the SDK runtime_stubs/ but is not
-        // compiled by the test project's CMakeLists.txt (only profile_globals.cpp is).
-        // The generated code for async methods (e.g. Task.Yield) references these symbols.
-        // Stubs return zero/success values sufficient for verification dispatch.
-        var asyncStubPath = Path.Combine(outputDir, "chaos_stub_async.cpp");
-        if (!File.Exists(asyncStubPath))
-        {
-            File.WriteAllText(asyncStubPath,
-                "// Auto-generated stubs for async runtime helpers.\n"
-                + "// The real implementations are in async_stubs.cpp (part of\n"
-                + "// chaos_runtime_core.lib) but the SDK prebuilt lib may not\n"
-                + "// include them.  Test entry points don't await, so stubs suffice.\n"
-                + "#include <chaos/native_types.h>\n"
-                + "extern \"C\" {\n"
-                + "CHAOS_IL2CPP_INTPTR chaos_async_yield_create(void) noexcept { return 0; }\n"
-                + "CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR) noexcept { return 0; }\n"
-                + "CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR) noexcept { return 1; }\n"
-                + "void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR) noexcept {}\n"
-                + "}\n");
-        }
+        // Async yield stubs — async_stubs.cpp is now compiled from the SDK
+        // runtime_stubs directory (included in the CMakeLists.txt template).
+        // Skip generation of chaos_stub_async.cpp to avoid LNK4006 duplicates.
+        // If a test project fails with unresolved async symbols, revert this and
+        // add a target_link_options /INCLUDE:chaos_async_yield_create directive.
 
 
         // chaos-sdk cmake files
@@ -450,6 +435,22 @@ public sealed class CppProjectEmitter
                 try { oldCmakeFiles.Delete(recursive: true); }
                 catch { /* best-effort */ }
             }
+        // ── SDK auto-sync: ensure codegen/lib/ has latest preset libs ──
+        string presetLibDir = Path.Combine(projectDir, "..", "..", "..", "..", "..", "artifacts", "presets", "windows-x64-reference", "src", "native", "runtime-core", "RelWithDebInfo");
+        string codegenLibDir = Path.Combine(codegenDir, "lib");
+        string presetLib = Path.Combine(presetLibDir, "chaos_runtime_core.lib");
+        string codegenLib = Path.Combine(codegenLibDir, "chaos_runtime_core.lib");
+        if (File.Exists(presetLib) && File.Exists(codegenLib))
+        {
+            var presetTime = File.GetLastWriteTimeUtc(presetLib);
+            var codegenTime = File.GetLastWriteTimeUtc(codegenLib);
+            if (presetTime > codegenTime)
+            {
+                File.Copy(presetLib, codegenLib, overwrite: true);
+                Console.Error.WriteLine($"  [build] SDK sync: updated chaos_runtime_core.lib (preset newer)");
+            }
+        }
+
             Console.Error.WriteLine($"  [build] cmake configure (fresh)...");
             var cfgArgs = new List<string> { "-S", projectDir, "-B", buildDir.FullName };
             cfgArgs.AddRange(cmakeGeneratorArgs);
