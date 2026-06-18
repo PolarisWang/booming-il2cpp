@@ -585,6 +585,14 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrMethodArtifact method,
         string indentation)
     {
+        // Emit pending branch skip labels from brtrue/brfalse fallback.
+        // Emitted BEFORE the next block so fallthrough path skips target body.
+        if (_pendingBranchSkipLabels is { Count: > 0 })
+        {
+            foreach (var sl in _pendingBranchSkipLabels)
+                builder.AppendLine(indentation + $"{sl}:;");
+            _pendingBranchSkipLabels.Clear();
+        }
         // When an IRBlock is emitted as a child of IRSequence or inside a
         // branch body, it may start with instructions that pop values pushed
         // by predecessor CFG blocks. Ensure the structured slot depth is
@@ -667,19 +675,35 @@ public sealed partial class NativeAotLoweringPlanner
                 // Fallback: when control flow recovery fails to wrap a conditional
                 // branch in IRIfThenElse (e.g., complex CFG with mixed structured +
                 // unstructured patterns), emit a goto-based conditional jump instead
-                // of crashing.  Uses a unique label for each occurrence.
+                // of crashing.  The label is emitted at the current position so the
+                // NEXT IR node (the branch target body) lands between the label and
+                // the fallthrough goto.  This pattern:
+                //   if (cond) goto chaos_br_N;
+                //   goto chaos_skip_N;       // false: skip target block
+                //   chaos_br_N:               // true branch target
+                //   ... target block code ...
+                //   chaos_skip_N:             // resume after target
+                // Without the fallthrough goto, both paths converge at chaos_br_N
+                // making the branch a no-op — the original bug.
                 {
                     int labelIdx = Interlocked.Increment(ref s_structuredBrLabelSeq);
                     string label = $"chaos_br_{labelIdx}";
+                    string skipLabel = $"chaos_skip_{labelIdx}";
                     string cond = ConsumeEvalStackValueExpression();
                     bool branchOnTrue = terminator.Op == "brtrue";
                     string condition = branchOnTrue
                         ? $"{cond} != 0"
                         : $"{cond} == 0";
                     builder.AppendLine(indentation + $"if ({condition}) goto {label};");
-                    // The target block will be emitted by the next IR node in sequence.
-                    // Emit a label at the current position so the branch target resolves.
+                    builder.AppendLine(indentation + $"goto {skipLabel};");
                     builder.AppendLine(indentation + $"{label}:;");
+                    // The NEXT block emitted by the IR emitter will be the branch
+                    // target body.  After it completes, the caller must emit skipLabel
+                    // to allow fallthrough to resume correctly.
+                    // We store the skip label so the structured IR loop body emitter
+                    // can emit it after the target block.
+                    _pendingBranchSkipLabels ??= new List<string>();
+                    _pendingBranchSkipLabels.Add(skipLabel);
                 }
                 break;
 
@@ -2687,6 +2711,7 @@ public sealed partial class NativeAotLoweringPlanner
     private static long s_totalMethodCount;
     internal static long s_pcDispatchCount;
     private static int s_structuredBrLabelSeq;
+    private List<string>? _pendingBranchSkipLabels;
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, long> s_irreducibleReasons
         = new(System.StringComparer.Ordinal);
 
