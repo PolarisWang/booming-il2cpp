@@ -275,6 +275,7 @@ public static class Program
         var sourceOnly = false;
         var clean = false;
         var isJit = false;
+        string? namespaceFilter = null;
         var assemblyDirs = new List<string>();
 
         for (int i = 0; i < args.Length; i++)
@@ -304,6 +305,10 @@ public static class Program
                     break;
                 case "--assembly-dir" when i + 1 < args.Length:
                     assemblyDirs.Add(Path.GetFullPath(args[++i]));
+                    break;
+                case "--namespace-filter" when i + 1 < args.Length:
+                    // Skip — consumed by codegen driver, not TPG
+                    i++;
                     break;
             }
         }
@@ -394,6 +399,14 @@ public static class Program
         // Auto-detect additional assemblies: scan subjects for target assembly names
         // and add their DLLs to the codegen assembly list. This ensures non-BCL target
         // assembly methods (e.g. System.Collections.Immutable) get native AOT codegen.
+        // Skip when a namespace filter is active to avoid duplicate key errors from
+        // compiling full assemblies alongside the entry assembly.
+        if (namespaceFilter != null)
+        {
+            Console.WriteLine($"  [codegen] skipping auto-detect (namespace filter: {namespaceFilter})");
+        }
+        else
+        {
         var additionalAssemblyPaths = new List<string>();
         var targetAssemblyNames = subjects
             .Select(s => s.AssemblyName)
@@ -422,6 +435,8 @@ public static class Program
                 }
             }
         }
+        }
+
         // Build assembly path list: subjects DLL + auto-detected target assemblies
         var allAssemblyPaths = new List<string>(additionalAssemblyPaths.Count + 1) { dllPath };
         allAssemblyPaths.AddRange(additionalAssemblyPaths);
