@@ -945,15 +945,6 @@ public sealed class NativeAotEmitter
 				}
 				argCount++;
 			}
-			stub.Append("extern CHAOS_IL2CPP_INTPTR ");
-			stub.Append(sym);
-			stub.Append('(');
-			for (int i = 0; i < argCount; i++)
-			{
-				if (i > 0) stub.Append(", ");
-				stub.Append("CHAOS_IL2CPP_INTPTR");
-			}
-			stub.AppendLine(") noexcept;");
 		}
 		stub.AppendLine();
 		string genSrc = sb.ToString();
