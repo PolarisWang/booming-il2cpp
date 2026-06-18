@@ -3010,7 +3010,15 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			if (constructorTarget.ParameterAbis.Count == 0)
 			{
-				throw new NotSupportedException("native-aot structured EH linear lowering requires instance constructor ABI for '" + (instruction.Callee ?? "<null>") + "'.");
+				// Parameterless constructor (e.g. ArrayList::.ctor()).
+				// Allocate GC object, init type_info, push as eval stack result.
+				builder.AppendLine(indentation + "{");
+				builder.AppendLine(indentation + "    auto* chaos_object = CHAOS_IL2CPP_NEW_GC(" + GetNativeTypeSymbol(requiredTargetReference.SubjectId) + ", {});");
+				builder.AppendLine(indentation + "    chaos_object->header.type_info = " + GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId) + ";");
+				builder.AppendLine(indentation + "    CHAOS_IL2CPP_INTPTR chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);");
+				EmitEvalStackPush(builder, indentation + "    ", "chaos_result");
+				builder.AppendLine(indentation + "}");
+				return;
 			}
 			if (constructorTarget.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
 			{

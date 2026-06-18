@@ -70,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Reflection.Metadata/chunks/system-reflection-metadata-ecma335/native/codegen")
-set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Reflection.Metadata/chunks/system-reflection-metadata-ecma335/native/codegen")
+set(CHAOS_SDK_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Reflection.Metadata/chunks/system-reflection-metadata-ecma335/native/codegen")
+set(CHAOS_PROJECT_ROOT "D:/agent/chaos-il2cpp")
+set(CHAOS_CODEGEN_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Reflection.Metadata/chunks/system-reflection-metadata-ecma335/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -227,5 +227,3 @@ if(NOT MSVC)
   target_link_libraries(chaos_entry PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})
-# Weak default stubs in subject_dispatch.cpp provide fallback symbols for
-# subject-miss methods, eliminating the need for /FORCE:UNRESOLVED.
