@@ -1691,13 +1691,12 @@ public sealed partial class NativeAotLoweringPlanner
 
                 // Pure pops (-1)
                 case "pop": case "stloc": case "starg": case "initobj":
-                case "stsfld":
                 case "throw":
                 case "brfalse": case "brtrue":
                     pushes = 0; pops = 1; break;
 
                 // Pops 2 (instance stores, indirect stores, conditional branches)
-                case "stfld":
+                case "stfld": case "stsfld":
                 case "stobj":
                 case "stind.i4": case "stind.i1": case "stind.i2":
                 case "stind.i8": case "stind.r4": case "stind.r8": case "stind.ref":
@@ -1712,7 +1711,7 @@ public sealed partial class NativeAotLoweringPlanner
                     pushes = 0; pops = 3; break;
 
                 // Pop 2, push 1 (net -1)
-                case "cgt.un": case "ceq": case "cgt": case "clt":
+                case "cgt.un": case "ceq": case "cgt": case "clt": case "clt.un":
                 case "add": case "sub": case "mul": case "div": case "div.un": case "rem": case "rem.un":
                 case "shl": case "shr": case "shr.un":
                 case "and": case "or": case "xor":
@@ -1738,7 +1737,7 @@ public sealed partial class NativeAotLoweringPlanner
                 case "conv.ovf.i": case "conv.ovf.u": case "conv.ovf.i8.un": case "conv.ovf.u8.un": case "conv.ovf.i.un": case "conv.ovf.u.un":
                     case "conv.ovf.i1.un": case "conv.ovf.i2.un": case "conv.ovf.i4.un":
                     case "conv.ovf.u1.un": case "conv.ovf.u2.un": case "conv.ovf.u4.un":
-                case "not":
+                case "not": case "neg":
                     pushes = 1; pops = 1; break;
 
                 // Pop 1 (typed reference), push 2 (handle + pointer)
