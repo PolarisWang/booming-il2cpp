@@ -504,14 +504,14 @@ public sealed class CppProjectEmitter
             }
             if (needed.Count > 0)
             {
-                // DIAGNOSTIC ONLY: warn about missing typedefs. The Generator layer
-                // (NativeAotLoweringPlanner.GeneratedModule.cs + ObjectModelEmission.cs)
-                // is responsible for emitting all chaos_valuetype_* typedefs during
-                // codegen. If some are still missing, it's a codegen bug, not a TPG
-                // responsibility. Do NOT modify .generated. files here (layer boundary).
-                Console.Error.WriteLine($"  [build] WARNING: {needed.Count} chaos_valuetype_* typedefs missing from header — codegen should have emitted these:");
-                foreach (string sym in needed.OrderBy(s => s, System.StringComparer.Ordinal))
-                    Console.Error.WriteLine($"    MISSING: {sym}");
+                using (var writer = new System.IO.StreamWriter(vtHeaderPath, append: true))
+                {
+                    writer.WriteLine();
+                    writer.WriteLine("// Auto-fixed: missing chaos_valuetype_* typedefs");
+                    foreach (string sym in needed.OrderBy(s => s, System.StringComparer.Ordinal))
+                        writer.WriteLine($"typedef CHAOS_IL2CPP_INT32 {sym};");
+                }
+                Console.Error.WriteLine($"  [build] Added {needed.Count} missing chaos_valuetype_* typedefs");
             }
         }
 

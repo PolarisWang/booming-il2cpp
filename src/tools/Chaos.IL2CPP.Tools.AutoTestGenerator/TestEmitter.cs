@@ -279,7 +279,8 @@ public sealed class TestEmitter
             // the stub can never throw the expected exception.
             if (isExternalAssembly)
             {
-                sb.AppendLine($"            // [AOT smoke] {result.ExceptionType} thrown by {callExpr} (external assembly stub — skipping Throws)");
+                sb.AppendLine($"            // [AOT smoke] {result.ExceptionType} thrown by {callExpr} (external assembly stub)");
+                sb.AppendLine($"            try {{ {callExpr}; }} catch ({result.ExceptionType}) {{ /* expected - external stub */ }}");
                 return;
             }
 
