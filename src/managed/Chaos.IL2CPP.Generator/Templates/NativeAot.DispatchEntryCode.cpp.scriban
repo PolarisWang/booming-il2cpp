@@ -35,9 +35,11 @@ extern "C" const int kSubjectSlotMap[{{ subject_entries.size }}] = {
 };
 
 // ── Subject contract map (kSubjectContractMap[]) ───────────────────────
-// Maps subject slot index (si) to contract index (position in contract list).
-// Used by fact-json output to match native results against golden records
-// without assuming slot layout.
+// Maps subject slot index (si) to contract index.  Currently contract_index
+// is set to the same sequential 0..N-1 value as subject_index after sorting.
+// NOTE: kSubjectContractMap has NO downstream C++ consumer as of 2026-06-18
+// — the fact-runner JSON output hardcodes contractIndex:-1.  This array is
+// retained for potential future use (e.g., mapping slot→Subject_N number).
 extern "C" const int kSubjectContractMap[{{ subject_entries.size }}] = {
 {{~ for entry in subject_entries ~}}
 	{{ entry.contract_index }},

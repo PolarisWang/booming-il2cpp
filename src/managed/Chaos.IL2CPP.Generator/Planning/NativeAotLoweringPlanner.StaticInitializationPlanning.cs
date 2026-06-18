@@ -123,7 +123,7 @@ public sealed partial class NativeAotLoweringPlanner
                 if (cctorBody.ExceptionRegions.Length > 0) continue;
 
                 var plan = CreateStaticInitPlanFromIl(
-                    typeSubjectId, cctorBody.GetILBytes(),
+                    typeSubjectId, cctorBody.GetILBytes()!,
                     reader.Md, reader.Pe,
                     reachableMethodSubjectIds,
                     requiredExternalRuntimeHelperSubjectIds);

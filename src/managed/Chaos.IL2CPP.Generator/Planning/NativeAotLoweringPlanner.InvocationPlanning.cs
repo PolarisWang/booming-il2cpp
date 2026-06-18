@@ -967,7 +967,7 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
         if (!string.IsNullOrEmpty(calleeOrTarget) &&
             TryCreateExternalRuntimeHelperDefinition(calleeOrTarget, out var helperDef))
         {
-            symbol = helperDef.TargetSymbol;
+            symbol = helperDef!.TargetSymbol;
             extParamAbis = helperDef.ParameterAbis.Count > 0 ? helperDef.ParameterAbis : null;
             extReturnAbi = helperDef.ReturnAbi;
             extRawIndices = helperDef.RawArgumentIndices;
@@ -2116,7 +2116,7 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
                 if (!TryGetLdTokenSubjectId(instrs, callIndex - 3, out var subjectId1))
                     return false;
 
-                if (!IsTypeAotKnown(subjectId1) || !IsTypeAotKnown(subjectId2))
+                if (!IsTypeAotKnown(subjectId1!) || !IsTypeAotKnown(subjectId2!))
                     return false;
 
                 // Collect IlOffsets of dead instructions for DCE
@@ -2139,7 +2139,7 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
                 if (callIndex < 3) return false;
 
                 if (!TryGetLdTokenSubjectId(instrs, callIndex - 2, out var typeSubjectId)) return false;
-                if (!IsTypeAotKnown(typeSubjectId)) return false;
+                if (!IsTypeAotKnown(typeSubjectId!)) return false;
 
                 // SAFETY: if the object argument is a ldstr (produces CHAOS_IL2CPP_STRING_ID,
                 // a bit-63 tagged integer), we cannot fold because

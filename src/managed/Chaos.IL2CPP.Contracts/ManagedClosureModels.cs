@@ -370,7 +370,6 @@ public enum HybridDispatchKind : byte
     None = 0,
     Direct = 1,
     Virtual = 2,
-    [Obsolete("Bridge dispatch kind is no longer used; no codegen path emits it.")]
     Bridge = 3,
     ExternalRuntime = 4,
     Unsupported = 5,

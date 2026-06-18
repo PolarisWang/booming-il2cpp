@@ -265,17 +265,12 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!string.Equals(entry.MethodName, methodName, StringComparison.Ordinal))
                 {
                     // Try method-level generic args: methodName = "Equal[[System.Int32]]", entry.MethodName = "Equal"
-                    string? genericMarkerStart = null;
-                    string? bracketClose = null;
-                    string bc1 = entry.MethodName + "[[";
-                    string bc2 = entry.MethodName + "<";
-                    if (methodName.StartsWith(bc1, StringComparison.Ordinal)) { genericMarkerStart = bc1; bracketClose = "]]"; }
-                    else if (methodName.StartsWith(bc2, StringComparison.Ordinal)) { genericMarkerStart = bc2; bracketClose = ">"; }
-                    if (genericMarkerStart != null && bracketClose != null)
+                    var genericMarkerStart = entry.MethodName + "[[";
+                    if (methodName.StartsWith(genericMarkerStart, StringComparison.Ordinal))
                     {
-                        // Extract type args from between [[...]] or <...>
+                        // Extract type args from between [[...]]
                         var afterMarker = methodName.Substring(genericMarkerStart.Length);
-                        var closeBracket = afterMarker.LastIndexOf(bracketClose, StringComparison.Ordinal);
+                        var closeBracket = afterMarker.LastIndexOf("]]", StringComparison.Ordinal);
                         if (closeBracket < 0) continue;
                         var argsPart = afterMarker.Substring(0, closeBracket);
                         typeArgs = argsPart.Split(new[] { "],[", "," }, StringSplitOptions.None);
@@ -816,8 +811,5 @@ public sealed partial class NativeAotLoweringPlanner
             if (callee.Contains("Vector256")) return "RuntimeIntrinsicVector256Carrier";
             return "RuntimeIntrinsicVector128Carrier"; // default for Vector128
         }
-
     }
 }
-// Fri, Jun  5, 2026  9:36:53 PM
-// touch 1780668780

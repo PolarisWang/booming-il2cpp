@@ -107,44 +107,39 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		builder.AppendLine();
-		
-            // Build forwarding argument list for the stub to canonical body call.
-            // Parameter names follow the chaos_fn_arg_N convention matching param_sig.
-            string forwardedArgs;
-            if (methodAbiParameterSlots.Count > 0)
-            {
-                forwardedArgs = string.Join(", ",
-                    Enumerable.Range(0, methodAbiParameterSlots.Count)
-                        .Select(i => $"chaos_fn_arg_{i}"));
-            }
-            else
-            {
-                forwardedArgs = "";
-            }
-            if (needsContext)
-            {
-                forwardedArgs = string.IsNullOrEmpty(forwardedArgs)
-                    ? "chaos_generic_context"
-                    : forwardedArgs + ", chaos_generic_context";
-            }
-
-// Migrated to Scriban template: GenericInstantiationStub.cpp.scriban
-		var _stubM = new Scriban.Runtime.ScriptObject
+		builder.AppendLine("// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
+		builder.AppendLine(FormatGenericExecutionAuthorityComment(
+			method.OpenDefinitionSubjectId,
+			method.SharedGenericBodyId,
+			method.InstantiationStubId,
+			method.RuntimeGenericContext));
+		builder.AppendLine($"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {text}({paramSig})");
+		builder.AppendLine("{");
+		var argNames = new string[methodAbiParameterSlots.Count];
+			for (int i = 0; i < methodAbiParameterSlots.Count; i++)
+				argNames[i] = "chaos_fn_arg_" + i.ToString();
+			string text2 = string.Join(", ", argNames);
+		// Build forwarding argument list, appending chaos_generic_context if needed.
+		string forwardedArgs = text2;
+		if (needsContext)
 		{
-			["comment"] = "// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId),
-			["authority_comment"] = FormatGenericExecutionAuthorityComment(
-				method.OpenDefinitionSubjectId, method.SharedGenericBodyId,
-				method.InstantiationStubId, method.RuntimeGenericContext),
-			["return_type"] = MapAbiSlotReturnType(method.ReturnAbi),
-			["function_name"] = text,
-			["param_sig"] = paramSig,
-			["target_symbol"] = targetSymbol,
-			["forwarded_args"] = forwardedArgs,
-			["is_void"] = method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void,
-		};
-		builder.Append(
-			ScribanTemplateRenderer.RenderTemplate(
-				NativeAotTemplateCatalog.GetGenericInstantiationStubTemplate(), _stubM));
+			forwardedArgs = string.IsNullOrEmpty(text2)
+				? "chaos_generic_context"
+				: text2 + ", chaos_generic_context";
+		}
+		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
+		{
+			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
+				? $"    {targetSymbol}();"
+				: $"    {targetSymbol}({forwardedArgs});");
+		}
+		else
+		{
+			builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
+				? $"    return {targetSymbol}();"
+				: $"    return {targetSymbol}({forwardedArgs});");
+		}
+		builder.AppendLine("}");
 	}
 
 	private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
@@ -184,9 +179,6 @@ public sealed partial class NativeAotLoweringPlanner
 		// Cross-assembly method filter: if the method's declaring assembly does NOT
 		// match _assemblyName or a known test/subject wrapper assembly, emit a simple
 		// return stub instead of the full function body.
-		// However, methods from closure assemblies (additionalAssemblyPaths) must NOT
-		// be stubbed — they are part of this codegen's compilation scope and need
-		// native AOT function bodies for benchmark/fact dispatch.
 		if (method.SubjectId is not null && !string.IsNullOrEmpty(_assemblyName))
 		{
 			int slashIdx = method.SubjectId.IndexOf('/');
@@ -197,21 +189,15 @@ public sealed partial class NativeAotLoweringPlanner
 					!string.Equals(methodAssembly, "CombinedSubjects", StringComparison.Ordinal) &&
 					!string.Equals(methodAssembly, "Chaos.TestFramework.Sdk", StringComparison.Ordinal))
 				{
-					// Check if this assembly is in the closure (additional assembly paths).
-					// If so, it's part of the compilation scope and should get native code.
-					bool isClosureAssembly = _closureAssemblyPathByName.ContainsKey(methodAssembly);
-					if (!isClosureAssembly)
-					{
-						builder.AppendLine("// Cross-assembly stub: " + method.SubjectId);
-						var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
-						builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
-						builder.AppendLine("{");
-						var _retType = MapAbiSlotReturnType(method.ReturnAbi);
-						if (!string.IsNullOrEmpty(_retType) && _retType != "void")
-							builder.AppendLine("    return {};");
-						builder.AppendLine("}");
-						return;
-					}
+					builder.AppendLine("// Cross-assembly stub: " + method.SubjectId);
+					var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
+					builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
+					builder.AppendLine("{");
+					var _retType = MapAbiSlotReturnType(method.ReturnAbi);
+					if (!string.IsNullOrEmpty(_retType) && _retType != "void")
+						builder.AppendLine("    return {};");
+					builder.AppendLine("}");
+					return;
 				}
 			}
 		}
@@ -252,7 +238,7 @@ public sealed partial class NativeAotLoweringPlanner
 		if (instructions.Count == 0)
 		{
 		    var returnType = MapAbiSlotReturnType(method.ReturnAbi);
-		    builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
+		    builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId!));
 		    builder.AppendLine(FormatMethodDeclaration(method, _sharedContextSymbols).TrimEnd(';'));
 		    builder.AppendLine("{");
 		    if (!string.IsNullOrEmpty(returnType) && returnType != "void")
@@ -276,7 +262,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 		bool usesStructuredSlots = TryBuildStructuredMethodBody(method, instructions, offsets, out var body, out int structuredSlotCount);
 		int evalStackSize = usesStructuredSlots ? 0 : Math.Max(ComputeMaxEvalStackDepth(instructions), 1);
-		builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
+		builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId!));
 		var fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
 		// Strip trailing semicolon from FormatMethodDeclaration for function definition header.
 		builder.AppendLine(fnDecl.Length > 0 && fnDecl[^1] == ";"[0] ? fnDecl[..^1] : fnDecl);

@@ -63,9 +63,7 @@ extern const Functions kFunctions;
 
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Index by slot index to call any AOT method without struct-layout dependencies.
-// NOTE: extern "C" would trigger MSVC C2059 when <string> is included.
-// The actual C linkage comes from the definition in native-aot.generated.cpp.
-extern void* kFunctionsFlat[];
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers

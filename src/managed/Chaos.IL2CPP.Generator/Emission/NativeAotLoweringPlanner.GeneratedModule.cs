@@ -232,6 +232,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             }
 
+>>>>>>> 5b6a0a40f493f88f4078bc5b5eedc06541ebf6f4
             var vtBuilder = new System.Text.StringBuilder();
             vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");
             foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))

@@ -217,6 +217,53 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0 });
                 }));
 
+            // String.get_Chars(int32) → char (DirectNativeSymbol via ChaosStringGetChars)
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: "get_Chars",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
+                    [
+                        "    return ChaosStringGetChars(chaos_arg_0, chaos_arg_1);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateInt32AbiSlot(),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "ChaosStringGetChars");
+                }));
+
+            // String.IsNullOrEmpty(string) → bool (DirectNativeSymbol via ChaosStringIsNullOrEmpty)
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: "IsNullOrEmpty",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1) return null;
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        "    return ChaosStringIsNullOrEmpty(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: "ChaosStringIsNullOrEmpty");
+                }));
+
             // String.StartsWith — ordinal comparison with memcmp
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
@@ -2455,6 +2502,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -2526,6 +2574,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -2550,6 +2599,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -2574,6 +2624,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -3091,6 +3142,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                         [
+                            "    CHAOS_IL2CPP_FAIL();",
                             "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
@@ -3106,6 +3158,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -3896,7 +3949,7 @@ public sealed partial class NativeAotLoweringPlanner
                     MethodName: "AsVector256",
                     Resolver: static (callee, paramTypes) =>
                     {
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})), 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
                 // Vector256<T>::AsVector128 → Vector128<T>
                 registry.RegisterInline(new InlineShapeDescriptor(
@@ -3904,7 +3957,7 @@ public sealed partial class NativeAotLoweringPlanner
                     MethodName: "AsVector128",
                     Resolver: static (callee, paramTypes) =>
                     {
-                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                        return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})), 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                     }));
             }
             RegisterVectorCrossCast();
@@ -4055,7 +4108,7 @@ public sealed partial class NativeAotLoweringPlanner
                             var carrier = InferVectorCarrierType(callee);
                             if (carrier == null) return null;
                             // Determine target type from method name
-                            string toType = methodName switch
+                            string? toType = methodName switch
                             {
                                 "ConvertToInt32" or "ConvertToInt32Native" => "CHAOS_IL2CPP_INT32",
                                 "ConvertToInt64" or "ConvertToInt64Native" => "CHAOS_IL2CPP_INT64",
@@ -4089,7 +4142,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "GetLower",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})), 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // GetUpper: Vector256<T> → Vector128<T> (upper 128 bits)
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4097,7 +4150,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "GetUpper",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes + 16, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})) + 16, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── ToVector128 / ToVector256 ──
@@ -4107,7 +4160,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector128",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})), 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // ToVector128Unsafe: same as ToVector128
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4115,7 +4168,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector128Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})), 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             // ToVector256: Vector128<T> → Vector256<T> (extend)
             registry.RegisterInline(new InlineShapeDescriptor(
@@ -4123,14 +4176,14 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToVector256",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})), 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "Vector128",
                 MethodName: "ToVector256Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector256Carrier __r{{}}; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector128Carrier*>({{0}})), 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── CreateScalarUnsafe — same as CreateScalar but unchecked ──
@@ -4309,7 +4362,7 @@ public sealed partial class NativeAotLoweringPlanner
                 TypeDisplayNamePrefix: "Vector256", MethodName: "AsVector128Unsafe",
                 Resolver: static (callee, paramTypes) =>
                 {
-                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(__r.bytes, reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})->bytes, 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
+                    return $"[&]() -> CHAOS_IL2CPP_INTPTR {{ RuntimeIntrinsicVector128Carrier __r; memcpy(reinterpret_cast<char*>(&__r), reinterpret_cast<const char*>(reinterpret_cast<const RuntimeIntrinsicVector256Carrier*>({{0}})), 16); auto* __p = (decltype(__r)*)std::malloc(sizeof(__r)); *__p = __r; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__p); }}()";
                 }));
 
             // ── None (boolean) ──
@@ -4367,6 +4420,7 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                         [
+                            "    CHAOS_IL2CPP_FAIL();",
                             "    return 0;",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
@@ -4379,6 +4433,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -4996,6 +5051,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
                         "    (void)chaos_arg_0; (void)chaos_arg_1;",
+                        "    CHAOS_IL2CPP_FAIL();",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -5256,6 +5312,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                     [
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -5498,6 +5555,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, "",
                     [
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
@@ -5879,6 +5937,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
                         "    (void)chaos_arg_0;",
+                        "    CHAOS_IL2CPP_FAIL();",
                         "    return 0;",
                     ]);
                     return new GenericShapeResolution(src, symbol,
