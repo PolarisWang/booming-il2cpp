@@ -1,56 +1,42 @@
 {
   "assemblyName": "System.Text.Json",
-  "timestamp": "2026-06-18T06:03:23",
+  "timestamp": "2026-06-18T05:20:02",
   "summary": {
     "chunks": 3,
     "chunksVerified": 3,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 3,
-    "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 383,
+    "factPassRate": 98.4,
+    "totalBenchmarkedMethods": 282,
     "aggregatePerformance": {
-      "meanDurationMs": 0.10238466893152144,
-      "meanOpsPerSecond": 266818867.97414127,
-      "aggregateMeanCv": 0.1430349849169026,
-      "totalOutliers": 377
+      "meanDurationMs": 5.099608203080227,
+      "meanOpsPerSecond": 30089035.57706758,
+      "aggregateMeanCv": 0.18915695222310028,
+      "totalOutliers": 4
     },
     "hotupdate": {
-      "chunksWithPatchData": 3,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
-      "chunksWithRevertFailure": 0,
-      "totalPassed": 361,
+      "chunksWithRevertFailure": 2,
+      "totalPassed": 199,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 300,
-      "methodsWithNet8": 300,
-      "chaosAotVsNet8": {
-        "mean": 59.38,
-        "median": 59.38,
-        "min": 53.88,
-        "max": 64.87,
-        "p25": 56.63,
-        "p75": 62.12
-      },
-      "chaosJitVsNet8": {
-        "mean": 66.02,
-        "median": 65.78,
-        "min": 64.52,
-        "max": 67.75,
-        "p25": 65.15,
-        "p75": 66.77
-      },
+      "methodsAnalyzed": 14,
+      "methodsWithNet8": 14,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
       "net10VsNet8": {
-        "mean": -0.58,
-        "median": 0.0,
-        "min": -6.88,
-        "max": 5.14,
-        "p25": -3.44,
-        "p75": 2.57
+        "mean": 6.18,
+        "median": 6.18,
+        "min": 6.18,
+        "max": 6.18,
+        "p25": 6.18,
+        "p75": 6.18
       },
-      "highValueMethods_betterThanNet8": 76.0
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

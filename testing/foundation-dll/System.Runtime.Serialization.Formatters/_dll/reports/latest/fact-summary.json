@@ -1,56 +1,51 @@
 {
   "assemblyName": "System.Runtime.Serialization.Formatters",
-  "timestamp": "2026-06-18T06:03:23",
+  "timestamp": "2026-06-18T04:54:44",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
   "totalPassed": 75,
-  "totalFactMethods": 75,
+  "totalFactMethods": 76,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
         "passed": 75,
-        "total": 75,
+        "total": 76,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 84,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 74,
+        "methodCount": 75,
         "iterations": 10000,
-        "meanDurationMs": 0.17677297297297298,
-        "meanOpsPerSecond": 310646027.87297297,
-        "minDurationMs": 0.025,
-        "maxDurationMs": 4.0778,
-        "totalDurationMs": 13.0812,
+        "meanDurationMs": 5.238898666666667,
+        "meanOpsPerSecond": 34984216.55106667,
+        "minDurationMs": 0.206,
+        "maxDurationMs": 103.4067,
+        "totalDurationMs": 392.9174,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.2,
-        "totalOutliers": 59,
-        "meanCv": 0.20338135135135135,
-        "maxCv": 0.712907
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.006549026666666667,
+        "maxCv": 0.1105
       },
       "hotupdate": {
-        "passed": 74,
+        "passed": 0,
         "failed": 0,
         "allSemantic": false,
-        "allRevert": true,
-        "exitCode": 0,
-        "patchDataUsed": true,
+        "allRevert": false,
+        "exitCode": -15,
+        "patchDataUsed": false,
         "patchFailed": false,
-        "truncated": false,
+        "truncated": true,
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
       },
       "build": {
         "status": "passed"
-      },
-      "profile": {
-        "methodCount": 0,
-        "totalSize": 2903552,
-        "source": "none"
       },
       "benchmarkReport": {
         "totalMethods": 0,

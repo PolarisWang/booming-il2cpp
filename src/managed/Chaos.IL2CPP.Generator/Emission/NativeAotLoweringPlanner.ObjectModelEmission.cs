@@ -1263,13 +1263,6 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		EmitReflectionObjectHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitExceptionMetadataHelpers(builder, reachableMethods);
 		EmitGcTypeLayoutRegistration(builder, referenceTypeSubjectIds, referenceTypeBaseSubjectIds, fieldsByDeclaringType, fieldTypeMap, valueTypeSubjectIds);
-		// Backfill static fields registered by emission paths (ldsflda, hotpatch,
-		// method scan) but missed by instruction scanner's RuntimeServiceKind filter.
-		if (_staticFieldDeclarations is { Count: > 0 })
-		{
-		    foreach (var kvp in _staticFieldDeclarations)
-		        hashSet2.TryAdd(kvp.Key, kvp.Value);
-		}
 		foreach (KeyValuePair<string, string?> item11 in hashSet2.OrderBy<KeyValuePair<string, string?>, string>((KeyValuePair<string, string?> result) => result.Key, StringComparer.Ordinal))
 		{
 			var cppType = MapFieldTypeToCppType(item11.Value);

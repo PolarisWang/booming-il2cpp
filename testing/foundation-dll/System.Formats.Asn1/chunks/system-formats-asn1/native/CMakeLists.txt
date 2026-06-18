@@ -70,9 +70,9 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
 
 # ── Paths ──
-set(CHAOS_SDK_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Formats.Asn1/chunks/system-formats-asn1/native/codegen")
-set(CHAOS_PROJECT_ROOT "D:/agent/chaos-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Formats.Asn1/chunks/system-formats-asn1/native/codegen")
+set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Formats.Asn1/chunks/system-formats-asn1/native/codegen")
+set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Formats.Asn1/chunks/system-formats-asn1/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
@@ -150,8 +150,6 @@ set(CHAOS_INTEROP_STUBS
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/string_stubs.cpp"
 )
 set(CHAOS_ENTRY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
@@ -176,7 +174,6 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
-    ${CHAOS_STRING_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 

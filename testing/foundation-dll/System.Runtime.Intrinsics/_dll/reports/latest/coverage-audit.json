@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Runtime.Intrinsics",
-  "timestamp": "2026-06-18T06:03:23",
-  "totalChunks": 1,
-  "chunksWithResults": 0,
+  "timestamp": "2026-06-18T07:06:24",
+  "totalChunks": 2,
+  "chunksWithResults": 2,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 0
+  "totalDeclaredMethods": 2476
 }

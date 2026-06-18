@@ -1,46 +1,46 @@
 {
   "assemblyName": "System.IO.Compression.Brotli",
-  "timestamp": "2026-06-18T06:03:23",
+  "timestamp": "2026-06-18T05:51:39",
   "totalChunks": 1,
-  "totalBenchmarkedMethods": 34,
+  "totalBenchmarkedMethods": 45,
   "aggregatePerformance": {
-    "meanDurationMs": 0.013082352941176472,
-    "meanOpsPerSecond": 362927968.1,
-    "aggregateMeanCv": 0.076063375,
-    "totalOutliers": 19
+    "meanDurationMs": 6.3919822222222225,
+    "meanOpsPerSecond": 41050974.604444444,
+    "aggregateMeanCv": 0.11126395555555556,
+    "totalOutliers": 26
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 19,
-        "total": 22,
+        "passed": 45,
+        "total": 45,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 49,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 34,
+        "methodCount": 45,
         "iterations": 10000,
-        "meanDurationMs": 0.013082352941176472,
-        "meanOpsPerSecond": 362927968.1,
-        "minDurationMs": 0,
-        "maxDurationMs": 0.029,
-        "totalDurationMs": 0.44480000000000003,
+        "meanDurationMs": 6.3919822222222225,
+        "meanOpsPerSecond": 41050974.604444444,
+        "minDurationMs": 0.213,
+        "maxDurationMs": 111.4867,
+        "totalDurationMs": 287.6392,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 4.1,
-        "totalOutliers": 19,
-        "meanCv": 0.076063375,
-        "maxCv": 0.232892
+        "meanSampleCount": 4.4,
+        "totalOutliers": 26,
+        "meanCv": 0.11126395555555556,
+        "maxCv": 0.784033
       },
       "hotupdate": {
-        "passed": 28,
+        "passed": 45,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": true,
+        "patchDataUsed": false,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -52,7 +52,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 2827264,
+        "totalSize": 7124480,
         "source": "none"
       },
       "benchmarkReport": {

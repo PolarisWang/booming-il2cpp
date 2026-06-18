@@ -150,8 +150,6 @@ set(CHAOS_INTEROP_STUBS
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/string_stubs.cpp"
 )
 set(CHAOS_ENTRY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
@@ -176,7 +174,6 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
-    ${CHAOS_STRING_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -230,3 +227,5 @@ if(NOT MSVC)
   target_link_libraries(chaos_entry PRIVATE OpenSSL::Crypto OpenSSL::SSL)
 endif()
 target_link_options(chaos_entry PRIVATE ${CHAOS_FORCE_MULTIPLE})
+# Weak default stubs in subject_dispatch.cpp provide fallback symbols for
+# subject-miss methods, eliminating the need for /FORCE:UNRESOLVED.

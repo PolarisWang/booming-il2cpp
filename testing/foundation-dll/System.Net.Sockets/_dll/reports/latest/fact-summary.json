@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Net.Sockets",
-  "timestamp": "2026-06-18T06:03:23",
+  "timestamp": "2026-06-18T06:17:34",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
@@ -19,17 +19,17 @@
       },
       "benchmark": {
         "methodCount": 500,
-        "iterations": 10000,
-        "meanDurationMs": 0.033104999999999996,
-        "meanOpsPerSecond": 305809459.778,
-        "minDurationMs": 0.0262,
-        "maxDurationMs": 0.0378,
-        "totalDurationMs": 16.5525,
+        "iterations": 4761,
+        "meanDurationMs": 0.2786926,
+        "meanOpsPerSecond": 34006434.6458,
+        "minDurationMs": 0.1246,
+        "maxDurationMs": 14.833,
+        "totalDurationMs": 139.3463,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.2,
-        "totalOutliers": 387,
-        "meanCv": 0.187503862,
-        "maxCv": 1.864776
+        "meanSampleCount": 9.5,
+        "totalOutliers": 273,
+        "meanCv": 0.5728820520000001,
+        "maxCv": 0.827128
       },
       "hotupdate": {
         "passed": 500,
@@ -37,7 +37,7 @@
         "allSemantic": false,
         "allRevert": true,
         "exitCode": 0,
-        "patchDataUsed": true,
+        "patchDataUsed": false,
         "patchFailed": false,
         "truncated": false,
         "crash": false,
@@ -49,7 +49,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 5234176,
+        "totalSize": 9493832,
         "source": "none"
       },
       "benchmarkReport": {

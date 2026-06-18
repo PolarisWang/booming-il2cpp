@@ -1,56 +1,41 @@
 {
   "assemblyName": "System.Reflection.Metadata",
-  "timestamp": "2026-06-18T06:03:23",
+  "timestamp": "2026-06-18T07:06:15",
   "summary": {
     "chunks": 3,
     "chunksVerified": 3,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 3,
-    "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 475,
+    "factPassRate": 99.7,
+    "totalBenchmarkedMethods": 471,
     "aggregatePerformance": {
-      "meanDurationMs": 4.388704632551308,
-      "meanOpsPerSecond": 253168189.94908008,
-      "aggregateMeanCv": 0.33054904287368947,
-      "totalOutliers": 278
+      "meanDurationMs": 4.65655830357369,
+      "meanOpsPerSecond": 34854809.53163067,
+      "aggregateMeanCv": 0.04998969774054424
     },
     "hotupdate": {
-      "chunksWithPatchData": 3,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 678,
+      "totalPassed": 712,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 596,
-      "methodsWithNet8": 571,
-      "chaosAotVsNet8": {
-        "mean": -953.38,
-        "median": -953.38,
-        "min": -1743.77,
-        "max": -163.0,
-        "p25": -1348.58,
-        "p75": -558.19
-      },
-      "chaosJitVsNet8": {
-        "mean": -1226.01,
-        "median": -1711.32,
-        "min": -1729.68,
-        "max": -237.04,
-        "p25": -1720.5,
-        "p75": -974.18
-      },
+      "methodsAnalyzed": 176,
+      "methodsWithNet8": 176,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
       "net10VsNet8": {
-        "mean": -50.75,
-        "median": -50.53,
-        "min": -88.25,
-        "max": -13.46,
-        "p25": -69.39,
-        "p75": -32.0
+        "mean": -0.9,
+        "median": 4.18,
+        "min": -12.25,
+        "max": 5.37,
+        "p25": -4.04,
+        "p75": 4.78
       },
-      "highValueMethods_betterThanNet8": 44.8
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

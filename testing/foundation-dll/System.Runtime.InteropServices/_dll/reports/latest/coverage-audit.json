@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Runtime.InteropServices",
-  "timestamp": "2026-06-18T06:03:23",
+  "timestamp": "2026-06-18T07:06:20",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 1,
-  "totalDeclaredMethods": 29
+  "totalDeclaredMethods": 31
 }

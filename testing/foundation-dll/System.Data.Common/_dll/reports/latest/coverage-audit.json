@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Data.Common",
-  "timestamp": "2026-06-18T06:03:23",
+  "timestamp": "2026-06-18T05:49:50",
   "totalChunks": 4,
-  "chunksWithResults": 3,
+  "chunksWithResults": 4,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 3,
-  "totalDeclaredMethods": 932
+  "totalDeclaredMethods": 1194
 }

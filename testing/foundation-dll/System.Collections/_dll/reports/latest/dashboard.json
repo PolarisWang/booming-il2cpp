@@ -1,56 +1,56 @@
 {
   "assemblyName": "System.Collections",
-  "timestamp": "2026-06-18T06:03:23",
+  "timestamp": "2026-06-18T05:47:44",
   "summary": {
     "chunks": 1,
-    "chunksVerified": 0,
+    "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
-    "factPassRate": 0,
-    "totalBenchmarkedMethods": 17,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 65,
     "aggregatePerformance": {
-      "meanDurationMs": 0.029723529411764704,
-      "meanOpsPerSecond": 344279011.2352941,
-      "aggregateMeanCv": 0.073541,
-      "totalOutliers": 12
+      "meanDurationMs": 4.464116923076923,
+      "meanOpsPerSecond": 35599375.99538461,
+      "aggregateMeanCv": 0.6829098615384616,
+      "totalOutliers": 52
     },
     "hotupdate": {
-      "chunksWithPatchData": 1,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 0,
+      "totalPassed": 65,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 33,
-      "methodsWithNet8": 32,
+      "methodsAnalyzed": 16,
+      "methodsWithNet8": 3,
       "chaosAotVsNet8": {
-        "mean": 71.33,
-        "median": 71.33,
-        "min": 71.33,
-        "max": 71.33,
-        "p25": 71.33,
-        "p75": 71.33
+        "mean": -89.97,
+        "median": -89.97,
+        "min": -89.97,
+        "max": -89.97,
+        "p25": -89.97,
+        "p75": -89.97
       },
       "chaosJitVsNet8": {
-        "mean": 71.43,
-        "median": 71.43,
-        "min": 71.43,
-        "max": 71.43,
-        "p25": 71.43,
-        "p75": 71.43
+        "mean": -90.38,
+        "median": -90.38,
+        "min": -90.38,
+        "max": -90.38,
+        "p25": -90.38,
+        "p75": -90.38
       },
       "net10VsNet8": {
-        "mean": -24.33,
-        "median": -24.33,
-        "min": -24.33,
-        "max": -24.33,
-        "p25": -24.33,
-        "p75": -24.33
+        "mean": -52.96,
+        "median": -52.96,
+        "min": -52.96,
+        "max": -52.96,
+        "p25": -52.96,
+        "p75": -52.96
       },
-      "highValueMethods_betterThanNet8": 31.2
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }
