@@ -177,8 +177,10 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		// Cross-assembly method filter: if the method's declaring assembly does NOT
-		// match _assemblyName or a known test/subject wrapper assembly, emit a simple
-		// return stub instead of the full function body.
+		// match _assemblyName or a known test/subject wrapper assembly, previously we
+		// emitted a stub.  This was removed because it breaks foundation-dll fact tests
+		// (closure assembly detection via PE metadata is unreliable when PE files aren't
+		// pre-built on disk).  Full codegen is emitted for all methods regardless.
 		if (method.SubjectId is not null && !string.IsNullOrEmpty(_assemblyName))
 		{
 			int slashIdx = method.SubjectId.IndexOf('/');
@@ -189,20 +191,9 @@ public sealed partial class NativeAotLoweringPlanner
 					!string.Equals(methodAssembly, "CombinedSubjects", StringComparison.Ordinal) &&
 					!string.Equals(methodAssembly, "Chaos.TestFramework.Sdk", StringComparison.Ordinal))
 				{
-					// Cross-assembly method: emit stub unless the assembly is a
-					// closure/dependency assembly (known in the compilation scope).
-					if (!_closureAssemblyPathByName.ContainsKey(methodAssembly))
-					{
-						builder.AppendLine("// Cross-assembly stub: " + method.SubjectId);
-						var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
-						builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
-						builder.AppendLine("{");
-						var _retType = MapAbiSlotReturnType(method.ReturnAbi);
-						if (!string.IsNullOrEmpty(_retType) && _retType != "void")
-							builder.AppendLine("    return {};");
-						builder.AppendLine("}");
-						return;
-					}
+					// Cross-assembly method: always emit full codegen (stubs would break
+					// foundation-dll fact tests).  Closure assembly filtering via PE metadata
+					// is unreliable when PE files aren't pre-built on disk.
 				}
 			}
 		}
