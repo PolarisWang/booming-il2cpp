@@ -561,23 +561,23 @@ CHAOS_IL2CPP_INTPTR ChaosFormattablestringFactoryCreate(CHAOS_IL2CPP_INTPTR form
     return resolve_string_arg(format);
 }
 
-CHAOS_IL2CPP_INT32 ChaosStringGetLength(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INTPTR ChaosStringGetLength(CHAOS_IL2CPP_INTPTR str) noexcept
 {
     str = resolve_string_arg(str);
     if (str == 0) return 0;
     auto* sh = reinterpret_cast<const StubStringHeader*>(str);
     // Return byte_count as Int32 — for ASCII strings this equals Length.
-    return static_cast<CHAOS_IL2CPP_INT32>(sh->byte_count);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(sh->byte_count);
 }
 
-CHAOS_IL2CPP_UINT16 ChaosStringGetChars(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 index) noexcept
+CHAOS_IL2CPP_INTPTR ChaosStringGetChars(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR index) noexcept
 {
     str = resolve_string_arg(str);
     if (str == 0) return 0;
     auto* sh = reinterpret_cast<const StubStringHeader*>(str);
     if (index < 0 || static_cast<CHAOS_IL2CPP_UINTPTR>(index) >= sh->byte_count) return 0;
     const auto* data = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(stub_string_data(reinterpret_cast<const void*>(str)));
-    return static_cast<CHAOS_IL2CPP_UINT16>(data[index]);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(data[index]);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosStringIsNullOrEmpty(CHAOS_IL2CPP_INTPTR str) noexcept

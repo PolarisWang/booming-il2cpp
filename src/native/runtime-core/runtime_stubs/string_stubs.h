@@ -24,8 +24,8 @@ void    ChaosStringAppend(CHAOS_IL2CPP_INTPTR builder, CHAOS_IL2CPP_INTPTR str, 
 
 CHAOS_IL2CPP_INTPTR ChaosFormattablestringFactoryCreate(CHAOS_IL2CPP_INTPTR format, CHAOS_IL2CPP_INTPTR args) noexcept;
 
-CHAOS_IL2CPP_INT32  ChaosStringGetLength(CHAOS_IL2CPP_INTPTR str) noexcept;
-CHAOS_IL2CPP_UINT16 ChaosStringGetChars(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 index) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringGetLength(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosStringGetChars(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR index) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStringIsNullOrEmpty(CHAOS_IL2CPP_INTPTR str) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosStringConcat2(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept;
 
