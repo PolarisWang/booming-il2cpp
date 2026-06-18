@@ -1446,8 +1446,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Build A1 typed dispatch table header + A2 dispatch wiring source.
         // These are emitted as separate files (chaos_generated_module.h/.cpp) for
         // typed dispatch via ChaosRuntimeHost. Empty when methodsForLowering is empty.
-        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering);
-        var moduleSource = BuildGeneratedModuleSource(methodsForLowering);
+        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString());
+        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString());
 
         // Build include list — most are unconditional; feature-specific headers
         // (com_ccw.h, enum_stubs.h, enum_metadata.generated.h) are included only

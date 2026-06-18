@@ -12,11 +12,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// Renders the NativeAot.GeneratedModule.h.scriban template with type group
     /// data from the methods for lowering.
     /// </summary>
-    internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
+    internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null)
     {
         return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleHeaderTemplate(),
-            BuildGeneratedModuleModel(methodsForLowering));
+            BuildGeneratedModuleModel(methodsForLowering, objectModelText));
     }
 
     /// <summary>
@@ -24,14 +24,14 @@ public sealed partial class NativeAotLoweringPlanner
     /// Renders the NativeAot.GeneratedModule.cpp.scriban template with type group
     /// data and extern symbol declarations.
     /// </summary>
-    internal string BuildGeneratedModuleSource(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
+    internal string BuildGeneratedModuleSource(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null)
     {
         return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleSourceTemplate(),
-            BuildGeneratedModuleModel(methodsForLowering));
+            BuildGeneratedModuleModel(methodsForLowering, objectModelText));
     }
 
-    private ScriptObject BuildGeneratedModuleModel(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
+    private ScriptObject BuildGeneratedModuleModel(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null)
     {
         if (methodsForLowering.Count == 0)
         {
@@ -229,28 +229,26 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                 }
             }
-            // Also scan _methodsBySubjectId for value type ABI slots from
-            // cross-assembly stub methods (e.g., System.Linq) that may have 0
-            // instructions and thus be excluded from methodsForLowering by
-            // CollectAllMethods/CollectReachableMethods.  These methods still
-            // generate extern "C" declarations referencing chaos_valuetype_* types
-            // through the combined-subjects pipeline, and the header must provide
-            // the corresponding typedefs to avoid C4430/C2146 at the call site.
-            // The !string.IsNullOrEmpty guard safely skips entries from the
-            // original AOT IR JSON that lack TypeSubjectId metadata.
-            foreach (var m in _methodsBySubjectId.Values)
+            // ── Supplemental: scan method declaration strings for chaos_valuetype_* ──
+            // Cross-assembly stub methods (e.g., System.Linq) generate extern "C"
+            // declarations that reference chaos_valuetype_* types, but the original
+            // AOT IR JSON lacks TypeSubjectId on their ABI slots (even after
+            // lowering), so the ABI-slot scans above miss them.  By scanning the
+            // declaration strings we capture every referenced valuetype symbol and
+            // emit its typedef unconditionally, avoiding C4430/C2146 at the call site.
+            var valueTypeSymbols = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var decl in _methodDeclarations)
             {
-                if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
-                    !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
-                    _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
-                if (m.ParameterAbis != null)
+                int searchIdx = 0;
+                while ((searchIdx = decl.IndexOf("chaos_valuetype_", searchIdx, StringComparison.Ordinal)) >= 0)
                 {
-                    foreach (var abi in m.ParameterAbis)
-                    {
-                        if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
-                            !string.IsNullOrEmpty(abi.TypeSubjectId))
-                            _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
-                    }
+                    int symStart = searchIdx;
+                    int symEnd = symStart + "chaos_valuetype_".Length;
+                    while (symEnd < decl.Length && (char.IsLetterOrDigit(decl[symEnd]) || decl[symEnd] == '_'))
+                        symEnd++;
+                    if (symEnd > symStart + "chaos_valuetype_".Length)
+                        valueTypeSymbols.Add(decl.Substring(symStart, symEnd - symStart));
+                    searchIdx = symEnd;
                 }
             }
 
@@ -261,6 +259,49 @@ public sealed partial class NativeAotLoweringPlanner
                 vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
                 vtBuilder.Append(GetNativeValueTypeSymbol(typeId));
                 vtBuilder.AppendLine(";");
+            }
+            // Emit typedefs for any chaos_valuetype_* symbols found in method
+            // declarations that were NOT already covered by the TypeSubjectId scan
+            // above (e.g., types from cross-assembly stub ABI slots with no metadata).
+            var emittedSymbols = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var typeId in _emittedValueTypeSubjectIds)
+                emittedSymbols.Add(GetNativeValueTypeSymbol(typeId));
+            foreach (string sym in valueTypeSymbols.OrderBy(s => s, StringComparer.Ordinal))
+            {
+                if (emittedSymbols.Add(sym))
+                {
+                    vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
+                    vtBuilder.Append(sym);
+                    vtBuilder.AppendLine(";");
+                }
+            }
+            // Also scan the object model section text for chaos_valuetype_* symbols.
+            // The object model section (EmitObjectModelDeclarations) generates extern
+            // "C" declarations for cross-assembly references (e.g., vtable entries)
+            // whose types may not appear in methodDeclarations.  Without this fallback,
+            // types like System.Linq.ExceptionArgument used by vtable-entry methods
+            // have no typedef in the header, causing C4430 at the call site.
+            if (!string.IsNullOrEmpty(objectModelText))
+            {
+                int searchIdx = 0;
+                while ((searchIdx = objectModelText.IndexOf("chaos_valuetype_", searchIdx, StringComparison.Ordinal)) >= 0)
+                {
+                    int symStart = searchIdx;
+                    int symEnd = symStart + "chaos_valuetype_".Length;
+                    while (symEnd < objectModelText.Length && (char.IsLetterOrDigit(objectModelText[symEnd]) || objectModelText[symEnd] == '_'))
+                        symEnd++;
+                    if (symEnd > symStart + "chaos_valuetype_".Length)
+                    {
+                        string sym = objectModelText.Substring(symStart, symEnd - symStart);
+                        if (emittedSymbols.Add(sym))
+                        {
+                            vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
+                            vtBuilder.Append(sym);
+                            vtBuilder.AppendLine(";");
+                        }
+                    }
+                    searchIdx = symEnd;
+                }
             }
             vtBuilder.AppendLine();
             valueTypeTypedefs = vtBuilder.ToString();
