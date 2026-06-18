@@ -209,6 +209,8 @@ public sealed class CodegenOrchestrator
                 OutputDir = outputDir,
                 Error = ex.Message,
             };
+        }
+
         /// <summary>
         /// Try to resolve an assembly by name in the given directory.
         /// Returns true and the full path if found.

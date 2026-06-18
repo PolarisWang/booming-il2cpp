@@ -391,11 +391,45 @@ public static class Program
         var subjectMethodIds = aotSubjectIds.Distinct(StringComparer.Ordinal).ToList();
         Console.WriteLine($"        {subjectMethodIds.Count} AOT SubjectIds for codegen (from {subjects.Count} subjects)");
 
+        // Auto-detect additional assemblies: scan subjects for target assembly names
+        // and add their DLLs to the codegen assembly list. This ensures non-BCL target
+        // assembly methods (e.g. System.Collections.Immutable) get native AOT codegen.
+        var additionalAssemblyPaths = new List<string>();
+        var targetAssemblyNames = subjects
+            .Select(s => s.AssemblyName)
+            .Distinct(StringComparer.Ordinal)
+            .Where(n => !string.Equals(n, "CombinedSubjects", StringComparison.Ordinal)
+                     && !string.Equals(n, "Chaos.TestFramework.Sdk", StringComparison.Ordinal))
+            .ToList();
+        var searchDirs = new List<string>(assemblyDirs);
+        var dllDir = Path.GetDirectoryName(dllPath);
+        if (dllDir != null && !searchDirs.Contains(dllDir))
+            searchDirs.Add(dllDir);
+        foreach (var asmName in targetAssemblyNames)
+        {
+            foreach (var dir in searchDirs)
+            {
+                var candidate = Path.Combine(dir, asmName + ".dll");
+                if (File.Exists(candidate))
+                {
+                    additionalAssemblyPaths.Add(candidate);
+                    Console.WriteLine($"  [codegen] auto-added target assembly: {asmName} ({candidate})");
+                    break;
+                }
+            }
+        }
+        // Build assembly path list: subjects DLL + auto-detected target assemblies
+        var allAssemblyPaths = new List<string>(additionalAssemblyPaths.Count + 1) { dllPath };
+        allAssemblyPaths.AddRange(additionalAssemblyPaths);
+        // Build assembly path list: subjects DLL + auto-detected target assemblies
+        var allAssemblyPaths = new List<string>(additionalAssemblyPaths.Count + 1) { dllPath };
+        allAssemblyPaths.AddRange(additionalAssemblyPaths);
+
         // Step 2: Run IL2CPP codegen
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");
         var codegenBase = Path.Combine(outputDir, "codegen");
         var orchestrator = new Codegen.CodegenOrchestrator();
-        var codegenResult = orchestrator.Run([dllPath], codegenBase, isJit ? "jit" : "aot", subjectMethodIds, assemblyDirs);
+        var codegenResult = orchestrator.Run(allAssemblyPaths, codegenBase, isJit ? "jit" : "aot", subjectMethodIds, assemblyDirs);
 
         if (!codegenResult.Success)
             return Error($"Codegen failed: {codegenResult.Error}");
