@@ -201,38 +201,35 @@ public sealed partial class NativeAotLoweringPlanner
         // that conflict with chaos_generated_module.cpp, so we emit the
         // typedefs directly here.
         var valueTypeTypedefs = "";
-        if (_emittedValueTypeSubjectIds is { Count: > 0 })
-        {
-            // Post-scan _methodsBySubjectId for value type ABI slots from closure
-            // assembly methods.  The ObjectModelEmission phase only scans types in the
-            // AOT IR's type metadata, which may not include value types from closure
-            // assemblies (e.g., System.Data.ConnectionState, System.Data.IsolationLevel).
-            // Without these, the generated header lacks chaos_valuetype_* typedefs,
-            // causing C2061 when the subjects codegen uses them in function declarations.
+        _emittedValueTypeSubjectIds ??= new HashSet<string>(StringComparer.Ordinal);
+        // Post-scan the lowered method artifacts for closure assembly value
+        // type ABI slots.  The ObjectModelEmission phase only scans types in
+            // the AOT IR's type metadata, which may not include value types from
+            // closure assemblies (e.g., System.Data.ConnectionState,
+            // System.Data.IsolationLevel).  Without these, the generated header
+            // lacks chaos_valuetype_* typedefs, causing C2061.
             //
-            // Use TypeShape (not CarrierKindCode) for detection because the AOT IR JSON
-            // stores value type params with CarrierKindCode=NativeInt/Int64 and
-            // TypeShape=ValueType.  The CarrierKindCode is only upgraded to ValueTypeByValue
-            // during the lowering phase that produces method artifacts — _methodsBySubjectId
-            // still has the original JSON values.
-            foreach (var kvp in _methodsBySubjectId)
+            // Use methodsForLowering (parameter, lowered artifacts with proper
+            // CarrierKindCode=ValueTypeByValue and TypeSubjectId set) rather than
+            // _methodsBySubjectId (original AOT IR JSON with no TypeSubjectId for
+            // value types).
+            for (int mi = 0; mi < methodsForLowering.Count; mi++)
             {
-                var m = kvp.Value;
-                if (m.ReturnAbi.TypeShape == AotCoreIrTypeShapeKind.ValueType &&
+                var m = methodsForLowering[mi];
+                if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
                     !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
                     _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
                 if (m.ParameterAbis != null)
                 {
                     foreach (var abi in m.ParameterAbis)
                     {
-                        if (abi.TypeShape == AotCoreIrTypeShapeKind.ValueType &&
+                        if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
                             !string.IsNullOrEmpty(abi.TypeSubjectId))
                             _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
                     }
                 }
             }
 
->>>>>>> 5b6a0a40f493f88f4078bc5b5eedc06541ebf6f4
             var vtBuilder = new System.Text.StringBuilder();
             vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");
             foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
@@ -243,8 +240,6 @@ public sealed partial class NativeAotLoweringPlanner
             }
             vtBuilder.AppendLine();
             valueTypeTypedefs = vtBuilder.ToString();
-        }
-
         return new ScriptObject
         {
             ["type_groups"] = typeGroupModels,
