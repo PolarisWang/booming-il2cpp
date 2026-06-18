@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Security.Principal.Windows",
-  "timestamp": "2026-06-18T07:40:14",
+  "timestamp": "2026-06-18T04:55:31",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 1,
-  "totalDeclaredMethods": 36
+  "totalDeclaredMethods": 8
 }

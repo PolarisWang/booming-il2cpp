@@ -226,7 +226,7 @@ def _compile_custom_subjects(
         "--custom-cs-files", ";".join(str(f) for f in sorted(custom_cs_files)),
         "--output", str(output_dir),
         "--slug", subjects_dll.parent.parent.parent.name,
-        "--sdk-csproj", str(sdk_csproj),
+        "--sdk-csproj", os.path.relpath(sdk_csproj, output_dir),
         "--tfm", tfm,
     ]
 
@@ -617,7 +617,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "  </PropertyGroup>\n"
         "  <ItemGroup>\n"
         f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
-        f"    <ProjectReference Include=\"{sdk_csproj}\" />\n"
+        f"    <ProjectReference Include=\"{os.path.relpath(sdk_csproj, combined_csproj.parent)}\" />\n"
         f"{pkg_block}"
         "  </ItemGroup>\n"
         "</Project>\n"

@@ -290,6 +290,43 @@ bool FastExecute(FastFrame& frame,
         ++frame.pc;
         goto kOp_Epilogue;
     }
+    kOp_Add: {
+        _prev_pc = frame.pc;
+        if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; goto kOp_Terminate; }
+        int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
+        int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
+        frame.PushI32_NC(l + r);
+        ++frame.pc;
+        goto kOp_Epilogue;
+    }
+    kOp_Sub: {
+        _prev_pc = frame.pc;
+        if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; goto kOp_Terminate; }
+        int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
+        int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
+        frame.PushI32_NC(l - r);
+        ++frame.pc;
+        goto kOp_Epilogue;
+    }
+    kOp_Mul: {
+        _prev_pc = frame.pc;
+        if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; goto kOp_Terminate; }
+        int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
+        int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
+        frame.PushI32_NC(l * r);
+        ++frame.pc;
+        goto kOp_Epilogue;
+    }
+    kOp_LdStr: {
+        _prev_pc = frame.pc;
+        if (instrs[frame.pc].string_operand != nullptr) {
+            frame.PushObj_NC(const_cast<char*>(instrs[frame.pc].string_operand));
+        } else {
+            frame.PushNull_NC();
+        }
+        ++frame.pc;
+        goto kOp_Epilogue;
+    }
 
     // ═══════════════════════════════════════════════════════════════════
     //  Called handlers — complex ops via function call
@@ -302,7 +339,6 @@ bool FastExecute(FastFrame& frame,
     goto kOp_Epilogue; \
 } while(0)
 
-    kOp_LdStr:        OP_CALL_HANDLER(LdStr);
     kOp_LdArg:        OP_CALL_HANDLER(LdArg);
     kOp_LdLoc:        OP_CALL_HANDLER(LdLoc);
     kOp_StLoc:        OP_CALL_HANDLER(StLoc);
@@ -322,9 +358,6 @@ bool FastExecute(FastFrame& frame,
     kOp_Bgt:          OP_CALL_HANDLER(Bgt);
     kOp_Ble:          OP_CALL_HANDLER(Ble);
     kOp_Bge:          OP_CALL_HANDLER(Bge);
-    kOp_Add:          OP_CALL_HANDLER(Add);
-    kOp_Sub:          OP_CALL_HANDLER(Sub);
-    kOp_Mul:          OP_CALL_HANDLER(Mul);
     kOp_Div:          OP_CALL_HANDLER(Div);
     kOp_Rem:          OP_CALL_HANDLER(Rem);
     kOp_Ceq:          OP_CALL_HANDLER(Ceq);

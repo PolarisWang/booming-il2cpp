@@ -436,7 +436,7 @@ public static class Program
         Console.WriteLine("  [2/4] Running IL2CPP codegen...");
         var codegenBase = Path.Combine(outputDir, "codegen");
         var orchestrator = new Codegen.CodegenOrchestrator();
-        var codegenResult = orchestrator.Run(allAssemblyPaths, codegenBase, isJit ? "jit" : "aot", subjectMethodIds, assemblyDirs);
+        var codegenResult = orchestrator.Run([dllPath], codegenBase, isJit ? "jit" : "aot", subjectMethodIds, assemblyDirs);
 
         if (!codegenResult.Success)
             return Error($"Codegen failed: {codegenResult.Error}");

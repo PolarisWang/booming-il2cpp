@@ -1,25 +1,24 @@
 {
   "assemblyName": "System.IO.Compression.ZipFile",
-  "timestamp": "2026-06-18T07:40:14",
+  "timestamp": "2026-06-18T05:51:42",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
-    "chunksWithMetaMismatch": 0,
+    "chunksWithMetaMismatch": 1,
     "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 66,
+    "totalBenchmarkedMethods": 30,
     "aggregatePerformance": {
-      "meanDurationMs": 0.04365606060606061,
-      "meanOpsPerSecond": 220679256.00757575,
-      "aggregateMeanCv": 0.4371961212121212,
-      "totalOutliers": 80
+      "meanDurationMs": 1.20109,
+      "meanOpsPerSecond": 8404089.066666666,
+      "aggregateMeanCv": 0.03840346666666667
     },
     "hotupdate": {
-      "chunksWithPatchData": 1,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 66,
+      "totalPassed": 30,
       "totalFailed": 0,
       "skipBreakdown": {}
     },

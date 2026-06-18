@@ -1,25 +1,25 @@
 {
   "assemblyName": "System.Runtime.InteropServices",
-  "timestamp": "2026-06-18T07:40:14",
+  "timestamp": "2026-06-18T07:06:20",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
     "factPassRate": 100.0,
-    "totalBenchmarkedMethods": 29,
+    "totalBenchmarkedMethods": 31,
     "aggregatePerformance": {
-      "meanDurationMs": 2.3730344827586207,
-      "meanOpsPerSecond": 173443107.68896553,
-      "aggregateMeanCv": 0.13839024137931033,
-      "totalOutliers": 15
+      "meanDurationMs": 20.60996129032258,
+      "meanOpsPerSecond": 17692544.241935484,
+      "aggregateMeanCv": 0.4879306451612903,
+      "totalOutliers": 21
     },
     "hotupdate": {
-      "chunksWithPatchData": 1,
+      "chunksWithPatchData": 0,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
       "chunksWithRevertFailure": 0,
-      "totalPassed": 29,
+      "totalPassed": 31,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
