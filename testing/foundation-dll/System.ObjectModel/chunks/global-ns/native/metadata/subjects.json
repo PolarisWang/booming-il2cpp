@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-06-18T09:34:38.0849084Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::Contains:System.Boolean(System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "Contains",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::TryGetValue:System.Boolean(System.Int32,System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "TryGetValue",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.KeyedCollection\u003CSystem.Int32,System.Int32\u003E",
+      "methodName": "Remove",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E::Move:System.Void(System.Int32,System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E",
+      "methodName": "Move",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E::Move:System.Void(System.Int32,System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E",
+      "methodName": "Move",
+      "isStatic": true
+    },
+    {
+      "index": 9,
+      "kind": "fact",
+      "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E::Move:System.Void(System.Int32,System.Int32)",
+      "assemblyName": "System.ObjectModel",
+      "typeName": "System.Collections.ObjectModel.ObservableCollection\u003CSystem.Int32\u003E",
+      "methodName": "Move",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 10,
+    "factCount": 10,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}
