@@ -1,40 +1,41 @@
 {
   "assemblyName": "System.Formats.Asn1",
-  "timestamp": "2026-06-16T01:41:58",
+  "timestamp": "2026-06-18T06:03:23",
   "totalChunks": 1,
-  "totalBenchmarkedMethods": 69,
+  "totalBenchmarkedMethods": 30,
   "aggregatePerformance": {
-    "meanDurationMs": 0.30738260869565215,
-    "meanOpsPerSecond": 329883361.24,
-    "aggregateMeanCv": 0.04230966176470589
+    "meanDurationMs": 15.138793333333332,
+    "meanOpsPerSecond": 737482.3666666667,
+    "aggregateMeanCv": 0.42689703333333334,
+    "totalOutliers": 50
   },
   "chunkSummaries": [
     {
       "slug": "system-formats-asn1",
       "fact": {
-        "passed": 69,
-        "total": 69,
+        "passed": 30,
+        "total": 30,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 77,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 69,
-        "iterations": 50000,
-        "meanDurationMs": 0.30738260869565215,
-        "meanOpsPerSecond": 329883361.24,
-        "minDurationMs": 0,
-        "maxDurationMs": 11.1083,
-        "totalDurationMs": 21.2094,
-        "totalAllocatedBytes": 800000.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.04230966176470589,
-        "maxCv": 0.318814
+        "methodCount": 30,
+        "iterations": 10000,
+        "meanDurationMs": 15.138793333333332,
+        "meanOpsPerSecond": 737482.3666666667,
+        "minDurationMs": 9.7223,
+        "maxDurationMs": 20.0173,
+        "totalDurationMs": 454.1638,
+        "totalAllocatedBytes": 1120000.0,
+        "meanSampleCount": 8.3,
+        "totalOutliers": 50,
+        "meanCv": 0.42689703333333334,
+        "maxCv": 0.943179
       },
       "hotupdate": {
-        "passed": 68,
+        "passed": 30,
         "failed": 0,
         "allSemantic": false,
         "allRevert": true,
@@ -51,7 +52,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 2868224,
+        "totalSize": 4278784,
         "source": "none"
       },
       "benchmarkReport": {

@@ -1,56 +1,49 @@
 {
   "assemblyName": "System.Security.Claims",
-  "timestamp": "2026-06-18T04:54:51",
+  "timestamp": "2026-06-18T06:03:23",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
     "chunksWithValueWarnings": 0,
     "chunksWithMetaMismatch": 1,
-    "factPassRate": 97.8,
-    "totalBenchmarkedMethods": 44,
+    "factPassRate": 100.0,
+    "totalBenchmarkedMethods": 45,
     "aggregatePerformance": {
-      "meanDurationMs": 6.264343181818182,
-      "meanOpsPerSecond": 13345714.31590909,
-      "aggregateMeanCv": 0.3591775909090909,
-      "totalOutliers": 22
+      "meanDurationMs": 0.03036,
+      "meanOpsPerSecond": 329030254.12222224,
+      "aggregateMeanCv": 0.1651474,
+      "totalOutliers": 52
     },
     "hotupdate": {
-      "chunksWithPatchData": 0,
+      "chunksWithPatchData": 1,
       "chunksPatchFailed": 0,
       "chunksPatchSkippedNoMethods": 0,
-      "chunksWithRevertFailure": 1,
-      "totalPassed": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 45,
       "totalFailed": 0,
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 45,
-      "methodsWithNet8": 45,
-      "chaosAotVsNet8": {
-        "mean": -146.97,
-        "median": -146.97,
-        "min": -146.97,
-        "max": -146.97,
-        "p25": -146.97,
-        "p75": -146.97
-      },
+      "methodsAnalyzed": 30,
+      "methodsWithNet8": 29,
+      "chaosAotVsNet8": {},
       "chaosJitVsNet8": {
-        "mean": -130.37,
-        "median": -130.37,
-        "min": -130.37,
-        "max": -130.37,
-        "p25": -130.37,
-        "p75": -130.37
+        "mean": 79.99,
+        "median": 79.99,
+        "min": 79.99,
+        "max": 79.99,
+        "p25": 79.99,
+        "p75": 79.99
       },
       "net10VsNet8": {
-        "mean": -11.84,
-        "median": -11.84,
-        "min": -11.84,
-        "max": -11.84,
-        "p25": -11.84,
-        "p75": -11.84
+        "mean": -7.32,
+        "median": -7.32,
+        "min": -7.32,
+        "max": -7.32,
+        "p25": -7.32,
+        "p75": -7.32
       },
-      "highValueMethods_betterThanNet8": 8.9
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }
