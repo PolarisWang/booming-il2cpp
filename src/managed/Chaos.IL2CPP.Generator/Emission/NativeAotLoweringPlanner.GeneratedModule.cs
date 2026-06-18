@@ -203,6 +203,29 @@ public sealed partial class NativeAotLoweringPlanner
         var valueTypeTypedefs = "";
         if (_emittedValueTypeSubjectIds is { Count: > 0 })
         {
+            // Post-scan _methodsBySubjectId for ValueTypeByValue ABI slots from closure
+            // assembly methods.  The ObjectModelEmission phase only scans types in the
+            // AOT IR's type metadata, which may not include value types from closure
+            // assemblies (e.g., System.Data.ConnectionState, System.Data.IsolationLevel).
+            // Without these, the generated header lacks chaos_valuetype_* typedefs,
+            // causing C2061 when the subjects codegen uses them in function declarations.
+            foreach (var kvp in _methodsBySubjectId)
+            {
+                var m = kvp.Value;
+                if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
+                    !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
+                    _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
+                if (m.ParameterAbis != null)
+                {
+                    foreach (var abi in m.ParameterAbis)
+                    {
+                        if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
+                            !string.IsNullOrEmpty(abi.TypeSubjectId))
+                            _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
+                    }
+                }
+            }
+
             var vtBuilder = new System.Text.StringBuilder();
             vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");
             foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
