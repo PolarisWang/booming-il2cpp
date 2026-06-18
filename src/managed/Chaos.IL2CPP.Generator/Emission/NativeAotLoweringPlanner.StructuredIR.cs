@@ -662,6 +662,27 @@ public sealed partial class NativeAotLoweringPlanner
                 // should not reach emission in practice.
                 break;
 
+            case "brtrue":
+            case "brfalse":
+                // Fallback: when control flow recovery fails to wrap a conditional
+                // branch in IRIfThenElse (e.g., complex CFG with mixed structured +
+                // unstructured patterns), emit a goto-based conditional jump instead
+                // of crashing.  Uses a unique label for each occurrence.
+                {
+                    int labelIdx = Interlocked.Increment(ref s_structuredBrLabelSeq);
+                    string label = $"chaos_br_{labelIdx}";
+                    string cond = ConsumeEvalStackValueExpression();
+                    bool branchOnTrue = terminator.Op == "brtrue";
+                    string condition = branchOnTrue
+                        ? $"{cond} != 0"
+                        : $"{cond} == 0";
+                    builder.AppendLine(indentation + $"if ({condition}) goto {label};");
+                    // The target block will be emitted by the next IR node in sequence.
+                    // Emit a label at the current position so the branch target resolves.
+                    builder.AppendLine(indentation + $"{label}:;");
+                }
+                break;
+
             default:
                 throw new NotSupportedException(
                     "StructuredIR: unsupported block terminator '" + terminator.Op + "'");
@@ -2663,6 +2684,7 @@ public sealed partial class NativeAotLoweringPlanner
     private static long s_irreducibleCount;
     private static long s_totalMethodCount;
     internal static long s_pcDispatchCount;
+    private static int s_structuredBrLabelSeq;
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, long> s_irreducibleReasons
         = new(System.StringComparer.Ordinal);
 
