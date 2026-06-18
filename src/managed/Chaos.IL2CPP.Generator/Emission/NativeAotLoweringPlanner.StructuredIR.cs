@@ -961,15 +961,18 @@ public sealed partial class NativeAotLoweringPlanner
     {
         "stloc" or "stloc.s" or "starg" or "pop" or "initobj" => 1,
         "stfld" or "stobj" or "stsfld"
-            or "stelem" or "stelem.i" or "stelem.ref"
             or "stind.i4" or "stind.i1" or "stind.i2" or "stind.i8"
             or "stind.r4" or "stind.r8" or "stind.ref" or "stind.i"
-            or "cpblk" or "initblk" or "throw"
-            or "ceq" or "cgt" or "cgt.un" or "clt" or "clt.un"
-            or "add" or "sub" or "mul" or "div" or "div.un" or "rem" or "rem.un"
-            or "add.ovf" or "sub.ovf" or "mul.ovf"
+            or "cpblk" or "throw" => 2,
+        "stelem" or "stelem.i" or "stelem.ref" or "initblk" => 3,
+        // Comparison: pop 2, push 1
+        "ceq" or "cgt" or "cgt.un" or "clt" or "clt.un" => 2,
+        // Binary arithmetic: pop 2, push 1
+        "add" or "sub" or "mul" or "div" or "div.un" or "rem" or "rem.un"
+            or "shl" or "shr" or "shr.un"
             or "and" or "or" or "xor"
-            or "shl" or "shr" or "shr.un" => 2,
+            or "add.ovf" or "sub.ovf" or "mul.ovf" => 2,
+        // Unary: pop 1, push 1
         "neg" or "not" or "dup" => 1,
         _ => 0,
     };
