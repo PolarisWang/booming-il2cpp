@@ -662,11 +662,12 @@ private:
                     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
                 });
             }
-        // Restore original page protection after writing.
+        }
+    // Restore original page protection after writing.
 #if defined(_WIN32)
-        ::VirtualProtect(kChaosExternalRuntimeFnTable,
-            static_cast<CHAOS_IL2CPP_SIZE>(kChaosExternalRuntimeCount) * sizeof(void*),
-            PAGE_READWRITE, &_frs_old);
+    ::VirtualProtect(kChaosExternalRuntimeFnTable,
+        static_cast<CHAOS_IL2CPP_SIZE>(kChaosExternalRuntimeCount) * sizeof(void*),
+        PAGE_READWRITE, &_frs_old);
 #endif
     }
 };

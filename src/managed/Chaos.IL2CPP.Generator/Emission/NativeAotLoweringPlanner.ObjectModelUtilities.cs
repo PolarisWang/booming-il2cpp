@@ -51,6 +51,17 @@ public sealed partial class NativeAotLoweringPlanner
 		HashSet<string> hashSet = new HashSet<string>(StringComparer.Ordinal);
 		foreach (AotCoreIrMethodArtifact method in aotCoreIr.Methods)
 		{
+			// Pass 0: Scan parameter and return ABIs for value type subjects.
+			// Value types used as params/returns may not appear as TargetReferences.
+			if (method.ReturnAbi.TypeShape == AotCoreIrTypeShapeKind.ValueType &&
+			    !string.IsNullOrEmpty(method.ReturnAbi.TypeSubjectId))
+				hashSet.Add(method.ReturnAbi.TypeSubjectId);
+			foreach (var _vtp in method.ParameterAbis)
+			{
+				if (_vtp.TypeShape == AotCoreIrTypeShapeKind.ValueType &&
+				    !string.IsNullOrEmpty(_vtp.TypeSubjectId))
+					hashSet.Add(_vtp.TypeSubjectId);
+			}
 			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
 			{
 				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;

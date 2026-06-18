@@ -241,6 +241,9 @@ using chaos::il2cpp::jit::chaos_normalize_native_int_argument;
 using chaos::il2cpp::jit::chaos_resolve_managed_value_pointer;
 using chaos::il2cpp::jit::chaos_vtable_resolve;
 using chaos::il2cpp::jit::chaos_is_type_compatible;
-using chaos::il2cpp::jit::chaos_does_type_implement_interface;
+// C2873: MSVC rejects using-declaration for this function.
+// Use a forward declaration instead — the inline definition is in
+// namespace chaos::il2cpp::jit above (line 185).
+inline bool chaos_does_type_implement_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept;
 
 #endif  // CHAOS_IL2CPP_GENERATED_RUNTIME_PRELUDE_H_
