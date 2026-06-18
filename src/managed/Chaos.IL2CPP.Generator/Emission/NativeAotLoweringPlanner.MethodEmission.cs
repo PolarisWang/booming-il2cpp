@@ -107,7 +107,28 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		builder.AppendLine();
-		// Migrated to Scriban template: GenericInstantiationStub.cpp.scriban
+		
+            // Build forwarding argument list for the stub to canonical body call.
+            // Parameter names follow the chaos_fn_arg_N convention matching param_sig.
+            string forwardedArgs;
+            if (methodAbiParameterSlots.Count > 0)
+            {
+                forwardedArgs = string.Join(", ",
+                    Enumerable.Range(0, methodAbiParameterSlots.Count)
+                        .Select(i => $"chaos_fn_arg_{i}"));
+            }
+            else
+            {
+                forwardedArgs = "";
+            }
+            if (needsContext)
+            {
+                forwardedArgs = string.IsNullOrEmpty(forwardedArgs)
+                    ? "chaos_generic_context"
+                    : forwardedArgs + ", chaos_generic_context";
+            }
+
+// Migrated to Scriban template: GenericInstantiationStub.cpp.scriban
 		var _stubM = new Scriban.Runtime.ScriptObject
 		{
 			["comment"] = "// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId),
