@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Text.RegularExpressions;
 using Chaos.IL2CPP.Contracts;
 using Scriban.Runtime;
 
@@ -94,12 +93,12 @@ public sealed class NativeAotEmitter
         var codegenMetrics = NativeCodegenMetricsBuilder.Build(
             "native-aot",
             loweringPlan.PlanKind,
-            generatedSources.Select(generatedSource => (generatedSource.RelativePath, generatedSource.Contents)),
+            generatedSources.Select(generatedSource => (generatedSource.RelativePath, generatedSource.Contents!)),
             planner.StructuredMethodCount,
             planner.StructuredExceptionBodyCount,
             planner.TotalMethodCount,
             planner.AotReachableMethodCount,
-            planner?.AotUnreachableMethodCount ?? 0,
+            planner.AotUnreachableMethodCount,
             planner.HotpatchEntryCount,
             planner.HotpatchEligibleMethodCount);
 
@@ -107,7 +106,7 @@ public sealed class NativeAotEmitter
         var validator = new Validation.NativeCodegenValidator();
         foreach (var generatedSource in generatedSources)
         {
-            var result = validator.ValidateContent(generatedSource.Contents, generatedSource.RelativePath);
+            var result = validator.ValidateContent(generatedSource.Contents!, generatedSource.RelativePath);
             if (!result.IsValid)
             {
                 foreach (var error in result.Errors)

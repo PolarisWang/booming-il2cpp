@@ -952,7 +952,7 @@ public sealed partial class NativeAotLoweringPlanner
 						? string.Format("0x{0:X8}u", baseToken)
 						: "0u";
 				}
-				string ifaceMapSym = null;
+				string? ifaceMapSym = null;
 				int ifaceCount = 0;
 				if (referenceTypeImplementedInterfaceSubjectIds.TryGetValue(typeId, out var ifaces) && ifaces.Count > 0)
 				{
@@ -1288,30 +1288,6 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		        _staticFieldDeclarations.TryAdd(kvp.Key, kvp.Value);
 		}
 		_emittedValueTypeSubjectIds = new HashSet<string>(valueTypeSubjectIds, StringComparer.Ordinal);
-		// Post-scan: ensure value types from closure assembly methods' ABI slots are
-		// also included.  When closure assembly methods (e.g., System.Data.Common)
-		// have ValueTypeByValue parameters, their TypeSubjectId must have a
-		// corresponding chaos_valuetype_* typedef in the generated header.
-		// Without this, the subjects codegen emits declarations referencing
-		// chaos_valuetype_* identifiers that have no typedef, causing C2061.
-		if (_emittedValueTypeSubjectIds.Count > 0 && methodsForLowering != null)
-		{
-		    foreach (var m in methodsForLowering)
-		    {
-		        if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
-		            !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
-		            _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
-		        if (m.ParameterAbis != null)
-		        {
-		            foreach (var abi in m.ParameterAbis)
-		            {
-		                if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
-		                    !string.IsNullOrEmpty(abi.TypeSubjectId))
-		                    _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
-		            }
-		        }
-		    }
-		}
 		// Capture emitted type subject IDs for Phase 0 ModuleRegistry Tier 0 arrays
 		_allEmittedTypeSubjectIds = new HashSet<string>(referenceTypeSubjectIds, StringComparer.Ordinal);
 		_allEmittedTypeSubjectIds.UnionWith(interfaceTypeSubjectIds);

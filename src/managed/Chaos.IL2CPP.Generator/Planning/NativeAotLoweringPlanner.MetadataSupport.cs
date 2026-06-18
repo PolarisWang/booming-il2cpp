@@ -292,7 +292,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             foreach (var instruction in method.Instructions)
             {
-                var callee = ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee);
+                var callee = ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee!);
                 if (!TryParseAttributeGetterMethodSubjectId(callee, out var attributeTypeSubjectId, out var memberName) ||
                     string.IsNullOrEmpty(attributeTypeSubjectId) ||
                     string.IsNullOrEmpty(memberName) ||

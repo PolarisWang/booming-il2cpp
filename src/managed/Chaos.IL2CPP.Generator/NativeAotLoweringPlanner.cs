@@ -922,7 +922,7 @@ public sealed partial class NativeAotLoweringPlanner
         // ── Build pre-computed O(1) indexes for invocation planning ──
         _asyncMoveNextMethods = BuildAsyncMoveNextIndex(_methodsBySubjectId);
         _allDeclaringTypeSubjectIds = BuildAllDeclaringTypeSubjectIds(
-            _methodsBySubjectId, _referenceTypeBaseSubjectIds, _referenceTypeImplementedInterfaceSubjectIds);
+            _methodsBySubjectId, _referenceTypeBaseSubjectIds, _referenceTypeImplementedInterfaceSubjectIds!);
         _methodsByDeclaringType = BuildMethodsByDeclaringTypeIndex(_methodsBySubjectId);
         CustomAttributeSupportModel? customAttributeSupport = null;
         AssemblyReflectionSupportModel? assemblyReflectionSupport = null;
@@ -1103,7 +1103,7 @@ public sealed partial class NativeAotLoweringPlanner
         PcDispatchCount = (int)Interlocked.Read(ref s_pcDispatchCount);
 
 
-        var entryBridgeArguments = fullAssemblyMode ? "" : BuildEntryBridgeArguments(entryMethod);
+        var entryBridgeArguments = fullAssemblyMode ? "" : BuildEntryBridgeArguments(entryMethod!);
 
         var abiManifestCode = BuildAbiManifest(methodsForLowering);
         var nameIndexCode = BuildHotpatchTable(methodsForLowering, metadataRegistration);
@@ -1511,7 +1511,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Native bridge headers (e.g., "convert.h") from external runtime
         // helpers that map to direct native function calls.
         includes_.AddRange(
-            externalRuntimeHelpers
+            externalRuntimeHelpers!
                 .Select(h => h.DirectNativeHeader)
                 .Where(h => !string.IsNullOrEmpty(h))
                 .Distinct(StringComparer.Ordinal)
@@ -1593,7 +1593,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             Methods = allMethods,
             EntrySubjectId = loweringPlan.EntrySubjectId,
             EntrySymbol = loweringPlan.EntrySymbol,
-            EntryNativeSymbol = entryMethod.NativeSymbol,
+            EntryNativeSymbol = entryMethod!.NativeSymbol,
             NativeEntryFunctionName = loweringPlan.NativeEntryFunctionName,
             EntryBridgeArguments = entryBridgeArguments,
             ShapeDispatchHeaderContent = _shapeRegistry.GenerateCppShapeHeader(),
@@ -2803,7 +2803,7 @@ return sb.ToString();
         if (callee != null)
         {
             callee = ManagedNaming.NormalizeSubjectIdAssembly(callee);
-            if (_moduleSymbolTable.TryGetValue(callee, out nativeSymbol))
+            if (_moduleSymbolTable.TryGetValue(callee, out nativeSymbol!))
             {
                 // Only use the local symbol when the invocation target doesn't already
                 // have a DirectNativeSymbol (which is already optimized) and isn't
@@ -4118,7 +4118,7 @@ return sb.ToString();
             _ => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.String,
                 value.GetType().FullName switch
                 {
-                    not null when value.GetType().FullName.StartsWith("System.Collections.Immutable.ImmutableArray")
+                    not null when value.GetType().FullName!.StartsWith("System.Collections.Immutable.ImmutableArray")
                         => $"(immutable-array:{value})",
                     not null => $"(literal:{value})",
                     null => $"(literal)",
@@ -4460,30 +4460,21 @@ public sealed partial class NativeAotLoweringPlanner
         var methodEntries = new List<ScriptObject>(methods.Count);
         var subjectEntries = new List<ScriptObject>();
 
-        // ── Phase 1 diagnostic: SubjectId match rate (fact-only, excluding Benchmark_) ──
+        // ── Phase 1 diagnostic: SubjectId match rate ──
         if (_subjectMethodSubjectIds is { Count: > 0 })
         {
             var subjectIdsInMethods = new HashSet<string>(methods.Select(m => m.SubjectId!),
                 StringComparer.Ordinal);
-            int matched = 0, missed = 0, benchmarkSkipped = 0;
+            int matched = 0, missed = 0;
             foreach (var sid in _subjectMethodSubjectIds)
             {
-                // Skip Benchmark_ entries — they are excluded from subject entries
-                // by IsSubjectMethod() at line 4837, so counting them as "missed" is
-                // misleading. The diagnostic focuses on fact-wrapper match rate.
-                if (sid.Contains("::Benchmark_", StringComparison.Ordinal))
-                {
-                    benchmarkSkipped++;
-                    continue;
-                }
                 if (subjectIdsInMethods.Contains(sid))
                     matched++;
                 else
                     missed++;
             }
-            int totalConsidered = matched + missed;
             Console.Error.WriteLine($"[SUBJECT-MATCH] {matched} matched, {missed} missed " +
-                $"(out of {totalConsidered} fact subject-methods + {benchmarkSkipped} benchmark skipped, " +
+                $"(out of {_subjectMethodSubjectIds.Count} subject-methods, " +
                 $"{methods.Count} methods in dispatch)");
             if (missed > 0)
             {
@@ -4491,8 +4482,6 @@ public sealed partial class NativeAotLoweringPlanner
                 int sampleCount = 0;
                 foreach (var sid in _subjectMethodSubjectIds)
                 {
-                    if (sid.Contains("::Benchmark_", StringComparison.Ordinal))
-                        continue;
                     if (!subjectIdsInMethods.Contains(sid))
                     {
                         if (sampleCount < 10)
@@ -4579,8 +4568,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 if (extCall) { skippedSubjectVariants++; continue; }
             }
-
-            int subjectIdx = ExtractSubjectIndex(method.SubjectId);
+            int subjectIdx = ExtractSubjectIndex(method.SubjectId!);
                 if (subjectIdx < 0)
                     // Assign temporary unique index — will be sorted by subject_index
                     // and reassigned to sequential 0..N-1 after dedup+filter below.
@@ -4597,8 +4585,6 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (skippedSubjectVariants > 0)
             Console.Error.WriteLine($"[SUBJECT-VARIANT-SKIP] Skipped {skippedSubjectVariants} subject variant(s) (SubjectId-based)");
-        if (skippedSubjectVariants > 0)
-            Console.Error.WriteLine($"[SUBJECT-VARIANT-SKIP] {skippedSubjectVariants} variant(s) skipped (SubjectId-based)");
         // Deduplicate subject entries by subject_index — each unique subject
         // produces both a wrapper and the actual method body (2 entries) but
         // the slot map should expose only one entry per subject (the wrapper).
@@ -4682,9 +4668,12 @@ public sealed partial class NativeAotLoweringPlanner
                 return int.MaxValue; // Unknown methods go to the end
             })];
             // Reassign sequential subject_index and contract_index after sorting.
-            // contract_index maps to the position in the filtered metadata order
-            // (0-based after excluding Benchmark_ entries), NOT the Subject_N number
-            // from ExtractSubjectIndex which can have gaps due to dedup/filtering.
+            // NOTE: kSubjectContractMap (rendered by Scriban from contract_index) is
+            // intentionally sequential 0..N-1 matching subject_index — there are
+            // currently NO downstream C++ consumers of kSubjectContractMap (confirmed
+            // by codebase search). contract_index was previously set to the Subject_N
+            // parsed number (which has gaps after dedup/filtering), but since nothing
+            // reads it, sequential indexing is safe and cleaner for future use.
             for (int sei = 0; sei < subjectEntries.Count; sei++)
             {
                 subjectEntries[sei]["subject_index"] = sei;

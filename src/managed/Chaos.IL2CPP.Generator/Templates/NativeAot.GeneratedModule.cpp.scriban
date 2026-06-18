@@ -8,24 +8,18 @@
 #include "chaos_generated_module.h"
 #include <gc/gc_layout.h>
 
-// MSVC C2059 workaround: extern "C" on declarations after <string> (transitively
-// included via <chaos/common.h>) triggers "syntax error: 'string'".  Using a
-// macro delays the token past the parser's problematic state.
-#define EXTERN_C extern "C"
-
 // extern "C" symbols from native-aot.generated.cpp
-EXTERN_C const CodeRegistrationV0 chaos_codegen_code_registration;
-EXTERN_C const MetadataRegistrationV0 chaos_codegen_metadata_registration;
-EXTERN_C const CodegenRegistrationOptionsV0 chaos_codegen_options;
-EXTERN_C {{ k_aot_method_count_type }} kAotMethodCount;
+extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
+extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
+extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
+extern "C" {{ k_aot_method_count_type }} kAotMethodCount;
 
 {{~ if type_groups.size > 0 ~}}
 
 // extern "C" function declarations for all AOT-compiled methods
-// (using EXTERN_C macro to work around MSVC C2059 with <string>)
 {{~ for type_group in type_groups ~}}
 {{~ for method in type_group.methods ~}}
-EXTERN_C {{ method.return_type }} {{ method.native_symbol }}(
+extern "C" {{ method.return_type }} {{ method.native_symbol }}(
     {{~ if method.param_count > 0 ~}}
         {{~ for param in method.params ~}}
             {{ param.type }}{{ if !for.last }}, {{ end }}
@@ -36,7 +30,6 @@ EXTERN_C {{ method.return_type }} {{ method.native_symbol }}(
 );
 {{~ end ~}}
 {{~ end ~}}
-// end EXTERN_C declarations
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
@@ -51,7 +44,6 @@ static const Functions s_functions = {
     },
 {{~ end ~}}
     {{ k_aot_method_count_value }},
-{{~ end -}}
 };
 
 const Functions kFunctions = s_functions;
@@ -60,7 +52,7 @@ const Functions kFunctions = s_functions;
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
 {{~ if type_groups.size > 0 ~}}
-EXTERN_C void* kFunctionsFlat[{{ k_aot_method_count_value }}];
+extern "C" void* kFunctionsFlat[{{ k_aot_method_count_value }}];
 void* kFunctionsFlat[{{ k_aot_method_count_value }}] = {
 {{~ for type_group in type_groups ~}}
 {{~ for method in type_group.methods ~}}
@@ -68,6 +60,8 @@ void* kFunctionsFlat[{{ k_aot_method_count_value }}] = {
 {{~ end ~}}
 {{~ end ~}}
 };
+{{~ end ~}}
+
 {{~ end ~}}
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
