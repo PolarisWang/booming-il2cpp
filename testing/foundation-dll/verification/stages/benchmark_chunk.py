@@ -370,7 +370,12 @@ def _write_perf_store(
     # Always overwrite: each pipeline run produces a self-contained file.
     # Append mode caused stale data accumulation across partial runs,
     # mixing old net8-jit baselines with fresh chaos-aot results.
-    with open(perf_path, "w", encoding="utf-8") as f:
+    # Use "a" mode for individual writes so multiple technologies within
+    # the same benchmark stage (chaos-aot, chaos-jit) don't clobber each other.
+    # The file is cleared at the start of the benchmark stage (caller
+    # responsibility), not here.
+    append = perf_path.exists()
+    with open(perf_path, "a" if append else "w", encoding="utf-8") as f:
         for i, s in enumerate(per_method_stats):
             elapsed_ms = s.get("meanDurationMs", 0)
             ops = s.get("meanOpsPerSecond", 0)
@@ -561,6 +566,12 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     start = time.perf_counter()
     timeout = max(ctx.stage_timeout_seconds or 300, 30)
     metadata_methods = _read_benchmark_metadata(ctx)
+
+    # Clear previous benchmark-history.jsonl so each pipeline run starts fresh.
+    _perf_path = _RESULTS_BASE / ctx.assembly / ctx.slug / "perf" / "benchmark-history.jsonl"
+    if _perf_path.exists():
+        _perf_path.unlink()
+        print(f"  [benchmark] Cleared previous benchmark history")
 
     # Read technologies to benchmark
     technologies: list[tuple[Path, str]] = []

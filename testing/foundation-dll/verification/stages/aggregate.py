@@ -188,13 +188,10 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         1 for s in chunk_summaries
         if s.get("fact", {}).get("valueSuspicious", False)
     )
-    # Track chunks with metadata mismatch: C++ fact total should ideally
-    # match managed fact metaTotal/factMethodCount.  Small gaps are expected
-    # when codegen cannot lower some subjects (closures, compiler-generated
-    # helpers) — these are detected as "dropped" at fact stage but don't
-    # affect correctness if all dispatched facts passed.
-    # Treat gaps <= 25% as warnings (tolerable codegen limitation), larger
-    # gaps as errors (genuine metadata/codegen desync).
+    # Track chunks with metadata mismatch: C++ fact total must exactly
+    # match managed fact metaTotal/factMethodCount.  Small gaps (<1%) are
+    # tolerated — they come from JIT/interpreter limitations for specific
+    # generic instantiations (e.g., Lookup<,>::ApplyResultSelector).
     chunks_with_meta_mismatch = 0
     chunks_with_meta_warning = 0
     for s in chunk_summaries:
@@ -206,7 +203,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
             gap_ratio = gap / meta
             chunk_slug = s.get("info", {}).get("slug", "?")
             meta_label = "factMethodCount" if s.get("fact", {}).get("factMethodCount") else "metaTotal"
-            if gap_ratio < 0.25:
+            if gap_ratio < 0.01:
                 chunks_with_meta_warning += 1
                 print(f"  [aggregate] WARN: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")
             else:

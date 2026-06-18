@@ -2,46 +2,63 @@
   "date": "2026-06-18",
   "assemblyName": "System.Collections",
   "aggregate": {
+    "chaosAotVsNet8Pct": {
+      "mean": 71.33,
+      "median": 71.33,
+      "min": 71.33,
+      "max": 71.33,
+      "p25": 71.33,
+      "p75": 71.33
+    },
     "chaosJitVsNet8Pct": {
-      "mean": 71.77,
-      "median": 71.77,
-      "min": 71.77,
-      "max": 71.77,
-      "p25": 71.77,
-      "p75": 71.77
+      "mean": 71.43,
+      "median": 71.43,
+      "min": 71.43,
+      "max": 71.43,
+      "p25": 71.43,
+      "p75": 71.43
     },
     "net10VsNet8Pct": {
-      "mean": -32.05,
-      "median": -32.05,
-      "min": -32.05,
-      "max": -32.05,
-      "p25": -32.05,
-      "p75": -32.05
+      "mean": -3.85,
+      "median": -3.85,
+      "min": -3.85,
+      "max": -3.85,
+      "p25": -3.85,
+      "p75": -3.85
     },
-    "highValueMethods_betterThanNet8": 0.0
+    "highValueMethods_betterThanNet8": 71.4
   },
   "perChunk": [
     {
       "slug": "global-ns",
       "methodCount": 15,
-      "methodsWithNet8": 15,
+      "methodsWithNet8": 14,
       "aggregate": {
-        "methodsBetterThanNet8": 0,
+        "methodsBetterThanNet8": 10,
+        "chaosAotVsNet8Pct": {
+          "mean": 71.33,
+          "median": 66.67,
+          "min": 66.67,
+          "max": 85.38,
+          "p25": 66.67,
+          "p75": 75.59
+        },
+        "highValueMethods_betterThanNet8": 100.0,
         "chaosJitVsNet8Pct": {
-          "mean": 71.77,
-          "median": 68.56,
-          "min": 66.33,
-          "max": 83.33,
-          "p25": 66.5,
-          "p75": 76.32
+          "mean": 71.43,
+          "median": 66.67,
+          "min": 66.67,
+          "max": 85.71,
+          "p25": 66.67,
+          "p75": 75.59
         },
         "net10VsNet8Pct": {
-          "mean": -32.05,
+          "mean": -3.85,
           "median": -11.11,
-          "min": -333.33,
+          "min": -22.22,
           "max": 28.57,
           "p25": -11.11,
-          "p75": -5.55
+          "p75": -11.11
         },
         "gcAllocComparison": {
           "aotVsNet8Ratio": {

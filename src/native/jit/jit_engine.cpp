@@ -4747,11 +4747,9 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         if (!removed_mask.empty() && removed_mask[i])
             continue;
         {
-            char dbg_buf[128];
-            int len = snprintf(dbg_buf, sizeof(dbg_buf), "[DBG]   E[%u] op=%u dst=%u src1=%u src2=%u\n",
+            fprintf(stderr, "[DBG]   E[%u] op=%u dst=%u src1=%u src2=%u\n",
                 i, (unsigned)instr.op_code(), (unsigned)instr.dst_reg(),
                 (unsigned)instr.src1_reg(), (unsigned)instr.src2_reg());
-            write(2, dbg_buf, len > 0 ? (size_t)len : 0);
         }
         if (!EmitInstruction(instr)) {
             CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "Compile: unsupported opcode {} at pc={}, emitting deopt",
