@@ -189,15 +189,20 @@ public sealed partial class NativeAotLoweringPlanner
 					!string.Equals(methodAssembly, "CombinedSubjects", StringComparison.Ordinal) &&
 					!string.Equals(methodAssembly, "Chaos.TestFramework.Sdk", StringComparison.Ordinal))
 				{
-					builder.AppendLine("// Cross-assembly stub: " + method.SubjectId);
-					var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
-					builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
-					builder.AppendLine("{");
-					var _retType = MapAbiSlotReturnType(method.ReturnAbi);
-					if (!string.IsNullOrEmpty(_retType) && _retType != "void")
-						builder.AppendLine("    return {};");
-					builder.AppendLine("}");
-					return;
+					// Cross-assembly method: emit stub unless the assembly is a
+					// closure/dependency assembly (known in the compilation scope).
+					if (!_closureAssemblyPathByName.ContainsKey(methodAssembly))
+					{
+						builder.AppendLine("// Cross-assembly stub: " + method.SubjectId);
+						var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
+						builder.AppendLine(_fnDecl.Length > 0 && _fnDecl[^1] == ";"[0] ? _fnDecl[..^1] : _fnDecl);
+						builder.AppendLine("{");
+						var _retType = MapAbiSlotReturnType(method.ReturnAbi);
+						if (!string.IsNullOrEmpty(_retType) && _retType != "void")
+							builder.AppendLine("    return {};");
+						builder.AppendLine("}");
+						return;
+					}
 				}
 			}
 		}

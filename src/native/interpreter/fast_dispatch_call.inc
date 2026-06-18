@@ -196,7 +196,7 @@ struct PopCallArgs {
                 if (obj == nullptr) { args = nullptr; tags = nullptr; count = 0; return; }
                 frame.TrackPool(obj, ReturnBoxToPool);
                 obj->fields.resize(1);
-                obj->type_token = 0;
+                obj->type_token = frame.lazybox_type_tokens[frame.sp];
                 if (tag == interpreter::ValueTag::LazyBoxInt32) {
                     obj->fields[0] = interpreter::InterpreterValue::from_i32(
                         static_cast<int32_t>(frame.stack[frame.sp]));
@@ -401,7 +401,7 @@ static void Handle_Ret(FastFrame& frame, const interpreter::IRInstruction&) noex
             if (obj != nullptr) {
                 frame.TrackPool(obj, ReturnBoxToPool);
                 obj->fields.resize(1);
-                obj->type_token = 0;
+                obj->type_token = frame.lazybox_type_tokens[frame.sp - 1];
                 if (tag == interpreter::ValueTag::LazyBoxInt32) {
                     obj->fields[0] = interpreter::InterpreterValue::from_i32(
                         static_cast<int32_t>(frame.stack[frame.sp - 1]));

@@ -46,6 +46,11 @@ struct FastFrame {
 
     uint64_t  stack[kMaxStack]        = {};
     uint8_t   stack_tags[kMaxStack]   = {};
+    // LazyBox type tokens: parallel to stack[] — stores type_token for each
+    // LazyBoxInt32/LazyBoxInt64 stack slot.  Set by Handle_Box, read during
+    // materialization in PopCallArgs / Handle_Ret / Handle_StFld.
+    // Value is 0 for non-LazyBox slots.
+    uint32_t  lazybox_type_tokens[kMaxStack] = {};
     uint32_t  sp                      = 0;
 
     uint64_t  locals[kMaxLocals]      = {};

@@ -251,8 +251,10 @@ static void Handle_Box(FastFrame& frame, const interpreter::IRInstruction& instr
     auto tag = static_cast<interpreter::ValueTag>(frame.stack_tags[frame.sp - 1]);
     if (tag == interpreter::ValueTag::Int32) {
         // Value already in stack slot as int32 — just change the tag.
+        frame.lazybox_type_tokens[frame.sp - 1] = static_cast<uint32_t>(instr.immediate_i4);
         frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::LazyBoxInt32);
     } else if (tag == interpreter::ValueTag::Int64) {
+        frame.lazybox_type_tokens[frame.sp - 1] = static_cast<uint32_t>(instr.immediate_i4);
         frame.stack_tags[frame.sp - 1] = static_cast<uint8_t>(interpreter::ValueTag::LazyBoxInt64);
     } else {
         // Non-primitive: heap-allocate via TLS pool (existing behavior).
@@ -423,7 +425,7 @@ static void Handle_StFld(FastFrame& frame, const interpreter::IRInstruction& ins
         if (obj == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
         frame.TrackPool(obj, ReturnBoxToPool);
         obj->fields.resize(1);
-        obj->type_token = 0;
+        obj->type_token = frame.lazybox_type_tokens[frame.sp - 1];
         if (val_tag == interpreter::ValueTag::LazyBoxInt32) {
             obj->fields[0] = interpreter::InterpreterValue::from_i32(
                 static_cast<int32_t>(frame.stack[frame.sp - 1]));
