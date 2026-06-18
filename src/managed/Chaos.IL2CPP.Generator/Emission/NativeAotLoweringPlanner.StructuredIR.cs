@@ -905,13 +905,16 @@ public sealed partial class NativeAotLoweringPlanner
                 "bge" => ">=",
                 "bge.un" => ">=",
                 "bgt" => ">",
+                "bgt.un" => ">",
                 "ble" => "<=",
+                "ble.un" => "<=",
                 "blt" => "<",
+                "blt.un" => "<",
                 _ => throw new NotSupportedException(
                     "StructuredIR: unsupported conditional branch '" + terminator.Op + "'")
             };
 
-            bool isUnsigned = terminator.Op == "bge.un";
+            bool isUnsigned = terminator.Op is "bge.un" or "bgt.un" or "ble.un" or "blt.un";
             string valueType = isUnsigned
                 ? "CHAOS_IL2CPP_UINT32"
                 : (cmpOp == "==" || cmpOp == "!=" ? "CHAOS_IL2CPP_INTPTR" : "CHAOS_IL2CPP_INT32");
@@ -1185,13 +1188,16 @@ public sealed partial class NativeAotLoweringPlanner
                 "bge" => ">=",
                 "bge.un" => ">=",
                 "bgt" => ">",
+                "bgt.un" => ">",
                 "ble" => "<=",
+                "ble.un" => "<=",
                 "blt" => "<",
+                "blt.un" => "<",
                 _ => throw new NotSupportedException(
                     "StructuredIR: unsupported while condition '" + terminator.Op + "'")
             };
 
-            bool isUnsigned = terminator.Op == "bge.un";
+            bool isUnsigned = terminator.Op is "bge.un" or "bgt.un" or "ble.un" or "blt.un";
             string valueType = isUnsigned
                 ? "CHAOS_IL2CPP_UINT32"
                 : (cmpOp == "==" || cmpOp == "!=" ? "CHAOS_IL2CPP_INTPTR" : "CHAOS_IL2CPP_INT32");
@@ -1459,13 +1465,16 @@ public sealed partial class NativeAotLoweringPlanner
                     "bge" => ">=",
                     "bge.un" => ">=",
                     "bgt" => ">",
+                    "bgt.un" => ">",
                     "ble" => "<=",
+                    "ble.un" => "<=",
                     "blt" => "<",
+                    "blt.un" => "<",
                     _ => throw new NotSupportedException(
                         "StructuredIR: unsupported do-while latch '" + terminator.Op + "'")
                 };
 
-                bool isUnsigned = terminator.Op == "bge.un";
+                bool isUnsigned = terminator.Op is "bge.un" or "bgt.un" or "ble.un" or "blt.un";
                 string valueType = isUnsigned
                     ? "CHAOS_IL2CPP_UINT32"
                     : (cmpOp == "==" || cmpOp == "!=" ? "CHAOS_IL2CPP_INTPTR" : "CHAOS_IL2CPP_INT32");
