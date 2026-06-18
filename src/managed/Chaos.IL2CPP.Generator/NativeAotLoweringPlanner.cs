@@ -4460,21 +4460,30 @@ public sealed partial class NativeAotLoweringPlanner
         var methodEntries = new List<ScriptObject>(methods.Count);
         var subjectEntries = new List<ScriptObject>();
 
-        // ── Phase 1 diagnostic: SubjectId match rate ──
+        // ── Phase 1 diagnostic: SubjectId match rate (fact-only, excluding Benchmark_) ──
         if (_subjectMethodSubjectIds is { Count: > 0 })
         {
             var subjectIdsInMethods = new HashSet<string>(methods.Select(m => m.SubjectId!),
                 StringComparer.Ordinal);
-            int matched = 0, missed = 0;
+            int matched = 0, missed = 0, benchmarkSkipped = 0;
             foreach (var sid in _subjectMethodSubjectIds)
             {
+                // Skip Benchmark_ entries — they are excluded from subject entries
+                // by IsSubjectMethod() at line 4837, so counting them as "missed" is
+                // misleading. The diagnostic focuses on fact-wrapper match rate.
+                if (sid.Contains("::Benchmark_", StringComparison.Ordinal))
+                {
+                    benchmarkSkipped++;
+                    continue;
+                }
                 if (subjectIdsInMethods.Contains(sid))
                     matched++;
                 else
                     missed++;
             }
+            int totalConsidered = matched + missed;
             Console.Error.WriteLine($"[SUBJECT-MATCH] {matched} matched, {missed} missed " +
-                $"(out of {_subjectMethodSubjectIds.Count} subject-methods, " +
+                $"(out of {totalConsidered} fact subject-methods + {benchmarkSkipped} benchmark skipped, " +
                 $"{methods.Count} methods in dispatch)");
             if (missed > 0)
             {
@@ -4482,6 +4491,8 @@ public sealed partial class NativeAotLoweringPlanner
                 int sampleCount = 0;
                 foreach (var sid in _subjectMethodSubjectIds)
                 {
+                    if (sid.Contains("::Benchmark_", StringComparison.Ordinal))
+                        continue;
                     if (!subjectIdsInMethods.Contains(sid))
                     {
                         if (sampleCount < 10)

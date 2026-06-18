@@ -781,9 +781,9 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Save preConditionDepth so we can restore it for the else/post-merge body.
         // postConditionDepth is captured from ACTUAL depth after condition+terminator
-        // emission, since the estimation-based approach causes slot stack underflows
-        // for opcodes (ceq, cgt, clt, etc.) whose internal pops are not reflected by
-        // EstimatePushCount/EstimatePopCount.
+        // emission, as a safety net for any edge-case opcodes not covered by
+        // EstimatePushCount/EstimatePopCount (the core comparison/arithmetic opcodes
+        // ARE now covered — see EstimatePopCount).
         _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
 
         // Scan then/else bodies for ldloc slots referenced externally. When a stloc+ldloc
@@ -943,7 +943,13 @@ public sealed partial class NativeAotLoweringPlanner
             or "stelem" or "stelem.i" or "stelem.ref"
             or "stind.i4" or "stind.i1" or "stind.i2" or "stind.i8"
             or "stind.r4" or "stind.r8" or "stind.ref" or "stind.i"
-            or "cpblk" or "initblk" or "throw" => 2,
+            or "cpblk" or "initblk" or "throw"
+            or "ceq" or "cgt" or "cgt.un" or "clt" or "clt.un"
+            or "add" or "sub" or "mul" or "div" or "div.un" or "rem" or "rem.un"
+            or "add.ovf" or "sub.ovf" or "mul.ovf"
+            or "and" or "or" or "xor"
+            or "shl" or "shr" or "shr.un" => 2,
+        "neg" or "not" or "dup" => 1,
         _ => 0,
     };
 

@@ -61,7 +61,7 @@ internal static class RuntimeSkeletonThreadingSyncKernelAbiFactory
 
     private static readonly IReadOnlyDictionary<string, string> SpinLockMethodToHelper = new Dictionary<string, string>(StringComparer.Ordinal)
     {
-        ["Exit"] = "MonitorExit",
+        ["Exit"] = "SpinLockExit",
         ["get_IsHeld"] = "SpinLockIsHeld",
     };
 
