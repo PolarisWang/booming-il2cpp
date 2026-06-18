@@ -12,7 +12,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// Shapes are identified by canonical key (TypeDisplayName::MethodName(Param1,Param2,...))
     /// and matched via FNV-1a 32-bit hash. Assembly prefix is not part of shape identity.
     /// </summary>
-    internal sealed class RuntimeHelperShapeRegistry
+    internal sealed partial class RuntimeHelperShapeRegistry
     {
         public enum ShapeKind : byte
         {
