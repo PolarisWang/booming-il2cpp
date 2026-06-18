@@ -405,6 +405,10 @@ public static class Program
         var dllDir = Path.GetDirectoryName(dllPath);
         if (dllDir != null && !searchDirs.Contains(dllDir))
             searchDirs.Add(dllDir);
+        // Also scan the .NET runtime directory where BCL assemblies live
+        var runtimeDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+        if (runtimeDir != null && !searchDirs.Contains(runtimeDir))
+            searchDirs.Add(runtimeDir);
         foreach (var asmName in targetAssemblyNames)
         {
             foreach (var dir in searchDirs)
