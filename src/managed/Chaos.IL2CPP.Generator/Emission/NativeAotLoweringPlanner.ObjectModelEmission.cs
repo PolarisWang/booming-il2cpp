@@ -1385,7 +1385,7 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		}
 		void TrackAbiSlotCarrier(AotCoreIrAbiSlotArtifact abiSlot)
 		{
-			if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue && !string.IsNullOrEmpty(abiSlot.TypeSubjectId))
+			if ((abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue || abiSlot.TypeShape == AotCoreIrTypeShapeKind.ValueType) && !string.IsNullOrEmpty(abiSlot.TypeSubjectId))
 			{
 				valueTypeSubjectIds.Add(abiSlot.TypeSubjectId);
 			}
