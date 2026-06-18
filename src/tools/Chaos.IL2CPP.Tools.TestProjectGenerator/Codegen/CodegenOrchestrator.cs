@@ -38,7 +38,8 @@ public sealed class CodegenOrchestrator
     public CodegenResult Run(IReadOnlyList<string> assemblyPaths, string outputDir,
         string codegenMode = "aot",
         IReadOnlyList<string>? subjectMethodIds = null,
-        IReadOnlyList<string>? assemblyDirs = null)
+        IReadOnlyList<string>? assemblyDirs = null,
+        string? namespaceFilter = null)
     {
         try
         {
@@ -123,6 +124,13 @@ public sealed class CodegenOrchestrator
                 File.WriteAllText(subjectMethodsPath, smJson);
                 args.Add("--subject-methods");
                 args.Add(subjectMethodsPath);
+            }
+
+            // ── Namespace filter (--namespace-filter) ──
+            if (!string.IsNullOrEmpty(namespaceFilter))
+            {
+                args.Add("--namespace-filter");
+                args.Add(namespaceFilter);
             }
 
             // Run ConvertToCppHandler directly

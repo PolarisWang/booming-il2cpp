@@ -20,6 +20,13 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeAotLoweringPlanner
 {
+    /// <summary>
+    /// Optional namespace filter: comma-separated prefixes (e.g. "System.Collections.Frozen").
+    /// When set, only AOT IR methods whose declaring type namespace matches one of the
+    /// prefixes are included in lowering.  Set before calling <see cref="Create"/>.
+    /// </summary>
+    public string? NamespaceFilter { get; set; }
+
     private IReadOnlyDictionary<string, AotCoreIrMethodArtifact> _methodsBySubjectId =
         new Dictionary<string, AotCoreIrMethodArtifact>(StringComparer.Ordinal);
 
@@ -642,6 +649,35 @@ public sealed partial class NativeAotLoweringPlanner
         if (!fullAssemblyMode)
             ArgumentNullException.ThrowIfNull(entryMethod);
 
+        // ── Namespace filter: pre-filter AOT IR methods ──
+        // When set, only keep methods whose declaring type's portion of the SubjectId
+        // (after the assembly prefix) matches one of the comma-separated prefixes.
+        IReadOnlyList<AotCoreIrMethodArtifact> filteredMethods = aotCoreIr.Methods;
+        if (!string.IsNullOrEmpty(NamespaceFilter))
+        {
+            var nsPrefixes = NamespaceFilter.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (nsPrefixes.Length > 0)
+            {
+                var filtered = new List<AotCoreIrMethodArtifact>(aotCoreIr.Methods.Count);
+                foreach (var m in aotCoreIr.Methods)
+                {
+                    if (m.SubjectId is null) continue;
+                    int slashIdx = m.SubjectId.IndexOf('/');
+                    if (slashIdx < 0) continue;
+                    var typeName = m.SubjectId.Substring(slashIdx + 1);
+                    bool match = false;
+                    foreach (var prefix in nsPrefixes)
+                    {
+                        if (typeName.StartsWith(prefix, StringComparison.Ordinal))
+                        { match = true; break; }
+                    }
+                    if (match) filtered.Add(m);
+                }
+                Console.Error.WriteLine($"[namespace-filter] kept {filtered.Count}/{aotCoreIr.Methods.Count} methods (filter: {NamespaceFilter})");
+                filteredMethods = filtered;
+            }
+        }
+
         // Clear per-run collision tracking for pseudo-metadata handles.
         // Each codegen invocation (chunk) starts with a clean hash space.
         _usedPseudoMetadataHandles.Clear();
@@ -660,11 +696,11 @@ public sealed partial class NativeAotLoweringPlanner
                 $"native-aot entry symbol '{loweringPlan.EntrySymbol}' does not match aot-core-ir symbol '{entryMethod.NativeSymbol}'");
         }
 
-        _methodsBySubjectId = aotCoreIr.Methods
+        _methodsBySubjectId = filteredMethods
             .GroupBy(method => method.SubjectId, StringComparer.Ordinal)
             .ToDictionary(g => g.Key, g => g.First(), StringComparer.Ordinal);
         // Build index of types with at least one instance method (O(m) once, then O(1) per type lookup).
-        foreach (var method in aotCoreIr.Methods)
+        foreach (var method in filteredMethods)
         {
             if (!method.IsStatic && method.Identity.DeclaringTypeSubjectId is { } dt)
                 _typesWithInstanceMethods.Add(dt);

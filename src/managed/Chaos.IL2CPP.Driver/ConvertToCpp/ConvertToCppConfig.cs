@@ -44,6 +44,13 @@ internal sealed class ConvertToCppConfig
     public string? ConfigTier { get; init; }
 
     /// <summary>
+    /// Optional namespace filter: comma-separated prefixes (e.g. "System.Collections.Frozen").
+    /// When set, only methods whose declaring type namespace matches one of the prefixes
+    /// are included in the AOT IR, preventing closure assembly namespace conflicts.
+    /// </summary>
+    public string? NamespaceFilter { get; init; }
+
+    /// <summary>
     /// Parse CLI arguments.
     /// Expected: --assembly &lt;path&gt; [--assembly &lt;path&gt; ...] --output &lt;dir&gt; [options]
     /// </summary>
@@ -60,6 +67,7 @@ internal sealed class ConvertToCppConfig
         string? subjectMethodsPath = null;
         string? goldProfilePath = null;
         string? configTier = null;
+        string? namespaceFilter = null;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -108,6 +116,9 @@ internal sealed class ConvertToCppConfig
                 case "--config-tier" when i + 1 < args.Length:
                     configTier = args[++i].ToLowerInvariant();
                     break;
+                case "--namespace-filter" when i + 1 < args.Length:
+                    namespaceFilter = args[++i];
+                    break;
             }
         }
 
@@ -131,6 +142,7 @@ internal sealed class ConvertToCppConfig
             SubjectMethodsPath = subjectMethodsPath,
             GoldProfilePath = goldProfilePath,
             ConfigTier = configTier,
+            NamespaceFilter = namespaceFilter,
         };
     }
 

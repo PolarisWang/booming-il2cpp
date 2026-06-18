@@ -45,13 +45,15 @@ public sealed class NativeAotEmitter
         CodegenMode mode = CodegenMode.Aot,
         List<string>? subjectMethods = null,
         string? goldProfilePath = null,
-        IReadOnlyDictionary<string, ManagedMethodModel>? allManagedMethods = null)
+        IReadOnlyDictionary<string, ManagedMethodModel>? allManagedMethods = null,
+        string? namespaceFilter = null)
     {
         ValidateLoweringPlan(loweringPlan, closureManifest);
         var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
 
         bool isFullAssembly = string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal);
         var planner = new NativeAotLoweringPlanner();
+        planner.NamespaceFilter = namespaceFilter;
 
         // Gold Direct Link: load PGO profile for hot method direct calls
         if (!string.IsNullOrEmpty(goldProfilePath))
