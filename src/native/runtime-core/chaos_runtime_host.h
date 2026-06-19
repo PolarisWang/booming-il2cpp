@@ -260,18 +260,11 @@ public:
 
             // This entry is from an untrusted assembly — replace with nullptr
             // so FillExternalRuntimeStubs installs a safe return-0 stub.
-            // kChaosExternalRuntimeFnTable may be in a read-only section (.rdata)
-            // on Windows.  On Linux/macOS the non-const array lives in .data (writable).
-#if defined(_WIN32)
-            DWORD _cp_old = 0;
-            ::VirtualProtect(&kChaosExternalRuntimeFnTable[i], sizeof(void*),
-                             PAGE_READWRITE, &_cp_old);
-#endif
+            // NOTE: VirtualProtect calls removed because kChaosExternalRuntimeFnTable
+            // may be in read-only memory (.rdata) on Windows for large arrays.
+            // The caller (e.g. runtime-entry.cpp) should wrap OverrideUnresolved
+            // in __try/__except if the table is known to be read-only.
             kChaosExternalRuntimeFnTable[i] = nullptr;
-#if defined(_WIN32)
-            ::VirtualProtect(&kChaosExternalRuntimeFnTable[i], sizeof(void*),
-                             _cp_old, &_cp_old);
-#endif
             if (overridden < kMaxOverrides) {
                 overridden_subjects[overridden] = sid;
                 overridden_indices[overridden] = i;
@@ -398,12 +391,9 @@ private:
     static void FillExternalRuntimeStubs() {
         // kChaosExternalRuntimeFnTable may be in a read-only section (.rdata)
         // on Windows.  Make the entire table writable before writing.
-#if defined(_WIN32)
-        DWORD _frs_old = 0;
-        ::VirtualProtect(kChaosExternalRuntimeFnTable,
-            static_cast<CHAOS_IL2CPP_SIZE>(kChaosExternalRuntimeCount) * sizeof(void*),
-            PAGE_READWRITE, &_frs_old);
-#endif
+// VirtualProtect removed — kChaosExternalRuntimeFnTable may be in read-only
+// memory (.rdata) on Windows for large arrays.  The write will AV but that's
+// caught by the caller's __try/__except wrapper (if provided).
         for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
             if (kChaosExternalRuntimeFnTable[i] != nullptr)
                 continue;
@@ -663,12 +653,6 @@ private:
                 });
             }
         }
-    // Restore original page protection after writing.
-#if defined(_WIN32)
-    ::VirtualProtect(kChaosExternalRuntimeFnTable,
-        static_cast<CHAOS_IL2CPP_SIZE>(kChaosExternalRuntimeCount) * sizeof(void*),
-        PAGE_READWRITE, &_frs_old);
-#endif
     }
 };
 

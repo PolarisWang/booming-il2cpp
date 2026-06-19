@@ -54,17 +54,6 @@ static thread_local jmp_buf t_abort_jmp;
 #include <gc/gc_api.h>
 #include <profile_stats.h>
 
-// Force link-time inclusion of profile_alloc_hooks.cpp's GcAllocateProfiled
-// and GcAllocateAtomicProfiled overrides.  Without this, the linker resolves
-// these symbols from the prebuilt SDK lib's gc_alloc_stubs.obj (which has
-// ProfileRecord* inlined as no-ops) and never sees our local override.
-namespace chaos::il2cpp::runtime_core {
-    void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE);
-    void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE);
-    static auto* _chaos_force_gc_alloc_profiled = &GcAllocateProfiled;
-    static auto* _chaos_force_gc_alloc_atomic_profiled = &GcAllocateAtomicProfiled;
-}
-
 // ── TLS allocation counters ───────────────────────────────────────
 // tls_alloc_fast_bytes / tls_alloc_fast_count are defined in gc_region.cpp
 // (compiled into the SDK runtime lib).  DO NOT define them here — doing so
