@@ -436,19 +436,41 @@ public sealed class CppProjectEmitter
                 catch { /* best-effort */ }
             }
         // ── SDK auto-sync: ensure codegen/lib/ has latest preset libs ──
-        string presetLibDir = Path.Combine(projectDir, "..", "..", "..", "..", "..", "artifacts", "presets", "windows-x64-reference", "src", "native", "runtime-core", "RelWithDebInfo");
+        // The codegen SDK emits libs from artifacts/presets/ at convert time, but
+        // rebuilds of the native runtime between then and cmake build leave the
+        // codegen lib dir stale.  Sync the latest .lib files from the preset output.
+        string repoRoot = Path.GetFullPath(Path.Combine(projectDir, "..", "..", "..", "..", ".."));
+        string presetBase = Path.Combine(repoRoot, "artifacts", "presets", "windows-x64-reference");
         string codegenLibDir = Path.Combine(codegenDir, "lib");
-        string presetLib = Path.Combine(presetLibDir, "chaos_runtime_core.lib");
-        string codegenLib = Path.Combine(codegenLibDir, "chaos_runtime_core.lib");
-        if (File.Exists(presetLib) && File.Exists(codegenLib))
+        if (Directory.Exists(presetBase) && Directory.Exists(codegenLibDir))
         {
-            var presetTime = File.GetLastWriteTimeUtc(presetLib);
-            var codegenTime = File.GetLastWriteTimeUtc(codegenLib);
-            if (presetTime > codegenTime)
+            // Preset libs are in subdirectories: src/native/<lib>/RelWithDebInfo/<lib>.lib
+            // Also check flat lib/ layout used by some presets.
+            var presetLibDirs = new[] {
+                Path.Combine(presetBase, "src", "native", "runtime-core", "RelWithDebInfo"),
+                Path.Combine(presetBase, "src", "native", "bootstrap", "RelWithDebInfo"),
+                Path.Combine(presetBase, "src", "native", "common", "RelWithDebInfo"),
+                Path.Combine(presetBase, "lib"),
+            };
+            var synced = new System.Collections.Generic.HashSet<string>();
+            foreach (var pld in presetLibDirs)
             {
-                File.Copy(presetLib, codegenLib, overwrite: true);
-                Console.Error.WriteLine($"  [build] SDK sync: updated chaos_runtime_core.lib (preset newer)");
+                if (!Directory.Exists(pld)) continue;
+                foreach (string libFile in Directory.GetFiles(pld, "*.lib"))
+                {
+                    string name = Path.GetFileName(libFile);
+                    string dst = Path.Combine(codegenLibDir, name);
+                    if (!File.Exists(dst)) continue;
+                    var srcTime = File.GetLastWriteTimeUtc(libFile);
+                    var dstTime = File.GetLastWriteTimeUtc(dst);
+                    if (srcTime > dstTime && synced.Add(name))
+                    {
+                        File.Copy(libFile, dst, overwrite: true);
+                    }
+                }
             }
+            if (synced.Count > 0)
+                Console.Error.WriteLine($"  [build] SDK sync: updated {string.Join(", ", synced.OrderBy(x => x))}");
         }
 
             Console.Error.WriteLine($"  [build] cmake configure (fresh)...");
