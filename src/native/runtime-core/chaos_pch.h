@@ -57,4 +57,10 @@
 // Vector<T> comparison stubs (chaos_vector_greater_than_any, etc.)
 #include "runtime_stubs/vector_stubs.h"
 
+// ── Runtime host (ChaosRuntimeHost, Module registration) ───────────
+#include "chaos_runtime_host.h"
+
+// GC layout registration for generated types
+#include <gc/gc_layout.h>
+
 #endif // CHAOS_IL2CPP_CHAOS_PCH_H_

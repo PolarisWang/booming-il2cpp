@@ -8,9 +8,22 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP /Gy /Gw)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
+  # ── Precompiled header (PCH) ──────────────────────────────────
+  # target_precompile_headers auto-manages /Yc /Yu flags (CMake 3.16+).
+  # Files that include "chaos_pch.h" as first include use the PCH.
+  # The PCH compilation unit is automatically managed by CMake.
+  set(CHAOS_PCH_HDR "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.h")
+  set(CHAOS_PCH_SRC "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.cpp")
+  if(EXISTS "${CHAOS_PCH_HDR}")
+    target_precompile_headers({{ project_name }} PRIVATE "${CHAOS_PCH_HDR}")
+    # Ensure PCH source is compiled (/Yc generator)
+    if(EXISTS "${CHAOS_PCH_SRC}")
+      target_sources({{ project_name }} PRIVATE "${CHAOS_PCH_SRC}")
+    endif()
+  endif()
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
   set(CHAOS_EHA_FLAG -fexceptions)
