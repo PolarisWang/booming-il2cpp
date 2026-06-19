@@ -66,15 +66,13 @@ namespace chaos::il2cpp::runtime_core {
 }
 
 // ── TLS allocation counters ───────────────────────────────────────
-// Defined here (compiled into entry.exe locally) to provide a strong
-// symbol for the extern thread_local declarations in gc_alloc_stubs.h.
-// The prebuilt chaos_runtime_core.lib (SDK) was compiled from older
-// source and may lack these definitions, causing them to be silently
-// zeroed at link time when /FORCE:MULTIPLE is active.
-namespace chaos::il2cpp::runtime_core {
-    thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_count = 0;
-    thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes = 0;
-}
+// tls_alloc_fast_bytes / tls_alloc_fast_count are defined in gc_region.cpp
+// (compiled into the SDK runtime lib).  DO NOT define them here — doing so
+// would create a second TLS slot via /FORCE:MULTIPLE, and the codegen TU's
+// GcAllocateFast (which increments tls_alloc_fast_bytes) may reference a
+// DIFFERENT TLS slot than chaos_gc_get_allocated_bytes_for_current_thread()
+// (which reads it).  The SDK lib's single definition ensures all references
+// share the same TLS slot.
 
 #include "chaos_runtime_host.h"
 
