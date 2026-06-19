@@ -287,7 +287,7 @@ def _build_jit_entry(
             try:
                 print(f"      [jit:err] {line}")
             except UnicodeEncodeError:
-                safe = line.encode("utf-8", errors="ignore").decode("utf-8", errors="replace")
+                safe = line.encode("utf-8", errors="ignore").decode("utf-8", errors="ignore")
                 print(f"      [jit:err] {safe}")
         return False
 
