@@ -279,21 +279,34 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
 
     # Managed fact: run CombinedSubjects under net8.0/net10.0 via Chaos.TestFramework.Runtime
     managed_fact_results = {}
-    for tfm, tech in [("net8.0", "net8-fact"), ("net10.0", "net10-fact")]:
+    import tempfile, shutil
+    from verification.stages.managed_benchmark import _runner_dll
+    _TFM_TECH = [("net8.0", "net8-fact"), ("net10.0", "net10-fact")]
+    for tfm, tech in _TFM_TECH:
         try:
-            from verification.stages.managed_benchmark import _runner_dll, _build_combined_for_tfm
-            import tempfile, shutil
             combined_csproj = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.csproj"
+            if not combined_csproj.exists():
+                errors.append(f"{tech}: CombinedSubjects.csproj not found")
+                continue
             build_dir = Path(tempfile.mkdtemp())
-            ok = _build_combined_for_tfm(combined_csproj, tfm, build_dir)
-            if not ok:
-                errors.append(f"{tech}: CombinedSubjects build failed for {tfm}")
+            result = subprocess.run(
+                ["dotnet", "build", str(combined_csproj), "-f", tfm,
+                 f"-p:OutDir={build_dir}", "--nologo", "-v", "q"],
+                capture_output=True, text=True, timeout=120)
+            if result.returncode != 0:
+                errors.append(f"{tech}: build failed for {tfm} — {result.stderr[:200]}")
+                shutil.rmtree(build_dir, ignore_errors=True)
                 continue
             tfm_dll = build_dir / "CombinedSubjects.dll"
             if not tfm_dll.exists():
                 errors.append(f"{tech}: CombinedSubjects.dll not produced")
+                shutil.rmtree(build_dir, ignore_errors=True)
                 continue
             runner = _runner_dll(tfm)
+            if runner is None:
+                errors.append(f"{tech}: runner DLL not found for {tfm}")
+                shutil.rmtree(build_dir, ignore_errors=True)
+                continue
             r = subprocess.run(
                 ["dotnet", "exec", str(runner),
                  "--assembly", str(tfm_dll),
@@ -301,16 +314,26 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
                 capture_output=True, text=True, timeout=600)
             if r.returncode != 0:
                 errors.append(f"{tech}: runner failed (rc={r.returncode})")
-                continue
-            parsed = json.loads(r.stdout)
-            results = parsed.get("factResults", [])
-            passed = sum(1 for fr in results if fr.get("passed"))
-            total = len(results)
-            managed_fact_results[tech] = {"passed": passed, "total": total, "results": results}
-            print(f"  [fact] [{tech}] {passed}/{total} passed")
+                stderr_lines = (r.stderr or "").splitlines()
+                for line in stderr_lines[-5:]:
+                    print(f"      {tech}: {line}")
+            else:
+                stdout = r.stdout or ""
+                # FactRunner outputs 'Passed: N/M' plain text
+                import re
+                m = re.search(r"Passed:\s*(\d+)/(\d+)", stdout)
+                if m:
+                    passed = int(m.group(1))
+                    total = int(m.group(2))
+                    managed_fact_results[tech] = {"passed": passed, "total": total, "results": []}
+                    print(f"  [fact] [{tech}] {passed}/{total} passed")
+                else:
+                    errors.append(f"{tech}: unexpected runner output — {stdout[:100]}")
             shutil.rmtree(build_dir, ignore_errors=True)
         except Exception as ex:
             errors.append(f"{tech}: error — {ex}")
+            import traceback
+            traceback.print_exc()
     # Merge managed fact results into summary
     for tech, res in managed_fact_results.items():
         aot_result['passed'] += res['passed']

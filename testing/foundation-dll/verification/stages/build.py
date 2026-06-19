@@ -37,77 +37,6 @@ from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
-# -- Profile mode injection ---------------------------------------------------
-
-_PROFILE_MODE_INCLUDE = '#include <profile_stats.h>'
-
-_PROFILE_MODE_FUNC = """
-// ── --profile: per-method GC/allocation/code-size profile ───────────
-static int RunProfileMode() {
-    using namespace chaos::il2cpp::runtime_core;
-    const int kCount = kSubjectEntryCount;
-    ProfileStoreInit(kCount);
-    for (int si = 0; si < kCount; si++) {
-        int i = kSubjectSlotMap[si];
-        int64_t heap_before = chaos_gc_get_heap_size();
-        GetThreadProfileData().heap_before = heap_before;
-        CHAOS_EH_TRY
-            ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-        CHAOS_EH_CATCH_BEGIN
-        CHAOS_EH_END
-        int64_t heap_after = chaos_gc_get_heap_size();
-        GetThreadProfileData().heap_after = heap_after;
-        FlushThreadProfileData(i);
-    }
-    ProfileStoreFinalize();
-    ProfileEmitJson();
-    return 0;
-}
-
-"""
-
-_PROFILE_MODE_CLI = '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n'
-
-
-def _inject_profile_mode(native_dir: Path) -> None:
-    """Inject --profile mode into runtime-entry.cpp after TPG generation.
-
-    The TPG generates runtime-entry.cpp without --profile support even though
-    the native infrastructure (profile_stats.h, ProfileStoreInit, ProfileEmitJson)
-    is compiled in when CHAOS_IL2CPP_CONFIG_TIER=profile. This function patches
-    the generated file to add the missing RunProfileMode() function and CLI handler.
-    """
-    entry_path = native_dir / "runtime-entry.cpp"
-    if not entry_path.exists():
-        print(f"  [build] [profile-inject] runtime-entry.cpp not found at {entry_path}, skipping")
-        return
-
-    content = entry_path.read_text(encoding="utf-8", errors="replace")
-
-    # 1. Inject #include <profile_stats.h> after last #include <chaos/...>
-    if '#include <profile_stats.h>' not in content:
-        content = content.replace(
-            '#include <gc/gc_api.h>',
-            '#include <gc/gc_api.h>\n#include <profile_stats.h>')
-        print(f"  [build] [profile-inject] added #include <profile_stats.h>")
-
-    # 2. Inject RunProfileMode() before int main()
-    if 'RunProfileMode' not in content:
-        content = content.replace(
-            'int main(int argc, char* argv[]) {',
-            _PROFILE_MODE_FUNC + 'int main(int argc, char* argv[]) {')
-        print(f"  [build] [profile-inject] added RunProfileMode()")
-
-    # 3. Inject --profile CLI handler before Unknown flag
-    if '--profile' not in content:
-        content = content.replace(
-            'printf("Unknown flag: %s\\n", argv[1]);',
-            '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n    printf("Unknown flag: %s\\n", argv[1]);')
-        print(f"  [build] [profile-inject] added --profile CLI handler")
-
-    entry_path.write_text(content, encoding="utf-8")
-
 def _chaos_sdk_csproj() -> Path:
     """Path to Chaos.TestFramework.Sdk.csproj."""
     return (_REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk"
@@ -781,8 +710,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
                 duration_ms=int((time.perf_counter() - start) * 1000))
 
-    # -- 8b. Inject --profile mode into runtime-entry.cpp --
-    _inject_profile_mode(ctx.native_dir)
+    # -- 8b. Profile mode is generated directly by the TPG template --
 
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():

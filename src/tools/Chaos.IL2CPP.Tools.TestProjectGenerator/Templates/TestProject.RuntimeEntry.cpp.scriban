@@ -52,6 +52,7 @@ static thread_local jmp_buf t_abort_jmp;
 #include <chaos/profile.h>
 #include <runtime_core.h>
 #include <gc/gc_api.h>
+#include <profile_stats.h>
 
 #include "chaos_runtime_host.h"
 
@@ -569,6 +570,13 @@ static int RunBenchmarkAllMode(int iterations) {
         int i = kSubjectSlotMap[si];
         bool crashed = false;
 
+        // GC tracking: capture heap/collection state before dispatch
+        auto alloc_before_all = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
+        auto heap_before = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+        auto gc0_before = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(0);
+        auto gc1_before = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(1);
+        auto gc2_before = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(2);
+
 #if defined(_WIN32)
         // Wrap the ENTIRE per-method body in __try so process-level crashes
         // (stack overflow, AV in no_gc_region, heap corruption) are caught
@@ -630,8 +638,23 @@ static int RunBenchmarkAllMode(int iterations) {
             } else {
                 double elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
                 double ops_per_sec = elapsed_ms > 0.0 ? (iterations / elapsed_ms) * 1000.0 : 0.0;
-                printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,\"allocatedBytes\":%lld}\n",
-                       i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
+                // GC tracking: capture heap/collection state after dispatch
+                auto heap_after = chaos::il2cpp::runtime_core::chaos_gc_get_heap_size();
+                auto gc0_after = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(0);
+                auto gc1_after = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(1);
+                auto gc2_after = chaos::il2cpp::runtime_core::chaos_gc_get_collection_count(2);
+                printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,\"opsPerSecond\":%.0f,\"iterations\":%d,"
+                       "\"allocatedBytes\":%lld,"
+                       "\"gcInfo\":{\"totalAllocatedBytes\":%lld,\"heapBefore\":%lld,\"heapAfter\":%lld,\"heapDelta\":%lld,"
+                       "\"collectionCount0\":%d,\"collectionCount1\":%d,\"collectionCount2\":%d}}\n",
+                       i, elapsed_ms, ops_per_sec, iterations,
+                       (long long)(alloc_after - alloc_before),
+                       (long long)(alloc_after - alloc_before_all),
+                       (long long)heap_before, (long long)heap_after,
+                       (long long)(heap_after - heap_before),
+                       (int)(gc0_after - gc0_before),
+                       (int)(gc1_after - gc1_before),
+                       (int)(gc2_after - gc2_before));
             }
             fflush(stdout);
 #if defined(_WIN32)
@@ -1002,6 +1025,34 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
     return 0;
 }
 
+// ── --profile: per-method GC/allocation/code-size profile ───────────
+// Uses ProfileStoreInit/ProfileEmitJson (profile_stats.h) to collect
+// allocation counters from GcAllocateFast/ProfileRecord*() callbacks.
+// Only produces non-zero data when built with CHAOS_IL2CPP_PROFILE_ENABLED=1
+// (--preset profile).  In check/ship builds, ProfileEmitJson outputs
+// {"profile":[]} (stubs).
+static int RunProfileMode() {
+    using namespace chaos::il2cpp::runtime_core;
+    const int kCount = kSubjectEntryCount;
+    ProfileStoreInit(kCount);
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+        int64_t heap_before = chaos_gc_get_heap_size();
+        GetThreadProfileData().heap_before = heap_before;
+        CHAOS_EH_TRY
+            ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+        CHAOS_EH_CATCH_BEGIN
+        CHAOS_EH_END
+        int64_t heap_after = chaos_gc_get_heap_size();
+        GetThreadProfileData().heap_after = heap_after;
+        FlushThreadProfileData(i);
+    }
+    ProfileStoreFinalize();
+    ProfileEmitJson();
+    return 0;
+}
+
 int main(int argc, char* argv[]) {
 
 #if defined(_WIN32)
@@ -1265,6 +1316,8 @@ int main(int argc, char* argv[]) {
     }
 
     if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }
+
+    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }
 
     printf("Unknown flag: %s\n", argv[1]);
     ret = 1;
