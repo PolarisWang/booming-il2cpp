@@ -67,6 +67,16 @@ _KNOWN_FACT_FAILURE_PATTERNS: list[tuple[str, str]] = [
     ("System.Private.CoreLib/chunks/runtime-compiler", "System.Reflection.Metadata.AssemblyExtensions"),
     # System.Private.CoreLib/runtime-interop: ComWrappers methods need COM support.
     ("System.Private.CoreLib/chunks/runtime-interop", "System.Private.CoreLib/System.Runtime.InteropServices.ComWrappers"),
+    # System.Private.CoreLib/system-5: Methods from Convert, Half, Double, Char
+    # that crash due to external runtime fallback (type conversion intrinsics).
+    # SEH wrapper in runtime-entry.cpp prevents init crash for this large chunk.
+    ("System.Private.CoreLib/chunks/system-5", "System.Private.CoreLib/System.Convert"),
+    ("System.Private.CoreLib/chunks/system-5", "System.Private.CoreLib/System.Half"),
+    ("System.Private.CoreLib/chunks/system-5", "System.Private.CoreLib/System.Double"),
+    ("System.Private.CoreLib/chunks/system-5", "System.Private.CoreLib/System.Char"),
+    ("System.Private.CoreLib/chunks/system-5", "System.Private.CoreLib/System.CodeDom.Compiler"),
+    ("System.Private.CoreLib/chunks/system-5", "System.Private.CoreLib/System.Array"),
+    ("System.Private.CoreLib/chunks/system-5", "System.Private.CoreLib/System.DateOnly"),
 ]
 import subprocess
 import time
