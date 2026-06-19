@@ -657,15 +657,15 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     tpg_dll = tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
     print(f"  [build] Running TPG generate-dll...")
 
-    # Copy profile allocation hooks BEFORE TPG so cmake glob picks it up
-    _hooks_src = Path(__file__).resolve().parent / "profile_alloc_hooks.cpp"
-    _hooks_dst = ctx.native_dir / "profile_alloc_hooks.cpp"
-    if _hooks_src.exists():
-        import shutil
-        shutil.copy2(str(_hooks_src), str(_hooks_dst))
-        print(f"  [build] Copied profile_alloc_hooks.cpp")
+    # Copy gc_api.cpp locally so chaos_gc_get_allocated_bytes_for_current_thread
+    # links against our tls_alloc_fast_bytes (SDK prebuilt lib has stale ref)
+    _gcapi_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp"
+    _gcapi_dst = ctx.native_dir / "gc_api.cpp"
+    if _gcapi_src.exists():
+        shutil.copy2(str(_gcapi_src), str(_gcapi_dst))
+        print(f"  [build] Copied gc_api.cpp")
     else:
-        print(f"  [build] WARNING: profile_alloc_hooks.cpp not found")
+        print(f"  [build] WARNING: gc_api.cpp not found at {_gcapi_src}")
 
     tpg_cmd = [
         "dotnet", "exec", str(tpg_dll),

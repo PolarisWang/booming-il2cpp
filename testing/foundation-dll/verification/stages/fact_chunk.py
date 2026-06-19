@@ -45,6 +45,26 @@ _KNOWN_FACT_FAILURE_PATTERNS: list[tuple[str, str]] = [
     # dynamically generate IL at runtime, which is fundamentally incompatible
     # with AOT compilation.
     ("System.Private.CoreLib/chunks/runtime-compiler", "System.Private.CoreLib/System.Reflection.Emit."),
+    # System.Private.CoreLib/runtime-compiler: Unsafe.* methods are JIT intrinsics
+    # (memory manipulation, byref arithmetic) that cannot be AOT-compiled.
+    ("System.Private.CoreLib/chunks/runtime-compiler", "System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::"),
+    # System.Private.CoreLib/runtime-compiler: DefaultInterpolatedStringHandler
+    # requires JIT intrinsics for string interpolation codegen.
+    ("System.Private.CoreLib/chunks/runtime-compiler", "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler"),
+    # System.Private.CoreLib/runtime-compiler: ResourceManager/Reader/Set require
+    # embedded resource data that is not available in the AOT test context.
+    ("System.Private.CoreLib/chunks/runtime-compiler", "System.Private.CoreLib/System.Resources.Resource"),
+    # System.Private.CoreLib/runtime-compiler: ConditionalWeakTable requires
+    # runtime ephemeron support not available in AOT.
+    ("System.Private.CoreLib/chunks/runtime-compiler", "System.Private.CoreLib/System.Runtime.CompilerServices.ConditionalWeakTable"),
+    # System.Private.CoreLib/runtime-compiler: TaskAwaiter/ConfiguredTaskAwaitable
+    # async infrastructure requires JIT support for continuation codegen.
+    ("System.Private.CoreLib/chunks/runtime-compiler", "System.Private.CoreLib/System.Runtime.CompilerServices.ConfiguredTaskAwaitable"),
+    ("System.Private.CoreLib/chunks/runtime-compiler", "System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter"),
+    ("System.Private.CoreLib/chunks/runtime-compiler", "System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter"),
+    # System.Private.CoreLib/runtime-compiler: AssemblyExtensions.TryGetRawMetadata
+    # requires native metadata blob access.
+    ("System.Private.CoreLib/chunks/runtime-compiler", "System.Reflection.Metadata.AssemblyExtensions"),
     # System.Private.CoreLib/runtime-interop: ComWrappers methods need COM support.
     ("System.Private.CoreLib/chunks/runtime-interop", "System.Private.CoreLib/System.Runtime.InteropServices.ComWrappers"),
 ]

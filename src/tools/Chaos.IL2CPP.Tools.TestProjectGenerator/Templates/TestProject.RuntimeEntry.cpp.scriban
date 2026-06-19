@@ -54,6 +54,17 @@ static thread_local jmp_buf t_abort_jmp;
 #include <gc/gc_api.h>
 #include <profile_stats.h>
 
+// Force link-time inclusion of profile_alloc_hooks.cpp's GcAllocateProfiled
+// and GcAllocateAtomicProfiled overrides.  Without this, the linker resolves
+// these symbols from the prebuilt SDK lib's gc_alloc_stubs.obj (which has
+// ProfileRecord* inlined as no-ops) and never sees our local override.
+namespace chaos::il2cpp::runtime_core {
+    void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE);
+    void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE);
+    static auto* _chaos_force_gc_alloc_profiled = &GcAllocateProfiled;
+    static auto* _chaos_force_gc_alloc_atomic_profiled = &GcAllocateAtomicProfiled;
+}
+
 // ── TLS allocation counters ───────────────────────────────────────
 // Defined here (compiled into entry.exe locally) to provide a strong
 // symbol for the extern thread_local declarations in gc_alloc_stubs.h.
@@ -1050,30 +1061,16 @@ static int RunProfileMode() {
         int i = kSubjectSlotMap[si];
         int64_t heap_before = chaos_gc_get_heap_size();
         GetThreadProfileData().heap_before = heap_before;
-        // Direct test: manually increment and read the TLS counter
-        tls_alloc_fast_bytes += 1;
-        auto before = chaos_gc_get_allocated_bytes_for_current_thread();
         CHAOS_EH_TRY
             ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
-        auto after = chaos_gc_get_allocated_bytes_for_current_thread();
         int64_t heap_after = chaos_gc_get_heap_size();
         GetThreadProfileData().heap_after = heap_after;
         FlushThreadProfileData(i);
-        // Reset the manual increment so it doesn't pollute data
-        tls_alloc_fast_bytes -= 1;
-        if (after - before > 1) {
-            std::fprintf(stderr, "[profile-debug] method %d: alloc=%lld bytes (TLS direct)\n", i, (long long)(after - before));
-        }
     }
     ProfileStoreFinalize();
-    // Debug: log profile count to stderr so we can verify the dispatch loop runs
-    {{ if is_jit }}
-    // JIT profile mode: additional JIT-specific dispatch
-    {{ end }}
-    std::fprintf(stderr, "[profile] dispatch complete: %d entries stored\n", ProfileStoreCount());
     ProfileEmitJson();
     return 0;
 }

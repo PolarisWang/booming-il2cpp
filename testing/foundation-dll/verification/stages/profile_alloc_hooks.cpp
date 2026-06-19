@@ -29,6 +29,8 @@ void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
         ProfileRecordFastPath();
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
+    } else {
+        std::fprintf(stderr, "[alloc-hook] GcAllocateProfiled(%zu) -> NULL (no TLAB space)\n", size);
     }
     return ptr;
 }
@@ -48,6 +50,8 @@ void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
         ProfileRecordFastPath();
         tls_alloc_fast_count++;
         tls_alloc_fast_bytes += size;
+    } else {
+        std::fprintf(stderr, "[alloc-hook] GcAllocateAtomicProfiled(%zu) -> NULL\n", size);
     }
     return ptr;
 }
