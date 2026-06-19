@@ -1373,8 +1373,7 @@ int main(int argc, char* argv[]) {
     if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }
 
     if (std::strcmp(argv[1], "--profile-range") == 0) {
-        if (argc < 4) { printf("Usage: entry.exe --profile-range <start> <end>
-"); return 1; }
+        if (argc < 4) { printf("Usage: entry.exe --profile-range <start> <end>\n"); return 1; }
         ret = RunProfileRangeMode(std::atoi(argv[2]), std::atoi(argv[3]));
         goto shutdown;
     }
