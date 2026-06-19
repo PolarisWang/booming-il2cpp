@@ -498,3 +498,4 @@ skills/lifecycle/learning/signals/
 
 # Native SDK (CI-built, not tracked in git)
 testing/foundation-dll/sdk/
+src/reference/
