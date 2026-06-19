@@ -431,8 +431,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Group materializations by target kind
         var kindGroups = materializations
-            .GroupBy(m => m.TargetKind)
-            .ToDictionary(g => g.Key, g => g.ToList());
+            .ToLookup(m => m.TargetKind);
 
         // Collect unique attribute types for the materializer switch (shared across all kinds)
         var uniqueAttrTypes = new List<(string SubjectId, uint Token, List<(string FieldSubjectId, CustomAttributeLiteralValue Value)> Fields)>();
@@ -605,15 +604,16 @@ public sealed partial class NativeAotLoweringPlanner
     /// for the given kind. Plans whose token maps to an index >= entityCount are excluded.
     /// </summary>
     private static Dictionary<int, List<CustomAttributeMaterializationPlan>> BuildKindEntityMap(
-        Dictionary<CustomAttributeTargetKind, List<CustomAttributeMaterializationPlan>>? kindGroups,
+        ILookup<CustomAttributeTargetKind, CustomAttributeMaterializationPlan>? kindGroups,
         CustomAttributeTargetKind kind,
         int entityCount)
     {
         var result = new Dictionary<int, List<CustomAttributeMaterializationPlan>>();
 
-        if (kindGroups == null || !kindGroups.TryGetValue(kind, out var plans))
+        if (kindGroups == null)
             return result;
 
+        var plans = kindGroups[kind];
         foreach (var plan in plans)
         {
             int entityIdx = (int)((plan.TargetMetadataToken & 0x00FFFFFFu) - 1);

@@ -47,10 +47,12 @@ static thread_local jmp_buf t_abort_jmp;
 // library, so we do NOT define it here — doing so would cause a
 // multiple-definition linker error.
 
+// Precompiled header: provides all stable ChaOS runtime headers.
+#include "chaos_pch.h"
+
 #include <chaos/config.h>
 #include <chaos/native_types.h>
 #include <chaos/profile.h>
-#include <runtime_core.h>
 #include <gc/gc_api.h>
 #include <profile_stats.h>
 
@@ -1042,10 +1044,11 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 // {"profile":[]} (stubs).
 static int RunProfileMode() {
     using namespace chaos::il2cpp::runtime_core;
-    const int kCount = kAotMethodCount;
+    const int kCount = kSubjectEntryCount;
     auto* entries = GetHotpatchEntries();
     ProfileStoreInit(kCount);
-    for (int i = 0; i < kCount; i++) {
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
         int64_t heap_before = chaos_gc_get_heap_size();
         GetThreadProfileData().heap_before = heap_before;
 #if defined(_WIN32)
@@ -1062,6 +1065,41 @@ static int RunProfileMode() {
         int64_t heap_after = chaos_gc_get_heap_size();
         GetThreadProfileData().heap_after = heap_after;
         FlushThreadProfileData(i);
+    }
+    ProfileStoreFinalize();
+    ProfileEmitJson();
+    return 0;
+}
+
+// ── --profile-range: profile a contiguous range of AOT method table indices ─
+// First argument: start index (inclusive), second: end index (exclusive).
+// Dispatches ALL methods in [start, end) directly (not subject wrappers),
+// so real .NET method bodies execute and their GC allocations are tracked.
+// Uses __try/__except to skip methods that crash (abstract, uninitialized, etc.).
+static int RunProfileRangeMode(int start_idx, int end_idx) {
+    using namespace chaos::il2cpp::runtime_core;
+    if (start_idx < 0) start_idx = 0;
+    if (end_idx > kAotMethodCount) end_idx = kAotMethodCount;
+    const int kCount = end_idx - start_idx;
+    auto* entries = GetHotpatchEntries();
+    ProfileStoreInit(kCount);
+    for (int idx = start_idx; idx < end_idx; idx++) {
+        int64_t heap_before = chaos_gc_get_heap_size();
+        GetThreadProfileData().heap_before = heap_before;
+#if defined(_WIN32)
+        __try {
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, idx);
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+        }
+#else
+        CHAOS_EH_TRY
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, idx);
+        CHAOS_EH_CATCH_BEGIN
+        CHAOS_EH_END
+#endif
+        int64_t heap_after = chaos_gc_get_heap_size();
+        GetThreadProfileData().heap_after = heap_after;
+        FlushThreadProfileData(idx);
     }
     ProfileStoreFinalize();
     ProfileEmitJson();
@@ -1334,7 +1372,14 @@ int main(int argc, char* argv[]) {
 
     if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }
 
-    printf("Unknown flag: %s\n", argv[1]);
+    if (std::strcmp(argv[1], "--profile-range") == 0) {
+        if (argc < 4) { printf("Usage: entry.exe --profile-range <start> <end>
+"); return 1; }
+        ret = RunProfileRangeMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        goto shutdown;
+    }
+
+printf("Unknown flag: %s\n", argv[1]);
     ret = 1;
 
 shutdown:

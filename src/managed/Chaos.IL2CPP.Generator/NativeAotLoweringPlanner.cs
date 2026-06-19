@@ -1492,45 +1492,17 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString());
         var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString());
 
-        // Build include list — most are unconditional; feature-specific headers
-        // (com_ccw.h, enum_stubs.h, enum_metadata.generated.h) are included only
-        // when the generated code actually references those features.
+        // Build include list — stable runtime headers go into chaos_pch.h
+        // (precompiled header). Only conditional/per-run headers are here.
         var includes_ = new List<string>
         {
-            "<chaos/common.h>",
-            "<chaos/type_info.h>",
-            "\"runtime_core.h\"",
-            // Unified exception-handling macros (CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN / etc.)
-            // Must appear after runtime_core.h which provides the EH backend type definitions.
-            "<chaos/eh.h>",
-            "\"codegen_bridge.h\"",
-            "\"module_registry.h\"",
-            "\"abi_manifest.h\"",
-            "\"hotpatch_table.h\"",
-            "\"runtime_vtable.h\"",
-            "\"runtime_instantiation.h\"",
-            "\"reflection_query_model.h\"",
-            "\"load_store_chaos_bridge.h\"",
-            // Interpreter dispatch for hotpatch-kept-native & flat-goto fallback
-            "\"interpreter_entry.h\"",
-            // GC write barrier (SATB pre-write barrier for reference-type field stores).
-            "<gc/gc_bgc_inline.h>",
-            // GC card table (post-write dirty card marking for generational GC).
-            "<gc/gc_card_table.h>",
-            // GC root change tracking (BGC concurrent mark — records root slot
-            // overwrites so the re-mark phase can re-scan newly-unreachable objects).
-            "<gc/gc_root_change.h>",
-            // Common generated runtime prelude (shared header, ~200 lines
-            // of helper functions previously emitted inline in every file).
-            "<ChaosGeneratedRuntimePrelude.h>",
-            // Runtime stubs for Environment, Console, Culture, GC and delegate helpers
-            // (chaos_current_managed_thread_id, ChaosEnvironmentGetStackTrace, etc.)
-            "\"runtime_stubs/misc_stubs.h\"",
-            // Cryptography stubs (ChaosSha256Hash, ChaosHmacSha256, etc.) for
-            // System.Security.Cryptography SimpleForward external runtime helpers.
-            "\"runtime_stubs/crypto_stubs.h\"",
-            // Vector<T> comparison stubs (chaos_vector_greater_than_any, etc.)
-            "\"runtime_stubs/vector_stubs.h\"",
+            // PCH provides: <chaos/common.h>, <chaos/type_info.h>, <chaos/eh.h>,
+            //   runtime_core.h, codegen_bridge.h, module_registry.h, abi_manifest.h,
+            //   hotpatch_table.h, runtime_vtable.h, runtime_instantiation.h,
+            //   reflection_query_model.h, load_store_chaos_bridge.h,
+            //   interpreter_entry.h, gc/*.h, ChaosGeneratedRuntimePrelude.h,
+            //   runtime_stubs/{misc,crypto,vector}_stubs.h
+            "\"chaos_pch.h\"",
         };
         // com_ccw.h — only needed when COM interface vtable data is present.
         if (_comInterfaceVtableData is { Count: > 0 })
@@ -2944,8 +2916,7 @@ return sb.ToString();
             return reachable;
 
         var bySubjectId = methods
-            .GroupBy(m => m.SubjectId, StringComparer.Ordinal)
-            .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
+            .ToLookup(m => m.SubjectId, StringComparer.Ordinal);
 
         var queue = new Queue<string>();
         queue.Enqueue(entrySubjectId);
@@ -2954,10 +2925,10 @@ return sb.ToString();
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
-            if (!bySubjectId.TryGetValue(current, out var methodVariants))
+            if (!bySubjectId.Contains(current))
                 continue;
 
-            foreach (var method in methodVariants)
+            foreach (var method in bySubjectId[current])
             {
                 if (method.Instructions == null)
                     continue;

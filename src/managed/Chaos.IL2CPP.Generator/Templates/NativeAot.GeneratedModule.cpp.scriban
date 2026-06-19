@@ -4,7 +4,7 @@
 // Wires the extern "C" codegen symbols into the typed kFunctions table,
 // and implements ChaosGeneratedModuleActivate() for the A2 proxy wrappers.
 
-#include "chaos_runtime_host.h"
+#include "chaos_pch.h"
 #include "chaos_generated_module.h"
 #include <gc/gc_layout.h>
 
