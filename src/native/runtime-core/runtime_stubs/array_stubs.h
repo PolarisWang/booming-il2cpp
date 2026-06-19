@@ -1,4 +1,6 @@
 // ── Array stub declarations ────────────────────────────────────
+#ifndef CHAOS_IL2CPP_ARRAY_STUBS_H_
+#define CHAOS_IL2CPP_ARRAY_STUBS_H_
 #pragma once
 
 #include <chaos/native_types.h>
@@ -665,3 +667,4 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosArrayNew1D_Inline(
     arr->length = static_cast<CHAOS_IL2CPP_INTPTR>(len32);
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
+#endif  // CHAOS_IL2CPP_ARRAY_STUBS_H_

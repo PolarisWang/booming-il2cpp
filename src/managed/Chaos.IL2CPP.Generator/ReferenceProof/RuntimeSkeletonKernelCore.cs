@@ -50,7 +50,7 @@ internal sealed record RuntimeSkeletonKernelEmissionPlan(
     RuntimeSkeletonKernelCarrierSchema CarrierSchema,
     string HelperCallExpression);
 
-internal static class RuntimeSkeletonKernelCore
+internal static partial class RuntimeSkeletonKernelCore
 {
     public const string ContractId = "valuetype-kernel-v1";
 

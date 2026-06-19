@@ -8,7 +8,7 @@ using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.Generator;
 
-public sealed class NativeAotEmitter
+public sealed partial class NativeAotEmitter
 {
     private static readonly JsonSerializerOptions JsonOptions = new()
     {

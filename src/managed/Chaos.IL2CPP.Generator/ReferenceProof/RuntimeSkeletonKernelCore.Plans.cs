@@ -2,7 +2,7 @@ using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.Generator;
 
-internal static class RuntimeSkeletonKernelCore
+internal static partial class RuntimeSkeletonKernelCore
 {
 
     private static bool TryCreateInstanceUnaryPlan(

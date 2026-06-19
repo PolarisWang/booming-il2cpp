@@ -1,4 +1,6 @@
 // ── Runtime CPU feature detection (CPUID-based) ────────────────
+#ifndef CHAOS_IL2CPP_CPU_FEATURES_H_
+#define CHAOS_IL2CPP_CPU_FEATURES_H_
 #pragma once
 
 #include <chaos/native_types.h>
@@ -65,3 +67,4 @@ inline bool HasAvx2() noexcept
 }}} // namespace chaos::il2cpp::runtime_core
 
 #endif // __x86_64__ || _M_AMD64
+#endif  // CHAOS_IL2CPP_CPU_FEATURES_H_
