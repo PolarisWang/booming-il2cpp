@@ -681,8 +681,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     }
                 }
                 break;
-            [[likely]]
             }
+            [[likely]]
             case IROpCode::Add: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
                 const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
@@ -768,7 +768,8 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 frame->stack.push_back(InterpreterValue::from_obj(storage));
                 // Track interpreter allocation in TLS counter
                 chaos::il2cpp::runtime_core::tls_alloc_fast_count++;
-                chaos::il2cpp::runtime_core::tls_alloc_fast_bytes += sizeof(ObjectStorage) + storage->fields.capacity() * sizeof(InterpreterValue);
+                CHAOS_IL2CPP_SIZE obj_size = sizeof(ObjectStorage) + instruction.secondary_index * sizeof(InterpreterValue);
+                chaos::il2cpp::runtime_core::tls_alloc_fast_bytes += obj_size;
                 break;
             }
             case IROpCode::NewArr: {
