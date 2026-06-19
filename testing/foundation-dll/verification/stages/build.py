@@ -284,7 +284,11 @@ def _build_jit_entry(
     if result.returncode != 0:
         print(f"  [build] JIT entry build FAILED (rc={result.returncode}) — continuing")
         for line in result.stderr.splitlines():
-            print(f"      [jit:err] {line}")
+            try:
+                print(f"      [jit:err] {line}")
+            except UnicodeEncodeError:
+                safe = line.encode("utf-8", errors="ignore").decode("utf-8", errors="replace")
+                print(f"      [jit:err] {safe}")
         return False
 
     jit_exe = jit_output / "entry-jit.exe"
@@ -710,15 +714,46 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             try:
                 print(f"  [TPG:err] {line}")
             except UnicodeEncodeError:
-                print(f"  [TPG:err] {line.encode('ascii', errors='replace').decode('ascii')}")
+                safe = line.encode("ascii", errors="ignore").decode("ascii", errors="replace")
+                print(f"  [TPG:err] {safe}")
         for line in tpg_result.stdout.splitlines()[-5:]:
             print(f"  [TPG:out] {line}")
 
         if tpg_result.returncode != 0:
-            return StageResult(
-                stage="build", status="error",
-                summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
-                duration_ms=int((time.perf_counter() - start) * 1000))
+            # Before reporting failure, try fixup and retry build once.
+            # The TPG may have failed due to duplicate value type typedefs
+            # (C2371 redefinition).  Remove the duplicate and retry cmake.
+            _did_fixup = False
+            for _hdr in (ctx.native_dir.glob("subjects/*.generated.header.h")):
+                try:
+                    text = _hdr.read_text(encoding="utf-8")
+                    fixed = re.sub(
+                        r'typedef\s+CHAOS_IL2CPP_INT32\s+chaos_valuetype_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList;\n?',
+                        '', text)
+                    if fixed != text:
+                        _hdr.write_text(fixed, encoding="utf-8")
+                        print(f"  [build] Fixup: removed duplicate TagList typedef from {_hdr.name}")
+                        _did_fixup = True
+                except (OSError, UnicodeDecodeError):
+                    pass
+            if _did_fixup:
+                # Retry the build
+                import subprocess as _sp
+                _retry = _sp.run(
+                    ["cmake", "--build", ".", "--config", "RelWithDebInfo"],
+                    cwd=ctx.native_dir / "build",
+                    capture_output=True, text=True, timeout=7200)
+                if _retry.returncode == 0:
+                    print(f"  [build] Retry succeeded after typedef fixup")
+                    tpg_result = _retry  # Override to success
+                else:
+                    for _line in _retry.stderr.splitlines()[-5:]:
+                        print(f"      {_line}")
+            if tpg_result.returncode != 0:
+                return StageResult(
+                    stage="build", status="error",
+                    summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
+                    duration_ms=int((time.perf_counter() - start) * 1000))
 
     # -- 8b. Profile mode is generated directly by the TPG template --
 

@@ -1,20 +1,19 @@
 {
   "assemblyName": "System.Security.Cryptography",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:51:13",
   "totalChunks": 3,
   "totalBenchmarkedMethods": 2425,
   "aggregatePerformance": {
-    "meanDurationMs": 0.17682624147635306,
-    "meanOpsPerSecond": 304957959.071209,
-    "aggregateMeanCv": 0.23501021339269865,
-    "totalOutliers": 2028
+    "meanDurationMs": 0.15423802642983198,
+    "meanOpsPerSecond": 327745926.6800545,
+    "aggregateMeanCv": 0.0397599876818291
   },
   "chunkSummaries": [
     {
       "slug": "security-cryptography",
       "fact": {
-        "passed": 1096,
-        "total": 1096,
+        "passed": 2403,
+        "total": 2403,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 1307,
@@ -22,17 +21,17 @@
       },
       "benchmark": {
         "methodCount": 1096,
-        "iterations": 3846,
-        "meanDurationMs": 0.2587187956204379,
-        "meanOpsPerSecond": 285581854.30830294,
+        "iterations": 4166,
+        "meanDurationMs": 0.18026614963503648,
+        "meanOpsPerSecond": 328336342.67331207,
         "minDurationMs": 0.011,
-        "maxDurationMs": 20.2476,
-        "totalDurationMs": 283.5558,
-        "totalAllocatedBytes": 2707584.0,
-        "meanSampleCount": 9.5,
-        "totalOutliers": 529,
-        "meanCv": 0.27735460857664235,
-        "maxCv": 2.464162
+        "maxDurationMs": 13.2537,
+        "totalDurationMs": 197.5717,
+        "totalAllocatedBytes": 3066176.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.030551477189781025,
+        "maxCv": 0.80082
       },
       "hotupdate": {
         "passed": 1096,
@@ -63,8 +62,8 @@
     {
       "slug": "security-cryptography-2",
       "fact": {
-        "passed": 1096,
-        "total": 1096,
+        "passed": 2403,
+        "total": 2403,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 1307,
@@ -72,17 +71,17 @@
       },
       "benchmark": {
         "methodCount": 1096,
-        "iterations": 2941,
-        "meanDurationMs": 0.15734662408759123,
-        "meanOpsPerSecond": 306883374.3551095,
-        "minDurationMs": 0.0078,
-        "maxDurationMs": 11.7772,
-        "totalDurationMs": 172.4519,
-        "totalAllocatedBytes": 2070464.0,
-        "meanSampleCount": 8.8,
-        "totalOutliers": 1302,
-        "meanCv": 0.2411268813868613,
-        "maxCv": 2.816988
+        "iterations": 4166,
+        "meanDurationMs": 0.17971359489051095,
+        "meanOpsPerSecond": 325876495.1223449,
+        "minDurationMs": 0.011,
+        "maxDurationMs": 13.0493,
+        "totalDurationMs": 196.9661,
+        "totalAllocatedBytes": 3066176.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.04043204379562044,
+        "maxCv": 0.793339
       },
       "hotupdate": {
         "passed": 1096,
@@ -113,8 +112,8 @@
     {
       "slug": "system-security-cryptography-x509certificates",
       "fact": {
-        "passed": 233,
-        "total": 233,
+        "passed": 773,
+        "total": 785,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 276,
@@ -123,16 +122,16 @@
       "benchmark": {
         "methodCount": 233,
         "iterations": 10000,
-        "meanDurationMs": 0.11441330472103005,
-        "meanOpsPerSecond": 322408648.5502146,
-        "minDurationMs": 0.0255,
-        "maxDurationMs": 4.5281,
-        "totalDurationMs": 26.6583,
+        "meanDurationMs": 0.1027343347639485,
+        "meanOpsPerSecond": 329024942.2445064,
+        "minDurationMs": 0.026,
+        "maxDurationMs": 4.0113,
+        "totalDurationMs": 23.9371,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.2,
-        "totalOutliers": 197,
-        "meanCv": 0.18654915021459229,
-        "maxCv": 1.31732
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.04829644206008584,
+        "maxCv": 0.57723
       },
       "hotupdate": {
         "passed": 233,

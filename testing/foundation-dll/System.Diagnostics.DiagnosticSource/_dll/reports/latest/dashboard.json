@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Diagnostics.DiagnosticSource",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:30:51",
   "summary": {
     "chunks": 2,
     "chunksVerified": 2,
@@ -23,33 +23,19 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 214,
-      "methodsWithNet8": 25,
-      "chaosAotVsNet8": {
-        "mean": -418.62,
-        "median": -418.62,
-        "min": -418.62,
-        "max": -418.62,
-        "p25": -418.62,
-        "p75": -418.62
-      },
-      "chaosJitVsNet8": {
-        "mean": -415.15,
-        "median": -415.15,
-        "min": -415.15,
-        "max": -415.15,
-        "p25": -415.15,
-        "p75": -415.15
-      },
+      "methodsAnalyzed": 121,
+      "methodsWithNet8": 121,
+      "chaosAotVsNet8": {},
+      "chaosJitVsNet8": {},
       "net10VsNet8": {
-        "mean": -22.28,
-        "median": -22.28,
-        "min": -22.28,
-        "max": -22.28,
-        "p25": -22.28,
-        "p75": -22.28
+        "mean": -6.0,
+        "median": -6.0,
+        "min": -12.0,
+        "max": 0.0,
+        "p25": -9.0,
+        "p75": -3.0
       },
-      "highValueMethods_betterThanNet8": 8.0
+      "highValueMethods_betterThanNet8": 0.0
     }
   }
 }

@@ -122,15 +122,13 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # array_stubs.cpp: the prebuilt lib may be stale, missing recently-added
 # DirectNativeSymbol entries (ChaosArrayCopy3, ChaosArraySortWithComparer).
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
-# gc_alloc_stubs.cpp: compile locally so GcAllocateProfiled and
-# GcAllocateAtomicProfiled increment tls_alloc_fast_bytes (the
-# prebuilt SDK lib's versions don't have this tracking).
-# profile_stats.cpp: compile locally so ProfileEmitJson uses real
-# implementations (SDK prebuilt stubs output {"profile":[]}).
+# gc_alloc_stubs.cpp: the prebuilt SDK was compiled without
+# CHAOS_IL2CPP_PROFILE_ENABLED.  We compile profile_stats.cpp locally
+# so ProfileEmitJson outputs real data (12 fields).
+# /FORCE:MULTIPLE handles any overlap with the SDK lib.
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"

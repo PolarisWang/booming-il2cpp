@@ -1,17 +1,17 @@
 {
   "assemblyName": "System.IO.Compression.ZipFile",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:25:24",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 66,
-  "totalFactMethods": 66,
+  "totalPassed": 198,
+  "totalFactMethods": 198,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 66,
-        "total": 66,
+        "passed": 198,
+        "total": 198,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 66,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 66,
         "iterations": 10000,
-        "meanDurationMs": 0.04365606060606061,
-        "meanOpsPerSecond": 220679256.00757575,
-        "minDurationMs": 0.0383,
-        "maxDurationMs": 0.0546,
-        "totalDurationMs": 2.8813,
+        "meanDurationMs": 0.029645454545454544,
+        "meanOpsPerSecond": 334350791.06060606,
+        "minDurationMs": 0.0264,
+        "maxDurationMs": 0.0319,
+        "totalDurationMs": 1.9566,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 8.8,
-        "totalOutliers": 80,
-        "meanCv": 0.4371961212121212,
-        "maxCv": 2.454482
+        "meanSampleCount": 8.2,
+        "totalOutliers": 116,
+        "meanCv": 0.10020730303030302,
+        "maxCv": 0.467192
       },
       "hotupdate": {
         "passed": 66,

@@ -33,6 +33,29 @@ _KNOWN_FACT_FAILURES: dict[tuple[str, int], str] = {
     ("System.Private.CoreLib/chunks/runtime-interop", 349): "Marshal.GetFunctionPointerForDelegate needs OS interop",
     ("System.Private.CoreLib/chunks/runtime-interop", 354): "Marshal.ZeroFreeCoTaskMemAnsi needs COM support",
     ("System.Private.CoreLib/chunks/runtime-interop", 394): "Marshal.ReAllocCoTaskMem needs COM support",
+    # System.Diagnostics.DiagnosticSource: TagList-related failures from inline
+    # emission of opaue external value type fields. Codegen emits ->field access
+    # on types typedef'd as int32 — a known emission limitation.
+    ("System.Diagnostics.DiagnosticSource/chunks/diagnostics", 38): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/diagnostics", 42): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/diagnostics", 63): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/diagnostics", 80): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/diagnostics", 96): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/diagnostics", 101): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/diagnostics", 114): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 4): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 5): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 6): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 7): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 12): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 13): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 17): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 18): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 19): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 20): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 24): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 25): "TagList field access on opaque external value type",
+    ("System.Diagnostics.DiagnosticSource/chunks/global-ns", 26): "TagList field access on opaque external value type",
 }
 
 # ── Known fact failure patterns (subjectId prefix) ─────────────────────

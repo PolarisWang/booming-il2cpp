@@ -1,17 +1,17 @@
 {
   "assemblyName": "System.Runtime.Serialization.Formatters",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:34:39",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 75,
-  "totalFactMethods": 75,
+  "totalPassed": 226,
+  "totalFactMethods": 234,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 75,
-        "total": 75,
+        "passed": 226,
+        "total": 234,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 84,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 74,
         "iterations": 10000,
-        "meanDurationMs": 0.15444459459459461,
-        "meanOpsPerSecond": 323008133.6127027,
-        "minDurationMs": 0.0257,
-        "maxDurationMs": 3.483,
-        "totalDurationMs": 11.4289,
+        "meanDurationMs": 0.1580810810810811,
+        "meanOpsPerSecond": 325190226.7162162,
+        "minDurationMs": 0.026,
+        "maxDurationMs": 3.258,
+        "totalDurationMs": 11.698,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.02626181081081081,
-        "maxCv": 0.256527
+        "meanCv": 0.03762156756756757,
+        "maxCv": 0.287849
       },
       "hotupdate": {
         "passed": 74,

@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.IO.Compression.Brotli",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:31:38",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 1,
-  "totalDeclaredMethods": 22
+  "chunksWithMetaMismatch": 0,
+  "totalDeclaredMethods": 93
 }

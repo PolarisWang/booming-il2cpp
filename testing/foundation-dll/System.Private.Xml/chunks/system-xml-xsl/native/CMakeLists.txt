@@ -8,9 +8,17 @@ set(CMAKE_CXX_STANDARD 20)
 # ── Compiler settings ──
 # /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
-  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP)
+  add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP /Gy /Gw)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
+  # ── Precompiled header (PCH) ──────────────────────────────────
+  # chaos_pch.h includes all stable ChaOS runtime headers.
+  # Generated page files and entries include it as first #include.
+  # target_precompile_headers auto-manages /Yc /Yu flags via CMake 3.16+.
+  set(CHAOS_PCH_HDR "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.h")
+  if(EXISTS "${CHAOS_PCH_HDR}")
+    target_precompile_headers(chaos_entry PRIVATE "${CHAOS_PCH_HDR}")
+  endif()
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
   set(CHAOS_EHA_FLAG -fexceptions)

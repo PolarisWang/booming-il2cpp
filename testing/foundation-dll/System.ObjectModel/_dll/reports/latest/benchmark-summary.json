@@ -1,20 +1,19 @@
 {
   "assemblyName": "System.ObjectModel",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:30:53",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 10,
   "aggregatePerformance": {
-    "meanDurationMs": 0.03208,
-    "meanOpsPerSecond": 315956387.86,
-    "aggregateMeanCv": 0.1750878,
-    "totalOutliers": 10
+    "meanDurationMs": 0.0293,
+    "meanOpsPerSecond": 341578561.133,
+    "aggregateMeanCv": 0.0187141
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 10,
-        "total": 10,
+        "passed": 30,
+        "total": 30,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 10,
@@ -23,16 +22,16 @@
       "benchmark": {
         "methodCount": 10,
         "iterations": 10000,
-        "meanDurationMs": 0.03208,
-        "meanOpsPerSecond": 315956387.86,
-        "minDurationMs": 0.0283,
-        "maxDurationMs": 0.0364,
-        "totalDurationMs": 0.3208,
+        "meanDurationMs": 0.0293,
+        "meanOpsPerSecond": 341578561.133,
+        "minDurationMs": 0.027,
+        "maxDurationMs": 0.03,
+        "totalDurationMs": 0.293,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.0,
-        "totalOutliers": 10,
-        "meanCv": 0.1750878,
-        "maxCv": 0.207993
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.0187141,
+        "maxCv": 0.068986
       },
       "hotupdate": {
         "passed": 10,

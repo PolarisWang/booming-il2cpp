@@ -1,20 +1,20 @@
 {
   "assemblyName": "System.Net.Http",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:34:03",
   "totalChunks": 2,
   "totalBenchmarkedMethods": 187,
   "aggregatePerformance": {
-    "meanDurationMs": 0.6326160742948865,
-    "meanOpsPerSecond": 240167178.3895265,
-    "aggregateMeanCv": 0.08521353141481312,
-    "totalOutliers": 47
+    "meanDurationMs": 0.9834649449667507,
+    "meanOpsPerSecond": 274236368.55673355,
+    "aggregateMeanCv": 0.10763510708553084,
+    "totalOutliers": 67
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 89,
-        "total": 89,
+        "passed": 319,
+        "total": 319,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 119,
@@ -23,16 +23,16 @@
       "benchmark": {
         "methodCount": 89,
         "iterations": 10000,
-        "meanDurationMs": 1.221605617977528,
-        "meanOpsPerSecond": 251687930.1719101,
-        "minDurationMs": 0.024,
-        "maxDurationMs": 21.508,
-        "totalDurationMs": 108.7229,
+        "meanDurationMs": 1.9373921348314607,
+        "meanOpsPerSecond": 207264350.9977528,
+        "minDurationMs": 0.0312,
+        "maxDurationMs": 33.2661,
+        "totalDurationMs": 172.4279,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.07406957303370787,
-        "maxCv": 0.414421
+        "meanSampleCount": 9.2,
+        "totalOutliers": 67,
+        "meanCv": 0.16326288764044944,
+        "maxCv": 0.399106
       },
       "hotupdate": {
         "passed": 89,
@@ -63,8 +63,8 @@
     {
       "slug": "system-net-http",
       "fact": {
-        "passed": 98,
-        "total": 98,
+        "passed": 312,
+        "total": 312,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 107,
@@ -73,16 +73,16 @@
       "benchmark": {
         "methodCount": 98,
         "iterations": 10000,
-        "meanDurationMs": 0.043626530612244904,
-        "meanOpsPerSecond": 228646426.60714287,
-        "minDurationMs": 0.0375,
-        "maxDurationMs": 0.047,
-        "totalDurationMs": 4.2754,
+        "meanDurationMs": 0.029537755102040816,
+        "meanOpsPerSecond": 341208386.1157143,
+        "minDurationMs": 0.026,
+        "maxDurationMs": 0.0387,
+        "totalDurationMs": 2.8947,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.5,
-        "totalOutliers": 47,
-        "meanCv": 0.09635748979591838,
-        "maxCv": 1.52488
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.05200732653061225,
+        "maxCv": 0.392096
       },
       "hotupdate": {
         "passed": 98,

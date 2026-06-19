@@ -1,17 +1,17 @@
 {
   "assemblyName": "System.IO.Pipelines",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:32:14",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 23,
-  "totalFactMethods": 23,
+  "totalPassed": 40,
+  "totalFactMethods": 50,
   "chunkSummaries": [
     {
       "slug": "system-io-pipelines",
       "fact": {
-        "passed": 23,
-        "total": 23,
+        "passed": 40,
+        "total": 50,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 33,
@@ -19,17 +19,17 @@
       },
       "benchmark": {
         "methodCount": 23,
-        "iterations": 4545,
-        "meanDurationMs": 1.3277869565217393,
-        "meanOpsPerSecond": 232781195.40869567,
-        "minDurationMs": 0.0115,
-        "maxDurationMs": 6.8804,
-        "totalDurationMs": 30.5391,
-        "totalAllocatedBytes": 145440.0,
-        "meanSampleCount": 8.7,
-        "totalOutliers": 31,
-        "meanCv": 0.24340204347826086,
-        "maxCv": 1.626592
+        "iterations": 9090,
+        "meanDurationMs": 2.290317391304348,
+        "meanOpsPerSecond": 230386292.30521742,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 10.9037,
+        "totalDurationMs": 52.6773,
+        "totalAllocatedBytes": 581760.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.07645813043478261,
+        "maxCv": 0.291162
       },
       "hotupdate": {
         "passed": 23,

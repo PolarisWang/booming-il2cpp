@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Diagnostics.DiagnosticSource",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:30:51",
   "totalChunks": 2,
   "chunksWithResults": 2,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 2,
-  "totalDeclaredMethods": 304
+  "totalDeclaredMethods": 243
 }

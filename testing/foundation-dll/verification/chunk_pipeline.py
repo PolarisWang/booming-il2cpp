@@ -240,6 +240,7 @@ def main():
         "build": None,
         "fact": None,
         "profile": None,
+        "profile-range": None,
         "benchmark": None,
         "managed_benchmark": None,
         "benchmark_report": None,
@@ -258,6 +259,8 @@ def main():
     # ── Stage dependency DAG validation ──
     STAGE_DEPS: dict[str, list[str]] = {
         "fact":              ["build"],
+        "profile":           ["build"],
+        "profile-range":     ["build"],
         "benchmark":         ["build", "fact"],
         "managed_benchmark": ["build"],
         "benchmark_report":  ["benchmark", "managed_benchmark"],
@@ -282,6 +285,7 @@ def main():
     from verification.stages.build import run_build
     from verification.stages.fact_chunk import run_fact_chunk
     from verification.stages.profile import run_profile
+    from verification.stages.profile_range_chunk import run_profile_range_chunk
     from verification.stages.benchmark_chunk import run_benchmark_chunk
     from verification.stages.managed_benchmark import run_managed_benchmark
     from verification.stages.hotupdate_chunk import run_hotupdate_chunk
@@ -294,6 +298,7 @@ def main():
         "build": run_build,
         "fact": run_fact_chunk,
         "profile": run_profile,
+        "profile-range": run_profile_range_chunk,
         "benchmark": run_benchmark_chunk,
         "managed_benchmark": run_managed_benchmark,
         "hotupdate": run_hotupdate_chunk,
@@ -410,6 +415,11 @@ def main():
         print(f"\n  Chunk '{chunk_slug}' summary: "
               f"{sum(1 for s in stages_result.values() if s.get('status') == 'passed')}/"
               f"{len(stage_names)} passed")
+
+    # ── Execute chunks (sequential, single-threaded) ──
+    for chunk_slug in chunks:
+        seq += 1
+        _run_chunk(chunk_slug, seq)
 
     total_duration = time.perf_counter() - overall_start
     print(f"\n{'='*60}")

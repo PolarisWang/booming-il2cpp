@@ -1492,17 +1492,31 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString());
         var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString());
 
-        // Build include list — stable runtime headers go into chaos_pch.h
-        // (precompiled header). Only conditional/per-run headers are here.
+        // Build include list — most are unconditional; feature-specific headers
+        // (com_ccw.h, enum_stubs.h, enum_metadata.generated.h) are included only
+        // when the generated code actually references those features.
         var includes_ = new List<string>
         {
-            // PCH provides: <chaos/common.h>, <chaos/type_info.h>, <chaos/eh.h>,
-            //   runtime_core.h, codegen_bridge.h, module_registry.h, abi_manifest.h,
-            //   hotpatch_table.h, runtime_vtable.h, runtime_instantiation.h,
-            //   reflection_query_model.h, load_store_chaos_bridge.h,
-            //   interpreter_entry.h, gc/*.h, ChaosGeneratedRuntimePrelude.h,
-            //   runtime_stubs/{misc,crypto,vector}_stubs.h
-            "\"chaos_pch.h\"",
+            "<chaos/common.h>",
+            "<chaos/type_info.h>",
+            "\"runtime_core.h\"",
+            "<chaos/eh.h>",
+            "\"codegen_bridge.h\"",
+            "\"module_registry.h\"",
+            "\"abi_manifest.h\"",
+            "\"hotpatch_table.h\"",
+            "\"runtime_vtable.h\"",
+            "\"runtime_instantiation.h\"",
+            "\"reflection_query_model.h\"",
+            "\"load_store_chaos_bridge.h\"",
+            "\"interpreter_entry.h\"",
+            "<gc/gc_bgc_inline.h>",
+            "<gc/gc_card_table.h>",
+            "<gc/gc_root_change.h>",
+            "<ChaosGeneratedRuntimePrelude.h>",
+            "\"runtime_stubs/misc_stubs.h\"",
+            "\"runtime_stubs/crypto_stubs.h\"",
+            "\"runtime_stubs/vector_stubs.h\"",
         };
         // com_ccw.h — only needed when COM interface vtable data is present.
         if (_comInterfaceVtableData is { Count: > 0 })

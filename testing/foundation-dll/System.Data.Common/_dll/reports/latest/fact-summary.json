@@ -1,17 +1,17 @@
 {
   "assemblyName": "System.Data.Common",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:38:39",
   "totalChunks": 4,
-  "chunksWithFacts": 3,
+  "chunksWithFacts": 4,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 932,
-  "totalFactMethods": 932,
+  "totalPassed": 3941,
+  "totalFactMethods": 4023,
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 21,
-        "total": 21,
+        "passed": 63,
+        "total": 63,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 21,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 21,
         "iterations": 10000,
-        "meanDurationMs": 0.03041428571428571,
-        "meanOpsPerSecond": 332739215.317619,
-        "minDurationMs": 0.0267,
-        "maxDurationMs": 0.0457,
-        "totalDurationMs": 0.6386999999999999,
+        "meanDurationMs": 0.03045238095238095,
+        "meanOpsPerSecond": 335495875.8090476,
+        "minDurationMs": 0.026,
+        "maxDurationMs": 0.0397,
+        "totalDurationMs": 0.6395,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.047797523809523804,
-        "maxCv": 0.485168
+        "meanCv": 0.03817409523809524,
+        "maxCv": 0.34464
       },
       "hotupdate": {
         "passed": 21,
@@ -60,8 +60,8 @@
     {
       "slug": "system-data",
       "fact": {
-        "passed": 596,
-        "total": 596,
+        "passed": 1900,
+        "total": 1900,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 652,
@@ -70,16 +70,16 @@
       "benchmark": {
         "methodCount": 596,
         "iterations": 10000,
-        "meanDurationMs": 0.045600838926174496,
-        "meanOpsPerSecond": 305328250.52197987,
-        "minDurationMs": 0.0284,
-        "maxDurationMs": 4.0933,
-        "totalDurationMs": 27.1781,
+        "meanDurationMs": 0.03953003355704698,
+        "meanOpsPerSecond": 338167022.49973154,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 3.0833,
+        "totalDurationMs": 23.5599,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 8.7,
-        "totalOutliers": 763,
-        "meanCv": 0.15447378020134228,
-        "maxCv": 1.343251
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.04116778355704698,
+        "maxCv": 0.59397
       },
       "hotupdate": {
         "passed": 596,
@@ -110,8 +110,8 @@
     {
       "slug": "system-data-common",
       "fact": {
-        "passed": 315,
-        "total": 315,
+        "passed": 1027,
+        "total": 1109,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 442,
@@ -160,8 +160,8 @@
     {
       "slug": "system-data-sqltypes",
       "fact": {
-        "passed": 0,
-        "total": 0,
+        "passed": 951,
+        "total": 951,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 353,

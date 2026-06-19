@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Threading.Tasks.Parallel",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:30:14",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 1,
-  "totalDeclaredMethods": 106
+  "chunksWithMetaMismatch": 0,
+  "totalDeclaredMethods": 334
 }

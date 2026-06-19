@@ -1,17 +1,17 @@
 {
   "assemblyName": "System.Diagnostics.DiagnosticSource",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:30:51",
   "totalChunks": 2,
   "chunksWithFacts": 2,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 304,
-  "totalFactMethods": 304,
+  "totalPassed": 243,
+  "totalFactMethods": 243,
   "chunkSummaries": [
     {
       "slug": "diagnostics",
       "fact": {
-        "passed": 132,
-        "total": 132,
+        "passed": 125,
+        "total": 125,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 144,
@@ -60,8 +60,8 @@
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 172,
-        "total": 172,
+        "passed": 118,
+        "total": 118,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 175,

@@ -21,7 +21,7 @@ endif()
 
 # ── Config tier ──
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-  set(CHAOS_IL2CPP_CONFIG_TIER "ship")
+  set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
 
 # ── Hephaestus Lib: pre-compiled framework cache ──
@@ -40,20 +40,20 @@ if(DEFINED CHAOS_HEPHAESTUS_DIR AND EXISTS "${CHAOS_HEPHAESTUS_DIR}")
   endif()
 endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
   add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
 else()
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/test-only.h")
 endif()
 
@@ -150,11 +150,11 @@ set(CHAOS_INTEROP_STUBS
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/string_stubs.cpp"
 )
 set(CHAOS_ENTRY_STUBS
-    # entry_stubs.cpp removed — the functions (Assert_Reset, Assert_Complete)
-    # are defined in runtime-entry.cpp (Scriban template).  Including both
-    # causes LNK4006 duplicate symbol warnings.
+    "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
 )
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
@@ -176,6 +176,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
+    ${CHAOS_STRING_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 

@@ -1,17 +1,17 @@
 {
   "assemblyName": "System.ComponentModel.TypeConverter",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T08:36:32",
   "totalChunks": 3,
   "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
-  "totalPassed": 620,
-  "totalFactMethods": 620,
+  "totalPassed": 1426,
+  "totalFactMethods": 1426,
   "chunkSummaries": [
     {
       "slug": "component-model",
       "fact": {
-        "passed": 515,
-        "total": 515,
+        "passed": 1083,
+        "total": 1083,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 568,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 515,
         "iterations": 10000,
-        "meanDurationMs": 0.609463495145631,
-        "meanOpsPerSecond": 305532183.4481942,
+        "meanDurationMs": 0.614737281553398,
+        "meanOpsPerSecond": 307886272.75877666,
         "minDurationMs": 0.024,
-        "maxDurationMs": 22.057,
-        "totalDurationMs": 313.8737,
+        "maxDurationMs": 21.7103,
+        "totalDurationMs": 316.5897,
         "totalAllocatedBytes": 960000.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.044418603883495146,
-        "maxCv": 0.390627
+        "meanCv": 0.06631609708737865,
+        "maxCv": 0.565685
       },
       "hotupdate": {
         "passed": 515,
@@ -60,8 +60,8 @@
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 74,
-        "total": 74,
+        "passed": 234,
+        "total": 234,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 80,
@@ -70,16 +70,16 @@
       "benchmark": {
         "methodCount": 74,
         "iterations": 10000,
-        "meanDurationMs": 0.030459459459459458,
-        "meanOpsPerSecond": 336932889.6993243,
-        "minDurationMs": 0.025,
-        "maxDurationMs": 0.0338,
-        "totalDurationMs": 2.254,
+        "meanDurationMs": 0.029670270270270273,
+        "meanOpsPerSecond": 340143016.48702705,
+        "minDurationMs": 0.0263,
+        "maxDurationMs": 0.0553,
+        "totalDurationMs": 2.1956,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.3,
-        "totalOutliers": 49,
-        "meanCv": 0.06267022972972973,
-        "maxCv": 0.171645
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.03741391891891892,
+        "maxCv": 0.673029
       },
       "hotupdate": {
         "passed": 74,
@@ -110,8 +110,8 @@
     {
       "slug": "system-componentmodel-design",
       "fact": {
-        "passed": 31,
-        "total": 31,
+        "passed": 109,
+        "total": 109,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 39,
@@ -120,16 +120,16 @@
       "benchmark": {
         "methodCount": 31,
         "iterations": 10000,
-        "meanDurationMs": 0.042229032258064514,
-        "meanOpsPerSecond": 240265975.12903225,
-        "minDurationMs": 0.038,
-        "maxDurationMs": 0.0473,
-        "totalDurationMs": 1.3091,
+        "meanDurationMs": 0.03006451612903226,
+        "meanOpsPerSecond": 338101064.1716129,
+        "minDurationMs": 0.0267,
+        "maxDurationMs": 0.039,
+        "totalDurationMs": 0.932,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.7,
-        "totalOutliers": 10,
-        "meanCv": 0.09054390322580645,
-        "maxCv": 0.339227
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.06377874193548387,
+        "maxCv": 0.392096
       },
       "hotupdate": {
         "passed": 31,
