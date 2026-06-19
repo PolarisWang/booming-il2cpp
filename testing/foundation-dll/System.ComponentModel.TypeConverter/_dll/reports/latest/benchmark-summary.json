@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.ComponentModel.TypeConverter",
-  "timestamp": "2026-06-19T08:36:32",
+  "timestamp": "2026-06-19T11:21:08",
   "totalChunks": 3,
   "totalBenchmarkedMethods": 620,
   "aggregatePerformance": {
-    "meanDurationMs": 0.22482402265090018,
-    "meanOpsPerSecond": 328710117.8058055,
-    "aggregateMeanCv": 0.05583625264726048
+    "meanDurationMs": 0.22201000468366897,
+    "meanOpsPerSecond": 329985955.7219911,
+    "aggregateMeanCv": 0.05252727438907746
   },
   "chunkSummaries": [
     {
@@ -22,16 +22,16 @@
       "benchmark": {
         "methodCount": 515,
         "iterations": 10000,
-        "meanDurationMs": 0.614737281553398,
-        "meanOpsPerSecond": 307886272.75877666,
-        "minDurationMs": 0.024,
-        "maxDurationMs": 21.7103,
-        "totalDurationMs": 316.5897,
+        "meanDurationMs": 0.6067254368932039,
+        "meanOpsPerSecond": 307954987.80073786,
+        "minDurationMs": 0.026,
+        "maxDurationMs": 21.821,
+        "totalDurationMs": 312.4636,
         "totalAllocatedBytes": 960000.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.06631609708737865,
-        "maxCv": 0.565685
+        "meanCv": 0.05208319805825243,
+        "maxCv": 0.665512
       },
       "hotupdate": {
         "passed": 515,
@@ -72,16 +72,16 @@
       "benchmark": {
         "methodCount": 74,
         "iterations": 10000,
-        "meanDurationMs": 0.029670270270270273,
-        "meanOpsPerSecond": 340143016.48702705,
-        "minDurationMs": 0.0263,
-        "maxDurationMs": 0.0553,
-        "totalDurationMs": 2.1956,
+        "meanDurationMs": 0.029101351351351355,
+        "meanOpsPerSecond": 343951456.2887838,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 0.041,
+        "totalDurationMs": 2.1535,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.03741391891891892,
-        "maxCv": 0.673029
+        "meanCv": 0.03479227027027027,
+        "maxCv": 0.413916
       },
       "hotupdate": {
         "passed": 74,
@@ -122,16 +122,16 @@
       "benchmark": {
         "methodCount": 31,
         "iterations": 10000,
-        "meanDurationMs": 0.03006451612903226,
-        "meanOpsPerSecond": 338101064.1716129,
-        "minDurationMs": 0.0267,
+        "meanDurationMs": 0.030203225806451614,
+        "meanOpsPerSecond": 338051423.07645166,
+        "minDurationMs": 0.0243,
         "maxDurationMs": 0.039,
-        "totalDurationMs": 0.932,
+        "totalDurationMs": 0.9363,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.06377874193548387,
-        "maxCv": 0.392096
+        "meanCv": 0.07070635483870967,
+        "maxCv": 0.362619
       },
       "hotupdate": {
         "passed": 31,

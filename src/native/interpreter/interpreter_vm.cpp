@@ -11,6 +11,15 @@
 #include <memory_domain.h>
 
 #include <gc/gc_bgc_inline.h>
+
+// ── Allocation counter tracking ───────────────────────────────────
+// Incremented by interpreter NewObj/NewArr to make interpreted method
+// allocations visible to chaos_gc_get_allocated_bytes_for_current_thread().
+// Declared in gc_alloc_stubs.h but included here directly for independence.
+namespace chaos { namespace il2cpp { namespace runtime_core {
+    extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_count;
+    extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes;
+}}}
 #include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
 #include <chaos/pal/pal_eh.h>
@@ -757,6 +766,9 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 // Type token is set by the token resolver (or test) via immediate_i4.
                 storage->type_token = static_cast<CHAOS_IL2CPP_UINT32>(instruction.immediate_i4);
                 frame->stack.push_back(InterpreterValue::from_obj(storage));
+                // Track interpreter allocation in TLS counter
+                chaos::il2cpp::runtime_core::tls_alloc_fast_count++;
+                chaos::il2cpp::runtime_core::tls_alloc_fast_bytes += sizeof(ObjectStorage) + storage->fields.capacity() * sizeof(InterpreterValue);
                 break;
             }
             case IROpCode::NewArr: {
@@ -766,6 +778,9 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 ::new (storage) ArrayStorage();
                 storage->elements.resize(length);
                 frame->stack.push_back(InterpreterValue::from_obj(storage));
+                // Track interpreter allocation in TLS counter
+                chaos::il2cpp::runtime_core::tls_alloc_fast_count++;
+                chaos::il2cpp::runtime_core::tls_alloc_fast_bytes += sizeof(ArrayStorage) + length * sizeof(InterpreterValue);
                 break;
             }
             case IROpCode::LdFld: {

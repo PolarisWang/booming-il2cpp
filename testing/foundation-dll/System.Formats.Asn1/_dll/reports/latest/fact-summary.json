@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Formats.Asn1",
-  "timestamp": "2026-06-19T08:31:35",
+  "timestamp": "2026-06-19T11:16:16",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 30,
         "iterations": 10000,
-        "meanDurationMs": 7.087986666666667,
-        "meanOpsPerSecond": 1440633.4109999998,
-        "minDurationMs": 5.1257,
-        "maxDurationMs": 9.1727,
-        "totalDurationMs": 212.6396,
+        "meanDurationMs": 6.919700000000001,
+        "meanOpsPerSecond": 1472482.667,
+        "minDurationMs": 5.125,
+        "maxDurationMs": 9.0967,
+        "totalDurationMs": 207.591,
         "totalAllocatedBytes": 2240000.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.0506265,
-        "maxCv": 0.187794
+        "meanCv": 0.0333585,
+        "maxCv": 0.168761
       },
       "hotupdate": {
         "passed": 30,

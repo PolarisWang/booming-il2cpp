@@ -1,13 +1,12 @@
 {
   "assemblyName": "System.Net.Http",
-  "timestamp": "2026-06-19T08:34:03",
+  "timestamp": "2026-06-19T11:18:42",
   "totalChunks": 2,
   "totalBenchmarkedMethods": 187,
   "aggregatePerformance": {
-    "meanDurationMs": 0.9834649449667507,
-    "meanOpsPerSecond": 274236368.55673355,
-    "aggregateMeanCv": 0.10763510708553084,
-    "totalOutliers": 67
+    "meanDurationMs": 0.6022323091034166,
+    "meanOpsPerSecond": 294659560.73366314,
+    "aggregateMeanCv": 0.0609544035198349
   },
   "chunkSummaries": [
     {
@@ -23,16 +22,16 @@
       "benchmark": {
         "methodCount": 89,
         "iterations": 10000,
-        "meanDurationMs": 1.9373921348314607,
-        "meanOpsPerSecond": 207264350.9977528,
-        "minDurationMs": 0.0312,
-        "maxDurationMs": 33.2661,
-        "totalDurationMs": 172.4279,
+        "meanDurationMs": 1.1741258426966292,
+        "meanOpsPerSecond": 252749734.41977528,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 19.772,
+        "totalDurationMs": 104.49719999999999,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.2,
-        "totalOutliers": 67,
-        "meanCv": 0.16326288764044944,
-        "maxCv": 0.399106
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.055977898876404496,
+        "maxCv": 0.405731
       },
       "hotupdate": {
         "passed": 89,
@@ -73,16 +72,16 @@
       "benchmark": {
         "methodCount": 98,
         "iterations": 10000,
-        "meanDurationMs": 0.029537755102040816,
-        "meanOpsPerSecond": 341208386.1157143,
-        "minDurationMs": 0.026,
-        "maxDurationMs": 0.0387,
-        "totalDurationMs": 2.8947,
+        "meanDurationMs": 0.030338775510204086,
+        "meanOpsPerSecond": 336569387.04755104,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 0.0477,
+        "totalDurationMs": 2.9732000000000003,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.05200732653061225,
-        "maxCv": 0.392096
+        "meanCv": 0.06593090816326531,
+        "maxCv": 0.553818
       },
       "hotupdate": {
         "passed": 98,

@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.ObjectModel",
-  "timestamp": "2026-06-19T08:30:53",
+  "timestamp": "2026-06-19T11:10:38",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 10,
         "iterations": 10000,
-        "meanDurationMs": 0.0293,
-        "meanOpsPerSecond": 341578561.133,
-        "minDurationMs": 0.027,
-        "maxDurationMs": 0.03,
-        "totalDurationMs": 0.293,
+        "meanDurationMs": 0.04161,
+        "meanOpsPerSecond": 241042184.567,
+        "minDurationMs": 0.037,
+        "maxDurationMs": 0.043,
+        "totalDurationMs": 0.4161,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.0187141,
-        "maxCv": 0.068986
+        "meanCv": 0.0117337,
+        "maxCv": 0.029933
       },
       "hotupdate": {
         "passed": 10,

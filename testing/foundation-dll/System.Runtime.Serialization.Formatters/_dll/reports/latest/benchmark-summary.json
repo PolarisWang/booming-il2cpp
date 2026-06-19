@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.Runtime.Serialization.Formatters",
-  "timestamp": "2026-06-19T08:34:39",
+  "timestamp": "2026-06-19T11:19:15",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 74,
   "aggregatePerformance": {
-    "meanDurationMs": 0.1580810810810811,
-    "meanOpsPerSecond": 325190226.7162162,
-    "aggregateMeanCv": 0.03762156756756757
+    "meanDurationMs": 0.1555635135135135,
+    "meanOpsPerSecond": 320278519.3833784,
+    "aggregateMeanCv": 0.06479455405405406
   },
   "chunkSummaries": [
     {
@@ -22,16 +22,16 @@
       "benchmark": {
         "methodCount": 74,
         "iterations": 10000,
-        "meanDurationMs": 0.1580810810810811,
-        "meanOpsPerSecond": 325190226.7162162,
+        "meanDurationMs": 0.1555635135135135,
+        "meanOpsPerSecond": 320278519.3833784,
         "minDurationMs": 0.026,
-        "maxDurationMs": 3.258,
-        "totalDurationMs": 11.698,
+        "maxDurationMs": 3.3373,
+        "totalDurationMs": 11.5117,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.03762156756756757,
-        "maxCv": 0.287849
+        "meanCv": 0.06479455405405406,
+        "maxCv": 0.414001
       },
       "hotupdate": {
         "passed": 74,

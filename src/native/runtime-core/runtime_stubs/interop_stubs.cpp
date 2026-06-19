@@ -777,6 +777,13 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
         std::strstr(subject_id, "::TryRead:") != nullptr)
         return static_cast<CHAOS_IL2CPP_INTPTR>(1);
 
+    // ── Phase 0.75: Math/Float sentinel routing ─────────────────────────
+    // Half::IsFinite / Double::IsFinite default to true(1) for zero inputs
+    // (0.0 is finite).  IsNaN/IsInfinity default to false(0), matching the
+    // default fallback — no override needed.
+    if (subject_id != nullptr && std::strstr(subject_id, "::IsFinite:") != nullptr)
+        return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+
     // ── Phase 1: Try embedded IL data (kChaosExternalRuntimeIlData[]) ────
     // Crypto methods with AOT Core IR JSON or raw CIL data can execute via
     // the interpreter without requiring dispatch table entries or hotpatch

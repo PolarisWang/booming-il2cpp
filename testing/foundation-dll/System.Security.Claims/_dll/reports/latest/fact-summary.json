@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Security.Claims",
-  "timestamp": "2026-06-19T08:28:29",
+  "timestamp": "2026-06-19T11:12:13",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 45,
         "iterations": 10000,
-        "meanDurationMs": 0.02956,
-        "meanOpsPerSecond": 339055600.9353333,
-        "minDurationMs": 0.0276,
-        "maxDurationMs": 0.03,
-        "totalDurationMs": 1.3302,
+        "meanDurationMs": 0.029835555555555556,
+        "meanOpsPerSecond": 330448583.6888889,
+        "minDurationMs": 0.0245,
+        "maxDurationMs": 0.0315,
+        "totalDurationMs": 1.3426,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 7.7,
-        "totalOutliers": 60,
-        "meanCv": 0.08977646666666667,
-        "maxCv": 0.410871
+        "meanSampleCount": 3.9,
+        "totalOutliers": 50,
+        "meanCv": 0.09811542222222222,
+        "maxCv": 0.271598
       },
       "hotupdate": {
         "passed": 45,

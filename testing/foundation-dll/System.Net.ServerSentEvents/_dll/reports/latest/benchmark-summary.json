@@ -1,13 +1,13 @@
 {
   "assemblyName": "System.Net.ServerSentEvents",
-  "timestamp": "2026-06-19T08:26:41",
+  "timestamp": "2026-06-19T11:09:32",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 4,
   "aggregatePerformance": {
-    "meanDurationMs": 6.71715,
-    "meanOpsPerSecond": 156290335.70000002,
-    "aggregateMeanCv": 0.2138595,
-    "totalOutliers": 2
+    "meanDurationMs": 4.832825,
+    "meanOpsPerSecond": 161851100.625,
+    "aggregateMeanCv": 0.1670035,
+    "totalOutliers": 4
   },
   "chunkSummaries": [
     {
@@ -23,16 +23,16 @@
       "benchmark": {
         "methodCount": 4,
         "iterations": 10000,
-        "meanDurationMs": 6.71715,
-        "meanOpsPerSecond": 156290335.70000002,
-        "minDurationMs": 0.0301,
-        "maxDurationMs": 13.743,
-        "totalDurationMs": 26.8686,
+        "meanDurationMs": 4.832825,
+        "meanOpsPerSecond": 161851100.625,
+        "minDurationMs": 0.0263,
+        "maxDurationMs": 9.8987,
+        "totalDurationMs": 19.3313,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.5,
-        "totalOutliers": 2,
-        "meanCv": 0.2138595,
-        "maxCv": 0.226987
+        "meanSampleCount": 3.0,
+        "totalOutliers": 4,
+        "meanCv": 0.1670035,
+        "maxCv": 0.318773
       },
       "hotupdate": {
         "passed": 4,
