@@ -54,6 +54,17 @@ static thread_local jmp_buf t_abort_jmp;
 #include <gc/gc_api.h>
 #include <profile_stats.h>
 
+// ── TLS allocation counters ───────────────────────────────────────
+// Defined here (compiled into entry.exe locally) to provide a strong
+// symbol for the extern thread_local declarations in gc_alloc_stubs.h.
+// The prebuilt chaos_runtime_core.lib (SDK) was compiled from older
+// source and may lack these definitions, causing them to be silently
+// zeroed at link time when /FORCE:MULTIPLE is active.
+namespace chaos::il2cpp::runtime_core {
+    thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_count = 0;
+    thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes = 0;
+}
+
 #include "chaos_runtime_host.h"
 
 #include <chaos/hotpatch_dispatch.h>
