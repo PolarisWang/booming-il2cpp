@@ -335,6 +335,10 @@ def main():
 
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
+    # Ensure overall_start exists for nonlocal usage
+    if "overall_start" not in dir():
+        overall_start = 0.0
+
     def _run_chunk(chunk_slug, _seq):
         """Run all stages for a single chunk."""
         nonlocal overall_start
