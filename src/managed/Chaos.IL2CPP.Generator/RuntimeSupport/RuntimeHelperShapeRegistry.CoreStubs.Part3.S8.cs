@@ -42,10 +42,13 @@ public sealed partial class NativeAotLoweringPlanner
                     // For multi-dimensional arrays (2+ indices), just pass the first
                     // index — this avoids crashing while providing basic smoke-test
                     // coverage.  True multi-dim support would need ChaosArrayGetValue2D/3D.
+                    var stubBody = paramTypes.Count > 0
+                        ? "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);"
+                        : "    return ChaosArrayGetValue(chaos_arg_0, 0);";
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         paramSig,
                     [
-                        paramTypes.Count > 0 ? "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);" : "    return ChaosArrayGetValue(chaos_arg_0, 0);",
+                        stubBody,
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),

@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.Security.Cryptography",
-  "timestamp": "2026-06-19T13:26:16",
+  "timestamp": "2026-06-19T15:56:39",
   "totalChunks": 3,
   "totalBenchmarkedMethods": 2425,
   "aggregatePerformance": {
-    "meanDurationMs": 0.15886801465597358,
-    "meanOpsPerSecond": 326065521.775264,
-    "aggregateMeanCv": 0.05674920213443605
+    "meanDurationMs": 0.15675927981057403,
+    "meanOpsPerSecond": 323161496.72764874,
+    "aggregateMeanCv": 0.0652895695271138
   },
   "chunkSummaries": [
     {
@@ -21,17 +21,17 @@
       },
       "benchmark": {
         "methodCount": 1096,
-        "iterations": 4347,
-        "meanDurationMs": 0.18954525547445256,
-        "meanOpsPerSecond": 323628282.64542884,
+        "iterations": 4166,
+        "meanDurationMs": 0.18203421532846717,
+        "meanOpsPerSecond": 320676496.261542,
         "minDurationMs": 0.011,
-        "maxDurationMs": 14.0073,
-        "totalDurationMs": 207.7416,
-        "totalAllocatedBytes": 3199392.0,
+        "maxDurationMs": 13.2693,
+        "totalDurationMs": 199.5095,
+        "totalAllocatedBytes": 3066176.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.056778741788321166,
-        "maxCv": 0.680092
+        "meanCv": 0.07367431660583941,
+        "maxCv": 0.687939
       },
       "hotupdate": {
         "passed": 1096,
@@ -72,16 +72,16 @@
       "benchmark": {
         "methodCount": 1096,
         "iterations": 4166,
-        "meanDurationMs": 0.1812896897810219,
-        "meanOpsPerSecond": 325501377.0225091,
+        "meanDurationMs": 0.1833191605839416,
+        "meanOpsPerSecond": 321280530.7703741,
         "minDurationMs": 0.011,
-        "maxDurationMs": 14.2487,
-        "totalDurationMs": 198.6935,
+        "maxDurationMs": 13.4747,
+        "totalDurationMs": 200.9178,
         "totalAllocatedBytes": 3066176.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.05489217791970803,
-        "maxCv": 0.923237
+        "meanCv": 0.07221905291970802,
+        "maxCv": 0.716793
       },
       "hotupdate": {
         "passed": 1096,
@@ -122,16 +122,16 @@
       "benchmark": {
         "methodCount": 233,
         "iterations": 10000,
-        "meanDurationMs": 0.10576909871244636,
-        "meanOpsPerSecond": 329066905.6578541,
-        "minDurationMs": 0.024,
-        "maxDurationMs": 3.92,
-        "totalDurationMs": 24.6442,
+        "meanDurationMs": 0.10492446351931331,
+        "meanOpsPerSecond": 327527463.15103006,
+        "minDurationMs": 0.0243,
+        "maxDurationMs": 4.0803,
+        "totalDurationMs": 24.447400000000002,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.05857668669527897,
-        "maxCv": 0.473005
+        "meanCv": 0.049975339055793995,
+        "maxCv": 0.4515
       },
       "hotupdate": {
         "passed": 233,

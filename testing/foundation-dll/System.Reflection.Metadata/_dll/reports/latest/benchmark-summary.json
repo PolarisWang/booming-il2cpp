@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.Reflection.Metadata",
-  "timestamp": "2026-06-19T13:23:21",
+  "timestamp": "2026-06-19T15:54:46",
   "totalChunks": 3,
   "totalBenchmarkedMethods": 455,
   "aggregatePerformance": {
-    "meanDurationMs": 2.194537013158039,
-    "meanOpsPerSecond": 289299437.9805195,
-    "aggregateMeanCv": 0.14954876380919854,
+    "meanDurationMs": 2.1917995454784447,
+    "meanOpsPerSecond": 286638784.58775145,
+    "aggregateMeanCv": 0.1448217449100915,
     "totalOutliers": 61
   },
   "chunkSummaries": [
@@ -23,16 +23,16 @@
       "benchmark": {
         "methodCount": 41,
         "iterations": 5000,
-        "meanDurationMs": 0.3023487804878049,
-        "meanOpsPerSecond": 328456997.0980488,
-        "minDurationMs": 0.0123,
-        "maxDurationMs": 10.161,
-        "totalDurationMs": 12.3963,
+        "meanDurationMs": 0.3035219512195122,
+        "meanOpsPerSecond": 319199192.19512194,
+        "minDurationMs": 0.013,
+        "maxDurationMs": 10.2207,
+        "totalDurationMs": 12.4444,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.06704399999999999,
-        "maxCv": 0.335576
+        "meanCv": 0.054585317073170735,
+        "maxCv": 0.354401
       },
       "hotupdate": {
         "passed": 41,
@@ -73,16 +73,16 @@
       "benchmark": {
         "methodCount": 305,
         "iterations": 10000,
-        "meanDurationMs": 0.6948072131147541,
-        "meanOpsPerSecond": 305681350.7664262,
+        "meanDurationMs": 0.6854216393442624,
+        "meanOpsPerSecond": 306957195.4910492,
         "minDurationMs": 0.026,
-        "maxDurationMs": 21.0033,
-        "totalDurationMs": 211.9162,
+        "maxDurationMs": 20.8733,
+        "totalDurationMs": 209.05360000000002,
         "totalAllocatedBytes": 2080000.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.0757452393442623,
-        "maxCv": 0.490002
+        "meanCv": 0.0740228655737705,
+        "maxCv": 0.548369
       },
       "hotupdate": {
         "passed": 325,

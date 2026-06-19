@@ -1,13 +1,13 @@
 {
   "assemblyName": "System.Data.Common",
-  "timestamp": "2026-06-19T12:51:18",
+  "timestamp": "2026-06-19T15:30:57",
   "totalChunks": 4,
   "totalBenchmarkedMethods": 1180,
   "aggregatePerformance": {
-    "meanDurationMs": 1.2426730218717892,
-    "meanOpsPerSecond": 308883378.94935495,
-    "aggregateMeanCv": 0.15801866349386315,
-    "totalOutliers": 410
+    "meanDurationMs": 1.2428199118526135,
+    "meanOpsPerSecond": 311061421.8298649,
+    "aggregateMeanCv": 0.14064674023563367,
+    "totalOutliers": 397
   },
   "chunkSummaries": [
     {
@@ -23,16 +23,16 @@
       "benchmark": {
         "methodCount": 21,
         "iterations": 10000,
-        "meanDurationMs": 0.028657142857142857,
-        "meanOpsPerSecond": 344941990.2952381,
-        "minDurationMs": 0.025,
-        "maxDurationMs": 0.0311,
-        "totalDurationMs": 0.6018,
+        "meanDurationMs": 0.028642857142857144,
+        "meanOpsPerSecond": 344179322.58095235,
+        "minDurationMs": 0.0243,
+        "maxDurationMs": 0.029,
+        "totalDurationMs": 0.6015,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 8.6,
-        "totalOutliers": 30,
-        "meanCv": 0.1345965238095238,
-        "maxCv": 0.29126
+        "meanSampleCount": 4.2,
+        "totalOutliers": 17,
+        "meanCv": 0.09819114285714285,
+        "maxCv": 0.333333
       },
       "hotupdate": {
         "passed": 21,
@@ -72,17 +72,17 @@
       },
       "benchmark": {
         "methodCount": 596,
-        "iterations": 9090,
-        "meanDurationMs": 0.03947214765100671,
-        "meanOpsPerSecond": 324055961.5279866,
-        "minDurationMs": 0.0233,
-        "maxDurationMs": 3.392,
-        "totalDurationMs": 23.5254,
+        "iterations": 10000,
+        "meanDurationMs": 0.040073993288590605,
+        "meanOpsPerSecond": 333530800.7643121,
+        "minDurationMs": 0.026,
+        "maxDurationMs": 2.9867,
+        "totalDurationMs": 23.8841,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.08841421979865771,
-        "maxCv": 0.547003
+        "meanCv": 0.055331907718120805,
+        "maxCv": 0.383596
       },
       "hotupdate": {
         "passed": 596,

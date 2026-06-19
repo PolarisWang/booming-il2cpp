@@ -664,9 +664,12 @@ public sealed partial class NativeAotLoweringPlanner
                     var paramSig = "CHAOS_IL2CPP_INTPTR chaos_arg_0";
                     for (int pi = 0; pi < paramTypes.Count; pi++)
                         paramSig += ", CHAOS_IL2CPP_INT32 chaos_arg_" + (pi + 1);
+                    var stubBody = paramTypes.Count > 0
+                        ? "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);"
+                        : "    return ChaosArrayGetValue(chaos_arg_0, 0);";
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
-                        paramTypes.Count > 0 ? "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);" : "    return ChaosArrayGetValue(chaos_arg_0, 0);",
+                        stubBody,
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
