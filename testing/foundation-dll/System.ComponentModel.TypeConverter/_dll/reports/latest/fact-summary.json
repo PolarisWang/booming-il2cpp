@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.ComponentModel.TypeConverter",
-  "timestamp": "2026-06-19T11:21:08",
+  "timestamp": "2026-06-19T12:48:50",
   "totalChunks": 3,
   "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 515,
         "iterations": 10000,
-        "meanDurationMs": 0.6067254368932039,
-        "meanOpsPerSecond": 307954987.80073786,
-        "minDurationMs": 0.026,
-        "maxDurationMs": 21.821,
-        "totalDurationMs": 312.4636,
+        "meanDurationMs": 0.6163574757281554,
+        "meanOpsPerSecond": 303120606.56654364,
+        "minDurationMs": 0.0267,
+        "maxDurationMs": 21.9657,
+        "totalDurationMs": 317.4241,
         "totalAllocatedBytes": 960000.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.05208319805825243,
-        "maxCv": 0.665512
+        "meanCv": 0.07791829902912621,
+        "maxCv": 0.545128
       },
       "hotupdate": {
         "passed": 515,
@@ -70,16 +70,16 @@
       "benchmark": {
         "methodCount": 74,
         "iterations": 10000,
-        "meanDurationMs": 0.029101351351351355,
-        "meanOpsPerSecond": 343951456.2887838,
-        "minDurationMs": 0.024,
-        "maxDurationMs": 0.041,
-        "totalDurationMs": 2.1535,
+        "meanDurationMs": 0.03049864864864865,
+        "meanOpsPerSecond": 334544374.0133784,
+        "minDurationMs": 0.0243,
+        "maxDurationMs": 0.0403,
+        "totalDurationMs": 2.2569,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.03479227027027027,
-        "maxCv": 0.413916
+        "meanCv": 0.06948424324324325,
+        "maxCv": 0.405731
       },
       "hotupdate": {
         "passed": 74,
@@ -120,15 +120,15 @@
       "benchmark": {
         "methodCount": 31,
         "iterations": 10000,
-        "meanDurationMs": 0.030203225806451614,
-        "meanOpsPerSecond": 338051423.07645166,
-        "minDurationMs": 0.0243,
+        "meanDurationMs": 0.029903225806451616,
+        "meanOpsPerSecond": 339802293.54806453,
+        "minDurationMs": 0.025,
         "maxDurationMs": 0.039,
-        "totalDurationMs": 0.9363,
+        "totalDurationMs": 0.927,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.07070635483870967,
+        "meanCv": 0.0678488064516129,
         "maxCv": 0.362619
       },
       "hotupdate": {

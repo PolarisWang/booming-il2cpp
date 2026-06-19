@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.IO.Pipelines",
-  "timestamp": "2026-06-19T11:16:49",
+  "timestamp": "2026-06-19T12:43:53",
   "summary": {
     "chunks": 1,
     "chunksVerified": 1,
@@ -9,9 +9,9 @@
     "factPassRate": 80.0,
     "totalBenchmarkedMethods": 23,
     "aggregatePerformance": {
-      "meanDurationMs": 2.4982434782608696,
-      "meanOpsPerSecond": 236820325.83999997,
-      "aggregateMeanCv": 0.03984652173913043
+      "meanDurationMs": 2.492704347826087,
+      "meanOpsPerSecond": 241768269.89695653,
+      "aggregateMeanCv": 0.037931
     },
     "hotupdate": {
       "chunksWithPatchData": 1,
@@ -23,23 +23,23 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 20,
-      "methodsWithNet8": 12,
+      "methodsAnalyzed": 21,
+      "methodsWithNet8": 13,
       "chaosAotVsNet8": {
-        "mean": 75.24,
-        "median": 75.24,
-        "min": 75.24,
-        "max": 75.24,
-        "p25": 75.24,
-        "p75": 75.24
+        "mean": 73.6,
+        "median": 73.6,
+        "min": 73.6,
+        "max": 73.6,
+        "p25": 73.6,
+        "p75": 73.6
       },
       "chaosJitVsNet8": {
-        "mean": 70.09,
-        "median": 70.09,
-        "min": 70.09,
-        "max": 70.09,
-        "p25": 70.09,
-        "p75": 70.09
+        "mean": 74.09,
+        "median": 74.09,
+        "min": 74.09,
+        "max": 74.09,
+        "p25": 74.09,
+        "p75": 74.09
       },
       "net10VsNet8": {
         "mean": 0.0,
@@ -49,7 +49,7 @@
         "p25": 0.0,
         "p75": 0.0
       },
-      "highValueMethods_betterThanNet8": 75.0
+      "highValueMethods_betterThanNet8": 76.9
     }
   }
 }

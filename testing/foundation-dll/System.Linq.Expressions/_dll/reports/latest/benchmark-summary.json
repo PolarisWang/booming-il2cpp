@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.Linq.Expressions",
-  "timestamp": "2026-06-19T11:17:36",
+  "timestamp": "2026-06-19T12:44:50",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 659,
   "aggregatePerformance": {
-    "meanDurationMs": 0.41416570561456756,
-    "meanOpsPerSecond": 303558022.1473293,
-    "aggregateMeanCv": 0.03695171168437026
+    "meanDurationMs": 0.4308088012139606,
+    "meanOpsPerSecond": 293558668.84292865,
+    "aggregateMeanCv": 0.0867111593323217
   },
   "chunkSummaries": [
     {
@@ -22,16 +22,16 @@
       "benchmark": {
         "methodCount": 659,
         "iterations": 10000,
-        "meanDurationMs": 0.41416570561456756,
-        "meanOpsPerSecond": 303558022.1473293,
-        "minDurationMs": 0.0267,
-        "maxDurationMs": 6.1163,
-        "totalDurationMs": 272.9352,
+        "meanDurationMs": 0.4308088012139606,
+        "meanOpsPerSecond": 293558668.84292865,
+        "minDurationMs": 0.027,
+        "maxDurationMs": 6.2757,
+        "totalDurationMs": 283.903,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.03695171168437026,
-        "maxCv": 0.976608
+        "meanCv": 0.0867111593323217,
+        "maxCv": 0.547759
       },
       "hotupdate": {
         "passed": 659,

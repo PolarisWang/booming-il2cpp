@@ -686,6 +686,14 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         tpg_cmd.extend(['--assembly-dir', ad])
         print(f"  [build] assembly-dir: {ad}")
 
+    # Pass target assembly as --additional-assembly so the codegen compiles
+    # its methods as real AOT (not external stubs that throw NRE).
+    # This enables CombinedSubjects wrappers to actually execute real method
+    # bodies, which triggers GC allocations during profile/benchmark dispatch.
+    if target_dll is not None and target_dll.exists():
+        tpg_cmd.extend(['--additional-assembly', str(target_dll)])
+        print(f"  [build] additional-assembly (target): {target_dll}")
+
     # Additional assemblies from chunk config (declared in chunk.json)
     # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.
     config_assemblies = _get_additional_assemblies(ctx.chunk_dir)
@@ -761,6 +769,22 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                     if fixed != text:
                         _page.write_text(fixed, encoding="utf-8")
                         print(f"  [build] Fixup: replaced TagList field access in {_page.name}")
+                        _did_fixup = True
+                except (OSError, UnicodeDecodeError):
+                    pass
+            # Fix 3: Force kChaosExternalRuntimeFnTable into writable .data section
+            # MSVC linker may merge extern "C" void* arrays into .rdata for arrays
+            # >1000 entries. Add __declspec(allocate(".data")) to prevent this.
+            for _main_cpp in (ctx.native_dir.glob("subjects/native-aot.generated.cpp")):
+                try:
+                    text = _main_cpp.read_text(encoding="utf-8")
+                    _fn_table_decl = 'extern "C" void* kChaosExternalRuntimeFnTable['
+                    if _fn_table_decl in text and '__declspec' not in text.split(_fn_table_decl)[0][-20:]:
+                        text = text.replace(
+                            _fn_table_decl,
+                            '__declspec(allocate(".data")) ' + _fn_table_decl)
+                        _main_cpp.write_text(text, encoding="utf-8")
+                        print(f"  [build] Fixup: added __declspec(.data) to kChaosExternalRuntimeFnTable")
                         _did_fixup = True
                 except (OSError, UnicodeDecodeError):
                     pass

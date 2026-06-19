@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.IO.Pipelines",
-  "timestamp": "2026-06-19T11:16:49",
+  "timestamp": "2026-06-19T12:43:53",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 23,
   "aggregatePerformance": {
-    "meanDurationMs": 2.4982434782608696,
-    "meanOpsPerSecond": 236820325.83999997,
-    "aggregateMeanCv": 0.03984652173913043
+    "meanDurationMs": 2.492704347826087,
+    "meanOpsPerSecond": 241768269.89695653,
+    "aggregateMeanCv": 0.037931
   },
   "chunkSummaries": [
     {
@@ -22,16 +22,16 @@
       "benchmark": {
         "methodCount": 23,
         "iterations": 10000,
-        "meanDurationMs": 2.4982434782608696,
-        "meanOpsPerSecond": 236820325.83999997,
-        "minDurationMs": 0.028,
-        "maxDurationMs": 11.9163,
-        "totalDurationMs": 57.4596,
+        "meanDurationMs": 2.492704347826087,
+        "meanOpsPerSecond": 241768269.89695653,
+        "minDurationMs": 0.0253,
+        "maxDurationMs": 11.5123,
+        "totalDurationMs": 57.3322,
         "totalAllocatedBytes": 640000.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.03984652173913043,
-        "maxCv": 0.322049
+        "meanCv": 0.037931,
+        "maxCv": 0.310376
       },
       "hotupdate": {
         "passed": 23,

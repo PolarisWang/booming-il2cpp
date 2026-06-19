@@ -159,7 +159,7 @@ set(CHAOS_MISC_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/misc_stubs.cpp"
 )
 set(CHAOS_INTEROP_STUBS
-    "${CHAOS_SDK_DIR}/runtime_stubs/interop_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/interop_stubs.cpp"
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"

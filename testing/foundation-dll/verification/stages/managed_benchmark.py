@@ -83,6 +83,10 @@ _NET8_REPLACEMENTS = [
     ("default(System.ReadOnlySpan<byte>)", "default(byte[])"),
     ("default(System.ReadOnlyMemory<char>)", "default(string)"),
     ("default(System.ReadOnlyMemory<byte>)", "default(byte[])"),
+    # .NET 10 APIs: replace method calls with safe default values for .NET 8
+    # Each replacement converts a method call to a no-op expression.
+    ("Guid.CreateVersion7()", "default(System.Guid)"),
+    ("System.IO.File.AppendAllBytes(", "System.IO.File.WriteAllBytes("),
 ]
 
 # Benchmark methods using these APIs crash at runtime (stack overflow / buffer

@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Security.Cryptography",
-  "timestamp": "2026-06-19T11:53:27",
+  "timestamp": "2026-06-19T13:26:16",
   "totalChunks": 3,
   "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 1096,
         "iterations": 4347,
-        "meanDurationMs": 0.19264671532846717,
-        "meanOpsPerSecond": 323388797.4545165,
+        "meanDurationMs": 0.18954525547445256,
+        "meanOpsPerSecond": 323628282.64542884,
         "minDurationMs": 0.011,
-        "maxDurationMs": 13.8357,
-        "totalDurationMs": 211.1408,
+        "maxDurationMs": 14.0073,
+        "totalDurationMs": 207.7416,
         "totalAllocatedBytes": 3199392.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.05574510583941606,
-        "maxCv": 0.707107
+        "meanCv": 0.056778741788321166,
+        "maxCv": 0.680092
       },
       "hotupdate": {
         "passed": 1096,
@@ -69,17 +69,17 @@
       },
       "benchmark": {
         "methodCount": 1096,
-        "iterations": 4347,
-        "meanDurationMs": 0.19173111313868615,
-        "meanOpsPerSecond": 325160375.3573084,
+        "iterations": 4166,
+        "meanDurationMs": 0.1812896897810219,
+        "meanOpsPerSecond": 325501377.0225091,
         "minDurationMs": 0.011,
-        "maxDurationMs": 13.924,
-        "totalDurationMs": 210.1373,
-        "totalAllocatedBytes": 3199392.0,
+        "maxDurationMs": 14.2487,
+        "totalDurationMs": 198.6935,
+        "totalAllocatedBytes": 3066176.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.05360165602189781,
-        "maxCv": 0.836135
+        "meanCv": 0.05489217791970803,
+        "maxCv": 0.923237
       },
       "hotupdate": {
         "passed": 1096,
@@ -120,16 +120,16 @@
       "benchmark": {
         "methodCount": 233,
         "iterations": 10000,
-        "meanDurationMs": 0.10570772532188841,
-        "meanOpsPerSecond": 327831268.427897,
+        "meanDurationMs": 0.10576909871244636,
+        "meanOpsPerSecond": 329066905.6578541,
         "minDurationMs": 0.024,
-        "maxDurationMs": 4.1787,
-        "totalDurationMs": 24.6299,
+        "maxDurationMs": 3.92,
+        "totalDurationMs": 24.6442,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.054796802575107294,
-        "maxCv": 0.502621
+        "meanCv": 0.05857668669527897,
+        "maxCv": 0.473005
       },
       "hotupdate": {
         "passed": 233,
