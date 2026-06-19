@@ -124,6 +124,9 @@ def main():
                         help="Chunk slug to run (e.g. 'numerics')")
     parser.add_argument("--all-chunks", action="store_true",
                         help="Run all chunks for the assembly")
+    parser.add_argument("--parallel", type=int, default=0, nargs="?",
+                        const=4,
+                        help="Run chunks in parallel (default: 4 workers, pass --parallel N for custom)")
     parser.add_argument("--stages", default="build,fact,hotupdate,coverage-audit",
                         help="Comma-separated stages to run (default: build,fact,hotupdate,coverage-audit)")
     parser.add_argument("--mode", default=None,
@@ -325,9 +328,12 @@ def main():
         chunk_mode = args.mode
     seq = 0
 
-    for chunk_slug in chunks:
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    def _run_chunk(chunk_slug, _seq):
+        """Run all stages for a single chunk."""
+        nonlocal overall_start
         chunk_dir = foundation_dir / "chunks" / chunk_slug
-        # Read assembly dirs from pipeline-config.yaml for this chunk
         chunk_cfg = (_PIPELINE_CONFIG.get('chunks') or {}).get(chunk_slug, {})
         assembly_dirs_str = (chunk_cfg.get('assemblyDirs') or '').strip()
         assembly_dirs = []
@@ -343,7 +349,6 @@ def main():
                     assembly_dirs.append(str(resolved))
 
         # ── Run identity / provenance metadata ──
-        seq += 1
         run_id = f"fdn-{datetime.now(timezone.utc).strftime('%Y%m%d')}-{seq:03d}"
         platform_map = {"win32": "windows-x64", "linux": "linux-x64", "darwin": "macos-arm64"}
         platform = platform_map.get(sys.platform, sys.platform)

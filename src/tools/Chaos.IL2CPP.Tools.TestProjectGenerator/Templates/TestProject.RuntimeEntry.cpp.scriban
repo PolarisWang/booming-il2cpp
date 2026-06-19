@@ -1042,17 +1042,23 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 // {"profile":[]} (stubs).
 static int RunProfileMode() {
     using namespace chaos::il2cpp::runtime_core;
-    const int kCount = kSubjectEntryCount;
+    const int kCount = kAotMethodCount;
+    auto* entries = GetHotpatchEntries();
     ProfileStoreInit(kCount);
-    for (int si = 0; si < kCount; si++) {
-        int i = kSubjectSlotMap[si];
+    for (int i = 0; i < kCount; i++) {
         int64_t heap_before = chaos_gc_get_heap_size();
         GetThreadProfileData().heap_before = heap_before;
+#if defined(_WIN32)
+        __try {
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, i);
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+        }
+#else
         CHAOS_EH_TRY
-            ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, i);
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
+#endif
         int64_t heap_after = chaos_gc_get_heap_size();
         GetThreadProfileData().heap_after = heap_after;
         FlushThreadProfileData(i);
