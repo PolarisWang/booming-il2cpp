@@ -557,6 +557,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 EnsureLocal(&frame->locals, static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index));
                 frame->stack.push_back(frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
                 break;
+            [[likely]]
             case IROpCode::StLoc: {
                 EnsureLocal(&frame->locals, static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index));
                 frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)] = Pop(&frame->stack);
@@ -671,11 +672,13 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                     }
                 }
                 break;
+            [[likely]]
             }
             case IROpCode::Add: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
                 const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left + right));
+                [[likely]]
                 break;
             }
             case IROpCode::Sub: {
