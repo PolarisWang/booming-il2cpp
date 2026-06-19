@@ -4430,39 +4430,6 @@ internal sealed class NativeAotCustomAttributeTypeProvider : ICustomAttributeTyp
     }
 }
 
-internal static class NativeAotCustomAttributeTypeNameResolver
-{
-    public static string GetTypeName(MetadataReader metadataReader, TypeDefinitionHandle handle)
-    {
-        var typeDefinition = metadataReader.GetTypeDefinition(handle);
-        var typeName = metadataReader.GetString(typeDefinition.Name);
-        var namespaceName = metadataReader.GetString(typeDefinition.Namespace);
-        var declaringTypeHandle = typeDefinition.GetDeclaringType();
-        if (!declaringTypeHandle.IsNil)
-        {
-            return $"{GetTypeName(metadataReader, declaringTypeHandle)}+{typeName}";
-        }
-
-        return string.IsNullOrEmpty(namespaceName)
-            ? typeName
-            : $"{namespaceName}.{typeName}";
-    }
-
-    public static string GetTypeName(MetadataReader metadataReader, TypeReferenceHandle handle)
-    {
-        var typeReference = metadataReader.GetTypeReference(handle);
-        var typeName = metadataReader.GetString(typeReference.Name);
-        var namespaceName = metadataReader.GetString(typeReference.Namespace);
-        if (typeReference.ResolutionScope.Kind == HandleKind.TypeReference)
-        {
-            return $"{GetTypeName(metadataReader, (TypeReferenceHandle)typeReference.ResolutionScope)}+{typeName}";
-        }
-
-        return string.IsNullOrEmpty(namespaceName)
-            ? typeName
-            : $"{namespaceName}.{typeName}";
-    }
-}
 
 // ── Step 1-3: Dispatch, CodeRegistration structs, ReflectionQueryImage ───────────
 public sealed partial class NativeAotLoweringPlanner
