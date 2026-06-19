@@ -260,7 +260,7 @@ public sealed partial class NativeAotLoweringPlanner
             foreach (var entry in _genericDescriptors)
             {
                 if (callee.Contains("GreaterThanAny") || callee.Contains("LessThanAny"))
-                    System.Console.Error.WriteLine($"[GENSHAPE] callee={callee} typeDisplayName=|{typeDisplayName}| methodName=|{methodName}| entry.MethodName=|{entry.MethodName}| entry.TypePrefix=|{entry.TypeDisplayNamePrefix}|");
+                    // [GENSHAPE] debug — disabled to avoid TPG timeout on large chunks
 
                 if (!string.Equals(entry.MethodName, methodName, StringComparison.Ordinal))
                 {

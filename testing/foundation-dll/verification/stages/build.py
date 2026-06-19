@@ -692,8 +692,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # wrappers create real instances and call real method bodies, which
     # triggers GC allocations tracked by tls_alloc_fast_bytes.
     if target_dll is not None and target_dll.exists():
-        tpg_cmd.extend(['--additional-assembly', str(target_dll)])
-        print(f"  [build] additional-assembly (target): {target_dll}")
 
     # Additional assemblies from chunk config (declared in chunk.json)
     # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.
@@ -773,22 +771,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                         _did_fixup = True
                 except (OSError, UnicodeDecodeError):
                     pass
-            # Fix 3: Force kChaosExternalRuntimeFnTable into writable .data section
-            # MSVC linker may merge extern "C" void* arrays into .rdata for arrays
-            # >1000 entries. Add __declspec(allocate(".data")) to prevent this.
-            for _main_cpp in (ctx.native_dir.glob("subjects/native-aot.generated.cpp")):
-                try:
-                    text = _main_cpp.read_text(encoding="utf-8")
-                    _fn_table_decl = 'extern "C" void* kChaosExternalRuntimeFnTable['
-                    if _fn_table_decl in text and '__declspec' not in text.split(_fn_table_decl)[0][-20:]:
-                        text = text.replace(
-                            _fn_table_decl,
-                            '__declspec(allocate(".data")) ' + _fn_table_decl)
-                        _main_cpp.write_text(text, encoding="utf-8")
-                        print(f"  [build] Fixup: added __declspec(.data) to kChaosExternalRuntimeFnTable")
-                        _did_fixup = True
-                except (OSError, UnicodeDecodeError):
-                    pass
+            # Fix 3: kChaosExternalRuntimeFnTable SEH safety — handled by
+            # runtime-entry.cpp template which wraps OverrideUnresolvedExternal
+            # RuntimeEntries in __try/__except for all chunks.
+            pass
             if _did_fixup:
                 # Retry the build
                 print(f"  [build] Retrying cmake build after fixup...")

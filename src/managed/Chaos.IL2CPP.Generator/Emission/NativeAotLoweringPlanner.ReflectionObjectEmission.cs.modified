@@ -1,0 +1,243 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.Json;
+using Chaos.IL2CPP.Contracts;
+
+namespace Chaos.IL2CPP.Generator;
+
+public sealed partial class NativeAotLoweringPlanner
+{
+    private void EmitReflectionObjectHelpers(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods, IReadOnlySet<string> referenceTypeSubjectIds, IReadOnlySet<string> boxedTypeSubjectIds)
+    {
+        bool flag = _customAttributeSupport.QueryAttributeTypeByCallee.Count > 0 || _customAttributeSupport.SyntheticGetterFieldByMethodSubjectId.Count > 0 || _customAttributeSupport.UsesMemberInfoIsDefined;
+        bool flag2 = UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => IsTypeReflectionHelperSubjectId(instruction.Callee ?? string.Empty));
+        bool flag3 = UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => IsAssemblyReflectionHelperSubjectId(instruction.Callee ?? string.Empty));
+        bool flag4 = UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => IsReflectionMemberHelperSubjectId(instruction.Callee ?? string.Empty));
+        bool flag5 = _reflectionMemberSupport.TypeEntries.Count > 0 || _reflectionMemberSupport.FieldEntries.Count > 0 || _reflectionMemberSupport.MethodEntries.Count > 0;
+        bool flag6 = UsesDefaultInterpolatedStringHandlerHelpers(reachableMethods);
+        bool flag7 = RequiresManagedStringRuntime(reachableMethods);
+        if (!flag2 && !flag3 && !flag4 && !flag5 && !flag && !flag7 && _stringIdMapping is not { Count: > 0 })
+        {
+            return;
+        }
+        builder.AppendLine("const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept");
+        builder.AppendLine("{");
+        builder.AppendLine("    if (chaos_string_value == 0)");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return nullptr;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    if (chaos_runtime_get_abi_v0()->is_string_id(chaos_string_value))");
+        builder.AppendLine("    {");
+        builder.AppendLine("        const auto chaos_view = chaos::il2cpp::string_table::Resolve(");
+        builder.AppendLine("            chaos_extract_string_id(chaos_string_value));");
+        builder.AppendLine("        return chaos_view.utf8_data;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        StringBuilder stringBuilder = builder;
+        StringBuilder stringBuilder2 = stringBuilder;
+        StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(65, 1, stringBuilder);
+        handler.AppendLiteral("    auto* chaos_string = reinterpret_cast<");
+        handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.String"));
+        handler.AppendLiteral("*>(chaos_string_value);");
+        stringBuilder2.AppendLine(ref handler);
+        builder.AppendLine("    return chaos_string->utf8_data;");
+        builder.AppendLine("}");
+        builder.AppendLine();
+        }
+            builder.AppendLine();
+        }
+            builder.AppendLine();
+            builder.AppendLine();
+                builder.AppendLine();
+                builder.AppendLine();
+                builder.AppendLine();
+                builder.AppendLine();
+            }
+        }
+            builder.AppendLine();
+        }
+            builder.AppendLine();
+        }
+
+        if (RequiresManagedStringFactory(reachableMethods))
+            EmitManagedStringFactory(builder, reachableMethods);
+        if (_stringIdMapping is { Count: > 0 })
+            EmitStringMaterialize(builder);
+        if (flag6)
+            EmitInterpolatedStringHandlers(builder);
+        if (flag2 || flag4 || flag5)
+        {
+            EmitReflectionTypeHelpers(builder);
+            EmitReflectionMethodHelpers(builder);
+            EmitReflectionMetadataToken(builder);
+            EmitReflectionParameterName(builder);
+            EmitReflectionGetField(builder);
+            EmitReflectionGenericTypeDefinition(builder);
+            EmitReflectionGenericArguments(builder);
+            EmitReflectionConstructors(builder);
+        }
+        if (flag5)
+            EmitReflectionMemberInfo(builder);
+        if (flag3)
+            EmitReflectionAssembly(builder);
+        if (flag2 || flag4 || flag5)
+            EmitReflectionTypeHandle(builder);
+        if (flag)
+            EmitReflectionCustomAttribute(builder);
+
+    }
+
+    private void EmitMethodParameterNameCase(StringBuilder builder, ReflectionMemberMethodEntry entry, string condition)
+    {
+        builder.Append(condition)
+            .Append(" (chaos_method_handle == ")
+            .Append(GetMethodHandleLiteral(entry.MethodSubjectId))
+            .AppendLine(")");
+        builder.AppendLine("    {");
+        builder.Append("        const auto chaos_array_value = chaos_reflection_create_reference_array(")
+            .Append(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+            .Append(", static_cast<CHAOS_IL2CPP_SIZE>(")
+            .Append(entry.ParameterNames.Count)
+            .AppendLine("));");
+        builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_array_value);");
+        for (int i2 = 0; i2 < entry.ParameterNames.Count; i2++)
+        {
+            string value2 = entry.ParameterNames[i2];
+            builder.Append("        auto* chaos_parameter_").Append(i2)
+                .Append(" = CHAOS_IL2CPP_NEW_GC(")
+                .Append(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+                .AppendLine(", {});");
+            builder.Append("        chaos_parameter_").Append(i2)
+                .Append("->header.type_info = ")
+                .Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+                .AppendLine(";");
+            builder.Append("        chaos_parameter_").Append(i2)
+                .Append("->runtime_name_value = chaos_reflection_create_string_literal(")
+                .Append(ToCppStringLiteral(value2))
+                .AppendLine(");");
+            builder.Append("        chaos_array_get_elements(chaos_array)[").Append(i2)
+                .Append("] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_parameter_").Append(i2)
+                .AppendLine(");");
+        }
+        builder.AppendLine("        return chaos_array_value;");
+        builder.AppendLine("    }");
+    }
+
+    private void EmitParameterInfoTypeInfo(StringBuilder builder)
+    {
+        builder.Append("        ")
+            .Append(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+            .AppendLine(",");
+    }
+
+    private void EmitExceptionMetadataHelpers(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+    {
+        if (UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Callee, "System.Private.CoreLib/System.Exception::.ctor(System.String)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.InvalidOperationException::.ctor(System.String)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor(System.String,System.String)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Exception::get_Message()", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.ArgumentException::get_ParamName()", StringComparison.Ordinal)))
+        {
+            builder.AppendLine("struct chaos_exception_metadata_entry");
+            builder.AppendLine("{");
+            builder.AppendLine("    CHAOS_IL2CPP_INTPTR object_value = 0;");
+            builder.AppendLine("    CHAOS_IL2CPP_INTPTR message_value = 0;");
+            builder.AppendLine("    CHAOS_IL2CPP_INTPTR param_name_value = 0;");
+            builder.AppendLine("};");
+            builder.AppendLine();
+            builder.AppendLine("CHAOS_IL2CPP_VECTOR(chaos_exception_metadata_entry> chaos_exception_metadata_entries{};");
+            builder.AppendLine();
+            builder.AppendLine("chaos_exception_metadata_entry* chaos_reflection_get_or_add_exception_metadata(CHAOS_IL2CPP_INTPTR chaos_exception_value)");
+            builder.AppendLine("{");
+            builder.AppendLine("    if (chaos_exception_value == 0)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        CHAOS_IL2CPP_FAIL();");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    for (auto& chaos_entry : chaos_exception_metadata_entries)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        if (chaos_entry.object_value == chaos_exception_value)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            return &chaos_entry;");
+            builder.AppendLine("        }");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    chaos_exception_metadata_entries.push_back(chaos_exception_metadata_entry{");
+            builder.AppendLine("        chaos_exception_value,");
+            builder.AppendLine("        0,");
+            builder.AppendLine("        0,");
+            builder.AppendLine("    });");
+            builder.AppendLine("    return &chaos_exception_metadata_entries.back();");
+            builder.AppendLine("}");
+            builder.AppendLine();
+            builder.AppendLine("const chaos_exception_metadata_entry* chaos_reflection_find_exception_metadata(CHAOS_IL2CPP_INTPTR chaos_exception_value) noexcept");
+            builder.AppendLine("{");
+            builder.AppendLine("    if (chaos_exception_value == 0)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        return nullptr;");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    for (const auto& chaos_entry : chaos_exception_metadata_entries)");
+            builder.AppendLine("    {");
+            builder.AppendLine("        if (chaos_entry.object_value == chaos_exception_value)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            return &chaos_entry;");
+            builder.AppendLine("        }");
+            builder.AppendLine("    }");
+            builder.AppendLine();
+            builder.AppendLine("    return nullptr;");
+            builder.AppendLine("}");
+            builder.AppendLine();
+            builder.AppendLine("void ChaosReflectionSetExceptionMetadata(");
+            builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_exception_value,");
+            builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_message_value,");
+            builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_param_name_value)");
+            builder.AppendLine("{");
+            builder.AppendLine("    auto* chaos_entry = chaos_reflection_get_or_add_exception_metadata(chaos_exception_value);");
+            builder.AppendLine("    chaos_entry->message_value = chaos_message_value;");
+            builder.AppendLine("    chaos_entry->param_name_value = chaos_param_name_value;");
+            builder.AppendLine("}");
+            builder.AppendLine();
+            builder.AppendLine("CHAOS_IL2CPP_INTPTR ChaosReflectionGetExceptionMessage(CHAOS_IL2CPP_INTPTR chaos_exception_value) noexcept");
+            builder.AppendLine("{");
+            builder.AppendLine("    const auto* chaos_entry = chaos_reflection_find_exception_metadata(chaos_exception_value);");
+            builder.AppendLine("    return chaos_entry == nullptr ? 0 : chaos_entry->message_value;");
+            builder.AppendLine("}");
+            builder.AppendLine();
+            builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_get_exception_param_name(CHAOS_IL2CPP_INTPTR chaos_exception_value) noexcept");
+            builder.AppendLine("{");
+            builder.AppendLine("    const auto* chaos_entry = chaos_reflection_find_exception_metadata(chaos_exception_value);");
+            builder.AppendLine("    return chaos_entry == nullptr ? 0 : chaos_entry->param_name_value;");
+            builder.AppendLine("}");
+            builder.AppendLine();
+        }
+    }
+
+    private bool RequiresManagedStringFactory(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+    {
+        if (_customAttributeSupport.RequiresStringSupport)
+        {
+            return true;
+        }
+        string? elementTypeDisplayName;
+        return UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String", "System.String", "System.String") || TryGetStringJoinEnumerableElementType(instruction.Callee ?? string.Empty, out elementTypeDisplayName) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.ArgumentOutOfRangeException", ".ctor", "System.String", "System.String") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.Int32", "ToString") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Runtime.InteropServices/Marshal", "PtrToStringUTF8", "System.IntPtr") || IsAssemblyReflectionHelperSubjectId(instruction.Callee ?? string.Empty) || IsTypeReflectionHelperSubjectId(instruction.Callee ?? string.Empty) || IsReflectionMemberHelperSubjectId(instruction.Callee ?? string.Empty) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.Single", "ToString", "System.String") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.Double", "ToString", "System.String") || IsDefaultInterpolatedStringHandlerHelperSubjectId(instruction.Callee ?? string.Empty));
+    }
+
+    private bool RequiresManagedStringRuntime(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+    {
+        if (RequiresManagedStringFactory(reachableMethods))
+        {
+            return true;
+        }
+        string? elementTypeDisplayName;
+        return UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => TryGetStringJoinEnumerableElementType(instruction.Callee ?? string.Empty, out elementTypeDisplayName) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "StartsWith", "System.String", "System.StringComparison") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "Contains", "System.String", "System.StringComparison"));
+    }
+
+}

@@ -1,6 +1,8 @@
 // ── Misc stub declarations ─────────────────────────────────────
 // Assorted stubs without a clear single domain: Array, Buffer,
 // Type marshalling, Culture, GC, Environment, Console, Delegate.
+#ifndef CHAOS_IL2CPP_MISC_STUBS_H_
+#define CHAOS_IL2CPP_MISC_STUBS_H_
 #pragma once
 
 #include <chaos/compiler_hints.h>
@@ -97,3 +99,4 @@ void    ChaosDelegateInitialize(CHAOS_IL2CPP_INTPTR delegate_obj, CHAOS_IL2CPP_I
 CHAOS_IL2CPP_INTPTR ChaosDelegateGetTarget(CHAOS_IL2CPP_INTPTR delegate_obj) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_delegate_combine(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR value) noexcept;
+#endif  // CHAOS_IL2CPP_MISC_STUBS_H_
