@@ -524,6 +524,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 #endif
 
         switch (instruction.op_code) {
+            [[likely]]
             case IROpCode::LdcI4:
                 frame->stack.push_back(InterpreterValue::from_i32(instruction.immediate_i4));
                 break;
@@ -542,6 +543,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             case IROpCode::LdNull:
                 frame->stack.push_back(InterpreterValue::null_val());
                 break;
+            [[likely]]
             case IROpCode::LdArg:
                 if (instruction.operand_index < 0 ||
                     static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index) >= frame->arguments.size()) {
@@ -550,6 +552,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 
                 frame->stack.push_back(frame->arguments[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
                 break;
+            [[likely]]
             case IROpCode::LdLoc:
                 EnsureLocal(&frame->locals, static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index));
                 frame->stack.push_back(frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
@@ -725,15 +728,18 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 frame->stack.push_back(InterpreterValue::from_i32(left > right ? 1 : 0));
                 break;
             }
+            [[likely]]
             case IROpCode::Br:
                 instruction_index = GetBranchTarget(method, instruction.branch_target);
                 continue;
+            [[likely]]
             case IROpCode::BrTrue:
                 if (ReadInt32(Pop(&frame->stack)) != 0) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
                 }
                 break;
+            [[likely]]
             case IROpCode::BrFalse:
                 if (ReadInt32(Pop(&frame->stack)) == 0) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
@@ -978,6 +984,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
                 break;
             }
+            [[likely]]
             case IROpCode::Call:
             case IROpCode::CallBridge: {
                 // AotDirectDispatch: if direct_fn is set, call the pre-resolved
@@ -1628,6 +1635,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 frame->stack.push_back(InterpreterValue::from_obj(buf));
                 break;
             }
+            [[likely]]
             case IROpCode::Ret:
                 if (!frame->stack.empty()) {
                     result.has_return_value = true;
