@@ -1,20 +1,19 @@
 {
   "assemblyName": "System.Text.Json",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T11:55:31",
   "totalChunks": 3,
-  "totalBenchmarkedMethods": 383,
+  "totalBenchmarkedMethods": 376,
   "aggregatePerformance": {
-    "meanDurationMs": 0.10152810327495577,
-    "meanOpsPerSecond": 273899700.6381817,
-    "aggregateMeanCv": 0.09012817683609455,
-    "totalOutliers": 340
+    "meanDurationMs": 0.12596417014548933,
+    "meanOpsPerSecond": 331008387.11950564,
+    "aggregateMeanCv": 0.0693050918630752
   },
   "chunkSummaries": [
     {
       "slug": "global-ns",
       "fact": {
-        "passed": 33,
-        "total": 33,
+        "passed": 105,
+        "total": 105,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 36,
@@ -23,16 +22,16 @@
       "benchmark": {
         "methodCount": 33,
         "iterations": 10000,
-        "meanDurationMs": 0.029696969696969697,
-        "meanOpsPerSecond": 337420541.73757577,
-        "minDurationMs": 0.025,
-        "maxDurationMs": 0.0303,
-        "totalDurationMs": 0.98,
+        "meanDurationMs": 0.030718181818181818,
+        "meanOpsPerSecond": 334895692.2724242,
+        "minDurationMs": 0.0253,
+        "maxDurationMs": 0.0443,
+        "totalDurationMs": 1.0137,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.011176151515151516,
-        "maxCv": 0.118582
+        "meanCv": 0.09199015151515151,
+        "maxCv": 0.489126
       },
       "hotupdate": {
         "passed": 33,
@@ -63,8 +62,8 @@
     {
       "slug": "system-text-json-serialization-converters",
       "fact": {
-        "passed": 72,
-        "total": 72,
+        "passed": 156,
+        "total": 156,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 84,
@@ -72,17 +71,17 @@
       },
       "benchmark": {
         "methodCount": 72,
-        "iterations": 10000,
-        "meanDurationMs": 0.03453194444444444,
-        "meanOpsPerSecond": 238354995.66135594,
-        "minDurationMs": 0,
-        "maxDurationMs": 0.0477,
-        "totalDurationMs": 2.4863,
+        "iterations": 5263,
+        "meanDurationMs": 0.15906805555555556,
+        "meanOpsPerSecond": 328451433.45361114,
+        "minDurationMs": 0.013,
+        "maxDurationMs": 10.2987,
+        "totalDurationMs": 11.4529,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 2.5,
+        "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.039039271186440676,
-        "maxCv": 0.116597
+        "meanCv": 0.06966641666666668,
+        "maxCv": 0.401046
       },
       "hotupdate": {
         "passed": 59,
@@ -113,26 +112,26 @@
     {
       "slug": "text-json",
       "fact": {
-        "passed": 278,
-        "total": 278,
+        "passed": 968,
+        "total": 969,
         "valueSuspicious": false,
         "valueWarnings": 0,
         "metaTotal": 329,
         "metaBenchmarkCount": 0
       },
       "benchmark": {
-        "methodCount": 278,
-        "iterations": 14285,
-        "meanDurationMs": 0.2403553956834532,
-        "meanOpsPerSecond": 245923564.51561338,
+        "methodCount": 271,
+        "iterations": 10000,
+        "meanDurationMs": 0.18810627306273062,
+        "meanOpsPerSecond": 329678035.6324815,
         "minDurationMs": 0,
-        "maxDurationMs": 51.3093,
-        "totalDurationMs": 66.8188,
-        "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 8.5,
-        "totalOutliers": 340,
-        "meanCv": 0.22016910780669144,
-        "maxCv": 1.986091
+        "maxDurationMs": 21.1943,
+        "totalDurationMs": 50.9768,
+        "totalAllocatedBytes": 720000.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.04625870740740741,
+        "maxCv": 0.565685
       },
       "hotupdate": {
         "passed": 269,

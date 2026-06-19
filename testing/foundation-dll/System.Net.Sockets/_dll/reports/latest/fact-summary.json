@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Net.Sockets",
-  "timestamp": "2026-06-19T08:39:19",
+  "timestamp": "2026-06-19T11:24:35",
   "totalChunks": 2,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
@@ -35,16 +35,16 @@
       "benchmark": {
         "methodCount": 500,
         "iterations": 10000,
-        "meanDurationMs": 0.0295858,
-        "meanOpsPerSecond": 340531745.31192,
-        "minDurationMs": 0.024,
-        "maxDurationMs": 0.1047,
-        "totalDurationMs": 14.7929,
+        "meanDurationMs": 0.029637,
+        "meanOpsPerSecond": 338532059.66176003,
+        "minDurationMs": 0.0257,
+        "maxDurationMs": 0.0527,
+        "totalDurationMs": 14.8185,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.037442098,
-        "maxCv": 1.022377
+        "meanCv": 0.030840706000000002,
+        "maxCv": 0.635501
       },
       "hotupdate": {
         "passed": 500,

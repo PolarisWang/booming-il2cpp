@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Security.Cryptography",
-  "timestamp": "2026-06-19T08:51:13",
+  "timestamp": "2026-06-19T11:53:27",
   "summary": {
     "chunks": 3,
     "chunksVerified": 3,
@@ -9,9 +9,9 @@
     "factPassRate": 99.8,
     "totalBenchmarkedMethods": 2425,
     "aggregatePerformance": {
-      "meanDurationMs": 0.15423802642983198,
-      "meanOpsPerSecond": 327745926.6800545,
-      "aggregateMeanCv": 0.0397599876818291
+      "meanDurationMs": 0.16336185126301392,
+      "meanOpsPerSecond": 325460147.07990724,
+      "aggregateMeanCv": 0.05471452147880706
     },
     "hotupdate": {
       "chunksWithPatchData": 0,
@@ -23,33 +23,33 @@
       "skipBreakdown": {}
     },
     "benchmarkComparison": {
-      "methodsAnalyzed": 1455,
-      "methodsWithNet8": 1429,
+      "methodsAnalyzed": 1489,
+      "methodsWithNet8": 1453,
       "chaosAotVsNet8": {
-        "mean": -242.1,
-        "median": -319.8,
-        "min": -393.93,
-        "max": -12.56,
-        "p25": -356.87,
-        "p75": -166.18
+        "mean": -252.35,
+        "median": -357.04,
+        "min": -400.66,
+        "max": 0.65,
+        "p25": -378.85,
+        "p75": -178.2
       },
       "chaosJitVsNet8": {
-        "mean": -258.15,
-        "median": -333.17,
-        "min": -413.26,
-        "max": -28.01,
-        "p25": -373.22,
-        "p75": -180.59
+        "mean": -285.72,
+        "median": -417.11,
+        "min": -426.02,
+        "max": -14.02,
+        "p25": -421.56,
+        "p75": -215.56
       },
       "net10VsNet8": {
-        "mean": -3.71,
+        "mean": -4.72,
         "median": 0.0,
-        "min": -11.13,
+        "min": -14.15,
         "max": 0.0,
-        "p25": -5.57,
+        "p25": -7.08,
         "p75": 0.0
       },
-      "highValueMethods_betterThanNet8": 74.4
+      "highValueMethods_betterThanNet8": 73.8
     }
   }
 }

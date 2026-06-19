@@ -12,12 +12,17 @@ if(MSVC)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
   # ── Precompiled header (PCH) ──────────────────────────────────
-  # chaos_pch.h includes all stable ChaOS runtime headers.
-  # Generated page files and entries include it as first #include.
-  # target_precompile_headers auto-manages /Yc /Yu flags via CMake 3.16+.
+  # target_precompile_headers auto-manages /Yc /Yu flags (CMake 3.16+).
+  # Files that include "chaos_pch.h" as first include use the PCH.
+  # The PCH compilation unit is automatically managed by CMake.
   set(CHAOS_PCH_HDR "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.h")
+  set(CHAOS_PCH_SRC "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.cpp")
   if(EXISTS "${CHAOS_PCH_HDR}")
     target_precompile_headers(chaos_entry PRIVATE "${CHAOS_PCH_HDR}")
+    # Ensure PCH source is compiled (/Yc generator)
+    if(EXISTS "${CHAOS_PCH_SRC}")
+      target_sources(chaos_entry PRIVATE "${CHAOS_PCH_SRC}")
+    endif()
   endif()
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
@@ -118,7 +123,6 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_async.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
@@ -130,13 +134,8 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # array_stubs.cpp: the prebuilt lib may be stale, missing recently-added
 # DirectNativeSymbol entries (ChaosArrayCopy3, ChaosArraySortWithComparer).
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
-# gc_alloc_stubs.cpp: the prebuilt SDK was compiled without
-# CHAOS_IL2CPP_PROFILE_ENABLED.  We compile profile_stats.cpp locally
-# so ProfileEmitJson outputs real data (12 fields).
-# /FORCE:MULTIPLE handles any overlap with the SDK lib.
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"
@@ -164,11 +163,11 @@ set(CHAOS_INTEROP_STUBS
 )
 set(CHAOS_EXCEPTION_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/exception_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/object_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/string_stubs.cpp"
 )
 set(CHAOS_ENTRY_STUBS
-    # entry_stubs.cpp removed — the functions (Assert_Reset, Assert_Complete)
-    # are defined in runtime-entry.cpp (Scriban template).  Including both
-    # causes LNK4006 duplicate symbol warnings.
+    "${CHAOS_SDK_DIR}/runtime_stubs/entry_stubs.cpp"
 )
 set(CHAOS_CRYPTO_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/crypto_stubs.cpp"
@@ -190,6 +189,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_EXCEPTION_STUBS}
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
+    ${CHAOS_STRING_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -197,7 +197,6 @@ set(CHAOS_ENTRY_SOURCES
 set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"
     "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
@@ -213,7 +212,6 @@ set(CHAOS_ENTRY_INCLUDES
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
-    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"

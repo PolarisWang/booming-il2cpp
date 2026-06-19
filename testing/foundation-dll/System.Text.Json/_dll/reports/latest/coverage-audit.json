@@ -1,9 +1,9 @@
 {
   "assemblyName": "System.Text.Json",
-  "timestamp": "2026-06-18T15:57:37",
+  "timestamp": "2026-06-19T11:55:31",
   "totalChunks": 3,
   "chunksWithResults": 3,
   "chunksWithValueWarnings": 0,
-  "chunksWithMetaMismatch": 3,
-  "totalDeclaredMethods": 383
+  "chunksWithMetaMismatch": 0,
+  "totalDeclaredMethods": 1230
 }
