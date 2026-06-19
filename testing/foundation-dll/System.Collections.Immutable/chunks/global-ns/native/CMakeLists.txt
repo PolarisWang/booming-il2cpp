@@ -21,7 +21,7 @@ endif()
 
 # ── Config tier ──
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-  set(CHAOS_IL2CPP_CONFIG_TIER "profile")
+  set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
 
 # ── Hephaestus Lib: pre-compiled framework cache ──
@@ -40,20 +40,20 @@ if(DEFINED CHAOS_HEPHAESTUS_DIR AND EXISTS "${CHAOS_HEPHAESTUS_DIR}")
   endif()
 endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
   add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
 else()
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/test-only.h")
 endif()
 
@@ -122,9 +122,11 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # array_stubs.cpp: the prebuilt lib may be stale, missing recently-added
 # DirectNativeSymbol entries (ChaosArrayCopy3, ChaosArraySortWithComparer).
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
-# gc_alloc_stubs.cpp: prebuilt SDK was compiled without CHAOS_IL2CPP_PROFILE_ENABLED,
-# causing ProfileRecord* to be inlined as no-ops and tls_alloc_fast_bytes to be
-# untracked on the profiled allocation path.  Compiling locally overrides this.
+# gc_alloc_stubs.cpp: compile locally so GcAllocateProfiled and
+# GcAllocateAtomicProfiled increment tls_alloc_fast_bytes (the
+# prebuilt SDK lib's versions don't have this tracking).
+# profile_stats.cpp: compile locally so ProfileEmitJson uses real
+# implementations (SDK prebuilt stubs output {"profile":[]}).
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"

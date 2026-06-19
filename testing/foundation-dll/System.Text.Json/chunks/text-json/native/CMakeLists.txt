@@ -21,7 +21,7 @@ endif()
 
 # ── Config tier ──
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-  set(CHAOS_IL2CPP_CONFIG_TIER "ship")
+  set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
 
 # ── Hephaestus Lib: pre-compiled framework cache ──
@@ -40,20 +40,20 @@ if(DEFINED CHAOS_HEPHAESTUS_DIR AND EXISTS "${CHAOS_HEPHAESTUS_DIR}")
   endif()
 endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
   add_compile_definitions(CHAOS_IL2CPP_PROFILE_ENABLED=1)
 elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/desktop.h")
 else()
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
-  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
   add_compile_definitions(CHAOS_IL2CPP_RUNTIME_CONFIG_FILE="runtime-config/test-only.h")
 endif()
 
@@ -110,6 +110,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_async.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
@@ -121,8 +122,15 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # array_stubs.cpp: the prebuilt lib may be stale, missing recently-added
 # DirectNativeSymbol entries (ChaosArrayCopy3, ChaosArraySortWithComparer).
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
+# gc_alloc_stubs.cpp: compile locally so GcAllocateProfiled and
+# GcAllocateAtomicProfiled increment tls_alloc_fast_bytes (the
+# prebuilt SDK lib's versions don't have this tracking).
+# profile_stats.cpp: compile locally so ProfileEmitJson uses real
+# implementations (SDK prebuilt stubs output {"profile":[]}).
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/profile_stats.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"
@@ -183,6 +191,7 @@ set(CHAOS_ENTRY_SOURCES
 set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"
     "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
@@ -198,6 +207,7 @@ set(CHAOS_ENTRY_INCLUDES
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
+    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"
