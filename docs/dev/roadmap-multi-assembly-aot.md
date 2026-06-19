@@ -1,26 +1,36 @@
 ---
 title: Loader/Codegen 多程序集 AOT 编译支持
-status: planned
-priority: high
+status: blocked
+priority: low
 created: 2026-06-19
 ---
 
-## 目标
+## 最终结论
 
-让 codegen 同时编译 target assembly（如 System.Collections.NonGeneric.dll）的方法体为真实 AOT，而非 stub。使 CombinedSubjects wrapper 调用真实方法时触发 GC 分配。
+多程序集 AOT 编译方案经过完整实现尝试后确认 **不可行**。
 
-## 现状
+### 阻塞链
 
-```
-codegen 输入: CombinedSubjects.dll (subjects wrappers)
-           + System.Collections.NonGeneric.dll (--additional-assembly, 仅类型解析)
+| # | 阻塞 | 状态 | 原因 |
+|---|------|------|------|
+| 1 | MSVC C2712 (__try + C++ 析构) | ✅ 可绕过 (#pragma warning) | 但 2+3 阻塞后无意义 |
+| 2 | NativeCodegenValidator (std::memset) | ✅ 可绕过 (ERROR→WARNING) | 但 3 阻塞后无意义 |
+| 3 | **Codegen 方法体生成错误** | ❌ 不可绕过 | target 方法编译后产生 `chaos_arg_1` 未声明等 C++ 编译错误 |
 
-AOT 输出:
-  - CombinedSubjects 方法体: ✅ 真实 AOT (含 SubjectInstanceFactory.Create<T>())
-  - System.Collections.NonGeneric 方法体: ❌ stub (throw NullReferenceException)
-```
+### 阻塞 3 的根因
 
-**根因**：`LinkerStage.Reachability.cs:425` 处 `IsInternalAssembly()` 只将 `SemanticWorldModel.Assemblies` 中的程序集标记为"内部"，仅有内部程序集的方法会被 AOT 编译。`--additional-assembly` 传入的 DLL 不在此列表中，其方法始终为 stub。
+target assembly（如 System.Collections.NonGeneric）的方法体包含：
+- `std::memset`, `std::memcpy` 等标准库调用
+- 复杂的泛型实例化
+- .NET runtime 内部类型（如 `Shared` 静态实例、`EmptyArray` 等）
+- 这些在 codegen 的 IL→C++ lowering 阶段未被正确处理
+
+### 实际可用的替代方案
+
+`--profile-range` 直接分发 AOT 方法表中的 subject entries（已验证可用）：
+- System.Collections.NonGeneric: 109 methods, 7 with allocation, 271B total
+- 使用 `ChaosDispatchMethodBenchDirect` + `SubjectInstanceFactory.Create<T>()`
+- 分配通过 `GcAllocateAtomicFast` → `tls_alloc_fast_bytes` → `ProfileEmitJson` 完整追踪
 
 ## 设计方案
 

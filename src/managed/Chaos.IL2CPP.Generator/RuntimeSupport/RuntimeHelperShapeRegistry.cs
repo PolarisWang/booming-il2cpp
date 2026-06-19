@@ -666,7 +666,7 @@ public sealed partial class NativeAotLoweringPlanner
                         paramSig += ", CHAOS_IL2CPP_INT32 chaos_arg_" + (pi + 1);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
-                        "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);",
+                        paramTypes.Count > 0 ? "    return ChaosArrayGetValue(chaos_arg_0, chaos_arg_1);" : "    return ChaosArrayGetValue(chaos_arg_0, 0);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),

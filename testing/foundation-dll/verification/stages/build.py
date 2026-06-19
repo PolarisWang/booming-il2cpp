@@ -786,6 +786,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                     capture_output=True, text=True, timeout=7200)
                 if _retry.returncode == 0:
                     print(f"  [build] Retry succeeded after fixup")
+                    _built = ctx.native_dir / "build" / "RelWithDebInfo" / "chaos_entry.exe"
+                    if _built.exists():
+                        import shutil as _su
+                        _su.copy2(_built, ctx.entry_exe_path)
+                        print(f"  [build] Copied entry.exe from retry build")
                     tpg_result = _retry
                 else:
                     print(f"  [build] Retry FAILED (rc={_retry.returncode})")
