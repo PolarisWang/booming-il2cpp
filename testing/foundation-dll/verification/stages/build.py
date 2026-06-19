@@ -657,6 +657,16 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     tpg_dll = tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
     print(f"  [build] Running TPG generate-dll...")
 
+    # Copy profile allocation hooks BEFORE TPG so cmake glob picks it up
+    _hooks_src = Path(__file__).resolve().parent / "profile_alloc_hooks.cpp"
+    _hooks_dst = ctx.native_dir / "profile_alloc_hooks.cpp"
+    if _hooks_src.exists():
+        import shutil
+        shutil.copy2(str(_hooks_src), str(_hooks_dst))
+        print(f"  [build] Copied profile_alloc_hooks.cpp")
+    else:
+        print(f"  [build] WARNING: profile_alloc_hooks.cpp not found")
+
     tpg_cmd = [
         "dotnet", "exec", str(tpg_dll),
         "generate-dll",

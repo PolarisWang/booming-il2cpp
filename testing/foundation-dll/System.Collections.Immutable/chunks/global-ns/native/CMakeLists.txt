@@ -110,6 +110,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/patch-host-arrays.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_ChaosFindExternalTypeDescByStableId.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_patch_loader.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/chaos_stub_async.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
@@ -198,6 +199,7 @@ set(CHAOS_ENTRY_INCLUDES
 
     "${CMAKE_CURRENT_SOURCE_DIR}"
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
+    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"

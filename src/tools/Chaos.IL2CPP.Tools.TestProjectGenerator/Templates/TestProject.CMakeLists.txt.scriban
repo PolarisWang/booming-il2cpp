@@ -200,6 +200,7 @@ set(CHAOS_ENTRY_INCLUDES
 {{ subject_cmake_include_dirs_code }}
     "${CMAKE_CURRENT_SOURCE_DIR}"
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
+    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     # codegen/generated — needed for enum_metadata.generated.h and other
     # generated headers that aren't copied to subjects/ by TPG's flat layout.
     "${CHAOS_CODEGEN_DIR}/generated"

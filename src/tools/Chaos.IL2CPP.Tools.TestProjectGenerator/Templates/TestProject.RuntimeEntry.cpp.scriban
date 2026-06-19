@@ -1050,16 +1050,30 @@ static int RunProfileMode() {
         int i = kSubjectSlotMap[si];
         int64_t heap_before = chaos_gc_get_heap_size();
         GetThreadProfileData().heap_before = heap_before;
+        // Direct test: manually increment and read the TLS counter
+        tls_alloc_fast_bytes += 1;
+        auto before = chaos_gc_get_allocated_bytes_for_current_thread();
         CHAOS_EH_TRY
             ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
+        auto after = chaos_gc_get_allocated_bytes_for_current_thread();
         int64_t heap_after = chaos_gc_get_heap_size();
         GetThreadProfileData().heap_after = heap_after;
         FlushThreadProfileData(i);
+        // Reset the manual increment so it doesn't pollute data
+        tls_alloc_fast_bytes -= 1;
+        if (after - before > 1) {
+            std::fprintf(stderr, "[profile-debug] method %d: alloc=%lld bytes (TLS direct)\n", i, (long long)(after - before));
+        }
     }
     ProfileStoreFinalize();
+    // Debug: log profile count to stderr so we can verify the dispatch loop runs
+    {{ if is_jit }}
+    // JIT profile mode: additional JIT-specific dispatch
+    {{ end }}
+    std::fprintf(stderr, "[profile] dispatch complete: %d entries stored\n", ProfileStoreCount());
     ProfileEmitJson();
     return 0;
 }
