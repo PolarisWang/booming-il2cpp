@@ -480,6 +480,33 @@ def run_benchmark_report(ctx: ChunkContext, stages: dict[str, StageResult]) -> S
             except (json.JSONDecodeError, OSError):
                 pass
 
+        # Also load profile-range.json (--profile-range output, richer allocation data)
+        profile_range_data = None
+        pr_path = chunk_dir / "results" / "profile-range.json"
+        if pr_path.exists():
+            try:
+                pr = json.loads(pr_path.read_text(encoding="utf-8"))
+                profile_range_data = pr.get("profileData", [])
+                if profile_range_data:
+                    print(f"  [benchmark-report] Loaded {len(profile_range_data)} profile-range entries")
+            except (json.JSONDecodeError, OSError):
+                pass
+
+        # Merge profile-range data into profile_data (prefer profile-range for matching methods)
+        if profile_range_data:
+            pr_by_idx = {p.get("methodIndex"): p for p in profile_range_data if "methodIndex" in p}
+            if profile_data:
+                for p in profile_data:
+                    midx = p.get("methodIndex")
+                    if midx in pr_by_idx:
+                        pr_entry = pr_by_idx[midx]
+                        p["nurseryAllocBytes"] = pr_entry.get("nurseryAllocBytes", 0)
+                        p["fastPathCount"] = pr_entry.get("fastPathCount", 0)
+                        p["slowPathCount"] = pr_entry.get("slowPathCount", 0)
+                        p["gcPauseNs"] = pr_entry.get("gcPauseNs", 0)
+            else:
+                profile_data = profile_range_data
+
         methods_list, aggregate = _build_method_comparison(tech_map, slug, profile_data)
         if not methods_list:
             continue

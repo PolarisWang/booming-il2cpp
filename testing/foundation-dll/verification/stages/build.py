@@ -721,34 +721,65 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
         if tpg_result.returncode != 0:
             # Before reporting failure, try fixup and retry build once.
-            # The TPG may have failed due to duplicate value type typedefs
-            # (C2371 redefinition).  Remove the duplicate and retry cmake.
+            # The TPG may have failed due to:
+            # 1. C2371: duplicate value type typedef (TagList has struct + int32)
+            # 2. C2672/C3536: ->field access on opaque external value type
             _did_fixup = False
             for _hdr in (ctx.native_dir.glob("subjects/*.generated.header.h")):
                 try:
                     text = _hdr.read_text(encoding="utf-8")
+                    # Fix 1: Remove the struct AND insert a typedef BEFORE the
+                    # first boxed type that uses chaos_valuetype_TagList.
+                    # The codegen places the typedef at line 900+, AFTER the
+                    # boxed type struct at line 350+, causing C2334.
+                    _struct_pattern = r'struct chaos_valuetype_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList\s*\n?\{[^}]*\};\n?'
+                    if re.search(_struct_pattern, text, flags=re.DOTALL):
+                        # Insert typedef before the boxed type struct
+                        _typedef_line = 'typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList;\n'
+                        _boxed_marker = 'struct chaos_boxed_type_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList'
+                        if _boxed_marker in text:
+                            text = text.replace(
+                                _boxed_marker,
+                                _typedef_line + _boxed_marker)
+                        # Remove the struct definition
+                        text = re.sub(_struct_pattern, '', text, flags=re.DOTALL)
+                        _hdr.write_text(text, encoding="utf-8")
+                        print(f"  [build] Fixup: moved TagList typedef before boxed type in {_hdr.name}")
+                        _did_fixup = True
+                except (OSError, UnicodeDecodeError):
+                    pass
+            # Fix 2: Replace ->field access with reinterpret_cast for opaque types
+            for _page in (ctx.native_dir.glob("subjects/native-aot.generated.page*.cpp")):
+                try:
+                    text = _page.read_text(encoding="utf-8")
+                    # Replace: foo->field_TagList___tagsCount = val
+                    # With:    *reinterpret_cast<CHAOS_IL2CPP_INT32*>(foo) = (CHAOS_IL2CPP_INT32)(val)
                     fixed = re.sub(
-                        r'typedef\s+CHAOS_IL2CPP_INT32\s+chaos_valuetype_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList;\n?',
-                        '', text)
+                        r'(\w+)->field_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList___tagsCount = (\w+);',
+                        r'*reinterpret_cast<CHAOS_IL2CPP_INT32*>(\1) = static_cast<CHAOS_IL2CPP_INT32>(\2);',
+                        text)
                     if fixed != text:
-                        _hdr.write_text(fixed, encoding="utf-8")
-                        print(f"  [build] Fixup: removed duplicate TagList typedef from {_hdr.name}")
+                        _page.write_text(fixed, encoding="utf-8")
+                        print(f"  [build] Fixup: replaced TagList field access in {_page.name}")
                         _did_fixup = True
                 except (OSError, UnicodeDecodeError):
                     pass
             if _did_fixup:
                 # Retry the build
+                print(f"  [build] Retrying cmake build after fixup...")
                 import subprocess as _sp
                 _retry = _sp.run(
                     ["cmake", "--build", ".", "--config", "RelWithDebInfo"],
                     cwd=ctx.native_dir / "build",
                     capture_output=True, text=True, timeout=7200)
                 if _retry.returncode == 0:
-                    print(f"  [build] Retry succeeded after typedef fixup")
-                    tpg_result = _retry  # Override to success
+                    print(f"  [build] Retry succeeded after fixup")
+                    tpg_result = _retry
                 else:
-                    for _line in _retry.stderr.splitlines()[-5:]:
-                        print(f"      {_line}")
+                    print(f"  [build] Retry FAILED (rc={_retry.returncode})")
+                    for _line in (_retry.stderr + _retry.stdout).splitlines()[-3:]:
+                        if _line.strip():
+                            print(f"      {_line.strip()[:200]}")
             if tpg_result.returncode != 0:
                 return StageResult(
                     stage="build", status="error",

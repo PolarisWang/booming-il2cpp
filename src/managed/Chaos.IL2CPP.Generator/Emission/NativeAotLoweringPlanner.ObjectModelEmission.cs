@@ -29,7 +29,7 @@ public sealed partial class NativeAotLoweringPlanner
 	/// methods are inlined, producing direct ->field access in the generated C++.
 	/// Without a struct definition, the typedef int32 fails with C2227.
 	/// </summary>
-	private static bool _TryFindExternalValueTypeFields(
+	private bool _TryFindExternalValueTypeFields(
 		string typeSubjectId,
 		IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
 		out List<string> fields)
@@ -61,15 +61,22 @@ public sealed partial class NativeAotLoweringPlanner
 			if (!found)
 				return false;
 
-			// Provide a minimal opaque field — CHAOS_IL2CPP_INTPTR covers the
-			// _tagsCount (int, stored as pointer-sized slot) and any padding.
-			// The exact layout doesn't matter since the actual TagList methods
-			// go through the external runtime fallback; the struct only needs
-			// to be pointer-accessible for the inlined Clear() pattern.
+			// Provide a minimal opaque field — CHAOS_IL2CPP_INT32 matches the
+			// sizeof(int32) = 4 bytes, which preserves ABI compatibility with
+			// the typedef int32 that the codegen would otherwise generate.
+			// The struct definition is emitted before boxed_type structs that
+			// embed `chaos_valuetype_TagList value{};`, preventing C3646.
 			fields = new List<string>
 			{
 				$"{typeSubjectId}::_tagsCount"
 			};
+			// Register field type so MapFieldTypeToCppType returns CHAOS_IL2CPP_INT32
+			// (not CHAOS_IL2CPP_INTPTR).  sizeof must match typedef int32 (4 bytes)
+			// for ABI compatibility with codesize and GcAllocateFast(sizeof(T)).
+			if (_fieldTypeMap != null && !_fieldTypeMap.ContainsKey($"{typeSubjectId}::_tagsCount"))
+			{
+				_fieldTypeMap[$"{typeSubjectId}::_tagsCount"] = "System.Int32";
+			}
 			return true;
 		}
 
