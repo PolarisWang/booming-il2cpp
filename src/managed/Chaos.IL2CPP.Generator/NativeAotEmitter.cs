@@ -547,7 +547,7 @@ public sealed class NativeAotEmitter
         var pages = loweringPlan.TranslationUnitPages;
         int? pageSize = loweringPlan.TranslationUnitPageSize;
 
-        const int autoPageSize = 150;
+	        const int autoPageSize = 500;
         // Auto-paging: when the plan doesn't specify pages but the method count
         // exceeds the threshold, create synthetic pages to split the output into
         // multiple translation units. This prevents oversized generated files

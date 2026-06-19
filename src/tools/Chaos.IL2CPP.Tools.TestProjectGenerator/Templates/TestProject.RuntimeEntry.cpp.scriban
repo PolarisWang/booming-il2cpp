@@ -47,6 +47,9 @@ static thread_local jmp_buf t_abort_jmp;
 // library, so we do NOT define it here — doing so would cause a
 // multiple-definition linker error.
 
+// Precompiled header: stable ChaOS runtime headers (compiled once across TUs)
+#include "chaos_pch.h"
+
 #include <chaos/config.h>
 #include <chaos/native_types.h>
 #include <chaos/profile.h>
