@@ -200,7 +200,8 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         # Config says JIT disabled, but binary exists — info only, still run it
         print(f"  [fact] entry-jit.exe exists but chunk.json has jitEnabled=false, running anyway")
     elif not has_jit:
-        print(f"  [fact] entry-jit.exe not found, skipping chaos-jit fact")
+        errors.append("entry-jit.exe not found — chaos-jit fact is required")
+        print(f"  [fact] ERROR: entry-jit.exe not found, chaos-jit fact is required")
 
     # Build metadata reference — None if unavailable (handled by callers)
     meta_total: int | None = None
@@ -276,6 +277,46 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         if aot_status == "passed" and jit_status is not None and jit_status != "skipped":
             status = "passed"  # AOT passing is sufficient for pipeline success
 
+    # Managed fact: run CombinedSubjects under net8.0/net10.0 via Chaos.TestFramework.Runtime
+    managed_fact_results = {}
+    for tfm, tech in [("net8.0", "net8-fact"), ("net10.0", "net10-fact")]:
+        try:
+            from verification.stages.managed_benchmark import _runner_dll, _build_combined_for_tfm
+            import tempfile, shutil
+            combined_csproj = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.csproj"
+            build_dir = Path(tempfile.mkdtemp())
+            ok = _build_combined_for_tfm(combined_csproj, tfm, build_dir)
+            if not ok:
+                errors.append(f"{tech}: CombinedSubjects build failed for {tfm}")
+                continue
+            tfm_dll = build_dir / "CombinedSubjects.dll"
+            if not tfm_dll.exists():
+                errors.append(f"{tech}: CombinedSubjects.dll not produced")
+                continue
+            runner = _runner_dll(tfm)
+            r = subprocess.run(
+                ["dotnet", "exec", str(runner),
+                 "--assembly", str(tfm_dll),
+                 "--kind", "fact"],
+                capture_output=True, text=True, timeout=600)
+            if r.returncode != 0:
+                errors.append(f"{tech}: runner failed (rc={r.returncode})")
+                continue
+            parsed = json.loads(r.stdout)
+            results = parsed.get("factResults", [])
+            passed = sum(1 for fr in results if fr.get("passed"))
+            total = len(results)
+            managed_fact_results[tech] = {"passed": passed, "total": total, "results": results}
+            print(f"  [fact] [{tech}] {passed}/{total} passed")
+            shutil.rmtree(build_dir, ignore_errors=True)
+        except Exception as ex:
+            errors.append(f"{tech}: error — {ex}")
+    # Merge managed fact results into summary
+    for tech, res in managed_fact_results.items():
+        aot_result['passed'] += res['passed']
+        aot_result['total'] += res['total']
+        aot_result['results'].extend(res['results'])
+    
     # Cross-check: detect silent method drops from metadata.
     # Use factMethodCount (actual fact subjects) rather than totalMethods
     # (which includes helper/benchmark-only subjects that don't need fact dispatch).

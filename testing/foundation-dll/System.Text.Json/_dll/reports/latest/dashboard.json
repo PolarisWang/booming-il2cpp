@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Text.Json",
-  "timestamp": "2026-06-18T10:44:22",
+  "timestamp": "2026-06-18T15:57:37",
   "summary": {
     "chunks": 3,
     "chunksVerified": 3,
@@ -9,9 +9,9 @@
     "factPassRate": 100.0,
     "totalBenchmarkedMethods": 383,
     "aggregatePerformance": {
-      "meanDurationMs": 0.10179578004263255,
-      "meanOpsPerSecond": 274794412.8903029,
-      "aggregateMeanCv": 0.11098720713912485,
+      "meanDurationMs": 0.10152810327495577,
+      "meanOpsPerSecond": 273899700.6381817,
+      "aggregateMeanCv": 0.09012817683609455,
       "totalOutliers": 340
     },
     "hotupdate": {
@@ -35,19 +35,19 @@
         "p75": 62.12
       },
       "chaosJitVsNet8": {
-        "mean": 67.26,
+        "mean": 67.91,
         "median": 67.75,
         "min": 64.52,
-        "max": 69.5,
+        "max": 71.45,
         "p25": 66.13,
-        "p75": 68.62
+        "p75": 69.6
       },
       "net10VsNet8": {
-        "mean": -7.18,
+        "mean": -0.85,
         "median": 0.0,
-        "min": -26.69,
+        "min": -7.69,
         "max": 5.14,
-        "p25": -13.35,
+        "p25": -3.85,
         "p75": 2.57
       },
       "highValueMethods_betterThanNet8": 76.0

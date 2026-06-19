@@ -626,7 +626,9 @@ thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
 // allocations done via GcAllocateFast (inline TLAB bump) are visible to
 // chaos_gc_get_allocated_bytes_for_current_thread() even when no GC has
 // occurred to flush tls_alloc_fast_bytes into tls_total_allocated_bytes.
-extern thread_local CHAOS_IL2CPP_SIZE chaos::il2cpp::runtime_core::tls_alloc_fast_bytes;
+// NOTE: tls_alloc_fast_bytes is defined at file scope in gc_region.cpp,
+// NOT inside the chaos::il2cpp::runtime_core namespace.
+extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes;
 
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept
 {

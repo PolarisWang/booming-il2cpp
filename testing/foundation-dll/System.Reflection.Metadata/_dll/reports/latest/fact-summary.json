@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Reflection.Metadata",
-  "timestamp": "2026-06-18T10:44:22",
+  "timestamp": "2026-06-18T15:57:37",
   "totalChunks": 3,
   "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
@@ -19,17 +19,17 @@
       },
       "benchmark": {
         "methodCount": 41,
-        "iterations": 4000,
-        "meanDurationMs": 0.29210487804878044,
-        "meanOpsPerSecond": 289242013.13902444,
+        "iterations": 4761,
+        "meanDurationMs": 0.2963073170731707,
+        "meanOpsPerSecond": 318842887.7804878,
         "minDurationMs": 0.012,
-        "maxDurationMs": 9.6337,
-        "totalDurationMs": 11.976299999999998,
+        "maxDurationMs": 10.035,
+        "totalDurationMs": 12.1486,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 9.2,
-        "totalOutliers": 34,
-        "meanCv": 0.1966801463414634,
-        "maxCv": 1.040631
+        "meanSampleCount": 3.5,
+        "totalOutliers": 22,
+        "meanCv": 0.10026680487804879,
+        "maxCv": 0.340818
       },
       "hotupdate": {
         "passed": 41,
@@ -49,7 +49,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 3096064,
+        "totalSize": 3052544,
         "source": "none"
       },
       "benchmarkReport": {

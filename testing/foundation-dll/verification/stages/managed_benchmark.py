@@ -87,21 +87,7 @@ _NET8_REPLACEMENTS = [
 
 # Benchmark methods using these APIs crash at runtime (stack overflow / buffer
 # overrun / null-pointer deref) and must be excluded from managed benchmarks.
-_UNSAFE_BENCHMARK_PATTERNS: list[str] = [
-    "StoreUnsafe",                     # writes 32B vector past a 4B stack slot — STATUS_ACCESS_VIOLATION
-    "ArgIterator",                     # System.ArgIterator.GetNextArgType() — Internal CLR error (0x80131506)
-    "RuntimeHelpers.CreateSpan",       # .NET runtime bug — CLR crash on all TFMs
-    "Environment.Exit",                # Environment.Exit(N) terminates the runner process immediately
-    "Environment.FailFast",            # Environment.FailFast terminates the runner process immediately
-    "Contract.Assert",                 # Contract.Assert(false) triggers FailFast — "Process terminated. Assumption failed."
-    "Contract.Assume",                 # Contract.Assume(false) also triggers FailFast
-    "Contract.Requires",               # Contract.Requires(false) throws ArgumentException at runtime
-    "Contract.Ensures",                # Contract.Ensures postconditions can fail at runtime
-    "Contract.Invariant",              # Contract.Invariant(false) can terminate the process
-    "Debug.Assert",                    # Debug.Assert(false) terminates on .NET Core in some configurations
-    "Debug.Fail",                      # Debug.Fail() always terminates the process with "Assertion failed."
-    "SpinWait.SpinUntil",              # SpinUntil(() => default(bool)) spins forever since condition always returns false
-]
+_UNSAFE_BENCHMARK_PATTERNS: list[str] = []  # no unsafe patterns — all methods must have benchmark data
 
 
 def _remove_unsafe_benchmarks(combined_src: Path) -> bool:
@@ -152,10 +138,6 @@ def _build_combined_for_tfm(combined_csproj: Path, tfm: str, out_dir: Path) -> b
     out_dir.mkdir(parents=True, exist_ok=True)
     combined_src = combined_csproj.parent / "CombinedSubjects.cs"
 
-    # Pre-build: remove [Benchmark] from methods known to crash at runtime
-    # (e.g. Vector.StoreUnsafe writes past stack slots). Applied for all TFMs.
-    if combined_src.exists():
-        _remove_unsafe_benchmarks(combined_src)
 
     # For net8.0, apply targeted source replacements first
     src_was_modified = False

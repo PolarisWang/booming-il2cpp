@@ -1,13 +1,13 @@
 {
   "assemblyName": "System.ComponentModel.TypeConverter",
-  "timestamp": "2026-06-18T10:44:22",
+  "timestamp": "2026-06-18T15:57:37",
   "totalChunks": 3,
   "totalBenchmarkedMethods": 620,
   "aggregatePerformance": {
-    "meanDurationMs": 0.23056651989289637,
-    "meanOpsPerSecond": 297377943.2288373,
-    "aggregateMeanCv": 0.08364698606608488,
-    "totalOutliers": 769
+    "meanDurationMs": 0.2273839956210517,
+    "meanOpsPerSecond": 294243682.7588503,
+    "aggregateMeanCv": 0.06587757894634377,
+    "totalOutliers": 59
   },
   "chunkSummaries": [
     {
@@ -23,16 +23,16 @@
       "benchmark": {
         "methodCount": 515,
         "iterations": 10000,
-        "meanDurationMs": 0.6190110679611651,
-        "meanOpsPerSecond": 314934964.85815537,
-        "minDurationMs": 0.025,
-        "maxDurationMs": 22.3126,
-        "totalDurationMs": 318.7907,
+        "meanDurationMs": 0.609463495145631,
+        "meanOpsPerSecond": 305532183.4481942,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 22.057,
+        "totalDurationMs": 313.8737,
         "totalAllocatedBytes": 960000.0,
-        "meanSampleCount": 6.6,
-        "totalOutliers": 710,
-        "meanCv": 0.09772682524271845,
-        "maxCv": 1.304019
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.044418603883495146,
+        "maxCv": 0.390627
       },
       "hotupdate": {
         "passed": 515,
@@ -52,7 +52,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 5286400,
+        "totalSize": 5242880,
         "source": "none"
       },
       "benchmarkReport": {

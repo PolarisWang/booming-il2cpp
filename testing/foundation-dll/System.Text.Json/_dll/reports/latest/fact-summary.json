@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Text.Json",
-  "timestamp": "2026-06-18T10:44:22",
+  "timestamp": "2026-06-18T15:57:37",
   "totalChunks": 3,
   "chunksWithFacts": 3,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 33,
         "iterations": 10000,
-        "meanDurationMs": 0.0305,
-        "meanOpsPerSecond": 340104678.4939394,
-        "minDurationMs": 0.024,
-        "maxDurationMs": 0.059,
-        "totalDurationMs": 1.0065,
+        "meanDurationMs": 0.029696969696969697,
+        "meanOpsPerSecond": 337420541.73757577,
+        "minDurationMs": 0.025,
+        "maxDurationMs": 0.0303,
+        "totalDurationMs": 0.98,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.07375324242424243,
-        "maxCv": 0.695122
+        "meanCv": 0.011176151515151516,
+        "maxCv": 0.118582
       },
       "hotupdate": {
         "passed": 33,
@@ -49,7 +49,7 @@
       },
       "profile": {
         "methodCount": 0,
-        "totalSize": 2903040,
+        "totalSize": 2858496,
         "source": "none"
       },
       "benchmarkReport": {
