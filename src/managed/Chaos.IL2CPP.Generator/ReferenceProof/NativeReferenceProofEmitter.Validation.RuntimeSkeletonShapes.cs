@@ -6,12 +6,12 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeReferenceProofEmitter
 {
-private static bool TryResolveRuntimeSkeletonPrimitiveConvertShape(
-        string inputManagedType,
-        string outputManagedType,
-        out string inputCppType,
-        out string outputCppType,
-        out string convertedValueExpression)
+    private static bool TryResolveRuntimeSkeletonPrimitiveConvertShape(
+            string inputManagedType,
+            string outputManagedType,
+            out string inputCppType,
+            out string outputCppType,
+            out string convertedValueExpression)
     {
         inputCppType = string.Empty;
         outputCppType = string.Empty;
@@ -2636,4 +2636,5 @@ private static bool TryResolveRuntimeSkeletonPrimitiveConvertShape(
             throw new InvalidOperationException(
                 $"native-reference emitter expects instruction {instructionIndex} in '{subjectId}' to call a method starting with '{expectedPrefix}', but found '{instruction.Callee ?? "<null>"}'");
         }
-    }}
+    }
+}

@@ -112,17 +112,17 @@ public static class RegisterMethodBinarySerializer
         if (method == null || method.Instructions.Length == 0)
             return [];
 
-        int instrCount     = method.Instructions.Length;
-        int sehCount       = method.SehClauses.Length;
-        int catchCount     = method.CatchHandlerEntries.Length;
-        int ilCount        = method.IlOffsets.Length;
-        int smCount        = method.StackMapEntries.Length;
+        int instrCount = method.Instructions.Length;
+        int sehCount = method.SehClauses.Length;
+        int catchCount = method.CatchHandlerEntries.Length;
+        int ilCount = method.IlOffsets.Length;
+        int smCount = method.StackMapEntries.Length;
 
-        int instrBytes     = instrCount * Marshal.SizeOf<RegisterInstruction>();
-        int sehBytes       = sehCount * Marshal.SizeOf<RegisterSehClause>();
-        int catchBytes     = catchCount * Marshal.SizeOf<BinaryCatchHandlerEntry>();
-        int ilBytes        = ilCount * sizeof(uint);
-        int smBytes        = smCount * Marshal.SizeOf<BinaryStackMapEntry>();
+        int instrBytes = instrCount * Marshal.SizeOf<RegisterInstruction>();
+        int sehBytes = sehCount * Marshal.SizeOf<RegisterSehClause>();
+        int catchBytes = catchCount * Marshal.SizeOf<BinaryCatchHandlerEntry>();
+        int ilBytes = ilCount * sizeof(uint);
+        int smBytes = smCount * Marshal.SizeOf<BinaryStackMapEntry>();
         uint totalDataSize = (uint)(instrBytes + sehBytes + catchBytes + ilBytes + smBytes);
 
         using var ms = new MemoryStream();
@@ -131,17 +131,17 @@ public static class RegisterMethodBinarySerializer
         // Write header
         var hdr = new BinaryIrHeader
         {
-            Magic              = BinaryIrMagic,
-            Version            = BinaryIrVersion,
-            MaxRegs            = method.MaxRegs,
-            InstrCount         = (uint)instrCount,
-            SehCount           = (uint)sehCount,
-            CatchHandlerCount  = (uint)catchCount,
-            IlOffsetCount      = (uint)ilCount,
-            StackMapCount      = (uint)smCount,
-            TotalSize          = totalDataSize,
-            Reserved0          = 0,
-            Reserved1          = 0,
+            Magic = BinaryIrMagic,
+            Version = BinaryIrVersion,
+            MaxRegs = method.MaxRegs,
+            InstrCount = (uint)instrCount,
+            SehCount = (uint)sehCount,
+            CatchHandlerCount = (uint)catchCount,
+            IlOffsetCount = (uint)ilCount,
+            StackMapCount = (uint)smCount,
+            TotalSize = totalDataSize,
+            Reserved0 = 0,
+            Reserved1 = 0,
         };
 
         WriteStruct(bw, hdr);
@@ -192,13 +192,13 @@ public static class RegisterMethodBinarySerializer
             if (pos + 12 > irPrecompileData.Length)
                 break;
 
-            ushort maxRegs    = BitConverter.ToUInt16(irPrecompileData, pos + 4);
+            ushort maxRegs = BitConverter.ToUInt16(irPrecompileData, pos + 4);
             ushort instrCount = BitConverter.ToUInt16(irPrecompileData, pos + 6);
-            ushort sehCount   = BitConverter.ToUInt16(irPrecompileData, pos + 8);
+            ushort sehCount = BitConverter.ToUInt16(irPrecompileData, pos + 8);
             // skip subject_id_hash(4) + padding(2) = 6 bytes
 
             uint instrBytes = (uint)(instrCount * 16);
-            uint sehBytes   = (uint)(sehCount * 24);
+            uint sehBytes = (uint)(sehCount * 24);
             uint totalBlock = 12 + instrBytes + sehBytes;
 
             if (pos + totalBlock > irPrecompileData.Length)
@@ -229,12 +229,12 @@ public static class RegisterMethodBinarySerializer
         if (methodBlock.Length < 12)
             return [];
 
-        ushort maxRegs    = BitConverter.ToUInt16(methodBlock, 4);
+        ushort maxRegs = BitConverter.ToUInt16(methodBlock, 4);
         ushort instrCount = BitConverter.ToUInt16(methodBlock, 6);
-        ushort sehCount   = BitConverter.ToUInt16(methodBlock, 8);
+        ushort sehCount = BitConverter.ToUInt16(methodBlock, 8);
 
         uint instrBytes = (uint)(instrCount * 16);
-        uint sehBytes   = (uint)(sehCount * 24);
+        uint sehBytes = (uint)(sehCount * 24);
 
         // Build MethodRegisterIr from the raw block
         var method = new MethodRegisterIr

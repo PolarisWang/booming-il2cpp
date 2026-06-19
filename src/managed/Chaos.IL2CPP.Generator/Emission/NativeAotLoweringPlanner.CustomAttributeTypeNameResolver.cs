@@ -1,4 +1,5 @@
 namespace Chaos.IL2CPP.Generator;
+
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 

@@ -1,6 +1,9 @@
 // Auto-generated partial
-using System.Text; using Chaos.IL2CPP.Contracts; using Scriban.Runtime;
+using System.Text;
+using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 namespace Chaos.IL2CPP.Generator;
+
 public sealed partial class NativeAotLoweringPlanner
 {
     partial class RuntimeHelperShapeRegistry
@@ -426,8 +429,8 @@ public sealed partial class NativeAotLoweringPlanner
                 return "RuntimeIntrinsicVector128Carrier"; // default for Vector128
             }
 
-                        static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
-                string templateFn, bool requiresScalar)
+            static string? MakeVectorInlineExpression(string callee, IReadOnlyList<string> paramTypes,
+    string templateFn, bool requiresScalar)
             {
                 // DISABLED: AOT eval stack stores Vector128/256 as CHAOS_IL2CPP_INTPTR (pointer to
                 // 16/32-byte carrier), but template functions expect carrier by value. The InlineShape

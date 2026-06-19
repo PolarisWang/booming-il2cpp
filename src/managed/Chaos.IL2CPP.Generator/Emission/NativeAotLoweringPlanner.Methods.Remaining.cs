@@ -676,7 +676,7 @@ public sealed partial class NativeAotLoweringPlanner
             return postCollector;
         }
 
-return sb.ToString();
+        return sb.ToString();
     }
 
 

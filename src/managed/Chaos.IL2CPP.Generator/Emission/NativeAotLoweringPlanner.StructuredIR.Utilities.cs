@@ -222,7 +222,10 @@ public sealed partial class NativeAotLoweringPlanner
             case IRDoWhileLoop dw:
                 CollectWrittenSlots(dw.Body, written);
                 break;
-            case IRBreak: case IRContinue: case IRReturn: case IRThrow:
+            case IRBreak:
+            case IRContinue:
+            case IRReturn:
+            case IRThrow:
                 break;
             case IRExceptionRegion er:
                 CollectWrittenSlots(er.TryBody, written);
@@ -335,7 +338,10 @@ public sealed partial class NativeAotLoweringPlanner
             case IRDoWhileLoop dw:
                 CollectInstructions(dw.Body, instructions);
                 break;
-            case IRBreak: case IRContinue: case IRReturn: case IRThrow:
+            case IRBreak:
+            case IRContinue:
+            case IRReturn:
+            case IRThrow:
                 break;
             case IRExceptionRegion er:
                 CollectInstructions(er.TryBody, instructions);
@@ -375,13 +381,24 @@ public sealed partial class NativeAotLoweringPlanner
                 case "ldloc":
                     stack.Add(GetRequiredIntOperand(instr));
                     break;
-                case "ldc.i4": case "ldc.i8": case "ldc.r4": case "ldc.r8":
-                case "ldarg": case "ldnull": case "ldstr": case "ldtoken":
-                case "ldarga": case "ldloca": case "ldsflda":
+                case "ldc.i4":
+                case "ldc.i8":
+                case "ldc.r4":
+                case "ldc.r8":
+                case "ldarg":
+                case "ldnull":
+                case "ldstr":
+                case "ldtoken":
+                case "ldarga":
+                case "ldloca":
+                case "ldsflda":
                 case "ldflda":
-                case "newarr": case "sizeof":
-                case "dup": case "arglist":
-                case "ldftn": case "ldvirtftn":
+                case "newarr":
+                case "sizeof":
+                case "dup":
+                case "arglist":
+                case "ldftn":
+                case "ldvirtftn":
                     stack.Add(null);
                     break;
                 case "stloc":
@@ -390,7 +407,9 @@ public sealed partial class NativeAotLoweringPlanner
                 case "starg":
                     if (stack.Count > 0) stack.RemoveAt(stack.Count - 1);
                     break;
-                case "stelem": case "stelem.i": case "stelem.ref":
+                case "stelem":
+                case "stelem.i":
+                case "stelem.ref":
                     if (stack.Count >= 3)
                     {
                         // Pop: value (bottom), index (middle), array (top of pops)
@@ -402,7 +421,10 @@ public sealed partial class NativeAotLoweringPlanner
                             skipOffsets.Add(instr.IlOffset);
                     }
                     break;
-                case "ldelem": case "ldelem.i": case "ldelem.ref": case "ldelema":
+                case "ldelem":
+                case "ldelem.i":
+                case "ldelem.ref":
+                case "ldelema":
                     if (stack.Count >= 2)
                     {
                         int? idxSlot = stack[^1];
@@ -414,13 +436,29 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     break;
                 // Binary: pop 2, push null (derived)
-                case "add": case "sub": case "mul": case "div": case "div.un":
-                case "rem": case "rem.un":
-                case "and": case "or": case "xor":
-                case "shl": case "shr": case "shr.un":
-                case "ceq": case "cgt": case "clt": case "cgt.un":
-                case "add.ovf": case "sub.ovf": case "mul.ovf":
-                case "add.ovf.un": case "sub.ovf.un": case "mul.ovf.un":
+                case "add":
+                case "sub":
+                case "mul":
+                case "div":
+                case "div.un":
+                case "rem":
+                case "rem.un":
+                case "and":
+                case "or":
+                case "xor":
+                case "shl":
+                case "shr":
+                case "shr.un":
+                case "ceq":
+                case "cgt":
+                case "clt":
+                case "cgt.un":
+                case "add.ovf":
+                case "sub.ovf":
+                case "mul.ovf":
+                case "add.ovf.un":
+                case "sub.ovf.un":
+                case "mul.ovf.un":
                     if (stack.Count >= 2)
                     {
                         stack.RemoveRange(stack.Count - 2, 2);
@@ -428,21 +466,50 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     break;
                 // Unary: pop 1, push null (derived)
-                case "neg": case "not":
-                case "conv.i1": case "conv.i2": case "conv.i4": case "conv.i8":
-                case "conv.u1": case "conv.u2": case "conv.u4": case "conv.u8":
-                case "conv.u": case "conv.r4": case "conv.r8": case "conv.r.un":
-                case "conv.ovf.i1": case "conv.ovf.u1": case "conv.ovf.i2":
-                case "conv.ovf.u2": case "conv.ovf.i4": case "conv.ovf.u4":
-                case "conv.ovf.i8": case "conv.ovf.u8":
-                case "conv.ovf.i": case "conv.ovf.u":
+                case "neg":
+                case "not":
+                case "conv.i1":
+                case "conv.i2":
+                case "conv.i4":
+                case "conv.i8":
+                case "conv.u1":
+                case "conv.u2":
+                case "conv.u4":
+                case "conv.u8":
+                case "conv.u":
+                case "conv.r4":
+                case "conv.r8":
+                case "conv.r.un":
+                case "conv.ovf.i1":
+                case "conv.ovf.u1":
+                case "conv.ovf.i2":
+                case "conv.ovf.u2":
+                case "conv.ovf.i4":
+                case "conv.ovf.u4":
+                case "conv.ovf.i8":
+                case "conv.ovf.u8":
+                case "conv.ovf.i":
+                case "conv.ovf.u":
                 case "ckfinite":
-                case "ldind.i1": case "ldind.u1": case "ldind.i2": case "ldind.u2":
-                case "ldind.i4": case "ldind.u4": case "ldind.i8":
-                case "ldind.ref": case "ldind.r4": case "ldind.r8": case "ldind.i":
-                case "ldobj": case "ldlen": case "localloc":
-                case "box": case "unbox": case "unbox.any":
-                case "castclass": case "isinst":
+                case "ldind.i1":
+                case "ldind.u1":
+                case "ldind.i2":
+                case "ldind.u2":
+                case "ldind.i4":
+                case "ldind.u4":
+                case "ldind.i8":
+                case "ldind.ref":
+                case "ldind.r4":
+                case "ldind.r8":
+                case "ldind.i":
+                case "ldobj":
+                case "ldlen":
+                case "localloc":
+                case "box":
+                case "unbox":
+                case "unbox.any":
+                case "castclass":
+                case "isinst":
                 case "ldfld":
                     if (stack.Count >= 1)
                     {
@@ -451,19 +518,35 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     break;
                 // Pop 1 only
-                case "pop": case "stsfld": case "stfld":
-                case "initobj": case "throw":
-                case "brtrue": case "brfalse":
+                case "pop":
+                case "stsfld":
+                case "stfld":
+                case "initobj":
+                case "throw":
+                case "brtrue":
+                case "brfalse":
                     if (stack.Count >= 1) stack.RemoveAt(stack.Count - 1);
                     break;
                 // Pop 2 only
-                case "beq": case "bne.un": case "bge": case "bgt":
-                case "ble": case "blt":
-                case "bge.un": case "bgt.un": case "ble.un": case "blt.un":
+                case "beq":
+                case "bne.un":
+                case "bge":
+                case "bgt":
+                case "ble":
+                case "blt":
+                case "bge.un":
+                case "bgt.un":
+                case "ble.un":
+                case "blt.un":
                 case "stobj":
-                case "stind.i4": case "stind.i1": case "stind.i2":
-                case "stind.i8": case "stind.r4": case "stind.r8":
-                case "stind.ref": case "stind.i":
+                case "stind.i4":
+                case "stind.i1":
+                case "stind.i2":
+                case "stind.i8":
+                case "stind.r4":
+                case "stind.r8":
+                case "stind.ref":
+                case "stind.i":
                     if (stack.Count >= 2) stack.RemoveRange(stack.Count - 2, 2);
                     break;
                 // Pop 3 (cpblk)
@@ -471,7 +554,9 @@ public sealed partial class NativeAotLoweringPlanner
                     if (stack.Count >= 3) stack.RemoveRange(stack.Count - 3, 3);
                     break;
                 // Call: pop N args, push 0/1 result
-                case "call": case "callvirt": case "calli":
+                case "call":
+                case "callvirt":
+                case "calli":
                     int? paramCount = instr.TargetParameterCount;
                     if (paramCount.HasValue && stack.Count >= paramCount.Value)
                         stack.RemoveRange(stack.Count - paramCount.Value, paramCount.Value);
@@ -490,7 +575,8 @@ public sealed partial class NativeAotLoweringPlanner
                     stack.Clear();
                     break;
                 // br/leave: non-fallthrough, reset
-                case "br": case "leave":
+                case "br":
+                case "leave":
                     stack.Clear();
                     break;
                 case "jmp":
@@ -501,7 +587,8 @@ public sealed partial class NativeAotLoweringPlanner
                 case "mkrefany":
                     if (stack.Count >= 1) { stack.RemoveAt(stack.Count - 1); stack.Add(null); stack.Add(null); }
                     break;
-                case "refanyval": case "refanytype":
+                case "refanyval":
+                case "refanytype":
                     if (stack.Count >= 2) { stack.RemoveRange(stack.Count - 2, 2); stack.Add(null); }
                     break;
             }
@@ -546,7 +633,10 @@ public sealed partial class NativeAotLoweringPlanner
             case IRDoWhileLoop dw:
                 PreScanNodeArrayAccesses(dw.Body, ivSlot, writtenSlots, skipOffsets);
                 break;
-            case IRBreak: case IRContinue: case IRReturn: case IRThrow:
+            case IRBreak:
+            case IRContinue:
+            case IRReturn:
+            case IRThrow:
                 break;
             case IRExceptionRegion er:
                 PreScanNodeArrayAccesses(er.TryBody, ivSlot, writtenSlots, skipOffsets);

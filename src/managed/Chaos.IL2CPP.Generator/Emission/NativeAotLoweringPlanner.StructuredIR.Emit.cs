@@ -34,66 +34,66 @@ public sealed partial class NativeAotLoweringPlanner
         }
         try
         {
-        switch (node)
-        {
-            case IRBlock block:
-                EmitIRBlock(builder, block, method, indentation);
-                break;
-
-            case IRSequence seq:
-                foreach (var child in seq.Nodes)
-                    EmitStructuredIRNode(builder, child, method, indentation);
-                break;
-
-            case IRIfThenElse ite:
-                EmitIRIfThenElse(builder, ite, method, indentation);
-                break;
-
-            case IRWhileLoop w:
-                EmitIRWhileLoop(builder, w, method, indentation);
-                break;
-
-            case IRDoWhileLoop dw:
-                EmitIRDoWhileLoop(builder, dw, method, indentation);
-                break;
-
-            case IRSwitch sw:
-                EmitIRSwitch(builder, sw, method, indentation);
-                break;
-
-            case IRBreak:
-                builder.AppendLine(indentation + "break;");
-                break;
-
-            case IRContinue:
-                builder.AppendLine(indentation + "continue;");
-                break;
-
-            case IRReturn:
-                EmitStructuredMethodReturn(builder, method.ReturnAbi, indentation);
-                break;
-
-            case IRThrow:
-                builder.AppendLine(indentation + "throw;");
-                break;
-
-            case IRExceptionRegion er:
-                EmitIRExceptionRegion(builder, er, method, indentation);
-                break;
-
-            case IRPcDispatch pcDispatch:
-                EmitPcDispatch(builder, pcDispatch, method, indentation);
-                break;
-
-            default:
-                throw new NotSupportedException(
-                    "StructuredIR: unknown node type '" + node.GetType().Name + "'");
-        }
-            }
-            finally
+            switch (node)
             {
-                _structuredIrDepth--;
+                case IRBlock block:
+                    EmitIRBlock(builder, block, method, indentation);
+                    break;
+
+                case IRSequence seq:
+                    foreach (var child in seq.Nodes)
+                        EmitStructuredIRNode(builder, child, method, indentation);
+                    break;
+
+                case IRIfThenElse ite:
+                    EmitIRIfThenElse(builder, ite, method, indentation);
+                    break;
+
+                case IRWhileLoop w:
+                    EmitIRWhileLoop(builder, w, method, indentation);
+                    break;
+
+                case IRDoWhileLoop dw:
+                    EmitIRDoWhileLoop(builder, dw, method, indentation);
+                    break;
+
+                case IRSwitch sw:
+                    EmitIRSwitch(builder, sw, method, indentation);
+                    break;
+
+                case IRBreak:
+                    builder.AppendLine(indentation + "break;");
+                    break;
+
+                case IRContinue:
+                    builder.AppendLine(indentation + "continue;");
+                    break;
+
+                case IRReturn:
+                    EmitStructuredMethodReturn(builder, method.ReturnAbi, indentation);
+                    break;
+
+                case IRThrow:
+                    builder.AppendLine(indentation + "throw;");
+                    break;
+
+                case IRExceptionRegion er:
+                    EmitIRExceptionRegion(builder, er, method, indentation);
+                    break;
+
+                case IRPcDispatch pcDispatch:
+                    EmitPcDispatch(builder, pcDispatch, method, indentation);
+                    break;
+
+                default:
+                    throw new NotSupportedException(
+                        "StructuredIR: unknown node type '" + node.GetType().Name + "'");
             }
+        }
+        finally
+        {
+            _structuredIrDepth--;
+        }
     }
 
 
@@ -168,11 +168,11 @@ public sealed partial class NativeAotLoweringPlanner
                 break;
 
             case "throw":
-            {
-                string throwVal = ConsumeEvalStackValueExpression();
-                EmitThrowCpp(builder, throwVal, indentation);
-                break;
-            }
+                {
+                    string throwVal = ConsumeEvalStackValueExpression();
+                    EmitThrowCpp(builder, throwVal, indentation);
+                    break;
+                }
 
             case "rethrow":
                 EmitRethrowCpp(builder, indentation);
@@ -354,7 +354,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
 
-                // Compute minimum required depth for condition instructions using
+        // Compute minimum required depth for condition instructions using
         // the estimated push/pop counts. This compensates for values pushed
         // by predecessor CFG blocks that the condition instructions consume.
         {
@@ -799,8 +799,8 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
         }
-    _hoistedIVs = prevHoistedIVs;
-	_loopArrayAccessSkipOffsets = null;
+        _hoistedIVs = prevHoistedIVs;
+        _loopArrayAccessSkipOffsets = null;
     }
 
 
@@ -1179,76 +1179,76 @@ public sealed partial class NativeAotLoweringPlanner
         switch (er.Kind)
         {
             case IRExceptionKind.TryCatch:
-            {
-                int preTryDepth = _activeStructuredSlotContext?.Depth ?? 0;
-                builder.AppendLine(indentation + "CHAOS_EH_TRY");
-                EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                if (er.CatchTypeSubjectId != null)
-                    _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
-                builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
-                if (er.CatchTypeSubjectId != null)
                 {
-                    string typeInfoSym = GetNativeTypeInfoSymbol(er.CatchTypeSubjectId);
-                    builder.AppendLine(inner +
-                        $"if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, {typeInfoSym}))");
-                    builder.AppendLine(inner + "{ CHAOS_EH_RETHROW; }");
-                    EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
+                    int preTryDepth = _activeStructuredSlotContext?.Depth ?? 0;
+                    builder.AppendLine(indentation + "CHAOS_EH_TRY");
+                    EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
+                    if (er.CatchTypeSubjectId != null)
+                        _activeStructuredSlotContext?.RestoreDepth(preTryDepth);
+                    builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
+                    if (er.CatchTypeSubjectId != null)
+                    {
+                        string typeInfoSym = GetNativeTypeInfoSymbol(er.CatchTypeSubjectId);
+                        builder.AppendLine(inner +
+                            $"if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, {typeInfoSym}))");
+                        builder.AppendLine(inner + "{ CHAOS_EH_RETHROW; }");
+                        EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
+                    }
+                    else
+                    {
+                        EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
+                    }
+                    EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
+                    builder.AppendLine(indentation + "CHAOS_EH_END");
+                    break;
                 }
-                else
-                {
-                    EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
-                }
-                EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(indentation + "CHAOS_EH_END");
-                break;
-            }
 
             case IRExceptionKind.TryFinally:
-            {
-                builder.AppendLine(inner + "auto _chaos_finally = [&]()");
-                builder.AppendLine(inner + "{");
-                EmitStructuredIRNode(builder, er.HandlerBody, method, inner + "    ");
-                builder.AppendLine(inner + "};");
-                builder.AppendLine(indentation + "CHAOS_EH_TRY_FINALLY");
-                EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(indentation + "CHAOS_EH_FINALLY_END");
-                break;
-            }
-
-            case IRExceptionKind.TryFilter:
-            {
-                builder.AppendLine(indentation + "CHAOS_EH_TRY");
-                EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
-                builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
-                EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
-
-                // Emit structured filter body first, then let endfilter decide rethrow vs accept.
-                if (er.FilterInstructions != null && er.FilterInstructions.Count > 0)
                 {
-                    var filterInstructions = er.FilterInstructions;
-                    int terminalIndex = filterInstructions.Count - 1;
-                    bool hasTerminalEndFilter = string.Equals(filterInstructions[terminalIndex].Op, "endfilter", StringComparison.Ordinal);
-                    if (terminalIndex > 0)
-                    {
-                        StructuredIRNode filterBody = BuildExceptionPartitionTree(filterInstructions.Take(terminalIndex).ToArray(), offsets: new HashSet<int>(filterInstructions.Take(terminalIndex).Select(GetRequiredIlOffset)));
-                        EmitStructuredIRNode(builder, filterBody, method, inner);
-                    }
-
-                    if (hasTerminalEndFilter)
-                    {
-                        builder.AppendLine(inner +
-                            $"if ({ConsumeEvalStackValueExpression()} == 0)");
-                        builder.AppendLine(inner + "{");
-                        builder.AppendLine(inner + "    CHAOS_EH_RETHROW;");
-                        builder.AppendLine(inner + "}");
-                    }
+                    builder.AppendLine(inner + "auto _chaos_finally = [&]()");
+                    builder.AppendLine(inner + "{");
+                    EmitStructuredIRNode(builder, er.HandlerBody, method, inner + "    ");
+                    builder.AppendLine(inner + "};");
+                    builder.AppendLine(indentation + "CHAOS_EH_TRY_FINALLY");
+                    EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
+                    builder.AppendLine(indentation + "CHAOS_EH_FINALLY_END");
+                    break;
                 }
 
-                EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
-                EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
-                builder.AppendLine(indentation + "CHAOS_EH_END");
-                break;
-            }
+            case IRExceptionKind.TryFilter:
+                {
+                    builder.AppendLine(indentation + "CHAOS_EH_TRY");
+                    EmitStructuredIRNode(builder, er.TryBody, method, bodyIndent);
+                    builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
+                    EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
+
+                    // Emit structured filter body first, then let endfilter decide rethrow vs accept.
+                    if (er.FilterInstructions != null && er.FilterInstructions.Count > 0)
+                    {
+                        var filterInstructions = er.FilterInstructions;
+                        int terminalIndex = filterInstructions.Count - 1;
+                        bool hasTerminalEndFilter = string.Equals(filterInstructions[terminalIndex].Op, "endfilter", StringComparison.Ordinal);
+                        if (terminalIndex > 0)
+                        {
+                            StructuredIRNode filterBody = BuildExceptionPartitionTree(filterInstructions.Take(terminalIndex).ToArray(), offsets: new HashSet<int>(filterInstructions.Take(terminalIndex).Select(GetRequiredIlOffset)));
+                            EmitStructuredIRNode(builder, filterBody, method, inner);
+                        }
+
+                        if (hasTerminalEndFilter)
+                        {
+                            builder.AppendLine(inner +
+                                $"if ({ConsumeEvalStackValueExpression()} == 0)");
+                            builder.AppendLine(inner + "{");
+                            builder.AppendLine(inner + "    CHAOS_EH_RETHROW;");
+                            builder.AppendLine(inner + "}");
+                        }
+                    }
+
+                    EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
+                    EmitStructuredIRNode(builder, er.HandlerBody, method, bodyIndent);
+                    builder.AppendLine(indentation + "CHAOS_EH_END");
+                    break;
+                }
 
             default:
                 throw new NotSupportedException(
@@ -1281,11 +1281,22 @@ public sealed partial class NativeAotLoweringPlanner
             switch (op)
             {
                 // Pure pushes (+1)
-                case "ldc.i4": case "ldc.i8": case "ldc.r4": case "ldc.r8":
-                case "ldarg": case "ldstr": case "ldtoken": case "ldarga":
-                case "ldnull": case "ldloc": case "ldloca":
-                case "ldsfld": case "ldsflda":
-                case "ldftn": case "newarr": case "sizeof":
+                case "ldc.i4":
+                case "ldc.i8":
+                case "ldc.r4":
+                case "ldc.r8":
+                case "ldarg":
+                case "ldstr":
+                case "ldtoken":
+                case "ldarga":
+                case "ldnull":
+                case "ldloc":
+                case "ldloca":
+                case "ldsfld":
+                case "ldsflda":
+                case "ldftn":
+                case "newarr":
+                case "sizeof":
                     pushes = 1; pops = 0; break;
 
                 // Dup: push a copy of the top value
@@ -1294,67 +1305,149 @@ public sealed partial class NativeAotLoweringPlanner
                     pushes = 1; pops = 0; break;
 
                 // Pure pops (-1)
-                case "pop": case "stloc": case "stloc.s": case "starg": case "initobj":
+                case "pop":
+                case "stloc":
+                case "stloc.s":
+                case "starg":
+                case "initobj":
                 case "throw":
-                case "brfalse": case "brtrue":
+                case "brfalse":
+                case "brtrue":
                     pushes = 0; pops = 1; break;
 
                 // Pops 2 (instance stores, indirect stores, conditional branches)
-                case "stfld": case "stsfld":
+                case "stfld":
+                case "stsfld":
                 case "stobj":
-                case "stind.i4": case "stind.i1": case "stind.i2":
-                case "stind.i8": case "stind.r4": case "stind.r8": case "stind.ref":
+                case "stind.i4":
+                case "stind.i1":
+                case "stind.i2":
+                case "stind.i8":
+                case "stind.r4":
+                case "stind.r8":
+                case "stind.ref":
                 case "stind.i":
-                case "beq": case "bgt": case "blt": case "bge": case "ble":
-                case "bne.un": case "bge.un":
+                case "beq":
+                case "bgt":
+                case "blt":
+                case "bge":
+                case "ble":
+                case "bne.un":
+                case "bge.un":
                     pushes = 0; pops = 2; break;
 
                 // Pops 3
-                case "stelem": case "stelem.i": case "stelem.ref":
+                case "stelem":
+                case "stelem.i":
+                case "stelem.ref":
                 case "cpblk":
                     pushes = 0; pops = 3; break;
 
                 // Pop 2, push 1 (net -1)
-                case "cgt.un": case "ceq": case "cgt": case "clt": case "clt.un":
-                case "add": case "sub": case "mul": case "div": case "div.un": case "rem": case "rem.un":
-                case "shl": case "shr": case "shr.un":
-                case "and": case "or": case "xor":
-                case "add.ovf": case "sub.ovf": case "mul.ovf": case "add.ovf.un": case "sub.ovf.un": case "mul.ovf.un":
-                case "ldelem": case "ldelem.i": case "ldelem.ref": case "ldelema":
+                case "cgt.un":
+                case "ceq":
+                case "cgt":
+                case "clt":
+                case "clt.un":
+                case "add":
+                case "sub":
+                case "mul":
+                case "div":
+                case "div.un":
+                case "rem":
+                case "rem.un":
+                case "shl":
+                case "shr":
+                case "shr.un":
+                case "and":
+                case "or":
+                case "xor":
+                case "add.ovf":
+                case "sub.ovf":
+                case "mul.ovf":
+                case "add.ovf.un":
+                case "sub.ovf.un":
+                case "mul.ovf.un":
+                case "ldelem":
+                case "ldelem.i":
+                case "ldelem.ref":
+                case "ldelema":
                     pushes = 1; pops = 2; break;
 
                 // Pop 1, push 1 (net 0 鈥?in-place transformation)
-                case "ldfld": case "ldflda":
-                case "ldind.i4": case "ldind.u1": case "ldind.i1":
-                case "ldind.u2": case "ldind.i2": case "ldind.u4":
-                case "ldind.i8": case "ldind.r4": case "ldind.r8": case "ldind.ref":
+                case "ldfld":
+                case "ldflda":
+                case "ldind.i4":
+                case "ldind.u1":
+                case "ldind.i1":
+                case "ldind.u2":
+                case "ldind.i2":
+                case "ldind.u4":
+                case "ldind.i8":
+                case "ldind.r4":
+                case "ldind.r8":
+                case "ldind.ref":
                 case "ldind.i":
-                case "box": case "unbox": case "unbox.any":
-                case "castclass": case "isinst":
-                case "ldobj": case "ldlen": case "localloc":
-                case "conv.i4": case "conv.i1": case "conv.i2": case "conv.i8":
-                case "conv.u8": case "conv.r4": case "conv.r8": case "conv.u":
-                case "conv.u1": case "conv.u2": case "conv.u4":
-                case "conv.r.un": case "ckfinite":
-                case "conv.ovf.i1": case "conv.ovf.u1": case "conv.ovf.i2": case "conv.ovf.u2":
-                case "conv.ovf.i4": case "conv.ovf.u4": case "conv.ovf.i8": case "conv.ovf.u8":
-                case "conv.ovf.i": case "conv.ovf.u": case "conv.ovf.i8.un": case "conv.ovf.u8.un": case "conv.ovf.i.un": case "conv.ovf.u.un":
-                    case "conv.ovf.i1.un": case "conv.ovf.i2.un": case "conv.ovf.i4.un":
-                    case "conv.ovf.u1.un": case "conv.ovf.u2.un": case "conv.ovf.u4.un":
-                case "not": case "neg":
+                case "box":
+                case "unbox":
+                case "unbox.any":
+                case "castclass":
+                case "isinst":
+                case "ldobj":
+                case "ldlen":
+                case "localloc":
+                case "conv.i4":
+                case "conv.i1":
+                case "conv.i2":
+                case "conv.i8":
+                case "conv.u8":
+                case "conv.r4":
+                case "conv.r8":
+                case "conv.u":
+                case "conv.u1":
+                case "conv.u2":
+                case "conv.u4":
+                case "conv.r.un":
+                case "ckfinite":
+                case "conv.ovf.i1":
+                case "conv.ovf.u1":
+                case "conv.ovf.i2":
+                case "conv.ovf.u2":
+                case "conv.ovf.i4":
+                case "conv.ovf.u4":
+                case "conv.ovf.i8":
+                case "conv.ovf.u8":
+                case "conv.ovf.i":
+                case "conv.ovf.u":
+                case "conv.ovf.i8.un":
+                case "conv.ovf.u8.un":
+                case "conv.ovf.i.un":
+                case "conv.ovf.u.un":
+                case "conv.ovf.i1.un":
+                case "conv.ovf.i2.un":
+                case "conv.ovf.i4.un":
+                case "conv.ovf.u1.un":
+                case "conv.ovf.u2.un":
+                case "conv.ovf.u4.un":
+                case "not":
+                case "neg":
                     pushes = 1; pops = 1; break;
 
                 // Pop 1 (typed reference), push 2 (handle + pointer)
                 case "mkrefany":
                     pushes = 2; pops = 1; break;
-                case "refanyval": case "refanytype":
+                case "refanyval":
+                case "refanytype":
                     pushes = 1; pops = 2; break;  // pop 2 (typeHandle+ptr), push 1 result
                 case "ldvirtftn":
                     pushes = 1; pops = 1; break;
 
                 // Call/callvirt/calli: pop N args, push 0/1 result
                 // newobj: pop constructor args, push new object/value
-                case "call": case "callvirt": case "calli": case "newobj":
+                case "call":
+                case "callvirt":
+                case "calli":
+                case "newobj":
                     string? callee = instr.Callee ?? instr.TargetReference?.SubjectId;
                     if (!string.IsNullOrEmpty(callee) && TryGetLowerableMethod(callee) is { } lowerableMethod)
                     {
@@ -1423,7 +1516,8 @@ public sealed partial class NativeAotLoweringPlanner
                     pushes = 0; pops = 1; break;
 
                 // br/leave: reset depth at unconditional branch target
-                case "br": case "leave":
+                case "br":
+                case "leave":
                     pushes = 0; pops = 0;
                     depth = 0;
                     break;
@@ -1466,91 +1560,91 @@ public sealed partial class NativeAotLoweringPlanner
         try
         {
             if (instructions.Count == 0)
-        {
-            body = new IRSequence(Array.Empty<StructuredIRNode>());
-            return true;
-        }
-
-        if (ReferenceEquals(instructions, method.Instructions) &&
-            method.ExceptionRegionCount > 0 &&
-            method.ExceptionRegions is { Count: > 0 })
-        {
-            bool result = TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
-            if (result)
             {
-                LogStructuredMethod(method, "exception-body", instructions.Count, 0, 0, 0);
+                body = new IRSequence(Array.Empty<StructuredIRNode>());
                 return true;
             }
-            // Fall through to non-exception CFG-based emission below.
-            // The generic exception shape fallback should cover all valid EH
-            // patterns; if we reach here the method has no structured EH shape
-            // and will be emitted as normal CFG-structured code.
-        }
-        var cfg = BuildControlFlowGraph(instructions, offsets);
-        bool reducible = cfg.IsReducible;
-        if (!reducible)
-        {
-            var splitCfg = MakeCfgReducibleViaIntervalAnalysis(cfg);
-            if (splitCfg.IsReducible)
-            {
-                cfg = splitCfg;
-                LogStructuredMethod(method, "node-split", instructions.Count,
-                    cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
-            }
-            else
-            {
-                // CFG still irreducible after interval analysis.
-                // Emit a pc-dispatch state machine instead of goto fallback.
-                LogStructuredMethod(method, "pc-dispatch", instructions.Count,
-                    cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
-                body = BuildPcDispatchBody(cfg);
-                maxDepth = ComputeMaxEvalStackDepth(instructions, method.ReturnAbi);
-                if (maxDepth < 0)
-                    maxDepth = ComputeMaxEvalStackDepth(instructions);
-                return true;
-            }
-        }
 
-        body = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
-        if (ContainsResidualBranchTerminators(body))
-        {
-            // Convert remaining branches to structured control flow instead
-            // of falling back to IRFlatRegion (goto elimination).
-            body = ConvertResidualBranches(body, loopExitOffsets: null, loopHeaderOffset: null);
+            if (ReferenceEquals(instructions, method.Instructions) &&
+                method.ExceptionRegionCount > 0 &&
+                method.ExceptionRegions is { Count: > 0 })
+            {
+                bool result = TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
+                if (result)
+                {
+                    LogStructuredMethod(method, "exception-body", instructions.Count, 0, 0, 0);
+                    return true;
+                }
+                // Fall through to non-exception CFG-based emission below.
+                // The generic exception shape fallback should cover all valid EH
+                // patterns; if we reach here the method has no structured EH shape
+                // and will be emitted as normal CFG-structured code.
+            }
+            var cfg = BuildControlFlowGraph(instructions, offsets);
+            bool reducible = cfg.IsReducible;
+            if (!reducible)
+            {
+                var splitCfg = MakeCfgReducibleViaIntervalAnalysis(cfg);
+                if (splitCfg.IsReducible)
+                {
+                    cfg = splitCfg;
+                    LogStructuredMethod(method, "node-split", instructions.Count,
+                        cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+                }
+                else
+                {
+                    // CFG still irreducible after interval analysis.
+                    // Emit a pc-dispatch state machine instead of goto fallback.
+                    LogStructuredMethod(method, "pc-dispatch", instructions.Count,
+                        cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+                    body = BuildPcDispatchBody(cfg);
+                    maxDepth = ComputeMaxEvalStackDepth(instructions, method.ReturnAbi);
+                    if (maxDepth < 0)
+                        maxDepth = ComputeMaxEvalStackDepth(instructions);
+                    return true;
+                }
+            }
+
+            body = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
             if (ContainsResidualBranchTerminators(body))
             {
-                // Some residual branches could not be converted — log but still emit
-                // structured IR rather than goto fallback. Unconverted branches will
-                // emit as C++ goto which is correct albeit suboptimal.
-                LogStructuredMethod(method, "residual-branch-unconverted", instructions.Count,
-                    cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+                // Convert remaining branches to structured control flow instead
+                // of falling back to IRFlatRegion (goto elimination).
+                body = ConvertResidualBranches(body, loopExitOffsets: null, loopHeaderOffset: null);
+                if (ContainsResidualBranchTerminators(body))
+                {
+                    // Some residual branches could not be converted — log but still emit
+                    // structured IR rather than goto fallback. Unconverted branches will
+                    // emit as C++ goto which is correct albeit suboptimal.
+                    LogStructuredMethod(method, "residual-branch-unconverted", instructions.Count,
+                        cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+                }
+                else
+                {
+                    LogStructuredMethod(method, "residual-branch-converted", instructions.Count,
+                        cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+                }
             }
             else
             {
-                LogStructuredMethod(method, "residual-branch-converted", instructions.Count,
+                LogStructuredMethod(method, "structured", instructions.Count,
                     cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
             }
-        }
-        else
-        {
-            LogStructuredMethod(method, "structured", instructions.Count,
-                cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
-        }
 
-        maxDepth = ComputeMaxEvalStackDepth(instructions, method.ReturnAbi);
-        if (maxDepth < 0)
-        {
-            // Non-monotonic computation (slot reuse allowed) — may produce slightly
-            // larger eval stack than strictly needed for structured emission, but
-            // guarantees correctness without goto fallback.
-            maxDepth = ComputeMaxEvalStackDepth(instructions);
-            LogStructuredMethod(method, "stack-depth-fixup", instructions.Count,
-                cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
-        }
-        // else: non-monotonic (peak concurrent depth) matches
-        // StructuredSlotEmissionContext._maxDepth which tracks the maximum
-        // concurrently-live slot count via RestoreDepth at merge points.
-        return true;
+            maxDepth = ComputeMaxEvalStackDepth(instructions, method.ReturnAbi);
+            if (maxDepth < 0)
+            {
+                // Non-monotonic computation (slot reuse allowed) — may produce slightly
+                // larger eval stack than strictly needed for structured emission, but
+                // guarantees correctness without goto fallback.
+                maxDepth = ComputeMaxEvalStackDepth(instructions);
+                LogStructuredMethod(method, "stack-depth-fixup", instructions.Count,
+                    cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+            }
+            // else: non-monotonic (peak concurrent depth) matches
+            // StructuredSlotEmissionContext._maxDepth which tracks the maximum
+            // concurrently-live slot count via RestoreDepth at merge points.
+            return true;
         }
         catch (InvalidOperationException)
         {
@@ -1996,7 +2090,7 @@ public sealed partial class NativeAotLoweringPlanner
             // TRACE:EMIT disabled — was flooding stderr
             if (instructions.Count >= 3)
                 // TRACE:EMIT disabled
-            return EmitExceptionPartitionFallback(instructions);
+                return EmitExceptionPartitionFallback(instructions);
         }
 
         return StripExceptionPartitionExitTerminators(RecoverStructure(cfg, 0, cfg.Blocks.Count - 1));
@@ -2211,89 +2305,89 @@ public sealed partial class NativeAotLoweringPlanner
         switch (op)
         {
             case "brtrue":
-            {
-                string val = ctx.PeekValue();
-                ctx.PopValue();
-                return val;
-            }
+                {
+                    string val = ctx.PeekValue();
+                    ctx.PopValue();
+                    return val;
+                }
             case "brfalse":
-            {
-                string val = ctx.PeekValue();
-                ctx.PopValue();
-                return "!" + val;
-            }
+                {
+                    string val = ctx.PeekValue();
+                    ctx.PopValue();
+                    return "!" + val;
+                }
             case "brnull":
-            {
-                string val = ctx.PeekValue();
-                ctx.PopValue();
-                return val + " == 0";
-            }
+                {
+                    string val = ctx.PeekValue();
+                    ctx.PopValue();
+                    return val + " == 0";
+                }
             case "brnonnull":
-            {
-                string val = ctx.PeekValue();
-                ctx.PopValue();
-                return val + " != 0";
-            }
+                {
+                    string val = ctx.PeekValue();
+                    ctx.PopValue();
+                    return val + " != 0";
+                }
             case "beq":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return left + " == " + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return left + " == " + right;
+                }
             case "bne.un":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return left + " != " + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return left + " != " + right;
+                }
             case "blt":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return "(CHAOS_IL2CPP_INT32)" + left + " < (CHAOS_IL2CPP_INT32)" + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return "(CHAOS_IL2CPP_INT32)" + left + " < (CHAOS_IL2CPP_INT32)" + right;
+                }
             case "blt.un":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return "(CHAOS_IL2CPP_UINT32)" + left + " < (CHAOS_IL2CPP_UINT32)" + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return "(CHAOS_IL2CPP_UINT32)" + left + " < (CHAOS_IL2CPP_UINT32)" + right;
+                }
             case "bgt":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return "(CHAOS_IL2CPP_INT32)" + left + " > (CHAOS_IL2CPP_INT32)" + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return "(CHAOS_IL2CPP_INT32)" + left + " > (CHAOS_IL2CPP_INT32)" + right;
+                }
             case "bgt.un":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return "(CHAOS_IL2CPP_UINT32)" + left + " > (CHAOS_IL2CPP_UINT32)" + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return "(CHAOS_IL2CPP_UINT32)" + left + " > (CHAOS_IL2CPP_UINT32)" + right;
+                }
             case "ble":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return "(CHAOS_IL2CPP_INT32)" + left + " <= (CHAOS_IL2CPP_INT32)" + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return "(CHAOS_IL2CPP_INT32)" + left + " <= (CHAOS_IL2CPP_INT32)" + right;
+                }
             case "ble.un":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return "(CHAOS_IL2CPP_UINT32)" + left + " <= (CHAOS_IL2CPP_UINT32)" + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return "(CHAOS_IL2CPP_UINT32)" + left + " <= (CHAOS_IL2CPP_UINT32)" + right;
+                }
             case "bge":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return "(CHAOS_IL2CPP_INT32)" + left + " >= (CHAOS_IL2CPP_INT32)" + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return "(CHAOS_IL2CPP_INT32)" + left + " >= (CHAOS_IL2CPP_INT32)" + right;
+                }
             case "bge.un":
-            {
-                string right = ctx.PeekValue(); ctx.PopValue();
-                string left = ctx.PeekValue(); ctx.PopValue();
-                return "(CHAOS_IL2CPP_UINT32)" + left + " >= (CHAOS_IL2CPP_UINT32)" + right;
-            }
+                {
+                    string right = ctx.PeekValue(); ctx.PopValue();
+                    string left = ctx.PeekValue(); ctx.PopValue();
+                    return "(CHAOS_IL2CPP_UINT32)" + left + " >= (CHAOS_IL2CPP_UINT32)" + right;
+                }
             default:
                 // Unknown opcode: fall through to taken target (conservative)
                 if (ctx.Depth > 0)

@@ -165,131 +165,131 @@ internal static class RuntimeSkeletonThreadingAtomicCore
                 return true;
 
             case AtomicOperation.Increment:
-            {
-                var cppType = ToCppType(managedType!);
-                if (managedType == "System.Int64" || managedType == "System.UInt64")
                 {
-                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                                $"    auto result = ptr->fetch_add(1, std::memory_order_seq_cst) + 1;\n" +
-                                $"    *static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->return_value) = result;\n" +
-                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    var cppType = ToCppType(managedType!);
+                    if (managedType == "System.Int64" || managedType == "System.UInt64")
+                    {
+                        statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                    $"    auto result = ptr->fetch_add(1, std::memory_order_seq_cst) + 1;\n" +
+                                    $"    *static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->return_value) = result;\n" +
+                                    $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    }
+                    else
+                    {
+                        statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                    $"    auto result = ptr->fetch_add(1, std::memory_order_seq_cst) + 1;\n" +
+                                    $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
+                                    $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    }
+                    return true;
                 }
-                else
-                {
-                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                                $"    auto result = ptr->fetch_add(1, std::memory_order_seq_cst) + 1;\n" +
-                                $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
-                                $"    return CHAOS_BRIDGE_STATUS_OK;";
-                }
-                return true;
-            }
 
             case AtomicOperation.Decrement:
-            {
-                var cppType = ToCppType(managedType!);
-                if (managedType == "System.Int64" || managedType == "System.UInt64")
                 {
-                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                                $"    auto result = ptr->fetch_sub(1, std::memory_order_seq_cst) - 1;\n" +
-                                $"    *static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->return_value) = result;\n" +
-                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    var cppType = ToCppType(managedType!);
+                    if (managedType == "System.Int64" || managedType == "System.UInt64")
+                    {
+                        statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                    $"    auto result = ptr->fetch_sub(1, std::memory_order_seq_cst) - 1;\n" +
+                                    $"    *static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->return_value) = result;\n" +
+                                    $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    }
+                    else
+                    {
+                        statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                    $"    auto result = ptr->fetch_sub(1, std::memory_order_seq_cst) - 1;\n" +
+                                    $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
+                                    $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    }
+                    return true;
                 }
-                else
-                {
-                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                                $"    auto result = ptr->fetch_sub(1, std::memory_order_seq_cst) - 1;\n" +
-                                $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
-                                $"    return CHAOS_BRIDGE_STATUS_OK;";
-                }
-                return true;
-            }
 
             case AtomicOperation.Add:
-            {
-                var cppType = ToCppType(managedType!);
-                if (managedType == "System.Int64" || managedType == "System.UInt64")
                 {
-                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                                $"    auto value = *static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg1);\n" +
-                                $"    auto result = ptr->fetch_add(value, std::memory_order_seq_cst) + value;\n" +
-                                $"    *static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->return_value) = result;\n" +
-                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    var cppType = ToCppType(managedType!);
+                    if (managedType == "System.Int64" || managedType == "System.UInt64")
+                    {
+                        statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                    $"    auto value = *static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg1);\n" +
+                                    $"    auto result = ptr->fetch_add(value, std::memory_order_seq_cst) + value;\n" +
+                                    $"    *static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->return_value) = result;\n" +
+                                    $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    }
+                    else
+                    {
+                        statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                    $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
+                                    $"    auto result = ptr->fetch_add(value, std::memory_order_seq_cst) + value;\n" +
+                                    $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
+                                    $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    }
+                    return true;
                 }
-                else
-                {
-                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                                $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
-                                $"    auto result = ptr->fetch_add(value, std::memory_order_seq_cst) + value;\n" +
-                                $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
-                                $"    return CHAOS_BRIDGE_STATUS_OK;";
-                }
-                return true;
-            }
 
             case AtomicOperation.Exchange:
-            {
-                var cppType = ToCppType(managedType!);
-                statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                            $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
-                            $"    auto result = ptr->exchange(value, std::memory_order_seq_cst);\n" +
-                            $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
-                            $"    return CHAOS_BRIDGE_STATUS_OK;";
-                return true;
-            }
+                {
+                    var cppType = ToCppType(managedType!);
+                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
+                                $"    auto result = ptr->exchange(value, std::memory_order_seq_cst);\n" +
+                                $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
+                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    return true;
+                }
 
             case AtomicOperation.CompareExchange:
-            {
-                var cppType = ToCppType(managedType!);
-                statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                            $"    auto expected = *static_cast<{cppType}*>(request->arg1);\n" +
-                            $"    auto desired = *static_cast<{cppType}*>(request->arg2);\n" +
-                            $"    auto result = ptr->compare_exchange_strong(expected, desired, std::memory_order_seq_cst);\n" +
-                            $"    *static_cast<{cppType}*>(request->return_value) = result ? expected : ptr->load();\n" +
-                            $"    return CHAOS_BRIDGE_STATUS_OK;";
-                return true;
-            }
+                {
+                    var cppType = ToCppType(managedType!);
+                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                $"    auto expected = *static_cast<{cppType}*>(request->arg1);\n" +
+                                $"    auto desired = *static_cast<{cppType}*>(request->arg2);\n" +
+                                $"    auto result = ptr->compare_exchange_strong(expected, desired, std::memory_order_seq_cst);\n" +
+                                $"    *static_cast<{cppType}*>(request->return_value) = result ? expected : ptr->load();\n" +
+                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    return true;
+                }
 
             case AtomicOperation.And:
-            {
-                var cppType = ToCppType(managedType!);
-                statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                            $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
-                            $"    auto result = ptr->fetch_and(value, std::memory_order_seq_cst);\n" +
-                            $"    *static_cast<{cppType}*>(request->return_value) = result & value;\n" +
-                            $"    return CHAOS_BRIDGE_STATUS_OK;";
-                return true;
-            }
+                {
+                    var cppType = ToCppType(managedType!);
+                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
+                                $"    auto result = ptr->fetch_and(value, std::memory_order_seq_cst);\n" +
+                                $"    *static_cast<{cppType}*>(request->return_value) = result & value;\n" +
+                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    return true;
+                }
 
             case AtomicOperation.Or:
-            {
-                var cppType = ToCppType(managedType!);
-                statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                            $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
-                            $"    auto result = ptr->fetch_or(value, std::memory_order_seq_cst);\n" +
-                            $"    *static_cast<{cppType}*>(request->return_value) = result | value;\n" +
-                            $"    return CHAOS_BRIDGE_STATUS_OK;";
-                return true;
-            }
+                {
+                    var cppType = ToCppType(managedType!);
+                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
+                                $"    auto result = ptr->fetch_or(value, std::memory_order_seq_cst);\n" +
+                                $"    *static_cast<{cppType}*>(request->return_value) = result | value;\n" +
+                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    return true;
+                }
 
             case AtomicOperation.Read:
-            {
-                var cppType = ToCppType(managedType!);
-                statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                            $"    auto result = ptr->load(std::memory_order_seq_cst);\n" +
-                            $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
-                            $"    return CHAOS_BRIDGE_STATUS_OK;";
-                return true;
-            }
+                {
+                    var cppType = ToCppType(managedType!);
+                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                $"    auto result = ptr->load(std::memory_order_seq_cst);\n" +
+                                $"    *static_cast<{cppType}*>(request->return_value) = result;\n" +
+                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    return true;
+                }
 
             case AtomicOperation.Write:
-            {
-                var cppType = ToCppType(managedType!);
-                statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
-                            $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
-                            $"    ptr->store(value, std::memory_order_seq_cst);\n" +
-                            $"    return CHAOS_BRIDGE_STATUS_OK;";
-                return true;
-            }
+                {
+                    var cppType = ToCppType(managedType!);
+                    statements = $"auto* ptr = static_cast<CHAOS_IL2CPP_ATOMIC({cppType})*>(request->arg0);\n" +
+                                $"    auto value = *static_cast<{cppType}*>(request->arg1);\n" +
+                                $"    ptr->store(value, std::memory_order_seq_cst);\n" +
+                                $"    return CHAOS_BRIDGE_STATUS_OK;";
+                    return true;
+                }
 
             default:
                 return false;

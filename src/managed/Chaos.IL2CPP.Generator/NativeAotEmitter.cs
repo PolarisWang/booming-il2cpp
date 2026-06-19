@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -456,8 +456,8 @@ public sealed class NativeAotEmitter
             sb.Append(templateModel.EntryFunctionCode);
         }
 
-	AddExternalRuntimeStubs(sb);
-	FixFallbackZeroArgCalls(sb);
+        AddExternalRuntimeStubs(sb);
+        FixFallbackZeroArgCalls(sb);
         return sb;
     }
 
@@ -872,144 +872,145 @@ public sealed class NativeAotEmitter
 	/// ChaosExternalRuntimeFallback() without the required subject_id argument.
 	/// </summary>
 	private static void FixFallbackZeroArgCalls(StringBuilder sb)
-	{
-		if (sb.ToString().IndexOf("ChaosExternalRuntimeFallback();") < 0)
-			return;
-		sb.Replace("ChaosExternalRuntimeFallback();", "ChaosExternalRuntimeFallbackDefault();");
-		// Prepend extern declaration — use StringBuilder search on modified content
-		string modified = sb.ToString();
-		int anchor = modified.LastIndexOf("#include");
-		anchor = anchor >= 0 ? modified.IndexOf('\n', anchor) + 1 : 0;
-		sb.Insert(anchor,
-			"extern \"C\" CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;\n");
-	}
+    {
+        if (sb.ToString().IndexOf("ChaosExternalRuntimeFallback();") < 0)
+            return;
+        sb.Replace("ChaosExternalRuntimeFallback();", "ChaosExternalRuntimeFallbackDefault();");
+        // Prepend extern declaration — use StringBuilder search on modified content
+        string modified = sb.ToString();
+        int anchor = modified.LastIndexOf("#include");
+        anchor = anchor >= 0 ? modified.IndexOf('\n', anchor) + 1 : 0;
+        sb.Insert(anchor,
+            "extern \"C\" CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;\n");
+    }
 
-	private static void AddExternalRuntimeStubs(StringBuilder sb)
-	{
-		string text = sb.ToString();
-		var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
-		// Match declarations/definitions: extern "C" / static inline / void return-type
-		var declRx = new Regex(@"(?:extern|static inline|\bvoid)\b.*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Multiline);
-		var calls = callRx.Matches(text);
-		if (calls.Count == 0) return;
-		var missing = new HashSet<string>();
-		foreach (Match m in calls) missing.Add(m.Groups[1].Value);
-		foreach (Match m in declRx.Matches(text))
-		{
-			string sv = m.Value;
-			// Skip declarations with empty parens "()" — they are stubs with
-			// wrong arg count and need to be replaced by corrected declarations.
-			int nextIdx = m.Index + m.Length;
-			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
-			// Also count params in declaration — if they differ from call site, skip it
-			int closeParen = text.IndexOf(')', nextIdx);
-			if (closeParen > nextIdx)
-			{
-				string declArgs = text.Substring(nextIdx, closeParen - nextIdx);
-				int declParamCount = declArgs.Length > 0 ? declArgs.Split(',').Length : 0;
-				// Count args at call site (first non-declaration call)
-				// If declaration param count != call site arg count, skip it
-			}
-			if (nextIdx < text.Length && text[nextIdx] == ')') continue;
-			foreach (var s in missing.ToList())
-				if (sv.Contains(s)) missing.Remove(s);
-		}
-		if (missing.Count == 0) return;
-		var stub = new StringBuilder();
-		stub.AppendLine("// ── External runtime stubs (post-emission) ──");
-		foreach (var sym in missing.OrderBy(s => s))
-		{
-			int argCount = 0;
-			// Count arguments from first call site
-			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
-				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
-			if (callMatch.Success)
-			{
-				int pos = callMatch.Index + callMatch.Length;
-				int depth = 0;
-				bool inString = false;
-				for (int i = pos; i < text.Length; i++)
-				{
-					char c = text[i];
-					if (c == '"') inString = !inString;
-					else if (!inString)
-					{
-						if (c == '(') depth++;
-						else if (c == ')')
-						{
-							if (depth == 0) { if (i == pos) argCount = 0; break; }
-							depth--;
-						}
-						else if (c == ',' && depth == 0) argCount++;
-					}
-				}
-				argCount++;
-			}
-		}
-		stub.AppendLine();
-		string genSrc = sb.ToString();
-		int anchor = genSrc.LastIndexOf("#include");
-		if (anchor < 0) anchor = 0;
-		else {
-			int nl = genSrc.IndexOf('\n', anchor);
-			if (nl >= 0) anchor = nl + 1;
-		}
-		sb.Insert(anchor, stub.ToString());
+    private static void AddExternalRuntimeStubs(StringBuilder sb)
+    {
+        string text = sb.ToString();
+        var callRx = new Regex(@"\b(chaos_external_runtime_\w+)\(");
+        // Match declarations/definitions: extern "C" / static inline / void return-type
+        var declRx = new Regex(@"(?:extern|static inline|\bvoid)\b.*\bchaos_external_runtime_\w+\s*\(", RegexOptions.Multiline);
+        var calls = callRx.Matches(text);
+        if (calls.Count == 0) return;
+        var missing = new HashSet<string>();
+        foreach (Match m in calls) missing.Add(m.Groups[1].Value);
+        foreach (Match m in declRx.Matches(text))
+        {
+            string sv = m.Value;
+            // Skip declarations with empty parens "()" — they are stubs with
+            // wrong arg count and need to be replaced by corrected declarations.
+            int nextIdx = m.Index + m.Length;
+            if (nextIdx < text.Length && text[nextIdx] == ')') continue;
+            // Also count params in declaration — if they differ from call site, skip it
+            int closeParen = text.IndexOf(')', nextIdx);
+            if (closeParen > nextIdx)
+            {
+                string declArgs = text.Substring(nextIdx, closeParen - nextIdx);
+                int declParamCount = declArgs.Length > 0 ? declArgs.Split(',').Length : 0;
+                // Count args at call site (first non-declaration call)
+                // If declaration param count != call site arg count, skip it
+            }
+            if (nextIdx < text.Length && text[nextIdx] == ')') continue;
+            foreach (var s in missing.ToList())
+                if (sv.Contains(s)) missing.Remove(s);
+        }
+        if (missing.Count == 0) return;
+        var stub = new StringBuilder();
+        stub.AppendLine("// ── External runtime stubs (post-emission) ──");
+        foreach (var sym in missing.OrderBy(s => s))
+        {
+            int argCount = 0;
+            // Count arguments from first call site
+            var callMatch = System.Text.RegularExpressions.Regex.Match(text,
+                System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
+            if (callMatch.Success)
+            {
+                int pos = callMatch.Index + callMatch.Length;
+                int depth = 0;
+                bool inString = false;
+                for (int i = pos; i < text.Length; i++)
+                {
+                    char c = text[i];
+                    if (c == '"') inString = !inString;
+                    else if (!inString)
+                    {
+                        if (c == '(') depth++;
+                        else if (c == ')')
+                        {
+                            if (depth == 0) { if (i == pos) argCount = 0; break; }
+                            depth--;
+                        }
+                        else if (c == ',' && depth == 0) argCount++;
+                    }
+                }
+                argCount++;
+            }
+        }
+        stub.AppendLine();
+        string genSrc = sb.ToString();
+        int anchor = genSrc.LastIndexOf("#include");
+        if (anchor < 0) anchor = 0;
+        else
+        {
+            int nl = genSrc.IndexOf('\n', anchor);
+            if (nl >= 0) anchor = nl + 1;
+        }
+        sb.Insert(anchor, stub.ToString());
 
-		// Fix existing () declarations: replace with corrected arg counts
-		string postText = sb.ToString();
-		foreach (var sym in missing.OrderBy(s => s))
-		{
-			int argCount = 0;
-			var callMatch = System.Text.RegularExpressions.Regex.Match(text,
-				System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
-			while (callMatch.Success)
-			{
-				int ls = text.LastIndexOf((char)10, callMatch.Index);
-				if (ls < 0) ls = 0;
-				string lp = text.Substring(ls, callMatch.Index - ls).TrimStart();
-				if (!lp.StartsWith("extern") && !lp.StartsWith("static"))
-					break;
-				callMatch = callMatch.NextMatch();
-			}
-			if (callMatch.Success)
-			{
-				int pos = callMatch.Index + callMatch.Length;
-				int depth = 0;
-				bool inString = false;
-				for (int i = pos; i < text.Length; i++)
-				{
-					char c = text[i];
-					if (c == '"') inString = !inString;
-					else if (!inString)
-					{
-						if (c == '(') depth++;
-						else if (c == ')')
-						{
-							if (depth == 0) { if (i == pos) argCount = 0; break; }
-							depth--;
-						}
-						else if (c == ',' && depth == 0) argCount++;
-					}
-				}
-				argCount++;
-			}
-			string wrongDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
-			string wrongDeclC = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
-			string correctDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "(";
-			for (int i = 0; i < argCount; i++)
-			{
-				if (i > 0) correctDecl += ", ";
-				correctDecl += "CHAOS_IL2CPP_INTPTR";
-			}
-			correctDecl += ") noexcept;";
-			if (postText.Contains(wrongDecl))
-				sb.Replace(wrongDecl, correctDecl);
-			if (postText.Contains(wrongDeclC))
-				sb.Replace(wrongDeclC, correctDecl);
-		}
+        // Fix existing () declarations: replace with corrected arg counts
+        string postText = sb.ToString();
+        foreach (var sym in missing.OrderBy(s => s))
+        {
+            int argCount = 0;
+            var callMatch = System.Text.RegularExpressions.Regex.Match(text,
+                System.Text.RegularExpressions.Regex.Escape(sym) + "\\(");
+            while (callMatch.Success)
+            {
+                int ls = text.LastIndexOf((char)10, callMatch.Index);
+                if (ls < 0) ls = 0;
+                string lp = text.Substring(ls, callMatch.Index - ls).TrimStart();
+                if (!lp.StartsWith("extern") && !lp.StartsWith("static"))
+                    break;
+                callMatch = callMatch.NextMatch();
+            }
+            if (callMatch.Success)
+            {
+                int pos = callMatch.Index + callMatch.Length;
+                int depth = 0;
+                bool inString = false;
+                for (int i = pos; i < text.Length; i++)
+                {
+                    char c = text[i];
+                    if (c == '"') inString = !inString;
+                    else if (!inString)
+                    {
+                        if (c == '(') depth++;
+                        else if (c == ')')
+                        {
+                            if (depth == 0) { if (i == pos) argCount = 0; break; }
+                            depth--;
+                        }
+                        else if (c == ',' && depth == 0) argCount++;
+                    }
+                }
+                argCount++;
+            }
+            string wrongDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
+            string wrongDeclC = "extern \"C\" CHAOS_IL2CPP_INTPTR " + sym + "() noexcept;";
+            string correctDecl = "extern CHAOS_IL2CPP_INTPTR " + sym + "(";
+            for (int i = 0; i < argCount; i++)
+            {
+                if (i > 0) correctDecl += ", ";
+                correctDecl += "CHAOS_IL2CPP_INTPTR";
+            }
+            correctDecl += ") noexcept;";
+            if (postText.Contains(wrongDecl))
+                sb.Replace(wrongDecl, correctDecl);
+            if (postText.Contains(wrongDeclC))
+                sb.Replace(wrongDeclC, correctDecl);
+        }
 
-	}
+    }
 
 
 }

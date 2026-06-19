@@ -168,14 +168,14 @@ public static class RegisterIREmitter
 
             // Read ir_precompile header (skip subject_id_hash[4], use max_regs[2], instr_count[2], seh_count[2], padding[2])
             // RegirMethodHeader layout: subject_id_hash(4) + max_regs(2) + instr_count(2) + seh_count(2) + padding(2) = 12
-            ushort maxRegs    = BitConverter.ToUInt16(regirData, pos + 4);
+            ushort maxRegs = BitConverter.ToUInt16(regirData, pos + 4);
             ushort instrCount = BitConverter.ToUInt16(regirData, pos + 6);
-            ushort sehCount   = BitConverter.ToUInt16(regirData, pos + 8);
+            ushort sehCount = BitConverter.ToUInt16(regirData, pos + 8);
             // padding at pos+10..pos+11 (2 bytes, ignored)
 
             uint instrBytes = (uint)(instrCount * 16);
-            uint sehBytes   = (uint)(sehCount * 24);
-            uint totalBlock  = 12 + instrBytes + sehBytes;
+            uint sehBytes = (uint)(sehCount * 24);
+            uint totalBlock = 12 + instrBytes + sehBytes;
 
             if (pos + totalBlock > regirData.Length)
                 break;

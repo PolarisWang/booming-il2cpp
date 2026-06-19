@@ -1,5 +1,6 @@
 using Chaos.IL2CPP.Contracts;
 namespace Chaos.IL2CPP.Generator;
+
 public sealed partial class AotCoreIrLowering
 {
 

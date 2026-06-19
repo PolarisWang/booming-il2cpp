@@ -1,4 +1,5 @@
 namespace Chaos.IL2CPP.Generator;
+
 using Chaos.IL2CPP.Contracts;
 using Scriban.Runtime;
 

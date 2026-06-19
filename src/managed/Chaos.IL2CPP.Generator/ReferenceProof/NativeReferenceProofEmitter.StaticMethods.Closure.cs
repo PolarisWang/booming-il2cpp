@@ -105,11 +105,11 @@ public sealed partial class NativeReferenceProofEmitter
                             RelativePath = pageEmission.Page.Path,
                             Contents = pageEmission.Contents,
                         });
-                        pageEmissionsByIndex[pageIndex] = new RuntimeSkeletonPageEmission(
-                            pageEmission.Page,
-                            string.Empty,
-                            pageEmission.SupportedMethods,
-                            pageEmission.UnsupportedMethods);
+                    pageEmissionsByIndex[pageIndex] = new RuntimeSkeletonPageEmission(
+                        pageEmission.Page,
+                        string.Empty,
+                        pageEmission.SupportedMethods,
+                        pageEmission.UnsupportedMethods);
                 }
 
                 unsupportedMethodsByIndex[pageIndex] = pageEmission.UnsupportedMethods;

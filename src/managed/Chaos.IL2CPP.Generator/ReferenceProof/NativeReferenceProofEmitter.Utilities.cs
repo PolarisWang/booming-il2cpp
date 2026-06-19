@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.Json;
 using System.Runtime.CompilerServices;
 using System.Reflection.Metadata;
@@ -12,7 +12,7 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeReferenceProofEmitter
 {
-private static IReadOnlyDictionary<string, string> BuildAssemblyPathsByName(ManagedClosureManifestArtifact closureManifest)
+    private static IReadOnlyDictionary<string, string> BuildAssemblyPathsByName(ManagedClosureManifestArtifact closureManifest)
     {
         var pathsByAssemblyName = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (var resolvedAssembly in closureManifest.ResolvedAssemblies ?? [])

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -25,15 +25,15 @@ public sealed record NativeAotTemplateModel
 
     public required string ObjectModelCode { get; init; }
 
-/// <summary>
-/// Alternative to <see cref="ObjectModelCode"/>: a StringBuilder that holds the
-/// same content but avoids the 2x memory overhead of ToString().  When set,
-/// the emitter reads chunks via <c>GetChunks()</c> directly, eliminating the
-/// need to allocate a second 3+ GB string on the Large Object Heap.
-/// Only one of <see cref="ObjectModelCode"/> or <see cref="ObjectModelCodeBuilder"/>
-/// must be non-null.
-/// </summary>
-public StringBuilder? ObjectModelCodeBuilder { get; init; }
+    /// <summary>
+    /// Alternative to <see cref="ObjectModelCode"/>: a StringBuilder that holds the
+    /// same content but avoids the 2x memory overhead of ToString().  When set,
+    /// the emitter reads chunks via <c>GetChunks()</c> directly, eliminating the
+    /// need to allocate a second 3+ GB string on the Large Object Heap.
+    /// Only one of <see cref="ObjectModelCode"/> or <see cref="ObjectModelCodeBuilder"/>
+    /// must be non-null.
+    /// </summary>
+    public StringBuilder? ObjectModelCodeBuilder { get; init; }
 
     public required IReadOnlyList<string> MethodDeclarations { get; init; }
 
@@ -116,12 +116,12 @@ public StringBuilder? ObjectModelCodeBuilder { get; init; }
     /// </summary>
     public string EntryFunctionCode { get; init; } = "";
 
-/// <summary>
-/// JSON manifest of methods for verification dispatch generation.
-/// Consumed by generate_verification_dispatch.py outside core codegen.
-/// Empty string when no methods are present.
-/// </summary>
-public string ManifestJson { get; init; } = "";
+    /// <summary>
+    /// JSON manifest of methods for verification dispatch generation.
+    /// Consumed by generate_verification_dispatch.py outside core codegen.
+    /// Empty string when no methods are present.
+    /// </summary>
+    public string ManifestJson { get; init; } = "";
 
     /// <summary>
     /// C++ namespace for the generated translation unit.

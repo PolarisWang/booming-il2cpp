@@ -13,7 +13,7 @@ public sealed partial class AotCoreIrLowering
         ["ldnull"] = new() { Op = "ldnull", OpCode = InstructionOpCode.LdNull, IlOffset = 0 },
         ["dup"] = new() { Op = "dup", IlOffset = 0 },
         ["pop"] = new() { Op = "pop", IlOffset = 0 },
-        ["ret"] = new() { Op = "ret", IlOffset = 0  },
+        ["ret"] = new() { Op = "ret", IlOffset = 0 },
         ["ldarg.0"] = new() { Op = "ldarg", Operand = 0, OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
         ["ldarg.1"] = new() { Op = "ldarg", Operand = 1, OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
         ["ldarg.2"] = new() { Op = "ldarg", Operand = 2, OpCode = InstructionOpCode.LdArg, IlOffset = 0 },
@@ -615,14 +615,34 @@ public sealed partial class AotCoreIrLowering
         // Arithmetic
         switch (op)
         {
-            case "add": case "sub": case "mul": case "div": case "rem":
-            case "and": case "or": case "xor": case "not":
-            case "neg": case "shl": case "shr":
-            case "ceq": case "cgt": case "clt":
-            case "add.ovf": case "sub.ovf": case "mul.ovf":
-            case "ldnull": case "dup": case "pop": case "ret":
-            case "nop": case "throw": case "rethrow":
-            case "ldlen": case "ldc.i4": case "ldc.i8":
+            case "add":
+            case "sub":
+            case "mul":
+            case "div":
+            case "rem":
+            case "and":
+            case "or":
+            case "xor":
+            case "not":
+            case "neg":
+            case "shl":
+            case "shr":
+            case "ceq":
+            case "cgt":
+            case "clt":
+            case "add.ovf":
+            case "sub.ovf":
+            case "mul.ovf":
+            case "ldnull":
+            case "dup":
+            case "pop":
+            case "ret":
+            case "nop":
+            case "throw":
+            case "rethrow":
+            case "ldlen":
+            case "ldc.i4":
+            case "ldc.i8":
             case "localloc":
                 return true;
         }

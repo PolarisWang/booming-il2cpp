@@ -18,103 +18,103 @@ public sealed class CodeGenStage
         try
         {
             var lookups = BuildStageLookups(linkedWorld);
-        var methodShapes = lookups.MethodShapes;
-        var methodCapabilities = lookups.MethodCapabilities;
-        var internalAssemblyNames = lookups.InternalAssemblyNames;
-        var methodsBySubjectId = lookups.MethodsBySubjectId;
-        var typedIl = new TypedIlIrArtifact
-        {
-            Methods = linkedWorld.Methods
-                .Select(method => ToTypedIlMethodArtifact(
-                    method,
-                    methodShapes,
-                    methodCapabilities,
-                    internalAssemblyNames,
-                    methodsBySubjectId))
-                .ToList(),
-        };
-        var codeRegistration = new CodeRegistrationArtifact
-        {
-            Modules = linkedWorld.Assemblies
-                .Select(assembly => new CodeRegistrationModule
-                {
-                    ModuleName = $"{assembly.Name}.dll",
-                    Registrations = linkedWorld.Methods
-                        .Where(method => string.Equals(method.AssemblyName, assembly.Name, StringComparison.Ordinal))
-                        .Select((method, index) => new CodeRegistrationEntry
-                        {
-                            RegistrationKind = "methodPointer",
-                            Slot = index,
-                            Symbol = ManagedNaming.CreateMethodSymbol(method),
-                            SubjectId = method.SubjectId,
-                        })
-                        .ToList(),
-                })
-                .ToList(),
-            TypeCapabilities = BuildCodeRegistrationTypeCapabilities(metadataWriterOutput.MetadataRegistration),
-        };
-        var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
-
-        var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
-            ?? new GenericInstantiationDemandGraphModel
+            var methodShapes = lookups.MethodShapes;
+            var methodCapabilities = lookups.MethodCapabilities;
+            var internalAssemblyNames = lookups.InternalAssemblyNames;
+            var methodsBySubjectId = lookups.MethodsBySubjectId;
+            var typedIl = new TypedIlIrArtifact
             {
-                Demands = [],
+                Methods = linkedWorld.Methods
+                    .Select(method => ToTypedIlMethodArtifact(
+                        method,
+                        methodShapes,
+                        methodCapabilities,
+                        internalAssemblyNames,
+                        methodsBySubjectId))
+                    .ToList(),
             };
-
-        // Build generic capability matrix BEFORE adding bridge methods
-        // (bridge methods would produce conflicting generic authority observations).
-        var genericCapabilityMatrix = new GenericCapabilityMatrixBuilder().Build(
-            ResolveOwnerSubjectId(request.InputAssemblyPath, linkedWorld.Assembly.Name),
-            linkedWorld.EntryPointSubjectId,
-            genericInstantiationDemandGraph,
-            aotCoreIr,
-            metadataWriterOutput.SupplementalMetadataTemplate);
-
-        // Phase L2: Bridge method AOT compilation & integration.
-        // DISABLED (LCAC Phase 1): Cross-assembly calls use Demeter Table.
-        NativeReferenceLoweringPlanArtifact nativeReferenceLoweringPlan;
-        if (linkedWorld.FullAssemblyClosure && string.IsNullOrWhiteSpace(linkedWorld.EntryPointSubjectId))
-        {
-            nativeReferenceLoweringPlan = CreateAssemblyFullClosureNativeReferenceRuntimeSkeletonPlan(linkedWorld, codeRegistration);
-        }
-        else
-        {
-            var loweringPlanner = new NativeReferenceLoweringPlanner();
-            try
+            var codeRegistration = new CodeRegistrationArtifact
             {
-                nativeReferenceLoweringPlan = loweringPlanner.Create(
-                    linkedWorld,
-                    typedIl,
-                    metadataWriterOutput.MetadataRegistration,
-                    codeRegistration);
-            }
-            catch when (ShouldFallbackToGenericLoweringPlan(linkedWorld))
+                Modules = linkedWorld.Assemblies
+                    .Select(assembly => new CodeRegistrationModule
+                    {
+                        ModuleName = $"{assembly.Name}.dll",
+                        Registrations = linkedWorld.Methods
+                            .Where(method => string.Equals(method.AssemblyName, assembly.Name, StringComparison.Ordinal))
+                            .Select((method, index) => new CodeRegistrationEntry
+                            {
+                                RegistrationKind = "methodPointer",
+                                Slot = index,
+                                Symbol = ManagedNaming.CreateMethodSymbol(method),
+                                SubjectId = method.SubjectId,
+                            })
+                            .ToList(),
+                    })
+                    .ToList(),
+                TypeCapabilities = BuildCodeRegistrationTypeCapabilities(metadataWriterOutput.MetadataRegistration),
+            };
+            var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
+
+            var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
+                ?? new GenericInstantiationDemandGraphModel
+                {
+                    Demands = [],
+                };
+
+            // Build generic capability matrix BEFORE adding bridge methods
+            // (bridge methods would produce conflicting generic authority observations).
+            var genericCapabilityMatrix = new GenericCapabilityMatrixBuilder().Build(
+                ResolveOwnerSubjectId(request.InputAssemblyPath, linkedWorld.Assembly.Name),
+                linkedWorld.EntryPointSubjectId,
+                genericInstantiationDemandGraph,
+                aotCoreIr,
+                metadataWriterOutput.SupplementalMetadataTemplate);
+
+            // Phase L2: Bridge method AOT compilation & integration.
+            // DISABLED (LCAC Phase 1): Cross-assembly calls use Demeter Table.
+            NativeReferenceLoweringPlanArtifact nativeReferenceLoweringPlan;
+            if (linkedWorld.FullAssemblyClosure && string.IsNullOrWhiteSpace(linkedWorld.EntryPointSubjectId))
             {
-                nativeReferenceLoweringPlan = CreateGenericLoweringPlan(linkedWorld, codeRegistration);
+                nativeReferenceLoweringPlan = CreateAssemblyFullClosureNativeReferenceRuntimeSkeletonPlan(linkedWorld, codeRegistration);
             }
-        }
+            else
+            {
+                var loweringPlanner = new NativeReferenceLoweringPlanner();
+                try
+                {
+                    nativeReferenceLoweringPlan = loweringPlanner.Create(
+                        linkedWorld,
+                        typedIl,
+                        metadataWriterOutput.MetadataRegistration,
+                        codeRegistration);
+                }
+                catch when (ShouldFallbackToGenericLoweringPlan(linkedWorld))
+                {
+                    nativeReferenceLoweringPlan = CreateGenericLoweringPlan(linkedWorld, codeRegistration);
+                }
+            }
 
-        var nativeAotLoweringPlan = CreateNativeAotLoweringPlan(
-            linkedWorld,
-            metadataWriterOutput.MetadataRegistration,
-            codeRegistration);
+            var nativeAotLoweringPlan = CreateNativeAotLoweringPlan(
+                linkedWorld,
+                metadataWriterOutput.MetadataRegistration,
+                codeRegistration);
 
-        var closureManifest = new ManagedClosureManifestArtifact
-        {
-            AssemblyName = linkedWorld.Assembly.Name,
-            EntrySubjectId = linkedWorld.EntryPointSubjectId,
-            InputAssemblyPath = ManagedNaming.NormalizePathForManifest(request.InputAssemblyPath, Environment.CurrentDirectory),
-            AdditionalAssemblyPaths = request.AdditionalAssemblyPaths?
-                .Where(path => !string.IsNullOrWhiteSpace(path))
-                .Select(path => ManagedNaming.NormalizePathForManifest(path, Environment.CurrentDirectory))
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .ToList(),
-            ResolvedAssemblies = BuildResolvedAssemblies(request, linkedWorld),
-            FullAssemblyClosure = request.FullAssemblyClosure,
-            InputModuleVersionId = linkedWorld.Assembly.ModuleVersionId.ToString(),
-            Artifacts =
-            [
-                new ManagedClosureArtifactRef { Kind = "typedIlIr", Path = ManagedClosureArtifactNames.TypedIlIr },
+            var closureManifest = new ManagedClosureManifestArtifact
+            {
+                AssemblyName = linkedWorld.Assembly.Name,
+                EntrySubjectId = linkedWorld.EntryPointSubjectId,
+                InputAssemblyPath = ManagedNaming.NormalizePathForManifest(request.InputAssemblyPath, Environment.CurrentDirectory),
+                AdditionalAssemblyPaths = request.AdditionalAssemblyPaths?
+                    .Where(path => !string.IsNullOrWhiteSpace(path))
+                    .Select(path => ManagedNaming.NormalizePathForManifest(path, Environment.CurrentDirectory))
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToList(),
+                ResolvedAssemblies = BuildResolvedAssemblies(request, linkedWorld),
+                FullAssemblyClosure = request.FullAssemblyClosure,
+                InputModuleVersionId = linkedWorld.Assembly.ModuleVersionId.ToString(),
+                Artifacts =
+                [
+                    new ManagedClosureArtifactRef { Kind = "typedIlIr", Path = ManagedClosureArtifactNames.TypedIlIr },
                 new ManagedClosureArtifactRef { Kind = "aotCoreIr", Path = ManagedClosureArtifactNames.AotCoreIr },
                 new ManagedClosureArtifactRef { Kind = "aotManifest", Path = ManagedClosureArtifactNames.AotManifest },
                 new ManagedClosureArtifactRef { Kind = "metadataRegistration", Path = ManagedClosureArtifactNames.MetadataRegistration },
@@ -127,25 +127,25 @@ public sealed class CodeGenStage
                 new ManagedClosureArtifactRef { Kind = "nativeReferenceLoweringPlan", Path = ManagedClosureArtifactNames.NativeReferenceLoweringPlan },
                 new ManagedClosureArtifactRef { Kind = "nativeAotLoweringPlan", Path = ManagedClosureArtifactNames.NativeAotLoweringPlan },
             ],
-        };
+            };
 
-        return PipelineResult<ManagedClosureResult>.Ok(new ManagedClosureResult
-        {
-            OutputRootPath = request.OutputRootPath,
-            TypedIlIr = typedIl,
-            AotCoreIr = aotCoreIr,
-            AotManifest = metadataWriterOutput.AotManifest,
-            MetadataRegistration = metadataWriterOutput.MetadataRegistration,
-            SupplementalMetadataTemplate = metadataWriterOutput.SupplementalMetadataTemplate,
-            CodeRegistration = codeRegistration,
-            GenericInstantiationDemandGraph = genericInstantiationDemandGraph,
-            GenericCapabilityMatrix = genericCapabilityMatrix,
-            OptimizationFacts = linkedWorld.OptimizationFacts,
-            PreserveDescriptor = linkedWorld.PreserveDescriptor,
-            NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
-            NativeAotLoweringPlan = nativeAotLoweringPlan,
-            ClosureManifest = closureManifest,
-        });
+            return PipelineResult<ManagedClosureResult>.Ok(new ManagedClosureResult
+            {
+                OutputRootPath = request.OutputRootPath,
+                TypedIlIr = typedIl,
+                AotCoreIr = aotCoreIr,
+                AotManifest = metadataWriterOutput.AotManifest,
+                MetadataRegistration = metadataWriterOutput.MetadataRegistration,
+                SupplementalMetadataTemplate = metadataWriterOutput.SupplementalMetadataTemplate,
+                CodeRegistration = codeRegistration,
+                GenericInstantiationDemandGraph = genericInstantiationDemandGraph,
+                GenericCapabilityMatrix = genericCapabilityMatrix,
+                OptimizationFacts = linkedWorld.OptimizationFacts,
+                PreserveDescriptor = linkedWorld.PreserveDescriptor,
+                NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
+                NativeAotLoweringPlan = nativeAotLoweringPlan,
+                ClosureManifest = closureManifest,
+            });
         }
         catch (Exception ex)
         {
@@ -345,9 +345,9 @@ public sealed class CodeGenStage
 
 
 
-private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAssemblies(
-        ManagedClosureRequest request,
-        LinkedWorldModel linkedWorld)
+    private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAssemblies(
+            ManagedClosureRequest request,
+            LinkedWorldModel linkedWorld)
     {
         var resolvedPathsByAssemblyName = new Dictionary<string, string>(StringComparer.Ordinal);
         AddResolvedAssemblyPath(

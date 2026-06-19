@@ -50,20 +50,20 @@ public sealed partial class NativeAotLoweringPlanner
         return (ComputeFNVHash(assemblyName), ComputeFNVHash(subjectId));
     }
 
-	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _cppStringLiteralCache =
-		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _cppStringLiteralCache =
+        new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
-	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _sanitizedSubjectIdCache =
-		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _sanitizedSubjectIdCache =
+        new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
-	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _pseudoMetadataHandleCache =
-		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _pseudoMetadataHandleCache =
+        new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
-	// Tracks allocated pseudo-metadata handles to detect FNV-1a hash collisions.
-	// With ~10000 type entries in 25-bit hash space, collision probability is ~78%.
-	// When a collision is detected, the hash is incremented until a free slot is found.
-	private static readonly System.Collections.Concurrent.ConcurrentDictionary<uint, string> _usedPseudoMetadataHandles =
-		new System.Collections.Concurrent.ConcurrentDictionary<uint, string>();
+    // Tracks allocated pseudo-metadata handles to detect FNV-1a hash collisions.
+    // With ~10000 type entries in 25-bit hash space, collision probability is ~78%.
+    // When a collision is detected, the hash is incremented until a free slot is found.
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<uint, string> _usedPseudoMetadataHandles =
+        new System.Collections.Concurrent.ConcurrentDictionary<uint, string>();
 
 
     private IReadOnlyList<IGrouping<string, AotCoreIrMethodArtifact>> _methodsGroupedByDeclaringType =
@@ -527,9 +527,9 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         var methodsDict = new Dictionary<string, AotCoreIrMethodArtifact>(filteredMethods.Count, StringComparer.Ordinal);
-            foreach (var m in filteredMethods)
-                methodsDict.TryAdd(m.SubjectId, m);
-            _methodsBySubjectId = methodsDict;
+        foreach (var m in filteredMethods)
+            methodsDict.TryAdd(m.SubjectId, m);
+        _methodsBySubjectId = methodsDict;
         // Build index of types with at least one instance method (O(m) once, then O(1) per type lookup).
         foreach (var method in filteredMethods)
         {
@@ -1341,10 +1341,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Enum runtime stubs — only needed when there are enum types in the closure.
         if (_enumTypeSubjectIds is { Count: > 0 })
             includes_.Add("\"enum_stubs.h\"");
-                                        // Async stubs (Task.Yield / YieldAwaitable) - always included;
-                                        // the header is tiny (~15 lines) and the stubs are only
-                                        // referenced when async yield methods are present.
-                                        includes_.Add("\"async_stubs.h\"");
+        // Async stubs (Task.Yield / YieldAwaitable) - always included;
+        // the header is tiny (~15 lines) and the stubs are only
+        // referenced when async yield methods are present.
+        includes_.Add("\"async_stubs.h\"");
         // Exception stubs (ChaosInvokeAction) — needed by verification dispatch.
         // Always included; the header is tiny and the inline function is zero-cost.
         includes_.Add("\"exception_stubs.h\"");
@@ -1649,35 +1649,35 @@ public sealed partial class NativeAotLoweringPlanner
     // Emitted as extern "C" symbols for RegisterCodegen + BootstrapRuntime path.
     // References the generic registration arrays emitted by EmitGenericRegistration.
 
-// ── Step 3: ReflectionQueryImageDescriptor ──────────────────────────────────
+    // ── Step 3: ReflectionQueryImageDescriptor ──────────────────────────────────
     // Emits ReflectionQueryMethodDescriptor[] and ReflectionQueryTypeDescriptor[]
     // arrays, and a ReflectionQueryImageDescriptor that module.image points to.
     // This enables ResolveSubjectId to find call_target via reflection query model.
 
-/// <summary>
-/// Generate the C++ header for pre-computed enum metadata tables.
-/// Collects enum type data from ALL resolved assemblies (not just the entry
-/// assembly) so that SPC enum types (DayOfWeek, BindingFlags, etc.) are
-/// included alongside the entry assembly's own enum types.
-/// Returns empty string if no enum types or field data are available.
-/// </summary>
+    /// <summary>
+    /// Generate the C++ header for pre-computed enum metadata tables.
+    /// Collects enum type data from ALL resolved assemblies (not just the entry
+    /// assembly) so that SPC enum types (DayOfWeek, BindingFlags, etc.) are
+    /// included alongside the entry assembly's own enum types.
+    /// Returns empty string if no enum types or field data are available.
+    /// </summary>
 
-/// <summary>
-/// Read assembly PE metadata and collect enum type flags, subjectIds,
-/// AND field name/value entries for each enum type.
-/// Populates the provided lists, skipping types already in seenSubjectIds.
-/// </summary>
+    /// <summary>
+    /// Read assembly PE metadata and collect enum type flags, subjectIds,
+    /// AND field name/value entries for each enum type.
+    /// Populates the provided lists, skipping types already in seenSubjectIds.
+    /// </summary>
 
-/// <summary>
-/// Fallback: scan PE metadata of all closure assemblies to collect enum field
-/// entries (name + constant value) when _reflectionMemberSupport.FieldEntries
-/// is empty (e.g. during foundation-dll codegen for stub-based families).
-/// </summary>
+    /// <summary>
+    /// Fallback: scan PE metadata of all closure assemblies to collect enum field
+    /// entries (name + constant value) when _reflectionMemberSupport.FieldEntries
+    /// is empty (e.g. during foundation-dll codegen for stub-based families).
+    /// </summary>
 
-/// <summary>
-/// Read the constant value from a field definition's Constant metadata.
-/// Returns null if the field has no constant or the type is unsupported.
-/// </summary>
+    /// <summary>
+    /// Read the constant value from a field definition's Constant metadata.
+    /// Returns null if the field has no constant or the type is unsupported.
+    /// </summary>
     /// <summary>
     /// Collect enum type subject IDs from reflection member support data (preferred)
     /// or fall back to scanning PE metadata of closure assemblies.

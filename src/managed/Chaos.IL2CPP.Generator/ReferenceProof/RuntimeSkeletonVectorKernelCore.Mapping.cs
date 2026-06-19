@@ -2,6 +2,7 @@ using Chaos.IL2CPP.Contracts;
 using System.Collections.Concurrent;
 
 namespace Chaos.IL2CPP.Generator;
+
 internal static partial class RuntimeSkeletonVectorKernelCore
 {
     private static bool TryCreatePlanCore(

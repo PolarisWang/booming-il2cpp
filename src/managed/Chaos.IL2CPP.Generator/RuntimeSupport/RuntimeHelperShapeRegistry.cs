@@ -227,7 +227,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                 var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                 var result = entry.Resolver(callee, paramTypes);
-                if (_dbg) System.Console.Error.WriteLine($"[SHAPE]   RESOLVER mn={entry.MethodName} prefix={entry.TypeDisplayNamePrefix} result={(result != null ? "OK:" + result[..Math.Min(50,result.Length)] : "NULL")}");
+                if (_dbg) System.Console.Error.WriteLine($"[SHAPE]   RESOLVER mn={entry.MethodName} prefix={entry.TypeDisplayNamePrefix} result={(result != null ? "OK:" + result[..Math.Min(50, result.Length)] : "NULL")}");
                 if (result != null)
                 {
                     cppExpression = result;
@@ -360,8 +360,8 @@ public sealed partial class NativeAotLoweringPlanner
                 return true;
             }
 
-                if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
-                    System.Console.Error.WriteLine($"[SHAPE_DEBUG] TryMatchGenericShape EXHAUSTED method={methodName} typeDisplayName=|{typeDisplayName}| _genericDescriptors.Count={_genericDescriptors.Count}");
+            if (methodName == "GetHRForLastWin32Error" || methodName == "GetLastPInvokeError")
+                System.Console.Error.WriteLine($"[SHAPE_DEBUG] TryMatchGenericShape EXHAUSTED method={methodName} typeDisplayName=|{typeDisplayName}| _genericDescriptors.Count={_genericDescriptors.Count}");
 
             return false;
         }

@@ -125,7 +125,8 @@ public sealed class PatchDataExtractor
                 .Select(int.Parse)
                 .ToHashSet();
             methodDefs = methodDefs
-                .Where(entry => {
+                .Where(entry =>
+                {
                     var mh = MetadataTokens.MethodDefinitionHandle((int)entry.token);
                     if (mh.IsNil) return false;
                     var md = mr.GetMethodDefinition(mh);
@@ -475,17 +476,17 @@ public sealed class PatchDataExtractor
         var hdrSize = (uint)Marshal.SizeOf<FileHeader>();
         var off = hdrSize;
 
-        var strOff = off;        off += Pad4((uint)stringHeap.Length);
-        var blbOff = off;        off += Pad4((uint)blobHeap.Length);
-        var usOff = off;         off += Pad4((uint)userStrings.Length);
+        var strOff = off; off += Pad4((uint)stringHeap.Length);
+        var blbOff = off; off += Pad4((uint)blobHeap.Length);
+        var usOff = off; off += Pad4((uint)userStrings.Length);
         var arrOff = Align4(off); off = arrOff + Pad4(SizeOf<PatchAssemblyRefEntry>() * (uint)asmRefs.Length);
-        var trOff = Align4(off);  off = trOff + Pad4(SizeOf<PatchTypeRefEntry>() * (uint)typeRefs.Length);
-        var tdOff = Align4(off);  off = tdOff + Pad4(SizeOf<PatchTypeDefEntry>() * (uint)typeDefs.Length);
-        var fdOff = Align4(off);  off = fdOff + Pad4(SizeOf<PatchFieldDefEntry>() * (uint)fieldDefs.Length);
-        var mdOff = Align4(off);  off = mdOff + Pad4(SizeOf<PatchMethodDefEntry>() * (uint)methodDefs.Length);
-        var mrOff = Align4(off);  off = mrOff + Pad4(SizeOf<PatchMemberRefEntry>() * (uint)memberRefs.Length);
+        var trOff = Align4(off); off = trOff + Pad4(SizeOf<PatchTypeRefEntry>() * (uint)typeRefs.Length);
+        var tdOff = Align4(off); off = tdOff + Pad4(SizeOf<PatchTypeDefEntry>() * (uint)typeDefs.Length);
+        var fdOff = Align4(off); off = fdOff + Pad4(SizeOf<PatchFieldDefEntry>() * (uint)fieldDefs.Length);
+        var mdOff = Align4(off); off = mdOff + Pad4(SizeOf<PatchMethodDefEntry>() * (uint)methodDefs.Length);
+        var mrOff = Align4(off); off = mrOff + Pad4(SizeOf<PatchMemberRefEntry>() * (uint)memberRefs.Length);
         var bodyOff = Align4(off); off = bodyOff + Pad4((uint)bodyData.Length);
-        var irOff = off;           off = irOff + Pad4((uint)(aotCoreIrSection?.Length ?? 0));
+        var irOff = off; off = irOff + Pad4((uint)(aotCoreIrSection?.Length ?? 0));
         var regIrOff = off;        // reg_ir section always comes after IR (empty for now, runtime falls back to JSON)
         var depOff = Align4(off);  // dependency section after reg_ir (empty for now)
 
@@ -503,28 +504,45 @@ public sealed class PatchDataExtractor
 
         var hdr = new FileHeader
         {
-            magic = Magic, version = 3, header_size = hdrSize,
-            string_heap_offset = strOff, string_heap_size = (uint)stringHeap.Length,
-            blob_heap_offset = blbOff, blob_heap_size = (uint)blobHeap.Length,
-            user_string_heap_offset = usOff, user_string_heap_size = (uint)userStrings.Length,
-            assembly_ref_offset = arrOff, assembly_ref_count = (uint)asmRefs.Length,
-            type_ref_offset = trOff, type_ref_count = (uint)typeRefs.Length,
-            type_def_offset = tdOff, type_def_count = (uint)typeDefs.Length,
-            field_def_offset = fdOff, field_def_count = (uint)fieldDefs.Length,
-            method_def_offset = mdOff, method_def_count = (uint)methodDefs.Length,
-            member_ref_offset = mrOff, member_ref_count = (uint)memberRefs.Length,
-            standalone_sig_offset = 0, standalone_sig_count = 0,
-            body_data_offset = bodyOff, body_data_size = (uint)bodyData.Length,
-            aot_core_ir_offset = irOff, aot_core_ir_size = (uint)(aotCoreIrSection?.Length ?? 0),
+            magic = Magic,
+            version = 3,
+            header_size = hdrSize,
+            string_heap_offset = strOff,
+            string_heap_size = (uint)stringHeap.Length,
+            blob_heap_offset = blbOff,
+            blob_heap_size = (uint)blobHeap.Length,
+            user_string_heap_offset = usOff,
+            user_string_heap_size = (uint)userStrings.Length,
+            assembly_ref_offset = arrOff,
+            assembly_ref_count = (uint)asmRefs.Length,
+            type_ref_offset = trOff,
+            type_ref_count = (uint)typeRefs.Length,
+            type_def_offset = tdOff,
+            type_def_count = (uint)typeDefs.Length,
+            field_def_offset = fdOff,
+            field_def_count = (uint)fieldDefs.Length,
+            method_def_offset = mdOff,
+            method_def_count = (uint)methodDefs.Length,
+            member_ref_offset = mrOff,
+            member_ref_count = (uint)memberRefs.Length,
+            standalone_sig_offset = 0,
+            standalone_sig_count = 0,
+            body_data_offset = bodyOff,
+            body_data_size = (uint)bodyData.Length,
+            aot_core_ir_offset = irOff,
+            aot_core_ir_size = (uint)(aotCoreIrSection?.Length ?? 0),
             aot_core_ir_count = aotCoreIrCount,
-            reg_ir_offset = 0, reg_ir_size = 0, reg_ir_count = 0,
-            dependency_offset = depOff, dependency_count = (uint)deps.Length,
+            reg_ir_offset = 0,
+            reg_ir_size = 0,
+            reg_ir_count = 0,
+            dependency_offset = depOff,
+            dependency_count = (uint)deps.Length,
         };
         WriteStruct(bw, hdr);
 
-        bw.Write(stringHeap);   AlignStream(bw, (uint)stringHeap.Length);
-        bw.Write(blobHeap);     AlignStream(bw, (uint)blobHeap.Length);
-        bw.Write(userStrings);  AlignStream(bw, (uint)userStrings.Length);
+        bw.Write(stringHeap); AlignStream(bw, (uint)stringHeap.Length);
+        bw.Write(blobHeap); AlignStream(bw, (uint)blobHeap.Length);
+        bw.Write(userStrings); AlignStream(bw, (uint)userStrings.Length);
         WriteStructArray(bw, asmRefs);
         WriteStructArray(bw, typeRefs);
         WriteStructArray(bw, typeDefs);

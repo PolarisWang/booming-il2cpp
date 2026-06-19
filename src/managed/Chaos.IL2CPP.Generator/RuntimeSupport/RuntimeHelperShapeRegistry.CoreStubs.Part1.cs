@@ -1,6 +1,9 @@
 // Auto-generated partial
-using System.Text; using Chaos.IL2CPP.Contracts; using Scriban.Runtime;
+using System.Text;
+using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 namespace Chaos.IL2CPP.Generator;
+
 public sealed partial class NativeAotLoweringPlanner
 {
     partial class RuntimeHelperShapeRegistry
@@ -1810,7 +1813,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0, 1 });
                 }));
 
-            
+
             // === GCHandle stubs (DirectNativeSymbol) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Runtime.InteropServices.GCHandle",
@@ -2092,7 +2095,7 @@ public sealed partial class NativeAotLoweringPlanner
                         DirectNativeSymbol: "ChaosSafeBufferWriteByte");
                 }));
 
-// === String.Join (IEnumerable<T> — resolves variants at planning time) ===
+            // === String.Join (IEnumerable<T> — resolves variants at planning time) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Join",
@@ -3038,7 +3041,7 @@ public sealed partial class NativeAotLoweringPlanner
                 })
             { IsInstanceMethod = true });
 
-                        // === Array::Copy (GenericShapeDescriptor -- calls ChaosArrayCopy for 5-param overload) ===
+            // === Array::Copy (GenericShapeDescriptor -- calls ChaosArrayCopy for 5-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",
                 MethodName: "Copy",

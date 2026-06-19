@@ -1,6 +1,9 @@
 // Auto-generated partial
-using System.Text; using Chaos.IL2CPP.Contracts; using Scriban.Runtime;
+using System.Text;
+using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 namespace Chaos.IL2CPP.Generator;
+
 public sealed partial class NativeAotLoweringPlanner
 {
     partial class RuntimeHelperShapeRegistry
@@ -2526,198 +2529,198 @@ public sealed partial class NativeAotLoweringPlanner
                     return null;
                 }));
 
-		            // ── Globalization stubs (DirectNativeSymbol) ─────────────────────
-	            // These replace managed dispatch with direct native C function calls
-	            // for commonly-called globalization methods.  ASCII-range implementations
-	            // avoid the overhead of generic managed dispatch (~0.2ms → ~0.01ms).
+            // ── Globalization stubs (DirectNativeSymbol) ─────────────────────
+            // These replace managed dispatch with direct native C function calls
+            // for commonly-called globalization methods.  ASCII-range implementations
+            // avoid the overhead of generic managed dispatch (~0.2ms → ~0.01ms).
 
-	            // CharUnicodeInfo.GetNumericValue(char) → double
-	            registry.Register("System.Globalization.CharUnicodeInfo", "GetNumericValue", ["System.Char"],
-	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetNumericValue",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateInt32AbiSlot(),
-	                }),
-	                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-	                new HashSet<int>());
+            // CharUnicodeInfo.GetNumericValue(char) → double
+            registry.Register("System.Globalization.CharUnicodeInfo", "GetNumericValue", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetNumericValue",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateInt32AbiSlot(),
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int>());
 
-	            // CharUnicodeInfo.GetDigitValue(char) → int
-	            registry.Register("System.Globalization.CharUnicodeInfo", "GetDigitValue", ["System.Char"],
-	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDigitValue",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateInt32AbiSlot(),
-	                }),
-	                CreateInt32AbiSlot(),
-	                new HashSet<int>());
+            // CharUnicodeInfo.GetDigitValue(char) → int
+            registry.Register("System.Globalization.CharUnicodeInfo", "GetDigitValue", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDigitValue",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
 
-	            // CharUnicodeInfo.GetDigitValue(string, int) → int
-	            registry.Register("System.Globalization.CharUnicodeInfo", "GetDigitValue", ["System.String", "System.Int32"],
-	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDigitValueString",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-	                {
-	                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-	                    CreateInt32AbiSlot(),
-	                }),
-	                CreateInt32AbiSlot(),
-	                new HashSet<int> { 0, 1 });
+            // CharUnicodeInfo.GetDigitValue(string, int) → int
+            registry.Register("System.Globalization.CharUnicodeInfo", "GetDigitValue", ["System.String", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDigitValueString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
 
-	            // CharUnicodeInfo.GetNumericValue(string, int) → double
-	            registry.Register("System.Globalization.CharUnicodeInfo", "GetNumericValue", ["System.String", "System.Int32"],
-	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetNumericValueString",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-	                {
-	                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-	                    CreateInt32AbiSlot(),
-	                }),
-	                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
-	                new HashSet<int> { 0, 1 });
+            // CharUnicodeInfo.GetNumericValue(string, int) → double
+            registry.Register("System.Globalization.CharUnicodeInfo", "GetNumericValue", ["System.String", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetNumericValueString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        CreateInt32AbiSlot(),
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1 });
 
-	            // CharUnicodeInfo.GetDecimalDigitValue(char) → int
-	            registry.Register("System.Globalization.CharUnicodeInfo", "GetDecimalDigitValue", ["System.Char"],
-	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDecimalDigitValue",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateInt32AbiSlot(),
-	                }),
-	                CreateInt32AbiSlot(),
-	                new HashSet<int>());
+            // CharUnicodeInfo.GetDecimalDigitValue(char) → int
+            registry.Register("System.Globalization.CharUnicodeInfo", "GetDecimalDigitValue", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetDecimalDigitValue",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
 
-	            // CharUnicodeInfo.GetUnicodeCategory(char) → UnicodeCategory
-	            registry.Register("System.Globalization.CharUnicodeInfo", "GetUnicodeCategory", ["System.Char"],
-	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetUnicodeCategory",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateInt32AbiSlot(),
-	                }),
-	                CreateInt32AbiSlot(),
-	                new HashSet<int>());
+            // CharUnicodeInfo.GetUnicodeCategory(char) → UnicodeCategory
+            registry.Register("System.Globalization.CharUnicodeInfo", "GetUnicodeCategory", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetUnicodeCategory",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
 
-	            // CharUnicodeInfo.GetUnicodeCategory(int) → UnicodeCategory
-	            registry.Register("System.Globalization.CharUnicodeInfo", "GetUnicodeCategory", ["System.Int32"],
-	                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetUnicodeCategory",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateInt32AbiSlot(),
-	                }),
-	                CreateInt32AbiSlot(),
-	                new HashSet<int>());
+            // CharUnicodeInfo.GetUnicodeCategory(int) → UnicodeCategory
+            registry.Register("System.Globalization.CharUnicodeInfo", "GetUnicodeCategory", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosCharUnicodeInfoGetUnicodeCategory",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
 
-	            // CompareInfo.IsSortable(string) → bool
-	            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.String"],
-	                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableString",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-	                }),
-	                CreateInt32AbiSlot(),
-	                new HashSet<int> { 0 });
+            // CompareInfo.IsSortable(string) → bool
+            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
 
-	            // CompareInfo.IsSortable(char) → bool
-	            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.Char"],
-	                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableInt",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateInt32AbiSlot(),
-	                }),
-	                CreateInt32AbiSlot(),
-	                new HashSet<int>());
+            // CompareInfo.IsSortable(char) → bool
+            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.Char"],
+                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableInt",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
 
-	            // CompareInfo.IsSortable(System.Text.Rune) → bool
-	            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.Text.Rune"],
-	                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableInt",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateInt32AbiSlot(),
-	                }),
-	                CreateInt32AbiSlot(),
-	                new HashSet<int>());
+            // CompareInfo.IsSortable(System.Text.Rune) → bool
+            registry.Register("System.Globalization.CompareInfo", "IsSortable", ["System.Text.Rune"],
+                ShapeKind.SimpleForward, "ChaosCompareInfoIsSortableInt",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateInt32AbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int>());
 
-	            // DateTimeFormatInfo.GetInstance(IFormatProvider) → DateTimeFormatInfo
-	            registry.Register("System.Globalization.DateTimeFormatInfo", "GetInstance", ["System.IFormatProvider"],
-	                ShapeKind.SimpleForward, "ChaosDateTimeFormatInfoGetInstance",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-	                }),
-	                CreateNativeIntAbiSlot("System.Globalization.DateTimeFormatInfo", AotCoreIrTypeShapeKind.ReferenceType),
-	                new HashSet<int> { 0 });
+            // DateTimeFormatInfo.GetInstance(IFormatProvider) → DateTimeFormatInfo
+            registry.Register("System.Globalization.DateTimeFormatInfo", "GetInstance", ["System.IFormatProvider"],
+                ShapeKind.SimpleForward, "ChaosDateTimeFormatInfoGetInstance",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Globalization.DateTimeFormatInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-	            // CultureInfo.GetCultureInfo(string) → CultureInfo  (static)
-	            registry.Register("System.Globalization.CultureInfo", "GetCultureInfo", ["System.String"],
-	                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfo",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-	                }),
-	                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
-	                new HashSet<int> { 0 });
+            // CultureInfo.GetCultureInfo(string) → CultureInfo  (static)
+            registry.Register("System.Globalization.CultureInfo", "GetCultureInfo", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfo",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-	            // CultureInfo.GetCultureInfo(string, bool) → CultureInfo (static)
-	            registry.Register("System.Globalization.CultureInfo", "GetCultureInfo", ["System.String", "System.Boolean"],
-	                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfoBool",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-	                {
-	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-	                    CreateInt32AbiSlot(),  // bool → Int32 in unmanaged ABI
-	                }),
-	                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
-	                new HashSet<int> { 0 });
+            // CultureInfo.GetCultureInfo(string, bool) → CultureInfo (static)
+            registry.Register("System.Globalization.CultureInfo", "GetCultureInfo", ["System.String", "System.Boolean"],
+                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfoBool",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                        CreateInt32AbiSlot(),  // bool → Int32 in unmanaged ABI
+                }),
+                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-	            // CultureInfo.GetCultureInfoByIetfLanguageTag(string) → CultureInfo (static)
-	            registry.Register("System.Globalization.CultureInfo", "GetCultureInfoByIetfLanguageTag", ["System.String"],
-	                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfoByIetfLanguageTag",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-	                }),
-	                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
-	                new HashSet<int> { 0 });
+            // CultureInfo.GetCultureInfoByIetfLanguageTag(string) → CultureInfo (static)
+            registry.Register("System.Globalization.CultureInfo", "GetCultureInfoByIetfLanguageTag", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosCultureGetCultureInfoByIetfLanguageTag",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-	            // CultureInfo.CreateSpecificCulture(string) → CultureInfo (static)
-	            registry.Register("System.Globalization.CultureInfo", "CreateSpecificCulture", ["System.String"],
-	                ShapeKind.SimpleForward, "ChaosCultureCreateSpecificCulture",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-	                }),
-	                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
-	                new HashSet<int> { 0 });
+            // CultureInfo.CreateSpecificCulture(string) → CultureInfo (static)
+            registry.Register("System.Globalization.CultureInfo", "CreateSpecificCulture", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosCultureCreateSpecificCulture",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Globalization.CultureInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-	            // CompareInfo.GetCompareInfo(string) → CompareInfo (static)
-	            registry.Register("System.Globalization.CompareInfo", "GetCompareInfo", ["System.String"],
-	                ShapeKind.SimpleForward, "ChaosCompareInfoGetCompareInfo",
-	                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-	                {
-	                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-	                }),
-	                CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType),
-	                new HashSet<int> { 0 });
+            // CompareInfo.GetCompareInfo(string) → CompareInfo (static)
+            registry.Register("System.Globalization.CompareInfo", "GetCompareInfo", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosCompareInfoGetCompareInfo",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
+                {
+                        CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
 
-	            // ── Chaos.TestFramework.Assert inline shapes ──────────────────────
-	            // These inline expansions replace Assert.AreEqual/IsTrue/IsNull etc.
-	            // calls with C++ code that checks the condition and throws a managed
-	            // exception on failure.  The exception is caught by the dispatch
-	            // wrapper's catch(chaos_managed_exception&) block.
-	            //
-	            // The C# codegen always emits these assertion bodies.  The calling
-	            // test code simply does not invoke Assert methods in non-verification
-	            // builds, so the assertion code is dead-stripped by the C++ linker.
+            // ── Chaos.TestFramework.Assert inline shapes ──────────────────────
+            // These inline expansions replace Assert.AreEqual/IsTrue/IsNull etc.
+            // calls with C++ code that checks the condition and throws a managed
+            // exception on failure.  The exception is caught by the dispatch
+            // wrapper's catch(chaos_managed_exception&) block.
+            //
+            // The C# codegen always emits these assertion bodies.  The calling
+            // test code simply does not invoke Assert methods in non-verification
+            // builds, so the assertion code is dead-stripped by the C++ linker.
 
-	            // Assert.AreEqual(expected, actual) — all overloads
-	            // For byte[] arrays, uses element-by-element memcmp instead of pointer
-	            // comparison, since different array allocations are never pointer-equal.
-	            registry.RegisterInline(new InlineShapeDescriptor(
-	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-	                MethodName: "AreEqual",
-	                Resolver: static (callee, paramTypes) =>
-	                {
-	                    if (paramTypes.Count < 2) return null;
+            // Assert.AreEqual(expected, actual) — all overloads
+            // For byte[] arrays, uses element-by-element memcmp instead of pointer
+            // comparison, since different array allocations are never pointer-equal.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "AreEqual",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 2) return null;
 
-	                    // byte[]: structural comparison via memcmp
-	                    if (paramTypes[0] == "System.Byte[]" && paramTypes[1] == "System.Byte[]")
-	                    {
-	                        return """
+                    // byte[]: structural comparison via memcmp
+                    if (paramTypes[0] == "System.Byte[]" && paramTypes[1] == "System.Byte[]")
+                    {
+                        return """
 	                            [&]() -> void {
 	                                bool _cae_eq;
 	                                if (({0}) == ({1})) _cae_eq = true;
@@ -2738,71 +2741,71 @@ public sealed partial class NativeAotLoweringPlanner
 	                                if (!_cae_eq) throw chaos_managed_exception{};
 	                            }()
 	                            """.Replace("\r\n", "\n").Trim();
-	                    }
+                    }
 
-	                    return """
+                    return """
 	                        [&]() -> void { if (({0}) != ({1})) { throw chaos_managed_exception{}; } }()
 	                        """.Replace("\r\n", "\n").Trim();
-	                }));
+                }));
 
-	            // Assert.IsTrue(condition)
-	            registry.RegisterInline(new InlineShapeDescriptor(
-	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-	                MethodName: "IsTrue",
-	                Resolver: static (callee, paramTypes) =>
-	                {
-	                    if (paramTypes.Count < 1) return null;
-	                    return """
+            // Assert.IsTrue(condition)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "IsTrue",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 1) return null;
+                    return """
 	                        [&]() -> void { if (!({0})) { throw chaos_managed_exception{}; } }()
 	                        """.Replace("\r\n", "\n").Trim();
-	                }));
+                }));
 
-	            // Assert.IsFalse(condition)
-	            registry.RegisterInline(new InlineShapeDescriptor(
-	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-	                MethodName: "IsFalse",
-	                Resolver: static (callee, paramTypes) =>
-	                {
-	                    if (paramTypes.Count < 1) return null;
-	                    return """
+            // Assert.IsFalse(condition)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "IsFalse",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 1) return null;
+                    return """
 	                        [&]() -> void { if ({0}) { throw chaos_managed_exception{}; } }()
 	                        """.Replace("\r\n", "\n").Trim();
-	                }));
+                }));
 
-	            // Assert.IsNull(value)
-	            registry.RegisterInline(new InlineShapeDescriptor(
-	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-	                MethodName: "IsNull",
-	                Resolver: static (callee, paramTypes) =>
-	                {
-	                    if (paramTypes.Count < 1) return null;
-	                    return """
+            // Assert.IsNull(value)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "IsNull",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 1) return null;
+                    return """
 	                        [&]() -> void { if (({0}) != 0) { throw chaos_managed_exception{}; } }()
 	                        """.Replace("\r\n", "\n").Trim();
-	                }));
+                }));
 
-	            // Assert.IsNotNull(value)
-	            registry.RegisterInline(new InlineShapeDescriptor(
-	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-	                MethodName: "IsNotNull",
-	                Resolver: static (callee, paramTypes) =>
-	                {
-	                    if (paramTypes.Count < 1) return null;
-	                    return """
+            // Assert.IsNotNull(value)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "IsNotNull",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 1) return null;
+                    return """
 	                        [&]() -> void { if (({0}) == 0) { throw chaos_managed_exception{}; } }()
 	                        """.Replace("\r\n", "\n").Trim();
-	                }));
+                }));
 
-	            // Assert.Fail(message) — always throws
-	            registry.RegisterInline(new InlineShapeDescriptor(
-	                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-	                MethodName: "Fail",
-	                Resolver: static (callee, paramTypes) =>
-	                {
-	                    return """
+            // Assert.Fail(message) — always throws
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "Fail",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return """
 	                        [&]() -> void { throw chaos_managed_exception{}; }()
 	                        """.Replace("\r\n", "\n").Trim();
-	                }));
+                }));
 
             // Assert.Throws<T>(Action) — deferred to follow-up implementation.
             // Requires recognizing the callvirt Invoke delegate pattern and

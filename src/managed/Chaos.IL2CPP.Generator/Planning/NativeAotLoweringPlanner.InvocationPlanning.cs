@@ -423,7 +423,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }
 
                 // System.Console.Error.WriteLine($"[INVOCATION_DEBUG] TryCreateExternalRuntimeHelperDefinition targetSubjectId={targetSubjectId}");
-if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDefinition))
+                if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDefinition))
                 {
                     continue;
                 }
@@ -740,7 +740,7 @@ if (!TryCreateExternalRuntimeHelperDefinition(targetSubjectId, out var helperDef
                     }
                     // Multiple implementations: skip devirtualization, fall through to vtable
                 }
-               else
+                else
                 {
                     // (b) Guard-based: exactly 2 implementations, one from declaring type itself
                     var uniqueImpls = routes

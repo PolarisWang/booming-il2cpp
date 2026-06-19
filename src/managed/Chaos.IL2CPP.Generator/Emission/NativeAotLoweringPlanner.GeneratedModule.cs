@@ -204,117 +204,117 @@ public sealed partial class NativeAotLoweringPlanner
         _emittedValueTypeSubjectIds ??= new HashSet<string>(StringComparer.Ordinal);
         // Post-scan the lowered method artifacts for closure assembly value
         // type ABI slots.  The ObjectModelEmission phase only scans types in
-            // the AOT IR's type metadata, which may not include value types from
-            // closure assemblies (e.g., System.Data.ConnectionState,
-            // System.Data.IsolationLevel).  Without these, the generated header
-            // lacks chaos_valuetype_* typedefs, causing C2061.
-            //
-            // THREE SCAN LAYERS (each catches types missed by the previous):
-            //   1. ABI slot scan (below): iterates methodsForLowering ReturnAbi +
-            //      ParameterAbis for ValueTypeByValue carrier or ValueType shape.
-            //      Catches most value types used in method signatures.
-            //   2. Declaration-string regex scan (lines 240-253): parses extern "C"
-            //      declaration strings for 'chaos_valuetype_' identifiers. Catches
-            //      value types embedded in C++ type names (generics, by-ref).
-            //   3. Object-model text scan (lines 284-305): scans emitted object model
-            //      builder text. Catches value types from struct fields and generic args.
-            //
-            // Use methodsForLowering (parameter, lowered artifacts with proper
-            // CarrierKindCode=ValueTypeByValue and TypeSubjectId set) rather than
-            // _methodsBySubjectId (original AOT IR JSON with no TypeSubjectId for
-            // value types).
-            for (int mi = 0; mi < methodsForLowering.Count; mi++)
+        // the AOT IR's type metadata, which may not include value types from
+        // closure assemblies (e.g., System.Data.ConnectionState,
+        // System.Data.IsolationLevel).  Without these, the generated header
+        // lacks chaos_valuetype_* typedefs, causing C2061.
+        //
+        // THREE SCAN LAYERS (each catches types missed by the previous):
+        //   1. ABI slot scan (below): iterates methodsForLowering ReturnAbi +
+        //      ParameterAbis for ValueTypeByValue carrier or ValueType shape.
+        //      Catches most value types used in method signatures.
+        //   2. Declaration-string regex scan (lines 240-253): parses extern "C"
+        //      declaration strings for 'chaos_valuetype_' identifiers. Catches
+        //      value types embedded in C++ type names (generics, by-ref).
+        //   3. Object-model text scan (lines 284-305): scans emitted object model
+        //      builder text. Catches value types from struct fields and generic args.
+        //
+        // Use methodsForLowering (parameter, lowered artifacts with proper
+        // CarrierKindCode=ValueTypeByValue and TypeSubjectId set) rather than
+        // _methodsBySubjectId (original AOT IR JSON with no TypeSubjectId for
+        // value types).
+        for (int mi = 0; mi < methodsForLowering.Count; mi++)
+        {
+            var m = methodsForLowering[mi];
+            if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
+                !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
+                _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
+            if (m.ParameterAbis != null)
             {
-                var m = methodsForLowering[mi];
-                if (m.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
-                    !string.IsNullOrEmpty(m.ReturnAbi.TypeSubjectId))
-                    _emittedValueTypeSubjectIds.Add(m.ReturnAbi.TypeSubjectId);
-                if (m.ParameterAbis != null)
+                foreach (var abi in m.ParameterAbis)
                 {
-                    foreach (var abi in m.ParameterAbis)
-                    {
-                        if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
-                            !string.IsNullOrEmpty(abi.TypeSubjectId))
-                            _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
-                    }
+                    if (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
+                        !string.IsNullOrEmpty(abi.TypeSubjectId))
+                        _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
                 }
             }
-            // ── Supplemental: scan method declaration strings for chaos_valuetype_* ──
-            // Cross-assembly stub methods (e.g., System.Linq) generate extern "C"
-            // declarations that reference chaos_valuetype_* types, but the original
-            // AOT IR JSON lacks TypeSubjectId on their ABI slots (even after
-            // lowering), so the ABI-slot scans above miss them.  By scanning the
-            // declaration strings we capture every referenced valuetype symbol and
-            // emit its typedef unconditionally, avoiding C4430/C2146 at the call site.
-            var valueTypeSymbols = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var decl in _methodDeclarations)
+        }
+        // ── Supplemental: scan method declaration strings for chaos_valuetype_* ──
+        // Cross-assembly stub methods (e.g., System.Linq) generate extern "C"
+        // declarations that reference chaos_valuetype_* types, but the original
+        // AOT IR JSON lacks TypeSubjectId on their ABI slots (even after
+        // lowering), so the ABI-slot scans above miss them.  By scanning the
+        // declaration strings we capture every referenced valuetype symbol and
+        // emit its typedef unconditionally, avoiding C4430/C2146 at the call site.
+        var valueTypeSymbols = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var decl in _methodDeclarations)
+        {
+            int searchIdx = 0;
+            while ((searchIdx = decl.IndexOf("chaos_valuetype_", searchIdx, StringComparison.Ordinal)) >= 0)
             {
-                int searchIdx = 0;
-                while ((searchIdx = decl.IndexOf("chaos_valuetype_", searchIdx, StringComparison.Ordinal)) >= 0)
-                {
-                    int symStart = searchIdx;
-                    int symEnd = symStart + "chaos_valuetype_".Length;
-                    while (symEnd < decl.Length && (char.IsLetterOrDigit(decl[symEnd]) || decl[symEnd] == '_'))
-                        symEnd++;
-                    if (symEnd > symStart + "chaos_valuetype_".Length)
-                        valueTypeSymbols.Add(decl.Substring(symStart, symEnd - symStart));
-                    searchIdx = symEnd;
-                }
+                int symStart = searchIdx;
+                int symEnd = symStart + "chaos_valuetype_".Length;
+                while (symEnd < decl.Length && (char.IsLetterOrDigit(decl[symEnd]) || decl[symEnd] == '_'))
+                    symEnd++;
+                if (symEnd > symStart + "chaos_valuetype_".Length)
+                    valueTypeSymbols.Add(decl.Substring(symStart, symEnd - symStart));
+                searchIdx = symEnd;
             }
+        }
 
-            var vtBuilder = new System.Text.StringBuilder();
-            vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");
-            foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+        var vtBuilder = new System.Text.StringBuilder();
+        vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");
+        foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+        {
+            vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
+            vtBuilder.Append(GetNativeValueTypeSymbol(typeId));
+            vtBuilder.AppendLine(";");
+        }
+        // Emit typedefs for any chaos_valuetype_* symbols found in method
+        // declarations that were NOT already covered by the TypeSubjectId scan
+        // above (e.g., types from cross-assembly stub ABI slots with no metadata).
+        var emittedSymbols = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var typeId in _emittedValueTypeSubjectIds)
+            emittedSymbols.Add(GetNativeValueTypeSymbol(typeId));
+        foreach (string sym in valueTypeSymbols.OrderBy(s => s, StringComparer.Ordinal))
+        {
+            if (emittedSymbols.Add(sym))
             {
                 vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
-                vtBuilder.Append(GetNativeValueTypeSymbol(typeId));
+                vtBuilder.Append(sym);
                 vtBuilder.AppendLine(";");
             }
-            // Emit typedefs for any chaos_valuetype_* symbols found in method
-            // declarations that were NOT already covered by the TypeSubjectId scan
-            // above (e.g., types from cross-assembly stub ABI slots with no metadata).
-            var emittedSymbols = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var typeId in _emittedValueTypeSubjectIds)
-                emittedSymbols.Add(GetNativeValueTypeSymbol(typeId));
-            foreach (string sym in valueTypeSymbols.OrderBy(s => s, StringComparer.Ordinal))
+        }
+        // Also scan the object model section text for chaos_valuetype_* symbols.
+        // The object model section (EmitObjectModelDeclarations) generates extern
+        // "C" declarations for cross-assembly references (e.g., vtable entries)
+        // whose types may not appear in methodDeclarations.  Without this fallback,
+        // types like System.Linq.ExceptionArgument used by vtable-entry methods
+        // have no typedef in the header, causing C4430 at the call site.
+        if (!string.IsNullOrEmpty(objectModelText))
+        {
+            int searchIdx = 0;
+            while ((searchIdx = objectModelText.IndexOf("chaos_valuetype_", searchIdx, StringComparison.Ordinal)) >= 0)
             {
-                if (emittedSymbols.Add(sym))
+                int symStart = searchIdx;
+                int symEnd = symStart + "chaos_valuetype_".Length;
+                while (symEnd < objectModelText.Length && (char.IsLetterOrDigit(objectModelText[symEnd]) || objectModelText[symEnd] == '_'))
+                    symEnd++;
+                if (symEnd > symStart + "chaos_valuetype_".Length)
                 {
-                    vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
-                    vtBuilder.Append(sym);
-                    vtBuilder.AppendLine(";");
-                }
-            }
-            // Also scan the object model section text for chaos_valuetype_* symbols.
-            // The object model section (EmitObjectModelDeclarations) generates extern
-            // "C" declarations for cross-assembly references (e.g., vtable entries)
-            // whose types may not appear in methodDeclarations.  Without this fallback,
-            // types like System.Linq.ExceptionArgument used by vtable-entry methods
-            // have no typedef in the header, causing C4430 at the call site.
-            if (!string.IsNullOrEmpty(objectModelText))
-            {
-                int searchIdx = 0;
-                while ((searchIdx = objectModelText.IndexOf("chaos_valuetype_", searchIdx, StringComparison.Ordinal)) >= 0)
-                {
-                    int symStart = searchIdx;
-                    int symEnd = symStart + "chaos_valuetype_".Length;
-                    while (symEnd < objectModelText.Length && (char.IsLetterOrDigit(objectModelText[symEnd]) || objectModelText[symEnd] == '_'))
-                        symEnd++;
-                    if (symEnd > symStart + "chaos_valuetype_".Length)
+                    string sym = objectModelText.Substring(symStart, symEnd - symStart);
+                    if (emittedSymbols.Add(sym))
                     {
-                        string sym = objectModelText.Substring(symStart, symEnd - symStart);
-                        if (emittedSymbols.Add(sym))
-                        {
-                            vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
-                            vtBuilder.Append(sym);
-                            vtBuilder.AppendLine(";");
-                        }
+                        vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
+                        vtBuilder.Append(sym);
+                        vtBuilder.AppendLine(";");
                     }
-                    searchIdx = symEnd;
                 }
+                searchIdx = symEnd;
             }
-            vtBuilder.AppendLine();
-            valueTypeTypedefs = vtBuilder.ToString();
+        }
+        vtBuilder.AppendLine();
+        valueTypeTypedefs = vtBuilder.ToString();
         return new ScriptObject
         {
             ["type_groups"] = typeGroupModels,

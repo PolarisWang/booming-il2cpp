@@ -622,64 +622,64 @@ public sealed partial class NativeAotLoweringPlanner
                 return new IRBlock(block.BodyInstructions, null);
 
             case IRSequence seq when seq.Nodes.Count > 0:
-            {
-                var trimmed = RemoveTrailingBranch(seq.Nodes[^1], targetOffset);
-                if (!ReferenceEquals(trimmed, seq.Nodes[^1]))
                 {
-                    var newNodes = new List<StructuredIRNode>(seq.Nodes);
-                    newNodes[^1] = trimmed;
-                    return new IRSequence(newNodes);
+                    var trimmed = RemoveTrailingBranch(seq.Nodes[^1], targetOffset);
+                    if (!ReferenceEquals(trimmed, seq.Nodes[^1]))
+                    {
+                        var newNodes = new List<StructuredIRNode>(seq.Nodes);
+                        newNodes[^1] = trimmed;
+                        return new IRSequence(newNodes);
+                    }
+                    return seq;
                 }
-                return seq;
-            }
 
             case IRIfThenElse ite:
-            {
-                var thenBody = RemoveTrailingBranch(ite.ThenBody, targetOffset);
-                var elseBody = ite.ElseBody is null ? null : RemoveTrailingBranch(ite.ElseBody, targetOffset);
-                var postMergeBody = ite.PostMergeBody is null ? null : RemoveTrailingBranch(ite.PostMergeBody, targetOffset);
-                if (!ReferenceEquals(thenBody, ite.ThenBody) || !ReferenceEquals(elseBody, ite.ElseBody) || !ReferenceEquals(postMergeBody, ite.PostMergeBody))
-                    return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator, thenBody, elseBody, postMergeBody, ite.PreConditionDepth);
-                return ite;
-            }
+                {
+                    var thenBody = RemoveTrailingBranch(ite.ThenBody, targetOffset);
+                    var elseBody = ite.ElseBody is null ? null : RemoveTrailingBranch(ite.ElseBody, targetOffset);
+                    var postMergeBody = ite.PostMergeBody is null ? null : RemoveTrailingBranch(ite.PostMergeBody, targetOffset);
+                    if (!ReferenceEquals(thenBody, ite.ThenBody) || !ReferenceEquals(elseBody, ite.ElseBody) || !ReferenceEquals(postMergeBody, ite.PostMergeBody))
+                        return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator, thenBody, elseBody, postMergeBody, ite.PreConditionDepth);
+                    return ite;
+                }
 
             case IRWhileLoop loop:
-            {
-                var body = RemoveTrailingBranch(loop.Body, targetOffset);
-                if (!ReferenceEquals(body, loop.Body))
-                    return new IRWhileLoop(loop.ConditionInstructions, loop.ConditionTerminator, body, loop.ExitOffset);
-                return loop;
-            }
+                {
+                    var body = RemoveTrailingBranch(loop.Body, targetOffset);
+                    if (!ReferenceEquals(body, loop.Body))
+                        return new IRWhileLoop(loop.ConditionInstructions, loop.ConditionTerminator, body, loop.ExitOffset);
+                    return loop;
+                }
 
             case IRDoWhileLoop loop:
-            {
-                var body = RemoveTrailingBranch(loop.Body, targetOffset);
-                if (!ReferenceEquals(body, loop.Body))
-                    return new IRDoWhileLoop(body, loop.LatchInstructions, loop.LatchTerminator, loop.HeaderOffset, loop.ExitOffset);
-                return loop;
-            }
+                {
+                    var body = RemoveTrailingBranch(loop.Body, targetOffset);
+                    if (!ReferenceEquals(body, loop.Body))
+                        return new IRDoWhileLoop(body, loop.LatchInstructions, loop.LatchTerminator, loop.HeaderOffset, loop.ExitOffset);
+                    return loop;
+                }
 
             case IRSwitch sw:
-            {
-                var caseBodies = sw.CaseBodies.ToDictionary(
-                    pair => pair.Key,
-                    pair => RemoveTrailingBranch(pair.Value, targetOffset));
-                var defaultBody = sw.DefaultBody is null ? null : RemoveTrailingBranch(sw.DefaultBody, targetOffset);
-                bool changed = sw.DefaultBody is null != (defaultBody is null) ||
-                    sw.CaseBodies.Keys.Any(k => !ReferenceEquals(caseBodies[k], sw.CaseBodies[k]));
-                if (changed || !ReferenceEquals(defaultBody, sw.DefaultBody))
-                    return new IRSwitch(sw.SwitchInstructions, caseBodies, defaultBody, sw.ExitOffset, sw.FallthroughCaseValues);
-                return sw;
-            }
+                {
+                    var caseBodies = sw.CaseBodies.ToDictionary(
+                        pair => pair.Key,
+                        pair => RemoveTrailingBranch(pair.Value, targetOffset));
+                    var defaultBody = sw.DefaultBody is null ? null : RemoveTrailingBranch(sw.DefaultBody, targetOffset);
+                    bool changed = sw.DefaultBody is null != (defaultBody is null) ||
+                        sw.CaseBodies.Keys.Any(k => !ReferenceEquals(caseBodies[k], sw.CaseBodies[k]));
+                    if (changed || !ReferenceEquals(defaultBody, sw.DefaultBody))
+                        return new IRSwitch(sw.SwitchInstructions, caseBodies, defaultBody, sw.ExitOffset, sw.FallthroughCaseValues);
+                    return sw;
+                }
 
             case IRExceptionRegion er:
-            {
-                var tryBody = RemoveTrailingBranch(er.TryBody, targetOffset);
-                var handlerBody = RemoveTrailingBranch(er.HandlerBody, targetOffset);
-                if (!ReferenceEquals(tryBody, er.TryBody) || !ReferenceEquals(handlerBody, er.HandlerBody))
-                    return new IRExceptionRegion(er.Kind, tryBody, handlerBody, er.CatchTypeSubjectId, er.FilterInstructions);
-                return er;
-            }
+                {
+                    var tryBody = RemoveTrailingBranch(er.TryBody, targetOffset);
+                    var handlerBody = RemoveTrailingBranch(er.HandlerBody, targetOffset);
+                    if (!ReferenceEquals(tryBody, er.TryBody) || !ReferenceEquals(handlerBody, er.HandlerBody))
+                        return new IRExceptionRegion(er.Kind, tryBody, handlerBody, er.CatchTypeSubjectId, er.FilterInstructions);
+                    return er;
+                }
 
             default:
                 return node;
@@ -708,107 +708,107 @@ public sealed partial class NativeAotLoweringPlanner
         switch (node)
         {
             case IRBlock block when block.Terminator is { Op: "br" or "leave" }:
-            {
-                int target = GetRequiredIntOperand(block.Terminator);
-                bool isLeave = block.Terminator.Op == "leave";
+                {
+                    int target = GetRequiredIntOperand(block.Terminator);
+                    bool isLeave = block.Terminator.Op == "leave";
 
-                // Check for break (targets a loop exit)
-                if (loopExitOffsets != null && loopExitOffsets.Contains(target))
-                    return new IRBreak();
+                    // Check for break (targets a loop exit)
+                    if (loopExitOffsets != null && loopExitOffsets.Contains(target))
+                        return new IRBreak();
 
-                // Check for continue (targets the loop header — backedge)
-                if (loopHeaderOffset.HasValue && target == loopHeaderOffset.Value)
-                    return new IRContinue();
+                    // Check for continue (targets the loop header — backedge)
+                    if (loopHeaderOffset.HasValue && target == loopHeaderOffset.Value)
+                        return new IRContinue();
 
-                // Forward branch to a block after this one — safe to strip
-                // (structured control flow provides implicit fallthrough).
-                if (!isLeave && target >= 0)
-                    return new IRBlock(block.BodyInstructions, null);
+                    // Forward branch to a block after this one — safe to strip
+                    // (structured control flow provides implicit fallthrough).
+                    if (!isLeave && target >= 0)
+                        return new IRBlock(block.BodyInstructions, null);
 
-                // leave that is not a loop break: keep terminator
-                return node;
-            }
+                    // leave that is not a loop break: keep terminator
+                    return node;
+                }
 
             case IRSequence seq when seq.Nodes.Count > 0:
-            {
-                bool changed = false;
-                var newNodes = new List<StructuredIRNode>(seq.Nodes.Count);
-                foreach (var n in seq.Nodes)
                 {
-                    var converted = ConvertResidualBranches(n, loopExitOffsets, loopHeaderOffset);
-                    if (!ReferenceEquals(converted, n)) changed = true;
-                    newNodes.Add(converted);
+                    bool changed = false;
+                    var newNodes = new List<StructuredIRNode>(seq.Nodes.Count);
+                    foreach (var n in seq.Nodes)
+                    {
+                        var converted = ConvertResidualBranches(n, loopExitOffsets, loopHeaderOffset);
+                        if (!ReferenceEquals(converted, n)) changed = true;
+                        newNodes.Add(converted);
+                    }
+                    return changed ? new IRSequence(newNodes) : seq;
                 }
-                return changed ? new IRSequence(newNodes) : seq;
-            }
 
             case IRIfThenElse ite:
-            {
-                var thenBody = ConvertResidualBranches(ite.ThenBody, loopExitOffsets, loopHeaderOffset);
-                var elseBody = ite.ElseBody is null ? null : ConvertResidualBranches(ite.ElseBody, loopExitOffsets, loopHeaderOffset);
-                var postMerge = ite.PostMergeBody is null ? null : ConvertResidualBranches(ite.PostMergeBody, loopExitOffsets, loopHeaderOffset);
-                if (!ReferenceEquals(thenBody, ite.ThenBody) ||
-                    !ReferenceEquals(elseBody, ite.ElseBody) ||
-                    !ReferenceEquals(postMerge, ite.PostMergeBody))
                 {
-                    return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator,
-                        thenBody, elseBody, postMerge, ite.PreConditionDepth);
+                    var thenBody = ConvertResidualBranches(ite.ThenBody, loopExitOffsets, loopHeaderOffset);
+                    var elseBody = ite.ElseBody is null ? null : ConvertResidualBranches(ite.ElseBody, loopExitOffsets, loopHeaderOffset);
+                    var postMerge = ite.PostMergeBody is null ? null : ConvertResidualBranches(ite.PostMergeBody, loopExitOffsets, loopHeaderOffset);
+                    if (!ReferenceEquals(thenBody, ite.ThenBody) ||
+                        !ReferenceEquals(elseBody, ite.ElseBody) ||
+                        !ReferenceEquals(postMerge, ite.PostMergeBody))
+                    {
+                        return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator,
+                            thenBody, elseBody, postMerge, ite.PreConditionDepth);
+                    }
+                    return ite;
                 }
-                return ite;
-            }
 
             case IRWhileLoop loop:
-            {
-                // Build exit set: original exit + the loop's exit offset
-                var innerExits = new HashSet<int>(loopExitOffsets ?? new HashSet<int>());
-                if (loop.ExitOffset >= 0) innerExits.Add(loop.ExitOffset);
-                int innerHeader = loop.ConditionInstructions.Count > 0
-                    ? (loop.ConditionInstructions[0].IlOffset)  // approximate header offset
-                    : -1;
+                {
+                    // Build exit set: original exit + the loop's exit offset
+                    var innerExits = new HashSet<int>(loopExitOffsets ?? new HashSet<int>());
+                    if (loop.ExitOffset >= 0) innerExits.Add(loop.ExitOffset);
+                    int innerHeader = loop.ConditionInstructions.Count > 0
+                        ? (loop.ConditionInstructions[0].IlOffset)  // approximate header offset
+                        : -1;
 
-                // Use the header's start offset from the condition instructions if available
-                int? innerHeaderOffset = loopHeaderOffset;
+                    // Use the header's start offset from the condition instructions if available
+                    int? innerHeaderOffset = loopHeaderOffset;
 
-                var body = ConvertResidualBranches(loop.Body, innerExits, innerHeaderOffset);
-                if (!ReferenceEquals(body, loop.Body))
-                    return new IRWhileLoop(loop.ConditionInstructions, loop.ConditionTerminator, body, loop.ExitOffset);
-                return loop;
-            }
+                    var body = ConvertResidualBranches(loop.Body, innerExits, innerHeaderOffset);
+                    if (!ReferenceEquals(body, loop.Body))
+                        return new IRWhileLoop(loop.ConditionInstructions, loop.ConditionTerminator, body, loop.ExitOffset);
+                    return loop;
+                }
 
             case IRDoWhileLoop loop:
-            {
-                var innerExits = new HashSet<int>(loopExitOffsets ?? new HashSet<int>());
-                if (loop.ExitOffset >= 0) innerExits.Add(loop.ExitOffset);
-                var body = ConvertResidualBranches(loop.Body, innerExits, loop.HeaderOffset);
-                if (!ReferenceEquals(body, loop.Body))
-                    return new IRDoWhileLoop(body, loop.LatchInstructions, loop.LatchTerminator, loop.HeaderOffset, loop.ExitOffset);
-                return loop;
-            }
+                {
+                    var innerExits = new HashSet<int>(loopExitOffsets ?? new HashSet<int>());
+                    if (loop.ExitOffset >= 0) innerExits.Add(loop.ExitOffset);
+                    var body = ConvertResidualBranches(loop.Body, innerExits, loop.HeaderOffset);
+                    if (!ReferenceEquals(body, loop.Body))
+                        return new IRDoWhileLoop(body, loop.LatchInstructions, loop.LatchTerminator, loop.HeaderOffset, loop.ExitOffset);
+                    return loop;
+                }
 
             case IRSwitch sw:
-            {
-                bool changed = false;
-                var caseBodies = new Dictionary<int, StructuredIRNode>();
-                foreach (var (caseValue, caseBody) in sw.CaseBodies)
                 {
-                    var converted = ConvertResidualBranches(caseBody, loopExitOffsets, loopHeaderOffset);
-                    if (!ReferenceEquals(converted, caseBody)) changed = true;
-                    caseBodies[caseValue] = converted;
+                    bool changed = false;
+                    var caseBodies = new Dictionary<int, StructuredIRNode>();
+                    foreach (var (caseValue, caseBody) in sw.CaseBodies)
+                    {
+                        var converted = ConvertResidualBranches(caseBody, loopExitOffsets, loopHeaderOffset);
+                        if (!ReferenceEquals(converted, caseBody)) changed = true;
+                        caseBodies[caseValue] = converted;
+                    }
+                    var defaultBody = sw.DefaultBody is null ? null : ConvertResidualBranches(sw.DefaultBody, loopExitOffsets, loopHeaderOffset);
+                    if (changed || !ReferenceEquals(defaultBody, sw.DefaultBody))
+                        return new IRSwitch(sw.SwitchInstructions, caseBodies, defaultBody, sw.ExitOffset, sw.FallthroughCaseValues);
+                    return sw;
                 }
-                var defaultBody = sw.DefaultBody is null ? null : ConvertResidualBranches(sw.DefaultBody, loopExitOffsets, loopHeaderOffset);
-                if (changed || !ReferenceEquals(defaultBody, sw.DefaultBody))
-                    return new IRSwitch(sw.SwitchInstructions, caseBodies, defaultBody, sw.ExitOffset, sw.FallthroughCaseValues);
-                return sw;
-            }
 
             case IRExceptionRegion er:
-            {
-                var tryBody = ConvertResidualBranches(er.TryBody, loopExitOffsets, loopHeaderOffset);
-                var handlerBody = ConvertResidualBranches(er.HandlerBody, loopExitOffsets, loopHeaderOffset);
-                if (!ReferenceEquals(tryBody, er.TryBody) || !ReferenceEquals(handlerBody, er.HandlerBody))
-                    return new IRExceptionRegion(er.Kind, tryBody, handlerBody, er.CatchTypeSubjectId, er.FilterInstructions);
-                return er;
-            }
+                {
+                    var tryBody = ConvertResidualBranches(er.TryBody, loopExitOffsets, loopHeaderOffset);
+                    var handlerBody = ConvertResidualBranches(er.HandlerBody, loopExitOffsets, loopHeaderOffset);
+                    if (!ReferenceEquals(tryBody, er.TryBody) || !ReferenceEquals(handlerBody, er.HandlerBody))
+                        return new IRExceptionRegion(er.Kind, tryBody, handlerBody, er.CatchTypeSubjectId, er.FilterInstructions);
+                    return er;
+                }
 
             default:
                 return node;

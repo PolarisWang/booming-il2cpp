@@ -83,7 +83,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         string interfaceTypeSubjectId = GetMethodDeclaringTypeSubjectId(interfaceMethodSubjectId);
         string slotSignatureSuffix = GetMethodSignatureSuffix(interfaceMethodSubjectId);
-        return _methodsBySubjectId.Values.Where(delegate(AotCoreIrMethodArtifact method)
+        return _methodsBySubjectId.Values.Where(delegate (AotCoreIrMethodArtifact method)
         {
             if (method.IsStatic || !CanEmitMethodBody(method) || !string.Equals(GetMethodSignatureSuffix(method.SubjectId), slotSignatureSuffix, StringComparison.Ordinal))
             {

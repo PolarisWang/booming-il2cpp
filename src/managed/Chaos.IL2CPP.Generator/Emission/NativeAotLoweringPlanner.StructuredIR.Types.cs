@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -97,7 +97,7 @@ public sealed partial class NativeAotLoweringPlanner
         string? CatchTypeSubjectId = null,
         IReadOnlyList<AotCoreIrInstructionArtifact>? FilterInstructions = null
     ) : StructuredIRNode;
-	// Async IR nodes (F6)
-	internal enum AsyncAwaiterKind { TaskAwaiter, TaskAwaiterOfT, ValueTaskAwaiter, YieldAwaitable, ConfiguredTaskAwaiter, CustomAwaiter }
-	internal sealed record IRAwait(string Expr, AsyncAwaiterKind Kind, StructuredIRNode Cont, bool Sync = false) : StructuredIRNode;
+    // Async IR nodes (F6)
+    internal enum AsyncAwaiterKind { TaskAwaiter, TaskAwaiterOfT, ValueTaskAwaiter, YieldAwaitable, ConfiguredTaskAwaiter, CustomAwaiter }
+    internal sealed record IRAwait(string Expr, AsyncAwaiterKind Kind, StructuredIRNode Cont, bool Sync = false) : StructuredIRNode;
 }

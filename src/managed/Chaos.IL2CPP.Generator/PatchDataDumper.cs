@@ -56,11 +56,11 @@ public static class PatchDataDumper
         // Tables
         writer.WriteLine("── Metadata tables ──");
         DumpTable(writer, "AssemblyRef", hdr.assembly_ref_offset, hdr.assembly_ref_count, 8);
-        DumpTable(writer, "TypeRef",     hdr.type_ref_offset,     hdr.type_ref_count,     16);
-        DumpTable(writer, "TypeDef",     hdr.type_def_offset,     hdr.type_def_count,     22);
-        DumpTable(writer, "FieldDef",    hdr.field_def_offset,    hdr.field_def_count,    18);
-        DumpTable(writer, "MethodDef",   hdr.method_def_offset,   hdr.method_def_count,   28);
-        DumpTable(writer, "MemberRef",   hdr.member_ref_offset,   hdr.member_ref_count,   16);
+        DumpTable(writer, "TypeRef", hdr.type_ref_offset, hdr.type_ref_count, 16);
+        DumpTable(writer, "TypeDef", hdr.type_def_offset, hdr.type_def_count, 22);
+        DumpTable(writer, "FieldDef", hdr.field_def_offset, hdr.field_def_count, 18);
+        DumpTable(writer, "MethodDef", hdr.method_def_offset, hdr.method_def_count, 28);
+        DumpTable(writer, "MemberRef", hdr.member_ref_offset, hdr.member_ref_count, 16);
         DumpTable(writer, "StandaloneSig", hdr.standalone_sig_offset, hdr.standalone_sig_count, 8);
 
         // Method bodies

@@ -136,23 +136,23 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (IsSubjectMethod(method.SubjectId))
             {
-            // Skip _1/_2 when _0 exists with same SubjectId AND calls external
-            if (method.NativeSymbol != null
-                && (method.NativeSymbol.EndsWith("_1", StringComparison.Ordinal)
-                    || method.NativeSymbol.EndsWith("_2", StringComparison.Ordinal))
-                && subjectIdsWithZero.Contains(StripSubjectVariantSuffix(method.SubjectId ?? string.Empty)))
-            {
-                bool extCall = false;
-                foreach (var instr in method.Instructions)
+                // Skip _1/_2 when _0 exists with same SubjectId AND calls external
+                if (method.NativeSymbol != null
+                    && (method.NativeSymbol.EndsWith("_1", StringComparison.Ordinal)
+                        || method.NativeSymbol.EndsWith("_2", StringComparison.Ordinal))
+                    && subjectIdsWithZero.Contains(StripSubjectVariantSuffix(method.SubjectId ?? string.Empty)))
                 {
-                    string callee = instr.Callee ?? string.Empty;
-                    if (callee.Length > 0 && _externalRuntimeSubjects.ContainsKey(
-                            ManagedNaming.NormalizeSubjectIdAssembly(callee)))
-                    { extCall = true; break; }
+                    bool extCall = false;
+                    foreach (var instr in method.Instructions)
+                    {
+                        string callee = instr.Callee ?? string.Empty;
+                        if (callee.Length > 0 && _externalRuntimeSubjects.ContainsKey(
+                                ManagedNaming.NormalizeSubjectIdAssembly(callee)))
+                        { extCall = true; break; }
+                    }
+                    if (extCall) { skippedSubjectVariants++; continue; }
                 }
-                if (extCall) { skippedSubjectVariants++; continue; }
-            }
-            int subjectIdx = ExtractSubjectIndex(method.SubjectId!);
+                int subjectIdx = ExtractSubjectIndex(method.SubjectId!);
                 if (subjectIdx < 0)
                     // Assign temporary unique index — will be sorted by subject_index
                     // and reassigned to sequential 0..N-1 after dedup+filter below.
@@ -507,60 +507,60 @@ public sealed partial class NativeAotLoweringPlanner
     IReadOnlyList<AotCoreIrMethodArtifact> methods,
     MetadataRegistrationArtifact metadataRegistration,
     bool hasGcSlotMapSection = false)
-{
-    _ = metadataRegistration; // unused — kept to avoid changing callers
-    if (methods.Count == 0) return string.Empty;
-
-    var model = new ScriptObject
     {
-        ["methods"] = methods
-            .Select(m => new ScriptObject { ["native_symbol"] = m.NativeSymbol })
-            .ToArray(),
-        ["methods_count"] = methods.Count,
-        ["reverse_pinvoke_count"] = _reversePInvokeEntries.Count,
-        ["reverse_pinvoke_entries"] = _reversePInvokeEntries.Count > 0
-            ? _reversePInvokeEntries
-                .Select(e => new ScriptObject { ["native_symbol"] = e.NativeSymbol })
-                .ToArray()
-            : Array.Empty<ScriptObject>(),
-        ["assembly_name"] = EscapeCppStringLiteral(_assemblyName),
-        ["has_gc_slot_map_section"] = hasGcSlotMapSection,
-    };
+        _ = metadataRegistration; // unused — kept to avoid changing callers
+        if (methods.Count == 0) return string.Empty;
 
-    // ── VTable descriptors for BootstrapRuntime TypeVTable registration ──
-    // Always set (even when empty) to avoid Scriban "function not found" error.
-    if (_vtableDescriptors is { Count: > 0 })
-    {
-        model["vtable_descriptors"] = _vtableDescriptors
-            .Select(d => new ScriptObject
-            {
-                ["stable_id"] = "CHAOS_IL2CPP_UINT64_C(0x" + d.StableId.ToString("X16") + ")",
-                ["type_token_literal"] = d.TypeTokenLiteral,
-                ["base_token_literal"] = d.BaseTokenLiteral,
-                ["slot_count"] = d.Slots.Length,
-                ["slots_symbol"] = "kSlots_" + d.SanitizedId,
-                ["vtable_array_symbol"] = d.VTableArraySymbol,
-                ["vtable_length"] = d.VTableLength,
-                ["type_shape"] = d.TypeShape,
-                ["iface_map_symbol"] = d.IfaceMapSymbol ?? "nullptr",
-                ["iface_count"] = d.IfaceCount,
-            })
-            .ToArray();
-        model["vtable_descriptor_count"] = _vtableDescriptors.Count;
+        var model = new ScriptObject
+        {
+            ["methods"] = methods
+                .Select(m => new ScriptObject { ["native_symbol"] = m.NativeSymbol })
+                .ToArray(),
+            ["methods_count"] = methods.Count,
+            ["reverse_pinvoke_count"] = _reversePInvokeEntries.Count,
+            ["reverse_pinvoke_entries"] = _reversePInvokeEntries.Count > 0
+                ? _reversePInvokeEntries
+                    .Select(e => new ScriptObject { ["native_symbol"] = e.NativeSymbol })
+                    .ToArray()
+                : Array.Empty<ScriptObject>(),
+            ["assembly_name"] = EscapeCppStringLiteral(_assemblyName),
+            ["has_gc_slot_map_section"] = hasGcSlotMapSection,
+        };
+
+        // ── VTable descriptors for BootstrapRuntime TypeVTable registration ──
+        // Always set (even when empty) to avoid Scriban "function not found" error.
+        if (_vtableDescriptors is { Count: > 0 })
+        {
+            model["vtable_descriptors"] = _vtableDescriptors
+                .Select(d => new ScriptObject
+                {
+                    ["stable_id"] = "CHAOS_IL2CPP_UINT64_C(0x" + d.StableId.ToString("X16") + ")",
+                    ["type_token_literal"] = d.TypeTokenLiteral,
+                    ["base_token_literal"] = d.BaseTokenLiteral,
+                    ["slot_count"] = d.Slots.Length,
+                    ["slots_symbol"] = "kSlots_" + d.SanitizedId,
+                    ["vtable_array_symbol"] = d.VTableArraySymbol,
+                    ["vtable_length"] = d.VTableLength,
+                    ["type_shape"] = d.TypeShape,
+                    ["iface_map_symbol"] = d.IfaceMapSymbol ?? "nullptr",
+                    ["iface_count"] = d.IfaceCount,
+                })
+                .ToArray();
+            model["vtable_descriptor_count"] = _vtableDescriptors.Count;
+        }
+        else
+        {
+            model["vtable_descriptors"] = Array.Empty<ScriptObject>();
+            model["vtable_descriptor_count"] = 0;
+        }
+
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetCodeRegistrationTemplate(), model);
     }
-    else
-    {
-        model["vtable_descriptors"] = Array.Empty<ScriptObject>();
-        model["vtable_descriptor_count"] = 0;
-    }
-
-    return ScribanTemplateRenderer.RenderTemplate(
-        NativeAotTemplateCatalog.GetCodeRegistrationTemplate(), model);
-}
 
 
 
-// ── Step 3: ReflectionQueryImageDescriptor ──────────────────────────────────
+    // ── Step 3: ReflectionQueryImageDescriptor ──────────────────────────────────
     // Emits ReflectionQueryMethodDescriptor[] and ReflectionQueryTypeDescriptor[]
     // arrays, and a ReflectionQueryImageDescriptor that module.image points to.
     // This enables ResolveSubjectId to find call_target via reflection query model.
@@ -652,15 +652,15 @@ public sealed partial class NativeAotLoweringPlanner
                                 switch ((PrimitiveTypeCode)constant.TypeCode)
                                 {
                                     case PrimitiveTypeCode.Boolean: fieldValue = blobReader.ReadBoolean() ? 1L : 0L; break;
-                                    case PrimitiveTypeCode.Byte:    fieldValue = blobReader.ReadByte(); break;
-                                    case PrimitiveTypeCode.SByte:   fieldValue = blobReader.ReadSByte(); break;
-                                    case PrimitiveTypeCode.Int16:   fieldValue = blobReader.ReadInt16(); break;
-                                    case PrimitiveTypeCode.UInt16:  fieldValue = blobReader.ReadUInt16(); break;
-                                    case PrimitiveTypeCode.Char:    fieldValue = blobReader.ReadChar(); break;
-                                    case PrimitiveTypeCode.Int32:   fieldValue = blobReader.ReadInt32(); break;
-                                    case PrimitiveTypeCode.UInt32:  fieldValue = blobReader.ReadUInt32(); break;
-                                    case PrimitiveTypeCode.Int64:   fieldValue = blobReader.ReadInt64(); break;
-                                    case PrimitiveTypeCode.UInt64:  fieldValue = (long)blobReader.ReadUInt64(); break;
+                                    case PrimitiveTypeCode.Byte: fieldValue = blobReader.ReadByte(); break;
+                                    case PrimitiveTypeCode.SByte: fieldValue = blobReader.ReadSByte(); break;
+                                    case PrimitiveTypeCode.Int16: fieldValue = blobReader.ReadInt16(); break;
+                                    case PrimitiveTypeCode.UInt16: fieldValue = blobReader.ReadUInt16(); break;
+                                    case PrimitiveTypeCode.Char: fieldValue = blobReader.ReadChar(); break;
+                                    case PrimitiveTypeCode.Int32: fieldValue = blobReader.ReadInt32(); break;
+                                    case PrimitiveTypeCode.UInt32: fieldValue = blobReader.ReadUInt32(); break;
+                                    case PrimitiveTypeCode.Int64: fieldValue = blobReader.ReadInt64(); break;
+                                    case PrimitiveTypeCode.UInt64: fieldValue = (long)blobReader.ReadUInt64(); break;
                                 }
                             }
                             catch { }
@@ -813,238 +813,238 @@ public sealed partial class NativeAotLoweringPlanner
 
 
 
-/// <summary>
-/// Generate the C++ header for pre-computed enum metadata tables.
-/// Collects enum type data from ALL resolved assemblies (not just the entry
-/// assembly) so that SPC enum types (DayOfWeek, BindingFlags, etc.) are
-/// included alongside the entry assembly's own enum types.
-/// Returns empty string if no enum types or field data are available.
-/// </summary>
-private string GenerateEnumMetadataHeader()
-{
-    // Start with entry assembly data (already collected in _moduleTypeFlags/SubjectIds).
-    // Then augment with enum type data from all other resolved assemblies.
-    // The seenSubjectIds set prevents duplicates when an assembly's types
-    // overlap (e.g., when the entry assembly is also in resolved paths).
-    var mergedFlags = new List<uint>(_moduleTypeFlags);
-    var mergedSubjectIds = new List<string>(_moduleTypeSubjectIds);
-    var seenSubjectIds = new HashSet<string>(_moduleTypeSubjectIds, StringComparer.Ordinal);
-    // Collect field entries from PE metadata for all enum types (used when
-    // _reflectionMemberSupport.FieldEntries is empty for stub-based families).
-    var enumFieldEntries = new List<ReflectionMemberFieldEntry>();
+    /// <summary>
+    /// Generate the C++ header for pre-computed enum metadata tables.
+    /// Collects enum type data from ALL resolved assemblies (not just the entry
+    /// assembly) so that SPC enum types (DayOfWeek, BindingFlags, etc.) are
+    /// included alongside the entry assembly's own enum types.
+    /// Returns empty string if no enum types or field data are available.
+    /// </summary>
+    private string GenerateEnumMetadataHeader()
+    {
+        // Start with entry assembly data (already collected in _moduleTypeFlags/SubjectIds).
+        // Then augment with enum type data from all other resolved assemblies.
+        // The seenSubjectIds set prevents duplicates when an assembly's types
+        // overlap (e.g., when the entry assembly is also in resolved paths).
+        var mergedFlags = new List<uint>(_moduleTypeFlags);
+        var mergedSubjectIds = new List<string>(_moduleTypeSubjectIds);
+        var seenSubjectIds = new HashSet<string>(_moduleTypeSubjectIds, StringComparer.Ordinal);
+        // Collect field entries from PE metadata for all enum types (used when
+        // _reflectionMemberSupport.FieldEntries is empty for stub-based families).
+        var enumFieldEntries = new List<ReflectionMemberFieldEntry>();
 
-    foreach (var assemblyPath in _cachedClosureAssemblyPaths)
+        foreach (var assemblyPath in _cachedClosureAssemblyPaths)
+        {
+            try
+            {
+                CollectEnumTypesAndFieldsFromAssembly(assemblyPath, seenSubjectIds,
+                    mergedFlags, mergedSubjectIds, enumFieldEntries);
+            }
+            catch
+            {
+                // Skip assemblies that can't be read (e.g., native images, missing files)
+                continue;
+            }
+        }
+
+        if (mergedFlags.Count == 0)
+            return string.Empty;
+
+        // Prefer reflection member field entries when available (they include data
+        // from all closure assemblies); fall back to PE-metadata field entries.
+        var fieldEntries = _reflectionMemberSupport.FieldEntries.Count > 0
+            ? _reflectionMemberSupport.FieldEntries
+            : enumFieldEntries;
+
+        if (fieldEntries.Count == 0)
+            return string.Empty;
+
+        var header = EnumMetadataExtractor.GenerateHeader(
+            mergedFlags,
+            mergedSubjectIds,
+            fieldEntries);
+
+        // Post-process: if the header generator places compute_enum_hash24
+        // inside the chaos::il2cpp::codegen namespace (as newer versions of
+        // EnumMetadataExtractor do), but the registration code that calls it
+        // is generated OUTSIDE the namespace, inject a using-declaration so
+        // the unqualified call compiles.
+        const string namespaceClose = "}}}  // namespace chaos::il2cpp::codegen";
+        int nsCloseIdx = header.IndexOf(namespaceClose, StringComparison.Ordinal);
+        if (nsCloseIdx >= 0)
+        {
+            int callIdx = header.IndexOf("compute_enum_hash24(", nsCloseIdx, StringComparison.Ordinal);
+            if (callIdx >= 0)
+            {
+                // The hash function is called outside its defining namespace.
+                // Insert a using-declaration right after the namespace close.
+                int insertPos = nsCloseIdx + namespaceClose.Length;
+                // Skip past any trailing whitespace/newline
+                while (insertPos < header.Length &&
+                       (header[insertPos] == '\r' || header[insertPos] == '\n'))
+                    insertPos++;
+                header = header[..insertPos] + "\n" +
+                    "using chaos::il2cpp::codegen::compute_enum_hash24;" +
+                    header[insertPos..];
+            }
+        }
+
+        return header;
+    }
+
+
+
+    /// <summary>
+    /// Read assembly PE metadata and collect enum type flags, subjectIds,
+    /// AND field name/value entries for each enum type.
+    /// Populates the provided lists, skipping types already in seenSubjectIds.
+    /// </summary>
+    private static void CollectEnumTypesAndFieldsFromAssembly(
+        string assemblyPath,
+        HashSet<string> seenSubjectIds,
+        List<uint> mergedFlags,
+        List<string> mergedSubjectIds,
+        List<ReflectionMemberFieldEntry> enumFieldEntries)
+    {
+        if (string.IsNullOrEmpty(assemblyPath) || !File.Exists(assemblyPath))
+            return;
+
+        using var stream = File.OpenRead(assemblyPath);
+        using var peReader = new System.Reflection.PortableExecutable.PEReader(stream);
+        if (!peReader.HasMetadata)
+            return;
+
+        var metadataReader = peReader.GetMetadataReader();
+        if (!metadataReader.IsAssembly)
+            return;
+
+        var assemblyName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
+
+        foreach (var handle in metadataReader.TypeDefinitions)
+        {
+            var typeDef = metadataReader.GetTypeDefinition(handle);
+            var parentHandle = typeDef.BaseType;
+
+            // Only interested in enum types
+            if (parentHandle.IsNil)
+                continue;
+
+            var parentFullName = ResolveBaseTypeName(metadataReader, parentHandle);
+            if (parentFullName == null ||
+                !string.Equals(parentFullName, "System.Enum", StringComparison.Ordinal))
+                continue;
+
+            var subjectId = ComputeTypeDefSubjectId(metadataReader, handle, assemblyName);
+            if (string.IsNullOrEmpty(subjectId) || !seenSubjectIds.Add(subjectId))
+                continue;
+
+            uint flags = ComputeTypeFlags(metadataReader, typeDef, parentHandle);
+            mergedFlags.Add(flags);
+            mergedSubjectIds.Add(subjectId);
+
+            // Read field entries (names + constant values) from PE metadata
+            foreach (var fieldHandle in typeDef.GetFields())
+            {
+                var fieldDef = metadataReader.GetFieldDefinition(fieldHandle);
+                var fieldName = metadataReader.GetString(fieldDef.Name);
+
+                // Skip the implicit "value__" instance field
+                if (string.Equals(fieldName, "value__", StringComparison.Ordinal))
+                    continue;
+
+                long? constantValue = ReadFieldConstantValue(metadataReader, fieldDef);
+                if (!constantValue.HasValue)
+                    continue;
+
+                enumFieldEntries.Add(new ReflectionMemberFieldEntry(
+                    subjectId, fieldName, MetadataTokens.GetToken(fieldHandle), constantValue));
+            }
+        }
+    }
+
+
+
+    /// <summary>
+    /// Fallback: scan PE metadata of all closure assemblies to collect enum field
+    /// entries (name + constant value) when _reflectionMemberSupport.FieldEntries
+    /// is empty (e.g. during foundation-dll codegen for stub-based families).
+    /// </summary>
+    private IReadOnlyList<ReflectionMemberFieldEntry> CollectEnumFieldEntriesFromMetadata()
+    {
+        var seenSubjectIds = new HashSet<string>(_moduleTypeSubjectIds, StringComparer.Ordinal);
+        var enumFieldEntries = new List<ReflectionMemberFieldEntry>();
+        var dummyFlags = new List<uint>();
+        var dummySubjectIds = new List<string>();
+
+        foreach (var assemblyPath in _cachedClosureAssemblyPaths)
+        {
+            try
+            {
+                CollectEnumTypesAndFieldsFromAssembly(assemblyPath, seenSubjectIds,
+                    dummyFlags, dummySubjectIds, enumFieldEntries);
+            }
+            catch
+            {
+                continue;
+            }
+        }
+
+        return enumFieldEntries;
+    }
+
+
+
+    /// <summary>
+    /// Read the constant value from a field definition's Constant metadata.
+    /// Returns null if the field has no constant or the type is unsupported.
+    /// </summary>
+    private static long? ReadFieldConstantValue(
+        System.Reflection.Metadata.MetadataReader reader,
+        System.Reflection.Metadata.FieldDefinition fieldDef)
     {
         try
         {
-            CollectEnumTypesAndFieldsFromAssembly(assemblyPath, seenSubjectIds,
-                mergedFlags, mergedSubjectIds, enumFieldEntries);
-        }
-        catch
-        {
-            // Skip assemblies that can't be read (e.g., native images, missing files)
-            continue;
-        }
-    }
-
-    if (mergedFlags.Count == 0)
-        return string.Empty;
-
-    // Prefer reflection member field entries when available (they include data
-    // from all closure assemblies); fall back to PE-metadata field entries.
-    var fieldEntries = _reflectionMemberSupport.FieldEntries.Count > 0
-        ? _reflectionMemberSupport.FieldEntries
-        : enumFieldEntries;
-
-    if (fieldEntries.Count == 0)
-        return string.Empty;
-
-    var header = EnumMetadataExtractor.GenerateHeader(
-        mergedFlags,
-        mergedSubjectIds,
-        fieldEntries);
-
-    // Post-process: if the header generator places compute_enum_hash24
-    // inside the chaos::il2cpp::codegen namespace (as newer versions of
-    // EnumMetadataExtractor do), but the registration code that calls it
-    // is generated OUTSIDE the namespace, inject a using-declaration so
-    // the unqualified call compiles.
-    const string namespaceClose = "}}}  // namespace chaos::il2cpp::codegen";
-    int nsCloseIdx = header.IndexOf(namespaceClose, StringComparison.Ordinal);
-    if (nsCloseIdx >= 0)
-    {
-        int callIdx = header.IndexOf("compute_enum_hash24(", nsCloseIdx, StringComparison.Ordinal);
-        if (callIdx >= 0)
-        {
-            // The hash function is called outside its defining namespace.
-            // Insert a using-declaration right after the namespace close.
-            int insertPos = nsCloseIdx + namespaceClose.Length;
-            // Skip past any trailing whitespace/newline
-            while (insertPos < header.Length &&
-                   (header[insertPos] == '\r' || header[insertPos] == '\n'))
-                insertPos++;
-            header = header[..insertPos] + "\n" +
-                "using chaos::il2cpp::codegen::compute_enum_hash24;" +
-                header[insertPos..];
-        }
-    }
-
-    return header;
-}
-
-
-
-/// <summary>
-/// Read assembly PE metadata and collect enum type flags, subjectIds,
-/// AND field name/value entries for each enum type.
-/// Populates the provided lists, skipping types already in seenSubjectIds.
-/// </summary>
-private static void CollectEnumTypesAndFieldsFromAssembly(
-    string assemblyPath,
-    HashSet<string> seenSubjectIds,
-    List<uint> mergedFlags,
-    List<string> mergedSubjectIds,
-    List<ReflectionMemberFieldEntry> enumFieldEntries)
-{
-    if (string.IsNullOrEmpty(assemblyPath) || !File.Exists(assemblyPath))
-        return;
-
-    using var stream = File.OpenRead(assemblyPath);
-    using var peReader = new System.Reflection.PortableExecutable.PEReader(stream);
-    if (!peReader.HasMetadata)
-        return;
-
-    var metadataReader = peReader.GetMetadataReader();
-    if (!metadataReader.IsAssembly)
-        return;
-
-    var assemblyName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
-
-    foreach (var handle in metadataReader.TypeDefinitions)
-    {
-        var typeDef = metadataReader.GetTypeDefinition(handle);
-        var parentHandle = typeDef.BaseType;
-
-        // Only interested in enum types
-        if (parentHandle.IsNil)
-            continue;
-
-        var parentFullName = ResolveBaseTypeName(metadataReader, parentHandle);
-        if (parentFullName == null ||
-            !string.Equals(parentFullName, "System.Enum", StringComparison.Ordinal))
-            continue;
-
-        var subjectId = ComputeTypeDefSubjectId(metadataReader, handle, assemblyName);
-        if (string.IsNullOrEmpty(subjectId) || !seenSubjectIds.Add(subjectId))
-            continue;
-
-        uint flags = ComputeTypeFlags(metadataReader, typeDef, parentHandle);
-        mergedFlags.Add(flags);
-        mergedSubjectIds.Add(subjectId);
-
-        // Read field entries (names + constant values) from PE metadata
-        foreach (var fieldHandle in typeDef.GetFields())
-        {
-            var fieldDef = metadataReader.GetFieldDefinition(fieldHandle);
-            var fieldName = metadataReader.GetString(fieldDef.Name);
-
-            // Skip the implicit "value__" instance field
-            if (string.Equals(fieldName, "value__", StringComparison.Ordinal))
-                continue;
-
-            long? constantValue = ReadFieldConstantValue(metadataReader, fieldDef);
-            if (!constantValue.HasValue)
-                continue;
-
-            enumFieldEntries.Add(new ReflectionMemberFieldEntry(
-                subjectId, fieldName, MetadataTokens.GetToken(fieldHandle), constantValue));
-        }
-    }
-}
-
-
-
-/// <summary>
-/// Fallback: scan PE metadata of all closure assemblies to collect enum field
-/// entries (name + constant value) when _reflectionMemberSupport.FieldEntries
-/// is empty (e.g. during foundation-dll codegen for stub-based families).
-/// </summary>
-private IReadOnlyList<ReflectionMemberFieldEntry> CollectEnumFieldEntriesFromMetadata()
-{
-    var seenSubjectIds = new HashSet<string>(_moduleTypeSubjectIds, StringComparer.Ordinal);
-    var enumFieldEntries = new List<ReflectionMemberFieldEntry>();
-    var dummyFlags = new List<uint>();
-    var dummySubjectIds = new List<string>();
-
-    foreach (var assemblyPath in _cachedClosureAssemblyPaths)
-    {
-        try
-        {
-            CollectEnumTypesAndFieldsFromAssembly(assemblyPath, seenSubjectIds,
-                dummyFlags, dummySubjectIds, enumFieldEntries);
-        }
-        catch
-        {
-            continue;
-        }
-    }
-
-    return enumFieldEntries;
-}
-
-
-
-/// <summary>
-/// Read the constant value from a field definition's Constant metadata.
-/// Returns null if the field has no constant or the type is unsupported.
-/// </summary>
-private static long? ReadFieldConstantValue(
-    System.Reflection.Metadata.MetadataReader reader,
-    System.Reflection.Metadata.FieldDefinition fieldDef)
-{
-    try
-    {
-        var constHandle = fieldDef.GetDefaultValue();
-        if (constHandle.IsNil)
-            return null;
-
-        var constant = reader.GetConstant(constHandle);
-        var blobReader = reader.GetBlobReader(constant.Value);
-
-        // PrimitiveTypeCode matches the ECMA 335 constant type codes
-        // used by System.Reflection.Metadata (not to be confused with
-        // the unrelated ConstantTypeCode enum from a different namespace).
-        switch ((System.Reflection.Metadata.PrimitiveTypeCode)constant.TypeCode)
-        {
-            case System.Reflection.Metadata.PrimitiveTypeCode.Boolean:
-                return blobReader.ReadBoolean() ? 1L : 0L;
-            case System.Reflection.Metadata.PrimitiveTypeCode.Byte:
-                return blobReader.ReadByte();
-            case System.Reflection.Metadata.PrimitiveTypeCode.SByte:
-                return blobReader.ReadSByte();
-            case System.Reflection.Metadata.PrimitiveTypeCode.Int16:
-                return blobReader.ReadInt16();
-            case System.Reflection.Metadata.PrimitiveTypeCode.UInt16:
-                return blobReader.ReadUInt16();
-            case System.Reflection.Metadata.PrimitiveTypeCode.Char:
-                return blobReader.ReadChar();
-            case System.Reflection.Metadata.PrimitiveTypeCode.Int32:
-                return blobReader.ReadInt32();
-            case System.Reflection.Metadata.PrimitiveTypeCode.UInt32:
-                return blobReader.ReadUInt32();
-            case System.Reflection.Metadata.PrimitiveTypeCode.Int64:
-                return blobReader.ReadInt64();
-            case System.Reflection.Metadata.PrimitiveTypeCode.UInt64:
-                return unchecked((long)blobReader.ReadUInt64());
-            default:
+            var constHandle = fieldDef.GetDefaultValue();
+            if (constHandle.IsNil)
                 return null;
+
+            var constant = reader.GetConstant(constHandle);
+            var blobReader = reader.GetBlobReader(constant.Value);
+
+            // PrimitiveTypeCode matches the ECMA 335 constant type codes
+            // used by System.Reflection.Metadata (not to be confused with
+            // the unrelated ConstantTypeCode enum from a different namespace).
+            switch ((System.Reflection.Metadata.PrimitiveTypeCode)constant.TypeCode)
+            {
+                case System.Reflection.Metadata.PrimitiveTypeCode.Boolean:
+                    return blobReader.ReadBoolean() ? 1L : 0L;
+                case System.Reflection.Metadata.PrimitiveTypeCode.Byte:
+                    return blobReader.ReadByte();
+                case System.Reflection.Metadata.PrimitiveTypeCode.SByte:
+                    return blobReader.ReadSByte();
+                case System.Reflection.Metadata.PrimitiveTypeCode.Int16:
+                    return blobReader.ReadInt16();
+                case System.Reflection.Metadata.PrimitiveTypeCode.UInt16:
+                    return blobReader.ReadUInt16();
+                case System.Reflection.Metadata.PrimitiveTypeCode.Char:
+                    return blobReader.ReadChar();
+                case System.Reflection.Metadata.PrimitiveTypeCode.Int32:
+                    return blobReader.ReadInt32();
+                case System.Reflection.Metadata.PrimitiveTypeCode.UInt32:
+                    return blobReader.ReadUInt32();
+                case System.Reflection.Metadata.PrimitiveTypeCode.Int64:
+                    return blobReader.ReadInt64();
+                case System.Reflection.Metadata.PrimitiveTypeCode.UInt64:
+                    return unchecked((long)blobReader.ReadUInt64());
+                default:
+                    return null;
+            }
+        }
+        catch
+        {
+            return null;
         }
     }
-    catch
-    {
-        return null;
-    }
-}
 
 
     /// <summary>
@@ -1200,6 +1200,6 @@ private static long? ReadFieldConstantValue(
                     Console.Error.WriteLine($"  {m}");
             }
         }
-}
+    }
 
 }
