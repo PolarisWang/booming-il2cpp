@@ -230,13 +230,15 @@ public sealed class CSharpExpressionBuilder
                 return $"global::{baseName}{gaPart}{sharedSuffix}";
             }
             // Use SubjectInstanceFactory for valid instances. Ref structs and
-            // unresolvable types fall back to default(T)! (ref structs can't be
-            // generic type params; unresolved types may be in unreferenced assemblies).
+            // Unresolvable types: ref structs (only) fall back to default(T)!.
+            // All other types use SubjectInstanceFactory so a real instance
+            // is created at runtime, enabling the subject wrapper to execute
+            // the real method body instead of dispatching on null.
             try {
                 var t = Type.GetType(typeFullName, false);
-                if (t == null || (t.IsValueType && t.IsByRefLike))
+                if (t != null && t.IsValueType && t.IsByRefLike)
                     return $"default(global::{qualified.Replace('+', '.')})!";
-            } catch { return $"default(global::{qualified.Replace('+', '.')})!"; }
+            } catch { }
             return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
         }
 

@@ -687,9 +687,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] assembly-dir: {ad}")
 
     # Pass target assembly as --additional-assembly so the codegen compiles
-    # its methods as real AOT (not external stubs that throw NRE).
-    # This enables CombinedSubjects wrappers to actually execute real method
-    # bodies, which triggers GC allocations during profile/benchmark dispatch.
+    # its methods as real AOT (not external stubs). Combined with the
+    # SubjectInstanceFactory change in AutoTestGenerator, FACT subject
+    # wrappers create real instances and call real method bodies, which
+    # triggers GC allocations tracked by tls_alloc_fast_bytes.
     if target_dll is not None and target_dll.exists():
         tpg_cmd.extend(['--additional-assembly', str(target_dll)])
         print(f"  [build] additional-assembly (target): {target_dll}")

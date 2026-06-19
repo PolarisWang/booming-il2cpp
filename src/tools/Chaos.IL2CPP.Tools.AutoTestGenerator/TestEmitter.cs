@@ -184,6 +184,15 @@ public sealed class TestEmitter
                     ? $"<{string.Join(", ", method.GenericTypeArgs.Select(CSharpSerializer.MapToCSharpType))}>"
                     : "";
                 var instanceExpr = _expressionBuilder.GetInstanceExpression(typeFullName, method.IsStatic);
+                // Replace default(T)! with SubjectInstanceFactory so real
+                // instances are created at runtime.  This enables the FACT
+                // wrapper to actually execute the method body (triggering GC
+                // allocations) instead of dispatching on null.
+                if (instanceExpr.StartsWith("default(global::") && instanceExpr.EndsWith(")!"))
+                {
+                    var typeArg = instanceExpr["default(".Length..^"!)".Length];
+                    instanceExpr = $"SubjectInstanceFactory.Create<{typeArg}>()";
+                }
                 var callExpr = $"{instanceExpr}.{method.Name}{genericSuffix}({argsStr})";
 
                 // Task-returning methods: unwrap with GetAwaiter().GetResult() so assertions

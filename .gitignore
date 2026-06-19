@@ -499,3 +499,14 @@ skills/lifecycle/learning/signals/
 # Native SDK (CI-built, not tracked in git)
 testing/foundation-dll/sdk/
 src/reference/
+# Pipeline build artifacts
+testing/foundation-dll/*/chunks/*/native/gc_api.cpp
+testing/foundation-dll/*/chunks/*/native/metadata/subjects.json
+testing/foundation-dll/*/chunks/*/native/patch.patchdata.meta.json
+testing/foundation-dll/*/chunks/*/managed/subjects_net8_0/
+testing/foundation-dll/*/chunks/*/managed/combined/*/chunks/
+src/reference/*/chunks/*/managed/subjects/*.dll
+src/reference/*/chunks/*/managed/subjects/*.deps.json
+*.runtimeconfig.json
+*.nuget.dgspec.json
+project.assets.json
