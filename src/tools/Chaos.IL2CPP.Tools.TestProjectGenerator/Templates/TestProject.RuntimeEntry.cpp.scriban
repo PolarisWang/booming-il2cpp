@@ -58,6 +58,17 @@ static thread_local jmp_buf t_abort_jmp;
 
 #include "chaos_runtime_host.h"
 
+// ── EH macros: use try/catch everywhere ──────────────────────────
+// On Windows with /EHa, catch(...) catches SEH exceptions too,
+// so __try/__except is not needed.  Avoiding __try eliminates
+// MSVC C2712 (__try + C++ object unwinding incompatibility).
+#undef CHAOS_EH_TRY
+#undef CHAOS_EH_CATCH_BEGIN
+#undef CHAOS_EH_END
+#define CHAOS_EH_TRY               try {
+#define CHAOS_EH_CATCH_BEGIN       } catch (...) {
+#define CHAOS_EH_END               }
+
 #include <chaos/hotpatch_dispatch.h>
 #include <patch_loader.h>
 
@@ -273,29 +284,13 @@ static int RunFactMode() {
     int passed_count = 0;
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
-#if defined(_WIN32)
-        __try {
+    try {
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             ++passed_count;
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
             // SEH caught (e.g. STATUS_ACCESS_VIOLATION) — skip increment
-        }
-#else
-	        // On Linux, wrap dispatch in setjmp so longjmp from the fail hook
-	        // (or SIGABRT handler) recovers gracefully instead of UB.
-	        if (setjmp(t_abort_jmp) == 0) {
-	            CHAOS_EH_TRY
-	                chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-	                    GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-	                ++passed_count;
-	            CHAOS_EH_CATCH_BEGIN
-	                // caught — skip increment
-	            CHAOS_EH_END
-	        } else {
-	            // longjmp from CHAOS_IL2CPP_FAIL hook or SIGABRT — skip increment
-	        }
-#endif
+    }
     }
     int failed_count = kCount - passed_count;
     printf("Passed: %d/%d\n", passed_count, kCount);
@@ -392,10 +387,10 @@ static int RunFactJsonMode() {
         });
 
         if (_setjmp(t_abort_jmp) == 0) {
-            __try {
+            try {
                 result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                     GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            } __except(EXCEPTION_EXECUTE_HANDLER) {
+            } } catch (...) {
                 caught = true;
             }
         } else {
@@ -493,18 +488,13 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
     // Warmup: per-call crash protection
     bool crashed = false;
     for (int w = 0; w < 100; w++) {
-#if defined(_WIN32)
-        __try {
+    try {
             chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                 entries, kAotMethodCount, entry_index);
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
             crashed = true;
             break;
-        }
-#else
-        chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
-            entries, kAotMethodCount, entry_index);
-#endif
+    }
     }
 
     if (crashed) {
@@ -518,18 +508,13 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
     auto alloc_before = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
     auto start = std::chrono::steady_clock::now();
     for (int i = 0; i < iterations; i++) {
-#if defined(_WIN32)
-        __try {
+    try {
             chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                 entries, kAotMethodCount, entry_index);
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
             crashed = true;
             break;
-        }
-#else
-        chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
-            entries, kAotMethodCount, entry_index);
-#endif
+    }
     }
     auto end = std::chrono::steady_clock::now();
     auto alloc_after = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
@@ -576,33 +561,24 @@ static int RunBenchmarkAllMode(int iterations) {
         // Wrap the ENTIRE per-method body in __try so process-level crashes
         // (stack overflow, AV in no_gc_region, heap corruption) are caught
         // and the benchmark can continue with the next method.
-        __try {
+        try {
 #endif
             // Warmup: per-call crash protection
             for (int w = 0; w < 100; w++) {
-#if defined(_WIN32)
-                __try {
+    try {
                     chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                         entries, kAotMethodCount, i);
-                } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
                     crashed = true;
                     break;
-                }
-#else
-                chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
-                    entries, kAotMethodCount, i);
-#endif
+    }
             }
 
             if (crashed) {
                 printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
                        i);
                 fflush(stdout);
-#if defined(_WIN32)
                 __leave;
-#else
-                continue;
-#endif
             }
 
             // Timing: per-call crash protection
@@ -610,18 +586,13 @@ static int RunBenchmarkAllMode(int iterations) {
             auto alloc_before = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
             auto start = std::chrono::steady_clock::now();
             for (int t = 0; t < iterations; t++) {
-#if defined(_WIN32)
-                __try {
+    try {
                     chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                         entries, kAotMethodCount, i);
-                } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
                     crashed = true;
                     break;
-                }
-#else
-                chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
-                    entries, kAotMethodCount, i);
-#endif
+    }
             }
             auto end = std::chrono::steady_clock::now();
             auto alloc_after = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
@@ -638,7 +609,7 @@ static int RunBenchmarkAllMode(int iterations) {
             }
             fflush(stdout);
 #if defined(_WIN32)
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
+        } } catch (...) {
             // Process-level crash caught (e.g. AV in no_gc_region, stack overflow).
             // Record the failure and continue with the next method.
             printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"fatal crash\"}\n",
@@ -662,18 +633,13 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
         // Warmup: per-call crash protection
         bool crashed = false;
         for (int w = 0; w < 100; w++) {
-#if defined(_WIN32)
-            __try {
+    try {
                 chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                     entries, kAotMethodCount, i);
-            } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
                 crashed = true;
                 break;
-            }
-#else
-            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
-                entries, kAotMethodCount, i);
-#endif
+    }
         }
 
         if (crashed) {
@@ -688,18 +654,13 @@ static int RunBenchmarkRangeMode(int iterations, int start_idx, int end_idx) {
         auto alloc_before = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
         auto start = std::chrono::steady_clock::now();
         for (int t = 0; t < iterations; t++) {
-#if defined(_WIN32)
-            __try {
+    try {
                 chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
                     entries, kAotMethodCount, i);
-            } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
                 crashed = true;
                 break;
-            }
-#else
-            chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
-                entries, kAotMethodCount, i);
-#endif
+    }
         }
         auto end = std::chrono::steady_clock::now();
         auto alloc_after = chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread();
@@ -752,7 +713,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         // the dispatched function that manifests on printf/fflush).
         signal(SIGABRT, [](int) { longjmp(t_abort_jmp, 1); });
         if (_setjmp(t_abort_jmp) == 0) {
-            __try {
+            try {
                 CHAOS_EH_TRY
                     bv = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                         GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
@@ -760,7 +721,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
                 CHAOS_EH_CATCH_BEGIN
                     caught = true;
                 CHAOS_EH_END
-            } __except(EXCEPTION_EXECUTE_HANDLER) {
+            } } catch (...) {
                 caught = true;
             }
         } else {
@@ -783,20 +744,14 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         baseline_caught[si] = caught;
         baseline_value[si] = bv;
         // Guard printf against deferred heap corruption from dispatch
-#if defined(_WIN32)
-        __try {
+    try {
             if (si > 0) printf(",");
             printf("{\"si\":%d,\"passed\":%s,\"value\":%" PRId64 "}",
                    si, caught ? "false" : "true", bv);
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
             if (si > 0) printf(",");
             printf("{\"si\":%d,\"passed\":false,\"value\":0,\"error\":\"output_failed\"}", si);
-        }
-#else
-        if (si > 0) printf(",");
-        printf("{\"si\":%d,\"passed\":%s,\"value\":%" PRId64 "}",
-               si, caught ? "false" : "true", bv);
-#endif
+    }
     }
     printf("],");
     // Baseline benchmark (before patch)
@@ -806,19 +761,11 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
             int i = kSubjectSlotMap[si];
             bool crashed = false;
             auto result = BenchmarkResult{};
-#if defined(_WIN32)
-            __try {
+    try {
                 result = RunBenchmark(i, g_benchmark_iterations);
-            } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
                 crashed = true;
-            }
-#else
-            CHAOS_EH_TRY
-                result = RunBenchmark(i, g_benchmark_iterations);
-            CHAOS_EH_CATCH_BEGIN
-                crashed = true;
-            CHAOS_EH_END
-#endif
+    }
             if (si > 0) printf(",");
             if (crashed) {
                 printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"crashed\"}", i);
@@ -848,25 +795,16 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         int i = kSubjectSlotMap[si];
         int64_t patched_value = 0;
         bool patched_caught = false;
-#if defined(_WIN32)
-        __try {
+    try {
             CHAOS_EH_TRY
                 patched_value = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                     GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             CHAOS_EH_CATCH_BEGIN
                 patched_caught = true;
             CHAOS_EH_END
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
             patched_caught = true;
-        }
-#else
-        CHAOS_EH_TRY
-            patched_value = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
-                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-        CHAOS_EH_CATCH_BEGIN
-            patched_caught = true;
-        CHAOS_EH_END
-#endif
+    }
         if (semantic_passed > 0) printf(",");
         printf("{\"si\":%d,\"passed\":%s,\"value\":%" PRId64 "}",
                si, patched_caught ? "false" : "true",
@@ -893,19 +831,11 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
             int i = kSubjectSlotMap[si];
             bool crashed = false;
             auto result = BenchmarkResult{};
-#if defined(_WIN32)
-            __try {
+    try {
                 result = RunBenchmark(i, g_benchmark_iterations);
-            } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
                 crashed = true;
-            }
-#else
-            CHAOS_EH_TRY
-                result = RunBenchmark(i, g_benchmark_iterations);
-            CHAOS_EH_CATCH_BEGIN
-                crashed = true;
-            CHAOS_EH_END
-#endif
+    }
             if (si > 0) printf(",");
             if (crashed) {
                 printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"crashed\"}", i);
@@ -939,8 +869,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
         }
         int i = kSubjectSlotMap[si];
         bool reverted_ok = false;
-#if defined(_WIN32)
-        __try {
+    try {
             CHAOS_EH_TRY
                 chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                     GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
@@ -948,18 +877,9 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
             CHAOS_EH_CATCH_BEGIN
                 all_revert = false;
             CHAOS_EH_END
-        } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } catch (...) {
             all_revert = false;
-        }
-#else
-        CHAOS_EH_TRY
-            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            reverted_ok = true;
-        CHAOS_EH_CATCH_BEGIN
-            all_revert = false;
-        CHAOS_EH_END
-#endif
+    }
         if (si > 0) printf(",");
         printf("{\"si\":%d,\"passed\":%s}", si, reverted_ok ? "true" : "false");
     }

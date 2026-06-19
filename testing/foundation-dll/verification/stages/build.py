@@ -692,6 +692,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # wrappers create real instances and call real method bodies, which
     # triggers GC allocations tracked by tls_alloc_fast_bytes.
     if target_dll is not None and target_dll.exists():
+        pass
 
     # Additional assemblies from chunk config (declared in chunk.json)
     # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.
