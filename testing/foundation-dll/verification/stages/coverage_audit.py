@@ -134,6 +134,36 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
             if len(namespace_gaps) > 10:
                 print(f"    ... and {len(namespace_gaps) - 10} more")
 
+        # ── 4c. Categorize missing methods by probeability ──
+        # Hardware intrinsics (Vector2/4, Matrix4x4, Plane, BitOperations, etc.)
+        # can never be probed by ATG because they require CPU SIMD support.
+        # Separate them from fixable gaps for a more accurate coverage picture.
+        _INTRINSIC_TYPE_NAMES = frozenset({
+            "Vector2", "Vector3", "Vector4", "Vector128", "Vector256", "Vector64",
+            "Matrix4x4", "Matrix3x2", "Plane", "Quaternion",
+            "BitOperations", "Vector", "VectorT",
+            # Static classes that can't be instantiated by ATG
+            "WebUtility",
+        })
+        unprobeable_count = 0
+        fixable_missing = []
+        for mid in missing:
+            type_part = mid.split("::")[0] if "::" in mid else mid.split("/")[-1]
+            base_name = type_part.rsplit(".", 1)[-1] if "." in type_part else type_part
+            base_name = base_name.split("`")[0]
+            if base_name in _INTRINSIC_TYPE_NAMES:
+                unprobeable_count += 1
+            else:
+                fixable_missing.append(mid)
+
+        if unprobeable_count > 0:
+            print(f"  [coverage-audit] Of {len(missing)} missing methods, "
+                  f"{unprobeable_count} are hardware intrinsics (cannot probe) and "
+                  f"{len(fixable_missing)} are fixable gaps")
+        if fixable_missing:
+            for mid in sorted(fixable_missing)[:10]:
+                print(f"  [coverage-audit]   FIXABLE GAP: {mid}")
+
     # ── 5. Write results to chunk results dir ──
     chunk_results_dir = ctx.chunk_dir / "results"
     chunk_results_dir.mkdir(parents=True, exist_ok=True)
@@ -145,6 +175,8 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
         "missingMethods": len(chunk_method_ids - subject_method_ids) if metadata_path.exists() else 0,
         "coveragePct": coverage_pct,
         "namespaceGaps": namespace_gaps if metadata_path.exists() else {},
+        "unprobeableMethods": unprobeable_count,
+        "fixableGapCount": len(fixable_missing),
     }
     try:
         audit_path.write_text(json.dumps(audit_data, indent=2), encoding="utf-8")

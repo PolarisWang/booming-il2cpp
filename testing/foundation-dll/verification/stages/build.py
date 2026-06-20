@@ -821,7 +821,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "--metadata", str(metadata_path),
         "--output", str(ctx.native_dir),
         "--config-tier", ctx.native_config,
-        "--clean",
+            # No --clean: keep per-assembly files
     ]
 
     # Pass assembly dirs from pipeline-config.yaml (populated by chunk_pipeline.py)
@@ -835,7 +835,8 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # wrappers create real instances and call real method bodies, which
     # triggers GC allocations tracked by tls_alloc_fast_bytes.
     if target_dll is not None and target_dll.exists():
-        pass
+        tpg_cmd.extend(["--additional-assembly", str(target_dll)])
+        print(f"  [build] additional-assembly: {target_dll} (target assembly)")
 
     # Additional assemblies from chunk config (declared in chunk.json)
     # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.

@@ -567,9 +567,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         _assemblyName = loweringPlan.AssemblyName;
-        // Compute unique suffix for per-assembly modules (empty for root assembly).
-        // Per-assembly plans have a different plan kind; root plans use "full-assembly-entry".
-        _assemblySuffix = string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal)
+        // Compute unique suffix for per-assembly modules.  The root assembly
+        // (CombinedSubjects) keeps empty suffix; target assemblies get a
+        // suffix so their symbols don't conflict at link time.
+        _assemblySuffix = string.Equals(_assemblyName, "CombinedSubjects", StringComparison.Ordinal)
             ? ""
             : "_" + SanitizeCppIdentifier(_assemblyName);
 

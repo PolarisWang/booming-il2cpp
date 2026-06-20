@@ -101,6 +101,7 @@ file(GLOB CHAOS_CODEGEN_PER_ASM_CPP
     "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.page*.cpp"
     "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/*/chaos_generated_module.cpp"
 )
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"

@@ -156,6 +156,7 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
     build_failed = []
     no_fact = []
     large_gap = []
+    large_real_gap = []
     for ck, cd in sorted(chunks.items()):
         slug = cd.get("slug", "?")
         asm_name = ck.split("/")[0] if "/" in ck else "?"
@@ -164,6 +165,7 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             build_failed.append(f"{asm_name}/{slug} ({build_st})")
         ft = cd.get("factTotal", 0)
         gap = cd.get("coverageGap")
+        fixable_gap = cd.get("fixableGapCount") or gap
         if gap is None:
             no_fact.append(f"{asm_name}/{slug} (no fact data)")
         elif ft == 0 and gap > 0:
@@ -171,6 +173,9 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
         elif gap is not None and gap > 10:
             gap_pct = gap / (gap + ft) * 100
             large_gap.append(f"{asm_name}/{slug} gap={gap} ({gap_pct:.0f}%)")
+        if fixable_gap is not None and fixable_gap > 10 and (gap is None or gap > 10):
+            fixable_pct = fixable_gap / (fixable_gap + ft) * 100 if ft > 0 else 100
+            large_real_gap.append(f"{asm_name}/{slug} fixable_gap={fixable_gap} ({fixable_pct:.0f}%)")
 
     if build_failed:
         lines.append(f"#### Build Failures ❌ ({len(build_failed)})")
