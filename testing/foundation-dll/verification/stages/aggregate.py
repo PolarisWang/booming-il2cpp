@@ -132,6 +132,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 summary["coverageAudit"] = {
                     "coveragePct": cv.get("coveragePct", 100.0),
                     "namespaceGaps": cv.get("namespaceGaps", {}),
+                    "fixableGapCount": cv.get("fixableGapCount", 0),
                 }
             except (json.JSONDecodeError, OSError):
                 summary["coverageAudit"] = {"status": "error"}
@@ -317,6 +318,10 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     mean_alloc = (total_allocated / len(chunks_with_benchmark)
                   if chunks_with_benchmark else 0)
 
+    total_fixable_gap = sum(
+        s.get("coverageAudit", {}).get("fixableGapCount", 0) for s in chunk_summaries
+    )
+
     # coverage-audit.json
     coverage_audit = {
         "assemblyName": ctx.assembly,
@@ -327,6 +332,7 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "chunksWithMetaMismatch": chunks_with_meta_mismatch,
         "totalDeclaredMethods": total_fact,
         "coveragePct": round(total_passed / total_fact * 100, 1) if total_fact else 0,
+        "fixableGapCount": total_fixable_gap,
         "namespaceGaps": {},  # populated per-chunk; aggregate here if needed
     }
     (latest_dir / "coverage-audit.json").write_text(
@@ -380,15 +386,50 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     (latest_dir / "dashboard.json").write_text(
         json.dumps(dashboard, indent=2), encoding="utf-8")
 
-    # History: benchmark data for regression detection
+    # History: benchmark + fact + coverage data for regression detection
     today = date.today().isoformat()
-    history_entry = {
+    history_benchmark = {
         "date": today,
         "assemblyName": ctx.assembly,
         "chunks": chunk_summaries,
     }
     (history_dir / f"benchmark-{today}.json").write_text(
-        json.dumps(history_entry, indent=2), encoding="utf-8")
+        json.dumps(history_benchmark, indent=2), encoding="utf-8")
+
+    # Fact history (for cross-day fact pass rate trend)
+    history_fact = {
+        "date": today,
+        "assemblyName": ctx.assembly,
+        "totalChunks": len(chunk_slugs),
+        "chunksWithFacts": chunks_with_fact,
+        "totalPassed": total_passed,
+        "totalFactMethods": total_fact,
+        "chunks": [
+            {"slug": s["slug"], "fact": s.get("fact")}
+            for s in chunk_summaries
+        ],
+    }
+    (history_dir / f"fact-{today}.json").write_text(
+        json.dumps(history_fact, indent=2), encoding="utf-8")
+
+    # Coverage history (for cross-day coverage gap trend)
+    total_coverage_gap = sum(
+        max(0, (s.get("fact") or {}).get("metaTotal", 0) - (s.get("fact") or {}).get("total", 0))
+        for s in chunk_summaries
+    )
+    history_coverage = {
+        "date": today,
+        "assemblyName": ctx.assembly,
+        "totalChunks": len(chunk_slugs),
+        "coveragePct": round(total_passed / total_fact * 100, 1) if total_fact else 0,
+        "fixableGapCount": total_fixable_gap,
+        "chunks": [
+            {"slug": s["slug"], "coverageAudit": s.get("coverageAudit")}
+            for s in chunk_summaries
+        ],
+    }
+    (history_dir / f"coverage-{today}.json").write_text(
+        json.dumps(history_coverage, indent=2), encoding="utf-8")
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     print(f"  [aggregate] Reports written to {latest_dir}")

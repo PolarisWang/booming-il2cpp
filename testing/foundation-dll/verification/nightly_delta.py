@@ -86,31 +86,54 @@ def compute_assembly_delta(
         today_chunks[slug] = cs
 
     # ── Find previous history ──
-    prev_path = _find_last_history(dll_reports, "benchmark", today)
-    prev_data = _load_json(prev_path) if prev_path else None
+    # Benchmark history (for performance comparison)
+    prev_bench_path = _find_last_history(dll_reports, "benchmark", today)
+    prev_bench_data = _load_json(prev_bench_path) if prev_bench_path else None
     prev_chunks: dict[str, dict] = {}
-    prev_date: str | None = None
-    if prev_data:
-        prev_date = prev_data.get("date")
-        for cs in prev_data.get("chunks", []):
+    prev_bench_date: str | None = None
+    if prev_bench_data:
+        prev_bench_date = prev_bench_data.get("date")
+        for cs in prev_bench_data.get("chunks", []):
             prev_chunks[cs.get("slug", "?")] = cs
+
+    # Fact history (for fact pass rate trend)
+    prev_fact_path = _find_last_history(dll_reports, "fact", today)
+    prev_fact_data = _load_json(prev_fact_path) if prev_fact_path else None
+    prev_fact_chunks: dict[str, dict] = {}
+    prev_fact_date: str | None = None
+    if prev_fact_data:
+        prev_fact_date = prev_fact_data.get("date")
+        for cs in prev_fact_data.get("chunks", []):
+            prev_fact_chunks[cs.get("slug", "?")] = cs
+
+    # Coverage history (for coverage gap trend)
+    prev_cov_path = _find_last_history(dll_reports, "coverage", today)
+    prev_cov_data = _load_json(prev_cov_path) if prev_cov_path else None
+    prev_cov_chunks: dict[str, dict] = {}
+    prev_cov_date: str | None = None
+    if prev_cov_data:
+        prev_cov_date = prev_cov_data.get("date")
+        for cs in prev_cov_data.get("chunks", []):
+            prev_cov_chunks[cs.get("slug", "?")] = cs
 
     # ── Per-chunk delta ──
     per_chunk: dict[str, dict[str, Any]] = {}
-    all_slugs = set(today_chunks.keys()) | set(prev_chunks.keys())
+    all_slugs = set(today_chunks.keys()) | set(prev_chunks.keys()) | set(prev_fact_chunks.keys()) | set(prev_cov_chunks.keys())
 
     for slug in sorted(all_slugs):
         key = _chunk_key(assembly, slug)
         tc = today_chunks.get(slug)
         pc = prev_chunks.get(slug)
+        pf = prev_fact_chunks.get(slug)
+        pcov = prev_cov_chunks.get(slug)
         delta: dict[str, Any] = {"slug": slug}
 
-        # Status
-        if tc and pc:
+        # Status — use benchmark history as primary, fall back to fact
+        if tc and (pc or pf or pcov):
             delta["status"] = "compared"
-        elif tc and not pc:
+        elif tc and not (pc or pf or pcov):
             delta["status"] = "new"
-        elif not tc and pc:
+        elif not tc and (pc or pf):
             continue  # chunk was removed, skip
         else:
             continue
@@ -123,11 +146,11 @@ def compute_assembly_delta(
 
         # ── Fact delta ──
         tf = tc.get("fact", {}) if tc else {}
-        pf = pc.get("fact", {}) if pc else {}
+        pf_dict = pf.get("fact", {}) if pf else {}
         t_passed = tf.get("passed", 0)
         t_total = tf.get("total", 0)
-        p_passed = pf.get("passed", 0)
-        p_total = pf.get("total", 0)
+        p_passed = pf_dict.get("passed", 0)
+        p_total = pf_dict.get("total", 0)
 
         t_rate = (t_passed / t_total * 100) if t_total > 0 else None
         p_rate = (p_passed / p_total * 100) if p_total > 0 else None
@@ -142,7 +165,7 @@ def compute_assembly_delta(
         # Coverage gap: metaTotal - total
         t_meta = tf.get("metaTotal") if tf.get("metaTotal") is not None else None
         t_gap = max(0, t_meta - t_total) if t_meta is not None and t_total > 0 else None
-        p_meta = pf.get("metaTotal") if pf.get("metaTotal") is not None else None
+        p_meta = pf_dict.get("metaTotal") if pf_dict.get("metaTotal") is not None else None
         p_gap = max(0, p_meta - p_total) if p_meta is not None and p_total > 0 else None
         delta["coverageGap"] = t_gap
         t_gap_pct = round(t_gap / t_meta * 100, 1) if t_gap is not None and t_meta and t_meta > 0 else None
@@ -231,10 +254,12 @@ def compute_assembly_delta(
     fact_rate = (fact_passed / fact_total * 100) if fact_total > 0 else None
 
     prev_fact_passed = sum(
-        pc.get("fact", {}).get("passed", 0) for pc in prev_chunks.values()
+        fc.get("fact", {}).get("passed", 0) for fc in
+        (prev_fact_chunks if prev_fact_chunks else prev_chunks).values()
     )
     prev_fact_total = sum(
-        pc.get("fact", {}).get("total", 0) for pc in prev_chunks.values()
+        fc.get("fact", {}).get("total", 0) for fc in
+        (prev_fact_chunks if prev_fact_chunks else prev_chunks).values()
     )
     prev_fact_rate = (prev_fact_passed / prev_fact_total * 100) if prev_fact_total > 0 else None
 
@@ -255,8 +280,8 @@ def compute_assembly_delta(
             * 100, 1
         ) if sum(c.get("factTotal", 0) for c in per_chunk.values()) > 0 else None,
         "totalAllocatedBytes": sum(c.get("benchAllocatedBytes") or 0 for c in per_chunk.values()),
-        "hasPrevious": prev_path is not None,
-        "previousDate": prev_date,
+        "hasPrevious": prev_fact_path is not None or prev_bench_path is not None,
+        "previousDate": prev_fact_date or prev_bench_date,
     }
     if prev_fact_rate is not None and fact_rate is not None:
         aggregate["factPassRateDelta"] = round(fact_rate - prev_fact_rate, 1)

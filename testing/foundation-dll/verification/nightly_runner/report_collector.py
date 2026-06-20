@@ -98,6 +98,7 @@ class ReportCollector:
         assemblies = self.config.assemblies or discover_assemblies(self.config.foundation_dir)
 
         copied = 0
+        history_copied = 0
         for asm in assemblies:
             src = self.config.foundation_dir / asm / "_dll" / "reports" / "latest"
             if src.exists():
@@ -107,13 +108,28 @@ class ReportCollector:
                     shutil.copytree(
                         str(src), str(dst),
                         dirs_exist_ok=True,
-                        ignore=shutil.ignore_patterns("history"),
                     )
                     copied += 1
                 except OSError as e:
                     print(f"  [collector] WARNING: failed to copy reports for {asm}: {e}")
 
+            # Copy history files too (fact-*, coverage-*, benchmark-* across days)
+            history_src = self.config.foundation_dir / asm / "_dll" / "reports" / "history"
+            if history_src.exists():
+                history_dst = target / asm / "history"
+                history_dst.mkdir(parents=True, exist_ok=True)
+                try:
+                    shutil.copytree(
+                        str(history_src), str(history_dst),
+                        dirs_exist_ok=True,
+                    )
+                    history_copied += 1
+                except OSError as e:
+                    print(f"  [collector] WARNING: failed to copy history for {asm}: {e}")
+
         print(f"  [collector] Copied reports for {copied}/{len(assemblies)} assemblies")
+        if history_copied:
+            print(f"  [collector] Copied history for {history_copied}/{len(assemblies)} assemblies")
 
     # ── Chunk results ───────────────────────────────────────────────────
 
