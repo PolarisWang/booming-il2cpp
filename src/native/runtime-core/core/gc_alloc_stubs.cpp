@@ -32,8 +32,8 @@ void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
 }  // anonymous namespace
 
 // Forward declarations (lines 37-38 call these before they're defined)
-static void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size);
-static void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size);
+void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size);
+void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size);
 
 /// Legacy symbol: GcAllocate — delegates to the profiled variant.
 /// Kept for compilation units that include gc_helpers.h but not gc_alloc_stubs.h

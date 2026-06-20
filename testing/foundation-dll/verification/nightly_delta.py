@@ -241,6 +241,12 @@ def compute_assembly_delta(
         "benchComparison": today_summary.get("benchmarkComparison", {}),
         "hotupdate": today_summary.get("hotupdate", {}),
         "totalCoverageGap": sum(c.get("coverageGap") or 0 for c in per_chunk.values()),
+        "coverageGapPct": round(
+            sum(c.get("coverageGap") or 0 for c in per_chunk.values())
+            / max(1, sum(c.get("factTotal", 0) for c in per_chunk.values()) + sum(c.get("coverageGap") or 0 for c in per_chunk.values()))
+            * 100, 1
+        ) if sum(c.get("factTotal", 0) for c in per_chunk.values()) > 0 else None,
+        "totalAllocatedBytes": sum(c.get("benchAllocatedBytes") or 0 for c in per_chunk.values()),
         "hasPrevious": prev_path is not None,
         "previousDate": prev_date,
     }
@@ -362,11 +368,54 @@ def compute_nightly_delta(
                     "delta": cgd,
                 })
 
+            # Memory allocation regression: allocatedBytes increased > 15%
+            mad = cd.get("benchAllocDelta")
+            if mad is not None and mad > 15:
+                regressions.append({
+                    "assembly": assembly,
+                    "slug": cd["slug"],
+                    "metric": "memory_alloc",
+                    "before": round(cd["benchAllocatedBytes"] / (1 + mad / 100), 1) if cd.get("benchAllocatedBytes") else None,
+                    "after": cd.get("benchAllocatedBytes"),
+                    "delta": mad,
+                })
+            if mad is not None and mad < -15:
+                improvements.append({
+                    "assembly": assembly,
+                    "slug": cd["slug"],
+                    "metric": "memory_alloc",
+                    "before": round(cd["benchAllocatedBytes"] / (1 + mad / 100), 1) if cd.get("benchAllocatedBytes") else None,
+                    "after": cd.get("benchAllocatedBytes"),
+                    "delta": mad,
+                })
+
+            # Coverage gap pct regression: gap percentage increased > 5pp
+            cgpd = cd.get("coverageGapPctDelta")
+            if cgpd is not None and cgpd > 5:
+                regressions.append({
+                    "assembly": assembly,
+                    "slug": cd["slug"],
+                    "metric": "coverage_gap_pct",
+                    "before": round((cd.get("coverageGapPct") or 0) - cgpd, 1),
+                    "after": cd.get("coverageGapPct"),
+                    "delta": cgpd,
+                })
+            if cgpd is not None and cgpd < -5:
+                improvements.append({
+                    "assembly": assembly,
+                    "slug": cd["slug"],
+                    "metric": "coverage_gap_pct",
+                    "before": round((cd.get("coverageGapPct") or 0) - cgpd, 1),
+                    "after": cd.get("coverageGapPct"),
+                    "delta": cgpd,
+                })
+
     # ── Overall summary ──
     total_chunks = sum(a["aggregate"]["totalChunks"] for a in assemblies)
     total_verified = sum(a["aggregate"]["chunksVerified"] for a in assemblies)
     total_benchmarked = sum(a["aggregate"]["totalBenchmarked"] for a in assemblies)
     total_coverage_gap = sum(a["aggregate"]["totalCoverageGap"] for a in assemblies)
+    total_allocated = sum(a["aggregate"].get("totalAllocatedBytes", 0) for a in assemblies)
 
     all_fact_passed = sum(
         c.get("factPassed", 0) for c in all_chunks.values()
@@ -375,6 +424,24 @@ def compute_nightly_delta(
         c.get("factTotal", 0) for c in all_chunks.values()
     )
     overall_rate = (all_fact_passed / all_fact_total * 100) if all_fact_total > 0 else None
+
+    # ── Compute regression grade ──
+    # Use chunk-level aggregate approach: grade based on worst per-chunk delta.
+    bench_grades = []
+    for ck, cd in all_chunks.items():
+        bd = cd.get("benchDurationDelta")
+        ad = cd.get("benchAllocDelta")
+        if (bd is not None and bd > 20) or (ad is not None and ad > 20):
+            bench_grades.append("hard")
+        elif (bd is not None and bd > 10) or (ad is not None and ad > 10):
+            bench_grades.append("soft")
+        else:
+            bench_grades.append("none")
+
+    grade_order = {"none": 0, "soft": 1, "hard": 2}
+    regression_grade = max(bench_grades, key=lambda g: grade_order.get(g, 0)) if bench_grades else "none"
+    regressed_count = sum(1 for g in bench_grades if g == "hard")
+    degraded_count = sum(1 for g in bench_grades if g == "soft")
 
     return {
         "date": today,
@@ -386,7 +453,14 @@ def compute_nightly_delta(
             "factPassRate": round(overall_rate, 1) if overall_rate is not None else None,
             "totalBenchmarked": total_benchmarked,
             "totalCoverageGap": total_coverage_gap,
+            "totalCoverageGapPct": round(
+                total_coverage_gap / max(1, all_fact_total + total_coverage_gap) * 100, 1
+            ) if all_fact_total > 0 else None,
+            "totalAllocatedBytes": total_allocated,
             "assembliesWithHistory": sum(1 for a in assemblies if a["aggregate"]["hasPrevious"]),
+            "regressionGrade": regression_grade,
+            "regressedChunks": regressed_count,
+            "degradedChunks": degraded_count,
         },
         "regressions": regressions,
         "improvements": improvements,

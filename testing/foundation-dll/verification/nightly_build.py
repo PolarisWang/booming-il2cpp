@@ -339,8 +339,8 @@ def main() -> int:
                         help="Per-stage timeout in seconds (default: no timeout)")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Verbose output")
-    parser.add_argument("--run-profile", action="store_true",
-                        help="After Phase 1, rebuild entry.exe with profile preset and collect profile data")
+    parser.add_argument("--no-profile", action="store_true",
+                        help="Skip profile pass (profile is ON by default)")
     parser.add_argument("--skip-nightly-report", action="store_true",
                         help="Skip delta and summary generation at the end")
     parser.add_argument("--output-dir", default=None,
@@ -410,7 +410,7 @@ def main() -> int:
     print(f"\n  Build: {build_ok}/{len(all_results)} passed")
 
     # ── Phase 2 (optional): Profile pass with profile-tier build ──
-    if args.run_profile:
+    if not args.no_profile:
         print(f"\n{'='*60}")
         print(f"  Phase 2: Profile pass (native_config=profile)...")
         print(f"{'='*60}")

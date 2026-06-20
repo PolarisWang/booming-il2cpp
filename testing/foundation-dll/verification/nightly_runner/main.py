@@ -52,8 +52,8 @@ def main() -> int:
                         help="Native build config (default: check)")
     parser.add_argument("--stage-timeout", type=int, default=0,
                         help="Per-stage timeout in seconds (default: no timeout)")
-    parser.add_argument("--run-profile", action="store_true",
-                        help="Also rebuild entry.exe with profile preset and collect profile data")
+    parser.add_argument("--no-profile", action="store_true",
+                        help="Skip profile pass (profile is ON by default)")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Verbose/Debug output")
     parser.add_argument("--no-logs", action="store_true",
@@ -71,7 +71,7 @@ def main() -> int:
         max_workers=args.max_workers,
         bench_workers=args.bench_workers,
         native_config=args.native_config,
-        run_profile=args.run_profile,
+        run_profile=not args.no_profile,
         stage_timeout=args.stage_timeout,
         capture_logs=not args.no_logs,
         log_level="DEBUG" if args.verbose else "INFO",

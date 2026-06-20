@@ -701,6 +701,29 @@ def run_benchmark_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # Write unified-format records.jsonl from primary result
     _write_records_jsonl(per_method_stats, summary, ctx, iterations)
 
+    # Write benchmark-trend.json with per-method stats for regression grading
+    trend_path = ctx.results_dir / "benchmark-trend.json"
+    try:
+        trend_data = {
+            "methodCount": method_count,
+            "technologies": [t for _, t in technologies],
+            "perMethodStats": [
+                {
+                    "entryIndex": i,
+                    "meanDurationMs": s.get("meanDurationMs", 0),
+                    "meanOpsPerSecond": s.get("meanOpsPerSecond", 0),
+                    "meanAllocatedBytes": s.get("meanAllocatedBytes", 0),
+                    "cv": s.get("cv", 0),
+                    "sampleCount": s.get("cleanedSampleCount", s.get("sampleCount", 0)),
+                }
+                for i, s in enumerate(per_method_stats)
+            ],
+            "aggregateSummary": summary,
+        }
+        trend_path.write_text(json.dumps(trend_data, indent=2), encoding="utf-8")
+    except OSError:
+        pass  # best-effort
+
     status = "passed" if method_count > 0 else "error"
 
     # FP-12: Validate benchmark data minimum quality

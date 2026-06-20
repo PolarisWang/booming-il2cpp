@@ -62,7 +62,8 @@ class NightlyConfig:
     max_workers: int = 4
     bench_workers: int | None = None
     native_config: str = "check"
-    run_profile: bool = False
+    run_profile: bool = True
+    no_profile: bool = False  # override to disable profile pass
     stage_timeout: int = 0  # 0 = no timeout
 
     # ── Logging ────────────────────────────────────────────────────────

@@ -24,6 +24,18 @@ def _fmt_pct(value: float | None, always_sign: bool = False) -> str:
     return f"{sign}{value:.1f}%"
 
 
+def _fmt_bytes(value: float | int | None) -> str:
+    """Format bytes with human-readable suffix."""
+    if value is None or value == 0:
+        return "—"
+    b = float(value)
+    for unit in ("B", "KB", "MB", "GB"):
+        if b < 1024:
+            return f"{b:.1f}{unit}"
+        b /= 1024
+    return f"{b:.1f}TB"
+
+
 def _fmt_delta(value: float | None, unit: str = "") -> str:
     if value is None:
         return "—"
@@ -67,7 +79,14 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
     lines.append(f"| Fact pass rate | {_fmt_pct(overall.get('factPassRate'))} "
                  f"{_delta_emoji(overall.get('factPassRateDelta'))} |")
     lines.append(f"| Benchmark methods | {overall.get('totalBenchmarked', 0)} |")
-    lines.append(f"| Coverage gap | {overall.get('totalCoverageGap', 0)} methods unverified |")
+    lines.append(f"| Coverage gap | {overall.get('totalCoverageGap', 0)} methods "
+                 f"({_fmt_pct(overall.get('totalCoverageGapPct'))}) |")
+    lines.append(f"| Total allocated | {_fmt_bytes(overall.get('totalAllocatedBytes', 0))} |")
+    grade = overall.get("regressionGrade", "none")
+    grade_emoji = {"none": "✅", "soft": "⚠️", "hard": "❌"}.get(grade, "—")
+    lines.append(f"| Benchmark regression | **{grade.upper()}** {grade_emoji} "
+                 f"(hard={overall.get('regressedChunks', 0)}, "
+                 f"soft={overall.get('degradedChunks', 0)}) |")
     lines.append(f"| Assemblies with history | {overall.get('assembliesWithHistory', 0)} |")
     lines.append("")
 
@@ -86,9 +105,15 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             if metric == "coverage_gap":
                 fmt_before = str(int(before)) if before is not None else "—"
                 fmt_after = str(int(after)) if after is not None else "—"
+            elif metric == "coverage_gap_pct":
+                fmt_before = f"{before:.1f}%" if before is not None else "—"
+                fmt_after = f"{after:.1f}%" if after is not None else "—"
             elif metric == "bench_duration":
                 fmt_before = f"{before:.4f}ms" if before is not None else "—"
                 fmt_after = f"{after:.4f}ms" if after is not None else "—"
+            elif metric == "memory_alloc":
+                fmt_before = _fmt_bytes(before) if before is not None else "—"
+                fmt_after = _fmt_bytes(after) if after is not None else "—"
             lines.append(f"| {r.get('assembly', '?')} | {r.get('slug', '?')} | "
                          f"{metric} | {fmt_before} | {fmt_after} | **{r.get('delta', '?'):+.1f}** |")
     else:
@@ -110,9 +135,15 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             if metric == "coverage_gap":
                 fmt_before = str(int(before)) if before is not None else "—"
                 fmt_after = str(int(after)) if after is not None else "—"
+            elif metric == "coverage_gap_pct":
+                fmt_before = f"{before:.1f}%" if before is not None else "—"
+                fmt_after = f"{after:.1f}%" if after is not None else "—"
             elif metric == "bench_duration":
                 fmt_before = f"{before:.4f}ms" if before is not None else "—"
                 fmt_after = f"{after:.4f}ms" if after is not None else "—"
+            elif metric == "memory_alloc":
+                fmt_before = _fmt_bytes(before) if before is not None else "—"
+                fmt_after = _fmt_bytes(after) if after is not None else "—"
             lines.append(f"| {r.get('assembly', '?')} | {r.get('slug', '?')} | "
                          f"{metric} | {fmt_before} | {fmt_after} | **{r.get('delta', '?'):+.1f}** |")
     else:
@@ -166,8 +197,8 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
     lines.append("### Per-Assembly Detail")
     lines.append("")
     if assemblies:
-        lines.append("| Assembly | Build | Fact | ΔFact | Bench(ms) | ΔBench | Coverage | Profile | MBench | HU |")
-        lines.append("|----------|-------|------|-------|-----------|--------|----------|---------|--------|-----|")
+        lines.append("| Assembly | Build | Fact | ΔFact | Bench(ms) | ΔBench | Coverage | Alloc | Profile | MBench | HU |")
+        lines.append("|----------|-------|------|-------|-----------|--------|----------|-------|---------|--------|-----|")
         for a in sorted(assemblies, key=lambda x: x.get("assembly", "")):
             name = a.get("assembly", "?")
             rate = a.get("factPassRate")
@@ -176,6 +207,10 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             dur = a.get("benchComparison", {}).get("aggregate", {}).get("meanDurationMs")
             dur_str = f"{dur:.4f}" if dur else "—"
             gap = a.get("totalCoverageGap", 0)
+            gap_pct = a.get("coverageGapPct")
+            gap_str = f"{gap} ({_fmt_pct(gap_pct)})" if gap_pct is not None else str(gap)
+            alloc = a.get("totalAllocatedBytes", 0)
+            alloc_str = _fmt_bytes(alloc) if alloc else "—"
             hu = a.get("hotupdate", {})
             hu_str = "✅" if hu.get("chunksPatchFailed", 0) == 0 and hu.get("totalFailed", 0) == 0 else "❌"
 
@@ -208,7 +243,7 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
                 round(bench_delta_sum / bench_delta_count, 1) if bench_delta_count > 0 else None, "%"
             )
 
-            lines.append(f"| {name} | {build_str} | {rate_str} | {delta_str} | {dur_str} | {bench_delta_str} | {gap} | {prof_str} | {mb_str} | {hu_str} |")
+            lines.append(f"| {name} | {build_str} | {rate_str} | {delta_str} | {dur_str} | {bench_delta_str} | {gap_str} | {alloc_str} | {prof_str} | {mb_str} | {hu_str} |")
     else:
         lines.append("_No assembly data available._")
     lines.append("")
