@@ -186,6 +186,13 @@ public sealed partial class NativeAotLoweringPlanner
     internal bool _forceSerial;
 
     /// <summary>
+    /// Max degree of parallelism for method emission. Defaults to
+    /// Environment.ProcessorCount - 2 (reserve cores for GC/OS).
+    /// Set via CLI --parallelism N. Minimum 1.
+    /// </summary>
+    internal int _maxParallelism = Math.Max(1, Environment.ProcessorCount - 2);
+
+    /// <summary>
     /// Static field declarations (subjectId → fieldTypeSubjectId) captured during
     /// EmitObjectModelDeclarations for extern declarations in the shared header.
     /// </summary>
@@ -994,13 +1001,19 @@ public sealed partial class NativeAotLoweringPlanner
         }
         else
         {
+            int dop = Math.Max(1, _maxParallelism);
             System.Threading.Tasks.Parallel.For(0, emitMethods.Count,
-                new System.Threading.Tasks.ParallelOptions { MaxDegreeOfParallelism = System.Environment.ProcessorCount },
+                new System.Threading.Tasks.ParallelOptions { MaxDegreeOfParallelism = dop },
                 i => allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
         }
         List<NativeAotMethodTemplateModel> methods = new List<NativeAotMethodTemplateModel>(allMethods);
 
         _tPhase4 = _sw.ElapsedMilliseconds;
+        long phase4Ms = _tPhase4 - _tPhase3;
+        if (_forceSerial)
+            System.Console.Error.WriteLine($"[PARALLEL] SERIAL mode: {emitMethods.Count} methods in {phase4Ms}ms ({phase4Ms / Math.Max(1, emitMethods.Count)} ms/method)");
+        else
+            System.Console.Error.WriteLine($"[PARALLEL] PARALLEL mode DOP={Math.Max(1, _maxParallelism)}: {emitMethods.Count} methods in {phase4Ms}ms ({phase4Ms / Math.Max(1, emitMethods.Count)} ms/method)");
 
         // Capture pc-dispatch count from the static counter.
         // Incremented during BuildMethodSourceSafe → EmitViaStructuredIR → EmitPcDispatch.
