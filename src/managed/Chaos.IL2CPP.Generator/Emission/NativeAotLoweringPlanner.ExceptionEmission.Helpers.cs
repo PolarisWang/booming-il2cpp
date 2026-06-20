@@ -20,20 +20,20 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void ResetArrayCheckCache()
     {
-        _lastCheckedArrayExpr = null;
-        _lastCheckedIndexExpr = null;
+        _state.Value!.LastCheckedArrayExpr = null;
+        _state.Value!.LastCheckedIndexExpr = null;
     }
 
 
 
     private bool TrySkipArrayChecks(string arrayExpr, string indexExpr)
     {
-        if (_activeStructuredSlotContext is null)
+        if (_state.Value!.ActiveStructuredSlotContext is null)
             return false;
-        if (arrayExpr == _lastCheckedArrayExpr && indexExpr == _lastCheckedIndexExpr)
+        if (arrayExpr == _state.Value!.LastCheckedArrayExpr && indexExpr == _state.Value!.LastCheckedIndexExpr)
             return true;
-        _lastCheckedArrayExpr = arrayExpr;
-        _lastCheckedIndexExpr = indexExpr;
+        _state.Value!.LastCheckedArrayExpr = arrayExpr;
+        _state.Value!.LastCheckedIndexExpr = indexExpr;
         return false;
     }
 
@@ -466,24 +466,24 @@ public sealed partial class NativeAotLoweringPlanner
 
 
     private SlotType PeekSlotType()
-        => _activeStructuredSlotContext is not null && _structuredSlotTypes.Count > 0
-            ? _structuredSlotTypes.Peek()
+        => _state.Value!.ActiveStructuredSlotContext is not null && _state.Value!.StructuredSlotTypes.Count > 0
+            ? _state.Value!.StructuredSlotTypes.Peek()
             : SlotType.NativeInt;
 
 
 
     private void PushSlotType(SlotType type)
     {
-        if (_activeStructuredSlotContext is not null)
-            _structuredSlotTypes.Push(type);
+        if (_state.Value!.ActiveStructuredSlotContext is not null)
+            _state.Value!.StructuredSlotTypes.Push(type);
     }
 
 
 
     private SlotType ConsumeSlotType()
     {
-        if (_activeStructuredSlotContext is not null && _structuredSlotTypes.Count > 0)
-            return _structuredSlotTypes.Pop();
+        if (_state.Value!.ActiveStructuredSlotContext is not null && _state.Value!.StructuredSlotTypes.Count > 0)
+            return _state.Value!.StructuredSlotTypes.Pop();
         return SlotType.NativeInt;
     }
 
@@ -491,17 +491,17 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void UpdateSlotType(SlotType type)
     {
-        if (_activeStructuredSlotContext is not null && _structuredSlotTypes.Count > 0)
+        if (_state.Value!.ActiveStructuredSlotContext is not null && _state.Value!.StructuredSlotTypes.Count > 0)
         {
-            _structuredSlotTypes.Pop();
-            _structuredSlotTypes.Push(type);
+            _state.Value!.StructuredSlotTypes.Pop();
+            _state.Value!.StructuredSlotTypes.Push(type);
         }
     }
 
 
 
     private string AllocateLinearScratchName(string prefix)
-        => "chaos_" + prefix + "_" + (_linearScratchCounter++).ToString(CultureInfo.InvariantCulture);
+        => "chaos_" + prefix + "_" + (_state.Value!.LinearScratchCounter++).ToString(CultureInfo.InvariantCulture);
 
 
 

@@ -36,7 +36,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        int dispatchSeq = _dispatchLabelSeq++;
+        int dispatchSeq = _state.Value!.DispatchLabelSeq++;
         // Phase 3: AOT Devirtualization fast-path for linear emission (inside branches of structured nodes)
         string devirtKey = instruction.Callee ?? instruction.TargetReference?.SubjectId ?? "";
         if (devirtKey.Length > 0 && _devirtualizationHints.TryGetValue(devirtKey, out DevirtualizationHint devirtHint) && devirtHint.CanDevirtualize)
@@ -108,8 +108,8 @@ public sealed partial class NativeAotLoweringPlanner
                 string devirtCtxArg = "";
                 if (_sharedContextSymbols.Contains(devirtSymbol))
                 {
-                    bool callerIsShared = _currentMethodNativeSymbol != null &&
-                                          _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+                    bool callerIsShared = _state.Value!.CurrentMethodNativeSymbol != null &&
+                                          _sharedContextSymbols.Contains(_state.Value!.CurrentMethodNativeSymbol);
                     devirtCtxArg = string.IsNullOrEmpty(devirtArgs)
                         ? (callerIsShared ? "chaos_generic_context" : "0")
                         : (callerIsShared ? ", chaos_generic_context" : ", 0");
@@ -142,8 +142,8 @@ public sealed partial class NativeAotLoweringPlanner
                 string devirtCtxArg2 = "";
                 if (_sharedContextSymbols.Contains(devirtSymbol))
                 {
-                    bool callerIsShared = _currentMethodNativeSymbol != null &&
-                                          _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+                    bool callerIsShared = _state.Value!.CurrentMethodNativeSymbol != null &&
+                                          _sharedContextSymbols.Contains(_state.Value!.CurrentMethodNativeSymbol);
                     devirtCtxArg2 = string.IsNullOrEmpty(devirtArgs)
                         ? (callerIsShared ? "chaos_generic_context" : "0")
                         : (callerIsShared ? ", chaos_generic_context" : ", 0");
@@ -278,7 +278,7 @@ public sealed partial class NativeAotLoweringPlanner
         string methodDeclaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(instruction.Callee!);
         IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis = ResolveDelegateInvokeParameterAbis(instruction);
         AotCoreIrAbiSlotArtifact returnAbi = ResolveDelegateInvokeReturnAbi(instruction);
-        int dispatchSeq = _dispatchLabelSeq++;
+        int dispatchSeq = _state.Value!.DispatchLabelSeq++;
         string returnType = MapAbiSlotReturnType(returnAbi);
         string sigCache = FormatAbiSlotParameterSignature(parameterAbis);
         string openFnType = parameterAbis.Count == 0 ? (returnType + "(*)()") : string.Concat(returnType, "(*)(", sigCache, ")");
@@ -497,8 +497,8 @@ public sealed partial class NativeAotLoweringPlanner
             string ctorCtxArg0 = "";
             if (_sharedContextSymbols.Contains(invocationTarget.TargetSymbol))
             {
-                bool callerIsShared = _currentMethodNativeSymbol != null &&
-                                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+                bool callerIsShared = _state.Value!.CurrentMethodNativeSymbol != null &&
+                                      _sharedContextSymbols.Contains(_state.Value!.CurrentMethodNativeSymbol);
                 ctorCtxArg0 = string.IsNullOrEmpty(ctorArgs0)
                     ? (callerIsShared ? "chaos_generic_context" : "0")
                     : (callerIsShared ? ", chaos_generic_context" : ", 0");
@@ -564,8 +564,8 @@ public sealed partial class NativeAotLoweringPlanner
             string ctorCtxArg2 = "";
             if (_sharedContextSymbols.Contains(constructorTarget.TargetSymbol))
             {
-                bool callerIsShared = _currentMethodNativeSymbol != null &&
-                                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+                bool callerIsShared = _state.Value!.CurrentMethodNativeSymbol != null &&
+                                      _sharedContextSymbols.Contains(_state.Value!.CurrentMethodNativeSymbol);
                 ctorCtxArg2 = string.IsNullOrEmpty(ctorArgs2)
                     ? (callerIsShared ? "chaos_generic_context" : "0")
                     : (callerIsShared ? ", chaos_generic_context" : ", 0");

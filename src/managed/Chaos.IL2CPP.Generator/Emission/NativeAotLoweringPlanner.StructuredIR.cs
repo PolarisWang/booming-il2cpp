@@ -32,7 +32,7 @@ public sealed partial class NativeAotLoweringPlanner
     // the name at the current top and discards it.
     // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
 
-    private StructuredSlotEmissionContext? _activeStructuredSlotContext;
+    
 
     /// <summary>
     /// Maximum recursion depth for EmitStructuredIRNode. When the structured IR
@@ -47,7 +47,6 @@ public sealed partial class NativeAotLoweringPlanner
     /// RuntimeHelpers.TryEnsureSufficientExecutionStack() which may not work
     /// reliably on threads created with a custom maxStackSize.
     /// </summary>
-    private int _structuredIrDepth;
 
     private sealed class StructuredSlotEmissionContext
     {
@@ -246,26 +245,26 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     private string AllocateEvalStackTargetExpression(SlotType type = SlotType.NativeInt)
-        => _activeStructuredSlotContext is null
+        => _state.Value!.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[chaos_stack_top++]"
-            : _activeStructuredSlotContext.AllocatePushTarget(type);
+            : _state.Value!.ActiveStructuredSlotContext.AllocatePushTarget(type);
 
     private string ConsumeEvalStackValueExpression()
-        => _activeStructuredSlotContext is null
+        => _state.Value!.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[--chaos_stack_top]"
-            : _activeStructuredSlotContext.PopValue();
+            : _state.Value!.ActiveStructuredSlotContext.PopValue();
 
     private string AccessEvalStackTopExpression()
-        => _activeStructuredSlotContext is null
+        => _state.Value!.ActiveStructuredSlotContext is null
             ? "chaos_eval_stack[chaos_stack_top - 1]"
-            : _activeStructuredSlotContext.PeekValue();
+            : _state.Value!.ActiveStructuredSlotContext.PeekValue();
 
     private void EmitEvalStackPush(StringBuilder builder, string indentation, string valueExpression, SlotType type = SlotType.NativeInt)
         => builder.AppendLine($"{indentation}{AllocateEvalStackTargetExpression(type)} = {NormalizeStoredStackValueExpression(valueExpression)};");
 
     private void EmitEvalStackDiscard(StringBuilder builder, string indentation, int count = 1)
     {
-        if (_activeStructuredSlotContext is null)
+        if (_state.Value!.ActiveStructuredSlotContext is null)
         {
             if (count == 1)
             {
@@ -279,7 +278,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        _activeStructuredSlotContext.Discard(count);
+        _state.Value!.ActiveStructuredSlotContext.Discard(count);
     }
 
     private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, int maxInt64Slots, int maxWideSlots, string indentation)
@@ -534,7 +533,6 @@ public sealed partial class NativeAotLoweringPlanner
     private static long s_totalMethodCount;
     internal static long s_pcDispatchCount;
     private static int s_structuredBrLabelSeq;
-    private List<string>? _pendingBranchSkipLabels;
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, long> s_irreducibleReasons
         = new(System.StringComparer.Ordinal);
 

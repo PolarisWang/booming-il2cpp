@@ -35,7 +35,7 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 {{~ end ~}}
 };
 {{~ end ~}}
-extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
+extern "C" const CodeRegistrationV0 chaos_codegen_code_registration{{ assembly_suffix }}
     = {
     .struct_size               = sizeof(CodeRegistrationV0),
     .method_pointers           = kMethodPointers,
@@ -66,7 +66,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 };
 
 // MetadataRegistrationV0
-extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration
+extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration{{ assembly_suffix }}
     = {
     .struct_size              = sizeof(MetadataRegistrationV0),
     .generic_types            = kGenericTypeEntries,
@@ -88,7 +88,7 @@ extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration
 };
 
 // CodegenRegistrationOptionsV0
-extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
+extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options{{ assembly_suffix }}
     = {
     .struct_size       = sizeof(CodegenRegistrationOptionsV0),
     .registration_flags = 0u,

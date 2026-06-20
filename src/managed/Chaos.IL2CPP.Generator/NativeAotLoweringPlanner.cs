@@ -168,7 +168,6 @@ public sealed partial class NativeAotLoweringPlanner
 
     // Pre-try TypeInfo* fold initializers: emitted BEFORE CHAOS_EH_TRY so the
     // *Ptr call avoids SEH frame setup/teardown overhead.
-    private List<(string VarName, string Expression)>? _preTryFoldInitializers;
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
     private List<string>? _subjectMethodSubjectIds;

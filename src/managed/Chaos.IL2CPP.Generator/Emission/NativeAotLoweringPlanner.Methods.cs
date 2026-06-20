@@ -179,6 +179,13 @@ public sealed partial class NativeAotLoweringPlanner
     private bool _hasCustomAttributeBlob;
 
     /// <summary>
+    /// When true, method emission runs sequentially (single-threaded).
+    /// Set by --force-serial CLI flag.  Used as fallback if parallel
+    /// emission causes heap corruption (0xC000037D).
+    /// </summary>
+    internal bool _forceSerial;
+
+    /// <summary>
     /// Static field declarations (subjectId → fieldTypeSubjectId) captured during
     /// EmitObjectModelDeclarations for extern declarations in the shared header.
     /// </summary>
@@ -263,6 +270,13 @@ public sealed partial class NativeAotLoweringPlanner
     private string _assemblyName = string.Empty;
 
     /// <summary>
+    /// Suffix for unique symbol names in per-assembly modules (e.g. "_System_Collections_NonGeneric").
+    /// Empty for the root assembly.  Appended to code_registration, metadata_registration,
+    /// options, and activation function names to avoid linker conflicts with the root module.
+    /// </summary>
+    private string _assemblySuffix = string.Empty;
+
+    /// <summary>
     /// Maps method SubjectId → method_table index for cross-module calls.
     /// </summary>
     private readonly Dictionary<string, uint> _methodTableIndices = new(StringComparer.Ordinal);
@@ -276,6 +290,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// Collected method table entries for initialization code generation.
     /// </summary>
     private readonly List<(uint Index, string NativeSymbol)> _methodTableEntries = new();
+    private readonly object _reversePInvokeLock = new();
     private readonly List<(string SubjectId, string NativeSymbol)> _reversePInvokeEntries = new();
 
     /// <summary>
@@ -301,10 +316,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// infinite recursion (the codegen may collapse an unloverable IL body to
     /// a single "call self; ret" sequence).
     /// </summary>
-    private string? _currentMethodNativeSymbol;
 
     /// <summary>Current method artifact, used by inlining budget checks.</summary>
-    private AotCoreIrMethodArtifact? _currentMethodArtifact;
 
     /// <summary>
     /// Module-local symbol table: subjectId → nativeSymbol for all methods in the
@@ -370,7 +383,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// fallback static inline declarations for symbols the normal post-scan misses.
     /// Value is the return type's ABI carrier kind (needed to emit correct C++ return type).
     /// </summary>
-    private readonly Dictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(StringComparer.Ordinal);
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, AotCoreIrAbiCarrierKind> _emittedExternalRuntimeSymbols = new(System.StringComparer.Ordinal);
 
     /// <summary>
     /// Cache for TryCreateExternalRuntimeHelperDefinition results (P0 optimization).
@@ -554,6 +567,11 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         _assemblyName = loweringPlan.AssemblyName;
+        // Compute unique suffix for per-assembly modules (empty for root assembly).
+        // Per-assembly plans have a different plan kind; root plans use "full-assembly-entry".
+        _assemblySuffix = string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal)
+            ? ""
+            : "_" + SanitizeCppIdentifier(_assemblyName);
 
         // Build module-local symbol table: all methods in this codegen output
         // that belong to the current assembly get a subjectId → nativeSymbol
@@ -967,10 +985,19 @@ public sealed partial class NativeAotLoweringPlanner
                 emitMethods = cryptoFiltered;
             }
         }
-        var allMethods = new List<NativeAotMethodTemplateModel>(emitMethods.Count);
-        for (int i = 0; i < emitMethods.Count; i++)
-            allMethods.Add(EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
-        List<NativeAotMethodTemplateModel> methods = allMethods;
+        var allMethods = new NativeAotMethodTemplateModel[emitMethods.Count];
+        if (_forceSerial)
+        {
+            for (int i = 0; i < emitMethods.Count; i++)
+                allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds);
+        }
+        else
+        {
+            System.Threading.Tasks.Parallel.For(0, emitMethods.Count,
+                new System.Threading.Tasks.ParallelOptions { MaxDegreeOfParallelism = System.Environment.ProcessorCount },
+                i => allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
+        }
+        List<NativeAotMethodTemplateModel> methods = new List<NativeAotMethodTemplateModel>(allMethods);
 
         _tPhase4 = _sw.ElapsedMilliseconds;
 
@@ -1320,8 +1347,8 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Build A1 typed dispatch table header + A2 dispatch wiring source.
         // These are emitted as separate files (chaos_generated_module.h/.cpp) for
         // typed dispatch via ChaosRuntimeHost. Empty when methodsForLowering is empty.
-        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString());
-        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString());
+        var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix);
+        var moduleSource = BuildGeneratedModuleSource(methodsForLowering, objectModelBuilder.ToString(), _assemblySuffix);
 
         // Build include list — stable runtime headers go into chaos_pch.h
         // (precompiled header). Only conditional/per-run headers are here.

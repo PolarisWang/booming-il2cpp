@@ -131,7 +131,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private string? TryResolveHoistedArrayBase(string rawArrayExpr)
     {
-        if (_hoistedArrayBaseSlots == null)
+        if (_state.Value!.HoistedArrayBaseSlots == null)
             return null;
 
         int? slot = null;
@@ -144,11 +144,11 @@ public sealed partial class NativeAotLoweringPlanner
                 slot = directSlot;
         }
 
-        // Slot variable match: _sN via _slotVarToLocalSlot tracking
-        if (slot == null && _slotVarToLocalSlot != null && _slotVarToLocalSlot.TryGetValue(rawArrayExpr, out int trackedSlot))
+        // Slot variable match: _sN via _state.Value!.SlotVarToLocalSlot tracking
+        if (slot == null && _state.Value!.SlotVarToLocalSlot != null && _state.Value!.SlotVarToLocalSlot.TryGetValue(rawArrayExpr, out int trackedSlot))
             slot = trackedSlot;
 
-        if (slot.HasValue && _hoistedArrayBaseSlots.TryGetValue(slot.Value, out var basePtr))
+        if (slot.HasValue && _state.Value!.HoistedArrayBaseSlots.TryGetValue(slot.Value, out var basePtr))
             return basePtr;
 
         return null;
@@ -158,7 +158,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         string rawIndexExpr = ConsumeEvalStackValueExpression();
         string rawArrayExpr = ConsumeEvalStackValueExpression();
-        bool skipChecks = (_loopArrayAccessSkipOffsets?.Contains(instruction.IlOffset) == true)
+        bool skipChecks = (_state.Value!.LoopArrayAccessSkipOffsets?.Contains(instruction.IlOffset) == true)
             || TrySkipArrayChecks(rawArrayExpr, rawIndexExpr);
 
         builder.AppendLine($"{indentation}{{");
@@ -203,7 +203,7 @@ public sealed partial class NativeAotLoweringPlanner
         string rawValueExpr = ConsumeEvalStackValueExpression();
         string rawIndexExpr = ConsumeEvalStackValueExpression();
         string rawArrayExpr = ConsumeEvalStackValueExpression();
-        bool skipChecks = (_loopArrayAccessSkipOffsets?.Contains(instruction.IlOffset) == true)
+        bool skipChecks = (_state.Value!.LoopArrayAccessSkipOffsets?.Contains(instruction.IlOffset) == true)
             || TrySkipArrayChecks(rawArrayExpr, rawIndexExpr);
 
         builder.AppendLine($"{indentation}{{");

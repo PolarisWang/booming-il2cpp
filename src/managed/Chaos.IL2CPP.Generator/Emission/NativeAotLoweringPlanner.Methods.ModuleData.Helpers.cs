@@ -607,7 +607,7 @@ public sealed partial class NativeAotLoweringPlanner
         HashSet<string> aotReachableSubjectIds)
     {
         if (method.IsUnmanagedCallersOnly)
-            _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
+            lock (_reversePInvokeLock) _reversePInvokeEntries.Add((method.SubjectId, method.NativeSymbol));
 
         return new NativeAotMethodTemplateModel
         {
@@ -625,7 +625,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
     {
-        var builder = new StringBuilder(4096);
+        var builder = StringBuilderPool.Rent(4096);
         if (!string.IsNullOrWhiteSpace(method.OpenDefinitionSubjectId) ||
             method.SharedGenericBodyId is not null ||
             method.InstantiationStubId is not null ||
@@ -640,7 +640,9 @@ public sealed partial class NativeAotLoweringPlanner
 
         EmitManagedMethod(builder, method);
         EmitGenericInstantiationStub(builder, method);
-        return builder.ToString().TrimEnd();
+        var result = builder.ToString().TrimEnd();
+        StringBuilderPool.Return(builder);
+        return result;
     }
 
 

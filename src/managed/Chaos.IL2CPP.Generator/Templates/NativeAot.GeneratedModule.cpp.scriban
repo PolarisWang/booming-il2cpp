@@ -8,10 +8,10 @@
 #include "chaos_generated_module.h"
 
 // extern "C" symbols from native-aot.generated.cpp
-extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
-extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
-extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
-extern "C" {{ k_aot_method_count_type }} kAotMethodCount;
+extern "C" const CodeRegistrationV0 chaos_codegen_code_registration{{ assembly_suffix }};
+extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration{{ assembly_suffix }};
+extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options{{ assembly_suffix }};
+extern "C" {{ k_aot_method_count_type }} kAotMethodCount{{ assembly_suffix }};
 
 {{~ if type_groups.size > 0 ~}}
 
@@ -63,14 +63,14 @@ void* kFunctionsFlat[{{ k_aot_method_count_value }}] = {
 
 {{~ end ~}}
 
-bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
+bool ChaosGeneratedModuleActivate{{ assembly_suffix }}(ChaosRuntimeHost* host) {
     if (!host) return false;
     if (!host->IsInitialized()) return false;
 
     bool ok = host->RegisterModule(
-        &chaos_codegen_code_registration,
-        &chaos_codegen_metadata_registration,
-        &chaos_codegen_options
+        &chaos_codegen_code_registration{{ assembly_suffix }},
+        &chaos_codegen_metadata_registration{{ assembly_suffix }},
+        &chaos_codegen_options{{ assembly_suffix }}
     );
     if (ok) {
         ChaosRegisterGcLayouts();

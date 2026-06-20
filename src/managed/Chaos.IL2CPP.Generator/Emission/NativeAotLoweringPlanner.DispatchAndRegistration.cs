@@ -525,6 +525,7 @@ public sealed partial class NativeAotLoweringPlanner
                 : Array.Empty<ScriptObject>(),
             ["assembly_name"] = EscapeCppStringLiteral(_assemblyName),
             ["has_gc_slot_map_section"] = hasGcSlotMapSection,
+            ["assembly_suffix"] = _assemblySuffix ,
         };
 
         // ── VTable descriptors for BootstrapRuntime TypeVTable registration ──

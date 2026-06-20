@@ -12,11 +12,11 @@ public sealed partial class NativeAotLoweringPlanner
     /// Renders the NativeAot.GeneratedModule.h.scriban template with type group
     /// data from the methods for lowering.
     /// </summary>
-    internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null)
+    internal string BuildGeneratedModuleHeader(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null, string assemblySuffix = "")
     {
         return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleHeaderTemplate(),
-            BuildGeneratedModuleModel(methodsForLowering, objectModelText));
+            BuildGeneratedModuleModel(methodsForLowering, objectModelText, assemblySuffix));
     }
 
     /// <summary>
@@ -24,14 +24,14 @@ public sealed partial class NativeAotLoweringPlanner
     /// Renders the NativeAot.GeneratedModule.cpp.scriban template with type group
     /// data and extern symbol declarations.
     /// </summary>
-    internal string BuildGeneratedModuleSource(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null)
+    internal string BuildGeneratedModuleSource(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null, string assemblySuffix = "")
     {
         return ScribanTemplateRenderer.RenderTemplate(
             NativeAotTemplateCatalog.GetGeneratedModuleSourceTemplate(),
-            BuildGeneratedModuleModel(methodsForLowering, objectModelText));
+            BuildGeneratedModuleModel(methodsForLowering, objectModelText, assemblySuffix));
     }
 
-    private ScriptObject BuildGeneratedModuleModel(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null)
+    private ScriptObject BuildGeneratedModuleModel(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering, string? objectModelText = null, string assemblySuffix = "")
     {
         if (methodsForLowering.Count == 0)
         {
@@ -40,6 +40,7 @@ public sealed partial class NativeAotLoweringPlanner
                 ["type_groups"] = System.Array.Empty<ScriptObject>(),
                 ["k_aot_method_count_type"] = "CHAOS_IL2CPP_INT32",
                 ["k_aot_method_count_value"] = 0,
+                ["assembly_suffix"] = assemblySuffix,
             };
         }
 
@@ -321,6 +322,7 @@ public sealed partial class NativeAotLoweringPlanner
             ["k_aot_method_count_type"] = "CHAOS_IL2CPP_INT32",
             ["k_aot_method_count_value"] = totalDedupedCount,
             ["value_type_typedefs"] = valueTypeTypedefs,
+            ["assembly_suffix"] = assemblySuffix,
         };
     }
 
