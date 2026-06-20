@@ -39,7 +39,6 @@
 #include "gc_bgc_inline.h"
 #include "gc_helpers.h"
 #include "runtime_stubs/misc_stubs.h"
-#include "runtime_stubs/object_stubs.h"
 #include "runtime_stubs/array_stubs.h"
 #include "runtime_stubs/string_stubs.h"
 
@@ -220,8 +219,10 @@ public:
             return;
         // Track overridden entries for hotpatch fixup below.
         // Heap allocation is unavailable in this noexcept context (no throw),
-        // and kChaosExternalRuntimeCount is typically <100.
-        const int kMaxOverrides = 1024;
+        // and kChaosExternalRuntimeCount is typically <100 but can reach
+        // ~1530 for large chunks (System.Private.CoreLib/system).  Use
+        // a generous static bound to avoid buffer overflow (C4668/C4789).
+        const int kMaxOverrides = 4096;
         const char* overridden_subjects[kMaxOverrides];
         int32_t overridden_indices[kMaxOverrides];
         int overridden = 0;
