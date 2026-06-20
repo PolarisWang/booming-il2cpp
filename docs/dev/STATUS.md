@@ -48,5 +48,6 @@ Last updated: 2026-06-20
 | system-5 init hang | Workaround | SEH wrapper catches AV from .rdata array write |
 | Convert/Half/Double stubs | Not fixable | `ChaosExternalRuntimeFallback` has no argument access |
 | System.Runtime/Intrinsics/ReaderWriter | No chunks | Pre-existing, assemblies not configured |
-| **GcAllocateProfiled LNK2019** | Open | `chaos_jit.lib` missing `GcAllocateProfiled` symbol |
-| Coverage-audit mismatch | Some chunks | `declared` ≠ `covered`, needs separate investigation |
+| GcAllocateProfiled LNK2019 | Fixed | `gc_alloc_stubs.cpp` locally compiled |
+| **Vector512 carrier `operator[]`** | Open | `RuntimeIntrinsicVector512Carrier` 缺少 `operator[]`，block 了 1526 个 SIMD 测试 |
+| Coverage-audit | ✅ 100% | All chunks passed

@@ -171,6 +171,26 @@ class ReportCollector:
 
         print(f"  [collector] Copied {copied} benchmark history files")
 
+    # ── Logs ──────────────────────────────────────────────────────────
+
+    def _copy_logs(self):
+        """Move logs/ from report root into timestamped run directory.
+
+        Logs are written during execution BEFORE the run directory is created
+        (by ChunkLogManager -> report_dir/logs/...).  After the run completes,
+        move them into the run directory.
+        """
+        src = self.report_dir / "logs"
+        dst = self.run_dir / "logs"
+        if src.exists():
+            try:
+                if dst.exists():
+                    shutil.rmtree(str(dst))
+                shutil.move(str(src), str(dst))
+                print(f"  [collector] Logs moved to {dst}")
+            except OSError as e:
+                print(f"  [collector] WARNING: failed to move logs: {e}")
+
     # ── Nightly report (delta + summary) ────────────────────────────────
 
     def _generate_nightly_report(self):
