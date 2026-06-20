@@ -1,12 +1,13 @@
 {
   "assemblyName": "System.Collections.Immutable",
-  "timestamp": "2026-06-19T12:35:47",
+  "timestamp": "2026-06-20T04:05:45",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 32,
   "aggregatePerformance": {
-    "meanDurationMs": 0.030471875,
-    "meanOpsPerSecond": 337224650.08375,
-    "aggregateMeanCv": 0.08223159375
+    "meanDurationMs": 0.029275,
+    "meanOpsPerSecond": 342735607.3303125,
+    "aggregateMeanCv": 0.09357815625,
+    "totalOutliers": 28
   },
   "chunkSummaries": [
     {
@@ -22,16 +23,16 @@
       "benchmark": {
         "methodCount": 32,
         "iterations": 10000,
-        "meanDurationMs": 0.030471875,
-        "meanOpsPerSecond": 337224650.08375,
-        "minDurationMs": 0.026,
-        "maxDurationMs": 0.0413,
-        "totalDurationMs": 0.9751,
+        "meanDurationMs": 0.029275,
+        "meanOpsPerSecond": 342735607.3303125,
+        "minDurationMs": 0.025,
+        "maxDurationMs": 0.0324,
+        "totalDurationMs": 0.9368,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.08223159375,
-        "maxCv": 0.387768
+        "meanSampleCount": 6.1,
+        "totalOutliers": 28,
+        "meanCv": 0.09357815625,
+        "maxCv": 0.346774
       },
       "hotupdate": {
         "passed": 32,
@@ -45,6 +46,41 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Collections.Immutable/System.Collections.Frozen.FrozenHashTable": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Collections.Immutable/System.Collections.Frozen.Int32FrozenSet+GSW": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Collections.Immutable/System.Collections.Frozen.KeyAnalyzer+GetSpan": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Collections.Immutable/System.Collections.Frozen.LengthBucketsFrozenSet+GSW": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Collections.Immutable/System.Collections.Frozen.OrdinalStringFrozenSet+GSW": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          }
+        }
       },
       "build": {
         "status": "passed"

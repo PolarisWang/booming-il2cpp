@@ -70,6 +70,7 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
         extra = subject_method_ids - chunk_method_ids
 
         coverage_pct = round(len(subject_method_ids) / len(chunk_method_ids) * 100, 1) if chunk_method_ids else 100.0
+        coverage_pct = min(100.0, coverage_pct)  # cap at 100% (extra subjects are bonus)
 
         if missing:
             missing_pct = round(len(missing) / len(chunk_method_ids) * 100, 1)
@@ -92,6 +93,7 @@ def run_coverage_audit(ctx: ChunkContext, stages: dict[str, StageResult]) -> Sta
                 print(f"  [coverage-audit]     EXTRA: {mid}")
 
         coverage_pct = round(len(subject_method_ids) / len(chunk_method_ids) * 100, 1) if chunk_method_ids else 100.0
+        coverage_pct = min(100.0, coverage_pct)  # cap at 100% (extra subjects are bonus)
         print(f"  [coverage-audit] Coverage: {len(subject_method_ids)}/{len(chunk_method_ids)} ({coverage_pct}%)")
 
         # ── 4b. Namespace-level breakdown ──

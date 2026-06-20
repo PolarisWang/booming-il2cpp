@@ -60,6 +60,9 @@ class ReportCollector:
         if self.config.keep_per_chunk_results:
             self._copy_benchmark_history()
 
+        # 3b. Copy logs into the run directory
+        self._copy_logs()
+
         # 4. Generate nightly delta + summary
         if not self.config.skip_nightly_report:
             self._generate_nightly_report()
