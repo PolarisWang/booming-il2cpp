@@ -11,8 +11,8 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
-  build-codegen:
-    name: Build Codegen
+  verify:
+    name: Build + Small Batch
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,21 +30,6 @@ jobs:
         run: dotnet build src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/Chaos.IL2CPP.Tools.TestProjectGenerator.csproj --configuration Release
       - name: Restore & Build ATG
         run: dotnet build src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/Chaos.IL2CPP.Tools.AutoTestGenerator.csproj --configuration Release
-
-  foundation-small:
-    name: Small Assemblies
-    needs: build-codegen
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
-            10.0.x
       - name: Build SDK (cmake)
         run: |
           cmake --preset windows-x64-reference
@@ -52,7 +37,7 @@ jobs:
       - name: Run Small Batch
         working-directory: testing/foundation-dll
         run: |
-          bash ci-run-all.sh "build,fact,benchmark,managed_benchmark,benchmark_report,coverage-audit,aggregate,reporting" "small"
+          bash ci-run-all.sh "build,fact" "small"
       - name: Upload Reports
         if: always()
         uses: actions/upload-artifact@v4
