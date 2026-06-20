@@ -139,10 +139,18 @@ def compute_assembly_delta(
         p_meta = pf.get("metaTotal") if pf.get("metaTotal") is not None else None
         p_gap = max(0, p_meta - p_total) if p_meta is not None and p_total > 0 else None
         delta["coverageGap"] = t_gap
+        t_gap_pct = round(t_gap / t_meta * 100, 1) if t_gap is not None and t_meta and t_meta > 0 else None
+        p_gap_pct = round(p_gap / p_meta * 100, 1) if p_gap is not None and p_meta and p_meta > 0 else None
+        delta["coverageGapPct"] = t_gap_pct
         if delta["status"] == "compared" and t_gap is not None and p_gap is not None:
             delta["coverageGapDelta"] = t_gap - p_gap
+            if t_gap_pct is not None and p_gap_pct is not None:
+                delta["coverageGapPctDelta"] = round(t_gap_pct - p_gap_pct, 1)
+            else:
+                delta["coverageGapPctDelta"] = None
         else:
             delta["coverageGapDelta"] = None
+            delta["coverageGapPctDelta"] = None
 
         # ── Benchmark delta ──
         tb = tc.get("benchmark", {}) if tc else {}
@@ -164,6 +172,28 @@ def compute_assembly_delta(
         else:
             delta["benchOpsDelta"] = None
 
+        # ── Memory delta (allocated bytes) ──
+        t_alloc = tb.get("totalAllocatedBytes")
+        p_alloc = pb.get("totalAllocatedBytes")
+        delta["benchAllocatedBytes"] = t_alloc
+        if delta["status"] == "compared" and t_alloc and p_alloc and p_alloc > 0:
+            delta["benchAllocDelta"] = round((t_alloc - p_alloc) / p_alloc * 100, 1)
+        else:
+            delta["benchAllocDelta"] = None
+
+        # ── Profile delta (code size, optional) ──
+        tp = tc.get("profile", {}) if tc else {}
+        pp = pc.get("profile", {}) if pc else {}
+        delta["profileMethodCount"] = tp.get("methodCount", 0)
+        delta["profileTotalSize"] = tp.get("totalSize", 0)
+        delta["profileSource"] = tp.get("source", "")
+        t_code = tp.get("totalSize")
+        p_code = pp.get("totalSize")
+        if delta["status"] == "compared" and t_code and p_code and p_code > 0:
+            delta["profileSizeDelta"] = round((t_code - p_code) / p_code * 100, 1)
+        else:
+            delta["profileSizeDelta"] = None
+
         # ── Hotupdate delta ──
         th = tc.get("hotupdate", {}) if tc else {}
         ph = pc.get("hotupdate", {}) if pc else {}
@@ -174,12 +204,6 @@ def compute_assembly_delta(
         # ── Build status ──
         tb = tc.get("build", {}) if tc else {}
         delta["buildStatus"] = tb.get("status", "not_run")
-
-        # ── Profile (AOT code size) ──
-        tp = tc.get("profile", {}) if tc else {}
-        delta["profileMethodCount"] = tp.get("methodCount", 0)
-        delta["profileTotalSize"] = tp.get("totalSize", 0)
-        delta["profileSource"] = tp.get("source", "")
 
         # ── Managed benchmark ──
         tm = tc.get("managedBenchmark", {}) if tc else {}

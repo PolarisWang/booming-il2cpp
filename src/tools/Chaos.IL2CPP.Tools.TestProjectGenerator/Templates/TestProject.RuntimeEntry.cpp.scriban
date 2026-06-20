@@ -390,7 +390,7 @@ static int RunFactJsonMode() {
             try {
                 result = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
                     GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            } } catch (...) {
+            } catch (...) {
                 caught = true;
             }
         } else {
@@ -557,13 +557,8 @@ static int RunBenchmarkAllMode(int iterations) {
         int i = kSubjectSlotMap[si];
         bool crashed = false;
 
-#if defined(_WIN32)
-        // Wrap the ENTIRE per-method body in __try so process-level crashes
-        // (stack overflow, AV in no_gc_region, heap corruption) are caught
-        // and the benchmark can continue with the next method.
-        try {
-#endif
-            // Warmup: per-call crash protection
+        // Per-call try/catch handles managed exceptions.
+        // Warmup: per-call crash protection
             for (int w = 0; w < 100; w++) {
     try {
                     chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect(
@@ -578,7 +573,8 @@ static int RunBenchmarkAllMode(int iterations) {
                 printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"managed exception\"}\n",
                        i);
                 fflush(stdout);
-                __leave;
+                // __leave not used — C2712: __try + C++ objects with destructors.
+                // Fall through to let the crashed flag trigger early return below.
             }
 
             // Timing: per-call crash protection
@@ -608,15 +604,8 @@ static int RunBenchmarkAllMode(int iterations) {
                        i, elapsed_ms, ops_per_sec, iterations, (long long)(alloc_after - alloc_before));
             }
             fflush(stdout);
-#if defined(_WIN32)
-        } } catch (...) {
-            // Process-level crash caught (e.g. AV in no_gc_region, stack overflow).
-            // Record the failure and continue with the next method.
-            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"allocatedBytes\":0,\"error\":\"fatal crash\"}\n",
-                   i);
-            fflush(stdout);
-        }
-#endif
+        // __except block removed — C2712: can't mix __try with C++ try/catch.
+        // Per-call try/catch already handles managed exceptions.
     }
     printf("{\"summary\":{\"methodCount\":%d}}\n", kCount);
     fflush(stdout);
@@ -721,7 +710,7 @@ static int RunHotupdateMode(const char* patchDataPath = nullptr) {
                 CHAOS_EH_CATCH_BEGIN
                     caught = true;
                 CHAOS_EH_END
-            } } catch (...) {
+            } catch (...) {
                 caught = true;
             }
         } else {

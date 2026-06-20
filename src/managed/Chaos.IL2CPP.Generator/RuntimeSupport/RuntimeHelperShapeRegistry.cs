@@ -280,7 +280,10 @@ public sealed partial class NativeAotLoweringPlanner
 
                     // Also try <...> format (standard .NET metadata / subject ID syntax)
                     var angleStart = entry.MethodName + "<";
-                    if (methodName.StartsWith(angleStart, StringComparison.Ordinal) && methodName.EndsWith(">"))
+                    var hasAngleGeneric = methodName.StartsWith(angleStart, StringComparison.Ordinal);
+                    // methodName may end with ">" (no params) or ">(...)" (with params like "Empty<Int32>()")
+                    var endsWithAngle = methodName.EndsWith(">") || methodName.Contains(">(");
+                    if (hasAngleGeneric && endsWithAngle)
                     {
                         // BUG FIX: verify the type display name matches before matching a generic
                         // method through the angle-bracket fallback.  Without this check,
@@ -289,7 +292,10 @@ public sealed partial class NativeAotLoweringPlanner
                         // the type prefix "System.Array" does not match "System.Collections.Generic.List".
                         if (!typeDisplayName.StartsWith(entry.TypeDisplayNamePrefix, StringComparison.Ordinal))
                             continue;
-                        var inner = methodName.Substring(angleStart.Length, methodName.Length - angleStart.Length - 1);
+                        // Extract content between < and >; handle cases like "Empty<Int32>()" where > is not the last char
+                        var closeAngleIndex = methodName.IndexOf('>', angleStart.Length);
+                        if (closeAngleIndex < 0) continue;
+                        var inner = methodName.Substring(angleStart.Length, closeAngleIndex - angleStart.Length);
                         typeArgs = inner.Split(',');
                         descriptor = entry;
                         return true;

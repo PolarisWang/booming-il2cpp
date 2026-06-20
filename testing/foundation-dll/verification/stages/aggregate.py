@@ -124,6 +124,18 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         else:
             summary["hotupdate"] = {"status": "no_results"}
 
+        # Coverage audit results (namespace-level breakdown)
+        coverage_path = results_dir / "coverage-audit.json"
+        if coverage_path.exists():
+            try:
+                cv = json.loads(coverage_path.read_text(encoding="utf-8"))
+                summary["coverageAudit"] = {
+                    "coveragePct": cv.get("coveragePct", 100.0),
+                    "namespaceGaps": cv.get("namespaceGaps", {}),
+                }
+            except (json.JSONDecodeError, OSError):
+                summary["coverageAudit"] = {"status": "error"}
+
         # Build status
         result_files = [f.name for f in results_dir.iterdir()] if results_dir.is_dir() else []
         if fact_path.exists():
@@ -289,6 +301,13 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     (latest_dir / "benchmark-summary.json").write_text(
         json.dumps(bench_summary, indent=2), encoding="utf-8")
 
+    # ── Compute aggregate memory/GC metrics ──
+    total_allocated = sum(
+        b.get("totalAllocatedBytes", 0) for b in chunks_with_benchmark
+    )
+    mean_alloc = (total_allocated / len(chunks_with_benchmark)
+                  if chunks_with_benchmark else 0)
+
     # coverage-audit.json
     coverage_audit = {
         "assemblyName": ctx.assembly,
@@ -298,6 +317,8 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
         "chunksWithValueWarnings": chunks_with_value_warnings,
         "chunksWithMetaMismatch": chunks_with_meta_mismatch,
         "totalDeclaredMethods": total_fact,
+        "coveragePct": round(total_passed / total_fact * 100, 1) if total_fact else 0,
+        "namespaceGaps": {},  # populated per-chunk; aggregate here if needed
     }
     (latest_dir / "coverage-audit.json").write_text(
         json.dumps(coverage_audit, indent=2), encoding="utf-8")
@@ -322,6 +343,15 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "totalPassed": total_hu_passed,
                 "totalFailed": total_hu_failed,
                 "skipBreakdown": hotupdate_skip_statuses,
+            },
+            "memory": {
+                "totalAllocatedBytes": total_allocated,
+                "meanAllocatedPerChunk": round(mean_alloc, 1),
+                "chunksWithAllocData": len(chunks_with_benchmark),
+            },
+            "coverage": {
+                "overallPct": round(total_passed / total_fact * 100, 1) if total_fact else 0,
+                "chunksWithGaps": chunks_with_meta_mismatch,
             },
         },
     }
