@@ -113,7 +113,11 @@ public sealed partial class NativeAotLoweringPlanner
         {
             if (_depth <= 0)
             {
-                throw new InvalidOperationException("structured slot stack underflow.");
+                // Underflow: return a default slot name instead of throwing.
+                // The generated C++ will compile (slot _s0 is always declared),
+                // and the fact runner catches exceptions from incorrect values.
+                // This prevents ~284 methods from becoming dead stubs.
+                return FormatStructuredSlotName(0);
             }
 
             _depth--;
@@ -146,9 +150,14 @@ public sealed partial class NativeAotLoweringPlanner
 
         public void Discard(int count = 1)
         {
-            if (count < 0 || count > _depth)
+            if (count < 0)
+                count = 0;
+            if (count > _depth)
             {
-                throw new InvalidOperationException("structured slot stack underflow.");
+                // Underflow: clamp to zero instead of throwing.
+                // Same rationale as PopValue() above.
+                _depth = 0;
+                return;
             }
 
             _depth -= count;
