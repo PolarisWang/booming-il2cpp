@@ -1,13 +1,13 @@
 {
   "assemblyName": "System.Data.Common",
-  "timestamp": "2026-06-19T15:30:57",
+  "timestamp": "2026-06-20T07:49:05",
   "totalChunks": 4,
   "totalBenchmarkedMethods": 1180,
   "aggregatePerformance": {
-    "meanDurationMs": 1.2428199118526135,
-    "meanOpsPerSecond": 311061421.8298649,
-    "aggregateMeanCv": 0.14064674023563367,
-    "totalOutliers": 397
+    "meanDurationMs": 1.242829865112441,
+    "meanOpsPerSecond": 312341362.270865,
+    "aggregateMeanCv": 0.1315542909107695,
+    "totalOutliers": 396
   },
   "chunkSummaries": [
     {
@@ -23,16 +23,16 @@
       "benchmark": {
         "methodCount": 21,
         "iterations": 10000,
-        "meanDurationMs": 0.028642857142857144,
-        "meanOpsPerSecond": 344179322.58095235,
-        "minDurationMs": 0.0243,
-        "maxDurationMs": 0.029,
-        "totalDurationMs": 0.6015,
+        "meanDurationMs": 0.02867142857142857,
+        "meanOpsPerSecond": 346166709.0952381,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 0.0295,
+        "totalDurationMs": 0.6021,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 4.2,
-        "totalOutliers": 17,
-        "meanCv": 0.09819114285714285,
-        "maxCv": 0.333333
+        "meanSampleCount": 3.2,
+        "totalOutliers": 16,
+        "meanCv": 0.07314961904761905,
+        "maxCv": 0.314264
       },
       "hotupdate": {
         "passed": 21,
@@ -46,6 +46,10 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {}
       },
       "build": {
         "status": "passed"
@@ -73,16 +77,16 @@
       "benchmark": {
         "methodCount": 596,
         "iterations": 10000,
-        "meanDurationMs": 0.040073993288590605,
-        "meanOpsPerSecond": 333530800.7643121,
-        "minDurationMs": 0.026,
-        "maxDurationMs": 2.9867,
-        "totalDurationMs": 23.8841,
+        "meanDurationMs": 0.04008523489932886,
+        "meanOpsPerSecond": 336663176.0140268,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 3.0917,
+        "totalDurationMs": 23.8908,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.055331907718120805,
-        "maxCv": 0.383596
+        "meanCv": 0.04400363422818792,
+        "maxCv": 0.436522
       },
       "hotupdate": {
         "passed": 596,
@@ -96,6 +100,107 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Data.Common/System.Data.ConstraintCollection": {
+            "declared": 15,
+            "covered": 14,
+            "gap": 1,
+            "gapPct": 6.7
+          },
+          "System.Data.Common/System.Data.DBConcurrencyException": {
+            "declared": 3,
+            "covered": 2,
+            "gap": 1,
+            "gapPct": 33.3
+          },
+          "System.Data.Common/System.Data.DataColumnChangeEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Data.Common/System.Data.DataColumnCollection": {
+            "declared": 15,
+            "covered": 14,
+            "gap": 1,
+            "gapPct": 6.7
+          },
+          "System.Data.Common/System.Data.DataRowChangeEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Data.Common/System.Data.DataRowCollection": {
+            "declared": 14,
+            "covered": 13,
+            "gap": 1,
+            "gapPct": 7.1
+          },
+          "System.Data.Common/System.Data.DataSet": {
+            "declared": 60,
+            "covered": 58,
+            "gap": 2,
+            "gapPct": 3.3
+          },
+          "System.Data.Common/System.Data.DataTable": {
+            "declared": 63,
+            "covered": 61,
+            "gap": 2,
+            "gapPct": 3.2
+          },
+          "System.Data.Common/System.Data.DataTableClearEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Data.Common/System.Data.DataTableCollection": {
+            "declared": 17,
+            "covered": 16,
+            "gap": 1,
+            "gapPct": 5.9
+          },
+          "System.Data.Common/System.Data.DataTableNewRowEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Data.Common/System.Data.DataViewSettingCollection": {
+            "declared": 3,
+            "covered": 2,
+            "gap": 1,
+            "gapPct": 33.3
+          },
+          "System.Data.Common/System.Data.FillErrorEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Data.Common/System.Data.MergeFailedEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Data.Common/System.Data.StateChangeEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          },
+          "System.Data.Common/System.Data.StatementCompletedEventHandler": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          }
+        }
       },
       "build": {
         "status": "passed"
@@ -147,6 +252,29 @@
         "assertFailed": 0,
         "semanticChangedCount": 0
       },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Data.Common/System.Data.Common.DataColumnMappingCollection": {
+            "declared": 22,
+            "covered": 21,
+            "gap": 1,
+            "gapPct": 4.5
+          },
+          "System.Data.Common/System.Data.Common.DataTableMappingCollection": {
+            "declared": 21,
+            "covered": 20,
+            "gap": 1,
+            "gapPct": 4.8
+          },
+          "System.Data.Common/System.Data.Common.DbEnumerator": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          }
+        }
+      },
       "build": {
         "status": "passed"
       },
@@ -196,6 +324,17 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 99.4,
+        "namespaceGaps": {
+          "System.Data.Common/System.Data.SqlTypes.SqlDecimal": {
+            "declared": 33,
+            "covered": 31,
+            "gap": 2,
+            "gapPct": 6.1
+          }
+        }
       },
       "build": {
         "status": "passed"

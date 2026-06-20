@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Net.Http",
-  "timestamp": "2026-06-20T06:26:26",
+  "timestamp": "2026-06-20T07:44:41",
   "totalChunks": 2,
   "chunksWithFacts": 2,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 89,
         "iterations": 10000,
-        "meanDurationMs": 1.227112359550562,
-        "meanOpsPerSecond": 254941225.9544944,
+        "meanDurationMs": 1.2224876404494383,
+        "meanOpsPerSecond": 244146836.6988764,
         "minDurationMs": 0.024,
-        "maxDurationMs": 19.8383,
-        "totalDurationMs": 109.21300000000001,
+        "maxDurationMs": 19.8803,
+        "totalDurationMs": 108.8014,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.0,
-        "totalOutliers": 0,
-        "meanCv": 0.057539292134831464,
-        "maxCv": 0.414001
+        "meanSampleCount": 4.4,
+        "totalOutliers": 57,
+        "meanCv": 0.13018741573033707,
+        "maxCv": 0.455726
       },
       "hotupdate": {
         "passed": 89,
@@ -43,6 +43,35 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Net.Http/System.Net.Http.Headers.HeaderStringValues": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Net.Http/System.Net.Http.Headers.HeaderStringValues+Enumerator": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          },
+          "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated": {
+            "declared": 3,
+            "covered": 2,
+            "gap": 1,
+            "gapPct": 33.3
+          },
+          "System.Net.Http/System.Net.Http.Headers.HttpHeadersNonValidated+Enumerator": {
+            "declared": 2,
+            "covered": 0,
+            "gap": 2,
+            "gapPct": 100.0
+          }
+        }
       },
       "build": {
         "status": "passed"
@@ -70,16 +99,16 @@
       "benchmark": {
         "methodCount": 98,
         "iterations": 10000,
-        "meanDurationMs": 0.03186326530612245,
-        "meanOpsPerSecond": 319016179.3530612,
-        "minDurationMs": 0.0289,
-        "maxDurationMs": 0.0351,
-        "totalDurationMs": 3.1226,
+        "meanDurationMs": 0.02983673469387755,
+        "meanOpsPerSecond": 338617072.7036735,
+        "minDurationMs": 0.0273,
+        "maxDurationMs": 0.044,
+        "totalDurationMs": 2.924,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 8.8,
-        "totalOutliers": 121,
-        "meanCv": 0.1304585918367347,
-        "maxCv": 0.533208
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.05413846938775511,
+        "maxCv": 0.46614
       },
       "hotupdate": {
         "passed": 98,

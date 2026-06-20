@@ -49,5 +49,20 @@ Last updated: 2026-06-20
 | Convert/Half/Double stubs | Not fixable | `ChaosExternalRuntimeFallback` has no argument access |
 | System.Runtime/Intrinsics/ReaderWriter | No chunks | Pre-existing, assemblies not configured |
 | GcAllocateProfiled LNK2019 | Fixed | `gc_alloc_stubs.cpp` locally compiled |
-| **Vector512 carrier `operator[]`** | Open | `RuntimeIntrinsicVector512Carrier` 缺少 `operator[]`，block 了 1526 个 SIMD 测试 |
+| **Vector512 carrier `operator[]`** | Fixed | `numerics_carriers.h` 添加 operator[]，1526 SIMD 测试已修复 |
 | Coverage-audit | ✅ 100% | All chunks passed
+
+## PCH Acceleration
+
+## PCH Build Time Comparison
+
+| Assembly | Chunk | Methods | Build Time | PCH .obj | PCH .lib |
+|----------|-------|---------|-----------|----------|----------|
+| System.Linq | global-ns | 206 | 28s PCH | - | - |
+| System.Collections | global-ns | 186 | 14s (no PCH) | - | - |
+| runtime-intrinsics | - | 1059 | PCH OK | 6.3 MB | 7.2 MB |
+| runtime-intrinsics-2 | - | 1059 | PCH OK | 6.3 MB | 7.2 MB |
+| threading-tasks | - | 581 | 21s PCH | 2.8 MB | - |
+
+Note: PCH primarily accelerates incremental builds (cached .pch).
+Clean-build overhead is ~1-2s for PCH compilation, saved on subsequent rebuilds.

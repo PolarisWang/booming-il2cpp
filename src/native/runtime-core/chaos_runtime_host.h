@@ -39,6 +39,7 @@
 #include "gc_bgc_inline.h"
 #include "gc_helpers.h"
 #include "runtime_stubs/misc_stubs.h"
+#include "runtime_stubs/object_stubs.h"
 #include "runtime_stubs/array_stubs.h"
 #include "runtime_stubs/string_stubs.h"
 
@@ -582,6 +583,17 @@ private:
                 continue;
             }
 
+            // RuntimeHelpers::GetUninitializedObject(System.Type) → System.Object
+            // Force-override even if already resolved (prebuilt SDK entry uses
+            // old fallback path).  Uses ChaosRuntimeHelpersGetUninitializedObject
+            // which allocates through ChaOS GC (GcAllocateFast) for TLS counters.
+            if (std::strstr(sub, "RuntimeHelpers::GetUninitializedObject:")) {
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(
+                        +ChaosRuntimeHelpersGetUninitializedObject));
+                continue;
+            }
+
             // Console::get_Error, TextWriter::WriteLine — already have
             // compile-time entries in kChaosExternalRuntimeFnTable, skip.
 
@@ -651,6 +663,17 @@ private:
                     static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
                     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
                 });
+            }
+        }
+
+        // Second pass: force-override RuntimeHelpers::GetUninitializedObject even
+        // if already resolved (prebuilt SDK entry uses old fallback path).
+        for (int32_t i = 0; i < kChaosExternalRuntimeCount; i++) {
+            const char* sub = kChaosExternalRuntimeSubjects[i];
+            if (sub != nullptr && std::strstr(sub, "RuntimeHelpers::GetUninitializedObject:")) {
+                kChaosExternalRuntimeFnTable[i] =
+                    reinterpret_cast<void*>(static_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(
+                        +ChaosRuntimeHelpersGetUninitializedObject));
             }
         }
     }

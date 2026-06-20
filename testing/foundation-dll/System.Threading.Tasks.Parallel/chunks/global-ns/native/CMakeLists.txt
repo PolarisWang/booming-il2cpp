@@ -93,16 +93,6 @@ find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 # Prefer flat subjects/*.cpp (copied locally by TPG for MAX_PATH compatibility).
 # Fall back to codegen_dir/*Subjects/generated/*.cpp for in-place codegen builds.
 file(GLOB CHAOS_CODEGEN_FLAT_CPP "${CMAKE_CURRENT_SOURCE_DIR}/subjects/*.cpp")
-# Also include per-assembly generated files from codegen/generated/ subdirectories
-# (target assemblies e.g. System.Collections.NonGeneric).  The flat mode GLOB
-# above only picks up the root assembly (CombinedSubjects) — the per-assembly
-# files contain the actual AOT method bodies and must be compiled too.
-file(GLOB CHAOS_CODEGEN_PER_ASM_CPP
-    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.page*.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.page-*.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/*/chaos_generated_module.cpp"
-)
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.page*.cpp"
@@ -116,11 +106,7 @@ file(GLOB CHAOS_CODEGEN_NATIVE_CPP
 )
 
 if(CHAOS_CODEGEN_FLAT_CPP)
-  # Flat layout: combine root assembly codegen with per-assembly files
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_FLAT_CPP})
-  if(CHAOS_CODEGEN_PER_ASM_CPP)
-    list(APPEND CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_PER_ASM_CPP})
-  endif()
 else()
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
 endif()

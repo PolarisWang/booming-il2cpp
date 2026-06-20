@@ -957,6 +957,25 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         shutil.copy2(str(_gcapi_src), str(_gcapi_dst))
         print(f"  [build] Re-copied gc_api.cpp (cleaned by TPG --clean)")
 
+    # Re-copy object_stubs.cpp (cleaned by TPG --clean).
+    # Contains ChaosRuntimeHelpersGetUninitializedObject for ShapeRegistry direct call.
+    _objstub_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs" / "object_stubs.cpp"
+    _objstub_dst = ctx.native_dir / "object_stubs.cpp"
+    if _objstub_src.exists() and not _objstub_dst.exists():
+        shutil.copy2(str(_objstub_src), str(_objstub_dst))
+        print(f"  [build] Re-copied object_stubs.cpp (cleaned by TPG --clean)")
+    # Re-run cmake configure so the GLOB picks up the newly copied object_stubs.cpp.
+    if _objstub_dst.exists():
+        _build_dir = ctx.native_dir / "build"
+        if _build_dir.exists() and (_build_dir / "CMakeCache.txt").exists():
+            import subprocess as _sp
+            _cfg = _sp.run(["cmake", str(ctx.native_dir)], cwd=str(_build_dir),
+                           capture_output=True, text=True, timeout=60)
+            if _cfg.returncode != 0:
+                print(f"  [build] cmake reconfigure for object_stubs.cpp failed")
+                for _l in _cfg.stderr.splitlines()[-3:]:
+                    print(f"      {_l}")
+
     # -- 8b. Inject --profile-range handler into generated runtime-entry.cpp --
     _rp = ctx.native_dir / "runtime-entry.cpp"
     if _rp.exists():
@@ -989,6 +1008,15 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                 '\n}'
                 '\n'
                 '\nint main(int argc, char* argv[]) {'
+                '\n    // Force-override GetUninitializedObject in external runtime table'
+                '\n    // (prebuilt SDK resolves it to old fallback; redirect to ChaOS GC alloc).'
+                '\n    for (int _gui = 0; _gui < kChaosExternalRuntimeCount; _gui++) {'
+                '\n        auto* _gs = kChaosExternalRuntimeSubjects[_gui];'
+                '\n        if (_gs && std::strstr(_gs, "RuntimeHelpers::GetUninitializedObject:")) {'
+                '\n            kChaosExternalRuntimeFnTable[_gui] = (void*)ChaosRuntimeHelpersGetUninitializedObject;'
+                '\n            break;'
+                '\n        }'
+                '\n    }'
             )
             _cli = (
                 '\n    if (std::strcmp(argv[1], "--profile-range") == 0) {'

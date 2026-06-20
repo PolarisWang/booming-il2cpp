@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.Security.Principal.Windows",
-  "timestamp": "2026-06-20T06:26:27",
+  "timestamp": "2026-06-20T07:40:58",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 36,
   "aggregatePerformance": {
-    "meanDurationMs": 0.03005277777777778,
-    "meanOpsPerSecond": 333143327.73138887,
-    "aggregateMeanCv": 0.04521791666666666
+    "meanDurationMs": 0.03255833333333333,
+    "meanOpsPerSecond": 336574466.3422222,
+    "aggregateMeanCv": 0.09847708333333333
   },
   "chunkSummaries": [
     {
@@ -22,16 +22,16 @@
       "benchmark": {
         "methodCount": 36,
         "iterations": 10000,
-        "meanDurationMs": 0.03005277777777778,
-        "meanOpsPerSecond": 333143327.73138887,
-        "minDurationMs": 0.0253,
-        "maxDurationMs": 0.0347,
-        "totalDurationMs": 1.0819,
+        "meanDurationMs": 0.03255833333333333,
+        "meanOpsPerSecond": 336574466.3422222,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 0.073,
+        "totalDurationMs": 1.1721,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.04521791666666666,
-        "maxCv": 0.190375
+        "meanCv": 0.09847708333333333,
+        "maxCv": 0.83303
       },
       "hotupdate": {
         "passed": 36,

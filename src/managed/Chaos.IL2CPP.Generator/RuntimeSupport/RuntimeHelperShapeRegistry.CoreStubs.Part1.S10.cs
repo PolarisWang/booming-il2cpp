@@ -163,6 +163,12 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateVoidAbiSlot(),
                 new HashSet<int> { 1 });
 
+            registry.Register("System.Runtime.CompilerServices.RuntimeHelpers", "GetUninitializedObject", ["System.Type"],
+                ShapeKind.SimpleForward, "ChaosRuntimeHelpersGetUninitializedObject",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
         }
 
     }

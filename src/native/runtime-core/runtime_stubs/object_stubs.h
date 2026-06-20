@@ -12,3 +12,7 @@ CHAOS_IL2CPP_INT32  ChaosRuntimeHelpersGetHashCode(CHAOS_IL2CPP_INTPTR value) no
 CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetObjectValue(CHAOS_IL2CPP_INTPTR value) noexcept;
 
 CHAOS_IL2CPP_INTPTR ChaosObjectMemberwiseClone(CHAOS_IL2CPP_INTPTR obj) noexcept;
+
+/// RuntimeHelpers.GetUninitializedObject(Type) — allocates uninitialized
+/// object via ChaOS GC (GcAllocateFast), bypassing constructor call.
+CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetUninitializedObject(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
