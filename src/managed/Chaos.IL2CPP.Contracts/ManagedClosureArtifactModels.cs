@@ -741,6 +741,10 @@ public sealed record NativeAotLoweringPlanArtifact
 
     public IReadOnlyList<AuditTranslationUnitPageArtifact>? TranslationUnitPages { get; init; }
 
+    public IReadOnlyList<string>? Includes { get; init; }
+
+    public IReadOnlyDictionary<string, IReadOnlyList<string>>? PerPageIncludes { get; init; }
+
     public string? AuditStatus { get; init; }
 
     public string? AuditMessage { get; init; }

@@ -119,6 +119,14 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodName: "ToChar",
                 Resolver: (planner, callee, typeArgs) =>
                 {
+                    // Guard: only match methods named exactly "ToChar"
+                    var resolverMethodName = GetMethodNameFromSubjectId(callee);
+                    if (!string.Equals(resolverMethodName, "ToChar", StringComparison.Ordinal))
+                        return null;
+                    {
+                        System.Console.Error.WriteLine($"[TMPDEBUG] ConvertToChar REJECTED methodName={resolverMethodName} callee={callee}");
+                        return null;
+                    }
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
