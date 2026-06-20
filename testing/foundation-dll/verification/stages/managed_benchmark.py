@@ -87,6 +87,9 @@ _NET8_REPLACEMENTS = [
     # Each replacement converts a method call to a no-op expression.
     ("Guid.CreateVersion7()", "default(System.Guid)"),
     ("System.IO.File.AppendAllBytes(", "System.IO.File.WriteAllBytes("),
+    ("System.Threading.Tasks.Task.WaitAsync(", "System.Threading.Tasks.Task.Wait("),
+    # Task.WhenAny(IEnumerable<Task>, CancellationToken) doesn't exist in .NET 8
+    ("WaitAsync(System.Threading.CancellationToken)", "Wait()"),
 ]
 
 # Benchmark methods using these APIs crash at runtime (stack overflow / buffer

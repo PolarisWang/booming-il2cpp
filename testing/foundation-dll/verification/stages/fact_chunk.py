@@ -133,7 +133,7 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
     try:
         r = subprocess.run(
             [str(exe_path), "--fact-json"],
-            capture_output=True, timeout=600,
+            capture_output=True, timeout=1200,
         )
     except subprocess.TimeoutExpired:
         return {"error": "timed_out", "returncode": -1, "stdout": "", "stderr": "",

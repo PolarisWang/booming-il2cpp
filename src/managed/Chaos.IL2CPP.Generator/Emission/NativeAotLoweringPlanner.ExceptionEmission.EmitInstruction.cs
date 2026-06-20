@@ -260,6 +260,7 @@ public sealed partial class NativeAotLoweringPlanner
             _typeOfSkipIlOffsets.TryGetValue(_currentMethodNativeSymbol, out var typeOfSkipSet) &&
             typeOfSkipSet.Contains(instruction.IlOffset))
         {
+            CompensateDceSkipForStructuredSlots(instruction);
             return;
         }
 
