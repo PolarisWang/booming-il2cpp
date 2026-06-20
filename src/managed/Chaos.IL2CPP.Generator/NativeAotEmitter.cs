@@ -265,6 +265,19 @@ public sealed partial class NativeAotEmitter
             .ToArray();
 
         var includes = new List<string>(templateModel.Includes);
+        // Per-assembly translation units inherit an empty includes list from
+        // BuildPerAssemblyLoweringPlan.  Add headers and fixes needed for
+        // compilation — avoid chaos_pch.h which causes PCH conflicts.
+        if (includes.Count == 0 || (includes.Count == 1 && includes[0] == "\"chaos_pch.h\""))
+        {
+            includes.Clear();
+            includes.Add("<chaos/native_types.h>");
+            includes.Add("<interpreter_entry.h>");
+            includes.Add("<core/gc_alloc_stubs.h>");
+            includes.Add("<gc/gc_bgc_inline.h>");
+            includes.Add("<gc/gc_layout.h>");
+            includes.Add("<gc/gc_helpers.h>");
+        }
 
         // ── Direct StringBuilder path for large ObjectModelCode ────────
         // When ObjectModelCode exceeds ~200 KB (e.g. 50+ MB in subject mode),
@@ -343,6 +356,12 @@ public sealed partial class NativeAotEmitter
             sb.Append(include);
             sb.Append('\n');
         }
+        // Cross-TU declarations needed by generated code when the PCH isn't used
+        // (e.g. per-assembly TUs that don't inherit chaos_pch.h includes).
+        sb.Append("#pragma warning(disable: 2362)\n");
+        sb.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ");
+        sb.Append("System_Collections_NonGeneric_System_SR_GetResourceString_System_String(\n");
+        sb.Append("    CHAOS_IL2CPP_INTPTR) noexcept;\n");
 
         // Use per-page type declarations when available (optimization: only declare
         // types referenced by methods on this page). Fall back to shared header when

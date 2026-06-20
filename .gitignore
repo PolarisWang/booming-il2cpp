@@ -511,3 +511,8 @@ src/reference/*/chunks/*/managed/subjects/*.deps.json
 *.nuget.dgspec.json
 project.assets.json
 testing/foundation-dll/nightly-build-report/
+/nightly-build-report/
+testing/foundation-dll/**/native/object_stubs.cpp
+testing/foundation-dll/**/managed/subjects_net10_0/
+testing/foundation-dll/**/managed/.autogen.patch/
+testing/foundation-dll/inject_getui.py

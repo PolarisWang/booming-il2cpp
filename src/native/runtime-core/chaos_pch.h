@@ -16,6 +16,8 @@
 // ── Standard C/C++ headers (needed by all generated files) ─────────
 // Must be in PCH because MSVC /Yu requires the PCH include to be first;
 // any includes before #include "chaos_pch.h" are IGNORED.
+// Suppress C2362: codegen emits goto past local var init (structurally safe).
+#pragma warning(disable : 2362)
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>

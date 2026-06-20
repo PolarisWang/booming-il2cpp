@@ -327,6 +327,7 @@ public sealed partial class CodeGenStage
             TranslationUnitPageSize = originalPlan.TranslationUnitPageSize,
             TranslationUnitPageCount = originalPlan.TranslationUnitPageCount,
             TranslationUnitPages = originalPlan.TranslationUnitPages,
+            Includes = originalPlan.Includes,
         };
     }
 

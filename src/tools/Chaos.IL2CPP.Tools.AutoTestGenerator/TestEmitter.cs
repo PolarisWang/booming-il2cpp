@@ -184,14 +184,20 @@ public sealed class TestEmitter
                     ? $"<{string.Join(", ", method.GenericTypeArgs.Select(CSharpSerializer.MapToCSharpType))}>"
                     : "";
                 var instanceExpr = _expressionBuilder.GetInstanceExpression(typeFullName, method.IsStatic);
-                // Replace default(T)! with SubjectInstanceFactory so real
-                // instances are created at runtime.  This enables the FACT
-                // wrapper to actually execute the method body (triggering GC
-                // allocations) instead of dispatching on null.
-                if (instanceExpr.StartsWith("default(global::") && instanceExpr.EndsWith(")!"))
+                // The CSharpExpressionBuilder returns SubjectInstanceFactory for
+                // abstract/interface types (to avoid CS0144) and new T() for
+                // concrete types.  As a secondary override, convert any remaining
+                // SubjectInstanceFactory calls to new T() when the type is a
+                // non-abstract, non-interface, concrete type.
+                if (instanceExpr.StartsWith("SubjectInstanceFactory.Create<global::") && instanceExpr.EndsWith(">()"))
                 {
-                    var typeArg = instanceExpr["default(".Length..^"!)".Length];
-                    instanceExpr = $"SubjectInstanceFactory.Create<{typeArg}>()";
+                    var typeArg = instanceExpr["SubjectInstanceFactory.Create<global::".Length..">()".Length];
+                    try {
+                        var t = System.Type.GetType(typeArg, false);
+                        if (t != null && !t.IsAbstract && !t.IsInterface && !t.IsValueType) {
+                            instanceExpr = $"new global::{typeArg}()";
+                        }
+                    } catch { }
                 }
                 var callExpr = $"{instanceExpr}.{method.Name}{genericSuffix}({argsStr})";
 

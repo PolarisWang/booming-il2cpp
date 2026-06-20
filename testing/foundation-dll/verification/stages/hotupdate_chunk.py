@@ -353,12 +353,17 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
             dll_candidates.insert(0, candidate)
     # Fallback: search system-wide dotnet paths (checked after project ref)
     import sys as _sys
+    _dotnet_root = os.environ.get("DOTNET_ROOT", "")
     for base in (
-        Path(os.environ.get("DOTNET_ROOT", "")),
+        # Shared framework paths FIRST — these have runtime assemblies with IL code.
+        # DOTNET_ROOT may point to SDK/packs (set by build.py auto-detect) which
+        # only has reference assemblies (metadata-only, no IL for patch DLL build).
         Path("/usr/share/dotnet/shared"),
-        Path("C:/Program Files/dotnet/shared") if _sys.platform == "win32" else Path(""),
+        (Path("C:/Program Files/dotnet/shared") if _sys.platform == "win32" else None),
+        # DOTNET_ROOT fallback (only if set and not empty)
+        (Path(_dotnet_root) if _dotnet_root else None),
     ):
-        if base.exists():
+        if base is not None and base.exists():
             for runtime_dir in sorted(base.rglob(f"**/{ctx.assembly}.dll")):
                 dll_candidates.append(runtime_dir)
     for c in dll_candidates:
@@ -634,6 +639,11 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         status = "error"
         if not errors:
             errors.append("patch data generation failed earlier")
+        # Zero out huPassed/huFailed — tests ran without actual patch data,
+        # so any "passed" results are misleading.  Without patch data, the
+        # hotupdate stage runs in baseline-only mode which always passes.
+        result_data["passed"] = 0
+        result_data["failed"] = 0
     elif result_data.get("patchSkippedNoMethods"):
         # ATG produced 0 patchable methods — tests ran clean, nothing to patch
         status = "passed" if (assert_failed == 0 and all_revert) else "failed"

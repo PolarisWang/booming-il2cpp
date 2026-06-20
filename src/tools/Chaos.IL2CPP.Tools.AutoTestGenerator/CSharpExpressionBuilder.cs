@@ -239,7 +239,18 @@ public sealed class CSharpExpressionBuilder
                 if (t != null && t.IsValueType && t.IsByRefLike)
                     return $"default(global::{qualified.Replace('+', '.')})!";
             } catch { }
+            // Use SubjectInstanceFactory for valid instances.  Ref structs and
+            // unresolvable types: ref structs fall back to default(T)!.
+            // All other types use SubjectInstanceFactory so a real instance
+            // is created at runtime, enabling the subject wrapper to execute
+            // the real method body instead of dispatching on null.
+            try {
+                var t = Type.GetType(typeFullName, false);
+                if (t != null && t.IsValueType && t.IsByRefLike)
+                    return $"default(global::{qualified.Replace('+', '.')})!";
+            } catch { }
             return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
+            return $"new global::{qualified.Replace('+', '.')}()";
         }
 
         // Try to find a parameterless constructor via runtime reflection
