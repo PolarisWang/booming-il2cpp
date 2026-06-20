@@ -95,6 +95,13 @@ find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 # Prefer flat subjects/*.cpp (copied locally by TPG for MAX_PATH compatibility).
 # Fall back to codegen_dir/*Subjects/generated/*.cpp for in-place codegen builds.
 file(GLOB CHAOS_CODEGEN_FLAT_CPP "${CMAKE_CURRENT_SOURCE_DIR}/subjects/*.cpp")
+# Per-assembly generated files (target assemblies) in codegen/generated/*/
+# These are NOT included by the flat GLOB.  Compile them alongside the flat output.
+file(GLOB CHAOS_CODEGEN_PER_ASM_CPP
+    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.generated.page*.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/*/native-aot.page-*.cpp"
+)
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.page*.cpp"
@@ -109,6 +116,9 @@ file(GLOB CHAOS_CODEGEN_NATIVE_CPP
 
 if(CHAOS_CODEGEN_FLAT_CPP)
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_FLAT_CPP})
+  # Flat layout already contains all generated files in subjects/*.cpp.
+  # Per-assembly files under codegen/generated/*/ would cause C2371
+  # redefinition (chaos_type_id_* symbols) — skip them.
 else()
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
 endif()
@@ -224,7 +234,7 @@ set(CHAOS_ENTRY_INCLUDES
 
 add_executable({{ project_name }} ${CHAOS_ENTRY_SOURCES})
 if(MSVC)
-  target_compile_options({{ project_name }} PRIVATE /GS-)
+  target_compile_options({{ project_name }} PRIVATE /GS- /wd2362)
 endif()
 target_include_directories({{ project_name }} PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options({{ project_name }} PRIVATE ${CHAOS_EHA_FLAG})
