@@ -13,6 +13,19 @@ Last updated: 2026-06-20
 
 ## Key Changes
 
+### Codegen Fixes — Batch 1 (Jun 20)
+
+| Fix | File | Impact |
+|-----|------|--------|
+| **Convert.ToChar shape guard** | `Part1.S17.cs` | 修复 C2660: `chaos_convert_tochar_int32` 被非 ToChar 方法调用 |
+| **JIT cmake `gc_api.cpp` path** | `CMakeLists.txt.scriban` | 改为绝对 `CHAOS_PROJECT_ROOT` 路径，JIT 构建可用 |
+| **C2371 per-asm redefinition** | `CMakeLists.txt.scriban` | flat layout 时跳过 per-assembly 文件 |
+| **kMaxOverrides overflow** | `chaos_runtime_host.h` | 1024→4096，修复 system chunk 初始化卡死 |
+| **PerMethodState + parallel emission** | ~20 files | 25 个 per-method 字段提取到 ThreadLocal\<PerMethodState>，Parallel.For 并行化 |
+| **StringBuilderPool** | `StringBuilderPool.cs` | ThreadLocal 池化，减少 GC 压力 |
+| **Structured slot underflow** | `StructuredIR.cs` | PopValue()/Discard() 优雅恢复而非抛异常 |
+| **Nightly fact/coverage history** | `aggregate.py`, `nightly_delta.py`, `report_collector.py` | fact-{date}.json + coverage-{date}.json 写入 history，新增 fixableGapCount |
+
 ### Build Optimizations
 - `autoPageSize`: 150 (reverted from 500, TagList incompatibility)
 - `/Gy /Gw`: Link-time code generation + function-level linking
@@ -23,23 +36,43 @@ Last updated: 2026-06-20
 - `build.py`: Auto-fixup for TagList `->field` access (reinterpret_cast) + typedef insertion
 - `build.py`: UnicodeEncodeError fix for GBK terminal + pipeline stage counter fix
 - Scriban template: Linux EH `}} catch` fix, `__try`/`__except` → `try`/`catch` (C2712)
+- `report_collector.py`: Copy `_dll/reports/history/` into nightly report dir
 
 ### Codegen Fixes
 - `RuntimeHelperShapeRegistry.cs`: `chaos_arg_1` conditional generation (Array::Clone et al.)
 - `NativeAotLoweringPlanner.cs`: Include list corrections
 - `ObjectModelEmission.cs`: Removed `_TryFindExternalValueTypeFields`
+- `Part1.S17.cs`: Convert.ToChar Resolver 方法名守卫
 
 ### Runtime Fixes
-- `chaos_runtime_host.h`: Removed VirtualProtect
+- `chaos_runtime_host.h`: Removed VirtualProtect, kMaxOverrides 1024→4096
 - `interop_stubs.cpp`: `IsFinite` sentinel stub
 - Include guards: `stub_common.h`/`misc_stubs.h`/`array_stubs.h`/`cpu_features.h`
-- CMake template: `interop_stubs.cpp` from source tree
+- CMake template: `interop_stubs.cpp` from source tree, `gc_api.cpp` 绝对路径
 
 ### Tooling
 - GitHub Actions CI workflow (`.github/workflows/ci.yml`)
 - Parallel chunk builds: `--parallel N`
 - `managed_benchmark.py`: `_NET8_REPLACEMENTS` for .NET 8 API compat
 - GENSHAPE debug trace disabled (prevented TPG timeout)
+- `nightly_delta.py`: fact/coverage history 支持跨天对比
+
+## Codegen Acceleration
+
+### PerMethodState + Parallel Emission (Phase A)
+- **25 per-method fields** extracted into `PerMethodState` class
+- **ThreadLocal\<PerMethodState>** for thread-local state access
+- **ConcurrentDictionary** for `_emittedExternalRuntimeSymbols` (shared)
+- **Lock** for `_reversePInvokeEntries.Add()` (shared)
+- **Parallel.For** with `Environment.ProcessorCount` DOP
+- `_forceSerial` flag for fallback (`--force-serial` CLI)
+- ~170 reference sites updated across 20 files
+
+### StringBuilderPool (Phase E)
+- ThreadLocal\<StringBuilder?> pool for per-method emission
+- `Rent()` returns cleared builder; `Return()` caches if ≤64KB
+- Applied to `BuildMethodSource` (hottest allocation point)
+- ~N × 4KB heap reduction for N methods per codegen run
 
 ## Known Issues
 
@@ -50,7 +83,8 @@ Last updated: 2026-06-20
 | System.Runtime/Intrinsics/ReaderWriter | No chunks | Pre-existing, assemblies not configured |
 | GcAllocateProfiled LNK2019 | Fixed | `gc_alloc_stubs.cpp` locally compiled |
 | **Vector512 carrier `operator[]`** | Fixed | `numerics_carriers.h` 添加 operator[]，1526 SIMD 测试已修复 |
-| Coverage-audit | ✅ 100% | All chunks passed
+| Coverage-audit | ✅ 100% | All chunks passed |
+| **Build warning LNK4006** | Pre-existing | /FORCE:MULTIPLE 处理重复定义，不影响运行 |
 
 ## PCH Acceleration
 
