@@ -510,3 +510,4 @@ src/reference/*/chunks/*/managed/subjects/*.deps.json
 *.runtimeconfig.json
 *.nuget.dgspec.json
 project.assets.json
+testing/foundation-dll/nightly-build-report/
