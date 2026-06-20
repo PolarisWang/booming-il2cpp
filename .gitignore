@@ -520,5 +520,6 @@ testing/foundation-dll/**/native/object_stubs.cpp
 testing/foundation-dll/**/managed/subjects_net10_0/
 testing/foundation-dll/**/managed/.autogen.patch/
 testing/foundation-dll/**/managed/.autogen.patch/
+testing/foundation-dll/**/managed/combined/
 testing/foundation-dll/**/managed/subjects/patch/
 testing/foundation-dll/inject_getui.py
