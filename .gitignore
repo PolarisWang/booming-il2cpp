@@ -501,6 +501,10 @@ testing/foundation-dll/sdk/
 src/reference/
 # Pipeline build artifacts
 testing/foundation-dll/*/chunks/*/native/gc_api.cpp
+# Generated CMakeLists.txt (copied from TPG Scriban template during build)
+testing/foundation-dll/*/chunks/*/native/CMakeLists.txt
+# Generated patch-host-arrays.cpp (TPG output, not source)
+testing/foundation-dll/*/chunks/*/native/patch-host-arrays.cpp
 testing/foundation-dll/*/chunks/*/native/metadata/subjects.json
 testing/foundation-dll/*/chunks/*/native/patch.patchdata.meta.json
 testing/foundation-dll/*/chunks/*/managed/subjects_net8_0/
@@ -515,4 +519,6 @@ testing/foundation-dll/nightly-build-report/
 testing/foundation-dll/**/native/object_stubs.cpp
 testing/foundation-dll/**/managed/subjects_net10_0/
 testing/foundation-dll/**/managed/.autogen.patch/
+testing/foundation-dll/**/managed/.autogen.patch/
+testing/foundation-dll/**/managed/subjects/patch/
 testing/foundation-dll/inject_getui.py
