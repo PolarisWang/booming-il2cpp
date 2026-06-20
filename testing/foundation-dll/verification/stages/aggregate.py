@@ -137,15 +137,24 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 summary["coverageAudit"] = {"status": "error"}
 
         # Build status
-        result_files = [f.name for f in results_dir.iterdir()] if results_dir.is_dir() else []
-        if fact_path.exists():
-            summary["build"] = {"status": "passed"}
-        elif any(rf.endswith(".json") for rf in result_files):
-            summary["build"] = {"status": "passed"}
-        elif results_dir.is_dir():
-            summary["build"] = {"status": "failed"}
+        # Priority: .build_status marker (from build stage) > filesystem inference
+        build_status_marker = results_dir / ".build_status"
+        if build_status_marker.exists():
+            try:
+                marker_status = build_status_marker.read_text(encoding="utf-8").strip()
+                summary["build"] = {"status": marker_status}
+            except OSError:
+                pass
         else:
-            summary["build"] = {"status": "not_run"}
+            result_files = [f.name for f in results_dir.iterdir()] if results_dir.is_dir() else []
+            if fact_path.exists():
+                summary["build"] = {"status": "passed"}
+            elif any(rf.endswith(".json") for rf in result_files):
+                summary["build"] = {"status": "passed"}
+            elif results_dir.is_dir():
+                summary["build"] = {"status": "failed"}
+            else:
+                summary["build"] = {"status": "not_run"}
 
         # Profile results (AOT code size, optional)
         profile_path = results_dir / "profile.json"

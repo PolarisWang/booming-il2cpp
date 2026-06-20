@@ -1,0 +1,125 @@
+{
+  "assemblyName": "System.Net.Http",
+  "timestamp": "2026-06-20T05:43:26",
+  "totalChunks": 2,
+  "totalBenchmarkedMethods": 187,
+  "aggregatePerformance": {
+    "meanDurationMs": 0.6294878124283422,
+    "meanOpsPerSecond": 286978702.6537778,
+    "aggregateMeanCv": 0.09399894198578308,
+    "totalOutliers": 121
+  },
+  "chunkSummaries": [
+    {
+      "slug": "global-ns",
+      "fact": {
+        "passed": 319,
+        "total": 319,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 119,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 89,
+        "iterations": 10000,
+        "meanDurationMs": 1.227112359550562,
+        "meanOpsPerSecond": 254941225.9544944,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 19.8383,
+        "totalDurationMs": 109.21300000000001,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.057539292134831464,
+        "maxCv": 0.414001
+      },
+      "hotupdate": {
+        "passed": 89,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 4390400,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    },
+    {
+      "slug": "system-net-http",
+      "fact": {
+        "passed": 312,
+        "total": 312,
+        "valueSuspicious": false,
+        "valueWarnings": 0,
+        "metaTotal": 107,
+        "metaBenchmarkCount": 0
+      },
+      "benchmark": {
+        "methodCount": 98,
+        "iterations": 10000,
+        "meanDurationMs": 0.03186326530612245,
+        "meanOpsPerSecond": 319016179.3530612,
+        "minDurationMs": 0.0289,
+        "maxDurationMs": 0.0351,
+        "totalDurationMs": 3.1226,
+        "totalAllocatedBytes": 0.0,
+        "meanSampleCount": 8.8,
+        "totalOutliers": 121,
+        "meanCv": 0.1304585918367347,
+        "maxCv": 0.533208
+      },
+      "hotupdate": {
+        "passed": 98,
+        "failed": 0,
+        "allSemantic": false,
+        "allRevert": true,
+        "exitCode": 0,
+        "patchDataUsed": true,
+        "patchFailed": false,
+        "truncated": false,
+        "crash": false,
+        "assertFailed": 0,
+        "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Net.Http/System.Net.Http.HttpMethod": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          }
+        }
+      },
+      "build": {
+        "status": "passed"
+      },
+      "profile": {
+        "methodCount": 0,
+        "totalSize": 2865152,
+        "source": "none"
+      },
+      "benchmarkReport": {
+        "totalMethods": 0,
+        "methodsWithNet8": 0
+      }
+    }
+  ]
+}

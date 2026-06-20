@@ -15,6 +15,7 @@
 #include "gc_bgc.h"
 
 #include "../core/engine_lifecycle.h"
+#include "../core/gc_alloc_stubs.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -621,12 +622,6 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_total_pause_du
 /// Incremented by all allocation paths: NurseryAllocate, NurseryAllocateAtomic,
 /// PohAllocate, and fallback paths to old gen / LOH.
 thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
-
-// Fast-path TLS counter — defined HERE (not just extern) so that the
-// definition lives in the same translation unit as the function that
-// reads it.  Prevents TLS slot splits caused by /FORCE:MULTIPLE when
-// the SDK prebuilt lib's gc_region.obj has a separate definition.
-thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes = 0;
 
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept
 {

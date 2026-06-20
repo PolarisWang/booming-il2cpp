@@ -1,0 +1,65 @@
+{
+  "assemblyName": "System.Linq.Expressions",
+  "timestamp": "2026-06-20T05:49:43",
+  "summary": {
+    "chunks": 1,
+    "chunksVerified": 1,
+    "chunksWithValueWarnings": 0,
+    "chunksWithMetaMismatch": 0,
+    "factPassRate": 88.0,
+    "totalBenchmarkedMethods": 659,
+    "aggregatePerformance": {
+      "meanDurationMs": 0.8165113808801214,
+      "meanOpsPerSecond": 228204858.24446133,
+      "aggregateMeanCv": 0.3928356145675266,
+      "totalOutliers": 600
+    },
+    "hotupdate": {
+      "chunksWithPatchData": 1,
+      "chunksPatchFailed": 0,
+      "chunksPatchSkippedNoMethods": 0,
+      "chunksWithRevertFailure": 0,
+      "totalPassed": 659,
+      "totalFailed": 0,
+      "skipBreakdown": {}
+    },
+    "memory": {
+      "totalAllocatedBytes": 0.0,
+      "meanAllocatedPerChunk": 0.0,
+      "chunksWithAllocData": 1
+    },
+    "coverage": {
+      "overallPct": 88.0,
+      "chunksWithGaps": 0
+    },
+    "benchmarkComparison": {
+      "methodsAnalyzed": 511,
+      "methodsWithNet8": 409,
+      "chaosAotVsNet8": {
+        "mean": -5.45,
+        "median": -5.45,
+        "min": -5.45,
+        "max": -5.45,
+        "p25": -5.45,
+        "p75": -5.45
+      },
+      "chaosJitVsNet8": {
+        "mean": 1.89,
+        "median": 1.89,
+        "min": 1.89,
+        "max": 1.89,
+        "p25": 1.89,
+        "p75": 1.89
+      },
+      "net10VsNet8": {
+        "mean": 42.86,
+        "median": 42.86,
+        "min": 42.86,
+        "max": 42.86,
+        "p25": 42.86,
+        "p75": 42.86
+      },
+      "highValueMethods_betterThanNet8": 82.9
+    }
+  }
+}

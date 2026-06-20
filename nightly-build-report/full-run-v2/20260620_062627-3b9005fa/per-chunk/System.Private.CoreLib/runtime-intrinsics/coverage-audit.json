@@ -1,0 +1,8 @@
+{
+  "chunkSlug": "runtime-intrinsics",
+  "declaredMethods": 500,
+  "coveredMethods": 763,
+  "missingMethods": 162,
+  "coveragePct": 100.0,
+  "namespaceGaps": {}
+}

@@ -67,7 +67,9 @@ class NightlyResult:
 
     def __init__(self):
         self.started_at: float = time.perf_counter()
+        self.started_wallclock: float = time.time()
         self.ended_at: float = 0.0
+        self.ended_wallclock: float = 0.0
         self.chunk_results: dict[str, dict[str, StageResult]] = {}
         self.chunk_durations: dict[str, float] = {}
         self.chunk_count: int = 0
@@ -476,6 +478,7 @@ class NightlyOrchestrator:
                 print(f"    {asm}: reporting EXCEPTION: {e}")
 
         result.ended_at = time.perf_counter()
+        result.ended_wallclock = time.time()
         print(f"\n{'='*60}")
         print(f"  Nightly run complete: {result.summary()}")
         if result.build_failed > 0:

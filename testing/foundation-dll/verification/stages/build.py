@@ -287,7 +287,7 @@ def _build_jit_entry(
             try:
                 print(f"      [jit:err] {line}")
             except UnicodeEncodeError:
-                safe = line.encode("utf-8", errors="ignore").decode("utf-8", errors="ignore")
+                safe = line.encode("ascii", errors="replace").decode("ascii", errors="replace")
                 print(f"      [jit:err] {safe}")
         return False
 
@@ -452,7 +452,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             print(f"  [build] Capabilities: {caps_path.name}")
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=1200)
 
-        if result.returncode != 0:
+        # ATG returns rc=1 both for real errors AND for "no types found" (which is
+        # expected for type-forwarding assemblies and hardware intrinsics).
+        # Don't fail early — let the fallback logic handle 0-subject cases.
+        if result.returncode != 0 and "No types with public methods found" not in result.stdout:
             print(f"  [build] AutoTestGenerator FAILED (rc={result.returncode})")
             for line in (result.stderr.splitlines() + result.stdout.splitlines())[-15:]:
                 print(f"      {line}")
@@ -472,12 +475,84 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] AutoTestGenerator subjects: {total_subjects}")
 
     if total_subjects == 0:
-        print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
-              f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
-        return StageResult(
-            stage="build", status="skipped",
-            summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
-            duration_ms=int((time.perf_counter() - start) * 1000))
+        # ATG produced 0 subjects — possible reasons:
+        # 1. Namespace filter restricts to only delegates/interfaces
+        # 2. Assembly is a type-forwarding facade (e.g. System.Xml.ReaderWriter -> System.Private.Xml)
+        # 3. Assembly has no probeable types (e.g. System.Runtime.Intrinsics)
+        # Try fallbacks: remove namespace filter, then try Private.* counterpart.
+
+        # Fallback 1: remove namespace filter
+        if chunk_namespaces:
+            print(f"  [build] 0 subjects with namespace filter — retrying without filter...")
+            cmd_no_ns = [a for a in cmd if not a.startswith("--namespace-filter")]
+            result = subprocess.run(cmd_no_ns, capture_output=True, text=True,
+                                     encoding='utf-8', errors='replace', timeout=1200)
+            if result.returncode == 0 and metadata_path.exists():
+                metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+                total_subjects = metadata.get("totalMethods", 0)
+                print(f"  [build] Retry without namespace filter: {total_subjects} subjects")
+
+        # Fallback 2: try Private.* counterpart (type-forwarding facades)
+        if total_subjects == 0 and target_dll:
+            _asm_name = target_dll.stem  # e.g. "System.Xml.ReaderWriter"
+            _private_asm = target_dll.parent / f"System.Private.{_asm_name.removeprefix('System.').removeprefix('Private.')}.dll"
+            if not _private_asm.exists():
+                # Try alternative naming: System.Private.Xml.dll vs System.Xml.ReaderWriter -> System.Private.Xml.dll
+                _private_asm = target_dll.parent / "System.Private.Xml.dll"
+            if not _private_asm.exists():
+                # Generic: replace "System." prefix with "System.Private."
+                _private_asm = target_dll.parent / f"System.Private.{_asm_name[7:]}"
+
+            if _private_asm and _private_asm.exists() and _private_asm != target_dll:
+                print(f"  [build] 0 subjects — trying Private.* counterpart: {_private_asm.name}")
+                cmd_private = [
+                    "dotnet", "exec", str(auto_dll),
+                    "--dll", str(_private_asm),
+                    "--all-types",
+                    "--output", str(auto_output),
+                    "--emit-metadata", str(metadata_path),
+                    "--chunk-slug", ctx.slug,
+                ]
+                if chunk_namespaces:
+                    cmd_private.extend(["--namespace-filter", ",".join(chunk_namespaces)])
+                result = subprocess.run(cmd_private, capture_output=True, text=True,
+                                         encoding='utf-8', errors='replace', timeout=1200)
+                if result.returncode == 0 and metadata_path.exists():
+                    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+                    total_subjects = metadata.get("totalMethods", 0)
+                    print(f"  [build] Private.* fallback: {total_subjects} subjects from {_private_asm.name}")
+
+        if total_subjects == 0:
+            # After all fallbacks failed, this assembly genuinely has no probeable types.
+            # Hardware intrinsics assemblies (System.Runtime.Intrinsics) are a known case.
+            # Write an empty fact.json with status "no_subjects" so the pipeline doesn't
+            # fail on inherently un-probeable assemblies.
+            if target_dll and target_dll.stat().st_size < 50000:
+                print(f"  [build] Small assembly ({target_dll.stat().st_size} bytes) with no probeable "
+                      f"types — writing empty fact.json (no_subjects)")
+                ctx.chunk_dir.joinpath("results").mkdir(parents=True, exist_ok=True)
+                _empty_fact = {
+                    "passed": 0, "total": 0, "status": "no_subjects",
+                    "metaTotal": 0, "factMethodCount": 0,
+                    "note": f"Assembly '{target_dll.name}' has no probeable types "
+                            f"(hardware intrinsics / type-forwarding facade)",
+                }
+                try:
+                    (ctx.chunk_dir / "results" / "fact.json").write_text(
+                        json.dumps(_empty_fact, indent=2), encoding="utf-8")
+                except OSError:
+                    pass
+                return StageResult(
+                    stage="build", status="no_subjects",
+                    summary=f"No probeable types in {ctx.assembly}/{ctx.slug}",
+                    duration_ms=int((time.perf_counter() - start) * 1000))
+
+            print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
+                  f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
+            return StageResult(
+                stage="build", status="error",
+                summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
+                duration_ms=int((time.perf_counter() - start) * 1000))
 
     # -- 5. Detect TFM from target DLL --
     tfm = _detect_tfm(target_dll)
@@ -600,6 +675,9 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator" / "Emission" / "CppProjectEmitter.cs",
         _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "build.py",
         _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "hephaestus_cache.py",
+        # gc_api.cpp — locally compiled to override prebuilt lib's stale
+        # chaos_gc_get_allocated_bytes_for_current_thread (adds tls_alloc_fast_bytes)
+        _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp",
         # Tool binaries — any rebuild of ATG/TPG invalidates all caches
         tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator"),
         tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
@@ -867,6 +945,17 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                     stage="build", status="error",
                     summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
                     duration_ms=int((time.perf_counter() - start) * 1000))
+
+    # Re-copy gc_api.cpp after TPG --clean removes it.
+    # TPG generate-dll with --clean deletes gc_api.cpp from native_dir,
+    # but cmake still needs it for compilation.  This re-copy ensures
+    # ALL chunks have gc_api.cpp available during cmake build, not just
+    # those that go through the profile-range injection path.
+    _gcapi_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp"
+    _gcapi_dst = ctx.native_dir / "gc_api.cpp"
+    if _gcapi_src.exists() and not _gcapi_dst.exists():
+        shutil.copy2(str(_gcapi_src), str(_gcapi_dst))
+        print(f"  [build] Re-copied gc_api.cpp (cleaned by TPG --clean)")
 
     # -- 8b. Inject --profile-range handler into generated runtime-entry.cpp --
     _rp = ctx.native_dir / "runtime-entry.cpp"

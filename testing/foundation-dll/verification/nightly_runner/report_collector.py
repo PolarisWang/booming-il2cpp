@@ -277,8 +277,8 @@ class ReportCollector:
 
         # Duration info
         duration = {
-            "startedAt": datetime.fromtimestamp(self.result.started_at, tz=timezone.utc).isoformat(),
-            "endedAt": datetime.fromtimestamp(self.result.ended_at, tz=timezone.utc).isoformat(),
+            "startedAt": datetime.fromtimestamp(self.result.started_wallclock, tz=timezone.utc).isoformat(),
+            "endedAt": datetime.fromtimestamp(self.result.ended_wallclock, tz=timezone.utc).isoformat(),
             "totalSeconds": round(self.result.ended_at - self.result.started_at, 1),
             "chunkCount": self.result.chunk_count,
         }

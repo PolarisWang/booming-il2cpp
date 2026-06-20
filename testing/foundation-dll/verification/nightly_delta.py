@@ -115,6 +115,12 @@ def compute_assembly_delta(
         else:
             continue
 
+        # Skip chunks that were never built
+        fact = tc.get("fact", {}) if tc else {}
+        t_total = fact.get("total", 0)
+        if t_total == 0:
+            continue
+
         # ── Fact delta ──
         tf = tc.get("fact", {}) if tc else {}
         pf = pc.get("fact", {}) if pc else {}

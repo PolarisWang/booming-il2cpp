@@ -139,6 +139,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/gc_api.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"

@@ -11,6 +11,18 @@ if(MSVC)
   add_compile_options(/utf-8 /GS- /FS /bigobj /wd4716 /MP /Gy /Gw)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
+  # ── Precompiled header (PCH) ──────────────────────────────────
+  # chaos_pch.h includes all standard C headers + stable ChaOS runtime headers.
+  # CMake target_precompile_headers auto-manages /Yc /Yu flags (CMake 3.16+).
+  # Files that #include "chaos_pch.h" as first include automatically use the PCH.
+  set(CHAOS_PCH_HDR "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.h")
+  set(CHAOS_PCH_SRC "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.cpp")
+  if(EXISTS "${CHAOS_PCH_HDR}")
+    target_precompile_headers(chaos_entry PRIVATE "${CHAOS_PCH_HDR}")
+    if(EXISTS "${CHAOS_PCH_SRC}")
+      target_sources(chaos_entry PRIVATE "${CHAOS_PCH_SRC}")
+    endif()
+  endif()
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter -fpermissive)
   set(CHAOS_EHA_FLAG -fexceptions)
@@ -127,6 +139,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/gc_api.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"

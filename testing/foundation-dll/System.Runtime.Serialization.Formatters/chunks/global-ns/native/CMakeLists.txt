@@ -12,14 +12,13 @@ if(MSVC)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
   # ── Precompiled header (PCH) ──────────────────────────────────
-  # target_precompile_headers auto-manages /Yc /Yu flags (CMake 3.16+).
-  # Files that include "chaos_pch.h" as first include use the PCH.
-  # The PCH compilation unit is automatically managed by CMake.
+  # chaos_pch.h includes all standard C headers + stable ChaOS runtime headers.
+  # CMake target_precompile_headers auto-manages /Yc /Yu flags (CMake 3.16+).
+  # Files that #include "chaos_pch.h" as first include automatically use the PCH.
   set(CHAOS_PCH_HDR "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.h")
   set(CHAOS_PCH_SRC "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.cpp")
   if(EXISTS "${CHAOS_PCH_HDR}")
     target_precompile_headers(chaos_entry PRIVATE "${CHAOS_PCH_HDR}")
-    # Ensure PCH source is compiled (/Yc generator)
     if(EXISTS "${CHAOS_PCH_SRC}")
       target_sources(chaos_entry PRIVATE "${CHAOS_PCH_SRC}")
     endif()
@@ -94,6 +93,16 @@ find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 # Prefer flat subjects/*.cpp (copied locally by TPG for MAX_PATH compatibility).
 # Fall back to codegen_dir/*Subjects/generated/*.cpp for in-place codegen builds.
 file(GLOB CHAOS_CODEGEN_FLAT_CPP "${CMAKE_CURRENT_SOURCE_DIR}/subjects/*.cpp")
+# Also include per-assembly generated files from codegen/generated/ subdirectories
+# (target assemblies e.g. System.Collections.NonGeneric).  The flat mode GLOB
+# above only picks up the root assembly (CombinedSubjects) — the per-assembly
+# files contain the actual AOT method bodies and must be compiled too.
+file(GLOB CHAOS_CODEGEN_PER_ASM_CPP
+    "${CHAOS_CODEGEN_DIR}/*/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*/generated/native-aot.generated.page*.cpp"
+    "${CHAOS_CODEGEN_DIR}/*/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/*/generated/chaos_generated_module.cpp"
+)
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.page*.cpp"
@@ -107,7 +116,11 @@ file(GLOB CHAOS_CODEGEN_NATIVE_CPP
 )
 
 if(CHAOS_CODEGEN_FLAT_CPP)
+  # Flat layout: combine root assembly codegen with per-assembly files
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_FLAT_CPP})
+  if(CHAOS_CODEGEN_PER_ASM_CPP)
+    list(APPEND CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_PER_ASM_CPP})
+  endif()
 else()
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
 endif()
@@ -130,12 +143,17 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # on Linux, prebuilt on Windows).  Do NOT compile them locally — the SDK
 # library already contains these symbols and compiling them again causes
 # multiple-definition linker errors.
-# profile_globals.cpp is project-specific, so compile it from source.
+# profile_globals.cpp and gc_alloc_stubs.cpp are project-specific, so compile
+# them from source.  gc_alloc_stubs.cpp defines GcAllocateProfiled which is
+# referenced by chaos_jit.lib (JIT helpers).  Compiling locally ensures these
+# symbols are available even if the prebuilt runtime lib doesn't export them.
 # array_stubs.cpp: the prebuilt lib may be stale, missing recently-added
 # DirectNativeSymbol entries (ChaosArrayCopy3, ChaosArraySortWithComparer).
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/gc_api.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"
