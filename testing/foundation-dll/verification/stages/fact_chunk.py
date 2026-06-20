@@ -107,6 +107,7 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification.analysis.value_checker import check_method_values
 
 
 def _load_chunk_config(chunk_dir: Path) -> dict[str, Any]:
@@ -254,6 +255,65 @@ def _filter_known_failures(results: list[dict],
             r["_known_failure"] = True
         filtered.append(r)
     return filtered
+
+
+def _write_per_method_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | None,
+                                    managed_results: dict[str, dict]) -> None:
+    """Write per-method fact history JSONL for trend analysis.
+
+    Format: one JSON object per line, with per-method detail:
+      {"date": "2026-06-20", "assembly": "...", "slug": "...",
+       "methods": [{"si": 0, "passed": true, "value": 42, ...}, ...]}
+    """
+    from datetime import datetime, timezone
+    history_dir = ctx.foundation_dir / "_dll" / "reports" / "history"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    history_path = history_dir / f"fact-per-method-{date_str}.jsonl"
+
+    # Combine all method results
+    all_methods: list[dict] = []
+    seen_si: set[int] = set()
+
+    for result in [aot_result, jit_result]:
+        if not result:
+            continue
+        for r in result.get("results", []):
+            si = r.get("si", -1)
+            if si in seen_si:
+                continue
+            seen_si.add(si)
+            all_methods.append({
+                "si": si,
+                "methodSubjectId": r.get("methodSubjectId", ""),
+                "passed": r.get("passed", False),
+                "value": r.get("value"),
+                "source": "aot" if result is aot_result else "jit",
+            })
+
+    for tech_key, mr in (managed_results or {}).items():
+        for r in mr.get("results", []):
+            all_methods.append({
+                "si": -1,  # managed results may not have si
+                "methodSubjectId": r.get("methodSubjectId", ""),
+                "passed": r.get("passed", False),
+                "value": r.get("value"),
+                "source": tech_key,
+            })
+
+    entry = {
+        "date": date_str,
+        "assembly": ctx.assembly,
+        "slug": ctx.slug,
+        "methodCount": len(all_methods),
+        "methods": all_methods,
+    }
+
+    try:
+        with open(history_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except OSError:
+        pass  # non-fatal
 
 
 def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | None) -> None:
@@ -533,8 +593,41 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         errors.append(f"{value_warnings} method(s) returned negative values")
         print(f"  [fact] ERROR: {value_warnings} method(s) returned negative values")
 
-    # ── Write fact history (_dll/reports/history/fact-YYYY-MM-DD.jsonl) ──
-    _write_fact_history(ctx, aot_result, jit_result)
+    # ── Value correctness check ──
+    # Compare AOT fact values against expected (from metadata) and
+    # managed .NET 8 fact values (cross-tech comparison).
+    value_check_result = {}
+    if aot_result.get("results") and meta_path and meta_path.exists():
+        try:
+            md = json.loads(meta_path.read_text(encoding="utf-8"))
+            md_methods = md.get("methods", [])
+            # Build managed_result_list from managed_fact_results if available
+            managed_results_list = []
+            for tech_key in ("net8-fact", "net10-fact"):
+                if tech_key in managed_fact_results:
+                    mr = managed_fact_results[tech_key]
+                    managed_results_list.extend(mr.get("results", []))
+            value_check_result = check_method_values(
+                aot_result["results"],
+                md_methods,
+                managed_results=managed_results_list if managed_results_list else None,
+            )
+            if value_check_result["totalMismatches"] > 0:
+                print(f"  [fact] Value mismatches: {value_check_result['totalMismatches']} method(s) "
+                      f"(rate={value_check_result.get('valueMatchRate', 'N/A')}%)")
+                if value_check_result.get("crossTechMatchRate") is not None:
+                    print(f"  [fact] Cross-tech fact match: {value_check_result['crossTechMatchRate']}%")
+                for m in value_check_result["mismatches"][:5]:
+                    mtype = "expected" if m["type"] == "expected_value_mismatch" else "cross-tech"
+                    print(f"    [{mtype}] {m.get('methodSubjectId','?')}: AOT={m.get('aotValue')} vs "
+                          f"{m.get('expectedValue', m.get('managedValue', '?'))}")
+        except Exception as e:
+            print(f"  [fact] Value check error: {e}")
+            value_check_result = {"error": str(e)}
+
+    # ── Write per-method fact history ──
+    # More granular than the chunk-level aggregate in _write_fact_history
+    _write_per_method_fact_history(ctx, aot_result, jit_result, managed_fact_results)
 
     # ── Also write fact.json to chunk results dir for aggregate consumption ──
     _write_fact_results(ctx, aot_result, jit_result, meta_total, meta_fact_count, value_warnings)
@@ -549,6 +642,7 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
                        "returncode": jit_result["returncode"], "results": jit_result["results"]}}
                if jit_result else {}),
             **({"crossTechDiffs": cross_tech_diffs} if cross_tech_diffs else {}),
+            **({"valueCheck": value_check_result} if value_check_result else {}),
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
         value_suspicious=value_suspicious,

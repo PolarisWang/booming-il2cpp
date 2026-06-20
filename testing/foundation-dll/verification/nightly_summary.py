@@ -212,7 +212,13 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             alloc = a.get("totalAllocatedBytes", 0)
             alloc_str = _fmt_bytes(alloc) if alloc else "—"
             hu = a.get("hotupdate", {})
-            hu_str = "✅" if hu.get("chunksPatchFailed", 0) == 0 and hu.get("totalFailed", 0) == 0 else "❌"
+            revert_reg = a.get("revertRegressionCount", 0)
+            if hu.get("chunksPatchFailed", 0) > 0 or hu.get("totalFailed", 0) > 0:
+                hu_str = "❌"
+            elif revert_reg and revert_reg > 0:
+                hu_str = f"⚠️rv:{revert_reg}"
+            else:
+                hu_str = "✅"
 
             # Aggregate build status across chunks
             asm_chunks = {k: v for k, v in chunks.items() if k.startswith(name + "/")}

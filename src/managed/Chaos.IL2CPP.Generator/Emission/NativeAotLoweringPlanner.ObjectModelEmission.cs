@@ -83,6 +83,44 @@ public sealed partial class NativeAotLoweringPlanner
         return false;
     }
 
+    private string? _TryEmitOpaqueValueTypeStruct(string typeSubjectId)
+    {
+        if (typeSubjectId.Contains("System.Numerics.Vector") &&
+            (typeSubjectId.Contains("`1<") || typeSubjectId.Contains("Vector_1_")))
+        {
+            int size = _GetVectorSize(typeSubjectId);
+            if (size <= 0) return null;
+            var sb = new System.Text.StringBuilder(128);
+            sb.Append("struct ");
+            sb.Append(GetNativeValueTypeSymbol(typeSubjectId));
+            sb.AppendLine();
+            sb.AppendLine("{");
+            sb.Append("    CHAOS_IL2CPP_UINT8 __data[");
+            sb.Append(size);
+            sb.AppendLine("] = {};");
+            sb.AppendLine("};");
+            sb.AppendLine();
+            return sb.ToString();
+        }
+        return null;
+    }
+
+    private static int _GetVectorSize(string typeSubjectId)
+    {
+        var elStart = typeSubjectId.IndexOf('<');
+        var elEnd = typeSubjectId.LastIndexOf('>');
+        if (elStart < 0 || elEnd <= elStart) return 0;
+        var elType = typeSubjectId.Substring(elStart + 1, elEnd - elStart - 1);
+        return elType switch
+        {
+            "System.Byte" or "System.SByte" or "System.Char" => 16,
+            "System.Int16" or "System.UInt16" => 16,
+            "System.Int32" or "System.UInt32" or "System.Single" => 32,
+            "System.Int64" or "System.UInt64" or "System.Double" => 64,
+            _ => 0,
+        };
+    }
+
     private (int vtableOffset, int methodCount) ComputeInterfaceVtableInfo(string ifaceSubjectId)
     {
         if (_vtableSlotMap == null)
@@ -1270,8 +1308,19 @@ public sealed partial class NativeAotLoweringPlanner
                     vtFields = discoveredFields;
                     fieldsByDeclaringType[vtId] = vtFields;
                 }
+                // Check for opaque value types with known sizeof (e.g. Vector<T>)
+                // that need a real struct definition (not typedef int32).
                 if (vtFields.Count == 0)
                 {
+                    var opaqueCode = _TryEmitOpaqueValueTypeStruct(vtId);
+                    if (opaqueCode != null)
+                    {
+                        vtSubjectIds.Add(vtId);
+                        vtBuilder.Append(opaqueCode);
+                        // Ensure Vector<T> gets a boxed type struct in the shared header
+                        hashSet3.Add(vtId);
+                        continue;
+                    }
                     // No managed fields: keep typedef CHAOS_IL2CPP_INT32 only.
                     // Covers pure enums and _backing-only boxed types, avoiding
                     // C2440 (reinterpret_cast on struct) and C2371 (typedef conflict).

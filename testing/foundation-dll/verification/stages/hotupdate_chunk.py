@@ -487,10 +487,16 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         print(f"  [hotupdate] Running without --patch-data (no semantic change expected)...")
 
     # When patch data is available, run benchmark before/after for performance comparison
-    # Scale iterations by chunk size: 5 for small (<500), 2 for medium, 0 (disabled) for large
-    # NOTE: benchmark disabled for now — see DispatchDirectVoid+benchmark+patch-data crash
-    benchmark_iterations = 0
+    # Scale iterations by chunk size: 3 for small (<500), 2 for medium (>500), 1 for large (>2000)
+    # Best-effort: if the native entry.exe crashes with --benchmark-iterations + --patch-data,
+    # the benchmark will produce no data but fact/revert will still run.
     method_count = len(hotupdate_indices)
+    if method_count < 500:
+        benchmark_iterations = 3
+    elif method_count < 2000:
+        benchmark_iterations = 2
+    else:
+        benchmark_iterations = 1
 
     # Scale timeout by chunk size: 3s per method for 3 passes (baseline/patched/revert)
     hotupdate_timeout = max(120, 60 + method_count * 3)
@@ -549,6 +555,33 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # Compute per-method revert pass count
     revert_passed = sum(1 for r in reverted_fact if r.get("passed"))
 
+    # ── Per-method revert integrity check ──
+    # Compare each method's revert result against its baseline result.
+    # Methods that pass baseline but fail after revert are regression.
+    # Methods that fail both baseline and revert are expected (known failure).
+    baseline_fact = hotupdate_data.get("baselineFact", [])
+    revert_regression_count = 0
+    revert_fixed_count = 0
+    revert_stable_count = 0
+    for br in baseline_fact:
+        b_si = br.get("si", -1)
+        b_passed = br.get("passed", False)
+        # Find matching revert entry
+        rr = next((r for r in reverted_fact if r.get("si", -1) == b_si), None)
+        if rr is None:
+            continue
+        r_passed = rr.get("passed", False)
+        if b_passed and not r_passed:
+            revert_regression_count += 1  # was passing, now failing after revert
+        elif not b_passed and r_passed:
+            revert_fixed_count += 1  # was failing, now passing (odd but tracked)
+        else:
+            revert_stable_count += 1
+
+    if revert_regression_count > 0:
+        print(f"  [hotupdate] Revert integrity: {revert_regression_count} method(s) regressed after revert "
+              f"(were passing baseline, failed after revert)")
+
     ctx.results_dir.mkdir(parents=True, exist_ok=True)
     result_path = ctx.results_dir / "hotupdate.json"
     result_data = {
@@ -559,6 +592,9 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "allSemantic": all_semantic,
         "allRevert": all_revert,
         "revertPassed": revert_passed,
+        "revertRegressionCount": revert_regression_count,
+        "revertFixedCount": revert_fixed_count,
+        "revertStableCount": revert_stable_count,
         "semanticChangedCount": semantic_changed,
         "patchDataUsed": patch_data_path is not None,
         "patchFailed": patch_data_path is None and _patch_generation_attempted and not _patch_skipped_no_methods,

@@ -324,15 +324,14 @@ internal static class ConvertToCppHandler
                 features = new
                 {
                     async_methods = true,
-                    vector_t_boxing = false,
+                    vector_t_boxing = true,
                     generic_constraints = new[] { "unmanaged", "new" },
                     max_generic_params = 4,
                 },
                 known_limitations = new[]
                 {
                     "async state machine MoveNext methods (interpreter fallback only)",
-                    "Vector<T> return types (LNK2001 for boxed MethodTable entries)",
-                    "SerializationInfo-based constructors (requires infrastructure)",
+                                        "SerializationInfo-based constructors (requires infrastructure)",
                     "MetadataLoadContext dependent type discovery",
                     "Generic constraints unsatisfied by concretization (CS0315)",
                     ".NET 9 APIs not available in net8.0 reference assemblies",

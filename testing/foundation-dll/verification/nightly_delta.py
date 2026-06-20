@@ -200,6 +200,8 @@ def compute_assembly_delta(
         delta["huPassed"] = th.get("passed", 0)
         delta["huFailed"] = th.get("failed", 0)
         delta["huPatchFailed"] = th.get("patchFailed", False)
+        delta["huRevertRegression"] = th.get("revertRegressionCount", 0)
+        delta["huHasBaselineBenchmark"] = len(th.get("details", {}).get("baselineBenchmark", [])) > 0 if th else False
 
         # ── Build status ──
         tb = tc.get("build", {}) if tc else {}
@@ -427,13 +429,14 @@ def compute_nightly_delta(
 
     # ── Compute regression grade ──
     # Use chunk-level aggregate approach: grade based on worst per-chunk delta.
+    # Thresholds match regression_grading.py (tuned for real benchmark variance).
     bench_grades = []
     for ck, cd in all_chunks.items():
         bd = cd.get("benchDurationDelta")
         ad = cd.get("benchAllocDelta")
-        if (bd is not None and bd > 20) or (ad is not None and ad > 20):
+        if (bd is not None and bd > 50) or (ad is not None and ad > 30):
             bench_grades.append("hard")
-        elif (bd is not None and bd > 10) or (ad is not None and ad > 10):
+        elif (bd is not None and bd > 25) or (ad is not None and ad > 30):
             bench_grades.append("soft")
         else:
             bench_grades.append("none")

@@ -11,10 +11,17 @@ from __future__ import annotations
 
 from typing import Any
 
-# Default thresholds
-_SOFT_THRESHOLD = 10.0   # duration increase >10% = soft regression
-_HARD_THRESHOLD = 20.0   # duration increase >20% = hard regression
-_ALLOC_THRESHOLD = 15.0  # allocation increase >15% = regression
+# Default thresholds — tuned from real benchmark variance data:
+#   System.Linq:           6.5% methods have CV > 20%
+#   System.Private.CoreLib: 22.3% methods have CV > 20%
+#   System.Data.Common:    14.6% methods have CV > 20%
+# Thresholds are set HIGHER than typical CV to avoid false positives
+# from inherently high-variance methods (GC pauses, JIT warmup, etc.).
+# Only methods with CV < MAX_CV are eligible for regression detection.
+_SOFT_THRESHOLD = 25.0   # duration increase >25% = soft regression
+_HARD_THRESHOLD = 50.0   # duration increase >50% = hard regression
+_ALLOC_THRESHOLD = 30.0  # allocation increase >30% = regression
+_MAX_CV_FOR_REGRESSION = 0.10  # only consider methods with CV < 10%
 
 
 def compute_grade(
@@ -23,6 +30,7 @@ def compute_grade(
     soft_threshold: float = _SOFT_THRESHOLD,
     hard_threshold: float = _HARD_THRESHOLD,
     alloc_threshold: float = _ALLOC_THRESHOLD,
+    max_cv: float = _MAX_CV_FOR_REGRESSION,
 ) -> dict[str, Any]:
     """Compute regression grade for a chunk's benchmark results.
 
@@ -32,6 +40,9 @@ def compute_grade(
         soft_threshold: Duration increase % for soft regression.
         hard_threshold: Duration increase % for hard regression.
         alloc_threshold: Allocation increase % for regression.
+        max_cv: Maximum CV (coefficient of variation) to consider a method
+                eligible for regression detection. Methods with CV above this
+                threshold are inherently noisy and skipped.
 
     Returns:
         dict with keys:
@@ -41,6 +52,7 @@ def compute_grade(
             degradedMethods: Count of methods with soft regression.
             improvedMethods: Count of methods with significant improvement.
             allocRegressedMethods: Count of methods with allocation regression.
+            skippedHighCv: Count of methods skipped due to high CV.
     """
     if not today_per_method:
         return {
@@ -57,10 +69,17 @@ def compute_grade(
     degraded = 0
     improved = 0
     alloc_regressed = 0
+    skipped_high_cv = 0
 
     for i, t_stat in enumerate(today_per_method):
         t_dur = t_stat.get("meanDurationMs", 0)
+        t_cv = t_stat.get("cv", 1.0)
         if t_dur <= 0:
+            continue
+
+        # Skip high-variance methods — they produce too many false positives
+        if t_cv > max_cv:
+            skipped_high_cv += 1
             continue
 
         # Compare against previous run (if available)
@@ -103,6 +122,7 @@ def compute_grade(
         "degradedMethods": degraded,
         "improvedMethods": improved,
         "allocRegressedMethods": alloc_regressed,
+        "skippedHighCv": skipped_high_cv,
     }
 
 
