@@ -1,13 +1,12 @@
 {
   "assemblyName": "System.Security.Principal.Windows",
-  "timestamp": "2026-06-19T12:40:34",
+  "timestamp": "2026-06-20T04:26:00",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 36,
   "aggregatePerformance": {
-    "meanDurationMs": 0.029947222222222222,
-    "meanOpsPerSecond": 326610752.57222223,
-    "aggregateMeanCv": 0.16234425,
-    "totalOutliers": 42
+    "meanDurationMs": 0.02913333333333333,
+    "meanOpsPerSecond": 345018281.5838889,
+    "aggregateMeanCv": 0.03602841666666667
   },
   "chunkSummaries": [
     {
@@ -23,16 +22,16 @@
       "benchmark": {
         "methodCount": 36,
         "iterations": 10000,
-        "meanDurationMs": 0.029947222222222222,
-        "meanOpsPerSecond": 326610752.57222223,
-        "minDurationMs": 0.0268,
-        "maxDurationMs": 0.0394,
-        "totalDurationMs": 1.0781,
+        "meanDurationMs": 0.02913333333333333,
+        "meanOpsPerSecond": 345018281.5838889,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 0.0387,
+        "totalDurationMs": 1.0488,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.8,
-        "totalOutliers": 42,
-        "meanCv": 0.16234425,
-        "maxCv": 0.572868
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.03602841666666667,
+        "maxCv": 0.353553
       },
       "hotupdate": {
         "passed": 36,
@@ -46,6 +45,29 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 97.0,
+        "namespaceGaps": {
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityNotMappedException": {
+            "declared": 1,
+            "covered": 0,
+            "gap": 1,
+            "gapPct": 100.0
+          },
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection": {
+            "declared": 8,
+            "covered": 7,
+            "gap": 1,
+            "gapPct": 12.5
+          },
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceEnumerator": {
+            "declared": 3,
+            "covered": 0,
+            "gap": 3,
+            "gapPct": 100.0
+          }
+        }
       },
       "build": {
         "status": "passed"

@@ -1,9 +1,11 @@
 {
   "assemblyName": "System.Security.Claims",
-  "timestamp": "2026-06-19T12:39:58",
+  "timestamp": "2026-06-20T04:25:29",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 137
+  "totalDeclaredMethods": 137,
+  "coveragePct": 100.0,
+  "namespaceGaps": {}
 }

@@ -1,13 +1,12 @@
 {
   "assemblyName": "System.Collections.Immutable",
-  "timestamp": "2026-06-20T04:07:47",
+  "timestamp": "2026-06-20T04:21:50",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 32,
   "aggregatePerformance": {
-    "meanDurationMs": 0.029571875,
-    "meanOpsPerSecond": 338594551.859375,
-    "aggregateMeanCv": 0.05484103125,
-    "totalOutliers": 15
+    "meanDurationMs": 0.031490625,
+    "meanOpsPerSecond": 329540378.9159375,
+    "aggregateMeanCv": 0.08644565625
   },
   "chunkSummaries": [
     {
@@ -23,16 +22,16 @@
       "benchmark": {
         "methodCount": 32,
         "iterations": 10000,
-        "meanDurationMs": 0.029571875,
-        "meanOpsPerSecond": 338594551.859375,
-        "minDurationMs": 0.025,
-        "maxDurationMs": 0.0307,
-        "totalDurationMs": 0.9463,
+        "meanDurationMs": 0.031490625,
+        "meanOpsPerSecond": 329540378.9159375,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 0.043,
+        "totalDurationMs": 1.0077,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 3.5,
-        "totalOutliers": 15,
-        "meanCv": 0.05484103125,
-        "maxCv": 0.33503
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.08644565625,
+        "maxCv": 0.394444
       },
       "hotupdate": {
         "passed": 32,

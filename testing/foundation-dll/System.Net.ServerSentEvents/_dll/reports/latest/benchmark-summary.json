@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.Net.ServerSentEvents",
-  "timestamp": "2026-06-19T12:38:26",
+  "timestamp": "2026-06-20T04:24:02",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 4,
   "aggregatePerformance": {
-    "meanDurationMs": 1.42885,
-    "meanOpsPerSecond": 181728455.5,
-    "aggregateMeanCv": 0.0185115
+    "meanDurationMs": 4.83565,
+    "meanOpsPerSecond": 180850380.585,
+    "aggregateMeanCv": 0.00840875
   },
   "chunkSummaries": [
     {
@@ -21,17 +21,17 @@
       },
       "benchmark": {
         "methodCount": 4,
-        "iterations": 3030,
-        "meanDurationMs": 1.42885,
-        "meanOpsPerSecond": 181728455.5,
-        "minDurationMs": 0.0077,
-        "maxDurationMs": 2.9397,
-        "totalDurationMs": 5.7154,
+        "iterations": 10000,
+        "meanDurationMs": 4.83565,
+        "meanOpsPerSecond": 180850380.585,
+        "minDurationMs": 0.026,
+        "maxDurationMs": 10.1073,
+        "totalDurationMs": 19.3426,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.0185115,
-        "maxCv": 0.061488
+        "meanCv": 0.00840875,
+        "maxCv": 0.022061
       },
       "hotupdate": {
         "passed": 4,
@@ -45,6 +45,23 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 44.4,
+        "namespaceGaps": {
+          "System.Net.ServerSentEvents/System.Net.ArrayBuffer": {
+            "declared": 4,
+            "covered": 0,
+            "gap": 4,
+            "gapPct": 100.0
+          },
+          "System.Net.ServerSentEvents/System.Net.ServerSentEvents.PooledByteBufferWriter": {
+            "declared": 5,
+            "covered": 0,
+            "gap": 5,
+            "gapPct": 100.0
+          }
+        }
       },
       "build": {
         "status": "passed"

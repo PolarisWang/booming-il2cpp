@@ -12,14 +12,13 @@ if(MSVC)
   set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
   # ── Precompiled header (PCH) ──────────────────────────────────
-  # target_precompile_headers auto-manages /Yc /Yu flags (CMake 3.16+).
-  # Files that include "chaos_pch.h" as first include use the PCH.
-  # The PCH compilation unit is automatically managed by CMake.
+  # chaos_pch.h includes all standard C headers + stable ChaOS runtime headers.
+  # CMake target_precompile_headers auto-manages /Yc /Yu flags (CMake 3.16+).
+  # Files that #include "chaos_pch.h" as first include automatically use the PCH.
   set(CHAOS_PCH_HDR "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.h")
   set(CHAOS_PCH_SRC "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/chaos_pch.cpp")
   if(EXISTS "${CHAOS_PCH_HDR}")
     target_precompile_headers(chaos_entry PRIVATE "${CHAOS_PCH_HDR}")
-    # Ensure PCH source is compiled (/Yc generator)
     if(EXISTS "${CHAOS_PCH_SRC}")
       target_sources(chaos_entry PRIVATE "${CHAOS_PCH_SRC}")
     endif()
@@ -130,12 +129,16 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
 # on Linux, prebuilt on Windows).  Do NOT compile them locally — the SDK
 # library already contains these symbols and compiling them again causes
 # multiple-definition linker errors.
-# profile_globals.cpp is project-specific, so compile it from source.
+# profile_globals.cpp and gc_alloc_stubs.cpp are project-specific, so compile
+# them from source.  gc_alloc_stubs.cpp defines GcAllocateProfiled which is
+# referenced by chaos_jit.lib (JIT helpers).  Compiling locally ensures these
+# symbols are available even if the prebuilt runtime lib doesn't export them.
 # array_stubs.cpp: the prebuilt lib may be stale, missing recently-added
 # DirectNativeSymbol entries (ChaosArrayCopy3, ChaosArraySortWithComparer).
 # /FORCE:MULTIPLE handles any future overlap when the lib catches up.
 set(CHAOS_PROFILE_GLOBALS
     "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
 )
 set(CHAOS_ARRAY_STUBS
     "${CHAOS_SDK_DIR}/runtime_stubs/array_stubs.cpp"

@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.IO.Compression.Brotli",
-  "timestamp": "2026-06-19T12:36:27",
+  "timestamp": "2026-06-20T04:22:13",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 21,
         "iterations": 6250,
-        "meanDurationMs": 5.9352,
-        "meanOpsPerSecond": 1167243.445,
+        "meanDurationMs": 5.889633333333333,
+        "meanOpsPerSecond": 1186062.4805555556,
         "minDurationMs": 0,
-        "maxDurationMs": 10.355,
-        "totalDurationMs": 124.6392,
+        "maxDurationMs": 10.7253,
+        "totalDurationMs": 123.6823,
         "totalAllocatedBytes": 2000000.0,
         "meanSampleCount": 2.6,
         "totalOutliers": 0,
-        "meanCv": 0.01654872222222222,
-        "maxCv": 0.040659
+        "meanCv": 0.029430111111111115,
+        "maxCv": 0.080255
       },
       "hotupdate": {
         "passed": 28,
@@ -43,6 +43,29 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 71.4,
+        "namespaceGaps": {
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder": {
+            "declared": 3,
+            "covered": 1,
+            "gap": 2,
+            "gapPct": 66.7
+          },
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder": {
+            "declared": 6,
+            "covered": 2,
+            "gap": 4,
+            "gapPct": 66.7
+          },
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream": {
+            "declared": 19,
+            "covered": 17,
+            "gap": 2,
+            "gapPct": 10.5
+          }
+        }
       },
       "build": {
         "status": "passed"

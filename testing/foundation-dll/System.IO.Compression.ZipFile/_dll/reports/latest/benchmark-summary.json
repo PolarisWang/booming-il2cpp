@@ -1,12 +1,12 @@
 {
   "assemblyName": "System.IO.Compression.ZipFile",
-  "timestamp": "2026-06-19T12:37:06",
+  "timestamp": "2026-06-20T04:22:45",
   "totalChunks": 1,
   "totalBenchmarkedMethods": 66,
   "aggregatePerformance": {
-    "meanDurationMs": 0.031516666666666665,
-    "meanOpsPerSecond": 330011461.18136364,
-    "aggregateMeanCv": 0.10455539393939393
+    "meanDurationMs": 0.02982575757575758,
+    "meanOpsPerSecond": 341566335.7522727,
+    "aggregateMeanCv": 0.055949818181818184
   },
   "chunkSummaries": [
     {
@@ -22,16 +22,16 @@
       "benchmark": {
         "methodCount": 66,
         "iterations": 10000,
-        "meanDurationMs": 0.031516666666666665,
-        "meanOpsPerSecond": 330011461.18136364,
+        "meanDurationMs": 0.02982575757575758,
+        "meanOpsPerSecond": 341566335.7522727,
         "minDurationMs": 0.024,
-        "maxDurationMs": 0.0487,
-        "totalDurationMs": 2.0801,
+        "maxDurationMs": 0.039,
+        "totalDurationMs": 1.9685000000000001,
         "totalAllocatedBytes": 0.0,
         "meanSampleCount": 3.0,
         "totalOutliers": 0,
-        "meanCv": 0.10455539393939393,
-        "maxCv": 0.414001
+        "meanCv": 0.055949818181818184,
+        "maxCv": 0.362619
       },
       "hotupdate": {
         "passed": 66,
@@ -45,6 +45,23 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 50.0,
+        "namespaceGaps": {
+          "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile": {
+            "declared": 34,
+            "covered": 17,
+            "gap": 17,
+            "gapPct": 50.0
+          },
+          "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions": {
+            "declared": 12,
+            "covered": 6,
+            "gap": 6,
+            "gapPct": 50.0
+          }
+        }
       },
       "build": {
         "status": "passed"

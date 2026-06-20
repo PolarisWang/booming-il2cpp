@@ -1,9 +1,11 @@
 {
   "assemblyName": "System.Net.ServerSentEvents",
-  "timestamp": "2026-06-19T12:38:26",
+  "timestamp": "2026-06-20T04:24:02",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 10
+  "totalDeclaredMethods": 10,
+  "coveragePct": 60.0,
+  "namespaceGaps": {}
 }

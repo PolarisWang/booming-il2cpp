@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Threading.Tasks.Parallel",
-  "timestamp": "2026-06-19T12:41:13",
+  "timestamp": "2026-06-20T04:26:23",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 106,
         "iterations": 10000,
-        "meanDurationMs": 0.5506245283018868,
-        "meanOpsPerSecond": 302656593.5754717,
+        "meanDurationMs": 0.5448141509433962,
+        "meanOpsPerSecond": 311365877.8495283,
         "minDurationMs": 0.024,
-        "maxDurationMs": 16.0378,
-        "totalDurationMs": 58.3662,
+        "maxDurationMs": 15.7347,
+        "totalDurationMs": 57.7503,
         "totalAllocatedBytes": 1920000.0,
-        "meanSampleCount": 4.1,
-        "totalOutliers": 98,
-        "meanCv": 0.14440635849056604,
-        "maxCv": 0.49794
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.043472094339622645,
+        "maxCv": 0.434006
       },
       "hotupdate": {
         "passed": 106,
@@ -43,6 +43,17 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelEtwProvider": {
+            "declared": 6,
+            "covered": 0,
+            "gap": 6,
+            "gapPct": 100.0
+          }
+        }
       },
       "build": {
         "status": "passed"

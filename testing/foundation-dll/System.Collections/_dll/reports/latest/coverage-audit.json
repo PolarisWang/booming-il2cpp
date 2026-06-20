@@ -1,9 +1,11 @@
 {
   "assemblyName": "System.Collections",
-  "timestamp": "2026-06-19T12:35:09",
+  "timestamp": "2026-06-20T04:21:11",
   "totalChunks": 1,
   "chunksWithResults": 1,
   "chunksWithValueWarnings": 0,
   "chunksWithMetaMismatch": 0,
-  "totalDeclaredMethods": 186
+  "totalDeclaredMethods": 186,
+  "coveragePct": 100.0,
+  "namespaceGaps": {}
 }

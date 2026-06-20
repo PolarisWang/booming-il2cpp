@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.ObjectModel",
-  "timestamp": "2026-06-19T12:39:00",
+  "timestamp": "2026-06-20T04:24:33",
   "totalChunks": 1,
   "chunksWithFacts": 1,
   "chunksWithValueWarnings": 0,
@@ -20,16 +20,16 @@
       "benchmark": {
         "methodCount": 10,
         "iterations": 10000,
-        "meanDurationMs": 0.028100000000000003,
-        "meanOpsPerSecond": 354754115.54,
-        "minDurationMs": 0.0241,
-        "maxDurationMs": 0.0294,
-        "totalDurationMs": 0.281,
+        "meanDurationMs": 0.028000000000000004,
+        "meanOpsPerSecond": 359897200.366,
+        "minDurationMs": 0.024,
+        "maxDurationMs": 0.029,
+        "totalDurationMs": 0.28,
         "totalAllocatedBytes": 0.0,
-        "meanSampleCount": 8.0,
-        "totalOutliers": 20,
-        "meanCv": 0.11568590000000001,
-        "maxCv": 0.180142
+        "meanSampleCount": 3.0,
+        "totalOutliers": 0,
+        "meanCv": 0.0178065,
+        "maxCv": 0.091832
       },
       "hotupdate": {
         "passed": 10,
@@ -43,6 +43,10 @@
         "crash": false,
         "assertFailed": 0,
         "semanticChangedCount": 0
+      },
+      "coverageAudit": {
+        "coveragePct": 100.0,
+        "namespaceGaps": {}
       },
       "build": {
         "status": "passed"

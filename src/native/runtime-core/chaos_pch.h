@@ -13,6 +13,18 @@
 #ifndef CHAOS_IL2CPP_CHAOS_PCH_H_
 #define CHAOS_IL2CPP_CHAOS_PCH_H_
 
+// ── Standard C/C++ headers (needed by all generated files) ─────────
+// Must be in PCH because MSVC /Yu requires the PCH include to be first;
+// any includes before #include "chaos_pch.h" are IGNORED.
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <chrono>
+#include <cstdint>
+#include <cinttypes>
+#include <csignal>
+#include <csetjmp>
+
 // ── ChaOS runtime core headers ─────────────────────────────────────
 #include <chaos/common.h>
 #include <chaos/type_info.h>

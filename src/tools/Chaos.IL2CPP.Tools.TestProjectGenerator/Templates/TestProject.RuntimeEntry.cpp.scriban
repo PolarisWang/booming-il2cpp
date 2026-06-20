@@ -10,15 +10,12 @@
 //   --hotupdate-and-benchmark N I — post-patch benchmark
 //   --microbench         — interpreter microbenchmarks
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <chrono>
-#include <cstdint>
-#include <cinttypes>
-#include <csignal>
+// PCH must be the FIRST include (/Yu requirement). Provides all standard
+// C headers (cstdio, cstdlib, cstring, chrono, cstdint, cinttypes, csignal,
+// csetjmp) plus all stable ChaOS runtime headers.
+#include "chaos_pch.h"
+
 #include <chaos/pal/pal_eh.h>
-#include <csetjmp>
 
 #if defined(_WIN32)
 #define NOMINMAX
@@ -47,8 +44,6 @@ static thread_local jmp_buf t_abort_jmp;
 // library, so we do NOT define it here — doing so would cause a
 // multiple-definition linker error.
 
-// Precompiled header: stable ChaOS runtime headers (compiled once across TUs)
-#include "chaos_pch.h"
 
 #include <chaos/config.h>
 #include <chaos/native_types.h>

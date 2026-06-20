@@ -625,6 +625,71 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if ctx.entry_exe_path.exists():
                 exe_size = ctx.entry_exe_path.stat().st_size
                 print(f"  [build] [hephaestus] Restored entry.exe ({exe_size} bytes)")
+                # Ensure --profile-range handler is injected (cache may be from before this feature)
+                _rp = ctx.native_dir / "runtime-entry.cpp"
+                if _rp.exists():
+                    _code_hit = _rp.read_text(encoding="utf-8", errors="replace")
+                    if 'profile-range' not in _code_hit:
+                        _marker = '    if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }'
+                        if _marker in _code_hit:
+                            _prefix_hit = (
+                                '\n// --profile-range: profile contiguous AOT method indices'
+                                '\nstatic int RunProfileRangeMode(int start_idx, int end_idx) {'
+                                '\n    using namespace chaos::il2cpp::runtime_core;'
+                                '\n    if (start_idx < 0) start_idx = 0;'
+                                '\n    if (end_idx > kAotMethodCount) end_idx = kAotMethodCount;'
+                                '\n    const int kCount = end_idx - start_idx;'
+                                '\n    auto* entries = GetHotpatchEntries();'
+                                '\n    ProfileStoreInit(kCount);'
+                                '\n    for (int idx = start_idx; idx < end_idx; idx++) {'
+                                '\n        int64_t heap_before = chaos_gc_get_heap_size();'
+                                '\n        GetThreadProfileData().heap_before = heap_before;'
+                                '\n        __try {'
+                                '\n            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, idx);'
+                                '\n        } __except(EXCEPTION_EXECUTE_HANDLER) {'
+                                '\n        }'
+                                '\n        int64_t heap_after = chaos_gc_get_heap_size();'
+                                '\n        GetThreadProfileData().heap_after = heap_after;'
+                                '\n        FlushThreadProfileData(idx);'
+                                '\n    }'
+                                '\n    ProfileStoreFinalize();'
+                                '\n    ProfileEmitJson();'
+                                '\n    return 0;'
+                                '\n}'
+                                '\n'
+                                '\nint main(int argc, char* argv[]) {'
+                            )
+                            _cli_hit = (
+                                '\n    if (std::strcmp(argv[1], "--profile-range") == 0) {'
+                                '\n        if (argc < 4) { puts("Usage: entry.exe --profile-range <start> <end>"); return 1; }'
+                                '\n        ret = RunProfileRangeMode(std::atoi(argv[2]), std::atoi(argv[3]));'
+                                '\n        goto shutdown;'
+                                '\n    }'
+                                '\n'
+                            )
+                            _code_hit = _code_hit.replace('int main(int argc, char* argv[]) {', _prefix_hit)
+                            _code_hit = _code_hit.replace(_marker, _cli_hit + _marker)
+                            _rp.write_text(_code_hit, encoding="utf-8")
+                            print(f'  [build] Injected --profile-range handler into cached runtime-entry.cpp')
+                            # Rebuild entry.exe after injection
+                            _gcapi_src_hit = _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp"
+                            _gcapi_dst_hit = ctx.native_dir / "gc_api.cpp"
+                            if _gcapi_src_hit.exists():
+                                import shutil as _su_hit
+                                _su_hit.copy2(str(_gcapi_src_hit), str(_gcapi_dst_hit))
+                            import subprocess as _sp_hit
+                            _rebuild_hit = _sp_hit.run(
+                                ["cmake", "--build", ".", "--config", "RelWithDebInfo"],
+                                cwd=ctx.native_dir / "build",
+                                capture_output=True, text=True, timeout=7200)
+                            if _rebuild_hit.returncode == 0:
+                                _built_hit = ctx.native_dir / "build" / "RelWithDebInfo" / "chaos_entry.exe"
+                                if _built_hit.exists():
+                                    import shutil as _su_hit2
+                                    _su_hit2.copy2(_built_hit, ctx.entry_exe_path)
+                                    print(f'  [build] Rebuilt cached entry.exe with --profile-range')
+                            else:
+                                print(f'  [build] WARNING: rebuild of cached entry.exe for --profile-range failed')
                 duration_ms = int((time.perf_counter() - start) * 1000)
                 # Also build JIT entry (non-blocking, not cached separately)
                 _build_jit_entry(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"), subjects_dll, metadata_path, ctx.native_dir, ctx.native_config, ctx.assembly_dirs)
@@ -803,7 +868,74 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
                     summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
                     duration_ms=int((time.perf_counter() - start) * 1000))
 
-    # -- 8b. Profile mode is generated directly by the TPG template --
+    # -- 8b. Inject --profile-range handler into generated runtime-entry.cpp --
+    _rp = ctx.native_dir / "runtime-entry.cpp"
+    if _rp.exists():
+        _code = _rp.read_text(encoding="utf-8", errors="replace")
+        _marker = '    if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }'
+        if _marker in _code and 'profile-range' not in _code:
+            _prefix = (
+                '\n// --profile-range: profile contiguous AOT method indices'
+                '\nstatic int RunProfileRangeMode(int start_idx, int end_idx) {'
+                '\n    using namespace chaos::il2cpp::runtime_core;'
+                '\n    if (start_idx < 0) start_idx = 0;'
+                '\n    if (end_idx > kAotMethodCount) end_idx = kAotMethodCount;'
+                '\n    const int kCount = end_idx - start_idx;'
+                '\n    auto* entries = GetHotpatchEntries();'
+                '\n    ProfileStoreInit(kCount);'
+                '\n    for (int idx = start_idx; idx < end_idx; idx++) {'
+                '\n        int64_t heap_before = chaos_gc_get_heap_size();'
+                '\n        GetThreadProfileData().heap_before = heap_before;'
+                '\n        __try {'
+                '\n            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, idx);'
+                '\n        } __except(EXCEPTION_EXECUTE_HANDLER) {'
+                '\n        }'
+                '\n        int64_t heap_after = chaos_gc_get_heap_size();'
+                '\n        GetThreadProfileData().heap_after = heap_after;'
+                '\n        FlushThreadProfileData(idx);'
+                '\n    }'
+                '\n    ProfileStoreFinalize();'
+                '\n    ProfileEmitJson();'
+                '\n    return 0;'
+                '\n}'
+                '\n'
+                '\nint main(int argc, char* argv[]) {'
+            )
+            _cli = (
+                '\n    if (std::strcmp(argv[1], "--profile-range") == 0) {'
+                '\n        if (argc < 4) { puts("Usage: entry.exe --profile-range <start> <end>"); return 1; }'
+                '\n        ret = RunProfileRangeMode(std::atoi(argv[2]), std::atoi(argv[3]));'
+                '\n        goto shutdown;'
+                '\n    }'
+                '\n'
+            )
+            _code = _code.replace('int main(int argc, char* argv[]) {', _prefix)
+            _code = _code.replace(_marker, _cli + _marker)
+            _rp.write_text(_code, encoding="utf-8")
+            print(f'  [build] Injected --profile-range handler into runtime-entry.cpp')
+            # Re-copy gc_api.cpp (was cleaned by TPG --clean step) and rebuild
+            _gcapi_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp"
+            _gcapi_dst = ctx.native_dir / "gc_api.cpp"
+            if _gcapi_src.exists():
+                import shutil as _su
+                _su.copy2(str(_gcapi_src), str(_gcapi_dst))
+            import subprocess as _sp
+            _rebuild = _sp.run(
+                ["cmake", "--build", ".", "--config", "RelWithDebInfo"],
+                cwd=ctx.native_dir / "build",
+                capture_output=True, text=True, timeout=7200)
+            if _rebuild.returncode == 0:
+                print(f'  [build] Rebuilt entry.exe after profile-range injection')
+                _built = ctx.native_dir / "build" / "RelWithDebInfo" / "chaos_entry.exe"
+                if _built.exists():
+                    import shutil as _su
+                    _su.copy2(_built, ctx.entry_exe_path)
+                    print(f'  [build] Copied rebuilt entry.exe')
+            else:
+                print(f'  [build] WARNING: rebuild after profile-range injection failed')
+                for _line in (_rebuild.stderr.splitlines()[-3:]):
+                    if _line.strip():
+                        print(f'      {_line.strip()[:200]}')
 
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
