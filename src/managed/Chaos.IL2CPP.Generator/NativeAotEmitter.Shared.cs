@@ -304,6 +304,27 @@ public sealed partial class NativeAotEmitter
                         if (!_dedup.Add(_sym)) continue;
                     }
                 }
+                // Replace extern "C" CHAOS_IL2CPP_INTPTR declarations for MoveNext
+                // methods with the ABI dispatch signature matching the coroutine
+                // wrapper (CHAOS_IL2CPP_INT64, 4 × CHAOS_IL2CPP_INTPTR params).
+                // The original declaration uses the managed method's signature
+                // which conflicts with the coroutine wrapper (C2733).  Replacing
+                // instead of removing ensures forward references (vtable entries,
+                // dispatch tables) still have a visible symbol declaration.
+                if (_t.StartsWith("extern \"C\" CHAOS_IL2CPP_INTPTR ", StringComparison.Ordinal) &&
+                    _t.Contains("_MoveNext(", StringComparison.Ordinal) &&
+                    _t.EndsWith(";", StringComparison.Ordinal))
+                {
+                    var _symEnd = _t.IndexOf('(', 0);
+                    if (_symEnd > 0)
+                    {
+                        string _sym = _t.Substring(0, _symEnd).TrimEnd();
+                        _symEnd = _sym.LastIndexOf(' ');
+                        string _symName = _symEnd > 0 ? _sym.Substring(_symEnd + 1) : _sym;
+                        _sb.AppendLine($"extern \"C\" CHAOS_IL2CPP_INT64 {_symName}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
+                    }
+                    continue;
+                }
                 _sb.AppendLine(_line);
             }
             content = _sb.ToString().TrimEnd();

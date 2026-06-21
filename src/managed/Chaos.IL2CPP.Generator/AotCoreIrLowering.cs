@@ -612,6 +612,8 @@ public sealed partial class AotCoreIrLowering
         if (op.StartsWith("ble", StringComparison.Ordinal)) return true;
         if (op.StartsWith("blt", StringComparison.Ordinal)) return true;
         if (op.StartsWith("bne", StringComparison.Ordinal)) return true;
+        // refanytype (typed reference type extraction, no type reference needed)
+        if (string.Equals(op, "refanytype", StringComparison.Ordinal)) return true;
         // Arithmetic
         switch (op)
         {
@@ -632,6 +634,7 @@ public sealed partial class AotCoreIrLowering
             case "clt":
             case "add.ovf":
             case "sub.ovf":
+            case "sub.ovf.un":
             case "mul.ovf":
             case "ldnull":
             case "dup":
@@ -860,6 +863,7 @@ public sealed partial class AotCoreIrLowering
             "stsfld" => InstructionOpCode.StSFld,
             "sub" => InstructionOpCode.Sub,
             "sub.ovf" => InstructionOpCode.SubOvf,
+            "sub.ovf.un" => InstructionOpCode.SubOvf,
             "switch" => InstructionOpCode.Switch,
             "throw" => InstructionOpCode.Throw,
             "unbox" => InstructionOpCode.Unbox,

@@ -58,6 +58,12 @@ public sealed partial class NativeAotLoweringPlanner
         var declarations = new List<string>();
         var emittedStubSymbols = new HashSet<string>(StringComparer.Ordinal);
         var emittedSymbols = new HashSet<string>(StringComparer.Ordinal);
+        // Track NativeSymbols that were skipped via the async filter.  A second
+        // method with the same NativeSymbol but a different SubjectId (e.g. a
+        // shared generic instantiation) would NOT be caught by the async filter
+        // check alone, but would still emit an extern "C" declaration that
+        // conflicts with the coroutine wrapper's extern "C" definition (C2733).
+        var skippedSymbols = new HashSet<string>(StringComparer.Ordinal);
         foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
         {
             // Skip async state machine MoveNext methods — these are emitted as
@@ -71,12 +77,18 @@ public sealed partial class NativeAotLoweringPlanner
             if (IsAsyncStateMachineMoveNext(reachableMethod.SubjectId) ||
                 reachableMethod.SubjectId?.Contains("::MoveNext", StringComparison.Ordinal) == true)
             {
+                if (!string.IsNullOrEmpty(reachableMethod.NativeSymbol))
+                    skippedSymbols.Add(reachableMethod.NativeSymbol);
                 Console.Error.WriteLine($"[decl-skip] async MoveNext: {reachableMethod.SubjectId} sym={reachableMethod.NativeSymbol}");
                 continue;
             }
 
-            // Deduplicate by native symbol to avoid C2733 (extern "C" cannot be overloaded)
-            if (!emittedSymbols.Add(reachableMethod.NativeSymbol))
+            // Deduplicate by native symbol to avoid C2733 (extern "C" cannot be overloaded).
+            // Also skip symbols that were already skipped by the async filter above
+            // — a second method sharing the same NativeSymbol would otherwise emit
+            // a conflicting declaration.
+            if (!emittedSymbols.Add(reachableMethod.NativeSymbol) ||
+                skippedSymbols.Contains(reachableMethod.NativeSymbol))
                 continue;
 
             declarations.Add(FormatMethodDeclaration(reachableMethod, sharedContextSymbols));
