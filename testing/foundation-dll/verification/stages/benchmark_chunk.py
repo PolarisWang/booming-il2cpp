@@ -358,6 +358,8 @@ def _build_gc_info(
 
     Returns a dict with fields matching the managed benchmark gcInfo format:
     totalAllocatedBytes, and optional fastPathCount/slowPathCount for profile data.
+    Falls back to meanAllocatedBytes from the benchmark method's own measurement
+    when profile data is not available.
     """
     if profile_data and technology == "chaos-aot" and method_index < len(profile_data):
         p = profile_data[method_index]
@@ -442,6 +444,7 @@ def _write_perf_store(
                 "metrics": {
                     "elapsedMilliseconds": elapsed_ms if elapsed_ms > 0 else _MIN_ELAPSED_FLOOR,
                     "opsPerSecond": ops,
+                    "allocatedBytes": s.get("meanAllocatedBytes", 0),
                 },
                 "gcInfo": _build_gc_info(profile_data, s, i, technology),
                 "iterations": iterations,
