@@ -120,6 +120,19 @@ public sealed partial class NativeAotEmitter
             var allMethods = templateModel.Methods;
             int totalMethods = allMethods.Count;
 
+            // Cross-page NativeSymbol dedup: generic instantiation stubs
+            // (__generic suffix) and type-forwarded methods share the same
+            // NativeSymbol but may be assigned to different pages by the
+            // size-based partitioner, causing C2084 (function already has a
+            // body) on subsequent pages.  Pre-filter to unique symbols.
+            var dedupedMethods = new List<NativeAotMethodTemplateModel>(totalMethods);
+            var seenNs = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var m in allMethods)
+                if (!string.IsNullOrEmpty(m.NativeSymbol) && seenNs.Add(m.NativeSymbol))
+                    dedupedMethods.Add(m);
+            allMethods = dedupedMethods;
+            totalMethods = allMethods.Count;
+
             // ── Estimate page 0 overhead ──────────────────────────────
             // Page 0 carries object model (TypeInfoV0 inline defs), method
             // declarations, module registration, and generic registration.
@@ -719,7 +732,11 @@ public sealed partial class NativeAotEmitter
                 }
             }
         }
-        // Second pass: dedup type_id/mt and replace async MoveNext declarations
+        // Second pass: dedup type_id/mt and replace async MoveNext declarations.
+        // Also dedup function definitions within this page: two different methods
+        // may emit the same externally-visible function (e.g. generic instantiation
+        // stubs that collapse to the same chaos_stub_definition_*), causing C2084.
+        var seenDefinitions = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
         foreach (string _line in content.Split('\n'))
         {
             string _t = _line.Trim();
@@ -755,6 +772,21 @@ public sealed partial class NativeAotEmitter
                         sb.AppendLine($"extern \"C\" CHAOS_IL2CPP_INT64 {_symName2}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
                         continue;
                     }
+                }
+            }
+            // Dedup function definitions within this page (C2084).  Two
+            // different methods may emit the same extern "C" function body
+            // (e.g. collapse to the same chaos_stub_definition_*).  Skip
+            // duplicate definitions — the first occurrence suffices.
+            if (_t.StartsWith("extern \"C\" ", StringComparison.Ordinal) &&
+                !_t.EndsWith(";", StringComparison.Ordinal))
+            {
+                var _parenPos = _t.IndexOf('(', 0);
+                if (_parenPos > 0)
+                {
+                    string _fnSig = _t.Substring(0, _parenPos).TrimEnd();
+                    if (!seenDefinitions.Add(_fnSig))
+                        continue;
                 }
             }
             sb.AppendLine(_line);
