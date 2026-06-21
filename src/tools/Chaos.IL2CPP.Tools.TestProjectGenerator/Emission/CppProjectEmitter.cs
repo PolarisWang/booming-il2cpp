@@ -516,6 +516,11 @@ public sealed class CppProjectEmitter
                 }
             }
             var needed = new System.Collections.Generic.HashSet<string>(System.StringComparer.Ordinal);
+            // Also scan full header text for any struct chaos_valuetype_* definitions
+            // that may span multiple lines or have unusual formatting.  The line-by-line
+            // scan above may miss some struct definitions, and adding a redundant
+            // typedef for a type that already has a struct definition would cause C2371.
+            string fullHeaderText = System.IO.File.ReadAllText(vtHeaderPath);
             foreach (string cppFile in System.IO.Directory.GetFiles(Path.Combine(projectDir, "subjects"), "native-aot.generated*.cpp"))
             {
                 string cppText = System.IO.File.ReadAllText(cppFile);
@@ -528,7 +533,13 @@ public sealed class CppProjectEmitter
                     if (end > idx + "chaos_valuetype_".Length)
                     {
                         string sym = cppText.Substring(idx, end - idx);
-                        if (!existingTypes.Contains(sym))
+                        // Skip if the header already has a struct definition for this
+                        // type (even if the line-by-line scan above missed it).  Adding
+                        // a redundant typedef would cause C2371 (redefinition; different
+                        // basic types).  Use IndexOf on the full header text as a robust
+                        // fallback for multiline or oddly formatted struct definitions.
+                        if (!existingTypes.Contains(sym) &&
+                            !fullHeaderText.Contains("struct " + sym, System.StringComparison.Ordinal))
                             needed.Add(sym);
                     }
                     idx = end;
