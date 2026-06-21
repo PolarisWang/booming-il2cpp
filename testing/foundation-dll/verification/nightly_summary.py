@@ -165,14 +165,16 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             build_failed.append(f"{asm_name}/{slug} ({build_st})")
         ft = cd.get("factTotal", 0)
         gap = cd.get("coverageGap")
-        fixable_gap = cd.get("fixableGapCount") or gap
+        fixable_gap = cd.get("fixableGapCount", gap)
+        unprobeable_gap = cd.get("unprobeableMethods", 0)
         if gap is None:
             no_fact.append(f"{asm_name}/{slug} (no fact data)")
         elif ft == 0 and gap > 0:
             no_fact.append(f"{asm_name}/{slug} (metaTotal={gap})")
         elif gap is not None and gap > 10:
             gap_pct = gap / (gap + ft) * 100
-            large_gap.append(f"{asm_name}/{slug} gap={gap} ({gap_pct:.0f}%)")
+            unprobeable_note = f" ({unprobeable_gap} unprobeable)" if unprobeable_gap > 0 else ""
+            large_gap.append(f"{asm_name}/{slug} gap={gap} ({gap_pct:.0f}%){unprobeable_note}")
         if fixable_gap is not None and fixable_gap > 10 and (gap is None or gap > 10):
             fixable_pct = fixable_gap / (fixable_gap + ft) * 100 if ft > 0 else 100
             large_real_gap.append(f"{asm_name}/{slug} fixable_gap={fixable_gap} ({fixable_pct:.0f}%)")
@@ -196,6 +198,13 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
         lines.append("")
         for lg in large_gap[:20]:
             lines.append(f"- {lg}")
+        lines.append("")
+
+    if large_real_gap:
+        lines.append(f"#### Fixable Coverage Gaps 🔧 ({len(large_real_gap)})")
+        lines.append("")
+        for frg in large_real_gap[:20]:
+            lines.append(f"- {frg}")
         lines.append("")
 
     # ── Per-Assembly Detail (full stage breakdown) ──
