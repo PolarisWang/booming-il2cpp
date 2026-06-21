@@ -781,7 +781,10 @@ public sealed partial class NativeAotEmitter
             if (_t.StartsWith("extern \"C\" ", StringComparison.Ordinal) &&
                 !_t.EndsWith(";", StringComparison.Ordinal))
             {
-                var _parenPos = _t.IndexOf('(', 0);
+                // Use LAST '(' to handle function pointer syntax
+                // (extern "C" void (*name)(params)).  Using first '(' would
+                // incorrectly truncate at the pointer-dereference paren.
+                var _parenPos = _t.LastIndexOf('(');
                 if (_parenPos > 0)
                 {
                     string _fnSig = _t.Substring(0, _parenPos).TrimEnd();

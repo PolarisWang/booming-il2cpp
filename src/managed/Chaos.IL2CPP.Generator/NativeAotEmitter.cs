@@ -325,7 +325,9 @@ public sealed partial class NativeAotEmitter
         // page.  Flat-merge can produce duplicate definitions of common
         // System.Private.CoreLib types from each merged assembly, causing
         // C2374 redefinition errors.
-        DeduplicateTypeIdMtSymbols(_sb.ToString(), _sb);
+        string _pageText = _sb.ToString();
+        _sb.Clear();
+        DeduplicateTypeIdMtSymbols(_pageText, _sb);
         return _sb.ToString();
     }
 
