@@ -22,7 +22,7 @@ def _tool_dir(tool_name: str) -> Path:
 def tool_dll(tool_name: str) -> Path:
     """Get path to a tool's compiled DLL."""
     return (_repo_root() / "src" / "tools" / tool_name
-            / "bin" / "Release" / "net8.0" / f"{tool_name}.dll")
+            / "bin" / "Debug" / "net8.0" / f"{tool_name}.dll")
 
 
 def ensure_tool_built(tool_name: str) -> bool:
@@ -43,7 +43,7 @@ def ensure_tool_built(tool_name: str) -> bool:
             return True
     # Rebuild
     result = subprocess.run(
-        ["dotnet", "build", str(proj), "-c", "Release", "-nologo"],
+        ["dotnet", "build", str(proj), "-c", "Debug", "-nologo"],
         capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
         for line in (result.stderr.splitlines() + result.stdout.splitlines())[-5:]:

@@ -60,6 +60,21 @@ public sealed partial class NativeAotLoweringPlanner
         var emittedSymbols = new HashSet<string>(StringComparer.Ordinal);
         foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
         {
+            // Skip async state machine MoveNext methods — these are emitted as
+            // coroutines with a different extern "C" signature (ABI dispatch:
+            // 4 × CHAOS_IL2CPP_INTPTR params, CHAOS_IL2CPP_INT64 return) that
+            // does NOT match the original managed method's signature.  Emitting
+            // the original managed declaration here would cause C2733 (extern
+            // "C" function cannot be overloaded) when the coroutine emission
+            // path also defines the same extern "C" symbol with a different
+            // parameter/return signature.
+            if (IsAsyncStateMachineMoveNext(reachableMethod.SubjectId) ||
+                reachableMethod.SubjectId?.Contains("::MoveNext", StringComparison.Ordinal) == true)
+            {
+                Console.Error.WriteLine($"[decl-skip] async MoveNext: {reachableMethod.SubjectId} sym={reachableMethod.NativeSymbol}");
+                continue;
+            }
+
             // Deduplicate by native symbol to avoid C2733 (extern "C" cannot be overloaded)
             if (!emittedSymbols.Add(reachableMethod.NativeSymbol))
                 continue;

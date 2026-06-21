@@ -362,6 +362,26 @@ public sealed partial class NativeAotEmitter
                     content = content.Substring(0, _insertPos) + _fwdSb.ToString() + content.Substring(_insertPos);
                 }
 
+                // Also add explicit template instantiation right after the generated
+                // header include, BEFORE any implicit use in method bodies. MSVC fails
+                // to implicitly instantiate chaos_resolve_managed_value_pointer<T>
+                // with struct types defined in non-PCH headers (C2672).
+                foreach (string _fwd in _fwdSb.ToString().Split('\n', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    string _ft = _fwd.Trim();
+                    if (_ft.StartsWith("struct ") && _ft.EndsWith(";"))
+                    {
+                        string _tname = _ft.Substring(7, _ft.Length - 8);
+                        string _explInst = $"template {_tname}* chaos_resolve_managed_value_pointer<{_tname}>(CHAOS_IL2CPP_INTPTR);\n";
+                        var _hdrPos = content.IndexOf("#include \"native-aot.generated.header.h\"");
+                        if (_hdrPos > 0)
+                        {
+                            _hdrPos = content.IndexOf('\n', _hdrPos) + 1;
+                            content = content.Substring(0, _hdrPos) + _explInst + content.Substring(_hdrPos);
+                        }
+                    }
+                }
+
                 // PCH workaround: replace PCH include with explicit headers.
                 // PCH-mode MSVC cannot resolve struct template arguments defined
                 // in non-PCH headers, causing C2672. Replace the PCH so that
@@ -374,6 +394,11 @@ public sealed partial class NativeAotEmitter
                 _replHeaders.AppendLine("#include <chaos/type_info.h>");
                 _replHeaders.AppendLine("#include <chaos/eh.h>");
                 _replHeaders.AppendLine("#include <ChaosGeneratedRuntimePrelude.h>");
+                // <coroutine> is required by async coroutine emission
+                // (AsyncPromise/AsyncHandle use std::coroutine_handle and
+                // std::suspend_always).  Include it when the PCH is replaced
+                // to avoid C3774/C2039/C2065.
+                _replHeaders.AppendLine("#include <coroutine>");
                 // Runtime-core headers (same as chaos_pch.h provides)
                 _replHeaders.AppendLine("#include \"runtime_core.h\"");
                 _replHeaders.AppendLine("#include \"codegen_bridge.h\"");

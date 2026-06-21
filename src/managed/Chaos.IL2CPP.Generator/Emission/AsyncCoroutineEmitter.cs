@@ -61,7 +61,7 @@ public sealed partial class NativeAotLoweringPlanner
         // then define AsyncHandle before AsyncPromise so get_return_object()
         // can use AsyncHandle without C2027 (incomplete type) / C2065 (undeclared).
         sb.Append("    struct AsyncPromise_" + uid + ";\n");
-        sb.Append("    struct AsyncHandle_" + uid + " { AsyncPromise_" + uid + "* p; void Start() noexcept { std::coroutine_handle<AsyncPromise_" + uid + ">::from_promise(*p).resume(); } };\n");
+        sb.Append("    struct AsyncHandle_" + uid + " { using promise_type = AsyncPromise_" + uid + "; AsyncPromise_" + uid + "* p; void Start() noexcept { std::coroutine_handle<AsyncPromise_" + uid + ">::from_promise(*p).resume(); } };\n");
         sb.Append("    struct AsyncPromise_" + uid + " {\n");
         sb.Append("        CHAOS_IL2CPP_INTPTR _h[4]; uint32_t _magic = 0x45524F43; CHAOS_IL2CPP_INTPTR _result = 0;\n");
         sb.Append("        auto get_return_object() noexcept { return AsyncHandle_" + uid + "{this}; }\n");
