@@ -59,12 +59,12 @@ class NightlyConfig:
     mode: str = "full"  # "full" | "smoke" | "extended"
     assemblies: list[str] | None = None  # None = auto-discover all
     stages: list[str] = field(default_factory=lambda: list(_DEFAULT_STAGES))
-    max_workers: int = 4
+    max_workers: int = 2  # conservative: avoid memory pressure on large chunks
     bench_workers: int | None = None
     native_config: str = "check"
     run_profile: bool = True
     no_profile: bool = False  # override to disable profile pass
-    stage_timeout: int = 0  # 0 = no timeout
+    stage_timeout: int = 600  # max seconds per chunk before timeout (0=no limit)
 
     # ── Logging ────────────────────────────────────────────────────────
     capture_logs: bool = True

@@ -138,11 +138,13 @@ def _run_chunk_stages(
     verbose: bool = False,
     stage_timeout: int = 0,
     profile_pass: bool = False,
+    stages_filter: list[str] | None = None,
 ) -> tuple[str, dict[str, StageResult]]:
     """Run all stages for a single chunk.
 
     Normal pass: build → fact → profile → benchmark → managed_benchmark →
                  hotupdate → benchmark_report → coverage_audit
+    When stages_filter is set (e.g. ["build","fact"]), only those stages run.
     Profile pass: build → profile only
 
     Returns (f"{assembly}/{slug}", {stage: result}).
@@ -195,6 +197,18 @@ def _run_chunk_stages(
                 ("build", lambda ctx_, _: _restore_profile_cache(ctx_, ctx.chunk_dir)),
                 ("profile", run_profile),
             ]
+        elif stages_filter:
+            stage_map = {
+                "build": run_build,
+                "fact": run_fact_chunk,
+                "profile": run_profile,
+                "benchmark": run_benchmark_chunk,
+                "managed_benchmark": run_managed_benchmark,
+                "hotupdate": run_hotupdate_chunk,
+                "benchmark_report": run_benchmark_report,
+                "coverage_audit": run_coverage_audit,
+            }
+            stage_order = [(s, stage_map[s]) for s in stages_filter if s in stage_map]
         else:
             stage_order = [
                 ("build", run_build),
@@ -322,26 +336,39 @@ def _collect_chunk_results(
     futures: list,
     total: int,
     verbose: bool = False,
+    phase_label: str = "chunks",
 ) -> dict[str, dict[str, StageResult]]:
-    """Collect futures results, handling errors gracefully."""
+    """Collect futures results, handling errors gracefully.
+    Shows real-time progress with ETA."""
     results: dict[str, dict[str, StageResult]] = {}
     completed = 0
+    start_time = time.monotonic()
+    last_print = 0.0
     for future in as_completed(futures):
         completed += 1
         try:
             key, stages = future.result()
             results[key] = stages
-            status = stages.get("build", StageResult(stage="build", status="?")).status
-            if verbose:
-                print(f"  [nightly] [{completed}/{total}] {key}: build={status}, "
-                      f"fact={stages.get('fact', StageResult(stage='fact', status='?')).status}")
+            build_st = stages.get("build", StageResult(stage="build", status="?")).status
         except Exception as e:
             key = f"<future #{completed}>"
             results[key] = {
                 "build": StageResult(stage="build", status="skipped",
                                      summary=f"future exception: {e}")}
-            if verbose:
-                print(f"  [nightly] [{completed}/{total}] {key}: future EXCEPTION: {e}")
+            build_st = "exception"
+
+        # Progress log: print every 3s or every 5th chunk (whichever comes first)
+        now = time.monotonic()
+        elapsed = now - start_time
+        pct = completed / total * 100
+        rate = completed / max(elapsed, 0.1)
+        eta_remaining = (total - completed) / max(rate, 0.1)
+        eta_str = f"{eta_remaining:.0f}s" if eta_remaining < 3600 else f"{eta_remaining/60:.0f}m"
+        if verbose or completed == total or (completed % max(1, total // 20) == 0) or (now - last_print >= 3.0):
+            print(f"  [{phase_label}] [{completed}/{total} {pct:.0f}%] "
+                  f"{key.split('/')[-1] if '/' in key else key}: "
+                  f"build={build_st}, elapsed={elapsed:.0f}s, ETA={eta_str}")
+            last_print = now
     return results
 
 
@@ -402,20 +429,21 @@ class NightlyOrchestrator:
         result.chunk_count = len(all_chunks)
         print(f"  Total chunks: {len(all_chunks)}")
 
-        # ── Step 2: Run pipeline stages ──
-        print(f"\n  Phase 1: Running chunks "
-              f"(workers={config.max_workers}, bench_concurrency={config.bench_workers})...")
+        # ── Step 2: Phase A — Build + Fact only ──
+        print(f"\n{'='*60}")
+        print(f"  Phase A — Build + Fact ({len(all_chunks)} chunks, {config.max_workers} workers)")
+        print(f"{'='*60}")
 
+        phase_a_stages = ["build", "fact"]
         bench_semaphore = Manager().Semaphore(config.bench_workers or 1)
+        result.chunk_results = {}
 
         with ProcessPoolExecutor(max_workers=config.max_workers) as executor:
             futures = []
             for asm, slug, fdir in all_chunks:
                 future = executor.submit(
-                    self._run_single_chunk,
-                    assembly=asm,
-                    slug=slug,
-                    foundation_dir=fdir,
+                    _run_chunk_stages,
+                    assembly=asm, slug=slug, foundation_dir=fdir,
                     pipeline_config=pipeline_config,
                     bench_semaphore=bench_semaphore,
                     capture_logs=config.capture_logs,
@@ -424,13 +452,72 @@ class NightlyOrchestrator:
                     native_config=config.native_config,
                     verbose=config.log_level == "DEBUG",
                     stage_timeout=config.stage_timeout,
+                    stages_filter=phase_a_stages,
                 )
                 futures.append(future)
 
-            result.chunk_results = _collect_chunk_results(
-                futures, len(all_chunks),
-                verbose=config.log_level == "DEBUG",
-            )
+            phase_a_results = _collect_chunk_results(futures, len(all_chunks),
+                                                     verbose=config.log_level == "DEBUG",
+                                                     phase_label="A:build+fact")
+            result.chunk_results.update(phase_a_results)
+
+        phase_a_passed = sum(
+            1 for r in result.chunk_results.values()
+            if r.get("build", StageResult(stage="build", status="?")).status == "passed"
+        )
+        phase_a_failed = len(all_chunks) - phase_a_passed
+        print(f"\n  Phase A complete: {phase_a_passed}/{len(all_chunks)} build passed, "
+              f"{phase_a_failed} failed")
+
+        # ── Step 3: Phase B — Benchmark + Coverage (only for passed chunks) ──
+        passed_chunks = []
+        for asm, slug, fdir in all_chunks:
+            key = f"{asm}/{slug}"
+            cr = result.chunk_results.get(key, {})
+            if cr.get("build", StageResult(stage="build", status="?")).status == "passed":
+                passed_chunks.append((asm, slug, fdir))
+
+        if passed_chunks:
+            print(f"\n{'='*60}")
+            print(f"  Phase B — Benchmark + Coverage ({len(passed_chunks)} chunks, "
+                  f"{config.max_workers} workers)")
+            print(f"{'='*60}")
+
+            phase_b_stages = [
+                "benchmark", "managed_benchmark", "hotupdate",
+                "benchmark_report", "coverage_audit",
+            ]
+            with ProcessPoolExecutor(max_workers=config.max_workers) as executor:
+                futures = []
+                for asm, slug, fdir in passed_chunks:
+                    future = executor.submit(
+                        _run_chunk_stages,
+                        assembly=asm, slug=slug, foundation_dir=fdir,
+                        pipeline_config=pipeline_config,
+                        bench_semaphore=bench_semaphore,
+                        capture_logs=config.capture_logs,
+                        keep_console=config.keep_console_output,
+                        report_dir=config.report_dir,
+                        native_config=config.native_config,
+                        verbose=config.log_level == "DEBUG",
+                        stage_timeout=config.stage_timeout,
+                        stages_filter=phase_b_stages,
+                    )
+                    futures.append(future)
+
+                phase_b_results = _collect_chunk_results(
+                    futures, len(passed_chunks),
+                    verbose=config.log_level == "DEBUG",
+                    phase_label="B:bench+coverage",
+                )
+                # Merge Phase B results (don't overwrite Phase A build/fact results)
+                for key, stages in phase_b_results.items():
+                    if key in result.chunk_results:
+                        result.chunk_results[key].update(stages)
+                    else:
+                        result.chunk_results[key] = stages
+        else:
+            print("\n  Phase B skipped: no chunks passed build in Phase A")
 
         # Print build summary
         print(f"\n  Build: {result.build_passed}/{result.chunk_count} passed")

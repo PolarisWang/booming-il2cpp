@@ -64,7 +64,7 @@ from verification.stages.aggregate import run_aggregate
 from verification.stages.reporting import run_reporting
 
 
-_DEFAULT_BUILD_WORKERS = 4
+_DEFAULT_BUILD_WORKERS = 2
 
 
 def _detect_bench_workers() -> int:
@@ -335,7 +335,7 @@ def main() -> int:
     parser.add_argument("--native-config", default="check",
                         choices=["check", "profile", "ship"],
                         help="Native build config (default: check)")
-    parser.add_argument("--stage-timeout", type=int, default=0,
+    parser.add_argument("--stage-timeout", type=int, default=600,
                         help="Per-stage timeout in seconds (default: no timeout)")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Verbose output")
