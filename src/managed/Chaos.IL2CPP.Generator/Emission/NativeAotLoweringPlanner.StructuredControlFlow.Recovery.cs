@@ -157,7 +157,14 @@ public sealed partial class NativeAotLoweringPlanner
         // Using it causes premature fallback to flat IR on any thread, regardless
         // of how much OS stack remains. Instead we rely on the static depth counter
         // which has been empirically tuned (depth=5 safe on 4 MB main thread).
+        // However, on ThreadPool threads (1 MB stack, used by Parallel.For codegen),
+        // even depth=5 can overflow. Use TryEnsureSufficientExecutionStack as a
+        // safety net — it may produce more stubs on edge cases, but that's better
+        // than a hard STATUS_STACK_OVERFLOW process termination.
         if (depth > MaxRecoverStructureDepth)
+            return new IRSequence(Array.Empty<StructuredIRNode>());
+
+        if (!System.Runtime.CompilerServices.RuntimeHelpers.TryEnsureSufficientExecutionStack())
             return new IRSequence(Array.Empty<StructuredIRNode>());
 
         if (startIndex > endIndex)

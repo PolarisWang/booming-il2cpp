@@ -235,6 +235,11 @@ public sealed partial class NativeAotEmitter
                         includeObjectModel: true,
                         perPageTypeDeclarations: pageTypeDecl,
                         perPageIncludes: pageIncludes);
+                    // Dedup type_id/mt symbols across all pages (C2374).
+                    // Page 0 uses the StringBuilder path, so we must post-process.
+                    string pageText = pageBuilder.ToString();
+                    pageBuilder.Clear();
+                    DeduplicateTypeIdMtSymbols(pageText, pageBuilder);
                     sources.Add(new NativeAotGeneratedSource
                     {
                         RelativePath = pageRelativePath,
@@ -282,51 +287,10 @@ public sealed partial class NativeAotEmitter
 
             string content = BuildGeneratedTranslationUnit(templateModel);
 
-            // Deduplicate inline constexpr type_id/mt symbols across the entire
-            // translation unit.  Flat-merge can produce duplicate definitions
-            // of System.Private.CoreLib types (e.g. IEnumerable) from each
-            // merged assembly, causing C2374 redefinition errors.
-            var _dedup = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+            // Deduplicate inline constexpr type_id/mt symbols and fix MoveNext
+            // declaration signatures (C2374 / C2733 / C2382).
             var _sb = new System.Text.StringBuilder(content.Length);
-            foreach (string _line in content.Split('\n'))
-            {
-                string _t = _line.Trim();
-                if (_t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_") ||
-                    _t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_mt_") ||
-                    _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_") ||
-                    _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_mt_") ||
-                    _t.StartsWith("MethodTable chaos_mt_"))
-                {
-                    int _eq = _t.IndexOf(" =");
-                    if (_eq > 0)
-                    {
-                        string _sym = _t.Substring(0, _eq);
-                        if (!_dedup.Add(_sym)) continue;
-                    }
-                }
-                // Replace extern "C" CHAOS_IL2CPP_INTPTR declarations for MoveNext
-                // methods with the ABI dispatch signature matching the coroutine
-                // wrapper (CHAOS_IL2CPP_INT64, 4 × CHAOS_IL2CPP_INTPTR params).
-                // The original declaration uses the managed method's signature
-                // which conflicts with the coroutine wrapper (C2733).  Replacing
-                // instead of removing ensures forward references (vtable entries,
-                // dispatch tables) still have a visible symbol declaration.
-                if (_t.StartsWith("extern \"C\" CHAOS_IL2CPP_INTPTR ", StringComparison.Ordinal) &&
-                    _t.Contains("_MoveNext(", StringComparison.Ordinal) &&
-                    _t.EndsWith(";", StringComparison.Ordinal))
-                {
-                    var _symEnd = _t.IndexOf('(', 0);
-                    if (_symEnd > 0)
-                    {
-                        string _sym = _t.Substring(0, _symEnd).TrimEnd();
-                        _symEnd = _sym.LastIndexOf(' ');
-                        string _symName = _symEnd > 0 ? _sym.Substring(_symEnd + 1) : _sym;
-                        _sb.AppendLine($"extern \"C\" CHAOS_IL2CPP_INT64 {_symName}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
-                    }
-                    continue;
-                }
-                _sb.AppendLine(_line);
-            }
+            DeduplicateTypeIdMtSymbols(content, _sb);
             content = _sb.ToString().TrimEnd();
 
             // Add struct forward declarations for placeholder value types at the
@@ -719,6 +683,82 @@ public sealed partial class NativeAotEmitter
                 sb.Replace(wrongDeclC, correctDecl);
         }
 
+    }
+
+    /// <summary>
+    /// Deduplicate inline constexpr type_id/mt symbols and replace async MoveNext
+    /// declarations.  Flat-merge can produce duplicate definitions of common
+    /// System.Private.CoreLib types (e.g. IEnumerable) from each merged assembly,
+    /// causing C2374 redefinition errors.  Also replaces extern "C"
+    /// CHAOS_IL2CPP_INTPTR MoveNext declarations with the ABI dispatch signature
+    /// (CHAOS_IL2CPP_INT64, 4 params, noexcept) WHEN a coroutine wrapper
+    /// (Entry_<uid>) exists for the same symbol, avoiding C2733/C2382 conflicts.
+    /// Non-coroutine MoveNext methods (regular iterators) are left unchanged.
+    /// </summary>
+    private static void DeduplicateTypeIdMtSymbols(string content, System.Text.StringBuilder sb)
+    {
+        var _dedup = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+        // First pass: collect NativeSymbols that have coroutine wrappers
+        var coroutineSymbols = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+        foreach (string _line in content.Split('\n'))
+        {
+            string _t = _line.Trim();
+            // Entry_<uid>() functions are emitted by coroutine codegen for async
+            // state machine MoveNext methods.  Extract the NativeSymbol from the
+            // wrapping extern "C" definition on the next line.
+            if (_t.StartsWith("extern \"C\" CHAOS_IL2CPP_INT64 ", StringComparison.Ordinal) &&
+                _t.Contains("(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept", StringComparison.Ordinal))
+            {
+                var _symEnd = _t.IndexOf('(', 0);
+                if (_symEnd > 0)
+                {
+                    string _sym = _t.Substring(0, _symEnd).TrimEnd();
+                    _symEnd = _sym.LastIndexOf(' ');
+                    if (_symEnd > 0)
+                        coroutineSymbols.Add(_sym.Substring(_symEnd + 1));
+                }
+            }
+        }
+        // Second pass: dedup type_id/mt and replace async MoveNext declarations
+        foreach (string _line in content.Split('\n'))
+        {
+            string _t = _line.Trim();
+            if (_t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_") ||
+                _t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_mt_") ||
+                _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_") ||
+                _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_mt_") ||
+                _t.StartsWith("MethodTable chaos_mt_"))
+            {
+                int _eq = _t.IndexOf(" =");
+                if (_eq > 0)
+                {
+                    string _sym = _t.Substring(0, _eq);
+                    if (!_dedup.Add(_sym)) continue;
+                }
+            }
+            // Replace extern "C" CHAOS_IL2CPP_INTPTR declarations for coroutine
+            // MoveNext methods with the ABI dispatch signature.  Only replaces
+            // declarations whose NativeSymbol also appears as a coroutine wrapper
+            // (detected in the first pass above).
+            if (_t.StartsWith("extern \"C\" CHAOS_IL2CPP_INTPTR ", StringComparison.Ordinal) &&
+                _t.Contains("_MoveNext(", StringComparison.Ordinal) &&
+                _t.EndsWith(";", StringComparison.Ordinal))
+            {
+                var _symEnd2 = _t.IndexOf('(', 0);
+                if (_symEnd2 > 0)
+                {
+                    string _sym2 = _t.Substring(0, _symEnd2).TrimEnd();
+                    _symEnd2 = _sym2.LastIndexOf(' ');
+                    string _symName2 = _symEnd2 > 0 ? _sym2.Substring(_symEnd2 + 1) : _sym2;
+                    if (coroutineSymbols.Contains(_symName2))
+                    {
+                        sb.AppendLine($"extern \"C\" CHAOS_IL2CPP_INT64 {_symName2}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
+                        continue;
+                    }
+                }
+            }
+            sb.AppendLine(_line);
+        }
     }
 
 }

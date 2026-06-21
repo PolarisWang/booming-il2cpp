@@ -321,6 +321,11 @@ public sealed partial class NativeAotEmitter
         var _sb = new StringBuilder(_rendered);
         AddExternalRuntimeStubs(_sb);
         FixFallbackZeroArgCalls(_sb);
+        // Deduplicate inline constexpr type_id/mt symbols across the entire
+        // page.  Flat-merge can produce duplicate definitions of common
+        // System.Private.CoreLib types from each merged assembly, causing
+        // C2374 redefinition errors.
+        DeduplicateTypeIdMtSymbols(_sb.ToString(), _sb);
         return _sb.ToString();
     }
 
