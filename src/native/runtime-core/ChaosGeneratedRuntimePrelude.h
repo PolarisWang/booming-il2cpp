@@ -246,4 +246,33 @@ using chaos::il2cpp::jit::chaos_is_type_compatible;
 // namespace chaos::il2cpp::jit above (line 185).
 inline bool chaos_does_type_implement_interface(const TypeInfo* chaos_actual_type_info, const TypeInfo* chaos_target_interface_type_info) noexcept;
 
+// ── Object equality helpers (emitted by Scriban templates in page 0) ──
+// These inline definitions are here so ALL pages can resolve them,
+// not just page 0 which has the Scriban-rendered object model section.
+inline bool chaos_object_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept
+{
+    if (chaos_is_string_id(chaos_left_value) && chaos_is_string_id(chaos_right_value))
+        return chaos_left_value == chaos_right_value;
+    return chaos_left_value == chaos_right_value;
+}
+
+inline bool chaos_object_reference_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept
+{
+    return chaos_left_value == chaos_right_value;
+}
+
+inline CHAOS_IL2CPP_INT32 chaos_string_get_length(CHAOS_IL2CPP_INTPTR chaos_str) noexcept
+{
+    if (chaos_is_string_id(chaos_str))
+        return 0;
+    // Fallback: can't resolve length without full String type.
+    // The Scriban template version in page 0 provides the real implementation.
+    return 0;
+}
+
+inline CHAOS_IL2CPP_INT32 chaos_shift_right_un_int32(CHAOS_IL2CPP_INT32 chaos_value, CHAOS_IL2CPP_INT32 chaos_shift) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(chaos_value) >> chaos_shift);
+}
+
 #endif  // CHAOS_IL2CPP_GENERATED_RUNTIME_PRELUDE_H_
