@@ -312,6 +312,24 @@ public sealed partial class NativeAotEmitter
             // top of the cpp file (before namespace). These help PCH-mode MSVC
             // resolve chaos_resolve_managed_value_pointer<T> template arguments
             // when T is a struct defined in the generated header outside the PCH.
+            //
+            // IMPORTANT: Scan the header for existing typedef CHAOS_IL2CPP_INT32
+            // chaos_valuetype_* declarations — these types are opaque 32-bit
+            // value types (not structs), and emitting a `struct chaos_valuetype_*;`
+            // forward declaration for them would cause C2371 (redefinition;
+            // different basic types). Skip any type that already has a typedef in
+            // the shared header.
+            var _headerTypedefValueTypes = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+            foreach (string _hdrLine in headerContent.Split('\n'))
+            {
+                string _ht = _hdrLine.TrimStart();
+                if (_ht.StartsWith("typedef CHAOS_IL2CPP_INT32 chaos_valuetype_", StringComparison.Ordinal))
+                {
+                    var _parts = _ht.Split(' ');
+                    if (_parts.Length > 2)
+                        _headerTypedefValueTypes.Add(_parts[_parts.Length - 1].TrimEnd(';'));
+                }
+            }
             var _fwdSb = new System.Text.StringBuilder();
             var _seenFwd = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
             foreach (string _line in content.Split('\n'))
@@ -325,6 +343,10 @@ public sealed partial class NativeAotEmitter
                     if (_start > 0 && _end > _start)
                     {
                         var _typeName = _t.Substring(_start, _end - _start);
+                        // Skip if the header already has a typedef for this type
+                        // (opaque 32-bit value type, not a struct definition)
+                        if (_headerTypedefValueTypes.Contains(_typeName))
+                            continue;
                         if (_seenFwd.Add(_typeName))
                             _fwdSb.AppendLine("struct " + _typeName + ";");
                     }
