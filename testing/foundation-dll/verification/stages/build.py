@@ -63,21 +63,11 @@ def _get_additional_assemblies(chunk_dir: Path) -> list[str]:
 def _detect_tfm(dll_path: Path) -> str:
     """Detect target framework moniker from the DLL's runtime directory path.
 
-    E.g. ".../shared/Microsoft.NETCore.App/10.0.6/System.Private.CoreLib.dll"
-    -> "net10.0".  Falls back to "net8.0".
-
-    Also handles custom DLL paths like ".../dotnet-foundation/net10.0/runtime/...".
+    Delegates to tool_helpers.detect_tfm for consistent behavior across stages.
+    The shared implementation supports both Microsoft.NETCore.App and
+    Microsoft.NETCore.App.Ref paths.
     """
-    path = str(dll_path).replace("\\", "/")
-    # Primary: standard runtime layout
-    m = re.search(r"Microsoft\.NETCore\.App/(\d+)\.(\d+)\.", path)
-    if m:
-        return f"net{m.group(1)}.{m.group(2)}"
-    # Fallback: custom layout like dotnet-foundation/netX.Y/runtime/
-    m = re.search(r"/net(\d+)\.(\d+)/runtime/", path)
-    if m:
-        return f"net{m.group(1)}.{m.group(2)}"
-    return "net8.0"
+    return detect_tfm(dll_path)
 
 
 def _custom_subjects_metadata(

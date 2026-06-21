@@ -231,16 +231,28 @@ public sealed class CSharpExpressionBuilder
                 var gaPart = qualified.Contains('<') ? qualified[qualified.IndexOf('<')..] : "";
                 return $"global::{baseName}{gaPart}{sharedSuffix}";
             }
-                        // Use new T() for concrete types (new CHAOS_IL2CPP_NEW_GC),
+                        // Use new T() for concrete types with parameterless constructors,
             // SubjectInstanceFactory for abstract/interface, default(T)! for ref structs.
             try {
                 var t = Type.GetType(typeFullName, false);
-                if (t != null && t.IsValueType && t.IsByRefLike)
+                if (t != null)
+                {
+                    if (t.IsValueType && t.IsByRefLike)
+                        return $"default(global::{qualified.Replace('+', '.')})!";
+                    // Check for parameterless constructor (same logic as unqualified path below)
+                    if (!t.IsAbstract && !t.IsInterface)
+                    {
+                        var ctors = t.GetConstructors(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                        if (ctors.Any(c => c.GetParameters().Length == 0))
+                            return $"new global::{qualified.Replace('+', '.')}()";
+                    }
+                    // Abstract/interface or no parameterless ctor -> default(T)!
                     return $"default(global::{qualified.Replace('+', '.')})!";
+                }
             } catch { }
             if (_abstractTypeNames != null && _abstractTypeNames.Contains(typeFullName))
                 return $"SubjectInstanceFactory.Create<global::{qualified.Replace('+', '.')}>()";
-            return $"new global::{qualified.Replace('+', '.')}()";        }
+            return $"default(global::{qualified.Replace('+', '.')})!";        }
 
         // Try to find a parameterless constructor via runtime reflection
         try
