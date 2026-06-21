@@ -832,6 +832,34 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         tpg_cmd.extend(["--additional-assembly", str(target_dll)])
         print(f"  [build] additional-assembly: {target_dll} (target assembly)")
 
+    # Auto-detect type-forwarding assemblies: if subjects metadata references
+    # a different assembly than ctx.assembly, add that assembly's directory
+    # as an --assembly-dir for type resolution.  This handles cases like
+    # System.Xml.ReaderWriter (type-forwarder) -> System.Private.Xml.
+    # We use --assembly-dir (not --additional-assembly) to avoid pulling all
+    # methods from the forwarded-to assembly into codegen, which can cause
+    # OOM/crashes for large assemblies like System.Private.Xml (20K methods).
+    if metadata and metadata.get("totalMethods", 0) > 0:
+        _subject_asm_set: set[str] = set()
+        for _m in metadata.get("methods", []):
+            _sid = _m.get("methodSubjectId", "")
+            _asm = _sid.split("/")[0] if "/" in _sid else ""
+            if _asm:
+                _subject_asm_set.add(_asm)
+        _expected_asm = ctx.assembly.replace(".dll", "")
+        for _asm_name in sorted(_subject_asm_set):
+            if _asm_name != _expected_asm:
+                # Find the DLL's parent dir and add as assembly-dir for type resolution
+                _candidate = ctx.foundation_dir / f"{_asm_name}.dll"
+                if not _candidate.exists():
+                    if target_dll and target_dll.parent.exists():
+                        _candidate = target_dll.parent / f"{_asm_name}.dll"
+                if _candidate.exists():
+                    tpg_cmd.extend(["--assembly-dir", str(_candidate.parent)])
+                    print(f"  [build] assembly-dir: {_candidate.parent} (type-forward target for {_asm_name})")
+                else:
+                    print(f"  [build] WARNING: type-forward target {_asm_name}.dll not found")
+
     # Additional assemblies from chunk config (declared in chunk.json)
     # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.
     config_assemblies = _get_additional_assemblies(ctx.chunk_dir)
