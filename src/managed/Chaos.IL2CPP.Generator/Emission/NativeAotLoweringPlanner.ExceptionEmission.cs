@@ -18,7 +18,10 @@ namespace Chaos.IL2CPP.Generator;
 public sealed partial class NativeAotLoweringPlanner
 {
     /// <summary>Per-method emission state, thread-local for parallel emission.</summary>
-    private static readonly System.Threading.ThreadLocal<PerMethodState> _state = new(() => new PerMethodState());
+    private static readonly System.Threading.ThreadLocal<PerMethodState> _state = new(() => new PerMethodState
+    {
+        StructuredSlotTypes = new System.Collections.Generic.Stack<SlotType>(),
+    });
 
     private static readonly HashSet<string> ToCharEligiblePrimitives = new()
     {
