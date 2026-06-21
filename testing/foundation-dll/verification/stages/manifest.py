@@ -142,7 +142,7 @@ def scan_dll(dll_path: str) -> dict:
     return json.loads(result.stdout)
 
 
-def build_namespace_partition(manifest: dict, max_methods_per_chunk: int = 500) -> dict:
+def build_namespace_partition(manifest: dict, max_methods_per_chunk: int = 200) -> dict:
     """Build namespace-partition.json from the manifest data."""
     methods = manifest["methods"]
     namespaces = manifest["namespaces"]
