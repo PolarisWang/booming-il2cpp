@@ -71,12 +71,15 @@ public sealed partial class NativeAotLoweringPlanner
             return true;
         }
 
-        // Generic placeholder forms (__\d+__) — emit opaque fields to provide
+        // Generic placeholder forms — emit opaque fields to provide
         // a complete struct for chaos_resolve_managed_value_pointer<T> (C2227 fix).
         // These types have field references in the generated code (stfld/ldflda)
         // but their fields are not in fieldsByDeclaringType because the declaring
-        // type uses generic parameter placeholders (__0__) instead of concrete types.
-        if (typeSubjectId.Contains("__0__") || typeSubjectId.Contains("___y__"))
+        // type uses generic parameter placeholders instead of concrete types.
+        // Check the GENERATED symbol name (GetNativeValueTypeSymbol) because the
+        // SubjectId may use a different naming convention than ___y__/__\d+__.
+        var _vtSym = GetNativeValueTypeSymbol(typeSubjectId);
+        if (_vtSym.Contains("___y__") || _vtSym.Contains("__0_") || _vtSym.Contains("__1_"))
         {
             // Provide two INTPTR fields — the most common layout for generic
             // value types with backing fields (Key/Value pattern). This is
