@@ -318,7 +318,7 @@ public sealed partial class NativeAotEmitter
             {
                 string _t = _line.Trim();
                 if (_t.Contains("chaos_resolve_managed_value_pointer<chaos_valuetype_") &&
-                    (_t.Contains("__0__") || _t.Contains("___y__")))
+                    (_t.Contains("__0__")))
                 {
                     var _start = _t.IndexOf("chaos_valuetype_");
                     var _end = _t.IndexOf('>', _start);
@@ -339,6 +339,41 @@ public sealed partial class NativeAotEmitter
                     _fwdSb.AppendLine();
                     content = content.Substring(0, _insertPos) + _fwdSb.ToString() + content.Substring(_insertPos);
                 }
+
+                // PCH workaround: replace PCH include with explicit headers.
+                // PCH-mode MSVC cannot resolve struct template arguments defined
+                // in non-PCH headers, causing C2672. Replace the PCH so that
+                // all headers are included freshly in the TU context.
+                var _replHeaders = new System.Text.StringBuilder();
+                _replHeaders.AppendLine("#include <cstdint>");
+                _replHeaders.AppendLine("#include <cstddef>");
+                _replHeaders.AppendLine("#include <cstring>");
+                _replHeaders.AppendLine("#include <chaos/common.h>");
+                _replHeaders.AppendLine("#include <chaos/type_info.h>");
+                _replHeaders.AppendLine("#include <chaos/eh.h>");
+                _replHeaders.AppendLine("#include <ChaosGeneratedRuntimePrelude.h>");
+                // Runtime-core headers (same as chaos_pch.h provides)
+                _replHeaders.AppendLine("#include \"runtime_core.h\"");
+                _replHeaders.AppendLine("#include \"codegen_bridge.h\"");
+                _replHeaders.AppendLine("#include \"module_registry.h\"");
+                _replHeaders.AppendLine("#include \"abi_manifest.h\"");
+                _replHeaders.AppendLine("#include \"hotpatch_table.h\"");
+                _replHeaders.AppendLine("#include \"runtime_vtable.h\"");
+                _replHeaders.AppendLine("#include \"runtime_instantiation.h\"");
+                _replHeaders.AppendLine("#include \"reflection_query_model.h\"");
+                _replHeaders.AppendLine("#include \"load_store_chaos_bridge.h\"");
+                _replHeaders.AppendLine("#include \"interpreter_entry.h\"");
+                _replHeaders.AppendLine("#include <gc/gc_bgc_inline.h>");
+                _replHeaders.AppendLine("#include <gc/gc_card_table.h>");
+                _replHeaders.AppendLine("#include <gc/gc_root_change.h>");
+                _replHeaders.AppendLine("#include <gc/gc_layout.h>");
+                _replHeaders.AppendLine("#include \"runtime_stubs/misc_stubs.h\"");
+                _replHeaders.AppendLine("#include \"runtime_stubs/crypto_stubs.h\"");
+                _replHeaders.AppendLine("#include \"runtime_stubs/vector_stubs.h\"");
+                _replHeaders.AppendLine("#include \"chaos_runtime_host.h\"");
+                string _replStr = _replHeaders.ToString();
+                content = content.Replace("#include \"chaos_pch.h\"\r\n", _replStr);
+                content = content.Replace("#include \"chaos_pch.h\"\n", _replStr);
             }
 
             sources.Add(new NativeAotGeneratedSource
