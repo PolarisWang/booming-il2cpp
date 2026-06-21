@@ -251,13 +251,18 @@ if (allTypes)
         return 0;
     }
 
+    // Build abstract/interface type names set from scan results
+    var allAbstractNames = new HashSet<string>(allScanResults
+        .Where(r => r.IsAbstract || r.IsInterface)
+        .Select(r => r.TypeFullName), StringComparer.Ordinal);
+
     // Shared pipeline services (reused across all types)
     var allSerializer = new CSharpSerializer();
-    var allExpressionBuilder = new CSharpExpressionBuilder(allSerializer);
+    var allExpressionBuilder = new CSharpExpressionBuilder(allSerializer, allAbstractNames);
     var allAutoFixture = new AutoFixtureAllower(allSerializer);
     var allValueGenerator = new ValueGenerator(allSerializer, allAutoFixture);
     var allProbeEmitter = new ProbeEmitter(allSerializer, allExpressionBuilder);
-    var allEmitter = new TestEmitter(allSerializer, allExpressionBuilder);
+    var allEmitter = new TestEmitter(allSerializer, allExpressionBuilder, allAbstractNames);
     var allWriter = new ProjectWriter();
 
     int totalTypes = allScanResults.Count;

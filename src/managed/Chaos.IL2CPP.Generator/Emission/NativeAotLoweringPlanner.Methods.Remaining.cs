@@ -294,12 +294,9 @@ public sealed partial class NativeAotLoweringPlanner
         {
             foreach (string ifaceId in allInterfaceTypeIds.OrderBy(id => id, StringComparer.Ordinal))
             {
-                ulong ifaceStableId = ComputeStableTypeId(ifaceId);
-                sb.Append("inline constexpr CHAOS_IL2CPP_INTPTR ");
+                sb.Append("extern const CHAOS_IL2CPP_UINT64 ");
                 sb.Append(GetNativeTypeIdSymbol(ifaceId));
-                sb.Append(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
-                sb.Append(ifaceStableId.ToString());
-                sb.AppendLine("ULL);");
+                sb.AppendLine(";");
             }
             sb.AppendLine();
         }

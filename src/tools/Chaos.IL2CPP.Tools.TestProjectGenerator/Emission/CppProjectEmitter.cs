@@ -505,6 +505,15 @@ public sealed class CppProjectEmitter
                     if (parts.Length > 0)
                         existingTypes.Add(parts[parts.Length - 1].TrimEnd(';'));
                 }
+                // Also skip types that already have a struct definition in the header
+                // (emitted by codegen with actual fields). Adding a redundant typedef
+                // would conflict with the struct (C2371).
+                if (trimmed.StartsWith("struct chaos_valuetype_", System.StringComparison.Ordinal))
+                {
+                    var parts = trimmed.Split(' ');
+                    if (parts.Length > 1)
+                        existingTypes.Add(parts[1].TrimEnd());
+                }
             }
             var needed = new System.Collections.Generic.HashSet<string>(System.StringComparer.Ordinal);
             foreach (string cppFile in System.IO.Directory.GetFiles(Path.Combine(projectDir, "subjects"), "native-aot.generated*.cpp"))

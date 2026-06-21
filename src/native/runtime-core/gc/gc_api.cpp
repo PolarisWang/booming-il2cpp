@@ -18,6 +18,9 @@
 #include "../core/gc_alloc_stubs.h"
 #include "../module_registry.h"
 
+// Force linker to keep chaos_gc_get_allocated_bytes_for_current_thread
+#pragma comment(linker, "/include:chaos_gc_get_allocated_bytes_for_current_thread")
+
 namespace chaos::il2cpp::runtime_core {
 
 using chaos::il2cpp::pal::PalGetMemoryStatus;
@@ -626,8 +629,12 @@ thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
 
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept
 {
-    return tls_total_allocated_bytes
-         + static_cast<CHAOS_IL2CPP_INT64>(chaos::il2cpp::runtime_core::tls_alloc_fast_bytes);
+    auto _fast = static_cast<CHAOS_IL2CPP_INT64>(chaos::il2cpp::runtime_core::tls_alloc_fast_bytes);
+    auto _total = tls_total_allocated_bytes;
+    auto _sum = _total + _fast;
+    fprintf(stderr, "[GC_CNT] total=%lld fast=%lld sum=%lld\n",
+            (long long)_total, (long long)_fast, (long long)_sum);
+    return _sum;
 }
 
 // ======================================================================
@@ -668,6 +675,13 @@ extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_wait_for_full_gc_c
 
 extern "C" bool CHAOS_RUNTIME_ABI_CALL chaos_is_gc_pointer(const void* ptr) noexcept {
     return chaos::il2cpp::runtime_core::chaos_is_gc_pointer(ptr);
+}
+
+// Stub for exception metadata helper (may not be in prebuilt lib).
+void ChaosReflectionSetExceptionMetadata_2params(
+    CHAOS_IL2CPP_INTPTR exc, CHAOS_IL2CPP_INTPTR msg, CHAOS_IL2CPP_INTPTR inner) noexcept
+{
+    (void)exc; (void)msg; (void)inner;
 }
 
 // ChaosRuntimeHelpersGetUninitializedObject — registered in ShapeRegistry

@@ -752,7 +752,8 @@ public sealed class DllScanner
         return new DllScanResult(assemblyName,
             CSharpSerializer.StripAssemblyQualification(typeFullName),
             targetType.Namespace ?? string.Empty,
-            signatures, skippedMethods, tfm);
+            signatures, skippedMethods, tfm,
+            targetType.IsAbstract, targetType.IsInterface);
     }
 
     /// <summary>
@@ -1844,5 +1845,7 @@ public sealed record DllScanResult(
     string TypeNamespace,
     IReadOnlyList<MethodSignature> Methods,
     IReadOnlyList<string> SkippedMethods,
-    string TargetFramework
+    string TargetFramework,
+    bool IsAbstract = false,
+    bool IsInterface = false
 );

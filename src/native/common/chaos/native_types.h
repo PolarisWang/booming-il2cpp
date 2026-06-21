@@ -330,6 +330,12 @@ namespace chaos { namespace il2cpp { namespace common {
 #define CHAOS_IL2CPP_MALLOC_ATOMIC_GC(size) \
     static_cast<void*>(chaos::il2cpp::runtime_core::GcAllocateAtomicFastNoZero(size))
 
+// GC-pinned allocation for async coroutine frames (promise_type operator new).
+// Coroutine frames need stable addresses across suspension points because
+// native code holds raw pointers into the frame.
+#define CHAOS_IL2CPP_NEW_GC_PINNED(sz) \
+    chaos::il2cpp::runtime_core::GcAllocateFast(sz)
+
 // ========== Domain domain — per-module metadata ==========
 // Allocate through the current TLS domain heap.  Each allocation is tagged
 // with the originating heap pointer so that Free() routes to the correct

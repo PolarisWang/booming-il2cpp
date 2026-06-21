@@ -375,17 +375,23 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{i} = {ConsumeEvalStackValueExpression()};");
             builder.AppendLine($"{indentation}    const auto chaos_arg_{i} = {FormatInboundAbiArgumentExpression(paramAbis[i], $"chaos_raw_arg_{i}")};");
         }
-        // Null check
+        // Null check with if/else — avoids C2362 "initialization skipped by goto".
+        // raise_null_reference_exception() never returns (throws/longjmps),
+        // so the else arm is semantically equivalent to the original goto pattern.
         builder.AppendLine($"{indentation}    if (chaos_arg_0 == 0)");
         builder.AppendLine($"{indentation}    {{");
         builder.AppendLine($"{indentation}        chaos_runtime_get_abi_v0()->raise_null_reference_exception();");
-        builder.AppendLine($"{indentation}        goto chaos_vcall_end_{instruction.IlOffset};");
         builder.AppendLine($"{indentation}    }}");
+        builder.AppendLine($"{indentation}    else");
+        builder.AppendLine($"{indentation}    {{");
         // VTable resolve ¡ª always through type_info->vtable_array (unified ThinLockableHeader)
         string vtableSource = $"chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array";
         if (!string.Equals(returnType, "void", StringComparison.Ordinal))
         {
-            builder.AppendLine($"{indentation}    {returnType} chaos_callvirt_result{{}};");
+            // No initializer ({}) for chaos_callvirt_result — C2362 fires when
+            // a goto (from the null-check path) jumps past an initialized variable.
+            // The variable is never read on the null path (exception unwinds the frame).
+            builder.AppendLine($"{indentation}    {returnType} chaos_callvirt_result;");
         }
         // VTable dispatch
         if (_vtableSlotMap != null && _vtableSlotMap.TryGetValue(vtableSlotSig, out int vtableSlot))
@@ -413,9 +419,9 @@ public sealed partial class NativeAotLoweringPlanner
         if (!string.Equals(returnType, "void", StringComparison.Ordinal))
         {
             EmitAbiReturnPush(builder, dispatchSlotMethod.ReturnAbi, "chaos_callvirt_result", indentation + "    ");
-            builder.AppendLine($"{indentation}    chaos_vcall_end_{instruction.IlOffset}: ;");
         }
-        builder.AppendLine($"{indentation}}}");
+        builder.AppendLine($"{indentation}    }}");  // close else block
+        builder.AppendLine($"{indentation}}}");       // close outer block
     }
 
     private void EmitDevirtFallbackVTableDispatch(StringBuilder builder, AotCoreIrInstructionArtifact instruction,

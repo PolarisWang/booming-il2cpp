@@ -243,6 +243,15 @@ public sealed partial class NativeAotLoweringPlanner
     private HashSet<string>? _seenStructSymbols;
 
     /// <summary>
+    /// Deduplication set for inline constexpr chaos_type_id_* symbols.
+    /// When methods from multiple assemblies are merged into one translation unit,
+    /// the same type ID (e.g. System.Object) may be emitted by each assembly.
+    /// Prevents C2371 redefinition errors by emitting each type_id only once.
+    /// </summary>
+    private HashSet<string> _emittedTypeIds => _emittedTypeIdsCache ??= new(StringComparer.Ordinal);
+    private HashSet<string>? _emittedTypeIdsCache;
+
+    /// <summary>
     /// Complete reference type struct definitions captured during EmitObjectModelDeclarations
     /// via the StringBuilder checkpoint technique. These go to the shared header instead of
     /// page 0's object model to avoid C2027 on non-page-0 TUs.
@@ -585,8 +594,9 @@ public sealed partial class NativeAotLoweringPlanner
         // that belong to the current assembly get a subjectId → nativeSymbol
         // entry so EmitLinearCall can detect same-module callees and emit
         // direct C++ calls instead of routing through the extern table.
+        // In flat-merge mode (all assemblies in one TU), all methods are included.
         _moduleSymbolTable = _methodsBySubjectId
-            .Where(kvp => IsSameModuleMethod(kvp.Key))
+            .Where(kvp => kvp.Value is { Instructions.Count: > 0 })
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.NativeSymbol, StringComparer.Ordinal);
 
         // Build reverse symbol table for inlining SubjectId resolution.
@@ -633,9 +643,38 @@ public sealed partial class NativeAotLoweringPlanner
         // chaos_generic_context parameter for runtime type resolution.
         _sharedContextSymbols = BuildSharedContextSymbols();
 
+        // Start with methods reachable from the entry point
         var methodsForLowering = fullAssemblyMode
-            ? CollectAllMethods(aotCoreIr, _subjectMethodSubjectIds)
+            ? CollectAllMethods(aotCoreIr, null)  // all methods in full assembly mode
             : CollectReachableMethods(aotCoreIr, entryMethod);
+
+        // In subject mode (--subject-methods), also include subject wrapper methods and
+        // their transitive target assembly callees.  Subject wrappers are not reachable
+        // from the synthetic entry point but must get real AOT bodies.
+        if (_subjectMethodSubjectIds is { Count: > 0 } && !fullAssemblyMode)
+        {
+            // Collect all subject wrappers (target assembly + CombinedSubjects)
+            var extraMethods = new List<AotCoreIrMethodArtifact>();
+            foreach (var m in aotCoreIr.Methods)
+            {
+                if (_subjectMethodSubjectIds.Contains(m.SubjectId))
+                    extraMethods.Add(m);
+                // Also include CombinedSubjects wrapper methods (these have different
+                // subjectIds from the target assembly methods in _subjectMethodSubjectIds)
+                if (m.SubjectId is { } sid && sid.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
+                    extraMethods.Add(m);
+            }
+            // Also include their transitive callees from target assemblies
+            var seeds = extraMethods.Select(m => m.SubjectId).ToArray();
+            var transitiveIds = ComputeAotReachableSubjectIds(
+                null, aotCoreIr.Methods, seeds);
+            foreach (var m in aotCoreIr.Methods)
+            {
+                if (transitiveIds.Contains(m.SubjectId) && !methodsForLowering.Any(mm => mm.SubjectId == m.SubjectId))
+                    extraMethods.Add(m);
+            }
+            ((List<AotCoreIrMethodArtifact>)methodsForLowering).AddRange(extraMethods);
+        }
 
         // Ensure consistent ordering by numeric subject suffix where present,
         // so that RunNativeAot(slot) → Subject_{slot} is correct for all
@@ -1465,6 +1504,36 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             objectModelCode = objectModelBuilder.ToString().TrimEnd();
             objectModelCodeBuilder = null;
             objectModelBuilder.Length = 0;
+        }
+
+        // Deduplicate inline constexpr chaos_type_id_* and MethodTable chaos_mt_* symbols.
+        // When methods from multiple assemblies are merged into one translation unit,
+        // the same type/MT symbol can be emitted multiple times with identical value,
+        // causing C2374/C2086 errors.  Remove all but the first occurrence.
+        if (objectModelCode is { Length: > 0 })
+        {
+            var _dedup = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+            var _sb2 = new System.Text.StringBuilder(objectModelCode.Length);
+            foreach (string _line in objectModelCode.Split('\n'))
+            {
+                string _t = _line.Trim();
+                if ((_t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_") ||
+                     _t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_mt_") ||
+                     _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_") ||
+                     _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_mt_") ||
+                     _t.StartsWith("MethodTable chaos_mt_")))
+                {
+                    // Extract the symbol name (between 'chaos_type_id_' or 'chaos_mt_' and ' =')
+                    int _eq = _t.IndexOf(" =");
+                    if (_eq > 0)
+                    {
+                        string _sym = _t.Substring(0, _eq);
+                        if (!_dedup.Add(_sym)) continue;
+                    }
+                }
+                _sb2.AppendLine(_line);
+            }
+            objectModelCode = _sb2.ToString().TrimEnd();
         }
         // NOTE: .TrimEnd() is intentionally omitted despite potential trailing
         // whitespace — it would allocate a second 3+ GB copy, doubling peak

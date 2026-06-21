@@ -23,7 +23,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError as FuturesTimeoutError
 from datetime import datetime, timezone
 from multiprocessing import Manager
 from pathlib import Path
@@ -314,17 +314,33 @@ def _collect_chunk_results(
     """Collect futures results, handling errors gracefully. Shows ETA."""
     results: dict[str, dict[str, StageResult]] = {}
     completed = 0
+    crashed = 0
     start_time = time.monotonic()
     last_print = 0.0
-    for future in as_completed(futures):
+    for future in as_completed(futures, timeout=max(600, total * 120)):
         completed += 1
         try:
             key, stages = future.result()
             results[key] = stages
             build_st = stages.get("build", StageResult(stage="build", status="?")).status
-        except Exception as e:
+        except SystemExit:
+            # Worker process called sys.exit() — likely a subprocess crash (OOM, segfault)
+            crashed += 1
+            key = f"<crashed worker #{completed}>"
+            results[key] = {"build": StageResult(stage="build", status="failed",
+                             summary="worker process crashed (OOM/segfault)")}
+            build_st = "crashed"
+        except FuturesTimeoutError:
+            completed -= 1  # timeout doesn't consume a slot
+            crashed += 1
+            key = f"<timeout worker #{completed+1}>"
+            results[key] = {"build": StageResult(stage="build", status="skipped",
+                             summary="worker timeout (stage > max wait)")}
+            build_st = "timeout"
+        except BaseException as e:
             key = f"<future #{completed}>"
-            results[key] = {"build": StageResult(stage="build", status="skipped", summary=f"future exception: {e}")}
+            results[key] = {"build": StageResult(stage="build", status="skipped",
+                             summary=f"future exception: {e}")}
             build_st = "exception"
 
         now = time.monotonic()
@@ -406,6 +422,7 @@ def main() -> int:
     print(f"\n{'='*60}")
     print(f"  Phase A: Build + Fact ({len(all_chunks)} chunks, {args.max_workers} workers)")
     print(f"{'='*60}")
+    sys.stdout.flush()
 
     bench_semaphore = Manager().Semaphore(args.bench_workers or 1)
     all_results: dict[str, dict[str, StageResult]] = {}

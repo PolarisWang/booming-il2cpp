@@ -275,7 +275,8 @@ public sealed partial class NativeAotLoweringPlanner
         if (crCryptoJson != null)
             _cryptoAotIrEntries.Add((callee, crCryptoJson));
 
-        if (_methodsBySubjectId.ContainsKey(callee) && IsSameModuleMethod(callee))
+        if (_methodsBySubjectId.TryGetValue(callee, out var _asmMethod) &&
+            _asmMethod is { Instructions.Count: > 0 })
         {
             helperDefinition = null;
             _externalRuntimeHelperCache[callee] = null;

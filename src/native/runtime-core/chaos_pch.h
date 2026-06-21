@@ -14,10 +14,6 @@
 #define CHAOS_IL2CPP_CHAOS_PCH_H_
 
 // ── Standard C/C++ headers (needed by all generated files) ─────────
-// Must be in PCH because MSVC /Yu requires the PCH include to be first;
-// any includes before #include "chaos_pch.h" are IGNORED.
-// Suppress C2362: codegen emits goto past local var init (structurally safe).
-#pragma warning(disable : 2362)
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -26,6 +22,7 @@
 #include <cinttypes>
 #include <csignal>
 #include <csetjmp>
+#include <coroutine>         // std::suspend_always, std::coroutine_handle
 
 // ── ChaOS runtime core headers ─────────────────────────────────────
 #include <chaos/common.h>

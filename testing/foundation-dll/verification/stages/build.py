@@ -681,6 +681,10 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         # Tool binaries — any rebuild of ATG/TPG invalidates all caches
         tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator"),
         tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
+        # Generator DLL — loaded by TPG at runtime for codegen emission.
+        # Must be tracked separately because the TPG DLL only references it
+        # by path at runtime, not as a compile-time dependency.
+        _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Generator.dll",
         # Runtime library — cmake rebuild invalidates all cached entry.exe
         _REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference" / "src" / "native" / "runtime-core" / "RelWithDebInfo" / "chaos_runtime_core.lib",
         _REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference" / "src" / "native" / "bootstrap" / "RelWithDebInfo" / "chaos_bootstrap.lib",

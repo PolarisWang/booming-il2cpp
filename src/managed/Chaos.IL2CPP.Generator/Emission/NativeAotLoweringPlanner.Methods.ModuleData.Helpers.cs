@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -445,69 +445,51 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private static HashSet<string> ComputeAotReachableSubjectIds(
         string? entrySubjectId,
-        IReadOnlyList<AotCoreIrMethodArtifact> methods)
+        IReadOnlyList<AotCoreIrMethodArtifact> methods,
+        string[]? additionalSeeds = null)
     {
         var reachable = new HashSet<string>(StringComparer.Ordinal);
-        if (string.IsNullOrEmpty(entrySubjectId))
-            return reachable;
-
-        var bySubjectId = methods
-            .ToLookup(m => m.SubjectId, StringComparer.Ordinal);
-
         var queue = new Queue<string>();
-        queue.Enqueue(entrySubjectId);
-        reachable.Add(entrySubjectId);
 
+        // Seed from entry point
+        if (!string.IsNullOrEmpty(entrySubjectId))
+        {
+            queue.Enqueue(entrySubjectId);
+            reachable.Add(entrySubjectId);
+        }
+
+        // Seed from additional seeds (subject methods)
+        if (additionalSeeds != null)
+        {
+            foreach (var seed in additionalSeeds)
+            {
+                if (reachable.Add(seed))
+                    queue.Enqueue(seed);
+            }
+        }
+
+        // BFS through call graph
+        var bySubjectId = methods.ToLookup(m => m.SubjectId);
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
-            if (!bySubjectId.Contains(current))
-                continue;
-
             foreach (var method in bySubjectId[current])
             {
-                if (method.Instructions == null)
-                    continue;
-
                 foreach (var instr in method.Instructions)
                 {
-                    string op = instr.Op;
-                    if (op != "call" && op != "callvirt" && op != "newobj" &&
-                        op != "ldftn" && op != "ldvirtftn")
-                        continue;
-
-                    string? callee = instr.Callee ?? instr.TargetReference?.SubjectId;
-                    if (string.IsNullOrEmpty(callee))
-                        continue;
-
-                    // Add both the exact callee and any open-definition variant
-                    if (reachable.Add(callee))
-                        queue.Enqueue(callee);
-
-                    // Also follow to the resolved instantiation if available
-                    if (instr.TargetReference?.SubjectId is { } targetRef &&
-                        targetRef != callee &&
-                        reachable.Add(targetRef))
-                        queue.Enqueue(targetRef);
+                    if (instr.Op is "call" or "callvirt" or "newobj" or "ldftn" or "ldvirtftn")
+                    {
+                        var callee = instr.Callee ?? instr.TargetReference?.SubjectId;
+                        if (!string.IsNullOrEmpty(callee) && reachable.Add(callee))
+                            queue.Enqueue(callee);
+                    }
                 }
             }
         }
 
         return reachable;
     }
-
-
-
-
-
-    /// <summary>
-    /// Builds a minimal C++ function body stub for AOT-unreachable methods.
-    /// Unreachable methods still need a dispatchable entry point (for the
-    /// interpreter dispatch table) but do not require a full native body.
-    /// Returns a default value to avoid crashing when the fact loop runs
-    /// every dispatch-table entry including unreachable interface stubs.
-    /// </summary>
-    private static string BuildAotUnreachableMethodStub(AotCoreIrMethodArtifact method)
+            private static string BuildAotUnreachableMethodStub(AotCoreIrMethodArtifact method)
     {
         var returnAbi = method.ReturnAbi;
         var returnType = MapAbiSlotReturnType(returnAbi);

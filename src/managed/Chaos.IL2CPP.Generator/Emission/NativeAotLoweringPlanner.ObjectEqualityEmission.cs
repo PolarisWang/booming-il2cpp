@@ -40,6 +40,7 @@ public sealed partial class NativeAotLoweringPlanner
             ManagedNaming.NormalizeSubjectIdAssembly("System.Private.CoreLib/System.String"));
 
         var boxedTypeEntries = boxedTypeSubjectIds
+            .Where(value => !value.Contains("y__InlineArray", StringComparison.Ordinal))
             .OrderBy(value => value, StringComparer.Ordinal)
             .Select(item =>
             {

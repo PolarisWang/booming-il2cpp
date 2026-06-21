@@ -169,6 +169,13 @@ public sealed partial class CodeGenStage
         ManagedClosureResult fullResult,
         IReadOnlyList<string> inputAssemblyPaths)
     {
+        // Flat merge mode: when additional assemblies are provided, return ALL
+        // methods in a single result instead of splitting into per-assembly files.
+        // This avoids symbol conflicts (hotpatch table, code registration, type IDs)
+        // when multiple assemblies are compiled into a single executable (entry.exe).
+        if (inputAssemblyPaths.Count > 1)
+            return new[] { fullResult };
+
         // ── Phase 1: Global coordination ──
 
         // Build per-assembly method groups

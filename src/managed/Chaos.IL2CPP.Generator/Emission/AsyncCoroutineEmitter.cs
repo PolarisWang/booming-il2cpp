@@ -57,6 +57,11 @@ public sealed partial class NativeAotLoweringPlanner
     internal static string GenPromise(string uid, bool hr)
     {
         var sb = new StringBuilder();
+        // Forward-declare AsyncPromise so AsyncHandle can reference it,
+        // then define AsyncHandle before AsyncPromise so get_return_object()
+        // can use AsyncHandle without C2027 (incomplete type) / C2065 (undeclared).
+        sb.Append("    struct AsyncPromise_" + uid + ";\n");
+        sb.Append("    struct AsyncHandle_" + uid + " { AsyncPromise_" + uid + "* p; void Start() noexcept { std::coroutine_handle<AsyncPromise_" + uid + ">::from_promise(*p).resume(); } };\n");
         sb.Append("    struct AsyncPromise_" + uid + " {\n");
         sb.Append("        CHAOS_IL2CPP_INTPTR _h[4]; uint32_t _magic = 0x45524F43; CHAOS_IL2CPP_INTPTR _result = 0;\n");
         sb.Append("        auto get_return_object() noexcept { return AsyncHandle_" + uid + "{this}; }\n");
@@ -67,7 +72,6 @@ public sealed partial class NativeAotLoweringPlanner
         sb.Append("        static void* operator new(std::size_t sz) noexcept { return CHAOS_IL2CPP_NEW_GC_PINNED(sz); }\n");
         sb.Append("        static void operator delete(void*, std::size_t) noexcept {}\n");
         sb.Append("    };\n");
-        sb.Append("    struct AsyncHandle_" + uid + " { AsyncPromise_" + uid + "* p; void Start() noexcept { std::coroutine_handle<AsyncPromise_" + uid + ">::from_promise(*p).resume(); } };\n");
         return sb.ToString();
     }
 
@@ -76,7 +80,7 @@ public sealed partial class NativeAotLoweringPlanner
         var sb = new StringBuilder();
         sb.Append("    // F3 coroutine: " + sid + "\n");
         sb.Append("    static AsyncHandle_" + uid + " " + uid + "_Coro() {\n");
-        sb.Append("        CHAOS_EH_TRY { co_await std::suspend_always{}; co_return; } CHAOS_EH_CATCH(...) {}\n");
+        sb.Append("        try { co_await std::suspend_always{}; co_return; } catch (...) { }\n");
         sb.Append("    }\n");
         sb.Append("    extern \"C\" CHAOS_IL2CPP_INT64 Entry_" + uid + "() { auto h = " + uid + "_Coro(); h.Start(); return (CHAOS_IL2CPP_INT64)h.p; }\n");
         return sb.ToString();

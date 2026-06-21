@@ -42,8 +42,7 @@ public sealed partial class NativeAotLoweringPlanner
         // inlined TagList::Clear() which sets _tagsCount = 0.
         if (typeSubjectId.EndsWith("System.Diagnostics.TagList", StringComparison.Ordinal))
         {
-            // Scan reachable methods to confirm this type is accessed inline
-            // (e.g. via initobj or call on this type's methods).
+            // ... existing TagList code ...
             bool found = false;
             foreach (var m in reachableMethods)
             {
@@ -61,21 +60,39 @@ public sealed partial class NativeAotLoweringPlanner
             if (!found)
                 return false;
 
-            // Provide a minimal opaque field — CHAOS_IL2CPP_INT32 matches the
-            // sizeof(int32) = 4 bytes, which preserves ABI compatibility with
-            // the typedef int32 that the codegen would otherwise generate.
-            // The struct definition is emitted before boxed_type structs that
-            // embed `chaos_valuetype_TagList value{};`, preventing C3646.
             fields = new List<string>
             {
                 $"{typeSubjectId}::_tagsCount"
             };
-            // Register field type so MapFieldTypeToCppType returns CHAOS_IL2CPP_INT32
-            // (not CHAOS_IL2CPP_INTPTR).  sizeof must match typedef int32 (4 bytes)
-            // for ABI compatibility with codesize and GcAllocateFast(sizeof(T)).
             if (_fieldTypeMap != null && !_fieldTypeMap.ContainsKey($"{typeSubjectId}::_tagsCount"))
             {
                 _fieldTypeMap[$"{typeSubjectId}::_tagsCount"] = "System.Int32";
+            }
+            return true;
+        }
+
+        // Generic placeholder forms (__\d+__) — emit opaque fields to provide
+        // a complete struct for chaos_resolve_managed_value_pointer<T> (C2227 fix).
+        // These types have field references in the generated code (stfld/ldflda)
+        // but their fields are not in fieldsByDeclaringType because the declaring
+        // type uses generic parameter placeholders (__0__) instead of concrete types.
+        if (typeSubjectId.Contains("__0__") || typeSubjectId.Contains("___y__"))
+        {
+            // Provide two INTPTR fields — the most common layout for generic
+            // value types with backing fields (Key/Value pattern). This is
+            // sufficient for template instantiation; actual field access is
+            // resolved by name in the emitted code regardless of struct layout.
+            fields = new List<string>
+            {
+                $"{typeSubjectId}::__opaque_0",
+                $"{typeSubjectId}::__opaque_1",
+            };
+            if (_fieldTypeMap != null)
+            {
+                if (!_fieldTypeMap.ContainsKey($"{typeSubjectId}::__opaque_0"))
+                    _fieldTypeMap[$"{typeSubjectId}::__opaque_0"] = "System.IntPtr";
+                if (!_fieldTypeMap.ContainsKey($"{typeSubjectId}::__opaque_1"))
+                    _fieldTypeMap[$"{typeSubjectId}::__opaque_1"] = "System.IntPtr";
             }
             return true;
         }

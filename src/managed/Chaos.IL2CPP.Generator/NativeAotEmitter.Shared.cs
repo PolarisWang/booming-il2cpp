@@ -281,6 +281,66 @@ public sealed partial class NativeAotEmitter
             });
 
             string content = BuildGeneratedTranslationUnit(templateModel);
+
+            // Deduplicate inline constexpr type_id/mt symbols across the entire
+            // translation unit.  Flat-merge can produce duplicate definitions
+            // of System.Private.CoreLib types (e.g. IEnumerable) from each
+            // merged assembly, causing C2374 redefinition errors.
+            var _dedup = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+            var _sb = new System.Text.StringBuilder(content.Length);
+            foreach (string _line in content.Split('\n'))
+            {
+                string _t = _line.Trim();
+                if (_t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_") ||
+                    _t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_mt_") ||
+                    _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_") ||
+                    _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_mt_") ||
+                    _t.StartsWith("MethodTable chaos_mt_"))
+                {
+                    int _eq = _t.IndexOf(" =");
+                    if (_eq > 0)
+                    {
+                        string _sym = _t.Substring(0, _eq);
+                        if (!_dedup.Add(_sym)) continue;
+                    }
+                }
+                _sb.AppendLine(_line);
+            }
+            content = _sb.ToString().TrimEnd();
+
+            // Add struct forward declarations for placeholder value types at the
+            // top of the cpp file (before namespace). These help PCH-mode MSVC
+            // resolve chaos_resolve_managed_value_pointer<T> template arguments
+            // when T is a struct defined in the generated header outside the PCH.
+            var _fwdSb = new System.Text.StringBuilder();
+            var _seenFwd = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+            foreach (string _line in content.Split('\n'))
+            {
+                string _t = _line.Trim();
+                if (_t.Contains("chaos_resolve_managed_value_pointer<chaos_valuetype_") &&
+                    (_t.Contains("__0__") || _t.Contains("___y__")))
+                {
+                    var _start = _t.IndexOf("chaos_valuetype_");
+                    var _end = _t.IndexOf('>', _start);
+                    if (_start > 0 && _end > _start)
+                    {
+                        var _typeName = _t.Substring(_start, _end - _start);
+                        if (_seenFwd.Add(_typeName))
+                            _fwdSb.AppendLine("struct " + _typeName + ";");
+                    }
+                }
+            }
+            if (_fwdSb.Length > 0)
+            {
+                var _insertPos = content.IndexOf("#pragma warning(disable: 2362)");
+                if (_insertPos > 0)
+                {
+                    _fwdSb.Insert(0, "// PCH workaround: struct forward declarations for template resolution\n");
+                    _fwdSb.AppendLine();
+                    content = content.Substring(0, _insertPos) + _fwdSb.ToString() + content.Substring(_insertPos);
+                }
+            }
+
             sources.Add(new NativeAotGeneratedSource
             {
                 RelativePath = NativeAotArtifactNames.GeneratedTranslationUnit,

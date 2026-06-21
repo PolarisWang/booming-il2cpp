@@ -6,6 +6,7 @@ public sealed class TestEmitter
 {
     private readonly CSharpSerializer _serializer;
     private readonly CSharpExpressionBuilder _expressionBuilder;
+    private readonly IReadOnlySet<string>? _abstractTypeNames;
 
     // Assemblies whose methods dispatch through the external runtime stub table in
     // AOT mode.  The stubs return default values and never throw, so Assert.Throws<T>
@@ -22,10 +23,11 @@ public sealed class TestEmitter
         "System.Double", "System.Decimal", "System.Char",
     };
 
-    public TestEmitter(CSharpSerializer serializer, CSharpExpressionBuilder expressionBuilder)
+    public TestEmitter(CSharpSerializer serializer, CSharpExpressionBuilder expressionBuilder, IReadOnlySet<string>? abstractTypeNames = null)
     {
         _serializer = serializer;
         _expressionBuilder = expressionBuilder;
+        _abstractTypeNames = abstractTypeNames;
     }
 
     public string Emit(
@@ -192,12 +194,12 @@ public sealed class TestEmitter
                 if (instanceExpr.StartsWith("SubjectInstanceFactory.Create<global::") && instanceExpr.EndsWith(">()"))
                 {
                     var typeArg = instanceExpr["SubjectInstanceFactory.Create<global::".Length..">()".Length];
-                    try {
-                        var t = System.Type.GetType(typeArg, false);
-                        if (t != null && !t.IsAbstract && !t.IsInterface && !t.IsValueType) {
-                            instanceExpr = $"new global::{typeArg}()";
-                        }
-                    } catch { }
+                    // Convert to new T() for concrete types (not abstract/interface)
+                    // using DllScanner metadata (not Type.GetType which fails for target assemblies)
+                    bool isAbstract = _abstractTypeNames != null && _abstractTypeNames.Contains(typeArg);
+                    if (!isAbstract) {
+                        instanceExpr = $"new global::{typeArg}()";
+                    }
                 }
                 var callExpr = $"{instanceExpr}.{method.Name}{genericSuffix}({argsStr})";
 
@@ -262,8 +264,10 @@ public sealed class TestEmitter
                 {
                     sb.AppendLine();
                     sb.AppendLine("        [Benchmark]");
-                    sb.AppendLine($"        public static void Benchmark_{methodSuffix}()");
+                    sb.AppendLine($"        public static long Benchmark_{methodSuffix}()");
                     sb.AppendLine("        {");
+                    // Measure GC allocation: record before, execute, compute delta
+                    sb.AppendLine("            var before_alloc = GC.GetAllocatedBytesForCurrentThread();");
                     if (preludeStr.Length > 0)
                         sb.Append(preludeStr);
                     var benchCall = $"{instanceExpr}.{method.Name}{genericSuffix}({argsStr})";
@@ -271,6 +275,7 @@ public sealed class TestEmitter
                         sb.AppendLine($"            {benchCall};");
                     else
                         sb.AppendLine($"            _ = {benchCall};");
+                    sb.AppendLine("            return GC.GetAllocatedBytesForCurrentThread() - before_alloc;");
                     sb.AppendLine("        }");
                 }
             }
