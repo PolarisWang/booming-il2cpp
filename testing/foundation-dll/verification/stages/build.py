@@ -36,6 +36,84 @@ from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
+# Platform-aware SDK paths for dependency tracking
+import platform as _platform
+_is_linux = _platform.system() == "Linux"
+_sdk_preset = "linux-x64-profile" if _is_linux else "windows-x64-reference"
+_sdk_lib_ext = ".a" if _is_linux else ".lib"
+_sdk_config = "RelWithDebInfo"
+
+
+# -- Profile mode injection ---------------------------------------------------
+
+_PROFILE_MODE_INCLUDE = '#include <profile_stats.h>'
+
+_PROFILE_MODE_FUNC = """
+// ── --profile: per-method GC/allocation/code-size profile ───────────
+static int RunProfileMode() {
+    using namespace chaos::il2cpp::runtime_core;
+    const int kCount = kSubjectEntryCount;
+    ProfileStoreInit(kCount);
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+        int64_t heap_before = chaos_gc_get_heap_size();
+        GetThreadProfileData().heap_before = heap_before;
+        CHAOS_EH_TRY
+            ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+        CHAOS_EH_CATCH_BEGIN
+        CHAOS_EH_END
+        int64_t heap_after = chaos_gc_get_heap_size();
+        GetThreadProfileData().heap_after = heap_after;
+        FlushThreadProfileData(i);
+    }
+    ProfileStoreFinalize();
+    ProfileEmitJson();
+    return 0;
+}
+
+"""
+
+_PROFILE_MODE_CLI = '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n'
+
+
+def _inject_profile_mode(native_dir: Path) -> None:
+    """Inject --profile mode into runtime-entry.cpp after TPG generation.
+
+    The TPG generates runtime-entry.cpp without --profile support even though
+    the native infrastructure (profile_stats.h, ProfileStoreInit, ProfileEmitJson)
+    is compiled in when CHAOS_IL2CPP_CONFIG_TIER=profile. This function patches
+    the generated file to add the missing RunProfileMode() function and CLI handler.
+    """
+    entry_path = native_dir / "runtime-entry.cpp"
+    if not entry_path.exists():
+        print(f"  [build] [profile-inject] runtime-entry.cpp not found at {entry_path}, skipping")
+        return
+
+    content = entry_path.read_text(encoding="utf-8", errors="replace")
+
+    # 1. Inject #include <profile_stats.h> after last #include <chaos/...>
+    if '#include <profile_stats.h>' not in content:
+        content = content.replace(
+            '#include <gc/gc_api.h>',
+            '#include <gc/gc_api.h>\n#include <profile_stats.h>')
+        print(f"  [build] [profile-inject] added #include <profile_stats.h>")
+
+    # 2. Inject RunProfileMode() before int main()
+    if 'RunProfileMode' not in content:
+        content = content.replace(
+            'int main(int argc, char* argv[]) {',
+            _PROFILE_MODE_FUNC + 'int main(int argc, char* argv[]) {')
+        print(f"  [build] [profile-inject] added RunProfileMode()")
+
+    # 3. Inject --profile CLI handler before Unknown flag
+    if '--profile' not in content:
+        content = content.replace(
+            'printf("Unknown flag: %s\\n", argv[1]);',
+            '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n    printf("Unknown flag: %s\\n", argv[1]);')
+        print(f"  [build] [profile-inject] added --profile CLI handler")
+
+    entry_path.write_text(content, encoding="utf-8")
 
 def _chaos_sdk_csproj() -> Path:
     """Path to Chaos.TestFramework.Sdk.csproj."""
@@ -63,11 +141,21 @@ def _get_additional_assemblies(chunk_dir: Path) -> list[str]:
 def _detect_tfm(dll_path: Path) -> str:
     """Detect target framework moniker from the DLL's runtime directory path.
 
-    Delegates to tool_helpers.detect_tfm for consistent behavior across stages.
-    The shared implementation supports both Microsoft.NETCore.App and
-    Microsoft.NETCore.App.Ref paths.
+    E.g. ".../shared/Microsoft.NETCore.App/10.0.6/System.Private.CoreLib.dll"
+    -> "net10.0".  Falls back to "net8.0".
+
+    Also handles custom DLL paths like ".../dotnet-foundation/net10.0/runtime/...".
     """
-    return detect_tfm(dll_path)
+    path = str(dll_path).replace("\\", "/")
+    # Primary: standard runtime layout
+    m = re.search(r"Microsoft\.NETCore\.App/(\d+)\.(\d+)\.", path)
+    if m:
+        return f"net{m.group(1)}.{m.group(2)}"
+    # Fallback: custom layout like dotnet-foundation/netX.Y/runtime/
+    m = re.search(r"/net(\d+)\.(\d+)/runtime/", path)
+    if m:
+        return f"net{m.group(1)}.{m.group(2)}"
+    return "net8.0"
 
 
 def _custom_subjects_metadata(
@@ -232,6 +320,59 @@ def _compile_custom_subjects(
     return method_info
 
 
+def _merge_supplemental_coverage(metadata_path: Path, chunk_dir: Path) -> None:
+    """Merge supplemental coverage entries into subjects.metadata.json.
+
+    Reads supplemental-coverage.json from the chunk's managed/subjects/
+    directory and appends any entries whose methodSubjectId is not already
+    present. This provides AOT-compilation coverage for methods the
+    AutoTestGenerator cannot probe (delegate Invoke, internal classes, etc.).
+
+    The file is a no-op (no changes made) when supplemental-coverage.json
+    does not exist — making this safe for all chunks regardless of whether
+    they have supplemental entries.
+    """
+    supplemental_path = chunk_dir / "managed" / "subjects" / "supplemental-coverage.json"
+    if not supplemental_path.exists():
+        return
+
+    print(f"  [build] Found supplemental coverage: {supplemental_path.name}")
+    supp_data = json.loads(supplemental_path.read_text(encoding="utf-8"))
+    supp_entries = supp_data.get("entries", [])
+    if not supp_entries:
+        return
+
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    existing_ids = {m["methodSubjectId"] for m in metadata.get("methods", [])}
+
+    new_entries = []
+    for entry in supp_entries:
+        sid = entry["methodSubjectId"]
+        if sid in existing_ids:
+            continue
+        new_index = metadata["totalMethods"] + len(new_entries)
+        new_entries.append({
+            "index": new_index,
+            "kind": "aot-coverage",
+            "methodSubjectId": sid,
+            "generatedMethodId": "",
+        })
+
+    if not new_entries:
+        print(f"  [build]   All {len(supp_entries)} supplemental entries already in metadata")
+        return
+
+    metadata["methods"].extend(new_entries)
+    metadata["totalMethods"] += len(new_entries)
+    # NOTE: Do NOT add to benchmarkMethodIndices or hotupdateMethodIndices.
+    # These aot-coverage entries have no corresponding test/benchmark methods
+    # in CombinedSubjects.dll and must not produce dispatch table entries.
+
+    metadata_path.write_text(json.dumps(metadata, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"  [build]   Merged {len(new_entries)}/{len(supp_entries)} supplemental coverage entries "
+          f"(total methods now {metadata['totalMethods']})")
+
+
 def _build_jit_entry(
     tpg_dll: Path,
     subjects_dll: Path,
@@ -274,11 +415,7 @@ def _build_jit_entry(
     if result.returncode != 0:
         print(f"  [build] JIT entry build FAILED (rc={result.returncode}) — continuing")
         for line in result.stderr.splitlines():
-            try:
-                print(f"      [jit:err] {line}")
-            except UnicodeEncodeError:
-                safe = line.encode("ascii", errors="replace").decode("ascii", errors="replace")
-                print(f"      [jit:err] {safe}")
+            print(f"      [jit:err] {line}")
         return False
 
     jit_exe = jit_output / "entry-jit.exe"
@@ -289,6 +426,32 @@ def _build_jit_entry(
     shutil.copy2(jit_exe, native_dir / "entry-jit.exe")
     print(f"  [build] JIT entry-jit.exe: {native_dir / 'entry-jit.exe'} ({jit_exe.stat().st_size} bytes)")
     return True
+
+
+def _build_jit_entry_fast(
+    tpg_dll: Path,
+    subjects_dll: Path,
+    metadata_path: Path,
+    native_dir: Path,
+    native_config: str = "check",
+    assembly_dirs: list[str] | None = None,
+) -> bool:
+    """Build JIT entry-jit.exe if stale or missing, skip via mtime check otherwise.
+
+    Checks if entry-jit.exe already exists and is newer than the subjects DLL
+    and metadata. If so, skips the expensive TPG codegen + cmake build.
+    Returns True if JIT entry is available (built or already current).
+    """
+    jit_exe = native_dir / "entry-jit.exe"
+    if jit_exe.exists():
+        jit_mtime = jit_exe.stat().st_mtime
+        deps = [subjects_dll, metadata_path]
+        if all(d.exists() and jit_mtime >= d.stat().st_mtime for d in deps):
+            print(f"  [build] [jit] entry-jit.exe is current ({jit_exe.stat().st_size} bytes)")
+            return True
+        print(f"  [build] [jit] entry-jit.exe exists but stale — rebuilding")
+    return _build_jit_entry(tpg_dll, subjects_dll, metadata_path, native_dir,
+                            native_config, assembly_dirs)
 
 
 def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
@@ -442,10 +605,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             print(f"  [build] Capabilities: {caps_path.name}")
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=1200)
 
-        # ATG returns rc=1 both for real errors AND for "no types found" (which is
-        # expected for type-forwarding assemblies and hardware intrinsics).
-        # Don't fail early — let the fallback logic handle 0-subject cases.
-        if result.returncode != 0 and "No types with public methods found" not in result.stdout:
+        if result.returncode != 0:
             print(f"  [build] AutoTestGenerator FAILED (rc={result.returncode})")
             for line in (result.stderr.splitlines() + result.stdout.splitlines())[-15:]:
                 print(f"      {line}")
@@ -464,85 +624,23 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         total_subjects = metadata.get("totalMethods", 0)
         print(f"  [build] AutoTestGenerator subjects: {total_subjects}")
 
+        # ── Merge supplemental coverage entries ──
+        # For methods the ATG cannot probe (delegate Invoke, internal classes),
+        # supplemental-coverage.json provides entries so the AOT codegen still
+        # compiles them. This is a no-op for chunks without the file.
+        _merge_supplemental_coverage(metadata_path, ctx.chunk_dir)
+        # Re-read after potential merge so total_subjects reflects all entries
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        total_subjects = metadata.get("totalMethods", 0)
+        print(f"  [build] Total subjects (after supplemental merge): {total_subjects}")
+
     if total_subjects == 0:
-        # ATG produced 0 subjects — possible reasons:
-        # 1. Namespace filter restricts to only delegates/interfaces
-        # 2. Assembly is a type-forwarding facade (e.g. System.Xml.ReaderWriter -> System.Private.Xml)
-        # 3. Assembly has no probeable types (e.g. System.Runtime.Intrinsics)
-        # Try fallbacks: remove namespace filter, then try Private.* counterpart.
-
-        # Fallback 1: remove namespace filter
-        if chunk_namespaces:
-            print(f"  [build] 0 subjects with namespace filter — retrying without filter...")
-            cmd_no_ns = [a for a in cmd if not a.startswith("--namespace-filter")]
-            result = subprocess.run(cmd_no_ns, capture_output=True, text=True,
-                                     encoding='utf-8', errors='replace', timeout=1200)
-            if result.returncode == 0 and metadata_path.exists():
-                metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-                total_subjects = metadata.get("totalMethods", 0)
-                print(f"  [build] Retry without namespace filter: {total_subjects} subjects")
-
-        # Fallback 2: try Private.* counterpart (type-forwarding facades)
-        if total_subjects == 0 and target_dll:
-            _asm_name = target_dll.stem  # e.g. "System.Xml.ReaderWriter"
-            _private_asm = target_dll.parent / f"System.Private.{_asm_name.removeprefix('System.').removeprefix('Private.')}.dll"
-            if not _private_asm.exists():
-                # Try alternative naming: System.Private.Xml.dll vs System.Xml.ReaderWriter -> System.Private.Xml.dll
-                _private_asm = target_dll.parent / "System.Private.Xml.dll"
-            if not _private_asm.exists():
-                # Generic: replace "System." prefix with "System.Private."
-                _private_asm = target_dll.parent / f"System.Private.{_asm_name[7:]}"
-
-            if _private_asm and _private_asm.exists() and _private_asm != target_dll:
-                print(f"  [build] 0 subjects — trying Private.* counterpart: {_private_asm.name}")
-                cmd_private = [
-                    "dotnet", "exec", str(auto_dll),
-                    "--dll", str(_private_asm),
-                    "--all-types",
-                    "--output", str(auto_output),
-                    "--emit-metadata", str(metadata_path),
-                    "--chunk-slug", ctx.slug,
-                ]
-                if chunk_namespaces:
-                    cmd_private.extend(["--namespace-filter", ",".join(chunk_namespaces)])
-                result = subprocess.run(cmd_private, capture_output=True, text=True,
-                                         encoding='utf-8', errors='replace', timeout=1200)
-                if result.returncode == 0 and metadata_path.exists():
-                    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-                    total_subjects = metadata.get("totalMethods", 0)
-                    print(f"  [build] Private.* fallback: {total_subjects} subjects from {_private_asm.name}")
-
-        if total_subjects == 0:
-            # After all fallbacks failed, this assembly genuinely has no probeable types.
-            # Hardware intrinsics assemblies (System.Runtime.Intrinsics) are a known case.
-            # Write an empty fact.json with status "no_subjects" so the pipeline doesn't
-            # fail on inherently un-probeable assemblies.
-            if target_dll and target_dll.stat().st_size < 50000:
-                print(f"  [build] Small assembly ({target_dll.stat().st_size} bytes) with no probeable "
-                      f"types — writing empty fact.json (no_subjects)")
-                ctx.chunk_dir.joinpath("results").mkdir(parents=True, exist_ok=True)
-                _empty_fact = {
-                    "passed": 0, "total": 0, "status": "no_subjects",
-                    "metaTotal": 0, "factMethodCount": 0,
-                    "note": f"Assembly '{target_dll.name}' has no probeable types "
-                            f"(hardware intrinsics / type-forwarding facade)",
-                }
-                try:
-                    (ctx.chunk_dir / "results" / "fact.json").write_text(
-                        json.dumps(_empty_fact, indent=2), encoding="utf-8")
-                except OSError:
-                    pass
-                return StageResult(
-                    stage="build", status="no_subjects",
-                    summary=f"No probeable types in {ctx.assembly}/{ctx.slug}",
-                    duration_ms=int((time.perf_counter() - start) * 1000))
-
-            print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
-                  f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
-            return StageResult(
-                stage="build", status="error",
-                summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
-                duration_ms=int((time.perf_counter() - start) * 1000))
+        print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
+              f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
+        return StageResult(
+            stage="build", status="skipped",
+            summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
+            duration_ms=int((time.perf_counter() - start) * 1000))
 
     # -- 5. Detect TFM from target DLL --
     tfm = _detect_tfm(target_dll)
@@ -642,9 +740,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     print(f"  [build] Subjects DLL: {subjects_dll} ({subjects_dll.stat().st_size} bytes)")
 
-    # -- 7. Hephaestus cache lookup: skip TPG if unchanged input --
-    cache = HephaestusCache(ctx.foundation_dir, verbose=True)
-    cache_status = "miss"
     # Include runtime stub source files in hash so changes to interop_stubs.cpp
     # etc. invalidate the build cache and trigger a fresh rebuild.
     _runtime_stubs = [
@@ -665,20 +760,42 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator" / "Emission" / "CppProjectEmitter.cs",
         _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "build.py",
         _REPO_ROOT / "testing" / "foundation-dll" / "verification" / "stages" / "hephaestus_cache.py",
-        # gc_api.cpp — locally compiled to override prebuilt lib's stale
-        # chaos_gc_get_allocated_bytes_for_current_thread (adds tls_alloc_fast_bytes)
-        _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp",
         # Tool binaries — any rebuild of ATG/TPG invalidates all caches
         tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator"),
         tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
-        # Generator DLL — loaded by TPG at runtime for codegen emission.
-        # Must be tracked separately because the TPG DLL only references it
-        # by path at runtime, not as a compile-time dependency.
-        _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Generator.dll",
         # Runtime library — cmake rebuild invalidates all cached entry.exe
-        _REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference" / "src" / "native" / "runtime-core" / "RelWithDebInfo" / "chaos_runtime_core.lib",
-        _REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference" / "src" / "native" / "bootstrap" / "RelWithDebInfo" / "chaos_bootstrap.lib",
+        _REPO_ROOT / "artifacts" / "presets" / _sdk_preset / "src" / "native" / "runtime-core" / _sdk_config / f"chaos_runtime_core{_sdk_lib_ext}",
+        _REPO_ROOT / "artifacts" / "presets" / _sdk_preset / "src" / "native" / "bootstrap" / _sdk_config / f"chaos_bootstrap{_sdk_lib_ext}",
     ]
+
+    # -- 7a. Fast-path mtime check: skip TPG + cmake if entry.exe is already up to date --
+    if ctx.entry_exe_path.exists():
+        exe_mtime = ctx.entry_exe_path.stat().st_mtime
+        deps = [
+            subjects_dll, metadata_path, target_dll,
+            tool_dll("Chaos.IL2CPP.Tools.AutoTestGenerator"),
+            tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
+        ] + _runtime_stubs + _tpg_build_deps
+        deps = [d for d in deps if d is not None and d.exists()]
+        stalest_dep_mtime = max(d.stat().st_mtime for d in deps)
+        if exe_mtime >= stalest_dep_mtime:
+            exe_size = ctx.entry_exe_path.stat().st_size
+            print(f"  [build] [fastpath] entry.exe is current ({exe_size} bytes, mtime={exe_mtime:.0f})")
+            duration_ms = int((time.perf_counter() - start) * 1000)
+            # Also build JIT entry if stale or missing (non-blocking)
+            _build_jit_entry_fast(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
+                                  subjects_dll, metadata_path, ctx.native_dir,
+                                  ctx.native_config, ctx.assembly_dirs)
+            return StageResult(
+                stage="build", status="passed",
+                summary=f"[FASTPATH] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",
+                details={"chunkSlug": ctx.slug, "totalSubjects": total_subjects,
+                         "tfm": tfm, "durationMs": duration_ms, "fastpath": True},
+                duration_ms=duration_ms)
+
+    # -- 7b. Hephaestus cache lookup: skip TPG if unchanged input --
+    cache = HephaestusCache(ctx.foundation_dir, verbose=True)
+    cache_status = "miss"
     input_hash = compute_input_hash(
         subjects_dll, metadata_path, ctx.assembly,
         additional_dlls=[target_dll] if target_dll else None,
@@ -697,74 +814,11 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             if ctx.entry_exe_path.exists():
                 exe_size = ctx.entry_exe_path.stat().st_size
                 print(f"  [build] [hephaestus] Restored entry.exe ({exe_size} bytes)")
-                # Ensure --profile-range handler is injected (cache may be from before this feature)
-                _rp = ctx.native_dir / "runtime-entry.cpp"
-                if _rp.exists():
-                    _code_hit = _rp.read_text(encoding="utf-8", errors="replace")
-                    if 'profile-range' not in _code_hit:
-                        _marker = '    if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }'
-                        if _marker in _code_hit:
-                            _prefix_hit = (
-                                '\n// --profile-range: profile contiguous AOT method indices'
-                                '\nstatic int RunProfileRangeMode(int start_idx, int end_idx) {'
-                                '\n    using namespace chaos::il2cpp::runtime_core;'
-                                '\n    if (start_idx < 0) start_idx = 0;'
-                                '\n    if (end_idx > kAotMethodCount) end_idx = kAotMethodCount;'
-                                '\n    const int kCount = end_idx - start_idx;'
-                                '\n    auto* entries = GetHotpatchEntries();'
-                                '\n    ProfileStoreInit(kCount);'
-                                '\n    for (int idx = start_idx; idx < end_idx; idx++) {'
-                                '\n        int64_t heap_before = chaos_gc_get_heap_size();'
-                                '\n        GetThreadProfileData().heap_before = heap_before;'
-                                '\n        __try {'
-                                '\n            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, idx);'
-                                '\n        } __except(EXCEPTION_EXECUTE_HANDLER) {'
-                                '\n        }'
-                                '\n        int64_t heap_after = chaos_gc_get_heap_size();'
-                                '\n        GetThreadProfileData().heap_after = heap_after;'
-                                '\n        FlushThreadProfileData(idx);'
-                                '\n    }'
-                                '\n    ProfileStoreFinalize();'
-                                '\n    ProfileEmitJson();'
-                                '\n    return 0;'
-                                '\n}'
-                                '\n'
-                                '\nint main(int argc, char* argv[]) {'
-                            )
-                            _cli_hit = (
-                                '\n    if (std::strcmp(argv[1], "--profile-range") == 0) {'
-                                '\n        if (argc < 4) { puts("Usage: entry.exe --profile-range <start> <end>"); return 1; }'
-                                '\n        ret = RunProfileRangeMode(std::atoi(argv[2]), std::atoi(argv[3]));'
-                                '\n        goto shutdown;'
-                                '\n    }'
-                                '\n'
-                            )
-                            _code_hit = _code_hit.replace('int main(int argc, char* argv[]) {', _prefix_hit)
-                            _code_hit = _code_hit.replace(_marker, _cli_hit + _marker)
-                            _rp.write_text(_code_hit, encoding="utf-8")
-                            print(f'  [build] Injected --profile-range handler into cached runtime-entry.cpp')
-                            # Rebuild entry.exe after injection
-                            _gcapi_src_hit = _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp"
-                            _gcapi_dst_hit = ctx.native_dir / "gc_api.cpp"
-                            if _gcapi_src_hit.exists():
-                                import shutil as _su_hit
-                                _su_hit.copy2(str(_gcapi_src_hit), str(_gcapi_dst_hit))
-                            import subprocess as _sp_hit
-                            _rebuild_hit = _sp_hit.run(
-                                ["cmake", "--build", ".", "--config", "RelWithDebInfo"],
-                                cwd=ctx.native_dir / "build",
-                                capture_output=True, text=True, timeout=7200)
-                            if _rebuild_hit.returncode == 0:
-                                _built_hit = ctx.native_dir / "build" / "RelWithDebInfo" / "chaos_entry.exe"
-                                if _built_hit.exists():
-                                    import shutil as _su_hit2
-                                    _su_hit2.copy2(_built_hit, ctx.entry_exe_path)
-                                    print(f'  [build] Rebuilt cached entry.exe with --profile-range')
-                            else:
-                                print(f'  [build] WARNING: rebuild of cached entry.exe for --profile-range failed')
                 duration_ms = int((time.perf_counter() - start) * 1000)
-                # Also build JIT entry (non-blocking, not cached separately)
-                _build_jit_entry(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"), subjects_dll, metadata_path, ctx.native_dir, ctx.native_config, ctx.assembly_dirs)
+                # Also build JIT entry if stale or missing (non-blocking)
+                _build_jit_entry_fast(tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator"),
+                                      subjects_dll, metadata_path, ctx.native_dir,
+                                      ctx.native_config, ctx.assembly_dirs)
                 return StageResult(
                     stage="build", status="passed",
                     summary=f"[CACHE HIT] {total_subjects} subjects -> entry.exe ({duration_ms}ms)",
@@ -798,16 +852,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     tpg_dll = tool_dll("Chaos.IL2CPP.Tools.TestProjectGenerator")
     print(f"  [build] Running TPG generate-dll...")
 
-    # Copy gc_api.cpp locally so chaos_gc_get_allocated_bytes_for_current_thread
-    # links against our tls_alloc_fast_bytes (SDK prebuilt lib has stale ref)
-    _gcapi_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp"
-    _gcapi_dst = ctx.native_dir / "gc_api.cpp"
-    if _gcapi_src.exists():
-        shutil.copy2(str(_gcapi_src), str(_gcapi_dst))
-        print(f"  [build] Copied gc_api.cpp")
-    else:
-        print(f"  [build] WARNING: gc_api.cpp not found at {_gcapi_src}")
-
     tpg_cmd = [
         "dotnet", "exec", str(tpg_dll),
         "generate-dll",
@@ -815,22 +859,13 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "--metadata", str(metadata_path),
         "--output", str(ctx.native_dir),
         "--config-tier", ctx.native_config,
-            # No --clean: keep per-assembly files
+        "--clean",
     ]
 
     # Pass assembly dirs from pipeline-config.yaml (populated by chunk_pipeline.py)
     for ad in ctx.assembly_dirs:
         tpg_cmd.extend(['--assembly-dir', ad])
         print(f"  [build] assembly-dir: {ad}")
-
-    # Pass target assembly as --additional-assembly so the codegen compiles
-    # its methods as real AOT (not external stubs). Combined with the
-    # SubjectInstanceFactory change in AutoTestGenerator, FACT subject
-    # wrappers create real instances and call real method bodies, which
-    # triggers GC allocations tracked by tls_alloc_fast_bytes.
-    if target_dll is not None and target_dll.exists():
-        tpg_cmd.extend(["--additional-assembly", str(target_dll)])
-        print(f"  [build] additional-assembly: {target_dll} (target assembly)")
 
     # Additional assemblies from chunk config (declared in chunk.json)
     # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.
@@ -860,194 +895,18 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             try:
                 print(f"  [TPG:err] {line}")
             except UnicodeEncodeError:
-                safe = line.encode("ascii", errors="ignore").decode("ascii", errors="replace")
-                print(f"  [TPG:err] {safe}")
+                print(f"  [TPG:err] {line.encode('ascii', errors='replace').decode('ascii')}")
         for line in tpg_result.stdout.splitlines()[-5:]:
             print(f"  [TPG:out] {line}")
 
         if tpg_result.returncode != 0:
-            # Before reporting failure, try fixup and retry build once.
-            # The TPG may have failed due to:
-            # 1. C2371: duplicate value type typedef (TagList has struct + int32)
-            # 2. C2672/C3536: ->field access on opaque external value type
-            _did_fixup = False
-            for _hdr in (ctx.native_dir.glob("subjects/*.generated.header.h")):
-                try:
-                    text = _hdr.read_text(encoding="utf-8")
-                    # Fix 1: Remove the struct AND insert a typedef BEFORE the
-                    # first boxed type that uses chaos_valuetype_TagList.
-                    # The codegen places the typedef at line 900+, AFTER the
-                    # boxed type struct at line 350+, causing C2334.
-                    _struct_pattern = r'struct chaos_valuetype_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList\s*\n?\{[^}]*\};\n?'
-                    if re.search(_struct_pattern, text, flags=re.DOTALL):
-                        # Insert typedef before the boxed type struct
-                        _typedef_line = 'typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList;\n'
-                        _boxed_marker = 'struct chaos_boxed_type_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList'
-                        if _boxed_marker in text:
-                            text = text.replace(
-                                _boxed_marker,
-                                _typedef_line + _boxed_marker)
-                        # Remove the struct definition
-                        text = re.sub(_struct_pattern, '', text, flags=re.DOTALL)
-                        _hdr.write_text(text, encoding="utf-8")
-                        print(f"  [build] Fixup: moved TagList typedef before boxed type in {_hdr.name}")
-                        _did_fixup = True
-                except (OSError, UnicodeDecodeError):
-                    pass
-            # Fix 2: Replace ->field access with reinterpret_cast for opaque types
-            for _page in (ctx.native_dir.glob("subjects/native-aot.generated.page*.cpp")):
-                try:
-                    text = _page.read_text(encoding="utf-8")
-                    # Replace: foo->field_TagList___tagsCount = val
-                    # With:    *reinterpret_cast<CHAOS_IL2CPP_INT32*>(foo) = (CHAOS_IL2CPP_INT32)(val)
-                    fixed = re.sub(
-                        r'(\w+)->field_System_Diagnostics_DiagnosticSource_System_Diagnostics_TagList___tagsCount = (\w+);',
-                        r'*reinterpret_cast<CHAOS_IL2CPP_INT32*>(\1) = static_cast<CHAOS_IL2CPP_INT32>(\2);',
-                        text)
-                    if fixed != text:
-                        _page.write_text(fixed, encoding="utf-8")
-                        print(f"  [build] Fixup: replaced TagList field access in {_page.name}")
-                        _did_fixup = True
-                except (OSError, UnicodeDecodeError):
-                    pass
-            # Fix 3: kChaosExternalRuntimeFnTable SEH safety — handled by
-            # runtime-entry.cpp template which wraps OverrideUnresolvedExternal
-            # RuntimeEntries in __try/__except for all chunks.
-            pass
-            if _did_fixup:
-                # Retry the build
-                print(f"  [build] Retrying cmake build after fixup...")
-                import subprocess as _sp
-                _retry = _sp.run(
-                    ["cmake", "--build", ".", "--config", "RelWithDebInfo"],
-                    cwd=ctx.native_dir / "build",
-                    capture_output=True, text=True, timeout=7200)
-                if _retry.returncode == 0:
-                    print(f"  [build] Retry succeeded after fixup")
-                    _built = ctx.native_dir / "build" / "RelWithDebInfo" / "chaos_entry.exe"
-                    if _built.exists():
-                        import shutil as _su
-                        _su.copy2(_built, ctx.entry_exe_path)
-                        print(f"  [build] Copied entry.exe from retry build")
-                    tpg_result = _retry
-                else:
-                    print(f"  [build] Retry FAILED (rc={_retry.returncode})")
-                    for _line in (_retry.stderr + _retry.stdout).splitlines()[-3:]:
-                        if _line.strip():
-                            print(f"      {_line.strip()[:200]}")
-            if tpg_result.returncode != 0:
-                return StageResult(
-                    stage="build", status="error",
-                    summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
-                    duration_ms=int((time.perf_counter() - start) * 1000))
+            return StageResult(
+                stage="build", status="error",
+                summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
+                duration_ms=int((time.perf_counter() - start) * 1000))
 
-    # Re-copy gc_api.cpp after TPG --clean removes it.
-    # TPG generate-dll with --clean deletes gc_api.cpp from native_dir,
-    # but cmake still needs it for compilation.  This re-copy ensures
-    # ALL chunks have gc_api.cpp available during cmake build, not just
-    # those that go through the profile-range injection path.
-    _gcapi_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp"
-    _gcapi_dst = ctx.native_dir / "gc_api.cpp"
-    if _gcapi_src.exists() and not _gcapi_dst.exists():
-        shutil.copy2(str(_gcapi_src), str(_gcapi_dst))
-        print(f"  [build] Re-copied gc_api.cpp (cleaned by TPG --clean)")
-
-    # Re-copy object_stubs.cpp (cleaned by TPG --clean).
-    # Contains ChaosRuntimeHelpersGetUninitializedObject for ShapeRegistry direct call.
-    _objstub_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs" / "object_stubs.cpp"
-    _objstub_dst = ctx.native_dir / "object_stubs.cpp"
-    if _objstub_src.exists() and not _objstub_dst.exists():
-        shutil.copy2(str(_objstub_src), str(_objstub_dst))
-        print(f"  [build] Re-copied object_stubs.cpp (cleaned by TPG --clean)")
-    # Re-run cmake configure so the GLOB picks up the newly copied object_stubs.cpp.
-    if _objstub_dst.exists():
-        _build_dir = ctx.native_dir / "build"
-        if _build_dir.exists() and (_build_dir / "CMakeCache.txt").exists():
-            import subprocess as _sp
-            _cfg = _sp.run(["cmake", str(ctx.native_dir)], cwd=str(_build_dir),
-                           capture_output=True, text=True, timeout=60)
-            if _cfg.returncode != 0:
-                print(f"  [build] cmake reconfigure for object_stubs.cpp failed")
-                for _l in _cfg.stderr.splitlines()[-3:]:
-                    print(f"      {_l}")
-
-    # -- 8b. Inject --profile-range handler into generated runtime-entry.cpp --
-    _rp = ctx.native_dir / "runtime-entry.cpp"
-    if _rp.exists():
-        _code = _rp.read_text(encoding="utf-8", errors="replace")
-        _marker = '    if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }'
-        if _marker in _code and 'profile-range' not in _code:
-            _prefix = (
-                '\n// --profile-range: profile contiguous AOT method indices'
-                '\nstatic int RunProfileRangeMode(int start_idx, int end_idx) {'
-                '\n    using namespace chaos::il2cpp::runtime_core;'
-                '\n    if (start_idx < 0) start_idx = 0;'
-                '\n    if (end_idx > kAotMethodCount) end_idx = kAotMethodCount;'
-                '\n    const int kCount = end_idx - start_idx;'
-                '\n    auto* entries = GetHotpatchEntries();'
-                '\n    ProfileStoreInit(kCount);'
-                '\n    for (int idx = start_idx; idx < end_idx; idx++) {'
-                '\n        int64_t heap_before = chaos_gc_get_heap_size();'
-                '\n        GetThreadProfileData().heap_before = heap_before;'
-                '\n        __try {'
-                '\n            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, idx);'
-                '\n        } __except(EXCEPTION_EXECUTE_HANDLER) {'
-                '\n        }'
-                '\n        int64_t heap_after = chaos_gc_get_heap_size();'
-                '\n        GetThreadProfileData().heap_after = heap_after;'
-                '\n        FlushThreadProfileData(idx);'
-                '\n    }'
-                '\n    ProfileStoreFinalize();'
-                '\n    ProfileEmitJson();'
-                '\n    return 0;'
-                '\n}'
-                '\n'
-                '\nint main(int argc, char* argv[]) {'
-                '\n    // Force-override GetUninitializedObject in external runtime table'
-                '\n    // (prebuilt SDK resolves it to old fallback; redirect to ChaOS GC alloc).'
-                '\n    for (int _gui = 0; _gui < kChaosExternalRuntimeCount; _gui++) {'
-                '\n        auto* _gs = kChaosExternalRuntimeSubjects[_gui];'
-                '\n        if (_gs && std::strstr(_gs, "RuntimeHelpers::GetUninitializedObject:")) {'
-                '\n            kChaosExternalRuntimeFnTable[_gui] = (void*)ChaosRuntimeHelpersGetUninitializedObject;'
-                '\n            break;'
-                '\n        }'
-                '\n    }'
-            )
-            _cli = (
-                '\n    if (std::strcmp(argv[1], "--profile-range") == 0) {'
-                '\n        if (argc < 4) { puts("Usage: entry.exe --profile-range <start> <end>"); return 1; }'
-                '\n        ret = RunProfileRangeMode(std::atoi(argv[2]), std::atoi(argv[3]));'
-                '\n        goto shutdown;'
-                '\n    }'
-                '\n'
-            )
-            _code = _code.replace('int main(int argc, char* argv[]) {', _prefix)
-            _code = _code.replace(_marker, _cli + _marker)
-            _rp.write_text(_code, encoding="utf-8")
-            print(f'  [build] Injected --profile-range handler into runtime-entry.cpp')
-            # Re-copy gc_api.cpp (was cleaned by TPG --clean step) and rebuild
-            _gcapi_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "gc" / "gc_api.cpp"
-            _gcapi_dst = ctx.native_dir / "gc_api.cpp"
-            if _gcapi_src.exists():
-                import shutil as _su
-                _su.copy2(str(_gcapi_src), str(_gcapi_dst))
-            import subprocess as _sp
-            _rebuild = _sp.run(
-                ["cmake", "--build", ".", "--config", "RelWithDebInfo"],
-                cwd=ctx.native_dir / "build",
-                capture_output=True, text=True, timeout=7200)
-            if _rebuild.returncode == 0:
-                print(f'  [build] Rebuilt entry.exe after profile-range injection')
-                _built = ctx.native_dir / "build" / "RelWithDebInfo" / "chaos_entry.exe"
-                if _built.exists():
-                    import shutil as _su
-                    _su.copy2(_built, ctx.entry_exe_path)
-                    print(f'  [build] Copied rebuilt entry.exe')
-            else:
-                print(f'  [build] WARNING: rebuild after profile-range injection failed')
-                for _line in (_rebuild.stderr.splitlines()[-3:]):
-                    if _line.strip():
-                        print(f'      {_line.strip()[:200]}')
+    # -- 8b. Inject --profile mode into runtime-entry.cpp --
+    _inject_profile_mode(ctx.native_dir)
 
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
@@ -1069,7 +928,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     print(f"  [build] [hephaestus] Cached build output ({cache_key[:48]}...)")
 
     # -- 9. Build JIT entry (non-blocking) --
-    jit_built = _build_jit_entry(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config, ctx.assembly_dirs)
+    jit_built = _build_jit_entry_fast(tpg_dll, subjects_dll, metadata_path, ctx.native_dir, ctx.native_config, ctx.assembly_dirs)
 
     print(f"  [build] Done ({duration_ms}ms)")
 

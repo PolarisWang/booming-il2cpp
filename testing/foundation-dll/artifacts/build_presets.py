@@ -2,22 +2,23 @@
 """Build native runtime SDK from source.
 
 Builds all native C++ runtime libraries via cmake presets, then collects
-the resulting .lib files into testing/foundation-dll/sdk/<preset-name>/.
+the resulting .lib/.a files into testing/foundation-dll/sdk/<preset-name>/.
 
 Usage:
     python testing/foundation-dll/artifacts/build_presets.py
     python testing/foundation-dll/artifacts/build_presets.py --preset windows-x64-reference
+    python testing/foundation-dll/artifacts/build_presets.py --preset linux-x64-profile
     python testing/foundation-dll/artifacts/build_presets.py --check  # dry-run: check if up-to-date
 
 Output:
     testing/foundation-dll/sdk/windows-x64-reference/
         ├── chaos_runtime_core.lib
         ├── chaos_bootstrap.lib
-        ├── chaos_common.lib
-        ├── chaos_pal.lib
-        ├── chaos_jit.lib
-        ├── chaos_support.lib
-        └── ...
+        ├── ...
+    testing/foundation-dll/sdk/linux-x64-profile/
+        ├── chaos_runtime_core.a
+        ├── chaos_bootstrap.a
+        ├── ...
 """
 
 from __future__ import annotations
@@ -35,11 +36,20 @@ _SDK_ROOT = _REPO_ROOT / "testing" / "foundation-dll" / "sdk"
 _NATIVE_ROOT = _REPO_ROOT / "src" / "native"
 
 # ── Presets that need to be built ──
+# sdk_subdir is relative to _SDK_ROOT; the ensure_sdk() in tool_helpers.py
+# references windows-x64-reference for the reference SDK path.
 PRESETS = {
     "windows-x64-reference": {
         "cmake_preset": "windows-x64-reference",
         "config": "RelWithDebInfo",
         "sdk_subdir": "windows-x64-reference",
+        "lib_ext": ".lib",
+    },
+    "linux-x64-profile": {
+        "cmake_preset": "linux-x64-profile",
+        "config": "RelWithDebInfo",
+        "sdk_subdir": "linux-x64-profile",
+        "lib_ext": ".a",
     },
 }
 
@@ -48,7 +58,6 @@ def _get_source_hash() -> str:
     """Compute a hash of all native source files to detect changes."""
     hasher = hashlib.sha256()
     for root, dirs, files in os.walk(_NATIVE_ROOT):
-        # Skip build artifacts, cmake output, git dirs
         dirs[:] = [d for d in dirs if not d.startswith((".", "__")) and d not in ("build", "out")]
         for f in sorted(files):
             if f.endswith((".cpp", ".h", ".hpp", ".cmake", ".txt", ".scriban")):
@@ -56,7 +65,7 @@ def _get_source_hash() -> str:
                 rel = path.relative_to(_REPO_ROOT)
                 hasher.update(str(rel).encode())
                 try:
-                    hasher.update(path.read_bytes()[:4096])  # first 4KB
+                    hasher.update(path.read_bytes()[:4096])
                 except OSError:
                     pass
     return hasher.hexdigest()[:16]
@@ -76,7 +85,6 @@ def _sdk_needs_rebuild(preset_name: str) -> bool:
 
 
 def _write_source_hash(preset_name: str) -> None:
-    """Write source hash to mark SDK as up-to-date."""
     sdk_dir = _SDK_ROOT / preset_name
     sdk_dir.mkdir(parents=True, exist_ok=True)
     (sdk_dir / ".source_hash").write_text(_get_source_hash(), encoding="utf-8")
@@ -92,6 +100,7 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
     cmake_preset = info["cmake_preset"]
     config = info["config"]
     sdk_subdir = info["sdk_subdir"]
+    lib_ext = info["lib_ext"]
 
     if not force and not _sdk_needs_rebuild(preset_name):
         print(f"[build-presets] {preset_name}: SDK is up-to-date (source hash matches)")
@@ -111,7 +120,6 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
 
     # Step 2: cmake --build only the main lib targets (skip test targets)
     preset_dir = _PRESETS_DIR / preset_name
-    # List only the library/executable targets we need for the SDK.
     sdk_targets = [
         "chaos_runtime_core", "chaos_bootstrap", "chaos_common",
         "chaos_pal", "chaos_support", "chaos_fmt",
@@ -119,8 +127,13 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
         "chaos_eventpipe", "chaos_hot_update",
     ]
     for target in sdk_targets:
+        build_args = [
+            "cmake", "--build", str(preset_dir), "--target", target,
+        ]
+        if config:
+            build_args += ["--config", config]
         result = subprocess.run(
-            ["cmake", "--build", str(preset_dir), "--config", config, "--target", target],
+            build_args,
             capture_output=True, text=True, timeout=600,
         )
         if result.returncode != 0:
@@ -129,14 +142,14 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
                 print(f"  [{target}] {errors[-1].strip()}")
                 return False
 
-    # Step 3: Collect .lib files into SDK directory
+    # Step 3: Collect library files into SDK directory
     sdk_target = _SDK_ROOT / sdk_subdir
     sdk_lib_dir = sdk_target / "lib"
     sdk_lib_dir.mkdir(parents=True, exist_ok=True)
 
     lib_count = 0
-    for lib in preset_dir.rglob("*.lib"):
-        if "RelWithDebInfo" in str(lib) or config in str(lib):
+    for lib in preset_dir.rglob(f"*{lib_ext}"):
+        if not config or config in str(lib):
             target = sdk_lib_dir / lib.name
             shutil.copy2(lib, target)
             lib_count += 1

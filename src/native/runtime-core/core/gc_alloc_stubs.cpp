@@ -64,7 +64,7 @@ void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
     return ptr;
 }
 
-static void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
+void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
     CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomicProfiled");
 
     // GC Stress mode: force a full GC before allocation.

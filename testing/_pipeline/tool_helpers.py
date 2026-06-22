@@ -43,7 +43,7 @@ def ensure_tool_built(tool_name: str) -> bool:
             return True
     # Rebuild
     result = subprocess.run(
-        ["dotnet", "build", str(proj), "-c", "Debug", "-nologo"],
+        ["dotnet", "build", str(proj), "-nologo"],
         capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
         for line in (result.stderr.splitlines() + result.stdout.splitlines())[-5:]:
@@ -53,28 +53,40 @@ def ensure_tool_built(tool_name: str) -> bool:
 
 
 def ensure_sdk(repo_root: Path | None = None) -> Path:
-    """Ensure the native SDK is built, building it if needed."""
+    """Ensure the native SDK is built, building it if needed.
+
+    Platform detection: on Linux uses linux-x64-profile (static .a),
+    on Windows uses windows-x64-reference (static .lib).
+    Falls back gracefully when the platform preset is not available.
+    """
+    import platform as _platform
+
     if repo_root is None:
         repo_root = _repo_root()
-    sdk_dir = repo_root / "testing" / "foundation-dll" / "sdk" / "windows-x64-reference"
-    sdk_lib = sdk_dir / "lib" / "chaos_runtime_core.lib"
+
+    is_linux = _platform.system() == "Linux"
+    sdk_subdir = "linux-x64-profile" if is_linux else "windows-x64-reference"
+    lib_ext = ".a" if is_linux else ".lib"
+
+    sdk_dir = repo_root / "testing" / "foundation-dll" / "sdk" / sdk_subdir
+    sdk_lib = sdk_dir / "lib" / f"chaos_runtime_core{lib_ext}"
     if sdk_lib.exists():
         return sdk_dir
-    
-    print("[tool_helpers] SDK not found, building presets...")
+
+    print(f"[tool_helpers] SDK ({sdk_subdir}) not found, building presets...")
     script = repo_root / "testing" / "foundation-dll" / "artifacts" / "build_presets.py"
     result = subprocess.run(
         [sys.executable, str(script)],
         capture_output=True, text=True, timeout=1200,
     )
     if result.returncode != 0:
-        print("[tool_helpers] SDK build FAILED")
+        print(f"[tool_helpers] SDK build FAILED (presets may not support {_platform.system()})")
         print(result.stderr[-500:])
         raise RuntimeError(f"SDK build failed: {result.stderr[-200:]}")
-    
+
     if not sdk_lib.exists():
         raise RuntimeError(f"SDK built but {sdk_lib} not found")
-    
+
     print(f"[tool_helpers] SDK ready: {sdk_dir}")
     return sdk_dir
 
