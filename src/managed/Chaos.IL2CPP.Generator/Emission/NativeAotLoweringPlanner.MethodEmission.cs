@@ -60,36 +60,6 @@ public sealed partial class NativeAotLoweringPlanner
         var emittedSymbols = new HashSet<string>(StringComparer.Ordinal);
         foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
         {
-            // Async state machine MoveNext methods are emitted as coroutines with
-            // the ABI dispatch signature (CHAOS_IL2CPP_INT64 return, 4 × INTPTR
-            // params, noexcept).  The declaration MUST match this signature — not
-            // the original managed method's signature — to avoid C2733 (extern "C"
-            // overload conflict) with the coroutine wrapper definition.
-            // This applies to BOTH the primary symbol and any __generic stub symbol.
-            if (IsAsyncStateMachineMoveNext(reachableMethod.SubjectId))
-            {
-                if (string.IsNullOrEmpty(reachableMethod.NativeSymbol))
-                    continue;
-                // Track BOTH the primary symbol and the __generic stub symbol
-                // in emittedSymbols.  Without this, a separate method whose
-                // NativeSymbol is the __generic stub name would emit a
-                // declaration with the original managed signature, causing
-                // C2733 (extern "C" overload conflict).
-                if (!emittedSymbols.Add(reachableMethod.NativeSymbol))
-                    continue;
-                declarations.Add(
-                    $"extern \"C\" CHAOS_IL2CPP_INT64 {reachableMethod.NativeSymbol}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
-                string? stubText = TryGetInstantiationStubSymbol(reachableMethod);
-                if (!string.IsNullOrEmpty(stubText))
-                {
-                    emittedStubSymbols.Add(stubText);
-                    emittedSymbols.Add(stubText);
-                    declarations.Add(
-                        $"extern \"C\" CHAOS_IL2CPP_INT64 {stubText}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
-                }
-                continue;
-            }
-
             // Deduplicate by native symbol to avoid C2733 (extern "C" cannot be overloaded)
             if (!emittedSymbols.Add(reachableMethod.NativeSymbol))
                 continue;
@@ -117,33 +87,16 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        // Resolve stub target symbol (used by both async and non-async paths)
-        string targetSym = ResolveStubTargetNativeSymbol(method);
-
-        // Async state machine MoveNext methods don't need a generic instantiation
-        // stub — the coroutine wrapper (emitted by EmitManagedMethod) already
-        // provides the dispatch entry point with the ABI dispatch signature.
-        // Emitting a redundant stub here would cause C2733 (extern "C" overload
-        // conflict) with the declaration emitted by BuildMethodDeclarations.
-        if (IsAsyncStateMachineMoveNext(method.SubjectId))
-            return;
-
         // For shared generic instantiations, the stub forwards to the canonical
         // method's body instead of the per-instantiation body.
+        string targetSymbol = ResolveStubTargetNativeSymbol(method);
 
         IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
 
         // Determine if this stub needs the chaos_generic_context parameter.
-        // Must use the same logic as BuildMethodDeclarations (line 101-103) to
-        // ensure declaration and definition agree on generic context, avoiding
-        // C2733 (extern "C" overload conflict).  When _stubNeedsContext is null
-        // or doesn't contain this stub symbol, fall back to shared context
-        // check (matching BuildMethodDeclarations' fallback).
-        bool needsContext;
-        if (_stubNeedsContext is not null && _stubNeedsContext.TryGetValue(text, out bool nc))
-            needsContext = nc;
-        else
-            needsContext = _sharedContextSymbols?.Contains(method.NativeSymbol) == true;
+        // Uses the pre-computed _stubNeedsContext map (union semantics) to
+        // match the header declaration and avoid C2733.
+        bool needsContext = _stubNeedsContext.TryGetValue(text, out bool nc) && nc;
 
         string paramSig = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
         if (needsContext)
@@ -177,14 +130,14 @@ public sealed partial class NativeAotLoweringPlanner
         if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
         {
             builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-                ? $"    {targetSym}();"
-                : $"    {targetSym}({forwardedArgs});");
+                ? $"    {targetSymbol}();"
+                : $"    {targetSymbol}({forwardedArgs});");
         }
         else
         {
             builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-                ? $"    return {targetSym}();"
-                : $"    return {targetSym}({forwardedArgs});");
+                ? $"    return {targetSymbol}();"
+                : $"    return {targetSymbol}({forwardedArgs});");
         }
         builder.AppendLine("}");
     }
@@ -196,13 +149,6 @@ public sealed partial class NativeAotLoweringPlanner
         _state.Value!.NextInlineId = 0;
         _state.Value!.DispatchLabelSeq = 0;
         _state.Value!.PreTryFoldInitializers = null;  // reset per-method
-        _state.Value!.HoistedInvariantLocals = null;  // reset per-method (C2065)
-        _state.Value!.EmittedHoistedLocals = null;    // reset per-method (C2065)
-        _state.Value!.HoistedIVs = null;              // reset per-method
-        _state.Value!.AccumulatorSlots = null;        // reset per-method
-        _state.Value!.LoopArrayAccessSkipOffsets = null;  // reset per-method
-        _state.Value!.HoistedArrayBaseSlots = null;   // reset per-method
-        _state.Value!.SlotVarToLocalSlot = null;      // reset per-method
 
         // P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
         if (method.IsPInvoke)
@@ -289,25 +235,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var returnType = MapAbiSlotReturnType(method.ReturnAbi);
             builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId!));
-            // If this method has a __generic stub, ensure the context parameter
-            // matches the stub declaration's context (BuildMethodDeclarations).
-            // Using FormatMethodDeclaration with _sharedContextSymbols may give
-            // a different result than _stubNeedsContext, causing C2733.
-            bool needsGenericCtx = _sharedContextSymbols?.Contains(method.NativeSymbol) == true;
-            string? stubText = TryGetInstantiationStubSymbol(method);
-            if (stubText != null)
-            {
-                if (_stubNeedsContext is not null && _stubNeedsContext.TryGetValue(stubText, out bool nc))
-                    needsGenericCtx = nc;
-            }
-            var paramSig = FormatAbiSlotParameterSignature(GetMethodAbiParameterSlots(method));
-            if (needsGenericCtx)
-            {
-                paramSig = string.IsNullOrEmpty(paramSig) || paramSig == "void"
-                    ? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
-                    : paramSig + ", CHAOS_IL2CPP_INTPTR chaos_generic_context";
-            }
-            builder.AppendLine($"extern \"C\" {returnType} {method.NativeSymbol}({paramSig})");
+            builder.AppendLine(FormatMethodDeclaration(method, _sharedContextSymbols).TrimEnd(';'));
             builder.AppendLine("{");
             if (!string.IsNullOrEmpty(returnType) && returnType != "void")
                 builder.AppendLine("    return {};");

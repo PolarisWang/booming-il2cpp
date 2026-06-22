@@ -1,0 +1,10 @@
+{
+  "hot_experts": [
+    "dev-il2cpp-runtime-expert",
+    "dev-il2cpp-codegen-expert",
+    "dev-il2cpp-gc-expert",
+    "dev-il2cpp-translation-expert",
+    "dev-il2cpp-build-fixer"
+  ],
+  "note": "最常用的 5 个 Expert，新会话自动预加载。直接引用不走发现链。"
+}

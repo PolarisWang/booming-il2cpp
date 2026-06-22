@@ -10,7 +10,7 @@ extern "C" void InterpreterEntryDirect(
     void*     ret_buf) noexcept;
 
 #pragma warning(push)
-#pragma warning(disable: 4065 4244 4172)
+#pragma warning(disable: 4065 4244)
 
 namespace chaos::il2cpp::codegen::{{ codegen_namespace }} {
 
