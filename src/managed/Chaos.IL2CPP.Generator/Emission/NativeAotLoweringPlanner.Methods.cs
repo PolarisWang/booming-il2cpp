@@ -192,7 +192,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// stack overflow from excessive concurrent StructuredIR recovery
     /// on ThreadPool threads (1 MB stack vs 4 MB main thread).
     /// </summary>
-    internal int _maxParallelism = Math.Max(1, Environment.ProcessorCount - 2);
+    internal int _maxParallelism = Math.Max(1, Math.Min(4, Environment.ProcessorCount - 2));
 
     /// <summary>
     /// Static field declarations (subjectId → fieldTypeSubjectId) captured during

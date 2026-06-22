@@ -230,6 +230,52 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             }
 
+            // Layer 2: scan generated C++ page files for missing valuetype
+            // declarations via regex.  Some value types appear only as template
+            // arguments in generated code (e.g., chaos_valuetype_Nullable_1_Int32)
+            // without being directly referenced in ABI slots of any method.
+            // These would be missed by the ABI slot scan above.
+            string valueTypePattern = @"\b(chaos_valuetype_\w+)\b";
+            foreach (var pageFile in Directory.EnumerateFiles(
+                Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+                    ?? ".", "native-aot.page-*.cpp", SearchOption.TopDirectoryOnly)
+                .Concat(Directory.EnumerateFiles(
+                    Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+                        ?? ".", "_common.h", SearchOption.TopDirectoryOnly)))
+            {
+                string pageCode = File.ReadAllText(pageFile);
+                foreach (System.Text.RegularExpressions.Match match in
+                    System.Text.RegularExpressions.Regex.Matches(pageCode, valueTypePattern))
+                {
+                    string typeId = match.Groups[1].Value;
+                    if (!_emittedValueTypeSubjectIds.Contains(typeId))
+                        _emittedValueTypeSubjectIds.Add(typeId);
+                }
+            }
+
+            // Layer 3: scan the ObjectModelEmission output for valuetype usage
+            // patterns.  Codegen uses CHAOS_IL2CPP_HELPER_CALL_xxx that may
+            // reference valuetypes not captured by either ABI slots or page regex.
+            string objectModelDir = Path.Combine(
+                Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+                    ?? ".", "object_model");
+            if (Directory.Exists(objectModelDir))
+            {
+                string valueTypeRefPattern = @"(chaos_valuetype_\w+)";
+                foreach (var omFile in Directory.EnumerateFiles(
+                    objectModelDir, "*.generated.h", SearchOption.TopDirectoryOnly))
+                {
+                    string omCode = File.ReadAllText(omFile);
+                    foreach (System.Text.RegularExpressions.Match match in
+                        System.Text.RegularExpressions.Regex.Matches(omCode, valueTypeRefPattern))
+                    {
+                        string typeId = match.Groups[1].Value;
+                        if (!_emittedValueTypeSubjectIds.Contains(typeId))
+                            _emittedValueTypeSubjectIds.Add(typeId);
+                    }
+                }
+            }
+
             var vtBuilder = new System.Text.StringBuilder();
             vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");
             foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
