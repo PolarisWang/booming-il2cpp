@@ -289,7 +289,25 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var returnType = MapAbiSlotReturnType(method.ReturnAbi);
             builder.AppendLine("// Managed method: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId!));
-            builder.AppendLine(FormatMethodDeclaration(method, _sharedContextSymbols).TrimEnd(';'));
+            // If this method has a __generic stub, ensure the context parameter
+            // matches the stub declaration's context (BuildMethodDeclarations).
+            // Using FormatMethodDeclaration with _sharedContextSymbols may give
+            // a different result than _stubNeedsContext, causing C2733.
+            bool needsGenericCtx = _sharedContextSymbols?.Contains(method.NativeSymbol) == true;
+            string? stubText = TryGetInstantiationStubSymbol(method);
+            if (stubText != null)
+            {
+                if (_stubNeedsContext is not null && _stubNeedsContext.TryGetValue(stubText, out bool nc))
+                    needsGenericCtx = nc;
+            }
+            var paramSig = FormatAbiSlotParameterSignature(GetMethodAbiParameterSlots(method));
+            if (needsGenericCtx)
+            {
+                paramSig = string.IsNullOrEmpty(paramSig) || paramSig == "void"
+                    ? "CHAOS_IL2CPP_INTPTR chaos_generic_context"
+                    : paramSig + ", CHAOS_IL2CPP_INTPTR chaos_generic_context";
+            }
+            builder.AppendLine($"extern \"C\" {returnType} {method.NativeSymbol}({paramSig})");
             builder.AppendLine("{");
             if (!string.IsNullOrEmpty(returnType) && returnType != "void")
                 builder.AppendLine("    return {};");
