@@ -545,3 +545,5 @@ testing/foundation-dll/**/native/gc_api.cpp
 # Local agent session files
 .claude/.classified
 .claude/.loaded_skills_cache
+testing/project-test/**/native/CMakeLists.txt
+testing/src/native/CMakeLists.txt
