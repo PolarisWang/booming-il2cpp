@@ -42,7 +42,6 @@ _is_linux = _platform.system() == "Linux"
 _sdk_preset = "linux-x64-profile" if _is_linux else "windows-x64-reference"
 _sdk_lib_ext = ".a" if _is_linux else ".lib"
 _sdk_config = "RelWithDebInfo"
-_jit_exe_name = "entry-jit.exe"  # TPG generates entry-jit.exe on all platforms
 
 
 # -- Profile mode injection ---------------------------------------------------
@@ -79,14 +78,6 @@ _PROFILE_MODE_CLI = '    if (std::strcmp(argv[1], "--profile") == 0) { ret = Run
 
 
 def _inject_profile_mode(native_dir: Path) -> None:
-    # BOUNDARY_OVERRIDE: issues/NNN
-    # Reason: TPG cannot generate --profile mode natively; the native
-    #   infrastructure (profile_stats.h, ProfileStoreInit, ProfileEmitJson)
-    #   is compiled in when CHAOS_IL2CPP_CONFIG_TIER=profile, but the Scriban
-    #   template for runtime-entry.cpp does not include the RunProfileMode()
-    #   function or CLI handler. Patching the generated file is the least
-    #   invasive workaround until TPG templates gain --profile support.
-    # Expires: 2026-09-22
     """Inject --profile mode into runtime-entry.cpp after TPG generation.
 
     The TPG generates runtime-entry.cpp without --profile support even though
@@ -147,7 +138,26 @@ def _get_additional_assemblies(chunk_dir: Path) -> list[str]:
     return config.get("additionalAssemblies", [])
 
 
-# detect_tfm is imported from _pipeline.tool_helpers; prefer it over local reimplementation.
+def _detect_tfm(dll_path: Path) -> str:
+    """Detect target framework moniker from the DLL's runtime directory path.
+
+    E.g. ".../shared/Microsoft.NETCore.App/10.0.6/System.Private.CoreLib.dll"
+    -> "net10.0".  Falls back to "net8.0".
+
+    Also handles custom DLL paths like ".../dotnet-foundation/net10.0/runtime/...".
+    """
+    path = str(dll_path).replace("\\", "/")
+    # Primary: standard runtime layout
+    m = re.search(r"Microsoft\.NETCore\.App/(\d+)\.(\d+)\.", path)
+    if m:
+        return f"net{m.group(1)}.{m.group(2)}"
+    # Fallback: custom layout like dotnet-foundation/netX.Y/runtime/
+    m = re.search(r"/net(\d+)\.(\d+)/runtime/", path)
+    if m:
+        return f"net{m.group(1)}.{m.group(2)}"
+    return "net8.0"
+
+
 def _custom_subjects_metadata(
     method_info: list[tuple[str, str, str]],  # [(methodName, returnType, typeName)]
     slug: str,
@@ -371,7 +381,7 @@ def _build_jit_entry(
     native_config: str = "check",
     assembly_dirs: list[str] | None = None,
 ) -> bool:
-    """Build JIT entry-jit via TPG generate-dll --jit.
+    """Build JIT entry-jit.exe via TPG generate-dll --jit.
 
     Returns True if JIT build succeeded, False otherwise.
     JIT build failure does not block the pipeline.
@@ -408,13 +418,13 @@ def _build_jit_entry(
             print(f"      [jit:err] {line}")
         return False
 
-    jit_exe = jit_output / _jit_exe_name
+    jit_exe = jit_output / "entry-jit.exe"
     if not jit_exe.exists():
-        print(f"  [build] JIT {_jit_exe_name} not found at {jit_exe} — continuing")
+        print(f"  [build] JIT entry-jit.exe not found at {jit_exe} — continuing")
         return False
 
-    shutil.copy2(jit_exe, native_dir / _jit_exe_name)
-    print(f"  [build] JIT {_jit_exe_name}: {native_dir / _jit_exe_name} ({jit_exe.stat().st_size} bytes)")
+    shutil.copy2(jit_exe, native_dir / "entry-jit.exe")
+    print(f"  [build] JIT entry-jit.exe: {native_dir / 'entry-jit.exe'} ({jit_exe.stat().st_size} bytes)")
     return True
 
 
@@ -426,20 +436,20 @@ def _build_jit_entry_fast(
     native_config: str = "check",
     assembly_dirs: list[str] | None = None,
 ) -> bool:
-    """Build JIT entry-jit if stale or missing, skip via mtime check otherwise.
+    """Build JIT entry-jit.exe if stale or missing, skip via mtime check otherwise.
 
-    Checks if entry-jit already exists and is newer than the subjects DLL
+    Checks if entry-jit.exe already exists and is newer than the subjects DLL
     and metadata. If so, skips the expensive TPG codegen + cmake build.
     Returns True if JIT entry is available (built or already current).
     """
-    jit_exe = native_dir / _jit_exe_name
+    jit_exe = native_dir / "entry-jit.exe"
     if jit_exe.exists():
         jit_mtime = jit_exe.stat().st_mtime
         deps = [subjects_dll, metadata_path]
         if all(d.exists() and jit_mtime >= d.stat().st_mtime for d in deps):
-            print(f"  [build] [jit] {_jit_exe_name} is current ({jit_exe.stat().st_size} bytes)")
+            print(f"  [build] [jit] entry-jit.exe is current ({jit_exe.stat().st_size} bytes)")
             return True
-        print(f"  [build] [jit] {_jit_exe_name} exists but stale — rebuilding")
+        print(f"  [build] [jit] entry-jit.exe exists but stale — rebuilding")
     return _build_jit_entry(tpg_dll, subjects_dll, metadata_path, native_dir,
                             native_config, assembly_dirs)
 
@@ -625,144 +635,110 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] Total subjects (after supplemental merge): {total_subjects}")
 
     if total_subjects == 0:
-        # Fallback: check for custom subject .cs files (custom-only chunks)
-        custom_subjects_dir = ctx.chunk_dir / "managed" / "subjects"
-        custom_cs_files = list(custom_subjects_dir.rglob("*.cs")) if custom_subjects_dir.is_dir() else []
-        if custom_cs_files:
-            print(f"  [build] AutoTestGenerator produced 0 subjects — falling back to custom subjects "
-                  f"({len(custom_cs_files)} .cs files in {custom_subjects_dir})")
-            subjects_dll = ctx.subjects_dll_path
-            subjects_dll.parent.mkdir(parents=True, exist_ok=True)
-            tfm = detect_tfm(target_dll)
-            sdk_csproj = _chaos_sdk_csproj()
-            method_info = _compile_custom_subjects(custom_cs_files, subjects_dll, tfm, sdk_csproj)
-            if method_info is None:
-                print(f"  [build] Custom subjects build failed for {ctx.assembly}/{ctx.slug}")
-                return StageResult(
-                    stage="build", status="error",
-                    summary=f"Custom subjects build failed for {ctx.assembly}/{ctx.slug}",
-                    duration_ms=int((time.perf_counter() - start) * 1000))
-            # Generate metadata.json from the compiled custom subjects
-            metadata = _custom_subjects_metadata(method_info, ctx.slug)
-            metadata_path.write_text(
-                json.dumps(metadata, indent=2, ensure_ascii=False) + "\n",
-                encoding="utf-8")
-            metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-            total_subjects = metadata.get("totalMethods", 0)
-            print(f"  [build] Custom subjects: {total_subjects} methods")
-            # Fall through to the normal TPG flow (skip combine step)
-            _skip_combine = True
-        else:
-            print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
-                  f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
-            return StageResult(
-                stage="build", status="skipped",
-                summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
-                duration_ms=int((time.perf_counter() - start) * 1000))
-    else:
-        _skip_combine = False
+        print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
+              f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
+        return StageResult(
+            stage="build", status="skipped",
+            summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
+            duration_ms=int((time.perf_counter() - start) * 1000))
 
     # -- 5. Detect TFM from target DLL --
-    tfm = detect_tfm(target_dll)
+    tfm = _detect_tfm(target_dll)
     print(f"  [build] Target framework: {tfm}")
 
-    if _skip_combine:
-        print(f"  [build] Using custom-compiled subjects DLL (combine step skipped)")
-        subjects_dll = ctx.subjects_dll_path
-    else:
-        # -- 6. Combine generated .cs files into a single Library project --
-        print(f"  [build] Creating combined subjects DLL...")
-        subjects_dll = ctx.subjects_dll_path
-        subjects_dll.parent.mkdir(parents=True, exist_ok=True)
+    # -- 6. Combine generated .cs files into a single Library project --
+    print(f"  [build] Creating combined subjects DLL...")
+    subjects_dll = ctx.subjects_dll_path
+    subjects_dll.parent.mkdir(parents=True, exist_ok=True)
 
-        all_cs_files = list(auto_output.rglob("*.AutoGenerated.cs"))
+    all_cs_files = list(auto_output.rglob("*.AutoGenerated.cs"))
 
-        if not all_cs_files:
-            return StageResult(
-                stage="build", status="error",
-                summary="No generated .cs files found for combined build",
-                duration_ms=int((time.perf_counter() - start) * 1000))
+    if not all_cs_files:
+        return StageResult(
+            stage="build", status="error",
+            summary="No generated .cs files found for combined build",
+            duration_ms=int((time.perf_counter() - start) * 1000))
 
-        print(f"  [build]   {len(all_cs_files)} source files to combine")
-        combined_dir = ctx.chunk_dir / "managed" / "combined"
-        combined_dir.mkdir(parents=True, exist_ok=True)
+    print(f"  [build]   {len(all_cs_files)} source files to combine")
+    combined_dir = ctx.chunk_dir / "managed" / "combined"
+    combined_dir.mkdir(parents=True, exist_ok=True)
 
-        combined_cs_path = combined_dir / "CombinedSubjects.cs"
-        all_usings: set[str] = set()
-        namespace_blocks: list[str] = []
-        for cs_file in sorted(all_cs_files):
-            text = cs_file.read_text(encoding="utf-8")
-            ns_idx = text.find("\nnamespace ")
-            if ns_idx < 0:
-                # Fallback: whole file if no namespace
-                namespace_blocks.append(text)
-            else:
-                # Extract using directives from the preamble (before namespace)
-                preamble = text[:ns_idx]
-                for line in preamble.splitlines():
-                    stripped = line.strip()
-                    if stripped.startswith("using ") and stripped.endswith(";"):
-                        all_usings.add(stripped)
-                # Keep from namespace onward
-                namespace_blocks.append(text[ns_idx + 1:])
+    combined_cs_path = combined_dir / "CombinedSubjects.cs"
+    all_usings: set[str] = set()
+    namespace_blocks: list[str] = []
+    for cs_file in sorted(all_cs_files):
+        text = cs_file.read_text(encoding="utf-8")
+        ns_idx = text.find("\nnamespace ")
+        if ns_idx < 0:
+            # Fallback: whole file if no namespace
+            namespace_blocks.append(text)
+        else:
+            # Extract using directives from the preamble (before namespace)
+            preamble = text[:ns_idx]
+            for line in preamble.splitlines():
+                stripped = line.strip()
+                if stripped.startswith("using ") and stripped.endswith(";"):
+                    all_usings.add(stripped)
+            # Keep from namespace onward
+            namespace_blocks.append(text[ns_idx + 1:])
 
-        with open(combined_cs_path, "w", encoding="utf-8") as f:
-            f.write("// Auto-generated combined subjects file\n")
-            f.write("// Combined from all per-type AutoTestGenerator outputs\n\n")
-            for u in sorted(all_usings):
-                f.write(u + "\n")
-            f.write("\n")
-            for block in namespace_blocks:
-                f.write(block)
-                f.write("\n\n")
+    with open(combined_cs_path, "w", encoding="utf-8") as f:
+        f.write("// Auto-generated combined subjects file\n")
+        f.write("// Combined from all per-type AutoTestGenerator outputs\n\n")
+        for u in sorted(all_usings):
+            f.write(u + "\n")
+        f.write("\n")
+        for block in namespace_blocks:
+            f.write(block)
+            f.write("\n\n")
 
-        sdk_csproj = _chaos_sdk_csproj()
-        combined_csproj = combined_dir / "CombinedSubjects.csproj"
+    sdk_csproj = _chaos_sdk_csproj()
+    combined_csproj = combined_dir / "CombinedSubjects.csproj"
 
-        assembly_name = ctx.assembly
-        pkg_refs: list[str] = []
-        pkg_block = ""
+    assembly_name = ctx.assembly
+    pkg_refs: list[str] = []
+    pkg_block = ""
 
-        combined_csproj.write_text(
-            "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
-            "  <PropertyGroup>\n"
-            "    <OutputType>Library</OutputType>\n"
-            "    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>\n"
-            "    <ImplicitUsings>enable</ImplicitUsings>\n"
-            "    <Nullable>enable</Nullable>\n"
-            "    <DefineConstants>VERIFY</DefineConstants>\n"
-            "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
-            "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
-            "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
-            "  </PropertyGroup>\n"
-            "  <ItemGroup>\n"
-            f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
-            f"    <ProjectReference Include=\"{os.path.relpath(sdk_csproj, combined_csproj.parent)}\" />\n"
-            f"{pkg_block}"
-            "  </ItemGroup>\n"
-            "</Project>\n"
-        )
+    combined_csproj.write_text(
+        "<Project Sdk=\"Microsoft.NET.Sdk\">\n"
+        "  <PropertyGroup>\n"
+        "    <OutputType>Library</OutputType>\n"
+        "    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>\n"
+        "    <ImplicitUsings>enable</ImplicitUsings>\n"
+        "    <Nullable>enable</Nullable>\n"
+        "    <DefineConstants>VERIFY</DefineConstants>\n"
+        "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
+        "    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB5006</NoWarn>\n"
+        "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
+        "  </PropertyGroup>\n"
+        "  <ItemGroup>\n"
+        f"    <Compile Include=\"{combined_cs_path.name}\" />\n"
+        f"    <ProjectReference Include=\"{os.path.relpath(sdk_csproj, combined_csproj.parent)}\" />\n"
+        f"{pkg_block}"
+        "  </ItemGroup>\n"
+        "</Project>\n"
+    )
 
-        print(f"  [build] Building combined project ({tfm})...")
-        build_result = subprocess.run(
-            ["dotnet", "build", str(combined_csproj),
-             "-f", tfm,
-             f"-p:OutDir={subjects_dll.parent}",
-             "-p:ImportDirectoryBuildProps=false",
-             "--nologo", "-v", "quiet"],
-            capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
+    print(f"  [build] Building combined project ({tfm})...")
+    build_result = subprocess.run(
+        ["dotnet", "build", str(combined_csproj),
+         "-f", tfm,
+         f"-p:OutDir={subjects_dll.parent}",
+         "-p:ImportDirectoryBuildProps=false",
+         "--nologo", "-v", "quiet"],
+        capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
 
-        if build_result.returncode != 0 or not subjects_dll.exists():
-            print(f"  [build] Combined build FAILED for {tfm}")
-            for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
-                print(f"      {line}")
-            return StageResult(
-                stage="build", status="error",
-                summary="Combined subjects DLL build failed",
-                details={"buildErrors": build_result.stderr[:500]},
-                duration_ms=int((time.perf_counter() - start) * 1000))
+    if build_result.returncode != 0 or not subjects_dll.exists():
+        print(f"  [build] Combined build FAILED for {tfm}")
+        for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-15:]:
+            print(f"      {line}")
+        return StageResult(
+            stage="build", status="error",
+            summary="Combined subjects DLL build failed",
+            details={"buildErrors": build_result.stderr[:500]},
+            duration_ms=int((time.perf_counter() - start) * 1000))
 
-        print(f"  [build] Subjects DLL: {subjects_dll} ({subjects_dll.stat().st_size} bytes)")
+    print(f"  [build] Subjects DLL: {subjects_dll} ({subjects_dll.stat().st_size} bytes)")
 
     # Include runtime stub source files in hash so changes to interop_stubs.cpp
     # etc. invalidate the build cache and trigger a fresh rebuild.
@@ -890,11 +866,6 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     for ad in ctx.assembly_dirs:
         tpg_cmd.extend(['--assembly-dir', ad])
         print(f"  [build] assembly-dir: {ad}")
-
-    # Pass the target DLL as an additional assembly so TPG can resolve
-    # type-forwarding references (e.g. System.Collections -> System.Collections.NonGeneric).
-    tpg_cmd.extend(['--additional-assembly', str(target_dll)])
-    print(f"  [build] additional-assembly (target): {target_dll}")
 
     # Additional assemblies from chunk config (declared in chunk.json)
     # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.

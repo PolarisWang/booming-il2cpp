@@ -223,21 +223,13 @@ public sealed partial class NativeAotEmitter
         MetadataRegistrationArtifact? metadataRegistration = null;
         SupplementalMetadataTemplateArtifact? supplementalMetadataTemplate = null;
         Exception? loadException = null;
+        var loadLock = new object();
 
-        // Load closure artifacts sequentially.  Parallel loading (Parallel.Invoke)
-        // uses ThreadPool threads with limited stack (1 MB), which can trigger
-        // stack overflows when combined with deep JSON deserialization trees.
-        try
-        {
-            aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath);
-            closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath);
-            metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath);
-            supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath);
-        }
-        catch (Exception ex)
-        {
-            loadException = ex;
-        }
+        System.Threading.Tasks.Parallel.Invoke(
+            () => { try { aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+            () => { try { closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+            () => { try { metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+            () => { try { supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } });
 
         if (loadException is not null)
         {
@@ -391,7 +383,11 @@ public sealed partial class NativeAotEmitter
         sb.Append("    void*     args_buf,\n");
         sb.Append("    void*     ret_buf) noexcept;\n");
         sb.Append("\n#pragma warning(push)\n");
+<<<<<<< HEAD
         sb.Append("#pragma warning(disable: 4065 4244 4172 4789 4335)\n");
+=======
+        sb.Append("#pragma warning(disable: 4065 4244)\n");
+>>>>>>> 1c249777ad6ff87b23760942251018553d71f7dd
         sb.Append("#ifdef __GNUC__\n");
         sb.Append("#pragma GCC diagnostic push\n");
         sb.Append("#pragma GCC diagnostic ignored \"-Wunused-variable\"\n");

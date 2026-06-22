@@ -79,10 +79,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Check the GENERATED symbol name (GetNativeValueTypeSymbol) because the
         // SubjectId may use a different naming convention than ___y__/__\d+__.
         var _vtSym = GetNativeValueTypeSymbol(typeSubjectId);
-        // Match ALL generic parameter placeholders (__0_ through __9_) and
-        // the ___y__ InlineArray pattern.  Types with >5 type parameters
-        // (e.g. ___0___1___2___3___4___5_) were missed by earlier < __5_ checks.
-        if (_vtSym.Contains("___y__") || System.Text.RegularExpressions.Regex.IsMatch(_vtSym, @"__\d_"))
+        if (_vtSym.Contains("___y__") || _vtSym.Contains("__0_") || _vtSym.Contains("__1_"))
         {
             // Provide two INTPTR fields — the most common layout for generic
             // value types with backing fields (Key/Value pattern). This is
@@ -728,41 +725,17 @@ public sealed partial class NativeAotLoweringPlanner
                     referenceTypeBaseSubjectIds.TryGetValue(current, out string? nextCurrent);
                     current = nextCurrent;
                 }
-                // Emit extern "C" declarations for methods referenced in vtable array.
-                // Async state machine MoveNext methods must use the ABI dispatch
-                // signature (CHAOS_IL2CPP_INT64, 4 params, noexcept) to match the
-                // declaration emitted by BuildMethodDeclarations and the coroutine
-                // wrapper definition, avoiding C2733.
+                // Emit extern "C" declarations for methods referenced in vtable array
                 var externDeclared = new HashSet<string>(StringComparer.Ordinal);
                 foreach (var entry in entries)
                 {
                     if (entry is null || !externDeclared.Add(entry.NativeSymbol)) continue;
-                    if (IsAsyncStateMachineMoveNext(entry.SubjectId))
-                    {
-                        builder.AppendLine(
-                            $"extern \"C\" CHAOS_IL2CPP_INT64 {entry.NativeSymbol}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
-                    }
-                    else
-                    {
-                        builder.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
-                    }
+                    builder.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
                     var stub = TryGetInstantiationStubSymbol(entry);
                     if (stub != null && externDeclared.Add(stub))
                     {
-                        if (IsAsyncStateMachineMoveNext(entry.SubjectId))
-                        {
-                            builder.AppendLine(
-                                $"extern \"C\" CHAOS_IL2CPP_INT64 {stub}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
-                        }
-                        else
-                        {
-                            bool stubNeedsCtx;
-                            if (_stubNeedsContext is not null && _stubNeedsContext.TryGetValue(stub, out bool nc))
-                                stubNeedsCtx = nc;
-                            else
-                                stubNeedsCtx = _sharedContextSymbols?.Contains(entry.NativeSymbol) == true;
-                            builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
-                        }
+                        bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
+                        builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
                     }
                 }
                 // Emit vtable array
