@@ -113,9 +113,28 @@ verificationTasks.push(() =>
 
 const verifyResults = await parallel(verificationTasks)
 
+// ── Commit & Push ──
+const allPassed = verifyResults.every(Boolean) !== false
+if (allPassed) {
+  log('[code-review] All checks passed, committing and pushing...')
+  const commitMsg = args.commitMessage || `fix: code review — ${args.findings.map(f => f.issue).filter(Boolean).join(', ').slice(0, 120)}`
+  await agent(`Git operations:
+1. git add -A
+2. git commit -m "${commitMsg}" (include Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>)
+3. git push
+
+Handle trivially: if nothing to commit, log "nothing to commit" and skip push.`, {
+    label: 'git-commit-push',
+    phase: 'Verify',
+  })
+} else {
+  log('[code-review] Some checks failed — skipping commit. Manual review required.')
+}
+
 return {
   findingsCount: args.findings.length,
   expertsUsed: Object.keys(expertGroups),
   fixResults: fixResults.filter(Boolean),
   verifyResults: verifyResults.filter(Boolean),
+  committed: allPassed,
 }
