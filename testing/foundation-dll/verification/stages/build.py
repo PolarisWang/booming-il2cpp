@@ -79,8 +79,6 @@ _PROFILE_MODE_CLI = '    if (std::strcmp(argv[1], "--profile") == 0) { ret = Run
 
 
 def _inject_profile_mode(native_dir: Path) -> None:
-    """Inject --profile mode into runtime-entry.cpp after TPG generation.
-
     # BOUNDARY_OVERRIDE: issues/NNN
     # Reason: TPG cannot generate --profile mode natively; the native
     #   infrastructure (profile_stats.h, ProfileStoreInit, ProfileEmitJson)
@@ -89,6 +87,7 @@ def _inject_profile_mode(native_dir: Path) -> None:
     #   function or CLI handler. Patching the generated file is the least
     #   invasive workaround until TPG templates gain --profile support.
     # Expires: 2026-09-22
+    """Inject --profile mode into runtime-entry.cpp after TPG generation.
 
     The TPG generates runtime-entry.cpp without --profile support even though
     the native infrastructure (profile_stats.h, ProfileStoreInit, ProfileEmitJson)
