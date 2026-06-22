@@ -117,6 +117,9 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
+        // Resolve stub target symbol (used by both async and non-async paths)
+        string targetSym = ResolveStubTargetNativeSymbol(method);
+
         // Async state machine MoveNext stubs: use the ABI dispatch signature
         // (CHAOS_IL2CPP_INT64, 4 × INTPTR params, noexcept) to match the
         // declaration in BuildMethodDeclarations and the coroutine wrapper
@@ -126,17 +129,15 @@ public sealed partial class NativeAotLoweringPlanner
         {
             builder.AppendLine();
             builder.AppendLine("// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
-            string targetSymbol = ResolveStubTargetNativeSymbol(method);
             builder.AppendLine($"extern \"C\" CHAOS_IL2CPP_INT64 {text}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept");
             builder.AppendLine("{");
-            builder.AppendLine($"    return {targetSymbol}(CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0));");
+            builder.AppendLine($"    return {targetSym}(CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0));");
             builder.AppendLine("}");
             return;
         }
 
         // For shared generic instantiations, the stub forwards to the canonical
         // method's body instead of the per-instantiation body.
-        string targetSymbol = ResolveStubTargetNativeSymbol(method);
 
         IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
 
@@ -177,14 +178,14 @@ public sealed partial class NativeAotLoweringPlanner
         if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
         {
             builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-                ? $"    {targetSymbol}();"
-                : $"    {targetSymbol}({forwardedArgs});");
+                ? $"    {targetSym}();"
+                : $"    {targetSym}({forwardedArgs});");
         }
         else
         {
             builder.AppendLine(string.IsNullOrEmpty(forwardedArgs)
-                ? $"    return {targetSymbol}();"
-                : $"    return {targetSymbol}({forwardedArgs});");
+                ? $"    return {targetSym}();"
+                : $"    return {targetSym}({forwardedArgs});");
         }
         builder.AppendLine("}");
     }
