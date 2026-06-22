@@ -42,7 +42,7 @@ _is_linux = _platform.system() == "Linux"
 _sdk_preset = "linux-x64-profile" if _is_linux else "windows-x64-reference"
 _sdk_lib_ext = ".a" if _is_linux else ".lib"
 _sdk_config = "RelWithDebInfo"
-_jit_exe_name = "entry-jit"  # TPG generates entry-jit (no .exe extension) on all platforms
+_jit_exe_name = "entry-jit.exe"  # TPG generates entry-jit.exe on all platforms
 
 
 # -- Profile mode injection ---------------------------------------------------

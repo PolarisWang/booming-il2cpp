@@ -38,9 +38,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// Maximum recursion depth for EmitStructuredIRNode. When the structured IR
     /// tree exceeds this depth, the method falls back to PC-dispatch (linear)
     /// emission instead of overflowing the thread stack with recursive calls.
-    /// 500 is conservative — ThreadPool threads have only 1 MB stack, so even
-    /// 500 frames × ~200 bytes/frame = ~100 KB leaves headroom for Scriban
-    /// rendering.
+    /// ThreadPool threads have only 1 MB stack, so 500 frames × ~200 bytes/frame
+    /// = ~100 KB, leaving headroom for Scriban rendering.
     /// </summary>
     private const int MaxStructuredIRDepth = 500;
 

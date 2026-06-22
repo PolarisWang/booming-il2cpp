@@ -60,6 +60,36 @@ public sealed partial class NativeAotLoweringPlanner
         var emittedSymbols = new HashSet<string>(StringComparer.Ordinal);
         foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
         {
+            // Async state machine MoveNext methods are emitted as coroutines with
+            // the ABI dispatch signature (CHAOS_IL2CPP_INT64 return, 4 × INTPTR
+            // params, noexcept).  The declaration MUST match this signature — not
+            // the original managed method's signature — to avoid C2733 (extern "C"
+            // overload conflict) with the coroutine wrapper definition.
+            // This applies to BOTH the primary symbol and any __generic stub symbol.
+            if (IsAsyncStateMachineMoveNext(reachableMethod.SubjectId))
+            {
+                if (string.IsNullOrEmpty(reachableMethod.NativeSymbol))
+                    continue;
+                // Track BOTH the primary symbol and the __generic stub symbol
+                // in emittedSymbols.  Without this, a separate method whose
+                // NativeSymbol is the __generic stub name would emit a
+                // declaration with the original managed signature, causing
+                // C2733 (extern "C" overload conflict).
+                if (!emittedSymbols.Add(reachableMethod.NativeSymbol))
+                    continue;
+                declarations.Add(
+                    $"extern \"C\" CHAOS_IL2CPP_INT64 {reachableMethod.NativeSymbol}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
+                string? stubText = TryGetInstantiationStubSymbol(reachableMethod);
+                if (!string.IsNullOrEmpty(stubText))
+                {
+                    emittedStubSymbols.Add(stubText);
+                    emittedSymbols.Add(stubText);
+                    declarations.Add(
+                        $"extern \"C\" CHAOS_IL2CPP_INT64 {stubText}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
+                }
+                continue;
+            }
+
             // Deduplicate by native symbol to avoid C2733 (extern "C" cannot be overloaded)
             if (!emittedSymbols.Add(reachableMethod.NativeSymbol))
                 continue;
@@ -84,6 +114,23 @@ public sealed partial class NativeAotLoweringPlanner
         string? text = TryGetInstantiationStubSymbol(method);
         if (string.IsNullOrEmpty(text))
         {
+            return;
+        }
+
+        // Async state machine MoveNext stubs: use the ABI dispatch signature
+        // (CHAOS_IL2CPP_INT64, 4 × INTPTR params, noexcept) to match the
+        // declaration in BuildMethodDeclarations and the coroutine wrapper
+        // in EmitManagedMethod.  Using the original managed signature would
+        // cause C2733 (extern "C" overload conflict).
+        if (IsAsyncStateMachineMoveNext(method.SubjectId))
+        {
+            builder.AppendLine();
+            builder.AppendLine("// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
+            string targetSymbol = ResolveStubTargetNativeSymbol(method);
+            builder.AppendLine($"extern \"C\" CHAOS_IL2CPP_INT64 {text}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept");
+            builder.AppendLine("{");
+            builder.AppendLine($"    return {targetSymbol}(CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0));");
+            builder.AppendLine("}");
             return;
         }
 
