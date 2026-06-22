@@ -737,9 +737,25 @@ public sealed partial class NativeAotEmitter
         // may emit the same externally-visible function (e.g. generic instantiation
         // stubs that collapse to the same chaos_stub_definition_*), causing C2084.
         var seenDefinitions = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+        // Track struct definitions (chaos_type_ / chaos_boxed_type_) to dedup
+        // duplicate struct bodies emitted by flat-merge of both assemblies, C2011.
+        var seenStructDefs = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+        bool _skipStructBody = false;
         foreach (string _line in content.Split('\n'))
         {
             string _t = _line.Trim();
+
+            if (_skipStructBody)
+            {
+                if (_t == "};")
+                {
+                    _skipStructBody = false;
+                    // Emit the closing brace so the file remains valid C++
+                    _sb.AppendLine(_line);
+                }
+                continue; // skip all lines inside duplicate struct body
+            }
+
             if (_t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_") ||
                 _t.StartsWith("inline constexpr CHAOS_IL2CPP_UINT64 chaos_mt_") ||
                 _t.StartsWith("inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_") ||
@@ -751,6 +767,20 @@ public sealed partial class NativeAotEmitter
                 {
                     string _sym = _t.Substring(0, _eq);
                     if (!_dedup.Add(_sym)) continue;
+                }
+            }
+            // Dedup struct definitions (chaos_type_X and chaos_boxed_type_X).
+            // Flat-merge can produce duplicate full struct bodies from each
+            // merged assembly, causing C2011 redefinition errors.
+            if ((_t.StartsWith("struct chaos_type_", StringComparison.Ordinal) ||
+                 _t.StartsWith("struct chaos_boxed_type_", StringComparison.Ordinal)) &&
+                _t.EndsWith(" {", StringComparison.Ordinal))
+            {
+                string _sym = _t.Substring(7, _t.Length - 9); // "struct X {" -> "X"
+                if (!seenStructDefs.Add(_sym))
+                {
+                    _skipStructBody = true;
+                    continue; // skip duplicate struct start line
                 }
             }
             // Replace extern "C" CHAOS_IL2CPP_INTPTR declarations for coroutine
