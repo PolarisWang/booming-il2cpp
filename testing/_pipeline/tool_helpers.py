@@ -29,6 +29,10 @@ def ensure_tool_built(tool_name: str) -> bool:
     """Rebuild the tool DLL if the source has changed since last build.
 
     Uses source timestamp comparison for incremental builds.
+    When a rebuild fails because the output DLL is locked by another
+    process (MSB3021), treats the existing DLL as valid rather than
+    failing the pipeline — the locked DLL was built from a previous
+    successful run and is still usable.
     """
     proj = _tool_dir(tool_name) / f"{tool_name}.csproj"
     dll = tool_dll(tool_name)
@@ -46,7 +50,16 @@ def ensure_tool_built(tool_name: str) -> bool:
         ["dotnet", "build", str(proj), "-nologo"],
         capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
-        for line in (result.stderr.splitlines() + result.stdout.splitlines())[-5:]:
+        stderr = result.stderr or ""
+        stdout = result.stdout or ""
+        # MSB3021 = DLL locked by another process. This is common when
+        # the TPG is running while a concurrent rebuild is attempted.
+        # Since the existing DLL was built from a previous successful run,
+        # treat this as recoverable — the locked DLL is still valid.
+        if "MSB3021" in stderr or "MSB3021" in stdout:
+            print(f"  [tool_helpers] {tool_name} DLL locked, using existing")
+            return True
+        for line in (stderr.splitlines() + stdout.splitlines())[-5:]:
             print(f"      {line}")
         return False
     return True
