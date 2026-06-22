@@ -708,7 +708,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "    <Nullable>enable</Nullable>\n"
         "    <DefineConstants>VERIFY</DefineConstants>\n"
         "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
-        "    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>\n"
+        "    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB5006</NoWarn>\n"
         "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
         "  </PropertyGroup>\n"
         "  <ItemGroup>\n"
