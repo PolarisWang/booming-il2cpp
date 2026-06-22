@@ -900,7 +900,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Hoist ldloc's of slots that are never stloc'd inside the loop body.
         var prevHoistedInvariantLocals = _state.Value!.HoistedInvariantLocals;
         _state.Value!.HoistedInvariantLocals = null;
-        if (prevHoistedInvariantLocals == null && bodyInstrs3.Count > 0)
+        if (bodyInstrs3.Count > 0)
         {
             var readSlots = new HashSet<int>();
             var writtenSlots2 = new HashSet<int>();
@@ -954,6 +954,14 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     builder.AppendLine(bodyIndent + $"{declType} {varName} = {loadExpr};");
                     hoisted[slot] = (varName, slotType);
+                }
+                // Merge with outer-scope hoisted locals: inner scope may need
+                // variables that the outer scope didn't hoist (the outer scope's
+                // ldloc scan may not have covered all slots used in nested scopes).
+                if (prevHoistedInvariantLocals is not null)
+                {
+                    foreach (var kvp in prevHoistedInvariantLocals)
+                        hoisted.TryAdd(kvp.Key, kvp.Value);
                 }
                 _state.Value!.HoistedInvariantLocals = hoisted;
             }

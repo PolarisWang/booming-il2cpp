@@ -190,7 +190,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// Environment.ProcessorCount - 2 (reserve cores for GC/OS).
     /// Set via CLI --parallelism N. Minimum 1.
     /// </summary>
-    internal int _maxParallelism = Math.Max(1, Environment.ProcessorCount - 2);
+    internal int _maxParallelism = Math.Max(1, Math.Min(4, Environment.ProcessorCount - 2));
 
     /// <summary>
     /// Static field declarations (subjectId → fieldTypeSubjectId) captured during

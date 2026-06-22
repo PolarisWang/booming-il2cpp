@@ -63,7 +63,7 @@ public sealed partial class NativeAotLoweringPlanner
         sb.Append("    struct AsyncPromise_" + uid + ";\n");
         sb.Append("    struct AsyncHandle_" + uid + " { using promise_type = AsyncPromise_" + uid + "; AsyncPromise_" + uid + "* p; void Start() noexcept { std::coroutine_handle<AsyncPromise_" + uid + ">::from_promise(*p).resume(); } };\n");
         sb.Append("    struct AsyncPromise_" + uid + " {\n");
-        sb.Append("        CHAOS_IL2CPP_INTPTR _h[4]; uint32_t _magic = 0x45524F43; CHAOS_IL2CPP_INTPTR _result = 0;\n");
+        sb.Append("        CHAOS_IL2CPP_INTPTR _h[4]; CHAOS_IL2CPP_UINT32 _magic = 0x45524F43; CHAOS_IL2CPP_INTPTR _result = 0;\n");
         sb.Append("        auto get_return_object() noexcept { return AsyncHandle_" + uid + "{this}; }\n");
         sb.Append("        std::suspend_always initial_suspend() noexcept { return {}; }\n");
         sb.Append("        std::suspend_always final_suspend() noexcept { return {}; }\n");
