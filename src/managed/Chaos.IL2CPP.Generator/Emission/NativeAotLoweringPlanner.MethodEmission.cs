@@ -151,6 +151,11 @@ public sealed partial class NativeAotLoweringPlanner
         _state.Value!.PreTryFoldInitializers = null;  // reset per-method
         _state.Value!.HoistedInvariantLocals = null;  // reset per-method (C2065)
         _state.Value!.EmittedHoistedLocals = null;    // reset per-method (C2065)
+        _state.Value!.HoistedIVs = null;              // reset per-method
+        _state.Value!.AccumulatorSlots = null;        // reset per-method
+        _state.Value!.LoopArrayAccessSkipOffsets = null;  // reset per-method
+        _state.Value!.HoistedArrayBaseSlots = null;   // reset per-method
+        _state.Value!.SlotVarToLocalSlot = null;      // reset per-method
 
         // P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
         if (method.IsPInvoke)

@@ -920,6 +920,14 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (readSlots.Count > 0)
             {
+                // Exclude slots already hoisted by an outer-scope loop: their
+                // _hld_N declaration lives in the outer scope and is visible
+                // inside this nested loop body via C++ scoping rules.
+                if (prevHoistedInvariantLocals is not null)
+                {
+                    foreach (var kvp in prevHoistedInvariantLocals)
+                        readSlots.Remove(kvp.Key);
+                }
                 var hoisted = new Dictionary<int, (string VarName, SlotType SlotType)>();
                 foreach (int slot in readSlots.OrderBy(s => s))
                 {
@@ -956,9 +964,9 @@ public sealed partial class NativeAotLoweringPlanner
                     (_state.Value!.EmittedHoistedLocals ??= new System.Collections.Generic.HashSet<int>()).Add(slot);
                     hoisted[slot] = (varName, slotType);
                 }
-                // Merge with outer-scope hoisted locals: inner scope may need
-                // variables that the outer scope didn't hoist (the outer scope's
-                // ldloc scan may not have covered all slots used in nested scopes).
+                // Populate HoistedInvariantLocals with the merged set so that
+                // nested loops (child do-while/while) can inherit outer-scope
+                // hoisted variables without redeclaring them.
                 if (prevHoistedInvariantLocals is not null)
                 {
                     foreach (var kvp in prevHoistedInvariantLocals)
