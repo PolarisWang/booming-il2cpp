@@ -362,6 +362,19 @@ uint32_t TierManager::GetAdaptiveT2Threshold() const noexcept {
 TierManager::PromotionAction TierManager::EvaluateTierPromotion(
     PatchMethod* pm, uint32_t call_count) noexcept {
 
+    // ── PGO-adjusted call count ──────────────────────────────────────────
+    // Methods with high branch-per-call ratios are doing real work and
+    // should be promoted to higher tiers faster.  The PGO boost inflates
+    // effective_call_count by 1 unit per 8 branches, but only when branch
+    // traffic is at least 4× the call count (avoiding noise for trivial
+    // methods that happen to have a few branches).
+    uint32_t effective_call_count = call_count;
+    uint32_t pgo_total = pm->pgo_branch_taken.load(std::memory_order_relaxed) +
+                         pm->pgo_branch_not_taken.load(std::memory_order_relaxed);
+    if (pgo_total > call_count * 4) {
+        effective_call_count = call_count + (pgo_total / 8);
+    }
+
     // Step 1: read current tier state
     auto tier = pm->tier_state.load(std::memory_order_acquire);
 
@@ -384,7 +397,7 @@ TierManager::PromotionAction TierManager::EvaluateTierPromotion(
     if (tier == PatchMethod::kQuickJitted) {
         uint32_t backoff_base = PatchMethod::kJitThreshold +
                                 pm->codegen_fail_count * 1000;
-        if (call_count >= backoff_base) {
+        if (effective_call_count >= backoff_base) {
             uint32_t expected = PatchMethod::kQuickJitted;
             if (pm->tier_state.compare_exchange_strong(
                     expected, PatchMethod::kJitted,
@@ -411,7 +424,7 @@ TierManager::PromotionAction TierManager::EvaluateTierPromotion(
 
     // Step 5: T2→T3 — register-mapped → background optimization
     if (tier == PatchMethod::kRegisterMapped &&
-        call_count >= Get().GetAdaptiveT2Threshold()) {
+        effective_call_count >= Get().GetAdaptiveT2Threshold()) {
         uint32_t expected = PatchMethod::kRegisterMapped;
         if (pm->tier_state.compare_exchange_strong(
                 expected, PatchMethod::kOptimizeLowering,
@@ -425,7 +438,7 @@ TierManager::PromotionAction TierManager::EvaluateTierPromotion(
     if (tier == PatchMethod::kOptimizedRegister) {
         uint32_t backoff_base = PatchMethod::kJitThreshold +
                                 pm->codegen_fail_count * 1000;
-        if (call_count >= backoff_base) {
+        if (effective_call_count >= backoff_base) {
             uint32_t expected = PatchMethod::kOptimizedRegister;
             if (pm->tier_state.compare_exchange_strong(
                     expected, PatchMethod::kJitted,

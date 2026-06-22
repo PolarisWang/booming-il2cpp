@@ -234,6 +234,7 @@ static void Handle_Switch(FastFrame& frame, const interpreter::IRInstruction& in
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Switch");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     int32_t index = static_cast<int32_t>(frame.stack[--frame.sp]);
+    frame.last_pc = frame.pc;
     if (index >= 0 && instr.switch_targets != nullptr &&
         static_cast<uint32_t>(index) < instr.secondary_index) {
         frame.pc = static_cast<uint32_t>(instr.switch_targets[index]);

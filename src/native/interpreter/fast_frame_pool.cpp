@@ -53,6 +53,9 @@ void SetupFastFrame(FastFrame* ff,
     ff->patch_method = const_cast<void*>(patch_method);
     ff->loop_counter = 0;
     ff->osr_reenable = false;
+    ff->last_pc = 0;
+    ff->pgo_branch_taken = 0;
+    ff->pgo_branch_not_taken = 0;
 
     // Set arg count, args buffer, and arg type tags.
     auto* pm = static_cast<const PatchMethod*>(patch_method);

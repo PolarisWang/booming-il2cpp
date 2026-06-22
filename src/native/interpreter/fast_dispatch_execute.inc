@@ -134,6 +134,9 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
 // Opcode frequency histogram — only in PROFILE builds.
 #if CHAOS_IL2CPP_PROFILE_ENABLED
 static thread_local uint64_t g_fast_op_freq[128] = {};
+// Branch taken/not-taken counters for PGO-guided branch prediction.
+thread_local uint64_t g_branch_taken = 0;
+thread_local uint64_t g_branch_not_taken = 0;
 #endif
 
 void DumpFastExecuteOpcodeHistogram() noexcept {
@@ -145,9 +148,28 @@ void DumpFastExecuteOpcodeHistogram() noexcept {
                    static_cast<unsigned long long>(g_fast_op_freq[i]));
         }
     }
+    uint64_t total_branches = g_branch_taken + g_branch_not_taken;
+    if (total_branches > 0) {
+        printf("  Branch taken: %llu (%llu%%)\n",
+               static_cast<unsigned long long>(g_branch_taken),
+               static_cast<unsigned long long>(g_branch_taken * 100 / total_branches));
+        printf("  Branch not-taken: %llu (%llu%%)\n",
+               static_cast<unsigned long long>(g_branch_not_taken),
+               static_cast<unsigned long long>(g_branch_not_taken * 100 / total_branches));
+    }
 #else
     printf("FastExecute opcode histogram disabled (CHAOS_IL2CPP_PROFILE_ENABLED=0)\n");
 #endif
+}
+
+// ── PGO accumulation: copy per-execution branch counters into PatchMethod ──
+static void AccumulatePgoCounters(FastFrame& frame) noexcept {
+    if (frame.patch_method != nullptr &&
+        (frame.pgo_branch_taken > 0 || frame.pgo_branch_not_taken > 0)) {
+        auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
+        pm->pgo_branch_taken.fetch_add(frame.pgo_branch_taken, std::memory_order_relaxed);
+        pm->pgo_branch_not_taken.fetch_add(frame.pgo_branch_not_taken, std::memory_order_relaxed);
+    }
 }
 
 bool FastExecute(FastFrame& frame,
@@ -212,7 +234,6 @@ bool FastExecute(FastFrame& frame,
     // Entries 110-127 default to nullptr (caught by bounds check below).
 
     // First dispatch: enter the first instruction's handler.
-    uint32_t _prev_pc = 0;
     {
         uint32_t _op = static_cast<uint32_t>(instrs[frame.pc].op_code);
         if (_op > 127) { frame.threw_exception = true; return false; }
@@ -227,43 +248,36 @@ bool FastExecute(FastFrame& frame,
     // ═══════════════════════════════════════════════════════════════════
 
     kOp_LdcI4: {
-        _prev_pc = frame.pc;
         frame.PushI32_NC(instrs[frame.pc].immediate_i4);
         ++frame.pc;
         goto kOp_Epilogue;
     }
     kOp_LdcI8: {
-        _prev_pc = frame.pc;
         frame.PushI64_NC(instrs[frame.pc].immediate_i8);
         ++frame.pc;
         goto kOp_Epilogue;
     }
     kOp_LdcR4: {
-        _prev_pc = frame.pc;
         frame.PushF32_NC(static_cast<float>(instrs[frame.pc].immediate_r8));
         ++frame.pc;
         goto kOp_Epilogue;
     }
     kOp_LdcR8: {
-        _prev_pc = frame.pc;
         frame.PushF64_NC(instrs[frame.pc].immediate_r8);
         ++frame.pc;
         goto kOp_Epilogue;
     }
     kOp_LdNull: {
-        _prev_pc = frame.pc;
         frame.PushNull_NC();
         ++frame.pc;
         goto kOp_Epilogue;
     }
     kOp_Pop: {
-        _prev_pc = frame.pc;
         if (frame.sp > 0) --frame.sp;
         ++frame.pc;
         goto kOp_Epilogue;
     }
     kOp_Dup: {
-        _prev_pc = frame.pc;
         if (frame.sp == 0 || frame.sp >= FastFrame::kMaxStack) {
             frame.threw_exception = true; frame.pc = 9999;
             goto kOp_Terminate;
@@ -275,7 +289,6 @@ bool FastExecute(FastFrame& frame,
         goto kOp_Epilogue;
     }
     kOp_Neg: {
-        _prev_pc = frame.pc;
         if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; goto kOp_Terminate; }
         int32_t v = static_cast<int32_t>(frame.stack[frame.sp - 1]);
         frame.stack[frame.sp - 1] = static_cast<uint64_t>(-v);
@@ -283,7 +296,6 @@ bool FastExecute(FastFrame& frame,
         goto kOp_Epilogue;
     }
     kOp_Not: {
-        _prev_pc = frame.pc;
         if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; goto kOp_Terminate; }
         int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
         frame.PushI32_NC(~v);
@@ -291,7 +303,6 @@ bool FastExecute(FastFrame& frame,
         goto kOp_Epilogue;
     }
     kOp_Add: {
-        _prev_pc = frame.pc;
         if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; goto kOp_Terminate; }
         int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
         int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
@@ -300,7 +311,6 @@ bool FastExecute(FastFrame& frame,
         goto kOp_Epilogue;
     }
     kOp_Sub: {
-        _prev_pc = frame.pc;
         if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; goto kOp_Terminate; }
         int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
         int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
@@ -309,7 +319,6 @@ bool FastExecute(FastFrame& frame,
         goto kOp_Epilogue;
     }
     kOp_Mul: {
-        _prev_pc = frame.pc;
         if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; goto kOp_Terminate; }
         int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
         int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
@@ -318,7 +327,6 @@ bool FastExecute(FastFrame& frame,
         goto kOp_Epilogue;
     }
     kOp_LdStr: {
-        _prev_pc = frame.pc;
         if (instrs[frame.pc].string_operand != nullptr) {
             frame.PushObj_NC(const_cast<char*>(instrs[frame.pc].string_operand));
         } else {
@@ -333,7 +341,6 @@ bool FastExecute(FastFrame& frame,
     // ═══════════════════════════════════════════════════════════════════
 
 #define OP_CALL_HANDLER(name) do { \
-    _prev_pc = frame.pc; \
     Handle_##name(frame, instrs[frame.pc]); \
     ++frame.pc; \
     goto kOp_Epilogue; \
@@ -431,7 +438,6 @@ bool FastExecute(FastFrame& frame,
     kOp_LdElemANoChk: OP_CALL_HANDLER(LdElemANoChk);
     kOp_StFldBarrier: OP_CALL_HANDLER(StFldBarrier);
     kOp_Unsupported: {
-        _prev_pc = frame.pc;
         Handle_Unsupported(frame, instrs[frame.pc]);
         ++frame.pc;
         goto kOp_Epilogue;
@@ -444,8 +450,8 @@ bool FastExecute(FastFrame& frame,
     // ═══════════════════════════════════════════════════════════════════
 
     kOp_Epilogue: {
-        // OSR: detect hot-loop backward branch.
-        if (frame.pc < instr_count && frame.pc < _prev_pc) {
+        // OSR: detect hot-loop backward branch via frame.last_pc (set by branch handlers).
+        if (frame.pc < frame.last_pc) {
             uint32_t threshold = kFastOsrLoopThreshold;
             if (frame.osr_reenable) {
                 auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
@@ -458,22 +464,22 @@ bool FastExecute(FastFrame& frame,
                 if (TryFastOsrPromotion(frame)) goto kOp_Next;
                 frame.loop_counter = 0;
             }
-        } else if (frame.pc == _prev_pc + 1) {
-            if (frame.loop_counter > 0) --frame.loop_counter;
         }
+        frame.last_pc = 0;  // reset to prevent re-trigger for non-branch opcodes
         goto kOp_Next;
     }
 
     kOp_Terminate: {
+        AccumulatePgoCounters(frame);
         frame.CleanupTracked();
         return frame.threw_exception ? false : true;
     }
 
     kOp_Next: {
         // Termination sentinels.
-        if (frame.pc == 0xFFffFFffu) { frame.CleanupTracked(); return true; }
-        if (frame.pc == 9999 || frame.threw_exception) { frame.CleanupTracked(); return false; }
-        if (frame.pc >= instr_count) { frame.CleanupTracked(); return true; }
+        if (frame.pc == 0xFFffFFffu) { AccumulatePgoCounters(frame); frame.CleanupTracked(); return true; }
+        if (frame.pc == 9999 || frame.threw_exception) { AccumulatePgoCounters(frame); frame.CleanupTracked(); return false; }
+        if (frame.pc >= instr_count) { AccumulatePgoCounters(frame); frame.CleanupTracked(); return true; }
 
         // Decimated interrupt check — every 64 instructions.
         if ((++check_counter & kCheckMask) == 0 && thread != nullptr) {
@@ -481,6 +487,7 @@ bool FastExecute(FastFrame& frame,
                     thread->pending_abort.load(std::memory_order_relaxed) ||
                     thread->pending_interrupt.load(std::memory_order_relaxed))) {
                 frame.threw_exception = true;
+                AccumulatePgoCounters(frame);
                 frame.CleanupTracked();
                 return false;
             }
@@ -523,7 +530,7 @@ bool FastExecute(FastFrame& frame,
 
         // Dispatch the next instruction.
         uint32_t _op = static_cast<uint32_t>(instrs[frame.pc].op_code);
-        if (_op > 127) { frame.threw_exception = true; return false; }
+        if (_op > 127) { AccumulatePgoCounters(frame); frame.threw_exception = true; return false; }
 #if CHAOS_IL2CPP_PROFILE_ENABLED
         ++g_fast_op_freq[_op];
 #endif
@@ -531,6 +538,7 @@ bool FastExecute(FastFrame& frame,
     }
 
     // Unreachable — satisfy compiler.
+    AccumulatePgoCounters(frame);
     frame.CleanupTracked();
     return true;
 
@@ -547,8 +555,6 @@ bool FastExecute(FastFrame& frame,
 #if CHAOS_IL2CPP_PROFILE_ENABLED
         ++g_fast_op_freq[op_val];
 #endif
-
-        uint32_t prev_pc = frame.pc;
 
         // Debugger breakpoint check (hoisted: g_dbg_any_breakpoints loaded once at entry).
         if (CHAOS_IL2CPP_UNLIKELY(dbg_active))
@@ -647,7 +653,7 @@ bool FastExecute(FastFrame& frame,
                 break;
         }
 
-        if (frame.pc < instr_count && frame.pc < prev_pc) {
+        if (frame.pc < frame.last_pc) {
             uint32_t threshold = kFastOsrLoopThreshold;
             if (frame.osr_reenable) {
                 auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
@@ -660,9 +666,8 @@ bool FastExecute(FastFrame& frame,
                 if (TryFastOsrPromotion(frame)) continue;
                 frame.loop_counter = 0;
             }
-        } else if (frame.pc == prev_pc + 1) {
-            if (frame.loop_counter > 0) --frame.loop_counter;
         }
+        frame.last_pc = 0;
 
         if (frame.pc != 0xFFffFFffu && frame.pc != 9999) {
             if ((++check_counter & kCheckMask) == 0) {
@@ -676,13 +681,14 @@ bool FastExecute(FastFrame& frame,
             }
         }
         if (frame.threw_exception && frame.pc == 9999) {
-            frame.CleanupTracked(); return false;
+            AccumulatePgoCounters(frame); frame.CleanupTracked(); return false;
         }
         if (frame.pc == 0xFFffFFffu) {
-            frame.CleanupTracked(); return true;
+            AccumulatePgoCounters(frame); frame.CleanupTracked(); return true;
         }
     }
 
+    AccumulatePgoCounters(frame);
     frame.CleanupTracked();
     return true;
 #endif  // __GNUC__ || __clang__

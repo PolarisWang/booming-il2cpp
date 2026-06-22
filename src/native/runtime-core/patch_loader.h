@@ -113,6 +113,13 @@ struct PatchMethod {
     mutable std::atomic<uint32_t> call_count{0};
     static constexpr uint32_t kHotCallThreshold = 100;
 
+    // ── PGO branch profile accumulation (across FastExecute executions) ──
+    // Accumulated from FastFrame::pgo_branch_taken/not_taken on method exit.
+    // Used by TierManager to factor branch frequency into promotion decisions.
+    // Relaxed atomic: benign races (stale count doesn't affect correctness).
+    mutable std::atomic<uint32_t> pgo_branch_taken{0};
+    mutable std::atomic<uint32_t> pgo_branch_not_taken{0};
+
     // ── DHE: keep-native flag (Phase 3) ───────────────────────────────
     // When true, the dispatch entry's kHotpatchKeepNative flag is preserved
     // during SetPatchedBySlot, allowing this method to keep running as AOT

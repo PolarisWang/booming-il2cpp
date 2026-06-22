@@ -11,15 +11,6 @@
 #include <memory_domain.h>
 
 #include <gc/gc_bgc_inline.h>
-
-// ── Allocation counter tracking ───────────────────────────────────
-// Incremented by interpreter NewObj/NewArr to make interpreted method
-// allocations visible to chaos_gc_get_allocated_bytes_for_current_thread().
-// Declared in gc_alloc_stubs.h but included here directly for independence.
-namespace chaos { namespace il2cpp { namespace runtime_core {
-    extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_count;
-    extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes;
-}}}
 #include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
 #include <chaos/pal/pal_eh.h>
@@ -533,7 +524,6 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 #endif
 
         switch (instruction.op_code) {
-            [[likely]]
             case IROpCode::LdcI4:
                 frame->stack.push_back(InterpreterValue::from_i32(instruction.immediate_i4));
                 break;
@@ -552,7 +542,6 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             case IROpCode::LdNull:
                 frame->stack.push_back(InterpreterValue::null_val());
                 break;
-            [[likely]]
             case IROpCode::LdArg:
                 if (instruction.operand_index < 0 ||
                     static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index) >= frame->arguments.size()) {
@@ -561,12 +550,10 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 
                 frame->stack.push_back(frame->arguments[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
                 break;
-            [[likely]]
             case IROpCode::LdLoc:
                 EnsureLocal(&frame->locals, static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index));
                 frame->stack.push_back(frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)]);
                 break;
-            [[likely]]
             case IROpCode::StLoc: {
                 EnsureLocal(&frame->locals, static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index));
                 frame->locals[static_cast<CHAOS_IL2CPP_SIZE>(instruction.operand_index)] = Pop(&frame->stack);
@@ -682,12 +669,10 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
                 break;
             }
-            [[likely]]
             case IROpCode::Add: {
                 const CHAOS_IL2CPP_INT32 right = ReadInt32(Pop(&frame->stack));
                 const CHAOS_IL2CPP_INT32 left = ReadInt32(Pop(&frame->stack));
                 frame->stack.push_back(InterpreterValue::from_i32(left + right));
-                [[likely]]
                 break;
             }
             case IROpCode::Sub: {
@@ -740,18 +725,15 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 frame->stack.push_back(InterpreterValue::from_i32(left > right ? 1 : 0));
                 break;
             }
-            [[likely]]
             case IROpCode::Br:
                 instruction_index = GetBranchTarget(method, instruction.branch_target);
                 continue;
-            [[likely]]
             case IROpCode::BrTrue:
                 if (ReadInt32(Pop(&frame->stack)) != 0) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
                     continue;
                 }
                 break;
-            [[likely]]
             case IROpCode::BrFalse:
                 if (ReadInt32(Pop(&frame->stack)) == 0) {
                     instruction_index = GetBranchTarget(method, instruction.branch_target);
@@ -766,10 +748,6 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 // Type token is set by the token resolver (or test) via immediate_i4.
                 storage->type_token = static_cast<CHAOS_IL2CPP_UINT32>(instruction.immediate_i4);
                 frame->stack.push_back(InterpreterValue::from_obj(storage));
-                // Track interpreter allocation in TLS counter
-                chaos::il2cpp::runtime_core::tls_alloc_fast_count++;
-                CHAOS_IL2CPP_SIZE obj_size = sizeof(ObjectStorage) + instruction.secondary_index * sizeof(InterpreterValue);
-                chaos::il2cpp::runtime_core::tls_alloc_fast_bytes += obj_size;
                 break;
             }
             case IROpCode::NewArr: {
@@ -779,9 +757,6 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 ::new (storage) ArrayStorage();
                 storage->elements.resize(length);
                 frame->stack.push_back(InterpreterValue::from_obj(storage));
-                // Track interpreter allocation in TLS counter
-                chaos::il2cpp::runtime_core::tls_alloc_fast_count++;
-                chaos::il2cpp::runtime_core::tls_alloc_fast_bytes += sizeof(ArrayStorage) + length * sizeof(InterpreterValue);
                 break;
             }
             case IROpCode::LdFld: {
@@ -1003,7 +978,6 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 }
                 break;
             }
-            [[likely]]
             case IROpCode::Call:
             case IROpCode::CallBridge: {
                 // AotDirectDispatch: if direct_fn is set, call the pre-resolved
@@ -1654,7 +1628,6 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 frame->stack.push_back(InterpreterValue::from_obj(buf));
                 break;
             }
-            [[likely]]
             case IROpCode::Ret:
                 if (!frame->stack.empty()) {
                     result.has_return_value = true;

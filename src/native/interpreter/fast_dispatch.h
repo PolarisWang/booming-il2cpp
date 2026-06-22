@@ -96,6 +96,17 @@ struct FastFrame {
     uint32_t    loop_counter          = 0;      // backedge count for hot-loop detection
     bool        osr_reenable          = false;  // set after T4 deopt: immediate OSR on first backedge
 
+    // Last program counter before a branch instruction. Set by branch handlers,
+    // read by kOp_Epilogue for backward-branch detection. Reset to 0 after
+    // epilogue check to prevent re-trigger for non-branch opcodes.
+    uint32_t    last_pc               = 0;
+
+    // ── PGO branch profile counters (per-execution) ─────────────────────
+    // Incremented by conditional branch handlers (BrTrue/BrFalse/Beq/Blt/...).
+    // Reset at frame setup. Accumulated into PatchMethod on method exit.
+    uint32_t    pgo_branch_taken      = 0;
+    uint32_t    pgo_branch_not_taken  = 0;
+
     // ── SEH (Structured Exception Handling) state ──────────────────────
     // Set by SetupFastFrame when the method has SEH clauses.
     // FastExecute handles Throw/Leave/EndFinally in-place instead of

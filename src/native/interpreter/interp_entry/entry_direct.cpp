@@ -174,11 +174,7 @@ bool OptimizeToTier2(PatchMethod* pm) noexcept {
     if (pm == nullptr) return false;
     auto* orig_ir = static_cast<interpreter::IRMethod*>(pm->cached_ir);
     if (orig_ir == nullptr) return false;
-    // SEH-containing methods are now accepted — AllocateRegisters has seh_clauses
-    // support (ir_reg_alloc.h:291-295) and RegisterExecute executes flat without
-    // SEH dispatch, which is correct when all call targets resolve via the
-    // interp dispatch loop.  InterpreterVM fallback (Step 4) still has full SEH
-    // handling for any edge cases.
+    if (!orig_ir->seh_clauses.empty()) return false;
     if (orig_ir->instructions.size() <= 2) return false;
 
     auto cloned_ir = CloneIRMethod(*orig_ir);

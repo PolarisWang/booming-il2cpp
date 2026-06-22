@@ -122,17 +122,17 @@ static interpreter::InterpreterObject* AcquireBoxedObject() noexcept {
 void FastFrame::PushIV(const interpreter::InterpreterValue& iv) noexcept {
     switch (iv.tag) {
     case interpreter::ValueTag::Int32:
-        PushI32(iv.i32); break;
+        PushI32_NC(iv.i32); break;
     case interpreter::ValueTag::Int64:
-        PushI64(iv.i64); break;
+        PushI64_NC(iv.i64); break;
     case interpreter::ValueTag::Float32:
-        PushF32(iv.f32); break;
+        PushF32_NC(iv.f32); break;
     case interpreter::ValueTag::Float64:
-        PushF64(iv.f64); break;
+        PushF64_NC(iv.f64); break;
     case interpreter::ValueTag::Null:
-        PushNull(); break;
+        PushNull_NC(); break;
     default:
-        PushObj(iv.obj); break;
+        PushObj_NC(iv.obj); break;
     }
 }
 

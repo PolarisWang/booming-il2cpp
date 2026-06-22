@@ -4,8 +4,16 @@
 
 // REMOVED: branch_profiles and BranchProfile were removed from PatchMethod.
 
+// Profiling counters defined in fast_dispatch_execute.inc (included later
+// in the same translation unit via fast_dispatch.cpp).
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+extern thread_local uint64_t g_branch_taken;
+extern thread_local uint64_t g_branch_not_taken;
+#endif
+
 static void Handle_Br(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Br");
+    frame.last_pc = frame.pc;
     frame.pc = static_cast<uint32_t>(instr.branch_target);
 }
 
@@ -15,6 +23,11 @@ static void Handle_BrTrue(FastFrame& frame, const interpreter::IRInstruction& in
     int32_t val = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     --frame.sp;
     bool taken = (val != 0);
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+    if (taken) ++g_branch_taken; else ++g_branch_not_taken;
+#endif
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -28,6 +41,11 @@ static void Handle_BrFalse(FastFrame& frame, const interpreter::IRInstruction& i
     int32_t val = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     --frame.sp;
     bool taken = (val == 0);
+#if CHAOS_IL2CPP_PROFILE_ENABLED
+    if (taken) ++g_branch_taken; else ++g_branch_not_taken;
+#endif
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -42,6 +60,8 @@ static void Handle_Beq(FastFrame& frame, const interpreter::IRInstruction& instr
     uint64_t l = frame.stack[frame.sp - 2];
     frame.sp -= 2;
     bool taken = (l == r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -56,6 +76,8 @@ static void Handle_Blt(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l < r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -70,6 +92,8 @@ static void Handle_Bgt(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l > r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -84,6 +108,8 @@ static void Handle_Ble(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l <= r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -98,6 +124,8 @@ static void Handle_Bge(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l >= r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -112,6 +140,8 @@ static void Handle_BneUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l != r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -126,6 +156,8 @@ static void Handle_BgeUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l >= r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -140,6 +172,8 @@ static void Handle_BgtUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l > r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -154,6 +188,8 @@ static void Handle_BleUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l <= r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
@@ -168,6 +204,8 @@ static void Handle_BltUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
     bool taken = (l < r);
+    if (taken) ++frame.pgo_branch_taken; else ++frame.pgo_branch_not_taken;
+    frame.last_pc = frame.pc;
     if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {

@@ -64,6 +64,7 @@ static void Handle_Rethrow(FastFrame& frame, const interpreter::IRInstruction& i
 
 static void Handle_Leave(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Leave");
+    frame.last_pc = frame.pc;
     uint32_t target = static_cast<uint32_t>(instr.branch_target);
 
     // Check if we're inside a try block that has a finally/fault handler.
