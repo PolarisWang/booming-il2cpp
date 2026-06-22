@@ -120,21 +120,13 @@ public sealed partial class NativeAotLoweringPlanner
         // Resolve stub target symbol (used by both async and non-async paths)
         string targetSym = ResolveStubTargetNativeSymbol(method);
 
-        // Async state machine MoveNext stubs: use the ABI dispatch signature
-        // (CHAOS_IL2CPP_INT64, 4 × INTPTR params, noexcept) to match the
-        // declaration in BuildMethodDeclarations and the coroutine wrapper
-        // in EmitManagedMethod.  Using the original managed signature would
-        // cause C2733 (extern "C" overload conflict).
+        // Async state machine MoveNext methods don't need a generic instantiation
+        // stub — the coroutine wrapper (emitted by EmitManagedMethod) already
+        // provides the dispatch entry point with the ABI dispatch signature.
+        // Emitting a redundant stub here would cause C2733 (extern "C" overload
+        // conflict) with the declaration emitted by BuildMethodDeclarations.
         if (IsAsyncStateMachineMoveNext(method.SubjectId))
-        {
-            builder.AppendLine();
-            builder.AppendLine("// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
-            builder.AppendLine($"extern \"C\" CHAOS_IL2CPP_INT64 {text}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept");
-            builder.AppendLine("{");
-            builder.AppendLine($"    return {targetSym}(CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0), CHAOS_IL2CPP_INTPTR(0));");
-            builder.AppendLine("}");
             return;
-        }
 
         // For shared generic instantiations, the stub forwards to the canonical
         // method's body instead of the per-instantiation body.

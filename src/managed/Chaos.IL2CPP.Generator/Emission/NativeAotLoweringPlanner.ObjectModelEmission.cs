@@ -728,17 +728,37 @@ public sealed partial class NativeAotLoweringPlanner
                     referenceTypeBaseSubjectIds.TryGetValue(current, out string? nextCurrent);
                     current = nextCurrent;
                 }
-                // Emit extern "C" declarations for methods referenced in vtable array
+                // Emit extern "C" declarations for methods referenced in vtable array.
+                // Async state machine MoveNext methods must use the ABI dispatch
+                // signature (CHAOS_IL2CPP_INT64, 4 params, noexcept) to match the
+                // declaration emitted by BuildMethodDeclarations and the coroutine
+                // wrapper definition, avoiding C2733.
                 var externDeclared = new HashSet<string>(StringComparer.Ordinal);
                 foreach (var entry in entries)
                 {
                     if (entry is null || !externDeclared.Add(entry.NativeSymbol)) continue;
-                    builder.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
+                    if (IsAsyncStateMachineMoveNext(entry.SubjectId))
+                    {
+                        builder.AppendLine(
+                            $"extern \"C\" CHAOS_IL2CPP_INT64 {entry.NativeSymbol}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
+                    }
+                    else
+                    {
+                        builder.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
+                    }
                     var stub = TryGetInstantiationStubSymbol(entry);
                     if (stub != null && externDeclared.Add(stub))
                     {
-                        bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
-                        builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
+                        if (IsAsyncStateMachineMoveNext(entry.SubjectId))
+                        {
+                            builder.AppendLine(
+                                $"extern \"C\" CHAOS_IL2CPP_INT64 {stub}(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept;");
+                        }
+                        else
+                        {
+                            bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
+                            builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
+                        }
                     }
                 }
                 // Emit vtable array
