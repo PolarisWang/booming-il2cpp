@@ -112,6 +112,11 @@ CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFastNoZero(CHAOS_IL2CPP_SIZE size
     return ptr;
 }
 
+/// Out-of-line profiled allocation — used by non-hot-path callers and
+/// alloc_tls_hooks.cpp (chunk-local override in foundation-dll builds).
+void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size);
+void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size);
+
 /// Flush TLS fast allocation counters to the global GC stats.
 /// Called from GC collect path (NurseryAllocateSlow, GcYoungCollection, etc.)
 /// before any GC decision or stats read.
@@ -121,11 +126,6 @@ inline void FlushTlsFastStats() noexcept {
     if (count > 0 || bytes > 0) {
         g_gc_stats.alloc_total.fetch_add(count, std::memory_order_relaxed);
         g_gc_stats.alloc_bytes.fetch_add(bytes, std::memory_order_relaxed);
-        // Also flush to the per-thread total used by benchmark/profiling API
-        // (chaos_gc_get_allocated_bytes_for_current_thread), so that fast-path
-        // allocations are visible even after a GC resets the TLS counters.
-        extern thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes;
-        tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(bytes);
         tls_alloc_fast_count = 0;
         tls_alloc_fast_bytes = 0;
     }

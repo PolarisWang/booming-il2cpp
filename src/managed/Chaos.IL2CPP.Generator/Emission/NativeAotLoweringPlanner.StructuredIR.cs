@@ -40,7 +40,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// emission instead of overflowing the thread stack with recursive calls.
     /// 10,000 levels × ~200 bytes/frame ≈ 2 MB, well within an 8 MB worker stack.
     /// </summary>
-    private const int MaxStructuredIRDepth = 500;
+    private const int MaxStructuredIRDepth = 10000;
 
     /// <summary>
     /// Tracks current recursion depth of EmitStructuredIRNode. Used instead of

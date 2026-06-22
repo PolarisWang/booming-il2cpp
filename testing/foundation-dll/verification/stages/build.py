@@ -44,15 +44,76 @@ _sdk_lib_ext = ".a" if _is_linux else ".lib"
 _sdk_config = "RelWithDebInfo"
 
 
-# -- Profile mode injection — BOUNDARY_OVERRIDE: issues/archive --
-# Reason: Profile mode injection is handled by TPG CppProjectEmitter.cs
-# (C# layer) via PatchRuntimeEntry(), which adds #include <profile_stats.h>
-# and the RunProfileMode() function to runtime-entry.cpp.  This Python-level
-# injection was the original location, moved to TPG in 2026-06-22 to respect
-# the four-layer architecture (Python shall not write_text into .cpp files).
-# The TPG's PatchRuntimeEntry() runs during generate-dll, preserving the
-# same semantics without crossing the Python→C++ layer boundary.
-# Expires: never (this override documents a completed migration).
+# -- Profile mode injection ---------------------------------------------------
+
+_PROFILE_MODE_INCLUDE = '#include <profile_stats.h>'
+
+_PROFILE_MODE_FUNC = """
+// ── --profile: per-method GC/allocation/code-size profile ───────────
+static int RunProfileMode() {
+    using namespace chaos::il2cpp::runtime_core;
+    const int kCount = kSubjectEntryCount;
+    ProfileStoreInit(kCount);
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+        int64_t heap_before = chaos_gc_get_heap_size();
+        GetThreadProfileData().heap_before = heap_before;
+        CHAOS_EH_TRY
+            ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+        CHAOS_EH_CATCH_BEGIN
+        CHAOS_EH_END
+        int64_t heap_after = chaos_gc_get_heap_size();
+        GetThreadProfileData().heap_after = heap_after;
+        FlushThreadProfileData(i);
+    }
+    ProfileStoreFinalize();
+    ProfileEmitJson();
+    return 0;
+}
+
+"""
+
+_PROFILE_MODE_CLI = '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n'
+
+
+def _inject_profile_mode(native_dir: Path) -> None:
+    """Inject --profile mode into runtime-entry.cpp after TPG generation.
+
+    The TPG generates runtime-entry.cpp without --profile support even though
+    the native infrastructure (profile_stats.h, ProfileStoreInit, ProfileEmitJson)
+    is compiled in when CHAOS_IL2CPP_CONFIG_TIER=profile. This function patches
+    the generated file to add the missing RunProfileMode() function and CLI handler.
+    """
+    entry_path = native_dir / "runtime-entry.cpp"
+    if not entry_path.exists():
+        print(f"  [build] [profile-inject] runtime-entry.cpp not found at {entry_path}, skipping")
+        return
+
+    content = entry_path.read_text(encoding="utf-8", errors="replace")
+
+    # 1. Inject #include <profile_stats.h> after last #include <chaos/...>
+    if '#include <profile_stats.h>' not in content:
+        content = content.replace(
+            '#include <gc/gc_api.h>',
+            '#include <gc/gc_api.h>\n#include <profile_stats.h>')
+        print(f"  [build] [profile-inject] added #include <profile_stats.h>")
+
+    # 2. Inject RunProfileMode() before int main()
+    if 'RunProfileMode' not in content:
+        content = content.replace(
+            'int main(int argc, char* argv[]) {',
+            _PROFILE_MODE_FUNC + 'int main(int argc, char* argv[]) {')
+        print(f"  [build] [profile-inject] added RunProfileMode()")
+
+    # 3. Inject --profile CLI handler before Unknown flag
+    if '--profile' not in content:
+        content = content.replace(
+            'printf("Unknown flag: %s\\n", argv[1]);',
+            '    if (std::strcmp(argv[1], "--profile") == 0) { ret = RunProfileMode(); goto shutdown; }\n    printf("Unknown flag: %s\\n", argv[1]);')
+        print(f"  [build] [profile-inject] added --profile CLI handler")
+
+    entry_path.write_text(content, encoding="utf-8")
 
 def _chaos_sdk_csproj() -> Path:
     """Path to Chaos.TestFramework.Sdk.csproj."""
@@ -80,11 +141,21 @@ def _get_additional_assemblies(chunk_dir: Path) -> list[str]:
 def _detect_tfm(dll_path: Path) -> str:
     """Detect target framework moniker from the DLL's runtime directory path.
 
-    Delegates to tool_helpers.detect_tfm for consistent behavior across stages.
-    The shared implementation supports both Microsoft.NETCore.App and
-    Microsoft.NETCore.App.Ref paths.
+    E.g. ".../shared/Microsoft.NETCore.App/10.0.6/System.Private.CoreLib.dll"
+    -> "net10.0".  Falls back to "net8.0".
+
+    Also handles custom DLL paths like ".../dotnet-foundation/net10.0/runtime/...".
     """
-    return detect_tfm(dll_path)
+    path = str(dll_path).replace("\\", "/")
+    # Primary: standard runtime layout
+    m = re.search(r"Microsoft\.NETCore\.App/(\d+)\.(\d+)\.", path)
+    if m:
+        return f"net{m.group(1)}.{m.group(2)}"
+    # Fallback: custom layout like dotnet-foundation/netX.Y/runtime/
+    m = re.search(r"/net(\d+)\.(\d+)/runtime/", path)
+    if m:
+        return f"net{m.group(1)}.{m.group(2)}"
+    return "net8.0"
 
 
 def _custom_subjects_metadata(
@@ -347,15 +418,13 @@ def _build_jit_entry(
             print(f"      [jit:err] {line}")
         return False
 
-    # Platform-agnostic JIT entry name: .exe on Windows, no extension on Linux
-    _jit_exe_name = "entry-jit.exe" if not _is_linux else "entry-jit"
-    jit_exe = jit_output / _jit_exe_name
+    jit_exe = jit_output / "entry-jit.exe"
     if not jit_exe.exists():
-        print(f"  [build] JIT {_jit_exe_name} not found at {jit_exe} — continuing")
+        print(f"  [build] JIT entry-jit.exe not found at {jit_exe} — continuing")
         return False
 
-    shutil.copy2(jit_exe, native_dir / _jit_exe_name)
-    print(f"  [build] JIT {_jit_exe_name}: {native_dir / _jit_exe_name} ({jit_exe.stat().st_size} bytes)")
+    shutil.copy2(jit_exe, native_dir / "entry-jit.exe")
+    print(f"  [build] JIT entry-jit.exe: {native_dir / 'entry-jit.exe'} ({jit_exe.stat().st_size} bytes)")
     return True
 
 
@@ -373,16 +442,14 @@ def _build_jit_entry_fast(
     and metadata. If so, skips the expensive TPG codegen + cmake build.
     Returns True if JIT entry is available (built or already current).
     """
-    # Platform-agnostic JIT entry name: .exe on Windows, no extension on Linux
-    _jit_exe_name = "entry-jit.exe" if not _is_linux else "entry-jit"
-    jit_exe = native_dir / _jit_exe_name
+    jit_exe = native_dir / "entry-jit.exe"
     if jit_exe.exists():
         jit_mtime = jit_exe.stat().st_mtime
         deps = [subjects_dll, metadata_path]
         if all(d.exists() and jit_mtime >= d.stat().st_mtime for d in deps):
-            print(f"  [build] [jit] {_jit_exe_name} is current ({jit_exe.stat().st_size} bytes)")
+            print(f"  [build] [jit] entry-jit.exe is current ({jit_exe.stat().st_size} bytes)")
             return True
-        print(f"  [build] [jit] {_jit_exe_name} exists but stale — rebuilding")
+        print(f"  [build] [jit] entry-jit.exe exists but stale — rebuilding")
     return _build_jit_entry(tpg_dll, subjects_dll, metadata_path, native_dir,
                             native_config, assembly_dirs)
 
@@ -568,78 +635,12 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] Total subjects (after supplemental merge): {total_subjects}")
 
     if total_subjects == 0:
-        # ATG produced 0 subjects — possible reasons:
-        # 1. Namespace filter restricts to only delegates/interfaces
-        # 2. Assembly is a type-forwarding facade (e.g. System.Xml.ReaderWriter -> System.Private.Xml)
-        # 3. Assembly has no probeable types (e.g. System.Runtime.Intrinsics)
-        # Try fallbacks: remove namespace filter, then try Private.* counterpart.
-
-        # Fallback 1: remove namespace filter
-        if chunk_namespaces:
-            print(f"  [build] 0 subjects with namespace filter — retrying without filter...")
-            cmd_no_ns = [a for a in cmd if not a.startswith("--namespace-filter")]
-            result = subprocess.run(cmd_no_ns, capture_output=True, text=True,
-                                     encoding='utf-8', errors='replace', timeout=1200)
-            if result.returncode == 0 and metadata_path.exists():
-                metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-                total_subjects = metadata.get("totalMethods", 0)
-                print(f"  [build] Retry without namespace filter: {total_subjects} subjects")
-
-        # Fallback 2: try Private.* counterpart (type-forwarding facades)
-        if total_subjects == 0 and target_dll:
-            _asm_name = target_dll.stem
-            _private_asm = target_dll.parent / f"System.Private.{_asm_name.removeprefix('System.').removeprefix('Private.')}.dll"
-            if not _private_asm.exists():
-                _private_asm = target_dll.parent / "System.Private.Xml.dll"
-            if not _private_asm.exists():
-                _private_asm = target_dll.parent / f"System.Private.{_asm_name[7:]}"
-
-            if _private_asm and _private_asm.exists() and _private_asm != target_dll:
-                print(f"  [build] 0 subjects — trying Private.* counterpart: {_private_asm.name}")
-                cmd_private = [
-                    "dotnet", "exec", str(auto_dll),
-                    "--dll", str(_private_asm),
-                    "--all-types",
-                    "--output", str(auto_output),
-                    "--emit-metadata", str(metadata_path),
-                    "--chunk-slug", ctx.slug,
-                ]
-                if chunk_namespaces:
-                    cmd_private.extend(["--namespace-filter", ",".join(chunk_namespaces)])
-                result = subprocess.run(cmd_private, capture_output=True, text=True,
-                                         encoding='utf-8', errors='replace', timeout=1200)
-                if result.returncode == 0 and metadata_path.exists():
-                    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-                    total_subjects = metadata.get("totalMethods", 0)
-                    print(f"  [build] Private.* fallback: {total_subjects} subjects from {_private_asm.name}")
-
-        if total_subjects == 0:
-            # After all fallbacks failed, this assembly genuinely has no probeable types.
-            # Hardware intrinsics assemblies (System.Runtime.Intrinsics) are a known case.
-            # Write an empty fact.json with status "no_subjects" so the pipeline doesn't
-            # fail on inherently un-probeable assemblies.
-            if target_dll and target_dll.stat().st_size < 50000:
-                print(f"  [build] Small assembly ({target_dll.stat().st_size} bytes) with no probeable "
-                      f"types — writing empty fact.json (no_subjects)")
-                ctx.chunk_dir.joinpath("results").mkdir(parents=True, exist_ok=True)
-                _empty_fact = {
-                    "passed": 0, "total": 0, "valueSuspicious": False,
-                    "valueWarnings": 0, "metaTotal": 0, "factMethodCount": 0,
-                    "status": "no_subjects",
-                }
-                (ctx.chunk_dir / "results" / "fact.json").write_text(
-                    json.dumps(_empty_fact, indent=2), encoding="utf-8")
-                return StageResult(
-                    stage="build", status="skipped",
-                    summary=f"no probeable types in {ctx.assembly}/{ctx.slug} — wrote empty fact.json",
-                    duration_ms=int((time.perf_counter() - start) * 1000))
-
-            print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
-                  f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
-            return StageResult(
-                stage="build", status="skipped",
-                summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
-                duration_ms=int((time.perf_counter() - start) * 1000))
+        print(f"  [build] NO subjects generated for {ctx.assembly}/{ctx.slug} — "
+              f"assembly may consist entirely of non-probeable types (delegates, events, etc.)")
+        return StageResult(
+            stage="build", status="skipped",
+            summary=f"AutoTestGenerator produced 0 subjects for {ctx.assembly}/{ctx.slug}",
+            duration_ms=int((time.perf_counter() - start) * 1000))
 
     # -- 5. Detect TFM from target DLL --
     tfm = _detect_tfm(target_dll)
@@ -858,22 +859,13 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         "--metadata", str(metadata_path),
         "--output", str(ctx.native_dir),
         "--config-tier", ctx.native_config,
-        # No --clean: keep per-assembly files so rebuilds avoid regenerating
-        # unchanged codegen outputs (faster incremental cmake builds).
+        "--clean",
     ]
 
     # Pass assembly dirs from pipeline-config.yaml (populated by chunk_pipeline.py)
     for ad in ctx.assembly_dirs:
         tpg_cmd.extend(['--assembly-dir', ad])
         print(f"  [build] assembly-dir: {ad}")
-
-    # Pass target assembly as --additional-assembly so the codegen compiles
-    # its methods as real AOT (not external stubs). Without this, all methods
-    # in this chunk would be emitted as external dispatch stubs, breaking GC
-    # allocation tracking (tls_alloc_fast_bytes) and fact verification.
-    if target_dll is not None and target_dll.exists():
-        tpg_cmd.extend(["--additional-assembly", str(target_dll)])
-        print(f"  [build] additional-assembly: {target_dll} (target assembly)")
 
     # Additional assemblies from chunk config (declared in chunk.json)
     # e.g. crypto DLL for interpreter fallback in security-cryptography chunks.
@@ -908,64 +900,13 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             print(f"  [TPG:out] {line}")
 
         if tpg_result.returncode != 0:
-            # Before reporting failure, try fixup and retry build once.
-            # The TPG may have failed due to:
-            # 1. C2371: duplicate value type typedef (TagList has struct + int32)
-            # 2. C2672: field access on incomplete types (missing includes)
-            # 3. External runtime table __try/__except mismatches
-            # The fixup is best-effort — if it still fails, report the original error.
-            _stderr_text = tpg_result.stderr
-            _fixup_applied = False
-            if 'C2371' in _stderr_text:
-                print(f"  [build] Detected C2371 (duplicate typedef) — applying dedup fixup...")
-                for _gen_file in sorted(ctx.native_dir.rglob("native-aot.page-*.cpp")):
-                    _old = _gen_file.read_text(encoding="utf-8", errors="replace")
-                    _new = _old
-                    # Dedup typedef blocks with matching content
-                    _blocks = __import__('re').findall(r'typedef\s+struct\s+\{[^}]*\}\s+chaos_valuetype_\w+;', _old)
-                    _seen: set[str] = set()
-                    for _b in _blocks:
-                        if _b in _seen:
-                            _new = _new.replace(_b + '\n', '', 1)
-                        else:
-                            _seen.add(_b)
-                    if _new != _old:
-                        _gen_file.write_text(_new, encoding="utf-8")
-                        _fixup_applied = True
-                if _fixup_applied:
-                    print(f"  [build] C2371 fixup applied, retrying cmake build...")
-                    _retry = subprocess.run(tpg_cmd, capture_output=True, text=True,
-                                             encoding='utf-8', errors='replace', timeout=7200)
-                    if _retry.returncode == 0:
-                        tpg_result = _retry
-                        print(f"  [build] C2371 fixup + retry succeeded")
-            if tpg_result.returncode != 0 and 'C2672' in _stderr_text:
-                print(f"  [build] Detected C2672 (field access) — applying stub fixup...")
-                _fixup_applied = False
-                for _gen_file in sorted(ctx.native_dir.rglob("native-aot.page-*.cpp")):
-                    _old = _gen_file.read_text(encoding="utf-8", errors="replace")
-                    _new = _old
-                    _new = _new.replace(
-                        'chaos_resolve_managed_value_pointer<',
-                        'chaos_resolve_managed_value_pointer(')
-                    if _new != _old:
-                        _gen_file.write_text(_new, encoding="utf-8")
-                        _fixup_applied = True
-                if _fixup_applied:
-                    print(f"  [build] C2672 fixup applied, retrying cmake build...")
-                    _retry = subprocess.run(tpg_cmd, capture_output=True, text=True,
-                                             encoding='utf-8', errors='replace', timeout=7200)
-                    if _retry.returncode == 0:
-                        tpg_result = _retry
-                        print(f"  [build] C2672 fixup + retry succeeded")
-            if tpg_result.returncode != 0:
-                return StageResult(
-                    stage="build", status="error",
-                    summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
-                    duration_ms=int((time.perf_counter() - start) * 1000))
+            return StageResult(
+                stage="build", status="error",
+                summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
+                duration_ms=int((time.perf_counter() - start) * 1000))
 
-    # -- 8b. Profile mode is injected by TPG CppProjectEmitter.PatchRuntimeEntry()
-    # (C# layer).  No Python-level write_text needed.  See BOUNDARY_OVERRIDE above.
+    # -- 8b. Inject --profile mode into runtime-entry.cpp --
+    _inject_profile_mode(ctx.native_dir)
 
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
