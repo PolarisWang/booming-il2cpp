@@ -751,7 +751,7 @@ public sealed partial class NativeAotEmitter
                 {
                     _skipStructBody = false;
                     // Emit the closing brace so the file remains valid C++
-                    _sb.AppendLine(_line);
+                    sb.AppendLine(_line);
                 }
                 continue; // skip all lines inside duplicate struct body
             }
