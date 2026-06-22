@@ -134,9 +134,16 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
 
         // Determine if this stub needs the chaos_generic_context parameter.
-        // Uses the pre-computed _stubNeedsContext map (union semantics) to
-        // match the header declaration and avoid C2733.
-        bool needsContext = _stubNeedsContext.TryGetValue(text, out bool nc) && nc;
+        // Must use the same logic as BuildMethodDeclarations (line 101-103) to
+        // ensure declaration and definition agree on generic context, avoiding
+        // C2733 (extern "C" overload conflict).  When _stubNeedsContext is null
+        // or doesn't contain this stub symbol, fall back to shared context
+        // check (matching BuildMethodDeclarations' fallback).
+        bool needsContext;
+        if (_stubNeedsContext is not null && _stubNeedsContext.TryGetValue(text, out bool nc))
+            needsContext = nc;
+        else
+            needsContext = _sharedContextSymbols?.Contains(method.NativeSymbol) == true;
 
         string paramSig = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
         if (needsContext)

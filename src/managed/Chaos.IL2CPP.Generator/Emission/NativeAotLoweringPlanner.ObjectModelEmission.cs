@@ -756,7 +756,11 @@ public sealed partial class NativeAotLoweringPlanner
                         }
                         else
                         {
-                            bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
+                            bool stubNeedsCtx;
+                            if (_stubNeedsContext is not null && _stubNeedsContext.TryGetValue(stub, out bool nc))
+                                stubNeedsCtx = nc;
+                            else
+                                stubNeedsCtx = _sharedContextSymbols?.Contains(entry.NativeSymbol) == true;
                             builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
                         }
                     }
