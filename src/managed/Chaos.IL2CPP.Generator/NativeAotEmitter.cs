@@ -225,11 +225,20 @@ public sealed partial class NativeAotEmitter
         Exception? loadException = null;
         var loadLock = new object();
 
-        System.Threading.Tasks.Parallel.Invoke(
-            () => { try { aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-            () => { try { closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-            () => { try { metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
-            () => { try { supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } });
+        // Load closure artifacts sequentially.  Parallel loading (Parallel.Invoke)
+        // uses ThreadPool threads with limited stack (1 MB), which can trigger
+        // stack overflows when combined with deep JSON deserialization trees.
+        try
+        {
+            aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath);
+            closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath);
+            metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath);
+            supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath);
+        }
+        catch (Exception ex)
+        {
+            loadException = ex;
+        }
 
         if (loadException is not null)
         {

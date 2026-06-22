@@ -311,7 +311,15 @@ public sealed partial class NativeAotLoweringPlanner
                     // E6: hoisted invariant local check (before all other branches)
                     if (_state.Value!.HoistedInvariantLocals is not null && _state.Value!.HoistedInvariantLocals.TryGetValue(ldlocSlot, out var _hldInfo))
                     {
-                        EmitEvalStackPush(builder, indentation, _hldInfo.VarName, _hldInfo.SlotType);
+                        // The hoisting analysis may detect a slot but not emit
+                        // its declaration if the ldloc instruction wasn't in
+                        // the analyzed block's instruction list.  Fall back
+                        // to chaos_locals[slot] when undeclared (C2065).
+                        var _hldSet = _state.Value!.EmittedHoistedLocals;
+                        string _hldVal = (_hldSet is not null && _hldSet.Contains(ldlocSlot))
+                            ? _hldInfo.VarName
+                            : $"chaos_locals[{ldlocSlot}]";
+                        EmitEvalStackPush(builder, indentation, _hldVal, _hldInfo.SlotType);
                         PushSlotType(_hldInfo.SlotType);
                         break;
                     }

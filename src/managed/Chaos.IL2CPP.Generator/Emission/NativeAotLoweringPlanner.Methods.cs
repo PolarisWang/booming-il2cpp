@@ -1033,18 +1033,12 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         var allMethods = new NativeAotMethodTemplateModel[emitMethods.Count];
-        if (_forceSerial)
-        {
-            for (int i = 0; i < emitMethods.Count; i++)
-                allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds);
-        }
-        else
-        {
-            int dop = Math.Max(1, _maxParallelism);
-            System.Threading.Tasks.Parallel.For(0, emitMethods.Count,
-                new System.Threading.Tasks.ParallelOptions { MaxDegreeOfParallelism = dop },
-                i => allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds));
-        }
+        // ThreadPool threads have a 1 MB stack — insufficient for the recursive
+        // structured IR emitter when methods have deep control flow graphs.
+        // Serial emission (main thread, 4+ MB stack) avoids stack overflow.
+        // Always use serial mode regardless of method count.
+        for (int i = 0; i < emitMethods.Count; i++)
+            allMethods[i] = EmitOneMethod(emitMethods[i], aotReachableSubjectIds);
         List<NativeAotMethodTemplateModel> methods = new List<NativeAotMethodTemplateModel>(allMethods);
 
         _tPhase4 = _sw.ElapsedMilliseconds;

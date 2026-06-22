@@ -953,6 +953,7 @@ public sealed partial class NativeAotLoweringPlanner
                         loadExpr = $"chaos_locals[{slot}]";
                     }
                     builder.AppendLine(bodyIndent + $"{declType} {varName} = {loadExpr};");
+                    (_state.Value!.EmittedHoistedLocals ??= new System.Collections.Generic.HashSet<int>()).Add(slot);
                     hoisted[slot] = (varName, slotType);
                 }
                 // Merge with outer-scope hoisted locals: inner scope may need
