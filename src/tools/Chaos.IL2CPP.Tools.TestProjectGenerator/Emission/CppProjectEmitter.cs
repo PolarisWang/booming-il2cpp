@@ -728,16 +728,6 @@ public sealed class CppProjectEmitter
     /// </summary>
     private static string PatchRuntimeEntry(string code)
     {
-        // Fix 0: Ensure <profile_stats.h> is included for RunProfileMode()
-        // (The Python _inject_profile_mode() previously added this; moved here
-        //  to respect the four-layer architecture: Python shall not write .cpp.)
-        if (!code.Contains("#include <profile_stats.h>"))
-        {
-            code = code.Replace(
-                "#include <chaos/pal/pal_eh.h>",
-                "#include <chaos/pal/pal_eh.h>\n#include <profile_stats.h>");
-        }
-
         // Fix 1: Insert RunProfileMode function before --benchmark-range marker
         // This adds --profile CLI support for GC profile baseline collection.
         // Must be done here (not in scriban) because the scriban linter reverts changes.

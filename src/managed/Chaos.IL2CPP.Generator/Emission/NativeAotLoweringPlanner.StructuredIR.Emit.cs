@@ -900,7 +900,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Hoist ldloc's of slots that are never stloc'd inside the loop body.
         var prevHoistedInvariantLocals = _state.Value!.HoistedInvariantLocals;
         _state.Value!.HoistedInvariantLocals = null;
-        if (bodyInstrs3.Count > 0)
+        if (prevHoistedInvariantLocals == null && bodyInstrs3.Count > 0)
         {
             var readSlots = new HashSet<int>();
             var writtenSlots2 = new HashSet<int>();
@@ -920,14 +920,6 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (readSlots.Count > 0)
             {
-                // Exclude slots already hoisted by an outer-scope loop: their
-                // _hld_N declaration lives in the outer scope and is visible
-                // inside this nested loop body via C++ scoping rules.
-                if (prevHoistedInvariantLocals is not null)
-                {
-                    foreach (var kvp in prevHoistedInvariantLocals)
-                        readSlots.Remove(kvp.Key);
-                }
                 var hoisted = new Dictionary<int, (string VarName, SlotType SlotType)>();
                 foreach (int slot in readSlots.OrderBy(s => s))
                 {
@@ -961,16 +953,7 @@ public sealed partial class NativeAotLoweringPlanner
                         loadExpr = $"chaos_locals[{slot}]";
                     }
                     builder.AppendLine(bodyIndent + $"{declType} {varName} = {loadExpr};");
-                    (_state.Value!.EmittedHoistedLocals ??= new System.Collections.Generic.HashSet<int>()).Add(slot);
                     hoisted[slot] = (varName, slotType);
-                }
-                // Populate HoistedInvariantLocals with the merged set so that
-                // nested loops (child do-while/while) can inherit outer-scope
-                // hoisted variables without redeclaring them.
-                if (prevHoistedInvariantLocals is not null)
-                {
-                    foreach (var kvp in prevHoistedInvariantLocals)
-                        hoisted.TryAdd(kvp.Key, kvp.Value);
                 }
                 _state.Value!.HoistedInvariantLocals = hoisted;
             }

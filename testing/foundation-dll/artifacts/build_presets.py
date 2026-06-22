@@ -46,10 +46,10 @@ PRESETS = {
         "lib_ext": ".lib",
     },
     "linux-x64-profile": {
-        "cmake_preset": "linux-x64-profile",
-        "config": "RelWithDebInfo",
+        "cmake_preset": None,  # uses existing build dir, not cmake --preset
         "sdk_subdir": "linux-x64-profile",
         "lib_ext": ".a",
+        "build_dir": "_REPO_ROOT / 'build' / 'linux-x64-profile'",
     },
 }
 
@@ -97,8 +97,9 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
         print(f"[build-presets] Unknown preset: {preset_name}", file=sys.stderr)
         return False
 
-    cmake_preset = info["cmake_preset"]
-    config = info["config"]
+    cmake_preset = info.get("cmake_preset")
+    build_dir_str = info.get("build_dir")
+    config = info.get("config")
     sdk_subdir = info["sdk_subdir"]
     lib_ext = info["lib_ext"]
 
@@ -108,18 +109,25 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
 
     print(f"[build-presets] Building {preset_name}...")
 
-    # Step 1: cmake --preset (configure)
-    result = subprocess.run(
-        ["cmake", "--preset", cmake_preset],
-        cwd=_REPO_ROOT, capture_output=True, text=True, timeout=120,
-    )
-    if result.returncode != 0:
-        print(f"[build-presets] cmake configure FAILED for {preset_name}")
-        print(result.stderr[-500:])
+    if build_dir_str:
+        # Use existing build directory (no configure step)
+        preset_dir = eval(build_dir_str)
+    elif cmake_preset:
+        # Step 1: cmake --preset (configure)
+        result = subprocess.run(
+            ["cmake", "--preset", cmake_preset],
+            cwd=_REPO_ROOT, capture_output=True, text=True, timeout=120,
+        )
+        if result.returncode != 0:
+            print(f"[build-presets] cmake configure FAILED for {preset_name}")
+            print(result.stderr[-500:])
+            return False
+        preset_dir = _PRESETS_DIR / cmake_preset
+    else:
+        print(f"[build-presets] {preset_name}: no cmake preset or build dir configured")
         return False
 
     # Step 2: cmake --build only the main lib targets (skip test targets)
-    preset_dir = _PRESETS_DIR / preset_name
     sdk_targets = [
         "chaos_runtime_core", "chaos_bootstrap", "chaos_common",
         "chaos_pal", "chaos_support", "chaos_fmt",

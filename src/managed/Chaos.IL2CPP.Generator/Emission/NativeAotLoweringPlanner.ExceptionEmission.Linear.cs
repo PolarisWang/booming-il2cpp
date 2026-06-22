@@ -556,21 +556,13 @@ public sealed partial class NativeAotLoweringPlanner
                 // GC.GetAllocatedBytesForCurrentThread() reflects real object usage.
                 // While these are not GC heap allocations, the benchmark needs them
                 // to generate comparable allocation data. The count is manually
-                // as pointer-sized C++ objects with a type_info header field.
-                // .NET GC additionally tracks a sync-block (8 bytes) per object
-                // that our C++ structs don't model.  Add 8 bytes to approximate
-                // the real managed allocation size for benchmark comparability.
-                builder.AppendLine($"{indentation}    tls_alloc_fast_bytes += sizeof({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}) + 8;");
+                // incremented to match what GcAllocateFast would do.
+                builder.AppendLine($"{indentation}    tls_alloc_fast_bytes += sizeof({GetNativeTypeSymbol(requiredTargetReference.SubjectId)});");
                 builder.AppendLine($"{indentation}    tls_alloc_fast_count++;");
             }
             else
             {
                 builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
-                // GcAllocateFast increments tls_alloc_fast_bytes by sizeof(T)
-                // but does not include the 8-byte sync block that .NET GC counts.
-                // Add it here to align with the .NET GC allocation counter.
-                // tls_alloc_fast_count is already incremented by GcAllocateFast.
-                builder.AppendLine($"{indentation}    tls_alloc_fast_bytes += 8;");
             }
             builder.AppendLine($"{indentation}    chaos_object->header.type_info = {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
             var ctorArgs2 = FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis);
