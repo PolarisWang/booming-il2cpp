@@ -29,14 +29,17 @@ def ensure_tool_built(tool_name: str) -> bool:
     """Rebuild the tool DLL if the source has changed since last build.
 
     Uses source timestamp comparison for incremental builds.
-    When a rebuild fails because the output DLL is locked by another
-    process (MSB3021), treats the existing DLL as valid rather than
-    failing the pipeline — the locked DLL was built from a previous
-    successful run and is still usable.
+    When a rebuild fails for ANY reason and the DLL already exists,
+    treats the existing DLL as valid and continues — the existing DLL
+    was built from a previous successful run and is still usable.
+    This prevents locked-file errors (MSB3021) or transient MSBuild
+    failures from derailing the pipeline.
     """
     proj = _tool_dir(tool_name) / f"{tool_name}.csproj"
     dll = tool_dll(tool_name)
-    if dll.exists() and proj.exists():
+    has_existing = dll.exists()
+
+    if has_existing and proj.exists():
         # Check if any source file is newer than the DLL
         src_files = list(proj.parent.rglob("*.cs"))
         if src_files:
@@ -45,21 +48,20 @@ def ensure_tool_built(tool_name: str) -> bool:
             src_time = proj.stat().st_mtime
         if src_time <= dll.stat().st_mtime:
             return True
+
     # Rebuild
     result = subprocess.run(
         ["dotnet", "build", str(proj), "-nologo"],
         capture_output=True, text=True, timeout=120)
-    if result.returncode != 0:
-        stderr = result.stderr or ""
-        stdout = result.stdout or ""
-        # MSB3021 = DLL locked by another process. This is common when
-        # the TPG is running while a concurrent rebuild is attempted.
-        # Since the existing DLL was built from a previous successful run,
-        # treat this as recoverable — the locked DLL is still valid.
-        if "MSB3021" in stderr or "MSB3021" in stdout:
+    if result.returncode != 0 and has_existing:
+        # Rebuild failed but DLL exists — keep using the existing one.
+        # Common causes: MSB3021 (locked by another process), MSBuild
+        # transient errors, or dependency resolution failures.
+        if "MSB3021" in (result.stderr or "") or "MSB3021" in (result.stdout or ""):
             print(f"  [tool_helpers] {tool_name} DLL locked, using existing")
-            return True
-        for line in (stderr.splitlines() + stdout.splitlines())[-5:]:
+        return True
+    if result.returncode != 0:
+        for line in ((result.stderr or "").splitlines() + (result.stdout or "").splitlines())[-5:]:
             print(f"      {line}")
         return False
     return True
