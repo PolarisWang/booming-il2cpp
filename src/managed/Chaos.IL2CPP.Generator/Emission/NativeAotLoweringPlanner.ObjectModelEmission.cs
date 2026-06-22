@@ -79,7 +79,10 @@ public sealed partial class NativeAotLoweringPlanner
         // Check the GENERATED symbol name (GetNativeValueTypeSymbol) because the
         // SubjectId may use a different naming convention than ___y__/__\d+__.
         var _vtSym = GetNativeValueTypeSymbol(typeSubjectId);
-        if (_vtSym.Contains("___y__") || _vtSym.Contains("__0_") || _vtSym.Contains("__1_"))
+        // Match ALL generic parameter placeholders (__0_ through __9_) and
+        // the ___y__ InlineArray pattern.  Types with >5 type parameters
+        // (e.g. ___0___1___2___3___4___5_) were missed by earlier < __5_ checks.
+        if (_vtSym.Contains("___y__") || System.Text.RegularExpressions.Regex.IsMatch(_vtSym, @"__\d_"))
         {
             // Provide two INTPTR fields — the most common layout for generic
             // value types with backing fields (Key/Value pattern). This is
