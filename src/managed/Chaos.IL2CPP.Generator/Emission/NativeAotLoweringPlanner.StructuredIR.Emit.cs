@@ -686,6 +686,10 @@ public sealed partial class NativeAotLoweringPlanner
         {
             string ivName = $"_iv_{hoistedIVSlot.Value}";
             _state.Value!.HoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
+            // Declare the induction variable before the loop guard so it's in
+            // scope when the guard references it (C2065 fix). The variable is
+            // initialized inside the loop body from chaos_locals[slot].
+            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INT32 {ivName} = 0;");
         }
 
         if (w.ConditionTerminator == null)
@@ -866,6 +870,10 @@ public sealed partial class NativeAotLoweringPlanner
         {
             string ivName = $"_iv_{hoistedIVSlot.Value}";
             _state.Value!.HoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
+            // Declare the induction variable before the loop guard so it's in
+            // scope when the guard references it (C2065 fix). The variable is
+            // initialized inside the loop body from chaos_locals[slot].
+            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INT32 {ivName} = 0;");
         }
 
         // ---- Array base pointer hoisting ----
