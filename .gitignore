@@ -530,3 +530,18 @@ testing/foundation-dll/nightly-build-report/
 
 # Stale pipeline artifacts (regenerated on each run)
 testing/foundation-dll/inject_getui.py
+.claude/
+
+# TPG-generated build artifacts (contain local absolute paths)
+testing/foundation-dll/**/native/CMakeLists.txt
+testing/foundation-dll/**/native/CMakePresets.json
+testing/foundation-dll/**/native/object_stubs.cpp
+testing/foundation-dll/**/native/patch-host-arrays.cpp
+testing/foundation-dll/**/native/runtime-entry.cpp
+testing/foundation-dll/**/native/runtime-patchdata.cpp
+testing/foundation-dll/**/native/chaos_stub_*.cpp
+testing/foundation-dll/**/native/gc_api.cpp
+
+# Local agent session files
+.claude/.classified
+.claude/.loaded_skills_cache

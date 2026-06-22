@@ -1,6 +1,10 @@
 import json
+from pathlib import Path
 
-with open('D:/agent/chaos-il2cpp/nightly-build-report/full-run-v5/20260620_104654-c6a10a99/summary/nightly-delta.json') as f:
+script_dir = Path(__file__).resolve().parent
+project_root = script_dir.parent.parent
+
+with open(project_root / 'nightly-build-report/full-run-v5/20260620_104654-c6a10a99/summary/nightly-delta.json') as f:
     d = json.load(f)
 
 ov = d["overall"]
@@ -155,6 +159,6 @@ report = "\n".join(lines)
 print(report)
 
 # Save to file
-with open("D:/agent/chaos-il2cpp/nightly-build-report/full-run-v5/20260620_104654-c6a10a99/summary/comprehensive-report.txt", "w", encoding="utf-8") as f:
+with open(script_dir / 'tmp_report.txt', "w", encoding="utf-8") as f:
     f.write(report)
 print("\n(Saved to comprehensive-report.txt)")
