@@ -553,6 +553,46 @@ public sealed partial class NativeAotLoweringPlanner
         // Store field data for shared header struct emission (BuildTypeDeclarationsCode).
         _fieldsByDeclaringType = fieldsByDeclaringType;
         _fieldTypeMap = fieldTypeMap;
+        // ── Supplement: add fields for cross-assembly reference types ─────────────
+        // Callee-discovered types (from callee-based type discovery above) are in
+        // referenceTypeSubjectIds but their fields are NOT in hashSet because no
+        // instruction in the reachable methods has a Field-kind TargetReference for
+        // these types (field accesses happen within inlined method bodies, not as
+        // direct instruction operands).  Scan _reflectionMemberSupport.FieldEntries
+        // for any reference type whose declaring type is tracked but has no fields
+        // yet, and add its fields to fieldsByDeclaringType so struct definitions
+        // include complete field lists.
+        if (_reflectionMemberSupport.FieldEntries is { Count: > 0 })
+        {
+            foreach (var fe in _reflectionMemberSupport.FieldEntries)
+            {
+                if (string.IsNullOrEmpty(fe.DeclaringTypeSubjectId) || string.IsNullOrEmpty(fe.FieldName))
+                    continue;
+                // Only supplement types that ARE reference type tracked
+                if (!referenceTypeSubjectIds.Contains(fe.DeclaringTypeSubjectId))
+                    continue;
+                // Skip if this type already has fields in fieldsByDeclaringType
+                if (fieldsByDeclaringType.ContainsKey(fe.DeclaringTypeSubjectId))
+                    continue;
+                // Construct the field SubjectId as the codegen expects it:
+                //   {DeclaringTypeSubjectId}::{FieldName}:{FieldTypeId}()
+                // We use System.Object as a generic field type since the actual
+                // type is resolved from metadata and isn't needed for struct layout
+                // (all managed reference fields are pointer-sized).
+                string fieldSubjectId = $"{fe.DeclaringTypeSubjectId}::{fe.FieldName}:System.Object()";
+                if (!fieldsByDeclaringType.TryGetValue(fe.DeclaringTypeSubjectId, out var flist))
+                {
+                    flist = new List<string>();
+                    fieldsByDeclaringType[fe.DeclaringTypeSubjectId] = flist;
+                }
+                flist.Add(fieldSubjectId);
+                if (!fieldTypeMap.ContainsKey(fieldSubjectId))
+                    fieldTypeMap[fieldSubjectId] = null;
+            }
+            // Re-sort each type's field list after supplements
+            foreach (var list in fieldsByDeclaringType.Values)
+                list.Sort(StringComparer.Ordinal);
+        }
         int num = 2;
         // Ensure System.String is always tracked (used in IsArrayStoreCompatible fast path)
         TrackReferenceType("System.Private.CoreLib/System.String", null);

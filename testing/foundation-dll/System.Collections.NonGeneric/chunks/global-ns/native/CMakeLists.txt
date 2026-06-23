@@ -83,7 +83,7 @@ add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFIC
 
 # ── Paths ──
 set(CHAOS_SDK_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Collections.NonGeneric/chunks/global-ns/native/codegen")
-set(CHAOS_PROJECT_ROOT "D:/agent/chaos-il2cpp")
+set(CHAOS_PROJECT_ROOT "../../../../../..")
 set(CHAOS_CODEGEN_DIR "D:/agent/chaos-il2cpp/testing/foundation-dll/System.Collections.NonGeneric/chunks/global-ns/native/codegen")
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
