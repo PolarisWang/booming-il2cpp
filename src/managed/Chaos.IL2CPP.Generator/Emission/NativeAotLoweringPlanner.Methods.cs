@@ -188,11 +188,9 @@ public sealed partial class NativeAotLoweringPlanner
     /// <summary>
     /// Max degree of parallelism for method emission. Defaults to
     /// Environment.ProcessorCount - 2 (reserve cores for GC/OS).
-    /// Set via CLI --parallelism N. Minimum 1. Capped at 4 to prevent
-    /// stack overflow from excessive concurrent Scriban template rendering
-    /// and StructuredIR recovery on ThreadPool threads (1 MB default stack).
+    /// Set via CLI --parallelism N. Minimum 1.
     /// </summary>
-    internal int _maxParallelism = Math.Max(1, Math.Min(4, Environment.ProcessorCount - 2));
+    internal int _maxParallelism = Math.Max(1, Environment.ProcessorCount - 2);
 
     /// <summary>
     /// Static field declarations (subjectId → fieldTypeSubjectId) captured during
@@ -205,14 +203,6 @@ public sealed partial class NativeAotLoweringPlanner
     /// chaos_valuetype_* forward declarations in the shared header.
     /// </summary>
     private HashSet<string>? _emittedValueTypeSubjectIds;
-    /// <summary>
-    /// Value type subject IDs from the ABI slot and declaration-string scan in
-    /// BuildGeneratedModuleModel (GeneratedModule.cs:205-318). These may include
-    /// types referenced via chaos_resolve_managed_value_pointer<T> that are
-    /// not in the AOT IR type metadata. Merged into _emittedValueTypeSubjectIds
-    /// during EmitObjectModelDeclarations to prevent C2065/C2672.
-    /// </summary>
-    internal HashSet<string>? _emittedValueTypeSubjectIdsFromAbi;
 
     /// <summary>
     /// Full C++ struct body code for value types that have fields or _backing

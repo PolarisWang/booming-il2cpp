@@ -228,11 +228,6 @@ public sealed partial class NativeAotLoweringPlanner
                             _emittedValueTypeSubjectIds.Add(abi.TypeSubjectId);
                     }
                 }
-        // Save ABI-scanned value types before ObjectModelEmission overwrites
-        // _emittedValueTypeSubjectIds with just AOT IR metadata types.
-        _emittedValueTypeSubjectIdsFromAbi = new HashSet<string>(
-            _emittedValueTypeSubjectIds ?? System.Linq.Enumerable.Empty<string>(),
-            StringComparer.Ordinal);
             }
 
             var vtBuilder = new System.Text.StringBuilder();

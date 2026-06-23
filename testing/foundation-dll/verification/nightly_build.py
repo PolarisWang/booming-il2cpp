@@ -23,7 +23,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError as FuturesTimeoutError
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime, timezone
 from multiprocessing import Manager
 from pathlib import Path
@@ -64,7 +64,7 @@ from verification.stages.aggregate import run_aggregate
 from verification.stages.reporting import run_reporting
 
 
-_DEFAULT_BUILD_WORKERS = 2
+_DEFAULT_BUILD_WORKERS = 4
 
 
 def _detect_bench_workers() -> int:
@@ -97,9 +97,43 @@ def _discover_assemblies(foundation_dll: Path) -> list[str]:
             continue
         # Must have _dll/namespace-partition.json (chunk config)
         partition = entry / "_dll" / "namespace-partition.json"
-        if partition.exists():
-            assemblies.append(name)
+        if not partition.exists():
+            # Auto-generate via manifest stage
+            _ensure_namespace_partition(entry, name, foundation_dll)
+            if not partition.exists():
+                continue
+        assemblies.append(name)
     return assemblies
+
+
+def _ensure_namespace_partition(assembly_dir: Path, name: str, foundation_dll: Path) -> None:
+    """Auto-generate namespace-partition.json if missing by running the manifest stage."""
+    dll_candidates = [
+        assembly_dir / f"{name}.dll",
+    ]
+    try:
+        dotnet_root = subprocess.run(
+            ["dotnet", "--info"], capture_output=True, text=True, timeout=10)
+        for line in dotnet_root.stdout.splitlines():
+            if "Base Path:" in line:
+                base_path = line.split(":", 1)[1].strip()
+                dll_candidates.append(Path(base_path) / f"{name}.dll")
+                break
+    except Exception:
+        pass
+    for dll in dll_candidates:
+        if dll.exists():
+            try:
+                subprocess.run(
+                    [sys.executable, "-m", "verification.stages.manifest",
+                     "--dll", str(dll), "--output", str(assembly_dir / "_dll")],
+                    capture_output=True, timeout=120,
+                )
+                print(f"  [discovery] Auto-generated namespace-partition.json for {name}")
+            except Exception as exc:
+                print(f"  [discovery] Failed to generate partition for {name}: {exc}")
+            return
+    print(f"  [discovery] No DLL found for {name}, skipping")
 
 
 def _load_pipeline_config(foundation_dll: Path) -> dict:
@@ -178,13 +212,11 @@ def _run_chunk_stages(
     verbose: bool = False,
     stage_timeout: int = 0,
     profile_pass: bool = False,
-    stages_filter: list[str] | None = None,
 ) -> tuple[str, dict[str, StageResult]]:
     """Run all stages for a single chunk returning (assembly/slug, {stage: result}).
 
     Normal pass (profile_pass=False): build → fact → profile → benchmark → hotupdate
     Profile pass (profile_pass=True): build → profile only (profile-tier rebuild)
-    When stages_filter is set, only those stages run (e.g. ["build","fact"]).
 
     Build failure stops further stages for this chunk.
     Benchmark concurrency is controlled via bench_semaphore (default: 2).
@@ -243,18 +275,6 @@ def _run_chunk_stages(
                 ("build", lambda ctx, _stages: _restore_profile_cache_for(ctx)),
                 ("profile", run_profile),
             ]
-        elif stages_filter:
-            stage_map = {
-                "build": run_build,
-                "fact": run_fact_chunk,
-                "profile": run_profile,
-                "benchmark": run_benchmark_chunk,
-                "managed_benchmark": run_managed_benchmark,
-                "hotupdate": run_hotupdate_chunk,
-                "benchmark_report": run_benchmark_report,
-                "coverage_audit": run_coverage_audit,
-            }
-            stage_order = [(s, stage_map[s]) for s in stages_filter if s in stage_map]
         else:
             stage_order = [
                 ("build", run_build),
@@ -309,51 +329,24 @@ def _collect_chunk_results(
     futures: list,
     total: int,
     verbose: bool = False,
-    phase_label: str = "chunks",
 ) -> dict[str, dict[str, StageResult]]:
-    """Collect futures results, handling errors gracefully. Shows ETA."""
+    """Collect futures results, handling errors gracefully."""
     results: dict[str, dict[str, StageResult]] = {}
     completed = 0
-    crashed = 0
-    start_time = time.monotonic()
-    last_print = 0.0
-    for future in as_completed(futures, timeout=max(600, total * 120)):
+    for future in as_completed(futures):
         completed += 1
         try:
             key, stages = future.result()
             results[key] = stages
-            build_st = stages.get("build", StageResult(stage="build", status="?")).status
-        except SystemExit:
-            # Worker process called sys.exit() — likely a subprocess crash (OOM, segfault)
-            crashed += 1
-            key = f"<crashed worker #{completed}>"
-            results[key] = {"build": StageResult(stage="build", status="failed",
-                             summary="worker process crashed (OOM/segfault)")}
-            build_st = "crashed"
-        except FuturesTimeoutError:
-            completed -= 1  # timeout doesn't consume a slot
-            crashed += 1
-            key = f"<timeout worker #{completed+1}>"
-            results[key] = {"build": StageResult(stage="build", status="skipped",
-                             summary="worker timeout (stage > max wait)")}
-            build_st = "timeout"
-        except BaseException as e:
+            status = stages.get("build", StageResult(stage="build", status="?")).status
+            if verbose:
+                print(f"  [nightly] [{completed}/{total}] {key}: build={status}, "
+                      f"fact={stages.get('fact', StageResult(stage='fact', status='?')).status}")
+        except Exception as e:
             key = f"<future #{completed}>"
-            results[key] = {"build": StageResult(stage="build", status="skipped",
-                             summary=f"future exception: {e}")}
-            build_st = "exception"
-
-        now = time.monotonic()
-        elapsed = now - start_time
-        pct = completed / total * 100
-        rate = completed / max(elapsed, 0.1)
-        eta = (total - completed) / max(rate, 0.1)
-        eta_str = f"{eta:.0f}s" if eta < 3600 else f"{eta/60:.0f}m"
-        if verbose or completed == total or (now - last_print >= 5.0):
-            print(f"  [{phase_label}] [{completed}/{total} {pct:.0f}%] "
-                  f"{key.split('/')[-1] if '/' in key else key}: "
-                  f"build={build_st}, elapsed={elapsed:.0f}s, ETA={eta_str}")
-            last_print = now
+            results[key] = {"build": StageResult(stage="build", status="skipped", summary=f"future exception: {e}")}
+            if verbose:
+                print(f"  [nightly] [{completed}/{total}] {key}: future EXCEPTION: {e}")
     return results
 
 
@@ -376,12 +369,12 @@ def main() -> int:
     parser.add_argument("--native-config", default="check",
                         choices=["check", "profile", "ship"],
                         help="Native build config (default: check)")
-    parser.add_argument("--stage-timeout", type=int, default=600,
+    parser.add_argument("--stage-timeout", type=int, default=0,
                         help="Per-stage timeout in seconds (default: no timeout)")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Verbose output")
-    parser.add_argument("--no-profile", action="store_true",
-                        help="Skip profile pass (profile is ON by default)")
+    parser.add_argument("--run-profile", action="store_true",
+                        help="After Phase 1, rebuild entry.exe with profile preset and collect profile data")
     parser.add_argument("--skip-nightly-report", action="store_true",
                         help="Skip delta and summary generation at the end")
     parser.add_argument("--output-dir", default=None,
@@ -418,81 +411,30 @@ def main() -> int:
         return 1
     print(f"  Total chunks: {len(all_chunks)}")
 
-    # ── Step 2: Phase A — Build + Fact only ──
-    print(f"\n{'='*60}")
-    print(f"  Phase A: Build + Fact ({len(all_chunks)} chunks, {args.max_workers} workers)")
-    print(f"{'='*60}")
-    sys.stdout.flush()
+    # ── Step 2: Run build + fact + benchmark + hotupdate in parallel ──
+    print(f"\n  Phase 1-2: Running chunks (build={args.max_workers} workers, "
+          f"bench_concurrency={args.bench_workers})...")
 
     bench_semaphore = Manager().Semaphore(args.bench_workers or 1)
     all_results: dict[str, dict[str, StageResult]] = {}
+    futures = []
 
-    phase_a_futures = []
     with ProcessPoolExecutor(max_workers=args.max_workers) as executor:
         for asm, slug, fdir in all_chunks:
-            f = executor.submit(
+            future = executor.submit(
                 _run_chunk_stages,
-                assembly=asm, slug=slug, foundation_dir=fdir,
+                assembly=asm,
+                slug=slug,
+                foundation_dir=fdir,
                 pipeline_config=pipeline_config,
                 bench_semaphore=bench_semaphore,
                 native_config=args.native_config,
                 verbose=args.verbose,
                 stage_timeout=args.stage_timeout,
-                stages_filter=["build", "fact"],
             )
-            phase_a_futures.append(f)
+            futures.append(future)
 
-        all_results = _collect_chunk_results(phase_a_futures, len(all_chunks),
-                                             verbose=args.verbose, phase_label="A:build+fact")
-
-    phase_a_passed = sum(
-        1 for r in all_results.values()
-        if r.get("build", StageResult(stage="build", status="?")).status == "passed"
-    )
-    print(f"\n  Phase A complete: {phase_a_passed}/{len(all_chunks)} build passed")
-
-    # ── Step 3: Phase B — Benchmark + Coverage (only for passed chunks) ──
-    passed_chunks = [
-        (asm, slug, fdir) for asm, slug, fdir in all_chunks
-        if all_results.get(f"{asm}/{slug}", {}).get("build",
-            StageResult(stage="build", status="?")).status == "passed"
-    ]
-
-    if passed_chunks:
-        print(f"\n{'='*60}")
-        print(f"  Phase B: Benchmark + Coverage ({len(passed_chunks)} chunks)")
-        print(f"{'='*60}")
-
-        phase_b_stages = [
-            "benchmark", "managed_benchmark", "hotupdate",
-            "benchmark_report", "coverage_audit",
-        ]
-        phase_b_futures = []
-        with ProcessPoolExecutor(max_workers=args.max_workers) as executor:
-            for asm, slug, fdir in passed_chunks:
-                f = executor.submit(
-                    _run_chunk_stages,
-                    assembly=asm, slug=slug, foundation_dir=fdir,
-                    pipeline_config=pipeline_config,
-                    bench_semaphore=bench_semaphore,
-                    native_config=args.native_config,
-                    verbose=args.verbose,
-                    stage_timeout=args.stage_timeout,
-                    stages_filter=phase_b_stages,
-                )
-                phase_b_futures.append(f)
-
-            phase_b_results = _collect_chunk_results(
-                phase_b_futures, len(passed_chunks),
-                verbose=args.verbose, phase_label="B:bench+coverage",
-            )
-            for key, stages in phase_b_results.items():
-                if key in all_results:
-                    all_results[key].update(stages)
-                else:
-                    all_results[key] = stages
-    else:
-        print("\n  Phase B skipped: no chunks passed build in Phase A")
+        all_results = _collect_chunk_results(futures, len(all_chunks), verbose=args.verbose)
 
     # Count successes/failures
     build_ok = sum(
@@ -502,7 +444,7 @@ def main() -> int:
     print(f"\n  Build: {build_ok}/{len(all_results)} passed")
 
     # ── Phase 2 (optional): Profile pass with profile-tier build ──
-    if not args.no_profile:
+    if args.run_profile:
         print(f"\n{'='*60}")
         print(f"  Phase 2: Profile pass (native_config=profile)...")
         print(f"{'='*60}")

@@ -105,9 +105,44 @@ def discover_assemblies(foundation_dir: Path) -> list[str]:
         if name.startswith("_") or name.startswith("."):
             continue
         partition = entry / "_dll" / "namespace-partition.json"
-        if partition.exists():
-            assemblies.append(name)
+        if not partition.exists():
+            # Auto-generate namespace-partition.json via manifest stage
+            _ensure_namespace_partition(entry, name, foundation_dir)
+            if not partition.exists():
+                continue
+        assemblies.append(name)
     return assemblies
+
+
+def _ensure_namespace_partition(assembly_dir: Path, name: str, foundation_dir: Path) -> None:
+    """Auto-generate namespace-partition.json if missing by running the manifest stage."""
+    dll_candidates = [
+        assembly_dir / f"{name}.dll",
+    ]
+    # Check dotnet shared runtime
+    import subprocess as _sp
+    try:
+        dotnet_root = _sp.run(["dotnet", "--info"], capture_output=True, text=True, timeout=10)
+        for line in dotnet_root.stdout.splitlines():
+            if "Base Path:" in line:
+                base_path = line.split(":", 1)[1].strip()
+                dll_candidates.append(Path(base_path) / f"{name}.dll")
+                break
+    except Exception:
+        pass
+    for dll in dll_candidates:
+        if dll.exists():
+            try:
+                _sp.run(
+                    [sys.executable, "-m", "verification.stages.manifest",
+                     "--dll", str(dll), "--output", str(assembly_dir / "_dll")],
+                    capture_output=True, timeout=120,
+                )
+                print(f"  [discovery] Auto-generated namespace-partition.json for {name}")
+            except Exception as exc:
+                print(f"  [discovery] Failed to generate namespace-partition.json for {name}: {exc}")
+            return
+    print(f"  [discovery] No DLL found for {name}, skipping")
 
 
 def load_pipeline_config(foundation_dir: Path) -> dict:

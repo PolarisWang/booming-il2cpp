@@ -191,6 +191,17 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    # If build was skipped (0 subjects), skip fact too
+    build_result = stages.get("build")
+    if build_result and (isinstance(build_result, dict) and build_result.get("status") == "skipped"
+                         or getattr(build_result, 'status', None) == "skipped"):
+        print(f"  [fact] Build was skipped (0 subjects), skipping fact")
+        return StageResult(
+            stage="fact", status="skipped",
+            summary=f"skipped (build produced 0 subjects)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     # JIT: check chunk config first, then verify the binary exists
     jit_exe = ctx.entry_jit_exe_path
     jit_enabled = _is_jit_enabled(ctx.chunk_dir)
