@@ -327,12 +327,17 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine($"{indentation}    if (kChaosExternalRuntimeFnTable[{idx}] == nullptr) {{");
         // External runtime fallback: return type-appropriate default
         string escapedSubjectId = EscapeCppStringLiteral(invocationTarget.TargetSymbol);
-        builder.AppendLine($"{indentation}        const auto chaos_ret = ChaosExternalRuntimeFallback(\"" + escapedSubjectId + "\");");
-        EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_ret", indentation + "        ");
         if (string.Equals(returnType, "void", StringComparison.Ordinal))
+        {
+            builder.AppendLine($"{indentation}        ChaosExternalRuntimeFallback(\"" + escapedSubjectId + "\");");
             builder.AppendLine($"{indentation}        return;");
+        }
         else
+        {
+            builder.AppendLine($"{indentation}        const auto chaos_ret = ChaosExternalRuntimeFallback(\"" + escapedSubjectId + "\");");
+            EmitAbiReturnPush(builder, invocationTarget.ReturnAbi, "chaos_ret", indentation + "        ");
             builder.AppendLine($"{indentation}        return {{}};");
+        }
         builder.AppendLine($"{indentation}    }}");
         if (string.Equals(returnType, "void", StringComparison.Ordinal))
         {
